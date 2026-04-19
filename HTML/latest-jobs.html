@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Government Jobs | GovJobInd</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/latest-jobs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+             <div class="logo-container">
+                <img src="../Assets/Home Page/LogoSarkariOfficer.png" alt="SarkariOfficer Logo" class="logo-img">
+                <a href="#" class="logo">Sarkari<span>Officer</span></a>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="../HTML/Index.html">Home</a></li>
+                    <li><a href="latest-jobs.html" class="active">Latest Jobs</a></li>
+                    <li><a href="../HTML/admitcard.html">Admit Card</a></li>
+                    <li><a href="../HTML/results.html">Results</a></li>
+                    <li><a href="../HTML/answer-key.html">Answer Key</a></li>
+                    <li><a href="../HTML/rank-predictor.html">Quizzes</a></li>
+                    
+                    <li><a href="../HTML/documents.html">Documents</a></li>
+                    <li><a href="../HTML/about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="latest-jobs-page">
+        <section class="filter-section">
+            <div class="filter-group">
+                <label for="department">Department</label>
+                <div class="searchable-dropdown">
+                    <input type="text" id="departmentSearch" placeholder="Search department...">
+                    <select id="department">
+                        <option value="all">All Departments</option>
+                        <option value="ssc">SSC</option>
+                        <option value="upsc">UPSC</option>
+                        <option value="ibps">IBPS</option>
+                        <option value="upsssc">UPSSSC</option>
+                        <option value="uppcs">UPPCS</option>
+                        <option value="rbi">RBI</option>
+                        <option value="railway">Railway</option>
+                        <option value="neet">NEET</option>
+                        <option value="jee">JEE</option>
+                        <option value="state_psc">State PSCs</option>
+                        <option value="cat">CAT</option>
+                        <option value="gate">GATE</option>
+                        <option value="nta">NTA</option>
+                        <option value="upprpb">UPPRPB</option>
+                        <option value="bssc">BSSC</option>
+                        <option value="bsf">BSF</option>
+                        <option value="bshs">BSHS</option>
+                        <option value="mhaib">MHA IB</option>
+                        <option value="dsssb">DSSSB</option>
+                        <!-- Add more departments as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="year">Year</label>
+                <select id="year">
+                    <option value="all">All Years</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button id="applyFilter" class="btn btn-primary">Apply Filters</button>
+                <button id="resetFilter" class="btn btn-outline">Reset</button>
+            </div>
+        </section>
+        
+        <!-- Top Advertisement Banner -->
+        <div class="ad-space horizontal-ad">
+            <div class="ad-content">
+                <p>Advertisement</p>
+                <img src="../Assets/ads/horizontal-banner.jpg" alt="Advertisement" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="job-listings" id="jobListings">
+            <!-- Jobs will be loaded here by JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SarkariOfficer</h3>
+                <p>India's most trusted government job portal providing latest updates for all Sarkari Naukri across states and central sectors.</p>
+                <div class="social-icons">
+                    
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Latest Jobs</a></li>
+                    <li><a href="#">Admit Card</a></li>
+                    <li><a href="#">Results</a></li>
+                    <li><a href="#">Answer Key</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="#">Previous Papers</a></li>
+                    
+                   
+                    <li><a href="#">Preparation Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li>
+                    <li><i class="fas fa-phone"></i> +91 7300627752</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 (sarkariofficer.in) . All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="../JS/latest-jobs.js"></script>
+</body>
+</html>

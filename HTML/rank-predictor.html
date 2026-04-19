@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - SarkariOfficer</title>
+    <link rel="stylesheet" href="../CSS/quizzes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/LogoSarkariOfficer.png" alt="SarkariOfficer Logo" class="logo-img">
+                <a href="../HTML/Index.html" class="logo">Sarkari<span>Officer</span></a>
+            </div>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="../HTML/Index.html">Home</a></li>
+                    <li><a href="../HTML/latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="../HTML/admitcard.html">Admit Card</a></li>
+                    <li><a href="../HTML/results.html">Results</a></li>
+                    <li><a href="../HTML/answer-key.html">Answer key</a></li>
+                    <li><a href="../HTML/rank-predictor.html" class="active">Quizzes</a></li>
+                    <li><a href="../HTML/documents.html">Documents</a></li>
+                    <li><a href="../HTML/about-us.html">About us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Subjects List Section -->
+        <section id="subjects-section" class="subjects-section">
+            <h2 class="section-title">Practice Quizzes</h2>
+            <p class="section-subtitle">Select a subject to start practicing</p>
+            
+            <div class="subjects-grid">
+                <div class="subject-card" data-subject="Mathematics">
+                    <div class="subject-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Mathematics</h3>
+                    <p>Practice quantitative aptitude and numerical ability questions</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+                
+                <div class="subject-card" data-subject="English">
+                    <div class="subject-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>English</h3>
+                    <p>Improve your grammar, vocabulary and comprehension skills</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+                
+                <div class="subject-card" data-subject="Reasoning">
+                    <div class="subject-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Reasoning</h3>
+                    <p>Logical, analytical and critical reasoning questions</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+                
+                <div class="subject-card" data-subject="General Awareness">
+                    <div class="subject-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>General Awareness</h3>
+                    <p>Current affairs, history, geography and general knowledge</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+                
+                <div class="subject-card" data-subject="Science">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Science</h3>
+                    <p>Physics, chemistry, biology and scientific concepts</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+                
+                <div class="subject-card" data-subject="Hindi">
+                    <div class="subject-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Hindi</h3>
+                    <p>व्याकरण, समानार्थी शब्द और हिंदी comprehension</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+                
+                <div class="subject-card" data-subject="Computer">
+                    <div class="subject-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Computer</h3>
+                    <p>Fundamentals, software, hardware and networking concepts</p>
+                    <button class="subject-btn">Start Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Configuration Section -->
+        <section id="config-section" class="config-section hidden">
+            <div class="config-container">
+                <h2>Configure Your <span id="config-subject">Mathematics</span> Quiz</h2>
+                
+                <div class="config-options">
+                    <div class="config-option">
+                        <label for="question-count">Number of Questions</label>
+                        <input type="range" id="question-count" min="5" max="50" value="20">
+                        <span id="count-value">20</span>
+                    </div>
+                    
+                    <div class="config-option">
+                        <label for="time-per-question">Time Per Question (seconds)</label>
+                        <select id="time-per-question">
+                            <option value="30">30 seconds</option>
+                            <option value="60" selected>1 minute</option>
+                            <option value="90">1.5 minutes</option>
+                            <option value="120">2 minutes</option>
+                            <option value="0">No time limit</option>
+                        </select>
+                    </div>
+                    
+                    <div class="config-option">
+                        <label>Select Topics</label>
+                        <div id="topics-container" class="topics-container">
+                            <!-- Topics will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="config-option">
+                        <label for="difficulty">Difficulty Level</label>
+                        <select id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="mixed">Mixed</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="start-quiz-btn" class="btn btn-primary">Start Quiz</button>
+            </div>
+        </section>
+
+        <!-- Quiz Interface Section -->
+        <section id="quiz-section" class="quiz-section hidden">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <h3 id="quiz-subject">Mathematics</h3>
+                    <p>Question <span id="current-question">1</span> of <span id="total-questions">20</span></p>
+                </div>
+                <div class="quiz-timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">10:00</span>
+                </div>
+            </div>
+            
+            <div class="quiz-progress">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question">
+                    <h3 id="question-text">What is the capital of France?</h3>
+                </div>
+                
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="option1" name="answer" value="1">
+                        <label for="option1">London</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="option2" name="answer" value="2">
+                        <label for="option2">Berlin</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="option3" name="answer" value="3">
+                        <label for="option3">Paris</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="option4" name="answer" value="4">
+                        <label for="option4">Madrid</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-navigation">
+                <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
+                <button id="mark-review" class="btn btn-outline">Mark for Review</button>
+                <button id="next-btn" class="btn btn-primary">Next</button>
+                <button id="submit-quiz" class="btn btn-danger hidden">Submit Quiz</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section hidden">
+            <div class="results-container">
+                <h2>Quiz Results</h2>
+                <div class="score-circle">
+                    <svg class="progress-ring" width="200" height="200">
+                        <circle class="progress-ring__circle" stroke-width="10" fill="transparent" r="90" cx="100" cy="100"/>
+                    </svg>
+                    <div class="score-text">
+                        <span id="score-percent">75%</span>
+                        <span id="score-fraction">15/20</span>
+                    </div>
+                </div>
+                
+                <div class="results-details">
+                    <div class="result-item">
+                        <span class="result-label">Total Questions</span>
+                        <span id="result-total" class="result-value">20</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Attempted</span>
+                        <span id="result-attempted" class="result-value">18</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Correct</span>
+                        <span id="result-correct" class="result-value">15</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Incorrect</span>
+                        <span id="result-incorrect" class="result-value">3</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time Taken</span>
+                        <span id="result-time" class="result-value">15:30</span>
+                    </div>
+                </div>
+                
+                <div class="results-actions">
+                    <button id="review-answers" class="btn btn-outline">Review Answers</button>
+                    <button id="new-quiz" class="btn btn-primary">Start New Quiz</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SarkariOfficer</h3>
+                <p>India's most trusted government job portal providing latest updates for all Sarkari Naukri across states and central sectors.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../HTML/Index.html">Home</a></li>
+                    <li><a href="../HTML/latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="../HTML/admitcard.html">Admit Card</a></li>
+                    <li><a href="../HTML/results.html">Results</a></li>
+                    <li><a href="../HTML/answer-key.html">Answer Key</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="#">Previous Papers</a></li>
+                    <li><a href="#">Preparation Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li>
+                    <li><i class="fas fa-phone"></i> +91 7300627752</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 (sarkariofficer.in) . All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="../JS/subjects-data.js"></script>
+    <script src="../JS/quizzes.js"></script>
+</body>
+</html>

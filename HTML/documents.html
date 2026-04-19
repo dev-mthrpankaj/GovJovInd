@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Tools | GovJobInd</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/documents.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/LogoSarkariOfficer.png" alt="SarkariOfficer Logo" class="logo-img">
+                <a href="#" class="logo">Sarkari<span>Officer</span></a>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="../HTML/index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="../HTML/admitcard.html">Admit Card</a></li>
+                    <li><a href="../HTML/results.html">Results</a></li>
+                    <li><a href="../HTML/answer-key.html">Answer Key</a></li>
+                    <li><a href="../HTML/rank-predictor.html">Quizzes</a></li>
+                    
+                    <li><a href="../HTML/documents.html" class="active">Documents</a></li>
+                    <li><a href="../HTML/about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="documents-page">
+        <div class="tools-container">
+            <!-- Tool Selection Tabs -->
+            <div class="tool-tabs">
+                <button class="tab-btn active" data-tab="image-resizer">Image Resizer</button>
+                <button class="tab-btn" data-tab="image-to-pdf">Image to PDF</button>
+                <button class="tab-btn" data-tab="pdf-resizer">PDF Resizer</button>
+            </div>
+
+            <!-- Image Resizer Tool -->
+            <div id="image-resizer" class="tool-content active">
+                <h2><i class="fas fa-image"></i> Resize Photo/Signature</h2>
+                <div class="upload-area" id="image-upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <input type="file" id="image-upload" accept="image/*">
+                </div>
+                
+                <div class="preview-container hidden" id="image-preview-container">
+                    <div class="image-preview">
+                        <img id="image-preview" src="#" alt="Preview">
+                        <div class="original-size">
+                            Original: <span id="original-image-size">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="image-width">Width:</label>
+                            <div class="input-group">
+                                <input type="number" id="image-width" min="1">
+                                <select id="image-width-unit">
+                                    <option value="px">px</option>
+                                    <option value="cm">cm</option>
+                                    <option value="inch">inch</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="image-height">Height:</label>
+                            <div class="input-group">
+                                <input type="number" id="image-height" min="1">
+                                <select id="image-height-unit">
+                                    <option value="px">px</option>
+                                    <option value="cm">cm</option>
+                                    <option value="inch">inch</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="image-resolution">Resolution (DPI):</label>
+                            <input type="number" id="image-resolution" min="72" max="600" value="300">
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="image-format">Format:</label>
+                            <select id="image-format">
+                                <option value="jpg">JPG</option>
+                                <option value="png">PNG</option>
+                                <option value="webp">WEBP</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="image-quality">Quality:</label>
+                            <input type="range" id="image-quality" min="1" max="100" value="85">
+                            <span id="image-quality-value">85%</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="target-size">Target Size:</label>
+                            <div class="input-group">
+                                <input type="number" id="target-size-value" min="10" value="100">
+                                <select id="target-size-unit">
+                                    <option value="KB">KB</option>
+                                    <option value="MB">MB</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-btns hidden" id="image-action-btns">
+                    <button id="resize-image-btn" class="btn btn-primary">
+                        <i class="fas fa-compress-alt"></i> Resize Image
+                    </button>
+                    <button id="reset-image-btn" class="btn btn-outline">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <div class="download-area hidden" id="image-download-area">
+                    <div class="result-info">
+                        <p>New size: <span id="new-image-size">-</span></p>
+                        <p>Dimensions: <span id="new-image-dimensions">-</span></p>
+                    </div>
+                    <button id="download-image-btn" class="btn btn-download">
+                        <i class="fas fa-download"></i> Download Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image to PDF Tool -->
+            <div id="image-to-pdf" class="tool-content">
+                <h2><i class="fas fa-file-pdf"></i> Convert Image to PDF</h2>
+                <div class="upload-area" id="pdf-upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <input type="file" id="pdf-upload" accept="image/*">
+                </div>
+                
+                <div class="preview-container hidden" id="pdf-preview-container">
+                    <div class="image-preview">
+                        <img id="pdf-preview" src="#" alt="Preview">
+                        <div class="original-size">
+                            Original: <span id="original-pdf-size">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="pdf-page-size">Page Size:</label>
+                            <select id="pdf-page-size">
+                                <option value="a4">A4 (210 × 297 mm)</option>
+                                <option value="letter">Letter (216 × 279 mm)</option>
+                                <option value="legal">Legal (216 × 356 mm)</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                        
+                        <div class="custom-size hidden" id="pdf-custom-size">
+                            <div class="control-group">
+                                <label for="pdf-width">Width (mm):</label>
+                                <input type="number" id="pdf-width" min="1" value="210">
+                            </div>
+                            <div class="control-group">
+                                <label for="pdf-height">Height (mm):</label>
+                                <input type="number" id="pdf-height" min="1" value="297">
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="pdf-margin">Margin (mm):</label>
+                            <input type="number" id="pdf-margin" min="0" max="50" value="10">
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="pdf-orientation">Orientation:</label>
+                            <select id="pdf-orientation">
+                                <option value="portrait">Portrait</option>
+                                <option value="landscape">Landscape</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-btns hidden" id="pdf-action-btns">
+                    <button id="convert-pdf-btn" class="btn btn-primary">
+                        <i class="fas fa-file-export"></i> Convert to PDF
+                    </button>
+                    <button id="reset-pdf-btn" class="btn btn-outline">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <div class="download-area hidden" id="pdf-download-area">
+                    <div class="result-info">
+                        <p>PDF size: <span id="new-pdf-size">-</span></p>
+                        <p>Dimensions: <span id="new-pdf-dimensions">-</span></p>
+                    </div>
+                    <button id="download-pdf-btn" class="btn btn-download">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- PDF Resizer Tool -->
+            <div id="pdf-resizer" class="tool-content">
+                <h2><i class="fas fa-file-pdf"></i> Resize PDF File</h2>
+                <div class="upload-area" id="resize-pdf-upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your PDF here or click to browse</p>
+                    <input type="file" id="resize-pdf-upload" accept=".pdf">
+                </div>
+                
+                <div class="preview-container hidden" id="resize-pdf-preview-container">
+                    <div class="pdf-preview">
+                        <i class="fas fa-file-pdf"></i>
+                        <p id="resize-pdf-name">filename.pdf</p>
+                        <div class="original-size">
+                            Original: <span id="original-resize-pdf-size">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="pdf-target-size">Target Size:</label>
+                            <div class="input-group">
+                                <input type="number" id="pdf-target-size-value" min="10" value="100">
+                                <select id="pdf-target-size-unit">
+                                    <option value="KB">KB</option>
+                                    <option value="MB">MB</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="pdf-compression">Compression Level:</label>
+                            <select id="pdf-compression">
+                                <option value="low">Low (Better Quality)</option>
+                                <option value="medium" selected>Medium (Balanced)</option>
+                                <option value="high">High (Smaller File)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="pdf-quality">Image Quality (DPI):</label>
+                            <input type="range" id="pdf-quality" min="72" max="300" value="150">
+                            <span id="pdf-quality-value">150 DPI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-btns hidden" id="resize-pdf-action-btns">
+                    <button id="resize-pdf-btn" class="btn btn-primary">
+                        <i class="fas fa-compress-alt"></i> Resize PDF
+                    </button>
+                    <button id="reset-resize-pdf-btn" class="btn btn-outline">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <div class="download-area hidden" id="resize-pdf-download-area">
+                    <div class="result-info">
+                        <p>New size: <span id="new-resize-pdf-size">-</span></p>
+                        <p>Reduction: <span id="pdf-reduction">-</span></p>
+                    </div>
+                    <button id="download-resize-pdf-btn" class="btn btn-download">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+     <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SarkariOfficer</h3>
+                <p>India's most trusted government job portal providing latest updates for all Sarkari Naukri across states and central sectors.</p>
+                <div class="social-icons">
+                    
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Latest Jobs</a></li>
+                    <li><a href="#">Admit Card</a></li>
+                    <li><a href="#">Results</a></li>
+                    <li><a href="#">Answer Key</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="#">Previous Papers</a></li>
+                    
+                   
+                    <li><a href="#">Preparation Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li>
+                    <li><i class="fas fa-phone"></i> +91 7300627752</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 (sarkariofficer.in) . All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <!-- Include required PDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="../JS/documents.js"></script>
+</body>
+</html>
