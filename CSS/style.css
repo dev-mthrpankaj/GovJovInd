@@ -529,3 +529,34 @@ footer {
 .nav-links a:hover {
     background-color: #0056b3; /* Darker blue when you touch it */
 }
+
+/* News Bar Styling */
+.news-ticker {
+    background-color: #d9534f; /* Alert Red */
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+.news-ticker .label {
+    background: #ffcc00;
+    color: black;
+    padding: 2px 8px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+/* Nav Menu Styling */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 5px 10px;
+}
+nav ul li a:hover {
+    color: #007bff; /* Blue color when you hover */
+}
