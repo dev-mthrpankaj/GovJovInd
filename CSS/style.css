@@ -516,3 +516,16 @@ footer {
         font-size: 1.3rem;
     }
 }
+/* This makes your links look like professional buttons */
+.nav-links a {
+    background-color: #007bff; /* Nice Blue color */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    background-color: #0056b3; /* Darker blue when you touch it */
+}
