@@ -20,10 +20,10 @@ body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-he
 a{color:inherit}
 img{max-width:100%;height:auto;display:block}
 
-.ticker-wrap{display:flex;align-items:center;min-height:40px;background:var(--secondary);color:#fff;overflow:hidden}
-.ticker-title{background:var(--accent);color:#111827;font-weight:700;padding:.55rem .8rem;font-size:.82rem;white-space:nowrap}
-.ticker{display:flex;white-space:nowrap;animation:marquee 32s linear infinite}
-.ticker-item{padding:0 1.2rem;font-size:.9rem}
+.ticker-wrap{display:flex;align-items:center;min-height:44px;background:linear-gradient(90deg,#0f172a,#1e293b);color:#fff;overflow:hidden;padding-inline:.35rem}
+.ticker-title{background:var(--accent);color:#111827;font-weight:700;padding:.45rem .7rem;font-size:.78rem;border-radius:8px;white-space:nowrap;margin-right:.45rem}
+.ticker{display:flex;white-space:nowrap;animation:marquee 32s linear infinite;padding-right:.5rem}
+.ticker-item{padding:0 .95rem;font-size:.84rem;font-weight:500}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 
 header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
