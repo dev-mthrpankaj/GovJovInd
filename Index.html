@@ -5,19 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GovJobInd - India's Trusted Government Job Portal</title>
     <meta name="description" content="Get latest Sarkari Naukri updates, admit cards, results, and more for all government jobs across India.">
-    
- 
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="ticker-wrap">
+        <div class="ticker-title">New Updates</div>
+        <div class="ticker">
+            <div class="ticker-item">UP Police Constable Exam Dates Released!</div>
+            <div class="ticker-item">SSC CGL Tier-II Admit Card Available.</div>
+            <div class="ticker-item">IBPS PO Final Result Out.</div>
+            <div class="ticker-item">Apply now for Railway Recruitment 2026.</div>
+        </div>
+    </div>
+
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="../Assets/Home Page/LogoSarkariOfficer.png" alt="SarkariOfficer Logo" class="logo-img">
+                <div class="logo-circle">
+                    <img src="../Assets/Home Page/LogoSarkariOfficer.png" alt="SarkariOfficer Logo" class="logo-img">
+                </div>
                 <a href="#" class="logo">Sarkari<span>Officer</span></a>
             </div>
-            <div class="menu-toggle">☰</div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#" class="active">Home</a></li>
@@ -26,7 +40,6 @@
                     <li><a href="../HTML/results.html">Results</a></li>
                     <li><a href="../HTML/answer-key.html">Answer key</a></li>
                     <li><a href="../HTML/rank-predictor.html">Quizzes</a></li>
-                    <li><a href="../HTML/documents.html">Documents</a></li>
                     <li><a href="../HTML/about-us.html">About us</a></li>
                 </ul>
             </nav>
@@ -36,64 +49,69 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>India's Trusted Government Job Portal</h1>
-                <p>Stay updated with the latest Sarkari Jobs, Results, Admit Cards, and more from all states & central government sectors.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Check Latest Updates</a>
-                    <a href="#" class="btn btn-secondary">Browse All Jobs</a>
+                <span class="badge">#1 Job Portal in India</span>
+                <h1>Find Your Dream <br><span class="highlight">Government Job</span></h1>
+                <p>One-stop destination for Sarkari Naukri, Admit Cards, and Rank Predictions.</p>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search exams, jobs, or results...">
+                    <button class="btn-search">Search</button>
+                </div>
+
+                <div class="trending-tags">
+                    <span>Trending:</span>
+                    <a href="#">SSC GD</a>
+                    <a href="#">UP Police</a>
+                    <a href="#">Railway</a>
+                    <a href="#">UPSC</a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="../Assets/Home Page/Government Job Banner.png" 
-                     alt="Government Jobs" 
-                     class="hero-banner">
+                <div class="image-blob">
+                    <img src="../Assets/Home Page/Government Job Banner.png" alt="Government Jobs" class="hero-banner">
+                </div>
             </div>
         </section>
 
         <section class="features">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Everything you need for your government job search in one place</p>
+            <h2 class="section-title">Streamline Your Preparation</h2>
+            <p class="section-subtitle">We bring the most accurate and timely information for every aspirant.</p>
             
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <h3>Latest Notifications</h3>
-                    <p>Get real-time updates of Sarkari Naukri from SSC, UPSC, Police, Banks, and more.</p>
-                    <a href="#" class="feature-link">View Jobs <i class="fas fa-arrow-right"></i></a>
+                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    <h3>Instant Notifications</h3>
+                    <p>Never miss a deadline. Get real-time alerts for SSC, UPSC, and State Police jobs.</p>
+                    <a href="#" class="feature-link">View All Jobs <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <h3>Admit Cards & Results</h3>
-                    <p>Download admit cards and check results from a single platform without hassle.</p>
-                    <a href="#" class="feature-link">Check Now <i class="fas fa-arrow-right"></i></a>
+                    <div class="feature-icon"><i class="fas fa-id-card"></i></div>
+                    <h3>Digital Admit Cards</h3>
+                    <p>Fastest access to your hall tickets and exam center details with one click.</p>
+                    <a href="#" class="feature-link">Download <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Rank Prediction Tool</h3>
-                    <p>Upload your answer key and get an instant estimated rank and analysis report.</p>
-                    <a href="#" class="feature-link">Try Predictor <i class="fas fa-arrow-right"></i></a>
+                    <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Rank Predictor</h3>
+                    <p>Analyze your performance and estimate your rank among thousands of candidates.</p>
+                    <a href="#" class="feature-link">Check Rank <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
 
         <section class="stats">
             <div class="stat-item">
-                <span class="stat-number">10,000+</span>
-                <span class="stat-label">Job Notifications</span>
+                <span class="stat-number" data-target="10000">10K+</span>
+                <span class="stat-label">Active Jobs</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">5M+</span>
-                <span class="stat-label">Monthly Visitors</span>
+                <span class="stat-number" data-target="5000000">5M+</span>
+                <span class="stat-label">Happy Aspirants</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">Government Departments</span>
+                <span class="stat-number" data-target="50">50+</span>
+                <span class="stat-label">Departments</span>
             </div>
         </section>
     </main>
@@ -102,37 +120,26 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>SarkariOfficer</h3>
-                <p>India's most trusted government job portal providing latest updates for all Sarkari Naukri across states and central sectors.</p>
+                <p>Empowering India's youth by providing the most reliable government job updates and preparation resources since 2023.</p>
                 <div class="social-icons">
-                    
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3>Exam Resources</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Latest Jobs</a></li>
-                    <li><a href="#">Admit Card</a></li>
-                    <li><a href="#">Results</a></li>
-                    <li><a href="#">Answer Key</a></li>
+                    <li><a href="#">Exam Syllabus</a></li>
+                    <li><a href="#">Previous Year Papers</a></li>
+                    <li><a href="#">Current Affairs</a></li>
+                    <li><a href="#">Mock Tests</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="#">Syllabus</a></li>
-                    <li><a href="#">Previous Papers</a></li>
-                    
-                   
-                    <li><a href="#">Preparation Tips</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <ul>
+                <h3>Get In Touch</h3>
+                <ul class="contact-info">
                     <li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li>
                     <li><i class="fas fa-phone"></i> +91 7300627752</li>
                     <li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li>
@@ -140,7 +147,11 @@
             </div>
         </div>
         <div class="copyright">
-            &copy; 2023 (sarkariofficer.in) . All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            <p>&copy; 2026 SarkariOfficer.in. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
         </div>
     </footer>
     

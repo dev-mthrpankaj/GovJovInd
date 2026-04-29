@@ -1,60 +1,54 @@
-// Mobile menu toggle
-const menuToggle = document.querySelector('.menu-toggle');
+// Mobile menu toggle with animation
+const menuToggle = document.getElementById('mobile-menu');
 const nav = document.querySelector('nav');
 
 menuToggle.addEventListener('click', () => {
     nav.classList.toggle('active');
-    menuToggle.textContent = nav.classList.contains('active') ? '✕' : '☰';
+    menuToggle.classList.toggle('is-active');
 });
 
-// Close menu when clicking on a link
-const navLinks = document.querySelectorAll('nav ul li a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        menuToggle.textContent = '☰';
-        
-        // Set active state
-        navLinks.forEach(item => item.classList.remove('active'));
-        link.classList.add('active');
+// Counter Animation for Stats
+const stats = document.querySelectorAll('.stat-number');
+const speed = 200;
+
+const startCounters = () => {
+    stats.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText.replace(/[^\d]/g, '');
+            const inc = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc).toLocaleString() + (target === 50 ? '+' : target >= 1000000 ? 'M+' : 'K+');
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = (target >= 1000000 ? (target/1000000) + 'M+' : (target/1000) + 'K+');
+                if(target === 50) counter.innerText = '50+';
+            }
+        };
+        updateCount();
     });
-});
+};
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+// Intersection Observer to trigger counters when visible
+const statsSection = document.querySelector('.stats');
+const statsObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        startCounters();
+        statsObserver.unobserve(statsSection);
+    }
+}, { threshold: 0.5 });
 
-// Add shadow to header on scroll
+statsObserver.observe(statsSection);
+
+// Header background change on scroll
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
-    if (window.scrollY > 10) {
-        header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+    if (window.scrollY > 50) {
+        header.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+        header.style.padding = '0.8rem 5%';
     } else {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        header.style.boxShadow = 'none';
+        header.style.padding = '1rem 5%';
     }
-});
-
-// Animation for feature cards when they come into view
-const featureCards = document.querySelectorAll('.feature-card');
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, { threshold: 0.1 });
-
-featureCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'all 0.6s ease';
-    observer.observe(card);
 });
