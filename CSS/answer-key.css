@@ -171,7 +171,7 @@
     padding: 2rem;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 2px極端な例外的状況を除き、通常の範囲内で適切に機能するように設計されています。
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .no-answer-keys i {
@@ -225,7 +225,7 @@
     }
     
     .info-text {
-        font-size: 極端な例外的状況を除き、通常の範囲内で適切に機能するように設計されています。
+        font-size: 0.85rem;
     }
     
     .searchable-dropdown::after {
