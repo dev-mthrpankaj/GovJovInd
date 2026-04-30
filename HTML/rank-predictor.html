@@ -54,6 +54,8 @@
                 <p class="section-subtitle">Mobile-friendly quizzes for SSC, Railway, Police and other government exams.</p>
             </div>
             
+             <div class="recent-box"><h3>Recent Attempts</h3><ul id="recent-attempts"></ul></div>
+
             <div id="subjects-grid" class="subjects-grid">
                 <div class="subject-card" data-subject="Mathematics">
                     <div class="subject-icon"><i class="fas fa-calculator"></i></div>
@@ -155,14 +157,16 @@
         </section>
 
         <section id="quiz-section" class="quiz-section hidden">
-            <div class="quiz-header">
+            <div class="quiz-header sticky"></div>
                 <div class="quiz-info">
+                    <small id="quiz-difficulty"></small>
                     <span id="quiz-subject">Mathematics</span>
                     <h2>Question <span id="current-question">1</span> of <span id="total-questions">10</span></h2>
                 </div>
                 <div class="quiz-timer"><i class="fas fa-clock"></i><span id="timer">00:00</span></div>
             </div>
             <div class="quiz-progress"><div id="progress-bar" class="progress-bar"></div></div>
+            <div id="question-palette" class="question-palette"></div>
             <div class="question-container">
                 <h3 id="question-text"></h3>
                 <div class="options"></div>
@@ -170,6 +174,7 @@
             <div class="quiz-navigation">
                 <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button>
                 <button id="mark-review" class="btn btn-outline">Mark for Review</button>
+                <button id="skip-btn" class="btn btn-secondary">Skip</button>
                 <button id="next-btn" class="btn btn-primary">Next</button>
                 <button id="submit-quiz" class="btn btn-danger hidden">Submit Quiz</button>
             </div>
@@ -187,9 +192,13 @@
                 </div>
                 <div class="results-details">
                     <div class="result-item"><span>Total Questions</span><strong id="result-total">0</strong></div>
+                    <div class="result-item"><span>Unattempted</span><strong id="result-unattempted">0</strong></div>
                     <div class="result-item"><span>Attempted</span><strong id="result-attempted">0</strong></div>
                     <div class="result-item"><span>Correct</span><strong id="result-correct">0</strong></div>
                     <div class="result-item"><span>Incorrect</span><strong id="result-incorrect">0</strong></div>
+                    <div class="result-item"><span>Accuracy</span><strong id="result-accuracy">0%</strong></div>
+                    <div class="result-item"><span>Subject</span><strong id="result-subject">-</strong></div>
+                    <div class="result-item"><span>Difficulty</span><strong id="result-difficulty">-</strong></div>
                     <div class="result-item"><span>Time Taken</span><strong id="result-time">00:00</strong></div>
                 </div>
                 <div class="results-actions">
@@ -198,6 +207,25 @@
                 </div>
             </div>
         </section>
+
+          <section id="review-section" class="results-section hidden">
+            <div class="results-container">
+                <h2>Answer Review</h2>
+                <div class="review-filters">
+                    <button class="btn btn-outline review-filter" data-filter="all">All</button>
+                    <button class="btn btn-outline review-filter" data-filter="correct">Correct</button>
+                    <button class="btn btn-outline review-filter" data-filter="wrong">Wrong</button>
+                    <button class="btn btn-outline review-filter" data-filter="unattempted">Unattempted</button>
+                    <button class="btn btn-outline review-filter" data-filter="marked">Marked</button>
+                </div>
+                <div id="review-list"></div>
+                <div class="results-actions">
+                    <button id="back-to-results" class="btn btn-outline">Back to Results</button>
+                    <button id="restart-quiz" class="btn btn-primary">Restart Quiz</button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -227,6 +255,8 @@
         <div class="copyright">&copy; 2026 SarkariOfficer.in. All rights reserved.</div>
     </footer>
 
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"SarkariOfficer Quiz Practice","description":"Government exam practice quizzes with instant analytics.","educationalUse":"practice","learningResourceType":"Quiz","inLanguage":"en"}</script>
+    <script src="../JS/quiz-data.js"></script>
     <script src="../JS/quizzes.js"></script>
 </body>
 </html>
