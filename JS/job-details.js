@@ -409,7 +409,7 @@ function renderJobDetails(job) {
                 <i class="fas fa-exclamation-triangle"></i>
                 <h2>Job Not Found</h2>
                 <p>The requested job does not exist or has been removed.</p>
-                <a href="../HTML/latest-jobs.html" class="btn btn-primary">Back to Jobs</a>
+                <a href="latest-jobs.html" class="btn btn-primary">Back to Jobs</a>
             </div>
         `;
         return;

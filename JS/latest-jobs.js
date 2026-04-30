@@ -31,7 +31,7 @@ const jobsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "4543",
         applyLink: "https://www.upprpb.in/#/auth/landing",
-        detailsPage: "../Job_Details/HTML_JobDetails/job-details-1011.html"
+        detailsPage: "job-details.html?id=1011",
     },
     {
         id: 1012,
@@ -44,7 +44,7 @@ const jobsData = [
         qualification: "High School or Equivalent",
         totalPosts: "3727",
         applyLink: "https://www.onlinebssc.com/officeattendantspecial/",
-        detailsPage: "job-details-1012.html"
+        detailsPage: "job-details.html?id=1012",
     },
     {
         id: 1013,
@@ -57,7 +57,7 @@ const jobsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "1481",
         applyLink: "https://www.onlinebssc.com/4thgralevel/",
-        detailsPage: "job-details-1013.html"
+        detailsPage: "job-details.html?id=1013",
     },
     {
         id: 1014,
@@ -70,7 +70,7 @@ const jobsData = [
         qualification: "Intermediate with Science",
         totalPosts: "1121",
         applyLink: "https://rectt.bsf.gov.in/auth/login",
-        detailsPage: "job-details-1014.html"
+        detailsPage: "job-details.html?id=1014",
     },
     {
         id: 1015,
@@ -83,7 +83,7 @@ const jobsData = [
         qualification: "10+2 or above",
         totalPosts: "1075",
         applyLink: "#",
-        detailsPage: "job-details-1015.html"
+        detailsPage: "job-details.html?id=1015",
     },
     {
         id: 1016,
@@ -96,7 +96,7 @@ const jobsData = [
         qualification: "Graduate",
         totalPosts: "394",
         applyLink: "https://cdn.digialm.com/EForms/configuredHtml/1258/94260/Index.html",
-        detailsPage: "job-details-1016.html"
+        detailsPage: "job-details.html?id=1016",
     },
     {
         id: 1017,
@@ -109,7 +109,7 @@ const jobsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "10277",
         applyLink: "https://www.ibps.in/",
-        detailsPage: "job-details-1017.html"
+        detailsPage: "job-details.html?id=1017",
     },
     {
         id: 1018,
@@ -122,7 +122,7 @@ const jobsData = [
         qualification: "high School or Equivalent",
         totalPosts: "334",
         applyLink: "https://dsssbonline.nic.in/",
-        detailsPage: "job-details-1018.html"
+        detailsPage: "job-details.html?id=1018",
     }
 ];
 
@@ -194,8 +194,8 @@ function renderJobs(jobs) {
             </div>
             <p class="info-text"><i class="fas fa-info-circle"></i> For more information, click on "View Details" button</p>
             <div class="job-actions">
-                <a href="${job.applyLink}" class="btn btn-primary">Apply Now</a>
-                <a href="../HTML/${job.detailsPage}" class="btn btn-outline">View Details</a>
+                                ${job.applyLink && job.applyLink !== "#" ? `<a href="${job.applyLink}" target="_blank" rel="noopener" class="btn btn-primary">Apply Now</a>` : `<button class="btn btn-primary" disabled>Apply Closed</button>`}
+                <a href="${job.detailsPage}" class="btn btn-outline">View Details</a>
             </div>
         </div>
         

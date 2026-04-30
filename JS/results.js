@@ -31,7 +31,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "14582",
         resultLink: "https://ssc.gov.in/",
-        detailsPage: "../Job_Details/HTML_JobDetails/result-details-8.html"
+        detailsPage: "job-details.html?id=8",
     },
     {
         id: 7,
@@ -44,7 +44,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "1105",
         resultLink: "#",
-        detailsPage: "result-details-7.html"
+        detailsPage: "job-details.html?id=7",
     },
     {
         id: 6,
@@ -57,7 +57,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "6432",
         resultLink: "#",
-        detailsPage: "result-details-6.html"
+        detailsPage: "job-details.html?id=6",
     },
     {
         id: 5,
@@ -70,7 +70,7 @@ const resultsData = [
         qualification: "High School or Equivalent",
         totalCandidates: "20000+",
         resultLink: "#",
-        detailsPage: "result-details-5.html"
+        detailsPage: "job-details.html?id=5",
     },
     {
         id: 4,
@@ -83,7 +83,7 @@ const resultsData = [
         qualification: "10th Pass",
         totalCandidates: "25000",
         resultLink: "#",
-        detailsPage: "result-details-4.html"
+        detailsPage: "job-details.html?id=4",
     },
     {
         id: 3,
@@ -96,7 +96,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "457",
         resultLink: "#",
-        detailsPage: "result-details-3.html"
+        detailsPage: "job-details.html?id=3",
     },
     {
         id: 2,
@@ -109,7 +109,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "1000",
         resultLink: "#",
-        detailsPage: "result-details-2.html"
+        detailsPage: "job-details.html?id=2",
     },
     {
         id: 1,
@@ -122,7 +122,7 @@ const resultsData = [
         qualification: "12th Pass",
         totalCandidates: "5000",
         resultLink: "#",
-        detailsPage: "result-details-1.html"
+        detailsPage: "job-details.html?id=1",
     },
     // Additional results
     {
@@ -136,7 +136,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "850",
         resultLink: "#",
-        detailsPage: "result-details-9.html"
+        detailsPage: "job-details.html?id=9",
     },
     {
         id: 10,
@@ -149,7 +149,7 @@ const resultsData = [
         qualification: "Diploma in Engineering",
         totalCandidates: "3200",
         resultLink: "#",
-        detailsPage: "result-details-10.html"
+        detailsPage: "job-details.html?id=10",
     },
     {
         id: 11,
@@ -162,7 +162,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "7800",
         resultLink: "#",
-        detailsPage: "result-details-11.html"
+        detailsPage: "job-details.html?id=11",
     },
     {
         id: 12,
@@ -175,7 +175,7 @@ const resultsData = [
         qualification: "12th Pass",
         totalCandidates: "6000",
         resultLink: "#",
-        detailsPage: "result-details-12.html"
+        detailsPage: "job-details.html?id=12",
     }
 ];
 
@@ -248,7 +248,7 @@ function renderResults(results) {
             <p class="info-text"><i class="fas fa-info-circle"></i> For more details, click on "View Details" button</p>
             <div class="result-actions">
                 <a href="${result.resultLink}" class="btn btn-primary">View Result</a>
-                <a href="${result.detailsPage}" class="btn btn-outline">View Details</a>
+                 ${result.detailsPage && result.detailsPage !== "#" ? `<a href="${result.detailsPage}" class="btn btn-outline">View Details</a>` : `<button class="btn btn-outline" disabled>Details Soon</button>`}
             </div>
         </div>
         

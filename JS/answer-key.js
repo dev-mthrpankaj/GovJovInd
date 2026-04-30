@@ -32,7 +32,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 10,000",
         downloadLink: "https://ssc.gov.in/",
-        detailsPage: "../Job_Details/HTML_JobDetails/answer-key-details-8.html"
+        detailsPage: "job-details.html?id=8",
     },
     {
         id: 7,
@@ -46,7 +46,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 1,100",
         downloadLink: "#",
-        detailsPage: "answer-key-details-7.html"
+        detailsPage: "job-details.html?id=7",
     },
     {
         id: 6,
@@ -60,7 +60,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 5,000",
         downloadLink: "#",
-        detailsPage: "answer-key-details-6.html"
+        detailsPage: "job-details.html?id=6",
     },
     {
         id: 5,
@@ -74,7 +74,7 @@ const answerKeysData = [
         qualification: "High School or Equivalent",
         totalPosts: "Various Posts",
         downloadLink: "#",
-        detailsPage: "answer-key-details-5.html"
+        detailsPage: "job-details.html?id=5",
     },
     {
         id: 4,
@@ -88,7 +88,7 @@ const answerKeysData = [
         qualification: "10th Pass",
         totalPosts: "Approx 25,000",
         downloadLink: "#",
-        detailsPage: "answer-key-details-4.html"
+        detailsPage: "job-details.html?id=4",
     },
     {
         id: 3,
@@ -102,7 +102,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 350",
         downloadLink: "#",
-        detailsPage: "answer-key-details-3.html"
+        detailsPage: "job-details.html?id=3",
     },
     {
         id: 2,
@@ -116,7 +116,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 1,000",
         downloadLink: "#",
-        detailsPage: "answer-key-details-2.html"
+        detailsPage: "job-details.html?id=2",
     },
     {
         id: 1,
@@ -130,7 +130,7 @@ const answerKeysData = [
         qualification: "12th Pass",
         totalPosts: "Approx 5,000",
         downloadLink: "#",
-        detailsPage: "answer-key-details-1.html"
+        detailsPage: "job-details.html?id=1",
     },
     // Additional answer keys
     {
@@ -145,7 +145,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 200",
         downloadLink: "#",
-        detailsPage: "answer-key-details-9.html"
+        detailsPage: "job-details.html?id=9",
     },
     {
         id: 10,
@@ -159,7 +159,7 @@ const answerKeysData = [
         qualification: "Diploma in Engineering",
         totalPosts: "Approx 1,200",
         downloadLink: "#",
-        detailsPage: "answer-key-details-10.html"
+        detailsPage: "job-details.html?id=10",
     },
     {
         id: 11,
@@ -173,7 +173,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 6,000",
         downloadLink: "#",
-        detailsPage: "answer-key-details-11.html"
+        detailsPage: "job-details.html?id=11",
     },
     {
         id: 12,
@@ -187,7 +187,7 @@ const answerKeysData = [
         qualification: "12th Pass",
         totalPosts: "Approx 400",
         downloadLink: "#",
-        detailsPage: "answer-key-details-12.html"
+        detailsPage: "job-details.html?id=12",
     }
 ];
 
@@ -261,7 +261,7 @@ function renderAnswerKeys(answerKeys) {
             <p class="info-text"><i class="fas fa-info-circle"></i> For more details, click on "View Details" button</p>
             <div class="answer-key-actions">
                 <a href="${answerKey.downloadLink}" class="btn btn-primary">Download Answer Key</a>
-                <a href="${answerKey.detailsPage}" class="btn btn-outline">View Details</a>
+                ${answerKey.detailsPage && answerKey.detailsPage !== "#" ? `<a href="${answerKey.detailsPage}" class="btn btn-outline">View Details</a>` : `<button class="btn btn-outline" disabled>Details Soon</button>`}
             </div>
         </div>
         
