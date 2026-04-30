@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Government Job Results | GovJobInd</title>
-    <meta name="description" content="SarkariOfficer provides latest government jobs, admit cards, results, answer keys, and exam resources.">
+    <title>Government Exam Results 2026 | SarkariOfficer</title>
+    <meta name="description" content="Check latest Indian government exam results with department filters, result dates, official links, and result detail pages.">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/results.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -33,42 +33,49 @@
         </div>
     </header>
     
-    <main class="results-page">
-        <section class="filter-section">
-            <div class="filter-group">
-                <label for="department">Department</label>
-                <div class="searchable-dropdown">
-                    <input type="text" id="departmentSearch" placeholder="Search department...">
-                    <select id="department">
-                        <option value="all">All Departments</option>
-                        <option value="ssc">SSC</option>
-                        <option value="upsc">UPSC</option>
-                        <option value="ibps">IBPS</option>
-                        <option value="upsssc">UPSSSC</option>
-                        <option value="uppcs">UPPCS</option>
-                        <option value="rbi">RBI</option>
-                        <option value="railway">Railway</option>
-                        <option value="neet">NEET</option>
-                        <option value="jee">JEE</option>
-                        <option value="state_psc">State PSCs</option>
-                        <option value="cat">CAT</option>
-                        <option value="gate">GATE</option>
-                        <option value="nta">NTA</option>
-                    </select>
-                </div>
+    <main class="listing-page results-page">
+        <section class="listing-hero" aria-labelledby="resultsHeading">
+            <p class="eyebrow">SarkariOfficer Results Desk</p>
+            <h1 id="resultsHeading">Latest Government Results</h1>
+            <p class="listing-intro">Check released and upcoming results for major central and state government exams with official result links and detail pages.</p>
+        </section>
+
+        <section class="filter-section" aria-label="Filter results">
+            <div class="filter-group filter-group-wide">
+                <label for="resultSearch">Search results</label>
+                <input type="search" id="resultSearch" placeholder="Search by title, organization, department, or tag" autocomplete="off">
             </div>
             <div class="filter-group">
-                <label for="year">Year</label>
-                <select id="year">
+                <label for="resultDepartment">Department</label>
+                <select id="resultDepartment">
+                    <option value="all">All Departments</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="resultYear">Year</label>
+                <select id="resultYear">
                     <option value="all">All Years</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="resultStatus">Status</label>
+                <select id="resultStatus">
+                    <option value="all">All Status</option>
+                    <option value="released">Released</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="new">New</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="resultSort">Sort by</label>
+                <select id="resultSort">
+                    <option value="latest">Latest Updated</option>
+                    <option value="result">Latest Result</option>
+                    <option value="department">Department</option>
                 </select>
             </div>
             <div class="filter-actions">
-                <button id="applyFilter" class="btn btn-primary">Apply Filters</button>
-                <button id="resetFilter" class="btn btn-outline">Reset</button>
+                <button id="resultResetFilters" class="btn btn-outline" type="button">Reset Filters</button>
             </div>
         </section>
         
@@ -76,13 +83,21 @@
         <div class="ad-space horizontal-ad">
             <div class="ad-content">
                 <p>Advertisement</p>
-                <img src="../Assets/ads/horizontal-banner.jpg" alt="Advertisement" style="max-width: 100%; height: auto;">
+                <img src="../Assets/ads/horizontal-banner.jpg" alt="Advertisement">
             </div>
         </div>
         
-        <div class="result-listings" id="resultListings">
-            <!-- Results will be loaded here by JavaScript -->
-        </div>
+        <section class="listing-results" aria-labelledby="resultRecordsHeading">
+            <div class="results-bar">
+                <h2 id="resultRecordsHeading">Result Updates</h2>
+                <p id="resultCount" aria-live="polite">Loading results...</p>
+            </div>
+            <div class="listing-cards result-listings" id="resultListings"></div>
+            <div class="empty-state" id="resultEmptyState" aria-live="polite" hidden></div>
+            <div class="load-more-wrap">
+                <button id="resultLoadMore" class="btn btn-primary load-more-btn" type="button" hidden>Load More Results</button>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -123,6 +138,7 @@
             &copy; 2026 SarkariOfficer.in. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
         </div>
     </footer>
+<script src="../JS/results-data.js"></script>
 <script src="../JS/results.js"></script>
 <script src="../JS/script.js"></script>
 </body>

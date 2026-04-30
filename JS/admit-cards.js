@@ -1,262 +1,296 @@
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
+(function () {
+    "use strict";
 
-if (menuToggle && mainNav) {
-menuToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('active');
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-    const icon = menuToggle.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-});
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
 
-document.querySelectorAll('nav ul li a').forEach(link => {
-    link.addEventListener('click', () => {
-        mainNav.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'Open navigation menu');
-        menuToggle.querySelector('i').classList.remove('fa-times');
-        menuToggle.querySelector('i').classList.add('fa-bars');
-    });
-});
-}
+    if (menuToggle && mainNav && !menuToggle.dataset.listingBound) {
+        menuToggle.dataset.listingBound = "true";
+        menuToggle.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("active");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+            const icon = menuToggle.querySelector("i");
+            if (icon) {
+                icon.classList.toggle("fa-bars");
+                icon.classList.toggle("fa-times");
+            }
+        });
 
-// Admit Card Data with Job Listings
-const admitcardsData = [
-    // Original admit cards
-    {
-        id: 8,
-        title: "SSC CGL 2025 Admit Card",
-        department: "ssc",
-        year: "2025",
-        organization: "Staff Selection Commission",
-        examName: "Combined Graduate Level Examination",
-        releaseDate: "15-07-2025",
-        examDate: "10-08-2025",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 10,000",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-8.html",
-    },
-    {
-        id: 7,
-        title: "UPSC Civil Services 2024 Admit Card",
-        department: "upsc",
-        year: "2024",
-        organization: "Union Public Service Commission",
-        examName: "Civil Services Examination",
-        releaseDate: "05-06-2024",
-        examDate: "16-06-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 1,000",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-7.html",
-    },
-    {
-        id: 6,
-        title: "IBPS PO 2024 Admit Card",
-        department: "ibps",
-        year: "2024",
-        organization: "Institute of Banking Personnel Selection",
-        examName: "Probationary Officer Examination",
-        releaseDate: "10-05-2024",
-        examDate: "25-05-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 5,000",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-6.html",
-    },
-    {
-        id: 5,
-        title: "SSC CHSL 2024 Admit Card",
-        department: "ssc",
-        year: "2024",
-        organization: "Staff Selection Commission",
-        examName: "Combined Higher Secondary Level Examination",
-        releaseDate: "01-04-2024",
-        examDate: "15-04-2024",
-        qualification: "12th Pass",
-        totalPosts: "Approx 4,500",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-5.html",
-    },
-    {
-        id: 4,
-        title: "UPSC CDS 2024 Admit Card",
-        department: "upsc",
-        year: "2024",
-        organization: "Union Public Service Commission",
-        examName: "Combined Defence Services Examination",
-        releaseDate: "20-03-2024",
-        examDate: "10-04-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 400",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-4.html",
-    },
-    {
-        id: 3,
-        title: "RBI Grade B 2024 Admit Card",
-        department: "rbi",
-        year: "2024",
-        organization: "Reserve Bank of India",
-        examName: "Grade B Officer Examination",
-        releaseDate: "15-02-2024",
-        examDate: "05-03-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 200",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-3.html",
-    },
-    {
-        id: 2,
-        title: "SSC JE 2024 Admit Card",
-        department: "ssc",
-        year: "2024",
-        organization: "Staff Selection Commission",
-        examName: "Junior Engineer Examination",
-        releaseDate: "10-01-2024",
-        examDate: "25-01-2024",
-        qualification: "Diploma/Degree in Engineering",
-        totalPosts: "Approx 1,200",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-2.html",
-    },
-    {
-        id: 1,
-        title: "IBPS Clerk 2024 Admit Card",
-        department: "ibps",
-        year: "2024",
-        organization: "Institute of Banking Personnel Selection",
-        examName: "Clerical Cadre Examination",
-        releaseDate: "05-01-2024",
-        examDate: "20-01-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 6,000",
-        downloadLink: "#",
-        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-1.html",
-    },
-    
-
-];
-
-// DOM Elements
-const admitcardListings = document.getElementById('admitcardListings');
-const departmentSelect = document.getElementById('department');
-const yearSelect = document.getElementById('year');
-const applyFilterBtn = document.getElementById('applyFilter');
-const resetFilterBtn = document.getElementById('resetFilter');
-const departmentSearch = document.getElementById('departmentSearch');
-
-// Enhanced Department Search Functionality
-departmentSearch.addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
-    const options = departmentSelect.options;
-    let visibleOptions = 0;
-    let lastVisibleOption = null;
-    
-    // Show/hide options based on search term
-    for (let i = 1; i < options.length; i++) { // Skip first option (All Departments)
-        const optionText = options[i].text.toLowerCase();
-        if (!searchTerm || optionText.includes(searchTerm)) {
-            options[i].style.display = 'block';
-            visibleOptions++;
-            lastVisibleOption = options[i];
-        } else {
-            options[i].style.display = 'none';
-        }
+        document.querySelectorAll("nav ul li a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("active");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+                const icon = menuToggle.querySelector("i");
+                if (icon) {
+                    icon.classList.remove("fa-times");
+                    icon.classList.add("fa-bars");
+                }
+            });
+        });
     }
-    
-    // Auto-select if only one match found
-    if (visibleOptions === 1 && lastVisibleOption) {
-        departmentSelect.value = lastVisibleOption.value;
-        filterAdmitCards();
-    } else if (!searchTerm) {
-        departmentSelect.value = 'all';
-    }
-});
 
-// Handle Enter key in search
-departmentSearch.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        filterAdmitCards();
-    }
-});
+    const pageSize = 10;
+    let visibleCount = pageSize;
+    let currentItems = [];
+    const items = Array.isArray(window.govJobIndAdmitCards) ? window.govJobIndAdmitCards : [];
 
-// Render Admit Cards with ads
-function renderAdmitCards(admitcards) {
-    if (admitcards.length === 0) {
-        admitcardListings.innerHTML = `
-            <div class="no-admitcards">
-                <i class="fas fa-file-alt"></i>
-                <h3>No Admit Cards Found</h3>
-                <p>There are no admit cards matching your filter criteria.</p>
+    const elements = {
+        search: document.getElementById("admitSearch"),
+        department: document.getElementById("admitDepartment"),
+        year: document.getElementById("admitYear"),
+        status: document.getElementById("admitStatus"),
+        sort: document.getElementById("admitSort"),
+        reset: document.getElementById("admitResetFilters"),
+        loadMoreButton: document.getElementById("admitLoadMore"),
+        count: document.getElementById("admitCount"),
+        listings: document.getElementById("admitcardListings"),
+        emptyState: document.getElementById("admitEmptyState")
+    };
+
+    function parseDate(value) {
+        if (!value) return null;
+        const date = new Date(`${value}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function today() {
+        const date = new Date();
+        date.setHours(0, 0, 0, 0);
+        return date;
+    }
+
+    function dayDiff(fromDate, toDate) {
+        return Math.ceil((toDate - fromDate) / 86400000);
+    }
+
+    function getText(value, fallback = "Not specified") {
+        if (value === undefined || value === null || String(value).trim() === "") return fallback;
+        return String(value).trim();
+    }
+
+    function escapeHtml(value) {
+        return getText(value, "").replace(/[&<>"']/g, (character) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#039;"
+        }[character]));
+    }
+
+    function formatDate(value) {
+        const date = parseDate(value);
+        if (!date) return "Not specified";
+        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
+    function getStatus(item) {
+        const current = today();
+        const examDate = parseDate(item.examDate);
+        const releaseDate = parseDate(item.releaseDate);
+        const hasLink = getText(item.downloadLink, "#") !== "#";
+
+        if (examDate && examDate < current) return "exam-over";
+        if (releaseDate && releaseDate > current) return "upcoming";
+        if (hasLink && releaseDate && releaseDate <= current) return "available";
+        if (item.status === "available" || item.status === "upcoming") return item.status;
+        return "upcoming";
+    }
+
+    function isNew(item) {
+        const updatedAt = parseDate(item.updatedAt);
+        if (!updatedAt) return false;
+        const diff = dayDiff(updatedAt, today());
+        return diff >= 0 && diff <= 3;
+    }
+
+    function statusLabel(status) {
+        return {
+            "available": "Available",
+            "upcoming": "Upcoming",
+            "exam-over": "Exam Over"
+        }[status] || "Available";
+    }
+
+    function populateSelect(select, values) {
+        if (!select) return;
+        const firstOption = select.options[0] ? select.options[0].outerHTML : "";
+        const options = values
+            .filter(Boolean)
+            .sort((a, b) => String(a).localeCompare(String(b)))
+            .map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`)
+            .join("");
+        select.innerHTML = `${firstOption}${options}`;
+    }
+
+    function hydrateFilters() {
+        populateSelect(elements.department, [...new Set(items.map((item) => item.department || item.category))]);
+        populateSelect(elements.year, [...new Set(items.map((item) => item.year))].sort((a, b) => String(b).localeCompare(String(a))));
+    }
+
+    function filterItems() {
+        const query = getText(elements.search && elements.search.value, "").toLowerCase();
+        const department = elements.department ? elements.department.value : "all";
+        const year = elements.year ? elements.year.value : "all";
+        const status = elements.status ? elements.status.value : "all";
+
+        return items.filter((item) => {
+            const searchable = [item.title, item.organization, item.department, item.category, ...(Array.isArray(item.tags) ? item.tags : [])].join(" ").toLowerCase();
+            const computedStatus = getStatus(item);
+            return (!query || searchable.includes(query))
+                && (department === "all" || item.department === department || item.category === department)
+                && (year === "all" || item.year === year)
+                && (status === "all" || computedStatus === status || (status === "new" && isNew(item)));
+        });
+    }
+
+    function sortItems(filteredItems) {
+        const sortBy = elements.sort ? elements.sort.value : "latest";
+        return [...filteredItems].sort((first, second) => {
+            if (sortBy === "exam") {
+                const firstPast = getStatus(first) === "exam-over";
+                const secondPast = getStatus(second) === "exam-over";
+                if (firstPast !== secondPast) return firstPast ? 1 : -1;
+                return (parseDate(first.examDate) || new Date(8640000000000000)) - (parseDate(second.examDate) || new Date(8640000000000000));
+            }
+            if (sortBy === "release") {
+                return (parseDate(second.releaseDate) || new Date(0)) - (parseDate(first.releaseDate) || new Date(0));
+            }
+            return (parseDate(second.updatedAt) || new Date(0)) - (parseDate(first.updatedAt) || new Date(0));
+        });
+    }
+
+    function getDetailPage(item) {
+        if (!item || !/^\d+$/.test(String(item.id))) return "";
+        return `../AdmitCard_Details/HTML/admitcard-details-${item.id}.html`;
+    }
+
+    function renderBadges(item) {
+        const status = getStatus(item);
+        const badges = [
+            `<span class="record-badge badge-${status}">${statusLabel(status)}</span>`,
+            `<span class="record-badge badge-category">${escapeHtml(item.department || item.category)}</span>`
+        ];
+        if (isNew(item)) badges.push('<span class="record-badge badge-new">New</span>');
+        return badges.join("");
+    }
+
+    function renderCard(item) {
+        const downloadLink = getText(item.downloadLink, "#");
+        const downloadAction = downloadLink !== "#"
+            ? `<a href="${escapeHtml(downloadLink)}" target="_blank" rel="noopener" class="btn btn-primary">Download Admit Card</a>`
+            : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
+        const detailPage = getDetailPage(item);
+        const detailAction = detailPage
+            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
+            : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+
+        return `
+            <article class="record-card">
+                <div class="record-card-header">
+                    <div>
+                        <p class="record-organization">${escapeHtml(item.organization)}</p>
+                        <h3>${escapeHtml(item.title)}</h3>
+                    </div>
+                    <div class="record-badges">${renderBadges(item)}</div>
+                </div>
+                <dl class="record-meta">
+                    <div><dt>Exam Date</dt><dd>${formatDate(item.examDate)}</dd></div>
+                    <div><dt>Release Date</dt><dd>${formatDate(item.releaseDate)}</dd></div>
+                    <div><dt>Updated</dt><dd>${formatDate(item.updatedAt)}</dd></div>
+                </dl>
+                <div class="record-actions">
+                    ${downloadAction}
+                    ${detailAction}
+                </div>
+            </article>
+        `;
+    }
+
+    function renderEmptyState(message) {
+        if (!elements.emptyState || !elements.listings) return;
+        elements.listings.innerHTML = "";
+        elements.emptyState.hidden = false;
+        elements.emptyState.innerHTML = `
+            <div class="empty-state-card">
+                <i class="fas fa-file-alt" aria-hidden="true"></i>
+                <h3>${escapeHtml(message || "No records found")}</h3>
+                <p>Try changing filters or search keyword.</p>
+                <button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button>
             </div>
         `;
-        return;
+        const resetButton = elements.emptyState.querySelector("[data-reset-empty]");
+        if (resetButton) resetButton.addEventListener("click", resetFilters);
     }
 
-    admitcardListings.innerHTML = admitcards.map((admitcard, index) => `
-        <div class="admitcard-card">
-            <h3>${admitcard.title}</h3>
-            <p><strong>Organization:</strong> ${admitcard.organization}</p>
-            <div class="admitcard-meta">
-                <span><i class="fas fa-calendar-check"></i> Release Date: ${admitcard.releaseDate}</span>
-                <span><i class="fas fa-calendar-alt"></i> Exam Date: ${admitcard.examDate}</span>
-                ${admitcard.qualification ? `<span><i class="fas fa-user-graduate"></i> Qualification: ${admitcard.qualification}</span>` : ''}
-                ${admitcard.totalPosts ? `<span><i class="fas fa-briefcase"></i> Total Posts: ${admitcard.totalPosts}</span>` : ''}
-            </div>
-            <p class="info-text"><i class="fas fa-info-circle"></i> ${admitcard.examDate === "Application Open" || admitcard.examDate === "Application Closed" ? "Apply for this job from the official website" : "Download your admit card from the official website"}</p>
-            
-            ${admitcard.downloadLink && admitcard.downloadLink !== "#" ? `<a href="${admitcard.downloadLink}" target="_blank" rel="noopener" class="btn btn-primary">${admitcard.examDate === "Application Open" ? "Apply Now" : admitcard.examDate === "Application Closed" ? "View Details" : "Download Now"}</a>` : `<button class="btn btn-primary" disabled>Link Unavailable</button>`}
-                ${admitcard.detailsPage && admitcard.detailsPage !== "#" ? `<a href="${admitcard.detailsPage}" class="btn btn-outline">View Details</a>` : `<button class="btn btn-outline" disabled>Details Soon</button>`}
-            </div>
-        </div>
-        
-        ${index % 2 === 1 ? `
-        <div class="ad-space">
-            <div class="ad-content">
-                <p>Advertisement</p>
-                <img src="../Assets/ads/sample-ad.jpg" alt="Advertisement" style="max-width: 100%; height: auto;">
-            </div>
-        </div>
-        ` : ''}
-    `).join('');
-}
+    function renderItems() {
+        if (!elements.listings || !elements.count) return;
 
-// Filter Admit Cards
-function filterAdmitCards() {
-    const department = departmentSelect.value;
-    const year = yearSelect.value;
+        if (!items.length) {
+            elements.count.textContent = "Showing 0 of 0 admit cards";
+            renderEmptyState("Admit card data is currently unavailable");
+            if (elements.loadMoreButton) elements.loadMoreButton.hidden = true;
+            return;
+        }
 
-    const filteredAdmitCards = admitcardsData.filter(admitcard => {
-        const deptMatch = department === 'all' || admitcard.department === department;
-        const yearMatch = year === 'all' || admitcard.year === year;
-        return deptMatch && yearMatch;
+        currentItems = sortItems(filterItems());
+        const visibleItems = currentItems.slice(0, visibleCount);
+        elements.count.textContent = `Showing ${visibleItems.length} of ${currentItems.length} admit cards`;
+
+        if (elements.emptyState) {
+            elements.emptyState.hidden = true;
+            elements.emptyState.innerHTML = "";
+        }
+
+        if (!currentItems.length) {
+            renderEmptyState("No records found");
+        } else {
+            elements.listings.innerHTML = visibleItems.map(renderCard).join("");
+        }
+
+        if (elements.loadMoreButton) {
+            elements.loadMoreButton.hidden = visibleItems.length >= currentItems.length;
+        }
+    }
+
+    function resetFilters() {
+        if (elements.search) elements.search.value = "";
+        if (elements.department) elements.department.value = "all";
+        if (elements.year) elements.year.value = "all";
+        if (elements.status) elements.status.value = "all";
+        if (elements.sort) elements.sort.value = "latest";
+        visibleCount = pageSize;
+        renderItems();
+    }
+
+    function loadMore() {
+        visibleCount += pageSize;
+        renderItems();
+    }
+
+    function bindEvents() {
+        [elements.search, elements.department, elements.year, elements.status, elements.sort].forEach((element) => {
+            if (!element) return;
+            element.addEventListener("input", () => {
+                visibleCount = pageSize;
+                renderItems();
+            });
+            element.addEventListener("change", () => {
+                visibleCount = pageSize;
+                renderItems();
+            });
+        });
+        if (elements.reset) elements.reset.addEventListener("click", resetFilters);
+        if (elements.loadMoreButton) elements.loadMoreButton.addEventListener("click", loadMore);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        hydrateFilters();
+        bindEvents();
+        renderItems();
     });
 
-    renderAdmitCards(filteredAdmitCards);
-}
-
-// Reset Filters
-function resetFilters() {
-    departmentSelect.value = 'all';
-    yearSelect.value = 'all';
-    departmentSearch.value = '';
-    // Show all options when resetting
-    const options = departmentSelect.options;
-    for (let i = 0; i < options.length; i++) {
-        options[i].style.display = 'block';
-    }
-    renderAdmitCards(admitcardsData);
-}
-
-// Event Listeners
-applyFilterBtn.addEventListener('click', filterAdmitCards);
-resetFilterBtn.addEventListener('click', resetFilters);
-
-// Initial Load
-document.addEventListener('DOMContentLoaded', () => {
-    renderAdmitCards(admitcardsData);
-});
+    window.admitCardsPage = { getStatus, isNew, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
+}());

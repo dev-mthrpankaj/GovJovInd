@@ -1,252 +1,345 @@
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
+(function () {
+    "use strict";
 
-if (menuToggle && mainNav) {
-menuToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('active');
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-    const icon = menuToggle.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-});
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
 
-document.querySelectorAll('nav ul li a').forEach(link => {
-    link.addEventListener('click', () => {
-        mainNav.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'Open navigation menu');
-        menuToggle.querySelector('i').classList.remove('fa-times');
-        menuToggle.querySelector('i').classList.add('fa-bars');
-    });
-});
-}
+    if (menuToggle && mainNav && !menuToggle.dataset.latestJobsBound) {
+        menuToggle.dataset.latestJobsBound = "true";
+        menuToggle.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("active");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+            const icon = menuToggle.querySelector("i");
+            if (icon) {
+                icon.classList.toggle("fa-bars");
+                icon.classList.toggle("fa-times");
+            }
+        });
 
-// Job Data with starting dates
-const jobsData = [
-    {
-        id: 1011,
-        title: "U.P Police Sub Inspector Online Form 2025",
-        department: "upprpb",
-        year: "2025",
-        organization: "Uttar Pradesh Police Recruitment and Promotion Board",
-        startingDate: "12-08-2025",
-        lastDate: "11-09-2025",
-        qualification: "Bachelor's Degree",
-        totalPosts: "4543",
-        applyLink: "https://www.upprpb.in/#/auth/landing",
-        detailsPage: "../Job_Details/HTML/job-details-1011.html",
-    },
-    {
-        id: 1012,
-        title: "Bihar SSC Office Attendant 2025",
-        department: "bssc",
-        year: "2025",
-        organization: "Bihar Staff Selection Commission",
-        startingDate: "25-08-2025",
-        lastDate: "26-09-2025",
-        qualification: "High School or Equivalent",
-        totalPosts: "3727",
-        applyLink: "https://www.onlinebssc.com/officeattendantspecial/",
-        detailsPage: "../Job_Details/HTML/job-details-1012.html",
-    },
-    {
-        id: 1013,
-        title: "Bihar BSSC 4th Graduate Level 2025",
-        department: "bssc",
-        year: "2025",
-        organization: "Bihar Staff Selection Commission",
-        startingDate: "25-08-2025",
-        lastDate: "26-09-2025",
-        qualification: "Bachelor's Degree",
-        totalPosts: "1481",
-        applyLink: "https://www.onlinebssc.com/4thgralevel/",
-        detailsPage: "../Job_Details/HTML/job-details-1013.html",
-    },
-    {
-        id: 1014,
-        title: "BSF Head Constable Radio 2025",
-        department: "bsf",
-        year: "2023",
-        organization: "Border Security Force",
-        startingDate: "24-08-2025",
-        lastDate: "23-09-2025",
-        qualification: "Intermediate with Science",
-        totalPosts: "1121",
-        applyLink: "https://rectt.bsf.gov.in/auth/login",
-        detailsPage: "../Job_Details/HTML/job-details-1014.html",
-    },
-    {
-        id: 1015,
-        title: "Bihar SHS Lab Technician Online Form 2025",
-        department: "bshs",
-        year: "2023",
-        organization: "Bihar State Health Society",
-        startingDate: "01-09-2025",
-        lastDate: "12-09-2025",
-        qualification: "10+2 or above",
-        totalPosts: "1075",
-        applyLink: "#",
-        detailsPage: "../Job_Details/HTML/job-details-1015.html",
-    },
-    {
-        id: 1016,
-        title: "MHA IB Junior Intelligence Officer JIO Online Form 2025",
-        department: "mhaib",
-        year: "2025",
-        organization: "Ministry of Home Affairs (IB)",
-        startingDate: "23-08-2025",
-        lastDate: "14-09-2025",
-        qualification: "Graduate",
-        totalPosts: "394",
-        applyLink: "https://cdn.digialm.com/EForms/configuredHtml/1258/94260/Index.html",
-        detailsPage: "../Job_Details/HTML/job-details-1016.html",
-    },
-    {
-        id: 1017,
-        title: "IBPS Clerk 15th Online Form 2025",
-        department: "ibps",
-        year: "2025",
-        organization: "Institute of Banking Personnel Selection",
-        startingDate: "20-08-2025",
-        lastDate: "28-09-2025",
-        qualification: "Bachelor's Degree",
-        totalPosts: "10277",
-        applyLink: "https://www.ibps.in/",
-        detailsPage: "../Job_Details/HTML/job-details-1017.html",
-    },
-    {
-        id: 1018,
-        title: "DSSSB Delhi High Court Court Attendant Online Form 2025",
-        department: "dsssb",
-        year: "2025",
-        organization: "Delhi Subordinate Services Selection Board",
-        startingDate: "26-08-2025",
-        lastDate: "24-09-2025",
-        qualification: "high School or Equivalent",
-        totalPosts: "334",
-        applyLink: "https://dsssbonline.nic.in/",
-        detailsPage: "../Job_Details/HTML/job-details-1018.html",
+        document.querySelectorAll("nav ul li a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("active");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+                const icon = menuToggle.querySelector("i");
+                if (icon) {
+                    icon.classList.remove("fa-times");
+                    icon.classList.add("fa-bars");
+                }
+            });
+        });
     }
-];
 
-// DOM Elements
-const jobListings = document.getElementById('jobListings');
-const departmentSelect = document.getElementById('department');
-const yearSelect = document.getElementById('year');
-const applyFilterBtn = document.getElementById('applyFilter');
-const resetFilterBtn = document.getElementById('resetFilter');
-const departmentSearch = document.getElementById('departmentSearch');
+    const pageSize = 10;
+    let visibleCount = pageSize;
+    let currentJobs = [];
 
-// Enhanced Department Search Functionality
-departmentSearch.addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
-    const options = departmentSelect.options;
-    let visibleOptions = 0;
-    let lastVisibleOption = null;
-    
-    // Show/hide options based on search term
-    for (let i = 1; i < options.length; i++) { // Skip first option (All Departments)
-        const optionText = options[i].text.toLowerCase();
-        if (!searchTerm || optionText.includes(searchTerm)) {
-            options[i].style.display = 'block';
-            visibleOptions++;
-            lastVisibleOption = options[i];
-        } else {
-            options[i].style.display = 'none';
+    const jobs = Array.isArray(window.govJobIndJobs) ? window.govJobIndJobs : [];
+    const elements = {
+        search: document.getElementById("jobSearch"),
+        department: document.getElementById("departmentFilter"),
+        qualification: document.getElementById("qualificationFilter"),
+        year: document.getElementById("yearFilter"),
+        status: document.getElementById("statusFilter"),
+        sort: document.getElementById("sortFilter"),
+        reset: document.getElementById("resetFilters"),
+        loadMore: document.getElementById("loadMoreJobs"),
+        jobCount: document.getElementById("jobCount"),
+        listings: document.getElementById("jobListings"),
+        emptyState: document.getElementById("emptyState")
+    };
+
+    function parseDate(value) {
+        if (!value) return null;
+        const date = new Date(`${value}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function daysBetween(fromDate, toDate) {
+        const day = 24 * 60 * 60 * 1000;
+        return Math.ceil((toDate - fromDate) / day);
+    }
+
+    function getToday() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return today;
+    }
+
+    function getJobStatus(job) {
+        const today = getToday();
+        const lastDate = parseDate(job.lastDate);
+        const startDate = parseDate(job.startDate);
+
+        if (lastDate && today > lastDate) return "closed";
+        if (startDate && today < startDate) return "upcoming";
+        if (job.status === "upcoming") return "upcoming";
+        return "active";
+    }
+
+    function isNewJob(job) {
+        const updatedAt = parseDate(job.updatedAt);
+        return updatedAt ? daysBetween(updatedAt, getToday()) <= 3 && daysBetween(updatedAt, getToday()) >= 0 : false;
+    }
+
+    function isLastDateSoon(job) {
+        const status = getJobStatus(job);
+        const lastDate = parseDate(job.lastDate);
+        if (status === "closed" || !lastDate) return false;
+        const daysLeft = daysBetween(getToday(), lastDate);
+        return daysLeft >= 0 && daysLeft <= 7;
+    }
+
+    function getText(value, fallback = "Not specified") {
+        if (value === undefined || value === null || String(value).trim() === "") return fallback;
+        return String(value).trim();
+    }
+
+    function escapeHtml(value) {
+        return getText(value, "").replace(/[&<>"']/g, (character) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#039;"
+        }[character]));
+    }
+
+    function formatDate(value) {
+        const date = parseDate(value);
+        if (!date) return "Not specified";
+        return date.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+    }
+
+    function normalizeNumber(value) {
+        const number = parseInt(getText(value, "0").replace(/[^0-9]/g, ""), 10);
+        return Number.isNaN(number) ? 0 : number;
+    }
+
+    function getDetailPage(job) {
+        if (!job || !/^\d+$/.test(String(job.id))) return "";
+        const expectedPath = `../Job_Details/HTML/job-details-${job.id}.html`;
+        const detailPage = getText(job.detailPage, expectedPath);
+        return detailPage === expectedPath ? detailPage : expectedPath;
+    }
+
+    function populateSelect(select, values) {
+        if (!select) return;
+        const existingFirstOption = select.options[0] ? select.options[0].outerHTML : "";
+        const options = values
+            .filter(Boolean)
+            .sort((a, b) => String(a).localeCompare(String(b)))
+            .map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`)
+            .join("");
+        select.innerHTML = `${existingFirstOption}${options}`;
+    }
+
+    function hydrateFilters() {
+        populateSelect(elements.department, [...new Set(jobs.map((job) => job.department || job.category))]);
+        populateSelect(elements.qualification, [...new Set(jobs.map((job) => job.qualification))]);
+        populateSelect(elements.year, [...new Set(jobs.map((job) => job.year))].sort((a, b) => String(b).localeCompare(String(a))));
+    }
+
+    function filterJobs() {
+        const query = getText(elements.search && elements.search.value, "").toLowerCase();
+        const department = elements.department ? elements.department.value : "all";
+        const qualification = elements.qualification ? elements.qualification.value : "all";
+        const year = elements.year ? elements.year.value : "all";
+        const status = elements.status ? elements.status.value : "all";
+
+        return jobs.filter((job) => {
+            const searchableText = [
+                job.title,
+                job.organization,
+                job.department,
+                job.category,
+                ...(Array.isArray(job.tags) ? job.tags : [])
+            ].join(" ").toLowerCase();
+            const computedStatus = getJobStatus(job);
+
+            const searchMatch = !query || searchableText.includes(query);
+            const departmentMatch = department === "all" || job.department === department || job.category === department;
+            const qualificationMatch = qualification === "all" || job.qualification === qualification;
+            const yearMatch = year === "all" || job.year === year;
+            const statusMatch = status === "all"
+                || computedStatus === status
+                || (status === "new" && isNewJob(job))
+                || (status === "soon" && isLastDateSoon(job));
+
+            return searchMatch && departmentMatch && qualificationMatch && yearMatch && statusMatch;
+        });
+    }
+
+    function sortJobs(filteredJobs) {
+        const sortBy = elements.sort ? elements.sort.value : "latest";
+        return [...filteredJobs].sort((first, second) => {
+            if (sortBy === "deadline") {
+                const firstClosed = getJobStatus(first) === "closed";
+                const secondClosed = getJobStatus(second) === "closed";
+                if (firstClosed !== secondClosed) return firstClosed ? 1 : -1;
+                return (parseDate(first.lastDate) || new Date(8640000000000000)) - (parseDate(second.lastDate) || new Date(8640000000000000));
+            }
+
+            if (sortBy === "vacancies") {
+                return normalizeNumber(second.totalPosts) - normalizeNumber(first.totalPosts);
+            }
+
+            return (parseDate(second.updatedAt) || new Date(0)) - (parseDate(first.updatedAt) || new Date(0));
+        });
+    }
+
+    function renderBadges(job) {
+        const status = getJobStatus(job);
+        const badges = [
+            `<span class="job-badge badge-${status}">${status.charAt(0).toUpperCase()}${status.slice(1)}</span>`,
+            `<span class="job-badge badge-category">${escapeHtml(job.category || job.department)}</span>`
+        ];
+
+        if (isNewJob(job)) {
+            badges.push('<span class="job-badge badge-new">New</span>');
         }
-    }
-    
-    // Auto-select if only one match found
-    if (visibleOptions === 1 && lastVisibleOption) {
-        departmentSelect.value = lastVisibleOption.value;
-        filterJobs();
-    } else if (!searchTerm) {
-        departmentSelect.value = 'all';
-    }
-});
 
-// Handle Enter key in search
-departmentSearch.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        filterJobs();
-    }
-});
+        if (isLastDateSoon(job)) {
+            badges.push('<span class="job-badge badge-soon">Last Date Soon</span>');
+        }
 
-// Render Jobs with starting dates and ads
-function renderJobs(jobs) {
-    if (jobs.length === 0) {
-        jobListings.innerHTML = `
-            <div class="no-jobs">
-                <i class="fas fa-briefcase"></i>
-                <h3>No Jobs Found</h3>
-                <p>There are no jobs matching your filter criteria.</p>
+        return badges.join("");
+    }
+
+    function renderJobCard(job) {
+        const applyLink = getText(job.applyLink, "#");
+        const canApply = applyLink !== "#";
+        const applyAction = canApply
+            ? `<a href="${escapeHtml(applyLink)}" target="_blank" rel="noopener" class="btn btn-primary">Apply Now</a>`
+            : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
+        const detailPage = getDetailPage(job);
+        const detailAction = detailPage
+            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
+            : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+
+        return `
+            <article class="job-card">
+                <div class="job-card-header">
+                    <div>
+                        <p class="job-organization">${escapeHtml(job.organization)}</p>
+                        <h3>${escapeHtml(job.title)}</h3>
+                    </div>
+                    <div class="job-badges">${renderBadges(job)}</div>
+                </div>
+                <dl class="job-meta">
+                    <div><dt>Qualification</dt><dd>${escapeHtml(job.qualification)}</dd></div>
+                    <div><dt>Total Posts</dt><dd>${escapeHtml(job.totalPosts)}</dd></div>
+                    <div><dt>Start Date</dt><dd>${formatDate(job.startDate)}</dd></div>
+                    <div><dt>Last Date</dt><dd>${formatDate(job.lastDate)}</dd></div>
+                    <div><dt>Updated</dt><dd>${formatDate(job.updatedAt)}</dd></div>
+                </dl>
+                <div class="job-actions">
+                    ${applyAction}
+                    ${detailAction}
+                </div>
+            </article>
+        `;
+    }
+
+    function renderEmptyState(message) {
+        if (!elements.emptyState || !elements.listings) return;
+        elements.listings.innerHTML = "";
+        elements.emptyState.hidden = false;
+        elements.emptyState.innerHTML = `
+            <div class="empty-state-card">
+                <i class="fas fa-briefcase" aria-hidden="true"></i>
+                <h3>${escapeHtml(message || "No jobs found")}</h3>
+                <p>Try changing filters or search keyword.</p>
+                <button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button>
             </div>
         `;
-        return;
+        const resetButton = elements.emptyState.querySelector("[data-reset-empty]");
+        if (resetButton) resetButton.addEventListener("click", resetFilters);
     }
 
-    jobListings.innerHTML = jobs.map((job, index) => `
-        <div class="job-card">
-            <h3>${job.title}</h3>
-            <p><strong>Organization:</strong> ${job.organization}</p>
-            <div class="job-meta">
-                <span><i class="fas fa-calendar-check"></i> Starting Date: ${job.startingDate}</span>
-                <span><i class="fas fa-calendar-alt"></i> Last Date: ${job.lastDate}</span>
-                <span><i class="fas fa-user-graduate"></i> Qualification: ${job.qualification}</span>
-                <span><i class="fas fa-briefcase"></i> Total Posts: ${job.totalPosts}</span>
-            </div>
-            <p class="info-text"><i class="fas fa-info-circle"></i> For more information, click on "View Details" button</p>
-            <div class="job-actions">
-                                ${job.applyLink && job.applyLink !== "#" ? `<a href="${job.applyLink}" target="_blank" rel="noopener" class="btn btn-primary">Apply Now</a>` : `<button class="btn btn-primary" disabled>Apply Closed</button>`}
-                <a href="${job.detailsPage}" class="btn btn-outline">View Details</a>
-            </div>
-        </div>
-        
-        <!-- Advertisement space after every 2nd job -->
-        ${index % 2 === 1 ? `
-        <div class="ad-space">
-            <div class="ad-content">
-                <p>Advertisement</p>
-                <img src="../Assets/ads/sample-ad.jpg" alt="Advertisement" style="max-width: 100%; height: auto;">
-            </div>
-        </div>
-        ` : ''}
-    `).join('');
-}
+    function renderJobs() {
+        if (!elements.listings || !elements.jobCount) return;
 
-// Filter Jobs
-function filterJobs() {
-    const department = departmentSelect.value;
-    const year = yearSelect.value;
+        if (!jobs.length) {
+            elements.jobCount.textContent = "Showing 0 of 0 jobs";
+            renderEmptyState("Jobs data is currently unavailable");
+            if (elements.loadMore) elements.loadMore.hidden = true;
+            return;
+        }
 
-    const filteredJobs = jobsData.filter(job => {
-        const deptMatch = department === 'all' || job.department === department;
-        const yearMatch = year === 'all' || job.year === year;
-        return deptMatch && yearMatch;
+        currentJobs = sortJobs(filterJobs());
+        const visibleJobs = currentJobs.slice(0, visibleCount);
+
+        elements.jobCount.textContent = `Showing ${visibleJobs.length} of ${currentJobs.length} jobs`;
+        if (elements.emptyState) {
+            elements.emptyState.hidden = true;
+            elements.emptyState.innerHTML = "";
+        }
+
+        if (!currentJobs.length) {
+            renderEmptyState("No jobs found");
+        } else {
+            elements.listings.innerHTML = visibleJobs.map(renderJobCard).join("");
+        }
+
+        if (elements.loadMore) {
+            elements.loadMore.hidden = visibleJobs.length >= currentJobs.length;
+        }
+    }
+
+    function resetFilters() {
+        if (elements.search) elements.search.value = "";
+        if (elements.department) elements.department.value = "all";
+        if (elements.qualification) elements.qualification.value = "all";
+        if (elements.year) elements.year.value = "all";
+        if (elements.status) elements.status.value = "all";
+        if (elements.sort) elements.sort.value = "latest";
+        visibleCount = pageSize;
+        renderJobs();
+    }
+
+    function bindEvents() {
+        [elements.search, elements.department, elements.qualification, elements.year, elements.status, elements.sort].forEach((element) => {
+            if (!element) return;
+            element.addEventListener("input", () => {
+                visibleCount = pageSize;
+                renderJobs();
+            });
+            element.addEventListener("change", () => {
+                visibleCount = pageSize;
+                renderJobs();
+            });
+        });
+
+        if (elements.reset) {
+            elements.reset.addEventListener("click", resetFilters);
+        }
+
+        if (elements.loadMore) {
+            elements.loadMore.addEventListener("click", () => {
+                visibleCount += pageSize;
+                renderJobs();
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        hydrateFilters();
+        bindEvents();
+        renderJobs();
     });
 
-    renderJobs(filteredJobs);
-}
-
-// Reset Filters
-function resetFilters() {
-    departmentSelect.value = 'all';
-    yearSelect.value = 'all';
-    departmentSearch.value = '';
-    // Show all options when resetting
-    const options = departmentSelect.options;
-    for (let i = 0; i < options.length; i++) {
-        options[i].style.display = 'block';
-    }
-    renderJobs(jobsData);
-}
-
-// Event Listeners
-applyFilterBtn.addEventListener('click', filterJobs);
-resetFilterBtn.addEventListener('click', resetFilters);
-
-// Initial Load
-document.addEventListener('DOMContentLoaded', () => {
-    renderJobs(jobsData);
-});
+    window.latestJobsPage = {
+        getJobStatus,
+        filterJobs,
+        sortJobs,
+        renderJobs,
+        renderEmptyState,
+        resetFilters
+    };
+}());

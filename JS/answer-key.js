@@ -1,318 +1,304 @@
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
+(function () {
+    "use strict";
 
-if (menuToggle && mainNav) {
-menuToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('active');
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-    const icon = menuToggle.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-});
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
 
-document.querySelectorAll('nav ul li a').forEach(link => {
-    link.addEventListener('click', () => {
-        mainNav.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'Open navigation menu');
-        menuToggle.querySelector('i').classList.remove('fa-times');
-        menuToggle.querySelector('i').classList.add('fa-bars');
-    });
-});
-}
+    if (menuToggle && mainNav && !menuToggle.dataset.listingBound) {
+        menuToggle.dataset.listingBound = "true";
+        menuToggle.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("active");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+            const icon = menuToggle.querySelector("i");
+            if (icon) {
+                icon.classList.toggle("fa-bars");
+                icon.classList.toggle("fa-times");
+            }
+        });
 
-// Answer Key Data
-const answerKeysData = [
-    {
-        id: 8,
-        title: "SSC CGL 2024 Tier 1 Answer Key",
-        department: "ssc",
-        year: "2024",
-        organization: "Staff Selection Commission",
-        releaseDate: "15-07-2024",
-        examDate: "14-06-2024",
-        objectionLastDate: "20-07-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 10,000",
-        downloadLink: "https://ssc.gov.in/",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-8.html",
-    },
-    {
-        id: 7,
-        title: "UPSC Civil Services 2023 Prelims Answer Key",
-        department: "upsc",
-        year: "2023",
-        organization: "Union Public Service Commission",
-        releaseDate: "16-06-2023",
-        examDate: "05-06-2023",
-        objectionLastDate: "20-06-2023",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 1,100",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-7.html",
-    },
-    {
-        id: 6,
-        title: "IBPS PO XII Prelims Answer Key 2023",
-        department: "ibps",
-        year: "2023",
-        organization: "Institute of Banking Personnel Selection",
-        releaseDate: "01-11-2023",
-        examDate: "21-10-2023",
-        objectionLastDate: "05-11-2023",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 5,000",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-6.html",
-    },
-    {
-        id: 5,
-        title: "UPSSSC PET 2023 Answer Key",
-        department: "upsssc",
-        year: "2023",
-        organization: "UP Subordinate Services Selection Commission",
-        releaseDate: "10-07-2023",
-        examDate: "10-06-2023",
-        objectionLastDate: "15-07-2023",
-        qualification: "High School or Equivalent",
-        totalPosts: "Various Posts",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-5.html",
-    },
-    {
-        id: 4,
-        title: "SSC GD Constable 2023 Answer Key",
-        department: "ssc",
-        year: "2023",
-        organization: "Staff Selection Commission",
-        releaseDate: "24-04-2023",
-        examDate: "31-03-2023",
-        objectionLastDate: "30-04-2023",
-        qualification: "10th Pass",
-        totalPosts: "Approx 25,000",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-4.html",
-    },
-    {
-        id: 3,
-        title: "UPSC CDS I 2024 Answer Key",
-        department: "upsc",
-        year: "2024",
-        organization: "Union Public Service Commission",
-        releaseDate: "20-03-2024",
-        examDate: "09-03-2024",
-        objectionLastDate: "25-03-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 350",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-3.html",
-    },
-    {
-        id: 2,
-        title: "UPPCS 2023 Prelims Answer Key",
-        department: "uppcs",
-        year: "2023",
-        organization: "Uttar Pradesh Public Service Commission",
-        releaseDate: "08-06-2023",
-        examDate: "28-05-2023",
-        objectionLastDate: "15-06-2023",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 1,000",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-2.html",
-    },
-    {
-        id: 1,
-        title: "SSC CHSL 2023 Tier 1 Answer Key",
-        department: "ssc",
-        year: "2023",
-        organization: "Staff Selection Commission",
-        releaseDate: "01-08-2023",
-        examDate: "28-07-2023",
-        objectionLastDate: "05-08-2023",
-        qualification: "12th Pass",
-        totalPosts: "Approx 5,000",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-1.html",
-    },
-    // Additional answer keys
-    {
-        id: 9,
-        title: "RBI Grade B 2024 Phase I Answer Key",
-        department: "rbi",
-        year: "2024",
-        organization: "Reserve Bank of India",
-        releaseDate: "25-07-2024",
-        examDate: "15-06-2024",
-        objectionLastDate: "30-07-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 200",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-9.html",
-    },
-    {
-        id: 10,
-        title: "SSC JE 2024 Paper I Answer Key",
-        department: "ssc",
-        year: "2024",
-        organization: "Staff Selection Commission",
-        releaseDate: "10-08-2024",
-        examDate: "20-06-2024",
-        objectionLastDate: "15-08-2024",
-        qualification: "Diploma in Engineering",
-        totalPosts: "Approx 1,200",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-10.html",
-    },
-    {
-        id: 11,
-        title: "IBPS Clerk 2024 Prelims Answer Key",
-        department: "ibps",
-        year: "2024",
-        organization: "Institute of Banking Personnel Selection",
-        releaseDate: "05-09-2024",
-        examDate: "25-07-2024",
-        objectionLastDate: "10-09-2024",
-        qualification: "Bachelor's Degree",
-        totalPosts: "Approx 6,000",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-11.html",
-    },
-    {
-        id: 12,
-        title: "UPSC NDA 2024 Answer Key",
-        department: "upsc",
-        year: "2024",
-        organization: "Union Public Service Commission",
-        releaseDate: "15-09-2024",
-        examDate: "10-08-2024",
-        objectionLastDate: "20-09-2024",
-        qualification: "12th Pass",
-        totalPosts: "Approx 400",
-        downloadLink: "#",
-        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-12.html",
+        document.querySelectorAll("nav ul li a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("active");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+                const icon = menuToggle.querySelector("i");
+                if (icon) {
+                    icon.classList.remove("fa-times");
+                    icon.classList.add("fa-bars");
+                }
+            });
+        });
     }
-];
 
-// DOM Elements
-const answerKeyListings = document.getElementById('answerKeyListings');
-const departmentSelect = document.getElementById('department');
-const yearSelect = document.getElementById('year');
-const applyFilterBtn = document.getElementById('applyFilter');
-const resetFilterBtn = document.getElementById('resetFilter');
-const departmentSearch = document.getElementById('departmentSearch');
+    const pageSize = 10;
+    let visibleCount = pageSize;
+    let currentItems = [];
+    const items = Array.isArray(window.govJobIndAnswerKeys) ? window.govJobIndAnswerKeys : [];
 
-// Enhanced Department Search Functionality
-departmentSearch.addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
-    const options = departmentSelect.options;
-    let visibleOptions = 0;
-    let lastVisibleOption = null;
-    
-    // Show/hide options based on search term
-    for (let i = 1; i < options.length; i++) { // Skip first option (All Departments)
-        const optionText = options[i].text.toLowerCase();
-        if (!searchTerm || optionText.includes(searchTerm)) {
-            options[i].style.display = 'block';
-            visibleOptions++;
-            lastVisibleOption = options[i];
-        } else {
-            options[i].style.display = 'none';
-        }
+    const elements = {
+        search: document.getElementById("answerKeySearch"),
+        department: document.getElementById("answerKeyDepartment"),
+        year: document.getElementById("answerKeyYear"),
+        status: document.getElementById("answerKeyStatus"),
+        sort: document.getElementById("answerKeySort"),
+        reset: document.getElementById("answerKeyResetFilters"),
+        loadMoreButton: document.getElementById("answerKeyLoadMore"),
+        count: document.getElementById("answerKeyCount"),
+        listings: document.getElementById("answerKeyListings"),
+        emptyState: document.getElementById("answerKeyEmptyState")
+    };
+
+    function parseDate(value) {
+        if (!value) return null;
+        const date = new Date(`${value}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? null : date;
     }
-    
-    // Auto-select if only one match found
-    if (visibleOptions === 1 && lastVisibleOption) {
-        departmentSelect.value = lastVisibleOption.value;
-        filterAnswerKeys();
-    } else if (!searchTerm) {
-        departmentSelect.value = 'all';
-    }
-});
 
-// Handle Enter key in search
-departmentSearch.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        filterAnswerKeys();
+    function today() {
+        const date = new Date();
+        date.setHours(0, 0, 0, 0);
+        return date;
     }
-});
 
-// Render Answer Keys with ads
-function renderAnswerKeys(answerKeys) {
-    if (answerKeys.length === 0) {
-        answerKeyListings.innerHTML = `
-            <div class="no-answer-keys">
-                <i class="fas fa-key"></i>
-                <h3>No Answer Keys Found</h3>
-                <p>There are no answer keys matching your filter criteria.</p>
+    function dayDiff(fromDate, toDate) {
+        return Math.ceil((toDate - fromDate) / 86400000);
+    }
+
+    function getText(value, fallback = "Not specified") {
+        if (value === undefined || value === null || String(value).trim() === "") return fallback;
+        return String(value).trim();
+    }
+
+    function escapeHtml(value) {
+        return getText(value, "").replace(/[&<>"']/g, (character) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#039;"
+        }[character]));
+    }
+
+    function formatDate(value) {
+        const date = parseDate(value);
+        if (!date) return "Not specified";
+        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
+    function getStatus(item) {
+        const current = today();
+        const releaseDate = parseDate(item.releaseDate);
+        const objectionLastDate = parseDate(item.objectionLastDate);
+        const hasLink = getText(item.downloadLink, "#") !== "#";
+
+        if (objectionLastDate && current > objectionLastDate) return "objection-closed";
+        if (releaseDate && releaseDate > current) return "upcoming";
+        if (hasLink && releaseDate && releaseDate <= current) return "available";
+        if (item.status === "available" || item.status === "upcoming" || item.status === "objection-closed") return item.status;
+        return "upcoming";
+    }
+
+    function isNew(item) {
+        const updatedAt = parseDate(item.updatedAt);
+        if (!updatedAt) return false;
+        const diff = dayDiff(updatedAt, today());
+        return diff >= 0 && diff <= 3;
+    }
+
+    function statusLabel(status) {
+        return {
+            "available": "Available",
+            "upcoming": "Upcoming",
+            "objection-closed": "Objection Closed"
+        }[status] || "Available";
+    }
+
+    function populateSelect(select, values) {
+        if (!select) return;
+        const firstOption = select.options[0] ? select.options[0].outerHTML : "";
+        const options = values
+            .filter(Boolean)
+            .sort((a, b) => String(a).localeCompare(String(b)))
+            .map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`)
+            .join("");
+        select.innerHTML = `${firstOption}${options}`;
+    }
+
+    function hydrateFilters() {
+        populateSelect(elements.department, [...new Set(items.map((item) => item.department || item.category))]);
+        populateSelect(elements.year, [...new Set(items.map((item) => item.year))].sort((a, b) => String(b).localeCompare(String(a))));
+    }
+
+    function filterItems() {
+        const query = getText(elements.search && elements.search.value, "").toLowerCase();
+        const department = elements.department ? elements.department.value : "all";
+        const year = elements.year ? elements.year.value : "all";
+        const status = elements.status ? elements.status.value : "all";
+
+        return items.filter((item) => {
+            const searchable = [item.title, item.organization, item.department, item.category, ...(Array.isArray(item.tags) ? item.tags : [])].join(" ").toLowerCase();
+            const computedStatus = getStatus(item);
+            return (!query || searchable.includes(query))
+                && (department === "all" || item.department === department || item.category === department)
+                && (year === "all" || item.year === year)
+                && (status === "all" || computedStatus === status || (status === "new" && isNew(item)));
+        });
+    }
+
+    function sortItems(filteredItems) {
+        const sortBy = elements.sort ? elements.sort.value : "latest";
+        return [...filteredItems].sort((first, second) => {
+            if (sortBy === "exam") {
+                return (parseDate(first.examDate) || new Date(8640000000000000)) - (parseDate(second.examDate) || new Date(8640000000000000));
+            }
+            if (sortBy === "objection") {
+                const firstDate = parseDate(first.objectionLastDate);
+                const secondDate = parseDate(second.objectionLastDate);
+                const firstClosed = firstDate ? today() > firstDate : true;
+                const secondClosed = secondDate ? today() > secondDate : true;
+                if (firstClosed !== secondClosed) return firstClosed ? 1 : -1;
+                return (parseDate(first.objectionLastDate) || new Date(8640000000000000)) - (parseDate(second.objectionLastDate) || new Date(8640000000000000));
+            }
+            return (parseDate(second.updatedAt) || new Date(0)) - (parseDate(first.updatedAt) || new Date(0));
+        });
+    }
+
+    function getDetailPage(item) {
+        if (!item || !/^\d+$/.test(String(item.id))) return "";
+        return `../AnswerKey_Details/HTML/answerkey-details-${item.id}.html`;
+    }
+
+    function renderBadges(item) {
+        const status = getStatus(item);
+        const badges = [
+            `<span class="record-badge badge-${status}">${statusLabel(status)}</span>`,
+            `<span class="record-badge badge-category">${escapeHtml(item.department || item.category)}</span>`
+        ];
+        if (isNew(item)) badges.push('<span class="record-badge badge-new">New</span>');
+        return badges.join("");
+    }
+
+    function renderCard(item) {
+        const downloadLink = getText(item.downloadLink, "#");
+        const objectionLink = getText(item.objectionLink, "#");
+        const downloadAction = downloadLink !== "#"
+            ? `<a href="${escapeHtml(downloadLink)}" target="_blank" rel="noopener" class="btn btn-primary">Download Answer Key</a>`
+            : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
+        const objectionAction = objectionLink !== "#"
+            ? `<a href="${escapeHtml(objectionLink)}" target="_blank" rel="noopener" class="btn btn-outline">Raise Objection</a>`
+            : "";
+        const detailPage = getDetailPage(item);
+        const detailAction = detailPage
+            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
+            : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+
+        return `
+            <article class="record-card">
+                <div class="record-card-header">
+                    <div>
+                        <p class="record-organization">${escapeHtml(item.organization)}</p>
+                        <h3>${escapeHtml(item.title)}</h3>
+                    </div>
+                    <div class="record-badges">${renderBadges(item)}</div>
+                </div>
+                <dl class="record-meta">
+                    <div><dt>Exam Date</dt><dd>${formatDate(item.examDate)}</dd></div>
+                    <div><dt>Release Date</dt><dd>${formatDate(item.releaseDate)}</dd></div>
+                    <div><dt>Objection Last Date</dt><dd>${formatDate(item.objectionLastDate)}</dd></div>
+                    <div><dt>Updated</dt><dd>${formatDate(item.updatedAt)}</dd></div>
+                </dl>
+                <div class="record-actions">
+                    ${downloadAction}
+                    ${objectionAction}
+                    ${detailAction}
+                </div>
+            </article>
+        `;
+    }
+
+    function renderEmptyState(message) {
+        if (!elements.emptyState || !elements.listings) return;
+        elements.listings.innerHTML = "";
+        elements.emptyState.hidden = false;
+        elements.emptyState.innerHTML = `
+            <div class="empty-state-card">
+                <i class="fas fa-key" aria-hidden="true"></i>
+                <h3>${escapeHtml(message || "No records found")}</h3>
+                <p>Try changing filters or search keyword.</p>
+                <button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button>
             </div>
         `;
-        return;
+        const resetButton = elements.emptyState.querySelector("[data-reset-empty]");
+        if (resetButton) resetButton.addEventListener("click", resetFilters);
     }
 
-    answerKeyListings.innerHTML = answerKeys.map((answerKey, index) => `
-        <div class="answer-key-card">
-            <h3>${answerKey.title}</h3>
-            <p><strong>Organization:</strong> ${answerKey.organization}</p>
-            <div class="answer-key-meta">
-                <span><i class="fas fa-calendar-check"></i> Release Date: ${answerKey.releaseDate}</span>
-                <span><i class="fas fa-calendar-alt"></i> Exam Date: ${answerKey.examDate}</span>
-                <span><i class="fas fa-user-graduate"></i> Qualification: ${answerKey.qualification}</span>
-                <span><i class="fas fa-exclamation-circle"></i> Objection Last Date: ${answerKey.objectionLastDate}</span>
-                <span><i class="fas fa-briefcase"></i> Total Posts: ${answerKey.totalPosts}</span>
-            </div>
-            <p class="info-text"><i class="fas fa-info-circle"></i> For more details, click on "View Details" button</p>
-            <div class="answer-key-actions">
-                ${answerKey.downloadLink && answerKey.downloadLink !== "#" ? `<a href="${answerKey.downloadLink}" target="_blank" rel="noopener" class="btn btn-primary">Download Answer Key</a>` : `<button class="btn btn-primary" disabled>Link Unavailable</button>`}
-                ${answerKey.detailsPage && answerKey.detailsPage !== "#" ? `<a href="${answerKey.detailsPage}" class="btn btn-outline">View Details</a>` : `<button class="btn btn-outline" disabled>Details Soon</button>`}
-            </div>
-        </div>
-        
-        <!-- Advertisement space after every 2nd answer key -->
-        ${index % 2 === 1 ? `
-        <div class="ad-space">
-            <div class="ad-content">
-                <p>Advertisement</p>
-                <img src="../Assets/ads/sample-ad.jpg" alt="Advertisement" style="max-width: 100%; height: auto;">
-            </div>
-        </div>
-        ` : ''}
-    `).join('');
-}
+    function renderItems() {
+        if (!elements.listings || !elements.count) return;
 
-// Filter Answer Keys
-function filterAnswerKeys() {
-    const department = departmentSelect.value;
-    const year = yearSelect.value;
+        if (!items.length) {
+            elements.count.textContent = "Showing 0 of 0 answer keys";
+            renderEmptyState("Answer key data is currently unavailable");
+            if (elements.loadMoreButton) elements.loadMoreButton.hidden = true;
+            return;
+        }
 
-    const filteredAnswerKeys = answerKeysData.filter(answerKey => {
-        const deptMatch = department === 'all' || answerKey.department === department;
-        const yearMatch = year === 'all' || answerKey.year === year;
-        return deptMatch && yearMatch;
+        currentItems = sortItems(filterItems());
+        const visibleItems = currentItems.slice(0, visibleCount);
+        elements.count.textContent = `Showing ${visibleItems.length} of ${currentItems.length} answer keys`;
+
+        if (elements.emptyState) {
+            elements.emptyState.hidden = true;
+            elements.emptyState.innerHTML = "";
+        }
+
+        if (!currentItems.length) {
+            renderEmptyState("No records found");
+        } else {
+            elements.listings.innerHTML = visibleItems.map(renderCard).join("");
+        }
+
+        if (elements.loadMoreButton) {
+            elements.loadMoreButton.hidden = visibleItems.length >= currentItems.length;
+        }
+    }
+
+    function resetFilters() {
+        if (elements.search) elements.search.value = "";
+        if (elements.department) elements.department.value = "all";
+        if (elements.year) elements.year.value = "all";
+        if (elements.status) elements.status.value = "all";
+        if (elements.sort) elements.sort.value = "latest";
+        visibleCount = pageSize;
+        renderItems();
+    }
+
+    function loadMore() {
+        visibleCount += pageSize;
+        renderItems();
+    }
+
+    function bindEvents() {
+        [elements.search, elements.department, elements.year, elements.status, elements.sort].forEach((element) => {
+            if (!element) return;
+            element.addEventListener("input", () => {
+                visibleCount = pageSize;
+                renderItems();
+            });
+            element.addEventListener("change", () => {
+                visibleCount = pageSize;
+                renderItems();
+            });
+        });
+        if (elements.reset) elements.reset.addEventListener("click", resetFilters);
+        if (elements.loadMoreButton) elements.loadMoreButton.addEventListener("click", loadMore);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        hydrateFilters();
+        bindEvents();
+        renderItems();
     });
 
-    renderAnswerKeys(filteredAnswerKeys);
-}
-
-// Reset Filters
-function resetFilters() {
-    departmentSelect.value = 'all';
-    yearSelect.value = 'all';
-    departmentSearch.value = '';
-    // Show all options when resetting
-    const options = departmentSelect.options;
-    for (let i = 0; i < options.length; i++) {
-        options[i].style.display = 'block';
-    }
-    renderAnswerKeys(answerKeysData);
-}
-
-// Event Listeners
-applyFilterBtn.addEventListener('click', filterAnswerKeys);
-resetFilterBtn.addEventListener('click', resetFilters);
-
-// Initial Load
-document.addEventListener('DOMContentLoaded', () => {
-    renderAnswerKeys(answerKeysData);
-});
+    window.answerKeysPage = { getStatus, isNew, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
+}());

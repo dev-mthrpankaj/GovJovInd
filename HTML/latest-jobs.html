@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latest Government Jobs | GovJobInd</title>
-    <meta name="description" content="SarkariOfficer provides latest government jobs, admit cards, results, answer keys, and exam resources.">
+    <title>Latest Government Jobs 2026 | SarkariOfficer</title>
+    <meta name="description" content="Find latest Indian government jobs with department filters, eligibility, vacancy details, last dates, official apply links, and job detail pages.">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/latest-jobs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -34,48 +34,56 @@
     </header>
     
     <main class="latest-jobs-page">
-        <section class="filter-section">
-            <div class="filter-group">
-                <label for="department">Department</label>
-                <div class="searchable-dropdown">
-                    <input type="text" id="departmentSearch" placeholder="Search department...">
-                    <select id="department">
-                        <option value="all">All Departments</option>
-                        <option value="ssc">SSC</option>
-                        <option value="upsc">UPSC</option>
-                        <option value="ibps">IBPS</option>
-                        <option value="upsssc">UPSSSC</option>
-                        <option value="uppcs">UPPCS</option>
-                        <option value="rbi">RBI</option>
-                        <option value="railway">Railway</option>
-                        <option value="neet">NEET</option>
-                        <option value="jee">JEE</option>
-                        <option value="state_psc">State PSCs</option>
-                        <option value="cat">CAT</option>
-                        <option value="gate">GATE</option>
-                        <option value="nta">NTA</option>
-                        <option value="upprpb">UPPRPB</option>
-                        <option value="bssc">BSSC</option>
-                        <option value="bsf">BSF</option>
-                        <option value="bshs">BSHS</option>
-                        <option value="mhaib">MHA IB</option>
-                        <option value="dsssb">DSSSB</option>
-                        <!-- Add more departments as needed -->
-                    </select>
-                </div>
+        <section class="jobs-hero" aria-labelledby="latestJobsHeading">
+            <p class="eyebrow">SarkariOfficer Jobs Desk</p>
+            <h1 id="latestJobsHeading">Latest Government Jobs</h1>
+            <p class="jobs-intro">Search current vacancies by department, qualification, year, and status. Each listing includes eligibility, important dates, vacancy count, and direct action links.</p>
+        </section>
+
+        <section class="filter-section" aria-label="Filter latest government jobs">
+            <div class="filter-group filter-group-wide">
+                <label for="jobSearch">Search jobs</label>
+                <input type="search" id="jobSearch" placeholder="Search by title, organization, or tag" autocomplete="off">
             </div>
             <div class="filter-group">
-                <label for="year">Year</label>
-                <select id="year">
+                <label for="departmentFilter">Department</label>
+                <select id="departmentFilter">
+                    <option value="all">All Departments</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="qualificationFilter">Qualification</label>
+                <select id="qualificationFilter">
+                    <option value="all">All Qualifications</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="yearFilter">Year</label>
+                <select id="yearFilter">
                     <option value="all">All Years</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="statusFilter">Status</label>
+                <select id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="closed">Closed</option>
+                    <option value="new">New</option>
+                    <option value="soon">Last Date Soon</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sortFilter">Sort by</label>
+                <select id="sortFilter">
+                    <option value="latest">Latest Updated</option>
+                    <option value="deadline">Last Date Soon</option>
+                    <option value="vacancies">Most Vacancies</option>
                 </select>
             </div>
             <div class="filter-actions">
-                <button id="applyFilter" class="btn btn-primary">Apply Filters</button>
-                <button id="resetFilter" class="btn btn-outline">Reset</button>
+                <button id="resetFilters" class="btn btn-outline" type="button">Reset Filters</button>
             </div>
         </section>
         
@@ -83,13 +91,23 @@
         <div class="ad-space horizontal-ad">
             <div class="ad-content">
                 <p>Advertisement</p>
-                <img src="../Assets/ads/horizontal-banner.jpg" alt="Advertisement" style="max-width: 100%; height: auto;">
+                <img src="../Assets/ads/horizontal-banner.jpg" alt="Advertisement">
             </div>
         </div>
         
-        <div class="job-listings" id="jobListings">
-            <!-- Jobs will be loaded here by JavaScript -->
-        </div>
+        <section class="jobs-results" aria-labelledby="jobsResultHeading">
+            <div class="results-bar">
+                <h2 id="jobsResultHeading">Openings</h2>
+                <p id="jobCount" aria-live="polite">Loading jobs...</p>
+            </div>
+            <div class="job-listings" id="jobListings">
+                <!-- Jobs will be loaded here by JavaScript -->
+            </div>
+            <div class="empty-state" id="emptyState" aria-live="polite" hidden></div>
+            <div class="load-more-wrap">
+                <button id="loadMoreJobs" class="btn btn-primary load-more-btn" type="button" hidden>Load More Jobs</button>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -130,6 +148,7 @@
             &copy; 2026 SarkariOfficer.in. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
         </div>
     </footer>
+<script src="../JS/jobs-data.js"></script>
 <script src="../JS/latest-jobs.js"></script>
 <script src="../JS/script.js"></script>
 </body>
