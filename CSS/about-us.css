@@ -10,7 +10,7 @@
     position: relative;
     overflow: hidden;
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     align-items: center;
     gap: 2.75rem;
     margin-top: 1.5rem;
@@ -41,6 +41,7 @@
     position: relative;
     z-index: 1;
     min-width: 0;
+    max-width: 100%;
 }
 
 .about-eyebrow,
@@ -746,5 +747,106 @@
 
     .team-member {
         padding: 0.95rem;
+    }
+}
+
+/* Emergency mobile overflow hardening for About hero */
+.about-us-page,
+.about-us-page .hero,
+.about-us-page .hero-content,
+.about-us-page .hero-image {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    main,
+    .about-us-page,
+    .about-us-page .hero {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .about-us-page .hero {
+        display: block;
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .about-us-page .hero-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .about-us-page .hero * {
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .about-eyebrow {
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .about-us-page .hero h1 {
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(1.45rem, 7vw, 2rem);
+        line-height: 1.18;
+        text-align: center;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .about-us-page .hero p {
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.92rem;
+        line-height: 1.55;
+        text-align: center;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        gap: 0.7rem;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        display: flex;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .about-us-page .hero-image,
+    .about-us-page .hero-banner {
+        max-width: 100%;
+        min-width: 0;
+        transform: none;
+    }
+
+    .about-us-page .hero-banner {
+        animation: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us-page .hero-image {
+        display: none;
     }
 }
