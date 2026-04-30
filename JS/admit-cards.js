@@ -33,7 +33,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 10,000",
         downloadLink: "#",
-        detailsPage: "../Job_Details/HTML_JobDetails/job-details-1011.html"
+        detailsPage: "job-details.html?id=8",
     },
     {
         id: 7,
@@ -47,7 +47,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 1,000",
         downloadLink: "#",
-        detailsPage: "admitcard-details-7.html"
+        detailsPage: "job-details.html?id=7",
     },
     {
         id: 6,
@@ -61,7 +61,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 5,000",
         downloadLink: "#",
-        detailsPage: "admitcard-details-6.html"
+        detailsPage: "job-details.html?id=6",
     },
     {
         id: 5,
@@ -75,7 +75,7 @@ const admitcardsData = [
         qualification: "12th Pass",
         totalPosts: "Approx 4,500",
         downloadLink: "#",
-        detailsPage: "admitcard-details-5.html"
+        detailsPage: "job-details.html?id=5",
     },
     {
         id: 4,
@@ -89,7 +89,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 400",
         downloadLink: "#",
-        detailsPage: "admitcard-details-4.html"
+        detailsPage: "job-details.html?id=4",
     },
     {
         id: 3,
@@ -103,7 +103,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 200",
         downloadLink: "#",
-        detailsPage: "admitcard-details-3.html"
+        detailsPage: "job-details.html?id=3",
     },
     {
         id: 2,
@@ -117,7 +117,7 @@ const admitcardsData = [
         qualification: "Diploma/Degree in Engineering",
         totalPosts: "Approx 1,200",
         downloadLink: "#",
-        detailsPage: "admitcard-details-2.html"
+        detailsPage: "job-details.html?id=2",
     },
     {
         id: 1,
@@ -131,7 +131,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 6,000",
         downloadLink: "#",
-        detailsPage: "admitcard-details-1.html"
+        detailsPage: "job-details.html?id=1",
     },
     
 
@@ -205,9 +205,8 @@ function renderAdmitCards(admitcards) {
             </div>
             <p class="info-text"><i class="fas fa-info-circle"></i> ${admitcard.examDate === "Application Open" || admitcard.examDate === "Application Closed" ? "Apply for this job from the official website" : "Download your admit card from the official website"}</p>
             
-            <div class="admitcard-actions">
-                <a href="${admitcard.downloadLink}" class="btn btn-primary">${admitcard.examDate === "Application Open" ? "Apply Now" : admitcard.examDate === "Application Closed" ? "View Details" : "Download Now"}</a>
-                <a href="${admitcard.detailsPage}" class="btn btn-outline">View Details</a>
+            ${admitcard.downloadLink && admitcard.downloadLink !== "#" ? `<a href="${admitcard.downloadLink}" target="_blank" rel="noopener" class="btn btn-primary">${admitcard.examDate === "Application Open" ? "Apply Now" : admitcard.examDate === "Application Closed" ? "View Details" : "Download Now"}</a>` : `<button class="btn btn-primary" disabled>Link Unavailable</button>`}
+                ${admitcard.detailsPage && admitcard.detailsPage !== "#" ? `<a href="${admitcard.detailsPage}" class="btn btn-outline">View Details</a>` : `<button class="btn btn-outline" disabled>Details Soon</button>`}
             </div>
         </div>
         
