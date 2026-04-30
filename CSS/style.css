@@ -20,6 +20,10 @@ body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-he
 a{color:inherit}
 img{max-width:100%;height:auto;display:block}
 
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.6rem .9rem;background:#111827;color:#fff;border-radius:8px;z-index:2000}
+
+
 .ticker-wrap{display:flex;align-items:center;min-height:44px;background:linear-gradient(90deg,#0f172a,#1e293b);color:#fff;overflow:hidden;padding-inline:.35rem}
 .ticker-title{background:var(--accent);color:#111827;font-weight:700;padding:.45rem .7rem;font-size:.78rem;border-radius:8px;white-space:nowrap;margin-right:.45rem}
 .ticker{display:flex;white-space:nowrap;animation:marquee 32s linear infinite;padding-right:.5rem}
@@ -147,4 +151,9 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
 
 @media (min-width: 1440px){
   main,.header-container,.footer-content{max-width:1280px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto}
+  .ticker{animation:none}
+  .feature-card:hover,.subject-card:hover{transform:none}
 }
