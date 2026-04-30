@@ -2,6 +2,8 @@
 .about-us-page {
     display: grid;
     gap: 4rem;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .about-us-page .hero {
@@ -20,6 +22,7 @@
         linear-gradient(135deg, #07111f 0%, #0f2f63 58%, #0b5ed7 100%);
     color: #ffffff;
     box-shadow: 0 24px 70px rgba(15, 23, 42, 0.2);
+    max-width: 100%;
 }
 
 .about-us-page .hero::after {
@@ -37,6 +40,7 @@
 .about-us-page .hero-image {
     position: relative;
     z-index: 1;
+    min-width: 0;
 }
 
 .about-eyebrow,
@@ -68,12 +72,14 @@
     color: #ffffff;
     font-size: clamp(2.15rem, 5.6vw, 4.45rem);
     line-height: 1.04;
+    overflow-wrap: break-word;
 }
 
 .about-us-page .hero p {
     max-width: 62ch;
     color: rgba(255, 255, 255, 0.88);
     font-size: clamp(1rem, 1.8vw, 1.15rem);
+    overflow-wrap: break-word;
 }
 
 .hero-buttons {
@@ -121,10 +127,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100%;
 }
 
 .about-us-page .hero-banner {
     width: min(100%, 430px);
+    max-width: 100%;
+    min-width: 0;
     max-height: 360px;
     border: 8px solid rgba(255, 255, 255, 0.18);
     border-radius: 22px;
@@ -452,7 +461,22 @@
 
     .about-us-page .hero {
         grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
         text-align: center;
+    }
+
+    .about-us-page .hero-content,
+    .about-us-page .hero-image,
+    .about-us-page .hero-banner {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .about-us-page .hero h1,
+    .about-us-page .hero p {
+        max-width: 100%;
     }
 
     .about-eyebrow,
@@ -480,9 +504,17 @@
 @media (max-width: 768px) {
     .about-us-page {
         gap: 2rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .about-us-page .hero {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
         margin-top: 0.5rem;
         gap: 1.15rem;
         padding: 1.25rem;
@@ -490,13 +522,18 @@
     }
 
     .about-us-page .hero h1 {
+        max-width: 100%;
         margin-bottom: 0.75rem;
         font-size: clamp(1.8rem, 8vw, 2.45rem);
         line-height: 1.1;
+        overflow-wrap: anywhere;
+        word-break: normal;
     }
 
     .about-us-page .hero p {
+        max-width: 100%;
         font-size: 0.98rem;
+        overflow-wrap: break-word;
     }
 
     .about-eyebrow {
@@ -505,8 +542,19 @@
     }
 
     .hero-buttons {
+        width: 100%;
         gap: 0.7rem;
         margin-top: 1.1rem;
+    }
+
+    .hero-buttons .btn {
+        max-width: 100%;
+    }
+
+    .about-us-page .hero-image,
+    .about-us-page .hero-banner {
+        max-width: 100%;
+        min-width: 0;
     }
 
     .about-us-page .hero-banner {
@@ -586,6 +634,7 @@
     .hero-buttons,
     .about-us-page .btn {
         width: 100%;
+        max-width: 100%;
     }
 
     .about-us-page .btn {
@@ -616,16 +665,24 @@
     }
 
     .about-us-page .hero {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         padding: 1.05rem;
         border-radius: 18px;
     }
 
     .about-us-page .hero h1 {
-        font-size: clamp(1.65rem, 8.5vw, 2.15rem);
+        max-width: 100%;
+        font-size: clamp(1.55rem, 7.8vw, 2rem);
+        overflow-wrap: anywhere;
     }
 
     .about-us-page .hero p {
+        max-width: 100%;
         font-size: 0.94rem;
+        overflow-wrap: break-word;
     }
 
     .about-us-page .hero-banner {
@@ -643,7 +700,7 @@
 
 @media (max-width: 375px) {
     .about-us-page .hero h1 {
-        font-size: clamp(1.55rem, 8.2vw, 1.95rem);
+        font-size: clamp(1.48rem, 7.7vw, 1.8rem);
     }
 
     .about-us-page .hero-banner {
@@ -657,11 +714,17 @@
 
 @media (max-width: 320px) {
     .about-us-page .hero {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         padding: 0.95rem;
     }
 
     .about-us-page .hero h1 {
-        font-size: 1.48rem;
+        max-width: 100%;
+        font-size: 1.38rem;
+        overflow-wrap: anywhere;
+        word-break: normal;
     }
 
     .about-eyebrow {
