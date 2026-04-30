@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GovJobInd - India's Trusted Government Job Portal</title>
     <meta name="description" content="Get latest Sarkari Naukri updates, admit cards, results, and more for all government jobs across India.">
+    <meta name="theme-color" content="#0b5ed7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="ticker-wrap">
         <div class="ticker-title">New Updates</div>
-        <div class="ticker">
+        <div class="ticker" aria-live="polite"></div>
             <div class="ticker-item">UP Police Constable Exam Dates Released!</div>
             <div class="ticker-item">SSC CGL Tier-II Admit Card Available.</div>
             <div class="ticker-item">IBPS PO Final Result Out.</div>
@@ -27,8 +31,8 @@
                 </div>
                 <a href="Index.html" class="logo">Sarkari<span>Officer</span></a>
             </div>
-            <button class="menu-toggle" aria-expanded="false"><i class="fas fa-bars"></i></button>
-            <nav>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav"><i class="fas fa-bars"></i></button>
+            <nav id="primary-nav">
                 <ul>
                     <li><a href="#" class="active">Home</a></li>
                     <li><a href="HTML/latest-jobs.html">Latest Jobs</a></li>
@@ -42,7 +46,7 @@
         </div>
     </header>
     
-    <main>
+    <main id="main-content">
         <section class="hero">
             <div class="hero-content">
                 <span class="badge">#1 Job Portal in India</span>
