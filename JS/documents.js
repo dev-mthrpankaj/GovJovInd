@@ -1,585 +1,717 @@
-// Mobile Menu Toggle
-function initMobileMenu() {
-    const menuToggle = document.getElementById('menuToggle');
-    const mainNav = document.getElementById('mainNav');
+const IMAGE_MAX_BYTES = 8 * 1024 * 1024;
+const PDF_MAX_BYTES = 15 * 1024 * 1024;
+const MM_TO_POINTS = 2.83465;
 
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+function formatFileSize(bytes) {
+    if (!Number.isFinite(bytes) || bytes <= 0) return '0 Bytes';
+    const units = ['Bytes', 'KB', 'MB', 'GB'];
+    const index = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+    return `${(bytes / Math.pow(1024, index)).toFixed(index === 0 ? 0 : 2)} ${units[index]}`;
+}
+
+function showMessage(box, type, message) {
+    if (!box) return;
+    box.className = `message-box ${type || 'info'}`;
+    box.textContent = message;
+}
+
+function clearMessage(box) {
+    if (!box) return;
+    box.className = 'message-box hidden';
+    box.textContent = '';
+}
+
+function setBusy(button, busy, text) {
+    if (!button) return;
+    if (busy) {
+        button.dataset.originalHtml = button.innerHTML;
+        button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${text || 'Processing...'}`;
+        button.disabled = true;
+        return;
+    }
+    button.innerHTML = button.dataset.originalHtml || button.innerHTML;
+    button.disabled = false;
+}
+
+function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function bytesFromTarget(valueId, unitId) {
+    const value = parseFloat($(valueId).value);
+    if (!Number.isFinite(value) || value <= 0) return 0;
+    return $(unitId).value === 'MB' ? value * 1024 * 1024 : value * 1024;
+}
+
+function isImageFile(file) {
+    return file && ['image/jpeg', 'image/png', 'image/webp'].includes(file.type);
+}
+
+function isPdfFile(file) {
+    return file && (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
+}
+
+function validateFile(file, options) {
+    if (!file) return 'Please select a file first.';
+    if (file.size <= 0) return 'This file looks empty. Please choose another file.';
+    if (file.size > options.maxBytes) return `This file is too large. Maximum allowed size is ${formatFileSize(options.maxBytes)}.`;
+    if (!options.isValidType(file)) return options.invalidTypeMessage;
+    return '';
+}
+
+function setupUploadArea(area, input, options) {
+    const pickFile = () => input.click();
+
+    area.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            pickFile();
+        }
+    });
+
+    ['dragenter', 'dragover'].forEach((eventName) => {
+        area.addEventListener(eventName, (event) => {
+            event.preventDefault();
+            area.classList.add('dragover');
+        });
+    });
+
+    ['dragleave', 'drop'].forEach((eventName) => {
+        area.addEventListener(eventName, () => area.classList.remove('dragover'));
+    });
+
+    area.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        handleFile(file, input, options);
+    });
+
+    input.addEventListener('change', () => {
+        handleFile(input.files[0], input, options);
+    });
+}
+
+function handleFile(file, input, options) {
+    clearMessage(options.messageBox);
+    const error = validateFile(file, options);
+    if (error) {
+        input.value = '';
+        showMessage(options.messageBox, 'error', error);
+        options.onInvalid?.();
+        return;
+    }
+    options.onValid(file);
+}
+
+function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Unable to read this file. Please try again.'));
+        reader.readAsDataURL(file);
+    });
+}
+
+function loadImage(src) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error('This image could not be opened. Please try a JPG or PNG file.'));
+        image.src = src;
+    });
+}
+
+function canvasToBlob(canvas, mimeType, quality) {
+    return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                reject(new Error('Processing failed. Please try a smaller image or a different format.'));
+                return;
+            }
+            resolve(blob);
+        }, mimeType, quality);
+    });
+}
+
+function getImageMime(format) {
+    if (format === 'png') return 'image/png';
+    if (format === 'webp') return 'image/webp';
+    return 'image/jpeg';
+}
+
+function getImageExtension(format) {
+    return format === 'jpg' ? 'jpg' : format;
+}
+
+function convertDimension(value, unit, dpi) {
+    if (unit === 'cm') return Math.round((value * dpi) / 2.54);
+    if (unit === 'inch') return Math.round(value * dpi);
+    return Math.round(value);
+}
+
+function initMobileMenu() {
+    const menuToggle = $('#menuToggle');
+    const mainNav = $('#mainNav');
+    if (!menuToggle || !mainNav) return;
+
+    const toggleMenu = () => {
+        mainNav.classList.toggle('active');
+        const isOpen = mainNav.classList.contains('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.toggle('fa-bars', !isOpen);
+        icon.classList.toggle('fa-times', isOpen);
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    };
+
+    menuToggle.addEventListener('click', toggleMenu);
+    menuToggle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleMenu();
+        }
+    });
+
+    $$('nav ul li a').forEach((link) => {
+        link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
             const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            menuToggle.setAttribute('aria-label', 'Open navigation');
+        });
+    });
+}
+
+function initToolTabs() {
+    const tabs = $$('.tab-btn');
+    const panels = $$('.tool-content');
+
+    function activateTab(tab) {
+        tabs.forEach((item) => {
+            const isActive = item === tab;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-selected', String(isActive));
+            item.tabIndex = isActive ? 0 : -1;
         });
 
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                menuToggle.querySelector('i').classList.remove('fa-times');
-                menuToggle.querySelector('i').classList.add('fa-bars');
-            });
+        panels.forEach((panel) => {
+            const isActive = panel.id === tab.dataset.tab;
+            panel.classList.toggle('active', isActive);
+            panel.hidden = !isActive;
         });
     }
-}
 
-// Tab Switching
-function initToolTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tool-content').forEach(c => c.classList.remove('active'));
-            
-            btn.classList.add('active');
-            const tabId = btn.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active');
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(tab));
+        tab.addEventListener('keydown', (event) => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            let nextIndex = index;
+            if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+            if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+            if (event.key === 'Home') nextIndex = 0;
+            if (event.key === 'End') nextIndex = tabs.length - 1;
+            tabs[nextIndex].focus();
+            activateTab(tabs[nextIndex]);
         });
     });
 }
 
-// Helper function to format file size
-function formatFileSize(bytes) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
-
-// Image Resizer Tool
 function initImageResizer() {
-    const uploadArea = document.getElementById('image-upload-area');
-    const fileInput = document.getElementById('image-upload');
-    const previewContainer = document.getElementById('image-preview-container');
-    const imagePreview = document.getElementById('image-preview');
-    const originalSize = document.getElementById('original-image-size');
-    const actionBtns = document.getElementById('image-action-btns');
-    const downloadArea = document.getElementById('image-download-area');
-    const newSize = document.getElementById('new-image-size');
-    const newDimensions = document.getElementById('new-image-dimensions');
-    
+    const messageBox = $('#image-message');
+    const fileInput = $('#image-upload');
+    const previewContainer = $('#image-preview-container');
+    const actionBtns = $('#image-action-btns');
+    const downloadArea = $('#image-download-area');
+    const originalPreview = $('#image-preview');
+    const resizedPreview = $('#resized-image-preview');
+    const resizeBtn = $('#resize-image-btn');
+    const resetBtn = $('#reset-image-btn');
+    const downloadBtn = $('#download-image-btn');
+    const qualityInput = $('#image-quality');
+    const qualityValue = $('#image-quality-value');
+
+    let originalFile = null;
     let originalImage = null;
-    let resizedImage = null;
-    
-    // Setup drag and drop
-    uploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadArea.classList.add('dragover');
+    let resizedBlob = null;
+    let resizedUrl = '';
+
+    const presets = {
+        passport: { width: 3.5, height: 4.5, unit: 'cm', dpi: 300, format: 'jpg', quality: 90, target: 100 },
+        signature: { width: 4, height: 2, unit: 'cm', dpi: 300, format: 'jpg', quality: 90, target: 50 },
+        small: { width: 800, height: 800, unit: 'px', dpi: 300, format: 'jpg', quality: 82, target: 50 },
+        form: { width: 1000, height: 1000, unit: 'px', dpi: 300, format: 'jpg', quality: 85, target: 100 }
+    };
+
+    setupUploadArea($('#image-upload-area'), fileInput, {
+        maxBytes: IMAGE_MAX_BYTES,
+        isValidType: isImageFile,
+        invalidTypeMessage: 'Please upload a JPG, PNG, or WEBP image.',
+        messageBox,
+        onInvalid: resetImageResult,
+        onValid: handleImageUpload
     });
-    
-    uploadArea.addEventListener('dragleave', () => {
-        uploadArea.classList.remove('dragover');
+
+    $$('.preset-btn').forEach((button) => {
+        button.addEventListener('click', () => applyPreset(button.dataset.preset));
     });
-    
-    uploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-        if (e.dataTransfer.files.length) {
-            fileInput.files = e.dataTransfer.files;
-            handleImageUpload(fileInput.files[0]);
-        }
+
+    qualityInput.addEventListener('input', () => {
+        qualityValue.textContent = `${qualityInput.value}%`;
     });
-    
-    uploadArea.addEventListener('click', () => fileInput.click());
-    
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length) {
-            handleImageUpload(fileInput.files[0]);
-        }
-    });
-    
-    function handleImageUpload(file) {
-        if (!file.type.match('image.*')) {
-            alert('Please select an image file (JPEG, PNG, etc.)');
+
+    resizeBtn.addEventListener('click', resizeImage);
+    resetBtn.addEventListener('click', resetImage);
+    downloadBtn.addEventListener('click', () => {
+        if (!resizedBlob) {
+            showMessage(messageBox, 'error', 'Please resize an image before downloading.');
             return;
         }
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            originalImage = new Image();
-            originalImage.onload = function() {
-                imagePreview.src = e.target.result;
-                originalSize.textContent = formatFileSize(file.size);
-                
-                // Set initial dimensions
-                document.getElementById('image-width').value = this.width;
-                document.getElementById('image-height').value = this.height;
-                
-                previewContainer.classList.remove('hidden');
-                actionBtns.classList.remove('hidden');
-            };
-            originalImage.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-    
-    document.getElementById('resize-image-btn').addEventListener('click', resizeImage);
-    document.getElementById('reset-image-btn').addEventListener('click', resetImage);
-    document.getElementById('download-image-btn').addEventListener('click', downloadResizedImage);
-    
-    document.getElementById('image-quality').addEventListener('input', function() {
-        document.getElementById('image-quality-value').textContent = this.value + '%';
+        const extension = getImageExtension($('#image-format').value);
+        downloadBlob(resizedBlob, `SarkariOfficer_Resized_${Date.now()}.${extension}`);
     });
-    
-    function resizeImage() {
-        const width = parseInt(document.getElementById('image-width').value);
-        const height = parseInt(document.getElementById('image-height').value);
-        const widthUnit = document.getElementById('image-width-unit').value;
-        const heightUnit = document.getElementById('image-height-unit').value;
-        const resolution = parseInt(document.getElementById('image-resolution').value);
-        const format = document.getElementById('image-format').value;
-        const quality = parseInt(document.getElementById('image-quality').value) / 100;
-        const targetSizeValue = parseInt(document.getElementById('target-size-value').value);
-        const targetSizeUnit = document.getElementById('target-size-unit').value;
-        const targetBytes = targetSizeUnit === 'KB' ? targetSizeValue * 1024 : targetSizeValue * 1024 * 1024;
-        
-        // Convert units to pixels
-        let targetWidth = width;
-        let targetHeight = height;
-        
-        if (widthUnit === 'cm') {
-            targetWidth = Math.round(width * resolution / 2.54);
-        } else if (widthUnit === 'inch') {
-            targetWidth = Math.round(width * resolution);
+
+    function applyPreset(name) {
+        const preset = presets[name];
+        if (!preset) return;
+
+        const width = (name === 'small' || name === 'form') && originalImage ? originalImage.width : preset.width;
+        const height = (name === 'small' || name === 'form') && originalImage ? originalImage.height : preset.height;
+
+        $('#image-width').value = width;
+        $('#image-height').value = height;
+        $('#image-width-unit').value = preset.unit;
+        $('#image-height-unit').value = preset.unit;
+        $('#image-resolution').value = preset.dpi;
+        $('#image-format').value = preset.format;
+        $('#image-quality').value = preset.quality;
+        $('#target-size-value').value = preset.target;
+        $('#target-size-unit').value = 'KB';
+        qualityValue.textContent = `${preset.quality}%`;
+        showMessage(messageBox, 'info', `${buttonLabel(name)} preset applied. Upload an image or press Resize Image if your file is already selected.`);
+    }
+
+    function buttonLabel(name) {
+        if (name === 'passport') return 'Passport Photo';
+        if (name === 'signature') return 'Signature';
+        if (name === 'small') return 'Small Upload';
+        return 'Form Upload';
+    }
+
+    async function handleImageUpload(file) {
+        try {
+            resetImageResult();
+            originalFile = file;
+            const dataUrl = await readFileAsDataUrl(file);
+            originalImage = await loadImage(dataUrl);
+
+            originalPreview.src = dataUrl;
+            $('#image-file-name').textContent = file.name;
+            $('#original-image-size').textContent = formatFileSize(file.size);
+            $('#result-original-image-size').textContent = formatFileSize(file.size);
+            $('#image-width').value = originalImage.width;
+            $('#image-height').value = originalImage.height;
+            $('#image-width-unit').value = 'px';
+            $('#image-height-unit').value = 'px';
+
+            $('#image-file-summary').classList.remove('hidden');
+            previewContainer.classList.remove('hidden');
+            actionBtns.classList.remove('hidden');
+            showMessage(messageBox, 'success', 'Image ready. Choose a preset or adjust the fields, then resize.');
+        } catch (error) {
+            showMessage(messageBox, 'error', error.message || 'Unable to open this image.');
         }
-        
-        if (heightUnit === 'cm') {
-            targetHeight = Math.round(height * resolution / 2.54);
-        } else if (heightUnit === 'inch') {
-            targetHeight = Math.round(height * resolution);
-        }
-        
-        // Create canvas
-        const canvas = document.createElement('canvas');
-        canvas.width = targetWidth;
-        canvas.height = targetHeight;
-        const ctx = canvas.getContext('2d');
-        
-        // Draw resized image
-        ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
-        
-        // Show loading
-        const resizeBtn = document.getElementById('resize-image-btn');
-        const originalText = resizeBtn.innerHTML;
-        resizeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        resizeBtn.disabled = true;
-        
-        // Process in steps for better UX
-        setTimeout(() => {
-            canvas.toBlob((blob) => {
-                if (targetBytes > 0) {
-                    adjustQualityToTargetSize(canvas, blob, format, targetBytes, targetWidth, targetHeight);
-                } else {
-                    finalizeResize(blob, targetWidth, targetHeight);
-                }
-                resizeBtn.innerHTML = originalText;
-                resizeBtn.disabled = false;
-            }, `image/${format}`, quality);
-        }, 100);
     }
-    
-    function adjustQualityToTargetSize(canvas, initialBlob, format, targetBytes, width, height) {
-        let minQuality = 0.1;
-        let maxQuality = 1.0;
-        let bestBlob = initialBlob;
-        let closestDiff = Math.abs(initialBlob.size - targetBytes);
-        let iterations = 0;
-        const MAX_ITERATIONS = 5;
-        
-        const processNext = (callback) => {
-            if (iterations >= MAX_ITERATIONS) return callback();
-            
-            iterations++;
-            const midQuality = (minQuality + maxQuality) / 2;
-            
-            canvas.toBlob((blob) => {
-                const diff = Math.abs(blob.size - targetBytes);
-                
-                if (diff < closestDiff) {
-                    closestDiff = diff;
-                    bestBlob = blob;
-                }
-                
-                // If within 5% of target, stop
-                if (blob.size > targetBytes * 0.95 && blob.size < targetBytes * 1.05) {
-                    return callback();
-                }
-                
-                // Adjust quality range
-                if (blob.size > targetBytes) {
-                    maxQuality = midQuality;
-                } else {
-                    minQuality = midQuality;
-                }
-                
-                processNext(callback);
-            }, `image/${format}`, midQuality);
-        };
-        
-        processNext(() => {
-            finalizeResize(bestBlob, width, height);
-        });
+
+    function resetImageResult() {
+        if (resizedUrl) URL.revokeObjectURL(resizedUrl);
+        resizedUrl = '';
+        resizedBlob = null;
+        downloadArea.classList.add('hidden');
+        resizedPreview.removeAttribute('src');
     }
-    
-    function finalizeResize(blob, width, height) {
-        resizedImage = blob;
-        newSize.textContent = formatFileSize(blob.size);
-        newDimensions.textContent = `${width} × ${height} px`;
-        downloadArea.classList.remove('hidden');
-        downloadArea.scrollIntoView({ behavior: 'smooth' });
-    }
-    
+
     function resetImage() {
         fileInput.value = '';
+        originalFile = null;
+        originalImage = null;
+        originalPreview.removeAttribute('src');
+        $('#image-file-summary').classList.add('hidden');
         previewContainer.classList.add('hidden');
         actionBtns.classList.add('hidden');
-        downloadArea.classList.add('hidden');
+        resetImageResult();
+        clearMessage(messageBox);
     }
-    
-    function downloadResizedImage() {
-        if (!resizedImage) return;
-        
-        const format = document.getElementById('image-format').value;
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const filename = `NaukariTrack_Resized_${timestamp}.${format}`;
-        
-        saveAs(resizedImage, filename);
+
+    async function resizeImage() {
+        if (!originalImage || !originalFile) {
+            showMessage(messageBox, 'error', 'Please upload an image before resizing.');
+            return;
+        }
+
+        const width = parseFloat($('#image-width').value);
+        const height = parseFloat($('#image-height').value);
+        const dpi = parseInt($('#image-resolution').value, 10) || 300;
+        const targetWidth = convertDimension(width, $('#image-width-unit').value, dpi);
+        const targetHeight = convertDimension(height, $('#image-height-unit').value, dpi);
+        const format = $('#image-format').value;
+        const mimeType = getImageMime(format);
+        const targetBytes = bytesFromTarget('#target-size-value', '#target-size-unit');
+
+        if (!Number.isFinite(targetWidth) || !Number.isFinite(targetHeight) || targetWidth < 1 || targetHeight < 1) {
+            showMessage(messageBox, 'error', 'Please enter valid width and height values.');
+            return;
+        }
+
+        setBusy(resizeBtn, true, 'Processing...');
+        clearMessage(messageBox);
+
+        try {
+            const canvas = document.createElement('canvas');
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            const context = canvas.getContext('2d', { alpha: format !== 'jpg' });
+
+            if (format === 'jpg') {
+                context.fillStyle = '#ffffff';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            context.imageSmoothingEnabled = true;
+            context.imageSmoothingQuality = 'high';
+            context.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
+
+            const initialQuality = parseInt(qualityInput.value, 10) / 100;
+            resizedBlob = await createTargetImageBlob(canvas, mimeType, initialQuality, targetBytes);
+
+            if (resizedUrl) URL.revokeObjectURL(resizedUrl);
+            resizedUrl = URL.createObjectURL(resizedBlob);
+            resizedPreview.src = resizedUrl;
+            $('#new-image-size').textContent = formatFileSize(resizedBlob.size);
+            $('#new-image-dimensions').textContent = `${targetWidth} x ${targetHeight} px`;
+            downloadArea.classList.remove('hidden');
+
+            const targetNote = targetBytes && resizedBlob.size > targetBytes * 1.12
+                ? ' The exact target size may not be possible with these dimensions and format.'
+                : '';
+            showMessage(messageBox, 'success', `Image resized successfully.${targetNote}`);
+        } catch (error) {
+            showMessage(messageBox, 'error', error.message || 'Processing failed. Please try a smaller image.');
+        } finally {
+            setBusy(resizeBtn, false);
+        }
+    }
+
+    async function createTargetImageBlob(canvas, mimeType, initialQuality, targetBytes) {
+        let bestBlob = await canvasToBlob(canvas, mimeType, initialQuality);
+        if (!targetBytes || mimeType === 'image/png') return bestBlob;
+
+        let low = 0.2;
+        let high = initialQuality;
+
+        for (let i = 0; i < 8; i++) {
+            const quality = (low + high) / 2;
+            const blob = await canvasToBlob(canvas, mimeType, quality);
+            if (Math.abs(blob.size - targetBytes) < Math.abs(bestBlob.size - targetBytes)) {
+                bestBlob = blob;
+            }
+            if (blob.size > targetBytes) {
+                high = quality;
+            } else {
+                low = quality;
+            }
+        }
+
+        return bestBlob;
     }
 }
 
-// Image to PDF Converter
 function initImageToPdf() {
-    const uploadArea = document.getElementById('pdf-upload-area');
-    const fileInput = document.getElementById('pdf-upload');
-    const previewContainer = document.getElementById('pdf-preview-container');
-    const pdfPreview = document.getElementById('pdf-preview');
-    const originalSize = document.getElementById('original-pdf-size');
-    const actionBtns = document.getElementById('pdf-action-btns');
-    const downloadArea = document.getElementById('pdf-download-area');
-    const newSize = document.getElementById('new-pdf-size');
-    const newDimensions = document.getElementById('new-pdf-dimensions');
-    const pageSizeSelect = document.getElementById('pdf-page-size');
-    const customSizeGroup = document.getElementById('pdf-custom-size');
-    
+    const messageBox = $('#pdf-message');
+    const fileInput = $('#pdf-upload');
+    const previewContainer = $('#pdf-preview-container');
+    const actionBtns = $('#pdf-action-btns');
+    const downloadArea = $('#pdf-download-area');
+    const preview = $('#pdf-preview');
+    const convertBtn = $('#convert-pdf-btn');
+    const resetBtn = $('#reset-pdf-btn');
+    const downloadBtn = $('#download-pdf-btn');
+    const pageSizeSelect = $('#pdf-page-size');
+
+    let originalFile = null;
     let originalImage = null;
+    let originalDataUrl = '';
     let pdfBlob = null;
-    
-    // Setup drag and drop
-    uploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadArea.classList.add('dragover');
+
+    setupUploadArea($('#pdf-upload-area'), fileInput, {
+        maxBytes: IMAGE_MAX_BYTES,
+        isValidType: isImageFile,
+        invalidTypeMessage: 'Please upload a JPG, PNG, or WEBP image.',
+        messageBox,
+        onInvalid: resetPdfResult,
+        onValid: handlePdfImageUpload
     });
-    
-    uploadArea.addEventListener('dragleave', () => {
-        uploadArea.classList.remove('dragover');
+
+    pageSizeSelect.addEventListener('change', () => {
+        $('#pdf-custom-size').classList.toggle('hidden', pageSizeSelect.value !== 'custom');
     });
-    
-    uploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-        if (e.dataTransfer.files.length) {
-            fileInput.files = e.dataTransfer.files;
-            handleImageUpload(fileInput.files[0]);
-        }
-    });
-    
-    uploadArea.addEventListener('click', () => fileInput.click());
-    
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length) {
-            handleImageUpload(fileInput.files[0]);
-        }
-    });
-    
-    pageSizeSelect.addEventListener('change', function() {
-        customSizeGroup.classList.toggle('hidden', this.value !== 'custom');
-    });
-    
-    function handleImageUpload(file) {
-        if (!file.type.match('image.*')) {
-            alert('Please select an image file (JPEG, PNG, etc.)');
+
+    convertBtn.addEventListener('click', convertToPdf);
+    resetBtn.addEventListener('click', resetPdf);
+    downloadBtn.addEventListener('click', () => {
+        if (!pdfBlob) {
+            showMessage(messageBox, 'error', 'Please convert an image before downloading.');
             return;
         }
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            originalImage = new Image();
-            originalImage.onload = function() {
-                pdfPreview.src = e.target.result;
-                originalSize.textContent = formatFileSize(file.size);
-                previewContainer.classList.remove('hidden');
-                actionBtns.classList.remove('hidden');
-            };
-            originalImage.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-    
-    document.getElementById('convert-pdf-btn').addEventListener('click', convertToPdf);
-    document.getElementById('reset-pdf-btn').addEventListener('click', resetPdf);
-    document.getElementById('download-pdf-btn').addEventListener('click', downloadPdf);
-    
-    async function convertToPdf() {
-        const pageSize = document.getElementById('pdf-page-size').value;
-        const margin = parseInt(document.getElementById('pdf-margin').value);
-        const orientation = document.getElementById('pdf-orientation').value;
-        
-        let pageWidth, pageHeight;
-        
-        switch(pageSize) {
-            case 'a4':
-                pageWidth = 210;
-                pageHeight = 297;
-                break;
-            case 'letter':
-                pageWidth = 216;
-                pageHeight = 279;
-                break;
-            case 'legal':
-                pageWidth = 216;
-                pageHeight = 356;
-                break;
-            case 'custom':
-                pageWidth = parseInt(document.getElementById('pdf-width').value);
-                pageHeight = parseInt(document.getElementById('pdf-height').value);
-                break;
-        }
-        
-        if (orientation === 'landscape') {
-            [pageWidth, pageHeight] = [pageHeight, pageWidth];
-        }
-        
-        // Convert mm to points (1 mm = 2.83465 points)
-        pageWidth *= 2.83465;
-        pageHeight *= 2.83465;
-        const marginPoints = margin * 2.83465;
-        
-        // Show loading
-        const convertBtn = document.getElementById('convert-pdf-btn');
-        const originalText = convertBtn.innerHTML;
-        convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        convertBtn.disabled = true;
-        
+        downloadBlob(pdfBlob, `SarkariOfficer_Image_To_PDF_${Date.now()}.pdf`);
+    });
+
+    async function handlePdfImageUpload(file) {
         try {
-            const { PDFDocument, rgb } = PDFLib;
-            const pdfDoc = await PDFDocument.create();
-            const page = pdfDoc.addPage([pageWidth, pageHeight]);
-            
-            // Calculate image dimensions
-            const maxWidth = pageWidth - (marginPoints * 2);
-            const maxHeight = pageHeight - (marginPoints * 2);
-            
-            let imgWidth = originalImage.width;
-            let imgHeight = originalImage.height;
-            const ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
-            
-            imgWidth *= ratio;
-            imgHeight *= ratio;
-            
-            // Center image
-            const x = (pageWidth - imgWidth) / 2;
-            const y = (pageHeight - imgHeight) / 2;
-            
-            // Embed image
-            const imageBytes = await fetch(originalImage.src).then(res => res.arrayBuffer());
-            const image = await pdfDoc.embedJpg(imageBytes);
-            
-            // Draw image
-            page.drawImage(image, { x, y, width: imgWidth, height: imgHeight });
-            
-            // Save PDF
-            const pdfBytes = await pdfDoc.save();
-            pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-            
-            // Show results
-            newSize.textContent = formatFileSize(pdfBlob.size);
-            newDimensions.textContent = `${pageWidth / 2.83465} × ${pageHeight / 2.83465} mm`;
-            downloadArea.classList.remove('hidden');
-            downloadArea.scrollIntoView({ behavior: 'smooth' });
-            
+            resetPdfResult();
+            originalFile = file;
+            originalDataUrl = await readFileAsDataUrl(file);
+            originalImage = await loadImage(originalDataUrl);
+            preview.src = originalDataUrl;
+            $('#pdf-file-name').textContent = file.name;
+            $('#original-pdf-size').textContent = formatFileSize(file.size);
+            $('#pdf-file-summary').classList.remove('hidden');
+            previewContainer.classList.remove('hidden');
+            actionBtns.classList.remove('hidden');
+            showMessage(messageBox, 'success', 'Image ready. A4 portrait is selected by default.');
         } catch (error) {
-            console.error('PDF creation error:', error);
-            alert('Error creating PDF. Please try a different image.');
-        } finally {
-            convertBtn.innerHTML = originalText;
-            convertBtn.disabled = false;
+            showMessage(messageBox, 'error', error.message || 'Unable to open this image.');
         }
     }
-    
+
+    function resetPdfResult() {
+        pdfBlob = null;
+        downloadArea.classList.add('hidden');
+    }
+
     function resetPdf() {
         fileInput.value = '';
+        originalFile = null;
+        originalImage = null;
+        originalDataUrl = '';
+        preview.removeAttribute('src');
+        $('#pdf-file-summary').classList.add('hidden');
         previewContainer.classList.add('hidden');
         actionBtns.classList.add('hidden');
-        downloadArea.classList.add('hidden');
+        resetPdfResult();
+        clearMessage(messageBox);
     }
-    
-    function downloadPdf() {
-        if (!pdfBlob) return;
-        
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const filename = `NaukariTrack_Converted_${timestamp}.pdf`;
-        
-        saveAs(pdfBlob, filename);
-    }
-}
 
-// PDF Resizer Tool
-function initPdfResizer() {
-    const uploadArea = document.getElementById('resize-pdf-upload-area');
-    const fileInput = document.getElementById('resize-pdf-upload');
-    const previewContainer = document.getElementById('resize-pdf-preview-container');
-    const pdfName = document.getElementById('resize-pdf-name');
-    const originalSize = document.getElementById('original-resize-pdf-size');
-    const actionBtns = document.getElementById('resize-pdf-action-btns');
-    const downloadArea = document.getElementById('resize-pdf-download-area');
-    const newSize = document.getElementById('new-resize-pdf-size');
-    const reduction = document.getElementById('pdf-reduction');
-    
-    let originalPdf = null;
-    let resizedPdf = null;
-    
-    // Setup drag and drop
-    uploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadArea.classList.add('dragover');
-    });
-    
-    uploadArea.addEventListener('dragleave', () => {
-        uploadArea.classList.remove('dragover');
-    });
-    
-    uploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-        if (e.dataTransfer.files.length) {
-            fileInput.files = e.dataTransfer.files;
-            handlePdfUpload(fileInput.files[0]);
-        }
-    });
-    
-    uploadArea.addEventListener('click', () => fileInput.click());
-    
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length) {
-            handlePdfUpload(fileInput.files[0]);
-        }
-    });
-    
-    document.getElementById('pdf-quality').addEventListener('input', function() {
-        document.getElementById('pdf-quality-value').textContent = this.value + ' DPI';
-    });
-    
-    function handlePdfUpload(file) {
-        if (!file.type.match('application.pdf')) {
-            alert('Please select a PDF file');
+    async function convertToPdf() {
+        if (!originalImage || !originalFile) {
+            showMessage(messageBox, 'error', 'Please upload an image before converting to PDF.');
             return;
         }
-        
-        pdfName.textContent = file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name;
-        originalSize.textContent = formatFileSize(file.size);
-        originalPdf = file;
-        previewContainer.classList.remove('hidden');
-        actionBtns.classList.remove('hidden');
-    }
-    
-    document.getElementById('resize-pdf-btn').addEventListener('click', resizePdf);
-    document.getElementById('reset-resize-pdf-btn').addEventListener('click', resetResizePdf);
-    document.getElementById('download-resize-pdf-btn').addEventListener('click', downloadResizedPdf);
-    
-    async function resizePdf() {
-        const targetSize = parseInt(document.getElementById('pdf-target-size-value').value);
-        const targetUnit = document.getElementById('pdf-target-size-unit').value;
-        const compression = document.getElementById('pdf-compression').value;
-        const quality = parseInt(document.getElementById('pdf-quality').value);
-        
-        const targetBytes = targetUnit === 'KB' ? targetSize * 1024 : targetSize * 1024 * 1024;
-        
-        // Show loading
-        const resizeBtn = document.getElementById('resize-pdf-btn');
-        const originalText = resizeBtn.innerHTML;
-        resizeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        resizeBtn.disabled = true;
-        
+
+        if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+            showMessage(messageBox, 'error', 'PDF library failed to load. Please check your internet connection and reload this page.');
+            return;
+        }
+
+        setBusy(convertBtn, true, 'Creating PDF...');
+        clearMessage(messageBox);
+
         try {
-            // First try client-side compression
-            const { PDFDocument } = PDFLib;
-            const pdfBytes = await originalPdf.arrayBuffer();
-            const pdfDoc = await PDFDocument.load(pdfBytes);
-            
-            // Save with compression
-            const compressedBytes = await pdfDoc.save({
-                useObjectStreams: true,
-                // Add any available compression options
+            const { PDFDocument } = window.PDFLib;
+            const pdfDoc = await PDFDocument.create();
+            const pageSize = getPdfPageSize();
+            const page = pdfDoc.addPage([pageSize.width, pageSize.height]);
+            const margin = Math.max(0, parseFloat($('#pdf-margin').value) || 0) * MM_TO_POINTS;
+            const maxWidth = Math.max(10, pageSize.width - margin * 2);
+            const maxHeight = Math.max(10, pageSize.height - margin * 2);
+            const imageBytes = await getImageBytesForPdf(originalImage);
+            const embeddedImage = await pdfDoc.embedJpg(imageBytes);
+            const fitToPage = $('#pdf-fit-page').checked;
+
+            let drawWidth = originalImage.width;
+            let drawHeight = originalImage.height;
+            const ratio = fitToPage ? Math.min(maxWidth / drawWidth, maxHeight / drawHeight) : Math.min(1, maxWidth / drawWidth, maxHeight / drawHeight);
+            drawWidth *= ratio;
+            drawHeight *= ratio;
+
+            page.drawImage(embeddedImage, {
+                x: (pageSize.width - drawWidth) / 2,
+                y: (pageSize.height - drawHeight) / 2,
+                width: drawWidth,
+                height: drawHeight
             });
-            
-            let resultBlob = new Blob([compressedBytes], { type: 'application/pdf' });
-            
-            // If client-side result is not close enough, use Cloudflare Worker
-            if (Math.abs(resultBlob.size - targetBytes) / targetBytes > 0.1) {
-                try {
-                    resultBlob = await compressWithCloudflare(originalPdf, targetBytes, compression);
-                } catch (e) {
-                    console.log('Cloudflare compression failed, using client-side result', e);
-                }
-            }
-            
-            resizedPdf = resultBlob;
-            
-            // Show results
-            const originalSizeFormatted = formatFileSize(originalPdf.size);
-            const newSizeFormatted = formatFileSize(resizedPdf.size);
-            const reductionPercent = Math.round((1 - (resizedPdf.size / originalPdf.size)) * 100);
-            
-            newSize.textContent = newSizeFormatted;
-            reduction.textContent = `${reductionPercent}% (from ${originalSizeFormatted}) | Target: ${formatFileSize(targetBytes)}`;
+
+            const bytes = await pdfDoc.save({ useObjectStreams: true });
+            pdfBlob = new Blob([bytes], { type: 'application/pdf' });
+            $('#new-pdf-size').textContent = formatFileSize(pdfBlob.size);
+            $('#new-pdf-dimensions').textContent = `${Math.round(pageSize.width / MM_TO_POINTS)} x ${Math.round(pageSize.height / MM_TO_POINTS)} mm`;
             downloadArea.classList.remove('hidden');
-            downloadArea.scrollIntoView({ behavior: 'smooth' });
-            
+            showMessage(messageBox, 'success', 'PDF created successfully. Download button is ready.');
         } catch (error) {
-            console.error('PDF processing error:', error);
-            alert('Error processing PDF. Please try a different file.');
+            showMessage(messageBox, 'error', error.message || 'Processing failed. Please try another image.');
         } finally {
-            resizeBtn.innerHTML = originalText;
-            resizeBtn.disabled = false;
+            setBusy(convertBtn, false);
         }
     }
-    
-    async function compressWithCloudflare(pdfFile, targetBytes, compressionLevel) {
-        const formData = new FormData();
-        formData.append('file', pdfFile);
-        formData.append('target_size', targetBytes);
-        formData.append('compression', compressionLevel);
-        
-        const response = await fetch('https://sarkariofficer.in/resize-pdf', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (!response.ok) {
-            throw new Error(await response.text());
+
+    function getPdfPageSize() {
+        const sizes = {
+            a4: { width: 210, height: 297 },
+            letter: { width: 216, height: 279 },
+            legal: { width: 216, height: 356 },
+            custom: {
+                width: parseFloat($('#pdf-width').value) || 210,
+                height: parseFloat($('#pdf-height').value) || 297
+            }
+        };
+        const selected = sizes[pageSizeSelect.value] || sizes.a4;
+        let width = selected.width;
+        let height = selected.height;
+        if ($('#pdf-orientation').value === 'landscape') {
+            [width, height] = [height, width];
         }
-        
-        return await response.blob();
+        return { width: width * MM_TO_POINTS, height: height * MM_TO_POINTS };
     }
-    
-    function resetResizePdf() {
-        fileInput.value = '';
-        previewContainer.classList.add('hidden');
-        actionBtns.classList.add('hidden');
-        downloadArea.classList.add('hidden');
-    }
-    
-    function downloadResizedPdf() {
-        if (!resizedPdf) return;
-        
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const filename = `NaukariTrack_Resized_${timestamp}.pdf`;
-        
-        saveAs(resizedPdf, filename);
+
+    async function getImageBytesForPdf(image) {
+        const canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth || image.width;
+        canvas.height = image.naturalHeight || image.height;
+        const context = canvas.getContext('2d');
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0);
+        const blob = await canvasToBlob(canvas, 'image/jpeg', 0.92);
+        return blob.arrayBuffer();
     }
 }
 
-// Initialize everything when page loads
+function initPdfResizer() {
+    const messageBox = $('#resize-pdf-message');
+    const fileInput = $('#resize-pdf-upload');
+    const previewContainer = $('#resize-pdf-preview-container');
+    const actionBtns = $('#resize-pdf-action-btns');
+    const downloadArea = $('#resize-pdf-download-area');
+    const resizeBtn = $('#resize-pdf-btn');
+    const resetBtn = $('#reset-resize-pdf-btn');
+    const downloadBtn = $('#download-resize-pdf-btn');
+    const qualityInput = $('#pdf-quality');
+    const qualityValue = $('#pdf-quality-value');
+
+    let originalPdf = null;
+    let resizedPdf = null;
+
+    setupUploadArea($('#resize-pdf-upload-area'), fileInput, {
+        maxBytes: PDF_MAX_BYTES,
+        isValidType: isPdfFile,
+        invalidTypeMessage: 'Please upload a PDF file.',
+        messageBox,
+        onInvalid: resetPdfResizeResult,
+        onValid: handlePdfUpload
+    });
+
+    qualityInput.addEventListener('input', () => {
+        qualityValue.textContent = `${qualityInput.value} DPI`;
+    });
+
+    resizeBtn.addEventListener('click', resizePdf);
+    resetBtn.addEventListener('click', resetResizePdf);
+    downloadBtn.addEventListener('click', () => {
+        if (!resizedPdf) {
+            showMessage(messageBox, 'error', 'Please process a PDF before downloading.');
+            return;
+        }
+        downloadBlob(resizedPdf, `SarkariOfficer_Resized_PDF_${Date.now()}.pdf`);
+    });
+
+    function handlePdfUpload(file) {
+        originalPdf = file;
+        resizedPdf = null;
+        $('#resize-pdf-name').textContent = file.name;
+        $('#original-resize-pdf-size').textContent = formatFileSize(file.size);
+        $('#result-original-resize-pdf-size').textContent = formatFileSize(file.size);
+        previewContainer.classList.remove('hidden');
+        actionBtns.classList.remove('hidden');
+        downloadArea.classList.add('hidden');
+        showMessage(messageBox, 'success', 'PDF ready. Choose a target size and process.');
+    }
+
+    function resetPdfResizeResult() {
+        resizedPdf = null;
+        downloadArea.classList.add('hidden');
+    }
+
+    function resetResizePdf() {
+        fileInput.value = '';
+        originalPdf = null;
+        $('#resize-pdf-name').textContent = 'filename.pdf';
+        previewContainer.classList.add('hidden');
+        actionBtns.classList.add('hidden');
+        resetPdfResizeResult();
+        clearMessage(messageBox);
+    }
+
+    async function resizePdf() {
+        if (!originalPdf) {
+            showMessage(messageBox, 'error', 'Please upload a PDF before resizing.');
+            return;
+        }
+
+        if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+            showMessage(messageBox, 'error', 'PDF library failed to load. Please check your internet connection and reload this page.');
+            return;
+        }
+
+        setBusy(resizeBtn, true, 'Processing...');
+        clearMessage(messageBox);
+
+        try {
+            const targetBytes = bytesFromTarget('#pdf-target-size-value', '#pdf-target-size-unit');
+            const { PDFDocument } = window.PDFLib;
+            const originalBytes = await originalPdf.arrayBuffer();
+            const pdfDoc = await PDFDocument.load(originalBytes, { ignoreEncryption: true });
+            const compressedBytes = await pdfDoc.save({
+                useObjectStreams: true,
+                addDefaultPage: false,
+                objectsPerTick: 50
+            });
+
+            const compressedBlob = new Blob([compressedBytes], { type: 'application/pdf' });
+            resizedPdf = compressedBlob.size < originalPdf.size ? compressedBlob : originalPdf;
+
+            const reduction = Math.max(0, Math.round((1 - resizedPdf.size / originalPdf.size) * 100));
+            $('#new-resize-pdf-size').textContent = formatFileSize(resizedPdf.size);
+
+            if (resizedPdf.size >= originalPdf.size) {
+                $('#pdf-reduction').textContent = 'No meaningful reduction found. Your original PDF is already optimized or image-heavy.';
+                showMessage(messageBox, 'info', 'This PDF could not be reduced safely in the browser. You can still download the original file from the button below.');
+            } else if (targetBytes && resizedPdf.size > targetBytes) {
+                $('#pdf-reduction').textContent = `${reduction}% smaller. Target was ${formatFileSize(targetBytes)}, but this PDF cannot safely reach that size in-browser.`;
+                showMessage(messageBox, 'info', 'PDF processed, but the exact target size may not be possible without reducing scanned image quality outside the browser.');
+            } else {
+                $('#pdf-reduction').textContent = `${reduction}% smaller`;
+                showMessage(messageBox, 'success', 'PDF processed successfully. Download button is ready.');
+            }
+
+            downloadArea.classList.remove('hidden');
+        } catch (error) {
+            showMessage(messageBox, 'error', error.message || 'Processing failed. This PDF may be encrypted, damaged, or unsupported.');
+        } finally {
+            setBusy(resizeBtn, false);
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initToolTabs();

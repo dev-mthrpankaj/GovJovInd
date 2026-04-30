@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Tools | GovJobInd</title>
-    <meta name="description" content="SarkariOfficer provides latest government jobs, admit cards, results, answer keys, and exam resources.">
+    <title>Document Tools | SarkariOfficer</title>
+    <meta name="description" content="Resize photos, signatures, and convert images to PDF in your browser for government exam forms.">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/documents.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,7 +16,7 @@
                 <img src="../Assets/Home Page/LogoSarkariOfficer.png" alt="SarkariOfficer Logo" class="logo-img">
                 <a href="../Index.html" class="logo">Sarkari<span>Officer</span></a>
             </div>
-            <div class="menu-toggle" id="menuToggle">
+            <div class="menu-toggle" id="menuToggle" aria-label="Open navigation" role="button" tabindex="0">
                 <i class="fas fa-bars"></i>
             </div>
             <nav id="mainNav">
@@ -27,7 +27,6 @@
                     <li><a href="results.html">Results</a></li>
                     <li><a href="answer-key.html">Answer Key</a></li>
                     <li><a href="rank-predictor.html">Quizzes</a></li>
-                    
                     <li><a href="documents.html" class="active">Documents</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
@@ -36,81 +35,119 @@
     </header>
 
     <main class="documents-page">
+        <section class="documents-hero" aria-labelledby="documents-title">
+            <div>
+                <span class="hero-badge"><i class="fas fa-shield-alt"></i> Browser-only document tools</span>
+                <h1 id="documents-title">Document Tools for Government Forms</h1>
+                <p>Resize photos, signatures, and convert images to PDF directly in your browser.</p>
+            </div>
+            <p class="trust-note"><i class="fas fa-lock"></i> Your files are processed in your browser. We do not upload or store your documents.</p>
+        </section>
+
         <div class="tools-container">
-            <!-- Tool Selection Tabs -->
-            <div class="tool-tabs">
-                <button class="tab-btn active" data-tab="image-resizer">Image Resizer</button>
-                <button class="tab-btn" data-tab="image-to-pdf">Image to PDF</button>
-                <button class="tab-btn" data-tab="pdf-resizer">PDF Resizer</button>
+            <div class="tool-tabs" role="tablist" aria-label="Document tools">
+                <button class="tab-btn active" id="tab-image-resizer" role="tab" aria-selected="true" aria-controls="image-resizer" data-tab="image-resizer" type="button">
+                    <i class="fas fa-image"></i>
+                    <span>Image Resizer</span>
+                </button>
+                <button class="tab-btn" id="tab-image-to-pdf" role="tab" aria-selected="false" aria-controls="image-to-pdf" data-tab="image-to-pdf" type="button" tabindex="-1">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Image to PDF</span>
+                </button>
+                <button class="tab-btn" id="tab-pdf-resizer" role="tab" aria-selected="false" aria-controls="pdf-resizer" data-tab="pdf-resizer" type="button" tabindex="-1">
+                    <i class="fas fa-compress-alt"></i>
+                    <span>PDF Resizer</span>
+                </button>
             </div>
 
-            <!-- Image Resizer Tool -->
-            <div id="image-resizer" class="tool-content active">
-                <h2><i class="fas fa-image"></i> Resize Photo/Signature</h2>
-                <div class="upload-area" id="image-upload-area">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Drag & drop your image here or click to browse</p>
-                    <input type="file" id="image-upload" accept="image/*">
+            <section id="image-resizer" class="tool-content active" role="tabpanel" aria-labelledby="tab-image-resizer">
+                <div class="tool-heading">
+                    <h2><i class="fas fa-image"></i> Resize Photo or Signature</h2>
+                    <p>Use common Sarkari form sizes or enter your own dimensions.</p>
                 </div>
-                
+
+                <div class="preset-grid" aria-label="Quick image presets">
+                    <button class="preset-btn" type="button" data-preset="passport">
+                        <strong>Passport Photo</strong>
+                        <span>3.5cm x 4.5cm, JPG, 300 DPI</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="signature">
+                        <strong>Signature</strong>
+                        <span>4cm x 2cm, JPG, 300 DPI</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="small">
+                        <strong>Small Upload</strong>
+                        <span>Target 50KB</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="form">
+                        <strong>Form Upload</strong>
+                        <span>Target 100KB</span>
+                    </button>
+                </div>
+
+                <div class="message-box hidden" id="image-message" role="status" aria-live="polite"></div>
+
+                <label class="upload-area" id="image-upload-area" for="image-upload" tabindex="0" aria-label="Upload image for resizing">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <strong>Upload JPG, PNG, or WEBP</strong>
+                    <span>Tap to browse or drag and drop image here. Max 8 MB.</span>
+                    <input type="file" id="image-upload" accept="image/jpeg,image/png,image/webp">
+                </label>
+
+                <div class="file-summary hidden" id="image-file-summary">
+                    <span><i class="fas fa-file-image"></i> <strong id="image-file-name">No file selected</strong></span>
+                    <span>Original size: <strong id="original-image-size">-</strong></span>
+                </div>
+
                 <div class="preview-container hidden" id="image-preview-container">
-                    <div class="image-preview">
-                        <img id="image-preview" src="#" alt="Preview">
-                        <div class="original-size">
-                            Original: <span id="original-image-size">-</span>
-                        </div>
+                    <div class="preview-card">
+                        <h3>Original Preview</h3>
+                        <img id="image-preview" src="#" alt="Original uploaded document image preview">
                     </div>
-                    
                     <div class="controls">
                         <div class="control-group">
-                            <label for="image-width">Width:</label>
+                            <label for="image-width">Width</label>
                             <div class="input-group">
-                                <input type="number" id="image-width" min="1">
-                                <select id="image-width-unit">
+                                <input type="number" id="image-width" min="1" inputmode="decimal">
+                                <select id="image-width-unit" aria-label="Width unit">
                                     <option value="px">px</option>
                                     <option value="cm">cm</option>
                                     <option value="inch">inch</option>
                                 </select>
                             </div>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="image-height">Height:</label>
+                            <label for="image-height">Height</label>
                             <div class="input-group">
-                                <input type="number" id="image-height" min="1">
-                                <select id="image-height-unit">
+                                <input type="number" id="image-height" min="1" inputmode="decimal">
+                                <select id="image-height-unit" aria-label="Height unit">
                                     <option value="px">px</option>
                                     <option value="cm">cm</option>
                                     <option value="inch">inch</option>
                                 </select>
                             </div>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="image-resolution">Resolution (DPI):</label>
+                            <label for="image-resolution">Resolution (DPI)</label>
                             <input type="number" id="image-resolution" min="72" max="600" value="300">
                         </div>
-                        
                         <div class="control-group">
-                            <label for="image-format">Format:</label>
+                            <label for="image-format">Format</label>
                             <select id="image-format">
                                 <option value="jpg">JPG</option>
                                 <option value="png">PNG</option>
                                 <option value="webp">WEBP</option>
                             </select>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="image-quality">Quality:</label>
-                            <input type="range" id="image-quality" min="1" max="100" value="85">
-                            <span id="image-quality-value">85%</span>
+                            <label for="image-quality">Quality <span id="image-quality-value">85%</span></label>
+                            <input type="range" id="image-quality" min="20" max="100" value="85">
                         </div>
-                        
                         <div class="control-group">
-                            <label for="target-size">Target Size:</label>
+                            <label for="target-size-value">Target Size</label>
                             <div class="input-group">
-                                <input type="number" id="target-size-value" min="10" value="100">
-                                <select id="target-size-unit">
+                                <input type="number" id="target-size-value" min="0" value="100" inputmode="decimal">
+                                <select id="target-size-unit" aria-label="Target size unit">
                                     <option value="KB">KB</option>
                                     <option value="MB">MB</option>
                                 </select>
@@ -118,177 +155,196 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="action-btns hidden" id="image-action-btns">
-                    <button id="resize-image-btn" class="btn btn-primary">
+                    <button id="resize-image-btn" class="btn btn-primary" type="button" aria-label="Resize uploaded image">
                         <i class="fas fa-compress-alt"></i> Resize Image
                     </button>
-                    <button id="reset-image-btn" class="btn btn-outline">
-                        <i class="fas fa-redo"></i> Reset
+                    <button id="reset-image-btn" class="btn btn-outline" type="button" aria-label="Clear image resizer">
+                        <i class="fas fa-redo"></i> Clear
                     </button>
                 </div>
-                
-                <div class="download-area hidden" id="image-download-area">
-                    <div class="result-info">
-                        <p>New size: <span id="new-image-size">-</span></p>
-                        <p>Dimensions: <span id="new-image-dimensions">-</span></p>
-                    </div>
-                    <button id="download-image-btn" class="btn btn-download">
-                        <i class="fas fa-download"></i> Download Image
-                    </button>
-                </div>
-            </div>
 
-            <!-- Image to PDF Tool -->
-            <div id="image-to-pdf" class="tool-content">
-                <h2><i class="fas fa-file-pdf"></i> Convert Image to PDF</h2>
-                <div class="upload-area" id="pdf-upload-area">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Drag & drop your image here or click to browse</p>
-                    <input type="file" id="pdf-upload" accept="image/*">
-                </div>
-                
-                <div class="preview-container hidden" id="pdf-preview-container">
-                    <div class="image-preview">
-                        <img id="pdf-preview" src="#" alt="Preview">
-                        <div class="original-size">
-                            Original: <span id="original-pdf-size">-</span>
+                <div class="download-area hidden" id="image-download-area">
+                    <div class="result-layout">
+                        <div class="preview-card">
+                            <h3>Resized Preview</h3>
+                            <img id="resized-image-preview" src="#" alt="Resized image preview">
+                        </div>
+                        <div class="result-info">
+                            <p>Original size: <span id="result-original-image-size">-</span></p>
+                            <p>New size: <span id="new-image-size">-</span></p>
+                            <p>New dimensions: <span id="new-image-dimensions">-</span></p>
+                            <button id="download-image-btn" class="btn btn-download" type="button" aria-label="Download resized image">
+                                <i class="fas fa-download"></i> Download Image
+                            </button>
                         </div>
                     </div>
-                    
+                </div>
+            </section>
+
+            <section id="image-to-pdf" class="tool-content" role="tabpanel" aria-labelledby="tab-image-to-pdf" tabindex="0" hidden>
+                <div class="tool-heading">
+                    <h2><i class="fas fa-file-pdf"></i> Convert Image to PDF</h2>
+                    <p>Create a clean A4 PDF for online application forms.</p>
+                </div>
+
+                <div class="message-box hidden" id="pdf-message" role="status" aria-live="polite"></div>
+
+                <label class="upload-area" id="pdf-upload-area" for="pdf-upload" tabindex="0" aria-label="Upload image to convert into PDF">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <strong>Upload JPG, PNG, or WEBP</strong>
+                    <span>Tap to browse or drag and drop image here. Max 8 MB.</span>
+                    <input type="file" id="pdf-upload" accept="image/jpeg,image/png,image/webp">
+                </label>
+
+                <div class="file-summary hidden" id="pdf-file-summary">
+                    <span><i class="fas fa-file-image"></i> <strong id="pdf-file-name">No file selected</strong></span>
+                    <span>Original size: <strong id="original-pdf-size">-</strong></span>
+                </div>
+
+                <div class="preview-container hidden" id="pdf-preview-container">
+                    <div class="preview-card">
+                        <h3>Image Preview</h3>
+                        <img id="pdf-preview" src="#" alt="Image selected for PDF conversion">
+                    </div>
                     <div class="controls">
                         <div class="control-group">
-                            <label for="pdf-page-size">Page Size:</label>
+                            <label for="pdf-page-size">Page Size</label>
                             <select id="pdf-page-size">
-                                <option value="a4">A4 (210 × 297 mm)</option>
-                                <option value="letter">Letter (216 × 279 mm)</option>
-                                <option value="legal">Legal (216 × 356 mm)</option>
+                                <option value="a4">A4 (210 x 297 mm)</option>
+                                <option value="letter">Letter (216 x 279 mm)</option>
+                                <option value="legal">Legal (216 x 356 mm)</option>
                                 <option value="custom">Custom</option>
                             </select>
                         </div>
-                        
                         <div class="custom-size hidden" id="pdf-custom-size">
                             <div class="control-group">
-                                <label for="pdf-width">Width (mm):</label>
+                                <label for="pdf-width">Width (mm)</label>
                                 <input type="number" id="pdf-width" min="1" value="210">
                             </div>
                             <div class="control-group">
-                                <label for="pdf-height">Height (mm):</label>
+                                <label for="pdf-height">Height (mm)</label>
                                 <input type="number" id="pdf-height" min="1" value="297">
                             </div>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="pdf-margin">Margin (mm):</label>
-                            <input type="number" id="pdf-margin" min="0" max="50" value="10">
-                        </div>
-                        
-                        <div class="control-group">
-                            <label for="pdf-orientation">Orientation:</label>
+                            <label for="pdf-orientation">Orientation</label>
                             <select id="pdf-orientation">
                                 <option value="portrait">Portrait</option>
                                 <option value="landscape">Landscape</option>
                             </select>
                         </div>
+                        <div class="control-group">
+                            <label for="pdf-margin">Margin (mm)</label>
+                            <input type="number" id="pdf-margin" min="0" max="50" value="10">
+                        </div>
+                        <div class="control-group checkbox-group">
+                            <input type="checkbox" id="pdf-fit-page" checked>
+                            <label for="pdf-fit-page">Fit image to page</label>
+                        </div>
                     </div>
                 </div>
-                
+
                 <div class="action-btns hidden" id="pdf-action-btns">
-                    <button id="convert-pdf-btn" class="btn btn-primary">
+                    <button id="convert-pdf-btn" class="btn btn-primary" type="button" aria-label="Convert uploaded image to PDF">
                         <i class="fas fa-file-export"></i> Convert to PDF
                     </button>
-                    <button id="reset-pdf-btn" class="btn btn-outline">
-                        <i class="fas fa-redo"></i> Reset
+                    <button id="reset-pdf-btn" class="btn btn-outline" type="button" aria-label="Clear image to PDF tool">
+                        <i class="fas fa-redo"></i> Clear
                     </button>
                 </div>
-                
+
                 <div class="download-area hidden" id="pdf-download-area">
                     <div class="result-info">
-                        <p>PDF size: <span id="new-pdf-size">-</span></p>
-                        <p>Dimensions: <span id="new-pdf-dimensions">-</span></p>
+                        <p>Generated PDF size: <span id="new-pdf-size">-</span></p>
+                        <p>Page dimensions: <span id="new-pdf-dimensions">-</span></p>
+                        <button id="download-pdf-btn" class="btn btn-download" type="button" aria-label="Download generated PDF">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
                     </div>
-                    <button id="download-pdf-btn" class="btn btn-download">
-                        <i class="fas fa-download"></i> Download PDF
-                    </button>
                 </div>
-            </div>
+            </section>
 
-            <!-- PDF Resizer Tool -->
-            <div id="pdf-resizer" class="tool-content">
-                <h2><i class="fas fa-file-pdf"></i> Resize PDF File</h2>
-                <div class="upload-area" id="resize-pdf-upload-area">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Drag & drop your PDF here or click to browse</p>
-                    <input type="file" id="resize-pdf-upload" accept=".pdf">
+            <section id="pdf-resizer" class="tool-content" role="tabpanel" aria-labelledby="tab-pdf-resizer" tabindex="0" hidden>
+                <div class="tool-heading">
+                    <h2><i class="fas fa-compress-alt"></i> PDF Resizer</h2>
+                    <p>Compression depends on PDF content. Text PDFs may reduce well; scanned image PDFs may not reduce much in the browser.</p>
                 </div>
-                
+
+                <div class="message-box info" id="resize-pdf-note" role="note">
+                    For privacy, this tool does not upload PDFs to a server. If your PDF is already optimized, the new file may be similar in size.
+                </div>
+                <div class="message-box hidden" id="resize-pdf-message" role="status" aria-live="polite"></div>
+
+                <label class="upload-area" id="resize-pdf-upload-area" for="resize-pdf-upload" tabindex="0" aria-label="Upload PDF to resize">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <strong>Upload PDF</strong>
+                    <span>Tap to browse or drag and drop PDF here. Max 15 MB.</span>
+                    <input type="file" id="resize-pdf-upload" accept="application/pdf,.pdf">
+                </label>
+
                 <div class="preview-container hidden" id="resize-pdf-preview-container">
                     <div class="pdf-preview">
                         <i class="fas fa-file-pdf"></i>
                         <p id="resize-pdf-name">filename.pdf</p>
-                        <div class="original-size">
-                            Original: <span id="original-resize-pdf-size">-</span>
-                        </div>
+                        <div class="original-size">Original: <span id="original-resize-pdf-size">-</span></div>
                     </div>
-                    
                     <div class="controls">
                         <div class="control-group">
-                            <label for="pdf-target-size">Target Size:</label>
+                            <label for="pdf-target-size-value">Target Size</label>
                             <div class="input-group">
-                                <input type="number" id="pdf-target-size-value" min="10" value="100">
-                                <select id="pdf-target-size-unit">
+                                <input type="number" id="pdf-target-size-value" min="10" value="100" inputmode="decimal">
+                                <select id="pdf-target-size-unit" aria-label="PDF target size unit">
                                     <option value="KB">KB</option>
                                     <option value="MB">MB</option>
                                 </select>
                             </div>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="pdf-compression">Compression Level:</label>
+                            <label for="pdf-compression">Compression Level</label>
                             <select id="pdf-compression">
                                 <option value="low">Low (Better Quality)</option>
                                 <option value="medium" selected>Medium (Balanced)</option>
                                 <option value="high">High (Smaller File)</option>
                             </select>
                         </div>
-                        
                         <div class="control-group">
-                            <label for="pdf-quality">Image Quality (DPI):</label>
+                            <label for="pdf-quality">Estimated Image Quality <span id="pdf-quality-value">150 DPI</span></label>
                             <input type="range" id="pdf-quality" min="72" max="300" value="150">
-                            <span id="pdf-quality-value">150 DPI</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="action-btns hidden" id="resize-pdf-action-btns">
-                    <button id="resize-pdf-btn" class="btn btn-primary">
+                    <button id="resize-pdf-btn" class="btn btn-primary" type="button" aria-label="Resize uploaded PDF">
                         <i class="fas fa-compress-alt"></i> Resize PDF
                     </button>
-                    <button id="reset-resize-pdf-btn" class="btn btn-outline">
-                        <i class="fas fa-redo"></i> Reset
+                    <button id="reset-resize-pdf-btn" class="btn btn-outline" type="button" aria-label="Clear PDF resizer">
+                        <i class="fas fa-redo"></i> Clear
                     </button>
                 </div>
-                
+
                 <div class="download-area hidden" id="resize-pdf-download-area">
                     <div class="result-info">
-                        <p>New size: <span id="new-resize-pdf-size">-</span></p>
-                        <p>Reduction: <span id="pdf-reduction">-</span></p>
+                        <p>Original size: <span id="result-original-resize-pdf-size">-</span></p>
+                        <p>Estimated/new size: <span id="new-resize-pdf-size">-</span></p>
+                        <p>Result: <span id="pdf-reduction">-</span></p>
+                        <button id="download-resize-pdf-btn" class="btn btn-download" type="button" aria-label="Download resized PDF">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
                     </div>
-                    <button id="download-resize-pdf-btn" class="btn btn-download">
-                        <i class="fas fa-download"></i> Download PDF
-                    </button>
                 </div>
-            </div>
+            </section>
         </div>
     </main>
 
-     <footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>SarkariOfficer</h3>
                 <p>India's most trusted government job portal providing latest updates for all Sarkari Naukri across states and central sectors.</p>
                 <div class="social-icons">
-                    
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
@@ -309,8 +365,6 @@
                 <ul>
                     <li><a href="rank-predictor.html">Quizzes</a></li>
                     <li><a href="latest-jobs.html">Latest Jobs</a></li>
-                    
-                   
                     <li><a href="rank-predictor.html">Preparation Tips</a></li>
                 </ul>
             </div>
@@ -324,13 +378,11 @@
             </div>
         </div>
         <div class="copyright">
-        &copy; 2023 (sarkariofficer.in) . All rights reserved. | <a href="about-us.html">Privacy Policy</a> | <a href="about-us.html">Terms of Service</a>
+            &copy; 2023 (sarkariofficer.in) . All rights reserved. | <a href="about-us.html">Privacy Policy</a> | <a href="about-us.html">Terms of Service</a>
         </div>
     </footer>
 
-    <!-- Include required PDF library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="../JS/documents.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js" defer></script>
+    <script src="../JS/documents.js" defer></script>
 </body>
 </html>
