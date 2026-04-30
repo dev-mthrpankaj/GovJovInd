@@ -37,7 +37,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 10,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=8",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-8.html",
     },
     {
         id: 7,
@@ -51,7 +51,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 1,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=7",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-7.html",
     },
     {
         id: 6,
@@ -65,7 +65,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 5,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=6",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-6.html",
     },
     {
         id: 5,
@@ -79,7 +79,7 @@ const admitcardsData = [
         qualification: "12th Pass",
         totalPosts: "Approx 4,500",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=5",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-5.html",
     },
     {
         id: 4,
@@ -93,7 +93,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 400",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=4",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-4.html",
     },
     {
         id: 3,
@@ -107,7 +107,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 200",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=3",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-3.html",
     },
     {
         id: 2,
@@ -121,7 +121,7 @@ const admitcardsData = [
         qualification: "Diploma/Degree in Engineering",
         totalPosts: "Approx 1,200",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=2",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-2.html",
     },
     {
         id: 1,
@@ -135,7 +135,7 @@ const admitcardsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 6,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=1",
+        detailsPage: "../AdmitCard_Details/HTML/admitcard-details-1.html",
     },
     
 

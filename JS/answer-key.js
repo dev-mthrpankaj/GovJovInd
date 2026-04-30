@@ -36,7 +36,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 10,000",
         downloadLink: "https://ssc.gov.in/",
-        detailsPage: "job-details.html?id=8",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-8.html",
     },
     {
         id: 7,
@@ -50,7 +50,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 1,100",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=7",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-7.html",
     },
     {
         id: 6,
@@ -64,7 +64,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 5,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=6",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-6.html",
     },
     {
         id: 5,
@@ -78,7 +78,7 @@ const answerKeysData = [
         qualification: "High School or Equivalent",
         totalPosts: "Various Posts",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=5",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-5.html",
     },
     {
         id: 4,
@@ -92,7 +92,7 @@ const answerKeysData = [
         qualification: "10th Pass",
         totalPosts: "Approx 25,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=4",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-4.html",
     },
     {
         id: 3,
@@ -106,7 +106,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 350",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=3",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-3.html",
     },
     {
         id: 2,
@@ -120,7 +120,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 1,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=2",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-2.html",
     },
     {
         id: 1,
@@ -134,7 +134,7 @@ const answerKeysData = [
         qualification: "12th Pass",
         totalPosts: "Approx 5,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=1",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-1.html",
     },
     // Additional answer keys
     {
@@ -149,7 +149,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 200",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=9",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-9.html",
     },
     {
         id: 10,
@@ -163,7 +163,7 @@ const answerKeysData = [
         qualification: "Diploma in Engineering",
         totalPosts: "Approx 1,200",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=10",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-10.html",
     },
     {
         id: 11,
@@ -177,7 +177,7 @@ const answerKeysData = [
         qualification: "Bachelor's Degree",
         totalPosts: "Approx 6,000",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=11",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-11.html",
     },
     {
         id: 12,
@@ -191,7 +191,7 @@ const answerKeysData = [
         qualification: "12th Pass",
         totalPosts: "Approx 400",
         downloadLink: "#",
-        detailsPage: "job-details.html?id=12",
+        detailsPage: "../AnswerKey_Details/HTML/answerkey-details-12.html",
     }
 ];
 

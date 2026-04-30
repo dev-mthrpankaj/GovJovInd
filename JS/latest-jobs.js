@@ -35,7 +35,7 @@ const jobsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "4543",
         applyLink: "https://www.upprpb.in/#/auth/landing",
-        detailsPage: "job-details.html?id=1011",
+        detailsPage: "../Job_Details/HTML/job-details-1011.html",
     },
     {
         id: 1012,
@@ -48,7 +48,7 @@ const jobsData = [
         qualification: "High School or Equivalent",
         totalPosts: "3727",
         applyLink: "https://www.onlinebssc.com/officeattendantspecial/",
-        detailsPage: "job-details.html?id=1012",
+        detailsPage: "../Job_Details/HTML/job-details-1012.html",
     },
     {
         id: 1013,
@@ -61,7 +61,7 @@ const jobsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "1481",
         applyLink: "https://www.onlinebssc.com/4thgralevel/",
-        detailsPage: "job-details.html?id=1013",
+        detailsPage: "../Job_Details/HTML/job-details-1013.html",
     },
     {
         id: 1014,
@@ -74,7 +74,7 @@ const jobsData = [
         qualification: "Intermediate with Science",
         totalPosts: "1121",
         applyLink: "https://rectt.bsf.gov.in/auth/login",
-        detailsPage: "job-details.html?id=1014",
+        detailsPage: "../Job_Details/HTML/job-details-1014.html",
     },
     {
         id: 1015,
@@ -87,7 +87,7 @@ const jobsData = [
         qualification: "10+2 or above",
         totalPosts: "1075",
         applyLink: "#",
-        detailsPage: "job-details.html?id=1015",
+        detailsPage: "../Job_Details/HTML/job-details-1015.html",
     },
     {
         id: 1016,
@@ -100,7 +100,7 @@ const jobsData = [
         qualification: "Graduate",
         totalPosts: "394",
         applyLink: "https://cdn.digialm.com/EForms/configuredHtml/1258/94260/Index.html",
-        detailsPage: "job-details.html?id=1016",
+        detailsPage: "../Job_Details/HTML/job-details-1016.html",
     },
     {
         id: 1017,
@@ -113,7 +113,7 @@ const jobsData = [
         qualification: "Bachelor's Degree",
         totalPosts: "10277",
         applyLink: "https://www.ibps.in/",
-        detailsPage: "job-details.html?id=1017",
+        detailsPage: "../Job_Details/HTML/job-details-1017.html",
     },
     {
         id: 1018,
@@ -126,7 +126,7 @@ const jobsData = [
         qualification: "high School or Equivalent",
         totalPosts: "334",
         applyLink: "https://dsssbonline.nic.in/",
-        detailsPage: "job-details.html?id=1018",
+        detailsPage: "../Job_Details/HTML/job-details-1018.html",
     }
 ];
 

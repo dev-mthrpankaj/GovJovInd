@@ -35,7 +35,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "14582",
         resultLink: "https://ssc.gov.in/",
-        detailsPage: "job-details.html?id=8",
+        detailsPage: "../Result_Details/HTML/result-details-8.html",
     },
     {
         id: 7,
@@ -48,7 +48,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "1105",
         resultLink: "#",
-        detailsPage: "job-details.html?id=7",
+        detailsPage: "../Result_Details/HTML/result-details-7.html",
     },
     {
         id: 6,
@@ -61,7 +61,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "6432",
         resultLink: "#",
-        detailsPage: "job-details.html?id=6",
+        detailsPage: "../Result_Details/HTML/result-details-6.html",
     },
     {
         id: 5,
@@ -74,7 +74,7 @@ const resultsData = [
         qualification: "High School or Equivalent",
         totalCandidates: "20000+",
         resultLink: "#",
-        detailsPage: "job-details.html?id=5",
+        detailsPage: "../Result_Details/HTML/result-details-5.html",
     },
     {
         id: 4,
@@ -87,7 +87,7 @@ const resultsData = [
         qualification: "10th Pass",
         totalCandidates: "25000",
         resultLink: "#",
-        detailsPage: "job-details.html?id=4",
+        detailsPage: "../Result_Details/HTML/result-details-4.html",
     },
     {
         id: 3,
@@ -100,7 +100,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "457",
         resultLink: "#",
-        detailsPage: "job-details.html?id=3",
+        detailsPage: "../Result_Details/HTML/result-details-3.html",
     },
     {
         id: 2,
@@ -113,7 +113,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "1000",
         resultLink: "#",
-        detailsPage: "job-details.html?id=2",
+        detailsPage: "../Result_Details/HTML/result-details-2.html",
     },
     {
         id: 1,
@@ -126,7 +126,7 @@ const resultsData = [
         qualification: "12th Pass",
         totalCandidates: "5000",
         resultLink: "#",
-        detailsPage: "job-details.html?id=1",
+        detailsPage: "../Result_Details/HTML/result-details-1.html",
     },
     // Additional results
     {
@@ -140,7 +140,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "850",
         resultLink: "#",
-        detailsPage: "job-details.html?id=9",
+        detailsPage: "../Result_Details/HTML/result-details-9.html",
     },
     {
         id: 10,
@@ -153,7 +153,7 @@ const resultsData = [
         qualification: "Diploma in Engineering",
         totalCandidates: "3200",
         resultLink: "#",
-        detailsPage: "job-details.html?id=10",
+        detailsPage: "../Result_Details/HTML/result-details-10.html",
     },
     {
         id: 11,
@@ -166,7 +166,7 @@ const resultsData = [
         qualification: "Bachelor's Degree",
         totalCandidates: "7800",
         resultLink: "#",
-        detailsPage: "job-details.html?id=11",
+        detailsPage: "../Result_Details/HTML/result-details-11.html",
     },
     {
         id: 12,
@@ -179,7 +179,7 @@ const resultsData = [
         qualification: "12th Pass",
         totalCandidates: "6000",
         resultLink: "#",
-        detailsPage: "job-details.html?id=12",
+        detailsPage: "../Result_Details/HTML/result-details-12.html",
     }
 ];
 
