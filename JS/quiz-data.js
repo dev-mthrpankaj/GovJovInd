@@ -1,85 +1,158 @@
-window.quizQuestionBank = [
-  // Mathematics
-  { id:'M1', subject:'Mathematics', topic:'Arithmetic', difficulty:'easy', question:'What is 25% of 200?', options:['25','40','50','75'], correctAnswer:2, explanation:'25% means one-fourth, and one-fourth of 200 is 50.', examTags:['SSC','Railway'], year:'2021' },
-  { id:'M2', subject:'Mathematics', topic:'Arithmetic', difficulty:'medium', question:'If CP=₹80 and SP=₹100, profit % is?', options:['20%','25%','15%','30%'], correctAnswer:1, explanation:'Profit=20; 20/80×100=25%.', examTags:['SSC','Police'] },
-  { id:'M3', subject:'Mathematics', topic:'Number System', difficulty:'easy', question:'LCM of 12 and 18 is?', options:['24','30','36','48'], correctAnswer:2, explanation:'Prime factors give LCM = 2²×3² = 36.', examTags:['Railway'] },
-  { id:'M4', subject:'Mathematics', topic:'Algebra', difficulty:'medium', question:'Solve: 2x+5=17', options:['5','6','7','8'], correctAnswer:1, explanation:'2x=12 so x=6.', examTags:['SSC'] },
-  { id:'M5', subject:'Mathematics', topic:'Geometry', difficulty:'easy', question:'Sum of angles in a triangle?', options:['90°','180°','270°','360°'], correctAnswer:1, explanation:'Interior angles of a triangle sum to 180°.', examTags:['Banking'] },
-  { id:'M6', subject:'Mathematics', topic:'Arithmetic', difficulty:'hard', question:'Simple interest on ₹1200 at 10% for 2 years?', options:['₹120','₹200','₹240','₹260'], correctAnswer:2, explanation:'SI=PRT/100=1200×10×2/100=240.', examTags:['SSC','Police'] },
-  { id:'M7', subject:'Mathematics', topic:'Mensuration', difficulty:'medium', question:'Area of rectangle 12cm × 7cm?', options:['84','76','68','96'], correctAnswer:0, explanation:'Area = length × breadth = 84.', examTags:['Railway'] },
-  { id:'M8', subject:'Mathematics', topic:'Arithmetic', difficulty:'hard', question:'Average of 10, 20, 30, 40?', options:['20','25','30','35'], correctAnswer:1, explanation:'Sum is 100 and count is 4, so average 25.', examTags:['SSC'] },
-  { id:'M9', subject:'Mathematics', topic:'Number System', difficulty:'medium', question:'A number divisible by both 3 and 4 must be divisible by?', options:['6','7','12','8'], correctAnswer:2, explanation:'LCM of 3 and 4 is 12.', examTags:['Police'] },
-  { id:'M10', subject:'Mathematics', topic:'Data Interpretation', difficulty:'hard', question:'If marks are 60, 70, 80 then median is?', options:['60','70','80','75'], correctAnswer:1, explanation:'Middle value in ordered data is 70.', examTags:['Banking'] },
+(function () {
+    const examCycle = [
+        ['SSC', 'Railway'],
+        ['Police', 'State Exams'],
+        ['Banking', 'SSC'],
+        ['UPSC', 'State Exams'],
+        ['Railway', 'Police'],
+        ['SSC', 'Banking']
+    ];
 
-  // English
-  { id:'E1', subject:'English', topic:'Grammar', difficulty:'easy', question:'Choose correct: He ____ to school daily.', options:['go','goes','gone','going'], correctAnswer:1, explanation:'Singular subject “He” takes “goes”.', examTags:['SSC'] },
-  { id:'E2', subject:'English', topic:'Vocabulary', difficulty:'easy', question:'Synonym of “Rapid” is', options:['Slow','Quick','Weak','Late'], correctAnswer:1, explanation:'Rapid means quick.', examTags:['Railway'] },
-  { id:'E3', subject:'English', topic:'Grammar', difficulty:'medium', question:'Choose correct article: She is ___ honest officer.', options:['a','an','the','no article'], correctAnswer:1, explanation:'Honest begins with vowel sound.', examTags:['SSC','Banking'] },
-  { id:'E4', subject:'English', topic:'Error Spotting', difficulty:'medium', question:'Find error: “Each of the boys have a book.”', options:['Each of the','boys have','a book','No error'], correctAnswer:1, explanation:'“Each” takes singular verb: has.', examTags:['Police'] },
-  { id:'E5', subject:'English', topic:'Comprehension', difficulty:'hard', question:'Antonym of “Scarce” is', options:['Rare','Plenty','Empty','Thin'], correctAnswer:1, explanation:'Scarce means limited; antonym is plenty/abundant.', examTags:['SSC'] },
-  { id:'E6', subject:'English', topic:'Tense', difficulty:'easy', question:'I ____ my homework yesterday.', options:['do','did','done','doing'], correctAnswer:1, explanation:'Past time uses did.', examTags:['Railway'] },
-  { id:'E7', subject:'English', topic:'Vocabulary', difficulty:'medium', question:'Meaning of “Benevolent”', options:['Kind','Cruel','Proud','Fearful'], correctAnswer:0, explanation:'Benevolent means kind/helpful.', examTags:['Banking'] },
-  { id:'E8', subject:'English', topic:'Sentence Improvement', difficulty:'hard', question:'Choose correct: “Neither Ram nor Shyam ____ coming.”', options:['are','is','were','be'], correctAnswer:1, explanation:'Verb agrees with nearest subject Shyam (singular).', examTags:['SSC'] },
-  { id:'E9', subject:'English', topic:'Idioms', difficulty:'medium', question:'“At the eleventh hour” means', options:['Very late','Very early','Exactly 11 AM','Noon'], correctAnswer:0, explanation:'It means at the last possible moment.', examTags:['Police'] },
-  { id:'E10', subject:'English', topic:'Active Passive', difficulty:'hard', question:'Passive of “They completed work.”', options:['Work was completed by them.','Work completed them.','They were completed by work.','Work is completed by them.'], correctAnswer:0, explanation:'Simple past passive: was/were + V3.', examTags:['SSC'] },
+    function makeQuestion(subject, topic, difficulty, question, options, correctAnswer, explanation, index) {
+        return {
+            id: `${subject.replace(/\s+/g, '-').toLowerCase()}-${index}`,
+            subject,
+            topic,
+            difficulty,
+            examTags: examCycle[index % examCycle.length],
+            question,
+            options,
+            correctAnswer,
+            explanation,
+            source: `Practice Set ${Math.ceil(index / 5)}`,
+            year: 2024,
+            marks: 1,
+            negativeMarks: 0.25
+        };
+    }
 
-  // Reasoning
-  { id:'R1', subject:'Reasoning', topic:'Analogy', difficulty:'easy', question:'Book : Read :: Food : ?', options:['Cook','Eat','Serve','Buy'], correctAnswer:1, explanation:'Food is eaten.', examTags:['SSC'] },
-  { id:'R2', subject:'Reasoning', topic:'Series', difficulty:'medium', question:'2, 4, 8, 16, ?', options:['18','24','32','30'], correctAnswer:2, explanation:'Pattern doubles each time.', examTags:['Railway'] },
-  { id:'R3', subject:'Reasoning', topic:'Coding-Decoding', difficulty:'hard', question:'If CAT=3120, BAT=?', options:['2120','220','221','212'], correctAnswer:0, explanation:'C=3,A=1,T=20 so B=2,A=1,T=20.', examTags:['SSC'] },
-  { id:'R4', subject:'Reasoning', topic:'Direction', difficulty:'medium', question:'A person faces north, turns right then right. Now facing?', options:['North','South','East','West'], correctAnswer:1, explanation:'Two right turns from north -> south.', examTags:['Police'] },
-  { id:'R5', subject:'Reasoning', topic:'Blood Relation', difficulty:'hard', question:'My mother’s brother is my', options:['Cousin','Uncle','Nephew','Grandfather'], correctAnswer:1, explanation:'Mother’s brother is uncle.', examTags:['Railway'] },
-  { id:'R6', subject:'Reasoning', topic:'Odd One Out', difficulty:'easy', question:'Find odd: Circle, Triangle, Square, Car', options:['Circle','Triangle','Square','Car'], correctAnswer:3, explanation:'Car is not a geometric figure.', examTags:['SSC'] },
-  { id:'R7', subject:'Reasoning', topic:'Syllogism', difficulty:'hard', question:'All apples are fruits. Some fruits are yellow. Conclusion: Some apples are yellow.', options:['Definitely true','Definitely false','Cannot be determined','Both true and false'], correctAnswer:2, explanation:'No direct link between apples and yellow fruits.', examTags:['Banking'] },
-  { id:'R8', subject:'Reasoning', topic:'Ranking', difficulty:'medium', question:'In a row of 20, A is 7th from left. Position from right?', options:['12th','13th','14th','15th'], correctAnswer:2, explanation:'20-7+1=14.', examTags:['SSC'] },
-  { id:'R9', subject:'Reasoning', topic:'Calendar', difficulty:'medium', question:'How many days in a leap year?', options:['365','366','364','367'], correctAnswer:1, explanation:'Leap year has 366 days.', examTags:['Railway'] },
-  { id:'R10', subject:'Reasoning', topic:'Clock', difficulty:'easy', question:'At 3:00 angle between hands?', options:['90°','60°','45°','30°'], correctAnswer:0, explanation:'At 3:00 hands are perpendicular.', examTags:['Police'] },
+    const data = {
+        Mathematics: [
+            ['Arithmetic', 'easy', 'What is 25% of 240?', ['40', '50', '60', '80'], 2, '25% is one-fourth. One-fourth of 240 is 60.'],
+            ['Profit and Loss', 'medium', 'An item bought for 800 is sold for 920. What is the profit percent?', ['12%', '15%', '18%', '20%'], 1, 'Profit is 120. Profit percent = 120/800 x 100 = 15%.'],
+            ['Number System', 'easy', 'LCM of 18 and 24 is', ['48', '54', '72', '96'], 2, '18 = 2 x 3 x 3 and 24 = 2 x 2 x 2 x 3. LCM is 72.'],
+            ['Time and Work', 'medium', 'A can complete a work in 12 days and B in 18 days. Together they finish it in', ['6.2 days', '7.2 days', '8 days', '9 days'], 1, 'Combined work per day = 1/12 + 1/18 = 5/36, so time = 36/5 = 7.2 days.'],
+            ['Percentage', 'easy', 'If 40% of a number is 160, the number is', ['320', '360', '400', '420'], 2, 'Number = 160 x 100 / 40 = 400.'],
+            ['Simple Interest', 'medium', 'Simple interest on 5000 at 8% per annum for 2 years is', ['600', '700', '800', '900'], 2, 'SI = PRT/100 = 5000 x 8 x 2 / 100 = 800.'],
+            ['Ratio', 'easy', 'The ratio 24:36 in simplest form is', ['2:3', '3:4', '4:5', '5:6'], 0, 'Divide both terms by 12 to get 2:3.'],
+            ['Average', 'medium', 'Average of 12, 18, 20, 30 and 40 is', ['22', '24', '26', '28'], 1, 'Sum is 120 and count is 5. Average is 24.'],
+            ['Geometry', 'easy', 'Sum of interior angles of a triangle is', ['90 degrees', '180 degrees', '270 degrees', '360 degrees'], 1, 'Every triangle has angle sum of 180 degrees.'],
+            ['Mensuration', 'medium', 'Area of a rectangle with length 15 cm and breadth 8 cm is', ['96 sq cm', '110 sq cm', '120 sq cm', '128 sq cm'], 2, 'Area = length x breadth = 15 x 8 = 120 sq cm.'],
+            ['Algebra', 'medium', 'If 3x + 7 = 28, then x is', ['5', '6', '7', '8'], 2, '3x = 21, so x = 7.'],
+            ['Speed Time Distance', 'hard', 'A train covers 360 km in 4 hours. Its speed is', ['80 km/h', '85 km/h', '90 km/h', '95 km/h'], 2, 'Speed = distance/time = 360/4 = 90 km/h.'],
+            ['Data Interpretation', 'hard', 'If total marks are 500 and a candidate scores 365, percentage is', ['70%', '72%', '73%', '75%'], 2, 'Percentage = 365/500 x 100 = 73%.'],
+            ['Number System', 'hard', 'The smallest number divisible by 8, 12 and 15 is', ['120', '180', '240', '360'], 0, 'LCM of 8, 12 and 15 is 120.'],
+            ['Mixture', 'hard', 'Milk and water are in ratio 3:2. In 25 litres mixture, milk is', ['10 L', '12 L', '15 L', '18 L'], 2, 'Milk share = 3/5 of 25 = 15 litres.']
+        ],
+        English: [
+            ['Grammar', 'easy', 'Choose the correct sentence.', ['He go to school.', 'He goes to school.', 'He going school.', 'He gone school.'], 1, 'Singular subject he takes the verb goes.'],
+            ['Vocabulary', 'easy', 'Synonym of rapid is', ['slow', 'quick', 'late', 'weak'], 1, 'Rapid means quick or fast.'],
+            ['Article', 'medium', 'She is ___ honest officer.', ['a', 'an', 'the', 'no article'], 1, 'Honest starts with a vowel sound, so an is used.'],
+            ['Error Spotting', 'medium', 'Find the error: Each of the players have a kit.', ['Each of', 'the players', 'have a kit', 'No error'], 2, 'Each takes a singular verb: has.'],
+            ['Antonym', 'easy', 'Antonym of expand is', ['increase', 'stretch', 'contract', 'spread'], 2, 'Contract is the opposite of expand.'],
+            ['Tense', 'medium', 'I ___ him yesterday.', ['meet', 'met', 'meeting', 'meets'], 1, 'Yesterday indicates past tense, so met is correct.'],
+            ['Voice', 'hard', 'Passive voice of "They completed the work" is', ['The work completed them.', 'The work was completed by them.', 'They were completed by work.', 'The work is completing.'], 1, 'Simple past passive uses was/were + past participle.'],
+            ['Idiom', 'medium', 'At the eleventh hour means', ['very early', 'at the last moment', 'at 11 AM', 'after lunch'], 1, 'The idiom means at the last possible moment.'],
+            ['Preposition', 'easy', 'He is good ___ mathematics.', ['in', 'at', 'on', 'by'], 1, 'Good at is the correct phrase.'],
+            ['One Word', 'medium', 'A person who writes poems is a', ['novelist', 'poet', 'editor', 'actor'], 1, 'A poet writes poems.'],
+            ['Spelling', 'easy', 'Choose the correctly spelt word.', ['Accomodate', 'Acommodate', 'Accommodate', 'Acomodate'], 2, 'Accommodate has double c and double m.'],
+            ['Cloze', 'hard', 'Select the best word: Discipline is the key to ___ in exams.', ['success', 'noise', 'delay', 'excuse'], 0, 'Success fits the sentence meaning.'],
+            ['Sentence Improvement', 'hard', 'Neither Ram nor Shyam ___ present.', ['are', 'were', 'is', 'be'], 2, 'The verb agrees with the nearest singular subject Shyam.'],
+            ['Vocabulary', 'hard', 'Meaning of benevolent is', ['kind', 'angry', 'careless', 'silent'], 0, 'Benevolent means kind and helpful.'],
+            ['Grammar', 'medium', 'Choose the correct form: The news ___ true.', ['are', 'is', 'were', 'be'], 1, 'News is treated as singular.']
+        ],
+        Reasoning: [
+            ['Analogy', 'easy', 'Book is to reading as food is to', ['cooking', 'eating', 'buying', 'serving'], 1, 'Food is eaten just as a book is read.'],
+            ['Series', 'medium', 'Find the next number: 3, 6, 12, 24, ?', ['30', '36', '48', '60'], 2, 'Each term is doubled.'],
+            ['Coding-Decoding', 'hard', 'If CAT is coded as 3120, then BAT is coded as', ['2120', '220', '221', '1202'], 0, 'B=2, A=1, T=20.'],
+            ['Direction', 'medium', 'A man faces north, turns right, then turns right again. He faces', ['north', 'south', 'east', 'west'], 1, 'Two right turns from north lead to south.'],
+            ['Blood Relation', 'easy', "My mother's brother is my", ['father', 'uncle', 'cousin', 'nephew'], 1, "Mother's brother is uncle."],
+            ['Odd One Out', 'easy', 'Find the odd one: Circle, Square, Triangle, Bus', ['Circle', 'Square', 'Triangle', 'Bus'], 3, 'Bus is not a geometric figure.'],
+            ['Syllogism', 'hard', 'All pens are tools. Some tools are blue. Conclusion: Some pens are blue.', ['definitely true', 'definitely false', 'cannot be determined', 'none'], 2, 'The statements do not prove any pen is blue.'],
+            ['Ranking', 'medium', 'In a row of 25 students, A is 9th from left. Position from right is', ['15th', '16th', '17th', '18th'], 2, 'Right position = 25 - 9 + 1 = 17.'],
+            ['Calendar', 'easy', 'A leap year has how many days?', ['364', '365', '366', '367'], 2, 'A leap year has 366 days.'],
+            ['Clock', 'medium', 'Angle between hands at 3:00 is', ['30 degrees', '60 degrees', '90 degrees', '120 degrees'], 2, 'At 3:00 the hands are perpendicular.'],
+            ['Series', 'hard', 'Find the next term: A, C, F, J, O, ?', ['S', 'T', 'U', 'V'], 2, 'Gaps are +2, +3, +4, +5, so next is +6 = U.'],
+            ['Puzzles', 'hard', 'If yesterday was Monday, the day after tomorrow will be', ['Wednesday', 'Thursday', 'Friday', 'Saturday'], 1, 'If yesterday was Monday, today is Tuesday and day after tomorrow is Thursday.'],
+            ['Analogy', 'medium', 'Doctor : Hospital :: Teacher : ?', ['Court', 'School', 'Bank', 'Market'], 1, 'Teacher works in a school.'],
+            ['Coding-Decoding', 'medium', 'If DELHI is written as EFMKJ, how is PATNA written?', ['QBUOB', 'QZUOB', 'QBUOZ', 'OZSMZ'], 0, 'Each letter is shifted by +1.'],
+            ['Venn Diagram', 'easy', 'Which relation best fits: roses, flowers, plants?', ['all separate', 'roses inside flowers inside plants', 'plants inside roses', 'flowers outside plants'], 1, 'Roses are flowers and flowers are plants.']
+        ],
+        'General Awareness': [
+            ['Polity', 'easy', 'Constitution Day in India is observed on', ['26 January', '15 August', '26 November', '2 October'], 2, 'Constitution Day is observed on 26 November.'],
+            ['History', 'medium', 'Who founded the Maurya Empire?', ['Ashoka', 'Chandragupta Maurya', 'Bindusara', 'Harsha'], 1, 'Chandragupta Maurya founded the Maurya Empire.'],
+            ['Geography', 'easy', 'The capital of Rajasthan is', ['Jodhpur', 'Udaipur', 'Jaipur', 'Kota'], 2, 'Jaipur is the capital of Rajasthan.'],
+            ['Economy', 'medium', 'RBI headquarters is located in', ['Delhi', 'Mumbai', 'Kolkata', 'Chennai'], 1, 'The Reserve Bank of India headquarters is in Mumbai.'],
+            ['Current Affairs', 'medium', 'The G20 Summit 2023 hosted by India was held in', ['Mumbai', 'New Delhi', 'Goa', 'Jaipur'], 1, 'The main summit was held in New Delhi.'],
+            ['Polity', 'hard', 'Fundamental Duties are mentioned in which part of the Constitution?', ['Part III', 'Part IV', 'Part IVA', 'Part V'], 2, 'Fundamental Duties are in Part IVA.'],
+            ['History', 'medium', 'Quit India Movement was launched in', ['1930', '1942', '1945', '1919'], 1, 'The movement was launched in August 1942.'],
+            ['Geography', 'easy', 'The longest river flowing in India is', ['Yamuna', 'Godavari', 'Ganga', 'Narmada'], 2, 'Ganga is generally considered the longest river in India.'],
+            ['Science Tech', 'medium', 'ISRO headquarters is in', ['Bengaluru', 'Hyderabad', 'Ahmedabad', 'Pune'], 0, 'ISRO headquarters is in Bengaluru.'],
+            ['Economy', 'hard', 'GST was introduced in India in', ['2015', '2016', '2017', '2018'], 2, 'GST was implemented from 1 July 2017.'],
+            ['Awards', 'easy', 'Bharat Ratna is India\'s', ['highest civilian award', 'sports award', 'military award', 'film award'], 0, 'Bharat Ratna is the highest civilian award.'],
+            ['Polity', 'medium', 'The Lok Sabha is also known as', ['Council of States', 'House of the People', 'Upper House', 'State Assembly'], 1, 'Lok Sabha is the House of the People.'],
+            ['Geography', 'hard', 'The Tropic of Cancer passes through how many Indian states?', ['6', '7', '8', '9'], 2, 'It passes through 8 Indian states.'],
+            ['History', 'hard', 'The Battle of Plassey was fought in', ['1757', '1764', '1857', '1707'], 0, 'The Battle of Plassey was fought in 1757.'],
+            ['Current Affairs', 'easy', 'NITI Aayog replaced which institution?', ['RBI', 'Planning Commission', 'Finance Commission', 'Election Commission'], 1, 'NITI Aayog replaced the Planning Commission.']
+        ],
+        Science: [
+            ['Physics', 'easy', 'SI unit of force is', ['Joule', 'Newton', 'Pascal', 'Watt'], 1, 'Force is measured in Newton.'],
+            ['Chemistry', 'easy', 'Chemical formula of water is', ['H2O', 'CO2', 'O2', 'NaCl'], 0, 'Water is H2O.'],
+            ['Biology', 'medium', 'Powerhouse of the cell is', ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi body'], 1, 'Mitochondria produce energy in the cell.'],
+            ['Physics', 'hard', 'Speed of light in vacuum is approximately', ['3 x 10^8 m/s', '3 x 10^6 m/s', '1.5 x 10^8 m/s', '3 x 10^5 m/s'], 0, 'The speed of light is about 3 x 10^8 m/s.'],
+            ['Chemistry', 'medium', 'pH of a neutral solution is', ['0', '7', '10', '14'], 1, 'Neutral solution has pH 7.'],
+            ['Biology', 'easy', 'Human blood is red due to', ['chlorophyll', 'hemoglobin', 'plasma', 'calcium'], 1, 'Hemoglobin gives blood its red color.'],
+            ['Physics', 'medium', 'Current is measured by', ['voltmeter', 'ammeter', 'barometer', 'thermometer'], 1, 'Ammeter measures electric current.'],
+            ['Chemistry', 'medium', 'Gas used by plants in photosynthesis is', ['oxygen', 'nitrogen', 'carbon dioxide', 'hydrogen'], 2, 'Plants use carbon dioxide during photosynthesis.'],
+            ['Biology', 'medium', 'Largest organ of the human body is', ['liver', 'heart', 'skin', 'lungs'], 2, 'Skin is the largest organ.'],
+            ['Environment', 'hard', 'Ozone layer mainly absorbs', ['infrared rays', 'ultraviolet rays', 'visible light', 'radio waves'], 1, 'The ozone layer absorbs harmful UV radiation.'],
+            ['Physics', 'easy', 'A device used to measure atmospheric pressure is', ['barometer', 'ammeter', 'speedometer', 'hygrometer'], 0, 'Barometer measures atmospheric pressure.'],
+            ['Chemistry', 'hard', 'Common salt is chemically known as', ['sodium chloride', 'sodium carbonate', 'calcium chloride', 'potassium nitrate'], 0, 'Common salt is sodium chloride.'],
+            ['Biology', 'hard', 'Deficiency of vitamin C causes', ['rickets', 'scurvy', 'night blindness', 'anemia'], 1, 'Vitamin C deficiency causes scurvy.'],
+            ['Environment', 'medium', 'The main cause of acid rain is', ['oxygen', 'sulphur dioxide and nitrogen oxides', 'helium', 'argon'], 1, 'SO2 and NOx form acids in the atmosphere.'],
+            ['Physics', 'medium', 'Unit of electric power is', ['volt', 'watt', 'ohm', 'ampere'], 1, 'Electric power is measured in watt.']
+        ],
+        Hindi: [
+            ['Vyakaran', 'easy', '"Ram" kis prakar ki sangya hai?', ['Jativachak', 'Vyaktivachak', 'Bhavvachak', 'Samuhvachak'], 1, 'Ram kisi vishesh vyakti ka naam hai.'],
+            ['Paryayvachi', 'medium', '"Jal" ka paryayvachi shabd hai', ['Agni', 'Vayu', 'Neer', 'Dhara'], 2, 'Jal ka paryayvachi neer hota hai.'],
+            ['Vilom', 'easy', '"Din" ka vilom hai', ['Raat', 'Suraj', 'Samay', 'Dopahar'], 0, 'Din ka vipreet raat hai.'],
+            ['Muhavare', 'hard', '"Naak katna" ka arth hai', ['Ghayal hona', 'Apmaan hona', 'Bimar hona', 'Gir jana'], 1, 'Naak katna ka arth apmaan hona hai.'],
+            ['Shuddh Vartani', 'medium', 'Sahi shabd chuniye', ['Vidhyalay', 'Vidyalaya', 'Viddyalay', 'Vidhalaay'], 1, 'Sahi vartani Vidyalaya hai.'],
+            ['Sandhi', 'hard', '"Devalaya" mein kaunsi sandhi hai?', ['Gun', 'Vriddhi', 'Yan', 'Dirgh'], 0, 'Dev + Alaya mein gun sandhi hoti hai.'],
+            ['Samas', 'medium', '"Rajputra" ka samas hai', ['Karmadharaya', 'Tatpurush', 'Dvandva', 'Bahuvrihi'], 1, 'Raja ka putra arth mein tatpurush samas hai.'],
+            ['Vyakaran', 'easy', '"Main school jata hun" mein kriya pad hai', ['Main', 'School', 'Jata hun', 'Mein'], 2, 'Jata hun kriya pad hai.'],
+            ['Lokokti', 'hard', '"Oont ke muh mein jeera" ka arth hai', ['Bahut adhik', 'Bahut kam', 'Bahut teekha', 'Bahut meetha'], 1, 'Iska arth avashyakta ki tulna mein bahut kam hai.'],
+            ['Alankar', 'medium', 'Ek hi varna ki punaravritti ka alankar hai', ['Anupras', 'Upma', 'Rupak', 'Yamak'], 0, 'Anupras alankar mein varna punaravritti hoti hai.'],
+            ['Vilom', 'easy', '"Sukh" ka vilom hai', ['Dukh', 'Hasya', 'Prem', 'Laabh'], 0, 'Sukh ka vipreet dukh hai.'],
+            ['Paryayvachi', 'medium', '"Surya" ka paryayvachi hai', ['Chandra', 'Ravi', 'Vayu', 'Prithvi'], 1, 'Surya ka paryayvachi Ravi hai.'],
+            ['Vachan', 'easy', '"Ladka" ka bahuvachan hai', ['Ladki', 'Ladke', 'Ladkaon', 'Ladkana'], 1, 'Ladka ka bahuvachan ladke hai.'],
+            ['Karak', 'hard', '"Ram ne khana khaya" mein "ne" ka karak hai', ['Karta', 'Karm', 'Karan', 'Sampradan'], 0, 'Ne karta karak ka chihn hai.'],
+            ['Vyakaran', 'medium', 'Hindi varnamala mein swar kitne mane jate hain?', ['9', '11', '13', '15'], 1, 'Samanya roop se 11 swar mane jate hain.']
+        ],
+        Computer: [
+            ['Basics', 'easy', 'CPU stands for', ['Central Process Unit', 'Central Processing Unit', 'Computer Primary Unit', 'Control Processing Unit'], 1, 'CPU means Central Processing Unit.'],
+            ['Hardware', 'easy', 'Which of these is an input device?', ['Monitor', 'Printer', 'Keyboard', 'Speaker'], 2, 'Keyboard is used to input data.'],
+            ['Software', 'medium', 'Windows is a type of', ['application software', 'operating system', 'programming language', 'database'], 1, 'Windows is an operating system.'],
+            ['Internet', 'medium', 'WWW stands for', ['World Wide Web', 'World Web Wide', 'Web World Wide', 'Wide World Web'], 0, 'WWW means World Wide Web.'],
+            ['MS Office', 'hard', 'Modern PowerPoint file extension is', ['.docx', '.xlsx', '.pptx', '.txt'], 2, 'PowerPoint presentations use .pptx.'],
+            ['Networking', 'hard', 'LAN stands for', ['Large Area Network', 'Local Area Network', 'Live Area Network', 'Linked Area Network'], 1, 'LAN means Local Area Network.'],
+            ['Security', 'medium', 'A strong password should include', ['only numbers', 'only name', 'mixed characters', 'only lowercase'], 2, 'Strong passwords use a mix of characters.'],
+            ['Memory', 'easy', 'RAM is generally', ['permanent memory', 'temporary memory', 'optical memory', 'printed memory'], 1, 'RAM is volatile temporary memory.'],
+            ['Internet', 'medium', 'Protocol used to receive email is', ['SMTP', 'POP3 or IMAP', 'HTTP', 'FTP'], 1, 'POP3 and IMAP are used for receiving emails.'],
+            ['Basics', 'hard', 'Binary form of decimal 5 is', ['101', '110', '111', '100'], 0, 'Decimal 5 is 101 in binary.'],
+            ['Hardware', 'easy', 'Which device displays output?', ['Mouse', 'Scanner', 'Monitor', 'Microphone'], 2, 'Monitor is an output device.'],
+            ['Software', 'medium', 'MS Excel is mainly used for', ['spreadsheets', 'painting', 'video calling', 'web hosting'], 0, 'Excel is spreadsheet software.'],
+            ['Security', 'hard', 'Malware means', ['safe software', 'malicious software', 'system update', 'keyboard shortcut'], 1, 'Malware is malicious software.'],
+            ['Networking', 'medium', 'IP address is used to identify', ['a network device', 'a printer cable', 'a folder', 'a font'], 0, 'IP address identifies a device on a network.'],
+            ['Internet', 'easy', 'A web browser is used to', ['browse websites', 'print currency', 'charge battery', 'scan virus only'], 0, 'Browsers are used to access websites.']
+        ]
+    };
 
-  // GA
-  { id:'G1', subject:'General Awareness', topic:'Polity', difficulty:'easy', question:'Constitution Day in India is on', options:['26 Jan','15 Aug','26 Nov','2 Oct'], correctAnswer:2, explanation:'Observed on 26 November.', examTags:['SSC'] },
-  { id:'G2', subject:'General Awareness', topic:'History', difficulty:'medium', question:'Who founded Maurya Empire?', options:['Ashoka','Chandragupta Maurya','Bindusara','Harsha'], correctAnswer:1, explanation:'Founded by Chandragupta Maurya.', examTags:['Railway'] },
-  { id:'G3', subject:'General Awareness', topic:'Geography', difficulty:'easy', question:'Longest river in India?', options:['Yamuna','Godavari','Ganga','Narmada'], correctAnswer:2, explanation:'Ganga is the longest in India.', examTags:['SSC'] },
-  { id:'G4', subject:'General Awareness', topic:'Economy', difficulty:'medium', question:'RBI headquarters is in', options:['Delhi','Mumbai','Kolkata','Chennai'], correctAnswer:1, explanation:'RBI HQ is Mumbai.', examTags:['Banking'] },
-  { id:'G5', subject:'General Awareness', topic:'Current Affairs', difficulty:'hard', question:'G20 summit 2023 in India was held at', options:['Mumbai','New Delhi','Goa','Jaipur'], correctAnswer:1, explanation:'Held in New Delhi.', examTags:['SSC'] },
-  { id:'G6', subject:'General Awareness', topic:'Polity', difficulty:'medium', question:'Fundamental Duties are in which part?', options:['Part III','Part IV','Part IVA','Part V'], correctAnswer:2, explanation:'Part IVA.', examTags:['Police'] },
-  { id:'G7', subject:'General Awareness', topic:'History', difficulty:'hard', question:'Quit India Movement launched in', options:['1940','1942','1945','1930'], correctAnswer:1, explanation:'Launched in August 1942.', examTags:['SSC'] },
-  { id:'G8', subject:'General Awareness', topic:'Geography', difficulty:'easy', question:'Capital of Rajasthan?', options:['Jodhpur','Udaipur','Jaipur','Kota'], correctAnswer:2, explanation:'Jaipur is capital city.', examTags:['Railway'] },
-  { id:'G9', subject:'General Awareness', topic:'Science Tech', difficulty:'medium', question:'ISRO headquarters is in', options:['Bengaluru','Hyderabad','Ahmedabad','Pune'], correctAnswer:0, explanation:'Located in Bengaluru.', examTags:['SSC'] },
-  { id:'G10', subject:'General Awareness', topic:'Economy', difficulty:'hard', question:'GST was introduced in India in', options:['2015','2016','2017','2018'], correctAnswer:2, explanation:'Implemented on 1 July 2017.', examTags:['Banking'] },
-
-  // Science
-  { id:'S1', subject:'Science', topic:'Physics', difficulty:'easy', question:'SI unit of force?', options:['Joule','Newton','Pascal','Watt'], correctAnswer:1, explanation:'Force is measured in Newton.', examTags:['SSC'] },
-  { id:'S2', subject:'Science', topic:'Chemistry', difficulty:'easy', question:'Chemical formula of water?', options:['H2O','CO2','O2','NaCl'], correctAnswer:0, explanation:'Water is H2O.', examTags:['Railway'] },
-  { id:'S3', subject:'Science', topic:'Biology', difficulty:'medium', question:'Powerhouse of cell?', options:['Nucleus','Mitochondria','Ribosome','Golgi body'], correctAnswer:1, explanation:'Mitochondria produce ATP.', examTags:['SSC'] },
-  { id:'S4', subject:'Science', topic:'Physics', difficulty:'hard', question:'Speed of light is approx', options:['3×10^8 m/s','3×10^6 m/s','3×10^5 km/s','1.5×10^8 m/s'], correctAnswer:0, explanation:'Approx 3×10^8 m/s in vacuum.', examTags:['Police'] },
-  { id:'S5', subject:'Science', topic:'Chemistry', difficulty:'medium', question:'pH of neutral solution?', options:['0','7','10','14'], correctAnswer:1, explanation:'Neutral pH is 7.', examTags:['SSC'] },
-  { id:'S6', subject:'Science', topic:'Biology', difficulty:'easy', question:'Human blood color is', options:['Blue','Green','Red','Yellow'], correctAnswer:2, explanation:'Due to hemoglobin.', examTags:['Railway'] },
-  { id:'S7', subject:'Science', topic:'Physics', difficulty:'medium', question:'Device to measure current?', options:['Voltmeter','Ammeter','Barometer','Thermometer'], correctAnswer:1, explanation:'Current measured by ammeter.', examTags:['Banking'] },
-  { id:'S8', subject:'Science', topic:'Chemistry', difficulty:'hard', question:'Gas used in photosynthesis?', options:['Oxygen','Nitrogen','Carbon dioxide','Hydrogen'], correctAnswer:2, explanation:'Plants absorb CO2.', examTags:['SSC'] },
-  { id:'S9', subject:'Science', topic:'Biology', difficulty:'medium', question:'Largest organ in human body?', options:['Liver','Heart','Skin','Lung'], correctAnswer:2, explanation:'Skin is largest organ.', examTags:['Police'] },
-  { id:'S10', subject:'Science', topic:'Environment', difficulty:'hard', question:'Ozone layer mainly absorbs', options:['Infrared','UV rays','Visible light','X-rays'], correctAnswer:1, explanation:'It protects from UV radiation.', examTags:['SSC'] },
-
-  // Hindi
-  { id:'H1', subject:'Hindi', topic:'व्याकरण', difficulty:'easy', question:'“राम” कौन सा संज्ञा है?', options:['जातिवाचक','व्यक्तिवाचक','भाववाचक','समूहवाचक'], correctAnswer:1, explanation:'राम एक व्यक्ति विशेष का नाम है।', examTags:['SSC'] },
-  { id:'H2', subject:'Hindi', topic:'पर्यायवाची', difficulty:'medium', question:'“जल” का पर्यायवाची', options:['अग्नि','वायु','नीर','धरा'], correctAnswer:2, explanation:'जल = नीर।', examTags:['Railway'] },
-  { id:'H3', subject:'Hindi', topic:'विलोम', difficulty:'easy', question:'“दिन” का विलोम', options:['रात','सूरज','समय','दोपहर'], correctAnswer:0, explanation:'दिन का विलोम रात है।', examTags:['Police'] },
-  { id:'H4', subject:'Hindi', topic:'मुहावरे', difficulty:'hard', question:'“नाक कटना” का अर्थ', options:['घायल होना','अपमान होना','बीमार होना','गिरना'], correctAnswer:1, explanation:'नाक कटना = अपमानित होना।', examTags:['SSC'] },
-  { id:'H5', subject:'Hindi', topic:'शुद्ध वर्तनी', difficulty:'medium', question:'सही शब्द चुनें', options:['विधालय','विद्यालय','विद्द्यालय','विध्यालय'], correctAnswer:1, explanation:'सही वर्तनी विद्यालय।', examTags:['Railway'] },
-  { id:'H6', subject:'Hindi', topic:'संधि', difficulty:'hard', question:'“देवालय” में कौन सी संधि?', options:['गुण','वृद्धि','यण','दीर्घ'], correctAnswer:0, explanation:'देव + आलय में गुण संधि।', examTags:['SSC'] },
-  { id:'H7', subject:'Hindi', topic:'समास', difficulty:'medium', question:'“राजपुत्र” कौन सा समास?', options:['कर्मधारय','तत्पुरुष','द्वंद्व','बहुव्रीहि'], correctAnswer:1, explanation:'राजा का पुत्र = तत्पुरुष।', examTags:['Police'] },
-  { id:'H8', subject:'Hindi', topic:'व्याकरण', difficulty:'easy', question:'“मैं स्कूल जाता हूँ।” में क्रिया', options:['मैं','स्कूल','जाता हूँ','में'], correctAnswer:2, explanation:'जाता हूँ क्रिया पद है।', examTags:['SSC'] },
-  { id:'H9', subject:'Hindi', topic:'लोकोक्तियाँ', difficulty:'hard', question:'“ऊँट के मुँह में जीरा” का अर्थ', options:['बहुत ज्यादा','बहुत कम','बहुत तीखा','बहुत मीठा'], correctAnswer:1, explanation:'आवश्यकता की तुलना में बहुत कम।', examTags:['Railway'] },
-  { id:'H10', subject:'Hindi', topic:'अलंकार', difficulty:'medium', question:'“चंदा मामा दूर के” में अलंकार', options:['अनुप्रास','उपमा','रूपक','यमक'], correctAnswer:0, explanation:'च/द ध्वनियों की पुनरावृत्ति।', examTags:['SSC'] },
-
-  // Computer
-  { id:'C1', subject:'Computer', topic:'Basics', difficulty:'easy', question:'CPU stands for', options:['Central Process Unit','Central Processing Unit','Computer Primary Unit','Control Processing Unit'], correctAnswer:1, explanation:'CPU = Central Processing Unit.', examTags:['SSC'] },
-  { id:'C2', subject:'Computer', topic:'Hardware', difficulty:'easy', question:'Which is an input device?', options:['Monitor','Printer','Keyboard','Speaker'], correctAnswer:2, explanation:'Keyboard is input device.', examTags:['Railway'] },
-  { id:'C3', subject:'Computer', topic:'Software', difficulty:'medium', question:'Windows is a', options:['Application','Operating System','Programming Language','Browser'], correctAnswer:1, explanation:'Windows is an OS.', examTags:['Banking'] },
-  { id:'C4', subject:'Computer', topic:'Internet', difficulty:'medium', question:'WWW stands for', options:['World Wide Web','World Web Wide','Web World Wide','Wide World Web'], correctAnswer:0, explanation:'Full form is World Wide Web.', examTags:['SSC'] },
-  { id:'C5', subject:'Computer', topic:'MS Office', difficulty:'hard', question:'Extension of PowerPoint file (modern)', options:['.docx','.xlsx','.pptx','.txt'], correctAnswer:2, explanation:'PowerPoint uses .pptx.', examTags:['Police'] },
-  { id:'C6', subject:'Computer', topic:'Networking', difficulty:'hard', question:'LAN means', options:['Large Area Network','Local Area Network','Live Area Network','Linked Area Network'], correctAnswer:1, explanation:'LAN = Local Area Network.', examTags:['Railway'] },
-  { id:'C7', subject:'Computer', topic:'Security', difficulty:'medium', question:'A strong password should include', options:['Only numbers','Only name','Mixed characters','Only lowercase'], correctAnswer:2, explanation:'Use letters, numbers, symbols.', examTags:['SSC'] },
-  { id:'C8', subject:'Computer', topic:'Memory', difficulty:'easy', question:'RAM is', options:['Permanent memory','Temporary memory','Optical memory','External memory'], correctAnswer:1, explanation:'RAM is volatile temporary memory.', examTags:['Banking'] },
-  { id:'C9', subject:'Computer', topic:'Internet', difficulty:'medium', question:'Email protocol for receiving mail', options:['SMTP','POP3/IMAP','HTTP','FTP'], correctAnswer:1, explanation:'POP3 or IMAP receives emails.', examTags:['SSC'] },
-  { id:'C10', subject:'Computer', topic:'Basics', difficulty:'hard', question:'Binary of decimal 5 is', options:['101','110','111','100'], correctAnswer:0, explanation:'5 in binary is 101.', examTags:['Railway'] }
-];
+    window.SARKARI_QUIZ = {
+        subjects: Object.keys(data),
+        categories: ['SSC', 'Railway', 'Police', 'Banking', 'UPSC', 'State Exams'],
+        questions: Object.entries(data).flatMap(([subject, rows]) =>
+            rows.map((row, index) => makeQuestion(subject, row[0], row[1], row[2], row[3], row[4], row[5], index + 1))
+        )
+    };
+})();
