@@ -9,7 +9,11 @@ function initMobileMenu() {
         nav.classList.toggle('active', open);
         menuToggle.setAttribute('aria-expanded', String(open));
         menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-        menuToggle.textContent = open ? '×' : '☰';
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-bars', !open);
+            icon.classList.toggle('fa-times', open);
+        }
     }
 
     menuToggle.addEventListener('click', () => {

@@ -1,22 +1,26 @@
-// Mobile Menu Toggle
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
 
+if (menuToggle && mainNav) {
 menuToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
+    const isOpen = mainNav.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     const icon = menuToggle.querySelector('i');
     icon.classList.toggle('fa-bars');
     icon.classList.toggle('fa-times');
 });
 
-// Close menu when clicking on a link
 document.querySelectorAll('nav ul li a').forEach(link => {
     link.addEventListener('click', () => {
         mainNav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
         menuToggle.querySelector('i').classList.remove('fa-times');
         menuToggle.querySelector('i').classList.add('fa-bars');
     });
 });
+}
 
 // Result Data
 const resultsData = [
@@ -247,7 +251,7 @@ function renderResults(results) {
             </div>
             <p class="info-text"><i class="fas fa-info-circle"></i> For more details, click on "View Details" button</p>
             <div class="result-actions">
-                <a href="${result.resultLink}" class="btn btn-primary">View Result</a>
+                ${result.resultLink && result.resultLink !== "#" ? `<a href="${result.resultLink}" target="_blank" rel="noopener" class="btn btn-primary">View Result</a>` : `<button class="btn btn-primary" disabled>Link Unavailable</button>`}
                  ${result.detailsPage && result.detailsPage !== "#" ? `<a href="${result.detailsPage}" class="btn btn-outline">View Details</a>` : `<button class="btn btn-outline" disabled>Details Soon</button>`}
             </div>
         </div>

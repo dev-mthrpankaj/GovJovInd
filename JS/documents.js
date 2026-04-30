@@ -171,6 +171,7 @@ function initMobileMenu() {
         icon.classList.toggle('fa-bars', !isOpen);
         icon.classList.toggle('fa-times', isOpen);
         menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
     };
 
     menuToggle.addEventListener('click', toggleMenu);
@@ -188,6 +189,7 @@ function initMobileMenu() {
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
             menuToggle.setAttribute('aria-label', 'Open navigation');
+            menuToggle.setAttribute('aria-expanded', 'false');
         });
     });
 }
