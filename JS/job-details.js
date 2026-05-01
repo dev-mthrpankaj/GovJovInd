@@ -388,7 +388,7 @@ function updatePageURL(jobId, jobTitle) {
     window.history.replaceState({}, '', newURL);
     
     // Update the page title for SEO
-    document.title = `${jobTitle} | SarkariOfficer`;
+    document.title = `${jobTitle} | GovJobUpdates`;
     
     // Update meta description for SEO
     const job = jobDatabase[jobId];

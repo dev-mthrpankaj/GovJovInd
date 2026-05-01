@@ -35,7 +35,7 @@
     let visibleCount = pageSize;
     let currentJobs = [];
 
-    const jobs = Array.isArray(window.govJobIndJobs) ? window.govJobIndJobs : [];
+    const jobs = Array.isArray(window.GovJobUpdatesJobs) ? window.GovJobUpdatesJobs : [];
     const elements = {
         search: document.getElementById("jobSearch"),
         department: document.getElementById("departmentFilter"),

@@ -1,4 +1,4 @@
-window.govJobIndJobs = [
+window.GovJobUpdatesJobs = [
     { id: "job-1001", title: "Rajasthan RSSB Teaching Associate Online Form 2026 (3540 Posts)", organization: "Rajasthan Staff Selection Board", department: "Teaching", category: "Teaching", year: "2026", qualification: "Not specified", totalPosts: "3540", startDate: "2026-05-01", lastDate: "2026-06-03", status: "active", tags: ["RSSB", "Rajasthan", "Teaching"], applyLink: "#", officialNotification: "#", detailPage: "../Job_Details/HTML/job-details-job-1001.html", updatedAt: "2026-05-01" },
 
     { id: "job-1002", title: "UP Police 1 Lakh New Recruitment Notice 2026", organization: "Uttar Pradesh Police Recruitment and Promotion Board", department: "Police", category: "Police", year: "2026", qualification: "Not specified", totalPosts: "100000", startDate: "", lastDate: "", status: "upcoming", tags: ["UP Police", "Police", "Upcoming"], applyLink: "#", officialNotification: "#", detailPage: "../Job_Details/HTML/job-details-job-1002.html", updatedAt: "2026-05-01" },

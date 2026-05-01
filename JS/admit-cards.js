@@ -34,7 +34,7 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    const items = Array.isArray(window.govJobIndAdmitCards) ? window.govJobIndAdmitCards : [];
+    const items = Array.isArray(window.GovJobUpdatesAdmitCards) ? window.GovJobUpdatesAdmitCards : [];
 
     const elements = {
         search: document.getElementById("admitSearch"),

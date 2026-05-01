@@ -1,6 +1,6 @@
 (function () {
     const memory = {};
-    const prefix = 'sarkariOfficerQuiz.';
+    const prefix = 'GovJobUpdatesQuiz.';
 
     function available() {
         try {

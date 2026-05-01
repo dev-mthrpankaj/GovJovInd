@@ -280,7 +280,7 @@ function initImageResizer() {
             return;
         }
         const extension = getImageExtension($('#image-format').value);
-        downloadBlob(resizedBlob, `SarkariOfficer_Resized_${Date.now()}.${extension}`);
+        downloadBlob(resizedBlob, `GovJobUpdates_Resized_${Date.now()}.${extension}`);
     });
 
     function applyPreset(name) {
@@ -475,7 +475,7 @@ function initImageToPdf() {
             showMessage(messageBox, 'error', 'Please convert an image before downloading.');
             return;
         }
-        downloadBlob(pdfBlob, `SarkariOfficer_Image_To_PDF_${Date.now()}.pdf`);
+        downloadBlob(pdfBlob, `GovJobUpdates_Image_To_PDF_${Date.now()}.pdf`);
     });
 
     async function handlePdfImageUpload(file) {
@@ -633,7 +633,7 @@ function initPdfResizer() {
             showMessage(messageBox, 'error', 'Please process a PDF before downloading.');
             return;
         }
-        downloadBlob(resizedPdf, `SarkariOfficer_Resized_PDF_${Date.now()}.pdf`);
+        downloadBlob(resizedPdf, `GovJobUpdates_Resized_PDF_${Date.now()}.pdf`);
     });
 
     function handlePdfUpload(file) {

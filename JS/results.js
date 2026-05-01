@@ -34,7 +34,7 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    const items = Array.isArray(window.govJobIndResults) ? window.govJobIndResults : [];
+    const items = Array.isArray(window.GovJobUpdatesResults) ? window.GovJobUpdatesResults : [];
 
     const elements = {
         search: document.getElementById("resultSearch"),
