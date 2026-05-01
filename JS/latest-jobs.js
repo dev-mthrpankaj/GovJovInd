@@ -122,10 +122,9 @@
     }
 
     function getDetailPage(job) {
-        if (!job || !/^\d+$/.test(String(job.id))) return "";
+        if (!job || !job.id) return "";
         const expectedPath = `../Job_Details/HTML/job-details-${job.id}.html`;
-        const detailPage = getText(job.detailPage, expectedPath);
-        return detailPage === expectedPath ? detailPage : expectedPath;
+        return getText(job.detailPage, expectedPath);
     }
 
     function populateSelect(select, values) {

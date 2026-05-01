@@ -163,8 +163,8 @@
     }
 
     function getDetailPage(item) {
-        if (!item || !/^\d+$/.test(String(item.id))) return "";
-        return `../AdmitCard_Details/HTML/admitcard-details-${item.id}.html`;
+        if (!item || !item.id) return "";
+        return getText(item.detailPage, `../AdmitCard_Details/HTML/admitcard-details-${item.id}.html`);
     }
 
     function renderBadges(item) {

@@ -155,8 +155,8 @@
     }
 
     function getDetailPage(item) {
-        if (!item || !/^\d+$/.test(String(item.id))) return "";
-        return `../Result_Details/HTML/result-details-${item.id}.html`;
+        if (!item || !item.id) return "";
+        return getText(item.detailPage, `../Result_Details/HTML/result-details-${item.id}.html`);
     }
 
     function renderBadges(item) {

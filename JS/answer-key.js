@@ -165,8 +165,8 @@
     }
 
     function getDetailPage(item) {
-        if (!item || !/^\d+$/.test(String(item.id))) return "";
-        return `../AnswerKey_Details/HTML/answerkey-details-${item.id}.html`;
+        if (!item || !item.id) return "";
+        return getText(item.detailPage, `../AnswerKey_Details/HTML/answerkey-details-${item.id}.html`);
     }
 
     function renderBadges(item) {
