@@ -16,14 +16,15 @@
     nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
   }
   document.querySelectorAll('.copy-link').forEach((button) => {
+    const originalContent = button.innerHTML;
     button.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(window.location.href);
-        button.textContent = 'Link Copied';
-        setTimeout(() => { button.textContent = 'Copy Page Link'; }, 1600);
+        button.innerHTML = '<i class="fas fa-check"></i> Link Copied';
+        setTimeout(() => { button.innerHTML = originalContent; }, 1600);
       } catch (error) {
-        button.textContent = 'Copy Failed';
-        setTimeout(() => { button.textContent = 'Copy Page Link'; }, 1600);
+        button.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Copy Failed';
+        setTimeout(() => { button.innerHTML = originalContent; }, 1600);
       }
     });
   });
