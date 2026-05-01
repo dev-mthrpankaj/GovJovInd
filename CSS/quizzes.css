@@ -107,6 +107,7 @@ body {
 
 .quiz-hero h1 {
     font-size: clamp(2rem, 9vw, 3.2rem);
+    overflow-wrap: anywhere;
 }
 
 .quiz-hero p,
@@ -840,5 +841,39 @@ legend {
 
     .quiz-hero h1 {
         font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .quiz-hero h1 {
+        font-size: 2.35rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .quiz-app {
+        padding: 0.75rem;
+    }
+
+    .quiz-hero {
+        padding: 1rem;
+    }
+
+    .quiz-hero h1 {
+        font-size: 1.85rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .quiz-app {
+        padding: 0.6rem;
+    }
+
+    .quiz-hero {
+        padding: 0.85rem;
+    }
+
+    .quiz-hero h1 {
+        font-size: 1.65rem;
     }
 }

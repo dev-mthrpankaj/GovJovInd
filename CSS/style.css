@@ -145,6 +145,13 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
   .footer-content{grid-template-columns:2fr 1fr 1fr 1fr}
 }
 
+@media (min-width:768px) and (max-width:1099px){
+  .menu-toggle{display:grid}
+  nav{position:fixed;left:0;right:0;top:68px;background:#fff;border-bottom:1px solid var(--border);transform:translateY(-140%);transition:.25s ease;box-shadow:var(--shadow);max-height:calc(100vh - 68px);overflow-y:auto}
+  nav.active{transform:translateY(0)}
+  nav ul{display:grid;padding:.6rem 1rem 1rem;gap:.25rem}
+}
+
 
 /* Responsive hardening for redesigned layout */
 :where(button,.btn,.btn-search,.subject-btn,.menu-toggle){min-height:44px}
