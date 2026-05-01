@@ -249,3 +249,29 @@
 .job-detail-page {
     margin-top: 20px;
 }
+/* MP Nursing page additions */
+.job-detail-page .note {
+    color: #555;
+    font-size: 0.95rem;
+    margin-top: 0.75rem;
+}
+
+.job-detail-page .job-header .btn + .btn,
+.job-detail-page .notification-box .btn + .btn {
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .job-detail-page .job-header .btn,
+    .job-detail-page .notification-box .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .job-detail-page .job-header .btn + .btn,
+    .job-detail-page .notification-box .btn + .btn {
+        margin-left: 0;
+    }
+}
