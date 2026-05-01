@@ -56,6 +56,18 @@ if (menuToggle && nav && !pageOwnsMenu) {
   }));
 }
 
+document.querySelectorAll('.ticker-wrap').forEach((ticker) => {
+  const toggle = ticker.querySelector('.ticker-toggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const isPaused = ticker.classList.toggle('ticker-paused');
+    toggle.setAttribute('aria-pressed', String(isPaused));
+    toggle.setAttribute('aria-label', isPaused ? 'Play updates ticker' : 'Pause updates ticker');
+    toggle.innerHTML = `<i class="fas fa-${isPaused ? 'play' : 'pause'}" aria-hidden="true"></i>`;
+  });
+});
+
 const stats = document.querySelectorAll('.stat-number');
 
 const startCounters = () => {

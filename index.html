@@ -17,14 +17,23 @@
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="ticker-wrap">
+    <div class="ticker-wrap" aria-label="Latest updates">
         <div class="ticker-title">New Updates</div>
-        <div class="ticker" aria-live="polite">
-            <div class="ticker-item">UP Police Constable Exam Dates Released!</div>
-            <div class="ticker-item">SSC CGL Tier-II Admit Card Available.</div>
-            <div class="ticker-item">IBPS PO Final Result Out.</div>
-            <div class="ticker-item">Apply now for Railway Recruitment 2026.</div>
+        <div class="ticker-viewport">
+            <div class="ticker-track" aria-live="polite">
+                <a class="ticker-item" href="HTML/admitcard.html">UP Police Constable Exam Dates Released!</a>
+                <a class="ticker-item" href="HTML/admitcard.html">SSC CGL Tier-II Admit Card Available.</a>
+                <a class="ticker-item" href="HTML/results.html">IBPS PO Final Result Out.</a>
+                <a class="ticker-item" href="HTML/latest-jobs.html">Apply now for Railway Recruitment 2026.</a>
+                <a class="ticker-item" href="HTML/admitcard.html" aria-hidden="true" tabindex="-1">UP Police Constable Exam Dates Released!</a>
+                <a class="ticker-item" href="HTML/admitcard.html" aria-hidden="true" tabindex="-1">SSC CGL Tier-II Admit Card Available.</a>
+                <a class="ticker-item" href="HTML/results.html" aria-hidden="true" tabindex="-1">IBPS PO Final Result Out.</a>
+                <a class="ticker-item" href="HTML/latest-jobs.html" aria-hidden="true" tabindex="-1">Apply now for Railway Recruitment 2026.</a>
+            </div>
         </div>
+        <button class="ticker-toggle" type="button" aria-label="Pause updates ticker" aria-pressed="false">
+            <i class="fas fa-pause" aria-hidden="true"></i>
+        </button>
     </div>
 
     <header>
