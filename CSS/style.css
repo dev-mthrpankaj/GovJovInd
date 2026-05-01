@@ -78,6 +78,46 @@ main{max-width:1200px;margin:auto;padding:1rem}
 .filter-actions{display:flex;gap:.6rem;flex-wrap:wrap}
 .btn-outline{background:#fff;color:var(--primary);border:1px solid var(--primary)}
 
+.ad-space,
+.ad-container,
+.horizontal-ad {
+  width: 100%;
+  max-height: 280px;
+  overflow: hidden;
+  margin: 18px 0;
+  padding: 10px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.ad-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.ad-content img,
+.ad-space img,
+.ad-container img,
+.horizontal-ad img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.ad-content p,
+.ad-label {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
 .stat-item{background:#fff;border:1px solid var(--border);padding:1rem;border-radius:12px;text-align:center}
 .stat-number{display:block;font-size:1.45rem;font-weight:800;color:var(--primary)}
@@ -119,6 +159,19 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
   .search-box i{margin-left:.2rem}
   .search-box input{width:100%}
   .btn-search{width:100%}
+  .ad-space,
+  .ad-container,
+  .horizontal-ad {
+    max-height: 180px;
+    margin: 14px 0;
+    padding: 8px;
+  }
+  .ad-content img,
+  .ad-space img,
+  .ad-container img,
+  .horizontal-ad img {
+    max-height: 145px;
+  }
 }
 
 @media (max-width: 425px){
@@ -135,6 +188,17 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
   .section-title{font-size:1.25rem}
   .feature-card,.subject-card,.job-card,.admit-card,.result-card,.answer-card{padding:.85rem}
   .filter-actions .btn,.job-actions .btn{width:100%}
+  .ad-space,
+  .ad-container,
+  .horizontal-ad {
+    max-height: 150px;
+  }
+  .ad-content img,
+  .ad-space img,
+  .ad-container img,
+  .horizontal-ad img {
+    max-height: 120px;
+  }
 }
 
 @media (max-width: 375px){

@@ -312,33 +312,6 @@
     color: #4b5563;
 }
 
-.ad-space {
-    margin: 1.25rem 0;
-    padding: 1rem;
-    background: #f8fafc;
-    border: 1px dashed #cbd5e1;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.ad-content {
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-.ad-content p {
-    margin: 0 0 0.5rem;
-    color: #64748b;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.ad-content img {
-    max-width: 100%;
-    height: auto;
-}
-
 @media (max-width: 1024px) {
     .filter-section {
         grid-template-columns: repeat(3, minmax(0, 1fr));
