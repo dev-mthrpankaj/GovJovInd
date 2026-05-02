@@ -1,7 +1,11 @@
 (function () {
-    const config = window.RANK_PREDICTOR_CONFIG || {};
+    "use strict";
+
+    const config = window.RANK_PREDICTOR_CONFIG || { exams: [] };
     const state = {
+        exam: null,
         mode: "offline",
+        activeTab: "submit",
         expectedMarks: 0
     };
 
@@ -9,81 +13,124 @@
 
     function initRankPredictor() {
         const app = document.getElementById("rankPredictorApp");
-        const form = document.getElementById("rankPredictorForm");
-        if (!app || !form) return;
+        if (!app) return;
 
-        populateSelect(document.getElementById("category"), config.categories || []);
-        populateSelect(document.getElementById("state"), config.states || []);
-        applyConfigDefaults();
+        state.exam = (config.exams || [])[0] || null;
+        bindTabs();
+        bindExamSelector();
         bindModeToggle(app);
-        bindForm(form);
-        setMode("offline", app);
+        bindSubmitForm();
+        bindCheckForm();
+        applyExamDefaults();
+        calculateMarks();
+        renderPendingResult();
+    }
+
+    function bindTabs() {
+        document.querySelectorAll("[data-tab]").forEach((button) => {
+            button.addEventListener("click", () => setTab(button.dataset.tab));
+        });
+    }
+
+    function setTab(tab) {
+        state.activeTab = tab === "check" ? "check" : "submit";
+        document.querySelectorAll("[data-tab]").forEach((button) => {
+            const active = button.dataset.tab === state.activeTab;
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-selected", String(active));
+        });
+        document.querySelectorAll("[data-panel]").forEach((panel) => {
+            panel.classList.toggle("is-active", panel.dataset.panel === state.activeTab);
+        });
+    }
+
+    function bindExamSelector() {
+        const select = document.getElementById("globalExamSelect");
+        if (!select) return;
+        select.innerHTML = (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}">${escapeHtml(exam.examName)}</option>`).join("");
+        select.addEventListener("change", () => {
+            state.exam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
+            applyExamDefaults();
+            renderPendingResult();
+        });
+    }
+
+    function applyExamDefaults() {
+        const exam = state.exam;
+        if (!exam) {
+            setText("activeExamLabel", "Not configured");
+            setText("activeModeLabel", "No exam");
+            showMessage("submitMessage", "No exams configured in rank-predictor-config.js.", "error");
+            return;
+        }
+
+        setValue("globalExamSelect", exam.examId);
+        setValue("submitExamName", exam.examName);
+        setValue("checkExamName", exam.examName);
+        setText("activeExamLabel", exam.examName);
+        setText("activeModeLabel", getModeLabel(exam.supportedModes || []));
+        populateSelect(document.getElementById("category"), exam.categories || []);
+        populateSelect(document.getElementById("state"), exam.states || []);
+        setValue("totalQuestions", exam.totalQuestions || 0);
+        setValue("marksPerCorrect", exam.marksPerCorrect ?? 1);
+        setValue("negativeMarking", exam.negativeMarking ?? 0);
+        setValue("totalAttempted", 0);
+        setValue("rightAnswers", 0);
+        setValue("wrongAnswers", 0);
+        setMode((exam.supportedModes || [])[0] || "offline");
         calculateMarks();
     }
 
     function populateSelect(select, values) {
         if (!select) return;
-        const placeholder = select.querySelector("option[value='']")?.outerHTML || "";
-        select.innerHTML = `${placeholder}${values.map(value => `<option value="${escapeAttr(value)}">${escapeHtml(value)}</option>`).join("")}`;
-    }
-
-    function applyConfigDefaults() {
-        const marks = config.marks || {};
-        setValue("examName", config.activeExam || "");
-        setText("activeExamLabel", config.activeExam || "Not configured");
-        setValue("totalQuestions", marks.totalQuestions ?? 100);
-        setValue("marksPerCorrect", marks.perCorrect ?? 1);
-        setValue("negativeMarking", marks.negative ?? 0);
-        setValue("totalAttempted", 0);
-        setValue("rightAnswers", 0);
-        setValue("wrongAnswers", 0);
+        select.innerHTML = `<option value="">Select</option>${values.map((value) => `<option value="${escapeAttr(value)}">${escapeHtml(value)}</option>`).join("")}`;
     }
 
     function bindModeToggle(app) {
-        document.querySelectorAll("[data-mode]").forEach(button => {
-            button.addEventListener("click", () => setMode(button.dataset.mode, app));
+        document.querySelectorAll("[data-mode]").forEach((button) => {
+            button.addEventListener("click", () => {
+                if (!button.disabled) setMode(button.dataset.mode, app);
+            });
         });
     }
 
     function setMode(mode, app = document.getElementById("rankPredictorApp")) {
-        state.mode = mode === "online" ? "online" : "offline";
+        const supported = state.exam?.supportedModes || ["offline"];
+        state.mode = supported.includes(mode) ? mode : supported[0] || "offline";
         if (app) app.dataset.mode = state.mode;
-        document.querySelectorAll("[data-mode]").forEach(button => {
-            const isActive = button.dataset.mode === state.mode;
-            button.classList.toggle("is-active", isActive);
-            button.setAttribute("aria-pressed", String(isActive));
+        document.querySelectorAll("[data-mode]").forEach((button) => {
+            const supportedMode = supported.includes(button.dataset.mode);
+            const active = button.dataset.mode === state.mode;
+            button.disabled = !supportedMode;
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-pressed", String(active));
         });
         const answerSheetLink = document.getElementById("answerSheetLink");
         if (answerSheetLink) answerSheetLink.required = state.mode === "online";
-        setText("activeModeLabel", state.mode === "online" ? "Online Exam" : "Offline Exam");
     }
 
-    function bindForm(form) {
-        [
-            "totalQuestions",
-            "totalAttempted",
-            "rightAnswers",
-            "wrongAnswers",
-            "marksPerCorrect",
-            "negativeMarking"
-        ].forEach(id => document.getElementById(id)?.addEventListener("input", calculateMarks));
-
-        form.addEventListener("input", event => {
-            const field = event.target.closest(".rp-field, .consent-row");
-            field?.classList.remove("has-error");
-            event.target.removeAttribute("aria-invalid");
+    function bindSubmitForm() {
+        const form = document.getElementById("rankSubmitForm");
+        if (!form) return;
+        ["totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"].forEach((id) => {
+            document.getElementById(id)?.addEventListener("input", calculateMarks);
         });
-
+        form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleSubmit);
         document.getElementById("resetPredictorBtn")?.addEventListener("click", () => {
             form.reset();
-            applyConfigDefaults();
-            setMode("offline");
-            clearErrors();
-            showMessage("");
+            applyExamDefaults();
+            clearErrors(form);
+            showMessage("submitMessage", "");
             renderPendingResult();
-            calculateMarks();
         });
+    }
+
+    function bindCheckForm() {
+        const form = document.getElementById("rankCheckForm");
+        if (!form) return;
+        form.addEventListener("input", clearFieldError);
+        form.addEventListener("submit", handleCheckRank);
     }
 
     function calculateMarks() {
@@ -100,7 +147,6 @@
         setValue("unattempted", unattempted);
         setValue("expectedMarks", formatMarks(state.expectedMarks));
         setText("resultExpectedMarks", formatMarks(state.expectedMarks));
-        setText("accuracyIndicator", buildAccuracyLabel(right, attempted));
         return state.expectedMarks;
     }
 
@@ -108,66 +154,100 @@
         event.preventDefault();
         calculateMarks();
         const form = event.currentTarget;
-        const validation = validateForm(form);
+        const validation = validateSubmitForm(form);
         if (!validation.ok) {
-            showMessage(validation.message, "error");
+            showMessage("submitMessage", validation.message, "error");
             validation.field?.focus();
             return;
         }
 
-        const payload = collectPayload();
-        setLoading(true);
-
-        if (!String(config.apiUrl || "").trim()) {
-            window.setTimeout(() => {
-                setLoading(false);
-                showMessage("Rank predictor backend is not connected yet.", "warning");
-                renderPendingResult(payload);
-            }, 650);
+        const payload = collectSubmitPayload();
+        if (!hasApiUrl()) {
+            showMessage("submitMessage", "Backend is not connected yet. Paste Google Apps Script Web App URL in rank-predictor-config.js.", "warning");
+            renderPendingResult(payload);
             return;
         }
 
-        fetch(config.apiUrl, {
+        requestBackend(payload, "submitDataBtn", "Submitting...")
+            .then((data) => {
+                if (data.duplicate) {
+                    showMessage("submitMessage", data.message || "Data already exists for this Roll Number and Date of Birth. Please use Check My Rank.", "warning");
+                    return;
+                }
+                if (data.success === false) {
+                    showMessage("submitMessage", data.message || "Unable to submit data.", "error");
+                    return;
+                }
+                showMessage("submitMessage", data.message || "Data submitted successfully.", data.success === false ? "error" : "success");
+                renderResult(data, payload);
+            })
+            .catch((error) => showMessage("submitMessage", error.message || "Unable to submit data.", "error"));
+    }
+
+    function handleCheckRank(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const validation = validateCheckForm(form);
+        if (!validation.ok) {
+            showMessage("checkMessage", validation.message, "error");
+            validation.field?.focus();
+            return;
+        }
+
+        const payload = collectCheckPayload();
+        if (!hasApiUrl()) {
+            showMessage("checkMessage", "Backend is not connected yet. Paste Google Apps Script Web App URL in rank-predictor-config.js.", "warning");
+            return;
+        }
+
+        requestBackend(payload, "checkRankBtn", "Checking...")
+            .then((data) => {
+                if (data.found === false) {
+                    showMessage("checkMessage", data.message || "No data found for this Roll Number and Date of Birth. Please submit your data first.", "warning");
+                    return;
+                }
+                if (data.success === false) {
+                    showMessage("checkMessage", data.message || "Unable to check rank.", "error");
+                    return;
+                }
+                showMessage("checkMessage", data.message || "Rank found successfully.", data.success === false ? "error" : "success");
+                renderResult(data, payload);
+            })
+            .catch((error) => showMessage("checkMessage", error.message || "Unable to check rank.", "error"));
+    }
+
+    function requestBackend(payload, buttonId, loadingText) {
+        const button = document.getElementById(buttonId);
+        const original = button?.textContent || "";
+        if (button) {
+            button.disabled = true;
+            button.textContent = loadingText;
+        }
+
+        return fetch(config.apiUrl, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         })
-            .then(response => {
-                if (!response.ok) throw new Error("Unable to submit rank predictor data.");
+            .then((response) => {
+                if (!response.ok) throw new Error("Backend request failed.");
                 return response.json();
             })
-            .then(data => {
-                setLoading(false);
-                showMessage("Rank prediction updated successfully.", "info");
-                renderBackendResult(data, payload);
-            })
-            .catch(error => {
-                setLoading(false);
-                showMessage(error.message || "Rank predictor submission failed.", "error");
+            .finally(() => {
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = original;
+                }
             });
     }
 
-    function validateForm(form) {
-        clearErrors();
-        const requiredIds = [
-            "examName",
-            "candidateName",
-            "gender",
-            "rollNumber",
-            "category",
-            "state",
-            "totalQuestions",
-            "totalAttempted",
-            "rightAnswers",
-            "wrongAnswers",
-            "marksPerCorrect",
-            "negativeMarking"
-        ];
-        if (state.mode === "online") requiredIds.push("answerSheetLink");
+    function validateSubmitForm(form) {
+        clearErrors(form);
+        const required = ["candidateName", "rollNumber", "dob", "gender", "category", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"];
+        if (state.mode === "online") required.push("answerSheetLink");
 
-        for (const id of requiredIds) {
+        for (const id of required) {
             const field = document.getElementById(id);
-            if (!field || String(field.value).trim()) continue;
+            if (field && String(field.value).trim()) continue;
             markInvalid(field);
             return { ok: false, field, message: "Please fill all required fields." };
         }
@@ -176,7 +256,6 @@
         const attempted = readNumber("totalAttempted");
         const right = readNumber("rightAnswers");
         const wrong = readNumber("wrongAnswers");
-
         if (total <= 0) return invalidNumber("totalQuestions", "Total questions must be greater than zero.");
         if (attempted > total) return invalidNumber("totalAttempted", "Total attempted cannot be greater than total questions.");
         if (right + wrong > attempted) return invalidNumber("rightAnswers", "Right and wrong answers cannot exceed total attempted.");
@@ -185,8 +264,100 @@
             markInvalid(field);
             return { ok: false, field, message: "Please accept the consent checkbox." };
         }
-
         return { ok: true };
+    }
+
+    function validateCheckForm(form) {
+        clearErrors(form);
+        for (const id of ["checkRollNumber", "checkDob"]) {
+            const field = document.getElementById(id);
+            if (field && String(field.value).trim()) continue;
+            markInvalid(field);
+            return { ok: false, field, message: "Please enter Roll Number and Date of Birth." };
+        }
+        return { ok: true };
+    }
+
+    function collectSubmitPayload() {
+        return {
+            action: "submitData",
+            examId: state.exam.examId,
+            examName: state.exam.examName,
+            sheetName: state.exam.sheetName,
+            mode: state.mode,
+            candidateName: readValue("candidateName"),
+            rollNumber: readValue("rollNumber"),
+            dob: readValue("dob"),
+            gender: readValue("gender"),
+            category: readValue("category"),
+            state: readValue("state"),
+            totalQuestions: readNumber("totalQuestions"),
+            totalAttempted: readNumber("totalAttempted"),
+            rightAnswers: readNumber("rightAnswers"),
+            wrongAnswers: readNumber("wrongAnswers"),
+            unattempted: readNumber("unattempted"),
+            marksPerCorrect: readNumber("marksPerCorrect"),
+            negativeMarking: readNumber("negativeMarking"),
+            expectedMarks: state.expectedMarks,
+            answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : ""
+        };
+    }
+
+    function collectCheckPayload() {
+        return {
+            action: "checkRank",
+            examId: state.exam.examId,
+            sheetName: state.exam.sheetName,
+            rollNumber: readValue("checkRollNumber"),
+            dob: readValue("checkDob")
+        };
+    }
+
+    function renderPendingResult(payload = {}) {
+        setText("resultExpectedMarks", formatMarks(payload.expectedMarks ?? state.expectedMarks));
+        setText("resultCandidateName", "Private");
+        setText("overallRank", "Pending");
+        setText("categoryRank", "Pending");
+        setText("stateRank", "Pending");
+        setText("totalSubmissions", "0");
+        setText("accuracyIndicator", "Pending");
+        setText("lastUpdated", "Pending");
+        setText("resultNote", "Rank prediction accuracy improves as more candidates submit data.");
+    }
+
+    function renderResult(data, payload) {
+        const total = Number(data.totalSubmissions || data.total || 0);
+        setText("resultExpectedMarks", formatMarks(data.expectedMarks ?? payload.expectedMarks ?? state.expectedMarks));
+        setText("resultCandidateName", data.candidateName || "Private");
+        setText("overallRank", formatRank(data.overallRank));
+        setText("categoryRank", formatRank(data.categoryRank));
+        setText("stateRank", formatRank(data.stateRank));
+        setText("totalSubmissions", total ? String(total) : "0");
+        setText("accuracyIndicator", data.accuracyIndicator || getAccuracyIndicator(total));
+        setText("lastUpdated", formatDateTime(data.lastUpdated));
+        setText("resultNote", "Rank prediction accuracy improves as more candidates submit data.");
+    }
+
+    function getAccuracyIndicator(totalSubmissions) {
+        if (totalSubmissions >= 1000) return "High";
+        if (totalSubmissions >= 100) return "Medium";
+        return "Low";
+    }
+
+    function formatRank(value) {
+        return value ? `#${value}` : "Pending";
+    }
+
+    function formatDateTime(value) {
+        if (!value) return "Just now";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return String(value);
+        return date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+    }
+
+    function hasApiUrl() {
+        const apiUrl = String(config.apiUrl || "").trim();
+        return apiUrl && apiUrl !== "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
     }
 
     function invalidNumber(id, message) {
@@ -201,74 +372,28 @@
         field.closest(".rp-field, .consent-row")?.classList.add("has-error");
     }
 
-    function clearErrors() {
-        document.querySelectorAll("[aria-invalid='true']").forEach(field => field.removeAttribute("aria-invalid"));
-        document.querySelectorAll(".has-error").forEach(field => field.classList.remove("has-error"));
+    function clearFieldError(event) {
+        const field = event.target.closest(".rp-field, .consent-row");
+        field?.classList.remove("has-error");
+        event.target.removeAttribute("aria-invalid");
     }
 
-    function collectPayload() {
-        return {
-            mode: state.mode,
-            examName: readValue("examName"),
-            candidateName: readValue("candidateName"),
-            gender: readValue("gender"),
-            rollNumber: readValue("rollNumber"),
-            category: readValue("category"),
-            state: readValue("state"),
-            totalQuestions: readNumber("totalQuestions"),
-            totalAttempted: readNumber("totalAttempted"),
-            rightAnswers: readNumber("rightAnswers"),
-            wrongAnswers: readNumber("wrongAnswers"),
-            unattempted: readNumber("unattempted"),
-            marksPerCorrect: readNumber("marksPerCorrect"),
-            negativeMarking: readNumber("negativeMarking"),
-            expectedMarks: state.expectedMarks,
-            answerSheetLink: readValue("answerSheetLink"),
-            submittedAt: new Date().toISOString()
-        };
+    function clearErrors(root) {
+        (root || document).querySelectorAll("[aria-invalid='true']").forEach((field) => field.removeAttribute("aria-invalid"));
+        (root || document).querySelectorAll(".has-error").forEach((field) => field.classList.remove("has-error"));
     }
 
-    function renderPendingResult(payload = collectPayload()) {
-        const accuracy = payload.totalAttempted ? Math.round((payload.rightAnswers / payload.totalAttempted) * 100) : 0;
-        setText("resultExpectedMarks", formatMarks(payload.expectedMarks ?? state.expectedMarks));
-        setText("overallRankEstimate", "Pending");
-        setText("categoryRankEstimate", "Pending");
-        setText("stateRankEstimate", "Pending");
-        setText("totalSubmissions", "0");
-        setText("accuracyIndicator", `${accuracy}% input accuracy`);
-        setText("resultNote", "Rank predictor backend is not connected yet.");
-    }
-
-    function renderBackendResult(data, payload) {
-        setText("resultExpectedMarks", formatMarks(data.expectedMarks ?? payload.expectedMarks));
-        setText("overallRankEstimate", data.overallRankEstimate ?? "Pending");
-        setText("categoryRankEstimate", data.categoryRankEstimate ?? "Pending");
-        setText("stateRankEstimate", data.stateRankEstimate ?? "Pending");
-        setText("totalSubmissions", data.totalSubmissions ?? "0");
-        setText("accuracyIndicator", data.accuracyIndicator ?? buildAccuracyLabel(payload.rightAnswers, payload.totalAttempted));
-        setText("resultNote", data.message || "Rank estimate is based on submitted candidate data.");
-    }
-
-    function setLoading(isLoading) {
-        const button = document.getElementById("predictRankBtn");
-        if (!button) return;
-        button.disabled = isLoading;
-        button.textContent = isLoading ? "Estimating..." : "Predict Rank";
-    }
-
-    function showMessage(message, type = "info") {
-        const box = document.getElementById("formMessage");
+    function showMessage(id, message, type = "info") {
+        const box = document.getElementById(id);
         if (!box) return;
         box.textContent = message;
         box.className = message ? `form-message ${type}` : "form-message hidden";
     }
 
-    function buildAccuracyLabel(right, attempted) {
-        if (!attempted) return "Pending";
-        const accuracy = Math.round((right / attempted) * 100);
-        if (accuracy >= 80) return `${accuracy}% High`;
-        if (accuracy >= 55) return `${accuracy}% Moderate`;
-        return `${accuracy}% Low`;
+    function getModeLabel(modes) {
+        if (modes.includes("offline") && modes.includes("online")) return "Offline + Online";
+        if (modes.includes("online")) return "Online Exam";
+        return "Offline Exam";
     }
 
     function readNumber(id) {
@@ -299,10 +424,10 @@
     }
 
     function escapeHtml(value) {
-        return String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char]));
+        return String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[char]));
     }
 
     function escapeAttr(value) {
         return escapeHtml(value);
     }
-})();
+}());

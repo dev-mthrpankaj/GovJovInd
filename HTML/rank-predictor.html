@@ -40,111 +40,146 @@
     <main class="rank-predictor-page" id="rankPredictorApp">
         <section class="predictor-hero" aria-labelledby="rankPredictorTitle">
             <div class="predictor-hero-copy">
-                <span class="predictor-badge"><i class="fas fa-chart-line"></i> Candidate data based</span>
-                <h1 id="rankPredictorTitle">Advanced Rank Predictor</h1>
-                <p>Estimate your expected rank using submitted candidate data.</p>
+                <span class="predictor-badge"><i class="fas fa-chart-line"></i> Google Sheets powered</span>
+                <h1 id="rankPredictorTitle">Multi Exam Rank Predictor</h1>
+                <p>Submit your exam performance or securely check an existing rank using roll number and date of birth.</p>
             </div>
             <div class="predictor-summary" aria-label="Current predictor setup">
-                <div>
-                    <span>Active Mode</span>
-                    <strong id="activeModeLabel">Offline Exam</strong>
-                </div>
                 <div>
                     <span>Active Exam</span>
                     <strong id="activeExamLabel">Loading</strong>
                 </div>
+                <div>
+                    <span>Supported Mode</span>
+                    <strong id="activeModeLabel">Loading</strong>
+                </div>
             </div>
         </section>
 
-        <section class="mode-section" aria-label="Exam mode">
-            <button class="mode-card is-active" type="button" data-mode="offline" aria-pressed="true">
-                <span class="mode-icon"><i class="fas fa-file-alt"></i></span>
-                <strong>Offline Exam</strong>
-                <small>OMR, written, and center based exams</small>
-            </button>
-            <button class="mode-card" type="button" data-mode="online" aria-pressed="false">
-                <span class="mode-icon"><i class="fas fa-laptop"></i></span>
-                <strong>Online Exam</strong>
-                <small>CBT exams with response sheet data</small>
-            </button>
+        <section class="exam-selector-card" aria-label="Exam selection">
+            <label class="rp-field" for="globalExamSelect">Select Exam
+                <select id="globalExamSelect"></select>
+            </label>
+            <div class="mode-section" aria-label="Exam mode">
+                <button class="mode-card is-active" type="button" data-mode="offline" aria-pressed="true">
+                    <span class="mode-icon"><i class="fas fa-file-alt"></i></span>
+                    <strong>Offline Exam</strong>
+                    <small>OMR, written, and center based exams</small>
+                </button>
+                <button class="mode-card" type="button" data-mode="online" aria-pressed="false">
+                    <span class="mode-icon"><i class="fas fa-laptop"></i></span>
+                    <strong>Online Exam</strong>
+                    <small>CBT exams with response sheet data</small>
+                </button>
+            </div>
+            <p class="privacy-note"><i class="fas fa-lock"></i> We do not show your name, roll number, or DOB publicly. These details are used only to calculate and retrieve your rank.</p>
+        </section>
+
+        <section class="tab-card" aria-label="Rank predictor actions">
+            <button class="tab-btn is-active" type="button" data-tab="submit" aria-selected="true">Submit Data</button>
+            <button class="tab-btn" type="button" data-tab="check" aria-selected="false">Check My Rank</button>
         </section>
 
         <section class="predictor-workspace">
-            <form class="predictor-form" id="rankPredictorForm" novalidate>
-                <div class="form-heading">
-                    <span>Submit Data</span>
-                    <h2>Candidate Exam Details</h2>
-                </div>
+            <div class="forms-column">
+                <form class="predictor-form tab-panel is-active" id="rankSubmitForm" data-panel="submit" novalidate>
+                    <div class="form-heading">
+                        <span>Submit Data</span>
+                        <h2>Candidate Exam Details</h2>
+                    </div>
 
-                <div class="form-grid">
-                    <label class="rp-field" for="examName">Exam Name
-                        <input id="examName" name="examName" type="text" autocomplete="off" required>
-                    </label>
-                    <label class="rp-field" for="candidateName">Candidate Name
-                        <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
-                    </label>
-                    <label class="rp-field" for="gender">Gender
-                        <select id="gender" name="gender" required>
-                            <option value="">Select Gender</option>
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </label>
-                    <label class="rp-field" for="rollNumber">Roll Number
-                        <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" required>
-                    </label>
-                    <label class="rp-field" for="category">Category
-                        <select id="category" name="category" required>
-                            <option value="">Select Category</option>
-                        </select>
-                    </label>
-                    <label class="rp-field" for="state">State
-                        <select id="state" name="state" required>
-                            <option value="">Select State</option>
-                        </select>
-                    </label>
-                    <label class="rp-field" for="totalQuestions">Total Questions
-                        <input id="totalQuestions" name="totalQuestions" type="number" min="1" step="1" required>
-                    </label>
-                    <label class="rp-field" for="totalAttempted">Total Attempted
-                        <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
-                    </label>
-                    <label class="rp-field" for="rightAnswers">Right Answers
-                        <input id="rightAnswers" name="rightAnswers" type="number" min="0" step="1" required>
-                    </label>
-                    <label class="rp-field" for="wrongAnswers">Wrong Answers
-                        <input id="wrongAnswers" name="wrongAnswers" type="number" min="0" step="1" required>
-                    </label>
-                    <label class="rp-field" for="unattempted">Unattempted
-                        <input id="unattempted" name="unattempted" type="number" readonly>
-                    </label>
-                    <label class="rp-field" for="marksPerCorrect">Marks per Correct
-                        <input id="marksPerCorrect" name="marksPerCorrect" type="number" min="0" step="0.01" required>
-                    </label>
-                    <label class="rp-field" for="negativeMarking">Negative Marking
-                        <input id="negativeMarking" name="negativeMarking" type="number" min="0" step="0.01" required>
-                    </label>
-                    <label class="rp-field" for="expectedMarks">Expected Marks
-                        <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
-                    </label>
-                    <label class="rp-field online-only" for="answerSheetLink">Answer Key / Response Sheet Link
-                        <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" placeholder="https://">
-                    </label>
-                </div>
+                    <div class="form-grid">
+                        <label class="rp-field" for="submitExamName">Exam Name
+                            <input id="submitExamName" name="examName" type="text" readonly>
+                        </label>
+                        <label class="rp-field" for="candidateName">Candidate Name
+                            <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
+                        </label>
+                        <label class="rp-field" for="rollNumber">Roll Number
+                            <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" required>
+                        </label>
+                        <label class="rp-field" for="dob">Date of Birth
+                            <input id="dob" name="dob" type="date" required>
+                        </label>
+                        <label class="rp-field" for="gender">Gender
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </label>
+                        <label class="rp-field" for="category">Category
+                            <select id="category" name="category" required></select>
+                        </label>
+                        <label class="rp-field" for="state">State
+                            <select id="state" name="state" required></select>
+                        </label>
+                        <label class="rp-field" for="totalQuestions">Total Questions
+                            <input id="totalQuestions" name="totalQuestions" type="number" min="1" step="1" required>
+                        </label>
+                        <label class="rp-field" for="totalAttempted">Total Attempted
+                            <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
+                        </label>
+                        <label class="rp-field" for="rightAnswers">Right Answers
+                            <input id="rightAnswers" name="rightAnswers" type="number" min="0" step="1" required>
+                        </label>
+                        <label class="rp-field" for="wrongAnswers">Wrong Answers
+                            <input id="wrongAnswers" name="wrongAnswers" type="number" min="0" step="1" required>
+                        </label>
+                        <label class="rp-field" for="unattempted">Unattempted
+                            <input id="unattempted" name="unattempted" type="number" readonly>
+                        </label>
+                        <label class="rp-field" for="marksPerCorrect">Marks Per Correct
+                            <input id="marksPerCorrect" name="marksPerCorrect" type="number" min="0" step="0.01" required>
+                        </label>
+                        <label class="rp-field" for="negativeMarking">Negative Marking
+                            <input id="negativeMarking" name="negativeMarking" type="number" min="0" step="0.01" required>
+                        </label>
+                        <label class="rp-field" for="expectedMarks">Expected Marks
+                            <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
+                        </label>
+                        <label class="rp-field online-only" for="answerSheetLink">Answer Key / Response Sheet Link
+                            <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" placeholder="https://">
+                        </label>
+                    </div>
 
-                <label class="consent-row" for="dataConsent">
-                    <input id="dataConsent" name="dataConsent" type="checkbox" required>
-                    <span>I consent to submit this exam data for rank prediction.</span>
-                </label>
+                    <label class="consent-row" for="dataConsent">
+                        <input id="dataConsent" name="dataConsent" type="checkbox" required>
+                        <span>I consent to submit this exam data for rank prediction.</span>
+                    </label>
 
-                <div class="form-message hidden" id="formMessage" role="status" aria-live="polite"></div>
+                    <div class="form-message hidden" id="submitMessage" role="status" aria-live="polite"></div>
 
-                <div class="form-actions">
-                    <button class="btn btn-primary" id="predictRankBtn" type="submit">Predict Rank</button>
-                    <button class="btn btn-outline" id="resetPredictorBtn" type="button">Reset</button>
-                </div>
-            </form>
+                    <div class="form-actions sticky-actions">
+                        <button class="btn btn-primary" id="submitDataBtn" type="submit">Submit Data</button>
+                        <button class="btn btn-outline" id="resetPredictorBtn" type="button">Reset</button>
+                    </div>
+                </form>
+
+                <form class="predictor-form tab-panel" id="rankCheckForm" data-panel="check" novalidate>
+                    <div class="form-heading">
+                        <span>Already Submitted?</span>
+                        <h2>Check Your Rank</h2>
+                    </div>
+                    <div class="form-grid compact">
+                        <label class="rp-field" for="checkExamName">Exam Name
+                            <input id="checkExamName" name="checkExamName" type="text" readonly>
+                        </label>
+                        <label class="rp-field" for="checkRollNumber">Roll Number
+                            <input id="checkRollNumber" name="rollNumber" type="text" autocomplete="off" required>
+                        </label>
+                        <label class="rp-field" for="checkDob">Date of Birth
+                            <input id="checkDob" name="dob" type="date" required>
+                        </label>
+                    </div>
+                    <p class="privacy-note"><i class="fas fa-user-shield"></i> We only use roll number and DOB to find your own submitted record.</p>
+                    <div class="form-message hidden" id="checkMessage" role="status" aria-live="polite"></div>
+                    <div class="form-actions sticky-actions">
+                        <button class="btn btn-primary" id="checkRankBtn" type="submit">Check Rank</button>
+                    </div>
+                </form>
+            </div>
 
             <aside class="prediction-result" aria-labelledby="predictionResultTitle">
                 <div class="result-heading">
@@ -157,16 +192,20 @@
                         <strong id="resultExpectedMarks">0.00</strong>
                     </article>
                     <article class="result-metric">
+                        <span>Candidate</span>
+                        <strong id="resultCandidateName">Private</strong>
+                    </article>
+                    <article class="result-metric">
                         <span>Overall Rank Estimate</span>
-                        <strong id="overallRankEstimate">Pending</strong>
+                        <strong id="overallRank">Pending</strong>
                     </article>
                     <article class="result-metric">
                         <span>Category Rank Estimate</span>
-                        <strong id="categoryRankEstimate">Pending</strong>
+                        <strong id="categoryRank">Pending</strong>
                     </article>
                     <article class="result-metric">
                         <span>State Rank Estimate</span>
-                        <strong id="stateRankEstimate">Pending</strong>
+                        <strong id="stateRank">Pending</strong>
                     </article>
                     <article class="result-metric">
                         <span>Total Submissions</span>
@@ -176,8 +215,12 @@
                         <span>Accuracy Indicator</span>
                         <strong id="accuracyIndicator">Pending</strong>
                     </article>
+                    <article class="result-metric">
+                        <span>Last Updated</span>
+                        <strong id="lastUpdated">Pending</strong>
+                    </article>
                 </div>
-                <p class="result-note" id="resultNote">Rank estimates will appear after candidate data is submitted.</p>
+                <p class="result-note" id="resultNote">Rank prediction accuracy improves as more candidates submit data.</p>
             </aside>
         </section>
     </main>

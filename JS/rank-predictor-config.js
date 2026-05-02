@@ -1,56 +1,40 @@
+// Paste Google Apps Script Web App URL in apiUrl, not Google Sheet link.
+// Keep the Google Sheet ID inside GoogleAppsScript/rank-predictor-Code.gs only.
 window.RANK_PREDICTOR_CONFIG = {
-    activeExam: "GovJobUpdates Demo Exam",
-    marks: {
-        totalQuestions: 100,
-        perCorrect: 1,
-        negative: 0.25
-    },
-    categories: [
-        "General",
-        "EWS",
-        "OBC",
-        "SC",
-        "ST",
-        "PwD",
-        "Ex-Servicemen"
-    ],
-    states: [
-        "Andaman and Nicobar Islands",
-        "Andhra Pradesh",
-        "Arunachal Pradesh",
-        "Assam",
-        "Bihar",
-        "Chandigarh",
-        "Chhattisgarh",
-        "Dadra and Nagar Haveli and Daman and Diu",
-        "Delhi",
-        "Goa",
-        "Gujarat",
-        "Haryana",
-        "Himachal Pradesh",
-        "Jammu and Kashmir",
-        "Jharkhand",
-        "Karnataka",
-        "Kerala",
-        "Ladakh",
-        "Lakshadweep",
-        "Madhya Pradesh",
-        "Maharashtra",
-        "Manipur",
-        "Meghalaya",
-        "Mizoram",
-        "Nagaland",
-        "Odisha",
-        "Puducherry",
-        "Punjab",
-        "Rajasthan",
-        "Sikkim",
-        "Tamil Nadu",
-        "Telangana",
-        "Tripura",
-        "Uttar Pradesh",
-        "Uttarakhand",
-        "West Bengal"
-    ],
-    apiUrl: ""
+    apiUrl: "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE",
+    exams: [
+        {
+            examId: "demo-exam",
+            examName: "GovJobUpdates Demo Exam",
+            sheetName: "Demo Exam",
+            supportedModes: ["offline", "online"],
+            totalQuestions: 100,
+            marksPerCorrect: 1,
+            negativeMarking: 0.25,
+            categories: ["General", "OBC", "EWS", "SC", "ST"],
+            states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Other"]
+        },
+        {
+            examId: "up-police-si-2025",
+            examName: "UP Police SI 2025",
+            sheetName: "UP Police SI 2025",
+            supportedModes: ["offline", "online"],
+            totalQuestions: 100,
+            marksPerCorrect: 1,
+            negativeMarking: 0.25,
+            categories: ["General", "OBC", "EWS", "SC", "ST"],
+            states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Other"]
+        },
+        {
+            examId: "ssc-gd-2025",
+            examName: "SSC GD 2025",
+            sheetName: "SSC GD 2025",
+            supportedModes: ["online"],
+            totalQuestions: 80,
+            marksPerCorrect: 2,
+            negativeMarking: 0.25,
+            categories: ["General", "OBC", "EWS", "SC", "ST"],
+            states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
+        }
+    ]
 };
