@@ -7,6 +7,32 @@
     const seenQuizIds = new Set();
     const subjectQuestionText = new Map();
 
+    function sanitizeQuestionText(value) {
+        let text = String(value || "");
+
+        text = text
+            .replace(/\{label\}/gi, " ")
+            .replace(/\bIn\s+[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s+Round\s+\d+\s*,?\s*/gi, " ")
+            .replace(/\b[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s+Round\s+\d+\s*,?\s*/gi, " ")
+            .replace(/^\s*(?:In\s+)?[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s*[,;:.-]?\s*/i, "")
+            .replace(/\bRound\s+\d+\b\s*[,;:.-]?\s*/gi, " ")
+            .replace(/^\s*Q\s*\d+\s*[,;:.-]?\s*/i, "")
+            .replace(/\s+/g, " ")
+            .replace(/\s+([?.!,;:])/g, "$1")
+            .trim()
+            .replace(/^[,;:.-]\s*/, "");
+
+        if (!text) return "";
+
+        text = text.charAt(0).toUpperCase() + text.slice(1);
+
+        if (!/[?.!:'")\]]$/.test(text)) {
+            text += ".";
+        }
+
+        return text;
+    }
+
     function normalizeText(value) {
         return String(value || "").trim().replace(/\s+/g, " ").toLowerCase();
     }
@@ -61,6 +87,7 @@
 
         quiz.questions = quiz.questions.map((question) => ({
             ...question,
+            question: sanitizeQuestionText(question.question),
             subject: question.subject || quiz.subject,
             marks: Number(question.marks) || quiz.marksPerQuestion,
             negativeMarks: Number(question.negativeMarks) || quiz.negativeMarks
@@ -99,14 +126,16 @@
 
         subjectQuestionText.set(quiz.subject, subjectTexts);
 
-        if (quiz.validation.duplicateQuestionIds.length || quiz.validation.duplicateQuestionTexts.length) {
-            quiz.validation.errors.push("Quiz contains duplicate question ids or question text.");
+        if (quiz.validation.duplicateQuestionIds.length) {
+            quiz.validation.errors.push("Quiz contains duplicate question ids.");
         }
 
         quiz.validation.isComplete = quiz.validation.errors.length === 0;
 
         if (!quiz.validation.isComplete) {
             console.warn("[GJU Quiz Registry] Incomplete quiz:", quiz.id, quiz.validation);
+        } else if (quiz.validation.duplicateQuestionTexts.length) {
+            console.warn("[GJU Quiz Registry] Repeated question text inside quiz:", quiz.id, quiz.validation.duplicateQuestionTexts);
         } else if (quiz.validation.duplicateSubjectQuestionTexts.length) {
             console.warn("[GJU Quiz Registry] Repeated question text across subject quizzes:", quiz.id, quiz.validation.duplicateSubjectQuestionTexts);
         }
@@ -116,6 +145,8 @@
 
     const quizzes = bank.map(validateQuiz);
     const subjects = subjectOrder.filter((subject) => quizzes.some((quiz) => quiz.subject === subject));
+
+    window.GJU_SANITIZE_QUESTION_TEXT = sanitizeQuestionText;
 
     window.GJU_QUIZZES = {
         subjects,

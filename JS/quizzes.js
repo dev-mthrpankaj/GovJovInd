@@ -12,6 +12,9 @@
         write: function () { return false; },
         remove: function () {}
     };
+    const sanitizeQuestionText = window.GJU_SANITIZE_QUESTION_TEXT || function (value) {
+        return String(value || "").trim().replace(/\s+/g, " ");
+    };
 
     const subjectIcons = {
         Mathematics: "fa-calculator",
@@ -268,7 +271,7 @@
                         <span class="meta-pill">+${set.marksPerQuestion} marks</span>
                         <span class="meta-pill">-${set.negativeMarks} negative</span>
                     </div>
-                    ${isComplete ? "" : `<div class="message-box error">This quiz needs 50 unique questions before it can start.</div>`}
+                    ${isComplete ? "" : `<div class="message-box error">This quiz needs 50 complete questions before it can start.</div>`}
                 </div>
                 <div>
                     <div class="quiz-performance">
@@ -297,7 +300,7 @@
         if (!set) return;
 
         if (!set.validation || !set.validation.isComplete) {
-            showListMessage("This quiz needs 50 unique questions before it can start.", "error");
+            showListMessage("This quiz needs 50 complete questions before it can start.", "error");
             return;
         }
 
@@ -342,7 +345,12 @@
     }
 
     function getQuestionsForSet(set) {
-        return Array.isArray(set.questions) ? set.questions.slice(0, 50) : [];
+        return Array.isArray(set.questions)
+            ? set.questions.slice(0, 50).map((question) => ({
+                ...question,
+                question: sanitizeQuestionText(question.question)
+            }))
+            : [];
     }
 
     function renderExam() {
@@ -362,7 +370,7 @@
                 <span class="meta-pill">${escapeHtml(question.difficulty)}</span>
                 <span class="meta-pill">+${question.marks}, -${question.negativeMarks}</span>
             </div>
-            <h2 class="question-title">${escapeHtml(question.question)}</h2>
+            <h2 class="question-title">${escapeHtml(sanitizeQuestionText(question.question))}</h2>
             <div class="option-list" role="radiogroup" aria-label="Answer options">
                 ${question.options.map((option, index) => `
                     <button class="answer-option ${app.answers[app.current] === index ? "selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${app.answers[app.current] === index}">
@@ -604,7 +612,7 @@
                     ${marked ? `<span class="status-badge">Marked</span>` : ""}
                     <span class="status-badge">Q${index + 1}</span>
                 </div>
-                <h3>${escapeHtml(question.question)}</h3>
+                <h3>${escapeHtml(sanitizeQuestionText(question.question))}</h3>
                 <div class="review-answer ${state === "wrong" ? "wrong" : ""}">User answer: ${selected === null ? "Not attempted" : escapeHtml(question.options[selected])}</div>
                 <div class="review-answer correct">Correct answer: ${escapeHtml(question.options[question.correctAnswer])}</div>
                 <p><strong>Explanation:</strong> ${escapeHtml(question.explanation)}</p>
