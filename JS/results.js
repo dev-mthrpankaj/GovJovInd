@@ -86,6 +86,37 @@
         return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
     }
 
+    function getInlineAdFrequency() {
+        const configuredFrequency = Number(window.ADS_CONFIG && window.ADS_CONFIG.inlineFrequency);
+        return Number.isFinite(configuredFrequency) && configuredFrequency > 0 ? configuredFrequency : 6;
+    }
+
+    function shouldRenderAds() {
+        const config = window.ADS_CONFIG || {};
+        const pageName = decodeURIComponent((window.location.pathname.split("/").pop() || "").toLowerCase());
+        const blockedPages = Array.isArray(config.blockedPages) ? config.blockedPages : [];
+        return config.enabled !== false && !blockedPages.includes(pageName);
+    }
+
+    function renderInlineAdSlot(sequence) {
+        if (!shouldRenderAds()) return "";
+        return `
+            <div class="ad-slot ad-slot-inline" data-ad-location="inline" data-ad-placeholder="true" data-ad-sequence="${sequence}">
+                <span class="ad-label">Advertisement</span>
+                <!-- Replace with Google AdSense ad unit after approval -->
+            </div>
+        `;
+    }
+
+    function renderCardsWithAds(records, renderCard) {
+        const frequency = getInlineAdFrequency();
+        return records.map((record, index) => {
+            const cardHtml = renderCard(record);
+            const position = index + 1;
+            return position % frequency === 0 ? `${cardHtml}${renderInlineAdSlot(position)}` : cardHtml;
+        }).join("");
+    }
+
     function getStatus(item) {
         const resultDate = parseDate(item.resultDate);
         const hasLink = getText(item.resultLink, "#") !== "#";
@@ -238,7 +269,7 @@
         if (!currentItems.length) {
             renderEmptyState("No records found");
         } else {
-            elements.listings.innerHTML = visibleItems.map(renderCard).join("");
+            elements.listings.innerHTML = renderCardsWithAds(visibleItems, renderCard);
         }
 
         if (elements.loadMoreButton) {

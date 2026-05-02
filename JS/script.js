@@ -1,11 +1,91 @@
 (() => {
 const markPageLoaded = () => document.body.classList.add('page-loaded');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ADS_CONFIG = {
+  enabled: true,
+  blockedPages: ['quiz.html', 'rank-predictor.html', 'documents.html'],
+  inlineFrequency: 6
+};
+
+window.ADS_CONFIG = ADS_CONFIG;
+
+const getCurrentPageName = () => {
+  const pageName = window.location.pathname.split('/').pop();
+  return decodeURIComponent(pageName || 'index.html').toLowerCase();
+};
+
+const isAdsBlockedPage = () => {
+  return !ADS_CONFIG.enabled || ADS_CONFIG.blockedPages.includes(getCurrentPageName());
+};
+
+const createAdSlot = (variant, autoLocation) => {
+  const slot = document.createElement('div');
+  const isInline = variant === 'inline';
+  slot.className = `ad-slot ${isInline ? 'ad-slot-inline' : 'ad-slot-top'}`;
+  slot.dataset.adLocation = isInline ? 'inline' : 'top';
+  slot.dataset.adPlaceholder = 'true';
+  if (autoLocation) slot.dataset.adAuto = autoLocation;
+
+  const label = document.createElement('span');
+  label.className = 'ad-label';
+  label.textContent = 'Advertisement';
+  slot.appendChild(label);
+  slot.appendChild(document.createComment(' Replace with Google AdSense ad unit after approval '));
+
+  return slot;
+};
+
+const ensureDetailPageAds = () => {
+  if (isAdsBlockedPage()) return;
+
+  const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
+  const pageName = getCurrentPageName();
+  const isDetailPage = pageName === 'job-details.html'
+    || path.includes('/job_details/html/')
+    || path.includes('/admitcard_details/html/')
+    || path.includes('/result_details/html/')
+    || path.includes('/answerkey_details/html/');
+
+  if (!isDetailPage) return;
+
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  const summaryCard = document.querySelector('.job-details-container .job-header, .job-detail-page > .job-header, .detail-grid > .highlight-card');
+  if (summaryCard && !document.querySelector('.ad-slot[data-ad-auto="detail-summary"]')) {
+    summaryCard.insertAdjacentElement('afterend', createAdSlot('top', 'detail-summary'));
+  }
+
+  const bottomHost = document.querySelector('.job-details-page') || main;
+  if (bottomHost && !document.querySelector('.ad-slot[data-ad-auto="detail-bottom"]')) {
+    bottomHost.appendChild(createAdSlot('inline', 'detail-bottom'));
+  }
+};
+
+const applyAdControls = () => {
+  if (isAdsBlockedPage()) {
+    document.querySelectorAll('.ad-slot').forEach((slot) => slot.remove());
+    document.body.classList.add('ads-blocked');
+    return;
+  }
+
+  document.body.classList.add('ads-enabled');
+  ensureDetailPageAds();
+};
+
+window.GovJobAds = {
+  config: ADS_CONFIG,
+  apply: applyAdControls,
+  createSlot: createAdSlot,
+  isBlockedPage: isAdsBlockedPage
+};
 
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', markPageLoaded);
+  window.addEventListener('DOMContentLoaded', applyAdControls);
 } else {
   markPageLoaded();
+  applyAdControls();
 }
 
 document.addEventListener('click', (event) => {

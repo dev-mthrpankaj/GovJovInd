@@ -15,12 +15,14 @@
     color: #2563eb;
     margin-bottom: 1rem;
     font-size: 2rem;
+    overflow-wrap: anywhere;
 }
 
 .job-detail-page .org-name {
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 1.5rem;
+    overflow-wrap: anywhere;
 }
 
 .job-detail-page .important-dates {

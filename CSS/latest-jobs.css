@@ -175,11 +175,16 @@
     margin-bottom: 1rem;
 }
 
+.job-card-header > div:first-child {
+    min-width: 0;
+}
+
 .job-organization {
     margin: 0 0 0.3rem;
     color: #4b5563;
     font-size: 0.92rem;
     font-weight: 700;
+    overflow-wrap: anywhere;
 }
 
 .job-card h3 {
@@ -187,6 +192,7 @@
     color: #1d4ed8;
     font-size: 1.2rem;
     line-height: 1.35;
+    overflow-wrap: anywhere;
 }
 
 .job-badges {

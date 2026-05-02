@@ -420,10 +420,6 @@ function renderJobDetails(job) {
             <h1>${job.title}</h1>
             <p class="organization">${job.organization}</p>
             
-            <div class="ad-space">
-                <img src="${job.advertisement[0].src}" alt="Advertisement" class="ad-banner">
-            </div>
-            
             <div class="quick-info">
                 <div class="info-box">
                     <i class="fas fa-calendar-alt"></i>
@@ -470,11 +466,7 @@ function renderJobDetails(job) {
                     </table>
                 </div>
             </div>
-            
-            <div class="ad-space">
-                <img src="${job.advertisement[1].src}" alt="Advertisement" class="ad-square">
-            </div>
-            
+
             <div class="content-section">
                 <h2><i class="fas fa-venus-mars"></i> Vacancy Details</h2>
                 <div class="table-responsive">

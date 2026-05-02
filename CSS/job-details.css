@@ -59,6 +59,7 @@
     color: #2563eb;
     margin-bottom: 0.5rem;
     font-size: 1.8rem;
+    overflow-wrap: anywhere;
 }
 
 .organization {
@@ -66,34 +67,7 @@
     font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
-}
-
-/* Advertisement Styles */
-.ad-space {
-    margin: 1.5rem 0;
-    text-align: center;
-}
-
-.ad-banner {
-    width: 100%;
-    max-width: 728px;
-    height: auto;
-    border-radius: 6px;
-    margin: 0 auto;
-    display: block;
-    background: #f1f5f9;
-    border: 1px dashed #cbd5e1;
-}
-
-.ad-square {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 6px;
-    margin: 1rem auto;
-    display: block;
-    background: #f1f5f9;
-    border: 1px dashed #cbd5e1;
+    overflow-wrap: anywhere;
 }
 
 /* Quick Info Grid */

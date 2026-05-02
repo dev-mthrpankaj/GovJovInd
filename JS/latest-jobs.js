@@ -116,6 +116,37 @@
         });
     }
 
+    function getInlineAdFrequency() {
+        const configuredFrequency = Number(window.ADS_CONFIG && window.ADS_CONFIG.inlineFrequency);
+        return Number.isFinite(configuredFrequency) && configuredFrequency > 0 ? configuredFrequency : 6;
+    }
+
+    function shouldRenderAds() {
+        const config = window.ADS_CONFIG || {};
+        const pageName = decodeURIComponent((window.location.pathname.split("/").pop() || "").toLowerCase());
+        const blockedPages = Array.isArray(config.blockedPages) ? config.blockedPages : [];
+        return config.enabled !== false && !blockedPages.includes(pageName);
+    }
+
+    function renderInlineAdSlot(sequence) {
+        if (!shouldRenderAds()) return "";
+        return `
+            <div class="ad-slot ad-slot-inline" data-ad-location="inline" data-ad-placeholder="true" data-ad-sequence="${sequence}">
+                <span class="ad-label">Advertisement</span>
+                <!-- Replace with Google AdSense ad unit after approval -->
+            </div>
+        `;
+    }
+
+    function renderCardsWithAds(records, renderCard) {
+        const frequency = getInlineAdFrequency();
+        return records.map((record, index) => {
+            const cardHtml = renderCard(record);
+            const position = index + 1;
+            return position % frequency === 0 ? `${cardHtml}${renderInlineAdSlot(position)}` : cardHtml;
+        }).join("");
+    }
+
     function normalizeNumber(value) {
         const number = parseInt(getText(value, "0").replace(/[^0-9]/g, ""), 10);
         return Number.isNaN(number) ? 0 : number;
@@ -283,7 +314,7 @@
         if (!currentJobs.length) {
             renderEmptyState("No jobs found");
         } else {
-            elements.listings.innerHTML = visibleJobs.map(renderJobCard).join("");
+            elements.listings.innerHTML = renderCardsWithAds(visibleJobs, renderJobCard);
         }
 
         if (elements.loadMore) {
