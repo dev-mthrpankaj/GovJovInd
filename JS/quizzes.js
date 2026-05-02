@@ -1,8 +1,12 @@
 (function () {
     "use strict";
 
-    const quizData = window.SARKARI_QUIZ || { subjects: [], questions: [] };
-    const quizSets = Array.isArray(window.QUIZ_SETS) ? window.QUIZ_SETS : [];
+    const registry = window.GJU_QUIZZES || {
+        subjects: [],
+        quizzes: [],
+        getQuizzesBySubject: function () { return []; },
+        getQuizById: function () { return null; }
+    };
     const storage = window.QuizStorage || {
         read: function (_key, fallback) { return fallback; },
         write: function () { return false; },
@@ -20,8 +24,6 @@
 
     const views = {};
     const elements = {};
-    const questionMap = new Map(quizData.questions.map((question) => [question.id, question]));
-
     const app = {
         subject: "",
         quizSet: null,
@@ -85,12 +87,12 @@
         const quizId = params.get("quiz");
         const subject = params.get("subject");
 
-        if (quizId && quizSets.some((set) => set.id === quizId)) {
+        if (quizId && registry.getQuizById(quizId)) {
             startQuiz(quizId);
             return;
         }
 
-        if (subject && quizData.subjects.includes(subject)) {
+        if (subject && registry.subjects.includes(subject)) {
             openSubject(subject);
             return;
         }
@@ -222,8 +224,8 @@
     }
 
     function renderSubjects() {
-        elements.subjectCards.innerHTML = quizData.subjects.map((subject) => {
-            const count = quizSets.filter((set) => set.subject === subject).length;
+        elements.subjectCards.innerHTML = registry.subjects.map((subject) => {
+            const count = registry.getQuizzesBySubject(subject).length;
             return `
                 <article class="subject-card" data-subject="${escapeAttr(subject)}">
                     <span class="subject-icon"><i class="fas ${subjectIcons[subject] || "fa-book"}" aria-hidden="true"></i></span>
@@ -242,7 +244,7 @@
         elements.subjectQuizHeading.textContent = `${subject} Quizzes`;
         hideListMessage();
 
-        const sets = quizSets.filter((set) => set.subject === subject);
+        const sets = registry.getQuizzesBySubject(subject);
         elements.quizSetList.innerHTML = sets.length
             ? sets.map(renderQuizSetCard).join("")
             : `<article class="quiz-set-card"><p class="result-subtext">No quiz sets found for ${escapeHtml(subject)}.</p></article>`;
@@ -252,7 +254,7 @@
 
     function renderQuizSetCard(set) {
         const stats = getQuizStats(set.id);
-        const isComplete = getQuestionsForSet(set).length === 50;
+        const isComplete = Boolean(set.validation && set.validation.isComplete);
         return `
             <article class="quiz-set-card">
                 <div class="quiz-card-head">
@@ -261,12 +263,12 @@
                     <div class="quiz-meta">
                         <span class="meta-pill">${escapeHtml(set.subject)}</span>
                         <span class="meta-pill">${escapeHtml(set.difficulty)}</span>
-                        <span class="meta-pill">50 Questions</span>
-                        <span class="meta-pill">30 Minutes</span>
+                        <span class="meta-pill">${escapeHtml(set.totalQuestions)} Questions</span>
+                        <span class="meta-pill">${escapeHtml(set.durationMinutes)} Minutes</span>
                         <span class="meta-pill">+${set.marksPerQuestion} marks</span>
                         <span class="meta-pill">-${set.negativeMarks} negative</span>
                     </div>
-                    ${isComplete ? "" : `<div class="message-box error">This quiz needs 50 questions. Please add more questions.</div>`}
+                    ${isComplete ? "" : `<div class="message-box error">This quiz needs 50 unique questions before it can start.</div>`}
                 </div>
                 <div>
                     <div class="quiz-performance">
@@ -291,12 +293,11 @@
     }
 
     function startQuiz(quizId) {
-        const set = quizSets.find((item) => item.id === quizId);
+        const set = registry.getQuizById(quizId);
         if (!set) return;
 
-        const questions = getQuestionsForSet(set);
-        if (questions.length !== 50) {
-            showListMessage("This quiz needs 50 questions. Please add more questions.", "error");
+        if (!set.validation || !set.validation.isComplete) {
+            showListMessage("This quiz needs 50 unique questions before it can start.", "error");
             return;
         }
 
@@ -308,9 +309,9 @@
 
         app.quizSet = set;
         app.subject = set.subject;
-        app.questions = questions;
-        app.answers = questions.map(() => null);
-        app.statuses = questions.map(() => "not-visited");
+        app.questions = getQuestionsForSet(set);
+        app.answers = app.questions.map(() => null);
+        app.statuses = app.questions.map(() => "not-visited");
         app.statuses[0] = "not-answered";
         app.current = 0;
         app.startedAt = Date.now();
@@ -323,16 +324,9 @@
         showView("exam");
     }
 
-    function getQuestionsForSet(set) {
-        return (set.questionIds || [])
-            .map((id) => questionMap.get(id))
-            .filter(Boolean)
-            .slice(0, 50);
-    }
-
     function resumeAttempt(saved) {
-        const set = quizSets.find((item) => item.id === saved.quizId);
-        if (!set) return;
+        const set = registry.getQuizById(saved.quizId);
+        if (!set || !set.validation || !set.validation.isComplete) return;
         app.quizSet = set;
         app.subject = set.subject;
         app.questions = getQuestionsForSet(set);
@@ -345,6 +339,10 @@
         renderExam();
         startTimer();
         showView("exam");
+    }
+
+    function getQuestionsForSet(set) {
+        return Array.isArray(set.questions) ? set.questions.slice(0, 50) : [];
     }
 
     function renderExam() {
