@@ -41,9 +41,43 @@
 
     function init() {
         cacheDom();
+        bindMobileNavigation();
         bindEvents();
         renderSubjects();
         openInitialRoute();
+    }
+
+    function bindMobileNavigation() {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mainNav = document.querySelector("header nav");
+
+        if (!menuToggle || !mainNav || menuToggle.dataset.quizMenuBound) return;
+        menuToggle.dataset.quizMenuBound = "true";
+
+        const icon = menuToggle.querySelector("i");
+
+        function setMenu(open) {
+            mainNav.classList.toggle("active", open);
+            menuToggle.setAttribute("aria-expanded", String(open));
+            menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+
+            if (icon) {
+                icon.classList.toggle("fa-bars", !open);
+                icon.classList.toggle("fa-times", open);
+            }
+        }
+
+        menuToggle.addEventListener("click", () => {
+            setMenu(!mainNav.classList.contains("active"));
+        });
+
+        mainNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => setMenu(false));
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") setMenu(false);
+        });
     }
 
     function openInitialRoute() {
