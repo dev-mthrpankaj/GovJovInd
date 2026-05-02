@@ -278,6 +278,27 @@ body {
     display: grid;
 }
 
+.manual-fallback {
+    gap: 0.25rem;
+    padding: 0.85rem;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    background: #fff7ed;
+    color: var(--rp-amber);
+    font-weight: 800;
+}
+
+.manual-fallback span {
+    color: #7c2d12;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.rank-predictor-page:not(.has-stage) .stage-field,
+.rank-predictor-page:not(.has-shift) .shift-field {
+    display: none;
+}
+
 .consent-row,
 .privacy-note,
 .result-note {

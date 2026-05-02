@@ -53,6 +53,10 @@
                     <span>Supported Mode</span>
                     <strong id="activeModeLabel">Loading</strong>
                 </div>
+                <div>
+                    <span>Normalization</span>
+                    <strong id="normalizationLabel">Loading</strong>
+                </div>
             </div>
         </section>
 
@@ -73,6 +77,7 @@
                 </button>
             </div>
             <p class="privacy-note"><i class="fas fa-lock"></i> We do not show your name, roll number, or DOB publicly. These details are used only to calculate and retrieve your rank.</p>
+            <p class="privacy-note"><i class="fas fa-circle-info"></i> Online response sheet links may not always be readable automatically because some exam boards use encrypted/session-based links. In that case, please enter your right and wrong answers manually.</p>
         </section>
 
         <section class="tab-card" aria-label="Rank predictor actions">
@@ -91,6 +96,12 @@
                     <div class="form-grid">
                         <label class="rp-field" for="submitExamName">Exam Name
                             <input id="submitExamName" name="examName" type="text" readonly>
+                        </label>
+                        <label class="rp-field stage-field" for="stage">Stage
+                            <select id="stage" name="stage" required></select>
+                        </label>
+                        <label class="rp-field shift-field" for="shift">Shift
+                            <select id="shift" name="shift"></select>
                         </label>
                         <label class="rp-field" for="candidateName">Candidate Name
                             <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
@@ -144,6 +155,11 @@
                         </label>
                     </div>
 
+                    <div class="manual-fallback online-only">
+                        <strong>Manual marks fallback is required</strong>
+                        <span>Automatic answer key reading is not available for many encrypted or session-based links. Enter attempted, right and wrong answers manually.</span>
+                    </div>
+
                     <label class="consent-row" for="dataConsent">
                         <input id="dataConsent" name="dataConsent" type="checkbox" required>
                         <span>I consent to submit this exam data for rank prediction.</span>
@@ -165,6 +181,9 @@
                     <div class="form-grid compact">
                         <label class="rp-field" for="checkExamName">Exam Name
                             <input id="checkExamName" name="checkExamName" type="text" readonly>
+                        </label>
+                        <label class="rp-field shift-field" for="checkShift">Shift (optional)
+                            <select id="checkShift" name="checkShift"></select>
                         </label>
                         <label class="rp-field" for="checkRollNumber">Roll Number
                             <input id="checkRollNumber" name="rollNumber" type="text" autocomplete="off" required>
@@ -188,8 +207,12 @@
                 </div>
                 <div class="result-grid">
                     <article class="result-metric featured">
-                        <span>Expected Marks</span>
+                        <span>Raw Marks</span>
                         <strong id="resultExpectedMarks">0.00</strong>
+                    </article>
+                    <article class="result-metric">
+                        <span>Normalized Marks</span>
+                        <strong id="normalizedMarks">Pending</strong>
                     </article>
                     <article class="result-metric">
                         <span>Candidate</span>
@@ -206,6 +229,10 @@
                     <article class="result-metric">
                         <span>State Rank Estimate</span>
                         <strong id="stateRank">Pending</strong>
+                    </article>
+                    <article class="result-metric">
+                        <span>Shift Rank Estimate</span>
+                        <strong id="shiftRank">Pending</strong>
                     </article>
                     <article class="result-metric">
                         <span>Total Submissions</span>

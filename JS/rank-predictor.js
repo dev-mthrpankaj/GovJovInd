@@ -15,7 +15,7 @@
         const app = document.getElementById("rankPredictorApp");
         if (!app) return;
 
-        state.exam = (config.exams || [])[0] || null;
+        state.exam = (config.exams || []).find((exam) => !exam.disabled) || null;
         bindTabs();
         bindExamSelector();
         bindModeToggle(app);
@@ -47,9 +47,10 @@
     function bindExamSelector() {
         const select = document.getElementById("globalExamSelect");
         if (!select) return;
-        select.innerHTML = (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}">${escapeHtml(exam.examName)}</option>`).join("");
+        select.innerHTML = (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("");
         select.addEventListener("change", () => {
             state.exam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
+            if (state.exam?.disabled) state.exam = (config.exams || []).find((exam) => !exam.disabled) || null;
             applyExamDefaults();
             renderPendingResult();
         });
@@ -69,8 +70,19 @@
         setValue("checkExamName", exam.examName);
         setText("activeExamLabel", exam.examName);
         setText("activeModeLabel", getModeLabel(exam.supportedModes || []));
+        setText("normalizationLabel", exam.normalization ? "Yes" : "No");
         populateSelect(document.getElementById("category"), exam.categories || []);
         populateSelect(document.getElementById("state"), exam.states || []);
+        populateSelect(document.getElementById("stage"), exam.stages || [], "Select Stage");
+        populateSelect(document.getElementById("shift"), getShiftOptions(exam), "Select Shift");
+        populateSelect(document.getElementById("checkShift"), getShiftOptions(exam), "Any Shift");
+        document.getElementById("rankPredictorApp")?.classList.toggle("has-stage", (exam.stages || []).length > 0);
+        document.getElementById("rankPredictorApp")?.classList.toggle("has-shift", getShiftOptions(exam).length > 0);
+        if ((exam.stages || []).length === 1) setValue("stage", exam.stages[0]);
+        if (getShiftOptions(exam).length === 1) {
+            setValue("shift", getShiftOptions(exam)[0]);
+            setValue("checkShift", getShiftOptions(exam)[0]);
+        }
         setValue("totalQuestions", exam.totalQuestions || 0);
         setValue("marksPerCorrect", exam.marksPerCorrect ?? 1);
         setValue("negativeMarking", exam.negativeMarking ?? 0);
@@ -81,9 +93,15 @@
         calculateMarks();
     }
 
-    function populateSelect(select, values) {
+    function populateSelect(select, values, placeholder = "Select") {
         if (!select) return;
-        select.innerHTML = `<option value="">Select</option>${values.map((value) => `<option value="${escapeAttr(value)}">${escapeHtml(value)}</option>`).join("")}`;
+        select.innerHTML = `<option value="">${escapeHtml(placeholder)}</option>${values.map((value) => `<option value="${escapeAttr(value)}">${escapeHtml(value)}</option>`).join("")}`;
+    }
+
+    function getShiftOptions(exam) {
+        if (!exam) return [];
+        if (Array.isArray(exam.shifts) && exam.shifts.length) return exam.shifts;
+        return exam.examType === "online" ? [] : ["Single Shift"];
     }
 
     function bindModeToggle(app) {
@@ -106,7 +124,7 @@
             button.setAttribute("aria-pressed", String(active));
         });
         const answerSheetLink = document.getElementById("answerSheetLink");
-        if (answerSheetLink) answerSheetLink.required = state.mode === "online";
+        if (answerSheetLink) answerSheetLink.required = false;
     }
 
     function bindSubmitForm() {
@@ -243,7 +261,8 @@
     function validateSubmitForm(form) {
         clearErrors(form);
         const required = ["candidateName", "rollNumber", "dob", "gender", "category", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"];
-        if (state.mode === "online") required.push("answerSheetLink");
+        if ((state.exam?.stages || []).length) required.push("stage");
+        if (state.mode === "online" && getShiftOptions(state.exam).length) required.push("shift");
 
         for (const id of required) {
             const field = document.getElementById(id);
@@ -283,7 +302,10 @@
             action: "submitData",
             examId: state.exam.examId,
             examName: state.exam.examName,
+            board: state.exam.board || "",
             sheetName: state.exam.sheetName,
+            stage: readValue("stage"),
+            shift: readValue("shift"),
             mode: state.mode,
             candidateName: readValue("candidateName"),
             rollNumber: readValue("rollNumber"),
@@ -298,7 +320,10 @@
             unattempted: readNumber("unattempted"),
             marksPerCorrect: readNumber("marksPerCorrect"),
             negativeMarking: readNumber("negativeMarking"),
+            rawMarks: state.expectedMarks,
             expectedMarks: state.expectedMarks,
+            normalizedMarks: "",
+            normalization: Boolean(state.exam.normalization),
             answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : ""
         };
     }
@@ -308,6 +333,7 @@
             action: "checkRank",
             examId: state.exam.examId,
             sheetName: state.exam.sheetName,
+            shift: readValue("checkShift"),
             rollNumber: readValue("checkRollNumber"),
             dob: readValue("checkDob")
         };
@@ -315,10 +341,12 @@
 
     function renderPendingResult(payload = {}) {
         setText("resultExpectedMarks", formatMarks(payload.expectedMarks ?? state.expectedMarks));
+        setText("normalizedMarks", "Pending");
         setText("resultCandidateName", "Private");
         setText("overallRank", "Pending");
         setText("categoryRank", "Pending");
         setText("stateRank", "Pending");
+        setText("shiftRank", "Pending");
         setText("totalSubmissions", "0");
         setText("accuracyIndicator", "Pending");
         setText("lastUpdated", "Pending");
@@ -327,15 +355,17 @@
 
     function renderResult(data, payload) {
         const total = Number(data.totalSubmissions || data.total || 0);
-        setText("resultExpectedMarks", formatMarks(data.expectedMarks ?? payload.expectedMarks ?? state.expectedMarks));
+        setText("resultExpectedMarks", formatMarks(data.rawMarks ?? data.expectedMarks ?? payload.expectedMarks ?? state.expectedMarks));
+        setText("normalizedMarks", data.normalizedMarks !== undefined && data.normalizedMarks !== "" && data.normalizedMarks !== null ? formatMarks(data.normalizedMarks) : "Pending");
         setText("resultCandidateName", data.candidateName || "Private");
         setText("overallRank", formatRank(data.overallRank));
         setText("categoryRank", formatRank(data.categoryRank));
         setText("stateRank", formatRank(data.stateRank));
+        setText("shiftRank", formatRank(data.shiftRank));
         setText("totalSubmissions", total ? String(total) : "0");
         setText("accuracyIndicator", data.accuracyIndicator || getAccuracyIndicator(total));
         setText("lastUpdated", formatDateTime(data.lastUpdated));
-        setText("resultNote", "Rank prediction accuracy improves as more candidates submit data.");
+        setText("resultNote", data.rankBasis === "normalized" ? "Rank is based on normalized marks." : "Rank based on raw marks. Normalized rank will improve when normalized marks are available.");
     }
 
     function getAccuracyIndicator(totalSubmissions) {

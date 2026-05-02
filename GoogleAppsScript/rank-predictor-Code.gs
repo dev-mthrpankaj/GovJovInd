@@ -4,6 +4,9 @@ const HEADERS = [
   "Timestamp",
   "Exam ID",
   "Exam Name",
+  "Board",
+  "Stage",
+  "Shift",
   "Mode",
   "Candidate Name",
   "Roll Number",
@@ -18,80 +21,92 @@ const HEADERS = [
   "Unattempted",
   "Marks Per Correct",
   "Negative Marking",
-  "Expected Marks",
+  "Raw Marks",
+  "Normalized Marks",
   "Answer Key Link",
   "Overall Rank",
   "Category Rank",
   "State Rank",
+  "Shift Rank",
   "User Agent"
 ];
 
 function doPost(e) {
   try {
     const payload = JSON.parse((e && e.postData && e.postData.contents) || "{}");
-    return sendJson(routeRequest(payload, e));
+    if (payload.action === "submitData") return sendJson(submitData(payload, e));
+    if (payload.action === "checkRank") return sendJson(checkRank(payload));
+    if (payload.action === "getExamStats") return sendJson(getExamStats(payload));
+    if (payload.action === "getLeaderboard") return sendJson(getLeaderboard(payload));
+    return sendJson({ success: false, message: "Unsupported action." });
   } catch (error) {
     return sendJson({ success: false, message: error.message || "Invalid request." });
   }
 }
 
-function routeRequest(payload, event) {
-  if (!payload || !payload.action) {
-    return { success: false, message: "Action is required." };
+function submitData(payload, event) {
+  validateSubmitPayload(payload);
+  payload.rawMarks = calculateRawMarks(payload);
+  payload.normalizedMarks = payload.normalizedMarks === "" || payload.normalizedMarks === undefined ? "" : Number(payload.normalizedMarks);
+
+  const sheet = getSheetByExam(payload.sheetName);
+  setupHeaders(sheet);
+
+  if (findCandidate(sheet, payload.examId, payload.rollNumber, payload.dob)) {
+    return {
+      success: false,
+      duplicate: true,
+      message: "Your data already exists. Use Check My Rank."
+    };
   }
 
-  if (payload.action === "submitData") {
-    validateSubmitPayload(payload);
-    payload.expectedMarks = calculateMarks(payload);
-    const sheet = getSheetByExam(payload.sheetName);
-    setupSheetHeaders(sheet);
+  appendCandidateData(sheet, payload, getUserAgent(event));
+  const candidateRow = findCandidate(sheet, payload.examId, payload.rollNumber, payload.dob);
+  return Object.assign({
+    success: true,
+    duplicate: false,
+    message: "Data submitted successfully."
+  }, calculateRanks(sheet, candidateRow));
+}
 
-    if (findExistingCandidate(sheet, payload.rollNumber, payload.dob, payload.examId)) {
+function checkRank(payload) {
+  validateCheckPayload(payload);
+  const sheet = getSheetByExam(payload.sheetName);
+  setupHeaders(sheet);
+  const candidateRow = findCandidate(sheet, payload.examId, payload.rollNumber, payload.dob);
+  if (!candidateRow) {
+    return { success: false, found: false, message: "No data found. Please submit your data first." };
+  }
+  return Object.assign({ success: true, found: true, message: "Rank found successfully." }, calculateRanks(sheet, candidateRow));
+}
+
+function getExamStats(payload) {
+  const sheet = getSheetByExam(payload.sheetName);
+  setupHeaders(sheet);
+  const totalSubmissions = getRows(sheet).filter(function (row) {
+    return String(row.examId) === String(payload.examId || row.examId);
+  }).length;
+  return { success: true, totalSubmissions, accuracyIndicator: getAccuracyIndicator(totalSubmissions) };
+}
+
+function getLeaderboard(payload) {
+  const sheet = getSheetByExam(payload.sheetName);
+  setupHeaders(sheet);
+  const rows = getRows(sheet).filter(function (row) {
+    return String(row.examId) === String(payload.examId || row.examId);
+  });
+  return {
+    success: true,
+    leaderboard: rows.sort(compareByRankMarks).slice(0, 50).map(function (row, index) {
       return {
-        success: false,
-        duplicate: true,
-        message: "Data already exists for this Roll Number and Date of Birth. Please use Check My Rank."
+        rank: index + 1,
+        marks: getRankMarks(row),
+        category: row.category,
+        state: row.state,
+        shift: row.shift
       };
-    }
-
-    appendCandidateData(sheet, payload, getUserAgent(event));
-    const rankResult = calculateRanks(sheet, payload.rollNumber, payload.dob, payload.examId);
-    return Object.assign({
-      success: true,
-      duplicate: false,
-      message: "Data submitted successfully."
-    }, rankResult);
-  }
-
-  if (payload.action === "checkRank") {
-    validateCheckPayload(payload);
-    const sheet = getSheetByExam(payload.sheetName);
-    setupSheetHeaders(sheet);
-    const rankResult = calculateRanks(sheet, payload.rollNumber, payload.dob, payload.examId);
-    if (!rankResult.found) {
-      return {
-        success: false,
-        found: false,
-        message: "No data found for this Roll Number and Date of Birth. Please submit your data first."
-      };
-    }
-    return Object.assign({ success: true, found: true, message: "Rank found successfully." }, rankResult);
-  }
-
-  if (payload.action === "getExamStats") {
-    const sheet = getSheetByExam(payload.sheetName);
-    setupSheetHeaders(sheet);
-    const totalSubmissions = getTotalSubmissions(sheet);
-    return { success: true, totalSubmissions, accuracyIndicator: getAccuracyIndicator(totalSubmissions) };
-  }
-
-  if (payload.action === "getLeaderboard") {
-    const sheet = getSheetByExam(payload.sheetName);
-    setupSheetHeaders(sheet);
-    return { success: true, leaderboard: getLeaderboard(sheet) };
-  }
-
-  return { success: false, message: "Unsupported action." };
+    })
+  };
 }
 
 function getSheetByExam(sheetName) {
@@ -101,7 +116,7 @@ function getSheetByExam(sheetName) {
   return spreadsheet.getSheetByName(safeName) || spreadsheet.insertSheet(safeName);
 }
 
-function setupSheetHeaders(sheet) {
+function setupHeaders(sheet) {
   const range = sheet.getRange(1, 1, 1, HEADERS.length);
   const current = range.getValues()[0];
   if (current.join("") !== HEADERS.join("")) {
@@ -111,32 +126,14 @@ function setupSheetHeaders(sheet) {
 }
 
 function validateSubmitPayload(payload) {
-  const required = [
-    "examId",
-    "examName",
-    "sheetName",
-    "mode",
-    "candidateName",
-    "rollNumber",
-    "dob",
-    "gender",
-    "category",
-    "state"
-  ];
-  required.forEach(function (key) {
+  ["examId", "examName", "sheetName", "mode", "rollNumber", "dob", "gender", "category", "state"].forEach(function (key) {
     if (!String(payload[key] || "").trim()) throw new Error(key + " is required.");
   });
-
   ["totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"].forEach(function (key) {
     if (!isFinite(Number(payload[key]))) throw new Error(key + " must be a number.");
   });
-
-  if (Number(payload.totalAttempted) > Number(payload.totalQuestions)) {
-    throw new Error("Total attempted cannot exceed total questions.");
-  }
-  if (Number(payload.rightAnswers) + Number(payload.wrongAnswers) > Number(payload.totalAttempted)) {
-    throw new Error("Right and wrong answers cannot exceed total attempted.");
-  }
+  if (Number(payload.totalAttempted) > Number(payload.totalQuestions)) throw new Error("Total attempted cannot exceed total questions.");
+  if (Number(payload.rightAnswers) + Number(payload.wrongAnswers) > Number(payload.totalAttempted)) throw new Error("Right and wrong answers cannot exceed total attempted.");
 }
 
 function validateCheckPayload(payload) {
@@ -145,16 +142,16 @@ function validateCheckPayload(payload) {
   });
 }
 
-function calculateMarks(payload) {
-  const right = Number(payload.rightAnswers) || 0;
-  const wrong = Number(payload.wrongAnswers) || 0;
-  const marksPerCorrect = Number(payload.marksPerCorrect) || 0;
-  const negativeMarking = Number(payload.negativeMarking) || 0;
-  return round2((right * marksPerCorrect) - (wrong * negativeMarking));
+function calculateRawMarks(payload) {
+  return round2((Number(payload.rightAnswers) || 0) * (Number(payload.marksPerCorrect) || 0) - (Number(payload.wrongAnswers) || 0) * (Number(payload.negativeMarking) || 0));
 }
 
-function findExistingCandidate(sheet, rollNumber, dob, examId) {
-  return findRowIndex(sheet, rollNumber, dob, examId) > -1;
+function findCandidate(sheet, examId, rollNumber, dob) {
+  return getRows(sheet).find(function (row) {
+    return String(row.examId) === String(examId) &&
+      normalizeKey(row.rollNumber) === normalizeKey(rollNumber) &&
+      normalizeDob(row.dob) === normalizeDob(dob);
+  }) || null;
 }
 
 function appendCandidateData(sheet, payload, userAgent) {
@@ -163,8 +160,11 @@ function appendCandidateData(sheet, payload, userAgent) {
     new Date(),
     payload.examId,
     payload.examName,
+    payload.board || "",
+    payload.stage || "",
+    payload.shift || "",
     payload.mode,
-    payload.candidateName,
+    payload.candidateName || "Private",
     normalizeKey(payload.rollNumber),
     payload.dob,
     payload.gender,
@@ -177,8 +177,10 @@ function appendCandidateData(sheet, payload, userAgent) {
     unattempted,
     Number(payload.marksPerCorrect),
     Number(payload.negativeMarking),
-    Number(payload.expectedMarks),
+    Number(payload.rawMarks),
+    payload.normalizedMarks,
     payload.answerKeyLink || "",
+    "",
     "",
     "",
     "",
@@ -186,124 +188,98 @@ function appendCandidateData(sheet, payload, userAgent) {
   ]);
 }
 
-function calculateRanks(sheet, rollNumber, dob, examId) {
-  const rows = getDataRows(sheet).filter(function (row) {
-    return String(row.examId) === String(examId);
+function calculateRanks(sheet, candidateRow) {
+  if (!candidateRow) return { found: false };
+  const rows = getRows(sheet).filter(function (row) {
+    return String(row.examId) === String(candidateRow.examId);
   });
-  const target = rows.find(function (row) {
-    return normalizeKey(row.rollNumber) === normalizeKey(rollNumber) && normalizeDob(row.dob) === normalizeDob(dob);
-  });
+  const overallRank = calculateTieAwareRank(rows, candidateRow);
+  const categoryRank = calculateTieAwareRank(rows.filter(function (row) {
+    return normalizeKey(row.category) === normalizeKey(candidateRow.category);
+  }), candidateRow);
+  const stateRank = calculateTieAwareRank(rows.filter(function (row) {
+    return normalizeKey(row.state) === normalizeKey(candidateRow.state);
+  }), candidateRow);
+  const shiftRank = calculateTieAwareRank(rows.filter(function (row) {
+    return normalizeKey(row.shift) === normalizeKey(candidateRow.shift);
+  }), candidateRow);
 
-  if (!target) return { found: false };
+  sheet.getRange(candidateRow.rowNumber, 24, 1, 4).setValues([[overallRank, categoryRank, stateRank, shiftRank]]);
 
-  const overallRank = rankWithin(rows, target);
-  const categoryRank = rankWithin(rows.filter(function (row) {
-    return normalizeKey(row.category) === normalizeKey(target.category);
-  }), target);
-  const stateRank = rankWithin(rows.filter(function (row) {
-    return normalizeKey(row.state) === normalizeKey(target.state);
-  }), target);
-
-  writeRanks(sheet, target.rowNumber, overallRank, categoryRank, stateRank);
-
-  const totalSubmissions = rows.length;
+  const rankBasis = candidateRow.normalizedMarks !== "" && candidateRow.normalizedMarks !== null && candidateRow.normalizedMarks !== undefined ? "normalized" : "raw";
   return {
     found: true,
-    candidateName: target.candidateName,
-    expectedMarks: Number(target.expectedMarks),
+    candidateName: "Private",
+    rawMarks: Number(candidateRow.rawMarks),
+    expectedMarks: Number(candidateRow.rawMarks),
+    normalizedMarks: candidateRow.normalizedMarks,
     overallRank,
     categoryRank,
     stateRank,
-    totalSubmissions,
-    accuracyIndicator: getAccuracyIndicator(totalSubmissions),
+    shiftRank,
+    totalSubmissions: rows.length,
+    accuracyIndicator: getAccuracyIndicator(rows.length),
+    rankBasis,
     lastUpdated: new Date().toISOString()
   };
 }
 
-function getDataRows(sheet) {
+function calculateTieAwareRank(rows, candidateRow) {
+  const sorted = rows.slice().sort(compareByRankMarks);
+  let previousMarks = null;
+  let previousRank = 0;
+  for (let index = 0; index < sorted.length; index += 1) {
+    const marks = getRankMarks(sorted[index]);
+    const rank = marks === previousMarks ? previousRank : index + 1;
+    previousMarks = marks;
+    previousRank = rank;
+    if (sorted[index].rowNumber === candidateRow.rowNumber) return rank;
+  }
+  return 0;
+}
+
+function getRows(sheet) {
   const lastRow = sheet.getLastRow();
   if (lastRow < 2) return [];
-  const values = sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues();
-  return values.map(function (row, index) {
+  return sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues().map(function (row, index) {
     return {
       rowNumber: index + 2,
       timestamp: row[0],
       examId: row[1],
       examName: row[2],
-      mode: row[3],
-      candidateName: row[4],
-      rollNumber: row[5],
-      dob: row[6],
-      gender: row[7],
-      category: row[8],
-      state: row[9],
-      totalQuestions: row[10],
-      totalAttempted: row[11],
-      rightAnswers: row[12],
-      wrongAnswers: row[13],
-      unattempted: row[14],
-      marksPerCorrect: row[15],
-      negativeMarking: row[16],
-      expectedMarks: Number(row[17]) || 0
+      board: row[3],
+      stage: row[4],
+      shift: row[5],
+      mode: row[6],
+      candidateName: row[7],
+      rollNumber: row[8],
+      dob: row[9],
+      gender: row[10],
+      category: row[11],
+      state: row[12],
+      totalQuestions: row[13],
+      totalAttempted: row[14],
+      rightAnswers: row[15],
+      wrongAnswers: row[16],
+      unattempted: row[17],
+      marksPerCorrect: row[18],
+      negativeMarking: row[19],
+      rawMarks: Number(row[20]) || 0,
+      normalizedMarks: row[21] === "" ? "" : Number(row[21])
     };
   });
 }
 
-function findRowIndex(sheet, rollNumber, dob, examId) {
-  const rows = getDataRows(sheet);
-  const found = rows.find(function (row) {
-    return String(row.examId) === String(examId) &&
-      normalizeKey(row.rollNumber) === normalizeKey(rollNumber) &&
-      normalizeDob(row.dob) === normalizeDob(dob);
-  });
-  return found ? found.rowNumber : -1;
+function compareByRankMarks(a, b) {
+  return getRankMarks(b) - getRankMarks(a);
 }
 
-function rankWithin(rows, target) {
-  const sorted = rows.slice().sort(function (a, b) {
-    return Number(b.expectedMarks) - Number(a.expectedMarks);
-  });
-  let rank = 0;
-  let previousMarks = null;
-  let previousRank = 0;
-  for (let index = 0; index < sorted.length; index += 1) {
-    const marks = Number(sorted[index].expectedMarks);
-    rank = marks === previousMarks ? previousRank : index + 1;
-    previousMarks = marks;
-    previousRank = rank;
-    if (sorted[index].rowNumber === target.rowNumber) return rank;
-  }
-  return 0;
-}
-
-function writeRanks(sheet, rowNumber, overallRank, categoryRank, stateRank) {
-  sheet.getRange(rowNumber, 20, 1, 3).setValues([[overallRank, categoryRank, stateRank]]);
-}
-
-function getTotalSubmissions(sheet) {
-  return Math.max(sheet.getLastRow() - 1, 0);
-}
-
-function getLeaderboard(sheet) {
-  return getDataRows(sheet)
-    .sort(function (a, b) {
-      return Number(b.expectedMarks) - Number(a.expectedMarks);
-    })
-    .slice(0, 20)
-    .map(function (row, index) {
-      return {
-        rank: index + 1,
-        expectedMarks: row.expectedMarks,
-        category: row.category,
-        state: row.state
-      };
-    });
+function getRankMarks(row) {
+  return row.normalizedMarks !== "" && row.normalizedMarks !== null && row.normalizedMarks !== undefined ? Number(row.normalizedMarks) : Number(row.rawMarks);
 }
 
 function sendJson(response) {
-  return ContentService
-    .createTextOutput(JSON.stringify(response))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(response)).setMimeType(ContentService.MimeType.JSON);
 }
 
 function getAccuracyIndicator(totalSubmissions) {
