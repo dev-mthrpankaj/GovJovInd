@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Sarkari Exam Quiz Practice | GovJobUpdates</title>
-    <meta name="description" content="Practice free Sarkari exam quizzes for SSC, Railway, Police, Banking, UPSC, state exams, reasoning, GK, maths, English, Hindi, science, and computer topics.">
+    <title>Free Government Exam Quizzes | GovJobUpdates</title>
+    <meta name="description" content="Practice 50-question government exam quiz sets for Mathematics, English, Hindi, General Awareness, Reasoning and Computer with 30-minute timer.">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
@@ -38,178 +38,57 @@
     </header>
 
     <main class="quiz-app" id="quizApp">
-        <section class="view quiz-home" id="homeView" aria-labelledby="quizHomeTitle">
-            <div class="quiz-hero">
-                <div class="hero-copy">
-                    <span class="quiz-badge"><i class="fas fa-bolt"></i> Free exam practice</span>
-                    <h1 id="quizHomeTitle">Practice smarter for Sarkari exams</h1>
-                    <p>Build speed, accuracy and exam confidence with SSC, Railway, Police, Banking, UPSC and State Exam style practice.</p>
-                    <div class="hero-actions">
-                        <button class="btn btn-primary" type="button" data-action="start-flow">Start New Quiz</button>
-                        <button class="btn btn-outline hidden" type="button" id="continueQuizBtn" data-action="continue-quiz">Continue Last Quiz</button>
-                    </div>
-                </div>
-                <div class="hero-links" aria-label="Useful GovJobUpdates links">
-                    <a href="latest-jobs.html"><i class="fas fa-briefcase"></i> Latest Jobs</a>
-                    <a href="admitcard.html"><i class="fas fa-id-card"></i> Admit Cards</a>
-                    <a href="results.html"><i class="fas fa-chart-line"></i> Results</a>
-                    <a href="documents.html"><i class="fas fa-file-alt"></i> Documents</a>
-                </div>
-            </div>
+        <h1 class="sr-only">Free Government Exam Quizzes</h1>
 
-            <section class="dashboard-grid" aria-label="Quiz dashboard">
-                <article class="metric-card"><span>Best Score</span><strong id="bestScore">0%</strong></article>
-                <article class="metric-card"><span>Total Attempts</span><strong id="totalAttempts">0</strong></article>
-                <article class="metric-card"><span>Accuracy Average</span><strong id="avgAccuracy">0%</strong></article>
-            </section>
-
-            <section class="panel">
-                <div class="panel-heading">
-                    <h2>Choose Subject</h2>
-                    <p>Pick a subject now, or use the guided setup.</p>
-                </div>
-                <div class="subject-grid" id="subjectCards"></div>
-            </section>
-
-            <section class="panel">
-                <div class="panel-heading">
-                    <h2>Exam Categories</h2>
-                    <p>Practice questions tagged for popular Indian government exams.</p>
-                </div>
-                <div class="chip-row" id="examChips"></div>
-            </section>
-
-            <section class="panel">
-                <div class="panel-heading row-heading">
-                    <div>
-                        <h2>Recent Attempts</h2>
-                        <p>Your latest completed quizzes are saved on this browser.</p>
-                    </div>
-                    <button class="btn btn-ghost" type="button" data-action="show-history">View History</button>
-                </div>
-                <div class="recent-list" id="recentAttempts"></div>
-            </section>
+        <section class="quiz-screen subject-screen" id="subjectView" aria-label="Choose quiz subject">
+            <div class="subject-grid" id="subjectCards"></div>
         </section>
 
-        <section class="view setup-view hidden" id="setupView" aria-labelledby="setupTitle">
-            <button class="back-btn" type="button" data-action="go-home"><i class="fas fa-arrow-left"></i> Back</button>
-            <div class="panel">
-                <div class="panel-heading">
-                    <h1 id="setupTitle">Create Practice Quiz</h1>
-                    <p>Set up your test like an exam, or keep it relaxed for practice.</p>
-                </div>
-                <div class="setup-steps" id="setupSteps"></div>
-                <div class="message-box hidden" id="setupMessage" role="status" aria-live="polite"></div>
-                <form class="setup-form" id="quizSetupForm">
-                    <fieldset>
-                        <legend>1. Subject Selection</legend>
-                        <div class="option-grid" id="subjectOptions"></div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>2. Exam Category Selection</legend>
-                        <div class="option-grid compact" id="categoryOptions"></div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>3. Topic Selection</legend>
-                        <div class="toolbar-row">
-                            <button class="btn btn-ghost" type="button" data-action="select-all-topics">Select All Topics</button>
-                            <button class="btn btn-ghost" type="button" data-action="clear-topics">Clear Topics</button>
-                        </div>
-                        <div class="option-grid" id="topicOptions"></div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>4. Difficulty Selection</legend>
-                        <div class="segmented" id="difficultyOptions">
-                            <label><input type="radio" name="difficulty" value="mixed" checked> Mixed</label>
-                            <label><input type="radio" name="difficulty" value="easy"> Easy</label>
-                            <label><input type="radio" name="difficulty" value="medium"> Medium</label>
-                            <label><input type="radio" name="difficulty" value="hard"> Hard</label>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>5. Quiz Settings</legend>
-                        <div class="settings-grid">
-                            <label class="field">Number of Questions
-                                <select id="questionCount">
-                                    <option value="5">5 Questions</option>
-                                    <option value="10" selected>10 Questions</option>
-                                    <option value="15">15 Questions</option>
-                                    <option value="20">20 Questions</option>
-                                    <option value="30">30 Questions</option>
-                                </select>
-                            </label>
-                            <label class="field">Time Limit
-                                <select id="timerType">
-                                    <option value="none">No timer</option>
-                                    <option value="perQuestion">Per question timer</option>
-                                    <option value="fullTest" selected>Full test timer</option>
-                                </select>
-                            </label>
-                            <label class="field">Time Value
-                                <select id="timerValue">
-                                    <option value="30">30 seconds / question</option>
-                                    <option value="45" selected>45 seconds / question</option>
-                                    <option value="60">60 seconds / question</option>
-                                    <option value="600">10 minutes full test</option>
-                                    <option value="900">15 minutes full test</option>
-                                    <option value="1200">20 minutes full test</option>
-                                </select>
-                            </label>
-                            <label class="field">Mode
-                                <select id="quizMode">
-                                    <option value="practice" selected>Practice Mode</option>
-                                    <option value="exam">Exam Mode</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="toggle-grid">
-                            <label><input type="checkbox" id="negativeMarking" checked> Negative marking</label>
-                            <label><input type="checkbox" id="shuffleQuestions" checked> Shuffle questions</label>
-                            <label><input type="checkbox" id="shuffleOptions"> Shuffle options</label>
-                        </div>
-                    </fieldset>
-                    <div class="setup-actions">
-                        <button class="btn btn-primary" type="submit">Start Practice Quiz</button>
-                    </div>
-                </form>
+        <section class="quiz-screen quiz-list-screen hidden" id="quizListView" aria-labelledby="subjectQuizHeading">
+            <div class="screen-topbar">
+                <button class="quiz-back-btn" type="button" data-action="show-subjects"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+                <h2 id="subjectQuizHeading">Subject Quizzes</h2>
             </div>
+            <div class="message-box hidden" id="quizListMessage" role="status" aria-live="polite"></div>
+            <div class="quiz-set-list" id="quizSetList"></div>
         </section>
 
-        <section class="view exam-view hidden" id="examView" aria-label="Quiz exam interface">
+        <section class="quiz-screen exam-screen hidden" id="examView" aria-label="Exam interface">
             <div class="exam-shell">
                 <div class="exam-main">
                     <div class="exam-topbar">
-                        <div>
+                        <div class="exam-title-block">
                             <span id="examSubject">Subject</span>
-                            <strong>Question <span id="currentQuestionNo">1</span>/<span id="totalQuestionNo">10</span></strong>
+                            <strong id="examTitle">Quiz title</strong>
                         </div>
-                        <div class="timer-pill" id="timerPill"><i class="fas fa-clock"></i> <span id="timerText">No timer</span></div>
-                        <button class="btn btn-ghost palette-toggle" type="button" data-action="open-palette">Palette</button>
+                        <div class="exam-status-block">
+                            <span>Question <strong id="currentQuestionNo">1</strong>/<strong id="totalQuestionNo">50</strong></span>
+                            <span class="timer-pill" id="timerPill"><i class="fas fa-clock"></i> <strong id="timerText">30:00</strong></span>
+                            <button class="palette-toggle" type="button" data-action="open-palette" aria-controls="palettePanel"><i class="fas fa-border-all"></i> Palette</button>
+                        </div>
                     </div>
-                    <div class="progress-track"><div id="quizProgress"></div></div>
+
+                    <div class="progress-track" aria-hidden="true"><div id="quizProgress"></div></div>
                     <article class="question-card" id="questionCard"></article>
-                    <div class="mobile-action-bar">
-                        <button class="btn btn-ghost" type="button" data-action="prev-question">Previous</button>
-                        <button class="btn btn-primary" type="button" data-action="next-question">Next</button>
-                    </div>
+
                     <div class="exam-actions">
                         <button class="btn btn-ghost" type="button" data-action="prev-question">Previous</button>
-                        <button class="btn btn-ghost" type="button" data-action="next-question">Next</button>
-                        <button class="btn btn-outline" type="button" data-action="clear-response">Clear Response</button>
+                        <button class="btn btn-primary" type="button" data-action="save-next">Save &amp; Next</button>
                         <button class="btn btn-outline" type="button" data-action="mark-review">Mark for Review</button>
-                        <button class="btn btn-primary" type="button" data-action="save-next">Save & Next</button>
+                        <button class="btn btn-outline" type="button" data-action="clear-response">Clear Response</button>
                         <button class="btn btn-danger" type="button" data-action="submit-confirm">Submit Test</button>
                     </div>
                 </div>
+
                 <aside class="palette-panel" id="palettePanel" aria-label="Question palette">
                     <div class="palette-head">
                         <h2>Question Palette</h2>
-                        <button class="btn btn-ghost close-palette" type="button" data-action="close-palette">Close</button>
+                        <button class="palette-close" type="button" data-action="close-palette" aria-label="Close question palette"><i class="fas fa-times"></i></button>
                     </div>
                     <div class="palette-grid" id="questionPalette"></div>
-                    <div class="legend">
-                        <span><i class="status-dot not-visited"></i> Not Visited</span>
-                        <span><i class="status-dot not-answered"></i> Not Answered</span>
+                    <div class="palette-legend">
+                        <span><i class="status-dot not-visited"></i> Not visited</span>
+                        <span><i class="status-dot not-answered"></i> Not answered</span>
                         <span><i class="status-dot answered"></i> Answered</span>
                         <span><i class="status-dot marked"></i> Marked</span>
                         <span><i class="status-dot answered-marked"></i> Answered + Marked</span>
@@ -218,12 +97,11 @@
             </div>
         </section>
 
-        <section class="view result-view hidden" id="resultView" aria-labelledby="resultTitle"></section>
-        <section class="view review-view hidden" id="reviewView" aria-labelledby="reviewTitle"></section>
-        <section class="view history-view hidden" id="historyView" aria-labelledby="historyTitle"></section>
+        <section class="quiz-screen result-screen hidden" id="resultView" aria-labelledby="resultTitle"></section>
+        <section class="quiz-screen review-screen hidden" id="reviewView" aria-labelledby="reviewTitle"></section>
     </main>
 
-    <div class="modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitTitle">
+    <div class="quiz-modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitTitle">
         <div class="modal-card">
             <h2 id="submitTitle">Submit test?</h2>
             <p id="submitSummary">Please confirm your submission.</p>
@@ -253,7 +131,7 @@
             <div class="footer-section">
                 <h3>Resources</h3>
                 <ul>
-                    <li><a href="quiz.html">Exam Quizzes</a></li>
+                    <li><a href="quiz.html">Quizzes</a></li>
                     <li><a href="rank-predictor.html">Rank Predictor</a></li>
                     <li><a href="documents.html">Documents</a></li>
                     <li><a href="latest-jobs.html">Latest Jobs</a></li>
@@ -274,6 +152,7 @@
         </div>
     </footer>
 <script src="../JS/quiz-data.js" defer></script>
+<script src="../JS/quiz-sets.js" defer></script>
 <script src="../JS/quiz-storage.js" defer></script>
 <script src="../JS/quizzes.js" defer></script>
 <script src="../JS/script.js"></script>

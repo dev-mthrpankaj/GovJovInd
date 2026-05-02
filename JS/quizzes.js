@@ -1,741 +1,650 @@
 (function () {
-    const quizData = window.SARKARI_QUIZ || { subjects: [], categories: [], questions: [] };
+    "use strict";
+
+    const quizData = window.SARKARI_QUIZ || { subjects: [], questions: [] };
+    const quizSets = Array.isArray(window.QUIZ_SETS) ? window.QUIZ_SETS : [];
     const storage = window.QuizStorage || {
-        read: (_key, fallback) => fallback,
-        write: () => false,
-        remove: () => {},
-        clearHistory: () => {}
+        read: function (_key, fallback) { return fallback; },
+        write: function () { return false; },
+        remove: function () {}
+    };
+
+    const subjectIcons = {
+        Mathematics: "fa-calculator",
+        English: "fa-language",
+        Hindi: "fa-book",
+        "General Awareness": "fa-globe-asia",
+        Reasoning: "fa-brain",
+        Computer: "fa-laptop-code"
     };
 
     const views = {};
+    const elements = {};
+    const questionMap = new Map(quizData.questions.map((question) => [question.id, question]));
+
     const app = {
-        settings: defaultSettings(),
+        subject: "",
+        quizSet: null,
         questions: [],
         answers: [],
         statuses: [],
         current: 0,
         startedAt: 0,
-        elapsed: 0,
-        fullRemaining: 0,
-        questionRemaining: 0,
+        endsAt: 0,
+        remainingSeconds: 1800,
         timerId: null,
-        lastResult: null,
-        reviewFilter: 'all',
-        reviewSearch: ''
+        result: null,
+        reviewFilter: "all"
     };
 
-    const icons = {
-        Mathematics: 'fa-calculator',
-        English: 'fa-language',
-        Reasoning: 'fa-brain',
-        'General Awareness': 'fa-globe',
-        Science: 'fa-flask',
-        Hindi: 'fa-book',
-        Computer: 'fa-laptop'
-    };
-
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener("DOMContentLoaded", init);
 
     function init() {
-        cacheViews();
-        initHeaderMenu();
-        renderHome();
-        renderSetupOptions();
+        cacheDom();
         bindEvents();
-        showView('home');
+        renderSubjects();
+        openInitialRoute();
     }
 
-    function cacheViews() {
-        ['home', 'setup', 'exam', 'result', 'review', 'history'].forEach(name => {
-            views[name] = document.getElementById(`${name}View`);
-        });
+    function openInitialRoute() {
+        const params = new URLSearchParams(window.location.search);
+        const quizId = params.get("quiz");
+        const subject = params.get("subject");
+
+        if (quizId && quizSets.some((set) => set.id === quizId)) {
+            startQuiz(quizId);
+            return;
+        }
+
+        if (subject && quizData.subjects.includes(subject)) {
+            openSubject(subject);
+            return;
+        }
+
+        showView("subject");
     }
 
-    function initHeaderMenu() {
-        const toggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav');
-        if (!toggle || !nav) return;
-        toggle.addEventListener('click', () => {
-            const open = nav.classList.toggle('active');
-            toggle.setAttribute('aria-expanded', String(open));
-            toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-        });
+    function cacheDom() {
+        views.subject = document.getElementById("subjectView");
+        views.quizList = document.getElementById("quizListView");
+        views.exam = document.getElementById("examView");
+        views.result = document.getElementById("resultView");
+        views.review = document.getElementById("reviewView");
+
+        elements.subjectCards = document.getElementById("subjectCards");
+        elements.subjectQuizHeading = document.getElementById("subjectQuizHeading");
+        elements.quizSetList = document.getElementById("quizSetList");
+        elements.quizListMessage = document.getElementById("quizListMessage");
+        elements.examSubject = document.getElementById("examSubject");
+        elements.examTitle = document.getElementById("examTitle");
+        elements.currentQuestionNo = document.getElementById("currentQuestionNo");
+        elements.totalQuestionNo = document.getElementById("totalQuestionNo");
+        elements.timerPill = document.getElementById("timerPill");
+        elements.timerText = document.getElementById("timerText");
+        elements.quizProgress = document.getElementById("quizProgress");
+        elements.questionCard = document.getElementById("questionCard");
+        elements.palettePanel = document.getElementById("palettePanel");
+        elements.questionPalette = document.getElementById("questionPalette");
+        elements.submitModal = document.getElementById("submitModal");
+        elements.submitSummary = document.getElementById("submitSummary");
     }
 
     function bindEvents() {
-        document.body.addEventListener('click', handleClick);
-        document.getElementById('quizSetupForm').addEventListener('submit', event => {
-            event.preventDefault();
-            startQuizFromSetup();
-        });
-        document.getElementById('quizSetupForm').addEventListener('change', () => {
-            document.querySelectorAll('.option-tile').forEach(label => {
-                const input = label.querySelector('input');
-                if (input) label.classList.toggle('selected', input.checked);
-            });
-        });
-        document.getElementById('subjectOptions').addEventListener('change', syncTopics);
-        document.getElementById('categoryOptions').addEventListener('change', syncTopics);
-        document.addEventListener('keydown', handleKeyboard);
-        window.addEventListener('beforeunload', persistUnfinished);
+        document.body.addEventListener("click", handleClick);
+        document.addEventListener("keydown", handleKeyboard);
+        window.addEventListener("beforeunload", persistUnfinished);
     }
 
     function handleClick(event) {
-        const actionTarget = event.target.closest('[data-action]');
-        const subjectCard = event.target.closest('[data-subject]');
-        const option = event.target.closest('[data-option-index]');
-        const palette = event.target.closest('[data-question-index]');
-        const reviewFilter = event.target.closest('[data-review-filter]');
+        const subjectTarget = event.target.closest("[data-subject]");
+        const quizTarget = event.target.closest("[data-quiz-id]");
+        const optionTarget = event.target.closest("[data-option-index]");
+        const paletteTarget = event.target.closest("[data-question-index]");
+        const actionTarget = event.target.closest("[data-action]");
+        const reviewFilterTarget = event.target.closest("[data-review-filter]");
 
-        if (subjectCard) {
-            openSetup({ subject: subjectCard.dataset.subject });
+        if (subjectTarget) {
+            openSubject(subjectTarget.dataset.subject);
             return;
         }
-        if (option) {
-            selectOption(Number(option.dataset.optionIndex));
+
+        if (quizTarget) {
+            startQuiz(quizTarget.dataset.quizId);
             return;
         }
-        if (palette) {
-            goQuestion(Number(palette.dataset.questionIndex));
+
+        if (optionTarget) {
+            selectOption(Number(optionTarget.dataset.optionIndex));
+            return;
+        }
+
+        if (paletteTarget) {
+            goQuestion(Number(paletteTarget.dataset.questionIndex));
             closePalette();
             return;
         }
-        if (reviewFilter) {
-            app.reviewFilter = reviewFilter.dataset.reviewFilter;
+
+        if (reviewFilterTarget) {
+            app.reviewFilter = reviewFilterTarget.dataset.reviewFilter;
             renderReview();
             return;
         }
+
         if (!actionTarget) return;
 
-        const action = actionTarget.dataset.action;
-        const handlers = {
-            'start-flow': () => openSetup({ category: actionTarget.dataset.category }),
-            'continue-quiz': continueQuiz,
-            'show-history': showHistory,
-            'go-home': () => { stopTimer(); showView('home'); renderHome(); },
-            'select-all-topics': () => setAllTopics(true),
-            'clear-topics': () => setAllTopics(false),
-            'prev-question': () => goQuestion(app.current - 1),
-            'next-question': () => goQuestion(app.current + 1),
-            'save-next': saveAndNext,
-            'clear-response': clearResponse,
-            'mark-review': markReview,
-            'submit-confirm': openSubmitModal,
-            'submit-now': () => finishQuiz('manual'),
-            'cancel-submit': closeSubmitModal,
-            'open-palette': openPalette,
-            'close-palette': closePalette,
-            'new-quiz': () => openSetup(),
-            'review-answers': () => { showView('review'); renderReview(); },
-            'back-results': () => showView('result'),
-            'export-json': exportResult,
-            'clear-history': clearHistory
+        const actions = {
+            "show-subjects": function () {
+                stopTimer();
+                renderSubjects();
+                showView("subject");
+            },
+            "prev-question": function () { goQuestion(app.current - 1); },
+            "save-next": saveAndNext,
+            "mark-review": markForReview,
+            "clear-response": clearResponse,
+            "submit-confirm": openSubmitModal,
+            "submit-now": function () { submitQuiz("manual"); },
+            "cancel-submit": closeSubmitModal,
+            "open-palette": openPalette,
+            "close-palette": closePalette,
+            "review-answers": function () {
+                app.reviewFilter = "all";
+                renderReview();
+                showView("review");
+            },
+            "back-to-result": function () { showView("result"); },
+            "back-to-quizzes": function () { openSubject(app.subject); }
         };
-        handlers[action]?.();
+
+        if (actions[actionTarget.dataset.action]) actions[actionTarget.dataset.action]();
     }
 
     function handleKeyboard(event) {
-        if (views.exam.classList.contains('hidden') || document.getElementById('submitModal').classList.contains('hidden') === false) return;
+        if (views.exam.classList.contains("hidden") || !elements.submitModal.classList.contains("hidden")) return;
         const key = event.key.toLowerCase();
-        if (['1', '2', '3', '4'].includes(key)) {
+        if (["1", "2", "3", "4"].includes(key)) {
             event.preventDefault();
             selectOption(Number(key) - 1);
         }
-        if (key === 'n') { event.preventDefault(); saveAndNext(); }
-        if (key === 'p') { event.preventDefault(); goQuestion(app.current - 1); }
-        if (key === 'm') { event.preventDefault(); markReview(); }
-        if (key === 'c') { event.preventDefault(); clearResponse(); }
-        if (key === 's') { event.preventDefault(); openSubmitModal(); }
-    }
-
-    function defaultSettings() {
-        return {
-            subjects: ['Mathematics'],
-            category: 'SSC',
-            topics: [],
-            difficulty: 'mixed',
-            count: 10,
-            timerType: 'fullTest',
-            timerValue: 45,
-            negativeMarking: true,
-            shuffleQuestions: true,
-            shuffleOptions: false,
-            mode: 'practice'
-        };
+        if (key === "p") {
+            event.preventDefault();
+            goQuestion(app.current - 1);
+        }
+        if (key === "n") {
+            event.preventDefault();
+            saveAndNext();
+        }
+        if (key === "m") {
+            event.preventDefault();
+            markForReview();
+        }
     }
 
     function showView(name) {
-        Object.entries(views).forEach(([key, node]) => node.classList.toggle('hidden', key !== name));
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderHome() {
-        renderSubjectCards();
-        renderExamChips();
-        renderDashboard();
-        renderRecentAttempts();
-        document.getElementById('continueQuizBtn').classList.toggle('hidden', !storage.read('unfinished', null));
-    }
-
-    function renderSubjectCards() {
-        document.getElementById('subjectCards').innerHTML = quizData.subjects.map(subject => {
-            const count = quizData.questions.filter(q => q.subject === subject).length;
-            return `<button class="subject-card" type="button" data-subject="${escapeAttr(subject)}">
-                <span class="subject-icon"><i class="fas ${icons[subject] || 'fa-book'}"></i></span>
-                <h3>${subject}</h3>
-                <p>${count} exam-style questions with explanations.</p>
-            </button>`;
-        }).join('');
-    }
-
-    function renderExamChips() {
-        document.getElementById('examChips').innerHTML = quizData.categories.map(category =>
-            `<button class="chip" type="button" data-action="start-flow" data-category="${escapeAttr(category)}">${category}</button>`
-        ).join('');
-    }
-
-    function renderDashboard() {
-        const attempts = storage.read('attempts', []);
-        const best = attempts.reduce((max, item) => Math.max(max, item.percentage || 0), 0);
-        const avg = attempts.length ? Math.round(attempts.reduce((sum, item) => sum + (item.accuracy || 0), 0) / attempts.length) : 0;
-        document.getElementById('bestScore').textContent = `${best}%`;
-        document.getElementById('totalAttempts').textContent = attempts.length;
-        document.getElementById('avgAccuracy').textContent = `${avg}%`;
-    }
-
-    function renderRecentAttempts() {
-        const attempts = storage.read('attempts', []).slice(0, 5);
-        document.getElementById('recentAttempts').innerHTML = attempts.length
-            ? attempts.map(item => `<article class="recent-item"><strong>${item.title}</strong><span>${item.percentage}% score · ${item.accuracy}% accuracy · ${new Date(item.completedAt).toLocaleString()}</span></article>`).join('')
-            : '<p class="result-subtext">No attempts yet. Start your first practice quiz.</p>';
-    }
-
-    function renderSetupOptions() {
-        document.getElementById('subjectOptions').innerHTML = quizData.subjects.map((subject, index) =>
-            `<label class="option-tile ${index === 0 ? 'selected' : ''}"><input type="checkbox" name="subjects" value="${escapeAttr(subject)}" ${index === 0 ? 'checked' : ''}> <strong>${subject}</strong><span>${topicsForSubject(subject).length} topics</span></label>`
-        ).join('');
-        document.getElementById('categoryOptions').innerHTML = quizData.categories.map((category, index) =>
-            `<label class="option-tile ${index === 0 ? 'selected' : ''}"><input type="radio" name="category" value="${escapeAttr(category)}" ${index === 0 ? 'checked' : ''}> <strong>${category}</strong></label>`
-        ).join('');
-        syncTopics();
-    }
-
-    function openSetup(seed = {}) {
-        showMessage('');
-        showView('setup');
-        if (seed.subject) {
-            document.querySelectorAll('input[name="subjects"]').forEach(input => {
-                input.checked = input.value === seed.subject;
-                input.closest('.option-tile').classList.toggle('selected', input.checked);
-            });
-            syncTopics();
-        }
-        if (seed.category) {
-            document.querySelectorAll('input[name="category"]').forEach(input => {
-                input.checked = input.value === seed.category;
-                input.closest('.option-tile').classList.toggle('selected', input.checked);
-            });
-        }
-    }
-
-    function syncTopics() {
-        document.querySelectorAll('.option-tile').forEach(label => {
-            const input = label.querySelector('input');
-            if (input) label.classList.toggle('selected', input.checked);
+        Object.entries(views).forEach(([key, view]) => {
+            view.classList.toggle("hidden", key !== name);
         });
-        const subjects = selectedValues('subjects');
-        const topics = [...new Set(quizData.questions.filter(q => subjects.includes(q.subject)).map(q => q.topic))].sort();
-        document.getElementById('topicOptions').innerHTML = topics.map(topic =>
-            `<label class="option-tile selected"><input type="checkbox" name="topics" value="${escapeAttr(topic)}" checked> <strong>${topic}</strong></label>`
-        ).join('');
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function setAllTopics(checked) {
-        document.querySelectorAll('input[name="topics"]').forEach(input => {
-            input.checked = checked;
-            input.closest('.option-tile').classList.toggle('selected', checked);
-        });
+    function renderSubjects() {
+        elements.subjectCards.innerHTML = quizData.subjects.map((subject) => {
+            const count = quizSets.filter((set) => set.subject === subject).length;
+            return `
+                <article class="subject-card" data-subject="${escapeAttr(subject)}">
+                    <span class="subject-icon"><i class="fas ${subjectIcons[subject] || "fa-book"}" aria-hidden="true"></i></span>
+                    <div>
+                        <h2>${escapeHtml(subject)}</h2>
+                        <span class="subject-meta">${count} quizzes available</span>
+                    </div>
+                    <button class="btn btn-primary" type="button">View Quizzes</button>
+                </article>
+            `;
+        }).join("");
     }
 
-    function selectedValues(name) {
-        return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
+    function openSubject(subject) {
+        app.subject = subject;
+        elements.subjectQuizHeading.textContent = `${subject} Quizzes`;
+        hideListMessage();
+
+        const sets = quizSets.filter((set) => set.subject === subject);
+        elements.quizSetList.innerHTML = sets.length
+            ? sets.map(renderQuizSetCard).join("")
+            : `<article class="quiz-set-card"><p class="result-subtext">No quiz sets found for ${escapeHtml(subject)}.</p></article>`;
+
+        showView("quizList");
     }
 
-    function getSettingsFromForm() {
+    function renderQuizSetCard(set) {
+        const stats = getQuizStats(set.id);
+        const isComplete = getQuestionsForSet(set).length === 50;
+        return `
+            <article class="quiz-set-card">
+                <div class="quiz-card-head">
+                    <h3>${escapeHtml(set.title)}</h3>
+                    <p class="quiz-meta">${escapeHtml(set.description || "")}</p>
+                    <div class="quiz-meta">
+                        <span class="meta-pill">${escapeHtml(set.subject)}</span>
+                        <span class="meta-pill">${escapeHtml(set.difficulty)}</span>
+                        <span class="meta-pill">50 Questions</span>
+                        <span class="meta-pill">30 Minutes</span>
+                        <span class="meta-pill">+${set.marksPerQuestion} marks</span>
+                        <span class="meta-pill">-${set.negativeMarks} negative</span>
+                    </div>
+                    ${isComplete ? "" : `<div class="message-box error">This quiz needs 50 questions. Please add more questions.</div>`}
+                </div>
+                <div>
+                    <div class="quiz-performance">
+                        <div class="perf-tile"><span>Best</span><strong>${stats.bestScore}%</strong></div>
+                        <div class="perf-tile"><span>Attempts</span><strong>${stats.attemptCount}</strong></div>
+                        <div class="perf-tile"><span>Last</span><strong>${stats.lastAttempt}</strong></div>
+                    </div>
+                    <button class="btn btn-primary" type="button" data-quiz-id="${escapeAttr(set.id)}" ${isComplete ? "" : "disabled"}>Start Quiz</button>
+                </div>
+            </article>
+        `;
+    }
+
+    function getQuizStats(quizId) {
+        const attempts = storage.read("attempts", []).filter((attempt) => attempt.quizId === quizId);
+        const bestScores = storage.read("bestScores", {});
         return {
-            subjects: selectedValues('subjects'),
-            category: document.querySelector('input[name="category"]:checked')?.value || 'SSC',
-            topics: selectedValues('topics'),
-            difficulty: document.querySelector('input[name="difficulty"]:checked')?.value || 'mixed',
-            count: Number(document.getElementById('questionCount').value),
-            timerType: document.getElementById('timerType').value,
-            timerValue: Number(document.getElementById('timerValue').value),
-            negativeMarking: document.getElementById('negativeMarking').checked,
-            shuffleQuestions: document.getElementById('shuffleQuestions').checked,
-            shuffleOptions: document.getElementById('shuffleOptions').checked,
-            mode: document.getElementById('quizMode').value
+            bestScore: bestScores[quizId] || 0,
+            attemptCount: attempts.length,
+            lastAttempt: attempts[0] ? formatDate(attempts[0].completedAt) : "Not attempted"
         };
     }
 
-    function startQuizFromSetup() {
-        const settings = getSettingsFromForm();
-        const pool = filterQuestions(settings);
-        if (!settings.subjects.length) return showMessage('Please select at least one subject.', 'error');
-        if (!settings.topics.length) return showMessage('Please select at least one topic.', 'error');
-        if (!pool.length) return showMessage('No questions match these filters. Try Mixed difficulty, more topics, or another exam category.', 'error');
+    function startQuiz(quizId) {
+        const set = quizSets.find((item) => item.id === quizId);
+        if (!set) return;
 
-        app.settings = settings;
-        const picked = (settings.shuffleQuestions ? shuffle([...pool]) : [...pool]).slice(0, Math.min(settings.count, pool.length));
-        app.questions = picked.map(q => prepareQuestion(q, settings.shuffleOptions));
-        app.answers = app.questions.map(() => null);
-        app.statuses = app.questions.map(() => 'not-visited');
+        const questions = getQuestionsForSet(set);
+        if (questions.length !== 50) {
+            showListMessage("This quiz needs 50 questions. Please add more questions.", "error");
+            return;
+        }
+
+        const saved = storage.read("unfinished", null);
+        if (saved && saved.quizId === quizId && window.confirm("Resume your unfinished attempt?")) {
+            resumeAttempt(saved);
+            return;
+        }
+
+        app.quizSet = set;
+        app.subject = set.subject;
+        app.questions = questions;
+        app.answers = questions.map(() => null);
+        app.statuses = questions.map(() => "not-visited");
+        app.statuses[0] = "not-answered";
         app.current = 0;
-        app.elapsed = 0;
         app.startedAt = Date.now();
-        app.fullRemaining = settings.timerType === 'fullTest' ? getFullTestSeconds(settings, app.questions.length) : 0;
-        app.questionRemaining = settings.timerType === 'perQuestion' ? settings.timerValue : 0;
-        app.statuses[0] = 'not-answered';
-        storage.write('settings', settings);
-        storage.write('unfinished', serializeAttempt());
+        app.endsAt = app.startedAt + set.durationMinutes * 60 * 1000;
+        app.remainingSeconds = set.durationMinutes * 60;
+        app.result = null;
         renderExam();
         startTimer();
-        showView('exam');
+        persistUnfinished();
+        showView("exam");
     }
 
-    function filterQuestions(settings) {
-        return quizData.questions.filter(q => {
-            const subjectOk = settings.subjects.includes(q.subject);
-            const topicOk = settings.topics.includes(q.topic);
-            const difficultyOk = settings.difficulty === 'mixed' || q.difficulty === settings.difficulty;
-            const categoryOk = q.examTags.includes(settings.category);
-            return subjectOk && topicOk && difficultyOk && categoryOk;
-        });
+    function getQuestionsForSet(set) {
+        return (set.questionIds || [])
+            .map((id) => questionMap.get(id))
+            .filter(Boolean)
+            .slice(0, 50);
     }
 
-    function prepareQuestion(question, shuffleOptions) {
-        const copy = JSON.parse(JSON.stringify(question));
-        if (!shuffleOptions) return copy;
-        const options = copy.options.map((text, index) => ({ text, index }));
-        shuffle(options);
-        copy.options = options.map(item => item.text);
-        copy.correctAnswer = options.findIndex(item => item.index === question.correctAnswer);
-        return copy;
-    }
-
-    function getFullTestSeconds(settings, count) {
-        if (settings.timerValue >= 300) return settings.timerValue;
-        return settings.timerValue * count;
+    function resumeAttempt(saved) {
+        const set = quizSets.find((item) => item.id === saved.quizId);
+        if (!set) return;
+        app.quizSet = set;
+        app.subject = set.subject;
+        app.questions = getQuestionsForSet(set);
+        app.answers = Array.isArray(saved.answers) ? saved.answers : app.questions.map(() => null);
+        app.statuses = Array.isArray(saved.statuses) ? saved.statuses : app.questions.map(() => "not-visited");
+        app.current = Number(saved.current) || 0;
+        app.startedAt = Number(saved.startedAt) || Date.now();
+        app.endsAt = Number(saved.endsAt) || Date.now() + set.durationMinutes * 60 * 1000;
+        app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
+        renderExam();
+        startTimer();
+        showView("exam");
     }
 
     function renderExam() {
-        const q = app.questions[app.current];
-        if (!q) return;
-        document.getElementById('examSubject').textContent = app.settings.subjects.join(', ');
-        document.getElementById('currentQuestionNo').textContent = app.current + 1;
-        document.getElementById('totalQuestionNo').textContent = app.questions.length;
-        document.getElementById('quizProgress').style.width = `${((app.current + 1) / app.questions.length) * 100}%`;
+        const question = app.questions[app.current];
+        if (!question) return;
 
-        document.getElementById('questionCard').innerHTML = `<div class="question-meta">
-            <span class="meta-pill">${q.subject}</span>
-            <span class="meta-pill">${q.topic}</span>
-            <span class="meta-pill">${q.difficulty}</span>
-            <span class="meta-pill">${q.marks} mark${app.settings.negativeMarking ? `, -${q.negativeMarks}` : ''}</span>
-        </div>
-        <h2 class="question-title">${escapeHtml(q.question)}</h2>
-        <div class="option-list" role="radiogroup" aria-label="Answer options">
-            ${q.options.map((option, index) => `<button class="answer-option ${app.answers[app.current] === index ? 'selected' : ''}" type="button" data-option-index="${index}" aria-pressed="${app.answers[app.current] === index}">
-                <span class="option-key">${index + 1}</span><span>${escapeHtml(option)}</span>
-            </button>`).join('')}
-        </div>`;
+        elements.examSubject.textContent = app.quizSet.subject;
+        elements.examTitle.textContent = app.quizSet.title;
+        elements.currentQuestionNo.textContent = app.current + 1;
+        elements.totalQuestionNo.textContent = app.questions.length;
+        elements.quizProgress.style.width = `${((app.current + 1) / app.questions.length) * 100}%`;
+
+        elements.questionCard.innerHTML = `
+            <div class="question-meta">
+                <span class="meta-pill">${escapeHtml(question.subject)}</span>
+                <span class="meta-pill">${escapeHtml(question.topic)}</span>
+                <span class="meta-pill">${escapeHtml(question.difficulty)}</span>
+                <span class="meta-pill">+${question.marks}, -${question.negativeMarks}</span>
+            </div>
+            <h2 class="question-title">${escapeHtml(question.question)}</h2>
+            <div class="option-list" role="radiogroup" aria-label="Answer options">
+                ${question.options.map((option, index) => `
+                    <button class="answer-option ${app.answers[app.current] === index ? "selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${app.answers[app.current] === index}">
+                        <span class="option-key">${String.fromCharCode(65 + index)}</span>
+                        <span>${escapeHtml(option)}</span>
+                    </button>
+                `).join("")}
+            </div>
+        `;
+
         renderPalette();
-        updateTimerText();
+        updateTimerDisplay();
     }
 
     function renderPalette() {
-        document.getElementById('questionPalette').innerHTML = app.questions.map((_q, index) => {
-            const status = app.statuses[index] || 'not-visited';
-            return `<button class="palette-btn ${status} ${index === app.current ? 'current' : ''}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${status.replace('-', ' ')}">${index + 1}</button>`;
-        }).join('');
+        elements.questionPalette.innerHTML = app.questions.map((_question, index) => {
+            const status = app.statuses[index] || "not-visited";
+            return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${status.replace("-", " ")}">${index + 1}</button>`;
+        }).join("");
     }
 
     function selectOption(index) {
         app.answers[app.current] = index;
-        app.statuses[app.current] = app.statuses[app.current] === 'marked' || app.statuses[app.current] === 'answered-marked' ? 'answered-marked' : 'answered';
+        app.statuses[app.current] = app.statuses[app.current] === "marked" || app.statuses[app.current] === "answered-marked" ? "answered-marked" : "answered";
         persistUnfinished();
         renderExam();
     }
 
     function clearResponse() {
         app.answers[app.current] = null;
-        app.statuses[app.current] = app.statuses[app.current] === 'answered-marked' || app.statuses[app.current] === 'marked' ? 'marked' : 'not-answered';
+        app.statuses[app.current] = app.statuses[app.current] === "answered-marked" || app.statuses[app.current] === "marked" ? "marked" : "not-answered";
         persistUnfinished();
         renderExam();
     }
 
-    function markReview() {
-        app.statuses[app.current] = app.answers[app.current] === null ? 'marked' : 'answered-marked';
+    function markForReview() {
+        app.statuses[app.current] = app.answers[app.current] === null ? "marked" : "answered-marked";
         persistUnfinished();
         renderExam();
     }
 
     function saveAndNext() {
-        if (app.statuses[app.current] === 'not-visited') app.statuses[app.current] = 'not-answered';
-        if (app.current < app.questions.length - 1) {
-            goQuestion(app.current + 1);
-        } else {
+        if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
+        if (app.current >= app.questions.length - 1) {
             openSubmitModal();
+            return;
         }
+        goQuestion(app.current + 1);
     }
 
     function goQuestion(index) {
         if (index < 0 || index >= app.questions.length) return;
-        if (app.statuses[app.current] === 'not-visited') app.statuses[app.current] = 'not-answered';
+        if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
         app.current = index;
-        if (app.statuses[app.current] === 'not-visited') app.statuses[app.current] = 'not-answered';
-        if (app.settings.timerType === 'perQuestion') app.questionRemaining = app.settings.timerValue;
+        if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
         persistUnfinished();
         renderExam();
     }
 
     function startTimer() {
         stopTimer();
-        if (app.settings.timerType === 'none') {
-            updateTimerText();
-            return;
-        }
-        app.timerId = setInterval(() => {
-            app.elapsed++;
-            if (app.settings.timerType === 'fullTest') {
-                app.fullRemaining--;
-                if (app.fullRemaining <= 0) finishQuiz('time');
-            }
-            if (app.settings.timerType === 'perQuestion') {
-                app.questionRemaining--;
-                if (app.questionRemaining <= 0) {
-                    if (app.current >= app.questions.length - 1) {
-                        finishQuiz('time');
-                    } else {
-                        saveAndNext();
-                    }
-                }
-            }
-            updateTimerText();
+        updateTimerDisplay();
+        app.timerId = window.setInterval(function () {
+            app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
+            updateTimerDisplay();
             persistUnfinished();
+            if (app.remainingSeconds <= 0) submitQuiz("time");
         }, 1000);
     }
 
     function stopTimer() {
-        clearInterval(app.timerId);
+        window.clearInterval(app.timerId);
         app.timerId = null;
     }
 
-    function updateTimerText() {
-        const pill = document.getElementById('timerPill');
-        const text = document.getElementById('timerText');
-        pill.classList.remove('warning');
-        if (app.settings.timerType === 'none') {
-            text.textContent = 'No timer';
-            return;
-        }
-        const remaining = app.settings.timerType === 'fullTest' ? app.fullRemaining : app.questionRemaining;
-        const total = app.settings.timerType === 'fullTest' ? getFullTestSeconds(app.settings, app.questions.length) : app.settings.timerValue;
-        if (remaining / total <= 0.2) pill.classList.add('warning');
-        text.textContent = formatTime(Math.max(0, remaining));
+    function updateTimerDisplay() {
+        elements.timerText.textContent = formatTime(app.remainingSeconds);
+        elements.timerPill.classList.toggle("warning", app.remainingSeconds <= 300);
     }
 
     function openSubmitModal() {
-        const attempted = app.answers.filter(answer => answer !== null).length;
-        document.getElementById('submitSummary').textContent = `Attempted ${attempted} of ${app.questions.length}. Marked for review: ${app.statuses.filter(s => s.includes('marked')).length}.`;
-        document.getElementById('submitModal').classList.remove('hidden');
+        const attempted = app.answers.filter((answer) => answer !== null).length;
+        const marked = app.statuses.filter((status) => status.includes("marked")).length;
+        elements.submitSummary.textContent = `Attempted ${attempted} of 50. Marked for review: ${marked}.`;
+        elements.submitModal.classList.remove("hidden");
     }
 
     function closeSubmitModal() {
-        document.getElementById('submitModal').classList.add('hidden');
+        elements.submitModal.classList.add("hidden");
     }
 
-    function finishQuiz(reason) {
+    function submitQuiz(reason) {
         stopTimer();
         closeSubmitModal();
         const result = calculateResult(reason);
-        app.lastResult = result;
-        storage.remove('unfinished');
-        saveCompletedAttempt(result);
+        app.result = result;
+        storage.remove("unfinished");
+        saveAttempt(result);
         renderResult();
-        renderHome();
-        showView('result');
+        showView("result");
     }
 
     function calculateResult(reason) {
         let correct = 0;
-        let incorrect = 0;
-        let marksGained = 0;
-        let negativeMarks = 0;
-        const subjectBreakdown = {};
-        const difficultyBreakdown = {};
-        const topicBreakdown = {};
+        let wrong = 0;
 
-        app.questions.forEach((q, index) => {
-            const selected = app.answers[index];
-            const attempted = selected !== null;
-            const isCorrect = selected === q.correctAnswer;
-            if (attempted && isCorrect) {
-                correct++;
-                marksGained += q.marks;
-            }
-            if (attempted && !isCorrect) {
-                incorrect++;
-                if (app.settings.negativeMarking) negativeMarks += q.negativeMarks;
-            }
-            addBreakdown(subjectBreakdown, q.subject, attempted, isCorrect);
-            addBreakdown(difficultyBreakdown, q.difficulty, attempted, isCorrect);
-            addBreakdown(topicBreakdown, q.topic, attempted, isCorrect);
+        app.questions.forEach((question, index) => {
+            const answer = app.answers[index];
+            if (answer === null) return;
+            if (answer === question.correctAnswer) correct += 1;
+            else wrong += 1;
         });
 
         const total = app.questions.length;
-        const attempted = correct + incorrect;
+        const attempted = correct + wrong;
         const unattempted = total - attempted;
-        const score = Number((marksGained - negativeMarks).toFixed(2));
-        const maxMarks = app.questions.reduce((sum, q) => sum + q.marks, 0);
-        const percentage = maxMarks ? Math.max(0, Math.round((score / maxMarks) * 100)) : 0;
+        const score = Number((correct * app.quizSet.marksPerQuestion - wrong * app.quizSet.negativeMarks).toFixed(2));
+        const percentage = Math.max(0, Math.round((score / total) * 100));
         const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
-        const timeTaken = app.elapsed || Math.floor((Date.now() - app.startedAt) / 1000);
+        const timeTaken = Math.max(0, app.quizSet.durationMinutes * 60 - app.remainingSeconds);
 
         return {
             id: `attempt-${Date.now()}`,
-            title: `${app.settings.subjects.join(', ')} · ${app.settings.category}`,
+            quizId: app.quizSet.id,
+            quizTitle: app.quizSet.title,
+            subject: app.quizSet.subject,
             completedAt: new Date().toISOString(),
             reason,
-            settings: app.settings,
-            questions: app.questions,
-            answers: app.answers,
-            statuses: app.statuses,
             total,
             attempted,
             unattempted,
             correct,
-            incorrect,
-            marksGained,
-            negativeMarks: Number(negativeMarks.toFixed(2)),
+            wrong,
             score,
-            maxMarks,
             percentage,
             accuracy,
             timeTaken,
-            avgTime: total ? Math.round(timeTaken / total) : 0,
-            subjectBreakdown,
-            difficultyBreakdown,
-            topicBreakdown,
-            message: percentage >= 80 ? 'Excellent' : percentage >= 55 ? 'Good' : 'Needs Practice'
+            questions: app.questions,
+            answers: app.answers,
+            statuses: app.statuses,
+            message: getPerformanceMessage(percentage)
         };
     }
 
-    function addBreakdown(map, key, attempted, correct) {
-        map[key] ||= { total: 0, attempted: 0, correct: 0 };
-        map[key].total++;
-        if (attempted) map[key].attempted++;
-        if (correct) map[key].correct++;
+    function saveAttempt(result) {
+        const attempts = storage.read("attempts", []);
+        attempts.unshift(summarizeAttempt(result));
+        storage.write("attempts", attempts.slice(0, 80));
+        storage.write("recentAttempts", attempts.slice(0, 10));
+
+        const bestScores = storage.read("bestScores", {});
+        bestScores[result.quizId] = Math.max(bestScores[result.quizId] || 0, result.percentage);
+        storage.write("bestScores", bestScores);
     }
 
-    function saveCompletedAttempt(result) {
-        const attempts = storage.read('attempts', []);
-        attempts.unshift(result);
-        storage.write('attempts', attempts.slice(0, 30));
-        storage.write('performance', buildPerformance(attempts));
-    }
-
-    function buildPerformance(attempts) {
-        return attempts.reduce((map, attempt) => {
-            attempt.settings.subjects.forEach(subject => {
-                map[subject] ||= { attempts: 0, accuracyTotal: 0 };
-                map[subject].attempts++;
-                map[subject].accuracyTotal += attempt.accuracy;
-            });
-            return map;
-        }, {});
+    function summarizeAttempt(result) {
+        return {
+            id: result.id,
+            quizId: result.quizId,
+            quizTitle: result.quizTitle,
+            subject: result.subject,
+            completedAt: result.completedAt,
+            total: result.total,
+            attempted: result.attempted,
+            correct: result.correct,
+            wrong: result.wrong,
+            score: result.score,
+            percentage: result.percentage,
+            accuracy: result.accuracy,
+            timeTaken: result.timeTaken
+        };
     }
 
     function renderResult() {
-        const r = app.lastResult;
-        views.result.innerHTML = `<article class="result-card score-hero">
-            <h1 class="result-title" id="resultTitle">Result Analytics</h1>
-            <span class="score-number">${r.percentage}%</span>
-            <strong>${r.message}</strong>
-            <p class="result-subtext">${r.score}/${r.maxMarks} marks · ${r.reason === 'time' ? 'Auto-submitted on time over' : 'Submitted successfully'}</p>
-        </article>
-        <section class="result-card stats-grid">${statTiles(r).join('')}</section>
-        <section class="result-card chart-grid">
-            <div><h2>Accuracy</h2><div class="bar"><span style="width:${r.accuracy}%"></span></div><p>${r.accuracy}%</p></div>
-            <div><h2>Correct vs Incorrect</h2><div class="stack-bar"><span class="correct" style="width:${pct(r.correct, r.total)}%"></span><span class="wrong" style="width:${pct(r.incorrect, r.total)}%"></span></div><p>${r.correct} correct, ${r.incorrect} incorrect</p></div>
-        </section>
-        <section class="result-card breakdown-grid">
-            ${renderBreakdown('Subject-wise Breakdown', r.subjectBreakdown)}
-            ${renderBreakdown('Difficulty-wise Breakdown', r.difficultyBreakdown)}
-        </section>
-        <section class="result-card">${renderBreakdown('Topic-wise Performance', r.topicBreakdown)}</section>
-        <div class="hero-actions">
-            <button class="btn btn-outline" type="button" data-action="review-answers">Review Answers</button>
-            <button class="btn btn-ghost" type="button" data-action="export-json">Export Result JSON</button>
-            <button class="btn btn-primary" type="button" data-action="new-quiz">Start New Quiz</button>
-        </div>`;
+        const result = app.result;
+        views.result.innerHTML = `
+            <article class="result-panel score-panel">
+                <h2 id="resultTitle">${escapeHtml(result.quizTitle)}</h2>
+                <span class="score-number">${result.percentage}%</span>
+                <strong>${escapeHtml(result.message)}</strong>
+                <p class="result-subtext">${result.score}/50 marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
+            </article>
+            <section class="result-panel result-grid">
+                ${renderResultTile("Total questions", result.total)}
+                ${renderResultTile("Attempted", result.attempted)}
+                ${renderResultTile("Unattempted", result.unattempted)}
+                ${renderResultTile("Correct", result.correct)}
+                ${renderResultTile("Wrong", result.wrong)}
+                ${renderResultTile("Accuracy", `${result.accuracy}%`)}
+                ${renderResultTile("Time taken", formatTime(result.timeTaken))}
+                ${renderResultTile("Score", result.score)}
+            </section>
+            <div class="result-actions">
+                <button class="btn btn-outline" type="button" data-action="review-answers">Review Answers</button>
+                <button class="btn btn-primary" type="button" data-action="back-to-quizzes">Back to Quizzes</button>
+            </div>
+        `;
     }
 
-    function statTiles(r) {
-        return [
-            ['Total Questions', r.total], ['Attempted', r.attempted], ['Unattempted', r.unattempted],
-            ['Correct', r.correct], ['Incorrect', r.incorrect], ['Accuracy', `${r.accuracy}%`],
-            ['Marks Gained', r.marksGained], ['Negative Marks', r.negativeMarks], ['Time Taken', formatTime(r.timeTaken)],
-            ['Avg Time / Question', `${r.avgTime}s`], ['Mode', r.settings.mode], ['Category', r.settings.category]
-        ].map(([label, value]) => `<div class="info-tile"><span>${label}</span><strong>${value}</strong></div>`);
-    }
-
-    function renderBreakdown(title, data) {
-        return `<div><h2>${title}</h2>${Object.entries(data).map(([key, item]) => {
-            const accuracy = item.attempted ? Math.round(item.correct / item.attempted * 100) : 0;
-            return `<div class="topic-row"><strong>${key}</strong><div class="bar"><span style="width:${accuracy}%"></span></div><span>${item.correct}/${item.total} correct · ${accuracy}% accuracy</span></div>`;
-        }).join('')}</div>`;
+    function renderResultTile(label, value) {
+        return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
     }
 
     function renderReview() {
-        const r = app.lastResult;
-        if (!r) return;
-        const list = r.questions.map((q, index) => reviewItem(q, index, r)).filter(Boolean).join('');
-        views.review.innerHTML = `<div class="result-card">
-            <h1 class="review-title" id="reviewTitle">Answer Review</h1>
-            <div class="review-controls">
-                <input class="review-search" type="search" value="${escapeAttr(app.reviewSearch)}" placeholder="Search questions or topics" aria-label="Search answer review">
-                <div class="filter-row">
-                    ${['all', 'correct', 'wrong', 'unattempted', 'marked'].map(f => `<button class="btn ${app.reviewFilter === f ? 'btn-primary' : 'btn-ghost'}" type="button" data-review-filter="${f}">${titleCase(f)}</button>`).join('')}
+        const result = app.result;
+        if (!result) return;
+
+        const items = result.questions.map((question, index) => renderReviewCard(question, index, result)).filter(Boolean).join("");
+        views.review.innerHTML = `
+            <section class="result-panel">
+                <h2 id="reviewTitle">Review Answers</h2>
+                <div class="review-filter-row">
+                    ${["all", "correct", "wrong", "unattempted", "marked"].map((filter) => `
+                        <button class="btn ${app.reviewFilter === filter ? "btn-primary" : "btn-ghost"}" type="button" data-review-filter="${filter}">${titleCase(filter)}</button>
+                    `).join("")}
                 </div>
+            </section>
+            ${items || `<article class="review-card"><p>No answers match this filter.</p></article>`}
+            <div class="review-actions">
+                <button class="btn btn-outline" type="button" data-action="back-to-result">Back to Result</button>
+                <button class="btn btn-primary" type="button" data-action="back-to-quizzes">Back to Quizzes</button>
             </div>
-        </div>
-        ${list || '<article class="review-card"><p>No review items match this filter.</p></article>'}
-        <div class="hero-actions"><button class="btn btn-outline" type="button" data-action="back-results">Back to Results</button><button class="btn btn-primary" type="button" data-action="new-quiz">New Quiz</button></div>`;
-        views.review.querySelector('.review-search').addEventListener('input', event => {
-            app.reviewSearch = event.target.value.toLowerCase();
-            renderReview();
-        });
+        `;
     }
 
-    function reviewItem(q, index, result) {
+    function renderReviewCard(question, index, result) {
         const selected = result.answers[index];
-        const status = selected === null ? 'unattempted' : selected === q.correctAnswer ? 'correct' : 'wrong';
-        const marked = result.statuses[index]?.includes('marked');
-        if (app.reviewFilter !== 'all' && app.reviewFilter !== status && !(app.reviewFilter === 'marked' && marked)) return '';
-        const haystack = `${q.question} ${q.topic} ${q.explanation}`.toLowerCase();
-        if (app.reviewSearch && !haystack.includes(app.reviewSearch)) return '';
-        return `<article class="review-card">
-            <div class="question-meta"><span class="status-badge">${status}</span>${marked ? '<span class="status-badge">marked</span>' : ''}<span class="status-badge">${q.topic}</span><span class="status-badge">${q.difficulty}</span></div>
-            <h2>Q${index + 1}. ${escapeHtml(q.question)}</h2>
-            <div class="review-answer ${status === 'wrong' ? 'wrong' : ''}">Your answer: ${selected === null ? 'Not attempted' : escapeHtml(q.options[selected])}</div>
-            <div class="review-answer correct">Correct answer: ${escapeHtml(q.options[q.correctAnswer])}</div>
-            <p><strong>Explanation:</strong> ${escapeHtml(q.explanation)}</p>
-        </article>`;
+        const marked = (result.statuses[index] || "").includes("marked");
+        const state = selected === null ? "unattempted" : selected === question.correctAnswer ? "correct" : "wrong";
+
+        if (app.reviewFilter !== "all" && app.reviewFilter !== state && !(app.reviewFilter === "marked" && marked)) {
+            return "";
+        }
+
+        return `
+            <article class="review-card">
+                <div class="question-meta">
+                    <span class="status-badge">${titleCase(state)}</span>
+                    ${marked ? `<span class="status-badge">Marked</span>` : ""}
+                    <span class="status-badge">Q${index + 1}</span>
+                </div>
+                <h3>${escapeHtml(question.question)}</h3>
+                <div class="review-answer ${state === "wrong" ? "wrong" : ""}">User answer: ${selected === null ? "Not attempted" : escapeHtml(question.options[selected])}</div>
+                <div class="review-answer correct">Correct answer: ${escapeHtml(question.options[question.correctAnswer])}</div>
+                <p><strong>Explanation:</strong> ${escapeHtml(question.explanation)}</p>
+            </article>
+        `;
     }
 
-    function showHistory() {
-        const attempts = storage.read('attempts', []);
-        views.history.innerHTML = `<section class="result-card">
-            <h1 id="historyTitle">Quiz History</h1>
-            <p class="result-subtext">Completed attempts saved in this browser.</p>
-            <div class="hero-actions"><button class="btn btn-ghost" type="button" data-action="go-home">Back Home</button><button class="btn btn-danger" type="button" data-action="clear-history">Clear History</button></div>
-        </section>
-        ${attempts.length ? attempts.map(item => `<article class="history-card"><strong>${item.title}</strong><p>${item.percentage}% score · ${item.accuracy}% accuracy · ${formatTime(item.timeTaken)} · ${new Date(item.completedAt).toLocaleString()}</p></article>`).join('') : '<article class="history-card"><p>No completed attempts yet.</p></article>'}`;
-        showView('history');
-    }
-
-    function clearHistory() {
-        storage.clearHistory();
-        renderHome();
-        showHistory();
-    }
-
-    function continueQuiz() {
-        const saved = storage.read('unfinished', null);
-        if (!saved) return;
-        Object.assign(app, saved);
-        renderExam();
-        startTimer();
-        showView('exam');
-    }
-
-    function serializeAttempt() {
-        return {
-            settings: app.settings,
-            questions: app.questions,
+    function persistUnfinished() {
+        if (!app.quizSet || views.exam.classList.contains("hidden") || !app.questions.length) return;
+        storage.write("unfinished", {
+            quizId: app.quizSet.id,
             answers: app.answers,
             statuses: app.statuses,
             current: app.current,
             startedAt: app.startedAt,
-            elapsed: app.elapsed,
-            fullRemaining: app.fullRemaining,
-            questionRemaining: app.questionRemaining
-        };
-    }
-
-    function persistUnfinished() {
-        if (!views.exam || views.exam.classList.contains('hidden') || !app.questions.length) return;
-        storage.write('unfinished', serializeAttempt());
-    }
-
-    function exportResult() {
-        if (!app.lastResult) return;
-        const blob = new Blob([JSON.stringify(app.lastResult, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `govjobupdates-quiz-result-${Date.now()}.json`;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(url);
+            endsAt: app.endsAt
+        });
     }
 
     function openPalette() {
-        document.getElementById('palettePanel').classList.add('open');
+        elements.palettePanel.classList.add("open");
     }
 
     function closePalette() {
-        document.getElementById('palettePanel').classList.remove('open');
+        elements.palettePanel.classList.remove("open");
     }
 
-    function showMessage(message, type = 'info') {
-        const box = document.getElementById('setupMessage');
-        box.textContent = message;
-        box.className = message ? `message-box ${type}` : 'message-box hidden';
+    function showListMessage(message, type) {
+        elements.quizListMessage.textContent = message;
+        elements.quizListMessage.className = `message-box ${type || ""}`.trim();
     }
 
-    function topicsForSubject(subject) {
-        return [...new Set(quizData.questions.filter(q => q.subject === subject).map(q => q.topic))];
+    function hideListMessage() {
+        elements.quizListMessage.textContent = "";
+        elements.quizListMessage.className = "message-box hidden";
     }
 
-    function shuffle(items) {
-        for (let i = items.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [items[i], items[j]] = [items[j], items[i]];
-        }
-        return items;
+    function getPerformanceMessage(percentage) {
+        if (percentage >= 85) return "Rank booster performance";
+        if (percentage >= 70) return "Strong exam readiness";
+        if (percentage >= 50) return "Good base, improve accuracy";
+        return "Needs focused revision";
     }
 
     function formatTime(seconds) {
         const safe = Math.max(0, Number(seconds) || 0);
-        const m = String(Math.floor(safe / 60)).padStart(2, '0');
-        const s = String(safe % 60).padStart(2, '0');
-        return `${m}:${s}`;
+        const minutes = String(Math.floor(safe / 60)).padStart(2, "0");
+        const secs = String(safe % 60).padStart(2, "0");
+        return `${minutes}:${secs}`;
     }
 
-    function pct(value, total) {
-        return total ? Math.round(value / total * 100) : 0;
+    function formatDate(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "Not attempted";
+        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
     }
 
-    function titleCase(text) {
-        return text.replace('-', ' ').replace(/\b\w/g, char => char.toUpperCase());
+    function titleCase(value) {
+        return String(value).replace("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
     }
 
     function escapeHtml(value) {
-        return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
+        return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#039;"
+        }[character]));
     }
 
     function escapeAttr(value) {
         return escapeHtml(value);
     }
-})();
+}());
