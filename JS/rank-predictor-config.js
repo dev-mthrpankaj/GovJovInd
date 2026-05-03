@@ -1,7 +1,7 @@
 // Paste Google Apps Script Web App URL in apiUrl, not Google Sheet link.
 // Keep the Google Sheet ID inside GoogleAppsScript/rank-predictor-Code.gs only.
 const RANK_PREDICTOR_CONFIG = {
-    apiUrl: "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE",
+    apiUrl: "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec",
     exams: [
         {
             examId: "ssc-cpo-2025-paper-1",
