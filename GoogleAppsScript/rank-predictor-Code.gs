@@ -33,51 +33,113 @@ const HEADERS = [
 
 function doPost(e) {
   try {
-    const payload = JSON.parse((e && e.postData && e.postData.contents) || "{}");
-    if (payload.action === "submitData") return sendJson(submitData(payload, e));
-    if (payload.action === "checkRank") return sendJson(checkRank(payload));
-    if (payload.action === "getExamStats") return sendJson(getExamStats(payload));
-    if (payload.action === "getLeaderboard") return sendJson(getLeaderboard(payload));
-    return sendJson({ success: false, message: "Unsupported action." });
+    let raw = e && e.postData && e.postData.contents;
+
+    if (!raw) {
+      return sendResponse({
+        success: false,
+        message: "No data received"
+      });
+    }
+
+    let data;
+
+    try {
+      data = JSON.parse(raw);
+    } catch (err) {
+      return sendResponse({
+        success: false,
+        message: "Invalid JSON format"
+      });
+    }
+
+    if (!data.action) {
+      return sendResponse({
+        success: false,
+        message: "Missing action"
+      });
+    }
+
+    if (data.action === "submitData") {
+      return submitData(data);
+    }
+
+    if (data.action === "checkRank") {
+      return checkRank(data);
+    }
+
+    return sendResponse({
+      success: false,
+      message: "Invalid action"
+    });
+
   } catch (error) {
-    return sendJson({ success: false, message: error.message || "Invalid request." });
+    return sendResponse({
+      success: false,
+      message: "Server error: " + error.message
+    });
   }
 }
 
-function submitData(payload, event) {
-  validateSubmitPayload(payload);
-  payload.rawMarks = calculateRawMarks(payload);
-  payload.normalizedMarks = payload.normalizedMarks === "" || payload.normalizedMarks === undefined ? "" : Number(payload.normalizedMarks);
+function doGet() {
+  return sendResponse({
+    success: true,
+    message: "API is working"
+  });
+}
 
-  const sheet = getSheetByExam(payload.sheetName);
+function submitData(data) {
+  Logger.log("Incoming Data: " + JSON.stringify(data));
+
+  if (!data.sheetName) {
+    return sendResponse({
+      success: false,
+      message: "Sheet name missing"
+    });
+  }
+
+  validateSubmitPayload(data);
+  data.rawMarks = calculateRawMarks(data);
+  data.normalizedMarks = data.normalizedMarks === "" || data.normalizedMarks === undefined ? "" : Number(data.normalizedMarks);
+
+  const sheet = getSheetByExam(data.sheetName);
   setupHeaders(sheet);
 
-  if (findCandidate(sheet, payload.examId, payload.rollNumber, payload.dob)) {
-    return {
+  if (findCandidate(sheet, data.examId, data.rollNumber, data.dob)) {
+    return sendResponse({
       success: false,
       duplicate: true,
       message: "Your data already exists. Use Check My Rank."
-    };
+    });
   }
 
-  appendCandidateData(sheet, payload, getUserAgent(event));
-  const candidateRow = findCandidate(sheet, payload.examId, payload.rollNumber, payload.dob);
-  return Object.assign({
+  appendCandidateData(sheet, data, "");
+  const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob);
+  return sendResponse(Object.assign({
     success: true,
     duplicate: false,
     message: "Data submitted successfully."
-  }, calculateRanks(sheet, candidateRow));
+  }, calculateRanks(sheet, candidateRow)));
 }
 
-function checkRank(payload) {
-  validateCheckPayload(payload);
-  const sheet = getSheetByExam(payload.sheetName);
-  setupHeaders(sheet);
-  const candidateRow = findCandidate(sheet, payload.examId, payload.rollNumber, payload.dob);
-  if (!candidateRow) {
-    return { success: false, found: false, message: "No data found. Please submit your data first." };
+function checkRank(data) {
+  Logger.log("Check Rank Request: " + JSON.stringify(data));
+
+  if (!data.sheetName) {
+    return sendResponse({
+      success: false,
+      message: "Sheet name missing"
+    });
   }
-  return Object.assign({ success: true, found: true, message: "Rank found successfully." }, calculateRanks(sheet, candidateRow));
+
+  validateCheckPayload(data);
+  const sheet = getSheetByExam(data.sheetName);
+  setupHeaders(sheet);
+  const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob);
+  if (!candidateRow) {
+    return sendResponse({ success: false, found: false, message: "No data found. Please submit your data first." });
+  }
+  return sendResponse(Object.assign({ success: true, found: true, message: "Rank found successfully." }, calculateRanks(sheet, candidateRow)));
 }
 
 function getExamStats(payload) {
@@ -189,7 +251,16 @@ function appendCandidateData(sheet, payload, userAgent) {
 }
 
 function calculateRanks(sheet, candidateRow) {
-  if (!candidateRow) return { found: false };
+  if (!candidateRow) {
+    return {
+      found: false,
+      marks: 0,
+      overallRank: 0,
+      categoryRank: 0,
+      stateRank: 0,
+      totalSubmissions: 0
+    };
+  }
   const rows = getRows(sheet).filter(function (row) {
     return String(row.examId) === String(candidateRow.examId);
   });
@@ -278,8 +349,10 @@ function getRankMarks(row) {
   return row.normalizedMarks !== "" && row.normalizedMarks !== null && row.normalizedMarks !== undefined ? Number(row.normalizedMarks) : Number(row.rawMarks);
 }
 
-function sendJson(response) {
-  return ContentService.createTextOutput(JSON.stringify(response)).setMimeType(ContentService.MimeType.JSON);
+function sendResponse(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function getAccuracyIndicator(totalSubmissions) {
