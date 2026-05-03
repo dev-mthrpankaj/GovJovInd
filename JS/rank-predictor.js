@@ -245,11 +245,13 @@
         requestBackend(payload, "checkRankBtn", "Checking...")
             .then((data) => {
                 if (data.found === false) {
+                    console.log("Check Rank Debug:", data.debug || data);
                     clearResultCard();
                     showMessage("checkMessage", data.message || "No data found for this Roll Number and Date of Birth. Please submit your data first.", "warning");
                     return;
                 }
                 if (!data.success) {
+                    console.log("Check Rank Debug:", data.debug || data);
                     clearResultCard();
                     showMessage("checkMessage", data.message || "Something went wrong", "error");
                     return;
@@ -355,18 +357,22 @@
 
     function collectSubmitPayload() {
         const selectedExam = getSelectedExam();
+        const rollNumber = normalizeRoll(readValue("rollNumber"));
+        const dob = normalizeDob(readValue("dob"));
+        const candidateKey = makeCandidateKey(selectedExam.examId, rollNumber, dob);
         return {
             action: "submitData",
             examId: selectedExam.examId,
             examName: selectedExam.examName,
+            candidateKey,
             board: selectedExam.board || "",
             sheetName: selectedExam.sheetName,
             stage: readValue("stage"),
             shift: readValue("shift"),
             mode: state.mode,
             candidateName: readValue("candidateName"),
-            rollNumber: normalizeRoll(readValue("rollNumber")),
-            dob: readValue("dob"),
+            rollNumber,
+            dob,
             gender: readValue("gender"),
             category: readValue("category"),
             state: readValue("state"),
@@ -387,14 +393,18 @@
 
     function collectCheckPayload() {
         const selectedExam = getSelectedExam();
+        const rollNumber = normalizeRoll(readValue("checkRollNumber"));
+        const dob = normalizeDob(readValue("checkDob"));
+        const candidateKey = makeCandidateKey(selectedExam.examId, rollNumber, dob);
         return {
             action: "checkRank",
             examId: selectedExam.examId,
             examName: selectedExam.examName,
+            candidateKey,
             sheetName: selectedExam.sheetName,
             shift: readValue("checkShift"),
-            rollNumber: normalizeRoll(readValue("checkRollNumber")),
-            dob: readValue("checkDob")
+            rollNumber,
+            dob
         };
     }
 
@@ -509,7 +519,7 @@
     }
 
     function validateBackendPayload(payload) {
-        const required = ["action", "sheetName", "examId", "rollNumber", "dob"];
+        const required = ["action", "sheetName", "examId", "rollNumber", "dob", "candidateKey"];
         const missing = required.filter((key) => !String(payload[key] || "").trim());
         if (missing.length) {
             return {
@@ -580,6 +590,14 @@
 
     function normalizeRoll(value) {
         return String(value || "").trim().toUpperCase();
+    }
+
+    function normalizeDob(value) {
+        return String(value || "").trim();
+    }
+
+    function makeCandidateKey(examId, rollNumber, dob) {
+        return `${String(examId || "").trim().toLowerCase()}|${normalizeRoll(rollNumber)}|${normalizeDob(dob)}`;
     }
 
     function setValue(id, value) {
