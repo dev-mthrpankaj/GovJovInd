@@ -36,7 +36,7 @@ function doPost(e) {
     let raw = e && e.postData && e.postData.contents;
 
     if (!raw) {
-      return sendResponse({
+      return sendJSON({
         success: false,
         message: "No data received"
       });
@@ -47,7 +47,7 @@ function doPost(e) {
     try {
       data = JSON.parse(raw);
     } catch (err) {
-      return sendResponse({
+      return sendJSON({
         success: false,
         message: "Invalid JSON format"
       });
@@ -56,7 +56,7 @@ function doPost(e) {
     Logger.log(JSON.stringify(data));
 
     if (!data.action) {
-      return sendResponse({
+      return sendJSON({
         success: false,
         message: "Missing action"
       });
@@ -70,13 +70,13 @@ function doPost(e) {
       return checkRank(data);
     }
 
-    return sendResponse({
+    return sendJSON({
       success: false,
       message: "Invalid action"
     });
 
   } catch (error) {
-    return sendResponse({
+    return sendJSON({
       success: false,
       message: "Server error: " + error.message
     });
@@ -84,7 +84,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return sendResponse({
+  return sendJSON({
     success: true,
     message: "API working"
   });
@@ -94,7 +94,7 @@ function submitData(data) {
   Logger.log("Incoming Data: " + JSON.stringify(data));
 
   if (!data.sheetName) {
-    return sendResponse({
+    return sendJSON({
       success: false,
       message: "Sheet name missing"
     });
@@ -111,7 +111,7 @@ function submitData(data) {
   setupHeaders(sheet);
 
   if (findCandidate(sheet, data.examId, data.rollNumber, data.dob)) {
-    return sendResponse({
+    return sendJSON({
       success: false,
       duplicate: true,
       message: "Your data already exists. Use Check My Rank."
@@ -123,26 +123,26 @@ function submitData(data) {
   const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob) || getRows(sheet).find(function (row) {
     return row.rowNumber === appendedRowNumber;
   });
-  const rankData = calculateRanks(sheet, candidateRow);
 
   if (!candidateRow) {
-    return sendResponse({
+    return sendJSON({
       success: false,
       message: "Data saved, but rank calculation failed",
       debug: {
-        roll: data.rollNumber,
-        dob: data.dob,
         sheetName: data.sheetName,
-        totalRows: getRows(sheet).length
+        searchedRoll: normalizeRoll(data.rollNumber),
+        searchedDob: normalizeDob(data.dob),
+        totalRows: sheet.getLastRow(),
+        sampleRows: getDebugSampleRows(sheet)
       }
     });
   }
 
-  return sendResponse({
+  return sendJSON({
     success: true,
     duplicate: false,
     message: "Data submitted successfully",
-    data: rankData
+    data: calculateRanks(sheet, candidateRow)
   });
 }
 
@@ -150,7 +150,7 @@ function checkRank(data) {
   Logger.log("Check Rank Request: " + JSON.stringify(data));
 
   if (!data.sheetName) {
-    return sendResponse({
+    return sendJSON({
       success: false,
       message: "Sheet name missing"
     });
@@ -159,32 +159,41 @@ function checkRank(data) {
   data.rollNumber = normalizeRoll(data.rollNumber);
   data.dob = normalizeDob(data.dob);
   validateCheckPayload(data);
+
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = getSheetByExam(data.sheetName, spreadsheet);
   setupHeaders(sheet);
   const rows = getRows(sheet);
+
   Logger.log("Check Rank Lookup: " + JSON.stringify({
     sheetName: data.sheetName,
     rollNumber: data.rollNumber,
     dob: data.dob,
-    totalRows: rows.length
+    totalRows: sheet.getLastRow()
   }));
+
   const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob);
   if (!candidateRow) {
-    return sendResponse({
+    return sendJSON({
       success: false,
       found: false,
-      message: "No record found in " + data.sheetName + " for this Roll Number and DOB.",
+      message: `No record found in ${data.sheetName} for this Roll Number and DOB.`,
       debug: {
-        roll: data.rollNumber,
-        dob: data.dob,
         sheetName: data.sheetName,
-        totalRows: rows.length
+        searchedRoll: normalizeRoll(data.rollNumber),
+        searchedDob: normalizeDob(data.dob),
+        totalRows: sheet.getLastRow(),
+        sampleRows: rows.slice(0, 3).map(function (row) {
+          return {
+            roll: normalizeRoll(row.rollNumber),
+            dob: normalizeDob(row.dob)
+          };
+        })
       }
     });
   }
 
-  return sendResponse({
+  return sendJSON({
     success: true,
     found: true,
     message: "Rank found successfully.",
@@ -231,7 +240,12 @@ function getSheetByExam(sheetName, spreadsheet) {
 function setupHeaders(sheet) {
   const range = sheet.getRange(1, 1, 1, HEADERS.length);
   const current = range.getValues()[0];
-  if (current.join("") !== HEADERS.join("")) {
+  const indexes = getHeaderIndexes(current);
+  const hasCandidateHeaders = indexes["exam id"] !== undefined &&
+    indexes["roll number"] !== undefined &&
+    indexes["dob"] !== undefined;
+
+  if (current.join("") === "" || !hasCandidateHeaders) {
     range.setValues([HEADERS]);
     sheet.setFrozenRows(1);
   }
@@ -259,49 +273,53 @@ function calculateRawMarks(payload) {
 }
 
 function findCandidate(sheet, examId, rollNumber, dob) {
-  return getRows(sheet).find(function (row) {
+  const rows = getRows(sheet);
+  const searchRoll = normalizeRoll(rollNumber);
+  const searchDob = normalizeDob(dob);
+  return rows.find(function (row) {
+    const rowRoll = normalizeRoll(row.rollNumber);
+    const rowDob = normalizeDob(row.dob);
     return String(row.examId) === String(examId) &&
-      normalizeRoll(row.rollNumber) === normalizeRoll(rollNumber) &&
-      normalizeDob(row.dob) === normalizeDob(dob);
+      rowRoll === searchRoll &&
+      rowDob === searchDob;
   }) || null;
 }
 
 function appendCandidateData(sheet, payload, userAgent) {
-  const unattempted = Number(payload.unattempted) || Math.max(Number(payload.totalQuestions) - Number(payload.totalAttempted), 0);
+  const columns = getColumnMap(sheet);
+  const lastColumn = Math.max(sheet.getLastColumn(), HEADERS.length);
   const nextRow = sheet.getLastRow() + 1;
-  const row = [
-    new Date(),
-    payload.examId,
-    payload.examName,
-    payload.board || "",
-    payload.stage || "",
-    payload.shift || "",
-    payload.mode,
-    payload.candidateName || "Private",
-    normalizeRoll(payload.rollNumber),
-    normalizeDob(payload.dob),
-    payload.gender,
-    payload.category,
-    payload.state,
-    Number(payload.totalQuestions),
-    Number(payload.totalAttempted),
-    Number(payload.rightAnswers),
-    Number(payload.wrongAnswers),
-    unattempted,
-    Number(payload.marksPerCorrect),
-    Number(payload.negativeMarking),
-    Number(payload.rawMarks),
-    payload.normalizedMarks,
-    payload.answerKeyLink || "",
-    "",
-    "",
-    "",
-    "",
-    userAgent || ""
-  ];
+  const row = new Array(lastColumn).fill("");
+  const unattempted = Number(payload.unattempted) || Math.max(Number(payload.totalQuestions) - Number(payload.totalAttempted), 0);
 
-  sheet.getRange(nextRow, 9, 1, 2).setNumberFormat("@");
-  sheet.getRange(nextRow, 1, 1, HEADERS.length).setValues([row]);
+  setCell(row, columns.timestamp, new Date());
+  setCell(row, columns.examId, payload.examId);
+  setCell(row, columns.examName, payload.examName);
+  setCell(row, columns.board, payload.board || "");
+  setCell(row, columns.stage, payload.stage || "");
+  setCell(row, columns.shift, payload.shift || "");
+  setCell(row, columns.mode, payload.mode);
+  setCell(row, columns.candidateName, payload.candidateName || "Private");
+  setCell(row, columns.rollNumber, normalizeRoll(payload.rollNumber));
+  setCell(row, columns.dob, normalizeDob(payload.dob));
+  setCell(row, columns.gender, payload.gender);
+  setCell(row, columns.category, payload.category);
+  setCell(row, columns.state, payload.state);
+  setCell(row, columns.totalQuestions, Number(payload.totalQuestions));
+  setCell(row, columns.totalAttempted, Number(payload.totalAttempted));
+  setCell(row, columns.rightAnswers, Number(payload.rightAnswers));
+  setCell(row, columns.wrongAnswers, Number(payload.wrongAnswers));
+  setCell(row, columns.unattempted, unattempted);
+  setCell(row, columns.marksPerCorrect, Number(payload.marksPerCorrect));
+  setCell(row, columns.negativeMarking, Number(payload.negativeMarking));
+  setCell(row, columns.rawMarks, Number(payload.rawMarks));
+  setCell(row, columns.normalizedMarks, payload.normalizedMarks);
+  setCell(row, columns.answerKeyLink, payload.answerKeyLink || "");
+  setCell(row, columns.userAgent, userAgent || "");
+
+  if (columns.rollNumber !== null) sheet.getRange(nextRow, columns.rollNumber + 1).setNumberFormat("@");
+  if (columns.dob !== null) sheet.getRange(nextRow, columns.dob + 1).setNumberFormat("@");
+  sheet.getRange(nextRow, 1, 1, row.length).setValues([row]);
   return nextRow;
 }
 
@@ -329,8 +347,12 @@ function calculateRanks(sheet, candidateRow) {
   const shiftRank = calculateTieAwareRank(rows.filter(function (row) {
     return normalizeKey(row.shift) === normalizeKey(candidateRow.shift);
   }), candidateRow);
+  const columns = getColumnMap(sheet);
 
-  sheet.getRange(candidateRow.rowNumber, 24, 1, 4).setValues([[overallRank, categoryRank, stateRank, shiftRank]]);
+  if (columns.overallRank !== null) sheet.getRange(candidateRow.rowNumber, columns.overallRank + 1).setValue(overallRank);
+  if (columns.categoryRank !== null) sheet.getRange(candidateRow.rowNumber, columns.categoryRank + 1).setValue(categoryRank);
+  if (columns.stateRank !== null) sheet.getRange(candidateRow.rowNumber, columns.stateRank + 1).setValue(stateRank);
+  if (columns.shiftRank !== null) sheet.getRange(candidateRow.rowNumber, columns.shiftRank + 1).setValue(shiftRank);
 
   const rankBasis = candidateRow.normalizedMarks !== "" && candidateRow.normalizedMarks !== null && candidateRow.normalizedMarks !== undefined ? "normalized" : "raw";
   return {
@@ -367,33 +389,112 @@ function calculateTieAwareRank(rows, candidateRow) {
 function getRows(sheet) {
   const lastRow = sheet.getLastRow();
   if (lastRow < 2) return [];
-  return sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues().map(function (row, index) {
+  const lastColumn = Math.max(sheet.getLastColumn(), HEADERS.length);
+  const values = sheet.getRange(1, 1, lastRow, lastColumn).getValues();
+  const columns = getColumnMapFromHeader(values[0]);
+
+  return values.slice(1).map(function (row, index) {
+    const normalizedMarks = getCell(row, columns.normalizedMarks);
     return {
       rowNumber: index + 2,
-      timestamp: row[0],
-      examId: row[1],
-      examName: row[2],
-      board: row[3],
-      stage: row[4],
-      shift: row[5],
-      mode: row[6],
-      candidateName: row[7],
-      rollNumber: row[8],
-      dob: row[9],
-      gender: row[10],
-      category: row[11],
-      state: row[12],
-      totalQuestions: row[13],
-      totalAttempted: row[14],
-      rightAnswers: row[15],
-      wrongAnswers: row[16],
-      unattempted: row[17],
-      marksPerCorrect: row[18],
-      negativeMarking: row[19],
-      rawMarks: Number(row[20]) || 0,
-      normalizedMarks: row[21] === "" ? "" : Number(row[21])
+      timestamp: getCell(row, columns.timestamp),
+      examId: getCell(row, columns.examId),
+      examName: getCell(row, columns.examName),
+      board: getCell(row, columns.board),
+      stage: getCell(row, columns.stage),
+      shift: getCell(row, columns.shift),
+      mode: getCell(row, columns.mode),
+      candidateName: getCell(row, columns.candidateName),
+      rollNumber: normalizeRoll(getCell(row, columns.rollNumber)),
+      dob: normalizeDob(getCell(row, columns.dob)),
+      gender: getCell(row, columns.gender),
+      category: getCell(row, columns.category),
+      state: getCell(row, columns.state),
+      totalQuestions: getCell(row, columns.totalQuestions),
+      totalAttempted: getCell(row, columns.totalAttempted),
+      rightAnswers: getCell(row, columns.rightAnswers),
+      wrongAnswers: getCell(row, columns.wrongAnswers),
+      unattempted: getCell(row, columns.unattempted),
+      marksPerCorrect: getCell(row, columns.marksPerCorrect),
+      negativeMarking: getCell(row, columns.negativeMarking),
+      rawMarks: Number(getCell(row, columns.rawMarks)) || 0,
+      normalizedMarks: normalizedMarks === "" ? "" : Number(normalizedMarks)
     };
   });
+}
+
+function getDebugSampleRows(sheet) {
+  return getRows(sheet).slice(0, 3).map(function (row) {
+    return {
+      roll: normalizeRoll(row.rollNumber),
+      dob: normalizeDob(row.dob)
+    };
+  });
+}
+
+function getColumnMap(sheet) {
+  const lastColumn = Math.max(sheet.getLastColumn(), HEADERS.length);
+  const header = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
+  return getColumnMapFromHeader(header);
+}
+
+function getColumnMapFromHeader(header) {
+  const indexes = getHeaderIndexes(header || []);
+  return {
+    timestamp: getHeaderIndex(indexes, "Timestamp", 0),
+    examId: getHeaderIndex(indexes, "Exam ID", 1),
+    examName: getHeaderIndex(indexes, "Exam Name", 2),
+    board: getHeaderIndex(indexes, "Board", null),
+    stage: getHeaderIndex(indexes, "Stage", 4),
+    shift: getHeaderIndex(indexes, "Shift", 5),
+    mode: getHeaderIndex(indexes, "Mode", 6),
+    candidateName: getHeaderIndex(indexes, "Candidate Name", 7),
+    rollNumber: getHeaderIndex(indexes, "Roll Number", 8),
+    dob: getHeaderIndex(indexes, "DOB", 9),
+    gender: getHeaderIndex(indexes, "Gender", 10),
+    category: getHeaderIndex(indexes, "Category", 11),
+    state: getHeaderIndex(indexes, "State", 12),
+    totalQuestions: getHeaderIndex(indexes, "Total Questions", 13),
+    totalAttempted: getHeaderIndex(indexes, "Total Attempted", 14),
+    rightAnswers: getHeaderIndex(indexes, "Right Answers", 15),
+    wrongAnswers: getHeaderIndex(indexes, "Wrong Answers", 16),
+    unattempted: getHeaderIndex(indexes, "Unattempted", 17),
+    marksPerCorrect: getHeaderIndex(indexes, "Marks Per Correct", 18),
+    negativeMarking: getHeaderIndex(indexes, "Negative Marking", 19),
+    rawMarks: getHeaderIndex(indexes, "Raw Marks", 20),
+    normalizedMarks: getHeaderIndex(indexes, "Normalized Marks", null),
+    answerKeyLink: getHeaderIndex(indexes, "Answer Key Link", 22),
+    overallRank: getHeaderIndex(indexes, "Overall Rank", null),
+    categoryRank: getHeaderIndex(indexes, "Category Rank", null),
+    stateRank: getHeaderIndex(indexes, "State Rank", null),
+    shiftRank: getHeaderIndex(indexes, "Shift Rank", null),
+    userAgent: getHeaderIndex(indexes, "User Agent", 27)
+  };
+}
+
+function getHeaderIndexes(header) {
+  return (header || []).reduce(function (indexes, value, index) {
+    const key = normalizeHeader(value);
+    if (key) indexes[key] = index;
+    return indexes;
+  }, {});
+}
+
+function getHeaderIndex(indexes, label, fallback) {
+  const key = normalizeHeader(label);
+  return indexes[key] === undefined ? fallback : indexes[key];
+}
+
+function normalizeHeader(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function getCell(row, index) {
+  return index === null || index === undefined ? "" : row[index];
+}
+
+function setCell(row, index, value) {
+  if (index !== null && index !== undefined) row[index] = value;
 }
 
 function compareByRankMarks(a, b) {
@@ -404,7 +505,7 @@ function getRankMarks(row) {
   return row.normalizedMarks !== "" && row.normalizedMarks !== null && row.normalizedMarks !== undefined ? Number(row.normalizedMarks) : Number(row.rawMarks);
 }
 
-function sendResponse(obj) {
+function sendJSON(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
@@ -425,10 +526,26 @@ function normalizeRoll(value) {
 }
 
 function normalizeDob(value) {
+  if (!value) return "";
+
   if (Object.prototype.toString.call(value) === "[object Date]") {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), "yyyy-MM-dd");
   }
-  return String(value || "").trim();
+
+  let str = String(value).trim();
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+
+  if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)) {
+    const parts = str.split("/");
+    const a = parts[0].padStart(2, "0");
+    const b = parts[1].padStart(2, "0");
+    const y = parts[2];
+
+    return `${y}-${a}-${b}`;
+  }
+
+  return str;
 }
 
 function round2(value) {

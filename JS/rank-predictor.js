@@ -228,6 +228,7 @@
         }
 
         const payload = collectCheckPayload();
+        console.log("Check Rank Payload:", payload);
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
@@ -364,7 +365,7 @@
             shift: readValue("shift"),
             mode: state.mode,
             candidateName: readValue("candidateName"),
-            rollNumber: normalizeRollInput(readValue("rollNumber")),
+            rollNumber: normalizeRoll(readValue("rollNumber")),
             dob: readValue("dob"),
             gender: readValue("gender"),
             category: readValue("category"),
@@ -392,7 +393,7 @@
             examName: selectedExam.examName,
             sheetName: selectedExam.sheetName,
             shift: readValue("checkShift"),
-            rollNumber: normalizeRollInput(readValue("checkRollNumber")),
+            rollNumber: normalizeRoll(readValue("checkRollNumber")),
             dob: readValue("checkDob")
         };
     }
@@ -577,7 +578,7 @@
         return String(document.getElementById(id)?.value || "").trim();
     }
 
-    function normalizeRollInput(value) {
+    function normalizeRoll(value) {
         return String(value || "").trim().toUpperCase();
     }
 
