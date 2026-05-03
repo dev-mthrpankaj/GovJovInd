@@ -5,6 +5,8 @@
     const API_TIMEOUT_MS = 10000;
     const API_INVALID_URL_MESSAGE = "Backend URL is not configured correctly.";
     const API_NETWORK_ERROR_MESSAGE = "Unable to connect to server. Please check your internet or try again later.";
+    const API_DOPOST_NOT_REACHED_MESSAGE = "Backend doPost was not reached. Check the Apps Script /exec deployment and browser console.";
+    const API_INVALID_RESPONSE_MESSAGE = "Backend did not return JSON. Apps Script doPost may not be deployed or reachable.";
     const API_TIMEOUT_MESSAGE = "Server timeout. Please try again.";
     const state = {
         exam: null,
@@ -184,6 +186,11 @@
         }
 
         const payload = collectSubmitPayload();
+        const payloadValidation = validateBackendPayload(payload);
+        if (!payloadValidation.ok) {
+            showMessage("submitMessage", payloadValidation.message, "error");
+            return;
+        }
         const apiValidation = validateApiUrl();
         if (!apiValidation.ok) {
             showMessage("submitMessage", apiValidation.message, "warning");
@@ -219,6 +226,11 @@
         }
 
         const payload = collectCheckPayload();
+        const payloadValidation = validateBackendPayload(payload);
+        if (!payloadValidation.ok) {
+            showMessage("checkMessage", payloadValidation.message, "error");
+            return;
+        }
         const apiValidation = validateApiUrl();
         if (!apiValidation.ok) {
             showMessage("checkMessage", apiValidation.message, "warning");
@@ -253,6 +265,7 @@
         }
 
         const apiUrl = getApiUrl();
+        console.log("apiUrl:", apiUrl);
         console.log("Rank API URL:", window.RANK_PREDICTOR_CONFIG?.apiUrl || config.apiUrl);
         console.log("Payload:", payload);
 
@@ -445,13 +458,35 @@
             return JSON.parse(text);
         } catch (error) {
             console.error("JSON parse error:", error);
-            throw new Error("Invalid server response.");
+            const invalidResponseError = new Error(API_INVALID_RESPONSE_MESSAGE);
+            invalidResponseError.code = "INVALID_JSON_RESPONSE";
+            throw invalidResponseError;
         }
     }
 
     function getBackendErrorMessage(error) {
         if (error?.name === "AbortError") return API_TIMEOUT_MESSAGE;
+        if (error?.code === "INVALID_JSON_RESPONSE") return API_INVALID_RESPONSE_MESSAGE;
+        if (error instanceof TypeError) return API_DOPOST_NOT_REACHED_MESSAGE;
         return API_NETWORK_ERROR_MESSAGE;
+    }
+
+    function validateBackendPayload(payload) {
+        const required = ["action", "sheetName", "examId", "rollNumber", "dob"];
+        const missing = required.filter((key) => !String(payload[key] || "").trim());
+        if (missing.length) {
+            return {
+                ok: false,
+                message: `Backend payload missing: ${missing.join(", ")}`
+            };
+        }
+        if (!["submitData", "checkRank"].includes(payload.action)) {
+            return {
+                ok: false,
+                message: "Backend payload action is invalid."
+            };
+        }
+        return { ok: true };
     }
 
     function isValidDateInput(id) {
