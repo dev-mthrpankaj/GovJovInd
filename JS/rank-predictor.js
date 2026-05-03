@@ -21,7 +21,7 @@
         const app = document.getElementById("rankPredictorApp");
         if (!app) return;
 
-        state.exam = (config.exams || []).find((exam) => !exam.disabled) || null;
+        setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
         bindModeToggle(app);
@@ -55,15 +55,16 @@
         if (!select) return;
         select.innerHTML = (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("");
         select.addEventListener("change", () => {
-            state.exam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
-            if (state.exam?.disabled) state.exam = (config.exams || []).find((exam) => !exam.disabled) || null;
+            let selectedExam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
+            if (selectedExam?.disabled) selectedExam = (config.exams || []).find((exam) => !exam.disabled) || null;
+            setSelectedExam(selectedExam);
             applyExamDefaults();
             renderPendingResult();
         });
     }
 
     function applyExamDefaults() {
-        const exam = state.exam;
+        const exam = getSelectedExam();
         if (!exam) {
             setText("activeExamLabel", "Not configured");
             setText("activeModeLabel", "No exam");
@@ -220,6 +221,7 @@
         const form = event.currentTarget;
         const validation = validateCheckForm(form);
         if (!validation.ok) {
+            clearResultCard();
             showMessage("checkMessage", validation.message, "error");
             validation.field?.focus();
             return;
@@ -228,11 +230,13 @@
         const payload = collectCheckPayload();
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
+            clearResultCard();
             showMessage("checkMessage", payloadValidation.message, "error");
             return;
         }
         const apiValidation = validateApiUrl();
         if (!apiValidation.ok) {
+            clearResultCard();
             showMessage("checkMessage", apiValidation.message, "warning");
             return;
         }
@@ -240,10 +244,12 @@
         requestBackend(payload, "checkRankBtn", "Checking...")
             .then((data) => {
                 if (data.found === false) {
+                    clearResultCard();
                     showMessage("checkMessage", data.message || "No data found for this Roll Number and Date of Birth. Please submit your data first.", "warning");
                     return;
                 }
                 if (!data.success) {
+                    clearResultCard();
                     showMessage("checkMessage", data.message || "Something went wrong", "error");
                     return;
                 }
@@ -251,7 +257,10 @@
                 showMessage("checkMessage", data.message || "Rank found successfully.", "success");
                 renderResult(resultData, payload);
             })
-            .catch((error) => showMessage("checkMessage", getBackendErrorMessage(error), "error"));
+            .catch((error) => {
+                clearResultCard();
+                showMessage("checkMessage", getBackendErrorMessage(error), "error");
+            });
     }
 
     function requestBackend(payload, buttonId, loadingText) {
@@ -303,8 +312,9 @@
     function validateSubmitForm(form) {
         clearErrors(form);
         const required = ["candidateName", "rollNumber", "dob", "gender", "category", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"];
-        if ((state.exam?.stages || []).length) required.push("stage");
-        if (state.mode === "online" && getShiftOptions(state.exam).length) required.push("shift");
+        const selectedExam = getSelectedExam();
+        if ((selectedExam?.stages || []).length) required.push("stage");
+        if (state.mode === "online" && getShiftOptions(selectedExam).length) required.push("shift");
 
         for (const id of required) {
             const field = document.getElementById(id);
@@ -343,17 +353,18 @@
     }
 
     function collectSubmitPayload() {
+        const selectedExam = getSelectedExam();
         return {
             action: "submitData",
-            examId: state.exam.examId,
-            examName: state.exam.examName,
-            board: state.exam.board || "",
-            sheetName: state.exam.sheetName,
+            examId: selectedExam.examId,
+            examName: selectedExam.examName,
+            board: selectedExam.board || "",
+            sheetName: selectedExam.sheetName,
             stage: readValue("stage"),
             shift: readValue("shift"),
             mode: state.mode,
             candidateName: readValue("candidateName"),
-            rollNumber: readValue("rollNumber"),
+            rollNumber: normalizeRollInput(readValue("rollNumber")),
             dob: readValue("dob"),
             gender: readValue("gender"),
             category: readValue("category"),
@@ -368,18 +379,20 @@
             rawMarks: state.expectedMarks,
             expectedMarks: state.expectedMarks,
             normalizedMarks: "",
-            normalization: Boolean(state.exam.normalization),
+            normalization: Boolean(selectedExam.normalization),
             answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : ""
         };
     }
 
     function collectCheckPayload() {
+        const selectedExam = getSelectedExam();
         return {
             action: "checkRank",
-            examId: state.exam.examId,
-            sheetName: state.exam.sheetName,
+            examId: selectedExam.examId,
+            examName: selectedExam.examName,
+            sheetName: selectedExam.sheetName,
             shift: readValue("checkShift"),
-            rollNumber: readValue("checkRollNumber"),
+            rollNumber: normalizeRollInput(readValue("checkRollNumber")),
             dob: readValue("checkDob")
         };
     }
@@ -396,6 +409,20 @@
         setText("accuracyIndicator", "Pending");
         setText("lastUpdated", "Pending");
         setText("resultNote", "Rank prediction accuracy improves as more candidates submit data.");
+    }
+
+    function clearResultCard() {
+        setText("resultExpectedMarks", "Pending");
+        setText("normalizedMarks", "Pending");
+        setText("resultCandidateName", "Private");
+        setText("overallRank", "Pending");
+        setText("categoryRank", "Pending");
+        setText("stateRank", "Pending");
+        setText("shiftRank", "Pending");
+        setText("totalSubmissions", "0");
+        setText("accuracyIndicator", "Pending");
+        setText("lastUpdated", "Pending");
+        setText("resultNote", "No matching record found for the selected exam, roll number, and DOB.");
     }
 
     function renderResult(data, payload) {
@@ -433,6 +460,15 @@
     function getApiUrl() {
         const apiUrl = String(config.apiUrl || "").trim();
         return apiUrl;
+    }
+
+    function setSelectedExam(exam) {
+        state.exam = exam;
+        window.RANK_PREDICTOR_SELECTED_EXAM = exam;
+    }
+
+    function getSelectedExam() {
+        return window.RANK_PREDICTOR_SELECTED_EXAM || state.exam;
     }
 
     function validateApiUrl() {
@@ -539,6 +575,10 @@
 
     function readValue(id) {
         return String(document.getElementById(id)?.value || "").trim();
+    }
+
+    function normalizeRollInput(value) {
+        return String(value || "").trim().toUpperCase();
     }
 
     function setValue(id, value) {

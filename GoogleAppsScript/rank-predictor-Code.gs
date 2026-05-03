@@ -163,12 +163,18 @@ function checkRank(data) {
   const sheet = getSheetByExam(data.sheetName, spreadsheet);
   setupHeaders(sheet);
   const rows = getRows(sheet);
+  Logger.log("Check Rank Lookup: " + JSON.stringify({
+    sheetName: data.sheetName,
+    rollNumber: data.rollNumber,
+    dob: data.dob,
+    totalRows: rows.length
+  }));
   const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob);
   if (!candidateRow) {
     return sendResponse({
       success: false,
       found: false,
-      message: "No data found",
+      message: "No record found in " + data.sheetName + " for this Roll Number and DOB.",
       debug: {
         roll: data.rollNumber,
         dob: data.dob,
@@ -415,7 +421,7 @@ function normalizeKey(value) {
 }
 
 function normalizeRoll(value) {
-  return String(value || "").trim();
+  return String(value || "").trim().toUpperCase();
 }
 
 function normalizeDob(value) {
