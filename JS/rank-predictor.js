@@ -75,21 +75,16 @@
         setText("activeExamLabel", exam.examName);
         setText("activeModeLabel", getModeLabel(exam.supportedModes || []));
         setText("normalizationLabel", exam.normalization ? "Yes" : "No");
+        setFixedExamInfo(exam);
         populateSelect(document.getElementById("category"), exam.categories || []);
         populateSelect(document.getElementById("state"), exam.states || []);
-        populateSelect(document.getElementById("stage"), exam.stages || [], "Select Stage");
-        populateSelect(document.getElementById("shift"), getShiftOptions(exam), "Select Shift");
-        populateSelect(document.getElementById("checkShift"), getShiftOptions(exam), "Any Shift");
-        document.getElementById("rankPredictorApp")?.classList.toggle("has-stage", (exam.stages || []).length > 0);
-        document.getElementById("rankPredictorApp")?.classList.toggle("has-shift", getShiftOptions(exam).length > 0);
-        if ((exam.stages || []).length === 1) setValue("stage", exam.stages[0]);
-        if (getShiftOptions(exam).length === 1) {
-            setValue("shift", getShiftOptions(exam)[0]);
-            setValue("checkShift", getShiftOptions(exam)[0]);
+        document.getElementById("rankPredictorApp")?.classList.toggle("has-shift", Boolean(exam.hasShifts));
+        const shift = document.getElementById("shift");
+        if (shift) {
+            shift.required = Boolean(exam.hasShifts);
+            shift.value = "";
         }
-        setValue("totalQuestions", exam.totalQuestions || 0);
-        setValue("marksPerCorrect", exam.marksPerCorrect ?? 1);
-        setValue("negativeMarking", exam.negativeMarking ?? 0);
+        setValue("checkShift", "");
         setValue("totalAttempted", 0);
         setValue("rightAnswers", 0);
         setValue("wrongAnswers", 0);
@@ -100,12 +95,6 @@
     function populateSelect(select, values, placeholder = "Select") {
         if (!select) return;
         select.innerHTML = `<option value="">${escapeHtml(placeholder)}</option>${values.map((value) => `<option value="${escapeAttr(value)}">${escapeHtml(value)}</option>`).join("")}`;
-    }
-
-    function getShiftOptions(exam) {
-        if (!exam) return [];
-        if (Array.isArray(exam.shifts) && exam.shifts.length) return exam.shifts;
-        return exam.examType === "online" ? [] : ["Single Shift"];
     }
 
     function bindModeToggle(app) {
@@ -134,7 +123,7 @@
     function bindSubmitForm() {
         const form = document.getElementById("rankSubmitForm");
         if (!form) return;
-        ["totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"].forEach((id) => {
+        ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
             document.getElementById(id)?.addEventListener("input", calculateMarks);
         });
         form.addEventListener("input", clearFieldError);
@@ -156,12 +145,13 @@
     }
 
     function calculateMarks() {
-        const total = readNumber("totalQuestions");
+        const selectedExam = getSelectedExam();
+        const total = getExamNumber(selectedExam, "totalQuestions");
         const attempted = readNumber("totalAttempted");
         const right = readNumber("rightAnswers");
         const wrong = readNumber("wrongAnswers");
-        const perCorrect = readNumber("marksPerCorrect");
-        const negative = readNumber("negativeMarking");
+        const perCorrect = getExamNumber(selectedExam, "marksPerCorrect");
+        const negative = getExamNumber(selectedExam, "negativeMarking");
         const unattempted = Math.max(total - attempted, 0);
         const expected = (right * perCorrect) - (wrong * negative);
 
@@ -315,9 +305,8 @@
             markInvalid(field);
             return { ok: false, field, message: "Please select a valid exam." };
         }
-        const required = ["candidateName", "rollNumber", "dob", "gender", "category", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"];
-        if ((selectedExam?.stages || []).length) required.push("stage");
-        if (state.mode === "online" && getShiftOptions(selectedExam).length) required.push("shift");
+        const required = ["candidateName", "rollNumber", "dob", "examDate", "gender", "category", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
+        if (selectedExam.hasShifts) required.push("shift");
 
         for (const id of required) {
             const field = document.getElementById(id);
@@ -326,14 +315,17 @@
             return { ok: false, field, message: "Please fill all required fields." };
         }
 
-        const total = readNumber("totalQuestions");
+        const total = getExamNumber(selectedExam, "totalQuestions");
         const attempted = readNumber("totalAttempted");
         const right = readNumber("rightAnswers");
         const wrong = readNumber("wrongAnswers");
-        if (total <= 0) return invalidNumber("totalQuestions", "Total questions must be greater than zero.");
+        if (total <= 0) return invalidNumber("globalExamSelect", "Total questions must be configured for this exam.");
         if (attempted > total) return invalidNumber("totalAttempted", "Total attempted cannot be greater than total questions.");
         if (right + wrong > attempted) return invalidNumber("rightAnswers", "Right and wrong answers cannot exceed total attempted.");
+        if (total - attempted < 0) return invalidNumber("totalAttempted", "Unattempted cannot be negative.");
         if (!isValidDateInput("dob")) return invalidNumber("dob", "Please enter a valid Date of Birth.");
+        if (!isValidDateInput("examDate")) return invalidNumber("examDate", "Please enter a valid Exam Date.");
+        if (selectedExam.hasShifts && !isPositiveIntegerInput("shift")) return invalidNumber("shift", "Shift Number must be a positive number.");
         if (!Number.isFinite(state.expectedMarks)) return invalidNumber("expectedMarks", "Marks could not be calculated. Please check your answers.");
         if (!document.getElementById("dataConsent")?.checked) {
             const field = document.getElementById("dataConsent");
@@ -358,6 +350,10 @@
             return { ok: false, field, message: "Please enter Roll Number and Date of Birth." };
         }
         if (!isValidDateInput("checkDob")) return invalidNumber("checkDob", "Please enter a valid Date of Birth.");
+        const checkExamDate = document.getElementById("checkExamDate");
+        if (checkExamDate?.value && !isValidDateInput("checkExamDate")) return invalidNumber("checkExamDate", "Please enter a valid Exam Date.");
+        const checkShift = document.getElementById("checkShift");
+        if (checkShift?.value && !isPositiveIntegerInput("checkShift")) return invalidNumber("checkShift", "Shift Number must be a positive number.");
         return { ok: true };
     }
 
@@ -365,8 +361,17 @@
         const selectedExam = getSelectedExam();
         const rollNumberInput = document.getElementById("rollNumber");
         const dobInput = document.getElementById("dob");
+        const examDateInput = document.getElementById("examDate");
         const rollNumber = normalizeRoll(rollNumberInput?.value);
         const dob = dobInput?.value || "";
+        const totalQuestions = getExamNumber(selectedExam, "totalQuestions");
+        const totalAttempted = readNumber("totalAttempted");
+        const rightAnswers = readNumber("rightAnswers");
+        const wrongAnswers = readNumber("wrongAnswers");
+        const marksPerCorrect = getExamNumber(selectedExam, "marksPerCorrect");
+        const negativeMarking = getExamNumber(selectedExam, "negativeMarking");
+        const unattempted = Math.max(totalQuestions - totalAttempted, 0);
+        const rawMarks = round2((rightAnswers * marksPerCorrect) - (wrongAnswers * negativeMarking));
         return {
             action: "submitData",
             examId: selectedExam.examId,
@@ -379,15 +384,16 @@
             gender: readValue("gender"),
             category: readValue("category"),
             state: readValue("state"),
-            stage: readValue("stage"),
+            examDate: examDateInput?.value || "",
             shift: readValue("shift"),
-            totalQuestions: readNumber("totalQuestions"),
-            totalAttempted: readNumber("totalAttempted"),
-            rightAnswers: readNumber("rightAnswers"),
-            wrongAnswers: readNumber("wrongAnswers"),
-            unattempted: readNumber("unattempted"),
-            marksPerCorrect: readNumber("marksPerCorrect"),
-            negativeMarking: readNumber("negativeMarking"),
+            totalQuestions,
+            totalAttempted,
+            rightAnswers,
+            wrongAnswers,
+            unattempted,
+            marksPerCorrect,
+            negativeMarking,
+            rawMarks,
             answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : "",
             userAgent: navigator.userAgent
         };
@@ -397,6 +403,7 @@
         const selectedExam = getSelectedExam();
         const rollNumberInput = document.getElementById("checkRollNumber");
         const dobInput = document.getElementById("checkDob");
+        const examDateInput = document.getElementById("checkExamDate");
         const rollNumber = normalizeRoll(rollNumberInput?.value);
         const dob = dobInput?.value || "";
         return {
@@ -405,14 +412,15 @@
             examName: selectedExam.examName,
             sheetName: selectedExam.sheetName,
             rollNumber,
-            dob
+            dob,
+            examDate: examDateInput?.value || "",
+            shift: readValue("checkShift")
         };
     }
 
     function renderPendingResult(payload = {}) {
         setText("resultExpectedMarks", "Pending");
-        setText("normalizedMarks", "Pending");
-        setText("resultCandidateName", "Private");
+        setText("resultPercentile", "Pending");
         setText("overallRank", "Pending");
         setText("categoryRank", "Pending");
         setText("stateRank", "Pending");
@@ -425,8 +433,7 @@
 
     function clearResultCard() {
         setText("resultExpectedMarks", "Pending");
-        setText("normalizedMarks", "Pending");
-        setText("resultCandidateName", "Private");
+        setText("resultPercentile", "Pending");
         setText("overallRank", "Pending");
         setText("categoryRank", "Pending");
         setText("stateRank", "Pending");
@@ -441,8 +448,7 @@
         const total = Number(data.totalSubmissions || data.total || 0);
         const marks = data.rawMarks ?? data.marks;
         setText("resultExpectedMarks", marks !== undefined && marks !== null && marks !== "" ? formatMarks(marks) : "Pending");
-        setText("normalizedMarks", data.normalizedMarks !== undefined && data.normalizedMarks !== "" && data.normalizedMarks !== null ? formatMarks(data.normalizedMarks) : "Pending");
-        setText("resultCandidateName", data.candidateName || "Private");
+        setText("resultPercentile", formatPercentile(data.percentile));
         setText("overallRank", formatRank(data.overallRank));
         setText("categoryRank", formatRank(data.categoryRank));
         setText("stateRank", formatRank(data.stateRank));
@@ -450,7 +456,7 @@
         setText("totalSubmissions", total ? String(total) : "0");
         setText("accuracyIndicator", data.accuracyIndicator || getAccuracyIndicator(total));
         setText("lastUpdated", formatDateTime(data.lastUpdated));
-        setText("resultNote", data.rankBasis === "normalized" ? "Rank is based on normalized marks." : "Rank based on raw marks. Normalized rank will improve when normalized marks are available.");
+        setText("resultNote", "Rank and percentile are based on submitted raw marks for the selected exam.");
     }
 
     function getAccuracyIndicator(totalSubmissions) {
@@ -461,6 +467,12 @@
 
     function formatRank(value) {
         return value ? `#${value}` : "Pending";
+    }
+
+    function formatPercentile(value) {
+        if (value === undefined || value === null || value === "") return "Pending";
+        const number = Number(value);
+        return Number.isFinite(number) ? `${number.toFixed(2)}%` : "Pending";
     }
 
     function formatDateTime(value) {
@@ -493,8 +505,10 @@
     }
 
     function validateBackendPayload(payload) {
-        const required = ["action", "sheetName", "examId", "examName", "rollNumber", "dob"];
-        const missing = required.filter((key) => !String(payload[key] || "").trim());
+        const required = payload.action === "submitData"
+            ? ["action", "sheetName", "examId", "examName", "rollNumber", "dob", "examDate", "totalQuestions", "marksPerCorrect", "rawMarks"]
+            : ["action", "sheetName", "examId", "examName", "rollNumber", "dob"];
+        const missing = required.filter((key) => isBlank(payload[key]));
         if (missing.length) {
             return {
                 ok: false,
@@ -508,6 +522,11 @@
             };
         }
         return { ok: true };
+    }
+
+    function isPositiveIntegerInput(id) {
+        const value = document.getElementById(id)?.value;
+        return /^[1-9]\d*$/.test(String(value || "").trim());
     }
 
     function isValidDateInput(id) {
@@ -560,6 +579,27 @@
 
     function readValue(id) {
         return String(document.getElementById(id)?.value || "").trim();
+    }
+
+    function isBlank(value) {
+        return value === undefined || value === null || String(value).trim() === "";
+    }
+
+    function setFixedExamInfo(exam) {
+        setText("fixedTotalQuestions", String(getExamNumber(exam, "totalQuestions")));
+        setText("fixedMarksPerCorrect", formatConfigNumber(getExamNumber(exam, "marksPerCorrect")));
+        setText("fixedNegativeMarking", formatConfigNumber(getExamNumber(exam, "negativeMarking")));
+        setText("fixedExamMode", getModeLabel(exam.supportedModes || []));
+        setText("fixedNormalization", exam.normalization ? "Yes" : "No");
+    }
+
+    function getExamNumber(exam, key) {
+        const value = Number(exam?.[key]);
+        return Number.isFinite(value) ? value : 0;
+    }
+
+    function formatConfigNumber(value) {
+        return Number(value) % 1 === 0 ? String(Number(value)) : String(Number(value).toFixed(2));
     }
 
     function normalizeRoll(value) {

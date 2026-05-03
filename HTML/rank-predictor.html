@@ -93,15 +93,36 @@
                         <h2>Candidate Exam Details</h2>
                     </div>
 
+                    <div class="fixed-exam-settings" aria-label="Fixed exam settings">
+                        <div class="fixed-setting">
+                            <span>Total Questions</span>
+                            <strong id="fixedTotalQuestions">0</strong>
+                        </div>
+                        <div class="fixed-setting">
+                            <span>Marks per Correct</span>
+                            <strong id="fixedMarksPerCorrect">0</strong>
+                        </div>
+                        <div class="fixed-setting">
+                            <span>Negative Marking</span>
+                            <strong id="fixedNegativeMarking">0</strong>
+                        </div>
+                        <div class="fixed-setting">
+                            <span>Mode</span>
+                            <strong id="fixedExamMode">Loading</strong>
+                        </div>
+                        <div class="fixed-setting">
+                            <span>Normalization</span>
+                            <strong id="fixedNormalization">Loading</strong>
+                        </div>
+                        <p class="fixed-exam-note"><i class="fas fa-lock"></i> These values are fixed for this exam and cannot be edited.</p>
+                    </div>
+
                     <div class="form-grid">
                         <label class="rp-field" for="submitExamName">Exam Name
                             <input id="submitExamName" name="examName" type="text" readonly>
                         </label>
-                        <label class="rp-field stage-field" for="stage">Stage
-                            <select id="stage" name="stage" required></select>
-                        </label>
-                        <label class="rp-field shift-field" for="shift">Shift
-                            <select id="shift" name="shift"></select>
+                        <label class="rp-field shift-field" for="shift">Shift Number
+                            <input id="shift" name="shift" type="number" min="1" step="1" inputmode="numeric">
                         </label>
                         <label class="rp-field" for="candidateName">Candidate Name
                             <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
@@ -111,6 +132,9 @@
                         </label>
                         <label class="rp-field" for="dob">Date of Birth
                             <input id="dob" name="dob" type="date" required>
+                        </label>
+                        <label class="rp-field" for="examDate">Exam Date
+                            <input id="examDate" name="examDate" type="date" required>
                         </label>
                         <label class="rp-field" for="gender">Gender
                             <select id="gender" name="gender" required>
@@ -126,9 +150,6 @@
                         <label class="rp-field" for="state">State
                             <select id="state" name="state" required></select>
                         </label>
-                        <label class="rp-field" for="totalQuestions">Total Questions
-                            <input id="totalQuestions" name="totalQuestions" type="number" min="1" step="1" required>
-                        </label>
                         <label class="rp-field" for="totalAttempted">Total Attempted
                             <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
                         </label>
@@ -140,12 +161,6 @@
                         </label>
                         <label class="rp-field" for="unattempted">Unattempted
                             <input id="unattempted" name="unattempted" type="number" readonly>
-                        </label>
-                        <label class="rp-field" for="marksPerCorrect">Marks Per Correct
-                            <input id="marksPerCorrect" name="marksPerCorrect" type="number" min="0" step="0.01" required>
-                        </label>
-                        <label class="rp-field" for="negativeMarking">Negative Marking
-                            <input id="negativeMarking" name="negativeMarking" type="number" min="0" step="0.01" required>
                         </label>
                         <label class="rp-field" for="expectedMarks">Expected Marks
                             <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
@@ -182,8 +197,11 @@
                         <label class="rp-field" for="checkExamName">Exam Name
                             <input id="checkExamName" name="checkExamName" type="text" readonly>
                         </label>
-                        <label class="rp-field shift-field" for="checkShift">Shift (optional)
-                            <select id="checkShift" name="checkShift"></select>
+                        <label class="rp-field" for="checkExamDate">Exam Date (optional)
+                            <input id="checkExamDate" name="examDate" type="date">
+                        </label>
+                        <label class="rp-field shift-field" for="checkShift">Shift Number (optional)
+                            <input id="checkShift" name="checkShift" type="number" min="1" step="1" inputmode="numeric">
                         </label>
                         <label class="rp-field" for="checkRollNumber">Roll Number
                             <input id="checkRollNumber" name="rollNumber" type="text" autocomplete="off" required>
@@ -211,12 +229,8 @@
                         <strong id="resultExpectedMarks">0.00</strong>
                     </article>
                     <article class="result-metric">
-                        <span>Normalized Marks</span>
-                        <strong id="normalizedMarks">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Candidate</span>
-                        <strong id="resultCandidateName">Private</strong>
+                        <span>Percentile</span>
+                        <strong id="resultPercentile">Pending</strong>
                     </article>
                     <article class="result-metric">
                         <span>Overall Rank Estimate</span>
