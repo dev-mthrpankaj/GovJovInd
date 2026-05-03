@@ -145,37 +145,78 @@ function checkRank(data) {
 
   data.rollNumber = normalizeRoll(data.rollNumber);
   data.dob = normalizeDob(data.dob);
-  data.candidateKey = data.candidateKey || makeCandidateKey(data.examId, data.rollNumber, data.dob);
   validateCheckPayload(data);
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  const sheet = getSheetByExam(data.sheetName, spreadsheet);
-  setupHeaders(sheet);
+  const sheet = spreadsheet.getSheetByName(String(data.sheetName).trim());
 
   Logger.log("Check Rank Lookup: " + JSON.stringify({
     sheetName: data.sheetName,
-    candidateKey: data.candidateKey,
-    totalRows: sheet.getLastRow()
+    rollNumber: data.rollNumber,
+    dob: data.dob,
+    totalRows: sheet ? sheet.getLastRow() : 0
   }));
 
-  const targetRow = findCandidateByKey(sheet, data.candidateKey);
-  if (!targetRow) {
-    if (findLegacyCandidate(sheet, data.examId, data.rollNumber, data.dob)) {
-      return sendJSON({
-        success: false,
-        found: false,
-        message: "Old records need to be resubmitted after rank system update.",
-        debug: Object.assign(buildNotFoundDebug(sheet, data.sheetName, data.candidateKey), {
-          oldRecordFound: true
-        })
-      });
-    }
-
+  if (!sheet) {
     return sendJSON({
       success: false,
       found: false,
       message: "No data found",
-      debug: buildNotFoundDebug(sheet, data.sheetName, data.candidateKey)
+      debug: {
+        sheetName: data.sheetName,
+        searchedRoll: data.rollNumber,
+        searchedDob: data.dob,
+        totalRows: 0,
+        firstFiveRows: []
+      }
+    });
+  }
+
+  const columnMap = getColumnMap(sheet);
+  const requiredHeaders = ["Roll Number", "DOB", "Raw Marks", "Category", "State", "Shift"];
+  const missingHeaders = requiredHeaders.filter(function (header) {
+    return columnMap[normalizeHeader(header)] === undefined;
+  });
+
+  if (missingHeaders.length) {
+    return sendJSON({
+      success: false,
+      found: false,
+      message: "No data found",
+      debug: {
+        sheetName: data.sheetName,
+        searchedRoll: data.rollNumber,
+        searchedDob: data.dob,
+        totalRows: sheet.getLastRow(),
+        missingHeaders: missingHeaders,
+        firstFiveRows: []
+      }
+    });
+  }
+
+  const rows = getRowsByHeaders(sheet, columnMap);
+  const targetRow = rows.find(function (row) {
+    const sameExam = !row.examId || String(row.examId).trim() === String(data.examId || "").trim();
+    return sameExam && row.rollNumber === data.rollNumber && row.dob === data.dob;
+  }) || null;
+
+  if (!targetRow) {
+    return sendJSON({
+      success: false,
+      found: false,
+      message: "No data found",
+      debug: {
+        sheetName: data.sheetName,
+        searchedRoll: data.rollNumber,
+        searchedDob: data.dob,
+        totalRows: sheet.getLastRow(),
+        firstFiveRows: rows.slice(0, 5).map(function (row) {
+          return {
+            roll: row.rollNumber,
+            dob: row.dob
+          };
+        })
+      }
     });
   }
 
@@ -183,7 +224,7 @@ function checkRank(data) {
     success: true,
     found: true,
     message: "Rank found successfully.",
-    data: calculateRanks(sheet, data.candidateKey)
+    data: calculateRanksFromHeaderRows(rows, targetRow)
   });
 }
 
@@ -204,6 +245,17 @@ function setupHeaders(sheet) {
   }
 }
 
+function getColumnMap(sheet) {
+  const lastColumn = sheet.getLastColumn();
+  if (lastColumn < 1) return {};
+  const headers = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
+  const map = {};
+  headers.forEach(function (h, i) {
+    map[String(h).trim().toLowerCase()] = i;
+  });
+  return map;
+}
+
 function validateSubmitPayload(data) {
   ["candidateKey", "examId", "examName", "sheetName", "mode", "rollNumber", "dob", "gender", "category", "state"].forEach(function (key) {
     if (!String(data[key] || "").trim()) throw new Error(key + " is required.");
@@ -216,7 +268,7 @@ function validateSubmitPayload(data) {
 }
 
 function validateCheckPayload(data) {
-  ["candidateKey", "examId", "sheetName", "rollNumber", "dob"].forEach(function (key) {
+  ["examId", "examName", "sheetName", "rollNumber", "dob"].forEach(function (key) {
     if (!String(data[key] || "").trim()) throw new Error(key + " is required.");
   });
 }
@@ -382,6 +434,81 @@ function getRows(sheet) {
   });
 }
 
+function getRowsByHeaders(sheet, columnMap) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return [];
+  const lastColumn = sheet.getLastColumn();
+  return sheet.getRange(2, 1, lastRow - 1, lastColumn).getValues().map(function (row, index) {
+    return {
+      rowNumber: index + 2,
+      candidateKey: String(getHeaderValue(row, columnMap, "Candidate Key") || "").trim(),
+      timestamp: getHeaderValue(row, columnMap, "Timestamp"),
+      examId: getHeaderValue(row, columnMap, "Exam ID"),
+      examName: getHeaderValue(row, columnMap, "Exam Name"),
+      rollNumber: normalizeRoll(getHeaderValue(row, columnMap, "Roll Number")),
+      dob: normalizeDob(getHeaderValue(row, columnMap, "DOB")),
+      category: getHeaderValue(row, columnMap, "Category"),
+      state: getHeaderValue(row, columnMap, "State"),
+      shift: getHeaderValue(row, columnMap, "Shift"),
+      rawMarks: Number(getHeaderValue(row, columnMap, "Raw Marks")) || 0
+    };
+  });
+}
+
+function getHeaderValue(row, columnMap, header) {
+  const index = columnMap[normalizeHeader(header)];
+  return index === undefined ? "" : row[index];
+}
+
+function calculateRanksFromHeaderRows(rows, targetRow) {
+  const rowsForExam = rows.filter(function (row) {
+    const sameExam = !targetRow.examId || !row.examId || String(row.examId).trim() === String(targetRow.examId).trim();
+    return sameExam && row.rollNumber && row.dob;
+  });
+  const overallRank = calculateTieAwareHeaderRank(rowsForExam, targetRow);
+  const categoryRank = calculateTieAwareHeaderRank(rowsForExam.filter(function (row) {
+    return normalizeKey(row.category) === normalizeKey(targetRow.category);
+  }), targetRow);
+  const stateRank = calculateTieAwareHeaderRank(rowsForExam.filter(function (row) {
+    return normalizeKey(row.state) === normalizeKey(targetRow.state);
+  }), targetRow);
+  const shiftRank = calculateTieAwareHeaderRank(rowsForExam.filter(function (row) {
+    return normalizeKey(row.shift) === normalizeKey(targetRow.shift);
+  }), targetRow);
+
+  return {
+    found: true,
+    candidateName: "Private",
+    rawMarks: Number(targetRow.rawMarks),
+    marks: Number(targetRow.rawMarks),
+    normalizedMarks: "",
+    overallRank: overallRank,
+    categoryRank: categoryRank,
+    stateRank: stateRank,
+    shiftRank: shiftRank,
+    totalSubmissions: rowsForExam.length,
+    accuracyIndicator: getAccuracyIndicator(rowsForExam.length),
+    rankBasis: "raw",
+    lastUpdated: new Date().toISOString()
+  };
+}
+
+function calculateTieAwareHeaderRank(rows, targetRow) {
+  const sorted = rows.slice().sort(compareByRankMarks);
+  let previousMarks = null;
+  let previousRank = 0;
+
+  for (let index = 0; index < sorted.length; index += 1) {
+    const marks = getRankMarks(sorted[index]);
+    const rank = marks === previousMarks ? previousRank : index + 1;
+    previousMarks = marks;
+    previousRank = rank;
+    if (sorted[index].rowNumber === targetRow.rowNumber) return rank;
+  }
+
+  return 0;
+}
+
 function buildNotFoundDebug(sheet, sheetName, candidateKey) {
   return {
     searchedCandidateKey: String(candidateKey || "").trim(),
@@ -426,6 +553,10 @@ function normalizeRoll(value) {
 }
 
 function normalizeKey(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function normalizeHeader(value) {
   return String(value || "").trim().toLowerCase();
 }
 

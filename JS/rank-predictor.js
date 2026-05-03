@@ -225,7 +225,7 @@
         }
 
         const payload = collectCheckPayload();
-        console.log("Check rank payload:", payload);
+        console.log("Check payload:", payload);
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
@@ -298,6 +298,7 @@
         try {
             const response = JSON.parse(text);
             console.log("Parsed response:", response);
+            console.log("API response:", response);
             console.log("Rank API response:", response);
             return response;
         } catch (error) {
@@ -362,8 +363,10 @@
 
     function collectSubmitPayload() {
         const selectedExam = getSelectedExam();
-        const rollNumber = normalizeRoll(readValue("rollNumber"));
-        const dob = normalizeDob(readValue("dob"));
+        const rollNumberInput = document.getElementById("rollNumber");
+        const dobInput = document.getElementById("dob");
+        const rollNumber = normalizeRoll(rollNumberInput?.value);
+        const dob = dobInput?.value || "";
         return {
             action: "submitData",
             examId: selectedExam.examId,
@@ -392,8 +395,10 @@
 
     function collectCheckPayload() {
         const selectedExam = getSelectedExam();
-        const rollNumber = normalizeRoll(readValue("checkRollNumber"));
-        const dob = normalizeDob(readValue("checkDob"));
+        const rollNumberInput = document.getElementById("checkRollNumber");
+        const dobInput = document.getElementById("checkDob");
+        const rollNumber = normalizeRoll(rollNumberInput?.value);
+        const dob = dobInput?.value || "";
         return {
             action: "checkRank",
             examId: selectedExam.examId,
@@ -509,7 +514,7 @@
         const field = document.getElementById(id);
         if (!field) return false;
         if (field.validity && !field.validity.valid) return false;
-        return !Number.isNaN(new Date(field.value).getTime());
+        return /^\d{4}-\d{2}-\d{2}$/.test(field.value);
     }
 
     function invalidNumber(id, message) {
