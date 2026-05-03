@@ -53,6 +53,8 @@ function doPost(e) {
       });
     }
 
+    Logger.log(JSON.stringify(data));
+
     if (!data.action) {
       return sendResponse({
         success: false,
@@ -84,7 +86,7 @@ function doPost(e) {
 function doGet() {
   return sendResponse({
     success: true,
-    message: "API is working"
+    message: "API working"
   });
 }
 
@@ -98,11 +100,14 @@ function submitData(data) {
     });
   }
 
+  data.rollNumber = normalizeRoll(data.rollNumber);
+  data.dob = normalizeDob(data.dob);
   validateSubmitPayload(data);
   data.rawMarks = calculateRawMarks(data);
   data.normalizedMarks = data.normalizedMarks === "" || data.normalizedMarks === undefined ? "" : Number(data.normalizedMarks);
 
-  const sheet = getSheetByExam(data.sheetName);
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getSheetByExam(data.sheetName, spreadsheet);
   setupHeaders(sheet);
 
   if (findCandidate(sheet, data.examId, data.rollNumber, data.dob)) {
@@ -113,13 +118,32 @@ function submitData(data) {
     });
   }
 
-  appendCandidateData(sheet, data, "");
-  const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob);
-  return sendResponse(Object.assign({
+  const appendedRowNumber = appendCandidateData(sheet, data, "");
+  SpreadsheetApp.flush();
+  const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob) || getRows(sheet).find(function (row) {
+    return row.rowNumber === appendedRowNumber;
+  });
+  const rankData = calculateRanks(sheet, candidateRow);
+
+  if (!candidateRow) {
+    return sendResponse({
+      success: false,
+      message: "Data saved, but rank calculation failed",
+      debug: {
+        roll: data.rollNumber,
+        dob: data.dob,
+        sheetName: data.sheetName,
+        totalRows: getRows(sheet).length
+      }
+    });
+  }
+
+  return sendResponse({
     success: true,
     duplicate: false,
-    message: "Data submitted successfully."
-  }, calculateRanks(sheet, candidateRow)));
+    message: "Data submitted successfully",
+    data: rankData
+  });
 }
 
 function checkRank(data) {
@@ -132,14 +156,34 @@ function checkRank(data) {
     });
   }
 
+  data.rollNumber = normalizeRoll(data.rollNumber);
+  data.dob = normalizeDob(data.dob);
   validateCheckPayload(data);
-  const sheet = getSheetByExam(data.sheetName);
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getSheetByExam(data.sheetName, spreadsheet);
   setupHeaders(sheet);
+  const rows = getRows(sheet);
   const candidateRow = findCandidate(sheet, data.examId, data.rollNumber, data.dob);
   if (!candidateRow) {
-    return sendResponse({ success: false, found: false, message: "No data found. Please submit your data first." });
+    return sendResponse({
+      success: false,
+      found: false,
+      message: "No data found",
+      debug: {
+        roll: data.rollNumber,
+        dob: data.dob,
+        sheetName: data.sheetName,
+        totalRows: rows.length
+      }
+    });
   }
-  return sendResponse(Object.assign({ success: true, found: true, message: "Rank found successfully." }, calculateRanks(sheet, candidateRow)));
+
+  return sendResponse({
+    success: true,
+    found: true,
+    message: "Rank found successfully.",
+    data: calculateRanks(sheet, candidateRow)
+  });
 }
 
 function getExamStats(payload) {
@@ -171,11 +215,11 @@ function getLeaderboard(payload) {
   };
 }
 
-function getSheetByExam(sheetName) {
+function getSheetByExam(sheetName, spreadsheet) {
   const safeName = String(sheetName || "").trim();
   if (!safeName) throw new Error("Sheet name is required.");
-  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  return spreadsheet.getSheetByName(safeName) || spreadsheet.insertSheet(safeName);
+  const activeSpreadsheet = spreadsheet || SpreadsheetApp.openById(SPREADSHEET_ID);
+  return activeSpreadsheet.getSheetByName(safeName) || activeSpreadsheet.insertSheet(safeName);
 }
 
 function setupHeaders(sheet) {
@@ -211,14 +255,15 @@ function calculateRawMarks(payload) {
 function findCandidate(sheet, examId, rollNumber, dob) {
   return getRows(sheet).find(function (row) {
     return String(row.examId) === String(examId) &&
-      normalizeKey(row.rollNumber) === normalizeKey(rollNumber) &&
+      normalizeRoll(row.rollNumber) === normalizeRoll(rollNumber) &&
       normalizeDob(row.dob) === normalizeDob(dob);
   }) || null;
 }
 
 function appendCandidateData(sheet, payload, userAgent) {
   const unattempted = Number(payload.unattempted) || Math.max(Number(payload.totalQuestions) - Number(payload.totalAttempted), 0);
-  sheet.appendRow([
+  const nextRow = sheet.getLastRow() + 1;
+  const row = [
     new Date(),
     payload.examId,
     payload.examName,
@@ -227,8 +272,8 @@ function appendCandidateData(sheet, payload, userAgent) {
     payload.shift || "",
     payload.mode,
     payload.candidateName || "Private",
-    normalizeKey(payload.rollNumber),
-    payload.dob,
+    normalizeRoll(payload.rollNumber),
+    normalizeDob(payload.dob),
     payload.gender,
     payload.category,
     payload.state,
@@ -247,7 +292,11 @@ function appendCandidateData(sheet, payload, userAgent) {
     "",
     "",
     userAgent || ""
-  ]);
+  ];
+
+  sheet.getRange(nextRow, 9, 1, 2).setNumberFormat("@");
+  sheet.getRange(nextRow, 1, 1, HEADERS.length).setValues([row]);
+  return nextRow;
 }
 
 function calculateRanks(sheet, candidateRow) {
@@ -363,6 +412,10 @@ function getAccuracyIndicator(totalSubmissions) {
 
 function normalizeKey(value) {
   return String(value || "").trim().toLowerCase();
+}
+
+function normalizeRoll(value) {
+  return String(value || "").trim();
 }
 
 function normalizeDob(value) {

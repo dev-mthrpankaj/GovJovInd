@@ -3,8 +3,7 @@
 
     const config = window.RANK_PREDICTOR_CONFIG || { exams: [] };
     const API_TIMEOUT_MS = 10000;
-    const API_NOT_CONFIGURED_MESSAGE = "Backend not connected. Please configure API URL.";
-    const API_INVALID_URL_MESSAGE = "Invalid backend URL. Please use the deployed Google Apps Script /exec URL.";
+    const API_INVALID_URL_MESSAGE = "Backend URL is not configured correctly.";
     const API_NETWORK_ERROR_MESSAGE = "Unable to connect to server. Please check your internet or try again later.";
     const API_TIMEOUT_MESSAGE = "Server timeout. Please try again.";
     const state = {
@@ -253,20 +252,26 @@
             button.textContent = loadingText;
         }
 
-        console.log("Sending payload:", payload);
+        const apiUrl = getApiUrl();
+        console.log("Rank API URL:", window.RANK_PREDICTOR_CONFIG?.apiUrl || config.apiUrl);
+        console.log("Payload:", payload);
 
-        return fetch(getApiUrl(), {
+        return fetch(apiUrl, {
             method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
             body: JSON.stringify(payload),
             redirect: "follow",
             signal: controller.signal
         })
             .then((response) => {
-                return response.json();
+                return response.text();
             })
-            .then((data) => {
-                console.log("API response:", data);
-                console.log("Received response:", data);
+            .then((text) => {
+                console.log("Raw response:", text);
+                const data = parseApiResponse(text);
+                console.log("Parsed response:", data);
                 return data;
             })
             .catch((error) => {
@@ -420,7 +425,7 @@
     function validateApiUrl() {
         const apiUrl = getApiUrl();
         if (!apiUrl || apiUrl === "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
-            return { ok: false, message: API_NOT_CONFIGURED_MESSAGE };
+            return { ok: false, message: API_INVALID_URL_MESSAGE };
         }
         if (!apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) {
             return { ok: false, message: API_INVALID_URL_MESSAGE };
@@ -433,6 +438,15 @@
             return Object.assign({}, data, data.data);
         }
         return data || {};
+    }
+
+    function parseApiResponse(text) {
+        try {
+            return JSON.parse(text);
+        } catch (error) {
+            console.error("JSON parse error:", error);
+            throw new Error("Invalid server response.");
+        }
     }
 
     function getBackendErrorMessage(error) {
