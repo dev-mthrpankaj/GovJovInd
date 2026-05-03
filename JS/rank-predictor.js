@@ -293,9 +293,11 @@
         });
 
         const text = await res.text();
+        console.log("Raw response:", text);
 
         try {
             const response = JSON.parse(text);
+            console.log("Parsed response:", response);
             console.log("Rank API response:", response);
             return response;
         } catch (error) {
