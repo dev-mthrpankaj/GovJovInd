@@ -2,12 +2,9 @@
     "use strict";
 
     const config = window.RANK_PREDICTOR_CONFIG || { exams: [] };
-    const API_TIMEOUT_MS = 10000;
     const API_INVALID_URL_MESSAGE = "Backend URL is not configured correctly.";
     const API_NETWORK_ERROR_MESSAGE = "Unable to connect to server. Please check your internet or try again later.";
-    const API_DOPOST_NOT_REACHED_MESSAGE = "Backend doPost was not reached. Check the Apps Script /exec deployment and browser console.";
-    const API_INVALID_RESPONSE_MESSAGE = "Backend did not return JSON. Apps Script doPost may not be deployed or reachable.";
-    const API_TIMEOUT_MESSAGE = "Server timeout. Please try again.";
+    const API_INVALID_RESPONSE_MESSAGE = "Invalid backend response.";
     const state = {
         exam: null,
         mode: "offline",
@@ -171,7 +168,6 @@
         state.expectedMarks = round2(expected);
         setValue("unattempted", unattempted);
         setValue("expectedMarks", formatMarks(state.expectedMarks));
-        setText("resultExpectedMarks", formatMarks(state.expectedMarks));
         return state.expectedMarks;
     }
 
@@ -187,25 +183,23 @@
         }
 
         const payload = collectSubmitPayload();
+        console.log("Submit payload:", payload);
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
+            clearResultCard();
             showMessage("submitMessage", payloadValidation.message, "error");
-            return;
-        }
-        const apiValidation = validateApiUrl();
-        if (!apiValidation.ok) {
-            showMessage("submitMessage", apiValidation.message, "warning");
-            renderPendingResult(payload);
             return;
         }
 
         requestBackend(payload, "submitDataBtn", "Submitting...")
             .then((data) => {
                 if (data.duplicate) {
+                    clearResultCard();
                     showMessage("submitMessage", data.message || "Data already exists for this Roll Number and Date of Birth. Please use Check My Rank.", "warning");
                     return;
                 }
                 if (!data.success) {
+                    clearResultCard();
                     showMessage("submitMessage", data.message || "Something went wrong", "error");
                     return;
                 }
@@ -213,7 +207,10 @@
                 showMessage("submitMessage", data.message || "Data submitted successfully.", "success");
                 renderResult(resultData, payload);
             })
-            .catch((error) => showMessage("submitMessage", getBackendErrorMessage(error), "error"));
+            .catch((error) => {
+                clearResultCard();
+                showMessage("submitMessage", getBackendErrorMessage(error), "error");
+            });
     }
 
     function handleCheckRank(event) {
@@ -228,17 +225,11 @@
         }
 
         const payload = collectCheckPayload();
-        console.log("Check Rank Payload:", payload);
+        console.log("Check rank payload:", payload);
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
             showMessage("checkMessage", payloadValidation.message, "error");
-            return;
-        }
-        const apiValidation = validateApiUrl();
-        if (!apiValidation.ok) {
-            clearResultCard();
-            showMessage("checkMessage", apiValidation.message, "warning");
             return;
         }
 
@@ -269,42 +260,13 @@
     function requestBackend(payload, buttonId, loadingText) {
         const button = document.getElementById(buttonId);
         const original = button?.textContent || "";
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
         if (button) {
             button.disabled = true;
             button.textContent = loadingText;
         }
 
-        const apiUrl = getApiUrl();
-        console.log("apiUrl:", apiUrl);
-        console.log("Rank API URL:", window.RANK_PREDICTOR_CONFIG?.apiUrl || config.apiUrl);
-        console.log("Payload:", payload);
-
-        return fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(payload),
-            redirect: "follow",
-            signal: controller.signal
-        })
-            .then((response) => {
-                return response.text();
-            })
-            .then((text) => {
-                console.log("Raw response:", text);
-                const data = parseApiResponse(text);
-                console.log("Parsed response:", data);
-                return data;
-            })
-            .catch((error) => {
-                console.error("Fetch error:", error);
-                throw error;
-            })
+        return callRankApi(payload)
             .finally(() => {
-                clearTimeout(timeoutId);
                 if (button) {
                     button.disabled = false;
                     button.textContent = original;
@@ -312,10 +274,45 @@
             });
     }
 
+    async function callRankApi(payload) {
+        const apiUrl = RANK_PREDICTOR_CONFIG.apiUrl;
+
+        console.log("apiUrl:", apiUrl);
+
+        if (!apiUrl || !apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) {
+            throw new Error(API_INVALID_URL_MESSAGE);
+        }
+
+        const res = await fetch(apiUrl, {
+            method: "POST",
+            redirect: "follow",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const text = await res.text();
+
+        try {
+            const response = JSON.parse(text);
+            console.log("Rank API response:", response);
+            return response;
+        } catch (error) {
+            console.error("Invalid backend response:", text);
+            throw new Error(API_INVALID_RESPONSE_MESSAGE);
+        }
+    }
+
     function validateSubmitForm(form) {
         clearErrors(form);
-        const required = ["candidateName", "rollNumber", "dob", "gender", "category", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"];
         const selectedExam = getSelectedExam();
+        if (!selectedExam || selectedExam.disabled || !String(selectedExam.sheetName || "").trim()) {
+            const field = document.getElementById("globalExamSelect");
+            markInvalid(field);
+            return { ok: false, field, message: "Please select a valid exam." };
+        }
+        const required = ["candidateName", "rollNumber", "dob", "gender", "category", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "marksPerCorrect", "negativeMarking"];
         if ((selectedExam?.stages || []).length) required.push("stage");
         if (state.mode === "online" && getShiftOptions(selectedExam).length) required.push("shift");
 
@@ -345,6 +342,12 @@
 
     function validateCheckForm(form) {
         clearErrors(form);
+        const selectedExam = getSelectedExam();
+        if (!selectedExam || selectedExam.disabled || !String(selectedExam.sheetName || "").trim()) {
+            const field = document.getElementById("globalExamSelect");
+            markInvalid(field);
+            return { ok: false, field, message: "Please select a valid exam." };
+        }
         for (const id of ["checkRollNumber", "checkDob"]) {
             const field = document.getElementById(id);
             if (field && String(field.value).trim()) continue;
@@ -359,16 +362,11 @@
         const selectedExam = getSelectedExam();
         const rollNumber = normalizeRoll(readValue("rollNumber"));
         const dob = normalizeDob(readValue("dob"));
-        const candidateKey = makeCandidateKey(selectedExam.examId, rollNumber, dob);
         return {
             action: "submitData",
             examId: selectedExam.examId,
             examName: selectedExam.examName,
-            candidateKey,
-            board: selectedExam.board || "",
             sheetName: selectedExam.sheetName,
-            stage: readValue("stage"),
-            shift: readValue("shift"),
             mode: state.mode,
             candidateName: readValue("candidateName"),
             rollNumber,
@@ -376,6 +374,8 @@
             gender: readValue("gender"),
             category: readValue("category"),
             state: readValue("state"),
+            stage: readValue("stage"),
+            shift: readValue("shift"),
             totalQuestions: readNumber("totalQuestions"),
             totalAttempted: readNumber("totalAttempted"),
             rightAnswers: readNumber("rightAnswers"),
@@ -383,11 +383,8 @@
             unattempted: readNumber("unattempted"),
             marksPerCorrect: readNumber("marksPerCorrect"),
             negativeMarking: readNumber("negativeMarking"),
-            rawMarks: state.expectedMarks,
-            expectedMarks: state.expectedMarks,
-            normalizedMarks: "",
-            normalization: Boolean(selectedExam.normalization),
-            answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : ""
+            answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : "",
+            userAgent: navigator.userAgent
         };
     }
 
@@ -395,21 +392,18 @@
         const selectedExam = getSelectedExam();
         const rollNumber = normalizeRoll(readValue("checkRollNumber"));
         const dob = normalizeDob(readValue("checkDob"));
-        const candidateKey = makeCandidateKey(selectedExam.examId, rollNumber, dob);
         return {
             action: "checkRank",
             examId: selectedExam.examId,
             examName: selectedExam.examName,
-            candidateKey,
             sheetName: selectedExam.sheetName,
-            shift: readValue("checkShift"),
             rollNumber,
             dob
         };
     }
 
     function renderPendingResult(payload = {}) {
-        setText("resultExpectedMarks", formatMarks(payload.expectedMarks ?? state.expectedMarks));
+        setText("resultExpectedMarks", "Pending");
         setText("normalizedMarks", "Pending");
         setText("resultCandidateName", "Private");
         setText("overallRank", "Pending");
@@ -438,7 +432,8 @@
 
     function renderResult(data, payload) {
         const total = Number(data.totalSubmissions || data.total || 0);
-        setText("resultExpectedMarks", formatMarks(data.rawMarks ?? data.expectedMarks ?? payload.expectedMarks ?? state.expectedMarks));
+        const marks = data.rawMarks ?? data.marks;
+        setText("resultExpectedMarks", marks !== undefined && marks !== null && marks !== "" ? formatMarks(marks) : "Pending");
         setText("normalizedMarks", data.normalizedMarks !== undefined && data.normalizedMarks !== "" && data.normalizedMarks !== null ? formatMarks(data.normalizedMarks) : "Pending");
         setText("resultCandidateName", data.candidateName || "Private");
         setText("overallRank", formatRank(data.overallRank));
@@ -468,11 +463,6 @@
         return date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
     }
 
-    function getApiUrl() {
-        const apiUrl = String(config.apiUrl || "").trim();
-        return apiUrl;
-    }
-
     function setSelectedExam(exam) {
         state.exam = exam;
         window.RANK_PREDICTOR_SELECTED_EXAM = exam;
@@ -482,17 +472,6 @@
         return window.RANK_PREDICTOR_SELECTED_EXAM || state.exam;
     }
 
-    function validateApiUrl() {
-        const apiUrl = getApiUrl();
-        if (!apiUrl || apiUrl === "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
-            return { ok: false, message: API_INVALID_URL_MESSAGE };
-        }
-        if (!apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) {
-            return { ok: false, message: API_INVALID_URL_MESSAGE };
-        }
-        return { ok: true };
-    }
-
     function getResponseData(data) {
         if (data && typeof data.data === "object" && data.data !== null) {
             return Object.assign({}, data, data.data);
@@ -500,26 +479,14 @@
         return data || {};
     }
 
-    function parseApiResponse(text) {
-        try {
-            return JSON.parse(text);
-        } catch (error) {
-            console.error("JSON parse error:", error);
-            const invalidResponseError = new Error(API_INVALID_RESPONSE_MESSAGE);
-            invalidResponseError.code = "INVALID_JSON_RESPONSE";
-            throw invalidResponseError;
-        }
-    }
-
     function getBackendErrorMessage(error) {
-        if (error?.name === "AbortError") return API_TIMEOUT_MESSAGE;
-        if (error?.code === "INVALID_JSON_RESPONSE") return API_INVALID_RESPONSE_MESSAGE;
-        if (error instanceof TypeError) return API_DOPOST_NOT_REACHED_MESSAGE;
+        if (error instanceof TypeError) return API_NETWORK_ERROR_MESSAGE;
+        if (error?.message) return error.message;
         return API_NETWORK_ERROR_MESSAGE;
     }
 
     function validateBackendPayload(payload) {
-        const required = ["action", "sheetName", "examId", "rollNumber", "dob", "candidateKey"];
+        const required = ["action", "sheetName", "examId", "examName", "rollNumber", "dob"];
         const missing = required.filter((key) => !String(payload[key] || "").trim());
         if (missing.length) {
             return {
@@ -589,15 +556,11 @@
     }
 
     function normalizeRoll(value) {
-        return String(value || "").trim().toUpperCase();
+        return String(value || "").trim();
     }
 
     function normalizeDob(value) {
         return String(value || "").trim();
-    }
-
-    function makeCandidateKey(examId, rollNumber, dob) {
-        return `${String(examId || "").trim().toLowerCase()}|${normalizeRoll(rollNumber)}|${normalizeDob(dob)}`;
     }
 
     function setValue(id, value) {
