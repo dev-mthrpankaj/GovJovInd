@@ -2,6 +2,11 @@
     "use strict";
 
     const config = window.RANK_PREDICTOR_CONFIG || { exams: [] };
+    const API_TIMEOUT_MS = 10000;
+    const API_NOT_CONFIGURED_MESSAGE = "Backend not connected. Please configure API URL.";
+    const API_INVALID_URL_MESSAGE = "Invalid backend URL. Please use the deployed Google Apps Script /exec URL.";
+    const API_NETWORK_ERROR_MESSAGE = "Unable to connect to server. Please check your internet or try again later.";
+    const API_TIMEOUT_MESSAGE = "Server timeout. Please try again.";
     const state = {
         exam: null,
         mode: "offline",
@@ -180,8 +185,9 @@
         }
 
         const payload = collectSubmitPayload();
-        if (!hasApiUrl()) {
-            showMessage("submitMessage", "Backend is not connected yet. Paste Google Apps Script Web App URL in rank-predictor-config.js.", "warning");
+        const apiValidation = validateApiUrl();
+        if (!apiValidation.ok) {
+            showMessage("submitMessage", apiValidation.message, "warning");
             renderPendingResult(payload);
             return;
         }
@@ -192,14 +198,15 @@
                     showMessage("submitMessage", data.message || "Data already exists for this Roll Number and Date of Birth. Please use Check My Rank.", "warning");
                     return;
                 }
-                if (data.success === false) {
-                    showMessage("submitMessage", data.message || "Unable to submit data.", "error");
+                if (!data.success) {
+                    showMessage("submitMessage", data.message || "Something went wrong", "error");
                     return;
                 }
-                showMessage("submitMessage", data.message || "Data submitted successfully.", data.success === false ? "error" : "success");
-                renderResult(data, payload);
+                const resultData = getResponseData(data);
+                showMessage("submitMessage", data.message || "Data submitted successfully.", "success");
+                renderResult(resultData, payload);
             })
-            .catch((error) => showMessage("submitMessage", error.message || "Unable to submit data.", "error"));
+            .catch((error) => showMessage("submitMessage", getBackendErrorMessage(error), "error"));
     }
 
     function handleCheckRank(event) {
@@ -213,8 +220,9 @@
         }
 
         const payload = collectCheckPayload();
-        if (!hasApiUrl()) {
-            showMessage("checkMessage", "Backend is not connected yet. Paste Google Apps Script Web App URL in rank-predictor-config.js.", "warning");
+        const apiValidation = validateApiUrl();
+        if (!apiValidation.ok) {
+            showMessage("checkMessage", apiValidation.message, "warning");
             return;
         }
 
@@ -224,33 +232,49 @@
                     showMessage("checkMessage", data.message || "No data found for this Roll Number and Date of Birth. Please submit your data first.", "warning");
                     return;
                 }
-                if (data.success === false) {
-                    showMessage("checkMessage", data.message || "Unable to check rank.", "error");
+                if (!data.success) {
+                    showMessage("checkMessage", data.message || "Something went wrong", "error");
                     return;
                 }
-                showMessage("checkMessage", data.message || "Rank found successfully.", data.success === false ? "error" : "success");
-                renderResult(data, payload);
+                const resultData = getResponseData(data);
+                showMessage("checkMessage", data.message || "Rank found successfully.", "success");
+                renderResult(resultData, payload);
             })
-            .catch((error) => showMessage("checkMessage", error.message || "Unable to check rank.", "error"));
+            .catch((error) => showMessage("checkMessage", getBackendErrorMessage(error), "error"));
     }
 
     function requestBackend(payload, buttonId, loadingText) {
         const button = document.getElementById(buttonId);
         const original = button?.textContent || "";
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
         if (button) {
             button.disabled = true;
             button.textContent = loadingText;
         }
 
-        return fetch(config.apiUrl, {
+        console.log("Sending payload:", payload);
+
+        return fetch(getApiUrl(), {
             method: "POST",
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload),
+            redirect: "follow",
+            signal: controller.signal
         })
             .then((response) => {
-                if (!response.ok) throw new Error("Backend request failed.");
                 return response.json();
             })
+            .then((data) => {
+                console.log("API response:", data);
+                console.log("Received response:", data);
+                return data;
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+                throw error;
+            })
             .finally(() => {
+                clearTimeout(timeoutId);
                 if (button) {
                     button.disabled = false;
                     button.textContent = original;
@@ -278,6 +302,8 @@
         if (total <= 0) return invalidNumber("totalQuestions", "Total questions must be greater than zero.");
         if (attempted > total) return invalidNumber("totalAttempted", "Total attempted cannot be greater than total questions.");
         if (right + wrong > attempted) return invalidNumber("rightAnswers", "Right and wrong answers cannot exceed total attempted.");
+        if (!isValidDateInput("dob")) return invalidNumber("dob", "Please enter a valid Date of Birth.");
+        if (!Number.isFinite(state.expectedMarks)) return invalidNumber("expectedMarks", "Marks could not be calculated. Please check your answers.");
         if (!document.getElementById("dataConsent")?.checked) {
             const field = document.getElementById("dataConsent");
             markInvalid(field);
@@ -294,6 +320,7 @@
             markInvalid(field);
             return { ok: false, field, message: "Please enter Roll Number and Date of Birth." };
         }
+        if (!isValidDateInput("checkDob")) return invalidNumber("checkDob", "Please enter a valid Date of Birth.");
         return { ok: true };
     }
 
@@ -385,9 +412,39 @@
         return date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
     }
 
-    function hasApiUrl() {
+    function getApiUrl() {
         const apiUrl = String(config.apiUrl || "").trim();
-        return apiUrl && apiUrl !== "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+        return apiUrl;
+    }
+
+    function validateApiUrl() {
+        const apiUrl = getApiUrl();
+        if (!apiUrl || apiUrl === "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
+            return { ok: false, message: API_NOT_CONFIGURED_MESSAGE };
+        }
+        if (!apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) {
+            return { ok: false, message: API_INVALID_URL_MESSAGE };
+        }
+        return { ok: true };
+    }
+
+    function getResponseData(data) {
+        if (data && typeof data.data === "object" && data.data !== null) {
+            return Object.assign({}, data, data.data);
+        }
+        return data || {};
+    }
+
+    function getBackendErrorMessage(error) {
+        if (error?.name === "AbortError") return API_TIMEOUT_MESSAGE;
+        return API_NETWORK_ERROR_MESSAGE;
+    }
+
+    function isValidDateInput(id) {
+        const field = document.getElementById(id);
+        if (!field) return false;
+        if (field.validity && !field.validity.valid) return false;
+        return !Number.isNaN(new Date(field.value).getTime());
     }
 
     function invalidNumber(id, message) {

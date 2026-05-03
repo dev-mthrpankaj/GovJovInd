@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = "https://docs.google.com/spreadsheets/d/1IIDP7Slon3zRDlOH0hxzOnAZd4fzYi5nZHphVCW2_wE/edit?gid=0#gid=0";
+const SPREADSHEET_ID = "1IIDP7Slon3zRDlOH0hxzOnAZd4fzYi5nZHphVCW2_wE";
 
 const HEADERS = [
   "Timestamp",
