@@ -3,8 +3,9 @@
 
     const config = window.RANK_PREDICTOR_CONFIG || { exams: [] };
     const API_INVALID_URL_MESSAGE = "Backend URL is not configured correctly.";
-    const API_NETWORK_ERROR_MESSAGE = "Unable to connect to server. Please check your internet or try again later.";
+    const API_NETWORK_ERROR_MESSAGE = "Server connection failed. Please try again.";
     const API_INVALID_RESPONSE_MESSAGE = "Invalid backend response.";
+    const PROCESSING_TEXT = "Processing...";
     const state = {
         exam: null,
         mode: "offline",
@@ -24,6 +25,7 @@
         bindModeToggle(app);
         bindSubmitForm();
         bindCheckForm();
+        bindMobileFocusHelper(app);
         applyExamDefaults();
         calculateMarks();
         renderPendingResult();
@@ -33,6 +35,7 @@
         document.querySelectorAll("[data-tab]").forEach((button) => {
             button.addEventListener("click", () => setTab(button.dataset.tab));
         });
+        setTab(state.activeTab);
     }
 
     function setTab(tab) {
@@ -43,7 +46,20 @@
             button.setAttribute("aria-selected", String(active));
         });
         document.querySelectorAll("[data-panel]").forEach((panel) => {
-            panel.classList.toggle("is-active", panel.dataset.panel === state.activeTab);
+            const active = panel.dataset.panel === state.activeTab;
+            panel.classList.toggle("is-active", active);
+            panel.toggleAttribute("hidden", !active);
+        });
+    }
+
+    function bindMobileFocusHelper(app) {
+        app.addEventListener("focusin", (event) => {
+            const field = event.target;
+            if (!field.matches("input, select, textarea")) return;
+            if (!window.matchMedia("(max-width: 767px)").matches) return;
+            window.setTimeout(() => {
+                field.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 250);
         });
     }
 
@@ -99,7 +115,7 @@
     }
 
     function bindModeToggle(app) {
-        document.querySelectorAll("[data-mode]").forEach((button) => {
+        document.querySelectorAll("button[data-mode]").forEach((button) => {
             button.addEventListener("click", () => {
                 if (!button.disabled) setMode(button.dataset.mode, app);
             });
@@ -110,7 +126,7 @@
         const supported = state.exam?.supportedModes || ["offline"];
         state.mode = supported.includes(mode) ? mode : supported[0] || "offline";
         if (app) app.dataset.mode = state.mode;
-        document.querySelectorAll("[data-mode]").forEach((button) => {
+        document.querySelectorAll("button[data-mode]").forEach((button) => {
             const supportedMode = supported.includes(button.dataset.mode);
             const active = button.dataset.mode === state.mode;
             button.disabled = !supportedMode;
@@ -172,6 +188,7 @@
         event.preventDefault();
         calculateMarks();
         const form = event.currentTarget;
+        if (form.dataset.busy === "true") return;
         const validation = validateSubmitForm(form);
         if (!validation.ok) {
             showMessage("submitMessage", validation.message, "error");
@@ -184,20 +201,23 @@
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
+            console.log("Submit payload validation failed:", payloadValidation.debug || payloadValidation.message);
             showMessage("submitMessage", payloadValidation.message, "error");
             return;
         }
 
-        requestBackend(payload, "submitDataBtn", "Submitting...")
+        requestBackend(payload, "submitDataBtn")
             .then((data) => {
                 if (data.duplicate) {
+                    console.log("Duplicate Submit Debug:", data.debug || data);
                     clearResultCard();
-                    showMessage("submitMessage", data.message || "Data already exists for this Roll Number and Date of Birth. Please use Check My Rank.", "warning");
+                    showMessage("submitMessage", "Data already exists for this Roll Number and DOB. Please use Check My Rank.", "warning");
                     return;
                 }
                 if (!data.success) {
+                    console.log("Submit Debug:", data.debug || data);
                     clearResultCard();
-                    showMessage("submitMessage", data.message || "Something went wrong", "error");
+                    showMessage("submitMessage", API_NETWORK_ERROR_MESSAGE, "error");
                     return;
                 }
                 const resultData = getResponseData(data);
@@ -205,6 +225,7 @@
                 renderResult(resultData, payload);
             })
             .catch((error) => {
+                console.log("Submit request failed:", error);
                 clearResultCard();
                 showMessage("submitMessage", getBackendErrorMessage(error), "error");
             });
@@ -213,6 +234,7 @@
     function handleCheckRank(event) {
         event.preventDefault();
         const form = event.currentTarget;
+        if (form.dataset.busy === "true") return;
         const validation = validateCheckForm(form);
         if (!validation.ok) {
             clearResultCard();
@@ -226,22 +248,23 @@
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
+            console.log("Check payload validation failed:", payloadValidation.debug || payloadValidation.message);
             showMessage("checkMessage", payloadValidation.message, "error");
             return;
         }
 
-        requestBackend(payload, "checkRankBtn", "Checking...")
+        requestBackend(payload, "checkRankBtn")
             .then((data) => {
-                if (data.found === false) {
+                if (data.found === false || /no data found/i.test(String(data.message || ""))) {
                     console.log("Check Rank Debug:", data.debug || data);
                     clearResultCard();
-                    showMessage("checkMessage", data.message || "No data found for this Roll Number and Date of Birth. Please submit your data first.", "warning");
+                    showMessage("checkMessage", "No data found for this Roll Number and DOB.", "warning");
                     return;
                 }
                 if (!data.success) {
                     console.log("Check Rank Debug:", data.debug || data);
                     clearResultCard();
-                    showMessage("checkMessage", data.message || "Something went wrong", "error");
+                    showMessage("checkMessage", API_NETWORK_ERROR_MESSAGE, "error");
                     return;
                 }
                 const resultData = getResponseData(data);
@@ -249,24 +272,36 @@
                 renderResult(resultData, payload);
             })
             .catch((error) => {
+                console.log("Check request failed:", error);
                 clearResultCard();
                 showMessage("checkMessage", getBackendErrorMessage(error), "error");
             });
     }
 
-    function requestBackend(payload, buttonId, loadingText) {
+    function requestBackend(payload, buttonId) {
         const button = document.getElementById(buttonId);
-        const original = button?.textContent || "";
+        const form = button?.closest("form") || null;
+        const original = button?.innerHTML || "";
         if (button) {
             button.disabled = true;
-            button.textContent = loadingText;
+            button.setAttribute("aria-busy", "true");
+            button.innerHTML = `<span class="loading-spinner" aria-hidden="true"></span><span>${PROCESSING_TEXT}</span>`;
+        }
+        if (form) {
+            form.dataset.busy = "true";
+            form.setAttribute("aria-busy", "true");
         }
 
         return callRankApi(payload)
             .finally(() => {
                 if (button) {
                     button.disabled = false;
-                    button.textContent = original;
+                    button.removeAttribute("aria-busy");
+                    button.innerHTML = original;
+                }
+                if (form) {
+                    form.dataset.busy = "false";
+                    form.setAttribute("aria-busy", "false");
                 }
             });
     }
@@ -339,7 +374,7 @@
         if (!document.getElementById("dataConsent")?.checked) {
             const field = document.getElementById("dataConsent");
             markInvalid(field);
-            return { ok: false, field, message: "Please accept the consent checkbox." };
+            return { ok: false, field, message: "Please fill all required fields." };
         }
         return { ok: true };
     }
@@ -356,7 +391,7 @@
             const field = document.getElementById(id);
             if (field && String(field.value).trim()) continue;
             markInvalid(field);
-            return { ok: false, field, message: "Please enter Roll Number and Date of Birth." };
+            return { ok: false, field, message: "Please fill all required fields." };
         }
         if (!isValidDateInput("checkDob")) return invalidNumber("checkDob", "Please enter a valid Date of Birth.");
         const checkExamDate = document.getElementById("checkExamDate");
@@ -442,6 +477,9 @@
         grid.innerHTML = subjects.map((subject, index) => {
             const name = String(subject.name || `Subject ${index + 1}`);
             const questions = Number(subject.questions) || 0;
+            const attemptedId = `subject-${index}-attempted`;
+            const correctId = `subject-${index}-correct`;
+            const wrongId = `subject-${index}-wrong`;
             return `
                 <article class="subject-card" data-subject-index="${index}">
                     <div class="subject-card-heading">
@@ -449,14 +487,14 @@
                         <small>${questions} questions</small>
                     </div>
                     <div class="subject-input-grid">
-                        <label>Attempted
-                            <input class="subject-input" data-subject-field="attempted" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                        <label for="${attemptedId}">Attempted
+                            <input id="${attemptedId}" class="subject-input" data-subject-field="attempted" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
                         </label>
-                        <label>Correct
-                            <input class="subject-input" data-subject-field="correct" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                        <label for="${correctId}">Correct
+                            <input id="${correctId}" class="subject-input" data-subject-field="correct" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
                         </label>
-                        <label>Wrong
-                            <input class="subject-input" data-subject-field="wrong" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                        <label for="${wrongId}">Wrong
+                            <input id="${wrongId}" class="subject-input" data-subject-field="wrong" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
                         </label>
                     </div>
                 </article>`;
@@ -617,15 +655,15 @@
         const body = document.getElementById("subjectAnalysisBody");
         if (!body) return;
         if (!Array.isArray(subjectAnalysis) || !subjectAnalysis.length) {
-            body.innerHTML = `<tr><td colspan="4">Pending</td></tr>`;
+            body.innerHTML = `<tr class="subject-empty-row"><td colspan="4" data-label="Status">Pending</td></tr>`;
             return;
         }
         body.innerHTML = subjectAnalysis.map((subject) => `
             <tr>
-                <td>${escapeHtml(subject.name || "Subject")}</td>
-                <td>${formatOptionalMarks(subject.score)}</td>
-                <td>${formatOptionalMarks(subject.avgScore)}</td>
-                <td>${formatPercentile(subject.accuracy)}</td>
+                <td data-label="Subject">${escapeHtml(subject.name || "Subject")}</td>
+                <td data-label="Your Score">${formatOptionalMarks(subject.score)}</td>
+                <td data-label="Average Score">${formatOptionalMarks(subject.avgScore)}</td>
+                <td data-label="Accuracy">${formatPercentile(subject.accuracy)}</td>
             </tr>
         `).join("");
     }
@@ -654,8 +692,9 @@
     }
 
     function getBackendErrorMessage(error) {
-        if (error instanceof TypeError) return API_NETWORK_ERROR_MESSAGE;
-        if (error?.message) return error.message;
+        if (error?.message === API_INVALID_URL_MESSAGE || error?.message === API_INVALID_RESPONSE_MESSAGE) {
+            return API_NETWORK_ERROR_MESSAGE;
+        }
         return API_NETWORK_ERROR_MESSAGE;
     }
 
@@ -667,13 +706,15 @@
         if (missing.length) {
             return {
                 ok: false,
-                message: `Backend payload missing: ${missing.join(", ")}`
+                message: "Please fill all required fields.",
+                debug: `Backend payload missing: ${missing.join(", ")}`
             };
         }
         if (!["submitData", "checkRank"].includes(payload.action)) {
             return {
                 ok: false,
-                message: "Backend payload action is invalid."
+                message: API_NETWORK_ERROR_MESSAGE,
+                debug: "Backend payload action is invalid."
             };
         }
         return { ok: true };
@@ -704,7 +745,7 @@
     }
 
     function clearFieldError(event) {
-        const field = event.target.closest(".rp-field, .consent-row");
+        const field = event.target.closest(".rp-field, .consent-row, .subject-card");
         field?.classList.remove("has-error");
         event.target.removeAttribute("aria-invalid");
     }

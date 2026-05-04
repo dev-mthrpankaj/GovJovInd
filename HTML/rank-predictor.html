@@ -80,14 +80,14 @@
             <p class="privacy-note"><i class="fas fa-circle-info"></i> Online response sheet links may not always be readable automatically because some exam boards use encrypted/session-based links. In that case, please enter your right and wrong answers manually.</p>
         </section>
 
-        <section class="tab-card" aria-label="Rank predictor actions">
-            <button class="tab-btn is-active" type="button" data-tab="submit" aria-selected="true">Submit Data</button>
-            <button class="tab-btn" type="button" data-tab="check" aria-selected="false">Check My Rank</button>
+        <section class="tab-card" role="tablist" aria-label="Rank predictor actions">
+            <button class="tab-btn is-active" id="submitTab" type="button" role="tab" data-tab="submit" aria-selected="true" aria-controls="rankSubmitForm">Submit Data</button>
+            <button class="tab-btn" id="checkTab" type="button" role="tab" data-tab="check" aria-selected="false" aria-controls="rankCheckForm">Check My Rank</button>
         </section>
 
         <section class="predictor-workspace">
             <div class="forms-column">
-                <form class="predictor-form tab-panel is-active" id="rankSubmitForm" data-panel="submit" novalidate>
+                <form class="predictor-form tab-panel is-active" id="rankSubmitForm" data-panel="submit" role="tabpanel" aria-labelledby="submitTab" aria-busy="false" novalidate>
                     <div class="form-heading">
                         <span>Submit Data</span>
                         <h2>Candidate Exam Details</h2>
@@ -117,76 +117,106 @@
                         <p class="fixed-exam-note"><i class="fas fa-lock"></i> These values are fixed for this exam and cannot be edited.</p>
                     </div>
 
-                    <div class="form-grid">
-                        <label class="rp-field" for="submitExamName">Exam Name
-                            <input id="submitExamName" name="examName" type="text" readonly>
-                        </label>
-                        <label class="rp-field shift-field" for="shift">Shift Number
-                            <input id="shift" name="shift" type="number" min="1" step="1" inputmode="numeric">
-                        </label>
-                        <label class="rp-field" for="candidateName">Candidate Name
-                            <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
-                        </label>
-                        <label class="rp-field" for="rollNumber">Roll Number
-                            <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" required>
-                        </label>
-                        <label class="rp-field" for="dob">Date of Birth
-                            <input id="dob" name="dob" type="date" required>
-                        </label>
-                        <label class="rp-field" for="examDate">Exam Date
-                            <input id="examDate" name="examDate" type="date" required>
-                        </label>
-                        <label class="rp-field" for="gender">Gender
-                            <select id="gender" name="gender" required>
-                                <option value="">Select Gender</option>
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </label>
-                        <label class="rp-field" for="category">Category
-                            <select id="category" name="category" required></select>
-                        </label>
-                        <label class="rp-field" for="state">State
-                            <select id="state" name="state" required></select>
-                        </label>
-                        <label class="rp-field" for="totalAttempted">Total Attempted
-                            <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
-                        </label>
-                        <label class="rp-field" for="rightAnswers">Right Answers
-                            <input id="rightAnswers" name="rightAnswers" type="number" min="0" step="1" required>
-                        </label>
-                        <label class="rp-field" for="wrongAnswers">Wrong Answers
-                            <input id="wrongAnswers" name="wrongAnswers" type="number" min="0" step="1" required>
-                        </label>
-                        <label class="rp-field" for="unattempted">Unattempted
-                            <input id="unattempted" name="unattempted" type="number" readonly>
-                        </label>
-                        <label class="rp-field" for="expectedMarks">Expected Marks
-                            <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
-                        </label>
-                        <label class="rp-field online-only" for="answerSheetLink">Answer Key / Response Sheet Link
-                            <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" placeholder="https://">
-                        </label>
-                    </div>
-
-                    <section class="subject-entry-card" aria-labelledby="subjectEntryTitle">
-                        <div class="form-heading compact-heading">
-                            <span>Subject Scorecard</span>
-                            <h3 id="subjectEntryTitle">Subject-wise Attempts</h3>
+                    <section class="form-section-card" aria-labelledby="candidateDetailsTitle">
+                        <div class="section-heading">
+                            <span>Candidate Details</span>
+                            <h3 id="candidateDetailsTitle">Candidate Details</h3>
                         </div>
-                        <div class="subject-entry-grid" id="subjectEntryGrid"></div>
+                        <div class="form-grid">
+                            <label class="rp-field" for="candidateName">Candidate Name
+                                <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
+                            </label>
+                            <label class="rp-field" for="rollNumber">Roll Number
+                                <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" required>
+                            </label>
+                            <label class="rp-field" for="dob">Date of Birth
+                                <input id="dob" name="dob" type="date" required>
+                            </label>
+                            <label class="rp-field" for="gender">Gender
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </label>
+                            <label class="rp-field" for="category">Category
+                                <select id="category" name="category" required></select>
+                            </label>
+                            <label class="rp-field" for="state">State
+                                <select id="state" name="state" required></select>
+                            </label>
+                        </div>
                     </section>
 
-                    <div class="manual-fallback online-only">
-                        <strong>Manual marks fallback is required</strong>
-                        <span>Automatic answer key reading is not available for many encrypted or session-based links. Enter attempted, right and wrong answers manually.</span>
-                    </div>
+                    <section class="form-section-card" aria-labelledby="examDetailsTitle">
+                        <div class="section-heading">
+                            <span>Exam Details</span>
+                            <h3 id="examDetailsTitle">Exam Details</h3>
+                        </div>
+                        <div class="form-grid">
+                            <label class="rp-field" for="submitExamName">Exam Name
+                                <input id="submitExamName" name="examName" type="text" readonly>
+                            </label>
+                            <label class="rp-field" for="examDate">Exam Date
+                                <input id="examDate" name="examDate" type="date" required>
+                            </label>
+                            <label class="rp-field shift-field" for="shift">Shift Number
+                                <input id="shift" name="shift" type="number" min="1" step="1" inputmode="numeric">
+                            </label>
+                            <label class="rp-field online-only" for="answerSheetLink">Answer Key / Response Sheet Link
+                                <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" placeholder="https://">
+                            </label>
+                        </div>
+                        <div class="manual-fallback online-only">
+                            <strong>Manual marks fallback is required</strong>
+                            <span>Automatic answer key reading is not available for many encrypted or session-based links. Enter attempted, right and wrong answers manually.</span>
+                        </div>
+                    </section>
 
-                    <label class="consent-row" for="dataConsent">
-                        <input id="dataConsent" name="dataConsent" type="checkbox" required>
-                        <span>I consent to submit this exam data for rank prediction.</span>
-                    </label>
+                    <section class="form-section-card" aria-labelledby="attemptDetailsTitle">
+                        <div class="section-heading">
+                            <span>Attempt Details</span>
+                            <h3 id="attemptDetailsTitle">Attempt Details</h3>
+                        </div>
+                        <div class="form-grid">
+                            <label class="rp-field" for="totalAttempted">Total Attempted
+                                <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
+                            </label>
+                            <label class="rp-field" for="rightAnswers">Right Answers
+                                <input id="rightAnswers" name="rightAnswers" type="number" min="0" step="1" required>
+                            </label>
+                            <label class="rp-field" for="wrongAnswers">Wrong Answers
+                                <input id="wrongAnswers" name="wrongAnswers" type="number" min="0" step="1" required>
+                            </label>
+                            <label class="rp-field" for="unattempted">Unattempted
+                                <input id="unattempted" name="unattempted" type="number" readonly>
+                            </label>
+                            <label class="rp-field" for="expectedMarks">Expected Marks
+                                <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
+                            </label>
+                        </div>
+                    </section>
+
+                    <details class="form-section-card subject-entry-card" id="subjectScorecardDetails" open>
+                        <summary class="section-summary">
+                            <span>Subject Scorecard</span>
+                            <strong id="subjectEntryTitle">Subject-wise Attempts</strong>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </summary>
+                        <div class="subject-entry-grid" id="subjectEntryGrid"></div>
+                    </details>
+
+                    <section class="form-section-card consent-section" aria-labelledby="consentTitle">
+                        <div class="section-heading">
+                            <span>Consent</span>
+                            <h3 id="consentTitle">Consent</h3>
+                        </div>
+                        <label class="consent-row" for="dataConsent">
+                            <input id="dataConsent" name="dataConsent" type="checkbox" required>
+                            <span>I consent to submit this exam data for rank prediction.</span>
+                        </label>
+                    </section>
 
                     <div class="form-message hidden" id="submitMessage" role="status" aria-live="polite"></div>
 
@@ -196,7 +226,7 @@
                     </div>
                 </form>
 
-                <form class="predictor-form tab-panel" id="rankCheckForm" data-panel="check" novalidate>
+                <form class="predictor-form tab-panel" id="rankCheckForm" data-panel="check" role="tabpanel" aria-labelledby="checkTab" aria-busy="false" novalidate>
                     <div class="form-heading">
                         <span>Already Submitted?</span>
                         <h2>Check Your Rank</h2>
@@ -232,7 +262,7 @@
                     <h2 id="predictionResultTitle">Rank Estimate</h2>
                 </div>
                 <section class="result-section" aria-label="Rank section">
-                    <h3>Rank Section</h3>
+                    <h3>Main Rank</h3>
                     <div class="result-grid">
                         <article class="result-metric">
                             <span>Overall Rank</span>
@@ -253,7 +283,7 @@
                     </div>
                 </section>
                 <section class="result-section" aria-label="Gender rank section">
-                    <h3>Gender Rank Section</h3>
+                    <h3>Gender Rank</h3>
                     <div class="result-grid">
                         <article class="result-metric">
                             <span>Gender Rank</span>
@@ -274,7 +304,7 @@
                     </div>
                 </section>
                 <section class="result-section" aria-label="Performance section">
-                    <h3>Performance Section</h3>
+                    <h3>Performance</h3>
                     <div class="result-grid">
                         <article class="result-metric featured">
                             <span>Raw Marks</span>
@@ -289,11 +319,11 @@
                             <strong id="averageMarks">Pending</strong>
                         </article>
                         <article class="result-metric">
-                            <span>Shift Average</span>
+                            <span>Average Shift Marks</span>
                             <strong id="averageShiftMarks">Pending</strong>
                         </article>
                         <article class="result-metric">
-                            <span>Category Average</span>
+                            <span>Category Average Marks</span>
                             <strong id="categoryAverageMarks">Pending</strong>
                         </article>
                         <article class="result-metric">
@@ -323,8 +353,8 @@
                                 </tr>
                             </thead>
                             <tbody id="subjectAnalysisBody">
-                                <tr>
-                                    <td colspan="4">Pending</td>
+                                <tr class="subject-empty-row">
+                                    <td colspan="4" data-label="Status">Pending</td>
                                 </tr>
                             </tbody>
                         </table>
