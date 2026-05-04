@@ -56,10 +56,19 @@
         app.addEventListener("focusin", (event) => {
             const field = event.target;
             if (!field.matches("input, select, textarea")) return;
+            if (field.type === "checkbox") return;
             if (!window.matchMedia("(max-width: 767px)").matches) return;
             window.setTimeout(() => {
-                field.scrollIntoView({ behavior: "smooth", block: "center" });
-            }, 250);
+                if (document.activeElement !== field) return;
+                const viewportHeight = window.visualViewport?.height || window.innerHeight;
+                const rect = field.getBoundingClientRect();
+                const topGuard = 110;
+                const bottomGuard = Math.max(150, Math.round(viewportHeight * 0.28));
+                const isHiddenByChrome = rect.top < topGuard || rect.bottom > viewportHeight - bottomGuard;
+                if (isHiddenByChrome) {
+                    field.scrollIntoView({ behavior: "auto", block: "center" });
+                }
+            }, 180);
         });
     }
 
