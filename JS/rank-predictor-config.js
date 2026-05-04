@@ -5,6 +5,25 @@ const RANK_PREDICTOR_CONFIG = {
     apiUrl: "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec",
     exams: [
         {
+            examId: "up-homeguard-2026",
+            examName: "Uttar Pradesh Home Guard 2026",
+            board: "UPPRPB",
+            examType: "online",
+            sheetName: "UP Home Guard 2026",
+            totalQuestions: 100,
+            marksPerCorrect: 1,
+            negativeMarking: 0,
+            hasShifts: true,
+            normalization: true,
+            supportedModes: ["offline"],
+            subjects: [
+                { name: "General Awareness", questions: 100 },
+                
+            ],
+            categories: ["UR", "OBC", "EWS", "SC", "ST", "Ex-Serviceman"],
+            states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
+        },
+        {
             examId: "ssc-cpo-2025-paper-1",
             examName: "SSC CPO 2025 Paper 1",
             board: "Staff Selection Commission",
