@@ -56,7 +56,7 @@ const RANK_PREDICTOR_CONFIG = {
             marksPerCorrect: 1,
             negativeMarking: 0,
             hasShifts: true,
-            normalization: false,
+            normalization: true,
             supportedModes: ["offline"],
             subjects: [
                 { name: "Maths", questions: 40 },

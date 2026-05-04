@@ -389,6 +389,15 @@ body {
     border: 1px solid var(--rp-border);
     border-radius: 8px;
     background: #f8fafc;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+}
+
+.rank-predictor-page .subject-card:hover,
+.rank-predictor-page .subject-card:focus-within {
+    transform: none;
+    transition: none;
 }
 
 .subject-card-heading {
@@ -767,18 +776,8 @@ body {
 
 @media (max-width: 767px) {
     .sticky-actions {
-        position: sticky;
-        bottom: max(12px, env(safe-area-inset-bottom));
-        z-index: 30;
-        margin: 0 -16px -16px;
-        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-        border-top: 1px solid var(--rp-border);
-        background: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 -10px 26px rgba(15, 23, 42, 0.08);
-    }
-
-    .predictor-form:focus-within .sticky-actions {
         position: static;
+        z-index: 30;
         margin: 4px 0 0;
         padding: 0;
         border-top: 0;
@@ -918,8 +917,8 @@ body {
     }
 
     .sticky-actions {
-        margin: 0 -14px -14px;
-        padding-inline: 14px;
+        margin: 4px 0 0;
+        padding-inline: 0;
     }
 
     .mode-card {
@@ -972,8 +971,8 @@ body {
     }
 
     .sticky-actions {
-        margin: 0 -12px -12px;
-        padding-inline: 12px;
+        margin: 4px 0 0;
+        padding-inline: 0;
     }
 }
 

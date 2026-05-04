@@ -10,7 +10,8 @@
         exam: null,
         mode: "offline",
         activeTab: "submit",
-        expectedMarks: 0
+        expectedMarks: 0,
+        marksFrame: 0
     };
 
     document.addEventListener("DOMContentLoaded", initRankPredictor);
@@ -25,7 +26,6 @@
         bindModeToggle(app);
         bindSubmitForm();
         bindCheckForm();
-        bindMobileFocusHelper(app);
         applyExamDefaults();
         calculateMarks();
         renderPendingResult();
@@ -49,26 +49,6 @@
             const active = panel.dataset.panel === state.activeTab;
             panel.classList.toggle("is-active", active);
             panel.toggleAttribute("hidden", !active);
-        });
-    }
-
-    function bindMobileFocusHelper(app) {
-        app.addEventListener("focusin", (event) => {
-            const field = event.target;
-            if (!field.matches("input, select, textarea")) return;
-            if (field.type === "checkbox") return;
-            if (!window.matchMedia("(max-width: 767px)").matches) return;
-            window.setTimeout(() => {
-                if (document.activeElement !== field) return;
-                const viewportHeight = window.visualViewport?.height || window.innerHeight;
-                const rect = field.getBoundingClientRect();
-                const topGuard = 110;
-                const bottomGuard = Math.max(150, Math.round(viewportHeight * 0.28));
-                const isHiddenByChrome = rect.top < topGuard || rect.bottom > viewportHeight - bottomGuard;
-                if (isHiddenByChrome) {
-                    field.scrollIntoView({ behavior: "auto", block: "center" });
-                }
-            }, 180);
         });
     }
 
@@ -151,11 +131,10 @@
         const form = document.getElementById("rankSubmitForm");
         if (!form) return;
         ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
-            document.getElementById(id)?.addEventListener("input", calculateMarks);
+            document.getElementById(id)?.addEventListener("input", scheduleMarksCalculation);
         });
         document.getElementById("subjectEntryGrid")?.addEventListener("input", () => {
-            syncSubjectTotals();
-            calculateMarks();
+            scheduleMarksCalculation();
         });
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleSubmit);
@@ -176,6 +155,7 @@
     }
 
     function calculateMarks() {
+        state.marksFrame = 0;
         const selectedExam = getSelectedExam();
         const subjectData = collectSubjectData(selectedExam);
         if (subjectData.length) {
@@ -195,6 +175,11 @@
         setValue("unattempted", unattempted);
         setValue("expectedMarks", formatMarks(state.expectedMarks));
         return state.expectedMarks;
+    }
+
+    function scheduleMarksCalculation() {
+        if (state.marksFrame) window.cancelAnimationFrame(state.marksFrame);
+        state.marksFrame = window.requestAnimationFrame(calculateMarks);
     }
 
     function handleSubmit(event) {
@@ -774,6 +759,7 @@
     }
 
     function clearFieldError(event) {
+        if (!event.target.hasAttribute("aria-invalid") && !event.target.closest(".has-error")) return;
         const field = event.target.closest(".rp-field, .consent-row, .subject-card");
         field?.classList.remove("has-error");
         event.target.removeAttribute("aria-invalid");
