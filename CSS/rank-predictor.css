@@ -418,6 +418,36 @@ body {
     gap: 12px;
 }
 
+.subject-derived-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.subject-derived-row span {
+    display: grid;
+    gap: 4px;
+    min-height: 48px;
+    padding: 10px 12px;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.subject-derived-row small {
+    color: var(--rp-muted);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.subject-derived-row strong {
+    color: var(--rp-blue-dark);
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
 .subject-input-grid label,
 .rp-field {
     display: grid;
@@ -698,7 +728,7 @@ body {
     }
 
     .subject-input-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .form-grid.compact {

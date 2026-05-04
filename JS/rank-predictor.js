@@ -102,6 +102,7 @@
         setText("normalizationLabel", exam.normalization ? "Yes" : "No");
         setFixedExamInfo(exam);
         renderSubjectInputs(exam);
+        setAggregateAttemptFieldsReadonly(exam);
         populateSelect(document.getElementById("category"), exam.categories || []);
         populateSelect(document.getElementById("state"), exam.states || []);
         document.getElementById("rankPredictorApp")?.classList.toggle("has-shift", Boolean(exam.hasShifts));
@@ -177,7 +178,10 @@
     function calculateMarks() {
         const selectedExam = getSelectedExam();
         const subjectData = collectSubjectData(selectedExam);
-        if (subjectData.length) syncSubjectTotals(subjectData);
+        if (subjectData.length) {
+            syncSubjectTotals(subjectData);
+            syncSubjectDerivedOutputs(subjectData);
+        }
         const total = getExamNumber(selectedExam, "totalQuestions");
         const perCorrect = getExamNumber(selectedExam, "marksPerCorrect");
         const negative = getExamNumber(selectedExam, "negativeMarking");
@@ -486,7 +490,6 @@
         grid.innerHTML = subjects.map((subject, index) => {
             const name = String(subject.name || `Subject ${index + 1}`);
             const questions = Number(subject.questions) || 0;
-            const attemptedId = `subject-${index}-attempted`;
             const correctId = `subject-${index}-correct`;
             const wrongId = `subject-${index}-wrong`;
             return `
@@ -496,15 +499,16 @@
                         <small>${questions} questions</small>
                     </div>
                     <div class="subject-input-grid">
-                        <label for="${attemptedId}">Attempted
-                            <input id="${attemptedId}" class="subject-input" data-subject-field="attempted" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
-                        </label>
                         <label for="${correctId}">Correct
                             <input id="${correctId}" class="subject-input" data-subject-field="correct" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
                         </label>
                         <label for="${wrongId}">Wrong
                             <input id="${wrongId}" class="subject-input" data-subject-field="wrong" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
                         </label>
+                    </div>
+                    <div class="subject-derived-row" aria-label="${escapeAttr(name)} calculated totals">
+                        <span><small>Attempted</small><strong data-subject-derived="attempted">0</strong></span>
+                        <span><small>Unattempted</small><strong data-subject-derived="unattempted">${questions}</strong></span>
                     </div>
                 </article>`;
         }).join("");
@@ -519,9 +523,9 @@
 
         return subjects.map((subject, index) => {
             const card = document.querySelector(`[data-subject-index="${index}"]`);
-            const attempted = readSubjectNumber(card, "attempted");
             const correct = readSubjectNumber(card, "correct");
             const wrong = readSubjectNumber(card, "wrong");
+            const attempted = correct + wrong;
             return {
                 name: String(subject.name || `Subject ${index + 1}`),
                 questions: Number(subject.questions) || 0,
@@ -545,6 +549,25 @@
         setValue("wrongAnswers", sumBy(subjectData, "wrong"));
     }
 
+    function syncSubjectDerivedOutputs(subjectData = collectSubjectData(getSelectedExam())) {
+        subjectData.forEach((subject, index) => {
+            const card = document.querySelector(`[data-subject-index="${index}"]`);
+            const unattempted = Math.max((Number(subject.questions) || 0) - (Number(subject.attempted) || 0), 0);
+            setNodeText(card?.querySelector('[data-subject-derived="attempted"]'), String(subject.attempted));
+            setNodeText(card?.querySelector('[data-subject-derived="unattempted"]'), String(unattempted));
+        });
+    }
+
+    function setAggregateAttemptFieldsReadonly(exam) {
+        const hasSubjects = Array.isArray(exam?.subjects) && exam.subjects.length > 0;
+        ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
+            const field = document.getElementById(id);
+            if (!field) return;
+            field.readOnly = hasSubjects;
+            field.setAttribute("aria-readonly", String(hasSubjects));
+        });
+    }
+
     function validateSubjectInputs(exam, attempted, right, wrong) {
         const subjectData = collectSubjectData(exam);
         if (!subjectData.length) return { ok: true };
@@ -553,10 +576,7 @@
             const subject = subjectData[index];
             const card = document.querySelector(`[data-subject-index="${index}"]`);
             if (subject.attempted > subject.questions) {
-                return invalidSubject(card, "attempted", `${subject.name} attempted cannot exceed ${subject.questions}.`);
-            }
-            if (subject.correct + subject.wrong > subject.attempted) {
-                return invalidSubject(card, "correct", `${subject.name} correct and wrong answers cannot exceed attempted.`);
+                return invalidSubject(card, "correct", `${subject.name} correct and wrong answers cannot exceed ${subject.questions}.`);
             }
         }
 
@@ -826,6 +846,10 @@
 
     function setText(id, value) {
         const node = document.getElementById(id);
+        if (node) node.textContent = value;
+    }
+
+    function setNodeText(node, value) {
         if (node) node.textContent = value;
     }
 
