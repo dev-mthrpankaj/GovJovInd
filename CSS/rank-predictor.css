@@ -37,6 +37,7 @@ body {
 .mode-card,
 .predictor-form,
 .prediction-result,
+.subject-entry-card,
 .fixed-setting,
 .result-metric {
     border: 1px solid var(--rp-border);
@@ -216,6 +217,8 @@ body {
 .prediction-result,
 .form-grid,
 .fixed-exam-settings,
+.subject-entry-card,
+.subject-entry-grid,
 .result-grid {
     display: grid;
     gap: 0.85rem;
@@ -231,6 +234,18 @@ body {
 
 .form-grid {
     grid-template-columns: 1fr;
+}
+
+.compact-heading {
+    gap: 0.35rem;
+}
+
+.compact-heading h3,
+.result-section h3 {
+    margin: 0;
+    color: var(--rp-ink);
+    font-size: 1rem;
+    line-height: 1.2;
 }
 
 .fixed-exam-settings {
@@ -271,6 +286,53 @@ body {
     font-weight: 800;
 }
 
+.subject-entry-card {
+    padding: 0.85rem;
+    box-shadow: none;
+}
+
+.subject-entry-grid {
+    grid-template-columns: 1fr;
+}
+
+.subject-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.subject-card-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--rp-ink);
+    font-weight: 900;
+}
+
+.subject-card-heading small {
+    color: var(--rp-muted);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.subject-input-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+.subject-input-grid label {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--rp-muted);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
 .rp-field {
     display: grid;
     gap: 0.4rem;
@@ -280,7 +342,8 @@ body {
 }
 
 .rp-field input,
-.rp-field select {
+.rp-field select,
+.subject-input-grid input {
     width: 100%;
     min-height: 46px;
     padding: 0.72rem 0.8rem;
@@ -298,14 +361,16 @@ body {
 }
 
 .rp-field input:focus,
-.rp-field select:focus {
+.rp-field select:focus,
+.subject-input-grid input:focus {
     border-color: var(--rp-blue);
     outline: 3px solid rgba(11, 94, 215, 0.14);
 }
 
 .rp-field.has-error input,
 .rp-field.has-error select,
-.consent-row.has-error {
+.consent-row.has-error,
+.subject-card.has-error {
     border-color: #fecaca;
     background: #fff7f7;
 }
@@ -404,6 +469,11 @@ body {
     box-shadow: none;
 }
 
+.result-section {
+    display: grid;
+    gap: 0.7rem;
+}
+
 .result-metric.featured {
     border-color: #bfdbfe;
     background: #eff6ff;
@@ -414,6 +484,41 @@ body {
     font-size: 1.8rem;
 }
 
+.subject-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+}
+
+.subject-score-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    color: var(--rp-ink);
+    font-size: 0.86rem;
+}
+
+.subject-score-table th,
+.subject-score-table td {
+    padding: 0.72rem;
+    border-bottom: 1px solid var(--rp-border);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.subject-score-table th {
+    background: #f8fafc;
+    color: var(--rp-muted);
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.subject-score-table tr:last-child td {
+    border-bottom: 0;
+}
+
 @media (min-width: 640px) {
     .mode-section,
     .form-actions {
@@ -422,6 +527,7 @@ body {
 
     .form-grid,
     .fixed-exam-settings,
+    .subject-entry-grid,
     .result-grid,
     .predictor-summary {
         grid-template-columns: repeat(2, minmax(0, 1fr));

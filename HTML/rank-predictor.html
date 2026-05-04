@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260503-fixed-exam-settings">
+    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260504-advanced-analytics">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -170,6 +170,14 @@
                         </label>
                     </div>
 
+                    <section class="subject-entry-card" aria-labelledby="subjectEntryTitle">
+                        <div class="form-heading compact-heading">
+                            <span>Subject Scorecard</span>
+                            <h3 id="subjectEntryTitle">Subject-wise Attempts</h3>
+                        </div>
+                        <div class="subject-entry-grid" id="subjectEntryGrid"></div>
+                    </section>
+
                     <div class="manual-fallback online-only">
                         <strong>Manual marks fallback is required</strong>
                         <span>Automatic answer key reading is not available for many encrypted or session-based links. Enter attempted, right and wrong answers manually.</span>
@@ -223,44 +231,105 @@
                     <span>Result Card</span>
                     <h2 id="predictionResultTitle">Rank Estimate</h2>
                 </div>
-                <div class="result-grid">
-                    <article class="result-metric featured">
-                        <span>Raw Marks</span>
-                        <strong id="resultExpectedMarks">0.00</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Percentile</span>
-                        <strong id="resultPercentile">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Overall Rank Estimate</span>
-                        <strong id="overallRank">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Category Rank Estimate</span>
-                        <strong id="categoryRank">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>State Rank Estimate</span>
-                        <strong id="stateRank">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Shift Rank Estimate</span>
-                        <strong id="shiftRank">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Total Submissions</span>
-                        <strong id="totalSubmissions">0</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Accuracy Indicator</span>
-                        <strong id="accuracyIndicator">Pending</strong>
-                    </article>
-                    <article class="result-metric">
-                        <span>Last Updated</span>
-                        <strong id="lastUpdated">Pending</strong>
-                    </article>
-                </div>
+                <section class="result-section" aria-label="Rank section">
+                    <h3>Rank Section</h3>
+                    <div class="result-grid">
+                        <article class="result-metric">
+                            <span>Overall Rank</span>
+                            <strong id="overallRank">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Category Rank</span>
+                            <strong id="categoryRank">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>State Rank</span>
+                            <strong id="stateRank">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Shift Rank</span>
+                            <strong id="shiftRank">Pending</strong>
+                        </article>
+                    </div>
+                </section>
+                <section class="result-section" aria-label="Gender rank section">
+                    <h3>Gender Rank Section</h3>
+                    <div class="result-grid">
+                        <article class="result-metric">
+                            <span>Gender Rank</span>
+                            <strong id="genderRank">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Gender Category Rank</span>
+                            <strong id="genderCategoryRank">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Gender State Rank</span>
+                            <strong id="genderStateRank">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Gender Shift Rank</span>
+                            <strong id="genderShiftRank">Pending</strong>
+                        </article>
+                    </div>
+                </section>
+                <section class="result-section" aria-label="Performance section">
+                    <h3>Performance Section</h3>
+                    <div class="result-grid">
+                        <article class="result-metric featured">
+                            <span>Raw Marks</span>
+                            <strong id="resultExpectedMarks">0.00</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Percentile</span>
+                            <strong id="resultPercentile">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Average Marks</span>
+                            <strong id="averageMarks">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Shift Average</span>
+                            <strong id="averageShiftMarks">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Category Average</span>
+                            <strong id="categoryAverageMarks">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Total Submissions</span>
+                            <strong id="totalSubmissions">0</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Accuracy Indicator</span>
+                            <strong id="accuracyIndicator">Pending</strong>
+                        </article>
+                        <article class="result-metric">
+                            <span>Last Updated</span>
+                            <strong id="lastUpdated">Pending</strong>
+                        </article>
+                    </div>
+                </section>
+                <section class="result-section subject-scorecard" aria-label="Subject scorecard">
+                    <h3>Subject Scorecard</h3>
+                    <div class="subject-table-wrap">
+                        <table class="subject-score-table">
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Your Score</th>
+                                    <th>Avg Score</th>
+                                    <th>Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subjectAnalysisBody">
+                                <tr>
+                                    <td colspan="4">Pending</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
                 <p class="result-note" id="resultNote">Rank prediction accuracy improves as more candidates submit data.</p>
             </aside>
         </section>
@@ -304,8 +373,8 @@
             &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
         </div>
     </footer>
-<script src="../JS/rank-predictor-config.js?v=20260503-fixed-exam-settings" defer></script>
-<script src="../JS/rank-predictor.js?v=20260503-fixed-exam-settings" defer></script>
+<script src="../JS/rank-predictor-config.js?v=20260504-advanced-analytics" defer></script>
+<script src="../JS/rank-predictor.js?v=20260504-advanced-analytics" defer></script>
 <script src="../JS/script.js"></script>
 </body>
 </html>

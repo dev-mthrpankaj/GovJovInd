@@ -76,6 +76,7 @@
         setText("activeModeLabel", getModeLabel(exam.supportedModes || []));
         setText("normalizationLabel", exam.normalization ? "Yes" : "No");
         setFixedExamInfo(exam);
+        renderSubjectInputs(exam);
         populateSelect(document.getElementById("category"), exam.categories || []);
         populateSelect(document.getElementById("state"), exam.states || []);
         document.getElementById("rankPredictorApp")?.classList.toggle("has-shift", Boolean(exam.hasShifts));
@@ -126,6 +127,10 @@
         ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
             document.getElementById(id)?.addEventListener("input", calculateMarks);
         });
+        document.getElementById("subjectEntryGrid")?.addEventListener("input", () => {
+            syncSubjectTotals();
+            calculateMarks();
+        });
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleSubmit);
         document.getElementById("resetPredictorBtn")?.addEventListener("click", () => {
@@ -146,12 +151,14 @@
 
     function calculateMarks() {
         const selectedExam = getSelectedExam();
+        const subjectData = collectSubjectData(selectedExam);
+        if (subjectData.length) syncSubjectTotals(subjectData);
         const total = getExamNumber(selectedExam, "totalQuestions");
-        const attempted = readNumber("totalAttempted");
-        const right = readNumber("rightAnswers");
-        const wrong = readNumber("wrongAnswers");
         const perCorrect = getExamNumber(selectedExam, "marksPerCorrect");
         const negative = getExamNumber(selectedExam, "negativeMarking");
+        const attempted = subjectData.length ? sumBy(subjectData, "attempted") : readNumber("totalAttempted");
+        const right = subjectData.length ? sumBy(subjectData, "correct") : readNumber("rightAnswers");
+        const wrong = subjectData.length ? sumBy(subjectData, "wrong") : readNumber("wrongAnswers");
         const unattempted = Math.max(total - attempted, 0);
         const expected = (right * perCorrect) - (wrong * negative);
 
@@ -319,6 +326,8 @@
         const attempted = readNumber("totalAttempted");
         const right = readNumber("rightAnswers");
         const wrong = readNumber("wrongAnswers");
+        const subjectValidation = validateSubjectInputs(selectedExam, attempted, right, wrong);
+        if (!subjectValidation.ok) return subjectValidation;
         if (total <= 0) return invalidNumber("globalExamSelect", "Total questions must be configured for this exam.");
         if (attempted > total) return invalidNumber("totalAttempted", "Total attempted cannot be greater than total questions.");
         if (right + wrong > attempted) return invalidNumber("rightAnswers", "Right and wrong answers cannot exceed total attempted.");
@@ -365,11 +374,12 @@
         const rollNumber = normalizeRoll(rollNumberInput?.value);
         const dob = dobInput?.value || "";
         const totalQuestions = getExamNumber(selectedExam, "totalQuestions");
-        const totalAttempted = readNumber("totalAttempted");
-        const rightAnswers = readNumber("rightAnswers");
-        const wrongAnswers = readNumber("wrongAnswers");
         const marksPerCorrect = getExamNumber(selectedExam, "marksPerCorrect");
         const negativeMarking = getExamNumber(selectedExam, "negativeMarking");
+        const subjectData = collectSubjectData(selectedExam);
+        const totalAttempted = subjectData.length ? sumBy(subjectData, "attempted") : readNumber("totalAttempted");
+        const rightAnswers = subjectData.length ? sumBy(subjectData, "correct") : readNumber("rightAnswers");
+        const wrongAnswers = subjectData.length ? sumBy(subjectData, "wrong") : readNumber("wrongAnswers");
         const unattempted = Math.max(totalQuestions - totalAttempted, 0);
         const rawMarks = round2((rightAnswers * marksPerCorrect) - (wrongAnswers * negativeMarking));
         return {
@@ -394,6 +404,7 @@
             marksPerCorrect,
             negativeMarking,
             rawMarks,
+            subjectData,
             answerKeyLink: state.mode === "online" ? readValue("answerSheetLink") : "",
             userAgent: navigator.userAgent
         };
@@ -418,6 +429,103 @@
         };
     }
 
+    function renderSubjectInputs(exam) {
+        const grid = document.getElementById("subjectEntryGrid");
+        if (!grid) return;
+
+        const subjects = Array.isArray(exam?.subjects) ? exam.subjects : [];
+        if (!subjects.length) {
+            grid.innerHTML = "";
+            return;
+        }
+
+        grid.innerHTML = subjects.map((subject, index) => {
+            const name = String(subject.name || `Subject ${index + 1}`);
+            const questions = Number(subject.questions) || 0;
+            return `
+                <article class="subject-card" data-subject-index="${index}">
+                    <div class="subject-card-heading">
+                        <strong>${escapeHtml(name)}</strong>
+                        <small>${questions} questions</small>
+                    </div>
+                    <div class="subject-input-grid">
+                        <label>Attempted
+                            <input class="subject-input" data-subject-field="attempted" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                        </label>
+                        <label>Correct
+                            <input class="subject-input" data-subject-field="correct" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                        </label>
+                        <label>Wrong
+                            <input class="subject-input" data-subject-field="wrong" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                        </label>
+                    </div>
+                </article>`;
+        }).join("");
+    }
+
+    function collectSubjectData(exam) {
+        const subjects = Array.isArray(exam?.subjects) ? exam.subjects : [];
+        if (!subjects.length) return [];
+
+        const marksPerCorrect = getExamNumber(exam, "marksPerCorrect");
+        const negativeMarking = getExamNumber(exam, "negativeMarking");
+
+        return subjects.map((subject, index) => {
+            const card = document.querySelector(`[data-subject-index="${index}"]`);
+            const attempted = readSubjectNumber(card, "attempted");
+            const correct = readSubjectNumber(card, "correct");
+            const wrong = readSubjectNumber(card, "wrong");
+            return {
+                name: String(subject.name || `Subject ${index + 1}`),
+                questions: Number(subject.questions) || 0,
+                attempted,
+                correct,
+                wrong,
+                marks: round2((correct * marksPerCorrect) - (wrong * negativeMarking))
+            };
+        });
+    }
+
+    function readSubjectNumber(card, field) {
+        const value = Number(card?.querySelector(`[data-subject-field="${field}"]`)?.value);
+        return Number.isFinite(value) ? value : 0;
+    }
+
+    function syncSubjectTotals(subjectData = collectSubjectData(getSelectedExam())) {
+        if (!subjectData.length) return;
+        setValue("totalAttempted", sumBy(subjectData, "attempted"));
+        setValue("rightAnswers", sumBy(subjectData, "correct"));
+        setValue("wrongAnswers", sumBy(subjectData, "wrong"));
+    }
+
+    function validateSubjectInputs(exam, attempted, right, wrong) {
+        const subjectData = collectSubjectData(exam);
+        if (!subjectData.length) return { ok: true };
+
+        for (let index = 0; index < subjectData.length; index += 1) {
+            const subject = subjectData[index];
+            const card = document.querySelector(`[data-subject-index="${index}"]`);
+            if (subject.attempted > subject.questions) {
+                return invalidSubject(card, "attempted", `${subject.name} attempted cannot exceed ${subject.questions}.`);
+            }
+            if (subject.correct + subject.wrong > subject.attempted) {
+                return invalidSubject(card, "correct", `${subject.name} correct and wrong answers cannot exceed attempted.`);
+            }
+        }
+
+        if (sumBy(subjectData, "attempted") !== attempted) return invalidNumber("totalAttempted", "Sum of subject attempted must match Total Attempted.");
+        if (sumBy(subjectData, "correct") !== right) return invalidNumber("rightAnswers", "Sum of subject correct answers must match Right Answers.");
+        if (sumBy(subjectData, "wrong") !== wrong) return invalidNumber("wrongAnswers", "Sum of subject wrong answers must match Wrong Answers.");
+
+        return { ok: true };
+    }
+
+    function invalidSubject(card, field, message) {
+        const input = card?.querySelector(`[data-subject-field="${field}"]`);
+        markInvalid(input);
+        return { ok: false, field: input, message };
+    }
+
     function renderPendingResult(payload = {}) {
         setText("resultExpectedMarks", "Pending");
         setText("resultPercentile", "Pending");
@@ -425,9 +533,17 @@
         setText("categoryRank", "Pending");
         setText("stateRank", "Pending");
         setText("shiftRank", "Pending");
+        setText("genderRank", "Pending");
+        setText("genderCategoryRank", "Pending");
+        setText("genderStateRank", "Pending");
+        setText("genderShiftRank", "Pending");
+        setText("averageMarks", "Pending");
+        setText("averageShiftMarks", "Pending");
+        setText("categoryAverageMarks", "Pending");
         setText("totalSubmissions", "0");
         setText("accuracyIndicator", "Pending");
         setText("lastUpdated", "Pending");
+        renderSubjectAnalysis([]);
         setText("resultNote", "Rank prediction accuracy improves as more candidates submit data.");
     }
 
@@ -438,9 +554,17 @@
         setText("categoryRank", "Pending");
         setText("stateRank", "Pending");
         setText("shiftRank", "Pending");
+        setText("genderRank", "Pending");
+        setText("genderCategoryRank", "Pending");
+        setText("genderStateRank", "Pending");
+        setText("genderShiftRank", "Pending");
+        setText("averageMarks", "Pending");
+        setText("averageShiftMarks", "Pending");
+        setText("categoryAverageMarks", "Pending");
         setText("totalSubmissions", "0");
         setText("accuracyIndicator", "Pending");
         setText("lastUpdated", "Pending");
+        renderSubjectAnalysis([]);
         setText("resultNote", "No matching record found for the selected exam, roll number, and DOB.");
     }
 
@@ -453,9 +577,17 @@
         setText("categoryRank", formatRank(data.categoryRank));
         setText("stateRank", formatRank(data.stateRank));
         setText("shiftRank", formatRank(data.shiftRank));
+        setText("genderRank", formatRank(data.genderRank));
+        setText("genderCategoryRank", formatRank(data.genderCategoryRank));
+        setText("genderStateRank", formatRank(data.genderStateRank));
+        setText("genderShiftRank", formatRank(data.genderShiftRank));
+        setText("averageMarks", formatOptionalMarks(data.averageMarks));
+        setText("averageShiftMarks", formatOptionalMarks(data.averageShiftMarks));
+        setText("categoryAverageMarks", formatOptionalMarks(data.categoryAverageMarks));
         setText("totalSubmissions", total ? String(total) : "0");
         setText("accuracyIndicator", data.accuracyIndicator || getAccuracyIndicator(total));
         setText("lastUpdated", formatDateTime(data.lastUpdated));
+        renderSubjectAnalysis(data.subjectAnalysis || []);
         setText("resultNote", "Rank and percentile are based on submitted raw marks for the selected exam.");
     }
 
@@ -473,6 +605,29 @@
         if (value === undefined || value === null || value === "") return "Pending";
         const number = Number(value);
         return Number.isFinite(number) ? `${number.toFixed(2)}%` : "Pending";
+    }
+
+    function formatOptionalMarks(value) {
+        if (value === undefined || value === null || value === "") return "Pending";
+        const number = Number(value);
+        return Number.isFinite(number) ? formatMarks(number) : "Pending";
+    }
+
+    function renderSubjectAnalysis(subjectAnalysis) {
+        const body = document.getElementById("subjectAnalysisBody");
+        if (!body) return;
+        if (!Array.isArray(subjectAnalysis) || !subjectAnalysis.length) {
+            body.innerHTML = `<tr><td colspan="4">Pending</td></tr>`;
+            return;
+        }
+        body.innerHTML = subjectAnalysis.map((subject) => `
+            <tr>
+                <td>${escapeHtml(subject.name || "Subject")}</td>
+                <td>${formatOptionalMarks(subject.score)}</td>
+                <td>${formatOptionalMarks(subject.avgScore)}</td>
+                <td>${formatPercentile(subject.accuracy)}</td>
+            </tr>
+        `).join("");
     }
 
     function formatDateTime(value) {
@@ -545,7 +700,7 @@
     function markInvalid(field) {
         if (!field) return;
         field.setAttribute("aria-invalid", "true");
-        field.closest(".rp-field, .consent-row")?.classList.add("has-error");
+        field.closest(".rp-field, .consent-row, .subject-card")?.classList.add("has-error");
     }
 
     function clearFieldError(event) {
@@ -579,6 +734,10 @@
 
     function readValue(id) {
         return String(document.getElementById(id)?.value || "").trim();
+    }
+
+    function sumBy(items, key) {
+        return (items || []).reduce((total, item) => total + (Number(item?.[key]) || 0), 0);
     }
 
     function isBlank(value) {

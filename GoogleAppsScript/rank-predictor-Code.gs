@@ -22,6 +22,14 @@ const HEADERS = [
   "Negative Marking",
   "Raw Marks",
   "Percentile",
+  "Subject Data (JSON)",
+  "Gender Rank",
+  "Gender Category Rank",
+  "Gender State Rank",
+  "Gender Shift Rank",
+  "Average Marks",
+  "Average Shift Marks",
+  "Category Average Marks",
   "Answer Key Link",
   "User Agent"
 ];
@@ -37,39 +45,22 @@ function doPost(e) {
   try {
     const raw = e && e.postData && e.postData.contents;
 
-    if (!raw) {
-      return sendJSON({
-        success: false,
-        message: "No data received"
-      });
-    }
+    if (!raw) return sendJSON({ success: false, message: "No data received" });
 
     let data;
     try {
       data = JSON.parse(raw);
     } catch (err) {
-      return sendJSON({
-        success: false,
-        message: "Invalid JSON format"
-      });
+      return sendJSON({ success: false, message: "Invalid JSON format" });
     }
 
     Logger.log("Incoming payload: " + JSON.stringify(data));
 
-    if (!data.action) {
-      return sendJSON({
-        success: false,
-        message: "Missing action"
-      });
-    }
-
+    if (!data.action) return sendJSON({ success: false, message: "Missing action" });
     if (data.action === "submitData") return submitData(data);
     if (data.action === "checkRank") return checkRank(data);
 
-    return sendJSON({
-      success: false,
-      message: "Invalid action"
-    });
+    return sendJSON({ success: false, message: "Invalid action" });
   } catch (error) {
     return sendJSON({
       success: false,
@@ -85,13 +76,17 @@ function submitData(data) {
   data.dob = normalizeDob(data.dob);
   data.examDate = normalizeDob(data.examDate);
   data.shift = normalizeShift(data.shift);
+  data.gender = normalizeText(data.gender);
+  data.category = normalizeText(data.category);
+  data.state = normalizeText(data.state);
+  data.subjectData = normalizeSubjectData(data.subjectData, data);
   data.rawMarks = isFinite(Number(data.rawMarks)) ? Number(data.rawMarks) : calculateRawMarks(data);
 
   validateSubmitPayload(data);
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = getSheetByExam(data.sheetName, spreadsheet);
-  const columnMap = ensureSheetHeaders(sheet);
+  const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
 
   const existing = findCandidateRow(rows, data);
@@ -118,8 +113,8 @@ function submitData(data) {
     });
   }
 
-  const rankData = calculateRanksFromRows(refreshedRows, targetRow);
-  writePercentile(sheet, refreshedMap, targetRow.rowNumber, rankData.percentile);
+  const rankData = calculateAnalytics(refreshedRows, targetRow);
+  writeAnalytics(sheet, refreshedMap, targetRow.rowNumber, rankData);
 
   return sendJSON({
     success: true,
@@ -157,7 +152,7 @@ function checkRank(data) {
     });
   }
 
-  const columnMap = getColumnMap(sheet);
+  const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
 
   Logger.log("Check Rank Lookup: " + JSON.stringify({
@@ -180,8 +175,8 @@ function checkRank(data) {
     });
   }
 
-  const rankData = calculateRanksFromRows(rows, targetRow);
-  writePercentile(sheet, columnMap, targetRow.rowNumber, rankData.percentile);
+  const rankData = calculateAnalytics(rows, targetRow);
+  writeAnalytics(sheet, columnMap, targetRow.rowNumber, rankData);
 
   return sendJSON({
     success: true,
@@ -197,43 +192,68 @@ function getSheetByExam(sheetName, spreadsheet) {
   return spreadsheet.getSheetByName(safeName) || spreadsheet.insertSheet(safeName);
 }
 
-function ensureSheetHeaders(sheet) {
-  const existingColumnCount = Math.max(sheet.getLastColumn(), HEADERS.length);
+function ensureSheetSchema(sheet) {
+  if (sheet.getMaxColumns() < HEADERS.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), HEADERS.length - sheet.getMaxColumns());
+  }
 
-  if (sheet.getLastRow() < 1 || existingColumnCount < 1) {
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+
+  if (lastRow < 1 || lastColumn < 1) {
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.setFrozenRows(1);
     return getColumnMap(sheet);
   }
 
-  if (sheet.getLastColumn() < HEADERS.length) {
-    sheet.insertColumnsAfter(sheet.getLastColumn(), HEADERS.length - sheet.getLastColumn());
+  const currentHeaders = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
+  if (headersMatch(currentHeaders)) {
+    sheet.setFrozenRows(1);
+    return getColumnMap(sheet);
   }
 
+  const oldMap = buildColumnMapFromHeaders(currentHeaders);
+  const oldRows = lastRow > 1 ? sheet.getRange(2, 1, lastRow - 1, lastColumn).getValues() : [];
+  const migratedRows = oldRows.map(function (row) {
+    return HEADERS.map(function (header) {
+      return getHeaderValue(row, oldMap, header);
+    });
+  });
+
+  sheet.clearContents();
   sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  if (migratedRows.length) {
+    sheet.getRange(2, 1, migratedRows.length, HEADERS.length).setValues(migratedRows);
+  }
   sheet.setFrozenRows(1);
   return getColumnMap(sheet);
+}
+
+function headersMatch(headers) {
+  return HEADERS.every(function (header, index) {
+    return normalizeHeader(headers[index]) === normalizeHeader(header);
+  });
+}
+
+function buildColumnMapFromHeaders(headers) {
+  const map = {};
+  headers.forEach(function (h, i) {
+    const key = normalizeHeader(h);
+    if (key) map[key] = i;
+  });
+  return map;
 }
 
 function getColumnMap(sheet) {
   const lastColumn = sheet.getLastColumn();
   if (lastColumn < 1) return {};
-
   const headers = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
-  const map = {};
-
-  headers.forEach(function (h, i) {
-    const key = normalizeHeader(h);
-    if (key) map[key] = i;
-  });
-
-  return map;
+  return buildColumnMapFromHeaders(headers);
 }
 
 function appendCandidateData(sheet, columnMap, data) {
-  const lastColumn = Math.max(sheet.getLastColumn(), HEADERS.length);
-  const row = new Array(lastColumn).fill("");
-  const unattempted = Number(data.unattempted) || Math.max(Number(data.totalQuestions) - Number(data.totalAttempted), 0);
+  const row = new Array(HEADERS.length).fill("");
+  const unattempted = isFinite(Number(data.unattempted)) ? Number(data.unattempted) : Math.max(Number(data.totalQuestions) - Number(data.totalAttempted), 0);
 
   setHeaderValue(row, columnMap, "Timestamp", new Date());
   setHeaderValue(row, columnMap, "Exam ID", data.examId);
@@ -256,27 +276,21 @@ function appendCandidateData(sheet, columnMap, data) {
   setHeaderValue(row, columnMap, "Negative Marking", Number(data.negativeMarking));
   setHeaderValue(row, columnMap, "Raw Marks", Number(data.rawMarks));
   setHeaderValue(row, columnMap, "Percentile", "");
+  setHeaderValue(row, columnMap, "Subject Data (JSON)", JSON.stringify(data.subjectData || []));
   setHeaderValue(row, columnMap, "Answer Key Link", data.answerKeyLink || "");
   setHeaderValue(row, columnMap, "User Agent", data.userAgent || "");
 
   const nextRow = sheet.getLastRow() + 1;
-  setTextFormat(sheet, columnMap, nextRow, "Roll Number");
-  setTextFormat(sheet, columnMap, nextRow, "DOB");
-  setTextFormat(sheet, columnMap, nextRow, "Exam Date");
-  setTextFormat(sheet, columnMap, nextRow, "Shift");
+  ["Roll Number", "DOB", "Exam Date", "Shift", "Subject Data (JSON)"].forEach(function (header) {
+    setTextFormat(sheet, columnMap, nextRow, header);
+  });
 
-  sheet.getRange(nextRow, 1, 1, lastColumn).setValues([row]);
-}
-
-function setTextFormat(sheet, columnMap, rowNumber, header) {
-  const index = columnMap[normalizeHeader(header)];
-  if (index !== undefined) sheet.getRange(rowNumber, index + 1).setNumberFormat("@");
+  sheet.getRange(nextRow, 1, 1, HEADERS.length).setValues([row]);
 }
 
 function getRowsByHeaders(sheet, columnMap) {
   const lastRow = sheet.getLastRow();
   const lastColumn = sheet.getLastColumn();
-
   if (lastRow < 2 || lastColumn < 1) return [];
 
   return sheet.getRange(2, 1, lastRow - 1, lastColumn).getValues().map(function (row, index) {
@@ -289,12 +303,14 @@ function getRowsByHeaders(sheet, columnMap) {
       rollNumber: normalizeRoll(getHeaderValue(row, columnMap, "Roll Number")),
       dob: normalizeDob(getHeaderValue(row, columnMap, "DOB")),
       candidateName: getHeaderValue(row, columnMap, "Candidate Name"),
+      gender: normalizeText(getHeaderValue(row, columnMap, "Gender")),
       category: normalizeText(getHeaderValue(row, columnMap, "Category")),
       state: normalizeText(getHeaderValue(row, columnMap, "State")),
       examDate: normalizeDob(getHeaderValue(row, columnMap, "Exam Date")),
       shift: normalizeShift(getHeaderValue(row, columnMap, "Shift")),
       rawMarks: Number(getHeaderValue(row, columnMap, "Raw Marks")) || 0,
-      percentile: Number(getHeaderValue(row, columnMap, "Percentile")) || 0
+      percentile: Number(getHeaderValue(row, columnMap, "Percentile")) || 0,
+      subjectData: parseSubjectData(getHeaderValue(row, columnMap, "Subject Data (JSON)"))
     };
   });
 }
@@ -310,7 +326,7 @@ function findCandidateRow(rows, data) {
   }) || null;
 }
 
-function calculateRanksFromRows(rows, targetRow) {
+function calculateAnalytics(rows, targetRow) {
   const rowsForExam = rows.filter(function (row) {
     const sameExam = !targetRow.examId || !row.examId || row.examId === targetRow.examId;
     return sameExam && row.rollNumber && row.dob;
@@ -319,6 +335,12 @@ function calculateRanksFromRows(rows, targetRow) {
   const overallRank = calculateTieAwareRank(rowsForExam, targetRow);
   const totalSubmissions = rowsForExam.length;
   const percentile = calculatePercentile(totalSubmissions, overallRank);
+  const sameShiftRows = rowsForExam.filter(function (row) {
+    return normalizeKey(row.shift) === normalizeKey(targetRow.shift);
+  });
+  const sameCategoryRows = rowsForExam.filter(function (row) {
+    return normalizeKey(row.category) === normalizeKey(targetRow.category);
+  });
 
   return {
     found: true,
@@ -326,15 +348,30 @@ function calculateRanksFromRows(rows, targetRow) {
     marks: Number(targetRow.rawMarks),
     percentile: percentile,
     overallRank: overallRank,
-    categoryRank: calculateTieAwareRank(rowsForExam.filter(function (row) {
-      return normalizeKey(row.category) === normalizeKey(targetRow.category);
-    }), targetRow),
+    categoryRank: calculateTieAwareRank(sameCategoryRows, targetRow),
     stateRank: calculateTieAwareRank(rowsForExam.filter(function (row) {
       return normalizeKey(row.state) === normalizeKey(targetRow.state);
     }), targetRow),
-    shiftRank: calculateTieAwareRank(rowsForExam.filter(function (row) {
-      return normalizeKey(row.shift) === normalizeKey(targetRow.shift);
-    }), targetRow),
+    shiftRank: calculateTieAwareRank(sameShiftRows, targetRow),
+    genderRank: countAtLeast(rowsForExam.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(targetRow.gender);
+    }), targetRow.rawMarks),
+    genderCategoryRank: countAtLeast(rowsForExam.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(targetRow.gender) &&
+        normalizeKey(row.category) === normalizeKey(targetRow.category);
+    }), targetRow.rawMarks),
+    genderStateRank: countAtLeast(rowsForExam.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(targetRow.gender) &&
+        normalizeKey(row.state) === normalizeKey(targetRow.state);
+    }), targetRow.rawMarks),
+    genderShiftRank: countAtLeast(rowsForExam.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(targetRow.gender) &&
+        normalizeKey(row.shift) === normalizeKey(targetRow.shift);
+    }), targetRow.rawMarks),
+    averageMarks: averageMarks(rowsForExam),
+    averageShiftMarks: averageMarks(sameShiftRows),
+    categoryAverageMarks: averageMarks(sameCategoryRows),
+    subjectAnalysis: buildSubjectAnalysis(rowsForExam, targetRow),
     totalSubmissions: totalSubmissions,
     accuracyIndicator: getAccuracyIndicator(totalSubmissions),
     rankBasis: "raw",
@@ -353,14 +390,55 @@ function calculateTieAwareRank(rows, targetRow) {
   for (let index = 0; index < sorted.length; index += 1) {
     const marks = Number(sorted[index].rawMarks || 0);
     const rank = marks === previousMarks ? previousRank : index + 1;
-
     previousMarks = marks;
     previousRank = rank;
-
     if (sorted[index].rowNumber === targetRow.rowNumber) return rank;
   }
 
   return 0;
+}
+
+function countAtLeast(rows, targetMarks) {
+  const marks = Number(targetMarks) || 0;
+  return rows.filter(function (row) {
+    return Number(row.rawMarks || 0) >= marks;
+  }).length || 0;
+}
+
+function averageMarks(rows) {
+  if (!rows.length) return 0;
+  return round2(rows.reduce(function (total, row) {
+    return total + (Number(row.rawMarks) || 0);
+  }, 0) / rows.length);
+}
+
+function buildSubjectAnalysis(rowsForExam, targetRow) {
+  if (!Array.isArray(targetRow.subjectData) || !targetRow.subjectData.length) return [];
+
+  return targetRow.subjectData.map(function (subject) {
+    const name = normalizeText(subject.name);
+    const matchingScores = rowsForExam.map(function (row) {
+      const match = (row.subjectData || []).find(function (item) {
+        return normalizeKey(item.name) === normalizeKey(name);
+      });
+      return match ? Number(match.marks || match.score || 0) : null;
+    }).filter(function (value) {
+      return value !== null;
+    });
+
+    const attempted = Number(subject.attempted) || 0;
+    const correct = Number(subject.correct) || 0;
+    const score = Number(subject.marks || subject.score || 0);
+
+    return {
+      name: name,
+      score: round2(score),
+      avgScore: matchingScores.length ? round2(matchingScores.reduce(function (total, value) {
+        return total + value;
+      }, 0) / matchingScores.length) : 0,
+      accuracy: attempted ? round2((correct / attempted) * 100) : 0
+    };
+  });
 }
 
 function calculatePercentile(totalSubmissions, overallRank) {
@@ -371,9 +449,22 @@ function calculatePercentile(totalSubmissions, overallRank) {
   return round2(((total - rank) / total) * 100);
 }
 
-function writePercentile(sheet, columnMap, rowNumber, percentile) {
-  const index = columnMap[normalizeHeader("Percentile")];
-  if (index !== undefined) sheet.getRange(rowNumber, index + 1).setValue(percentile);
+function writeAnalytics(sheet, columnMap, rowNumber, analytics) {
+  const values = {
+    "Percentile": analytics.percentile,
+    "Gender Rank": analytics.genderRank,
+    "Gender Category Rank": analytics.genderCategoryRank,
+    "Gender State Rank": analytics.genderStateRank,
+    "Gender Shift Rank": analytics.genderShiftRank,
+    "Average Marks": analytics.averageMarks,
+    "Average Shift Marks": analytics.averageShiftMarks,
+    "Category Average Marks": analytics.categoryAverageMarks
+  };
+
+  Object.keys(values).forEach(function (header) {
+    const index = columnMap[normalizeHeader(header)];
+    if (index !== undefined) sheet.getRange(rowNumber, index + 1).setValue(values[header]);
+  });
 }
 
 function buildNotFoundDebug(sheet, data, rows) {
@@ -423,6 +514,38 @@ function calculateRawMarks(data) {
   );
 }
 
+function normalizeSubjectData(subjectData, data) {
+  if (!Array.isArray(subjectData)) return [];
+  return subjectData.map(function (subject) {
+    const attempted = Number(subject.attempted) || 0;
+    const correct = Number(subject.correct) || 0;
+    const wrong = Number(subject.wrong) || 0;
+    const marks = isFinite(Number(subject.marks))
+      ? Number(subject.marks)
+      : round2((correct * (Number(data.marksPerCorrect) || 0)) - (wrong * (Number(data.negativeMarking) || 0)));
+    return {
+      name: normalizeText(subject.name),
+      attempted: attempted,
+      correct: correct,
+      wrong: wrong,
+      marks: round2(marks)
+    };
+  }).filter(function (subject) {
+    return subject.name;
+  });
+}
+
+function parseSubjectData(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return normalizeSubjectData(value, {});
+  try {
+    const parsed = JSON.parse(String(value));
+    return normalizeSubjectData(parsed, {});
+  } catch (error) {
+    return [];
+  }
+}
+
 function getHeaderValue(row, columnMap, header) {
   const index = columnMap[normalizeHeader(header)];
   return index === undefined ? "" : row[index];
@@ -433,13 +556,16 @@ function setHeaderValue(row, columnMap, header, value) {
   if (index !== undefined) row[index] = value;
 }
 
+function setTextFormat(sheet, columnMap, rowNumber, header) {
+  const index = columnMap[normalizeHeader(header)];
+  if (index !== undefined) sheet.getRange(rowNumber, index + 1).setNumberFormat("@");
+}
+
 function normalizeDob(value) {
   if (!value) return "";
-
   if (Object.prototype.toString.call(value) === "[object Date]") {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), "yyyy-MM-dd");
   }
-
   return String(value).trim();
 }
 

@@ -16,6 +16,12 @@ const RANK_PREDICTOR_CONFIG = {
             hasShifts: true,
             normalization: true,
             supportedModes: ["online"],
+            subjects: [
+                { name: "Maths", questions: 50 },
+                { name: "Reasoning", questions: 50 },
+                { name: "English", questions: 50 },
+                { name: "General Awareness", questions: 50 }
+            ],
             categories: ["UR", "OBC", "EWS", "SC", "ST", "Ex-Serviceman"],
             states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
         },
@@ -31,6 +37,12 @@ const RANK_PREDICTOR_CONFIG = {
             hasShifts: true,
             normalization: true,
             supportedModes: ["online"],
+            subjects: [
+                { name: "Maths", questions: 25 },
+                { name: "Reasoning", questions: 25 },
+                { name: "English", questions: 25 },
+                { name: "General Awareness", questions: 25 }
+            ],
             categories: ["UR", "OBC", "EWS", "SC", "ST", "PwD", "Ex-Serviceman"],
             states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
         },
@@ -46,6 +58,12 @@ const RANK_PREDICTOR_CONFIG = {
             hasShifts: true,
             normalization: false,
             supportedModes: ["offline"],
+            subjects: [
+                { name: "Maths", questions: 40 },
+                { name: "Reasoning", questions: 40 },
+                { name: "English", questions: 40 },
+                { name: "General Awareness", questions: 40 }
+            ],
             categories: ["UR", "OBC", "EWS", "SC", "ST"],
             states: ["Uttar Pradesh", "Other"]
         },
@@ -61,6 +79,7 @@ const RANK_PREDICTOR_CONFIG = {
             hasShifts: false,
             normalization: false,
             supportedModes: [],
+            subjects: [],
             categories: [],
             states: [],
             disabled: true
