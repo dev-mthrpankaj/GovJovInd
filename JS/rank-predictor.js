@@ -203,6 +203,9 @@
         subjectGrid?.addEventListener("focusin", handleSubjectMarksFocus);
         subjectGrid?.addEventListener("blur", handleMarksBlur, true);
         subjectGrid?.addEventListener("focusout", handleMarksBlur);
+        ["mobileNumber", "checkMobileNumber"].forEach((id) => {
+            getById(id)?.addEventListener("input", sanitizeMobileInput);
+        });
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleSubmit);
         getById("resetPredictorBtn")?.addEventListener("click", () => {
@@ -248,6 +251,11 @@
     function handleMarksBlur(event) {
         if (!isMarksInput(event.target)) return;
         runMarksCalculation();
+    }
+
+    function sanitizeMobileInput(event) {
+        const nextValue = normalizeMobile(event.target.value).slice(0, 10);
+        if (event.target.value !== nextValue) event.target.value = nextValue;
     }
 
     function runMarksCalculation() {
@@ -316,7 +324,7 @@
             .then((data) => {
                 if (data.duplicate) {
                     clearResultCard();
-                    showMessage("submitMessage", "Data already exists for this Roll Number and DOB. Please use Check My Rank.", "warning");
+                    showMessage("submitMessage", data.message || "Data already exists for this exam. Please use Check My Rank.", "warning");
                     return;
                 }
                 if (!data.success) {
@@ -358,7 +366,7 @@
             .then((data) => {
                 if (data.found === false || /no data found/i.test(String(data.message || ""))) {
                     clearResultCard();
-                    showMessage("checkMessage", "No data found for this Roll Number and DOB.", "warning");
+                    showMessage("checkMessage", "No data found for this mobile number, roll number, and DOB.", "warning");
                     return;
                 }
                 if (!data.success) {
@@ -437,7 +445,7 @@
             markInvalid(field);
             return { ok: false, field, message: "Please select a valid exam." };
         }
-        const required = ["candidateName", "rollNumber", "dob", "examDate", "gender", "category", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
+        const required = ["candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
         if (selectedExam.hasShifts) required.push("shift");
 
         for (const id of required) {
@@ -457,6 +465,7 @@
         if (attempted > total) return invalidNumber("totalAttempted", "Total attempted cannot be greater than total questions.");
         if (right + wrong > attempted) return invalidNumber("rightAnswers", "Right and wrong answers cannot exceed total attempted.");
         if (total - attempted < 0) return invalidNumber("totalAttempted", "Unattempted cannot be negative.");
+        if (!isValidMobileInput("mobileNumber")) return invalidNumber("mobileNumber", "Please enter a valid 10-digit mobile number.");
         if (!isValidDateInput("dob")) return invalidNumber("dob", "Please enter a valid Date of Birth.");
         if (!isValidDateInput("examDate")) return invalidNumber("examDate", "Please enter a valid Exam Date.");
         if (selectedExam.hasShifts && !isPositiveIntegerInput("shift")) return invalidNumber("shift", "Shift Number must be a positive number.");
@@ -477,12 +486,13 @@
             markInvalid(field);
             return { ok: false, field, message: "Please select a valid exam." };
         }
-        for (const id of ["checkRollNumber", "checkDob"]) {
+        for (const id of ["checkRollNumber", "checkMobileNumber", "checkDob"]) {
             const field = getById(id);
             if (field && String(field.value).trim()) continue;
             markInvalid(field);
             return { ok: false, field, message: "Please fill all required fields." };
         }
+        if (!isValidMobileInput("checkMobileNumber")) return invalidNumber("checkMobileNumber", "Please enter a valid 10-digit mobile number.");
         if (!isValidDateInput("checkDob")) return invalidNumber("checkDob", "Please enter a valid Date of Birth.");
         const checkExamDate = getById("checkExamDate");
         if (checkExamDate?.value && !isValidDateInput("checkExamDate")) return invalidNumber("checkExamDate", "Please enter a valid Exam Date.");
@@ -494,9 +504,11 @@
     function collectSubmitPayload() {
         const selectedExam = getSelectedExam();
         const rollNumberInput = getById("rollNumber");
+        const mobileInput = getById("mobileNumber");
         const dobInput = getById("dob");
         const examDateInput = getById("examDate");
         const rollNumber = normalizeRoll(rollNumberInput?.value);
+        const mobileNumber = normalizeMobile(mobileInput?.value);
         const dob = dobInput?.value || "";
         const totalQuestions = getExamNumber(selectedExam, "totalQuestions");
         const marksPerCorrect = getExamNumber(selectedExam, "marksPerCorrect");
@@ -515,6 +527,7 @@
             mode: state.mode,
             candidateName: readValue("candidateName"),
             rollNumber,
+            mobileNumber,
             dob,
             gender: readValue("gender"),
             category: readValue("category"),
@@ -538,9 +551,11 @@
     function collectCheckPayload() {
         const selectedExam = getSelectedExam();
         const rollNumberInput = getById("checkRollNumber");
+        const mobileInput = getById("checkMobileNumber");
         const dobInput = getById("checkDob");
         const examDateInput = getById("checkExamDate");
         const rollNumber = normalizeRoll(rollNumberInput?.value);
+        const mobileNumber = normalizeMobile(mobileInput?.value);
         const dob = dobInput?.value || "";
         return {
             action: "checkRank",
@@ -548,6 +563,7 @@
             examName: selectedExam.examName,
             sheetName: selectedExam.sheetName,
             rollNumber,
+            mobileNumber,
             dob,
             examDate: examDateInput?.value || "",
             shift: readValue("checkShift")
@@ -815,8 +831,8 @@
 
     function validateBackendPayload(payload) {
         const required = payload.action === "submitData"
-            ? ["action", "sheetName", "examId", "examName", "rollNumber", "dob", "examDate", "totalQuestions", "marksPerCorrect", "rawMarks"]
-            : ["action", "sheetName", "examId", "examName", "rollNumber", "dob"];
+            ? ["action", "sheetName", "examId", "examName", "rollNumber", "mobileNumber", "dob", "examDate", "totalQuestions", "marksPerCorrect", "rawMarks"]
+            : ["action", "sheetName", "examId", "examName", "rollNumber", "mobileNumber", "dob"];
         const missing = required.filter((key) => isBlank(payload[key]));
         if (missing.length) {
             return {
@@ -845,6 +861,10 @@
         if (!field) return false;
         if (field.validity && !field.validity.valid) return false;
         return /^\d{4}-\d{2}-\d{2}$/.test(field.value);
+    }
+
+    function isValidMobileInput(id) {
+        return /^\d{10}$/.test(normalizeMobile(getById(id)?.value));
     }
 
     function invalidNumber(id, message) {
@@ -948,6 +968,12 @@
 
     function normalizeRoll(value) {
         return String(value || "").trim();
+    }
+
+    function normalizeMobile(value) {
+        const digits = String(value || "").replace(/\D/g, "");
+        if (digits.length === 12 && digits.startsWith("91")) return digits.slice(2);
+        return digits;
     }
 
     function normalizeDob(value) {

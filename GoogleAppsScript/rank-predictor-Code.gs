@@ -6,6 +6,7 @@ const HEADERS = [
   "Exam Name",
   "Mode",
   "Roll Number",
+  "Mobile Number",
   "DOB",
   "Candidate Name",
   "Gender",
@@ -54,8 +55,6 @@ function doPost(e) {
       return sendJSON({ success: false, message: "Invalid JSON format" });
     }
 
-    Logger.log("Incoming payload: " + JSON.stringify(data));
-
     if (!data.action) return sendJSON({ success: false, message: "Missing action" });
     if (data.action === "submitData") return submitData(data);
     if (data.action === "checkRank") return checkRank(data);
@@ -70,9 +69,8 @@ function doPost(e) {
 }
 
 function submitData(data) {
-  Logger.log("Submit Data: " + JSON.stringify(data));
-
   data.rollNumber = normalizeRoll(data.rollNumber);
+  data.mobileNumber = normalizeMobile(data.mobileNumber);
   data.dob = normalizeDob(data.dob);
   data.examDate = normalizeDob(data.examDate);
   data.shift = normalizeShift(data.shift);
@@ -89,12 +87,13 @@ function submitData(data) {
   const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
 
-  const existing = findCandidateRow(rows, data);
-  if (existing) {
+  const duplicate = findDuplicateCandidate(rows, data);
+  if (duplicate) {
     return sendJSON({
       success: false,
       duplicate: true,
-      message: "Your data already exists. Use Check My Rank."
+      duplicateType: duplicate.type,
+      message: duplicate.message
     });
   }
 
@@ -125,9 +124,8 @@ function submitData(data) {
 }
 
 function checkRank(data) {
-  Logger.log("Check Rank Request: " + JSON.stringify(data));
-
   data.rollNumber = normalizeRoll(data.rollNumber);
+  data.mobileNumber = normalizeMobile(data.mobileNumber);
   data.dob = normalizeDob(data.dob);
   data.examDate = normalizeDob(data.examDate);
   data.shift = normalizeShift(data.shift);
@@ -145,6 +143,7 @@ function checkRank(data) {
       debug: {
         sheetName: data.sheetName,
         searchedRoll: data.rollNumber,
+        searchedMobile: maskMobile(data.mobileNumber),
         searchedDob: data.dob,
         totalRows: 0,
         firstFiveRows: []
@@ -154,15 +153,6 @@ function checkRank(data) {
 
   const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
-
-  Logger.log("Check Rank Lookup: " + JSON.stringify({
-    sheetName: data.sheetName,
-    rollNumber: data.rollNumber,
-    dob: data.dob,
-    examDate: data.examDate,
-    shift: data.shift,
-    totalRows: sheet.getLastRow()
-  }));
 
   const targetRow = findCandidateRow(rows, data);
 
@@ -260,6 +250,7 @@ function appendCandidateData(sheet, columnMap, data) {
   setHeaderValue(row, columnMap, "Exam Name", data.examName);
   setHeaderValue(row, columnMap, "Mode", data.mode);
   setHeaderValue(row, columnMap, "Roll Number", data.rollNumber);
+  setHeaderValue(row, columnMap, "Mobile Number", data.mobileNumber);
   setHeaderValue(row, columnMap, "DOB", data.dob);
   setHeaderValue(row, columnMap, "Candidate Name", data.candidateName || "Private");
   setHeaderValue(row, columnMap, "Gender", data.gender || "");
@@ -281,7 +272,7 @@ function appendCandidateData(sheet, columnMap, data) {
   setHeaderValue(row, columnMap, "User Agent", data.userAgent || "");
 
   const nextRow = sheet.getLastRow() + 1;
-  ["Roll Number", "DOB", "Exam Date", "Shift", "Subject Data (JSON)"].forEach(function (header) {
+  ["Roll Number", "Mobile Number", "DOB", "Exam Date", "Shift", "Subject Data (JSON)"].forEach(function (header) {
     setTextFormat(sheet, columnMap, nextRow, header);
   });
 
@@ -301,6 +292,7 @@ function getRowsByHeaders(sheet, columnMap) {
       examName: normalizeText(getHeaderValue(row, columnMap, "Exam Name")),
       mode: normalizeText(getHeaderValue(row, columnMap, "Mode")),
       rollNumber: normalizeRoll(getHeaderValue(row, columnMap, "Roll Number")),
+      mobileNumber: normalizeMobile(getHeaderValue(row, columnMap, "Mobile Number")),
       dob: normalizeDob(getHeaderValue(row, columnMap, "DOB")),
       candidateName: getHeaderValue(row, columnMap, "Candidate Name"),
       gender: normalizeText(getHeaderValue(row, columnMap, "Gender")),
@@ -317,13 +309,56 @@ function getRowsByHeaders(sheet, columnMap) {
 
 function findCandidateRow(rows, data) {
   const searchedRoll = normalizeRoll(data.rollNumber);
+  const searchedMobile = normalizeMobile(data.mobileNumber);
   const searchedDob = normalizeDob(data.dob);
   const searchedExamId = normalizeText(data.examId);
 
   return rows.find(function (row) {
     const sameExam = !row.examId || !searchedExamId || row.examId === searchedExamId;
-    return sameExam && row.rollNumber === searchedRoll && row.dob === searchedDob;
+    return sameExam && row.rollNumber === searchedRoll && row.mobileNumber === searchedMobile && row.dob === searchedDob;
   }) || null;
+}
+
+function findDuplicateCandidate(rows, data) {
+  const searchedRoll = normalizeRoll(data.rollNumber);
+  const searchedMobile = normalizeMobile(data.mobileNumber);
+  const searchedDob = normalizeDob(data.dob);
+  const searchedExamId = normalizeText(data.examId);
+
+  const exact = rows.find(function (row) {
+    const sameExam = !row.examId || !searchedExamId || row.examId === searchedExamId;
+    return sameExam && row.rollNumber === searchedRoll && row.mobileNumber === searchedMobile && row.dob === searchedDob;
+  });
+  if (exact) {
+    return {
+      type: "identity",
+      message: "Your data already exists. Use Check My Rank."
+    };
+  }
+
+  const sameRoll = rows.find(function (row) {
+    const sameExam = !row.examId || !searchedExamId || row.examId === searchedExamId;
+    return sameExam && row.rollNumber === searchedRoll;
+  });
+  if (sameRoll) {
+    return {
+      type: "rollNumber",
+      message: "This Roll Number is already submitted for this exam. Please use Check My Rank."
+    };
+  }
+
+  const sameMobile = rows.find(function (row) {
+    const sameExam = !row.examId || !searchedExamId || row.examId === searchedExamId;
+    return sameExam && row.mobileNumber && row.mobileNumber === searchedMobile;
+  });
+  if (sameMobile) {
+    return {
+      type: "mobileNumber",
+      message: "This Mobile Number is already submitted for this exam. Please use Check My Rank."
+    };
+  }
+
+  return null;
 }
 
 function calculateAnalytics(rows, targetRow) {
@@ -471,6 +506,7 @@ function buildNotFoundDebug(sheet, data, rows) {
   return {
     sheetName: data.sheetName,
     searchedRoll: normalizeRoll(data.rollNumber),
+    searchedMobile: maskMobile(data.mobileNumber),
     searchedDob: normalizeDob(data.dob),
     searchedExamDate: normalizeDob(data.examDate),
     searchedShift: normalizeShift(data.shift),
@@ -478,6 +514,7 @@ function buildNotFoundDebug(sheet, data, rows) {
     firstFiveRows: rows.slice(0, 5).map(function (row) {
       return {
         roll: row.rollNumber,
+        mobile: maskMobile(row.mobileNumber),
         dob: row.dob,
         examDate: row.examDate,
         shift: row.shift
@@ -487,7 +524,7 @@ function buildNotFoundDebug(sheet, data, rows) {
 }
 
 function validateSubmitPayload(data) {
-  ["examId", "examName", "sheetName", "mode", "rollNumber", "dob", "category", "state", "examDate"].forEach(function (key) {
+  ["examId", "examName", "sheetName", "mode", "rollNumber", "mobileNumber", "dob", "category", "state", "examDate"].forEach(function (key) {
     if (!String(data[key] || "").trim()) throw new Error(key + " is required.");
   });
 
@@ -499,12 +536,14 @@ function validateSubmitPayload(data) {
   if (Number(data.totalAttempted) > Number(data.totalQuestions)) throw new Error("Total attempted cannot exceed total questions.");
   if (Number(data.rightAnswers) + Number(data.wrongAnswers) > Number(data.totalAttempted)) throw new Error("Right and wrong answers cannot exceed total attempted.");
   if (Number(data.unattempted) < 0) throw new Error("Unattempted cannot be negative.");
+  if (!isValidMobile(data.mobileNumber)) throw new Error("Mobile number must be 10 digits.");
 }
 
 function validateCheckPayload(data) {
-  ["examId", "examName", "sheetName", "rollNumber", "dob"].forEach(function (key) {
+  ["examId", "examName", "sheetName", "rollNumber", "mobileNumber", "dob"].forEach(function (key) {
     if (!String(data[key] || "").trim()) throw new Error(key + " is required.");
   });
+  if (!isValidMobile(data.mobileNumber)) throw new Error("Mobile number must be 10 digits.");
 }
 
 function calculateRawMarks(data) {
@@ -571,6 +610,22 @@ function normalizeDob(value) {
 
 function normalizeRoll(value) {
   return String(value || "").trim();
+}
+
+function normalizeMobile(value) {
+  const digits = String(value || "").replace(/\D/g, "");
+  if (digits.length === 12 && digits.indexOf("91") === 0) return digits.slice(2);
+  return digits;
+}
+
+function isValidMobile(value) {
+  return /^\d{10}$/.test(normalizeMobile(value));
+}
+
+function maskMobile(value) {
+  const mobile = normalizeMobile(value);
+  if (mobile.length < 4) return mobile;
+  return "******" + mobile.slice(-4);
 }
 
 function normalizeShift(value) {

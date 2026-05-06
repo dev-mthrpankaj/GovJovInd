@@ -42,7 +42,7 @@
             <div class="predictor-hero-copy">
                 <span class="predictor-badge"><i class="fas fa-chart-line"></i> Google Sheets powered</span>
                 <h1 id="rankPredictorTitle">Multi Exam Rank Predictor</h1>
-                <p>Submit your exam performance or securely check an existing rank using roll number and date of birth.</p>
+                <p>Submit your exam performance or securely check an existing rank using mobile number, roll number, and date of birth.</p>
             </div>
             <div class="predictor-summary" aria-label="Current predictor setup">
                 <div>
@@ -76,7 +76,7 @@
                     <small>CBT exams with response sheet data</small>
                 </button>
             </div>
-            <p class="privacy-note"><i class="fas fa-lock"></i> We do not show your name, roll number, or DOB publicly. These details are used only to calculate and retrieve your rank.</p>
+            <p class="privacy-note"><i class="fas fa-lock"></i> We do not show your name, mobile number, roll number, or DOB publicly. These details are used only to calculate and retrieve your rank.</p>
             <p class="privacy-note"><i class="fas fa-circle-info"></i> Online response sheet links may not always be readable automatically because some exam boards use encrypted/session-based links. In that case, please enter your right and wrong answers manually.</p>
         </section>
 
@@ -128,6 +128,9 @@
                             </label>
                             <label class="rp-field" for="rollNumber">Roll Number
                                 <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" required>
+                            </label>
+                            <label class="rp-field" for="mobileNumber">Mobile Number
+                                <input id="mobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" required>
                             </label>
                             <label class="rp-field" for="dob">Date of Birth
                                 <input id="dob" name="dob" type="date" required>
@@ -244,11 +247,14 @@
                         <label class="rp-field" for="checkRollNumber">Roll Number
                             <input id="checkRollNumber" name="rollNumber" type="text" autocomplete="off" required>
                         </label>
+                        <label class="rp-field" for="checkMobileNumber">Mobile Number
+                            <input id="checkMobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" required>
+                        </label>
                         <label class="rp-field" for="checkDob">Date of Birth
                             <input id="checkDob" name="dob" type="date" required>
                         </label>
                     </div>
-                    <p class="privacy-note"><i class="fas fa-user-shield"></i> We only use roll number and DOB to find your own submitted record.</p>
+                    <p class="privacy-note"><i class="fas fa-user-shield"></i> We only use mobile number, roll number, and DOB to find your own submitted record.</p>
                     <div class="form-message hidden" id="checkMessage" role="status" aria-live="polite"></div>
                     <div class="form-actions sticky-actions">
                         <button class="btn btn-primary" id="checkRankBtn" type="submit">Check Rank</button>
@@ -404,7 +410,7 @@
         </div>
     </footer>
 <script src="../JS/rank-predictor-config.js?v=20260504-advanced-analytics" defer></script>
-<script src="../JS/rank-predictor.js?v=20260506-mobile-marks-performance" defer></script>
+<script src="../JS/rank-predictor.js?v=20260506-mobile-unique-identity" defer></script>
 <script src="../JS/script.js"></script>
 </body>
 </html>
