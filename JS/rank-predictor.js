@@ -13,13 +13,61 @@
         expectedMarks: 0,
         marksFrame: 0
     };
+    const dom = {
+        byId: Object.create(null),
+        tabButtons: [],
+        panels: [],
+        modeButtons: [],
+        subjectControls: [],
+        invalidFields: new Set(),
+        errorContainers: new Set()
+    };
+    const debouncedTotalCalculation = debounce(() => scheduleMarksCalculation(), 300);
+    const debouncedSubjectCalculation = debounce(() => scheduleMarksCalculation(), 300);
 
     document.addEventListener("DOMContentLoaded", initRankPredictor);
 
+    function debounce(fn, delay = 300) {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn(...args), delay);
+        };
+    }
+
+    function cacheStaticDom() {
+        dom.tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
+        dom.panels = Array.from(document.querySelectorAll("[data-panel]"));
+        dom.modeButtons = Array.from(document.querySelectorAll("button[data-mode]"));
+    }
+
+    function cacheSubjectControls(grid = getById("subjectEntryGrid")) {
+        dom.subjectControls = Array.from(grid?.querySelectorAll("[data-subject-index]") || []).map((card) => ({
+            card,
+            correct: card.querySelector('[data-subject-field="correct"]'),
+            wrong: card.querySelector('[data-subject-field="wrong"]'),
+            attempted: card.querySelector('[data-subject-derived="attempted"]'),
+            unattempted: card.querySelector('[data-subject-derived="unattempted"]')
+        }));
+    }
+
+    function getById(id) {
+        const cached = dom.byId[id];
+        if (cached && document.documentElement.contains(cached)) return cached;
+        const node = document.getElementById(id);
+        dom.byId[id] = node;
+        return node;
+    }
+
+    function isSubjectInput(target) {
+        return Boolean(target?.classList?.contains("subject-input"));
+    }
+
     function initRankPredictor() {
-        const app = document.getElementById("rankPredictorApp");
+        const app = getById("rankPredictorApp");
         if (!app) return;
 
+        cacheStaticDom();
         setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
@@ -27,12 +75,11 @@
         bindSubmitForm();
         bindCheckForm();
         applyExamDefaults();
-        calculateMarks();
         renderPendingResult();
     }
 
     function bindTabs() {
-        document.querySelectorAll("[data-tab]").forEach((button) => {
+        dom.tabButtons.forEach((button) => {
             button.addEventListener("click", () => setTab(button.dataset.tab));
         });
         setTab(state.activeTab);
@@ -40,12 +87,12 @@
 
     function setTab(tab) {
         state.activeTab = tab === "check" ? "check" : "submit";
-        document.querySelectorAll("[data-tab]").forEach((button) => {
+        dom.tabButtons.forEach((button) => {
             const active = button.dataset.tab === state.activeTab;
             button.classList.toggle("is-active", active);
             button.setAttribute("aria-selected", String(active));
         });
-        document.querySelectorAll("[data-panel]").forEach((panel) => {
+        dom.panels.forEach((panel) => {
             const active = panel.dataset.panel === state.activeTab;
             panel.classList.toggle("is-active", active);
             panel.toggleAttribute("hidden", !active);
@@ -53,7 +100,7 @@
     }
 
     function bindExamSelector() {
-        const select = document.getElementById("globalExamSelect");
+        const select = getById("globalExamSelect");
         if (!select) return;
         select.innerHTML = (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("");
         select.addEventListener("change", () => {
@@ -83,10 +130,10 @@
         setFixedExamInfo(exam);
         renderSubjectInputs(exam);
         setAggregateAttemptFieldsReadonly(exam);
-        populateSelect(document.getElementById("category"), exam.categories || []);
-        populateSelect(document.getElementById("state"), exam.states || []);
-        document.getElementById("rankPredictorApp")?.classList.toggle("has-shift", Boolean(exam.hasShifts));
-        const shift = document.getElementById("shift");
+        populateSelect(getById("category"), exam.categories || []);
+        populateSelect(getById("state"), exam.states || []);
+        getById("rankPredictorApp")?.classList.toggle("has-shift", Boolean(exam.hasShifts));
+        const shift = getById("shift");
         if (shift) {
             shift.required = Boolean(exam.hasShifts);
             shift.value = "";
@@ -105,40 +152,49 @@
     }
 
     function bindModeToggle(app) {
-        document.querySelectorAll("button[data-mode]").forEach((button) => {
+        dom.modeButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 if (!button.disabled) setMode(button.dataset.mode, app);
             });
         });
     }
 
-    function setMode(mode, app = document.getElementById("rankPredictorApp")) {
+    function setMode(mode, app = getById("rankPredictorApp")) {
         const supported = state.exam?.supportedModes || ["offline"];
         state.mode = supported.includes(mode) ? mode : supported[0] || "offline";
         if (app) app.dataset.mode = state.mode;
-        document.querySelectorAll("button[data-mode]").forEach((button) => {
+        dom.modeButtons.forEach((button) => {
             const supportedMode = supported.includes(button.dataset.mode);
             const active = button.dataset.mode === state.mode;
             button.disabled = !supportedMode;
             button.classList.toggle("is-active", active);
             button.setAttribute("aria-pressed", String(active));
         });
-        const answerSheetLink = document.getElementById("answerSheetLink");
+        const answerSheetLink = getById("answerSheetLink");
         if (answerSheetLink) answerSheetLink.required = false;
     }
 
     function bindSubmitForm() {
-        const form = document.getElementById("rankSubmitForm");
+        const form = getById("rankSubmitForm");
         if (!form) return;
         ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
-            document.getElementById(id)?.addEventListener("input", scheduleMarksCalculation);
+            const field = getById(id);
+            if (!field) return;
+            field.addEventListener("input", debouncedTotalCalculation);
+            field.addEventListener("blur", scheduleMarksCalculation);
         });
-        document.getElementById("subjectEntryGrid")?.addEventListener("input", () => {
+        const subjectGrid = getById("subjectEntryGrid");
+        subjectGrid?.addEventListener("input", (event) => {
+            if (!isSubjectInput(event.target)) return;
+            debouncedSubjectCalculation();
+        });
+        subjectGrid?.addEventListener("blur", (event) => {
+            if (!isSubjectInput(event.target)) return;
             scheduleMarksCalculation();
-        });
+        }, true);
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleSubmit);
-        document.getElementById("resetPredictorBtn")?.addEventListener("click", () => {
+        getById("resetPredictorBtn")?.addEventListener("click", () => {
             form.reset();
             applyExamDefaults();
             clearErrors(form);
@@ -148,7 +204,7 @@
     }
 
     function bindCheckForm() {
-        const form = document.getElementById("rankCheckForm");
+        const form = getById("rankCheckForm");
         if (!form) return;
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleCheckRank);
@@ -178,7 +234,11 @@
     }
 
     function scheduleMarksCalculation() {
-        if (state.marksFrame) window.cancelAnimationFrame(state.marksFrame);
+        if (state.marksFrame && window.cancelAnimationFrame) window.cancelAnimationFrame(state.marksFrame);
+        if (!window.requestAnimationFrame) {
+            calculateMarks();
+            return;
+        }
         state.marksFrame = window.requestAnimationFrame(calculateMarks);
     }
 
@@ -195,11 +255,9 @@
         }
 
         const payload = collectSubmitPayload();
-        console.log("Submit payload:", payload);
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
-            console.log("Submit payload validation failed:", payloadValidation.debug || payloadValidation.message);
             showMessage("submitMessage", payloadValidation.message, "error");
             return;
         }
@@ -207,13 +265,11 @@
         requestBackend(payload, "submitDataBtn")
             .then((data) => {
                 if (data.duplicate) {
-                    console.log("Duplicate Submit Debug:", data.debug || data);
                     clearResultCard();
                     showMessage("submitMessage", "Data already exists for this Roll Number and DOB. Please use Check My Rank.", "warning");
                     return;
                 }
                 if (!data.success) {
-                    console.log("Submit Debug:", data.debug || data);
                     clearResultCard();
                     showMessage("submitMessage", API_NETWORK_ERROR_MESSAGE, "error");
                     return;
@@ -222,10 +278,9 @@
                 showMessage("submitMessage", data.message || "Data submitted successfully.", "success");
                 renderResult(resultData, payload);
             })
-            .catch((error) => {
-                console.log("Submit request failed:", error);
+            .catch(() => {
                 clearResultCard();
-                showMessage("submitMessage", getBackendErrorMessage(error), "error");
+                showMessage("submitMessage", getBackendErrorMessage(), "error");
             });
     }
 
@@ -242,11 +297,9 @@
         }
 
         const payload = collectCheckPayload();
-        console.log("Check payload:", payload);
         const payloadValidation = validateBackendPayload(payload);
         if (!payloadValidation.ok) {
             clearResultCard();
-            console.log("Check payload validation failed:", payloadValidation.debug || payloadValidation.message);
             showMessage("checkMessage", payloadValidation.message, "error");
             return;
         }
@@ -254,13 +307,11 @@
         requestBackend(payload, "checkRankBtn")
             .then((data) => {
                 if (data.found === false || /no data found/i.test(String(data.message || ""))) {
-                    console.log("Check Rank Debug:", data.debug || data);
                     clearResultCard();
                     showMessage("checkMessage", "No data found for this Roll Number and DOB.", "warning");
                     return;
                 }
                 if (!data.success) {
-                    console.log("Check Rank Debug:", data.debug || data);
                     clearResultCard();
                     showMessage("checkMessage", API_NETWORK_ERROR_MESSAGE, "error");
                     return;
@@ -269,15 +320,14 @@
                 showMessage("checkMessage", data.message || "Rank found successfully.", "success");
                 renderResult(resultData, payload);
             })
-            .catch((error) => {
-                console.log("Check request failed:", error);
+            .catch(() => {
                 clearResultCard();
-                showMessage("checkMessage", getBackendErrorMessage(error), "error");
+                showMessage("checkMessage", getBackendErrorMessage(), "error");
             });
     }
 
     function requestBackend(payload, buttonId) {
-        const button = document.getElementById(buttonId);
+        const button = getById(buttonId);
         const form = button?.closest("form") || null;
         const original = button?.innerHTML || "";
         if (button) {
@@ -307,8 +357,6 @@
     async function callRankApi(payload) {
         const apiUrl = RANK_PREDICTOR_CONFIG.apiUrl;
 
-        console.log("apiUrl:", apiUrl);
-
         if (!apiUrl || !apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) {
             throw new Error(API_INVALID_URL_MESSAGE);
         }
@@ -323,16 +371,10 @@
         });
 
         const text = await res.text();
-        console.log("Raw response:", text);
 
         try {
-            const response = JSON.parse(text);
-            console.log("Parsed response:", response);
-            console.log("API response:", response);
-            console.log("Rank API response:", response);
-            return response;
-        } catch (error) {
-            console.error("Invalid backend response:", text);
+            return JSON.parse(text);
+        } catch {
             throw new Error(API_INVALID_RESPONSE_MESSAGE);
         }
     }
@@ -341,7 +383,7 @@
         clearErrors(form);
         const selectedExam = getSelectedExam();
         if (!selectedExam || selectedExam.disabled || !String(selectedExam.sheetName || "").trim()) {
-            const field = document.getElementById("globalExamSelect");
+            const field = getById("globalExamSelect");
             markInvalid(field);
             return { ok: false, field, message: "Please select a valid exam." };
         }
@@ -349,7 +391,7 @@
         if (selectedExam.hasShifts) required.push("shift");
 
         for (const id of required) {
-            const field = document.getElementById(id);
+            const field = getById(id);
             if (field && String(field.value).trim()) continue;
             markInvalid(field);
             return { ok: false, field, message: "Please fill all required fields." };
@@ -369,8 +411,8 @@
         if (!isValidDateInput("examDate")) return invalidNumber("examDate", "Please enter a valid Exam Date.");
         if (selectedExam.hasShifts && !isPositiveIntegerInput("shift")) return invalidNumber("shift", "Shift Number must be a positive number.");
         if (!Number.isFinite(state.expectedMarks)) return invalidNumber("expectedMarks", "Marks could not be calculated. Please check your answers.");
-        if (!document.getElementById("dataConsent")?.checked) {
-            const field = document.getElementById("dataConsent");
+        if (!getById("dataConsent")?.checked) {
+            const field = getById("dataConsent");
             markInvalid(field);
             return { ok: false, field, message: "Please fill all required fields." };
         }
@@ -381,29 +423,29 @@
         clearErrors(form);
         const selectedExam = getSelectedExam();
         if (!selectedExam || selectedExam.disabled || !String(selectedExam.sheetName || "").trim()) {
-            const field = document.getElementById("globalExamSelect");
+            const field = getById("globalExamSelect");
             markInvalid(field);
             return { ok: false, field, message: "Please select a valid exam." };
         }
         for (const id of ["checkRollNumber", "checkDob"]) {
-            const field = document.getElementById(id);
+            const field = getById(id);
             if (field && String(field.value).trim()) continue;
             markInvalid(field);
             return { ok: false, field, message: "Please fill all required fields." };
         }
         if (!isValidDateInput("checkDob")) return invalidNumber("checkDob", "Please enter a valid Date of Birth.");
-        const checkExamDate = document.getElementById("checkExamDate");
+        const checkExamDate = getById("checkExamDate");
         if (checkExamDate?.value && !isValidDateInput("checkExamDate")) return invalidNumber("checkExamDate", "Please enter a valid Exam Date.");
-        const checkShift = document.getElementById("checkShift");
+        const checkShift = getById("checkShift");
         if (checkShift?.value && !isPositiveIntegerInput("checkShift")) return invalidNumber("checkShift", "Shift Number must be a positive number.");
         return { ok: true };
     }
 
     function collectSubmitPayload() {
         const selectedExam = getSelectedExam();
-        const rollNumberInput = document.getElementById("rollNumber");
-        const dobInput = document.getElementById("dob");
-        const examDateInput = document.getElementById("examDate");
+        const rollNumberInput = getById("rollNumber");
+        const dobInput = getById("dob");
+        const examDateInput = getById("examDate");
         const rollNumber = normalizeRoll(rollNumberInput?.value);
         const dob = dobInput?.value || "";
         const totalQuestions = getExamNumber(selectedExam, "totalQuestions");
@@ -445,9 +487,9 @@
 
     function collectCheckPayload() {
         const selectedExam = getSelectedExam();
-        const rollNumberInput = document.getElementById("checkRollNumber");
-        const dobInput = document.getElementById("checkDob");
-        const examDateInput = document.getElementById("checkExamDate");
+        const rollNumberInput = getById("checkRollNumber");
+        const dobInput = getById("checkDob");
+        const examDateInput = getById("checkExamDate");
         const rollNumber = normalizeRoll(rollNumberInput?.value);
         const dob = dobInput?.value || "";
         return {
@@ -463,12 +505,13 @@
     }
 
     function renderSubjectInputs(exam) {
-        const grid = document.getElementById("subjectEntryGrid");
+        const grid = getById("subjectEntryGrid");
         if (!grid) return;
 
         const subjects = Array.isArray(exam?.subjects) ? exam.subjects : [];
         if (!subjects.length) {
             grid.innerHTML = "";
+            dom.subjectControls = [];
             return;
         }
 
@@ -497,6 +540,7 @@
                     </div>
                 </article>`;
         }).join("");
+        cacheSubjectControls(grid);
     }
 
     function collectSubjectData(exam) {
@@ -507,9 +551,9 @@
         const negativeMarking = getExamNumber(exam, "negativeMarking");
 
         return subjects.map((subject, index) => {
-            const card = document.querySelector(`[data-subject-index="${index}"]`);
-            const correct = readSubjectNumber(card, "correct");
-            const wrong = readSubjectNumber(card, "wrong");
+            const control = dom.subjectControls[index];
+            const correct = readSubjectNumber(control, "correct");
+            const wrong = readSubjectNumber(control, "wrong");
             const attempted = correct + wrong;
             return {
                 name: String(subject.name || `Subject ${index + 1}`),
@@ -522,8 +566,8 @@
         });
     }
 
-    function readSubjectNumber(card, field) {
-        const value = Number(card?.querySelector(`[data-subject-field="${field}"]`)?.value);
+    function readSubjectNumber(control, field) {
+        const value = Number(control?.[field]?.value);
         return Number.isFinite(value) ? value : 0;
     }
 
@@ -536,17 +580,17 @@
 
     function syncSubjectDerivedOutputs(subjectData = collectSubjectData(getSelectedExam())) {
         subjectData.forEach((subject, index) => {
-            const card = document.querySelector(`[data-subject-index="${index}"]`);
+            const control = dom.subjectControls[index];
             const unattempted = Math.max((Number(subject.questions) || 0) - (Number(subject.attempted) || 0), 0);
-            setNodeText(card?.querySelector('[data-subject-derived="attempted"]'), String(subject.attempted));
-            setNodeText(card?.querySelector('[data-subject-derived="unattempted"]'), String(unattempted));
+            setNodeText(control?.attempted, String(subject.attempted));
+            setNodeText(control?.unattempted, String(unattempted));
         });
     }
 
     function setAggregateAttemptFieldsReadonly(exam) {
         const hasSubjects = Array.isArray(exam?.subjects) && exam.subjects.length > 0;
         ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
-            const field = document.getElementById(id);
+            const field = getById(id);
             if (!field) return;
             field.readOnly = hasSubjects;
             field.setAttribute("aria-readonly", String(hasSubjects));
@@ -559,9 +603,8 @@
 
         for (let index = 0; index < subjectData.length; index += 1) {
             const subject = subjectData[index];
-            const card = document.querySelector(`[data-subject-index="${index}"]`);
             if (subject.attempted > subject.questions) {
-                return invalidSubject(card, "correct", `${subject.name} correct and wrong answers cannot exceed ${subject.questions}.`);
+                return invalidSubject(index, "correct", `${subject.name} correct and wrong answers cannot exceed ${subject.questions}.`);
             }
         }
 
@@ -572,8 +615,8 @@
         return { ok: true };
     }
 
-    function invalidSubject(card, field, message) {
-        const input = card?.querySelector(`[data-subject-field="${field}"]`);
+    function invalidSubject(index, field, message) {
+        const input = dom.subjectControls[index]?.[field];
         markInvalid(input);
         return { ok: false, field: input, message };
     }
@@ -666,7 +709,7 @@
     }
 
     function renderSubjectAnalysis(subjectAnalysis) {
-        const body = document.getElementById("subjectAnalysisBody");
+        const body = getById("subjectAnalysisBody");
         if (!body) return;
         if (!Array.isArray(subjectAnalysis) || !subjectAnalysis.length) {
             body.innerHTML = `<tr class="subject-empty-row"><td colspan="4" data-label="Status">Pending</td></tr>`;
@@ -735,19 +778,19 @@
     }
 
     function isPositiveIntegerInput(id) {
-        const value = document.getElementById(id)?.value;
+        const value = getById(id)?.value;
         return /^[1-9]\d*$/.test(String(value || "").trim());
     }
 
     function isValidDateInput(id) {
-        const field = document.getElementById(id);
+        const field = getById(id);
         if (!field) return false;
         if (field.validity && !field.validity.valid) return false;
         return /^\d{4}-\d{2}-\d{2}$/.test(field.value);
     }
 
     function invalidNumber(id, message) {
-        const field = document.getElementById(id);
+        const field = getById(id);
         markInvalid(field);
         return { ok: false, field, message };
     }
@@ -755,26 +798,54 @@
     function markInvalid(field) {
         if (!field) return;
         field.setAttribute("aria-invalid", "true");
-        field.closest(".rp-field, .consent-row, .subject-card")?.classList.add("has-error");
+        dom.invalidFields.add(field);
+        const container = field.closest(".rp-field, .consent-row, .subject-card");
+        container?.classList.add("has-error");
+        if (container) dom.errorContainers.add(container);
     }
 
     function clearFieldError(event) {
-        if (!event.target.hasAttribute("aria-invalid") && !event.target.closest(".has-error")) return;
-        const field = event.target.closest(".rp-field, .consent-row, .subject-card");
+        const hasInvalidFlag = event.target.hasAttribute("aria-invalid");
+        if (!hasInvalidFlag && !dom.errorContainers.size) return;
+        const field = hasInvalidFlag
+            ? event.target.closest(".rp-field, .consent-row, .subject-card")
+            : event.target.closest(".has-error");
+        if (!hasInvalidFlag && !field) return;
         field?.classList.remove("has-error");
         event.target.removeAttribute("aria-invalid");
+        dom.invalidFields.delete(event.target);
+        if (field) dom.errorContainers.delete(field);
     }
 
     function clearErrors(root) {
-        (root || document).querySelectorAll("[aria-invalid='true']").forEach((field) => field.removeAttribute("aria-invalid"));
-        (root || document).querySelectorAll(".has-error").forEach((field) => field.classList.remove("has-error"));
+        const scope = root || document;
+        dom.invalidFields.forEach((field) => {
+            if (!document.documentElement.contains(field)) {
+                dom.invalidFields.delete(field);
+                return;
+            }
+            if (!scope.contains(field)) return;
+            field.removeAttribute("aria-invalid");
+            dom.invalidFields.delete(field);
+        });
+        dom.errorContainers.forEach((field) => {
+            if (!document.documentElement.contains(field)) {
+                dom.errorContainers.delete(field);
+                return;
+            }
+            if (!scope.contains(field)) return;
+            field.classList.remove("has-error");
+            dom.errorContainers.delete(field);
+        });
     }
 
     function showMessage(id, message, type = "info") {
-        const box = document.getElementById(id);
+        const box = getById(id);
         if (!box) return;
-        box.textContent = message;
-        box.className = message ? `form-message ${type}` : "form-message hidden";
+        const nextText = String(message || "");
+        const nextClass = message ? `form-message ${type}` : "form-message hidden";
+        if (box.textContent !== nextText) box.textContent = nextText;
+        if (box.className !== nextClass) box.className = nextClass;
     }
 
     function getModeLabel(modes) {
@@ -784,12 +855,12 @@
     }
 
     function readNumber(id) {
-        const value = Number(document.getElementById(id)?.value);
+        const value = Number(getById(id)?.value);
         return Number.isFinite(value) ? value : 0;
     }
 
     function readValue(id) {
-        return String(document.getElementById(id)?.value || "").trim();
+        return String(getById(id)?.value || "").trim();
     }
 
     function sumBy(items, key) {
@@ -826,17 +897,19 @@
     }
 
     function setValue(id, value) {
-        const field = document.getElementById(id);
-        if (field) field.value = value;
+        const field = getById(id);
+        const nextValue = String(value);
+        if (field && field.value !== nextValue) field.value = nextValue;
     }
 
     function setText(id, value) {
-        const node = document.getElementById(id);
-        if (node) node.textContent = value;
+        const node = getById(id);
+        setNodeText(node, value);
     }
 
     function setNodeText(node, value) {
-        if (node) node.textContent = value;
+        const nextText = String(value);
+        if (node && node.textContent !== nextText) node.textContent = nextText;
     }
 
     function round2(value) {
