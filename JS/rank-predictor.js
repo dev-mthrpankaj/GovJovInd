@@ -11,7 +11,9 @@
         mode: "offline",
         activeTab: "submit",
         expectedMarks: 0,
-        marksFrame: 0
+        marksFrame: 0,
+        marksDirty: false,
+        mobileMarksMode: false
     };
     const dom = {
         byId: Object.create(null),
@@ -22,8 +24,9 @@
         invalidFields: new Set(),
         errorContainers: new Set()
     };
-    const debouncedTotalCalculation = debounce(() => scheduleMarksCalculation(), 300);
-    const debouncedSubjectCalculation = debounce(() => scheduleMarksCalculation(), 300);
+    const debouncedTotalCalculation = debounce(runMarksCalculation, 300);
+    const debouncedSubjectCalculation = debounce(runMarksCalculation, 300);
+    const debouncedMobileCalculation = debounce(runMobileMarksCalculation, 900);
 
     document.addEventListener("DOMContentLoaded", initRankPredictor);
 
@@ -63,11 +66,20 @@
         return Boolean(target?.classList?.contains("subject-input"));
     }
 
+    function isMarksInput(target) {
+        return isSubjectInput(target) || ["totalAttempted", "rightAnswers", "wrongAnswers"].includes(target?.id);
+    }
+
+    function detectMobileMarksMode() {
+        return Boolean(window.matchMedia?.("(pointer: coarse), (max-width: 767px)")?.matches || window.innerWidth <= 767);
+    }
+
     function initRankPredictor() {
         const app = getById("rankPredictorApp");
         if (!app) return;
 
         cacheStaticDom();
+        state.mobileMarksMode = detectMobileMarksMode();
         setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
@@ -76,6 +88,9 @@
         bindCheckForm();
         applyExamDefaults();
         renderPendingResult();
+        window.addEventListener("resize", () => {
+            state.mobileMarksMode = detectMobileMarksMode();
+        }, { passive: true });
     }
 
     function bindTabs() {
@@ -180,18 +195,14 @@
         ["totalAttempted", "rightAnswers", "wrongAnswers"].forEach((id) => {
             const field = getById(id);
             if (!field) return;
-            field.addEventListener("input", debouncedTotalCalculation);
-            field.addEventListener("blur", scheduleMarksCalculation);
+            field.addEventListener("input", handleTotalMarksInput);
+            field.addEventListener("blur", handleMarksBlur);
         });
         const subjectGrid = getById("subjectEntryGrid");
-        subjectGrid?.addEventListener("input", (event) => {
-            if (!isSubjectInput(event.target)) return;
-            debouncedSubjectCalculation();
-        });
-        subjectGrid?.addEventListener("blur", (event) => {
-            if (!isSubjectInput(event.target)) return;
-            scheduleMarksCalculation();
-        }, true);
+        subjectGrid?.addEventListener("input", handleSubjectMarksInput);
+        subjectGrid?.addEventListener("focusin", handleSubjectMarksFocus);
+        subjectGrid?.addEventListener("blur", handleMarksBlur, true);
+        subjectGrid?.addEventListener("focusout", handleMarksBlur);
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleSubmit);
         getById("resetPredictorBtn")?.addEventListener("click", () => {
@@ -208,6 +219,45 @@
         if (!form) return;
         form.addEventListener("input", clearFieldError);
         form.addEventListener("submit", handleCheckRank);
+    }
+
+    function handleTotalMarksInput() {
+        state.marksDirty = true;
+        if (state.mobileMarksMode) {
+            debouncedMobileCalculation();
+            return;
+        }
+        debouncedTotalCalculation();
+    }
+
+    function handleSubjectMarksInput(event) {
+        if (!isSubjectInput(event.target)) return;
+        state.marksDirty = true;
+        if (state.mobileMarksMode) {
+            debouncedMobileCalculation();
+            return;
+        }
+        debouncedSubjectCalculation();
+    }
+
+    function handleSubjectMarksFocus(event) {
+        if (!isSubjectInput(event.target) || event.target.value !== "0") return;
+        event.target.select();
+    }
+
+    function handleMarksBlur(event) {
+        if (!isMarksInput(event.target)) return;
+        runMarksCalculation();
+    }
+
+    function runMarksCalculation() {
+        state.marksDirty = false;
+        scheduleMarksCalculation();
+    }
+
+    function runMobileMarksCalculation() {
+        if (!state.marksDirty || isMarksInput(document.activeElement)) return;
+        runMarksCalculation();
     }
 
     function calculateMarks() {
@@ -518,6 +568,7 @@
         grid.innerHTML = subjects.map((subject, index) => {
             const name = String(subject.name || `Subject ${index + 1}`);
             const questions = Number(subject.questions) || 0;
+            const maxLength = Math.max(String(questions).length, 1);
             const correctId = `subject-${index}-correct`;
             const wrongId = `subject-${index}-wrong`;
             return `
@@ -528,10 +579,10 @@
                     </div>
                     <div class="subject-input-grid">
                         <label for="${correctId}">Correct
-                            <input id="${correctId}" class="subject-input" data-subject-field="correct" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                            <input id="${correctId}" class="subject-input" data-subject-field="correct" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="${maxLength}" autocomplete="off" enterkeyhint="next" value="0">
                         </label>
                         <label for="${wrongId}">Wrong
-                            <input id="${wrongId}" class="subject-input" data-subject-field="wrong" type="number" min="0" max="${questions}" step="1" value="0" inputmode="numeric">
+                            <input id="${wrongId}" class="subject-input" data-subject-field="wrong" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="${maxLength}" autocomplete="off" enterkeyhint="next" value="0">
                         </label>
                     </div>
                     <div class="subject-derived-row" aria-label="${escapeAttr(name)} calculated totals">
@@ -567,8 +618,15 @@
     }
 
     function readSubjectNumber(control, field) {
-        const value = Number(control?.[field]?.value);
+        const value = parseWholeNumber(control?.[field]?.value);
         return Number.isFinite(value) ? value : 0;
+    }
+
+    function parseWholeNumber(value) {
+        const digits = String(value ?? "").replace(/[^\d]/g, "");
+        if (!digits) return 0;
+        const number = Number(digits);
+        return Number.isFinite(number) ? number : 0;
     }
 
     function syncSubjectTotals(subjectData = collectSubjectData(getSelectedExam())) {
