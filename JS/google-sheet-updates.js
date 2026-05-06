@@ -61,6 +61,7 @@
         if (!apiUrl) return "";
         const url = new URL(apiUrl, window.location.href);
         url.searchParams.set("type", type);
+        url.searchParams.set("_ts", String(Date.now()));
         return url.toString();
     }
 

@@ -1,4 +1,5 @@
 const CONTENT_SPREADSHEET_ID = "1dRnOLInUsS73ejKj86xh0AHsckqMFoKz6kDRJ4updRo";
+const CONTENT_ADMIN_TOKEN = "gju-live-test-20260506-8f4c2b91";
 
 const CONTENT_SHEETS = {
   jobs: {
@@ -85,6 +86,10 @@ const CONTENT_SHEETS = {
 
 function doGet(e) {
   try {
+    const params = e && e.parameter ? e.parameter : {};
+    const action = String(params.action || "").trim();
+    if (action) return handleContentAdminAction(action, params);
+
     const type = String(e && e.parameter && e.parameter.type || "all").trim();
     if (type === "all") return sendContentJson(buildAllContent());
     if (!CONTENT_SHEETS[type]) return sendContentJson({ success: false, message: "Invalid content type." });
@@ -105,6 +110,32 @@ function doGet(e) {
   }
 }
 
+function handleContentAdminAction(action, params) {
+  if (!isValidContentAdminToken(params.token)) {
+    return sendContentJson({
+      success: false,
+      message: "Unauthorized admin action."
+    });
+  }
+
+  if (action === "addTestRows") {
+    return sendContentJson(addContentLiveTestRows());
+  }
+
+  if (action === "removeTestRows") {
+    return sendContentJson(removeContentLiveTestRows());
+  }
+
+  return sendContentJson({
+    success: false,
+    message: "Invalid admin action."
+  });
+}
+
+function isValidContentAdminToken(token) {
+  return String(token || "") === CONTENT_ADMIN_TOKEN;
+}
+
 function setupContentSheets() {
   const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
   Object.keys(CONTENT_SHEETS).forEach(function (type) {
@@ -112,6 +143,140 @@ function setupContentSheets() {
     const sheet = getOrCreateContentSheet(spreadsheet, config);
     ensureContentHeaders(sheet, config);
   });
+}
+
+function addContentLiveTestRows() {
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  const today = formatContentDate(new Date());
+  const testItems = buildContentLiveTestItems(today);
+  const summary = {};
+
+  Object.keys(testItems).forEach(function (type) {
+    const config = CONTENT_SHEETS[type];
+    const sheet = getOrCreateContentSheet(spreadsheet, config);
+    ensureContentHeaders(sheet, config);
+    removeContentRowsById(sheet, "gju-live-test-" + type);
+    sheet.getRange(sheet.getLastRow() + 1, 1, 1, getContentHeaders(config).length)
+      .setValues([buildContentRowFromItem(testItems[type], config, 1)]);
+    applyContentSheetFormatting(sheet, getContentHeaders(config).length);
+
+    summary[type] = {
+      inserted: 1,
+      id: testItems[type].id,
+      title: testItems[type].title,
+      totalRows: Math.max(sheet.getLastRow() - 1, 0)
+    };
+  });
+
+  return {
+    success: true,
+    action: "addTestRows",
+    updatedAt: new Date().toISOString(),
+    summary: summary
+  };
+}
+
+function removeContentLiveTestRows() {
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  const summary = {};
+
+  Object.keys(CONTENT_SHEETS).forEach(function (type) {
+    const config = CONTENT_SHEETS[type];
+    const sheet = getOrCreateContentSheet(spreadsheet, config);
+    ensureContentHeaders(sheet, config);
+    summary[type] = {
+      removed: removeContentRowsById(sheet, "gju-live-test-" + type),
+      totalRows: Math.max(sheet.getLastRow() - 1, 0)
+    };
+  });
+
+  return {
+    success: true,
+    action: "removeTestRows",
+    updatedAt: new Date().toISOString(),
+    summary: summary
+  };
+}
+
+function buildContentLiveTestItems(today) {
+  return {
+    jobs: {
+      id: "gju-live-test-jobs",
+      title: "TEST LIVE JOB FROM GOOGLE SHEET",
+      organization: "GovJobUpdates Test",
+      department: "Testing",
+      category: "Testing",
+      year: "2026",
+      qualification: "Not specified",
+      totalPosts: "1",
+      startDate: today,
+      lastDate: today,
+      status: "active",
+      tags: ["Live Test", "Google Sheet"],
+      applyLink: "#",
+      officialNotification: "#",
+      detailPage: "",
+      updatedAt: today
+    },
+    admitCards: {
+      id: "gju-live-test-admitCards",
+      title: "TEST LIVE ADMIT CARD FROM GOOGLE SHEET",
+      organization: "GovJobUpdates Test",
+      department: "Testing",
+      category: "Admit Card",
+      year: "2026",
+      examDate: today,
+      releaseDate: today,
+      status: "available",
+      tags: ["Live Test", "Google Sheet"],
+      downloadLink: "#",
+      detailPage: "",
+      updatedAt: today
+    },
+    results: {
+      id: "gju-live-test-results",
+      title: "TEST LIVE RESULT FROM GOOGLE SHEET",
+      organization: "GovJobUpdates Test",
+      department: "Testing",
+      category: "Result",
+      year: "2026",
+      resultDate: today,
+      status: "released",
+      tags: ["Live Test", "Google Sheet"],
+      resultLink: "#",
+      detailPage: "",
+      updatedAt: today
+    },
+    answerKeys: {
+      id: "gju-live-test-answerKeys",
+      title: "TEST LIVE ANSWER KEY FROM GOOGLE SHEET",
+      organization: "GovJobUpdates Test",
+      department: "Testing",
+      category: "Answer Key",
+      year: "2026",
+      examDate: today,
+      releaseDate: today,
+      objectionLastDate: today,
+      status: "available",
+      tags: ["Live Test", "Google Sheet"],
+      downloadLink: "#",
+      objectionLink: "#",
+      detailPage: "",
+      updatedAt: today
+    }
+  };
+}
+
+function buildContentRowFromItem(item, config, order) {
+  const values = config.fields.map(function (fieldConfig) {
+    return normalizeContentCellValue(item[fieldConfig[1]]);
+  });
+  return ["yes", order].concat(values);
+}
+
+function normalizeContentCellValue(value) {
+  if (Array.isArray(value)) return value.join(", ");
+  return value === undefined || value === null ? "" : String(value);
 }
 
 function buildAllContent() {
@@ -223,6 +388,25 @@ function ensureContentHeaders(sheet, config) {
 function applyContentSheetFormatting(sheet, columnCount) {
   sheet.setFrozenRows(1);
   if (columnCount > 0) sheet.autoResizeColumns(1, columnCount);
+}
+
+function removeContentRowsById(sheet, id) {
+  const headerMap = buildContentHeaderMap(sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]);
+  const idIndex = headerMap[normalizeContentHeader("ID")];
+  if (idIndex === undefined || sheet.getLastRow() < 2) return 0;
+
+  const rowCount = sheet.getLastRow() - 1;
+  const idValues = sheet.getRange(2, idIndex + 1, rowCount, 1).getValues();
+  let removed = 0;
+
+  for (let index = idValues.length - 1; index >= 0; index -= 1) {
+    if (String(idValues[index][0] || "").trim() === id) {
+      sheet.deleteRow(index + 2);
+      removed += 1;
+    }
+  }
+
+  return removed;
 }
 
 function getContentHeaders(config) {
