@@ -35,7 +35,7 @@
     let visibleCount = pageSize;
     let currentJobs = [];
 
-    const jobs = Array.isArray(window.GovJobUpdatesJobs) ? window.GovJobUpdatesJobs : [];
+    let jobs = Array.isArray(window.GovJobUpdatesJobs) ? window.GovJobUpdatesJobs : [];
     const elements = {
         search: document.getElementById("jobSearch"),
         department: document.getElementById("departmentFilter"),
@@ -358,10 +358,21 @@
         }
     }
 
+    async function loadJobsFromSheet() {
+        if (!window.GovJobUpdatesSheetData) return;
+        const sheetJobs = await window.GovJobUpdatesSheetData.load("jobs", jobs);
+        if (!Array.isArray(sheetJobs) || !sheetJobs.length || sheetJobs === jobs) return;
+        jobs = sheetJobs;
+        visibleCount = pageSize;
+        hydrateFilters();
+        renderJobs();
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         hydrateFilters();
         bindEvents();
         renderJobs();
+        loadJobsFromSheet();
     });
 
     window.latestJobsPage = {

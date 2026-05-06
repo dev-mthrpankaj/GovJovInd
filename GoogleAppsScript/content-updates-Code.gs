@@ -1,0 +1,342 @@
+const CONTENT_SPREADSHEET_ID = "1dRnOLInUsS73ejKj86xh0AHsckqMFoKz6kDRJ4updRo";
+
+const CONTENT_SHEETS = {
+  jobs: {
+    sheetName: "Latest Jobs",
+    idPrefix: "job-sheet",
+    fields: [
+      ["ID", "id"],
+      ["Title", "title"],
+      ["Organization", "organization"],
+      ["Department", "department"],
+      ["Category", "category"],
+      ["Year", "year"],
+      ["Qualification", "qualification"],
+      ["Total Posts", "totalPosts"],
+      ["Start Date", "startDate", "date"],
+      ["Last Date", "lastDate", "date"],
+      ["Status", "status"],
+      ["Tags", "tags", "tags"],
+      ["Apply Link", "applyLink"],
+      ["Official Notification", "officialNotification"],
+      ["Detail Page", "detailPage"],
+      ["Updated At", "updatedAt", "date"]
+    ]
+  },
+  admitCards: {
+    sheetName: "Admit Cards",
+    idPrefix: "admit-sheet",
+    fields: [
+      ["ID", "id"],
+      ["Title", "title"],
+      ["Organization", "organization"],
+      ["Department", "department"],
+      ["Category", "category"],
+      ["Year", "year"],
+      ["Exam Date", "examDate", "date"],
+      ["Release Date", "releaseDate", "date"],
+      ["Status", "status"],
+      ["Tags", "tags", "tags"],
+      ["Download Link", "downloadLink"],
+      ["Detail Page", "detailPage"],
+      ["Updated At", "updatedAt", "date"]
+    ]
+  },
+  results: {
+    sheetName: "Results",
+    idPrefix: "result-sheet",
+    fields: [
+      ["ID", "id"],
+      ["Title", "title"],
+      ["Organization", "organization"],
+      ["Department", "department"],
+      ["Category", "category"],
+      ["Year", "year"],
+      ["Result Date", "resultDate", "date"],
+      ["Status", "status"],
+      ["Tags", "tags", "tags"],
+      ["Result Link", "resultLink"],
+      ["Detail Page", "detailPage"],
+      ["Updated At", "updatedAt", "date"]
+    ]
+  },
+  answerKeys: {
+    sheetName: "Answer Keys",
+    idPrefix: "answerkey-sheet",
+    fields: [
+      ["ID", "id"],
+      ["Title", "title"],
+      ["Organization", "organization"],
+      ["Department", "department"],
+      ["Category", "category"],
+      ["Year", "year"],
+      ["Exam Date", "examDate", "date"],
+      ["Release Date", "releaseDate", "date"],
+      ["Objection Last Date", "objectionLastDate", "date"],
+      ["Status", "status"],
+      ["Tags", "tags", "tags"],
+      ["Download Link", "downloadLink"],
+      ["Objection Link", "objectionLink"],
+      ["Detail Page", "detailPage"],
+      ["Updated At", "updatedAt", "date"]
+    ]
+  }
+};
+
+function doGet(e) {
+  try {
+    const type = String(e && e.parameter && e.parameter.type || "all").trim();
+    if (type === "all") return sendContentJson(buildAllContent());
+    if (!CONTENT_SHEETS[type]) return sendContentJson({ success: false, message: "Invalid content type." });
+
+    const result = getContentResult(type);
+    const response = {
+      success: true,
+      updatedAt: new Date().toISOString(),
+      meta: result.meta
+    };
+    response[type] = result.items;
+    return sendContentJson(response);
+  } catch (error) {
+    return sendContentJson({
+      success: false,
+      message: error.message
+    });
+  }
+}
+
+function setupContentSheets() {
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  Object.keys(CONTENT_SHEETS).forEach(function (type) {
+    const config = CONTENT_SHEETS[type];
+    const sheet = getOrCreateContentSheet(spreadsheet, config);
+    ensureContentHeaders(sheet, config);
+  });
+}
+
+function buildAllContent() {
+  const response = {
+    success: true,
+    updatedAt: new Date().toISOString(),
+    meta: {}
+  };
+  Object.keys(CONTENT_SHEETS).forEach(function (type) {
+    const result = getContentResult(type);
+    response[type] = result.items;
+    response.meta[type] = result.meta;
+  });
+  return response;
+}
+
+function getContentItems(type) {
+  return getContentResult(type).items;
+}
+
+function getContentResult(type) {
+  const config = CONTENT_SHEETS[type];
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  const sheet = getOrCreateContentSheet(spreadsheet, config);
+  ensureContentHeaders(sheet, config);
+  const meta = {
+    sheetName: config.sheetName,
+    totalRows: Math.max(sheet.getLastRow() - 1, 0),
+    publishedRows: 0,
+    unpublishedRows: 0,
+    missingTitleRows: 0,
+    blankRows: 0
+  };
+  if (sheet.getLastRow() < 2) return { items: [], meta: meta };
+
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  const values = sheet.getRange(1, 1, lastRow, lastColumn).getValues();
+  const headerMap = buildContentHeaderMap(values[0]);
+
+  const items = values.slice(1)
+    .map(function (row, index) {
+      return buildContentItem(row, headerMap, config, index + 2);
+    })
+    .filter(function (item) {
+      if (!item || !hasContentItemData(item, config)) {
+        meta.blankRows += 1;
+        return false;
+      }
+      if (!isPublished(item.__published)) {
+        meta.unpublishedRows += 1;
+        return false;
+      }
+      if (!item.title) {
+        meta.missingTitleRows += 1;
+        return false;
+      }
+      meta.publishedRows += 1;
+      return true;
+    })
+    .map(function (item) {
+      delete item.__published;
+      delete item.__order;
+      delete item.__hasRowData;
+      return item;
+    })
+    .sort(sortContentItems);
+
+  return { items: items, meta: meta };
+}
+
+function getOrCreateContentSheet(spreadsheet, config) {
+  const sheet = spreadsheet.getSheetByName(config.sheetName) || spreadsheet.insertSheet(config.sheetName);
+  const headers = getContentHeaders(config);
+  if (sheet.getLastRow() === 0) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  }
+  applyContentSheetFormatting(sheet, headers.length);
+  return sheet;
+}
+
+function ensureContentHeaders(sheet, config) {
+  const requiredHeaders = getContentHeaders(config);
+  const currentHeaders = sheet.getLastColumn() > 0
+    ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    : [];
+  const hasAnyHeader = currentHeaders.some(function (header) {
+    return String(header || "").trim();
+  });
+  if (!hasAnyHeader) {
+    sheet.getRange(1, 1, 1, requiredHeaders.length).setValues([requiredHeaders]);
+    applyContentSheetFormatting(sheet, requiredHeaders.length);
+    return;
+  }
+
+  const currentMap = buildContentHeaderMap(currentHeaders);
+  const missingHeaders = requiredHeaders.filter(function (header) {
+    return currentMap[normalizeContentHeader(header)] === undefined;
+  });
+
+  if (!missingHeaders.length) return;
+
+  const startColumn = sheet.getLastColumn() + 1;
+  sheet.insertColumnsAfter(sheet.getLastColumn(), missingHeaders.length);
+  sheet.getRange(1, startColumn, 1, missingHeaders.length).setValues([missingHeaders]);
+  applyContentSheetFormatting(sheet, sheet.getLastColumn());
+}
+
+function applyContentSheetFormatting(sheet, columnCount) {
+  sheet.setFrozenRows(1);
+  if (columnCount > 0) sheet.autoResizeColumns(1, columnCount);
+}
+
+function getContentHeaders(config) {
+  return ["Published", "Order"].concat(config.fields.map(function (field) {
+    return field[0];
+  }));
+}
+
+function buildContentItem(row, headerMap, config, rowNumber) {
+  const item = {
+    __published: getCellByHeader(row, headerMap, "Published"),
+    __order: toNumber(getCellByHeader(row, headerMap, "Order")),
+    __hasRowData: false
+  };
+
+  config.fields.forEach(function (fieldConfig) {
+    const header = fieldConfig[0];
+    const field = fieldConfig[1];
+    const type = fieldConfig[2] || "text";
+    const value = getCellByHeader(row, headerMap, header);
+    const normalizedValue = normalizeContentValue(value, type);
+    item[field] = normalizedValue;
+    if (hasEnteredContentValue(normalizedValue)) item.__hasRowData = true;
+  });
+
+  if (!item.id) item.id = config.idPrefix + "-" + rowNumber;
+  if (!item.updatedAt) item.updatedAt = formatContentDate(new Date());
+  if (!item.status) item.status = "active";
+  if (!Array.isArray(item.tags)) item.tags = [];
+
+  return item;
+}
+
+function hasContentItemData(item, config) {
+  return Boolean(item.__hasRowData);
+}
+
+function hasEnteredContentValue(value) {
+  return Array.isArray(value) ? value.length > 0 : Boolean(String(value || "").trim());
+}
+
+function getCellByHeader(row, headerMap, header) {
+  const index = headerMap[normalizeContentHeader(header)];
+  return index === undefined ? "" : row[index];
+}
+
+function normalizeContentValue(value, type) {
+  if (type === "date") return formatContentDate(value);
+  if (type === "tags") return splitContentTags(value);
+  return String(value === undefined || value === null ? "" : value).trim();
+}
+
+function formatContentDate(value) {
+  if (!value) return "";
+  if (Object.prototype.toString.call(value) === "[object Date]" && !isNaN(value.getTime())) {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), "yyyy-MM-dd");
+  }
+  return String(value).trim();
+}
+
+function splitContentTags(value) {
+  if (Array.isArray(value)) return value.map(String).map(trimContentText).filter(Boolean);
+  return String(value || "")
+    .split(/[,|]/)
+    .map(trimContentText)
+    .filter(Boolean);
+}
+
+function trimContentText(value) {
+  return String(value || "").trim();
+}
+
+function isPublished(value) {
+  const normalized = String(value || "").trim().toLowerCase();
+  return !["no", "false", "0", "hidden", "draft"].includes(normalized);
+}
+
+function sortContentItems(first, second) {
+  const firstOrder = Number(first.__order);
+  const secondOrder = Number(second.__order);
+  if (Number.isFinite(firstOrder) && Number.isFinite(secondOrder) && firstOrder !== secondOrder) {
+    return firstOrder - secondOrder;
+  }
+  if (Number.isFinite(firstOrder)) return -1;
+  if (Number.isFinite(secondOrder)) return 1;
+  return parseContentDate(second.updatedAt) - parseContentDate(first.updatedAt);
+}
+
+function parseContentDate(value) {
+  const date = new Date(String(value || "") + "T00:00:00");
+  const time = date.getTime();
+  return Number.isNaN(time) ? 0 : time;
+}
+
+function toNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : "";
+}
+
+function buildContentHeaderMap(headers) {
+  const map = {};
+  headers.forEach(function (header, index) {
+    const key = normalizeContentHeader(header);
+    if (key) map[key] = index;
+  });
+  return map;
+}
+
+function normalizeContentHeader(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function sendContentJson(payload) {
+  return ContentService
+    .createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
+}

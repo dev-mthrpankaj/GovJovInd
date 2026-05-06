@@ -34,7 +34,7 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    const items = Array.isArray(window.GovJobUpdatesAdmitCards) ? window.GovJobUpdatesAdmitCards : [];
+    let items = Array.isArray(window.GovJobUpdatesAdmitCards) ? window.GovJobUpdatesAdmitCards : [];
 
     const elements = {
         search: document.getElementById("admitSearch"),
@@ -317,10 +317,21 @@
         if (elements.loadMoreButton) elements.loadMoreButton.addEventListener("click", loadMore);
     }
 
+    async function loadItemsFromSheet() {
+        if (!window.GovJobUpdatesSheetData) return;
+        const sheetItems = await window.GovJobUpdatesSheetData.load("admitCards", items);
+        if (!Array.isArray(sheetItems) || !sheetItems.length || sheetItems === items) return;
+        items = sheetItems;
+        visibleCount = pageSize;
+        hydrateFilters();
+        renderItems();
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         hydrateFilters();
         bindEvents();
         renderItems();
+        loadItemsFromSheet();
     });
 
     window.admitCardsPage = { getStatus, isNew, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };

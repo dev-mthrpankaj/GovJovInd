@@ -34,7 +34,7 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    const items = Array.isArray(window.GovJobUpdatesResults) ? window.GovJobUpdatesResults : [];
+    let items = Array.isArray(window.GovJobUpdatesResults) ? window.GovJobUpdatesResults : [];
 
     const elements = {
         search: document.getElementById("resultSearch"),
@@ -308,10 +308,21 @@
         if (elements.loadMoreButton) elements.loadMoreButton.addEventListener("click", loadMore);
     }
 
+    async function loadItemsFromSheet() {
+        if (!window.GovJobUpdatesSheetData) return;
+        const sheetItems = await window.GovJobUpdatesSheetData.load("results", items);
+        if (!Array.isArray(sheetItems) || !sheetItems.length || sheetItems === items) return;
+        items = sheetItems;
+        visibleCount = pageSize;
+        hydrateFilters();
+        renderItems();
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         hydrateFilters();
         bindEvents();
         renderItems();
+        loadItemsFromSheet();
     });
 
     window.resultsPage = { getStatus, isNew, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
