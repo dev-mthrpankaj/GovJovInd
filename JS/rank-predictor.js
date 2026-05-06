@@ -6,6 +6,7 @@
     const API_NETWORK_ERROR_MESSAGE = "Server connection failed. Please try again.";
     const API_INVALID_RESPONSE_MESSAGE = "Invalid backend response.";
     const PROCESSING_TEXT = "Processing...";
+    const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
     const state = {
         exam: null,
         mode: "offline",
@@ -74,12 +75,13 @@
         return Boolean(window.matchMedia?.("(pointer: coarse), (max-width: 767px)")?.matches || window.innerWidth <= 767);
     }
 
-    function initRankPredictor() {
+    async function initRankPredictor() {
         const app = getById("rankPredictorApp");
         if (!app) return;
 
         cacheStaticDom();
         state.mobileMarksMode = detectMobileMarksMode();
+        await loadSheetExamConfig();
         setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
@@ -91,6 +93,99 @@
         window.addEventListener("resize", () => {
             state.mobileMarksMode = detectMobileMarksMode();
         }, { passive: true });
+    }
+
+    async function loadSheetExamConfig() {
+        try {
+            const sheetExams = await fetchSheetExamConfig();
+            if (sheetExams.length) {
+                config.exams = sheetExams;
+                window.RANK_PREDICTOR_CONFIG = config;
+            }
+        } catch {
+            // Fallback exams in rank-predictor-config.js keep the form usable.
+        }
+    }
+
+    async function fetchSheetExamConfig() {
+        const apiUrl = String(config.apiUrl || "").trim();
+        if (!apiUrl || !apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) return [];
+
+        const url = new URL(apiUrl, window.location.href);
+        url.searchParams.set("type", "exams");
+        url.searchParams.set("_ts", String(Date.now()));
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), EXAM_LOAD_TIMEOUT_MS);
+        try {
+            const response = await fetch(url.toString(), {
+                method: "GET",
+                cache: "no-store",
+                redirect: "follow",
+                signal: controller.signal
+            });
+            if (!response.ok) return [];
+            const payload = await response.json();
+            if (!payload?.success || !Array.isArray(payload.exams)) return [];
+            return normalizeSheetExams(payload.exams);
+        } finally {
+            window.clearTimeout(timeoutId);
+        }
+    }
+
+    function normalizeSheetExams(exams) {
+        return exams.map(normalizeSheetExam).filter((exam) => exam.examId && exam.examName);
+    }
+
+    function normalizeSheetExam(exam) {
+        const normalized = {
+            examId: getString(exam.examId),
+            examName: getString(exam.examName),
+            board: getString(exam.board, "GovJobUpdates"),
+            examType: getString(exam.examType, "offline"),
+            sheetName: getString(exam.sheetName),
+            totalQuestions: getFiniteNumber(exam.totalQuestions, 0),
+            marksPerCorrect: getFiniteNumber(exam.marksPerCorrect, 0),
+            negativeMarking: getFiniteNumber(exam.negativeMarking, 0),
+            hasShifts: Boolean(exam.hasShifts),
+            normalization: Boolean(exam.normalization),
+            supportedModes: normalizeStringList(exam.supportedModes, true).filter((mode) => ["online", "offline"].includes(mode)),
+            subjects: normalizeSheetSubjects(exam.subjects),
+            categories: normalizeStringList(exam.categories),
+            states: normalizeStringList(exam.states),
+            disabled: Boolean(exam.disabled)
+        };
+        if (!normalized.supportedModes.length && !normalized.disabled) {
+            normalized.supportedModes = [normalized.examType === "online" ? "online" : "offline"];
+        }
+        return normalized;
+    }
+
+    function normalizeSheetSubjects(subjects) {
+        if (!Array.isArray(subjects)) return [];
+        return subjects.map((subject) => ({
+            name: getString(subject.name),
+            questions: getFiniteNumber(subject.questions, 0)
+        })).filter((subject) => subject.name && subject.questions > 0);
+    }
+
+    function normalizeStringList(value, lowerCase = false) {
+        const normalizeItem = (item) => {
+            const text = getString(item);
+            return lowerCase ? text.toLowerCase() : text;
+        };
+        if (Array.isArray(value)) return value.map(normalizeItem).filter(Boolean);
+        return getString(value).split(/[,|;]/).map((item) => normalizeItem(item.trim())).filter(Boolean);
+    }
+
+    function getString(value, fallback = "") {
+        const text = String(value === undefined || value === null ? "" : value).trim();
+        return text || fallback;
+    }
+
+    function getFiniteNumber(value, fallback) {
+        const number = Number(value);
+        return Number.isFinite(number) ? number : fallback;
     }
 
     function bindTabs() {
@@ -117,7 +212,9 @@
     function bindExamSelector() {
         const select = getById("globalExamSelect");
         if (!select) return;
-        select.innerHTML = (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("");
+        select.innerHTML = (config.exams || []).length
+            ? (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("")
+            : '<option value="">No exams configured</option>';
         select.addEventListener("change", () => {
             let selectedExam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
             if (selectedExam?.disabled) selectedExam = (config.exams || []).find((exam) => !exam.disabled) || null;
@@ -132,7 +229,7 @@
         if (!exam) {
             setText("activeExamLabel", "Not configured");
             setText("activeModeLabel", "No exam");
-            showMessage("submitMessage", "No exams configured in rank-predictor-config.js.", "error");
+            showMessage("submitMessage", "No Rank Predictor exams are configured.", "error");
             return;
         }
 

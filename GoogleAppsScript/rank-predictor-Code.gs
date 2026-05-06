@@ -1,4 +1,5 @@
 const SPREADSHEET_ID = "1IIDP7Slon3zRDlOH0hxzOnAZd4fzYi5nZHphVCW2_wE";
+const RANK_EXAMS_SHEET_NAME = "Rank Predictor Exams";
 
 const HEADERS = [
   "Timestamp",
@@ -35,7 +36,30 @@ const HEADERS = [
   "User Agent"
 ];
 
-function doGet() {
+const RANK_EXAM_HEADERS = [
+  "Published",
+  "Order",
+  "Exam ID",
+  "Exam Name",
+  "Board",
+  "Exam Type",
+  "Sheet Name",
+  "Total Questions",
+  "Marks Per Correct",
+  "Negative Marking",
+  "Has Shifts",
+  "Normalization",
+  "Supported Modes",
+  "Subjects",
+  "Categories",
+  "States",
+  "Disabled"
+];
+
+function doGet(e) {
+  const type = String(e && e.parameter && e.parameter.type || "").trim();
+  if (type === "exams") return sendJSON(getRankPredictorExamConfigResponse());
+
   return sendJSON({
     success: true,
     message: "GovJobUpdates Rank Predictor API working"
@@ -180,6 +204,248 @@ function getSheetByExam(sheetName, spreadsheet) {
   const safeName = String(sheetName || "").trim();
   if (!safeName) throw new Error("Sheet name is required.");
   return spreadsheet.getSheetByName(safeName) || spreadsheet.insertSheet(safeName);
+}
+
+function setupRankPredictorExamSheet() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getRankExamSheet(spreadsheet);
+  ensureRankExamSheetSchema(sheet);
+}
+
+function getRankPredictorExamConfigResponse() {
+  const result = getRankPredictorExamConfigs();
+  return {
+    success: true,
+    updatedAt: new Date().toISOString(),
+    exams: result.exams,
+    meta: result.meta
+  };
+}
+
+function getRankPredictorExamConfigs() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getRankExamSheet(spreadsheet);
+  ensureRankExamSheetSchema(sheet);
+
+  const meta = {
+    sheetName: RANK_EXAMS_SHEET_NAME,
+    totalRows: Math.max(sheet.getLastRow() - 1, 0),
+    publishedRows: 0,
+    unpublishedRows: 0,
+    missingRequiredRows: 0,
+    blankRows: 0
+  };
+
+  if (sheet.getLastRow() < 2) return { exams: [], meta: meta };
+
+  const values = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues();
+  const headerMap = buildColumnMapFromHeaders(values[0]);
+  const exams = values.slice(1)
+    .map(function (row, index) {
+      return buildRankExamConfig(row, headerMap, index + 2);
+    })
+    .filter(function (exam) {
+      if (!exam || !exam.__hasRowData) {
+        meta.blankRows += 1;
+        return false;
+      }
+      if (!isRankExamPublished(exam.__published)) {
+        meta.unpublishedRows += 1;
+        return false;
+      }
+      if (!isValidRankExamConfig(exam)) {
+        meta.missingRequiredRows += 1;
+        return false;
+      }
+      meta.publishedRows += 1;
+      return true;
+    })
+    .sort(sortRankExamConfigs)
+    .map(function (exam) {
+      delete exam.__published;
+      delete exam.__order;
+      delete exam.__rowNumber;
+      delete exam.__hasRowData;
+      return exam;
+    });
+
+  return { exams: exams, meta: meta };
+}
+
+function getRankExamSheet(spreadsheet) {
+  const sheet = spreadsheet.getSheetByName(RANK_EXAMS_SHEET_NAME) || spreadsheet.insertSheet(RANK_EXAMS_SHEET_NAME);
+  ensureRankExamSheetSchema(sheet);
+  return sheet;
+}
+
+function ensureRankExamSheetSchema(sheet) {
+  if (sheet.getMaxColumns() < RANK_EXAM_HEADERS.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), RANK_EXAM_HEADERS.length - sheet.getMaxColumns());
+  }
+
+  const lastColumn = sheet.getLastColumn();
+  const currentHeaders = lastColumn > 0 ? sheet.getRange(1, 1, 1, lastColumn).getValues()[0] : [];
+  const hasAnyHeader = currentHeaders.some(function (header) {
+    return String(header || "").trim();
+  });
+
+  if (!hasAnyHeader) {
+    sheet.getRange(1, 1, 1, RANK_EXAM_HEADERS.length).setValues([RANK_EXAM_HEADERS]);
+    sheet.setFrozenRows(1);
+    sheet.autoResizeColumns(1, RANK_EXAM_HEADERS.length);
+    return;
+  }
+
+  const currentMap = buildColumnMapFromHeaders(currentHeaders);
+  const missingHeaders = RANK_EXAM_HEADERS.filter(function (header) {
+    return currentMap[normalizeHeader(header)] === undefined;
+  });
+
+  if (missingHeaders.length) {
+    const startColumn = sheet.getLastColumn() + 1;
+    sheet.insertColumnsAfter(sheet.getLastColumn(), missingHeaders.length);
+    sheet.getRange(1, startColumn, 1, missingHeaders.length).setValues([missingHeaders]);
+  }
+
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, sheet.getLastColumn());
+}
+
+function buildRankExamConfig(row, headerMap, rowNumber) {
+  const exam = {
+    __published: getHeaderValue(row, headerMap, "Published"),
+    __order: toRankExamNumber(getHeaderValue(row, headerMap, "Order")),
+    __rowNumber: rowNumber,
+    __hasRowData: false
+  };
+
+  const textFields = {
+    examId: "Exam ID",
+    examName: "Exam Name",
+    board: "Board",
+    examType: "Exam Type",
+    sheetName: "Sheet Name"
+  };
+
+  Object.keys(textFields).forEach(function (field) {
+    exam[field] = normalizeText(getHeaderValue(row, headerMap, textFields[field]));
+    if (exam[field]) exam.__hasRowData = true;
+  });
+
+  exam.totalQuestions = toRankExamNumber(getHeaderValue(row, headerMap, "Total Questions"));
+  exam.marksPerCorrect = toRankExamNumber(getHeaderValue(row, headerMap, "Marks Per Correct"));
+  exam.negativeMarking = toRankExamNumber(getHeaderValue(row, headerMap, "Negative Marking"));
+  exam.hasShifts = toRankExamBoolean(getHeaderValue(row, headerMap, "Has Shifts"));
+  exam.normalization = toRankExamBoolean(getHeaderValue(row, headerMap, "Normalization"));
+  exam.supportedModes = parseRankExamList(getHeaderValue(row, headerMap, "Supported Modes")).map(function (mode) {
+    return String(mode).toLowerCase();
+  }).filter(function (mode) {
+    return mode === "online" || mode === "offline";
+  });
+  exam.subjects = parseRankExamSubjects(getHeaderValue(row, headerMap, "Subjects"));
+  exam.categories = parseRankExamList(getHeaderValue(row, headerMap, "Categories"));
+  exam.states = parseRankExamList(getHeaderValue(row, headerMap, "States"));
+  exam.disabled = toRankExamBoolean(getHeaderValue(row, headerMap, "Disabled"));
+
+  if (hasEnteredRankExamValue(exam.totalQuestions)) exam.__hasRowData = true;
+  if (hasEnteredRankExamValue(exam.marksPerCorrect)) exam.__hasRowData = true;
+  if (hasEnteredRankExamValue(exam.negativeMarking)) exam.__hasRowData = true;
+  if (exam.supportedModes.length || exam.subjects.length || exam.categories.length || exam.states.length) exam.__hasRowData = true;
+
+  if (!exam.examId && exam.examName) exam.examId = slugifyRankExamId(exam.examName) + "-" + rowNumber;
+  if (!exam.sheetName && exam.examName && !exam.disabled) exam.sheetName = exam.examName;
+  if (!exam.supportedModes.length && !exam.disabled) exam.supportedModes = [exam.examType === "online" ? "online" : "offline"];
+  if (!exam.board) exam.board = "GovJobUpdates";
+  if (!exam.examType) exam.examType = "offline";
+  if (!Number.isFinite(exam.negativeMarking)) exam.negativeMarking = 0;
+
+  return exam;
+}
+
+function isValidRankExamConfig(exam) {
+  if (!exam.examId || !exam.examName) return false;
+  if (exam.disabled) return true;
+  return Boolean(exam.sheetName)
+    && Number(exam.totalQuestions) > 0
+    && Number(exam.marksPerCorrect) > 0
+    && Array.isArray(exam.supportedModes)
+    && exam.supportedModes.length > 0;
+}
+
+function parseRankExamSubjects(value) {
+  const text = String(value || "").trim();
+  if (!text) return [];
+
+  try {
+    const parsed = JSON.parse(text);
+    if (Array.isArray(parsed)) {
+      return parsed.map(function (subject) {
+        return {
+          name: normalizeText(subject.name),
+          questions: toRankExamNumber(subject.questions)
+        };
+      }).filter(function (subject) {
+        return subject.name && Number(subject.questions) > 0;
+      });
+    }
+  } catch (error) {
+    // Plain text subjects are supported below.
+  }
+
+  return text.split(/[,|;]/).map(function (part) {
+    const piece = normalizeText(part);
+    const match = piece.match(/^(.+?)(?:\s*[:=-]\s*)(\d+(?:\.\d+)?)$/);
+    if (!match) return null;
+    return {
+      name: normalizeText(match[1]),
+      questions: toRankExamNumber(match[2])
+    };
+  }).filter(function (subject) {
+    return subject && subject.name && Number(subject.questions) > 0;
+  });
+}
+
+function parseRankExamList(value) {
+  return String(value || "")
+    .split(/[,|;]/)
+    .map(normalizeText)
+    .filter(Boolean);
+}
+
+function sortRankExamConfigs(first, second) {
+  const firstOrder = Number(first.__order);
+  const secondOrder = Number(second.__order);
+  if (Number.isFinite(firstOrder) && Number.isFinite(secondOrder) && firstOrder !== secondOrder) return firstOrder - secondOrder;
+  if (Number.isFinite(firstOrder)) return -1;
+  if (Number.isFinite(secondOrder)) return 1;
+  return Number(first.__rowNumber) - Number(second.__rowNumber);
+}
+
+function isRankExamPublished(value) {
+  const normalized = normalizeKey(value);
+  return !["no", "false", "0", "hidden", "draft"].includes(normalized);
+}
+
+function toRankExamBoolean(value) {
+  const normalized = normalizeKey(value);
+  return ["yes", "true", "1", "y", "enabled"].includes(normalized);
+}
+
+function toRankExamNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : "";
+}
+
+function hasEnteredRankExamValue(value) {
+  return value !== "" && value !== undefined && value !== null;
+}
+
+function slugifyRankExamId(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60) || "rank-exam";
 }
 
 function ensureSheetSchema(sheet) {
