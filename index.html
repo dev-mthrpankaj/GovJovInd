@@ -67,11 +67,11 @@
                 <h1>Find Your Dream <br><span class="highlight">Government Job</span></h1>
                 <p>One-stop destination for government jobs, admit cards, results, answer keys, quizzes, and document tools.</p>
                 
-                <div class="search-box">
+                <form class="search-box" id="homeSearchForm" role="search" action="HTML/latest-jobs.html">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search exams, jobs, or results...">
-                    <button class="btn-search">Search</button>
-                </div>
+                    <input id="homeSearchInput" name="q" type="search" placeholder="Search exams, jobs, or results..." aria-label="Search exams, jobs, admit cards, results, and answer keys" autocomplete="off">
+                    <button class="btn-search" type="submit">Search</button>
+                </form>
 
                 <div class="trending-tags">
                     <span>Trending:</span>

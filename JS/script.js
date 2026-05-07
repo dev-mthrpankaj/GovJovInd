@@ -116,6 +116,48 @@ document.addEventListener('click', (event) => {
   }, prefersReducedMotion ? 0 : 220);
 });
 
+const getHomeSearchRoute = (query) => {
+  const text = String(query || '').toLowerCase();
+
+  if (/\b(answer\s*keys?|answer-keys?|objections?)\b/.test(text)) {
+    return 'HTML/answer-key.html';
+  }
+
+  if (/\b(admit\s*cards?|hall\s*tickets?|exam\s*city|exam\s*dates?)\b/.test(text)) {
+    return 'HTML/admitcard.html';
+  }
+
+  if (/\b(results?|marks?|cut\s*offs?|cutoffs?|certificates?)\b/.test(text)) {
+    return 'HTML/results.html';
+  }
+
+  return 'HTML/latest-jobs.html';
+};
+
+const homeSearchForm = document.getElementById('homeSearchForm');
+const homeSearchInput = document.getElementById('homeSearchInput');
+
+if (homeSearchForm && homeSearchInput) {
+  homeSearchForm.addEventListener('submit', (event) => {
+    const query = homeSearchInput.value.trim().replace(/\s+/g, ' ');
+
+    if (!query) {
+      event.preventDefault();
+      homeSearchInput.focus();
+      return;
+    }
+
+    event.preventDefault();
+    const url = new URL(getHomeSearchRoute(query), window.location.href);
+    url.searchParams.set('q', query);
+    document.body.classList.remove('page-loaded');
+
+    setTimeout(() => {
+      window.location.href = url.toString();
+    }, prefersReducedMotion ? 0 : 220);
+  });
+}
+
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
 const pageOwnsMenu = Boolean(

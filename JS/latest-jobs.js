@@ -96,6 +96,15 @@
         return String(value).trim();
     }
 
+    function normalizeSearchText(value) {
+        return getText(value, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    function matchesSearchText(searchableText, query) {
+        if (!query) return true;
+        return query.split(" ").every((term) => searchableText.includes(term));
+    }
+
     function escapeHtml(value) {
         return getText(value, "").replace(/[&<>"']/g, (character) => ({
             "&": "&amp;",
@@ -175,24 +184,55 @@
         populateSelect(elements.year, [...new Set(jobs.map((job) => job.year))].sort((a, b) => String(b).localeCompare(String(a))));
     }
 
+    function getInitialSearchQuery() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            return getText(params.get("q") || params.get("search"), "");
+        } catch {
+            return "";
+        }
+    }
+
+    function applyInitialSearchQuery() {
+        const query = getInitialSearchQuery();
+        if (query && elements.search) elements.search.value = query;
+    }
+
+    function clearSearchQueryParams() {
+        try {
+            const url = new URL(window.location.href);
+            if (!url.searchParams.has("q") && !url.searchParams.has("search")) return;
+            url.searchParams.delete("q");
+            url.searchParams.delete("search");
+            window.history.replaceState({}, "", url.toString());
+        } catch {
+            // URL cleanup is optional; filtering already works without it.
+        }
+    }
+
     function filterJobs() {
-        const query = getText(elements.search && elements.search.value, "").toLowerCase();
+        const query = normalizeSearchText(elements.search && elements.search.value);
         const department = elements.department ? elements.department.value : "all";
         const qualification = elements.qualification ? elements.qualification.value : "all";
         const year = elements.year ? elements.year.value : "all";
         const status = elements.status ? elements.status.value : "all";
 
         return jobs.filter((job) => {
-            const searchableText = [
+            const searchableText = normalizeSearchText([
                 job.title,
                 job.organization,
                 job.department,
                 job.category,
+                job.qualification,
+                job.year,
+                getJobStatus(job),
+                isNewJob(job) ? "new" : "",
+                isLastDateSoon(job) ? "last date soon" : "",
                 ...(Array.isArray(job.tags) ? job.tags : [])
-            ].join(" ").toLowerCase();
+            ].join(" "));
             const computedStatus = getJobStatus(job);
 
-            const searchMatch = !query || searchableText.includes(query);
+            const searchMatch = matchesSearchText(searchableText, query);
             const departmentMatch = department === "all" || job.department === department || job.category === department;
             const qualificationMatch = qualification === "all" || job.qualification === qualification;
             const yearMatch = year === "all" || job.year === year;
@@ -330,6 +370,7 @@
         if (elements.status) elements.status.value = "all";
         if (elements.sort) elements.sort.value = "latest";
         visibleCount = pageSize;
+        clearSearchQueryParams();
         renderJobs();
     }
 
@@ -369,6 +410,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+        applyInitialSearchQuery();
         hydrateFilters();
         bindEvents();
         renderJobs();
