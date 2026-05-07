@@ -96,6 +96,7 @@ function doPost(e) {
     if (data.action === "registerCandidate") return registerCandidate(data);
     if (data.action === "loginCandidate") return loginCandidate(data);
     if (data.action === "resetCandidatePassword") return resetCandidatePassword(data);
+    if (data.action === "changeCandidatePassword") return changeCandidatePassword(data);
     if (data.action === "getCandidateDashboard") return getCandidateDashboard(data);
     if (data.action === "getCandidateAttempts") return getCandidateAttempts(data);
     if (data.action === "submitData") return submitData(data);
@@ -222,6 +223,42 @@ function resetCandidatePassword(data) {
   return sendJSON({
     success: true,
     message: "Password reset successfully."
+  });
+}
+
+function changeCandidatePassword(data) {
+  const userId = normalizeText(data.userId);
+  const currentPassword = String(data.currentPassword || "");
+  const newPassword = String(data.newPassword || "");
+
+  if (!userId) return sendJSON({ success: false, message: "Candidate ID is required." });
+  if (!currentPassword) return sendJSON({ success: false, message: "Current password is required." });
+  if (!isValidPassword(newPassword)) return sendJSON({ success: false, message: "New password must be alphanumeric with at least one letter and one number." });
+
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getUsersSheet(spreadsheet);
+  const columnMap = ensureUsersSheetSchema(sheet);
+  const users = getUserRows(sheet, columnMap);
+  const user = users.find(function (candidate) {
+    return candidate.userId === userId;
+  });
+
+  if (!user) return sendJSON({ success: false, message: "Candidate account not found." });
+
+  const currentHash = hashPassword(currentPassword);
+  if (user.password !== currentHash && user.password !== currentPassword) {
+    return sendJSON({ success: false, message: "Current password is incorrect." });
+  }
+
+  const passwordColumn = columnMap[normalizeHeader("Password")];
+  if (passwordColumn === undefined) throw new Error("Password column missing.");
+  setTextFormat(sheet, columnMap, user.rowNumber, "Password");
+  sheet.getRange(user.rowNumber, passwordColumn + 1).setValue(hashPassword(newPassword));
+  SpreadsheetApp.flush();
+
+  return sendJSON({
+    success: true,
+    message: "Password updated successfully."
   });
 }
 
@@ -1143,7 +1180,7 @@ function calculateAnalytics(rows, targetRow, examConfig) {
 
   const overallRank = calculateTieAwareRank(scoredRows, scoredTargetRow, rankScoreField);
   const totalSubmissions = rowsForExam.length;
-  const percentile = calculatePercentile(totalSubmissions, overallRank);
+  const percentile = calculatePercentile(scoredRows, scoredTargetRow, rankScoreField);
   const sameShiftRows = scoredRows.filter(function (row) {
     return normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
   });
@@ -1191,13 +1228,14 @@ function calculateAnalytics(rows, targetRow, examConfig) {
 }
 
 function applyNormalizedMarks(rowsForExam, examConfig, normalizationEnabled) {
-  const allShiftAverage = averageMarks(rowsForExam, "rawMarks");
-  const shiftAverageMap = buildShiftAverageMap(rowsForExam);
+  const shiftDistributions = normalizationEnabled
+    ? buildShiftPercentileDistributions(rowsForExam)
+    : [];
 
   return rowsForExam.map(function (row) {
     const rawMarks = Number(row.rawMarks) || 0;
     const normalizedMarks = normalizationEnabled
-      ? calculateExamNormalizedMarks(row, examConfig, allShiftAverage, shiftAverageMap)
+      ? calculateExamNormalizedMarks(row, examConfig, shiftDistributions)
       : rawMarks;
     const nextRow = Object.assign({}, row);
     nextRow.normalizedMarks = round2(normalizedMarks);
@@ -1205,7 +1243,7 @@ function applyNormalizedMarks(rowsForExam, examConfig, normalizationEnabled) {
   });
 }
 
-function buildShiftAverageMap(rows) {
+function buildShiftPercentileDistributions(rows) {
   const grouped = {};
   rows.forEach(function (row) {
     const key = normalizeKey(row.shift) || "__no_shift__";
@@ -1213,34 +1251,105 @@ function buildShiftAverageMap(rows) {
     grouped[key].push(row);
   });
 
-  const averages = {};
-  Object.keys(grouped).forEach(function (key) {
-    averages[key] = averageMarks(grouped[key], "rawMarks");
+  return Object.keys(grouped).map(function (key) {
+    return buildShiftPercentileDistribution(key, grouped[key]);
+  }).filter(function (distribution) {
+    return distribution.total > 0 && distribution.points.length;
   });
-  return averages;
 }
 
-function calculateExamNormalizedMarks(row, examConfig, allShiftAverage, shiftAverageMap) {
-  const examId = normalizeKey((examConfig && examConfig.examId) || row.examId);
+function buildShiftPercentileDistribution(key, rows) {
+  const total = rows.length;
+  const counts = {};
+  rows.forEach(function (row) {
+    const marks = Number(row.rawMarks) || 0;
+    const markKey = String(marks);
+    counts[markKey] = (counts[markKey] || 0) + 1;
+  });
 
-  switch (examId) {
-    case "up-homeguard-2026":
-    case "ssc-cpo-2025-paper-1":
-    case "ssc-cgl-2025-tier-1":
-    case "up-police-si-2025":
-    default:
-      return calculateAverageShiftAdjustedMarks(row, examConfig, allShiftAverage, shiftAverageMap);
-  }
+  const marksList = Object.keys(counts).map(function (mark) {
+    return Number(mark);
+  }).sort(function (a, b) {
+    return a - b;
+  });
+
+  let cumulative = 0;
+  const points = marksList.map(function (marks) {
+    cumulative += counts[String(marks)] || 0;
+    return {
+      marks: marks,
+      percentile: total ? cumulative / total : 0
+    };
+  });
+
+  return {
+    key: key,
+    total: total,
+    points: points
+  };
 }
 
-function calculateAverageShiftAdjustedMarks(row, examConfig, allShiftAverage, shiftAverageMap) {
+function calculateExamNormalizedMarks(row, examConfig, shiftDistributions) {
+  return calculatePercentileInterpolatedMarks(row, examConfig, shiftDistributions);
+}
+
+function calculatePercentileInterpolatedMarks(row, examConfig, shiftDistributions) {
   const rawMarks = Number(row.rawMarks) || 0;
+  if (!Array.isArray(shiftDistributions) || shiftDistributions.length <= 1) {
+    return clampMarks(rawMarks, examConfig);
+  }
+
   const shiftKey = normalizeKey(row.shift) || "__no_shift__";
-  const shiftAverage = Number(shiftAverageMap[shiftKey]);
-  const adjustment = Number.isFinite(allShiftAverage) && Number.isFinite(shiftAverage)
-    ? allShiftAverage - shiftAverage
-    : 0;
-  return clampMarks(rawMarks + adjustment, examConfig);
+  const sourceDistribution = shiftDistributions.find(function (distribution) {
+    return distribution.key === shiftKey;
+  });
+  if (!sourceDistribution) return clampMarks(rawMarks, examConfig);
+
+  const percentile = getPercentileForMarks(sourceDistribution, rawMarks);
+  // SSC June 2025 method: map the candidate's shift percentile onto every
+  // shift's marks scale by interpolation, then average those corresponding marks.
+  const correspondingMarks = shiftDistributions.map(function (distribution) {
+    return interpolateMarksAtPercentile(distribution, percentile);
+  }).filter(function (marks) {
+    return Number.isFinite(Number(marks));
+  });
+
+  if (!correspondingMarks.length) return clampMarks(rawMarks, examConfig);
+  const average = correspondingMarks.reduce(function (sum, marks) {
+    return sum + Number(marks);
+  }, 0) / correspondingMarks.length;
+  return clampMarks(average, examConfig);
+}
+
+function getPercentileForMarks(distribution, marks) {
+  const targetMarks = Number(marks) || 0;
+  if (!distribution || !distribution.points || !distribution.points.length) return 0;
+
+  let percentile = 0;
+  distribution.points.forEach(function (point) {
+    if (Number(point.marks) <= targetMarks) percentile = Number(point.percentile) || 0;
+  });
+  return percentile;
+}
+
+function interpolateMarksAtPercentile(distribution, percentile) {
+  const points = distribution && distribution.points ? distribution.points : [];
+  const targetPercentile = Number(percentile) || 0;
+  if (!points.length) return 0;
+  if (targetPercentile <= Number(points[0].percentile)) return Number(points[0].marks) || 0;
+  if (targetPercentile >= Number(points[points.length - 1].percentile)) return Number(points[points.length - 1].marks) || 0;
+
+  for (let index = 1; index < points.length; index += 1) {
+    const lower = points[index - 1];
+    const upper = points[index];
+    const lowerPercentile = Number(lower.percentile) || 0;
+    const upperPercentile = Number(upper.percentile) || 0;
+    if (targetPercentile > upperPercentile) continue;
+    if (upperPercentile === lowerPercentile) return Number(upper.marks) || 0;
+    return Number(lower.marks) + ((Number(upper.marks) - Number(lower.marks)) / (upperPercentile - lowerPercentile)) * (targetPercentile - lowerPercentile);
+  }
+
+  return Number(points[points.length - 1].marks) || 0;
 }
 
 function clampMarks(value, examConfig) {
@@ -1316,12 +1425,15 @@ function buildSubjectAnalysis(rowsForExam, targetRow) {
   });
 }
 
-function calculatePercentile(totalSubmissions, overallRank) {
-  const total = Number(totalSubmissions) || 0;
-  const rank = Number(overallRank) || 0;
-  if (total <= 0 || rank <= 0) return 0;
-  if (total === 1) return 100;
-  return round2(((total - rank) / total) * 100);
+function calculatePercentile(rows, targetRow, scoreField) {
+  const total = Array.isArray(rows) ? rows.length : 0;
+  if (total <= 0 || !targetRow) return 0;
+  const field = scoreField || "rawMarks";
+  const targetMarks = Number(targetRow[field]) || 0;
+  const atOrBelow = rows.filter(function (row) {
+    return Number(row[field] || 0) <= targetMarks;
+  }).length;
+  return round2((atOrBelow / total) * 100);
 }
 
 function writeAnalytics(sheet, columnMap, rowNumber, analytics) {
