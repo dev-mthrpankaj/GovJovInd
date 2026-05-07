@@ -7,6 +7,7 @@
     const API_INVALID_RESPONSE_MESSAGE = "Invalid backend response.";
     const PROCESSING_TEXT = "Processing...";
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
+    const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
     const state = {
         exam: null,
         mode: "offline",
@@ -21,13 +22,14 @@
         tabButtons: [],
         panels: [],
         modeButtons: [],
+        formAccordions: [],
         subjectControls: [],
         invalidFields: new Set(),
         errorContainers: new Set()
     };
-    const debouncedTotalCalculation = debounce(runMarksCalculation, 300);
-    const debouncedSubjectCalculation = debounce(runMarksCalculation, 300);
-    const debouncedMobileCalculation = debounce(runMobileMarksCalculation, 900);
+    const debouncedTotalCalculation = debounce(runMarksCalculation, 120);
+    const debouncedSubjectCalculation = debounce(runMarksCalculation, 120);
+    const debouncedMobileCalculation = debounce(runMobileMarksCalculation, 120);
 
     document.addEventListener("DOMContentLoaded", initRankPredictor);
 
@@ -43,6 +45,7 @@
         dom.tabButtons = Array.from(document.querySelectorAll("[data-tab]"));
         dom.panels = Array.from(document.querySelectorAll("[data-panel]"));
         dom.modeButtons = Array.from(document.querySelectorAll("button[data-mode]"));
+        dom.formAccordions = Array.from(document.querySelectorAll(".form-accordion"));
     }
 
     function cacheSubjectControls(grid = getById("subjectEntryGrid")) {
@@ -51,7 +54,8 @@
             correct: card.querySelector('[data-subject-field="correct"]'),
             wrong: card.querySelector('[data-subject-field="wrong"]'),
             attempted: card.querySelector('[data-subject-derived="attempted"]'),
-            unattempted: card.querySelector('[data-subject-derived="unattempted"]')
+            unattempted: card.querySelector('[data-subject-derived="unattempted"]'),
+            summaryAttempted: card.querySelector('[data-subject-summary="attempted"]')
         }));
     }
 
@@ -72,7 +76,11 @@
     }
 
     function detectMobileMarksMode() {
-        return Boolean(window.matchMedia?.("(pointer: coarse), (max-width: 767px)")?.matches || window.innerWidth <= 767);
+        return Boolean(window.matchMedia?.(`(pointer: coarse), ${MOBILE_LAYOUT_QUERY}`)?.matches || window.innerWidth <= 767);
+    }
+
+    function isMobileLayout() {
+        return Boolean(window.matchMedia?.(MOBILE_LAYOUT_QUERY)?.matches || window.innerWidth <= 767);
     }
 
     async function initRankPredictor() {
@@ -88,11 +96,14 @@
         bindModeToggle(app);
         bindSubmitForm();
         bindCheckForm();
+        bindFormAccordions();
+        bindKeyboardFocusHandling(app);
         applyExamDefaults();
         renderPendingResult();
-        window.addEventListener("resize", () => {
+        window.addEventListener("resize", debounce(() => {
             state.mobileMarksMode = detectMobileMarksMode();
-        }, { passive: true });
+            applyAccordionDefaults();
+        }, 160), { passive: true });
     }
 
     async function loadSheetExamConfig() {
@@ -256,6 +267,7 @@
         setValue("wrongAnswers", 0);
         setMode((exam.supportedModes || [])[0] || "offline");
         calculateMarks();
+        applyAccordionDefaults();
     }
 
     function populateSelect(select, values, placeholder = "Select") {
@@ -321,6 +333,106 @@
         form.addEventListener("submit", handleCheckRank);
     }
 
+    function bindFormAccordions() {
+        dom.formAccordions.forEach((section) => {
+            section.addEventListener("toggle", () => {
+                if (section.dataset.applyingDefault === "true") return;
+                section.dataset.userToggled = "true";
+            });
+        });
+    }
+
+    function applyAccordionDefaults() {
+        const mobile = isMobileLayout();
+        dom.formAccordions.forEach((section) => {
+            if (mobile && section.dataset.userToggled === "true") return;
+            section.dataset.applyingDefault = "true";
+            section.open = !mobile || section.id === "candidateDetailsSection";
+            window.setTimeout(() => {
+                delete section.dataset.applyingDefault;
+            }, 0);
+        });
+
+        dom.subjectControls.forEach(({ card }) => {
+            if (!card || card.dataset.userToggled === "true") return;
+            card.dataset.applyingDefault = "true";
+            card.open = !mobile;
+            window.setTimeout(() => {
+                delete card.dataset.applyingDefault;
+            }, 0);
+        });
+    }
+
+    function bindKeyboardFocusHandling(app) {
+        const focusableSelector = "input, select, textarea";
+        app.addEventListener("focusin", (event) => {
+            const field = event.target?.closest?.(focusableSelector);
+            if (!field || !app.contains(field)) return;
+            openContainingDetails(field);
+            window.setTimeout(() => scrollFieldIntoView(field), 80);
+            window.setTimeout(() => scrollFieldIntoView(field), 280);
+        });
+
+        const updateViewport = () => {
+            updateKeyboardOffset(app);
+            const active = document.activeElement;
+            if (active?.matches?.(focusableSelector) && app.contains(active)) {
+                window.setTimeout(() => scrollFieldIntoView(active), 80);
+            }
+        };
+
+        updateViewport();
+        window.addEventListener("resize", updateViewport, { passive: true });
+        window.visualViewport?.addEventListener("resize", updateViewport, { passive: true });
+        window.visualViewport?.addEventListener("scroll", updateViewport, { passive: true });
+    }
+
+    function updateKeyboardOffset(app) {
+        const viewport = window.visualViewport;
+        const keyboardOffset = viewport ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop) : 0;
+        const roundedOffset = Math.round(keyboardOffset);
+        document.documentElement.style.setProperty("--rp-keyboard-offset", `${roundedOffset}px`);
+        app.classList.toggle("is-keyboard-open", roundedOffset > 120);
+    }
+
+    function scrollFieldIntoView(field) {
+        if (!field || !document.documentElement.contains(field)) return;
+        const rect = field.getBoundingClientRect();
+        const viewport = window.visualViewport;
+        const visibleTop = viewport ? viewport.offsetTop : 0;
+        const visibleBottom = visibleTop + (viewport ? viewport.height : window.innerHeight);
+        const topPadding = 96;
+        const bottomPadding = 132;
+        let delta = 0;
+
+        if (rect.bottom > visibleBottom - bottomPadding) {
+            delta = rect.bottom - (visibleBottom - bottomPadding);
+        } else if (rect.top < visibleTop + topPadding) {
+            delta = rect.top - (visibleTop + topPadding);
+        }
+
+        if (Math.abs(delta) > 2) {
+            window.scrollBy({ top: delta, behavior: "smooth" });
+        }
+    }
+
+    function openContainingDetails(field) {
+        let node = field?.parentElement || null;
+        while (node && node !== document.documentElement) {
+            if (node.tagName === "DETAILS") node.open = true;
+            node = node.parentElement;
+        }
+    }
+
+    function focusField(field) {
+        if (!field) return;
+        openContainingDetails(field);
+        window.setTimeout(() => {
+            field.focus({ preventScroll: true });
+            scrollFieldIntoView(field);
+        }, 0);
+    }
+
     function handleTotalMarksInput() {
         state.marksDirty = true;
         if (state.mobileMarksMode) {
@@ -332,6 +444,7 @@
 
     function handleSubjectMarksInput(event) {
         if (!isSubjectInput(event.target)) return;
+        sanitizeWholeNumberInput(event.target);
         state.marksDirty = true;
         if (state.mobileMarksMode) {
             debouncedMobileCalculation();
@@ -342,11 +455,14 @@
 
     function handleSubjectMarksFocus(event) {
         if (!isSubjectInput(event.target) || event.target.value !== "0") return;
-        event.target.select();
+        event.target.value = "";
     }
 
     function handleMarksBlur(event) {
         if (!isMarksInput(event.target)) return;
+        if (isSubjectInput(event.target) && event.target.value.trim() === "") {
+            event.target.value = "0";
+        }
         runMarksCalculation();
     }
 
@@ -355,13 +471,18 @@
         if (event.target.value !== nextValue) event.target.value = nextValue;
     }
 
+    function sanitizeWholeNumberInput(field) {
+        const nextValue = String(field.value || "").replace(/\D/g, "");
+        if (field.value !== nextValue) field.value = nextValue;
+    }
+
     function runMarksCalculation() {
         state.marksDirty = false;
-        scheduleMarksCalculation();
+        calculateMarks();
     }
 
     function runMobileMarksCalculation() {
-        if (!state.marksDirty || isMarksInput(document.activeElement)) return;
+        if (!state.marksDirty) return;
         runMarksCalculation();
     }
 
@@ -385,7 +506,15 @@
         state.expectedMarks = round2(expected);
         setValue("unattempted", unattempted);
         setValue("expectedMarks", formatMarks(state.expectedMarks));
+        syncLiveSummary(attempted, right, wrong, state.expectedMarks);
         return state.expectedMarks;
+    }
+
+    function syncLiveSummary(attempted, right, wrong, expectedMarks) {
+        setText("summaryAttempted", String(attempted));
+        setText("summaryCorrect", String(right));
+        setText("summaryWrong", String(wrong));
+        setText("summaryExpectedMarks", formatMarks(expectedMarks));
     }
 
     function scheduleMarksCalculation() {
@@ -405,7 +534,7 @@
         const validation = validateSubmitForm(form);
         if (!validation.ok) {
             showMessage("submitMessage", validation.message, "error");
-            validation.field?.focus();
+            focusField(validation.field);
             return;
         }
 
@@ -447,7 +576,7 @@
         if (!validation.ok) {
             clearResultCard();
             showMessage("checkMessage", validation.message, "error");
-            validation.field?.focus();
+            focusField(validation.field);
             return;
         }
 
@@ -684,27 +813,40 @@
             const maxLength = Math.max(String(questions).length, 1);
             const correctId = `subject-${index}-correct`;
             const wrongId = `subject-${index}-wrong`;
+            const openAttr = isMobileLayout() ? "" : " open";
             return `
-                <article class="subject-card" data-subject-index="${index}">
-                    <div class="subject-card-heading">
-                        <strong>${escapeHtml(name)}</strong>
-                        <small>${questions} questions</small>
+                <details class="subject-card" data-subject-index="${index}"${openAttr}>
+                    <summary class="subject-card-heading">
+                        <span class="subject-title">
+                            <strong>${escapeHtml(name)}</strong>
+                            <small>${questions} questions</small>
+                        </span>
+                        <span class="subject-card-total"><small>Attempted</small><strong data-subject-summary="attempted">0/${questions}</strong></span>
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </summary>
+                    <div class="subject-card-body">
+                        <div class="subject-input-grid">
+                            <label for="${correctId}">Correct
+                                <input id="${correctId}" class="subject-input" data-subject-field="correct" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="${maxLength}" autocomplete="off" enterkeyhint="next" value="0">
+                            </label>
+                            <label for="${wrongId}">Wrong
+                                <input id="${wrongId}" class="subject-input" data-subject-field="wrong" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="${maxLength}" autocomplete="off" enterkeyhint="next" value="0">
+                            </label>
+                        </div>
+                        <div class="subject-derived-row" aria-label="${escapeAttr(name)} calculated totals">
+                            <span><small>Attempted</small><strong data-subject-derived="attempted">0</strong></span>
+                            <span><small>Unattempted</small><strong data-subject-derived="unattempted">${questions}</strong></span>
+                        </div>
                     </div>
-                    <div class="subject-input-grid">
-                        <label for="${correctId}">Correct
-                            <input id="${correctId}" class="subject-input" data-subject-field="correct" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="${maxLength}" autocomplete="off" enterkeyhint="next" value="0">
-                        </label>
-                        <label for="${wrongId}">Wrong
-                            <input id="${wrongId}" class="subject-input" data-subject-field="wrong" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="${maxLength}" autocomplete="off" enterkeyhint="next" value="0">
-                        </label>
-                    </div>
-                    <div class="subject-derived-row" aria-label="${escapeAttr(name)} calculated totals">
-                        <span><small>Attempted</small><strong data-subject-derived="attempted">0</strong></span>
-                        <span><small>Unattempted</small><strong data-subject-derived="unattempted">${questions}</strong></span>
-                    </div>
-                </article>`;
+                </details>`;
         }).join("");
         cacheSubjectControls(grid);
+        dom.subjectControls.forEach(({ card }) => {
+            card.addEventListener("toggle", () => {
+                if (card.dataset.applyingDefault === "true") return;
+                card.dataset.userToggled = "true";
+            });
+        });
     }
 
     function collectSubjectData(exam) {
@@ -755,6 +897,7 @@
             const unattempted = Math.max((Number(subject.questions) || 0) - (Number(subject.attempted) || 0), 0);
             setNodeText(control?.attempted, String(subject.attempted));
             setNodeText(control?.unattempted, String(unattempted));
+            setNodeText(control?.summaryAttempted, `${subject.attempted}/${subject.questions}`);
         });
     }
 
@@ -972,6 +1115,7 @@
 
     function markInvalid(field) {
         if (!field) return;
+        openContainingDetails(field);
         field.setAttribute("aria-invalid", "true");
         dom.invalidFields.add(field);
         const container = field.closest(".rp-field, .consent-row, .subject-card");

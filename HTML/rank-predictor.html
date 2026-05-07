@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260504-mobile-typing-fix">
+    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260507-mobile-ux-fix">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -117,20 +117,40 @@
                         <p class="fixed-exam-note"><i class="fas fa-lock"></i> These values are fixed for this exam and cannot be edited.</p>
                     </div>
 
-                    <section class="form-section-card" aria-labelledby="candidateDetailsTitle">
-                        <div class="section-heading">
-                            <span>Candidate Details</span>
-                            <h3 id="candidateDetailsTitle">Candidate Details</h3>
+                    <section class="live-summary-card" aria-label="Live marks summary" aria-live="polite">
+                        <div>
+                            <span>Attempted</span>
+                            <strong id="summaryAttempted">0</strong>
                         </div>
-                        <div class="form-grid">
+                        <div>
+                            <span>Correct</span>
+                            <strong id="summaryCorrect">0</strong>
+                        </div>
+                        <div>
+                            <span>Wrong</span>
+                            <strong id="summaryWrong">0</strong>
+                        </div>
+                        <div>
+                            <span>Expected Marks</span>
+                            <strong id="summaryExpectedMarks">0.00</strong>
+                        </div>
+                    </section>
+
+                    <details class="form-section-card form-accordion" id="candidateDetailsSection" aria-labelledby="candidateDetailsTitle" open>
+                        <summary class="section-summary">
+                            <span>Candidate Details</span>
+                            <strong id="candidateDetailsTitle">Candidate Details</strong>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </summary>
+                        <div class="section-content form-grid">
                             <label class="rp-field" for="candidateName">Candidate Name
-                                <input id="candidateName" name="candidateName" type="text" autocomplete="name" required>
+                                <input id="candidateName" name="candidateName" type="text" autocomplete="name" enterkeyhint="next" required>
                             </label>
                             <label class="rp-field" for="rollNumber">Roll Number
-                                <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" required>
+                                <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" enterkeyhint="next" required>
                             </label>
                             <label class="rp-field" for="mobileNumber">Mobile Number
-                                <input id="mobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" required>
+                                <input id="mobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" enterkeyhint="next" required>
                             </label>
                             <label class="rp-field" for="dob">Date of Birth
                                 <input id="dob" name="dob" type="date" required>
@@ -150,14 +170,15 @@
                                 <select id="state" name="state" required></select>
                             </label>
                         </div>
-                    </section>
+                    </details>
 
-                    <section class="form-section-card" aria-labelledby="examDetailsTitle">
-                        <div class="section-heading">
+                    <details class="form-section-card form-accordion" id="examDetailsSection" aria-labelledby="examDetailsTitle">
+                        <summary class="section-summary">
                             <span>Exam Details</span>
-                            <h3 id="examDetailsTitle">Exam Details</h3>
-                        </div>
-                        <div class="form-grid">
+                            <strong id="examDetailsTitle">Exam Details</strong>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </summary>
+                        <div class="section-content form-grid">
                             <label class="rp-field" for="submitExamName">Exam Name
                                 <input id="submitExamName" name="examName" type="text" readonly>
                             </label>
@@ -175,14 +196,15 @@
                             <strong>Manual marks fallback is required</strong>
                             <span>Automatic answer key reading is not available for many encrypted or session-based links. Enter attempted, right and wrong answers manually.</span>
                         </div>
-                    </section>
+                    </details>
 
-                    <section class="form-section-card" aria-labelledby="attemptDetailsTitle">
-                        <div class="section-heading">
+                    <details class="form-section-card form-accordion" id="attemptDetailsSection" aria-labelledby="attemptDetailsTitle">
+                        <summary class="section-summary">
                             <span>Attempt Details</span>
-                            <h3 id="attemptDetailsTitle">Attempt Details</h3>
-                        </div>
-                        <div class="form-grid">
+                            <strong id="attemptDetailsTitle">Attempt Details</strong>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </summary>
+                        <div class="section-content form-grid">
                             <label class="rp-field" for="totalAttempted">Total Attempted (Auto)
                                 <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
                             </label>
@@ -199,9 +221,9 @@
                                 <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
                             </label>
                         </div>
-                    </section>
+                    </details>
 
-                    <details class="form-section-card subject-entry-card" id="subjectScorecardDetails" open>
+                    <details class="form-section-card form-accordion subject-entry-card" id="subjectScorecardDetails">
                         <summary class="section-summary">
                             <span>Subject Scorecard</span>
                             <strong id="subjectEntryTitle">Subject-wise Attempts</strong>
@@ -410,7 +432,7 @@
         </div>
     </footer>
 <script src="../JS/rank-predictor-config.js?v=20260506-sheet-exams" defer></script>
-<script src="../JS/rank-predictor.js?v=20260506-sheet-exams" defer></script>
+<script src="../JS/rank-predictor.js?v=20260507-mobile-ux-fix" defer></script>
 <script src="../JS/script.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@
     --rp-red: #b91c1c;
     --rp-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
     --rp-focus: 0 0 0 4px rgba(11, 94, 215, 0.18);
+    --rp-keyboard-offset: 0px;
 }
 
 html,
@@ -28,13 +29,15 @@ body {
 }
 
 .rank-predictor-page {
-    width: min(100%, 1200px);
+    width: calc(100% - 16px);
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 14px 14px max(140px, env(safe-area-inset-bottom));
-    padding-bottom: max(140px, env(safe-area-inset-bottom));
+    padding: 14px 14px max(120px, calc(var(--rp-keyboard-offset) + 96px), env(safe-area-inset-bottom));
+    padding-bottom: max(120px, calc(var(--rp-keyboard-offset) + 96px), env(safe-area-inset-bottom));
     color: var(--rp-ink);
     font-size: 16px;
     line-height: 1.55;
+    overflow-x: clip;
 }
 
 .rank-predictor-page .ad-slot,
@@ -49,8 +52,10 @@ body {
 .predictor-form,
 .prediction-result,
 .form-section-card,
+.live-summary-card,
 .fixed-setting,
 .result-metric {
+    width: 100%;
     border: 1px solid var(--rp-border);
     border-radius: 8px;
     background: var(--rp-card);
@@ -123,6 +128,7 @@ body {
     margin: 0;
     color: var(--rp-muted);
     font-size: 16px;
+    overflow-wrap: anywhere;
 }
 
 .predictor-summary {
@@ -175,7 +181,8 @@ body {
 .predictor-form,
 .prediction-result,
 .exam-selector-card,
-.form-section-card {
+.form-section-card,
+.live-summary-card {
     padding: 16px;
 }
 
@@ -230,10 +237,12 @@ body {
 
 .mode-card small {
     grid-column: 2;
+    min-width: 0;
     color: var(--rp-muted);
     font-size: 14px;
     font-weight: 600;
     line-height: 1.45;
+    overflow-wrap: anywhere;
 }
 
 .mode-icon {
@@ -271,9 +280,32 @@ body {
     font-weight: 800;
 }
 
+.rank-predictor-page .btn-primary {
+    border-color: var(--rp-blue);
+    background: var(--rp-blue);
+    color: #fff;
+}
+
+.rank-predictor-page .btn-primary:hover,
+.rank-predictor-page .btn-primary:focus-visible {
+    background: var(--rp-blue-dark);
+}
+
+.rank-predictor-page .btn-outline {
+    border-color: var(--rp-border-strong);
+    background: #fff;
+    color: var(--rp-blue);
+}
+
+.rank-predictor-page .btn:disabled {
+    opacity: 0.78;
+    cursor: wait;
+}
+
 .predictor-form,
 .prediction-result,
 .form-grid,
+.live-summary-card,
 .fixed-exam-settings,
 .subject-entry-grid,
 .result-grid {
@@ -299,7 +331,22 @@ body {
     box-shadow: none;
 }
 
+.form-accordion {
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.section-content {
+    padding: 0 16px 16px;
+}
+
+.form-accordion .manual-fallback {
+    margin: 0 16px 16px;
+}
+
 .fixed-exam-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 14px;
     border: 1px solid var(--rp-border);
     border-radius: 8px;
@@ -309,7 +356,7 @@ body {
 .fixed-setting {
     display: grid;
     gap: 6px;
-    padding: 12px;
+    padding: 10px;
     box-shadow: none;
 }
 
@@ -377,15 +424,64 @@ body {
     transform: rotate(180deg);
 }
 
+.form-accordion[open] > .section-summary i {
+    transform: rotate(180deg);
+}
+
+.form-accordion:not([open]) > .section-summary {
+    border-bottom: 0;
+}
+
 .subject-entry-grid {
     grid-template-columns: 1fr;
     padding: 0 16px 16px;
 }
 
+.live-summary-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.live-summary-card div {
+    display: grid;
+    gap: 2px;
+    min-height: 54px;
+    padding: 8px 10px;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.live-summary-card span {
+    color: var(--rp-muted);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.live-summary-card strong {
+    color: var(--rp-blue-dark);
+    font-size: 1.05rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.live-summary-card div:last-child {
+    border-color: var(--rp-border-strong);
+    background: #eff6ff;
+}
+
+.live-summary-card div:last-child strong {
+    color: var(--rp-blue);
+}
+
 .subject-card {
     display: grid;
-    gap: 14px;
-    padding: 14px;
+    gap: 0;
+    padding: 0;
     border: 1px solid var(--rp-border);
     border-radius: 8px;
     background: #f8fafc;
@@ -401,12 +497,35 @@ body {
 }
 
 .subject-card-heading {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 10px;
+    align-items: center;
+    min-height: 56px;
+    padding: 14px;
     color: var(--rp-ink);
+    cursor: pointer;
     font-weight: 900;
     line-height: 1.35;
+    list-style: none;
+}
+
+.subject-card-heading::-webkit-details-marker {
+    display: none;
+}
+
+.subject-card-heading i {
+    color: var(--rp-blue);
+    transition: transform 0.2s ease;
+}
+
+.subject-card[open] .subject-card-heading i {
+    transform: rotate(180deg);
+}
+
+.subject-title {
+    display: grid;
+    gap: 4px;
 }
 
 .subject-card-heading strong {
@@ -414,11 +533,38 @@ body {
 }
 
 .subject-card-heading small {
-    flex: 0 0 auto;
     color: var(--rp-muted);
     font-size: 14px;
     font-weight: 800;
+    white-space: normal;
+}
+
+.subject-card-total {
+    display: grid;
+    gap: 2px;
+    justify-items: end;
+    min-width: 76px;
+}
+
+.subject-card-total small {
+    color: var(--rp-muted);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.subject-card-total strong {
+    color: var(--rp-blue-dark);
+    font-size: 1rem;
+    line-height: 1.2;
     white-space: nowrap;
+}
+
+.subject-card-body {
+    display: grid;
+    gap: 12px;
+    padding: 0 14px 14px;
 }
 
 .subject-input-grid {
@@ -490,7 +636,20 @@ body {
     font-weight: 600;
     line-height: 1.35;
     scroll-margin-top: 110px;
-    scroll-margin-bottom: 140px;
+    scroll-margin-bottom: max(160px, calc(var(--rp-keyboard-offset) + 120px));
+}
+
+.rp-field select {
+    appearance: none;
+    padding-right: 44px;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--rp-muted) 50%),
+        linear-gradient(135deg, var(--rp-muted) 50%, transparent 50%);
+    background-position:
+        calc(100% - 20px) 50%,
+        calc(100% - 14px) 50%;
+    background-repeat: no-repeat;
+    background-size: 6px 6px, 6px 6px;
 }
 
 .rp-field textarea {
@@ -558,6 +717,7 @@ body {
     font-size: 14px;
     font-weight: 700;
     line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
 .rank-predictor-page:not(.has-shift) .shift-field {
@@ -582,6 +742,7 @@ body {
     font-size: 14px;
     font-weight: 700;
     line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
 .consent-row {
@@ -677,6 +838,7 @@ body {
 }
 
 .result-metric.featured {
+    grid-column: 1 / -1;
     border-color: var(--rp-border-strong);
     background: #eff6ff;
 }
@@ -732,6 +894,7 @@ body {
     .form-grid,
     .fixed-exam-settings,
     .subject-entry-grid,
+    .live-summary-card,
     .predictor-summary {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -747,8 +910,8 @@ body {
 
 @media (min-width: 768px) {
     .rank-predictor-page {
-        padding: 20px 20px max(140px, env(safe-area-inset-bottom));
-        padding-bottom: max(140px, env(safe-area-inset-bottom));
+        padding: 20px 20px max(120px, calc(var(--rp-keyboard-offset) + 96px), env(safe-area-inset-bottom));
+        padding-bottom: max(120px, calc(var(--rp-keyboard-offset) + 96px), env(safe-area-inset-bottom));
     }
 
     .predictor-hero {
@@ -775,14 +938,38 @@ body {
 }
 
 @media (max-width: 767px) {
+    .live-summary-card {
+        position: sticky;
+        top: 8px;
+        z-index: 25;
+    }
+
     .sticky-actions {
-        position: static;
+        position: sticky;
+        bottom: max(8px, env(safe-area-inset-bottom));
         z-index: 30;
+        margin: 0 -4px;
+        padding: 10px;
+        border: 1px solid var(--rp-border);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 -10px 24px rgba(15, 23, 42, 0.12);
+        backdrop-filter: blur(10px);
+    }
+
+    .rank-predictor-page.is-keyboard-open .sticky-actions {
+        position: static;
         margin: 4px 0 0;
         padding: 0;
-        border-top: 0;
+        border: 0;
+        border-radius: 0;
         background: transparent;
         box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    .rank-predictor-page.is-keyboard-open .live-summary-card {
+        top: 4px;
     }
 }
 
@@ -900,10 +1087,12 @@ body {
     .predictor-form,
     .prediction-result,
     .exam-selector-card,
-    .form-section-card {
+    .form-section-card,
+    .live-summary-card {
         padding: 14px;
     }
 
+    .form-accordion,
     .subject-entry-card {
         padding: 0;
     }
@@ -912,13 +1101,21 @@ body {
         padding: 14px;
     }
 
+    .section-content,
     .subject-entry-grid {
         padding: 0 14px 14px;
     }
 
+    .form-accordion .manual-fallback {
+        margin: 0 14px 14px;
+    }
+
+    .live-summary-card {
+        padding: 8px;
+    }
+
     .sticky-actions {
-        margin: 4px 0 0;
-        padding-inline: 0;
+        margin-inline: -2px;
     }
 
     .mode-card {
@@ -927,11 +1124,7 @@ body {
     }
 
     .subject-card-heading {
-        display: grid;
-    }
-
-    .subject-card-heading small {
-        white-space: normal;
+        grid-template-columns: minmax(0, 1fr) auto auto;
     }
 }
 
@@ -954,10 +1147,12 @@ body {
     .predictor-form,
     .prediction-result,
     .exam-selector-card,
-    .form-section-card {
+    .form-section-card,
+    .live-summary-card {
         padding: 12px;
     }
 
+    .form-accordion,
     .subject-entry-card {
         padding: 0;
     }
@@ -966,19 +1161,28 @@ body {
         padding: 12px;
     }
 
+    .section-content,
     .subject-entry-grid {
         padding: 0 12px 12px;
     }
 
+    .form-accordion .manual-fallback {
+        margin: 0 12px 12px;
+    }
+
+    .live-summary-card {
+        padding: 8px;
+    }
+
     .sticky-actions {
-        margin: 4px 0 0;
-        padding-inline: 0;
+        margin-inline: 0;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .loading-spinner,
-    .section-summary i {
+    .section-summary i,
+    .subject-card-heading i {
         animation: none;
         transition: none;
     }
