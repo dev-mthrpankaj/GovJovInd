@@ -937,6 +937,7 @@
 
     function renderPendingResult(payload = {}) {
         setText("resultExpectedMarks", "Pending");
+        setText("resultNormalizedMarks", "Pending");
         setText("resultPercentile", "Pending");
         setText("overallRank", "Pending");
         setText("categoryRank", "Pending");
@@ -958,6 +959,7 @@
 
     function clearResultCard() {
         setText("resultExpectedMarks", "Pending");
+        setText("resultNormalizedMarks", "Pending");
         setText("resultPercentile", "Pending");
         setText("overallRank", "Pending");
         setText("categoryRank", "Pending");
@@ -980,7 +982,9 @@
     function renderResult(data, payload) {
         const total = Number(data.totalSubmissions || data.total || 0);
         const marks = data.rawMarks ?? data.marks;
+        const normalizedMarks = calculateNormalizedMarks(data, payload, marks);
         setText("resultExpectedMarks", marks !== undefined && marks !== null && marks !== "" ? formatMarks(marks) : "Pending");
+        setText("resultNormalizedMarks", normalizedMarks !== null ? formatMarks(normalizedMarks) : "Pending");
         setText("resultPercentile", formatPercentile(data.percentile));
         setText("overallRank", formatRank(data.overallRank));
         setText("categoryRank", formatRank(data.categoryRank));
@@ -997,7 +1001,35 @@
         setText("accuracyIndicator", data.accuracyIndicator || getAccuracyIndicator(total));
         setText("lastUpdated", formatDateTime(data.lastUpdated));
         renderSubjectAnalysis(data.subjectAnalysis || []);
-        setText("resultNote", "Rank and percentile are based on submitted raw marks for the selected exam.");
+        setText("resultNote", data.rankBasis === "normalized"
+            ? "Rank and percentile are based on normalised marks for the selected exam."
+            : "Rank and percentile are based on submitted raw marks for the selected exam.");
+    }
+
+    function calculateNormalizedMarks(data, payload, rawMarksValue) {
+        const backendValue = data.normalizedMarks ?? data.normalisedMarks ?? data.normalizedScore ?? data.normalisedScore;
+        const backendNumber = Number(backendValue);
+        if (Number.isFinite(backendNumber)) return backendNumber;
+
+        const rawMarks = Number(rawMarksValue);
+        if (!Number.isFinite(rawMarks)) return null;
+
+        const exam = getSelectedExam();
+        if (!exam?.normalization) return rawMarks;
+
+        return calculatePlaceholderNormalizedMarks(exam, data, payload, rawMarks);
+    }
+
+    function calculatePlaceholderNormalizedMarks(exam, data, payload, rawMarks) {
+        const allShiftAverage = Number(data.averageMarks);
+        const candidateShiftAverage = Number(data.averageShiftMarks);
+        const shiftAdjustment = Number.isFinite(allShiftAverage) && Number.isFinite(candidateShiftAverage)
+            ? allShiftAverage - candidateShiftAverage
+            : 0;
+        const normalized = rawMarks + shiftAdjustment;
+        const maxMarks = getExamNumber(exam, "totalQuestions") * getExamNumber(exam, "marksPerCorrect");
+        if (maxMarks > 0) return round2(Math.min(Math.max(normalized, 0), maxMarks));
+        return round2(Math.max(normalized, 0));
     }
 
     function getAccuracyIndicator(totalSubmissions) {

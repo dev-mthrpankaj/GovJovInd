@@ -23,6 +23,7 @@ const HEADERS = [
   "Marks Per Correct",
   "Negative Marking",
   "Raw Marks",
+  "Normalized Marks",
   "Percentile",
   "Subject Data (JSON)",
   "Gender Rank",
@@ -108,6 +109,7 @@ function submitData(data) {
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = getSheetByExam(data.sheetName, spreadsheet);
+  const examConfig = getRankExamConfigForData(spreadsheet, data);
   const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
 
@@ -136,7 +138,7 @@ function submitData(data) {
     });
   }
 
-  const rankData = calculateAnalytics(refreshedRows, targetRow);
+  const rankData = calculateAnalytics(refreshedRows, targetRow, examConfig);
   writeAnalytics(sheet, refreshedMap, targetRow.rowNumber, rankData);
 
   return sendJSON({
@@ -158,6 +160,7 @@ function checkRank(data) {
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = spreadsheet.getSheetByName(String(data.sheetName).trim());
+  const examConfig = getRankExamConfigForData(spreadsheet, data);
 
   if (!sheet) {
     return sendJSON({
@@ -189,7 +192,7 @@ function checkRank(data) {
     });
   }
 
-  const rankData = calculateAnalytics(rows, targetRow);
+  const rankData = calculateAnalytics(rows, targetRow, examConfig);
   writeAnalytics(sheet, columnMap, targetRow.rowNumber, rankData);
 
   return sendJSON({
@@ -222,8 +225,8 @@ function getRankPredictorExamConfigResponse() {
   };
 }
 
-function getRankPredictorExamConfigs() {
-  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+function getRankPredictorExamConfigs(spreadsheet) {
+  spreadsheet = spreadsheet || SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = getRankExamSheet(spreadsheet);
   ensureRankExamSheetSchema(sheet);
 
@@ -270,6 +273,31 @@ function getRankPredictorExamConfigs() {
     });
 
   return { exams: exams, meta: meta };
+}
+
+function getRankExamConfigForData(spreadsheet, data) {
+  const result = getRankPredictorExamConfigs(spreadsheet);
+  const examId = normalizeText(data.examId);
+  const sheetName = normalizeText(data.sheetName);
+  const examName = normalizeText(data.examName);
+  const config = result.exams.find(function (exam) {
+    return (examId && normalizeText(exam.examId) === examId) ||
+      (sheetName && normalizeText(exam.sheetName) === sheetName) ||
+      (examName && normalizeText(exam.examName) === examName);
+  });
+
+  if (config) return config;
+
+  return {
+    examId: examId,
+    examName: examName,
+    sheetName: sheetName,
+    totalQuestions: Number(data.totalQuestions) || 0,
+    marksPerCorrect: Number(data.marksPerCorrect) || 0,
+    negativeMarking: Number(data.negativeMarking) || 0,
+    hasShifts: Boolean(data.shift),
+    normalization: false
+  };
 }
 
 function getRankExamSheet(spreadsheet) {
@@ -532,6 +560,7 @@ function appendCandidateData(sheet, columnMap, data) {
   setHeaderValue(row, columnMap, "Marks Per Correct", Number(data.marksPerCorrect));
   setHeaderValue(row, columnMap, "Negative Marking", Number(data.negativeMarking));
   setHeaderValue(row, columnMap, "Raw Marks", Number(data.rawMarks));
+  setHeaderValue(row, columnMap, "Normalized Marks", isFinite(Number(data.normalizedMarks)) ? Number(data.normalizedMarks) : "");
   setHeaderValue(row, columnMap, "Percentile", "");
   setHeaderValue(row, columnMap, "Subject Data (JSON)", JSON.stringify(data.subjectData || []));
   setHeaderValue(row, columnMap, "Answer Key Link", data.answerKeyLink || "");
@@ -567,6 +596,7 @@ function getRowsByHeaders(sheet, columnMap) {
       examDate: normalizeDob(getHeaderValue(row, columnMap, "Exam Date")),
       shift: normalizeShift(getHeaderValue(row, columnMap, "Shift")),
       rawMarks: Number(getHeaderValue(row, columnMap, "Raw Marks")) || 0,
+      normalizedMarks: readOptionalNumber(getHeaderValue(row, columnMap, "Normalized Marks")),
       percentile: Number(getHeaderValue(row, columnMap, "Percentile")) || 0,
       subjectData: parseSubjectData(getHeaderValue(row, columnMap, "Subject Data (JSON)"))
     };
@@ -627,69 +657,143 @@ function findDuplicateCandidate(rows, data) {
   return null;
 }
 
-function calculateAnalytics(rows, targetRow) {
+function calculateAnalytics(rows, targetRow, examConfig) {
   const rowsForExam = rows.filter(function (row) {
     const sameExam = !targetRow.examId || !row.examId || row.examId === targetRow.examId;
     return sameExam && row.rollNumber && row.dob;
   });
 
-  const overallRank = calculateTieAwareRank(rowsForExam, targetRow);
+  const normalizationEnabled = Boolean(examConfig && examConfig.normalization);
+  const scoredRows = applyNormalizedMarks(rowsForExam, examConfig, normalizationEnabled);
+  const scoredTargetRow = scoredRows.find(function (row) {
+    return row.rowNumber === targetRow.rowNumber;
+  }) || Object.assign({}, targetRow, {
+    normalizedMarks: normalizationEnabled ? Number(targetRow.rawMarks) || 0 : Number(targetRow.rawMarks) || 0
+  });
+  const rankScoreField = normalizationEnabled ? "normalizedMarks" : "rawMarks";
+  const targetRankMarks = Number(scoredTargetRow[rankScoreField]) || 0;
+
+  const overallRank = calculateTieAwareRank(scoredRows, scoredTargetRow, rankScoreField);
   const totalSubmissions = rowsForExam.length;
   const percentile = calculatePercentile(totalSubmissions, overallRank);
-  const sameShiftRows = rowsForExam.filter(function (row) {
-    return normalizeKey(row.shift) === normalizeKey(targetRow.shift);
+  const sameShiftRows = scoredRows.filter(function (row) {
+    return normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
   });
-  const sameCategoryRows = rowsForExam.filter(function (row) {
-    return normalizeKey(row.category) === normalizeKey(targetRow.category);
+  const sameCategoryRows = scoredRows.filter(function (row) {
+    return normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
   });
 
   return {
     found: true,
-    rawMarks: Number(targetRow.rawMarks),
-    marks: Number(targetRow.rawMarks),
+    rawMarks: Number(scoredTargetRow.rawMarks),
+    marks: Number(scoredTargetRow.rawMarks),
+    normalizedMarks: Number(scoredTargetRow.normalizedMarks),
+    normalisedMarks: Number(scoredTargetRow.normalizedMarks),
     percentile: percentile,
     overallRank: overallRank,
-    categoryRank: calculateTieAwareRank(sameCategoryRows, targetRow),
-    stateRank: calculateTieAwareRank(rowsForExam.filter(function (row) {
-      return normalizeKey(row.state) === normalizeKey(targetRow.state);
-    }), targetRow),
-    shiftRank: calculateTieAwareRank(sameShiftRows, targetRow),
-    genderRank: countAtLeast(rowsForExam.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(targetRow.gender);
-    }), targetRow.rawMarks),
-    genderCategoryRank: countAtLeast(rowsForExam.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(targetRow.gender) &&
-        normalizeKey(row.category) === normalizeKey(targetRow.category);
-    }), targetRow.rawMarks),
-    genderStateRank: countAtLeast(rowsForExam.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(targetRow.gender) &&
-        normalizeKey(row.state) === normalizeKey(targetRow.state);
-    }), targetRow.rawMarks),
-    genderShiftRank: countAtLeast(rowsForExam.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(targetRow.gender) &&
-        normalizeKey(row.shift) === normalizeKey(targetRow.shift);
-    }), targetRow.rawMarks),
-    averageMarks: averageMarks(rowsForExam),
-    averageShiftMarks: averageMarks(sameShiftRows),
-    categoryAverageMarks: averageMarks(sameCategoryRows),
+    categoryRank: calculateTieAwareRank(sameCategoryRows, scoredTargetRow, rankScoreField),
+    stateRank: calculateTieAwareRank(scoredRows.filter(function (row) {
+      return normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
+    }), scoredTargetRow, rankScoreField),
+    shiftRank: calculateTieAwareRank(sameShiftRows, scoredTargetRow, rankScoreField),
+    genderRank: countAtLeast(scoredRows.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender);
+    }), targetRankMarks, rankScoreField),
+    genderCategoryRank: countAtLeast(scoredRows.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender) &&
+        normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
+    }), targetRankMarks, rankScoreField),
+    genderStateRank: countAtLeast(scoredRows.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender) &&
+        normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
+    }), targetRankMarks, rankScoreField),
+    genderShiftRank: countAtLeast(scoredRows.filter(function (row) {
+      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender) &&
+        normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
+    }), targetRankMarks, rankScoreField),
+    averageMarks: averageMarks(scoredRows, "rawMarks"),
+    averageShiftMarks: averageMarks(sameShiftRows, "rawMarks"),
+    categoryAverageMarks: averageMarks(sameCategoryRows, "rawMarks"),
     subjectAnalysis: buildSubjectAnalysis(rowsForExam, targetRow),
     totalSubmissions: totalSubmissions,
     accuracyIndicator: getAccuracyIndicator(totalSubmissions),
-    rankBasis: "raw",
+    rankBasis: normalizationEnabled ? "normalized" : "raw",
     lastUpdated: new Date().toISOString()
   };
 }
 
-function calculateTieAwareRank(rows, targetRow) {
+function applyNormalizedMarks(rowsForExam, examConfig, normalizationEnabled) {
+  const allShiftAverage = averageMarks(rowsForExam, "rawMarks");
+  const shiftAverageMap = buildShiftAverageMap(rowsForExam);
+
+  return rowsForExam.map(function (row) {
+    const rawMarks = Number(row.rawMarks) || 0;
+    const normalizedMarks = normalizationEnabled
+      ? calculateExamNormalizedMarks(row, examConfig, allShiftAverage, shiftAverageMap)
+      : rawMarks;
+    const nextRow = Object.assign({}, row);
+    nextRow.normalizedMarks = round2(normalizedMarks);
+    return nextRow;
+  });
+}
+
+function buildShiftAverageMap(rows) {
+  const grouped = {};
+  rows.forEach(function (row) {
+    const key = normalizeKey(row.shift) || "__no_shift__";
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(row);
+  });
+
+  const averages = {};
+  Object.keys(grouped).forEach(function (key) {
+    averages[key] = averageMarks(grouped[key], "rawMarks");
+  });
+  return averages;
+}
+
+function calculateExamNormalizedMarks(row, examConfig, allShiftAverage, shiftAverageMap) {
+  const examId = normalizeKey((examConfig && examConfig.examId) || row.examId);
+
+  switch (examId) {
+    case "up-homeguard-2026":
+    case "ssc-cpo-2025-paper-1":
+    case "ssc-cgl-2025-tier-1":
+    case "up-police-si-2025":
+    default:
+      return calculateAverageShiftAdjustedMarks(row, examConfig, allShiftAverage, shiftAverageMap);
+  }
+}
+
+function calculateAverageShiftAdjustedMarks(row, examConfig, allShiftAverage, shiftAverageMap) {
+  const rawMarks = Number(row.rawMarks) || 0;
+  const shiftKey = normalizeKey(row.shift) || "__no_shift__";
+  const shiftAverage = Number(shiftAverageMap[shiftKey]);
+  const adjustment = Number.isFinite(allShiftAverage) && Number.isFinite(shiftAverage)
+    ? allShiftAverage - shiftAverage
+    : 0;
+  return clampMarks(rawMarks + adjustment, examConfig);
+}
+
+function clampMarks(value, examConfig) {
+  const normalized = Number(value);
+  if (!Number.isFinite(normalized)) return 0;
+  const maxMarks = Number(examConfig && examConfig.totalQuestions) * Number(examConfig && examConfig.marksPerCorrect);
+  if (Number.isFinite(maxMarks) && maxMarks > 0) return round2(Math.min(Math.max(normalized, 0), maxMarks));
+  return round2(Math.max(normalized, 0));
+}
+
+function calculateTieAwareRank(rows, targetRow, scoreField) {
+  const field = scoreField || "rawMarks";
   const sorted = rows.slice().sort(function (a, b) {
-    return Number(b.rawMarks || 0) - Number(a.rawMarks || 0);
+    return Number(b[field] || 0) - Number(a[field] || 0);
   });
 
   let previousMarks = null;
   let previousRank = 0;
 
   for (let index = 0; index < sorted.length; index += 1) {
-    const marks = Number(sorted[index].rawMarks || 0);
+    const marks = Number(sorted[index][field] || 0);
     const rank = marks === previousMarks ? previousRank : index + 1;
     previousMarks = marks;
     previousRank = rank;
@@ -699,17 +803,19 @@ function calculateTieAwareRank(rows, targetRow) {
   return 0;
 }
 
-function countAtLeast(rows, targetMarks) {
+function countAtLeast(rows, targetMarks, scoreField) {
+  const field = scoreField || "rawMarks";
   const marks = Number(targetMarks) || 0;
   return rows.filter(function (row) {
-    return Number(row.rawMarks || 0) >= marks;
+    return Number(row[field] || 0) >= marks;
   }).length || 0;
 }
 
-function averageMarks(rows) {
+function averageMarks(rows, scoreField) {
   if (!rows.length) return 0;
+  const field = scoreField || "rawMarks";
   return round2(rows.reduce(function (total, row) {
-    return total + (Number(row.rawMarks) || 0);
+    return total + (Number(row[field]) || 0);
   }, 0) / rows.length);
 }
 
@@ -752,6 +858,7 @@ function calculatePercentile(totalSubmissions, overallRank) {
 
 function writeAnalytics(sheet, columnMap, rowNumber, analytics) {
   const values = {
+    "Normalized Marks": analytics.normalizedMarks,
     "Percentile": analytics.percentile,
     "Gender Rank": analytics.genderRank,
     "Gender Category Rank": analytics.genderCategoryRank,
@@ -817,6 +924,12 @@ function calculateRawMarks(data) {
     (Number(data.rightAnswers) || 0) * (Number(data.marksPerCorrect) || 0) -
     (Number(data.wrongAnswers) || 0) * (Number(data.negativeMarking) || 0)
   );
+}
+
+function readOptionalNumber(value) {
+  if (value === "" || value === undefined || value === null) return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
 }
 
 function normalizeSubjectData(subjectData, data) {
