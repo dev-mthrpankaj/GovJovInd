@@ -38,6 +38,7 @@
         endsAt: 0,
         remainingSeconds: 1800,
         timerId: null,
+        persistTimerId: null,
         result: null,
         reviewFilter: "all"
     };
@@ -132,7 +133,7 @@
     function bindEvents() {
         document.body.addEventListener("click", handleClick);
         document.addEventListener("keydown", handleKeyboard);
-        window.addEventListener("beforeunload", persistUnfinished);
+        window.addEventListener("beforeunload", () => persistUnfinished(true));
     }
 
     function handleClick(event) {
@@ -368,6 +369,12 @@
     }
 
     function renderExam() {
+        renderQuestion();
+        renderPalette();
+        updateTimerDisplay();
+    }
+
+    function renderQuestion() {
         const question = app.questions[app.current];
         if (!question) return;
         const currentStatus = app.statuses[app.current] || "not-visited";
@@ -406,28 +413,10 @@
                 <span><i class="fas fa-minus-circle" aria-hidden="true"></i> -${question.negativeMarks} negative</span>
             </div>
         `;
-
-        renderPalette();
-        updateTimerDisplay();
     }
 
     function renderPalette() {
-        const counts = getStatusCounts();
-        if (elements.paletteSummary) {
-            elements.paletteSummary.innerHTML = [
-                ["answered", "Answered", counts.answered],
-                ["not-answered", "Not Answered", counts.notAnswered],
-                ["marked", "Marked", counts.marked],
-                ["answered-marked", "Answered + Marked", counts.answeredMarked],
-                ["not-visited", "Not Visited", counts.notVisited]
-            ].map(([status, label, value]) => `
-                <span class="palette-summary-tile ${status}">
-                    <strong>${value}</strong>
-                    <em>${label}</em>
-                </span>
-            `).join("");
-        }
-
+        updatePaletteSummary();
         elements.questionPalette.innerHTML = app.questions.map((_question, index) => {
             const status = app.statuses[index] || "not-visited";
             return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
@@ -438,20 +427,20 @@
         app.answers[app.current] = index;
         app.statuses[app.current] = app.statuses[app.current] === "marked" || app.statuses[app.current] === "answered-marked" ? "answered-marked" : "answered";
         persistUnfinished();
-        renderExam();
+        updateCurrentQuestionState();
     }
 
     function clearResponse() {
         app.answers[app.current] = null;
         app.statuses[app.current] = app.statuses[app.current] === "answered-marked" || app.statuses[app.current] === "marked" ? "marked" : "not-answered";
         persistUnfinished();
-        renderExam();
+        updateCurrentQuestionState();
     }
 
     function markForReview() {
         app.statuses[app.current] = app.answers[app.current] === null ? "marked" : "answered-marked";
         persistUnfinished();
-        renderExam();
+        updateCurrentQuestionState();
     }
 
     function saveAndNext() {
@@ -465,11 +454,65 @@
 
     function goQuestion(index) {
         if (index < 0 || index >= app.questions.length) return;
+        const previousIndex = app.current;
         if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
         app.current = index;
         if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
         persistUnfinished();
-        renderExam();
+        renderQuestion();
+        updatePaletteButton(previousIndex);
+        updatePaletteButton(app.current);
+        updatePaletteSummary();
+        updateTimerDisplay();
+    }
+
+    function updateCurrentQuestionState() {
+        updateAnswerOptions();
+        updateQuestionStatusBadge();
+        updatePaletteButton(app.current);
+        updatePaletteSummary();
+    }
+
+    function updateAnswerOptions() {
+        const selected = app.answers[app.current];
+        elements.questionCard.querySelectorAll("[data-option-index]").forEach((button) => {
+            const isSelected = Number(button.dataset.optionIndex) === selected;
+            button.classList.toggle("selected", isSelected);
+            button.setAttribute("aria-pressed", String(isSelected));
+        });
+    }
+
+    function updateQuestionStatusBadge() {
+        const badge = elements.questionCard.querySelector(".question-status-badge");
+        if (!badge) return;
+        const status = app.statuses[app.current] || "not-visited";
+        badge.className = `question-status-badge ${status}`;
+        badge.textContent = getStatusLabel(status);
+    }
+
+    function updatePaletteButton(index) {
+        const button = elements.questionPalette.querySelector(`[data-question-index="${index}"]`);
+        if (!button) return;
+        const status = app.statuses[index] || "not-visited";
+        button.className = `palette-btn ${status}${index === app.current ? " current" : ""}`;
+        button.setAttribute("aria-label", `Question ${index + 1}, ${getStatusLabel(status)}`);
+    }
+
+    function updatePaletteSummary() {
+        if (!elements.paletteSummary) return;
+        const counts = getStatusCounts();
+        elements.paletteSummary.innerHTML = [
+            ["answered", "Answered", counts.answered],
+            ["not-answered", "Not Answered", counts.notAnswered],
+            ["marked", "Marked", counts.marked],
+            ["answered-marked", "Answered + Marked", counts.answeredMarked],
+            ["not-visited", "Not Visited", counts.notVisited]
+        ].map(([status, label, value]) => `
+            <span class="palette-summary-tile ${status}">
+                <strong>${value}</strong>
+                <em>${label}</em>
+            </span>
+        `).join("");
     }
 
     function startTimer() {
@@ -509,6 +552,7 @@
         closeSubmitModal();
         const result = calculateResult(reason);
         app.result = result;
+        clearPendingPersist();
         storage.remove("unfinished");
         saveAttempt(result);
         renderResult();
@@ -775,7 +819,23 @@
         `;
     }
 
-    function persistUnfinished() {
+    function persistUnfinished(immediate = false) {
+        clearPendingPersist();
+        if (immediate) {
+            writeUnfinishedAttempt();
+            return;
+        }
+        app.persistTimerId = window.setTimeout(writeUnfinishedAttempt, 120);
+    }
+
+    function clearPendingPersist() {
+        if (!app.persistTimerId) return;
+        window.clearTimeout(app.persistTimerId);
+        app.persistTimerId = null;
+    }
+
+    function writeUnfinishedAttempt() {
+        app.persistTimerId = null;
         if (!app.quizSet || views.exam.classList.contains("hidden") || !app.questions.length) return;
         storage.write("unfinished", {
             quizId: app.quizSet.id,
