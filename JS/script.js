@@ -6,6 +6,7 @@ const ADS_CONFIG = {
   blockedPages: ['quiz.html', 'rank-predictor.html', 'documents.html'],
   inlineFrequency: 6
 };
+const CANDIDATE_SESSION_KEY = 'gju:candidate-session';
 
 window.ADS_CONFIG = ADS_CONFIG;
 
@@ -80,10 +81,65 @@ window.GovJobAds = {
   isBlockedPage: isAdsBlockedPage
 };
 
+const getCandidateHeaderSession = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CANDIDATE_SESSION_KEY) || sessionStorage.getItem(CANDIDATE_SESSION_KEY) || 'null');
+    return saved && saved.userId ? saved : null;
+  } catch {
+    return null;
+  }
+};
+
+const getCandidatePageHref = (pageName) => {
+  const rankPredictorLink = document.querySelector('header a[href*="rank-predictor.html"]');
+  const rankPredictorHref = rankPredictorLink?.getAttribute('href') || '';
+  if (rankPredictorHref) return rankPredictorHref.replace(/rank-predictor\.html(?:[?#].*)?$/i, pageName);
+
+  const path = window.location.pathname.replace(/\\/g, '/');
+  if (/\/HTML\/[^/]+\.html$/i.test(path)) return pageName;
+  if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../HTML/${pageName}`;
+  return `HTML/${pageName}`;
+};
+
+const ensureHeaderAuthEntry = () => {
+  const header = document.querySelector('header .header-container');
+  if (!header || header.querySelector('.header-auth-actions')) return;
+
+  const loginHref = getCandidatePageHref('login.html');
+  const dashboardHref = getCandidatePageHref('dashboard.html');
+  const session = getCandidateHeaderSession();
+  const authActions = document.createElement('div');
+  const authLink = document.createElement('a');
+  const authIcon = document.createElement('i');
+  const authLabel = document.createElement('span');
+
+  authActions.className = 'header-auth-actions';
+  authLink.className = `header-login-btn${session ? ' is-active' : ''}`;
+  authLink.href = session ? dashboardHref : loginHref;
+  authLink.setAttribute('aria-label', session ? 'Open candidate dashboard' : 'Login to candidate dashboard');
+  authLink.dataset.authEntry = '';
+  authLink.dataset.loginHref = loginHref;
+  authLink.dataset.dashboardHref = dashboardHref;
+  authIcon.className = 'fas fa-user-circle';
+  authIcon.setAttribute('aria-hidden', 'true');
+  authLabel.textContent = session ? 'Dashboard' : 'Login';
+
+  authLink.append(authIcon, authLabel);
+  authActions.appendChild(authLink);
+
+  const nav = header.querySelector('nav');
+  if (nav) nav.insertAdjacentElement('afterend', authActions);
+  else header.appendChild(authActions);
+
+  window.CandidateAuth?.syncHeaderEntry?.(header);
+};
+
 if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', ensureHeaderAuthEntry);
   window.addEventListener('DOMContentLoaded', markPageLoaded);
   window.addEventListener('DOMContentLoaded', applyAdControls);
 } else {
+  ensureHeaderAuthEntry();
   markPageLoaded();
   applyAdControls();
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Login | GovJobUpdates</title>
+    <meta name="description" content="Login to your GovJobUpdates candidate dashboard to track rank predictor attempts, percentile trend, and subject analytics.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+            </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                    <li><a href="quiz.html">Quizzes</a></li>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <section class="auth-shell" aria-labelledby="loginTitle">
+            <div class="auth-panel">
+                <span class="auth-eyebrow">Candidate workspace</span>
+                <h1 id="loginTitle">Track every rank attempt in one place.</h1>
+                <p>Login with your mobile number or email to view previous exams, percentile growth, rank history, and subject-wise improvement.</p>
+                <div class="auth-stats" aria-label="Dashboard features">
+                    <div class="auth-stat"><span>Trend</span><strong>Percentile</strong></div>
+                    <div class="auth-stat"><span>Focus</span><strong>Weak Subject</strong></div>
+                    <div class="auth-stat"><span>History</span><strong>Attempts</strong></div>
+                </div>
+                <div class="auth-note"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Your account stays lightweight and works with the existing Google Sheets rank predictor backend.</span></div>
+            </div>
+
+            <section class="auth-card" aria-labelledby="loginFormTitle">
+                <div>
+                    <h2 id="loginFormTitle">Login</h2>
+                    <p>Use your registered mobile number or email.</p>
+                </div>
+                <form class="auth-form" id="loginForm" novalidate>
+                    <label class="auth-field" for="loginContact">Mobile or Email
+                        <input id="loginContact" name="contact" type="text" autocomplete="username" inputmode="email" required>
+                    </label>
+                    <label class="auth-field" for="loginPassword">Password
+                        <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+                    </label>
+                    <label class="auth-check" for="rememberLogin">
+                        <input id="rememberLogin" name="remember" type="checkbox" checked>
+                        <span>Keep me logged in on this device.</span>
+                    </label>
+                    <div class="auth-message hidden" id="loginMessage" role="status" aria-live="polite"></div>
+                    <div class="auth-actions">
+                        <button class="btn btn-primary" id="loginSubmit" type="submit">Login</button>
+                        <a class="btn btn-outline" href="rank-predictor.html">Open Rank Predictor</a>
+                    </div>
+                </form>
+                <p class="auth-switch"><a href="forgot-password.html">Forgot password?</a></p>
+                <p class="auth-switch">New candidate? <a href="register.html">Create account</a></p>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+<script src="../JS/rank-predictor-config.js"></script>
+<script src="../JS/candidate-auth.js"></script>
+<script src="../JS/login.js"></script>
+<script src="../JS/script.js"></script>
+</body>
+</html>

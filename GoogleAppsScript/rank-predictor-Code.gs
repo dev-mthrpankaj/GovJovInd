@@ -1,8 +1,20 @@
 const SPREADSHEET_ID = "1IIDP7Slon3zRDlOH0hxzOnAZd4fzYi5nZHphVCW2_wE";
 const RANK_EXAMS_SHEET_NAME = "Rank Predictor Exams";
+const USERS_SHEET_NAME = "Users";
+
+const USER_HEADERS = [
+  "User ID",
+  "Name",
+  "Mobile",
+  "Email",
+  "Date of Birth",
+  "Password",
+  "Created At"
+];
 
 const HEADERS = [
   "Timestamp",
+  "User ID",
   "Exam ID",
   "Exam Name",
   "Mode",
@@ -81,6 +93,11 @@ function doPost(e) {
     }
 
     if (!data.action) return sendJSON({ success: false, message: "Missing action" });
+    if (data.action === "registerCandidate") return registerCandidate(data);
+    if (data.action === "loginCandidate") return loginCandidate(data);
+    if (data.action === "resetCandidatePassword") return resetCandidatePassword(data);
+    if (data.action === "getCandidateDashboard") return getCandidateDashboard(data);
+    if (data.action === "getCandidateAttempts") return getCandidateAttempts(data);
     if (data.action === "submitData") return submitData(data);
     if (data.action === "checkRank") return checkRank(data);
 
@@ -93,7 +110,141 @@ function doPost(e) {
   }
 }
 
+function registerCandidate(data) {
+  const name = normalizeText(data.name);
+  const mobile = normalizeMobile(data.mobile);
+  const email = normalizeEmail(data.email);
+  const dob = normalizeDob(data.dob);
+  const password = String(data.password || "");
+
+  if (!name) return sendJSON({ success: false, message: "Name is required." });
+  if (!mobile) return sendJSON({ success: false, message: "Mobile number is required." });
+  if (!email) return sendJSON({ success: false, message: "Email address is required." });
+  if (!dob) return sendJSON({ success: false, message: "Date of birth is required." });
+  if (!isValidMobile(mobile)) return sendJSON({ success: false, message: "Mobile number must be 10 digits." });
+  if (!isValidEmail(email)) return sendJSON({ success: false, message: "Email address is invalid." });
+  if (!isValidPassword(password)) return sendJSON({ success: false, message: "Password must be alphanumeric with at least one letter and one number." });
+
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getUsersSheet(spreadsheet);
+  const columnMap = ensureUsersSheetSchema(sheet);
+  const users = getUserRows(sheet, columnMap);
+
+  const duplicate = users.find(function (user) {
+    return (mobile && user.mobile === mobile) || (email && user.email === email);
+  });
+
+  if (duplicate) {
+    return sendJSON({
+      success: false,
+      message: "Account already exists. Please login."
+    });
+  }
+
+  const user = {
+    userId: generateUserId(users),
+    name: name,
+    mobile: mobile,
+    email: email,
+    dob: dob,
+    password: hashPassword(password),
+    createdAt: new Date()
+  };
+
+  appendUser(sheet, columnMap, user);
+
+  return sendJSON({
+    success: true,
+    message: "Account created successfully.",
+    user: sanitizeUser(user)
+  });
+}
+
+function loginCandidate(data) {
+  const identifier = normalizeLoginIdentifier(data.identifier || data.mobile || data.email);
+  const password = String(data.password || "");
+  if (!identifier || !password) return sendJSON({ success: false, message: "Mobile/email and password are required." });
+
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getUsersSheet(spreadsheet);
+  const columnMap = ensureUsersSheetSchema(sheet);
+  const users = getUserRows(sheet, columnMap);
+  const passwordHash = hashPassword(password);
+  const user = users.find(function (candidate) {
+    const identifierMatches = candidate.mobile === identifier || candidate.email === identifier;
+    const passwordMatches = candidate.password === passwordHash || candidate.password === password;
+    return identifierMatches && passwordMatches;
+  });
+
+  if (!user) return sendJSON({ success: false, message: "Invalid login details." });
+
+  return sendJSON({
+    success: true,
+    message: "Login successful.",
+    user: sanitizeUser(user)
+  });
+}
+
+function resetCandidatePassword(data) {
+  const mobile = normalizeMobile(data.mobile);
+  const email = normalizeEmail(data.email);
+  const dob = normalizeDob(data.dob);
+  const password = String(data.password || "");
+
+  if (!mobile) return sendJSON({ success: false, message: "Mobile number is required." });
+  if (!email) return sendJSON({ success: false, message: "Email address is required." });
+  if (!dob) return sendJSON({ success: false, message: "Date of birth is required." });
+  if (!isValidMobile(mobile)) return sendJSON({ success: false, message: "Mobile number must be 10 digits." });
+  if (!isValidEmail(email)) return sendJSON({ success: false, message: "Email address is invalid." });
+  if (!isValidPassword(password)) return sendJSON({ success: false, message: "New password must be alphanumeric with at least one letter and one number." });
+
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = getUsersSheet(spreadsheet);
+  const columnMap = ensureUsersSheetSchema(sheet);
+  const users = getUserRows(sheet, columnMap);
+  const user = users.find(function (candidate) {
+    return candidate.mobile === mobile && candidate.email === email && candidate.dob === dob;
+  });
+
+  if (!user) {
+    return sendJSON({
+      success: false,
+      message: "No account found with this mobile number, email, and date of birth."
+    });
+  }
+
+  const passwordColumn = columnMap[normalizeHeader("Password")];
+  if (passwordColumn === undefined) throw new Error("Password column missing.");
+  setTextFormat(sheet, columnMap, user.rowNumber, "Password");
+  sheet.getRange(user.rowNumber, passwordColumn + 1).setValue(hashPassword(password));
+  SpreadsheetApp.flush();
+
+  return sendJSON({
+    success: true,
+    message: "Password reset successfully."
+  });
+}
+
+function getCandidateDashboard(data) {
+  const dashboard = buildCandidateDashboard(data);
+  return sendJSON(Object.assign({
+    success: true,
+    message: "Dashboard loaded successfully."
+  }, dashboard));
+}
+
+function getCandidateAttempts(data) {
+  const dashboard = buildCandidateDashboard(data);
+  return sendJSON({
+    success: true,
+    message: "Attempts loaded successfully.",
+    user: dashboard.user,
+    attempts: dashboard.attempts
+  });
+}
+
 function submitData(data) {
+  data.userId = normalizeText(data.userId);
   data.rollNumber = normalizeRoll(data.rollNumber);
   data.mobileNumber = normalizeMobile(data.mobileNumber);
   data.dob = normalizeDob(data.dob);
@@ -207,6 +358,316 @@ function getSheetByExam(sheetName, spreadsheet) {
   const safeName = String(sheetName || "").trim();
   if (!safeName) throw new Error("Sheet name is required.");
   return spreadsheet.getSheetByName(safeName) || spreadsheet.insertSheet(safeName);
+}
+
+function getUsersSheet(spreadsheet) {
+  const sheet = spreadsheet.getSheetByName(USERS_SHEET_NAME) || spreadsheet.insertSheet(USERS_SHEET_NAME);
+  ensureUsersSheetSchema(sheet);
+  return sheet;
+}
+
+function ensureUsersSheetSchema(sheet) {
+  if (sheet.getMaxColumns() < USER_HEADERS.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), USER_HEADERS.length - sheet.getMaxColumns());
+  }
+
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  if (lastRow < 1 || lastColumn < 1) {
+    sheet.getRange(1, 1, 1, USER_HEADERS.length).setValues([USER_HEADERS]);
+    sheet.setFrozenRows(1);
+    return getColumnMap(sheet);
+  }
+
+  const currentHeaders = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
+  const hasAnyHeader = currentHeaders.some(function (header) {
+    return String(header || "").trim();
+  });
+  if (!hasAnyHeader) {
+    sheet.getRange(1, 1, 1, USER_HEADERS.length).setValues([USER_HEADERS]);
+    sheet.setFrozenRows(1);
+    return getColumnMap(sheet);
+  }
+
+  const currentMap = buildColumnMapFromHeaders(currentHeaders);
+  const missingHeaders = USER_HEADERS.filter(function (header) {
+    return currentMap[normalizeHeader(header)] === undefined;
+  });
+
+  if (missingHeaders.length) {
+    const startColumn = sheet.getLastColumn() + 1;
+    sheet.insertColumnsAfter(sheet.getLastColumn(), missingHeaders.length);
+    sheet.getRange(1, startColumn, 1, missingHeaders.length).setValues([missingHeaders]);
+  }
+
+  sheet.setFrozenRows(1);
+  return getColumnMap(sheet);
+}
+
+function setupCandidateLoginSheets() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  ensureUsersSheetSchema(getUsersSheet(spreadsheet));
+  getRankPredictorExamConfigs(spreadsheet).exams.forEach(function (exam) {
+    if (!exam.sheetName || exam.disabled) return;
+    ensureSheetSchema(getSheetByExam(exam.sheetName, spreadsheet));
+  });
+}
+
+function getUserRows(sheet, columnMap) {
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  if (lastRow < 2 || lastColumn < 1) return [];
+
+  return sheet.getRange(2, 1, lastRow - 1, lastColumn).getValues().map(function (row, index) {
+    return {
+      rowNumber: index + 2,
+      userId: normalizeText(getHeaderValue(row, columnMap, "User ID")),
+      name: normalizeText(getHeaderValue(row, columnMap, "Name")),
+      mobile: normalizeMobile(getHeaderValue(row, columnMap, "Mobile")),
+      email: normalizeEmail(getHeaderValue(row, columnMap, "Email")),
+      dob: normalizeDob(getHeaderValue(row, columnMap, "Date of Birth")),
+      password: normalizeText(getHeaderValue(row, columnMap, "Password")),
+      createdAt: getHeaderValue(row, columnMap, "Created At")
+    };
+  }).filter(function (user) {
+    return user.userId;
+  });
+}
+
+function appendUser(sheet, columnMap, user) {
+  const row = new Array(Math.max(sheet.getLastColumn(), USER_HEADERS.length)).fill("");
+  setHeaderValue(row, columnMap, "User ID", user.userId);
+  setHeaderValue(row, columnMap, "Name", user.name);
+  setHeaderValue(row, columnMap, "Mobile", user.mobile);
+  setHeaderValue(row, columnMap, "Email", user.email);
+  setHeaderValue(row, columnMap, "Date of Birth", user.dob);
+  setHeaderValue(row, columnMap, "Password", user.password);
+  setHeaderValue(row, columnMap, "Created At", user.createdAt);
+
+  const nextRow = sheet.getLastRow() + 1;
+  ["User ID", "Mobile", "Email", "Date of Birth", "Password"].forEach(function (header) {
+    setTextFormat(sheet, columnMap, nextRow, header);
+  });
+  sheet.getRange(nextRow, 1, 1, row.length).setValues([row]);
+}
+
+function sanitizeUser(user) {
+  return {
+    userId: user.userId,
+    name: user.name,
+    mobile: user.mobile,
+    email: user.email,
+    dob: user.dob,
+    createdAt: toIsoString(user.createdAt)
+  };
+}
+
+function generateUserId(existingUsers) {
+  const known = {};
+  (existingUsers || []).forEach(function (user) {
+    if (user.userId) known[user.userId] = true;
+  });
+
+  let userId = "";
+  do {
+    userId = "GJU-" + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyyMMddHHmmss") + "-" + Math.floor(Math.random() * 9000 + 1000);
+  } while (known[userId]);
+  return userId;
+}
+
+function hashPassword(password) {
+  const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(password || ""), Utilities.Charset.UTF_8);
+  return digest.map(function (byte) {
+    const value = byte < 0 ? byte + 256 : byte;
+    return ("0" + value.toString(16)).slice(-2);
+  }).join("");
+}
+
+function buildCandidateDashboard(data) {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const usersSheet = getUsersSheet(spreadsheet);
+  const userMap = ensureUsersSheetSchema(usersSheet);
+  const users = getUserRows(usersSheet, userMap);
+  const user = findDashboardUser(users, data);
+
+  if (!user) throw new Error("Candidate account not found.");
+
+  const attempts = getCandidateAttemptRows(spreadsheet, user);
+  const subjectAnalytics = buildDashboardSubjectAnalytics(attempts);
+  return {
+    user: sanitizeUser(user),
+    summary: buildDashboardSummary(attempts, subjectAnalytics),
+    attempts: attempts,
+    subjectAnalytics: subjectAnalytics
+  };
+}
+
+function findDashboardUser(users, data) {
+  const userId = normalizeText(data.userId);
+  const mobile = normalizeMobile(data.mobile);
+  const email = normalizeEmail(data.email);
+  return users.find(function (user) {
+    return (userId && user.userId === userId) ||
+      (mobile && user.mobile === mobile) ||
+      (email && user.email === email);
+  }) || null;
+}
+
+function getCandidateAttemptRows(spreadsheet, user) {
+  const examConfigs = getRankPredictorExamConfigs(spreadsheet).exams.filter(function (exam) {
+    return exam.sheetName && !exam.disabled;
+  });
+  const attempts = [];
+  const seen = {};
+
+  examConfigs.forEach(function (examConfig) {
+    const sheet = spreadsheet.getSheetByName(examConfig.sheetName);
+    if (!sheet) return;
+    const columnMap = ensureSheetSchema(sheet);
+    const rows = getRowsByHeaders(sheet, columnMap);
+    rows.forEach(function (row) {
+      const matchesUser = row.userId && row.userId === user.userId;
+      const matchesLegacyMobile = !row.userId && user.mobile && row.mobileNumber === user.mobile;
+      if (!matchesUser && !matchesLegacyMobile) return;
+
+      const key = examConfig.sheetName + ":" + row.rowNumber;
+      if (seen[key]) return;
+      seen[key] = true;
+      const analytics = calculateAnalytics(rows, row, examConfig);
+      attempts.push(buildDashboardAttempt(row, analytics, examConfig));
+    });
+  });
+
+  return attempts.sort(function (first, second) {
+    return getSortableDate(second.timestamp || second.examDate) - getSortableDate(first.timestamp || first.examDate);
+  });
+}
+
+function buildDashboardAttempt(row, analytics, examConfig) {
+  const attempted = Number(row.totalAttempted) || 0;
+  const right = Number(row.rightAnswers) || 0;
+  return {
+    timestamp: toIsoString(row.timestamp),
+    userId: row.userId,
+    examId: row.examId || examConfig.examId,
+    examName: row.examName || examConfig.examName,
+    mode: row.mode,
+    examDate: row.examDate,
+    shift: row.shift,
+    category: row.category,
+    state: row.state,
+    totalQuestions: row.totalQuestions,
+    totalAttempted: row.totalAttempted,
+    rightAnswers: row.rightAnswers,
+    wrongAnswers: row.wrongAnswers,
+    unattempted: row.unattempted,
+    rawMarks: round2(row.rawMarks),
+    marks: round2(row.rawMarks),
+    normalizedMarks: round2(analytics.normalizedMarks),
+    percentile: round2(analytics.percentile),
+    overallRank: analytics.overallRank,
+    categoryRank: analytics.categoryRank,
+    stateRank: analytics.stateRank,
+    shiftRank: analytics.shiftRank,
+    accuracy: attempted ? round2((right / attempted) * 100) : 0,
+    subjectData: row.subjectData || [],
+    subjectAnalysis: analytics.subjectAnalysis || [],
+    totalSubmissions: analytics.totalSubmissions,
+    rankBasis: analytics.rankBasis
+  };
+}
+
+function buildDashboardSummary(attempts, subjectAnalytics) {
+  const total = attempts.length;
+  const percentileValues = attempts.map(function (attempt) {
+    return Number(attempt.percentile);
+  }).filter(function (value) {
+    return Number.isFinite(value);
+  });
+  const rankedAttempts = attempts.filter(function (attempt) {
+    return Number(attempt.overallRank) > 0;
+  }).sort(function (first, second) {
+    return Number(first.overallRank) - Number(second.overallRank);
+  });
+  const bestSubject = subjectAnalytics.length ? subjectAnalytics[0] : null;
+  const weakSubject = subjectAnalytics.length ? subjectAnalytics[subjectAnalytics.length - 1] : null;
+
+  return {
+    totalExamsAttempted: total,
+    averagePercentile: percentileValues.length ? round2(percentileValues.reduce(function (sum, value) {
+      return sum + value;
+    }, 0) / percentileValues.length) : 0,
+    bestRank: rankedAttempts.length ? rankedAttempts[0].overallRank : "",
+    bestRankExam: rankedAttempts.length ? rankedAttempts[0].examName : "",
+    bestSubject: bestSubject ? bestSubject.name : "",
+    bestSubjectAccuracy: bestSubject ? bestSubject.accuracy : "",
+    weakSubject: weakSubject ? weakSubject.name : "",
+    weakSubjectAccuracy: weakSubject ? weakSubject.accuracy : "",
+    recentExams: attempts.slice(0, 5).map(function (attempt) {
+      return {
+        examName: attempt.examName,
+        examDate: attempt.examDate,
+        percentile: attempt.percentile,
+        overallRank: attempt.overallRank,
+        rawMarks: attempt.rawMarks
+      };
+    })
+  };
+}
+
+function buildDashboardSubjectAnalytics(attempts) {
+  const buckets = {};
+  attempts.forEach(function (attempt) {
+    const subjectSource = Array.isArray(attempt.subjectData) && attempt.subjectData.length
+      ? attempt.subjectData
+      : attempt.subjectAnalysis || [];
+    subjectSource.forEach(function (subject) {
+      const name = normalizeText(subject.name);
+      if (!name) return;
+      if (!buckets[name]) {
+        buckets[name] = {
+          name: name,
+          scores: [],
+          totalCorrect: 0,
+          totalAttempted: 0,
+          accuracyTotal: 0,
+          accuracyCount: 0
+        };
+      }
+      const score = Number(subject.marks || subject.score || 0);
+      const attempted = Number(subject.attempted) || 0;
+      const correct = Number(subject.correct) || 0;
+      const accuracy = Number(subject.accuracy);
+      buckets[name].scores.push(score);
+      buckets[name].totalAttempted += attempted;
+      buckets[name].totalCorrect += correct;
+      if (Number.isFinite(accuracy)) {
+        buckets[name].accuracyTotal += accuracy;
+        buckets[name].accuracyCount += 1;
+      }
+    });
+  });
+
+  return Object.keys(buckets).map(function (name) {
+    const bucket = buckets[name];
+    const scores = bucket.scores.length ? bucket.scores : [0];
+    const averageScore = scores.reduce(function (sum, value) {
+      return sum + value;
+    }, 0) / scores.length;
+    const accuracy = bucket.totalAttempted
+      ? (bucket.totalCorrect / bucket.totalAttempted) * 100
+      : bucket.accuracyCount ? bucket.accuracyTotal / bucket.accuracyCount : 0;
+    return {
+      name: name,
+      averageScore: round2(averageScore),
+      bestScore: round2(Math.max.apply(null, scores)),
+      weakestScore: round2(Math.min.apply(null, scores)),
+      accuracy: round2(accuracy),
+      attempts: scores.length
+    };
+  }).sort(function (first, second) {
+    return Number(second.accuracy) - Number(first.accuracy);
+  });
 }
 
 function setupRankPredictorExamSheet() {
@@ -540,6 +1001,7 @@ function appendCandidateData(sheet, columnMap, data) {
   const unattempted = isFinite(Number(data.unattempted)) ? Number(data.unattempted) : Math.max(Number(data.totalQuestions) - Number(data.totalAttempted), 0);
 
   setHeaderValue(row, columnMap, "Timestamp", new Date());
+  setHeaderValue(row, columnMap, "User ID", data.userId || "");
   setHeaderValue(row, columnMap, "Exam ID", data.examId);
   setHeaderValue(row, columnMap, "Exam Name", data.examName);
   setHeaderValue(row, columnMap, "Mode", data.mode);
@@ -583,6 +1045,7 @@ function getRowsByHeaders(sheet, columnMap) {
     return {
       rowNumber: index + 2,
       timestamp: getHeaderValue(row, columnMap, "Timestamp"),
+      userId: normalizeText(getHeaderValue(row, columnMap, "User ID")),
       examId: normalizeText(getHeaderValue(row, columnMap, "Exam ID")),
       examName: normalizeText(getHeaderValue(row, columnMap, "Exam Name")),
       mode: normalizeText(getHeaderValue(row, columnMap, "Mode")),
@@ -595,6 +1058,11 @@ function getRowsByHeaders(sheet, columnMap) {
       state: normalizeText(getHeaderValue(row, columnMap, "State")),
       examDate: normalizeDob(getHeaderValue(row, columnMap, "Exam Date")),
       shift: normalizeShift(getHeaderValue(row, columnMap, "Shift")),
+      totalQuestions: Number(getHeaderValue(row, columnMap, "Total Questions")) || 0,
+      totalAttempted: Number(getHeaderValue(row, columnMap, "Total Attempted")) || 0,
+      rightAnswers: Number(getHeaderValue(row, columnMap, "Right Answers")) || 0,
+      wrongAnswers: Number(getHeaderValue(row, columnMap, "Wrong Answers")) || 0,
+      unattempted: Number(getHeaderValue(row, columnMap, "Unattempted")) || 0,
       rawMarks: Number(getHeaderValue(row, columnMap, "Raw Marks")) || 0,
       normalizedMarks: readOptionalNumber(getHeaderValue(row, columnMap, "Normalized Marks")),
       percentile: Number(getHeaderValue(row, columnMap, "Percentile")) || 0,
@@ -997,8 +1465,26 @@ function normalizeMobile(value) {
   return digits;
 }
 
+function normalizeEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function normalizeLoginIdentifier(value) {
+  const text = String(value || "").trim();
+  return text.indexOf("@") >= 0 ? normalizeEmail(text) : normalizeMobile(text);
+}
+
 function isValidMobile(value) {
   return /^\d{10}$/.test(normalizeMobile(value));
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeEmail(value));
+}
+
+function isValidPassword(value) {
+  const password = String(value || "");
+  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/.test(password);
 }
 
 function maskMobile(value) {
@@ -1021,6 +1507,22 @@ function normalizeKey(value) {
 
 function normalizeHeader(value) {
   return String(value || "").trim().toLowerCase();
+}
+
+function toIsoString(value) {
+  if (!value) return "";
+  if (Object.prototype.toString.call(value) === "[object Date]") {
+    return value.toISOString();
+  }
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? String(value) : date.toISOString();
+}
+
+function getSortableDate(value) {
+  if (!value) return 0;
+  if (Object.prototype.toString.call(value) === "[object Date]") return value.getTime();
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
 }
 
 function getAccuracyIndicator(totalSubmissions) {

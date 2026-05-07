@@ -99,6 +99,7 @@
         bindFormAccordions();
         bindKeyboardFocusHandling(app);
         applyExamDefaults();
+        hydrateCandidateSession();
         renderPendingResult();
         window.addEventListener("resize", debounce(() => {
             state.mobileMarksMode = detectMobileMarksMode();
@@ -320,6 +321,7 @@
         getById("resetPredictorBtn")?.addEventListener("click", () => {
             form.reset();
             applyExamDefaults();
+            hydrateCandidateSession();
             clearErrors(form);
             showMessage("submitMessage", "");
             renderPendingResult();
@@ -729,6 +731,7 @@
 
     function collectSubmitPayload() {
         const selectedExam = getSelectedExam();
+        const candidateSession = getCandidateSession();
         const rollNumberInput = getById("rollNumber");
         const mobileInput = getById("mobileNumber");
         const dobInput = getById("dob");
@@ -747,6 +750,7 @@
         const rawMarks = round2((rightAnswers * marksPerCorrect) - (wrongAnswers * negativeMarking));
         return {
             action: "submitData",
+            userId: candidateSession?.userId || "",
             examId: selectedExam.examId,
             examName: selectedExam.examName,
             sheetName: selectedExam.sheetName,
@@ -776,6 +780,7 @@
 
     function collectCheckPayload() {
         const selectedExam = getSelectedExam();
+        const candidateSession = getCandidateSession();
         const rollNumberInput = getById("checkRollNumber");
         const mobileInput = getById("checkMobileNumber");
         const dobInput = getById("checkDob");
@@ -785,6 +790,7 @@
         const dob = dobInput?.value || "";
         return {
             action: "checkRank",
+            userId: candidateSession?.userId || "",
             examId: selectedExam.examId,
             examName: selectedExam.examName,
             sheetName: selectedExam.sheetName,
@@ -1081,6 +1087,23 @@
     function setSelectedExam(exam) {
         state.exam = exam;
         window.RANK_PREDICTOR_SELECTED_EXAM = exam;
+    }
+
+    function getCandidateSession() {
+        return window.CandidateAuth?.getSession?.() || null;
+    }
+
+    function hydrateCandidateSession() {
+        const session = getCandidateSession();
+        if (!session) return;
+
+        const candidateName = getById("candidateName");
+        const mobileNumber = getById("mobileNumber");
+        const checkMobileNumber = getById("checkMobileNumber");
+
+        if (candidateName && !candidateName.value && session.name) candidateName.value = session.name;
+        if (mobileNumber && !mobileNumber.value && session.mobile) mobileNumber.value = session.mobile;
+        if (checkMobileNumber && !checkMobileNumber.value && session.mobile) checkMobileNumber.value = session.mobile;
     }
 
     function getSelectedExam() {

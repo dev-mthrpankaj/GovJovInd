@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Dashboard | GovJobUpdates</title>
+    <meta name="description" content="Candidate performance dashboard for GovJobUpdates Rank Predictor attempts, percentile trend, subject accuracy, and previous scorecards.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+            </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                    <li><a href="quiz.html">Quizzes</a></li>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-page" id="candidateDashboard" aria-busy="true">
+        <section class="dash-hero" aria-labelledby="dashboardTitle">
+            <div class="dash-hero-copy">
+                <span class="dash-eyebrow">Performance Dashboard</span>
+                <h1 id="dashboardTitle">Welcome, <span id="candidateName">Candidate</span></h1>
+                <p id="candidateContact">Loading your saved Rank Predictor attempts.</p>
+            </div>
+            <div class="dash-hero-actions">
+                <a class="btn btn-primary" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> New Attempt</a>
+                <button class="btn btn-outline" type="button" data-auth-logout="login.html"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</button>
+            </div>
+        </section>
+
+        <div class="dash-message hidden" id="dashboardMessage" role="status" aria-live="polite"></div>
+
+        <section class="dash-grid metrics-grid" aria-label="Performance summary">
+            <article class="metric-card">
+                <span>Total Exams Attempted</span>
+                <strong id="metricTotalExams">0</strong>
+                <small>Saved attempts</small>
+            </article>
+            <article class="metric-card">
+                <span>Average Percentile</span>
+                <strong id="metricAveragePercentile">0%</strong>
+                <small>Across all exams</small>
+            </article>
+            <article class="metric-card">
+                <span>Best Rank</span>
+                <strong id="metricBestRank">Pending</strong>
+                <small id="metricBestRankExam">No attempts yet</small>
+            </article>
+            <article class="metric-card">
+                <span>Best Subject</span>
+                <strong id="metricBestSubject">Pending</strong>
+                <small id="metricBestSubjectScore">Accuracy</small>
+            </article>
+            <article class="metric-card">
+                <span>Weak Subject</span>
+                <strong id="metricWeakSubject">Pending</strong>
+                <small id="metricWeakSubjectScore">Needs focus</small>
+            </article>
+            <article class="metric-card">
+                <span>Recent Exams</span>
+                <strong id="metricRecentExams">0</strong>
+                <small>Latest 5 listed below</small>
+            </article>
+        </section>
+
+        <section class="dash-grid dashboard-layout">
+            <div class="dash-grid">
+                <section class="dash-grid charts-grid" aria-label="Charts">
+                    <article class="dash-card">
+                        <div class="dash-card-header">
+                            <h2>Percentile Trend</h2>
+                            <p>Growth by attempt date</p>
+                        </div>
+                        <div class="chart-box"><canvas id="percentileTrendChart" aria-label="Percentile trend chart"></canvas></div>
+                    </article>
+                    <article class="dash-card">
+                        <div class="dash-card-header">
+                            <h2>Subject Accuracy</h2>
+                            <p>Average accuracy</p>
+                        </div>
+                        <div class="chart-box"><canvas id="subjectAccuracyChart" aria-label="Subject accuracy chart"></canvas></div>
+                    </article>
+                    <article class="dash-card wide-card">
+                        <div class="dash-card-header">
+                            <h2>Exam Performance</h2>
+                            <p>Marks and percentile together</p>
+                        </div>
+                        <div class="chart-box"><canvas id="examPerformanceChart" aria-label="Exam performance chart"></canvas></div>
+                    </article>
+                </section>
+
+                <section class="dash-card" aria-labelledby="attemptsTitle">
+                    <div class="dash-card-header">
+                        <h2 id="attemptsTitle">Previous Attempts</h2>
+                        <p id="attemptCountLabel">Loading</p>
+                    </div>
+                    <div class="attempt-list" id="attemptList"></div>
+                </section>
+            </div>
+
+            <aside class="dash-grid side-stack">
+                <section class="dash-card" aria-labelledby="recentTitle">
+                    <div class="dash-card-header">
+                        <h2 id="recentTitle">Recent Exams</h2>
+                    </div>
+                    <div class="attempt-list" id="recentExamList"></div>
+                </section>
+
+                <section class="dash-card" aria-labelledby="subjectTitle">
+                    <div class="dash-card-header">
+                        <h2 id="subjectTitle">Subject Analytics</h2>
+                        <p>Average, best, weakest, accuracy</p>
+                    </div>
+                    <div class="subject-grid" id="subjectAnalytics"></div>
+                </section>
+            </aside>
+        </section>
+    </main>
+
+    <div class="modal-backdrop hidden" id="scorecardModal" role="dialog" aria-modal="true" aria-labelledby="scorecardTitle">
+        <article class="detail-modal">
+            <div class="detail-modal-header">
+                <div>
+                    <h2 id="scorecardTitle">Scorecard</h2>
+                    <p id="scorecardSubtitle"></p>
+                </div>
+                <button class="modal-close" id="scorecardClose" type="button" aria-label="Close scorecard"><i class="fas fa-times" aria-hidden="true"></i></button>
+            </div>
+            <div class="score-grid" id="scorecardMetrics"></div>
+            <section>
+                <h3>Subject Scorecard</h3>
+                <div class="detail-subjects" id="scorecardSubjects"></div>
+            </section>
+        </article>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+<script src="../JS/rank-predictor-config.js"></script>
+<script src="../JS/candidate-auth.js"></script>
+<script src="../JS/dashboard.js"></script>
+<script src="../JS/script.js"></script>
+</body>
+</html>

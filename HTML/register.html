@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Candidate Account | GovJobUpdates</title>
+    <meta name="description" content="Create a GovJobUpdates candidate account to save rank predictor attempts and view performance analytics.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+            </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                    <li><a href="quiz.html">Quizzes</a></li>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <section class="auth-shell" aria-labelledby="registerTitle">
+            <div class="auth-panel">
+                <span class="auth-eyebrow">Start tracking</span>
+                <h1 id="registerTitle">Build your exam performance timeline.</h1>
+                <p>Your Rank Predictor submissions can now be grouped under one candidate ID, so the dashboard can show growth, weak areas, and recent scorecards.</p>
+                <div class="auth-stats" aria-label="Account benefits">
+                    <div class="auth-stat"><span>ID</span><strong>Auto</strong></div>
+                    <div class="auth-stat"><span>Storage</span><strong>Sheets</strong></div>
+                    <div class="auth-stat"><span>Login</span><strong>Mobile/Email</strong></div>
+                </div>
+                <div class="auth-note"><i class="fas fa-lock" aria-hidden="true"></i><span>Password storage is basic for now as requested. You can migrate this flow to Firebase later without changing the dashboard UI.</span></div>
+            </div>
+
+            <section class="auth-card" aria-labelledby="registerFormTitle">
+                <div>
+                    <h2 id="registerFormTitle">Create account</h2>
+                    <p>Mobile number, email, and date of birth are required for account recovery and dashboard matching.</p>
+                </div>
+                <form class="auth-form" id="registerForm" novalidate>
+                    <label class="auth-field" for="registerName">Name
+                        <input id="registerName" name="name" type="text" autocomplete="name" required>
+                    </label>
+                    <label class="auth-field" for="registerMobile">Mobile Number
+                        <input id="registerMobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" required>
+                    </label>
+                    <label class="auth-field" for="registerEmail">Email Address
+                        <input id="registerEmail" name="email" type="email" autocomplete="email" required>
+                    </label>
+                    <label class="auth-field" for="registerDob">Date of Birth
+                        <input id="registerDob" name="dob" type="date" autocomplete="bday" required>
+                    </label>
+                    <label class="auth-field" for="registerPassword">Password
+                        <input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="4" pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,}" title="Use letters and numbers only, with at least one letter and one number." required>
+                    </label>
+                    <label class="auth-check" for="rememberRegister">
+                        <input id="rememberRegister" name="remember" type="checkbox" checked>
+                        <span>Login automatically after registration.</span>
+                    </label>
+                    <div class="auth-message hidden" id="registerMessage" role="status" aria-live="polite"></div>
+                    <button class="btn btn-primary" id="registerSubmit" type="submit">Create Account</button>
+                </form>
+                <p class="auth-switch">Already registered? <a href="login.html">Login</a></p>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+<script src="../JS/rank-predictor-config.js"></script>
+<script src="../JS/candidate-auth.js"></script>
+<script src="../JS/register.js"></script>
+<script src="../JS/script.js"></script>
+</body>
+</html>
