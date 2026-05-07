@@ -33,6 +33,7 @@
             mobile: String(user.mobile || "").trim(),
             email: String(user.email || "").trim(),
             dob: String(user.dob || "").trim(),
+            gender: String(user.gender || "").trim(),
             createdAt: user.createdAt || "",
             savedAt: new Date().toISOString()
         };
@@ -104,7 +105,7 @@
         return digits.length === 12 && digits.startsWith("91") ? digits.slice(2) : digits;
     }
 
-    async function registerCandidate({ name, mobile, email, dob, contact, password, remember = true }) {
+    async function registerCandidate({ name, mobile, email, dob, gender, contact, password, remember = true }) {
         const contactType = getContactType(contact);
         const normalizedMobile = normalizeContact(mobile || (contactType === "mobile" ? contact : ""));
         const normalizedEmail = normalizeContact(email || (contactType === "email" ? contact : ""));
@@ -114,6 +115,7 @@
             mobile: normalizedMobile,
             email: normalizedEmail,
             dob: String(dob || "").trim(),
+            gender: String(gender || "").trim(),
             password: String(password || "")
         };
         const result = await callApi(payload);

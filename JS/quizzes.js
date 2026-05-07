@@ -123,6 +123,7 @@
         elements.quizProgress = document.getElementById("quizProgress");
         elements.questionCard = document.getElementById("questionCard");
         elements.palettePanel = document.getElementById("palettePanel");
+        elements.paletteSummary = document.getElementById("paletteSummary");
         elements.questionPalette = document.getElementById("questionPalette");
         elements.submitModal = document.getElementById("submitModal");
         elements.submitSummary = document.getElementById("submitSummary");
@@ -223,6 +224,8 @@
         Object.entries(views).forEach(([key, view]) => {
             view.classList.toggle("hidden", key !== name);
         });
+        document.body.classList.toggle("quiz-exam-active", name === "exam");
+        if (name !== "exam") closePalette();
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -296,6 +299,8 @@
     }
 
     function startQuiz(quizId) {
+        if (!canAttemptQuiz(quizId)) return;
+
         const set = registry.getQuizById(quizId);
         if (!set) return;
 
@@ -327,6 +332,15 @@
         showView("exam");
     }
 
+    function canAttemptQuiz(quizId) {
+        const session = window.CandidateAuth?.getSession?.();
+        if (session) return true;
+
+        const next = `quiz.html?quiz=${encodeURIComponent(String(quizId || ""))}`;
+        window.location.href = `login.html?next=${encodeURIComponent(next)}`;
+        return false;
+    }
+
     function resumeAttempt(saved) {
         const set = registry.getQuizById(saved.quizId);
         if (!set || !set.validation || !set.validation.isComplete) return;
@@ -356,6 +370,7 @@
     function renderExam() {
         const question = app.questions[app.current];
         if (!question) return;
+        const currentStatus = app.statuses[app.current] || "not-visited";
 
         elements.examSubject.textContent = app.quizSet.subject;
         elements.examTitle.textContent = app.quizSet.title;
@@ -364,20 +379,31 @@
         elements.quizProgress.style.width = `${((app.current + 1) / app.questions.length) * 100}%`;
 
         elements.questionCard.innerHTML = `
-            <div class="question-meta">
-                <span class="meta-pill">${escapeHtml(question.subject)}</span>
-                <span class="meta-pill">${escapeHtml(question.topic)}</span>
-                <span class="meta-pill">${escapeHtml(question.difficulty)}</span>
-                <span class="meta-pill">+${question.marks}, -${question.negativeMarks}</span>
+            <div class="question-card-head">
+                <div class="question-number-block">
+                    <span class="question-number-pill">Question ${app.current + 1}</span>
+                    <div class="question-meta">
+                        <span class="meta-pill">${escapeHtml(question.subject)}</span>
+                        <span class="meta-pill">${escapeHtml(question.topic)}</span>
+                        <span class="meta-pill">${escapeHtml(question.difficulty)}</span>
+                    </div>
+                </div>
+                <span class="question-status-badge ${currentStatus}">${escapeHtml(getStatusLabel(currentStatus))}</span>
             </div>
-            <h2 class="question-title">${escapeHtml(sanitizeQuestionText(question.question))}</h2>
-            <div class="option-list" role="radiogroup" aria-label="Answer options">
-                ${question.options.map((option, index) => `
-                    <button class="answer-option ${app.answers[app.current] === index ? "selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${app.answers[app.current] === index}">
-                        <span class="option-key">${String.fromCharCode(65 + index)}</span>
-                        <span>${escapeHtml(option)}</span>
-                    </button>
-                `).join("")}
+            <div class="question-content">
+                <h2 class="question-title">${escapeHtml(sanitizeQuestionText(question.question))}</h2>
+                <div class="option-list" role="radiogroup" aria-label="Answer options">
+                    ${question.options.map((option, index) => `
+                        <button class="answer-option ${app.answers[app.current] === index ? "selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${app.answers[app.current] === index}">
+                            <span class="option-key">${String.fromCharCode(65 + index)}</span>
+                            <span>${escapeHtml(option)}</span>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+            <div class="question-footnote">
+                <span><i class="fas fa-check" aria-hidden="true"></i> +${question.marks} marks</span>
+                <span><i class="fas fa-minus-circle" aria-hidden="true"></i> -${question.negativeMarks} negative</span>
             </div>
         `;
 
@@ -386,9 +412,25 @@
     }
 
     function renderPalette() {
+        const counts = getStatusCounts();
+        if (elements.paletteSummary) {
+            elements.paletteSummary.innerHTML = [
+                ["answered", "Answered", counts.answered],
+                ["not-answered", "Not Answered", counts.notAnswered],
+                ["marked", "Marked", counts.marked],
+                ["answered-marked", "Answered + Marked", counts.answeredMarked],
+                ["not-visited", "Not Visited", counts.notVisited]
+            ].map(([status, label, value]) => `
+                <span class="palette-summary-tile ${status}">
+                    <strong>${value}</strong>
+                    <em>${label}</em>
+                </span>
+            `).join("");
+        }
+
         elements.questionPalette.innerHTML = app.questions.map((_question, index) => {
             const status = app.statuses[index] || "not-visited";
-            return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${status.replace("-", " ")}">${index + 1}</button>`;
+            return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
         }).join("");
     }
 
@@ -471,6 +513,7 @@
         saveAttempt(result);
         renderResult();
         showView("result");
+        syncQuizAttempt(result);
     }
 
     function calculateResult(reason) {
@@ -488,7 +531,8 @@
         const attempted = correct + wrong;
         const unattempted = total - attempted;
         const score = Number((correct * app.quizSet.marksPerQuestion - wrong * app.quizSet.negativeMarks).toFixed(2));
-        const percentage = Math.max(0, Math.round((score / total) * 100));
+        const maxScore = total * app.quizSet.marksPerQuestion;
+        const percentage = maxScore ? Math.max(0, Math.round((score / maxScore) * 100)) : 0;
         const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
         const timeTaken = Math.max(0, app.quizSet.durationMinutes * 60 - app.remainingSeconds);
 
@@ -505,14 +549,62 @@
             correct,
             wrong,
             score,
+            maxScore,
             percentage,
             accuracy,
             timeTaken,
+            difficulty: app.quizSet.difficulty || "Mixed",
+            durationMinutes: app.quizSet.durationMinutes,
+            subjectData: buildQuizSubjectData(),
             questions: app.questions,
             answers: app.answers,
             statuses: app.statuses,
+            dashboardSynced: false,
+            dashboardSyncMessage: "",
             message: getPerformanceMessage(percentage)
         };
+    }
+
+    function buildQuizSubjectData() {
+        const buckets = {};
+        app.questions.forEach((question, index) => {
+            const name = question.subject || app.quizSet.subject || "General";
+            const answer = app.answers[index];
+            const attempted = answer !== null;
+            const isCorrect = attempted && answer === question.correctAnswer;
+            const isWrong = attempted && !isCorrect;
+            const marks = isCorrect ? Number(question.marks) || 0 : isWrong ? -(Number(question.negativeMarks) || 0) : 0;
+
+            if (!buckets[name]) {
+                buckets[name] = {
+                    name,
+                    totalQuestions: 0,
+                    attempted: 0,
+                    correct: 0,
+                    wrong: 0,
+                    marks: 0,
+                    maxMarks: 0
+                };
+            }
+
+            buckets[name].totalQuestions += 1;
+            buckets[name].maxMarks += Number(question.marks) || Number(app.quizSet.marksPerQuestion) || 1;
+            if (attempted) buckets[name].attempted += 1;
+            if (isCorrect) buckets[name].correct += 1;
+            if (isWrong) buckets[name].wrong += 1;
+            buckets[name].marks += marks;
+        });
+
+        return Object.keys(buckets).map((name) => {
+            const subject = buckets[name];
+            return {
+                ...subject,
+                marks: round2(subject.marks),
+                maxMarks: round2(subject.maxMarks),
+                accuracy: subject.attempted ? round2((subject.correct / subject.attempted) * 100) : 0,
+                scorePercent: subject.maxMarks ? round2((subject.marks / subject.maxMarks) * 100) : 0
+            };
+        });
     }
 
     function saveAttempt(result) {
@@ -538,20 +630,25 @@
             correct: result.correct,
             wrong: result.wrong,
             score: result.score,
+            maxScore: result.maxScore,
             percentage: result.percentage,
             accuracy: result.accuracy,
-            timeTaken: result.timeTaken
+            timeTaken: result.timeTaken,
+            dashboardSynced: result.dashboardSynced,
+            dashboardSyncMessage: result.dashboardSyncMessage
         };
     }
 
     function renderResult() {
         const result = app.result;
+        const session = window.CandidateAuth?.getSession?.();
         views.result.innerHTML = `
             <article class="result-panel score-panel">
                 <h2 id="resultTitle">${escapeHtml(result.quizTitle)}</h2>
                 <span class="score-number">${result.percentage}%</span>
                 <strong>${escapeHtml(result.message)}</strong>
-                <p class="result-subtext">${result.score}/50 marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
+                <p class="result-subtext">${formatMarks(result.score)}/${formatMarks(result.maxScore)} marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
+                <p class="result-subtext">${escapeHtml(getDashboardSyncText(result, session))}</p>
             </article>
             <section class="result-panel result-grid">
                 ${renderResultTile("Total questions", result.total)}
@@ -565,6 +662,7 @@
             </section>
             <div class="result-actions">
                 <button class="btn btn-outline" type="button" data-action="review-answers">Review Answers</button>
+                <a class="btn btn-outline" href="${session ? "dashboard.html#attempts" : "login.html?next=quiz.html"}">${session ? "View Dashboard" : "Login to Save"}</a>
                 <button class="btn btn-primary" type="button" data-action="back-to-quizzes">Back to Quizzes</button>
             </div>
         `;
@@ -572,6 +670,63 @@
 
     function renderResultTile(label, value) {
         return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+    }
+
+    async function syncQuizAttempt(result) {
+        const auth = window.CandidateAuth;
+        const session = auth?.getSession?.();
+        if (!auth || !session || !auth.callApi) return;
+
+        result.dashboardSyncMessage = "Saving quiz attempt to dashboard...";
+        renderResult();
+
+        try {
+            const response = await auth.callApi(buildQuizAttemptPayload(result, session));
+            result.dashboardSynced = Boolean(response.success);
+            result.dashboardSyncMessage = response.message || (response.success ? "Quiz attempt saved to dashboard." : "Quiz attempt could not be saved.");
+        } catch {
+            result.dashboardSynced = false;
+            result.dashboardSyncMessage = "Quiz saved on this device, but dashboard sync failed. Please check your connection.";
+        }
+
+        if (app.result && app.result.id === result.id) renderResult();
+    }
+
+    function buildQuizAttemptPayload(result, session) {
+        return {
+            action: "submitQuizAttempt",
+            userId: session.userId,
+            mobile: session.mobile,
+            email: session.email,
+            quizAttemptId: result.id,
+            quizId: result.quizId,
+            quizTitle: result.quizTitle,
+            subject: result.subject,
+            difficulty: result.difficulty,
+            completedAt: result.completedAt,
+            submitReason: result.reason,
+            totalQuestions: result.total,
+            attempted: result.attempted,
+            correct: result.correct,
+            wrong: result.wrong,
+            unattempted: result.unattempted,
+            score: result.score,
+            maxScore: result.maxScore,
+            percentage: result.percentage,
+            accuracy: result.accuracy,
+            timeTaken: result.timeTaken,
+            durationMinutes: result.durationMinutes,
+            subjectData: result.subjectData,
+            answers: result.answers,
+            statuses: result.statuses,
+            userAgent: navigator.userAgent || ""
+        };
+    }
+
+    function getDashboardSyncText(result, session) {
+        if (!session) return "Login before taking quizzes to save attempts in your dashboard.";
+        if (result.dashboardSyncMessage) return result.dashboardSyncMessage;
+        return result.dashboardSynced ? "Quiz attempt saved to dashboard." : "Saving quiz attempt to dashboard...";
     }
 
     function renderReview() {
@@ -670,8 +825,45 @@
         return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
     }
 
+    function formatMarks(value) {
+        const number = Number(value);
+        return Number.isFinite(number) ? number.toFixed(2) : "0.00";
+    }
+
+    function round2(value) {
+        const number = Number(value);
+        return Number.isFinite(number) ? Math.round((number + Number.EPSILON) * 100) / 100 : 0;
+    }
+
     function titleCase(value) {
         return String(value).replace("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function getStatusCounts() {
+        return app.statuses.reduce((counts, status) => {
+            if (status === "answered") counts.answered += 1;
+            else if (status === "not-answered") counts.notAnswered += 1;
+            else if (status === "marked") counts.marked += 1;
+            else if (status === "answered-marked") counts.answeredMarked += 1;
+            else counts.notVisited += 1;
+            return counts;
+        }, {
+            answered: 0,
+            notAnswered: 0,
+            marked: 0,
+            answeredMarked: 0,
+            notVisited: 0
+        });
+    }
+
+    function getStatusLabel(status) {
+        return {
+            "answered": "Answered",
+            "not-answered": "Not Answered",
+            "marked": "Marked for Review",
+            "answered-marked": "Answered + Marked",
+            "not-visited": "Not Visited"
+        }[status] || "Not Visited";
     }
 
     function escapeHtml(value) {

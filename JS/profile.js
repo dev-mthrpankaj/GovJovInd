@@ -22,6 +22,7 @@
             ["Mobile", session.mobile || "Not saved"],
             ["Email", session.email || "Not saved"],
             ["Date of Birth", formatDate(session.dob)],
+            ["Gender", session.gender || "Not saved"],
             ["Created", formatDate(session.createdAt)]
         ].map(([label, value]) => `
             <article class="profile-detail">

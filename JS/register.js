@@ -10,7 +10,7 @@
         if (!auth || !form) return;
 
         if (auth.getSession()) {
-            window.location.replace("dashboard.html");
+            window.location.replace(auth.getNextUrl("dashboard.html"));
             return;
         }
 
@@ -20,13 +20,14 @@
             const mobile = form.mobile.value.trim();
             const email = form.email.value.trim();
             const dob = form.dob.value.trim();
+            const gender = form.gender.value.trim();
             const password = form.password.value;
             const remember = Boolean(form.remember?.checked);
             const normalizedMobile = auth.normalizeContact(mobile);
             const normalizedEmail = auth.normalizeContact(email);
 
-            if (!name || !mobile || !email || !dob || !password) {
-                auth.showMessage(message, "Please fill name, mobile number, email, date of birth, and password.", "error");
+            if (!name || !mobile || !email || !dob || !gender || !password) {
+                auth.showMessage(message, "Please fill name, mobile number, email, date of birth, gender, and password.", "error");
                 return;
             }
 
@@ -48,13 +49,13 @@
             const original = auth.setButtonBusy(button, true);
             auth.showMessage(message, "");
             try {
-                const result = await auth.registerCandidate({ name, mobile, email, dob, password, remember });
+                const result = await auth.registerCandidate({ name, mobile, email, dob, gender, password, remember });
                 if (!result.success) {
                     auth.showMessage(message, result.message || "Registration failed. Please try again.", "error");
                     return;
                 }
                 auth.showMessage(message, "Account created. Opening dashboard...", "success");
-                window.location.href = "dashboard.html";
+                window.location.href = auth.getNextUrl("dashboard.html");
             } catch {
                 auth.showMessage(message, "Server connection failed. Please try again.", "error");
             } finally {

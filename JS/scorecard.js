@@ -58,20 +58,29 @@
     }
 
     function renderScorecard(attempt) {
+        const isQuiz = attempt.source === "quiz";
         setText("scorecardTitle", attempt.examName || "Scorecard");
-        setText("scorecardSubtitle", `${formatDate(attempt.examDate || attempt.timestamp)} | ${attempt.mode || "Exam"} | ${attempt.category || "Category"}`);
+        setText("scorecardSubtitle", `${formatDate(attempt.completedAt || attempt.examDate || attempt.timestamp)} | ${attempt.attemptType || attempt.mode || "Attempt"}${isQuiz ? "" : ` | ${attempt.category || "Category"}`}`);
         setText("scoreBreakdownMeta", `${formatNumber(attempt.totalAttempted)} attempted of ${formatNumber(attempt.totalQuestions)} questions`);
 
         const metrics = document.getElementById("scorecardMetrics");
         if (metrics) {
-            metrics.innerHTML = [
+            const metricItems = isQuiz ? [
+                ["Score", formatPercent(attempt.scorePercent ?? attempt.percentage), "Quiz performance"],
+                ["Marks", `${formatMarks(attempt.rawMarks ?? attempt.marks)} / ${formatMarks(attempt.maxMarks)}`, "Final score"],
+                ["Accuracy", formatPercent(attempt.accuracy), "Correct/attempted"],
+                ["Correct", formatNumber(attempt.rightAnswers), "Right answers"],
+                ["Wrong", formatNumber(attempt.wrongAnswers), "Wrong answers"],
+                ["Time Taken", formatTime(attempt.timeTaken), "Quiz duration"]
+            ] : [
                 ["Percentile", formatPercent(attempt.percentile), "Candidate standing"],
                 ["Overall Rank", attempt.overallRank ? `#${attempt.overallRank}` : "Pending", "Among submissions"],
                 ["Raw Marks", formatMarks(attempt.rawMarks ?? attempt.marks), "Before normalization"],
                 ["Accuracy", formatPercent(attempt.accuracy), "Correct/attempted"],
                 ["Category Rank", attempt.categoryRank ? `#${attempt.categoryRank}` : "Pending", attempt.category || "Category"],
                 ["State Rank", attempt.stateRank ? `#${attempt.stateRank}` : "Pending", attempt.state || "State"]
-            ].map(([label, value, hint]) => `
+            ];
+            metrics.innerHTML = metricItems.map(([label, value, hint]) => `
                 <article class="metric-card">
                     <span>${escapeHtml(label)}</span>
                     <strong>${escapeHtml(value)}</strong>
@@ -82,14 +91,22 @@
 
         const breakdown = document.getElementById("scoreBreakdown");
         if (breakdown) {
-            breakdown.innerHTML = [
+            const rows = isQuiz ? [
+                ["Total Questions", formatNumber(attempt.totalQuestions)],
+                ["Attempted", formatNumber(attempt.totalAttempted)],
+                ["Unattempted", formatNumber(attempt.unattempted)],
+                ["Score", `${formatMarks(attempt.rawMarks ?? attempt.marks)} / ${formatMarks(attempt.maxMarks)}`],
+                ["Submit Reason", attempt.submitReason || "Manual"],
+                ["Duration", attempt.durationMinutes ? `${formatNumber(attempt.durationMinutes)} minutes` : "Quiz"]
+            ] : [
                 ["Right Answers", formatNumber(attempt.rightAnswers)],
                 ["Wrong Answers", formatNumber(attempt.wrongAnswers)],
                 ["Unattempted", formatNumber(attempt.unattempted)],
                 ["Normalized Marks", formatMarks(attempt.normalizedMarks)],
                 ["Shift Rank", attempt.shiftRank ? `#${attempt.shiftRank}` : "Pending"],
                 ["Total Submissions", formatNumber(attempt.totalSubmissions)]
-            ].map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("");
+            ];
+            breakdown.innerHTML = rows.map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("");
         }
 
         renderSubjects(attempt);
@@ -99,6 +116,7 @@
     function renderSubjects(attempt) {
         const box = document.getElementById("scorecardSubjects");
         if (!box) return;
+        const isQuiz = attempt.source === "quiz";
         const subjects = Array.isArray(attempt.subjectAnalysis) && attempt.subjectAnalysis.length
             ? attempt.subjectAnalysis
             : Array.isArray(attempt.subjectData) ? attempt.subjectData : [];
@@ -117,7 +135,7 @@
                     <div class="subject-progress" aria-hidden="true"><span style="width:${accuracy}%"></span></div>
                     <div class="subject-meta">
                         <span>Score ${formatMarks(subject.score ?? subject.marks)}</span>
-                        <span>Avg ${formatMarks(subject.avgScore)}</span>
+                        <span>${isQuiz ? `Max ${formatMarks(subject.maxMarks)}` : `Avg ${formatMarks(subject.avgScore)}`}</span>
                         <span>Correct ${formatNumber(subject.correct)}</span>
                     </div>
                 </article>
@@ -171,6 +189,13 @@
     function formatPercent(value) {
         const number = Number(value);
         return Number.isFinite(number) ? `${number.toFixed(2)}%` : "0.00%";
+    }
+
+    function formatTime(seconds) {
+        const safe = Math.max(0, Number(seconds) || 0);
+        const minutes = Math.floor(safe / 60);
+        const secs = String(Math.floor(safe % 60)).padStart(2, "0");
+        return `${minutes}:${secs}`;
     }
 
     function formatDate(value) {

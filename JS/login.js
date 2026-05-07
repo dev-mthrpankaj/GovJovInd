@@ -14,6 +14,12 @@
             return;
         }
 
+        const registerLink = document.querySelector('a[href="register.html"]');
+        const nextUrl = auth.getNextUrl("");
+        if (registerLink && nextUrl) {
+            registerLink.href = `register.html?next=${encodeURIComponent(nextUrl)}`;
+        }
+
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
             const contact = form.contact.value.trim();

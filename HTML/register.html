@@ -69,6 +69,14 @@
                     <label class="auth-field" for="registerDob">Date of Birth
                         <input id="registerDob" name="dob" type="date" autocomplete="bday" required>
                     </label>
+                    <label class="auth-field" for="registerGender">Gender
+                        <select id="registerGender" name="gender" autocomplete="sex" required>
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </label>
                     <label class="auth-field" for="registerPassword">Password
                         <input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="4" pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,}" title="Use letters and numbers only, with at least one letter and one number." required>
                     </label>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candidate Dashboard | GovJobUpdates</title>
-    <meta name="description" content="Candidate performance dashboard for GovJobUpdates Rank Predictor attempts, percentile trend, subject accuracy, and previous scorecards.">
+    <meta name="description" content="Candidate performance dashboard for GovJobUpdates Rank Predictor and quiz attempts, percentile trend, subject accuracy, and previous scorecards.">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
@@ -42,10 +42,11 @@
             <div class="dash-hero-copy">
                 <span class="dash-eyebrow">Performance Dashboard</span>
                 <h1 id="dashboardTitle">Welcome, <span id="candidateName">Candidate</span></h1>
-                <p id="candidateContact">Loading your saved Rank Predictor attempts.</p>
+                <p id="candidateContact">Loading your saved Rank Predictor and quiz attempts.</p>
             </div>
             <div class="dash-hero-actions">
-                <a class="btn btn-primary" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> New Attempt</a>
+                <a class="btn btn-primary" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Rank Attempt</a>
+                <a class="btn btn-outline" href="quiz.html"><i class="fas fa-bolt" aria-hidden="true"></i> Practice Quiz</a>
                 <button class="btn btn-outline" type="button" data-auth-logout="login.html"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</button>
             </div>
         </section>
@@ -60,14 +61,14 @@
 
         <section class="dash-grid metrics-grid" aria-label="Performance summary">
             <article class="metric-card">
-                <span>Total Exams Attempted</span>
+                <span>Total Saved Attempts</span>
                 <strong id="metricTotalExams">0</strong>
-                <small>Saved attempts</small>
+                <small id="metricTotalBreakdown">Rank + quiz attempts</small>
             </article>
             <article class="metric-card">
-                <span>Average Percentile</span>
+                <span>Average Performance</span>
                 <strong id="metricAveragePercentile">0%</strong>
-                <small>Across all exams</small>
+                <small id="metricAverageLabel">Rank percentile / quiz score</small>
             </article>
             <article class="metric-card">
                 <span>Best Rank</span>
@@ -85,7 +86,7 @@
                 <small id="metricWeakSubjectScore">Needs focus</small>
             </article>
             <article class="metric-card">
-                <span>Recent Exams</span>
+                <span>Recent Attempts</span>
                 <strong id="metricRecentExams">0</strong>
                 <small>Latest 5 listed below</small>
             </article>
@@ -96,8 +97,8 @@
                 <section class="dash-grid charts-grid" aria-label="Charts">
                     <article class="dash-card">
                         <div class="dash-card-header">
-                            <h2>Percentile Trend</h2>
-                            <p>Growth by attempt date</p>
+                            <h2>Performance Trend</h2>
+                            <p>Rank percentile and quiz score growth</p>
                         </div>
                         <div class="chart-box"><canvas id="percentileTrendChart" aria-label="Percentile trend chart"></canvas></div>
                     </article>
@@ -110,8 +111,8 @@
                     </article>
                     <article class="dash-card wide-card">
                         <div class="dash-card-header">
-                            <h2>Exam Performance</h2>
-                            <p>Marks and percentile together</p>
+                            <h2>Attempt Performance</h2>
+                            <p>Marks and score percentage together</p>
                         </div>
                         <div class="chart-box"><canvas id="examPerformanceChart" aria-label="Exam performance chart"></canvas></div>
                     </article>
@@ -129,7 +130,7 @@
             <aside class="dash-grid side-stack">
                 <section class="dash-card" aria-labelledby="recentTitle">
                     <div class="dash-card-header">
-                        <h2 id="recentTitle">Recent Exams</h2>
+                        <h2 id="recentTitle">Recent Attempts</h2>
                     </div>
                     <div class="attempt-list" id="recentExamList"></div>
                 </section>

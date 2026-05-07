@@ -4,6 +4,8 @@
     const state = {
         session: null,
         attempts: [],
+        rankAttempts: [],
+        quizAttempts: [],
         subjects: [],
         summary: {}
     };
@@ -59,6 +61,8 @@
 
     function renderDashboard(data) {
         state.attempts = Array.isArray(data.attempts) ? data.attempts : [];
+        state.rankAttempts = Array.isArray(data.rankAttempts) ? data.rankAttempts : state.attempts.filter((attempt) => attempt.source !== "quiz");
+        state.quizAttempts = Array.isArray(data.quizAttempts) ? data.quizAttempts : state.attempts.filter((attempt) => attempt.source === "quiz");
         state.subjects = Array.isArray(data.subjectAnalytics) ? data.subjectAnalytics : [];
         state.summary = data.summary || {};
         renderSmartInsights();
@@ -89,19 +93,19 @@
                 `
                 : `
                     <span>Start here</span>
-                    <strong>Submit your first Rank Predictor attempt</strong>
-                    <p>Your dashboard will unlock percentile trends, subject accuracy, and detailed scorecards.</p>
-                    <a class="smart-link" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> First attempt</a>
+                    <strong>Take your first quiz or Rank Predictor attempt</strong>
+                    <p>Your dashboard will unlock performance trends, subject accuracy, and detailed scorecards.</p>
+                    <a class="smart-link" href="quiz.html"><i class="fas fa-bolt" aria-hidden="true"></i> Start quiz</a>
                 `;
         }
 
         if (growth) {
-            const diff = latest && previous ? round2((Number(latest.percentile) || 0) - (Number(previous.percentile) || 0)) : null;
+            const diff = latest && previous ? round2(getAttemptPerformanceValue(latest) - getAttemptPerformanceValue(previous)) : null;
             const direction = diff === null ? "No comparison yet" : diff >= 0 ? `+${diff.toFixed(2)}%` : `${diff.toFixed(2)}%`;
             growth.innerHTML = `
                 <span>Growth</span>
                 <strong>${escapeHtml(direction)}</strong>
-                <p>${escapeHtml(diff === null ? "Take two attempts to see real movement." : "Latest percentile compared with your previous saved attempt.")}</p>
+                <p>${escapeHtml(diff === null ? "Take two attempts to see real movement." : "Latest performance compared with your previous saved attempt.")}</p>
             `;
         }
 
@@ -117,8 +121,11 @@
 
     function renderMetrics() {
         const summary = state.summary;
+        const averagePerformance = Number(summary.averagePercentile) > 0 ? summary.averagePercentile : summary.averageQuizScore;
         setText("metricTotalExams", formatNumber(summary.totalExamsAttempted || state.attempts.length));
-        setText("metricAveragePercentile", formatPercent(summary.averagePercentile));
+        setText("metricTotalBreakdown", `${formatNumber(summary.totalRankPredictorAttempts || state.rankAttempts.length)} rank | ${formatNumber(summary.totalQuizzesAttempted || state.quizAttempts.length)} quiz`);
+        setText("metricAveragePercentile", formatPercent(averagePerformance));
+        setText("metricAverageLabel", Number(summary.averagePercentile) > 0 ? "Average rank percentile" : "Average quiz score");
         setText("metricBestRank", summary.bestRank ? `#${summary.bestRank}` : "Pending");
         setText("metricBestRankExam", summary.bestRankExam || "No attempts yet");
         setText("metricBestSubject", summary.bestSubject || "Pending");
@@ -133,7 +140,7 @@
         setText("attemptCountLabel", `${state.attempts.length} saved attempts`);
         if (!list) return;
         if (!state.attempts.length) {
-            list.innerHTML = renderEmpty("No attempts yet", "Submit your first Rank Predictor attempt to unlock analytics.", "rank-predictor.html", "Submit attempt");
+            list.innerHTML = renderEmpty("No attempts yet", "Take a quiz or submit your first Rank Predictor attempt to unlock analytics.", "quiz.html", "Start quiz");
             return;
         }
         list.innerHTML = state.attempts.map((attempt, index) => renderAttemptRow(attempt, index)).join("");
@@ -157,15 +164,16 @@
     }
 
     function renderAttemptRow(attempt, index, compact = false) {
+        const isQuiz = attempt.source === "quiz";
         return `
             <button class="attempt-row" type="button" data-attempt-index="${index}">
                 <span class="attempt-title">
                     <strong>${escapeHtml(attempt.examName || "Rank Predictor Attempt")}</strong>
-                    <span>${escapeHtml(formatDate(attempt.examDate || attempt.timestamp))}</span>
+                    <span>${escapeHtml(formatDate(attempt.completedAt || attempt.examDate || attempt.timestamp))} | ${escapeHtml(attempt.attemptType || attempt.mode || "Attempt")}</span>
                 </span>
                 <span class="attempt-metrics">
-                    <div><span>Percentile</span><strong>${formatPercent(attempt.percentile)}</strong></div>
-                    <div><span>Rank</span><strong>${attempt.overallRank ? `#${escapeHtml(attempt.overallRank)}` : "Pending"}</strong></div>
+                    <div><span>${isQuiz ? "Score" : "Percentile"}</span><strong>${formatPercent(isQuiz ? getAttemptPerformanceValue(attempt) : attempt.percentile)}</strong></div>
+                    <div><span>${isQuiz ? "Type" : "Rank"}</span><strong>${isQuiz ? "Quiz" : attempt.overallRank ? `#${escapeHtml(attempt.overallRank)}` : "Pending"}</strong></div>
                     <div><span>Marks</span><strong>${formatMarks(attempt.rawMarks ?? attempt.marks)}</strong></div>
                     ${compact ? "" : `<div><span>Mode</span><strong>${escapeHtml(attempt.mode || "Exam")}</strong></div>`}
                 </span>
@@ -204,7 +212,7 @@
         if (!container) return;
         const candidates = state.subjects.slice(-3).reverse();
         if (!candidates.length) {
-            container.innerHTML = renderEmpty("No suggestions yet", "Practice suggestions appear after subject-wise attempts.", "rank-predictor.html", "Add attempt");
+            container.innerHTML = renderEmpty("No suggestions yet", "Practice suggestions appear after subject-wise attempts.", "quiz.html", "Start quiz");
             return;
         }
         container.innerHTML = candidates.map((subject) => `
@@ -219,7 +227,7 @@
     function renderCharts() {
         drawLineChart("percentileTrendChart", state.attempts.slice().reverse().map((attempt) => ({
             label: attempt.examName || "Exam",
-            value: Number(attempt.percentile) || 0
+            value: getAttemptPerformanceValue(attempt)
         })), { suffix: "%", max: 100, color: "#0b5ed7" });
 
         drawBarChart("subjectAccuracyChart", state.subjects.map((subject) => ({
@@ -230,7 +238,7 @@
         drawBarChart("examPerformanceChart", state.attempts.slice(0, 8).reverse().map((attempt) => ({
             label: attempt.examName || "Exam",
             value: Number(attempt.rawMarks ?? attempt.marks) || 0,
-            secondary: Number(attempt.percentile) || 0
+            secondary: getAttemptPerformanceValue(attempt)
         })), { suffix: "", color: "#b45309", secondaryColor: "#6d28d9" });
     }
 
@@ -458,6 +466,14 @@
     function formatPercent(value) {
         const number = Number(value);
         return Number.isFinite(number) ? `${number.toFixed(2)}%` : "0.00%";
+    }
+
+    function getAttemptPerformanceValue(attempt) {
+        if (!attempt) return 0;
+        const value = attempt.source === "quiz"
+            ? Number(attempt.scorePercent ?? attempt.percentage)
+            : Number(attempt.percentile);
+        return Number.isFinite(value) ? value : 0;
     }
 
     function round2(value) {
