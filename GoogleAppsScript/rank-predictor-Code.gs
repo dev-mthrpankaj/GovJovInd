@@ -2,6 +2,8 @@ const SPREADSHEET_ID = "1IIDP7Slon3zRDlOH0hxzOnAZd4fzYi5nZHphVCW2_wE";
 const RANK_EXAMS_SHEET_NAME = "Rank Predictor Exams";
 const USERS_SHEET_NAME = "Users";
 const QUIZ_ATTEMPTS_SHEET_NAME = "Quiz Attempts";
+const VISITOR_SESSIONS_SHEET_NAME = "Visitor Sessions";
+const VISITOR_ACTIVE_WINDOW_MS = 3 * 60 * 1000;
 
 const USER_HEADERS = [
   "User ID",
@@ -42,6 +44,15 @@ const QUIZ_ATTEMPT_HEADERS = [
   "Subject Data (JSON)",
   "Answers (JSON)",
   "Statuses (JSON)",
+  "User Agent"
+];
+
+const VISITOR_SESSION_HEADERS = [
+  "Visitor ID",
+  "First Seen",
+  "Last Seen",
+  "Page",
+  "Referrer",
   "User Agent"
 ];
 
@@ -134,6 +145,7 @@ function doPost(e) {
     if (data.action === "getCandidateAttempts") return getCandidateAttempts(data);
     if (data.action === "submitQuizAttempt") return submitQuizAttempt(data);
     if (data.action === "getCandidateQuizAttempts") return getCandidateQuizAttempts(data);
+    if (data.action === "trackVisitor") return trackVisitor(data);
     if (data.action === "submitData") return submitData(data);
     if (data.action === "checkRank") return checkRank(data);
 
@@ -488,6 +500,50 @@ function getQuizAttemptsSheet(spreadsheet) {
   return sheet;
 }
 
+function getVisitorSessionsSheet(spreadsheet) {
+  const sheet = spreadsheet.getSheetByName(VISITOR_SESSIONS_SHEET_NAME) || spreadsheet.insertSheet(VISITOR_SESSIONS_SHEET_NAME);
+  ensureVisitorSessionsSheetSchema(sheet);
+  return sheet;
+}
+
+function trackVisitor(data) {
+  const visitorId = normalizeVisitorId(data.visitorId);
+  if (!visitorId) return sendJSON({ success: false, message: "Visitor ID is required." });
+
+  const lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(5000);
+
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = getVisitorSessionsSheet(spreadsheet);
+    const columnMap = ensureVisitorSessionsSheetSchema(sheet);
+    const now = new Date();
+    const session = {
+      visitorId: visitorId,
+      page: truncateText(data.page, 240),
+      referrer: truncateText(data.referrer, 240),
+      userAgent: truncateText(data.userAgent, 360),
+      now: now
+    };
+
+    upsertVisitorSession(sheet, columnMap, session);
+    SpreadsheetApp.flush();
+
+    return sendJSON({
+      success: true,
+      activeVisitors: countActiveVisitors(sheet, columnMap, now),
+      activeWindowSeconds: Math.round(VISITOR_ACTIVE_WINDOW_MS / 1000),
+      updatedAt: now.toISOString()
+    });
+  } finally {
+    try {
+      lock.releaseLock();
+    } catch (error) {
+      // The lock may not have been acquired if Apps Script timed out while waiting.
+    }
+  }
+}
+
 function ensureUsersSheetSchema(sheet) {
   if (sheet.getMaxColumns() < USER_HEADERS.length) {
     sheet.insertColumnsAfter(sheet.getMaxColumns(), USER_HEADERS.length - sheet.getMaxColumns());
@@ -564,10 +620,49 @@ function ensureQuizAttemptsSheetSchema(sheet) {
   return getColumnMap(sheet);
 }
 
+function ensureVisitorSessionsSheetSchema(sheet) {
+  if (sheet.getMaxColumns() < VISITOR_SESSION_HEADERS.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), VISITOR_SESSION_HEADERS.length - sheet.getMaxColumns());
+  }
+
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  if (lastRow < 1 || lastColumn < 1) {
+    sheet.getRange(1, 1, 1, VISITOR_SESSION_HEADERS.length).setValues([VISITOR_SESSION_HEADERS]);
+    sheet.setFrozenRows(1);
+    return getColumnMap(sheet);
+  }
+
+  const currentHeaders = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
+  const hasAnyHeader = currentHeaders.some(function (header) {
+    return String(header || "").trim();
+  });
+  if (!hasAnyHeader) {
+    sheet.getRange(1, 1, 1, VISITOR_SESSION_HEADERS.length).setValues([VISITOR_SESSION_HEADERS]);
+    sheet.setFrozenRows(1);
+    return getColumnMap(sheet);
+  }
+
+  const currentMap = buildColumnMapFromHeaders(currentHeaders);
+  const missingHeaders = VISITOR_SESSION_HEADERS.filter(function (header) {
+    return currentMap[normalizeHeader(header)] === undefined;
+  });
+
+  if (missingHeaders.length) {
+    const startColumn = sheet.getLastColumn() + 1;
+    sheet.insertColumnsAfter(sheet.getLastColumn(), missingHeaders.length);
+    sheet.getRange(1, startColumn, 1, missingHeaders.length).setValues([missingHeaders]);
+  }
+
+  sheet.setFrozenRows(1);
+  return getColumnMap(sheet);
+}
+
 function setupCandidateLoginSheets() {
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   ensureUsersSheetSchema(getUsersSheet(spreadsheet));
   ensureQuizAttemptsSheetSchema(getQuizAttemptsSheet(spreadsheet));
+  ensureVisitorSessionsSheetSchema(getVisitorSessionsSheet(spreadsheet));
   getRankPredictorExamConfigs(spreadsheet).exams.forEach(function (exam) {
     if (!exam.sheetName || exam.disabled) return;
     ensureSheetSchema(getSheetByExam(exam.sheetName, spreadsheet));
@@ -612,6 +707,60 @@ function appendUser(sheet, columnMap, user) {
     setTextFormat(sheet, columnMap, nextRow, header);
   });
   sheet.getRange(nextRow, 1, 1, row.length).setValues([row]);
+}
+
+function upsertVisitorSession(sheet, columnMap, session) {
+  const lastRow = sheet.getLastRow();
+  const lastColumn = Math.max(sheet.getLastColumn(), VISITOR_SESSION_HEADERS.length);
+  const visitorColumn = columnMap[normalizeHeader("Visitor ID")];
+  let targetRow = 0;
+
+  if (lastRow >= 2 && visitorColumn !== undefined) {
+    const ids = sheet.getRange(2, visitorColumn + 1, lastRow - 1, 1).getValues();
+    for (let index = 0; index < ids.length; index += 1) {
+      if (normalizeVisitorId(ids[index][0]) === session.visitorId) {
+        targetRow = index + 2;
+        break;
+      }
+    }
+  }
+
+  if (!targetRow) {
+    targetRow = lastRow + 1;
+    const row = new Array(lastColumn).fill("");
+    setHeaderValue(row, columnMap, "Visitor ID", session.visitorId);
+    setHeaderValue(row, columnMap, "First Seen", session.now);
+    setHeaderValue(row, columnMap, "Last Seen", session.now);
+    setHeaderValue(row, columnMap, "Page", session.page);
+    setHeaderValue(row, columnMap, "Referrer", session.referrer);
+    setHeaderValue(row, columnMap, "User Agent", session.userAgent);
+    setTextFormat(sheet, columnMap, targetRow, "Visitor ID");
+    sheet.getRange(targetRow, 1, 1, row.length).setValues([row]);
+    return;
+  }
+
+  setVisitorCellValue(sheet, columnMap, targetRow, "Last Seen", session.now);
+  setVisitorCellValue(sheet, columnMap, targetRow, "Page", session.page);
+  setVisitorCellValue(sheet, columnMap, targetRow, "Referrer", session.referrer);
+  setVisitorCellValue(sheet, columnMap, targetRow, "User Agent", session.userAgent);
+}
+
+function setVisitorCellValue(sheet, columnMap, rowNumber, header, value) {
+  const index = columnMap[normalizeHeader(header)];
+  if (index !== undefined) sheet.getRange(rowNumber, index + 1).setValue(value);
+}
+
+function countActiveVisitors(sheet, columnMap, now) {
+  const lastSeenColumn = columnMap[normalizeHeader("Last Seen")];
+  const lastRow = sheet.getLastRow();
+  if (lastSeenColumn === undefined || lastRow < 2) return 0;
+
+  const cutoff = now.getTime() - VISITOR_ACTIVE_WINDOW_MS;
+  const values = sheet.getRange(2, lastSeenColumn + 1, lastRow - 1, 1).getValues();
+  return values.filter(function (row) {
+    const seenAt = getTimestampMs(row[0]);
+    return seenAt >= cutoff;
+  }).length;
 }
 
 function sanitizeUser(user) {
@@ -1969,6 +2118,17 @@ function normalizeEmail(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function normalizeVisitorId(value) {
+  return String(value || "")
+    .trim()
+    .replace(/[^A-Za-z0-9:_-]/g, "")
+    .slice(0, 80);
+}
+
+function truncateText(value, maxLength) {
+  return normalizeText(value).slice(0, maxLength || 240);
+}
+
 function normalizeLoginIdentifier(value) {
   const text = String(value || "").trim();
   return text.indexOf("@") >= 0 ? normalizeEmail(text) : normalizeMobile(text);
@@ -2023,6 +2183,10 @@ function getSortableDate(value) {
   if (Object.prototype.toString.call(value) === "[object Date]") return value.getTime();
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+}
+
+function getTimestampMs(value) {
+  return getSortableDate(value);
 }
 
 function getAccuracyIndicator(totalSubmissions) {

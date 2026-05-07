@@ -7,6 +7,14 @@ const ADS_CONFIG = {
   inlineFrequency: 6
 };
 const CANDIDATE_SESSION_KEY = 'gju:candidate-session';
+const VISITOR_ID_KEY = 'gju:visitor-id';
+const VISITOR_API_FALLBACK_URL = 'https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec';
+const VISITOR_CONFIG = {
+  enabled: true,
+  heartbeatMs: 45000,
+  timeoutMs: 6500
+};
+let transientVisitorId = '';
 
 window.ADS_CONFIG = ADS_CONFIG;
 
@@ -166,16 +174,143 @@ window.GovJobCandidateNav = {
   sync: ensureCandidateBottomNav
 };
 
+const createVisitorId = () => {
+  const prefix = `gju-${Date.now().toString(36)}`;
+  try {
+    const bytes = new Uint32Array(2);
+    window.crypto.getRandomValues(bytes);
+    return `${prefix}-${bytes[0].toString(36)}${bytes[1].toString(36)}`;
+  } catch {
+    return `${prefix}-${Math.random().toString(36).slice(2, 12)}`;
+  }
+};
+
+const getVisitorId = () => {
+  if (transientVisitorId) return transientVisitorId;
+  try {
+    const saved = localStorage.getItem(VISITOR_ID_KEY);
+    if (saved) return saved;
+    const nextId = createVisitorId();
+    localStorage.setItem(VISITOR_ID_KEY, nextId);
+    return nextId;
+  } catch {
+    transientVisitorId = createVisitorId();
+    return transientVisitorId;
+  }
+};
+
+const getVisitorApiUrl = () => {
+  return String(window.RANK_PREDICTOR_CONFIG?.apiUrl || VISITOR_API_FALLBACK_URL || '').trim();
+};
+
+const isValidVisitorApiUrl = (apiUrl) => {
+  return Boolean(apiUrl && apiUrl.startsWith('https://') && apiUrl.endsWith('/exec') && !apiUrl.includes('/dev'));
+};
+
+const ensureFooterVisitorCounter = () => {
+  if (!VISITOR_CONFIG.enabled) return null;
+  const footer = document.querySelector('footer');
+  if (!footer) return null;
+
+  const existing = footer.querySelector('.footer-live-visitors');
+  if (existing) return existing;
+
+  const widget = document.createElement('div');
+  widget.className = 'footer-live-visitors';
+  widget.setAttribute('aria-live', 'polite');
+  widget.innerHTML = `
+    <div class="footer-live-pill">
+      <span class="footer-live-dot" aria-hidden="true"></span>
+      <span class="footer-live-label">Live visitors</span>
+      <strong data-visitor-count>--</strong>
+      <span class="footer-live-caption">online now</span>
+    </div>
+  `;
+
+  const copyright = footer.querySelector('.copyright');
+  if (copyright) footer.insertBefore(widget, copyright);
+  else footer.appendChild(widget);
+  return widget;
+};
+
+let visitorHeartbeatTimer = 0;
+let visitorHeartbeatInFlight = false;
+
+const setFooterVisitorState = (count, state = 'ready') => {
+  const widget = ensureFooterVisitorCounter();
+  if (!widget) return;
+  const countNode = widget.querySelector('[data-visitor-count]');
+  widget.dataset.visitorState = state;
+  if (countNode) countNode.textContent = count;
+};
+
+const sendVisitorHeartbeat = async () => {
+  if (!VISITOR_CONFIG.enabled || visitorHeartbeatInFlight) return;
+  const apiUrl = getVisitorApiUrl();
+  if (!isValidVisitorApiUrl(apiUrl)) {
+    setFooterVisitorState('--', 'offline');
+    return;
+  }
+
+  visitorHeartbeatInFlight = true;
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), VISITOR_CONFIG.timeoutMs);
+
+  try {
+    const payload = {
+      action: 'trackVisitor',
+      visitorId: getVisitorId(),
+      page: `${window.location.pathname}${window.location.search}`,
+      referrer: document.referrer || '',
+      userAgent: navigator.userAgent || ''
+    };
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+    const text = await response.text();
+    const result = JSON.parse(text);
+    if (!result.success || !Number.isFinite(Number(result.activeVisitors))) throw new Error(result.message || 'Visitor counter failed.');
+    setFooterVisitorState(String(Number(result.activeVisitors)), 'ready');
+  } catch {
+    setFooterVisitorState('--', 'offline');
+  } finally {
+    window.clearTimeout(timeout);
+    visitorHeartbeatInFlight = false;
+  }
+};
+
+const startVisitorCounter = () => {
+  if (!ensureFooterVisitorCounter() || visitorHeartbeatTimer) return;
+  sendVisitorHeartbeat();
+  visitorHeartbeatTimer = window.setInterval(sendVisitorHeartbeat, VISITOR_CONFIG.heartbeatMs);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) sendVisitorHeartbeat();
+  });
+};
+
+window.GovJobVisitors = {
+  refresh: sendVisitorHeartbeat,
+  start: startVisitorCounter
+};
+
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', ensureHeaderAuthEntry);
   window.addEventListener('DOMContentLoaded', ensureCandidateBottomNav);
   window.addEventListener('DOMContentLoaded', markPageLoaded);
   window.addEventListener('DOMContentLoaded', applyAdControls);
+  window.addEventListener('DOMContentLoaded', startVisitorCounter);
 } else {
   ensureHeaderAuthEntry();
   ensureCandidateBottomNav();
   markPageLoaded();
   applyAdControls();
+  startVisitorCounter();
 }
 
 document.addEventListener('click', (event) => {
