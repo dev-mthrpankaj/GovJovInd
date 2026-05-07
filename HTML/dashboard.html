@@ -52,6 +52,12 @@
 
         <div class="dash-message hidden" id="dashboardMessage" role="status" aria-live="polite"></div>
 
+        <section class="dash-grid smart-grid" aria-label="Recommended next actions">
+            <article class="smart-card smart-card-primary" id="nextActionCard"></article>
+            <article class="smart-card" id="growthCard"></article>
+            <article class="smart-card" id="quickStartCard"></article>
+        </section>
+
         <section class="dash-grid metrics-grid" aria-label="Performance summary">
             <article class="metric-card">
                 <span>Total Exams Attempted</span>
@@ -111,7 +117,7 @@
                     </article>
                 </section>
 
-                <section class="dash-card" aria-labelledby="attemptsTitle">
+                <section class="dash-card" id="attempts" aria-labelledby="attemptsTitle">
                     <div class="dash-card-header">
                         <h2 id="attemptsTitle">Previous Attempts</h2>
                         <p id="attemptCountLabel">Loading</p>
@@ -134,6 +140,14 @@
                         <p>Average, best, weakest, accuracy</p>
                     </div>
                     <div class="subject-grid" id="subjectAnalytics"></div>
+                </section>
+
+                <section class="dash-card" aria-labelledby="practiceTitle">
+                    <div class="dash-card-header">
+                        <h2 id="practiceTitle">Practice Suggestions</h2>
+                        <p>Based on weak areas</p>
+                    </div>
+                    <div class="practice-list" id="practiceSuggestions"></div>
                 </section>
             </aside>
         </section>

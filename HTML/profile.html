@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Profile | GovJobUpdates</title>
+    <meta name="description" content="Manage your GovJobUpdates candidate profile and password.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+            </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                    <li><a href="quiz.html">Quizzes</a></li>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page profile-page">
+        <section class="auth-shell" aria-labelledby="profileTitle">
+            <div class="auth-panel">
+                <span class="auth-eyebrow">Candidate profile</span>
+                <h1 id="profileTitle">Your account details.</h1>
+                <p>These details connect login, rank predictor attempts, and dashboard history.</p>
+                <div class="profile-grid" id="profileDetails"></div>
+                <div class="auth-note"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Passwords are stored as hashes in Google Sheets. The original password is never shown in the sheet.</span></div>
+            </div>
+
+            <section class="auth-card" aria-labelledby="passwordTitle">
+                <div>
+                    <h2 id="passwordTitle">Change password</h2>
+                    <p>Use letters and numbers only, with at least one letter and one number.</p>
+                </div>
+                <form class="auth-form" id="changePasswordForm" novalidate>
+                    <label class="auth-field" for="currentPassword">Current Password
+                        <input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" required>
+                    </label>
+                    <label class="auth-field" for="newPassword">New Password
+                        <input id="newPassword" name="newPassword" type="password" autocomplete="new-password" minlength="4" pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{4,}" required>
+                    </label>
+                    <label class="auth-field" for="confirmPassword">Confirm New Password
+                        <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="4" required>
+                    </label>
+                    <div class="auth-message hidden" id="profileMessage" role="status" aria-live="polite"></div>
+                    <div class="auth-actions">
+                        <button class="btn btn-primary" id="changePasswordSubmit" type="submit">Update Password</button>
+                        <button class="btn btn-outline" type="button" data-auth-logout="login.html">Logout</button>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+<script src="../JS/rank-predictor-config.js"></script>
+<script src="../JS/candidate-auth.js"></script>
+<script src="../JS/profile.js"></script>
+<script src="../JS/script.js"></script>
+</body>
+</html>

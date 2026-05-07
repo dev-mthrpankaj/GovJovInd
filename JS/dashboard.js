@@ -61,11 +61,58 @@
         state.attempts = Array.isArray(data.attempts) ? data.attempts : [];
         state.subjects = Array.isArray(data.subjectAnalytics) ? data.subjectAnalytics : [];
         state.summary = data.summary || {};
+        renderSmartInsights();
         renderMetrics();
         renderAttempts();
         renderRecent();
         renderSubjects();
+        renderPracticeSuggestions();
         renderCharts();
+    }
+
+    function renderSmartInsights() {
+        const nextAction = document.getElementById("nextActionCard");
+        const growth = document.getElementById("growthCard");
+        const quickStart = document.getElementById("quickStartCard");
+        const latest = state.attempts[0] || null;
+        const previous = state.attempts[1] || null;
+        const weakSubject = state.summary.weakSubject || state.subjects[state.subjects.length - 1]?.name || "";
+        const bestSubject = state.summary.bestSubject || state.subjects[0]?.name || "";
+
+        if (nextAction) {
+            nextAction.innerHTML = state.attempts.length
+                ? `
+                    <span>Next action</span>
+                    <strong>${escapeHtml(weakSubject ? `Practice ${weakSubject} today` : "Submit your next attempt")}</strong>
+                    <p>${escapeHtml(weakSubject ? "Your dashboard found this as the area with the most room to improve." : "A fresh attempt will keep your trend accurate.")}</p>
+                    <a class="smart-link" href="quiz.html"><i class="fas fa-bolt" aria-hidden="true"></i> Start practice</a>
+                `
+                : `
+                    <span>Start here</span>
+                    <strong>Submit your first Rank Predictor attempt</strong>
+                    <p>Your dashboard will unlock percentile trends, subject accuracy, and detailed scorecards.</p>
+                    <a class="smart-link" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> First attempt</a>
+                `;
+        }
+
+        if (growth) {
+            const diff = latest && previous ? round2((Number(latest.percentile) || 0) - (Number(previous.percentile) || 0)) : null;
+            const direction = diff === null ? "No comparison yet" : diff >= 0 ? `+${diff.toFixed(2)}%` : `${diff.toFixed(2)}%`;
+            growth.innerHTML = `
+                <span>Growth</span>
+                <strong>${escapeHtml(direction)}</strong>
+                <p>${escapeHtml(diff === null ? "Take two attempts to see real movement." : "Latest percentile compared with your previous saved attempt.")}</p>
+            `;
+        }
+
+        if (quickStart) {
+            quickStart.innerHTML = `
+                <span>Strong area</span>
+                <strong>${escapeHtml(bestSubject || "Waiting for data")}</strong>
+                <p>${escapeHtml(bestSubject ? "Protect this score while improving your weaker subject." : "Subject strengths will appear after your first attempt.")}</p>
+                <a class="smart-link" href="profile.html"><i class="fas fa-user" aria-hidden="true"></i> Profile</a>
+            `;
+        }
     }
 
     function renderMetrics() {
@@ -86,7 +133,7 @@
         setText("attemptCountLabel", `${state.attempts.length} saved attempts`);
         if (!list) return;
         if (!state.attempts.length) {
-            list.innerHTML = renderEmpty("No attempts yet", "Submit your first Rank Predictor attempt to unlock analytics.");
+            list.innerHTML = renderEmpty("No attempts yet", "Submit your first Rank Predictor attempt to unlock analytics.", "rank-predictor.html", "Submit attempt");
             return;
         }
         list.innerHTML = state.attempts.map((attempt, index) => renderAttemptRow(attempt, index)).join("");
@@ -150,6 +197,23 @@
                 </article>
             `;
         }).join("");
+    }
+
+    function renderPracticeSuggestions() {
+        const container = document.getElementById("practiceSuggestions");
+        if (!container) return;
+        const candidates = state.subjects.slice(-3).reverse();
+        if (!candidates.length) {
+            container.innerHTML = renderEmpty("No suggestions yet", "Practice suggestions appear after subject-wise attempts.", "rank-predictor.html", "Add attempt");
+            return;
+        }
+        container.innerHTML = candidates.map((subject) => `
+            <a class="practice-card" href="quiz.html">
+                <span><i class="fas fa-dumbbell" aria-hidden="true"></i> ${escapeHtml(subject.name || "Subject")}</span>
+                <strong>${formatPercent(subject.accuracy)} accuracy</strong>
+                <small>Practice this subject and submit another attempt to track growth.</small>
+            </a>
+        `).join("");
     }
 
     function renderCharts() {
@@ -296,6 +360,19 @@
 
     function openScorecard(index) {
         const attempt = state.attempts[index];
+        if (attempt) {
+            try {
+                sessionStorage.setItem("gju:selected-scorecard", JSON.stringify({
+                    userId: state.session?.userId || "",
+                    index,
+                    attempt
+                }));
+            } catch {
+                // Scorecard page can still load from dashboard data by index.
+            }
+            window.location.href = `scorecard.html?attempt=${encodeURIComponent(String(index))}`;
+            return;
+        }
         const modal = document.getElementById("scorecardModal");
         if (!attempt || !modal) return;
 
@@ -359,8 +436,8 @@
         node.className = message ? `dash-message ${type}` : "dash-message hidden";
     }
 
-    function renderEmpty(title, body) {
-        return `<div class="dash-empty"><strong>${escapeHtml(title)}</strong><span>${escapeHtml(body)}</span></div>`;
+    function renderEmpty(title, body, href = "", label = "") {
+        return `<div class="dash-empty"><strong>${escapeHtml(title)}</strong><span>${escapeHtml(body)}</span>${href ? `<a class="smart-link" href="${escapeHtml(href)}">${escapeHtml(label || "Open")}</a>` : ""}</div>`;
     }
 
     function setText(id, value) {
@@ -381,6 +458,11 @@
     function formatPercent(value) {
         const number = Number(value);
         return Number.isFinite(number) ? `${number.toFixed(2)}%` : "0.00%";
+    }
+
+    function round2(value) {
+        const number = Number(value);
+        return Number.isFinite(number) ? Math.round(number * 100) / 100 : 0;
     }
 
     function formatDate(value) {

@@ -223,6 +223,32 @@
     font-weight: 700;
 }
 
+.profile-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.profile-detail {
+    display: grid;
+    gap: 5px;
+    padding: 12px;
+    border: 1px solid var(--auth-border);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.profile-detail span {
+    color: var(--auth-muted);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.profile-detail strong {
+    color: var(--auth-ink);
+    overflow-wrap: anywhere;
+}
+
 .loading-spinner {
     width: 18px;
     height: 18px;
@@ -255,6 +281,10 @@
 
     .auth-stats {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .profile-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

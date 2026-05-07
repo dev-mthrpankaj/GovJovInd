@@ -42,6 +42,7 @@
         if (remember) sessionStorage.removeItem(SESSION_KEY);
         else localStorage.removeItem(SESSION_KEY);
         syncHeaderEntry();
+        window.GovJobCandidateNav?.sync?.();
         return session;
     }
 
@@ -133,6 +134,15 @@
         return callApi(payload);
     }
 
+    async function changeCandidatePassword({ userId, currentPassword, newPassword }) {
+        return callApi({
+            action: "changeCandidatePassword",
+            userId: String(userId || "").trim(),
+            currentPassword: String(currentPassword || ""),
+            newPassword: String(newPassword || "")
+        });
+    }
+
     async function loginCandidate({ contact, password, remember = true }) {
         const normalizedContact = normalizeContact(contact);
         const payload = {
@@ -212,6 +222,7 @@
         registerCandidate,
         loginCandidate,
         resetCandidatePassword,
+        changeCandidatePassword,
         setButtonBusy,
         showMessage,
         syncHeaderEntry,

@@ -134,12 +134,46 @@ const ensureHeaderAuthEntry = () => {
   window.CandidateAuth?.syncHeaderEntry?.(header);
 };
 
+const getHomeHref = () => {
+  const homeLink = document.querySelector('header a[href$="index.html"], header a[href="../index.html"], header a[href="../../index.html"]');
+  return homeLink?.getAttribute('href') || getCandidatePageHref('index.html').replace(/HTML\/index\.html$/i, 'index.html');
+};
+
+const ensureCandidateBottomNav = () => {
+  const session = getCandidateHeaderSession();
+  if (!session || document.querySelector('.candidate-bottom-nav')) return;
+
+  const nav = document.createElement('nav');
+  nav.className = 'candidate-bottom-nav';
+  nav.setAttribute('aria-label', 'Candidate navigation');
+  const items = [
+    { label: 'Home', icon: 'fa-home', href: getHomeHref(), match: /index\.html$/i },
+    { label: 'Rank', icon: 'fa-chart-line', href: getCandidatePageHref('rank-predictor.html'), match: /rank-predictor\.html$/i },
+    { label: 'Dashboard', icon: 'fa-border-all', href: getCandidatePageHref('dashboard.html'), match: /dashboard\.html$/i },
+    { label: 'Attempts', icon: 'fa-list-check', href: `${getCandidatePageHref('dashboard.html')}#attempts`, match: /scorecard\.html$/i },
+    { label: 'Profile', icon: 'fa-user', href: getCandidatePageHref('profile.html'), match: /profile\.html$/i }
+  ];
+  const currentPage = getCurrentPageName();
+  nav.innerHTML = items.map((item) => {
+    const active = item.match.test(currentPage) || (item.label === 'Dashboard' && currentPage === 'dashboard.html');
+    return `<a href="${item.href}" class="${active ? 'is-active' : ''}" aria-label="${item.label}"><i class="fas ${item.icon}" aria-hidden="true"></i><span>${item.label}</span></a>`;
+  }).join('');
+  document.body.appendChild(nav);
+  document.body.classList.add('has-candidate-bottom-nav');
+};
+
+window.GovJobCandidateNav = {
+  sync: ensureCandidateBottomNav
+};
+
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', ensureHeaderAuthEntry);
+  window.addEventListener('DOMContentLoaded', ensureCandidateBottomNav);
   window.addEventListener('DOMContentLoaded', markPageLoaded);
   window.addEventListener('DOMContentLoaded', applyAdControls);
 } else {
   ensureHeaderAuthEntry();
+  ensureCandidateBottomNav();
   markPageLoaded();
   applyAdControls();
 }

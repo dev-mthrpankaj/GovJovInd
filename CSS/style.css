@@ -61,6 +61,11 @@ nav ul{list-style:none;padding:.6rem 1rem 1rem;display:grid;gap:.25rem}
 nav a{display:block;padding:.72rem .8rem;text-decoration:none;border-radius:10px;font-weight:600;line-height:1.2;color:var(--text);white-space:nowrap}
 nav a:hover,nav a.active{background:#e8f0ff;color:var(--primary)}
 
+.candidate-bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:1200;display:none;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:7px max(8px,env(safe-area-inset-left)) max(7px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-right));border-top:1px solid var(--border);background:rgba(255,255,255,.98);box-shadow:0 -10px 28px rgba(15,23,42,.1);backdrop-filter:blur(10px)}
+.candidate-bottom-nav a{display:grid;place-items:center;gap:3px;min-height:48px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.72rem;font-weight:800;line-height:1.1}
+.candidate-bottom-nav i{font-size:1.05rem}
+.candidate-bottom-nav a.is-active,.candidate-bottom-nav a:hover,.candidate-bottom-nav a:focus-visible{background:#e8f0ff;color:var(--primary);outline:0}
+
 main{max-width:1200px;margin:auto;padding:1rem}
 .hero{display:grid;gap:1.4rem;align-items:center;padding:1rem 0}
 .badge{display:inline-block;padding:.35rem .7rem;background:#e7efff;color:var(--primary);border-radius:999px;font-weight:700;font-size:.8rem}
@@ -186,6 +191,8 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
 :where(input,select,textarea){font-size:16px}
 
 @media (max-width: 768px){
+  body.has-candidate-bottom-nav{padding-bottom:74px}
+  .candidate-bottom-nav{display:grid}
   .header-container{padding:.6rem .85rem}
   nav{top:68px;max-height:calc(100vh - 68px);overflow-y:auto}
   main{padding:.9rem}
