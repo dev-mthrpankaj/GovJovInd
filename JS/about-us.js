@@ -59,8 +59,65 @@ function animateStats() {
     });
 }
 
+function initTeamCarousel() {
+    const carousel = document.querySelector('[data-team-carousel]');
+    const track = document.getElementById('teamTrack');
+    const dots = document.getElementById('teamDots');
+    const status = document.getElementById('teamCarouselStatus');
+    const prev = carousel?.querySelector('[data-carousel-prev]');
+    const next = carousel?.querySelector('[data-carousel-next]');
+
+    if (!carousel || !track || !dots) return;
+
+    const cards = Array.from(track.querySelectorAll('.team-card'));
+    if (!cards.length) return;
+
+    dots.innerHTML = cards.map((_card, index) => (
+        `<button class="team-dot${index === 0 ? ' is-active' : ''}" type="button" data-team-dot="${index}" aria-label="Show team member ${index + 1}"></button>`
+    )).join('');
+
+    function getActiveIndex() {
+        const left = track.scrollLeft;
+        return cards.reduce((bestIndex, card, index) => {
+            const bestDistance = Math.abs(cards[bestIndex].offsetLeft - left);
+            const distance = Math.abs(card.offsetLeft - left);
+            return distance < bestDistance ? index : bestIndex;
+        }, 0);
+    }
+
+    function updateState() {
+        const active = getActiveIndex();
+        dots.querySelectorAll('.team-dot').forEach((dot, index) => {
+            dot.classList.toggle('is-active', index === active);
+            dot.setAttribute('aria-current', index === active ? 'true' : 'false');
+        });
+        if (status) status.textContent = `${active + 1} / ${cards.length}`;
+    }
+
+    function scrollToCard(index) {
+        const safeIndex = Math.min(Math.max(index, 0), cards.length - 1);
+        track.scrollTo({ left: cards[safeIndex].offsetLeft, behavior: 'smooth' });
+    }
+
+    prev?.addEventListener('click', () => scrollToCard(getActiveIndex() - 1));
+    next?.addEventListener('click', () => scrollToCard(getActiveIndex() + 1));
+    dots.addEventListener('click', (event) => {
+        const dot = event.target.closest('[data-team-dot]');
+        if (!dot) return;
+        scrollToCard(Number(dot.dataset.teamDot));
+    });
+    track.addEventListener('scroll', () => window.requestAnimationFrame(updateState), { passive: true });
+    track.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') scrollToCard(getActiveIndex() - 1);
+        if (event.key === 'ArrowRight') scrollToCard(getActiveIndex() + 1);
+    });
+    window.addEventListener('resize', updateState, { passive: true });
+    updateState();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
+    initTeamCarousel();
 
     const stats = document.querySelector('.trust-stats');
     if (!stats || !('IntersectionObserver' in window)) {
