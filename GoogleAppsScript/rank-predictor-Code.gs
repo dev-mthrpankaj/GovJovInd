@@ -1,7 +1,6 @@
 const SPREADSHEET_ID = "1IIDP7Slon3zRDlOH0hxzOnAZd4fzYi5nZHphVCW2_wE";
 const RANK_EXAMS_SHEET_NAME = "Rank Predictor Exams";
 const USERS_SHEET_NAME = "Users";
-const QUIZ_ATTEMPTS_SHEET_NAME = "Quiz Attempts";
 const VISITOR_SESSIONS_SHEET_NAME = "Visitor Sessions";
 const VISITOR_ACTIVE_WINDOW_MS = 3 * 60 * 1000;
 
@@ -14,37 +13,6 @@ const USER_HEADERS = [
   "Gender",
   "Password",
   "Created At"
-];
-
-const QUIZ_ATTEMPT_HEADERS = [
-  "Timestamp",
-  "User ID",
-  "Name",
-  "Mobile",
-  "Email",
-  "Gender",
-  "Quiz Attempt ID",
-  "Quiz ID",
-  "Quiz Title",
-  "Subject",
-  "Difficulty",
-  "Completed At",
-  "Submit Reason",
-  "Total Questions",
-  "Attempted",
-  "Correct",
-  "Wrong",
-  "Unattempted",
-  "Score",
-  "Max Score",
-  "Percentage",
-  "Accuracy",
-  "Time Taken Seconds",
-  "Duration Minutes",
-  "Subject Data (JSON)",
-  "Answers (JSON)",
-  "Statuses (JSON)",
-  "User Agent"
 ];
 
 const VISITOR_SESSION_HEADERS = [
@@ -143,8 +111,6 @@ function doPost(e) {
     if (data.action === "changeCandidatePassword") return changeCandidatePassword(data);
     if (data.action === "getCandidateDashboard") return getCandidateDashboard(data);
     if (data.action === "getCandidateAttempts") return getCandidateAttempts(data);
-    if (data.action === "submitQuizAttempt") return submitQuizAttempt(data);
-    if (data.action === "getCandidateQuizAttempts") return getCandidateQuizAttempts(data);
     if (data.action === "trackVisitor") return trackVisitor(data);
     if (data.action === "submitData") return submitData(data);
     if (data.action === "checkRank") return checkRank(data);
@@ -330,47 +296,6 @@ function getCandidateAttempts(data) {
   });
 }
 
-function submitQuizAttempt(data) {
-  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  const usersSheet = getUsersSheet(spreadsheet);
-  const userMap = ensureUsersSheetSchema(usersSheet);
-  const users = getUserRows(usersSheet, userMap);
-  const user = findDashboardUser(users, data);
-
-  if (!user) return sendJSON({ success: false, message: "Please login again before saving quiz attempts." });
-
-  const attempt = normalizeQuizAttemptPayload(data, user);
-  validateQuizAttemptPayload(attempt);
-
-  const sheet = getQuizAttemptsSheet(spreadsheet);
-  const columnMap = ensureQuizAttemptsSheetSchema(sheet);
-  appendQuizAttempt(sheet, columnMap, attempt);
-  SpreadsheetApp.flush();
-
-  return sendJSON({
-    success: true,
-    message: "Quiz attempt saved to dashboard.",
-    attempt: buildDashboardQuizAttempt(attempt)
-  });
-}
-
-function getCandidateQuizAttempts(data) {
-  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  const usersSheet = getUsersSheet(spreadsheet);
-  const userMap = ensureUsersSheetSchema(usersSheet);
-  const users = getUserRows(usersSheet, userMap);
-  const user = findDashboardUser(users, data);
-
-  if (!user) return sendJSON({ success: false, message: "Candidate account not found." });
-
-  return sendJSON({
-    success: true,
-    message: "Quiz attempts loaded successfully.",
-    user: sanitizeUser(user),
-    quizAttempts: getCandidateQuizAttemptRows(spreadsheet, user)
-  });
-}
-
 function submitData(data) {
   data.userId = normalizeText(data.userId);
   data.rollNumber = normalizeRoll(data.rollNumber);
@@ -494,12 +419,6 @@ function getUsersSheet(spreadsheet) {
   return sheet;
 }
 
-function getQuizAttemptsSheet(spreadsheet) {
-  const sheet = spreadsheet.getSheetByName(QUIZ_ATTEMPTS_SHEET_NAME) || spreadsheet.insertSheet(QUIZ_ATTEMPTS_SHEET_NAME);
-  ensureQuizAttemptsSheetSchema(sheet);
-  return sheet;
-}
-
 function getVisitorSessionsSheet(spreadsheet) {
   const sheet = spreadsheet.getSheetByName(VISITOR_SESSIONS_SHEET_NAME) || spreadsheet.insertSheet(VISITOR_SESSIONS_SHEET_NAME);
   ensureVisitorSessionsSheetSchema(sheet);
@@ -582,44 +501,6 @@ function ensureUsersSheetSchema(sheet) {
   return getColumnMap(sheet);
 }
 
-function ensureQuizAttemptsSheetSchema(sheet) {
-  if (sheet.getMaxColumns() < QUIZ_ATTEMPT_HEADERS.length) {
-    sheet.insertColumnsAfter(sheet.getMaxColumns(), QUIZ_ATTEMPT_HEADERS.length - sheet.getMaxColumns());
-  }
-
-  const lastRow = sheet.getLastRow();
-  const lastColumn = sheet.getLastColumn();
-  if (lastRow < 1 || lastColumn < 1) {
-    sheet.getRange(1, 1, 1, QUIZ_ATTEMPT_HEADERS.length).setValues([QUIZ_ATTEMPT_HEADERS]);
-    sheet.setFrozenRows(1);
-    return getColumnMap(sheet);
-  }
-
-  const currentHeaders = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
-  const hasAnyHeader = currentHeaders.some(function (header) {
-    return String(header || "").trim();
-  });
-  if (!hasAnyHeader) {
-    sheet.getRange(1, 1, 1, QUIZ_ATTEMPT_HEADERS.length).setValues([QUIZ_ATTEMPT_HEADERS]);
-    sheet.setFrozenRows(1);
-    return getColumnMap(sheet);
-  }
-
-  const currentMap = buildColumnMapFromHeaders(currentHeaders);
-  const missingHeaders = QUIZ_ATTEMPT_HEADERS.filter(function (header) {
-    return currentMap[normalizeHeader(header)] === undefined;
-  });
-
-  if (missingHeaders.length) {
-    const startColumn = sheet.getLastColumn() + 1;
-    sheet.insertColumnsAfter(sheet.getLastColumn(), missingHeaders.length);
-    sheet.getRange(1, startColumn, 1, missingHeaders.length).setValues([missingHeaders]);
-  }
-
-  sheet.setFrozenRows(1);
-  return getColumnMap(sheet);
-}
-
 function ensureVisitorSessionsSheetSchema(sheet) {
   if (sheet.getMaxColumns() < VISITOR_SESSION_HEADERS.length) {
     sheet.insertColumnsAfter(sheet.getMaxColumns(), VISITOR_SESSION_HEADERS.length - sheet.getMaxColumns());
@@ -661,7 +542,6 @@ function ensureVisitorSessionsSheetSchema(sheet) {
 function setupCandidateLoginSheets() {
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   ensureUsersSheetSchema(getUsersSheet(spreadsheet));
-  ensureQuizAttemptsSheetSchema(getQuizAttemptsSheet(spreadsheet));
   ensureVisitorSessionsSheetSchema(getVisitorSessionsSheet(spreadsheet));
   getRankPredictorExamConfigs(spreadsheet).exams.forEach(function (exam) {
     if (!exam.sheetName || exam.disabled) return;
@@ -805,16 +685,13 @@ function buildCandidateDashboard(data) {
 
   if (!user) throw new Error("Candidate account not found.");
 
-  const rankAttempts = getCandidateRankAttemptRows(spreadsheet, user);
-  const quizAttempts = getCandidateQuizAttemptRows(spreadsheet, user);
-  const attempts = rankAttempts.concat(quizAttempts).sort(sortDashboardAttempts);
+  const attempts = getCandidateRankAttemptRows(spreadsheet, user);
   const subjectAnalytics = buildDashboardSubjectAnalytics(attempts);
   return {
     user: sanitizeUser(user),
     summary: buildDashboardSummary(attempts, subjectAnalytics),
     attempts: attempts,
-    rankAttempts: rankAttempts,
-    quizAttempts: quizAttempts,
+    rankAttempts: attempts,
     subjectAnalytics: subjectAnalytics
   };
 }
@@ -831,9 +708,7 @@ function findDashboardUser(users, data) {
 }
 
 function getCandidateAttemptRows(spreadsheet, user) {
-  return getCandidateRankAttemptRows(spreadsheet, user)
-    .concat(getCandidateQuizAttemptRows(spreadsheet, user))
-    .sort(sortDashboardAttempts);
+  return getCandidateRankAttemptRows(spreadsheet, user).sort(sortDashboardAttempts);
 }
 
 function getCandidateRankAttemptRows(spreadsheet, user) {
@@ -905,231 +780,14 @@ function buildDashboardAttempt(row, analytics, examConfig) {
   };
 }
 
-function getCandidateQuizAttemptRows(spreadsheet, user) {
-  const sheet = spreadsheet.getSheetByName(QUIZ_ATTEMPTS_SHEET_NAME);
-  if (!sheet) return [];
-  const columnMap = ensureQuizAttemptsSheetSchema(sheet);
-  const rows = getQuizAttemptRowsByHeaders(sheet, columnMap);
-  return rows.filter(function (row) {
-    return row.userId === user.userId;
-  }).map(buildDashboardQuizAttempt).sort(sortDashboardAttempts);
-}
-
-function getQuizAttemptRowsByHeaders(sheet, columnMap) {
-  const lastRow = sheet.getLastRow();
-  const lastColumn = sheet.getLastColumn();
-  if (lastRow < 2 || lastColumn < 1) return [];
-
-  return sheet.getRange(2, 1, lastRow - 1, lastColumn).getValues().map(function (row, index) {
-    return {
-      rowNumber: index + 2,
-      timestamp: getHeaderValue(row, columnMap, "Timestamp"),
-      userId: normalizeText(getHeaderValue(row, columnMap, "User ID")),
-      name: normalizeText(getHeaderValue(row, columnMap, "Name")),
-      mobile: normalizeMobile(getHeaderValue(row, columnMap, "Mobile")),
-      email: normalizeEmail(getHeaderValue(row, columnMap, "Email")),
-      gender: normalizeText(getHeaderValue(row, columnMap, "Gender")),
-      quizAttemptId: normalizeText(getHeaderValue(row, columnMap, "Quiz Attempt ID")),
-      quizId: normalizeText(getHeaderValue(row, columnMap, "Quiz ID")),
-      quizTitle: normalizeText(getHeaderValue(row, columnMap, "Quiz Title")),
-      subject: normalizeText(getHeaderValue(row, columnMap, "Subject")),
-      difficulty: normalizeText(getHeaderValue(row, columnMap, "Difficulty")),
-      completedAt: getHeaderValue(row, columnMap, "Completed At"),
-      submitReason: normalizeText(getHeaderValue(row, columnMap, "Submit Reason")),
-      totalQuestions: Number(getHeaderValue(row, columnMap, "Total Questions")) || 0,
-      attempted: Number(getHeaderValue(row, columnMap, "Attempted")) || 0,
-      correct: Number(getHeaderValue(row, columnMap, "Correct")) || 0,
-      wrong: Number(getHeaderValue(row, columnMap, "Wrong")) || 0,
-      unattempted: Number(getHeaderValue(row, columnMap, "Unattempted")) || 0,
-      score: Number(getHeaderValue(row, columnMap, "Score")) || 0,
-      maxScore: Number(getHeaderValue(row, columnMap, "Max Score")) || 0,
-      percentage: Number(getHeaderValue(row, columnMap, "Percentage")) || 0,
-      accuracy: Number(getHeaderValue(row, columnMap, "Accuracy")) || 0,
-      timeTaken: Number(getHeaderValue(row, columnMap, "Time Taken Seconds")) || 0,
-      durationMinutes: Number(getHeaderValue(row, columnMap, "Duration Minutes")) || 0,
-      subjectData: parseSubjectData(getHeaderValue(row, columnMap, "Subject Data (JSON)")),
-      answers: parseJsonArray(getHeaderValue(row, columnMap, "Answers (JSON)")),
-      statuses: parseJsonArray(getHeaderValue(row, columnMap, "Statuses (JSON)"))
-    };
-  });
-}
-
-function buildDashboardQuizAttempt(row) {
-  const subjectData = Array.isArray(row.subjectData) && row.subjectData.length
-    ? row.subjectData
-    : [{
-      name: row.subject || "Quiz",
-      attempted: row.attempted,
-      correct: row.correct,
-      wrong: row.wrong,
-      marks: row.score,
-      maxMarks: row.maxScore,
-      accuracy: row.accuracy
-    }];
-  return {
-    source: "quiz",
-    attemptType: "Quiz",
-    timestamp: toIsoString(row.timestamp),
-    completedAt: toIsoString(row.completedAt || row.timestamp),
-    userId: row.userId,
-    gender: row.gender || "",
-    examId: row.quizId,
-    quizAttemptId: row.quizAttemptId,
-    examName: row.quizTitle || "Quiz Attempt",
-    quizTitle: row.quizTitle || "Quiz Attempt",
-    subject: row.subject,
-    difficulty: row.difficulty,
-    mode: "Quiz",
-    examDate: toIsoString(row.completedAt || row.timestamp),
-    shift: "",
-    category: "",
-    state: "",
-    totalQuestions: row.totalQuestions,
-    totalAttempted: row.attempted,
-    rightAnswers: row.correct,
-    wrongAnswers: row.wrong,
-    unattempted: row.unattempted,
-    rawMarks: round2(row.score),
-    marks: round2(row.score),
-    maxMarks: round2(row.maxScore),
-    normalizedMarks: "",
-    percentile: "",
-    percentage: round2(row.percentage),
-    scorePercent: round2(row.percentage),
-    overallRank: "",
-    categoryRank: "",
-    stateRank: "",
-    shiftRank: "",
-    accuracy: round2(row.accuracy),
-    timeTaken: row.timeTaken,
-    durationMinutes: row.durationMinutes,
-    submitReason: row.submitReason,
-    subjectData: subjectData,
-    subjectAnalysis: subjectData,
-    answers: row.answers || [],
-    statuses: row.statuses || [],
-    totalSubmissions: "",
-    rankBasis: "quiz-score"
-  };
-}
-
-function normalizeQuizAttemptPayload(data, user) {
-  const totalQuestions = Number(data.totalQuestions || data.total || 0);
-  const attempted = Number(data.attempted || data.totalAttempted || 0);
-  const correct = Number(data.correct || data.rightAnswers || 0);
-  const wrong = Number(data.wrong || data.wrongAnswers || 0);
-  const unattempted = isFinite(Number(data.unattempted)) ? Number(data.unattempted) : Math.max(totalQuestions - attempted, 0);
-  const score = Number(data.score || data.rawMarks || 0);
-  const maxScore = Number(data.maxScore || totalQuestions || 0);
-  const percentage = isFinite(Number(data.percentage))
-    ? Number(data.percentage)
-    : maxScore ? (score / maxScore) * 100 : 0;
-  const accuracy = isFinite(Number(data.accuracy))
-    ? Number(data.accuracy)
-    : attempted ? (correct / attempted) * 100 : 0;
-
-  return {
-    timestamp: new Date(),
-    userId: user.userId,
-    name: user.name,
-    mobile: user.mobile,
-    email: user.email,
-    gender: user.gender || "",
-    quizAttemptId: normalizeText(data.quizAttemptId) || "quiz-" + new Date().getTime(),
-    quizId: normalizeText(data.quizId),
-    quizTitle: normalizeText(data.quizTitle),
-    subject: normalizeText(data.subject),
-    difficulty: normalizeText(data.difficulty || "Mixed"),
-    completedAt: toDateOrNow(data.completedAt),
-    submitReason: normalizeText(data.submitReason || data.reason || "manual"),
-    totalQuestions: totalQuestions,
-    attempted: attempted,
-    correct: correct,
-    wrong: wrong,
-    unattempted: unattempted,
-    score: round2(score),
-    maxScore: round2(maxScore),
-    percentage: round2(Math.max(0, percentage)),
-    accuracy: round2(Math.max(0, accuracy)),
-    timeTaken: Number(data.timeTaken || 0),
-    durationMinutes: Number(data.durationMinutes || 0),
-    subjectData: normalizeSubjectData(data.subjectData || [], {
-      marksPerCorrect: 1,
-      negativeMarking: 0
-    }),
-    answers: Array.isArray(data.answers) ? data.answers : [],
-    statuses: Array.isArray(data.statuses) ? data.statuses : [],
-    userAgent: normalizeText(data.userAgent)
-  };
-}
-
-function validateQuizAttemptPayload(attempt) {
-  if (!attempt.userId) throw new Error("Candidate ID is required.");
-  if (!attempt.quizId) throw new Error("Quiz ID is required.");
-  if (!attempt.quizTitle) throw new Error("Quiz title is required.");
-  if (!attempt.subject) throw new Error("Quiz subject is required.");
-  if (!isFinite(Number(attempt.totalQuestions)) || Number(attempt.totalQuestions) <= 0) throw new Error("Total questions must be a number.");
-  if (Number(attempt.attempted) > Number(attempt.totalQuestions)) throw new Error("Attempted questions cannot exceed total questions.");
-  if (Number(attempt.correct) + Number(attempt.wrong) > Number(attempt.attempted)) throw new Error("Correct and wrong answers cannot exceed attempted questions.");
-}
-
-function appendQuizAttempt(sheet, columnMap, attempt) {
-  const row = new Array(Math.max(sheet.getLastColumn(), QUIZ_ATTEMPT_HEADERS.length)).fill("");
-  setHeaderValue(row, columnMap, "Timestamp", attempt.timestamp);
-  setHeaderValue(row, columnMap, "User ID", attempt.userId);
-  setHeaderValue(row, columnMap, "Name", attempt.name);
-  setHeaderValue(row, columnMap, "Mobile", attempt.mobile);
-  setHeaderValue(row, columnMap, "Email", attempt.email);
-  setHeaderValue(row, columnMap, "Gender", attempt.gender);
-  setHeaderValue(row, columnMap, "Quiz Attempt ID", attempt.quizAttemptId);
-  setHeaderValue(row, columnMap, "Quiz ID", attempt.quizId);
-  setHeaderValue(row, columnMap, "Quiz Title", attempt.quizTitle);
-  setHeaderValue(row, columnMap, "Subject", attempt.subject);
-  setHeaderValue(row, columnMap, "Difficulty", attempt.difficulty);
-  setHeaderValue(row, columnMap, "Completed At", attempt.completedAt);
-  setHeaderValue(row, columnMap, "Submit Reason", attempt.submitReason);
-  setHeaderValue(row, columnMap, "Total Questions", attempt.totalQuestions);
-  setHeaderValue(row, columnMap, "Attempted", attempt.attempted);
-  setHeaderValue(row, columnMap, "Correct", attempt.correct);
-  setHeaderValue(row, columnMap, "Wrong", attempt.wrong);
-  setHeaderValue(row, columnMap, "Unattempted", attempt.unattempted);
-  setHeaderValue(row, columnMap, "Score", attempt.score);
-  setHeaderValue(row, columnMap, "Max Score", attempt.maxScore);
-  setHeaderValue(row, columnMap, "Percentage", attempt.percentage);
-  setHeaderValue(row, columnMap, "Accuracy", attempt.accuracy);
-  setHeaderValue(row, columnMap, "Time Taken Seconds", attempt.timeTaken);
-  setHeaderValue(row, columnMap, "Duration Minutes", attempt.durationMinutes);
-  setHeaderValue(row, columnMap, "Subject Data (JSON)", JSON.stringify(attempt.subjectData || []));
-  setHeaderValue(row, columnMap, "Answers (JSON)", JSON.stringify(attempt.answers || []));
-  setHeaderValue(row, columnMap, "Statuses (JSON)", JSON.stringify(attempt.statuses || []));
-  setHeaderValue(row, columnMap, "User Agent", attempt.userAgent || "");
-
-  const nextRow = sheet.getLastRow() + 1;
-  ["User ID", "Mobile", "Email", "Quiz Attempt ID", "Quiz ID", "Subject Data (JSON)", "Answers (JSON)", "Statuses (JSON)"].forEach(function (header) {
-    setTextFormat(sheet, columnMap, nextRow, header);
-  });
-  sheet.getRange(nextRow, 1, 1, row.length).setValues([row]);
-}
-
 function buildDashboardSummary(attempts, subjectAnalytics) {
   const total = attempts.length;
-  const rankAttempts = attempts.filter(function (attempt) {
-    return attempt.source !== "quiz";
-  });
-  const quizAttempts = attempts.filter(function (attempt) {
-    return attempt.source === "quiz";
-  });
-  const percentileValues = rankAttempts.map(function (attempt) {
+  const percentileValues = attempts.map(function (attempt) {
     return Number(attempt.percentile);
   }).filter(function (value) {
     return Number.isFinite(value);
   });
-  const quizScoreValues = quizAttempts.map(function (attempt) {
-    return Number(attempt.scorePercent || attempt.percentage);
-  }).filter(function (value) {
-    return Number.isFinite(value);
-  });
-  const rankedAttempts = rankAttempts.filter(function (attempt) {
+  const rankedAttempts = attempts.filter(function (attempt) {
     return Number(attempt.overallRank) > 0;
   }).sort(function (first, second) {
     return Number(first.overallRank) - Number(second.overallRank);
@@ -1139,14 +797,10 @@ function buildDashboardSummary(attempts, subjectAnalytics) {
 
   return {
     totalExamsAttempted: total,
-    totalRankPredictorAttempts: rankAttempts.length,
-    totalQuizzesAttempted: quizAttempts.length,
+    totalRankPredictorAttempts: attempts.length,
     averagePercentile: percentileValues.length ? round2(percentileValues.reduce(function (sum, value) {
       return sum + value;
     }, 0) / percentileValues.length) : 0,
-    averageQuizScore: quizScoreValues.length ? round2(quizScoreValues.reduce(function (sum, value) {
-      return sum + value;
-    }, 0) / quizScoreValues.length) : 0,
     bestRank: rankedAttempts.length ? rankedAttempts[0].overallRank : "",
     bestRankExam: rankedAttempts.length ? rankedAttempts[0].examName : "",
     bestSubject: bestSubject ? bestSubject.name : "",
@@ -2061,24 +1715,6 @@ function parseSubjectData(value) {
   } catch (error) {
     return [];
   }
-}
-
-function parseJsonArray(value) {
-  if (!value) return [];
-  if (Array.isArray(value)) return value;
-  try {
-    const parsed = JSON.parse(String(value));
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    return [];
-  }
-}
-
-function toDateOrNow(value) {
-  if (!value) return new Date();
-  if (Object.prototype.toString.call(value) === "[object Date]" && !isNaN(value.getTime())) return value;
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? new Date() : date;
 }
 
 function getHeaderValue(row, columnMap, header) {

@@ -19,6 +19,7 @@ html,
 body {
     max-width: 100%;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .rank-predictor-page,
@@ -60,6 +61,16 @@ body {
     border-radius: 8px;
     background: var(--rp-card);
     box-shadow: var(--rp-shadow);
+}
+
+.predictor-hero,
+.exam-selector-card,
+.predictor-form,
+.prediction-result,
+.mode-card,
+.result-metric,
+.form-section-card {
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
 }
 
 .predictor-hero {
@@ -319,6 +330,18 @@ body {
 
 .tab-panel.is-active {
     display: grid;
+    animation: rp-panel-in 0.18s ease both;
+}
+
+@keyframes rp-panel-in {
+    from {
+        opacity: 0.01;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .form-grid {
@@ -637,6 +660,7 @@ body {
     line-height: 1.35;
     scroll-margin-top: 110px;
     scroll-margin-bottom: max(160px, calc(var(--rp-keyboard-offset) + 120px));
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
 }
 
 .rp-field select {
@@ -973,6 +997,14 @@ body {
     }
 }
 
+@media (hover: hover) {
+    .rank-predictor-page .mode-card:hover,
+    .rank-predictor-page .result-metric:hover,
+    .rank-predictor-page .fixed-setting:hover {
+        transform: translateY(-1px);
+    }
+}
+
 @media (max-width: 639px) {
     .mode-card,
     .tab-btn,
@@ -1180,10 +1212,30 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html,
+    body {
+        scroll-behavior: auto;
+    }
+
     .loading-spinner,
     .section-summary i,
-    .subject-card-heading i {
+    .subject-card-heading i,
+    .tab-panel.is-active {
         animation: none;
+        transition: none;
+    }
+
+    .predictor-hero,
+    .exam-selector-card,
+    .predictor-form,
+    .prediction-result,
+    .mode-card,
+    .result-metric,
+    .form-section-card,
+    .rp-field input,
+    .rp-field select,
+    .rp-field textarea,
+    .subject-input-grid input {
         transition: none;
     }
 }

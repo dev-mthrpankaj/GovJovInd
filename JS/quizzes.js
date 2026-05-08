@@ -5,7 +5,8 @@
         subjects: [],
         quizzes: [],
         getQuizzesBySubject: function () { return []; },
-        getQuizById: function () { return null; }
+        getQuizById: function () { return null; },
+        loadQuizById: function () { return null; }
     };
     const storage = window.QuizStorage || {
         read: function (_key, fallback) { return fallback; },
@@ -16,22 +17,23 @@
         return String(value || "").trim().replace(/\s+/g, " ");
     };
 
+    const ALL_SUBJECTS = "All";
+    const PERSIST_DELAY_MS = 900;
     const subjectIcons = {
         Mathematics: "fa-calculator",
         English: "fa-language",
         Hindi: "fa-book",
         "General Awareness": "fa-globe-asia",
         Reasoning: "fa-brain",
-        Computer: "fa-laptop-code"
+        Computer: "fa-laptop-code",
+        All: "fa-layer-group"
     };
-    const PERSIST_IDLE_TIMEOUT_MS = 60000;
-    const TIMER_STANDARD_INTERVAL_MS = 5000;
-    const TIMER_WARNING_INTERVAL_MS = 1000;
 
     const views = {};
     const elements = {};
-    const app = {
-        subject: "",
+    const state = {
+        subject: ALL_SUBJECTS,
+        search: "",
         quizSet: null,
         questions: [],
         answers: [],
@@ -39,86 +41,39 @@
         current: 0,
         startedAt: 0,
         endsAt: 0,
-        remainingSeconds: 1800,
-        timerId: null,
+        remainingSeconds: 0,
+        timerId: 0,
+        persistTimerId: 0,
         result: null,
         reviewFilter: "all",
-        persistTimerId: null,
-        lastPersistSignature: ""
+        isLoading: false
     };
 
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", initQuizPage);
 
-    function init() {
+    function initQuizPage() {
         cacheDom();
-        bindMobileNavigation();
         bindEvents();
-        renderSubjects();
+        renderHome();
         openInitialRoute();
     }
 
-    function bindMobileNavigation() {
-        const menuToggle = document.querySelector(".menu-toggle");
-        const mainNav = document.querySelector("header nav");
-
-        if (!menuToggle || !mainNav || menuToggle.dataset.quizMenuBound) return;
-        menuToggle.dataset.quizMenuBound = "true";
-
-        const icon = menuToggle.querySelector("i");
-
-        function setMenu(open) {
-            mainNav.classList.toggle("active", open);
-            menuToggle.setAttribute("aria-expanded", String(open));
-            menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
-
-            if (icon) {
-                icon.classList.toggle("fa-bars", !open);
-                icon.classList.toggle("fa-times", open);
-            }
-        }
-
-        menuToggle.addEventListener("click", () => {
-            setMenu(!mainNav.classList.contains("active"));
-        });
-
-        mainNav.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => setMenu(false));
-        });
-
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape") setMenu(false);
-        });
-    }
-
-    function openInitialRoute() {
-        const params = new URLSearchParams(window.location.search);
-        const quizId = params.get("quiz");
-        const subject = params.get("subject");
-
-        if (quizId && registry.getQuizById(quizId)) {
-            startQuiz(quizId);
-            return;
-        }
-
-        if (subject && registry.subjects.includes(subject)) {
-            openSubject(subject);
-            return;
-        }
-
-        showView("subject");
-    }
-
     function cacheDom() {
-        views.subject = document.getElementById("subjectView");
-        views.quizList = document.getElementById("quizListView");
+        views.home = document.getElementById("homeView");
         views.exam = document.getElementById("examView");
         views.result = document.getElementById("resultView");
         views.review = document.getElementById("reviewView");
 
-        elements.subjectCards = document.getElementById("subjectCards");
-        elements.subjectQuizHeading = document.getElementById("subjectQuizHeading");
+        elements.subjectFilters = document.getElementById("subjectFilters");
         elements.quizSetList = document.getElementById("quizSetList");
-        elements.quizListMessage = document.getElementById("quizListMessage");
+        elements.quizSearch = document.getElementById("quizSearch");
+        elements.quizMessage = document.getElementById("quizMessage");
+        elements.selectedSubjectLabel = document.getElementById("selectedSubjectLabel");
+        elements.availableQuizCount = document.getElementById("availableQuizCount");
+        elements.savedAttemptCount = document.getElementById("savedAttemptCount");
+        elements.bestScoreValue = document.getElementById("bestScoreValue");
+        elements.recentAttempts = document.getElementById("recentAttempts");
+
         elements.examSubject = document.getElementById("examSubject");
         elements.examTitle = document.getElementById("examTitle");
         elements.currentQuestionNo = document.getElementById("currentQuestionNo");
@@ -132,505 +87,446 @@
         elements.questionPalette = document.getElementById("questionPalette");
         elements.submitModal = document.getElementById("submitModal");
         elements.submitSummary = document.getElementById("submitSummary");
-        elements.paletteRendered = false;
     }
 
     function bindEvents() {
         document.body.addEventListener("click", handleClick);
         document.addEventListener("keydown", handleKeyboard);
-        window.addEventListener("beforeunload", () => persistUnfinished(true));
-        window.addEventListener("pagehide", () => persistUnfinished(true));
-        document.addEventListener("visibilitychange", () => {
+        elements.quizSearch?.addEventListener("input", function (event) {
+            state.search = event.target.value.trim().toLowerCase();
+            renderQuizList();
+        });
+        window.addEventListener("beforeunload", function () { persistUnfinished(true); });
+        window.addEventListener("pagehide", function () { persistUnfinished(true); });
+        document.addEventListener("visibilitychange", function () {
             if (document.hidden) persistUnfinished(true);
         });
     }
 
     function handleClick(event) {
-        const subjectTarget = event.target.closest("[data-subject]");
-        const quizTarget = event.target.closest("[data-quiz-id]");
-        const optionTarget = event.target.closest("[data-option-index]");
-        const paletteTarget = event.target.closest("[data-question-index]");
-        const actionTarget = event.target.closest("[data-action]");
-        const reviewFilterTarget = event.target.closest("[data-review-filter]");
+        const subjectButton = event.target.closest("[data-subject-filter]");
+        const startButton = event.target.closest("[data-start-quiz]");
+        const optionButton = event.target.closest("[data-option-index]");
+        const paletteButton = event.target.closest("[data-question-index]");
+        const reviewButton = event.target.closest("[data-review-filter]");
+        const actionButton = event.target.closest("[data-action]");
 
-        if (subjectTarget) {
-            openSubject(subjectTarget.dataset.subject);
+        if (subjectButton) {
+            setSubject(subjectButton.dataset.subjectFilter || ALL_SUBJECTS);
             return;
         }
 
-        if (quizTarget) {
-            startQuiz(quizTarget.dataset.quizId);
+        if (startButton) {
+            startQuiz(startButton.dataset.startQuiz);
             return;
         }
 
-        if (optionTarget) {
-            selectOption(Number(optionTarget.dataset.optionIndex));
+        if (optionButton) {
+            selectOption(Number(optionButton.dataset.optionIndex));
             return;
         }
 
-        if (paletteTarget) {
-            goQuestion(Number(paletteTarget.dataset.questionIndex));
+        if (paletteButton) {
+            goQuestion(Number(paletteButton.dataset.questionIndex));
             closePalette();
             return;
         }
 
-        if (reviewFilterTarget) {
-            app.reviewFilter = reviewFilterTarget.dataset.reviewFilter;
+        if (reviewButton) {
+            state.reviewFilter = reviewButton.dataset.reviewFilter || "all";
             renderReview();
             return;
         }
 
-        if (!actionTarget) return;
+        if (!actionButton) return;
 
         const actions = {
-            "show-subjects": function () {
-                stopTimer();
-                renderSubjects();
-                showView("subject");
-            },
-            "prev-question": function () { goQuestion(app.current - 1); },
+            "prev-question": function () { goQuestion(state.current - 1); },
             "save-next": saveAndNext,
             "mark-review": markForReview,
             "clear-response": clearResponse,
             "submit-confirm": openSubmitModal,
             "submit-now": function () { submitQuiz("manual"); },
             "cancel-submit": closeSubmitModal,
-            "open-palette": openPalette,
+            "toggle-palette": togglePalette,
             "close-palette": closePalette,
             "review-answers": function () {
-                app.reviewFilter = "all";
+                state.reviewFilter = "all";
                 renderReview();
                 showView("review");
             },
-            "back-to-result": function () { showView("result"); },
-            "back-to-quizzes": function () { openSubject(app.subject); }
+            "back-result": function () { showView("result"); },
+            "back-home": function () {
+                stopTimer();
+                closeSubmitModal();
+                renderHome();
+                showView("home");
+            }
         };
 
-        if (actions[actionTarget.dataset.action]) actions[actionTarget.dataset.action]();
+        const action = actions[actionButton.dataset.action];
+        if (action) action();
     }
 
     function handleKeyboard(event) {
-        if (views.exam.classList.contains("hidden") || !elements.submitModal.classList.contains("hidden")) return;
         const key = event.key.toLowerCase();
+        if (key === "escape") {
+            closeSubmitModal();
+            closePalette();
+            return;
+        }
+        if (!isViewVisible("exam") || isModalOpen() || isTypingTarget(event.target)) return;
+
         if (["1", "2", "3", "4"].includes(key)) {
             event.preventDefault();
             selectOption(Number(key) - 1);
-        }
-        if (key === "p") {
-            event.preventDefault();
-            goQuestion(app.current - 1);
-        }
-        if (key === "n") {
+        } else if (key === "n") {
             event.preventDefault();
             saveAndNext();
-        }
-        if (key === "m") {
+        } else if (key === "p") {
+            event.preventDefault();
+            goQuestion(state.current - 1);
+        } else if (key === "m") {
             event.preventDefault();
             markForReview();
         }
     }
 
-    function showView(name) {
-        Object.entries(views).forEach(([key, view]) => {
-            view.classList.toggle("hidden", key !== name);
-        });
-        document.body.classList.toggle("quiz-exam-active", name === "exam");
-        if (name !== "exam") closePalette();
-        window.scrollTo({ top: 0, behavior: name === "exam" ? "auto" : "smooth" });
+    function isTypingTarget(target) {
+        return Boolean(target && target.closest && target.closest("input, textarea, select, [contenteditable='true']"));
     }
 
-    function renderSubjects() {
-        elements.subjectCards.innerHTML = registry.subjects.map((subject) => {
-            const count = registry.getQuizzesBySubject(subject).length;
+    function openInitialRoute() {
+        const params = new URLSearchParams(window.location.search);
+        const subject = params.get("subject");
+        const quizId = params.get("quiz");
+
+        if (subject && getSubjects().includes(subject)) setSubject(subject, false);
+        if (quizId && registry.getQuizById(quizId)) {
+            startQuiz(quizId);
+            return;
+        }
+
+        showView("home");
+    }
+
+    function renderHome() {
+        renderStats();
+        renderSubjectFilters();
+        renderQuizList();
+        renderRecentAttempts();
+    }
+
+    function renderStats() {
+        const attempts = getAttempts();
+        const best = attempts.reduce(function (highest, attempt) {
+            return Math.max(highest, Number(attempt.percentage) || 0);
+        }, 0);
+
+        setText(elements.availableQuizCount, String(getAllQuizzes().length));
+        setText(elements.savedAttemptCount, String(attempts.length));
+        setText(elements.bestScoreValue, `${Math.round(best)}%`);
+    }
+
+    function renderSubjectFilters() {
+        const subjects = [ALL_SUBJECTS].concat(getSubjects());
+        elements.subjectFilters.innerHTML = subjects.map(function (subject) {
+            const count = subject === ALL_SUBJECTS ? getAllQuizzes().length : registry.getQuizzesBySubject(subject).length;
+            const active = subject === state.subject;
             return `
-                <article class="subject-card" data-subject="${escapeAttr(subject)}">
-                    <span class="subject-icon"><i class="fas ${subjectIcons[subject] || "fa-book"}" aria-hidden="true"></i></span>
-                    <div>
-                        <h2>${escapeHtml(subject)}</h2>
-                        <span class="subject-meta">${count} quizzes available</span>
-                    </div>
-                    <button class="btn btn-primary" type="button">View Quizzes</button>
-                </article>
+                <button class="subject-chip${active ? " is-active" : ""}" type="button" data-subject-filter="${escapeAttr(subject)}" role="tab" aria-selected="${active}">
+                    <i class="fas ${subjectIcons[subject] || "fa-book"}" aria-hidden="true"></i>
+                    <strong>${escapeHtml(subject === ALL_SUBJECTS ? "All Subjects" : subject)}</strong>
+                    <span>${count}</span>
+                </button>
             `;
         }).join("");
     }
 
-    function openSubject(subject) {
-        app.subject = subject;
-        elements.subjectQuizHeading.textContent = `${subject} Quizzes`;
-        hideListMessage();
+    function renderQuizList() {
+        const quizzes = getFilteredQuizzes();
+        setText(elements.selectedSubjectLabel, state.subject === ALL_SUBJECTS ? "All Subjects" : state.subject);
 
-        const sets = registry.getQuizzesBySubject(subject);
-        elements.quizSetList.innerHTML = sets.length
-            ? sets.map(renderQuizSetCard).join("")
-            : `<article class="quiz-set-card"><p class="result-subtext">No quiz sets found for ${escapeHtml(subject)}.</p></article>`;
+        if (!quizzes.length) {
+            elements.quizSetList.innerHTML = "";
+            showMessage("No quiz set matches your search.", "error");
+            return;
+        }
 
-        showView("quizList");
+        hideMessage();
+        elements.quizSetList.innerHTML = quizzes.map(renderQuizCard).join("");
     }
 
-    function renderQuizSetCard(set) {
-        const stats = getQuizStats(set.id);
-        const isComplete = Boolean(set.validation && set.validation.isComplete);
+    function renderQuizCard(quiz) {
+        const stats = getQuizStats(quiz.id);
+        const resume = getSavedUnfinished();
+        const canResume = resume && resume.quizId === quiz.id;
         return `
             <article class="quiz-set-card">
                 <div class="quiz-card-head">
-                    <h3>${escapeHtml(set.title)}</h3>
-                    <p class="quiz-meta">${escapeHtml(set.description || "")}</p>
-                    <div class="quiz-meta">
-                        <span class="meta-pill">${escapeHtml(set.subject)}</span>
-                        <span class="meta-pill">${escapeHtml(set.difficulty)}</span>
-                        <span class="meta-pill">${escapeHtml(set.totalQuestions)} Questions</span>
-                        <span class="meta-pill">${escapeHtml(set.durationMinutes)} Minutes</span>
-                        <span class="meta-pill">+${set.marksPerQuestion} marks</span>
-                        <span class="meta-pill">-${set.negativeMarks} negative</span>
+                    <span class="quiz-card-kicker">${escapeHtml(quiz.subject)}</span>
+                    <h3>${escapeHtml(quiz.title)}</h3>
+                    <p>${escapeHtml(quiz.description || "Practice set for government exam preparation.")}</p>
+                    <div class="quiz-set-meta">
+                        <span class="meta-pill">${escapeHtml(quiz.difficulty || "Mixed")}</span>
+                        <span class="meta-pill">${formatNumber(quiz.totalQuestions)} Questions</span>
+                        <span class="meta-pill">${formatNumber(quiz.durationMinutes)} Minutes</span>
+                        <span class="meta-pill">+${formatMarks(quiz.marksPerQuestion)}</span>
+                        <span class="meta-pill">-${formatMarks(quiz.negativeMarks)}</span>
+                        ${canResume ? '<span class="meta-pill">Resume available</span>' : ""}
                     </div>
-                    ${isComplete ? "" : `<div class="message-box error">This quiz needs 50 complete questions before it can start.</div>`}
                 </div>
-                <div>
+                <div class="quiz-card-foot">
                     <div class="quiz-performance">
-                        <div class="perf-tile"><span>Best</span><strong>${stats.bestScore}%</strong></div>
-                        <div class="perf-tile"><span>Attempts</span><strong>${stats.attemptCount}</strong></div>
-                        <div class="perf-tile"><span>Last</span><strong>${stats.lastAttempt}</strong></div>
+                        <div class="perf-tile"><span>Best</span><strong>${formatNumber(stats.bestScore)}%</strong></div>
+                        <div class="perf-tile"><span>Attempts</span><strong>${formatNumber(stats.attemptCount)}</strong></div>
+                        <div class="perf-tile"><span>Last</span><strong>${escapeHtml(stats.lastAttempt)}</strong></div>
                     </div>
-                    <button class="btn btn-primary" type="button" data-quiz-id="${escapeAttr(set.id)}" ${isComplete ? "" : "disabled"}>Start Quiz</button>
+                    <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(quiz.id)}">
+                        <i class="fas fa-play" aria-hidden="true"></i> ${canResume ? "Resume / Start" : "Start Test"}
+                    </button>
                 </div>
             </article>
         `;
     }
 
-    function getQuizStats(quizId) {
-        const attempts = storage.read("attempts", []).filter((attempt) => attempt.quizId === quizId);
-        const bestScores = storage.read("bestScores", {});
-        return {
-            bestScore: bestScores[quizId] || 0,
-            attemptCount: attempts.length,
-            lastAttempt: attempts[0] ? formatDate(attempts[0].completedAt) : "Not attempted"
-        };
-    }
-
-    async function startQuiz(quizId) {
-        let set = registry.getQuizById(quizId);
-        if (!set) return;
-        if (!Array.isArray(set.questions)) {
-            setQuizLoading(true);
-            try {
-                set = await registry.loadQuizById?.(quizId);
-            } catch {
-                set = null;
-            } finally {
-                setQuizLoading(false);
-            }
-        }
-
-        if (!set) {
-            showListMessage("Quiz could not load. Please try again.", "error");
-            showView("quizList");
+    function renderRecentAttempts() {
+        const attempts = getAttempts().slice(0, 5);
+        if (!attempts.length) {
+            elements.recentAttempts.innerHTML = '<div class="history-empty">Completed quiz attempts will appear here on this device.</div>';
             return;
         }
 
-        if (!set.validation || !set.validation.isComplete) {
-            showListMessage("This quiz needs 50 complete questions before it can start.", "error");
-            showView("quizList");
-            return;
-        }
-
-        const saved = storage.read("unfinished", null);
-        if (saved && saved.quizId === quizId && window.confirm("Resume your unfinished attempt?")) {
-            resumeAttempt(saved);
-            return;
-        }
-
-        app.quizSet = set;
-        app.subject = set.subject;
-        app.questions = getQuestionsForSet(set);
-        app.answers = app.questions.map(() => null);
-        app.statuses = app.questions.map(() => "not-visited");
-        app.statuses[0] = "not-answered";
-        app.current = 0;
-        app.startedAt = Date.now();
-        app.endsAt = app.startedAt + set.durationMinutes * 60 * 1000;
-        app.remainingSeconds = set.durationMinutes * 60;
-        app.result = null;
-        resetPalette();
-        renderExam();
-        startTimer();
-        persistUnfinished();
-        showView("exam");
-    }
-
-    function setQuizLoading(loading) {
-        document.body.classList.toggle("quiz-loading", loading);
-        if (loading) showListMessage("Loading quiz...", "info");
-        else hideListMessage();
-    }
-
-    function resumeAttempt(saved) {
-        const set = registry.getQuizById(saved.quizId);
-        if (!set || !set.validation || !set.validation.isComplete) return;
-        app.quizSet = set;
-        app.subject = set.subject;
-        app.questions = getQuestionsForSet(set);
-        app.answers = Array.isArray(saved.answers) ? saved.answers : app.questions.map(() => null);
-        app.statuses = Array.isArray(saved.statuses) ? saved.statuses : app.questions.map(() => "not-visited");
-        app.current = Number(saved.current) || 0;
-        app.startedAt = Number(saved.startedAt) || Date.now();
-        app.endsAt = Number(saved.endsAt) || Date.now() + set.durationMinutes * 60 * 1000;
-        app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
-        resetPalette();
-        renderExam();
-        startTimer();
-        showView("exam");
-    }
-
-    function getQuestionsForSet(set) {
-        return Array.isArray(set.questions)
-            ? set.questions.slice(0, 50).map((question) => ({
-                ...question,
-                question: question.question || sanitizeQuestionText(question.question)
-            }))
-            : [];
-    }
-
-    function renderExam() {
-        renderQuestionShell();
-        renderQuestion();
-        if (shouldRenderPaletteImmediately()) renderPalette();
-        updateTimerDisplay();
-    }
-
-    function shouldRenderPaletteImmediately() {
-        return Boolean(window.matchMedia?.("(min-width: 1024px)")?.matches || window.innerWidth >= 1024);
-    }
-
-    function resetPalette() {
-        elements.paletteRendered = false;
-        elements.paletteButtons = [];
-        elements.paletteSummaryValues = null;
-        if (elements.paletteSummary) elements.paletteSummary.innerHTML = "";
-        if (elements.questionPalette) elements.questionPalette.innerHTML = "";
-    }
-
-    function renderQuestionShell() {
-        if (elements.questionTitle && document.documentElement.contains(elements.questionTitle)) return;
-
-        elements.questionCard.innerHTML = `
-            <div class="question-card-head">
-                <div class="question-number-block">
-                    <span class="question-number-pill" data-question-number-pill></span>
-                    <div class="question-meta">
-                        <span class="meta-pill" data-question-subject></span>
-                        <span class="meta-pill" data-question-topic></span>
-                        <span class="meta-pill" data-question-difficulty></span>
-                    </div>
+        elements.recentAttempts.innerHTML = attempts.map(function (attempt) {
+            return `
+                <div class="history-item">
+                    <span>${escapeHtml(formatDate(attempt.completedAt))}</span>
+                    <strong>${escapeHtml(attempt.quizTitle || "Quiz Attempt")}</strong>
+                    <small>${formatNumber(attempt.percentage)}% | ${formatMarks(attempt.score)}/${formatMarks(attempt.maxScore)} marks</small>
                 </div>
-                <span class="question-status-badge" data-question-status></span>
-            </div>
-            <div class="question-content">
-                <h2 class="question-title" data-question-title></h2>
-                <div class="option-list" role="radiogroup" aria-label="Answer options">
-                    ${[0, 1, 2, 3].map((index) => `
-                        <button class="answer-option" type="button" data-option-index="${index}" aria-pressed="false">
-                            <span class="option-key">${String.fromCharCode(65 + index)}</span>
-                            <span data-option-text></span>
-                        </button>
-                    `).join("")}
-                </div>
-            </div>
-            <div class="question-footnote">
-                <span><i class="fas fa-check" aria-hidden="true"></i> <span data-correct-marks></span></span>
-                <span><i class="fas fa-minus-circle" aria-hidden="true"></i> <span data-negative-marks></span></span>
-            </div>
-        `;
-
-        elements.questionNumberPill = elements.questionCard.querySelector("[data-question-number-pill]");
-        elements.questionSubject = elements.questionCard.querySelector("[data-question-subject]");
-        elements.questionTopic = elements.questionCard.querySelector("[data-question-topic]");
-        elements.questionDifficulty = elements.questionCard.querySelector("[data-question-difficulty]");
-        elements.questionStatusBadge = elements.questionCard.querySelector("[data-question-status]");
-        elements.questionTitle = elements.questionCard.querySelector("[data-question-title]");
-        elements.optionButtons = Array.from(elements.questionCard.querySelectorAll("[data-option-index]"));
-        elements.optionTexts = elements.optionButtons.map((button) => button.querySelector("[data-option-text]"));
-        elements.correctMarks = elements.questionCard.querySelector("[data-correct-marks]");
-        elements.negativeMarks = elements.questionCard.querySelector("[data-negative-marks]");
-    }
-
-    function renderQuestion() {
-        const question = app.questions[app.current];
-        if (!question) return;
-        const currentStatus = app.statuses[app.current] || "not-visited";
-
-        elements.examSubject.textContent = app.quizSet.subject;
-        elements.examTitle.textContent = app.quizSet.title;
-        elements.currentQuestionNo.textContent = app.current + 1;
-        elements.totalQuestionNo.textContent = app.questions.length;
-        elements.quizProgress.style.width = `${((app.current + 1) / app.questions.length) * 100}%`;
-
-        elements.questionNumberPill.textContent = `Question ${app.current + 1}`;
-        elements.questionSubject.textContent = question.subject || app.quizSet.subject || "Subject";
-        elements.questionTopic.textContent = question.topic || "Topic";
-        elements.questionDifficulty.textContent = question.difficulty || app.quizSet.difficulty || "Mixed";
-        elements.questionTitle.textContent = question.question || "";
-        elements.correctMarks.textContent = `+${question.marks} marks`;
-        elements.negativeMarks.textContent = `-${question.negativeMarks} negative`;
-        elements.optionButtons.forEach((button, index) => {
-            const selected = app.answers[app.current] === index;
-            button.classList.toggle("selected", selected);
-            button.setAttribute("aria-pressed", String(selected));
-            elements.optionTexts[index].textContent = question.options[index] || "";
-        });
-        updateQuestionStatusBadge(currentStatus);
-    }
-
-    function renderPalette() {
-        renderPaletteSummaryShell();
-        elements.questionPalette.innerHTML = app.questions.map((_question, index) => {
-            const status = app.statuses[index] || "not-visited";
-            return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
+            `;
         }).join("");
-        elements.paletteButtons = Array.from(elements.questionPalette.querySelectorAll("[data-question-index]"));
-        elements.paletteRendered = true;
-        updatePaletteSummary();
     }
 
-    function selectOption(index) {
-        app.answers[app.current] = index;
-        app.statuses[app.current] = app.statuses[app.current] === "marked" || app.statuses[app.current] === "answered-marked" ? "answered-marked" : "answered";
-        persistUnfinished();
-        updateCurrentQuestionState();
-    }
-
-    function clearResponse() {
-        app.answers[app.current] = null;
-        app.statuses[app.current] = app.statuses[app.current] === "answered-marked" || app.statuses[app.current] === "marked" ? "marked" : "not-answered";
-        persistUnfinished();
-        updateCurrentQuestionState();
-    }
-
-    function markForReview() {
-        app.statuses[app.current] = app.answers[app.current] === null ? "marked" : "answered-marked";
-        persistUnfinished();
-        updateCurrentQuestionState();
-    }
-
-    function saveAndNext() {
-        if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
-        if (app.current >= app.questions.length - 1) {
-            openSubmitModal();
-            return;
+    function setSubject(subject, rerender = true) {
+        state.subject = subject && (subject === ALL_SUBJECTS || getSubjects().includes(subject)) ? subject : ALL_SUBJECTS;
+        if (rerender) {
+            renderSubjectFilters();
+            renderQuizList();
         }
-        goQuestion(app.current + 1);
     }
 
-    function goQuestion(index) {
-        if (index < 0 || index >= app.questions.length) return;
-        const previousIndex = app.current;
-        if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
-        app.current = index;
-        if (app.statuses[app.current] === "not-visited") app.statuses[app.current] = "not-answered";
-        persistUnfinished();
-        renderQuestion();
-        updatePaletteButton(previousIndex);
-        updatePaletteButton(app.current);
-        updatePaletteSummary();
+    async function startQuiz(quizId, forceNew = false) {
+        if (state.isLoading) return;
+        const meta = registry.getQuizById(quizId);
+        if (!meta) return;
+
+        state.isLoading = true;
+        showMessage("Loading quiz...", "info");
+
+        try {
+            const quizSet = await loadQuizSet(quizId);
+            if (!quizSet || !quizSet.validation || !quizSet.validation.isComplete) {
+                showMessage("This quiz is not ready yet.", "error");
+                return;
+            }
+
+            const saved = getSavedUnfinished();
+            if (!forceNew && saved && saved.quizId === quizId && window.confirm("Resume your unfinished attempt?")) {
+                resumeAttempt(quizSet, saved);
+            } else {
+                beginNewAttempt(quizSet);
+            }
+        } catch (error) {
+            showMessage("Quiz could not load. Please try again.", "error");
+        } finally {
+            state.isLoading = false;
+        }
     }
 
-    function updateCurrentQuestionState() {
-        updateAnswerOptions();
-        updateQuestionStatusBadge();
-        updatePaletteButton(app.current);
-        updatePaletteSummary();
+    async function loadQuizSet(quizId) {
+        const loaded = await registry.loadQuizById?.(quizId);
+        return loaded || registry.getQuizById(quizId);
     }
 
-    function updateAnswerOptions() {
-        const selected = app.answers[app.current];
-        elements.optionButtons.forEach((button) => {
-            const isSelected = Number(button.dataset.optionIndex) === selected;
-            button.classList.toggle("selected", isSelected);
-            button.setAttribute("aria-pressed", String(isSelected));
+    function beginNewAttempt(quizSet) {
+        const questions = getQuestionsForSet(quizSet);
+        state.quizSet = quizSet;
+        state.questions = questions;
+        state.answers = questions.map(function () { return null; });
+        state.statuses = questions.map(function (_question, index) {
+            return index === 0 ? "not-answered" : "not-visited";
         });
+        state.current = 0;
+        state.startedAt = Date.now();
+        state.remainingSeconds = Math.max(1, Number(quizSet.durationMinutes) || 30) * 60;
+        state.endsAt = state.startedAt + state.remainingSeconds * 1000;
+        state.result = null;
+        renderExam();
+        startTimer();
+        persistUnfinished(true);
+        showView("exam");
     }
 
-    function updateQuestionStatusBadge(status = app.statuses[app.current] || "not-visited") {
-        const badge = elements.questionStatusBadge;
-        if (!badge) return;
-        badge.className = `question-status-badge ${status}`;
-        badge.textContent = getStatusLabel(status);
-    }
-
-    function updatePaletteButton(index) {
-        if (!elements.paletteRendered) return;
-        const button = elements.paletteButtons?.[index];
-        if (!button) return;
-        const status = app.statuses[index] || "not-visited";
-        button.className = `palette-btn ${status}${index === app.current ? " current" : ""}`;
-        button.setAttribute("aria-label", `Question ${index + 1}, ${getStatusLabel(status)}`);
-    }
-
-    function renderPaletteSummaryShell() {
-        if (!elements.paletteSummary || elements.paletteSummaryValues) return;
-        const items = [
-            ["answered", "Answered"],
-            ["notAnswered", "Not Answered", "not-answered"],
-            ["marked", "Marked"],
-            ["answeredMarked", "Answered + Marked", "answered-marked"],
-            ["notVisited", "Not Visited", "not-visited"]
-        ];
-        elements.paletteSummary.innerHTML = items.map(([key, label, status = key]) => `
-            <span class="palette-summary-tile ${status}">
-                <strong data-summary-count="${key}">0</strong>
-                <em>${label}</em>
-            </span>
-        `).join("");
-        elements.paletteSummaryValues = items.reduce((map, [key]) => {
-            map[key] = elements.paletteSummary.querySelector(`[data-summary-count="${key}"]`);
-            return map;
-        }, {});
-    }
-
-    function updatePaletteSummary() {
-        if (!elements.paletteSummary || !elements.paletteRendered) return;
-        renderPaletteSummaryShell();
-        const counts = getStatusCounts();
-        Object.entries(counts).forEach(([key, value]) => {
-            if (elements.paletteSummaryValues?.[key]) elements.paletteSummaryValues[key].textContent = value;
-        });
-    }
-
-    function startTimer() {
-        stopTimer();
-        updateTimerDisplay();
-        scheduleTimerTick();
-    }
-
-    function scheduleTimerTick() {
-        const interval = app.remainingSeconds <= 300 ? TIMER_WARNING_INTERVAL_MS : TIMER_STANDARD_INTERVAL_MS;
-        app.timerId = window.setTimeout(handleTimerTick, interval);
-    }
-
-    function handleTimerTick() {
-        app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
-        updateTimerDisplay();
-        if (app.remainingSeconds <= 0) {
+    function resumeAttempt(quizSet, saved) {
+        const questions = getQuestionsForSet(quizSet);
+        state.quizSet = quizSet;
+        state.questions = questions;
+        state.answers = normalizeArray(saved.answers, questions.length, null);
+        state.statuses = normalizeArray(saved.statuses, questions.length, "not-visited");
+        state.current = clamp(Number(saved.current) || 0, 0, questions.length - 1);
+        state.startedAt = Number(saved.startedAt) || Date.now();
+        state.endsAt = Number(saved.endsAt) || Date.now() + Math.max(1, Number(quizSet.durationMinutes) || 30) * 60 * 1000;
+        state.remainingSeconds = Math.max(0, Math.ceil((state.endsAt - Date.now()) / 1000));
+        if (state.remainingSeconds <= 0) {
             submitQuiz("time");
             return;
         }
-        scheduleTimerTick();
+        renderExam();
+        startTimer();
+        showView("exam");
     }
 
-    function stopTimer() {
-        window.clearTimeout(app.timerId);
-        app.timerId = null;
+    function getQuestionsForSet(quizSet) {
+        const questions = Array.isArray(quizSet.questions) ? quizSet.questions : [];
+        return questions.slice(0, Number(quizSet.totalQuestions) || 50).map(function (question, index) {
+            return {
+                id: question.id || `${quizSet.id}-${index + 1}`,
+                subject: question.subject || quizSet.subject,
+                topic: question.topic || "General",
+                difficulty: question.difficulty || quizSet.difficulty || "Mixed",
+                question: sanitizeQuestionText(question.question),
+                options: Array.isArray(question.options) ? question.options.slice(0, 4) : [],
+                correctAnswer: Number(question.correctAnswer),
+                explanation: question.explanation || "Explanation is not available.",
+                marks: Number(question.marks) || Number(quizSet.marksPerQuestion) || 1,
+                negativeMarks: Number(question.negativeMarks) || Number(quizSet.negativeMarks) || 0
+            };
+        });
     }
 
-    function updateTimerDisplay() {
-        elements.timerText.textContent = formatTime(app.remainingSeconds);
-        elements.timerPill.classList.toggle("warning", app.remainingSeconds <= 300);
+    function renderExam() {
+        renderQuestion();
+        renderPalette();
+        updateTimerDisplay();
+    }
+
+    function renderQuestion() {
+        const question = state.questions[state.current];
+        if (!question) return;
+        const status = state.statuses[state.current] || "not-visited";
+
+        setText(elements.examSubject, state.quizSet.subject);
+        setText(elements.examTitle, state.quizSet.title);
+        setText(elements.currentQuestionNo, String(state.current + 1));
+        setText(elements.totalQuestionNo, String(state.questions.length));
+        elements.quizProgress.style.width = `${((state.current + 1) / state.questions.length) * 100}%`;
+
+        elements.questionCard.innerHTML = `
+            <div class="question-card-head">
+                <div class="question-number">Question ${state.current + 1}</div>
+                <div class="question-meta">
+                    <span class="meta-pill">${escapeHtml(question.subject || state.quizSet.subject)}</span>
+                    <span class="meta-pill">${escapeHtml(question.topic || "Topic")}</span>
+                    <span class="meta-pill">${escapeHtml(question.difficulty || "Mixed")}</span>
+                </div>
+                <span class="question-status ${status}">${escapeHtml(getStatusLabel(status))}</span>
+            </div>
+            <h2 class="question-title">${escapeHtml(question.question)}</h2>
+            <div class="option-list" role="radiogroup" aria-label="Answer options">
+                ${question.options.map(function (option, index) {
+                    const selected = state.answers[state.current] === index;
+                    return `
+                        <button class="answer-option${selected ? " selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${selected}">
+                            <span class="option-key">${String.fromCharCode(65 + index)}</span>
+                            <span>${escapeHtml(option)}</span>
+                        </button>
+                    `;
+                }).join("")}
+            </div>
+            <div class="question-footnote">
+                <span><i class="fas fa-check" aria-hidden="true"></i> +${formatMarks(question.marks)} marks</span>
+                <span><i class="fas fa-minus-circle" aria-hidden="true"></i> -${formatMarks(question.negativeMarks)} negative</span>
+            </div>
+        `;
+    }
+
+    function renderPalette() {
+        if (!state.questions.length) return;
+        const counts = getStatusCounts();
+        elements.paletteSummary.innerHTML = [
+            ["answered", "Answered", counts.answered],
+            ["not-answered", "Not Answered", counts.notAnswered],
+            ["marked", "Marked", counts.marked],
+            ["answered-marked", "Answered + Marked", counts.answeredMarked],
+            ["not-visited", "Not Visited", counts.notVisited]
+        ].map(function ([status, label, count]) {
+            return `<div class="palette-summary-tile ${status}"><strong>${count}</strong><span>${label}</span></div>`;
+        }).join("");
+
+        elements.questionPalette.innerHTML = state.questions.map(function (_question, index) {
+            const status = state.statuses[index] || "not-visited";
+            const current = index === state.current ? " current" : "";
+            return `<button class="palette-btn ${status}${current}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
+        }).join("");
+    }
+
+    function selectOption(index) {
+        if (!state.questions[state.current] || index < 0 || index > 3) return;
+        const currentStatus = state.statuses[state.current];
+        state.answers[state.current] = index;
+        state.statuses[state.current] = currentStatus === "marked" || currentStatus === "answered-marked"
+            ? "answered-marked"
+            : "answered";
+        persistUnfinished();
+        renderQuestion();
+        renderPalette();
+    }
+
+    function clearResponse() {
+        if (!state.questions[state.current]) return;
+        const currentStatus = state.statuses[state.current];
+        state.answers[state.current] = null;
+        state.statuses[state.current] = currentStatus === "answered-marked" || currentStatus === "marked"
+            ? "marked"
+            : "not-answered";
+        persistUnfinished();
+        renderQuestion();
+        renderPalette();
+    }
+
+    function markForReview() {
+        if (!state.questions[state.current]) return;
+        state.statuses[state.current] = state.answers[state.current] === null ? "marked" : "answered-marked";
+        persistUnfinished();
+        renderQuestion();
+        renderPalette();
+    }
+
+    function saveAndNext() {
+        if (!state.questions[state.current]) return;
+        if (state.statuses[state.current] === "not-visited") state.statuses[state.current] = "not-answered";
+        if (state.current >= state.questions.length - 1) {
+            openSubmitModal();
+            return;
+        }
+        goQuestion(state.current + 1);
+    }
+
+    function goQuestion(index) {
+        if (index < 0 || index >= state.questions.length) return;
+        if (state.statuses[state.current] === "not-visited") state.statuses[state.current] = "not-answered";
+        state.current = index;
+        if (state.statuses[state.current] === "not-visited") state.statuses[state.current] = "not-answered";
+        persistUnfinished();
+        renderQuestion();
+        renderPalette();
     }
 
     function openSubmitModal() {
-        const attempted = app.answers.filter((answer) => answer !== null).length;
-        const marked = app.statuses.filter((status) => status.includes("marked")).length;
-        elements.submitSummary.textContent = `Attempted ${attempted} of 50. Marked for review: ${marked}.`;
+        const attempted = state.answers.filter(function (answer) { return answer !== null; }).length;
+        const marked = state.statuses.filter(function (status) { return String(status).includes("marked"); }).length;
+        elements.submitSummary.textContent = `Attempted ${attempted} of ${state.questions.length}. Marked for review: ${marked}.`;
         elements.submitModal.classList.remove("hidden");
     }
 
@@ -638,11 +534,46 @@
         elements.submitModal.classList.add("hidden");
     }
 
+    function togglePalette() {
+        elements.palettePanel.classList.toggle("open");
+    }
+
+    function closePalette() {
+        elements.palettePanel.classList.remove("open");
+    }
+
+    function isModalOpen() {
+        return !elements.submitModal.classList.contains("hidden");
+    }
+
+    function startTimer() {
+        stopTimer();
+        tickTimer();
+        state.timerId = window.setInterval(tickTimer, 1000);
+    }
+
+    function stopTimer() {
+        window.clearInterval(state.timerId);
+        state.timerId = 0;
+    }
+
+    function tickTimer() {
+        state.remainingSeconds = Math.max(0, Math.ceil((state.endsAt - Date.now()) / 1000));
+        updateTimerDisplay();
+        if (state.remainingSeconds <= 0 && state.quizSet) submitQuiz("time");
+    }
+
+    function updateTimerDisplay() {
+        setText(elements.timerText, formatTime(state.remainingSeconds));
+        elements.timerPill.classList.toggle("warning", state.remainingSeconds <= 300);
+    }
+
     function submitQuiz(reason) {
+        if (!state.quizSet || !state.questions.length) return;
         stopTimer();
         closeSubmitModal();
         const result = calculateResult(reason);
-        app.result = result;
+        state.result = result;
         clearPendingPersist();
         storage.remove("unfinished");
         saveAttempt(result);
@@ -654,29 +585,30 @@
         let correct = 0;
         let wrong = 0;
 
-        app.questions.forEach((question, index) => {
-            const answer = app.answers[index];
+        state.questions.forEach(function (question, index) {
+            const answer = state.answers[index];
             if (answer === null) return;
             if (answer === question.correctAnswer) correct += 1;
             else wrong += 1;
         });
 
-        const total = app.questions.length;
+        const total = state.questions.length;
         const attempted = correct + wrong;
         const unattempted = total - attempted;
-        const score = Number((correct * app.quizSet.marksPerQuestion - wrong * app.quizSet.negativeMarks).toFixed(2));
-        const maxScore = total * app.quizSet.marksPerQuestion;
-        const percentage = maxScore ? Math.max(0, Math.round((score / maxScore) * 100)) : 0;
-        const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
-        const timeTaken = Math.max(0, app.quizSet.durationMinutes * 60 - app.remainingSeconds);
+        const score = round2(correct * (Number(state.quizSet.marksPerQuestion) || 1) - wrong * (Number(state.quizSet.negativeMarks) || 0));
+        const maxScore = round2(total * (Number(state.quizSet.marksPerQuestion) || 1));
+        const percentage = maxScore ? Math.max(0, round2((score / maxScore) * 100)) : 0;
+        const accuracy = attempted ? round2((correct / attempted) * 100) : 0;
+        const timeTaken = Math.max(0, Math.round(((Number(state.quizSet.durationMinutes) || 30) * 60) - state.remainingSeconds));
 
         return {
             id: `attempt-${Date.now()}`,
-            quizId: app.quizSet.id,
-            quizTitle: app.quizSet.title,
-            subject: app.quizSet.subject,
+            quizId: state.quizSet.id,
+            quizTitle: state.quizSet.title,
+            subject: state.quizSet.subject,
+            difficulty: state.quizSet.difficulty || "Mixed",
             completedAt: new Date().toISOString(),
-            reason,
+            reason: reason || "manual",
             total,
             attempted,
             unattempted,
@@ -687,25 +619,24 @@
             percentage,
             accuracy,
             timeTaken,
-            difficulty: app.quizSet.difficulty || "Mixed",
-            durationMinutes: app.quizSet.durationMinutes,
-            subjectData: buildQuizSubjectData(),
-            questions: app.questions,
-            answers: app.answers,
-            statuses: app.statuses,
+            durationMinutes: Number(state.quizSet.durationMinutes) || 30,
+            subjectData: buildSubjectData(),
+            questions: state.questions,
+            answers: state.answers.slice(),
+            statuses: state.statuses.slice(),
             message: getPerformanceMessage(percentage)
         };
     }
 
-    function buildQuizSubjectData() {
+    function buildSubjectData() {
         const buckets = {};
-        app.questions.forEach((question, index) => {
-            const name = question.subject || app.quizSet.subject || "General";
-            const answer = app.answers[index];
-            const attempted = answer !== null;
-            const isCorrect = attempted && answer === question.correctAnswer;
-            const isWrong = attempted && !isCorrect;
-            const marks = isCorrect ? Number(question.marks) || 0 : isWrong ? -(Number(question.negativeMarks) || 0) : 0;
+        state.questions.forEach(function (question, index) {
+            const name = question.subject || state.quizSet.subject || "General";
+            const selected = state.answers[index];
+            const attempted = selected !== null;
+            const correct = attempted && selected === question.correctAnswer;
+            const wrong = attempted && !correct;
+            const marks = correct ? Number(question.marks) || 0 : wrong ? -(Number(question.negativeMarks) || 0) : 0;
 
             if (!buckets[name]) {
                 buckets[name] = {
@@ -720,33 +651,32 @@
             }
 
             buckets[name].totalQuestions += 1;
-            buckets[name].maxMarks += Number(question.marks) || Number(app.quizSet.marksPerQuestion) || 1;
+            buckets[name].maxMarks += Number(question.marks) || 1;
             if (attempted) buckets[name].attempted += 1;
-            if (isCorrect) buckets[name].correct += 1;
-            if (isWrong) buckets[name].wrong += 1;
+            if (correct) buckets[name].correct += 1;
+            if (wrong) buckets[name].wrong += 1;
             buckets[name].marks += marks;
         });
 
-        return Object.keys(buckets).map((name) => {
+        return Object.keys(buckets).map(function (name) {
             const subject = buckets[name];
             return {
                 ...subject,
                 marks: round2(subject.marks),
                 maxMarks: round2(subject.maxMarks),
-                accuracy: subject.attempted ? round2((subject.correct / subject.attempted) * 100) : 0,
-                scorePercent: subject.maxMarks ? round2((subject.marks / subject.maxMarks) * 100) : 0
+                accuracy: subject.attempted ? round2((subject.correct / subject.attempted) * 100) : 0
             };
         });
     }
 
     function saveAttempt(result) {
-        const attempts = storage.read("attempts", []);
+        const attempts = getAttempts();
         attempts.unshift(summarizeAttempt(result));
         storage.write("attempts", attempts.slice(0, 80));
         storage.write("recentAttempts", attempts.slice(0, 10));
 
         const bestScores = storage.read("bestScores", {});
-        bestScores[result.quizId] = Math.max(bestScores[result.quizId] || 0, result.percentage);
+        bestScores[result.quizId] = Math.max(Number(bestScores[result.quizId]) || 0, Number(result.percentage) || 0);
         storage.write("bestScores", bestScores);
     }
 
@@ -770,28 +700,41 @@
     }
 
     function renderResult() {
-        const result = app.result;
+        const result = state.result;
+        if (!result) return;
+
         views.result.innerHTML = `
             <article class="result-panel score-panel">
+                <span class="result-eyebrow">${escapeHtml(result.subject)}</span>
                 <h2 id="resultTitle">${escapeHtml(result.quizTitle)}</h2>
-                <span class="score-number">${result.percentage}%</span>
+                <span class="score-number">${formatNumber(result.percentage)}%</span>
                 <strong>${escapeHtml(result.message)}</strong>
                 <p class="result-subtext">${formatMarks(result.score)}/${formatMarks(result.maxScore)} marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
-                <p class="result-subtext">Saved on this device for quick practice review.</p>
             </article>
-            <section class="result-panel result-grid">
-                ${renderResultTile("Total questions", result.total)}
-                ${renderResultTile("Attempted", result.attempted)}
-                ${renderResultTile("Unattempted", result.unattempted)}
-                ${renderResultTile("Correct", result.correct)}
-                ${renderResultTile("Wrong", result.wrong)}
-                ${renderResultTile("Accuracy", `${result.accuracy}%`)}
-                ${renderResultTile("Time taken", formatTime(result.timeTaken))}
-                ${renderResultTile("Score", result.score)}
+            <section class="result-panel">
+                <div class="result-grid">
+                    ${renderResultTile("Total", result.total)}
+                    ${renderResultTile("Attempted", result.attempted)}
+                    ${renderResultTile("Unattempted", result.unattempted)}
+                    ${renderResultTile("Correct", result.correct)}
+                    ${renderResultTile("Wrong", result.wrong)}
+                    ${renderResultTile("Accuracy", `${formatNumber(result.accuracy)}%`)}
+                    ${renderResultTile("Time", formatTime(result.timeTaken))}
+                    ${renderResultTile("Score", formatMarks(result.score))}
+                </div>
+            </section>
+            <section class="result-panel">
+                <h2>Subject Scorecard</h2>
+                <div class="result-grid">
+                    ${result.subjectData.map(function (subject) {
+                        return renderResultTile(subject.name, `${formatMarks(subject.marks)}/${formatMarks(subject.maxMarks)} | ${formatNumber(subject.accuracy)}%`);
+                    }).join("")}
+                </div>
             </section>
             <div class="result-actions">
-                <button class="btn btn-outline" type="button" data-action="review-answers">Review Answers</button>
-                <button class="btn btn-primary" type="button" data-action="back-to-quizzes">Back to Quizzes</button>
+                <button class="quiz-btn quiz-btn-outline" type="button" data-action="review-answers">Review Answers</button>
+                <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(result.quizId)}">Retake Test</button>
+                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="back-home">Back to Quizzes</button>
             </div>
         `;
     }
@@ -801,45 +744,48 @@
     }
 
     function renderReview() {
-        const result = app.result;
+        const result = state.result;
         if (!result) return;
 
-        const items = result.questions.map((question, index) => renderReviewCard(question, index, result)).filter(Boolean).join("");
+        const cards = result.questions.map(function (question, index) {
+            return renderReviewCard(question, index, result);
+        }).filter(Boolean).join("");
+
         views.review.innerHTML = `
             <section class="result-panel">
                 <h2 id="reviewTitle">Review Answers</h2>
                 <div class="review-filter-row">
-                    ${["all", "correct", "wrong", "unattempted", "marked"].map((filter) => `
-                        <button class="btn ${app.reviewFilter === filter ? "btn-primary" : "btn-ghost"}" type="button" data-review-filter="${filter}">${titleCase(filter)}</button>
-                    `).join("")}
+                    ${["all", "correct", "wrong", "unattempted", "marked"].map(function (filter) {
+                        return `<button class="${state.reviewFilter === filter ? "is-active" : ""}" type="button" data-review-filter="${filter}">${escapeHtml(titleCase(filter))}</button>`;
+                    }).join("")}
                 </div>
             </section>
-            ${items || `<article class="review-card"><p>No answers match this filter.</p></article>`}
+            ${cards || '<article class="review-card"><p>No answers match this filter.</p></article>'}
             <div class="review-actions">
-                <button class="btn btn-outline" type="button" data-action="back-to-result">Back to Result</button>
-                <button class="btn btn-primary" type="button" data-action="back-to-quizzes">Back to Quizzes</button>
+                <button class="quiz-btn quiz-btn-outline" type="button" data-action="back-result">Back to Result</button>
+                <button class="quiz-btn quiz-btn-primary" type="button" data-action="back-home">Back to Quizzes</button>
             </div>
         `;
     }
 
     function renderReviewCard(question, index, result) {
         const selected = result.answers[index];
-        const marked = (result.statuses[index] || "").includes("marked");
-        const state = selected === null ? "unattempted" : selected === question.correctAnswer ? "correct" : "wrong";
+        const marked = String(result.statuses[index] || "").includes("marked");
+        const answerState = selected === null ? "unattempted" : selected === question.correctAnswer ? "correct" : "wrong";
 
-        if (app.reviewFilter !== "all" && app.reviewFilter !== state && !(app.reviewFilter === "marked" && marked)) {
+        if (state.reviewFilter !== "all" && state.reviewFilter !== answerState && !(state.reviewFilter === "marked" && marked)) {
             return "";
         }
 
         return `
             <article class="review-card">
                 <div class="question-meta">
-                    <span class="status-badge">${titleCase(state)}</span>
-                    ${marked ? `<span class="status-badge">Marked</span>` : ""}
-                    <span class="status-badge">Q${index + 1}</span>
+                    <span class="meta-pill">Q${index + 1}</span>
+                    <span class="meta-pill">${escapeHtml(titleCase(answerState))}</span>
+                    ${marked ? '<span class="meta-pill">Marked</span>' : ""}
                 </div>
-                <h3>${escapeHtml(sanitizeQuestionText(question.question))}</h3>
-                <div class="review-answer ${state === "wrong" ? "wrong" : ""}">User answer: ${selected === null ? "Not attempted" : escapeHtml(question.options[selected])}</div>
+                <h3>${escapeHtml(question.question)}</h3>
+                <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}">Your answer: ${selected === null ? "Not attempted" : escapeHtml(question.options[selected])}</div>
                 <div class="review-answer correct">Correct answer: ${escapeHtml(question.options[question.correctAnswer])}</div>
                 <p><strong>Explanation:</strong> ${escapeHtml(question.explanation)}</p>
             </article>
@@ -847,93 +793,88 @@
     }
 
     function persistUnfinished(immediate = false) {
+        if (!state.quizSet || !isViewVisible("exam") || !state.questions.length) return;
         if (immediate) {
             clearPendingPersist();
-            writeUnfinishedAttempt();
+            writeUnfinished();
             return;
         }
-        if (app.persistTimerId) return;
-        app.persistTimerId = window.setTimeout(writeUnfinishedAttempt, PERSIST_IDLE_TIMEOUT_MS);
+        if (state.persistTimerId) return;
+        state.persistTimerId = window.setTimeout(writeUnfinished, PERSIST_DELAY_MS);
     }
 
     function clearPendingPersist() {
-        if (!app.persistTimerId) return;
-        window.clearTimeout(app.persistTimerId);
-        app.persistTimerId = null;
+        window.clearTimeout(state.persistTimerId);
+        state.persistTimerId = 0;
     }
 
-    function writeUnfinishedAttempt() {
-        app.persistTimerId = null;
-        if (!app.quizSet || views.exam.classList.contains("hidden") || !app.questions.length) return;
-        const attempt = {
-            quizId: app.quizSet.id,
-            answers: app.answers,
-            statuses: app.statuses,
-            current: app.current,
-            startedAt: app.startedAt,
-            endsAt: app.endsAt
+    function writeUnfinished() {
+        state.persistTimerId = 0;
+        if (!state.quizSet || !isViewVisible("exam")) return;
+        storage.write("unfinished", {
+            quizId: state.quizSet.id,
+            answers: state.answers,
+            statuses: state.statuses,
+            current: state.current,
+            startedAt: state.startedAt,
+            endsAt: state.endsAt
+        });
+    }
+
+    function showView(name) {
+        Object.keys(views).forEach(function (key) {
+            views[key].classList.toggle("hidden", key !== name);
+        });
+        document.body.classList.toggle("quiz-exam-active", name === "exam");
+        if (name !== "exam") closePalette();
+        window.scrollTo({ top: 0, behavior: name === "exam" ? "auto" : "smooth" });
+    }
+
+    function isViewVisible(name) {
+        return views[name] && !views[name].classList.contains("hidden");
+    }
+
+    function getFilteredQuizzes() {
+        const base = state.subject === ALL_SUBJECTS ? getAllQuizzes() : registry.getQuizzesBySubject(state.subject);
+        if (!state.search) return base;
+        return base.filter(function (quiz) {
+            const haystack = [quiz.title, quiz.subject, quiz.description, quiz.difficulty, (quiz.tags || []).join(" ")].join(" ").toLowerCase();
+            return haystack.includes(state.search);
+        });
+    }
+
+    function getSubjects() {
+        return Array.isArray(registry.subjects) ? registry.subjects.slice() : [];
+    }
+
+    function getAllQuizzes() {
+        return Array.isArray(registry.quizzes) ? registry.quizzes.slice() : [];
+    }
+
+    function getAttempts() {
+        const attempts = storage.read("attempts", []);
+        return Array.isArray(attempts) ? attempts : [];
+    }
+
+    function getSavedUnfinished() {
+        const saved = storage.read("unfinished", null);
+        return saved && saved.quizId ? saved : null;
+    }
+
+    function getQuizStats(quizId) {
+        const attempts = getAttempts().filter(function (attempt) {
+            return attempt.quizId === quizId;
+        });
+        const bestScores = storage.read("bestScores", {});
+        return {
+            bestScore: Number(bestScores[quizId]) || 0,
+            attemptCount: attempts.length,
+            lastAttempt: attempts[0] ? formatDate(attempts[0].completedAt) : "Not attempted"
         };
-        const signature = JSON.stringify(attempt);
-        if (signature === app.lastPersistSignature) return;
-        app.lastPersistSignature = signature;
-        storage.write("unfinished", attempt);
-    }
-
-    function openPalette() {
-        if (!elements.paletteRendered) renderPalette();
-        elements.palettePanel.classList.add("open");
-    }
-
-    function closePalette() {
-        elements.palettePanel.classList.remove("open");
-    }
-
-    function showListMessage(message, type) {
-        elements.quizListMessage.textContent = message;
-        elements.quizListMessage.className = `message-box ${type || ""}`.trim();
-    }
-
-    function hideListMessage() {
-        elements.quizListMessage.textContent = "";
-        elements.quizListMessage.className = "message-box hidden";
-    }
-
-    function getPerformanceMessage(percentage) {
-        if (percentage >= 85) return "Rank booster performance";
-        if (percentage >= 70) return "Strong exam readiness";
-        if (percentage >= 50) return "Good base, improve accuracy";
-        return "Needs focused revision";
-    }
-
-    function formatTime(seconds) {
-        const safe = Math.max(0, Number(seconds) || 0);
-        const minutes = String(Math.floor(safe / 60)).padStart(2, "0");
-        const secs = String(safe % 60).padStart(2, "0");
-        return `${minutes}:${secs}`;
-    }
-
-    function formatDate(value) {
-        const date = new Date(value);
-        if (Number.isNaN(date.getTime())) return "Not attempted";
-        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
-    }
-
-    function formatMarks(value) {
-        const number = Number(value);
-        return Number.isFinite(number) ? number.toFixed(2) : "0.00";
-    }
-
-    function round2(value) {
-        const number = Number(value);
-        return Number.isFinite(number) ? Math.round((number + Number.EPSILON) * 100) / 100 : 0;
-    }
-
-    function titleCase(value) {
-        return String(value).replace("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
     }
 
     function getStatusCounts() {
-        return app.statuses.reduce((counts, status) => {
+        return state.statuses.reduce(function (counts, status) {
             if (status === "answered") counts.answered += 1;
             else if (status === "not-answered") counts.notAnswered += 1;
             else if (status === "marked") counts.marked += 1;
@@ -951,22 +892,88 @@
 
     function getStatusLabel(status) {
         return {
-            "answered": "Answered",
+            answered: "Answered",
             "not-answered": "Not Answered",
-            "marked": "Marked for Review",
+            marked: "Marked for Review",
             "answered-marked": "Answered + Marked",
             "not-visited": "Not Visited"
         }[status] || "Not Visited";
     }
 
+    function getPerformanceMessage(percentage) {
+        if (percentage >= 85) return "Excellent exam readiness";
+        if (percentage >= 70) return "Strong performance";
+        if (percentage >= 50) return "Good base, improve accuracy";
+        return "Needs focused revision";
+    }
+
+    function showMessage(message, type = "info") {
+        elements.quizMessage.textContent = String(message || "");
+        elements.quizMessage.className = message ? `quiz-message ${type}` : "quiz-message hidden";
+    }
+
+    function hideMessage() {
+        showMessage("");
+    }
+
+    function normalizeArray(value, length, fallback) {
+        const source = Array.isArray(value) ? value.slice(0, length) : [];
+        while (source.length < length) source.push(fallback);
+        return source;
+    }
+
+    function setText(node, value) {
+        if (node) node.textContent = String(value);
+    }
+
+    function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+    function round2(value) {
+        const number = Number(value);
+        return Number.isFinite(number) ? Math.round((number + Number.EPSILON) * 100) / 100 : 0;
+    }
+
+    function formatTime(seconds) {
+        const safeSeconds = Math.max(0, Number(seconds) || 0);
+        const minutes = String(Math.floor(safeSeconds / 60)).padStart(2, "0");
+        const secs = String(safeSeconds % 60).padStart(2, "0");
+        return `${minutes}:${secs}`;
+    }
+
+    function formatDate(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "Not attempted";
+        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
+    function formatMarks(value) {
+        const number = Number(value);
+        return Number.isFinite(number) ? number.toFixed(number % 1 === 0 ? 0 : 2) : "0";
+    }
+
+    function formatNumber(value) {
+        const number = Number(value);
+        return Number.isFinite(number) ? String(Math.round(number)) : "0";
+    }
+
+    function titleCase(value) {
+        return String(value || "").replace(/-/g, " ").replace(/\b\w/g, function (letter) {
+            return letter.toUpperCase();
+        });
+    }
+
     function escapeHtml(value) {
-        return String(value ?? "").replace(/[&<>"']/g, (character) => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            "\"": "&quot;",
-            "'": "&#039;"
-        }[character]));
+        return String(value ?? "").replace(/[&<>"']/g, function (character) {
+            return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                "\"": "&quot;",
+                "'": "&#039;"
+            }[character];
+        });
     }
 
     function escapeAttr(value) {

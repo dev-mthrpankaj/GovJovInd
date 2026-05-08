@@ -23,6 +23,13 @@ const getCurrentPageName = () => {
   return decodeURIComponent(pageName || 'index.html').toLowerCase();
 };
 
+const getRootRelativeHref = (pathFromRoot) => {
+  const path = window.location.pathname.replace(/\\/g, '/');
+  if (/\/HTML\/[^/]+\.html$/i.test(path)) return `../${pathFromRoot}`;
+  if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../${pathFromRoot}`;
+  return pathFromRoot;
+};
+
 const isAdsBlockedPage = () => {
   return !ADS_CONFIG.enabled || ADS_CONFIG.blockedPages.includes(getCurrentPageName());
 };
@@ -145,6 +152,142 @@ const ensureHeaderAuthEntry = () => {
 const getHomeHref = () => {
   const homeLink = document.querySelector('header a[href$="index.html"], header a[href="../index.html"], header a[href="../../index.html"]');
   return homeLink?.getAttribute('href') || getCandidatePageHref('index.html').replace(/HTML\/index\.html$/i, 'index.html');
+};
+
+const getSharedPageHref = (pageName) => {
+  return pageName === 'index.html' ? getHomeHref() : getCandidatePageHref(pageName);
+};
+
+const getActivePageClass = (pageName) => {
+  const currentPage = getCurrentPageName();
+  return currentPage === pageName || (!currentPage && pageName === 'index.html') ? ' class="active"' : '';
+};
+
+const getSharedNavMarkup = () => {
+  const items = [
+    ['index.html', 'Home'],
+    ['latest-jobs.html', 'Latest Jobs'],
+    ['admitcard.html', 'Admit Card'],
+    ['results.html', 'Results'],
+    ['answer-key.html', 'Answer Key'],
+    ['quiz.html', 'Quizzes'],
+    ['rank-predictor.html', 'Rank Predictor'],
+    ['documents.html', 'Documents'],
+    ['about-us.html', 'About Us']
+  ];
+  return items.map(([page, label]) => `<li><a href="${getSharedPageHref(page)}"${getActivePageClass(page)}>${label}</a></li>`).join('');
+};
+
+const ensureSharedHeader = () => {
+  let header = document.querySelector('header');
+  if (!header) {
+    header = document.createElement('header');
+    document.body.insertBefore(header, document.body.firstChild);
+  }
+
+  let container = header.querySelector('.header-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'header-container';
+    header.replaceChildren(container);
+  }
+
+  let logoContainer = container.querySelector('.logo-container');
+  if (!logoContainer) {
+    logoContainer = document.createElement('div');
+    logoContainer.className = 'logo-container';
+    container.prepend(logoContainer);
+  }
+
+  logoContainer.innerHTML = `
+    <img src="${getRootRelativeHref('Assets/Home Page/favicon-96x96.png')}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async">
+    <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>
+  `;
+
+  let menuToggle = container.querySelector('.menu-toggle');
+  if (!menuToggle) {
+    menuToggle = document.createElement('button');
+    menuToggle.className = 'menu-toggle';
+    container.appendChild(menuToggle);
+  }
+  menuToggle.type = 'button';
+  menuToggle.setAttribute('aria-label', 'Open navigation menu');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+
+  let nav = container.querySelector('nav');
+  if (!nav) {
+    nav = document.createElement('nav');
+    container.appendChild(nav);
+  }
+  nav.innerHTML = `<ul>${getSharedNavMarkup()}</ul>`;
+
+  container.querySelectorAll('.header-auth-actions').forEach((node) => {
+    if (!node.querySelector('[data-auth-entry]')) node.remove();
+  });
+};
+
+const ensureSharedFooter = () => {
+  let footer = document.querySelector('footer');
+  if (!footer) {
+    footer = document.createElement('footer');
+    document.body.appendChild(footer);
+  }
+
+  let content = footer.querySelector('.footer-content');
+  if (!content) {
+    content = document.createElement('div');
+    content.className = 'footer-content';
+    footer.prepend(content);
+  }
+
+  content.innerHTML = `
+    <div class="footer-section">
+      <h3>GovJobUpdates</h3>
+      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, quizzes, rank prediction, and document tools.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="${getSharedPageHref('index.html')}">Home</a></li>
+        <li><a href="${getSharedPageHref('latest-jobs.html')}">Latest Jobs</a></li>
+        <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
+        <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
+        <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="${getSharedPageHref('quiz.html')}">Exam Quizzes</a></li>
+        <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
+        <li><a href="${getSharedPageHref('dashboard.html')}">Candidate Dashboard</a></li>
+        <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
+        <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <ul>
+        <li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li>
+        <li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li>
+        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li>
+      </ul>
+    </div>
+  `;
+
+  let copyright = footer.querySelector('.copyright');
+  if (!copyright) {
+    copyright = document.createElement('div');
+    copyright.className = 'copyright';
+    footer.appendChild(copyright);
+  }
+  copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a>`;
+};
+
+const ensureSharedSiteChrome = () => {
+  ensureSharedHeader();
+  ensureSharedFooter();
 };
 
 const ensureCandidateBottomNav = () => {
@@ -301,12 +444,15 @@ window.GovJobVisitors = {
 };
 
 if (document.readyState === 'loading') {
+  if (document.body) ensureSharedSiteChrome();
+  else window.addEventListener('DOMContentLoaded', ensureSharedSiteChrome);
   window.addEventListener('DOMContentLoaded', ensureHeaderAuthEntry);
   window.addEventListener('DOMContentLoaded', ensureCandidateBottomNav);
   window.addEventListener('DOMContentLoaded', markPageLoaded);
   window.addEventListener('DOMContentLoaded', applyAdControls);
   window.addEventListener('DOMContentLoaded', startVisitorCounter);
 } else {
+  ensureSharedSiteChrome();
   ensureHeaderAuthEntry();
   ensureCandidateBottomNav();
   markPageLoaded();
@@ -388,7 +534,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
 const pageOwnsMenu = Boolean(
   menuToggle?.id === 'menuToggle' ||
-  document.querySelector('script[src*="about-us.js"], script[src*="quizzes.js"], script[src*="documents.js"]')
+  document.querySelector('script[src*="about-us.js"], script[src*="documents.js"]')
 );
 if (menuToggle && nav && !pageOwnsMenu) {
   menuToggle.setAttribute('aria-label', 'Open navigation menu');
@@ -397,11 +543,12 @@ if (menuToggle && nav && !pageOwnsMenu) {
     menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   });
-  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+  nav.addEventListener('click', (event) => {
+    if (!event.target.closest('a')) return;
     nav.classList.remove('active');
     menuToggle.setAttribute('aria-expanded', 'false');
     menuToggle.setAttribute('aria-label', 'Open navigation menu');
-  }));
+  });
 }
 
 document.querySelectorAll('.ticker-wrap').forEach((ticker) => {
