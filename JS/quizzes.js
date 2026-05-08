@@ -303,14 +303,31 @@
         };
     }
 
-    function startQuiz(quizId) {
+    async function startQuiz(quizId) {
         if (!canAttemptQuiz(quizId)) return;
 
-        const set = registry.getQuizById(quizId);
+        let set = registry.getQuizById(quizId);
         if (!set) return;
+        if (!Array.isArray(set.questions)) {
+            setQuizLoading(true);
+            try {
+                set = await registry.loadQuizById?.(quizId);
+            } catch {
+                set = null;
+            } finally {
+                setQuizLoading(false);
+            }
+        }
+
+        if (!set) {
+            showListMessage("Quiz could not load. Please try again.", "error");
+            showView("quizList");
+            return;
+        }
 
         if (!set.validation || !set.validation.isComplete) {
             showListMessage("This quiz needs 50 complete questions before it can start.", "error");
+            showView("quizList");
             return;
         }
 
@@ -335,6 +352,12 @@
         startTimer();
         persistUnfinished();
         showView("exam");
+    }
+
+    function setQuizLoading(loading) {
+        document.body.classList.toggle("quiz-loading", loading);
+        if (loading) showListMessage("Loading quiz...", "info");
+        else hideListMessage();
     }
 
     function canAttemptQuiz(quizId) {
@@ -367,7 +390,7 @@
         return Array.isArray(set.questions)
             ? set.questions.slice(0, 50).map((question) => ({
                 ...question,
-                question: sanitizeQuestionText(question.question)
+                question: question.question || sanitizeQuestionText(question.question)
             }))
             : [];
     }

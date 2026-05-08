@@ -2,10 +2,51 @@
     "use strict";
 
     const REQUIRED_QUESTION_COUNT = 50;
-    const bank = Array.isArray(window.GJU_QUIZ_BANK) ? window.GJU_QUIZ_BANK : [];
     const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "Reasoning", "Computer"];
-    const seenQuizIds = new Set();
-    const subjectQuestionText = new Map();
+    const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
+    const loadedScripts = new Map();
+    const validatedQuizzes = new Map();
+
+    const manifest = [
+        quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
+        quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
+        quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
+        quizMeta("english-grammar-set-1", "English", "English Grammar Practice Set 1", "50 grammar questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/english/english-grammar-set-1.js"),
+        quizMeta("english-vocabulary-set-1", "English", "English Vocabulary Practice Set 1", "50 vocabulary, antonym, synonym, spelling and usage questions.", "Moderate", "quiz-data/english/english-vocabulary-set-1.js"),
+        quizMeta("english-mixed-set-1", "English", "English Mixed Practice Set 1", "50 mixed English grammar and vocabulary questions.", "Mixed", "quiz-data/english/english-mixed-set-1.js"),
+        quizMeta("hindi-vyakaran-set-1", "Hindi", "Hindi Vyakaran Practice Set 1", "50 Hindi grammar questions for government exams.", "Mixed", "quiz-data/hindi/hindi-vyakaran-set-1.js"),
+        quizMeta("hindi-mixed-set-1", "Hindi", "Hindi Mixed Practice Set 1", "50 mixed Hindi language questions.", "Mixed", "quiz-data/hindi/hindi-mixed-set-1.js"),
+        quizMeta("reasoning-set-1", "Reasoning", "Reasoning Practice Set 1", "50 analogy, series, coding, direction and ranking questions.", "Mixed", "quiz-data/reasoning/reasoning-set-1.js"),
+        quizMeta("reasoning-set-2", "Reasoning", "Reasoning Practice Set 2", "50 verbal and non-verbal reasoning practice questions.", "Moderate", "quiz-data/reasoning/reasoning-set-2.js"),
+        quizMeta("ga-set-1", "General Awareness", "General Awareness Static GK Set 1", "50 polity, history, geography, economy and science questions.", "Mixed", "quiz-data/general-awareness/ga-set-1.js"),
+        quizMeta("ga-current-affairs-set-1", "General Awareness", "General Awareness Current Affairs Set 1", "50 current and static awareness questions for competitive exams.", "Moderate", "quiz-data/general-awareness/ga-current-affairs-set-1.js"),
+        quizMeta("computer-set-1", "Computer", "Computer Basics Practice Set 1", "50 computer basics, hardware, software and internet questions.", "Mixed", "quiz-data/computer/computer-set-1.js"),
+        quizMeta("computer-set-2", "Computer", "Computer Awareness Practice Set 2", "50 networking, security, office tools and memory questions.", "Moderate", "quiz-data/computer/computer-set-2.js")
+    ];
+
+    function quizMeta(id, subject, title, description, difficulty, path) {
+        return {
+            id,
+            subject,
+            title,
+            description,
+            durationMinutes: 30,
+            totalQuestions: REQUIRED_QUESTION_COUNT,
+            marksPerQuestion: 1,
+            negativeMarks: 0.25,
+            difficulty,
+            tags: ["SSC", "Railway", "Police"],
+            path,
+            questions: null,
+            validation: {
+                isComplete: true,
+                errors: [],
+                duplicateQuestionIds: [],
+                duplicateQuestionTexts: [],
+                duplicateSubjectQuestionTexts: []
+            }
+        };
+    }
 
     function sanitizeQuestionText(value) {
         let text = String(value || "");
@@ -76,14 +117,8 @@
             }
         };
 
-        if (!quiz.id || seenQuizIds.has(quiz.id)) {
-            quiz.validation.errors.push("Quiz id is missing or duplicated.");
-        }
-        seenQuizIds.add(quiz.id);
-
-        if (!quiz.subject || !quiz.title) {
-            quiz.validation.errors.push("Quiz subject and title are required.");
-        }
+        if (!quiz.id) quiz.validation.errors.push("Quiz id is missing.");
+        if (!quiz.subject || !quiz.title) quiz.validation.errors.push("Quiz subject and title are required.");
 
         quiz.questions = quiz.questions.map((question) => ({
             ...question,
@@ -99,7 +134,6 @@
 
         const ids = new Set();
         const localTexts = new Set();
-        const subjectTexts = subjectQuestionText.get(quiz.subject) || new Set();
 
         quiz.questions.forEach((question, index) => {
             if (!hasQuestionShape(question)) {
@@ -107,55 +141,79 @@
                 return;
             }
 
-            if (ids.has(question.id)) {
-                quiz.validation.duplicateQuestionIds.push(question.id);
-            }
+            if (ids.has(question.id)) quiz.validation.duplicateQuestionIds.push(question.id);
             ids.add(question.id);
 
             const normalized = normalizeText(question.question);
-            if (localTexts.has(normalized)) {
-                quiz.validation.duplicateQuestionTexts.push(question.id);
-            }
+            if (localTexts.has(normalized)) quiz.validation.duplicateQuestionTexts.push(question.id);
             localTexts.add(normalized);
-
-            if (subjectTexts.has(normalized)) {
-                quiz.validation.duplicateSubjectQuestionTexts.push(question.id);
-            }
-            subjectTexts.add(normalized);
         });
 
-        subjectQuestionText.set(quiz.subject, subjectTexts);
-
-        if (quiz.validation.duplicateQuestionIds.length) {
-            quiz.validation.errors.push("Quiz contains duplicate question ids.");
-        }
-
+        if (quiz.validation.duplicateQuestionIds.length) quiz.validation.errors.push("Quiz contains duplicate question ids.");
         quiz.validation.isComplete = quiz.validation.errors.length === 0;
 
         if (!quiz.validation.isComplete) {
             console.warn("[GJU Quiz Registry] Incomplete quiz:", quiz.id, quiz.validation);
         } else if (quiz.validation.duplicateQuestionTexts.length) {
             console.warn("[GJU Quiz Registry] Repeated question text inside quiz:", quiz.id, quiz.validation.duplicateQuestionTexts);
-        } else if (quiz.validation.duplicateSubjectQuestionTexts.length) {
-            console.warn("[GJU Quiz Registry] Repeated question text across subject quizzes:", quiz.id, quiz.validation.duplicateSubjectQuestionTexts);
         }
 
+        validatedQuizzes.set(quiz.id, quiz);
         return quiz;
     }
 
-    const quizzes = bank.map(validateQuiz);
-    const subjects = subjectOrder.filter((subject) => quizzes.some((quiz) => quiz.subject === subject));
+    function getManifestQuiz(id) {
+        return manifest.find((quiz) => quiz.id === id) || null;
+    }
+
+    function getLoadedRawQuiz(id) {
+        const bank = Array.isArray(window.GJU_QUIZ_BANK) ? window.GJU_QUIZ_BANK : [];
+        return bank.find((quiz) => quiz.id === id) || null;
+    }
+
+    function loadScript(path) {
+        const src = new URL(path, scriptBaseUrl).href;
+        if (loadedScripts.has(src)) return loadedScripts.get(src);
+
+        const promise = new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = () => reject(new Error(`Unable to load quiz data: ${path}`));
+            document.head.appendChild(script);
+        });
+
+        loadedScripts.set(src, promise);
+        return promise;
+    }
+
+    async function loadQuizById(id) {
+        const validated = validatedQuizzes.get(id);
+        if (validated) return validated;
+
+        const meta = getManifestQuiz(id);
+        if (!meta) return null;
+
+        window.GJU_QUIZ_BANK = Array.isArray(window.GJU_QUIZ_BANK) ? window.GJU_QUIZ_BANK : [];
+        await loadScript(meta.path);
+        const rawQuiz = getLoadedRawQuiz(id);
+        return rawQuiz ? validateQuiz(rawQuiz) : null;
+    }
+
+    const subjects = subjectOrder.filter((subject) => manifest.some((quiz) => quiz.subject === subject));
 
     window.GJU_SANITIZE_QUESTION_TEXT = sanitizeQuestionText;
 
     window.GJU_QUIZZES = {
         subjects,
-        quizzes,
+        quizzes: manifest,
         getQuizzesBySubject(subject) {
-            return quizzes.filter((quiz) => quiz.subject === subject);
+            return manifest.filter((quiz) => quiz.subject === subject);
         },
         getQuizById(id) {
-            return quizzes.find((quiz) => quiz.id === id) || null;
-        }
+            return validatedQuizzes.get(id) || getManifestQuiz(id);
+        },
+        loadQuizById
     };
 }());

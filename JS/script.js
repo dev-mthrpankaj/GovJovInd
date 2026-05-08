@@ -149,7 +149,7 @@ const getHomeHref = () => {
 
 const ensureCandidateBottomNav = () => {
   const session = getCandidateHeaderSession();
-  if (!session || document.querySelector('.candidate-bottom-nav')) return;
+  if (!session || getCurrentPageName() === 'quiz.html' || document.querySelector('.candidate-bottom-nav')) return;
 
   const nav = document.createElement('nav');
   nav.className = 'candidate-bottom-nav';
