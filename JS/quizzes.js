@@ -51,7 +51,8 @@
         pendingResume: null,
         paletteDirty: true,
         statusCounts: null,
-        lastPaletteCurrent: -1
+        lastPaletteCurrent: -1,
+        questionEnteredAt: 0
     };
 
     const debouncedRenderQuizList = debounce(renderQuizList, 120);
@@ -88,10 +89,13 @@
         elements.totalQuestionNo = document.getElementById("totalQuestionNo");
         elements.timerPill = document.getElementById("timerPill");
         elements.timerText = document.getElementById("timerText");
+        elements.answeredCount = document.getElementById("answeredCount");
+        elements.examDurationLabel = document.getElementById("examDurationLabel");
         elements.quizProgress = document.getElementById("quizProgress");
         elements.questionCard = document.getElementById("questionCard");
         elements.questionNumberLabel = document.getElementById("questionNumberLabel");
         elements.questionStatusLabel = document.getElementById("questionStatusLabel");
+        elements.questionElapsedText = document.getElementById("questionElapsedText");
         elements.questionText = document.getElementById("questionText");
         elements.optionList = document.getElementById("optionList");
         elements.optionButtons = Array.from(document.querySelectorAll("#optionList [data-option-index]"));
@@ -106,6 +110,7 @@
         elements.questionPalette = document.getElementById("questionPalette");
         elements.submitModal = document.getElementById("submitModal");
         elements.submitSummary = document.getElementById("submitSummary");
+        elements.pauseModal = document.getElementById("pauseModal");
         elements.resumeModal = document.getElementById("resumeModal");
         elements.resumeSummary = document.getElementById("resumeSummary");
     }
@@ -177,6 +182,9 @@
             "submit-confirm": openSubmitModal,
             "submit-now": function () { submitQuiz("manual"); },
             "cancel-submit": closeSubmitModal,
+            "pause-confirm": openPauseModal,
+            "pause-test": pauseTest,
+            "cancel-pause": closePauseModal,
             "resume-saved": resumeSavedAttempt,
             "start-fresh": startFreshAttempt,
             "cancel-resume": closeResumeModal,
@@ -191,6 +199,7 @@
             "back-home": function () {
                 stopTimer();
                 closeSubmitModal();
+                closePauseModal();
                 closeResumeModal();
                 renderHome();
                 showView("home");
@@ -205,6 +214,7 @@
         const key = event.key.toLowerCase();
         if (key === "escape") {
             closeSubmitModal();
+            closePauseModal();
             closeResumeModal();
             closePalette();
             return;
@@ -412,6 +422,7 @@
         });
         state.statusCounts = countStatuses(state.statuses);
         state.current = 0;
+        state.questionEnteredAt = Date.now();
         state.lastPaletteCurrent = -1;
         state.paletteDirty = true;
         state.startedAt = Date.now();
@@ -438,6 +449,7 @@
         state.statuses = normalizeArray(saved.statuses, questions.length, "not-visited");
         state.statusCounts = countStatuses(state.statuses);
         state.current = clamp(Number(saved.current) || 0, 0, questions.length - 1);
+        state.questionEnteredAt = Date.now();
         state.lastPaletteCurrent = -1;
         state.paletteDirty = true;
         state.startedAt = Number(saved.startedAt) || Date.now();
@@ -486,18 +498,25 @@
         setText(elements.examTitle, state.quizSet.title);
         setText(elements.currentQuestionNo, String(state.current + 1));
         setText(elements.totalQuestionNo, String(state.questions.length));
-        setText(elements.questionNumberLabel, `Question ${state.current + 1}`);
+        setText(elements.questionNumberLabel, String(state.current + 1));
         setText(elements.questionText, question.question);
         setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
+        setText(elements.examDurationLabel, `Last ${formatNumber(state.quizSet.durationMinutes || 30)} Mins`);
         elements.quizProgress.style.width = `${((state.current + 1) / state.questions.length) * 100}%`;
-        if (elements.prevQuestionButton) elements.prevQuestionButton.disabled = state.current === 0;
+        updateAnsweredCount();
+        updateQuestionTimerDisplay();
+        if (elements.prevQuestionButton) {
+            const isFirst = state.current === 0;
+            elements.prevQuestionButton.disabled = isFirst;
+            elements.prevQuestionButton.hidden = isFirst;
+        }
         if (elements.saveNextButton) elements.saveNextButton.innerHTML = state.current >= state.questions.length - 1
             ? "Review &amp; Submit"
             : "Save &amp; Next";
         if (elements.markNextButton) elements.markNextButton.innerHTML = state.current >= state.questions.length - 1
-            ? '<i class="fas fa-bookmark" aria-hidden="true"></i> Mark &amp; Review'
-            : '<i class="fas fa-bookmark" aria-hidden="true"></i> Mark &amp; Next';
+            ? "Mark For Review"
+            : "Mark For Review";
 
         elements.optionTexts.forEach(function (node, index) {
             setText(node, question.options[index] || "");
@@ -536,14 +555,13 @@
 
     function renderPaletteSummary() {
         const counts = state.statusCounts || getStatusCounts();
+        const answered = counts.answered + counts.answeredMarked;
+        const unanswered = Math.max(0, state.questions.length - answered);
         const summaryHtml = [
-            ["answered", "Answered", counts.answered],
-            ["not-answered", "Not Answered", counts.notAnswered],
-            ["marked", "Marked", counts.marked],
-            ["answered-marked", "Ans + Marked", counts.answeredMarked],
-            ["not-visited", "Not Visited", counts.notVisited]
+            ["answered", "Answered Qs", answered],
+            ["not-answered", "Unanswered Qs", unanswered]
         ].map(function ([status, label, count]) {
-            return `<div class="palette-summary-tile ${status}"><strong>${count}</strong><span>${label}</span></div>`;
+            return `<div class="palette-summary-tile ${status}"><i aria-hidden="true"></i><span>${label}</span><strong>${count}</strong></div>`;
         }).join("");
 
         if (elements.paletteSummary.innerHTML !== summaryHtml) elements.paletteSummary.innerHTML = summaryHtml;
@@ -569,6 +587,7 @@
         if (!state.statusCounts) state.statusCounts = countStatuses(state.statuses);
         if (state.statusCounts[previous] !== undefined) state.statusCounts[previous] = Math.max(0, state.statusCounts[previous] - 1);
         if (state.statusCounts[status] !== undefined) state.statusCounts[status] += 1;
+        updateAnsweredCount();
     }
 
     function uniqueIndexes(indexes) {
@@ -648,6 +667,7 @@
         const previousIndex = state.current;
         if (state.statuses[state.current] === "not-visited") setQuestionStatus(state.current, "not-answered");
         state.current = index;
+        state.questionEnteredAt = Date.now();
         if (state.statuses[state.current] === "not-visited") setQuestionStatus(state.current, "not-answered");
         persistUnfinished();
         renderQuestion();
@@ -666,6 +686,24 @@
     function closeSubmitModal() {
         elements.submitModal?.classList.add("hidden");
         syncModalState();
+    }
+
+    function openPauseModal() {
+        elements.pauseModal?.classList.remove("hidden");
+        syncModalState();
+    }
+
+    function closePauseModal() {
+        elements.pauseModal?.classList.add("hidden");
+        syncModalState();
+    }
+
+    function pauseTest() {
+        persistUnfinished(true);
+        stopTimer();
+        closePauseModal();
+        renderHome();
+        showView("home");
     }
 
     function openResumeModal(quizSet, saved) {
@@ -726,6 +764,7 @@
     function isModalOpen() {
         return Boolean(
             elements.submitModal && !elements.submitModal.classList.contains("hidden")
+            || elements.pauseModal && !elements.pauseModal.classList.contains("hidden")
             || elements.resumeModal && !elements.resumeModal.classList.contains("hidden")
         );
     }
@@ -753,7 +792,20 @@
 
     function updateTimerDisplay() {
         setText(elements.timerText, formatTime(state.remainingSeconds));
-        elements.timerPill.classList.toggle("warning", state.remainingSeconds <= 300);
+        elements.timerPill?.classList.toggle("warning", state.remainingSeconds <= 300);
+        updateQuestionTimerDisplay();
+    }
+
+    function updateQuestionTimerDisplay() {
+        if (!elements.questionElapsedText || !state.questionEnteredAt) return;
+        const elapsed = Math.max(0, Math.floor((Date.now() - state.questionEnteredAt) / 1000));
+        setText(elements.questionElapsedText, formatTime(elapsed));
+    }
+
+    function updateAnsweredCount() {
+        if (!elements.answeredCount || !state.statuses.length) return;
+        const counts = state.statusCounts || getStatusCounts();
+        setText(elements.answeredCount, String(counts.answered + counts.answeredMarked));
     }
 
     function submitQuiz(reason) {
