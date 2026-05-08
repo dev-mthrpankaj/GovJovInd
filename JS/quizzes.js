@@ -49,7 +49,9 @@
         isLoading: false,
         loadingQuizId: "",
         pendingResume: null,
-        paletteDirty: true
+        paletteDirty: true,
+        statusCounts: null,
+        lastPaletteCurrent: -1
     };
 
     const debouncedRenderQuizList = debounce(renderQuizList, 120);
@@ -73,6 +75,7 @@
         elements.quizSetList = document.getElementById("quizSetList");
         elements.quizSearch = document.getElementById("quizSearch");
         elements.quizMessage = document.getElementById("quizMessage");
+        elements.quizLoading = document.getElementById("quizLoading");
         elements.selectedSubjectLabel = document.getElementById("selectedSubjectLabel");
         elements.availableQuizCount = document.getElementById("availableQuizCount");
         elements.savedAttemptCount = document.getElementById("savedAttemptCount");
@@ -87,6 +90,14 @@
         elements.timerText = document.getElementById("timerText");
         elements.quizProgress = document.getElementById("quizProgress");
         elements.questionCard = document.getElementById("questionCard");
+        elements.questionNumberLabel = document.getElementById("questionNumberLabel");
+        elements.questionStatusLabel = document.getElementById("questionStatusLabel");
+        elements.questionText = document.getElementById("questionText");
+        elements.optionList = document.getElementById("optionList");
+        elements.optionButtons = Array.from(document.querySelectorAll("#optionList [data-option-index]"));
+        elements.optionTexts = elements.optionButtons.map((button) => button.querySelector(".option-text"));
+        elements.questionMarks = document.getElementById("questionMarks");
+        elements.questionNegative = document.getElementById("questionNegative");
         elements.palettePanel = document.getElementById("palettePanel");
         elements.paletteSummary = document.getElementById("paletteSummary");
         elements.questionPalette = document.getElementById("questionPalette");
@@ -347,6 +358,7 @@
         state.isLoading = true;
         state.loadingQuizId = quizId;
         setStartButtonsLoading(quizId);
+        setQuizLoading(true);
         showMessage("Loading quiz...", "info");
 
         try {
@@ -371,6 +383,7 @@
         } finally {
             state.isLoading = false;
             state.loadingQuizId = "";
+            setQuizLoading(false);
             setStartButtonsLoading("");
         }
     }
@@ -393,7 +406,10 @@
         state.statuses = questions.map(function (_question, index) {
             return index === 0 ? "not-answered" : "not-visited";
         });
+        state.statusCounts = countStatuses(state.statuses);
         state.current = 0;
+        state.lastPaletteCurrent = -1;
+        state.paletteDirty = true;
         state.startedAt = Date.now();
         state.remainingSeconds = Math.max(1, Number(quizSet.durationMinutes) || 30) * 60;
         state.endsAt = state.startedAt + state.remainingSeconds * 1000;
@@ -416,7 +432,10 @@
         state.questions = questions;
         state.answers = normalizeArray(saved.answers, questions.length, null);
         state.statuses = normalizeArray(saved.statuses, questions.length, "not-visited");
+        state.statusCounts = countStatuses(state.statuses);
         state.current = clamp(Number(saved.current) || 0, 0, questions.length - 1);
+        state.lastPaletteCurrent = -1;
+        state.paletteDirty = true;
         state.startedAt = Number(saved.startedAt) || Date.now();
         state.endsAt = Number(saved.endsAt) || Date.now() + Math.max(1, Number(quizSet.durationMinutes) || 30) * 60 * 1000;
         state.remainingSeconds = Math.max(0, Math.ceil((state.endsAt - Date.now()) / 1000));
@@ -458,46 +477,27 @@
     function renderQuestion() {
         const question = state.questions[state.current];
         if (!question) return;
-        const status = state.statuses[state.current] || "not-visited";
 
         setText(elements.examSubject, state.quizSet.subject);
         setText(elements.examTitle, state.quizSet.title);
         setText(elements.currentQuestionNo, String(state.current + 1));
         setText(elements.totalQuestionNo, String(state.questions.length));
+        setText(elements.questionNumberLabel, `Question ${state.current + 1}`);
+        setText(elements.questionText, question.question);
+        setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
+        setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
         elements.quizProgress.style.width = `${((state.current + 1) / state.questions.length) * 100}%`;
 
-        elements.questionCard.innerHTML = `
-            <div class="question-card-head">
-                <div class="question-number">Question ${state.current + 1}</div>
-                <div class="question-meta">
-                    <span class="meta-pill">${escapeHtml(question.subject || state.quizSet.subject)}</span>
-                    <span class="meta-pill">${escapeHtml(question.topic || "Topic")}</span>
-                    <span class="meta-pill">${escapeHtml(question.difficulty || "Mixed")}</span>
-                </div>
-                <span class="question-status ${status}">${escapeHtml(getStatusLabel(status))}</span>
-            </div>
-            <h2 class="question-title">${escapeHtml(question.question)}</h2>
-            <div class="option-list" role="radiogroup" aria-label="Answer options">
-                ${question.options.map(function (option, index) {
-                    const selected = state.answers[state.current] === index;
-                    return `
-                        <button class="answer-option${selected ? " selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${selected}">
-                            <span class="option-key">${String.fromCharCode(65 + index)}</span>
-                            <span>${escapeHtml(option)}</span>
-                        </button>
-                    `;
-                }).join("")}
-            </div>
-            <div class="question-footnote">
-                <span><i class="fas fa-check" aria-hidden="true"></i> +${formatMarks(question.marks)} marks</span>
-                <span><i class="fas fa-minus-circle" aria-hidden="true"></i> -${formatMarks(question.negativeMarks)} negative</span>
-            </div>
-        `;
+        elements.optionTexts.forEach(function (node, index) {
+            setText(node, question.options[index] || "");
+        });
+        syncQuestionState();
     }
 
     function renderPalette(options = {}) {
         if (!state.questions.length) return;
         const force = Boolean(options.force);
+        const changedIndexes = Array.isArray(options.changedIndexes) ? options.changedIndexes : [];
         const paletteVisible = force || isDesktopPalette() || isPaletteOpen();
 
         if (!paletteVisible) {
@@ -514,21 +514,17 @@
                 return `<button class="palette-btn ${status}${current}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
             }).join("");
             state.paletteDirty = false;
+            state.lastPaletteCurrent = state.current;
             return;
         }
 
-        Array.from(elements.questionPalette.children).forEach(function (button, index) {
-            const status = state.statuses[index] || "not-visited";
-            const current = index === state.current ? " current" : "";
-            const nextClassName = `palette-btn ${status}${current}`;
-            if (button.className !== nextClassName) button.className = nextClassName;
-            const nextLabel = `Question ${index + 1}, ${getStatusLabel(status)}`;
-            if (button.getAttribute("aria-label") !== nextLabel) button.setAttribute("aria-label", nextLabel);
-        });
+        const indexes = uniqueIndexes([state.lastPaletteCurrent, state.current].concat(changedIndexes));
+        indexes.forEach(syncPaletteButton);
+        state.lastPaletteCurrent = state.current;
     }
 
     function renderPaletteSummary() {
-        const counts = getStatusCounts();
+        const counts = state.statusCounts || getStatusCounts();
         const summaryHtml = [
             ["answered", "Answered", counts.answered],
             ["not-answered", "Not Answered", counts.notAnswered],
@@ -542,48 +538,75 @@
         if (elements.paletteSummary.innerHTML !== summaryHtml) elements.paletteSummary.innerHTML = summaryHtml;
     }
 
+    function syncPaletteButton(index) {
+        if (index < 0 || index >= state.questions.length) return;
+        const button = elements.questionPalette.children[index];
+        if (!button) return;
+        const status = state.statuses[index] || "not-visited";
+        const current = index === state.current ? " current" : "";
+        const nextClassName = `palette-btn ${status}${current}`;
+        if (button.className !== nextClassName) button.className = nextClassName;
+        const nextLabel = `Question ${index + 1}, ${getStatusLabel(status)}`;
+        if (button.getAttribute("aria-label") !== nextLabel) button.setAttribute("aria-label", nextLabel);
+    }
+
+    function setQuestionStatus(index, status) {
+        if (index < 0 || index >= state.statuses.length) return;
+        const previous = state.statuses[index] || "not-visited";
+        if (previous === status) return;
+        state.statuses[index] = status;
+        if (!state.statusCounts) state.statusCounts = countStatuses(state.statuses);
+        if (state.statusCounts[previous] !== undefined) state.statusCounts[previous] = Math.max(0, state.statusCounts[previous] - 1);
+        if (state.statusCounts[status] !== undefined) state.statusCounts[status] += 1;
+    }
+
+    function uniqueIndexes(indexes) {
+        return Array.from(new Set(indexes.filter(function (index) {
+            return Number.isInteger(index) && index >= 0 && index < state.questions.length;
+        })));
+    }
+
     function selectOption(index) {
         if (!state.questions[state.current] || index < 0 || index > 3) return;
         const currentStatus = state.statuses[state.current];
         state.answers[state.current] = index;
-        state.statuses[state.current] = currentStatus === "marked" || currentStatus === "answered-marked"
+        setQuestionStatus(state.current, currentStatus === "marked" || currentStatus === "answered-marked"
             ? "answered-marked"
-            : "answered";
+            : "answered");
         persistUnfinished();
         syncQuestionState();
-        renderPalette();
+        renderPalette({ changedIndexes: [state.current] });
     }
 
     function clearResponse() {
         if (!state.questions[state.current]) return;
         const currentStatus = state.statuses[state.current];
         state.answers[state.current] = null;
-        state.statuses[state.current] = currentStatus === "answered-marked" || currentStatus === "marked"
+        setQuestionStatus(state.current, currentStatus === "answered-marked" || currentStatus === "marked"
             ? "marked"
-            : "not-answered";
+            : "not-answered");
         persistUnfinished();
         syncQuestionState();
-        renderPalette();
+        renderPalette({ changedIndexes: [state.current] });
     }
 
     function markForReview() {
         if (!state.questions[state.current]) return;
-        state.statuses[state.current] = state.answers[state.current] === null ? "marked" : "answered-marked";
+        setQuestionStatus(state.current, state.answers[state.current] === null ? "marked" : "answered-marked");
         persistUnfinished();
         syncQuestionState();
-        renderPalette();
+        renderPalette({ changedIndexes: [state.current] });
     }
 
     function syncQuestionState() {
         const status = state.statuses[state.current] || "not-visited";
-        const statusNode = elements.questionCard.querySelector(".question-status");
-        if (statusNode) {
+        if (elements.questionStatusLabel) {
             const nextClassName = `question-status ${status}`;
-            if (statusNode.className !== nextClassName) statusNode.className = nextClassName;
-            setText(statusNode, getStatusLabel(status));
+            if (elements.questionStatusLabel.className !== nextClassName) elements.questionStatusLabel.className = nextClassName;
+            setText(elements.questionStatusLabel, getStatusLabel(status));
         }
 
-        elements.questionCard.querySelectorAll("[data-option-index]").forEach(function (button) {
+        elements.optionButtons.forEach(function (button) {
             const selected = state.answers[state.current] === Number(button.dataset.optionIndex);
             button.classList.toggle("selected", selected);
             button.setAttribute("aria-pressed", String(selected));
@@ -592,7 +615,7 @@
 
     function saveAndNext() {
         if (!state.questions[state.current]) return;
-        if (state.statuses[state.current] === "not-visited") state.statuses[state.current] = "not-answered";
+        if (state.statuses[state.current] === "not-visited") setQuestionStatus(state.current, "not-answered");
         if (state.current >= state.questions.length - 1) {
             openSubmitModal();
             return;
@@ -602,12 +625,13 @@
 
     function goQuestion(index) {
         if (index < 0 || index >= state.questions.length) return;
-        if (state.statuses[state.current] === "not-visited") state.statuses[state.current] = "not-answered";
+        const previousIndex = state.current;
+        if (state.statuses[state.current] === "not-visited") setQuestionStatus(state.current, "not-answered");
         state.current = index;
-        if (state.statuses[state.current] === "not-visited") state.statuses[state.current] = "not-answered";
+        if (state.statuses[state.current] === "not-visited") setQuestionStatus(state.current, "not-answered");
         persistUnfinished();
         renderQuestion();
-        renderPalette();
+        renderPalette({ changedIndexes: [previousIndex, state.current] });
     }
 
     function openSubmitModal() {
@@ -1024,7 +1048,7 @@
         });
         document.body.classList.toggle("quiz-exam-active", name === "exam");
         if (name !== "exam") closePalette();
-        window.scrollTo({ top: 0, behavior: name === "exam" ? "auto" : "smooth" });
+        window.scrollTo({ top: 0, behavior: "auto" });
     }
 
     function isViewVisible(name) {
@@ -1075,7 +1099,11 @@
     }
 
     function getStatusCounts() {
-        return state.statuses.reduce(function (counts, status) {
+        return countStatuses(state.statuses);
+    }
+
+    function countStatuses(statuses) {
+        return statuses.reduce(function (counts, status) {
             if (status === "answered") counts.answered += 1;
             else if (status === "not-answered") counts.notAnswered += 1;
             else if (status === "marked") counts.marked += 1;
@@ -1111,6 +1139,11 @@
     function showMessage(message, type = "info") {
         elements.quizMessage.textContent = String(message || "");
         elements.quizMessage.className = message ? `quiz-message ${type}` : "quiz-message hidden";
+    }
+
+    function setQuizLoading(isLoading) {
+        if (!elements.quizLoading) return;
+        elements.quizLoading.classList.toggle("hidden", !isLoading);
     }
 
     function hideMessage() {
