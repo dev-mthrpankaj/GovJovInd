@@ -24,6 +24,9 @@
         Reasoning: "fa-brain",
         Computer: "fa-laptop-code"
     };
+    const PERSIST_IDLE_TIMEOUT_MS = 10000;
+    const TIMER_STANDARD_INTERVAL_MS = 5000;
+    const TIMER_WARNING_INTERVAL_MS = 1000;
 
     const views = {};
     const elements = {};
@@ -38,9 +41,10 @@
         endsAt: 0,
         remainingSeconds: 1800,
         timerId: null,
-        persistTimerId: null,
         result: null,
-        reviewFilter: "all"
+        reviewFilter: "all",
+        persistTimerId: null,
+        lastPersistSignature: ""
     };
 
     document.addEventListener("DOMContentLoaded", init);
@@ -227,7 +231,7 @@
         });
         document.body.classList.toggle("quiz-exam-active", name === "exam");
         if (name !== "exam") closePalette();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: name === "exam" ? "auto" : "smooth" });
     }
 
     function renderSubjects() {
@@ -369,9 +373,54 @@
     }
 
     function renderExam() {
+        renderQuestionShell();
         renderQuestion();
         renderPalette();
         updateTimerDisplay();
+    }
+
+    function renderQuestionShell() {
+        if (elements.questionTitle && document.documentElement.contains(elements.questionTitle)) return;
+
+        elements.questionCard.innerHTML = `
+            <div class="question-card-head">
+                <div class="question-number-block">
+                    <span class="question-number-pill" data-question-number-pill></span>
+                    <div class="question-meta">
+                        <span class="meta-pill" data-question-subject></span>
+                        <span class="meta-pill" data-question-topic></span>
+                        <span class="meta-pill" data-question-difficulty></span>
+                    </div>
+                </div>
+                <span class="question-status-badge" data-question-status></span>
+            </div>
+            <div class="question-content">
+                <h2 class="question-title" data-question-title></h2>
+                <div class="option-list" role="radiogroup" aria-label="Answer options">
+                    ${[0, 1, 2, 3].map((index) => `
+                        <button class="answer-option" type="button" data-option-index="${index}" aria-pressed="false">
+                            <span class="option-key">${String.fromCharCode(65 + index)}</span>
+                            <span data-option-text></span>
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+            <div class="question-footnote">
+                <span><i class="fas fa-check" aria-hidden="true"></i> <span data-correct-marks></span></span>
+                <span><i class="fas fa-minus-circle" aria-hidden="true"></i> <span data-negative-marks></span></span>
+            </div>
+        `;
+
+        elements.questionNumberPill = elements.questionCard.querySelector("[data-question-number-pill]");
+        elements.questionSubject = elements.questionCard.querySelector("[data-question-subject]");
+        elements.questionTopic = elements.questionCard.querySelector("[data-question-topic]");
+        elements.questionDifficulty = elements.questionCard.querySelector("[data-question-difficulty]");
+        elements.questionStatusBadge = elements.questionCard.querySelector("[data-question-status]");
+        elements.questionTitle = elements.questionCard.querySelector("[data-question-title]");
+        elements.optionButtons = Array.from(elements.questionCard.querySelectorAll("[data-option-index]"));
+        elements.optionTexts = elements.optionButtons.map((button) => button.querySelector("[data-option-text]"));
+        elements.correctMarks = elements.questionCard.querySelector("[data-correct-marks]");
+        elements.negativeMarks = elements.questionCard.querySelector("[data-negative-marks]");
     }
 
     function renderQuestion() {
@@ -385,42 +434,30 @@
         elements.totalQuestionNo.textContent = app.questions.length;
         elements.quizProgress.style.width = `${((app.current + 1) / app.questions.length) * 100}%`;
 
-        elements.questionCard.innerHTML = `
-            <div class="question-card-head">
-                <div class="question-number-block">
-                    <span class="question-number-pill">Question ${app.current + 1}</span>
-                    <div class="question-meta">
-                        <span class="meta-pill">${escapeHtml(question.subject)}</span>
-                        <span class="meta-pill">${escapeHtml(question.topic)}</span>
-                        <span class="meta-pill">${escapeHtml(question.difficulty)}</span>
-                    </div>
-                </div>
-                <span class="question-status-badge ${currentStatus}">${escapeHtml(getStatusLabel(currentStatus))}</span>
-            </div>
-            <div class="question-content">
-                <h2 class="question-title">${escapeHtml(sanitizeQuestionText(question.question))}</h2>
-                <div class="option-list" role="radiogroup" aria-label="Answer options">
-                    ${question.options.map((option, index) => `
-                        <button class="answer-option ${app.answers[app.current] === index ? "selected" : ""}" type="button" data-option-index="${index}" aria-pressed="${app.answers[app.current] === index}">
-                            <span class="option-key">${String.fromCharCode(65 + index)}</span>
-                            <span>${escapeHtml(option)}</span>
-                        </button>
-                    `).join("")}
-                </div>
-            </div>
-            <div class="question-footnote">
-                <span><i class="fas fa-check" aria-hidden="true"></i> +${question.marks} marks</span>
-                <span><i class="fas fa-minus-circle" aria-hidden="true"></i> -${question.negativeMarks} negative</span>
-            </div>
-        `;
+        elements.questionNumberPill.textContent = `Question ${app.current + 1}`;
+        elements.questionSubject.textContent = question.subject || app.quizSet.subject || "Subject";
+        elements.questionTopic.textContent = question.topic || "Topic";
+        elements.questionDifficulty.textContent = question.difficulty || app.quizSet.difficulty || "Mixed";
+        elements.questionTitle.textContent = question.question || "";
+        elements.correctMarks.textContent = `+${question.marks} marks`;
+        elements.negativeMarks.textContent = `-${question.negativeMarks} negative`;
+        elements.optionButtons.forEach((button, index) => {
+            const selected = app.answers[app.current] === index;
+            button.classList.toggle("selected", selected);
+            button.setAttribute("aria-pressed", String(selected));
+            elements.optionTexts[index].textContent = question.options[index] || "";
+        });
+        updateQuestionStatusBadge(currentStatus);
     }
 
     function renderPalette() {
-        updatePaletteSummary();
+        renderPaletteSummaryShell();
         elements.questionPalette.innerHTML = app.questions.map((_question, index) => {
             const status = app.statuses[index] || "not-visited";
             return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
         }).join("");
+        elements.paletteButtons = Array.from(elements.questionPalette.querySelectorAll("[data-question-index]"));
+        updatePaletteSummary();
     }
 
     function selectOption(index) {
@@ -463,7 +500,6 @@
         updatePaletteButton(previousIndex);
         updatePaletteButton(app.current);
         updatePaletteSummary();
-        updateTimerDisplay();
     }
 
     function updateCurrentQuestionState() {
@@ -475,59 +511,81 @@
 
     function updateAnswerOptions() {
         const selected = app.answers[app.current];
-        elements.questionCard.querySelectorAll("[data-option-index]").forEach((button) => {
+        elements.optionButtons.forEach((button) => {
             const isSelected = Number(button.dataset.optionIndex) === selected;
             button.classList.toggle("selected", isSelected);
             button.setAttribute("aria-pressed", String(isSelected));
         });
     }
 
-    function updateQuestionStatusBadge() {
-        const badge = elements.questionCard.querySelector(".question-status-badge");
+    function updateQuestionStatusBadge(status = app.statuses[app.current] || "not-visited") {
+        const badge = elements.questionStatusBadge;
         if (!badge) return;
-        const status = app.statuses[app.current] || "not-visited";
         badge.className = `question-status-badge ${status}`;
         badge.textContent = getStatusLabel(status);
     }
 
     function updatePaletteButton(index) {
-        const button = elements.questionPalette.querySelector(`[data-question-index="${index}"]`);
+        const button = elements.paletteButtons?.[index];
         if (!button) return;
         const status = app.statuses[index] || "not-visited";
         button.className = `palette-btn ${status}${index === app.current ? " current" : ""}`;
         button.setAttribute("aria-label", `Question ${index + 1}, ${getStatusLabel(status)}`);
     }
 
-    function updatePaletteSummary() {
-        if (!elements.paletteSummary) return;
-        const counts = getStatusCounts();
-        elements.paletteSummary.innerHTML = [
-            ["answered", "Answered", counts.answered],
-            ["not-answered", "Not Answered", counts.notAnswered],
-            ["marked", "Marked", counts.marked],
-            ["answered-marked", "Answered + Marked", counts.answeredMarked],
-            ["not-visited", "Not Visited", counts.notVisited]
-        ].map(([status, label, value]) => `
+    function renderPaletteSummaryShell() {
+        if (!elements.paletteSummary || elements.paletteSummaryValues) return;
+        const items = [
+            ["answered", "Answered"],
+            ["notAnswered", "Not Answered", "not-answered"],
+            ["marked", "Marked"],
+            ["answeredMarked", "Answered + Marked", "answered-marked"],
+            ["notVisited", "Not Visited", "not-visited"]
+        ];
+        elements.paletteSummary.innerHTML = items.map(([key, label, status = key]) => `
             <span class="palette-summary-tile ${status}">
-                <strong>${value}</strong>
+                <strong data-summary-count="${key}">0</strong>
                 <em>${label}</em>
             </span>
         `).join("");
+        elements.paletteSummaryValues = items.reduce((map, [key]) => {
+            map[key] = elements.paletteSummary.querySelector(`[data-summary-count="${key}"]`);
+            return map;
+        }, {});
+    }
+
+    function updatePaletteSummary() {
+        if (!elements.paletteSummary) return;
+        renderPaletteSummaryShell();
+        const counts = getStatusCounts();
+        Object.entries(counts).forEach(([key, value]) => {
+            if (elements.paletteSummaryValues?.[key]) elements.paletteSummaryValues[key].textContent = value;
+        });
     }
 
     function startTimer() {
         stopTimer();
         updateTimerDisplay();
-        app.timerId = window.setInterval(function () {
-            app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
-            updateTimerDisplay();
-            persistUnfinished();
-            if (app.remainingSeconds <= 0) submitQuiz("time");
-        }, 1000);
+        scheduleTimerTick();
+    }
+
+    function scheduleTimerTick() {
+        const interval = app.remainingSeconds <= 300 ? TIMER_WARNING_INTERVAL_MS : TIMER_STANDARD_INTERVAL_MS;
+        app.timerId = window.setTimeout(handleTimerTick, interval);
+    }
+
+    function handleTimerTick() {
+        app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
+        updateTimerDisplay();
+        if (app.remainingSeconds <= 0) {
+            submitQuiz("time");
+            return;
+        }
+        scheduleTimerTick();
     }
 
     function stopTimer() {
-        window.clearInterval(app.timerId);
+        window.clearTimeout(app.timerId);
         app.timerId = null;
     }
 
@@ -692,7 +750,7 @@
                 <span class="score-number">${result.percentage}%</span>
                 <strong>${escapeHtml(result.message)}</strong>
                 <p class="result-subtext">${formatMarks(result.score)}/${formatMarks(result.maxScore)} marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
-                <p class="result-subtext">${escapeHtml(getDashboardSyncText(result, session))}</p>
+                <p class="result-subtext" id="dashboardSyncText">${escapeHtml(getDashboardSyncText(result, session))}</p>
             </article>
             <section class="result-panel result-grid">
                 ${renderResultTile("Total questions", result.total)}
@@ -722,7 +780,7 @@
         if (!auth || !session || !auth.callApi) return;
 
         result.dashboardSyncMessage = "Saving quiz attempt to dashboard...";
-        renderResult();
+        updateDashboardSyncText(result, session);
 
         try {
             const response = await auth.callApi(buildQuizAttemptPayload(result, session));
@@ -733,7 +791,12 @@
             result.dashboardSyncMessage = "Quiz saved on this device, but dashboard sync failed. Please check your connection.";
         }
 
-        if (app.result && app.result.id === result.id) renderResult();
+        if (app.result && app.result.id === result.id) updateDashboardSyncText(result, session);
+    }
+
+    function updateDashboardSyncText(result, session) {
+        const node = document.getElementById("dashboardSyncText");
+        if (node) node.textContent = getDashboardSyncText(result, session);
     }
 
     function buildQuizAttemptPayload(result, session) {
@@ -820,12 +883,13 @@
     }
 
     function persistUnfinished(immediate = false) {
-        clearPendingPersist();
         if (immediate) {
+            clearPendingPersist();
             writeUnfinishedAttempt();
             return;
         }
-        app.persistTimerId = window.setTimeout(writeUnfinishedAttempt, 120);
+        if (app.persistTimerId) return;
+        app.persistTimerId = window.setTimeout(writeUnfinishedAttempt, PERSIST_IDLE_TIMEOUT_MS);
     }
 
     function clearPendingPersist() {
@@ -837,14 +901,18 @@
     function writeUnfinishedAttempt() {
         app.persistTimerId = null;
         if (!app.quizSet || views.exam.classList.contains("hidden") || !app.questions.length) return;
-        storage.write("unfinished", {
+        const attempt = {
             quizId: app.quizSet.id,
             answers: app.answers,
             statuses: app.statuses,
             current: app.current,
             startedAt: app.startedAt,
             endsAt: app.endsAt
-        });
+        };
+        const signature = JSON.stringify(attempt);
+        if (signature === app.lastPersistSignature) return;
+        app.lastPersistSignature = signature;
+        storage.write("unfinished", attempt);
     }
 
     function openPalette() {

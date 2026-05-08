@@ -208,7 +208,7 @@ const isValidVisitorApiUrl = (apiUrl) => {
 };
 
 const ensureFooterVisitorCounter = () => {
-  if (!VISITOR_CONFIG.enabled) return null;
+  if (!VISITOR_CONFIG.enabled || getCurrentPageName() === 'quiz.html') return null;
   const footer = document.querySelector('footer');
   if (!footer) return null;
 
@@ -245,7 +245,7 @@ const setFooterVisitorState = (count, state = 'ready') => {
 };
 
 const sendVisitorHeartbeat = async () => {
-  if (!VISITOR_CONFIG.enabled || visitorHeartbeatInFlight) return;
+  if (!VISITOR_CONFIG.enabled || getCurrentPageName() === 'quiz.html' || visitorHeartbeatInFlight) return;
   const apiUrl = getVisitorApiUrl();
   if (!isValidVisitorApiUrl(apiUrl)) {
     setFooterVisitorState('--', 'offline');
@@ -286,6 +286,7 @@ const sendVisitorHeartbeat = async () => {
 };
 
 const startVisitorCounter = () => {
+  if (getCurrentPageName() === 'quiz.html') return;
   if (!ensureFooterVisitorCounter() || visitorHeartbeatTimer) return;
   sendVisitorHeartbeat();
   visitorHeartbeatTimer = window.setInterval(sendVisitorHeartbeat, VISITOR_CONFIG.heartbeatMs);
@@ -387,7 +388,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
 const pageOwnsMenu = Boolean(
   menuToggle?.id === 'menuToggle' ||
-  document.querySelector('script[src$="about-us.js"], script[src$="quizzes.js"], script[src$="documents.js"]')
+  document.querySelector('script[src*="about-us.js"], script[src*="quizzes.js"], script[src*="documents.js"]')
 );
 if (menuToggle && nav && !pageOwnsMenu) {
   menuToggle.setAttribute('aria-label', 'Open navigation menu');

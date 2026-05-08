@@ -368,6 +368,14 @@ button {
     background: #e0f2fe;
     color: #075985;
     font-weight: 900;
+    contain: layout paint style;
+    font-variant-numeric: tabular-nums;
+}
+
+#timerText {
+    display: inline-block;
+    min-width: 5ch;
+    text-align: left;
 }
 
 .timer-pill.warning {
