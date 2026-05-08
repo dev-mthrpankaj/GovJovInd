@@ -48,8 +48,11 @@
         reviewFilter: "all",
         isLoading: false,
         loadingQuizId: "",
-        pendingResume: null
+        pendingResume: null,
+        paletteDirty: true
     };
+
+    const debouncedRenderQuizList = debounce(renderQuizList, 120);
 
     document.addEventListener("DOMContentLoaded", initQuizPage);
 
@@ -98,7 +101,7 @@
         document.addEventListener("keydown", handleKeyboard);
         elements.quizSearch?.addEventListener("input", function (event) {
             state.search = event.target.value.trim().toLowerCase();
-            renderQuizList();
+            debouncedRenderQuizList();
         });
         window.addEventListener("beforeunload", function () { persistUnfinished(true); });
         window.addEventListener("pagehide", function () { persistUnfinished(true); });
@@ -436,7 +439,7 @@
                 subject: question.subject || quizSet.subject,
                 topic: question.topic || "General",
                 difficulty: question.difficulty || quizSet.difficulty || "Mixed",
-                question: sanitizeQuestionText(question.question),
+                question: question.question || "",
                 options: Array.isArray(question.options) ? question.options.slice(0, 4) : [],
                 correctAnswer: Number(question.correctAnswer),
                 explanation: question.explanation || "Explanation is not available.",
@@ -448,7 +451,7 @@
 
     function renderExam() {
         renderQuestion();
-        renderPalette();
+        renderPalette({ force: true });
         updateTimerDisplay();
     }
 
@@ -492,10 +495,41 @@
         `;
     }
 
-    function renderPalette() {
+    function renderPalette(options = {}) {
         if (!state.questions.length) return;
+        const force = Boolean(options.force);
+        const paletteVisible = force || isDesktopPalette() || isPaletteOpen();
+
+        if (!paletteVisible) {
+            state.paletteDirty = true;
+            return;
+        }
+
+        renderPaletteSummary();
+
+        if (force || state.paletteDirty || elements.questionPalette.children.length !== state.questions.length) {
+            elements.questionPalette.innerHTML = state.questions.map(function (_question, index) {
+                const status = state.statuses[index] || "not-visited";
+                const current = index === state.current ? " current" : "";
+                return `<button class="palette-btn ${status}${current}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
+            }).join("");
+            state.paletteDirty = false;
+            return;
+        }
+
+        Array.from(elements.questionPalette.children).forEach(function (button, index) {
+            const status = state.statuses[index] || "not-visited";
+            const current = index === state.current ? " current" : "";
+            const nextClassName = `palette-btn ${status}${current}`;
+            if (button.className !== nextClassName) button.className = nextClassName;
+            const nextLabel = `Question ${index + 1}, ${getStatusLabel(status)}`;
+            if (button.getAttribute("aria-label") !== nextLabel) button.setAttribute("aria-label", nextLabel);
+        });
+    }
+
+    function renderPaletteSummary() {
         const counts = getStatusCounts();
-        elements.paletteSummary.innerHTML = [
+        const summaryHtml = [
             ["answered", "Answered", counts.answered],
             ["not-answered", "Not Answered", counts.notAnswered],
             ["marked", "Marked", counts.marked],
@@ -505,11 +539,7 @@
             return `<div class="palette-summary-tile ${status}"><strong>${count}</strong><span>${label}</span></div>`;
         }).join("");
 
-        elements.questionPalette.innerHTML = state.questions.map(function (_question, index) {
-            const status = state.statuses[index] || "not-visited";
-            const current = index === state.current ? " current" : "";
-            return `<button class="palette-btn ${status}${current}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
-        }).join("");
+        if (elements.paletteSummary.innerHTML !== summaryHtml) elements.paletteSummary.innerHTML = summaryHtml;
     }
 
     function selectOption(index) {
@@ -520,7 +550,7 @@
             ? "answered-marked"
             : "answered";
         persistUnfinished();
-        renderQuestion();
+        syncQuestionState();
         renderPalette();
     }
 
@@ -532,7 +562,7 @@
             ? "marked"
             : "not-answered";
         persistUnfinished();
-        renderQuestion();
+        syncQuestionState();
         renderPalette();
     }
 
@@ -540,8 +570,24 @@
         if (!state.questions[state.current]) return;
         state.statuses[state.current] = state.answers[state.current] === null ? "marked" : "answered-marked";
         persistUnfinished();
-        renderQuestion();
+        syncQuestionState();
         renderPalette();
+    }
+
+    function syncQuestionState() {
+        const status = state.statuses[state.current] || "not-visited";
+        const statusNode = elements.questionCard.querySelector(".question-status");
+        if (statusNode) {
+            const nextClassName = `question-status ${status}`;
+            if (statusNode.className !== nextClassName) statusNode.className = nextClassName;
+            setText(statusNode, getStatusLabel(status));
+        }
+
+        elements.questionCard.querySelectorAll("[data-option-index]").forEach(function (button) {
+            const selected = state.answers[state.current] === Number(button.dataset.optionIndex);
+            button.classList.toggle("selected", selected);
+            button.setAttribute("aria-pressed", String(selected));
+        });
     }
 
     function saveAndNext() {
@@ -609,6 +655,7 @@
 
     function togglePalette() {
         elements.palettePanel?.classList.toggle("open");
+        if (isPaletteOpen()) renderPalette({ force: state.paletteDirty || elements.questionPalette.children.length !== state.questions.length });
         syncPaletteState();
     }
 
@@ -621,7 +668,12 @@
         return Boolean(elements.palettePanel && elements.palettePanel.classList.contains("open"));
     }
 
+    function isDesktopPalette() {
+        return Boolean(window.matchMedia("(min-width: 1120px)").matches);
+    }
+
     function syncPaletteState() {
+        if (isDesktopPalette() && state.paletteDirty) renderPalette({ force: true });
         const shouldLock = isPaletteOpen() && !window.matchMedia("(min-width: 1120px)").matches;
         document.body.classList.toggle("quiz-palette-open", shouldLock);
     }
@@ -1132,6 +1184,16 @@
     function formatNumber(value) {
         const number = Number(value);
         return Number.isFinite(number) ? String(Math.round(number)) : "0";
+    }
+
+    function debounce(fn, delay) {
+        let timer = 0;
+        return function (...args) {
+            window.clearTimeout(timer);
+            timer = window.setTimeout(function () {
+                fn.apply(null, args);
+            }, delay);
+        };
     }
 
     function titleCase(value) {
