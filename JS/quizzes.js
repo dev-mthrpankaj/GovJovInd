@@ -24,7 +24,7 @@
         Reasoning: "fa-brain",
         Computer: "fa-laptop-code"
     };
-    const PERSIST_IDLE_TIMEOUT_MS = 10000;
+    const PERSIST_IDLE_TIMEOUT_MS = 60000;
     const TIMER_STANDARD_INTERVAL_MS = 5000;
     const TIMER_WARNING_INTERVAL_MS = 1000;
 
@@ -132,12 +132,17 @@
         elements.questionPalette = document.getElementById("questionPalette");
         elements.submitModal = document.getElementById("submitModal");
         elements.submitSummary = document.getElementById("submitSummary");
+        elements.paletteRendered = false;
     }
 
     function bindEvents() {
         document.body.addEventListener("click", handleClick);
         document.addEventListener("keydown", handleKeyboard);
         window.addEventListener("beforeunload", () => persistUnfinished(true));
+        window.addEventListener("pagehide", () => persistUnfinished(true));
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) persistUnfinished(true);
+        });
     }
 
     function handleClick(event) {
@@ -348,6 +353,7 @@
         app.endsAt = app.startedAt + set.durationMinutes * 60 * 1000;
         app.remainingSeconds = set.durationMinutes * 60;
         app.result = null;
+        resetPalette();
         renderExam();
         startTimer();
         persistUnfinished();
@@ -381,6 +387,7 @@
         app.startedAt = Number(saved.startedAt) || Date.now();
         app.endsAt = Number(saved.endsAt) || Date.now() + set.durationMinutes * 60 * 1000;
         app.remainingSeconds = Math.max(0, Math.ceil((app.endsAt - Date.now()) / 1000));
+        resetPalette();
         renderExam();
         startTimer();
         showView("exam");
@@ -398,8 +405,20 @@
     function renderExam() {
         renderQuestionShell();
         renderQuestion();
-        renderPalette();
+        if (shouldRenderPaletteImmediately()) renderPalette();
         updateTimerDisplay();
+    }
+
+    function shouldRenderPaletteImmediately() {
+        return Boolean(window.matchMedia?.("(min-width: 1024px)")?.matches || window.innerWidth >= 1024);
+    }
+
+    function resetPalette() {
+        elements.paletteRendered = false;
+        elements.paletteButtons = [];
+        elements.paletteSummaryValues = null;
+        if (elements.paletteSummary) elements.paletteSummary.innerHTML = "";
+        if (elements.questionPalette) elements.questionPalette.innerHTML = "";
     }
 
     function renderQuestionShell() {
@@ -480,6 +499,7 @@
             return `<button class="palette-btn ${status} ${index === app.current ? "current" : ""}" type="button" data-question-index="${index}" aria-label="Question ${index + 1}, ${getStatusLabel(status)}">${index + 1}</button>`;
         }).join("");
         elements.paletteButtons = Array.from(elements.questionPalette.querySelectorAll("[data-question-index]"));
+        elements.paletteRendered = true;
         updatePaletteSummary();
     }
 
@@ -549,6 +569,7 @@
     }
 
     function updatePaletteButton(index) {
+        if (!elements.paletteRendered) return;
         const button = elements.paletteButtons?.[index];
         if (!button) return;
         const status = app.statuses[index] || "not-visited";
@@ -578,7 +599,7 @@
     }
 
     function updatePaletteSummary() {
-        if (!elements.paletteSummary) return;
+        if (!elements.paletteSummary || !elements.paletteRendered) return;
         renderPaletteSummaryShell();
         const counts = getStatusCounts();
         Object.entries(counts).forEach(([key, value]) => {
@@ -939,6 +960,7 @@
     }
 
     function openPalette() {
+        if (!elements.paletteRendered) renderPalette();
         elements.palettePanel.classList.add("open");
     }
 

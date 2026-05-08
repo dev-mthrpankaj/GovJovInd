@@ -14,14 +14,113 @@
     --quiz-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
+    margin: 0;
     max-width: 100%;
     overflow-x: hidden;
 }
 
 body {
     background: var(--quiz-bg);
+    color: var(--quiz-ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--quiz-border);
+    background: #fff;
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(100%, 1180px);
+    min-height: 64px;
+    margin: 0 auto;
+    padding: 0.65rem 0.85rem;
+}
+
+.logo-container {
+    min-width: 0;
+}
+
+.logo {
+    color: var(--quiz-ink);
+    font-size: 1.25rem;
+    font-weight: 900;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--quiz-primary);
+}
+
+.menu-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--quiz-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--quiz-primary);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 900;
+}
+
+header nav {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    display: none;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+    border-bottom: 1px solid var(--quiz-border);
+    background: #fff;
+}
+
+header nav.active {
+    display: block;
+}
+
+header nav ul {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.7rem 0.85rem 1rem;
+    list-style: none;
+}
+
+header nav a {
+    display: block;
+    padding: 0.72rem 0.8rem;
+    border-radius: 8px;
+    color: var(--quiz-ink);
+    font-weight: 800;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+header nav a.active,
+header nav a:hover,
+header nav a:focus-visible {
+    background: var(--quiz-soft);
+    color: var(--quiz-primary);
+    outline: 0;
 }
 
 .quiz-app,
@@ -126,6 +225,39 @@ body {
 
 .fa-map-marker-alt::before {
     content: "*";
+}
+
+@media (min-width: 900px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .header-container {
+        grid-template-columns: auto minmax(0, 1fr);
+        min-height: 68px;
+        padding: 0.7rem 1.2rem;
+    }
+
+    header nav {
+        position: static;
+        display: block;
+        max-height: none;
+        overflow: visible;
+        border: 0;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.15rem;
+        padding: 0;
+    }
+
+    header nav a {
+        padding: 0.55rem 0.65rem;
+        font-size: 0.9rem;
+    }
 }
 
 .quiz-app .hidden,
