@@ -166,14 +166,13 @@ const getActivePageClass = (pageName) => {
 const getSharedNavMarkup = () => {
   const items = [
     ['index.html', 'Home'],
-    ['rank-predictor.html', 'Rank Predictor'],
-    ['quiz.html', 'Quiz'],
-    ['dashboard.html', 'Dashboard'],
-    ['latest-jobs.html', 'Jobs'],
+    ['latest-jobs.html', 'Job'],
     ['admitcard.html', 'Admit Card'],
-    ['results.html', 'Results'],
     ['answer-key.html', 'Answer Key'],
-    ['documents.html', 'Documents'],
+    ['results.html', 'Result'],
+    ['quiz.html', 'Quiz'],
+    ['rank-predictor.html', 'Rank Predictor'],
+    ['documents.html', 'Document'],
     ['about-us.html', 'About Us']
   ];
   return items.map(([page, label]) => `<li><a href="${getSharedPageHref(page)}"${getActivePageClass(page)}>${label}</a></li>`).join('');
@@ -251,22 +250,18 @@ const ensureSharedFooter = () => {
       <h3>Quick Links</h3>
       <ul>
         <li><a href="${getSharedPageHref('index.html')}">Home</a></li>
-        <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
-        <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
-        <li><a href="${getSharedPageHref('dashboard.html')}">Dashboard</a></li>
-        <li><a href="${getSharedPageHref('latest-jobs.html')}">Jobs</a></li>
+        <li><a href="${getSharedPageHref('latest-jobs.html')}">Job</a></li>
         <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
+        <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
+        <li><a href="${getSharedPageHref('results.html')}">Result</a></li>
       </ul>
     </div>
     <div class="footer-section">
       <h3>Resources</h3>
       <ul>
+        <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
         <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
-        <li><a href="${getSharedPageHref('quiz.html')}">Quiz System</a></li>
-        <li><a href="${getSharedPageHref('dashboard.html')}">Candidate Dashboard</a></li>
-        <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
-        <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
-        <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
+        <li><a href="${getSharedPageHref('documents.html')}">Document</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
       </ul>
     </div>

@@ -98,6 +98,9 @@
         elements.optionTexts = elements.optionButtons.map((button) => button.querySelector(".option-text"));
         elements.questionMarks = document.getElementById("questionMarks");
         elements.questionNegative = document.getElementById("questionNegative");
+        elements.prevQuestionButton = document.querySelector("[data-action='prev-question']");
+        elements.saveNextButton = document.querySelector("[data-action='save-next']");
+        elements.markNextButton = document.querySelector("[data-action='mark-next']");
         elements.palettePanel = document.getElementById("palettePanel");
         elements.paletteSummary = document.getElementById("paletteSummary");
         elements.questionPalette = document.getElementById("questionPalette");
@@ -169,6 +172,7 @@
             "prev-question": function () { goQuestion(state.current - 1); },
             "save-next": saveAndNext,
             "mark-review": markForReview,
+            "mark-next": markAndNext,
             "clear-response": clearResponse,
             "submit-confirm": openSubmitModal,
             "submit-now": function () { submitQuiz("manual"); },
@@ -218,7 +222,7 @@
             goQuestion(state.current - 1);
         } else if (key === "m") {
             event.preventDefault();
-            markForReview();
+            markAndNext();
         }
     }
 
@@ -487,6 +491,13 @@
         setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
         elements.quizProgress.style.width = `${((state.current + 1) / state.questions.length) * 100}%`;
+        if (elements.prevQuestionButton) elements.prevQuestionButton.disabled = state.current === 0;
+        if (elements.saveNextButton) elements.saveNextButton.innerHTML = state.current >= state.questions.length - 1
+            ? "Review &amp; Submit"
+            : "Save &amp; Next";
+        if (elements.markNextButton) elements.markNextButton.innerHTML = state.current >= state.questions.length - 1
+            ? '<i class="fas fa-bookmark" aria-hidden="true"></i> Mark &amp; Review'
+            : '<i class="fas fa-bookmark" aria-hidden="true"></i> Mark &amp; Next';
 
         elements.optionTexts.forEach(function (node, index) {
             setText(node, question.options[index] || "");
@@ -529,7 +540,7 @@
             ["answered", "Answered", counts.answered],
             ["not-answered", "Not Answered", counts.notAnswered],
             ["marked", "Marked", counts.marked],
-            ["answered-marked", "Answered + Marked", counts.answeredMarked],
+            ["answered-marked", "Ans + Marked", counts.answeredMarked],
             ["not-visited", "Not Visited", counts.notVisited]
         ].map(function ([status, label, count]) {
             return `<div class="palette-summary-tile ${status}"><strong>${count}</strong><span>${label}</span></div>`;
@@ -598,6 +609,15 @@
         renderPalette({ changedIndexes: [state.current] });
     }
 
+    function markAndNext() {
+        markForReview();
+        if (state.current >= state.questions.length - 1) {
+            openSubmitModal();
+            return;
+        }
+        goQuestion(state.current + 1);
+    }
+
     function syncQuestionState() {
         const status = state.statuses[state.current] || "not-visited";
         if (elements.questionStatusLabel) {
@@ -637,6 +657,7 @@
     function openSubmitModal() {
         const attempted = state.answers.filter(function (answer) { return answer !== null; }).length;
         const marked = state.statuses.filter(function (status) { return String(status).includes("marked"); }).length;
+        closePalette();
         elements.submitSummary.textContent = `Attempted ${attempted} of ${state.questions.length}. Marked for review: ${marked}.`;
         elements.submitModal.classList.remove("hidden");
         syncModalState();

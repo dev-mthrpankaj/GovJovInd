@@ -221,7 +221,7 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
 :where(input,select,textarea){font-size:16px}
 
 @media (max-width: 768px){
-  body.has-candidate-bottom-nav{padding-bottom:74px}
+  body.has-candidate-bottom-nav{padding-bottom:0}
   .candidate-bottom-nav{display:grid}
   .header-container{padding:.6rem .85rem}
   nav{top:68px;max-height:calc(100vh - 68px);overflow-y:auto}
