@@ -58,21 +58,13 @@
     }
 
     function renderScorecard(attempt) {
-        const isQuiz = attempt.source === "quiz";
         setText("scorecardTitle", attempt.examName || "Scorecard");
-        setText("scorecardSubtitle", `${formatDate(attempt.completedAt || attempt.examDate || attempt.timestamp)} | ${attempt.attemptType || attempt.mode || "Attempt"}${isQuiz ? "" : ` | ${attempt.category || "Category"}`}`);
+        setText("scorecardSubtitle", `${formatDate(attempt.completedAt || attempt.examDate || attempt.timestamp)} | ${attempt.attemptType || attempt.mode || "Attempt"} | ${attempt.category || "Category"}`);
         setText("scoreBreakdownMeta", `${formatNumber(attempt.totalAttempted)} attempted of ${formatNumber(attempt.totalQuestions)} questions`);
 
         const metrics = document.getElementById("scorecardMetrics");
         if (metrics) {
-            const metricItems = isQuiz ? [
-                ["Score", formatPercent(attempt.scorePercent ?? attempt.percentage), "Quiz performance"],
-                ["Marks", `${formatMarks(attempt.rawMarks ?? attempt.marks)} / ${formatMarks(attempt.maxMarks)}`, "Final score"],
-                ["Accuracy", formatPercent(attempt.accuracy), "Correct/attempted"],
-                ["Correct", formatNumber(attempt.rightAnswers), "Right answers"],
-                ["Wrong", formatNumber(attempt.wrongAnswers), "Wrong answers"],
-                ["Time Taken", formatTime(attempt.timeTaken), "Quiz duration"]
-            ] : [
+            const metricItems = [
                 ["Percentile", formatPercent(attempt.percentile), "Candidate standing"],
                 ["Overall Rank", attempt.overallRank ? `#${attempt.overallRank}` : "Pending", "Among submissions"],
                 ["Raw Marks", formatMarks(attempt.rawMarks ?? attempt.marks), "Before normalization"],
@@ -91,14 +83,7 @@
 
         const breakdown = document.getElementById("scoreBreakdown");
         if (breakdown) {
-            const rows = isQuiz ? [
-                ["Total Questions", formatNumber(attempt.totalQuestions)],
-                ["Attempted", formatNumber(attempt.totalAttempted)],
-                ["Unattempted", formatNumber(attempt.unattempted)],
-                ["Score", `${formatMarks(attempt.rawMarks ?? attempt.marks)} / ${formatMarks(attempt.maxMarks)}`],
-                ["Submit Reason", attempt.submitReason || "Manual"],
-                ["Duration", attempt.durationMinutes ? `${formatNumber(attempt.durationMinutes)} minutes` : "Quiz"]
-            ] : [
+            const rows = [
                 ["Right Answers", formatNumber(attempt.rightAnswers)],
                 ["Wrong Answers", formatNumber(attempt.wrongAnswers)],
                 ["Unattempted", formatNumber(attempt.unattempted)],
@@ -116,7 +101,6 @@
     function renderSubjects(attempt) {
         const box = document.getElementById("scorecardSubjects");
         if (!box) return;
-        const isQuiz = attempt.source === "quiz";
         const subjects = Array.isArray(attempt.subjectAnalysis) && attempt.subjectAnalysis.length
             ? attempt.subjectAnalysis
             : Array.isArray(attempt.subjectData) ? attempt.subjectData : [];
@@ -135,7 +119,7 @@
                     <div class="subject-progress" aria-hidden="true"><span style="width:${accuracy}%"></span></div>
                     <div class="subject-meta">
                         <span>Score ${formatMarks(subject.score ?? subject.marks)}</span>
-                        <span>${isQuiz ? `Max ${formatMarks(subject.maxMarks)}` : `Avg ${formatMarks(subject.avgScore)}`}</span>
+                        <span>Avg ${formatMarks(subject.avgScore)}</span>
                         <span>Correct ${formatNumber(subject.correct)}</span>
                     </div>
                 </article>
@@ -153,9 +137,9 @@
         const weak = subjects[0];
         box.innerHTML = `
             <div class="dash-empty">
-                <strong>${escapeHtml(weak ? `Practice ${weak.name}` : "Submit another attempt")}</strong>
+                <strong>${escapeHtml(weak ? `Improve ${weak.name}` : "Submit another attempt")}</strong>
                 <span>${escapeHtml(weak ? "This was your lowest accuracy subject in this scorecard." : "More attempts will make the recommendations sharper.")}</span>
-                <a class="smart-link" href="quiz.html"><i class="fas fa-dumbbell" aria-hidden="true"></i> Start practice</a>
+                <a class="smart-link" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Submit attempt</a>
             </div>
         `;
     }

@@ -46,7 +46,9 @@
         persistTimerId: 0,
         result: null,
         reviewFilter: "all",
-        isLoading: false
+        isLoading: false,
+        loadingQuizId: "",
+        pendingResume: null
     };
 
     document.addEventListener("DOMContentLoaded", initQuizPage);
@@ -87,6 +89,8 @@
         elements.questionPalette = document.getElementById("questionPalette");
         elements.submitModal = document.getElementById("submitModal");
         elements.submitSummary = document.getElementById("submitSummary");
+        elements.resumeModal = document.getElementById("resumeModal");
+        elements.resumeSummary = document.getElementById("resumeSummary");
     }
 
     function bindEvents() {
@@ -101,6 +105,7 @@
         document.addEventListener("visibilitychange", function () {
             if (document.hidden) persistUnfinished(true);
         });
+        window.addEventListener("resize", syncPaletteState);
     }
 
     function handleClick(event) {
@@ -111,12 +116,18 @@
         const reviewButton = event.target.closest("[data-review-filter]");
         const actionButton = event.target.closest("[data-action]");
 
+        if (isPaletteOpen() && !event.target.closest("#palettePanel") && !event.target.closest("[data-action='toggle-palette']")) {
+            closePalette();
+            return;
+        }
+
         if (subjectButton) {
             setSubject(subjectButton.dataset.subjectFilter || ALL_SUBJECTS);
             return;
         }
 
         if (startButton) {
+            if (startButton.disabled || state.isLoading) return;
             startQuiz(startButton.dataset.startQuiz);
             return;
         }
@@ -148,6 +159,9 @@
             "submit-confirm": openSubmitModal,
             "submit-now": function () { submitQuiz("manual"); },
             "cancel-submit": closeSubmitModal,
+            "resume-saved": resumeSavedAttempt,
+            "start-fresh": startFreshAttempt,
+            "cancel-resume": closeResumeModal,
             "toggle-palette": togglePalette,
             "close-palette": closePalette,
             "review-answers": function () {
@@ -159,6 +173,7 @@
             "back-home": function () {
                 stopTimer();
                 closeSubmitModal();
+                closeResumeModal();
                 renderHome();
                 showView("home");
             }
@@ -172,6 +187,7 @@
         const key = event.key.toLowerCase();
         if (key === "escape") {
             closeSubmitModal();
+            closeResumeModal();
             closePalette();
             return;
         }
@@ -261,6 +277,9 @@
         const stats = getQuizStats(quiz.id);
         const resume = getSavedUnfinished();
         const canResume = resume && resume.quizId === quiz.id;
+        const isBusy = state.isLoading && state.loadingQuizId === quiz.id;
+        const buttonLabel = isBusy ? "Loading..." : canResume ? "Resume / Start" : "Start Test";
+        const buttonIcon = isBusy ? "fa-spinner fa-spin" : "fa-play";
         return `
             <article class="quiz-set-card">
                 <div class="quiz-card-head">
@@ -282,8 +301,8 @@
                         <div class="perf-tile"><span>Attempts</span><strong>${formatNumber(stats.attemptCount)}</strong></div>
                         <div class="perf-tile"><span>Last</span><strong>${escapeHtml(stats.lastAttempt)}</strong></div>
                     </div>
-                    <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(quiz.id)}">
-                        <i class="fas fa-play" aria-hidden="true"></i> ${canResume ? "Resume / Start" : "Start Test"}
+                    <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(quiz.id)}"${state.isLoading ? " disabled" : ""} aria-busy="${isBusy}">
+                        <i class="fas ${buttonIcon}" aria-hidden="true"></i> ${buttonLabel}
                     </button>
                 </div>
             </article>
@@ -313,6 +332,7 @@
         if (rerender) {
             renderSubjectFilters();
             renderQuizList();
+            scrollQuizListIntoView();
         }
     }
 
@@ -322,6 +342,8 @@
         if (!meta) return;
 
         state.isLoading = true;
+        state.loadingQuizId = quizId;
+        setStartButtonsLoading(quizId);
         showMessage("Loading quiz...", "info");
 
         try {
@@ -332,15 +354,21 @@
             }
 
             const saved = getSavedUnfinished();
-            if (!forceNew && saved && saved.quizId === quizId && window.confirm("Resume your unfinished attempt?")) {
-                resumeAttempt(quizSet, saved);
+            if (!forceNew && saved && saved.quizId === quizId && !isSavedAttemptExpired(saved)) {
+                hideMessage();
+                openResumeModal(quizSet, saved);
             } else {
+                if (saved && saved.quizId === quizId) storage.remove("unfinished");
+                hideMessage();
                 beginNewAttempt(quizSet);
             }
         } catch (error) {
+            console.error("[GJU Quizzes] Failed to start quiz:", error);
             showMessage("Quiz could not load. Please try again.", "error");
         } finally {
             state.isLoading = false;
+            state.loadingQuizId = "";
+            setStartButtonsLoading("");
         }
     }
 
@@ -351,6 +379,11 @@
 
     function beginNewAttempt(quizSet) {
         const questions = getQuestionsForSet(quizSet);
+        if (!questions.length) {
+            showMessage("This quiz has no questions yet.", "error");
+            showView("home");
+            return;
+        }
         state.quizSet = quizSet;
         state.questions = questions;
         state.answers = questions.map(function () { return null; });
@@ -363,13 +396,19 @@
         state.endsAt = state.startedAt + state.remainingSeconds * 1000;
         state.result = null;
         renderExam();
+        showView("exam");
         startTimer();
         persistUnfinished(true);
-        showView("exam");
     }
 
     function resumeAttempt(quizSet, saved) {
         const questions = getQuestionsForSet(quizSet);
+        if (!questions.length) {
+            storage.remove("unfinished");
+            showMessage("This saved quiz is no longer available. Please start again.", "error");
+            showView("home");
+            return;
+        }
         state.quizSet = quizSet;
         state.questions = questions;
         state.answers = normalizeArray(saved.answers, questions.length, null);
@@ -379,12 +418,14 @@
         state.endsAt = Number(saved.endsAt) || Date.now() + Math.max(1, Number(quizSet.durationMinutes) || 30) * 60 * 1000;
         state.remainingSeconds = Math.max(0, Math.ceil((state.endsAt - Date.now()) / 1000));
         if (state.remainingSeconds <= 0) {
+            storage.remove("unfinished");
             submitQuiz("time");
             return;
         }
         renderExam();
-        startTimer();
         showView("exam");
+        startTimer();
+        persistUnfinished(true);
     }
 
     function getQuestionsForSet(quizSet) {
@@ -528,22 +569,72 @@
         const marked = state.statuses.filter(function (status) { return String(status).includes("marked"); }).length;
         elements.submitSummary.textContent = `Attempted ${attempted} of ${state.questions.length}. Marked for review: ${marked}.`;
         elements.submitModal.classList.remove("hidden");
+        syncModalState();
     }
 
     function closeSubmitModal() {
-        elements.submitModal.classList.add("hidden");
+        elements.submitModal?.classList.add("hidden");
+        syncModalState();
+    }
+
+    function openResumeModal(quizSet, saved) {
+        state.pendingResume = { quizSet, saved };
+        const current = clamp(Number(saved.current) || 0, 0, Math.max(0, Number(quizSet.totalQuestions) || 50) - 1) + 1;
+        const remaining = Math.max(0, Math.ceil((Number(saved.endsAt) - Date.now()) / 1000));
+        setText(elements.resumeSummary, `You have an unfinished attempt on Question ${current}. Time left: ${formatTime(remaining)}.`);
+        elements.resumeModal?.classList.remove("hidden");
+        syncModalState();
+    }
+
+    function closeResumeModal() {
+        elements.resumeModal?.classList.add("hidden");
+        state.pendingResume = null;
+        syncModalState();
+    }
+
+    function resumeSavedAttempt() {
+        const pending = state.pendingResume;
+        if (!pending) return;
+        closeResumeModal();
+        resumeAttempt(pending.quizSet, pending.saved);
+    }
+
+    function startFreshAttempt() {
+        const pending = state.pendingResume;
+        if (!pending) return;
+        closeResumeModal();
+        storage.remove("unfinished");
+        beginNewAttempt(pending.quizSet);
     }
 
     function togglePalette() {
-        elements.palettePanel.classList.toggle("open");
+        elements.palettePanel?.classList.toggle("open");
+        syncPaletteState();
     }
 
     function closePalette() {
-        elements.palettePanel.classList.remove("open");
+        elements.palettePanel?.classList.remove("open");
+        syncPaletteState();
+    }
+
+    function isPaletteOpen() {
+        return Boolean(elements.palettePanel && elements.palettePanel.classList.contains("open"));
+    }
+
+    function syncPaletteState() {
+        const shouldLock = isPaletteOpen() && !window.matchMedia("(min-width: 1120px)").matches;
+        document.body.classList.toggle("quiz-palette-open", shouldLock);
     }
 
     function isModalOpen() {
-        return !elements.submitModal.classList.contains("hidden");
+        return Boolean(
+            elements.submitModal && !elements.submitModal.classList.contains("hidden")
+            || elements.resumeModal && !elements.resumeModal.classList.contains("hidden")
+        );
+    }
+
+    function syncModalState() {
+        document.body.classList.toggle("quiz-modal-open", isModalOpen());
     }
 
     function startTimer() {
@@ -861,6 +952,10 @@
         return saved && saved.quizId ? saved : null;
     }
 
+    function isSavedAttemptExpired(saved) {
+        return !saved || !Number(saved.endsAt) || Number(saved.endsAt) <= Date.now();
+    }
+
     function getQuizStats(quizId) {
         const attempts = getAttempts().filter(function (attempt) {
             return attempt.quizId === quizId;
@@ -914,6 +1009,33 @@
 
     function hideMessage() {
         showMessage("");
+    }
+
+    function scrollQuizListIntoView() {
+        const quizListPanel = elements.quizSetList?.closest(".quiz-list-panel");
+        if (!quizListPanel || !window.matchMedia("(max-width: 899px)").matches) return;
+        window.setTimeout(function () {
+            quizListPanel.scrollIntoView({ block: "start", behavior: "smooth" });
+        }, 0);
+    }
+
+    function setStartButtonsLoading(activeQuizId) {
+        const isLoading = Boolean(activeQuizId);
+        document.querySelectorAll("[data-start-quiz]").forEach(function (button) {
+            const isActive = button.dataset.startQuiz === activeQuizId;
+            button.disabled = isLoading;
+            button.setAttribute("aria-busy", String(isActive));
+            if (isActive && !button.dataset.originalHtml) {
+                button.dataset.originalHtml = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+            } else if (!isLoading && button.dataset.originalHtml) {
+                button.innerHTML = button.dataset.originalHtml;
+                delete button.dataset.originalHtml;
+            } else if (!isLoading) {
+                const canResume = getSavedUnfinished()?.quizId === button.dataset.startQuiz;
+                button.innerHTML = `<i class="fas fa-play" aria-hidden="true"></i> ${canResume ? "Resume / Start" : "Start Test"}`;
+            }
+        });
     }
 
     function normalizeArray(value, length, fallback) {

@@ -2,6 +2,7 @@
     "use strict";
 
     const REQUIRED_QUESTION_COUNT = 50;
+    const SCRIPT_TIMEOUT_MS = 15000;
     const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "Reasoning", "Computer"];
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
     const loadedScripts = new Map();
@@ -177,10 +178,28 @@
 
         const promise = new Promise((resolve, reject) => {
             const script = document.createElement("script");
+            let timeoutId = 0;
+            let settled = false;
+
+            function finish(callback) {
+                if (settled) return;
+                settled = true;
+                window.clearTimeout(timeoutId);
+                callback();
+            }
+
             script.src = src;
             script.async = true;
-            script.onload = resolve;
-            script.onerror = () => reject(new Error(`Unable to load quiz data: ${path}`));
+            script.onload = () => finish(resolve);
+            script.onerror = () => finish(() => {
+                loadedScripts.delete(src);
+                reject(new Error(`Unable to load quiz data: ${path}`));
+            });
+            timeoutId = window.setTimeout(() => finish(() => {
+                script.remove();
+                loadedScripts.delete(src);
+                reject(new Error(`Timed out loading quiz data: ${path}`));
+            }), SCRIPT_TIMEOUT_MS);
             document.head.appendChild(script);
         });
 
@@ -198,7 +217,8 @@
         window.GJU_QUIZ_BANK = Array.isArray(window.GJU_QUIZ_BANK) ? window.GJU_QUIZ_BANK : [];
         await loadScript(meta.path);
         const rawQuiz = getLoadedRawQuiz(id);
-        return rawQuiz ? validateQuiz(rawQuiz) : null;
+        if (!rawQuiz) throw new Error(`Quiz data was not registered: ${id}`);
+        return validateQuiz(rawQuiz);
     }
 
     const subjects = subjectOrder.filter((subject) => manifest.some((quiz) => quiz.subject === subject));

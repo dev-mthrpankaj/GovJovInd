@@ -3,7 +3,7 @@ const markPageLoaded = () => document.body.classList.add('page-loaded');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ADS_CONFIG = {
   enabled: true,
-  blockedPages: ['quiz.html', 'rank-predictor.html', 'documents.html'],
+  blockedPages: ['rank-predictor.html', 'documents.html'],
   inlineFrequency: 6
 };
 const CANDIDATE_SESSION_KEY = 'gju:candidate-session';
@@ -170,7 +170,6 @@ const getSharedNavMarkup = () => {
     ['admitcard.html', 'Admit Card'],
     ['results.html', 'Results'],
     ['answer-key.html', 'Answer Key'],
-    ['quiz.html', 'Quizzes'],
     ['rank-predictor.html', 'Rank Predictor'],
     ['documents.html', 'Documents'],
     ['about-us.html', 'About Us']
@@ -244,7 +243,7 @@ const ensureSharedFooter = () => {
   content.innerHTML = `
     <div class="footer-section">
       <h3>GovJobUpdates</h3>
-      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, quizzes, rank prediction, and document tools.</p>
+      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, and document tools.</p>
     </div>
     <div class="footer-section">
       <h3>Quick Links</h3>
@@ -259,7 +258,6 @@ const ensureSharedFooter = () => {
     <div class="footer-section">
       <h3>Resources</h3>
       <ul>
-        <li><a href="${getSharedPageHref('quiz.html')}">Exam Quizzes</a></li>
         <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
         <li><a href="${getSharedPageHref('dashboard.html')}">Candidate Dashboard</a></li>
         <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
@@ -292,7 +290,7 @@ const ensureSharedSiteChrome = () => {
 
 const ensureCandidateBottomNav = () => {
   const session = getCandidateHeaderSession();
-  if (!session || getCurrentPageName() === 'quiz.html' || document.querySelector('.candidate-bottom-nav')) return;
+  if (!session || document.querySelector('.candidate-bottom-nav')) return;
 
   const nav = document.createElement('nav');
   nav.className = 'candidate-bottom-nav';
@@ -351,7 +349,7 @@ const isValidVisitorApiUrl = (apiUrl) => {
 };
 
 const ensureFooterVisitorCounter = () => {
-  if (!VISITOR_CONFIG.enabled || getCurrentPageName() === 'quiz.html') return null;
+  if (!VISITOR_CONFIG.enabled) return null;
   const footer = document.querySelector('footer');
   if (!footer) return null;
 
@@ -388,7 +386,7 @@ const setFooterVisitorState = (count, state = 'ready') => {
 };
 
 const sendVisitorHeartbeat = async () => {
-  if (!VISITOR_CONFIG.enabled || getCurrentPageName() === 'quiz.html' || visitorHeartbeatInFlight) return;
+  if (!VISITOR_CONFIG.enabled || visitorHeartbeatInFlight) return;
   const apiUrl = getVisitorApiUrl();
   if (!isValidVisitorApiUrl(apiUrl)) {
     setFooterVisitorState('--', 'offline');
@@ -429,7 +427,6 @@ const sendVisitorHeartbeat = async () => {
 };
 
 const startVisitorCounter = () => {
-  if (getCurrentPageName() === 'quiz.html') return;
   if (!ensureFooterVisitorCounter() || visitorHeartbeatTimer) return;
   sendVisitorHeartbeat();
   visitorHeartbeatTimer = window.setInterval(sendVisitorHeartbeat, VISITOR_CONFIG.heartbeatMs);

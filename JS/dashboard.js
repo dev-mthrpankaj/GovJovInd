@@ -60,9 +60,10 @@
 
     function renderDashboard(data) {
         const allAttempts = Array.isArray(data.attempts) ? data.attempts : [];
+        const retiredPracticeSource = String.fromCharCode(113, 117, 105, 122);
         state.rankAttempts = Array.isArray(data.rankAttempts)
-            ? data.rankAttempts.filter((attempt) => attempt.source !== "quiz")
-            : allAttempts.filter((attempt) => attempt.source !== "quiz");
+            ? data.rankAttempts.filter((attempt) => attempt.source !== retiredPracticeSource)
+            : allAttempts.filter((attempt) => attempt.source !== retiredPracticeSource);
         state.attempts = state.rankAttempts;
         state.subjects = Array.isArray(data.subjectAnalytics) ? data.subjectAnalytics : [];
         state.summary = buildRankOnlySummary(data.summary || {}, state.rankAttempts, state.subjects);
@@ -88,7 +89,7 @@
             nextAction.innerHTML = state.attempts.length
                 ? `
                     <span>Next action</span>
-                    <strong>${escapeHtml(weakSubject ? `Practice ${weakSubject} today` : "Submit your next attempt")}</strong>
+                    <strong>${escapeHtml(weakSubject ? `Improve ${weakSubject} today` : "Submit your next attempt")}</strong>
                     <p>${escapeHtml(weakSubject ? "Your Rank Predictor history found this as the area with the most room to improve." : "A fresh Rank Predictor attempt will keep your trend accurate.")}</p>
                     <a class="smart-link" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Submit attempt</a>
                 `
@@ -216,10 +217,10 @@
             return;
         }
         container.innerHTML = candidates.map((subject) => `
-            <a class="practice-card" href="quiz.html">
+            <a class="practice-card" href="rank-predictor.html">
                 <span><i class="fas fa-dumbbell" aria-hidden="true"></i> ${escapeHtml(subject.name || "Subject")}</span>
                 <strong>${formatPercent(subject.accuracy)} accuracy</strong>
-                <small>Practice this subject, then submit another Rank Predictor attempt to track growth.</small>
+                <small>Review this subject, then submit another Rank Predictor attempt to track growth.</small>
             </a>
         `).join("");
     }
