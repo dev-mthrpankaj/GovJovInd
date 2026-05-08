@@ -532,7 +532,7 @@
     }
 
     .dash-hero-actions {
-        grid-template-columns: repeat(2, auto);
+        grid-template-columns: repeat(3, auto);
     }
 
     .metrics-grid {
@@ -574,6 +574,29 @@
 
     .score-detail-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .dashboard-page {
+        padding: 12px;
+    }
+
+    .metrics-grid,
+    .score-grid,
+    .score-detail-grid,
+    .subject-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-hero-actions .btn {
+        width: 100%;
+    }
+
+    .chart-box,
+    .chart-box canvas {
+        min-height: 190px;
+        height: 190px;
     }
 }
 

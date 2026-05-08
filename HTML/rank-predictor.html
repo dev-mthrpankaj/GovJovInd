@@ -92,6 +92,13 @@
                         <h2>Candidate Exam Details</h2>
                     </div>
 
+                    <ol class="form-stepper" aria-label="Rank predictor steps">
+                        <li class="is-active" data-step-for="candidateDetailsSection"><span>1</span><strong>Candidate</strong></li>
+                        <li data-step-for="examDetailsSection"><span>2</span><strong>Exam</strong></li>
+                        <li data-step-for="attemptDetailsSection"><span>3</span><strong>Attempts</strong></li>
+                        <li data-step-for="dataConsent"><span>4</span><strong>Review</strong></li>
+                    </ol>
+
                     <div class="fixed-exam-settings" aria-label="Fixed exam settings">
                         <div class="fixed-setting">
                             <span>Total Questions</span>
@@ -137,7 +144,7 @@
 
                     <details class="form-section-card form-accordion" id="candidateDetailsSection" aria-labelledby="candidateDetailsTitle" open>
                         <summary class="section-summary">
-                            <span>Candidate Details</span>
+                            <span>Step 1</span>
                             <strong id="candidateDetailsTitle">Candidate Details</strong>
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </summary>
@@ -173,7 +180,7 @@
 
                     <details class="form-section-card form-accordion" id="examDetailsSection" aria-labelledby="examDetailsTitle">
                         <summary class="section-summary">
-                            <span>Exam Details</span>
+                            <span>Step 2</span>
                             <strong id="examDetailsTitle">Exam Details</strong>
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </summary>
@@ -199,8 +206,8 @@
 
                     <details class="form-section-card form-accordion" id="attemptDetailsSection" aria-labelledby="attemptDetailsTitle">
                         <summary class="section-summary">
-                            <span>Attempt Details</span>
-                            <strong id="attemptDetailsTitle">Attempt Details</strong>
+                            <span>Step 3</span>
+                            <strong id="attemptDetailsTitle">Subject Attempts</strong>
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </summary>
                         <div class="section-content form-grid">
@@ -233,8 +240,14 @@
 
                     <section class="form-section-card consent-section" aria-labelledby="consentTitle">
                         <div class="section-heading">
-                            <span>Consent</span>
-                            <h3 id="consentTitle">Consent</h3>
+                            <span>Step 4</span>
+                            <h3 id="consentTitle">Review & Submit</h3>
+                        </div>
+                        <div class="review-submit-grid" aria-label="Review summary before submit">
+                            <div><span>Attempted</span><strong id="reviewAttempted">0</strong></div>
+                            <div><span>Correct</span><strong id="reviewCorrect">0</strong></div>
+                            <div><span>Wrong</span><strong id="reviewWrong">0</strong></div>
+                            <div><span>Expected Marks</span><strong id="reviewExpectedMarks">0.00</strong></div>
                         </div>
                         <label class="consent-row" for="dataConsent">
                             <input id="dataConsent" name="dataConsent" type="checkbox" required>
@@ -384,6 +397,13 @@
                             </tbody>
                         </table>
                     </div>
+                </section>
+                <section class="result-section share-result-card" aria-label="Shareable result">
+                    <div>
+                        <span>Share Result</span>
+                        <strong id="shareResultText">My GovJobUpdates percentile is pending.</strong>
+                    </div>
+                    <button class="btn btn-outline" id="shareResultBtn" type="button"><i class="fas fa-share-alt" aria-hidden="true"></i> Share</button>
                 </section>
                 <p class="result-note" id="resultNote">Rank prediction accuracy improves as more candidates submit data.</p>
             </aside>

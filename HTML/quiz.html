@@ -3,14 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <meta http-equiv="refresh" content="0; url=../index.html">
-    <title>GovJobUpdates</title>
-    <script>
-        window.location.replace("../index.html");
-    </script>
+    <title>Quiz System | GovJobUpdates</title>
+    <meta name="description" content="Subject-wise government exam quizzes with timer, progress tracking, question palette, analytics, and answer review.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/quizzes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <a href="../index.html">Go to GovJobUpdates</a>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+            </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="quiz.html" class="active">Quiz</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="latest-jobs.html">Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="quiz-page" id="quizApp">
+        <section class="quiz-home-view" id="homeView" aria-labelledby="quizTitle">
+            <section class="quiz-topbar">
+                <div class="quiz-title-block">
+                    <span>Subject-first quiz system</span>
+                    <h1 id="quizTitle">Practice Like a Real Exam</h1>
+                    <p>Choose a subject, start a timed set, navigate with a question palette, and review accuracy after submission.</p>
+                </div>
+                <div class="quiz-stat-row" aria-label="Quiz stats">
+                    <div><span>Quiz Sets</span><strong id="availableQuizCount">0</strong></div>
+                    <div><span>Attempts</span><strong id="savedAttemptCount">0</strong></div>
+                    <div><span>Best Score</span><strong id="bestScoreValue">0%</strong></div>
+                </div>
+            </section>
+
+            <section class="quiz-workspace" aria-label="Quiz launcher">
+                <aside class="quiz-panel subject-panel">
+                    <div class="panel-heading">
+                        <span>Subjects</span>
+                        <h2>Pick a Subject</h2>
+                    </div>
+                    <div class="subject-filter-list" id="subjectFilters" role="tablist" aria-label="Quiz subjects"></div>
+                </aside>
+
+                <section class="quiz-panel quiz-list-panel" aria-labelledby="quizSetTitle">
+                    <div class="quiz-list-head">
+                        <div class="panel-heading">
+                            <span id="selectedSubjectLabel">All Subjects</span>
+                            <h2 id="quizSetTitle">Quiz Sets</h2>
+                        </div>
+                        <label class="quiz-search" for="quizSearch">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input id="quizSearch" type="search" placeholder="Search quiz sets" autocomplete="off">
+                        </label>
+                    </div>
+                    <div class="quiz-message hidden" id="quizMessage" role="status" aria-live="polite"></div>
+                    <div class="quiz-set-grid" id="quizSetList"></div>
+                </section>
+
+                <aside class="quiz-panel history-panel" aria-labelledby="recentQuizTitle">
+                    <div class="panel-heading">
+                        <span>On this device</span>
+                        <h2 id="recentQuizTitle">Recent Attempts</h2>
+                    </div>
+                    <div class="history-list" id="recentAttempts"></div>
+                </aside>
+            </section>
+        </section>
+
+        <section class="quiz-exam-view hidden" id="examView" aria-labelledby="examTitle">
+            <div class="exam-shell">
+                <div class="exam-main">
+                    <section class="exam-topbar">
+                        <div class="exam-title-block">
+                            <span id="examSubject">Subject</span>
+                            <strong id="examTitle">Quiz</strong>
+                        </div>
+                        <div class="exam-status-block">
+                            <span><span id="currentQuestionNo">1</span>/<span id="totalQuestionNo">50</span></span>
+                            <span class="timer-pill" id="timerPill"><i class="fas fa-clock" aria-hidden="true"></i><span id="timerText">00:00</span></span>
+                        </div>
+                        <div class="progress-track" aria-hidden="true"><span id="quizProgress"></span></div>
+                    </section>
+
+                    <article class="question-card" id="questionCard" aria-live="polite"></article>
+
+                    <section class="exam-actions" aria-label="Question actions">
+                        <button class="quiz-btn quiz-btn-ghost" type="button" data-action="prev-question"><i class="fas fa-arrow-left" aria-hidden="true"></i> Previous</button>
+                        <button class="quiz-btn quiz-btn-outline" type="button" data-action="clear-response"><i class="fas fa-eraser" aria-hidden="true"></i> Clear</button>
+                        <button class="quiz-btn quiz-btn-outline" type="button" data-action="mark-review"><i class="fas fa-bookmark" aria-hidden="true"></i> Mark</button>
+                        <button class="quiz-btn quiz-btn-outline icon-text-btn" type="button" data-action="toggle-palette"><i class="fas fa-border-all" aria-hidden="true"></i> Palette</button>
+                        <button class="quiz-btn quiz-btn-primary" type="button" data-action="save-next">Save & Next</button>
+                        <button class="quiz-btn quiz-btn-danger" type="button" data-action="submit-confirm">Submit Test</button>
+                    </section>
+                </div>
+
+                <aside class="palette-panel" id="palettePanel" aria-label="Question palette">
+                    <div class="palette-head">
+                        <h2>Question Palette</h2>
+                        <button class="palette-close" type="button" data-action="close-palette" aria-label="Close question palette"><i class="fas fa-times" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="palette-summary" id="paletteSummary"></div>
+                    <div class="palette-grid" id="questionPalette"></div>
+                    <div class="palette-legend">
+                        <span><i class="status-dot answered" aria-hidden="true"></i>Answered</span>
+                        <span><i class="status-dot not-answered" aria-hidden="true"></i>Not answered</span>
+                        <span><i class="status-dot marked" aria-hidden="true"></i>Marked</span>
+                        <span><i class="status-dot answered-marked" aria-hidden="true"></i>Answered + marked</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="quiz-result-view hidden" id="resultView" aria-live="polite"></section>
+        <section class="quiz-review-view hidden" id="reviewView" aria-live="polite"></section>
+    </main>
+
+    <div class="quiz-modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
+        <article class="modal-card">
+            <h2 id="submitModalTitle">Submit Test?</h2>
+            <p id="submitSummary">Review your attempt before final submission.</p>
+            <div class="modal-actions">
+                <button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-submit">Continue Test</button>
+                <button class="quiz-btn quiz-btn-primary" type="button" data-action="submit-now">Submit Now</button>
+            </div>
+        </article>
+    </div>
+
+    <div class="quiz-modal hidden" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle">
+        <article class="modal-card">
+            <h2 id="resumeModalTitle">Resume Saved Attempt?</h2>
+            <p id="resumeSummary">An unfinished quiz is available on this device.</p>
+            <div class="modal-actions">
+                <button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-resume">Cancel</button>
+                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="start-fresh">Start Fresh</button>
+                <button class="quiz-btn quiz-btn-primary" type="button" data-action="resume-saved">Resume</button>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+<script src="../JS/quiz-storage.js" defer></script>
+<script src="../JS/quiz-registry.js" defer></script>
+<script src="../JS/quizzes.js" defer></script>
+<script src="../JS/script.js"></script>
 </body>
 </html>

@@ -166,11 +166,13 @@ const getActivePageClass = (pageName) => {
 const getSharedNavMarkup = () => {
   const items = [
     ['index.html', 'Home'],
-    ['latest-jobs.html', 'Latest Jobs'],
+    ['rank-predictor.html', 'Rank Predictor'],
+    ['quiz.html', 'Quiz'],
+    ['dashboard.html', 'Dashboard'],
+    ['latest-jobs.html', 'Jobs'],
     ['admitcard.html', 'Admit Card'],
     ['results.html', 'Results'],
     ['answer-key.html', 'Answer Key'],
-    ['rank-predictor.html', 'Rank Predictor'],
     ['documents.html', 'Documents'],
     ['about-us.html', 'About Us']
   ];
@@ -249,17 +251,21 @@ const ensureSharedFooter = () => {
       <h3>Quick Links</h3>
       <ul>
         <li><a href="${getSharedPageHref('index.html')}">Home</a></li>
-        <li><a href="${getSharedPageHref('latest-jobs.html')}">Latest Jobs</a></li>
+        <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
+        <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
+        <li><a href="${getSharedPageHref('dashboard.html')}">Dashboard</a></li>
+        <li><a href="${getSharedPageHref('latest-jobs.html')}">Jobs</a></li>
         <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
-        <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
-        <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
       </ul>
     </div>
     <div class="footer-section">
       <h3>Resources</h3>
       <ul>
         <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
+        <li><a href="${getSharedPageHref('quiz.html')}">Quiz System</a></li>
         <li><a href="${getSharedPageHref('dashboard.html')}">Candidate Dashboard</a></li>
+        <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
+        <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
         <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
       </ul>
@@ -289,18 +295,17 @@ const ensureSharedSiteChrome = () => {
 };
 
 const ensureCandidateBottomNav = () => {
-  const session = getCandidateHeaderSession();
-  if (!session || document.querySelector('.candidate-bottom-nav')) return;
+  if (document.querySelector('.candidate-bottom-nav')) return;
 
   const nav = document.createElement('nav');
   nav.className = 'candidate-bottom-nav';
-  nav.setAttribute('aria-label', 'Candidate navigation');
+  nav.setAttribute('aria-label', 'Primary mobile navigation');
   const items = [
     { label: 'Home', icon: 'fa-home', href: getHomeHref(), match: /index\.html$/i },
     { label: 'Rank', icon: 'fa-chart-line', href: getCandidatePageHref('rank-predictor.html'), match: /rank-predictor\.html$/i },
-    { label: 'Dashboard', icon: 'fa-border-all', href: getCandidatePageHref('dashboard.html'), match: /dashboard\.html$/i },
-    { label: 'Attempts', icon: 'fa-list-check', href: `${getCandidatePageHref('dashboard.html')}#attempts`, match: /scorecard\.html$/i },
-    { label: 'Profile', icon: 'fa-user', href: getCandidatePageHref('profile.html'), match: /profile\.html$/i }
+    { label: 'Quiz', icon: 'fa-stopwatch', href: getCandidatePageHref('quiz.html'), match: /quiz\.html$/i },
+    { label: 'Dashboard', icon: 'fa-border-all', href: getCandidatePageHref('dashboard.html'), match: /dashboard\.html|scorecard\.html$/i },
+    { label: 'Jobs', icon: 'fa-briefcase', href: getCandidatePageHref('latest-jobs.html'), match: /latest-jobs\.html$/i }
   ];
   const currentPage = getCurrentPageName();
   nav.innerHTML = items.map((item) => {
@@ -488,6 +493,18 @@ document.addEventListener('click', (event) => {
 const getHomeSearchRoute = (query) => {
   const text = String(query || '').toLowerCase();
 
+  if (/\b(rank|percentile|predictor|scorecard)\b/.test(text)) {
+    return 'HTML/rank-predictor.html';
+  }
+
+  if (/\b(quiz|test|practice|mock|question)\b/.test(text)) {
+    return 'HTML/quiz.html';
+  }
+
+  if (/\b(dashboard|performance|attempts?|analytics)\b/.test(text)) {
+    return 'HTML/dashboard.html';
+  }
+
   if (/\b(answer\s*keys?|answer-keys?|objections?)\b/.test(text)) {
     return 'HTML/answer-key.html';
   }
@@ -562,13 +579,21 @@ document.querySelectorAll('.ticker-wrap').forEach((ticker) => {
 
 const stats = document.querySelectorAll('.stat-number');
 
+const formatCounterValue = (counter, value, target) => {
+  const suffix = counter.dataset.suffix || '+';
+  if (suffix && suffix !== '+') return `${Math.round(value)}${suffix}`;
+  if (target >= 1000000) return `${Math.round(value / 100000) / 10}M+`;
+  if (target >= 1000) return `${Math.round(value / 1000)}K+`;
+  return `${Math.round(value)}+`;
+};
+
 const startCounters = () => {
   stats.forEach((counter) => {
     const target = Number(counter.dataset.target || 0);
     if (!target) return;
 
     if (prefersReducedMotion) {
-      counter.textContent = target >= 1000000 ? `${Math.round(target / 100000) / 10}M+` : target >= 1000 ? `${Math.round(target / 1000)}K+` : `${target}+`;
+      counter.textContent = formatCounterValue(counter, target, target);
       return;
     }
     let count = 0;
@@ -579,7 +604,7 @@ const startCounters = () => {
         clearInterval(timer);
         count = target;
       }
-      counter.textContent = target >= 1000000 ? `${Math.round(count / 100000) / 10}M+` : target >= 1000 ? `${Math.round(count / 1000)}K+` : `${count}+`;
+      counter.textContent = formatCounterValue(counter, count, target);
     }, 16);
   });
 };

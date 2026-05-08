@@ -98,6 +98,7 @@
         bindCheckForm();
         bindFormAccordions();
         bindKeyboardFocusHandling(app);
+        bindShareCard();
         applyExamDefaults();
         hydrateCandidateSession();
         renderPendingResult();
@@ -316,7 +317,10 @@
         ["mobileNumber", "checkMobileNumber"].forEach((id) => {
             getById(id)?.addEventListener("input", sanitizeMobileInput);
         });
-        form.addEventListener("input", clearFieldError);
+        form.addEventListener("input", (event) => {
+            clearFieldError(event);
+            updateStepIndicators(getActiveStepTarget());
+        });
         form.addEventListener("submit", handleSubmit);
         getById("resetPredictorBtn")?.addEventListener("click", () => {
             form.reset();
@@ -340,8 +344,71 @@
             section.addEventListener("toggle", () => {
                 if (section.dataset.applyingDefault === "true") return;
                 section.dataset.userToggled = "true";
+                if (section.open) {
+                    if (isMobileLayout()) {
+                        dom.formAccordions.forEach((otherSection) => {
+                            if (otherSection !== section) otherSection.open = false;
+                        });
+                    }
+                    updateStepIndicators(section.id);
+                }
             });
         });
+    }
+
+    function bindShareCard() {
+        const button = getById("shareResultBtn");
+        if (!button) return;
+        button.addEventListener("click", async () => {
+            const text = getById("shareResultText")?.textContent || "My GovJobUpdates rank prediction is ready.";
+            try {
+                if (navigator.share) {
+                    await navigator.share({
+                        title: "GovJobUpdates Rank Prediction",
+                        text,
+                        url: window.location.href
+                    });
+                    return;
+                }
+                await navigator.clipboard?.writeText(`${text} ${window.location.href}`.trim());
+                button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Copied';
+                window.setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share';
+                }, 1400);
+            } catch {
+                button.innerHTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share';
+            }
+        });
+    }
+
+    function updateStepIndicators(activeTarget) {
+        const target = activeTarget || "candidateDetailsSection";
+        document.querySelectorAll(".form-stepper [data-step-for]").forEach((item) => {
+            const stepFor = item.getAttribute("data-step-for");
+            item.classList.toggle("is-active", stepFor === target);
+            item.classList.toggle("is-complete", isStepComplete(stepFor));
+        });
+    }
+
+    function getActiveStepTarget() {
+        const openSection = dom.formAccordions.find((section) => section.open);
+        if (openSection) return openSection.id;
+        if (document.activeElement?.closest?.(".consent-section")) return "dataConsent";
+        return "candidateDetailsSection";
+    }
+
+    function isStepComplete(stepFor) {
+        if (stepFor === "candidateDetailsSection") {
+            return ["candidateName", "rollNumber", "mobileNumber", "dob", "gender", "category", "state"].every((id) => String(getById(id)?.value || "").trim());
+        }
+        if (stepFor === "examDetailsSection") {
+            return ["submitExamName", "examDate"].every((id) => String(getById(id)?.value || "").trim());
+        }
+        if (stepFor === "attemptDetailsSection") {
+            return readNumber("totalAttempted") > 0 || readNumber("rightAnswers") > 0 || readNumber("wrongAnswers") > 0;
+        }
+        if (stepFor === "dataConsent") return Boolean(getById("dataConsent")?.checked);
+        return false;
     }
 
     function applyAccordionDefaults() {
@@ -363,6 +430,7 @@
                 delete card.dataset.applyingDefault;
             }, 0);
         });
+        updateStepIndicators("candidateDetailsSection");
     }
 
     function bindKeyboardFocusHandling(app) {
@@ -371,6 +439,7 @@
             const field = event.target?.closest?.(focusableSelector);
             if (!field || !app.contains(field)) return;
             openContainingDetails(field);
+            if (field.id === "dataConsent" || field.closest(".consent-section")) updateStepIndicators("dataConsent");
             window.setTimeout(() => scrollFieldIntoView(field), 80);
             window.setTimeout(() => scrollFieldIntoView(field), 280);
         });
@@ -421,7 +490,10 @@
     function openContainingDetails(field) {
         let node = field?.parentElement || null;
         while (node && node !== document.documentElement) {
-            if (node.tagName === "DETAILS") node.open = true;
+            if (node.tagName === "DETAILS") {
+                node.open = true;
+                if (node.classList.contains("form-accordion")) updateStepIndicators(node.id);
+            }
             node = node.parentElement;
         }
     }
@@ -517,6 +589,10 @@
         setText("summaryCorrect", String(right));
         setText("summaryWrong", String(wrong));
         setText("summaryExpectedMarks", formatMarks(expectedMarks));
+        setText("reviewAttempted", String(attempted));
+        setText("reviewCorrect", String(right));
+        setText("reviewWrong", String(wrong));
+        setText("reviewExpectedMarks", formatMarks(expectedMarks));
     }
 
     function scheduleMarksCalculation() {
@@ -851,6 +927,11 @@
             card.addEventListener("toggle", () => {
                 if (card.dataset.applyingDefault === "true") return;
                 card.dataset.userToggled = "true";
+                if (card.open && isMobileLayout()) {
+                    dom.subjectControls.forEach(({ card: otherCard }) => {
+                        if (otherCard && otherCard !== card) otherCard.open = false;
+                    });
+                }
             });
         });
     }
@@ -960,6 +1041,7 @@
         setText("accuracyIndicator", "Pending");
         setText("lastUpdated", "Pending");
         renderSubjectAnalysis([]);
+        updateShareResult();
         setText("resultNote", "Rank prediction accuracy improves as more candidates submit data.");
     }
 
@@ -982,6 +1064,7 @@
         setText("accuracyIndicator", "Pending");
         setText("lastUpdated", "Pending");
         renderSubjectAnalysis([]);
+        updateShareResult();
         setText("resultNote", "No matching record found for the selected exam, roll number, and DOB.");
     }
 
@@ -1007,9 +1090,21 @@
         setText("accuracyIndicator", data.accuracyIndicator || getAccuracyIndicator(total));
         setText("lastUpdated", formatDateTime(data.lastUpdated));
         renderSubjectAnalysis(data.subjectAnalysis || []);
+        updateShareResult(data, payload, normalizedMarks);
         setText("resultNote", data.rankBasis === "normalized"
             ? "Rank and percentile are based on normalised marks for the selected exam."
             : "Rank and percentile are based on submitted raw marks for the selected exam.");
+    }
+
+    function updateShareResult(data = null, payload = null, normalizedMarks = null) {
+        const percentile = data ? formatPercentile(data.percentile) : "pending";
+        const examName = payload?.examName || getSelectedExam()?.examName || "my exam";
+        const rank = data?.overallRank ? ` | Rank #${data.overallRank}` : "";
+        const marks = normalizedMarks !== null && normalizedMarks !== undefined ? ` | Marks ${formatMarks(normalizedMarks)}` : "";
+        const text = data
+            ? `My ${examName} percentile: ${percentile}${rank}${marks} on GovJobUpdates.`
+            : "My GovJobUpdates percentile is pending.";
+        setText("shareResultText", text);
     }
 
     function calculateNormalizedMarks(data, payload, rawMarksValue) {

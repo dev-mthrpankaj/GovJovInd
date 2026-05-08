@@ -793,6 +793,7 @@
     function renderResult() {
         const result = state.result;
         if (!result) return;
+        const insights = buildResultInsights(result);
 
         views.result.innerHTML = `
             <article class="result-panel score-panel">
@@ -815,6 +816,23 @@
                 </div>
             </section>
             <section class="result-panel">
+                <h2>Analytics</h2>
+                <div class="result-insight-grid">
+                    <article class="result-insight-card">
+                        <span>Strong Topics</span>
+                        <strong>${escapeHtml(insights.strongTopics)}</strong>
+                    </article>
+                    <article class="result-insight-card">
+                        <span>Weak Topics</span>
+                        <strong>${escapeHtml(insights.weakTopics)}</strong>
+                    </article>
+                    <article class="result-insight-card">
+                        <span>Time Analysis</span>
+                        <strong>${escapeHtml(insights.timeAnalysis)}</strong>
+                    </article>
+                </div>
+            </section>
+            <section class="result-panel">
                 <h2>Subject Scorecard</h2>
                 <div class="result-grid">
                     ${result.subjectData.map(function (subject) {
@@ -832,6 +850,42 @@
 
     function renderResultTile(label, value) {
         return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+    }
+
+    function buildResultInsights(result) {
+        const topics = {};
+        result.questions.forEach(function (question, index) {
+            const topicName = question.topic || "General";
+            const selected = result.answers[index];
+            if (!topics[topicName]) topics[topicName] = { total: 0, attempted: 0, correct: 0 };
+            topics[topicName].total += 1;
+            if (selected !== null) {
+                topics[topicName].attempted += 1;
+                if (selected === question.correctAnswer) topics[topicName].correct += 1;
+            }
+        });
+
+        const ranked = Object.keys(topics).map(function (name) {
+            const topic = topics[name];
+            return {
+                name,
+                accuracy: topic.attempted ? (topic.correct / topic.attempted) * 100 : 0,
+                attempted: topic.attempted
+            };
+        }).filter(function (topic) {
+            return topic.attempted > 0;
+        }).sort(function (first, second) {
+            return second.accuracy - first.accuracy;
+        });
+
+        const perQuestion = result.total ? Math.round(result.timeTaken / result.total) : 0;
+        const timeAnalysis = `${formatTime(result.timeTaken)} total, about ${perQuestion}s/question`;
+
+        return {
+            strongTopics: ranked.slice(0, 3).map(function (topic) { return topic.name; }).join(", ") || "Not enough attempted questions",
+            weakTopics: ranked.slice(-3).reverse().map(function (topic) { return topic.name; }).join(", ") || "Not enough attempted questions",
+            timeAnalysis
+        };
     }
 
     function renderReview() {
