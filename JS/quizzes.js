@@ -309,8 +309,6 @@
     }
 
     async function startQuiz(quizId) {
-        if (!canAttemptQuiz(quizId)) return;
-
         let set = registry.getQuizById(quizId);
         if (!set) return;
         if (!Array.isArray(set.questions)) {
@@ -364,15 +362,6 @@
         document.body.classList.toggle("quiz-loading", loading);
         if (loading) showListMessage("Loading quiz...", "info");
         else hideListMessage();
-    }
-
-    function canAttemptQuiz(quizId) {
-        const session = window.CandidateAuth?.getSession?.();
-        if (session) return true;
-
-        const next = `quiz.html?quiz=${encodeURIComponent(String(quizId || ""))}`;
-        window.location.href = `login.html?next=${encodeURIComponent(next)}`;
-        return false;
     }
 
     function resumeAttempt(saved) {
@@ -659,7 +648,6 @@
         saveAttempt(result);
         renderResult();
         showView("result");
-        syncQuizAttempt(result);
     }
 
     function calculateResult(reason) {
@@ -705,8 +693,6 @@
             questions: app.questions,
             answers: app.answers,
             statuses: app.statuses,
-            dashboardSynced: false,
-            dashboardSyncMessage: "",
             message: getPerformanceMessage(percentage)
         };
     }
@@ -779,22 +765,19 @@
             maxScore: result.maxScore,
             percentage: result.percentage,
             accuracy: result.accuracy,
-            timeTaken: result.timeTaken,
-            dashboardSynced: result.dashboardSynced,
-            dashboardSyncMessage: result.dashboardSyncMessage
+            timeTaken: result.timeTaken
         };
     }
 
     function renderResult() {
         const result = app.result;
-        const session = window.CandidateAuth?.getSession?.();
         views.result.innerHTML = `
             <article class="result-panel score-panel">
                 <h2 id="resultTitle">${escapeHtml(result.quizTitle)}</h2>
                 <span class="score-number">${result.percentage}%</span>
                 <strong>${escapeHtml(result.message)}</strong>
                 <p class="result-subtext">${formatMarks(result.score)}/${formatMarks(result.maxScore)} marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
-                <p class="result-subtext" id="dashboardSyncText">${escapeHtml(getDashboardSyncText(result, session))}</p>
+                <p class="result-subtext">Saved on this device for quick practice review.</p>
             </article>
             <section class="result-panel result-grid">
                 ${renderResultTile("Total questions", result.total)}
@@ -808,7 +791,6 @@
             </section>
             <div class="result-actions">
                 <button class="btn btn-outline" type="button" data-action="review-answers">Review Answers</button>
-                <a class="btn btn-outline" href="${session ? "dashboard.html#attempts" : "login.html?next=quiz.html"}">${session ? "View Dashboard" : "Login to Save"}</a>
                 <button class="btn btn-primary" type="button" data-action="back-to-quizzes">Back to Quizzes</button>
             </div>
         `;
@@ -816,68 +798,6 @@
 
     function renderResultTile(label, value) {
         return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
-    }
-
-    async function syncQuizAttempt(result) {
-        const auth = window.CandidateAuth;
-        const session = auth?.getSession?.();
-        if (!auth || !session || !auth.callApi) return;
-
-        result.dashboardSyncMessage = "Saving quiz attempt to dashboard...";
-        updateDashboardSyncText(result, session);
-
-        try {
-            const response = await auth.callApi(buildQuizAttemptPayload(result, session));
-            result.dashboardSynced = Boolean(response.success);
-            result.dashboardSyncMessage = response.message || (response.success ? "Quiz attempt saved to dashboard." : "Quiz attempt could not be saved.");
-        } catch {
-            result.dashboardSynced = false;
-            result.dashboardSyncMessage = "Quiz saved on this device, but dashboard sync failed. Please check your connection.";
-        }
-
-        if (app.result && app.result.id === result.id) updateDashboardSyncText(result, session);
-    }
-
-    function updateDashboardSyncText(result, session) {
-        const node = document.getElementById("dashboardSyncText");
-        if (node) node.textContent = getDashboardSyncText(result, session);
-    }
-
-    function buildQuizAttemptPayload(result, session) {
-        return {
-            action: "submitQuizAttempt",
-            userId: session.userId,
-            mobile: session.mobile,
-            email: session.email,
-            quizAttemptId: result.id,
-            quizId: result.quizId,
-            quizTitle: result.quizTitle,
-            subject: result.subject,
-            difficulty: result.difficulty,
-            completedAt: result.completedAt,
-            submitReason: result.reason,
-            totalQuestions: result.total,
-            attempted: result.attempted,
-            correct: result.correct,
-            wrong: result.wrong,
-            unattempted: result.unattempted,
-            score: result.score,
-            maxScore: result.maxScore,
-            percentage: result.percentage,
-            accuracy: result.accuracy,
-            timeTaken: result.timeTaken,
-            durationMinutes: result.durationMinutes,
-            subjectData: result.subjectData,
-            answers: result.answers,
-            statuses: result.statuses,
-            userAgent: navigator.userAgent || ""
-        };
-    }
-
-    function getDashboardSyncText(result, session) {
-        if (!session) return "Login before taking quizzes to save attempts in your dashboard.";
-        if (result.dashboardSyncMessage) return result.dashboardSyncMessage;
-        return result.dashboardSynced ? "Quiz attempt saved to dashboard." : "Saving quiz attempt to dashboard...";
     }
 
     function renderReview() {

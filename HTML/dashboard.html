@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candidate Dashboard | GovJobUpdates</title>
-    <meta name="description" content="Candidate performance dashboard for GovJobUpdates Rank Predictor and quiz attempts, percentile trend, subject accuracy, and previous scorecards.">
+    <meta name="description" content="Candidate performance dashboard for GovJobUpdates Rank Predictor attempts, percentile trend, subject accuracy, and previous scorecards.">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
@@ -42,7 +42,7 @@
             <div class="dash-hero-copy">
                 <span class="dash-eyebrow">Performance Dashboard</span>
                 <h1 id="dashboardTitle">Welcome, <span id="candidateName">Candidate</span></h1>
-                <p id="candidateContact">Loading your saved Rank Predictor and quiz attempts.</p>
+                <p id="candidateContact">Loading your saved Rank Predictor attempts.</p>
             </div>
             <div class="dash-hero-actions">
                 <a class="btn btn-primary" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Rank Attempt</a>
@@ -63,12 +63,12 @@
             <article class="metric-card">
                 <span>Total Saved Attempts</span>
                 <strong id="metricTotalExams">0</strong>
-                <small id="metricTotalBreakdown">Rank + quiz attempts</small>
+                <small id="metricTotalBreakdown">Rank Predictor attempts</small>
             </article>
             <article class="metric-card">
                 <span>Average Performance</span>
                 <strong id="metricAveragePercentile">0%</strong>
-                <small id="metricAverageLabel">Rank percentile / quiz score</small>
+                <small id="metricAverageLabel">Average rank percentile</small>
             </article>
             <article class="metric-card">
                 <span>Best Rank</span>
@@ -98,7 +98,7 @@
                     <article class="dash-card">
                         <div class="dash-card-header">
                             <h2>Performance Trend</h2>
-                            <p>Rank percentile and quiz score growth</p>
+                            <p>Rank percentile growth</p>
                         </div>
                         <div class="chart-box"><canvas id="percentileTrendChart" aria-label="Percentile trend chart"></canvas></div>
                     </article>
@@ -112,7 +112,7 @@
                     <article class="dash-card wide-card">
                         <div class="dash-card-header">
                             <h2>Attempt Performance</h2>
-                            <p>Marks and score percentage together</p>
+                            <p>Marks and percentile together</p>
                         </div>
                         <div class="chart-box"><canvas id="examPerformanceChart" aria-label="Exam performance chart"></canvas></div>
                     </article>

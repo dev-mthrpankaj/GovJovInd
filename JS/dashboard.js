@@ -5,7 +5,6 @@
         session: null,
         attempts: [],
         rankAttempts: [],
-        quizAttempts: [],
         subjects: [],
         summary: {}
     };
@@ -60,11 +59,13 @@
     }
 
     function renderDashboard(data) {
-        state.attempts = Array.isArray(data.attempts) ? data.attempts : [];
-        state.rankAttempts = Array.isArray(data.rankAttempts) ? data.rankAttempts : state.attempts.filter((attempt) => attempt.source !== "quiz");
-        state.quizAttempts = Array.isArray(data.quizAttempts) ? data.quizAttempts : state.attempts.filter((attempt) => attempt.source === "quiz");
+        const allAttempts = Array.isArray(data.attempts) ? data.attempts : [];
+        state.rankAttempts = Array.isArray(data.rankAttempts)
+            ? data.rankAttempts.filter((attempt) => attempt.source !== "quiz")
+            : allAttempts.filter((attempt) => attempt.source !== "quiz");
+        state.attempts = state.rankAttempts;
         state.subjects = Array.isArray(data.subjectAnalytics) ? data.subjectAnalytics : [];
-        state.summary = data.summary || {};
+        state.summary = buildRankOnlySummary(data.summary || {}, state.rankAttempts, state.subjects);
         renderSmartInsights();
         renderMetrics();
         renderAttempts();
@@ -88,14 +89,14 @@
                 ? `
                     <span>Next action</span>
                     <strong>${escapeHtml(weakSubject ? `Practice ${weakSubject} today` : "Submit your next attempt")}</strong>
-                    <p>${escapeHtml(weakSubject ? "Your dashboard found this as the area with the most room to improve." : "A fresh attempt will keep your trend accurate.")}</p>
-                    <a class="smart-link" href="quiz.html"><i class="fas fa-bolt" aria-hidden="true"></i> Start practice</a>
+                    <p>${escapeHtml(weakSubject ? "Your Rank Predictor history found this as the area with the most room to improve." : "A fresh Rank Predictor attempt will keep your trend accurate.")}</p>
+                    <a class="smart-link" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Submit attempt</a>
                 `
                 : `
                     <span>Start here</span>
-                    <strong>Take your first quiz or Rank Predictor attempt</strong>
+                    <strong>Submit your first Rank Predictor attempt</strong>
                     <p>Your dashboard will unlock performance trends, subject accuracy, and detailed scorecards.</p>
-                    <a class="smart-link" href="quiz.html"><i class="fas fa-bolt" aria-hidden="true"></i> Start quiz</a>
+                    <a class="smart-link" href="rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Start rank check</a>
                 `;
         }
 
@@ -121,11 +122,11 @@
 
     function renderMetrics() {
         const summary = state.summary;
-        const averagePerformance = Number(summary.averagePercentile) > 0 ? summary.averagePercentile : summary.averageQuizScore;
+        const averagePerformance = Number(summary.averagePercentile) || 0;
         setText("metricTotalExams", formatNumber(summary.totalExamsAttempted || state.attempts.length));
-        setText("metricTotalBreakdown", `${formatNumber(summary.totalRankPredictorAttempts || state.rankAttempts.length)} rank | ${formatNumber(summary.totalQuizzesAttempted || state.quizAttempts.length)} quiz`);
+        setText("metricTotalBreakdown", `${formatNumber(summary.totalRankPredictorAttempts || state.rankAttempts.length)} rank attempts`);
         setText("metricAveragePercentile", formatPercent(averagePerformance));
-        setText("metricAverageLabel", Number(summary.averagePercentile) > 0 ? "Average rank percentile" : "Average quiz score");
+        setText("metricAverageLabel", "Average rank percentile");
         setText("metricBestRank", summary.bestRank ? `#${summary.bestRank}` : "Pending");
         setText("metricBestRankExam", summary.bestRankExam || "No attempts yet");
         setText("metricBestSubject", summary.bestSubject || "Pending");
@@ -140,7 +141,7 @@
         setText("attemptCountLabel", `${state.attempts.length} saved attempts`);
         if (!list) return;
         if (!state.attempts.length) {
-            list.innerHTML = renderEmpty("No attempts yet", "Take a quiz or submit your first Rank Predictor attempt to unlock analytics.", "quiz.html", "Start quiz");
+            list.innerHTML = renderEmpty("No attempts yet", "Submit your first Rank Predictor attempt to unlock analytics.", "rank-predictor.html", "Start rank check");
             return;
         }
         list.innerHTML = state.attempts.map((attempt, index) => renderAttemptRow(attempt, index)).join("");
@@ -164,7 +165,6 @@
     }
 
     function renderAttemptRow(attempt, index, compact = false) {
-        const isQuiz = attempt.source === "quiz";
         return `
             <button class="attempt-row" type="button" data-attempt-index="${index}">
                 <span class="attempt-title">
@@ -172,8 +172,8 @@
                     <span>${escapeHtml(formatDate(attempt.completedAt || attempt.examDate || attempt.timestamp))} | ${escapeHtml(attempt.attemptType || attempt.mode || "Attempt")}</span>
                 </span>
                 <span class="attempt-metrics">
-                    <div><span>${isQuiz ? "Score" : "Percentile"}</span><strong>${formatPercent(isQuiz ? getAttemptPerformanceValue(attempt) : attempt.percentile)}</strong></div>
-                    <div><span>${isQuiz ? "Type" : "Rank"}</span><strong>${isQuiz ? "Quiz" : attempt.overallRank ? `#${escapeHtml(attempt.overallRank)}` : "Pending"}</strong></div>
+                    <div><span>Percentile</span><strong>${formatPercent(attempt.percentile)}</strong></div>
+                    <div><span>Rank</span><strong>${attempt.overallRank ? `#${escapeHtml(attempt.overallRank)}` : "Pending"}</strong></div>
                     <div><span>Marks</span><strong>${formatMarks(attempt.rawMarks ?? attempt.marks)}</strong></div>
                     ${compact ? "" : `<div><span>Mode</span><strong>${escapeHtml(attempt.mode || "Exam")}</strong></div>`}
                 </span>
@@ -212,14 +212,14 @@
         if (!container) return;
         const candidates = state.subjects.slice(-3).reverse();
         if (!candidates.length) {
-            container.innerHTML = renderEmpty("No suggestions yet", "Practice suggestions appear after subject-wise attempts.", "quiz.html", "Start quiz");
+            container.innerHTML = renderEmpty("No suggestions yet", "Suggestions appear after subject-wise Rank Predictor attempts.", "rank-predictor.html", "Start rank check");
             return;
         }
         container.innerHTML = candidates.map((subject) => `
             <a class="practice-card" href="quiz.html">
                 <span><i class="fas fa-dumbbell" aria-hidden="true"></i> ${escapeHtml(subject.name || "Subject")}</span>
                 <strong>${formatPercent(subject.accuracy)} accuracy</strong>
-                <small>Practice this subject and submit another attempt to track growth.</small>
+                <small>Practice this subject, then submit another Rank Predictor attempt to track growth.</small>
             </a>
         `).join("");
     }
@@ -470,10 +470,29 @@
 
     function getAttemptPerformanceValue(attempt) {
         if (!attempt) return 0;
-        const value = attempt.source === "quiz"
-            ? Number(attempt.scorePercent ?? attempt.percentage)
-            : Number(attempt.percentile);
+        const value = Number(attempt.percentile);
         return Number.isFinite(value) ? value : 0;
+    }
+
+    function buildRankOnlySummary(summary, rankAttempts, subjects) {
+        const percentileValues = rankAttempts
+            .map((attempt) => Number(attempt.percentile))
+            .filter((value) => Number.isFinite(value) && value > 0);
+        const rankedAttempts = rankAttempts
+            .filter((attempt) => Number(attempt.overallRank) > 0)
+            .sort((first, second) => Number(first.overallRank) - Number(second.overallRank));
+        return {
+            ...summary,
+            totalExamsAttempted: rankAttempts.length,
+            totalRankPredictorAttempts: rankAttempts.length,
+            averagePercentile: percentileValues.length
+                ? round2(percentileValues.reduce((total, value) => total + value, 0) / percentileValues.length)
+                : 0,
+            bestRank: rankedAttempts.length ? rankedAttempts[0].overallRank : "",
+            bestRankExam: rankedAttempts.length ? rankedAttempts[0].examName || "Rank Predictor" : "",
+            bestSubject: summary.bestSubject || subjects[0]?.name || "",
+            weakSubject: summary.weakSubject || subjects[subjects.length - 1]?.name || ""
+        };
     }
 
     function round2(value) {

@@ -9,12 +9,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
-    <link rel="stylesheet" href="../CSS/quizzes.css?v=20260508-mobile-lite">
+    <link rel="stylesheet" href="../CSS/quizzes.css?v=20260508-standalone-chrome">
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="42" height="42" decoding="async">
                 <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
             </div>
             <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNav"><i class="fas fa-bars"></i></button>
@@ -31,6 +32,12 @@
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
             </nav>
+            <div class="header-auth-actions">
+                <a class="header-login-btn is-active" href="dashboard.html" aria-label="Open candidate dashboard">
+                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -110,9 +117,48 @@
         </div>
     </div>
 
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GovJobUpdates</h3>
+                <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, quizzes, and document tools.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="quiz.html">Exam Quizzes</a></li>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><span class="footer-contact-label">Email</span> dmagstudio2023@outlook.com</li>
+                    <li><span class="footer-contact-label">Phone</span> +91 7300627752</li>
+                    <li><span class="footer-contact-label">Location</span> Shikohabad, UP, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+
 <script src="../JS/quiz-registry.js?v=20260508-lazy-quiz-data" defer></script>
 <script src="../JS/quiz-storage.js" defer></script>
-<script src="../JS/quiz-auth-lite.js?v=20260508-mobile-lite" defer></script>
-<script src="../JS/quizzes.js?v=20260508-mobile-lite" defer></script>
+<script src="../JS/quizzes.js?v=20260508-standalone" defer></script>
 </body>
 </html>
