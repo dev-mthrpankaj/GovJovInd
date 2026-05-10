@@ -33,6 +33,7 @@
 
 
         //Hindi_Registry
+        quizMeta("hindi-alankar-upsi-set-1", "Hindi", "Hindi Alankar UPSI Practice Set 1", "50 most important Hindi Alankar questions for UPSI and other police exams.", "Hard", "quiz-data/hindi/hindi-alankar-upsi-set-1.js"),
         quizMeta("hindi-vyakaran-set-1", "Hindi", "Hindi Vyakaran Practice Set 1", "50 Hindi grammar questions for government exams.", "Mixed", "quiz-data/hindi/hindi-vyakaran-set-1.js"),
         quizMeta("hindi-mixed-set-1", "Hindi", "Hindi Mixed Practice Set 1", "50 mixed Hindi language questions.", "Mixed", "quiz-data/hindi/hindi-mixed-set-1.js"),
 
