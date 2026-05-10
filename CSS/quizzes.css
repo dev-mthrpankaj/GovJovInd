@@ -1774,3 +1774,142 @@ body.quiz-exam-active .exam-actions .quiz-btn {
         border-radius: 8px;
     }
 }
+
+/* =========================================================
+   FINAL DESKTOP QUIZ ATTEMPT LAYOUT FIX
+   Left: Question Area | Right: Palette
+   Paste at VERY END of CSS/quizzes.css
+   ========================================================= */
+
+@media (min-width: 900px) {
+    body.quiz-exam-active {
+        height: 100dvh !important;
+        overflow: hidden !important;
+        background: #111214 !important;
+    }
+
+    body.quiz-exam-active .quiz-page,
+    body.quiz-exam-active .quiz-exam-view {
+        width: 100% !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    body.quiz-exam-active .exam-shell {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 320px !important;
+        grid-template-rows: 100dvh !important;
+        gap: 0 !important;
+        width: 100% !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+        overflow: hidden !important;
+        background: #2b2d30 !important;
+    }
+
+    body.quiz-exam-active .exam-main {
+        display: grid !important;
+        grid-template-rows: auto minmax(0, 1fr) auto !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+        overflow: hidden !important;
+        background: #2b2d30 !important;
+    }
+
+    body.quiz-exam-active .exam-topbar {
+        position: relative !important;
+        top: auto !important;
+        z-index: 20 !important;
+        grid-row: 1 !important;
+        background: #252628 !important;
+    }
+
+    body.quiz-exam-active .question-card {
+        grid-row: 2 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 14px 14px 24px !important;
+        background: #2b2d30 !important;
+    }
+
+    body.quiz-exam-active .exam-actions {
+        grid-row: 3 !important;
+        position: relative !important;
+        bottom: auto !important;
+        z-index: 30 !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        padding: 8px 10px !important;
+        border-width: 1px 0 0 !important;
+        border-radius: 0 !important;
+        background: #202124 !important;
+    }
+
+    body.quiz-exam-active .exam-actions .quiz-btn {
+        width: 100% !important;
+        min-height: 48px !important;
+        white-space: normal !important;
+    }
+
+    body.quiz-exam-active .palette-panel {
+        display: grid !important;
+        align-content: start !important;
+        position: relative !important;
+        inset: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        grid-column: 2 !important;
+        width: 320px !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        overflow-y: auto !important;
+        padding: 14px !important;
+        border-radius: 0 !important;
+        border-top: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 0 !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: #252628 !important;
+        color: #f8fafc !important;
+    }
+
+    body.quiz-exam-active .palette-close {
+        display: none !important;
+    }
+
+    body.quiz-exam-active .exam-menu-btn {
+        display: none !important;
+    }
+}
+
+/* Slightly wider palette on big laptop/desktop screens */
+@media (min-width: 1200px) {
+    body.quiz-exam-active .exam-shell {
+        grid-template-columns: minmax(0, 1fr) 360px !important;
+    }
+
+    body.quiz-exam-active .palette-panel {
+        width: 360px !important;
+    }
+}
+
+/* Keep mobile drawer behavior unchanged */
+@media (max-width: 899px) {
+    body.quiz-exam-active .palette-panel {
+        position: fixed;
+        inset: auto 0 0;
+        width: 100%;
+        transform: translateY(105%);
+    }
+
+    body.quiz-exam-active .palette-panel.open {
+        transform: translateY(0);
+    }
+}
