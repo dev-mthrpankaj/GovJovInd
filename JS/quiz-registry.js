@@ -9,19 +9,50 @@
     const validatedQuizzes = new Map();
 
     const manifest = [
+
+        //Mathematics_Registry
         quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
         quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
         quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
+
+
+
+
+
+
+        //English_Registry
         quizMeta("english-grammar-set-1", "English", "English Grammar Practice Set 1", "50 grammar questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/english/english-grammar-set-1.js"),
         quizMeta("english-vocabulary-set-1", "English", "English Vocabulary Practice Set 1", "50 vocabulary, antonym, synonym, spelling and usage questions.", "Moderate", "quiz-data/english/english-vocabulary-set-1.js"),
         quizMeta("english-mixed-set-1", "English", "English Mixed Practice Set 1", "50 mixed English grammar and vocabulary questions.", "Mixed", "quiz-data/english/english-mixed-set-1.js"),
         quizMeta("english-narration-set-1", "English", "English Narration Practice Set 1", "50 SSC CGL, CHSL and CPO direct-indirect speech narration questions.", "Previous Year", "quiz-data/english/english-narration-set-1.js"),
+
+
+
+
+
+
+        //Hindi_Registry
         quizMeta("hindi-vyakaran-set-1", "Hindi", "Hindi Vyakaran Practice Set 1", "50 Hindi grammar questions for government exams.", "Mixed", "quiz-data/hindi/hindi-vyakaran-set-1.js"),
         quizMeta("hindi-mixed-set-1", "Hindi", "Hindi Mixed Practice Set 1", "50 mixed Hindi language questions.", "Mixed", "quiz-data/hindi/hindi-mixed-set-1.js"),
+
+
+
+
+        //Reasoning_Registry
         quizMeta("reasoning-set-1", "Reasoning", "Reasoning Practice Set 1", "50 analogy, series, coding, direction and ranking questions.", "Mixed", "quiz-data/reasoning/reasoning-set-1.js"),
         quizMeta("reasoning-set-2", "Reasoning", "Reasoning Practice Set 2", "50 verbal and non-verbal reasoning practice questions.", "Moderate", "quiz-data/reasoning/reasoning-set-2.js"),
+
+
+
+
+        //General_Awareness_Registry
         quizMeta("ga-set-1", "General Awareness", "General Awareness Static GK Set 1", "50 polity, history, geography, economy and science questions.", "Mixed", "quiz-data/general-awareness/ga-set-1.js"),
         quizMeta("ga-current-affairs-set-1", "General Awareness", "General Awareness Current Affairs Set 1", "50 current and static awareness questions for competitive exams.", "Moderate", "quiz-data/general-awareness/ga-current-affairs-set-1.js"),
+
+
+
+
+        //Computer_Registry
         quizMeta("computer-set-1", "Computer", "Computer Basics Practice Set 1", "50 computer basics, hardware, software and internet questions.", "Mixed", "quiz-data/computer/computer-set-1.js"),
         quizMeta("computer-set-2", "Computer", "Computer Awareness Practice Set 2", "50 networking, security, office tools and memory questions.", "Moderate", "quiz-data/computer/computer-set-2.js")
     ];
