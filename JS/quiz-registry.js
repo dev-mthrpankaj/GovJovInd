@@ -11,6 +11,8 @@
     const manifest = [
 
         //Mathematics_Registry
+        quizMeta("math-percentage-abhinay-set-1", "Mathematics", "Percentage Practice Set 1", "50 hard percentage questions.", "Hard", "quiz-data/mathematics/math-percentage-abhinay-set-1.js"),
+quizMeta("math-percentage-abhinay-set-2", "Mathematics", "Percentage Practice Set 2", "50 hard percentage questions.", "Hard", "quiz-data/mathematics/math-percentage-abhinay-set-2.js"),
         quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
         quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
         quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
