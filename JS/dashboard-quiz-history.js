@@ -8,7 +8,10 @@
     if (node) node.textContent = value;
   };
 
-  function readAttempts() {
+  let activeAttempts = [];
+  let firebaseImportPromise = null;
+
+  function readLocalAttempts() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       const parsed = raw ? JSON.parse(raw) : [];
@@ -47,6 +50,19 @@
     return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short" });
   }
 
+  function sortAttempts(attempts) {
+    return attempts.slice().sort((a, b) => new Date(b.completedAt || b.timestamp || 0) - new Date(a.completedAt || a.timestamp || 0));
+  }
+
+  function mergeAttempts(primary, fallback) {
+    const map = new Map();
+    [...primary, ...fallback].forEach((attempt) => {
+      const key = attempt.id || [attempt.quizId, attempt.completedAt || attempt.timestamp, attempt.score, attempt.percentage].join("-");
+      if (!map.has(key)) map.set(key, attempt);
+    });
+    return sortAttempts(Array.from(map.values()));
+  }
+
   function buildSubjectStats(attempts) {
     const buckets = {};
     attempts.forEach((attempt) => {
@@ -63,18 +79,18 @@
       .slice(0, compactLimit(5, 4));
   }
 
-  function renderEmpty() {
+  function renderEmpty(message) {
     setText("#quizAttemptCount", "0");
     setText("#bestQuizScore", "--");
     const chart = $("#quizScoreChart");
-    if (chart) chart.innerHTML = `<div class="user-mini-card"><strong>No quiz attempts yet</strong><span>Complete a quiz set and your score graph will appear here.</span></div>`;
+    if (chart) chart.innerHTML = `<div class="user-mini-card"><strong>No quiz attempts yet</strong><span>${escapeHtml(message || "Complete a quiz set and your score graph will appear here.")}</span></div>`;
     const subjects = $("#quizSubjectChart");
     if (subjects) subjects.innerHTML = `<div class="user-mini-card"><strong>Subject performance</strong><span>No subject data available yet.</span></div>`;
     const list = $("#quizHistoryList");
     if (list) list.innerHTML = `<div class="user-mini-card"><strong>Start your first quiz</strong><span>Your recent quiz attempts will be shown in this dashboard.</span></div>`;
   }
 
-  function renderScoreChart(attempts) {
+  function renderScoreChart(attempts, sourceLabel) {
     const chart = $("#quizScoreChart");
     if (!chart) return;
     const recent = attempts.slice(0, 10).reverse();
@@ -82,7 +98,7 @@
     chart.innerHTML = `
       <div class="dash-chart-summary">
         <strong>Last ${recent.length} quiz attempts</strong>
-        <span>${hiddenCount ? `${hiddenCount} older attempts saved` : "Swipe horizontally if needed"}</span>
+        <span>${escapeHtml(sourceLabel || (hiddenCount ? `${hiddenCount} older attempts saved` : "Swipe horizontally if needed"))}</span>
       </div>
       <div class="dash-scroll-hint">← Swipe / scroll to see all last 10 quizzes →</div>
       <div class="dash-bar-scroll" aria-label="Last 10 quiz score chart">
@@ -154,23 +170,83 @@
     `;
   }
 
-  function render() {
-    const attempts = readAttempts().sort((a, b) => new Date(b.completedAt || b.timestamp || 0) - new Date(a.completedAt || a.timestamp || 0));
-    if (!attempts.length) {
+  function renderAttempts(attempts, sourceLabel) {
+    activeAttempts = sortAttempts(attempts);
+    if (!activeAttempts.length) {
       renderEmpty();
       return;
     }
-    const best = attempts.reduce((highest, attempt) => Math.max(highest, number(attempt.percentage)), 0);
-    setText("#quizAttemptCount", String(attempts.length));
+    const best = activeAttempts.reduce((highest, attempt) => Math.max(highest, number(attempt.percentage)), 0);
+    setText("#quizAttemptCount", String(activeAttempts.length));
     setText("#bestQuizScore", `${Math.round(best)}%`);
-    renderScoreChart(attempts);
-    renderSubjectChart(attempts);
-    renderHistory(attempts);
+    renderScoreChart(activeAttempts, sourceLabel);
+    renderSubjectChart(activeAttempts);
+    renderHistory(activeAttempts);
+  }
+
+  async function getFirebaseModules() {
+    if (firebaseImportPromise) return firebaseImportPromise;
+    firebaseImportPromise = Promise.all([
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js")
+    ]).then(([appMod, authMod, firestoreMod]) => ({ appMod, authMod, firestoreMod }));
+    return firebaseImportPromise;
+  }
+
+  function waitForAuthUser(authMod, auth, timeoutMs = 5000) {
+    if (auth.currentUser) return Promise.resolve(auth.currentUser);
+    return new Promise((resolve) => {
+      let done = false;
+      const unsubscribe = authMod.onAuthStateChanged(auth, (user) => {
+        if (done) return;
+        done = true;
+        window.clearTimeout(timer);
+        unsubscribe();
+        resolve(user || null);
+      });
+      const timer = window.setTimeout(() => {
+        if (done) return;
+        done = true;
+        unsubscribe();
+        resolve(auth.currentUser || null);
+      }, timeoutMs);
+    });
+  }
+
+  async function loadFirestoreAttempts() {
+    const config = window.GJU_FIREBASE_CONFIG;
+    if (!config || !config.apiKey) return;
+    try {
+      const { appMod, authMod, firestoreMod } = await getFirebaseModules();
+      const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(config);
+      const auth = authMod.getAuth(app);
+      const user = await waitForAuthUser(authMod, auth);
+      if (!user) return;
+      const db = firestoreMod.getFirestore(app);
+      const attemptsRef = firestoreMod.collection(db, "users", user.uid, "quizAttempts");
+      const q = firestoreMod.query(attemptsRef, firestoreMod.orderBy("completedAt", "desc"), firestoreMod.limit(50));
+      const snapshot = await firestoreMod.getDocs(q);
+      const cloudAttempts = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+      const localAttempts = readLocalAttempts();
+      const merged = mergeAttempts(cloudAttempts, localAttempts);
+      renderAttempts(merged, cloudAttempts.length ? "Synced from Firebase account history" : "No Firebase quiz history found yet");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Firestore quiz history load failed:", error.message);
+    }
+  }
+
+  function render() {
+    const localAttempts = sortAttempts(readLocalAttempts());
+    if (localAttempts.length) renderAttempts(localAttempts, "Local history loading; Firebase sync checking...");
+    else renderEmpty("Checking Firebase quiz history...");
+    loadFirestoreAttempts();
   }
 
   document.addEventListener("DOMContentLoaded", render);
-  window.addEventListener("resize", () => window.requestAnimationFrame(render));
+  window.addEventListener("resize", () => window.requestAnimationFrame(() => renderAttempts(activeAttempts.length ? activeAttempts : readLocalAttempts())));
   window.addEventListener("storage", (event) => {
     if (event.key === STORAGE_KEY) render();
   });
+  window.addEventListener("gju:quiz-attempt-synced", render);
 }());
