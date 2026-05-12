@@ -2,7 +2,7 @@
   "use strict";
 
   const CONTACT_EMAIL = "dmagstudio2023@outlook.com";
-  const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+  const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
   const allowedPages = new Set([
     "index.html",
     "about-us.html"
@@ -53,7 +53,6 @@
           </div>
           <form class="gju-contact-form" id="gjuContactForm">
             <input type="text" name="_honey" class="gju-contact-honeypot" tabindex="-1" autocomplete="off">
-            <input type="hidden" name="_subject" value="New GovJobUpdates Contact Request">
             <input type="hidden" name="Website Page" id="gjuContactPage" value="${escapeHtml(getPageLabel())}">
             <div class="gju-contact-row">
               <div class="gju-contact-field"><label for="gjuContactName">Name</label><input id="gjuContactName" name="Name" type="text" maxlength="80" placeholder="Your name"></div>
@@ -106,6 +105,8 @@
     const submit = document.getElementById("gjuContactSubmit");
     const subject = document.getElementById("gjuContactSubject")?.value.trim();
     const message = document.getElementById("gjuContactMessage")?.value.trim();
+    const honey = form.querySelector('[name="_honey"]')?.value.trim();
+    if (honey) return;
     if (!subject || !message) {
       setStatus("Please enter subject and description.", "error");
       return;
@@ -116,22 +117,33 @@
     }
     setStatus("Sending your request...", "");
     try {
-      const formData = new FormData(form);
-      formData.append("Page URL", window.location.href);
-      formData.append("Submitted At", new Date().toLocaleString("en-IN"));
-      const response = await fetch(FORM_ENDPOINT, {
+      const payload = {
+        action: "sendContactRequest",
+        name: document.getElementById("gjuContactName")?.value.trim() || "",
+        contact: document.getElementById("gjuContactPhone")?.value.trim() || "",
+        subject,
+        description: message,
+        page: getPageLabel(),
+        pageUrl: window.location.href,
+        userAgent: navigator.userAgent || "",
+        submittedAt: new Date().toISOString()
+      };
+      const response = await fetch(CONTACT_API_URL, {
         method: "POST",
-        headers: { "Accept": "application/json" },
-        body: formData
+        redirect: "follow",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
       });
-      if (!response.ok) throw new Error("Request failed");
+      const text = await response.text();
+      const result = JSON.parse(text);
+      if (!result.success) throw new Error(result.message || "Request failed");
       form.reset();
       document.getElementById("gjuContactPage").value = getPageLabel();
       setStatus("Request submitted successfully. We will review it soon.", "success");
     } catch (error) {
       const mailSubject = encodeURIComponent(`GovJobUpdates Contact: ${subject}`);
       const mailBody = encodeURIComponent(`${message}\n\nPage: ${window.location.href}`);
-      setStatus("Could not send automatically. Opening email fallback...", "error");
+      setStatus("Automatic mail is not active yet. Opening email fallback...", "error");
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
     } finally {
       if (submit) {
