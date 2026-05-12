@@ -6,8 +6,9 @@
         style.textContent = `
             @media (max-width: 767px) {
                 body.page-loaded { transform: none !important; }
-                body { padding-top: 68px !important; }
-                header {
+                body:has(.quiz-page:not(.quiz-exam-active)) { padding-top: 68px !important; }
+                body:has(.quiz-page.quiz-exam-active) { padding-top: 0 !important; }
+                body:has(.quiz-page:not(.quiz-exam-active)) > header {
                     position: fixed !important;
                     top: 0 !important;
                     left: 0 !important;
@@ -17,10 +18,13 @@
                     background: rgba(255,255,255,.98) !important;
                     transform: translateZ(0) !important;
                 }
-                header .header-container {
+                body:has(.quiz-page.quiz-exam-active) > header {
+                    display: none !important;
+                }
+                body:has(.quiz-page:not(.quiz-exam-active)) > header .header-container {
                     background: rgba(255,255,255,.98) !important;
                 }
-                header nav {
+                body:has(.quiz-page:not(.quiz-exam-active)) > header nav {
                     position: fixed !important;
                     top: 68px !important;
                     left: 0 !important;
@@ -30,6 +34,20 @@
                     overflow-y: auto !important;
                     overscroll-behavior: contain !important;
                     -webkit-overflow-scrolling: touch !important;
+                }
+                .quiz-page.quiz-exam-active {
+                    padding-top: 0 !important;
+                    min-height: 100dvh !important;
+                }
+                .quiz-page.quiz-exam-active .exam-shell {
+                    min-height: 100dvh !important;
+                }
+                .quiz-page.quiz-exam-active .exam-actions {
+                    position: sticky !important;
+                    bottom: 0 !important;
+                    z-index: 50 !important;
+                    background: #202225 !important;
+                    padding-bottom: max(10px, env(safe-area-inset-bottom)) !important;
                 }
             }
         `;
