@@ -10,7 +10,7 @@ const CANDIDATE_SESSION_KEY = 'gju:candidate-session';
 const VISITOR_ID_KEY = 'gju:visitor-id';
 const VISITOR_API_FALLBACK_URL = 'https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec';
 const VISITOR_CONFIG = {
-  enabled: true,
+  enabled: false,
   heartbeatMs: 45000,
   timeoutMs: 6500
 };

@@ -305,3 +305,46 @@ footer{margin-top:2rem;background:#0f172a;color:#e5e7eb}
   .ticker-track{animation:none;transform:none}
   .feature-card:hover,.subject-card:hover{transform:none}
 }
+
+.footer-live-pill-expanded {
+  flex-wrap: wrap;
+  row-gap: 8px;
+  text-align: center;
+}
+
+.footer-live-divider {
+  color: rgba(199, 210, 254, 0.45);
+  font-weight: 800;
+}
+
+.footer-live-pill-expanded [data-firebase-live-visitors],
+.footer-live-pill-expanded [data-firebase-total-visitors],
+.footer-live-pill-expanded [data-firebase-total-visits],
+.footer-live-pill-expanded [data-firebase-today-visitors] {
+  min-width: 2ch;
+  color: #ffffff;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 520px) {
+  .footer-live-pill-expanded {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    border-radius: 16px;
+    line-height: 1.25;
+  }
+
+  .footer-live-divider {
+    display: none;
+  }
+
+  .footer-live-caption {
+    display: none;
+  }
+
+  .footer-daily-divider,
+  .footer-daily-label,
+  [data-firebase-today-visitors] {
+    display: none;
+  }
+}
