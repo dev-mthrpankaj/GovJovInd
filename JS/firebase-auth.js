@@ -15,6 +15,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
 
   function show(msg, isError){ const n=$("#authMessage"); if(!n) return; n.textContent=msg; n.classList.remove("hidden"); n.classList.toggle("error", !!isError); }
   function busy(form, state){ if(!form) return; form.querySelectorAll("button").forEach(b=>b.disabled=!!state); }
+  function cleanMobile(value){ return String(value||"").replace(/[^0-9]/g,"").slice(-10); }
   function safeUser(user){ return { name:user.displayName||"", email:user.email||"", photoURL:user.photoURL||"", provider:user.providerData?.[0]?.providerId||"password", updatedAt:serverTimestamp() }; }
   function saveUser(user, extra={}){ if(!user) return Promise.resolve(); return update(ref(db, `users/${user.uid}`), { ...safeUser(user), ...extra, lastLoginAt:serverTimestamp() }); }
   function go(path){ window.location.href = path; }
@@ -26,7 +27,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
       loginForm.classList.toggle("hidden", target!=="login"); signupForm.classList.toggle("hidden", target!=="signup"); show("",false); $("#authMessage")?.classList.add("hidden");
     }));
     loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); await saveUser(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
-    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); await saveUser(res.user,{name,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
+    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); await saveUser(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
     googleBtn?.addEventListener("click", async()=>{ googleBtn.disabled=true; try{ const res=await signInWithPopup(auth,provider); await saveUser(res.user,{createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ googleBtn.disabled=false; } });
     onAuthStateChanged(auth,(user)=>{ if(user && new URLSearchParams(location.search).get("stay")!=="1"){} });
   }
