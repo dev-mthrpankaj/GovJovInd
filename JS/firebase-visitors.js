@@ -322,26 +322,27 @@ import {
 
       widget.innerHTML = `
         <div class="footer-live-pill footer-live-pill-expanded">
-          <span class="footer-live-dot" aria-hidden="true"></span>
+          <div class="footer-visitor-metric footer-visitor-live">
+            <span class="footer-live-dot" aria-hidden="true"></span>
+            <span class="footer-live-label">Live</span>
+            <strong data-firebase-live-visitors>--</strong>
+            <span class="footer-live-caption">online now</span>
+          </div>
 
-          <span class="footer-live-label">Live visitors</span>
-          <strong data-firebase-live-visitors>--</strong>
-          <span class="footer-live-caption">online now</span>
+          <div class="footer-visitor-metric">
+            <span class="footer-live-label">Visitors</span>
+            <strong data-firebase-total-visitors>--</strong>
+          </div>
 
-          <span class="footer-live-divider" aria-hidden="true">|</span>
+          <div class="footer-visitor-metric">
+            <span class="footer-live-label">Visits</span>
+            <strong data-firebase-total-visits>--</strong>
+          </div>
 
-          <span class="footer-live-label">Total visitors</span>
-          <strong data-firebase-total-visitors>--</strong>
-
-          <span class="footer-live-divider" aria-hidden="true">|</span>
-
-          <span class="footer-live-label">Total visits</span>
-          <strong data-firebase-total-visits>--</strong>
-
-          <span class="footer-live-divider footer-daily-divider" aria-hidden="true">|</span>
-
-          <span class="footer-live-label footer-daily-label">Today</span>
-          <strong data-firebase-today-visitors>--</strong>
+          <div class="footer-visitor-metric footer-visitor-today">
+            <span class="footer-live-label">Today</span>
+            <strong data-firebase-today-visitors>--</strong>
+          </div>
         </div>
       `;
 

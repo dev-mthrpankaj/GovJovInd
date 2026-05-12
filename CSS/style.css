@@ -852,9 +852,7 @@ footer {
   flex-wrap: wrap;
 }
 
-/* =========================================================
-   Firebase Visitor Counter - Desktop + Mobile Final Design
-   ========================================================= */
+/* Firebase Visitor Counter */
 .footer-live-visitors {
   max-width: 1200px;
   margin: 0 auto;
@@ -864,16 +862,13 @@ footer {
   align-items: center;
 }
 
-.footer-live-pill,
 .footer-live-pill-expanded {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-  row-gap: 8px;
+  gap: 0.6rem;
   min-height: 38px;
-  padding: 0.48rem 0.85rem;
+  padding: 0.5rem 0.9rem;
   border: 1px solid rgba(148, 163, 184, 0.32);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.07);
@@ -883,6 +878,21 @@ footer {
   line-height: 1;
   text-align: center;
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.18);
+}
+
+.footer-visitor-metric {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.footer-visitor-metric:not(:last-child)::after {
+  content: "|";
+  margin-left: 0.25rem;
+  color: rgba(199, 210, 254, 0.45);
+  font-weight: 800;
 }
 
 .footer-live-dot {
@@ -899,12 +909,6 @@ footer {
   color: #c7d2fe;
 }
 
-.footer-live-divider {
-  color: rgba(199, 210, 254, 0.45);
-  font-weight: 800;
-}
-
-.footer-live-pill strong,
 .footer-live-pill-expanded strong {
   min-width: 2ch;
   color: #ffffff;
@@ -1131,10 +1135,6 @@ footer {
   .footer-live-visitors {
     padding: 0.9rem 1rem 1rem;
   }
-
-  .footer-live-pill-expanded {
-    max-width: 100%;
-  }
 }
 
 /* Mobile final visitor counter layout */
@@ -1148,38 +1148,46 @@ footer {
     width: min(100%, 320px);
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 7px 6px;
-    padding: 12px 12px 13px;
+    gap: 0;
+    padding: 12px;
     border-radius: 15px;
-    line-height: 1.2;
-    background: rgba(255, 255, 255, 0.075);
+  }
+
+  .footer-visitor-metric {
+    display: grid;
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-items: center;
+    gap: 5px;
+    padding: 3px 4px;
+  }
+
+  .footer-visitor-metric:not(:last-child)::after {
+    display: none;
+  }
+
+  .footer-visitor-live {
+    position: relative;
   }
 
   .footer-live-dot {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-    align-self: center;
+    position: absolute;
+    left: 5px;
+    top: 7px;
     width: 0.52rem;
     height: 0.52rem;
-    margin-left: 2px;
-    margin-top: 1px;
   }
 
   .footer-live-label {
-    display: block;
     color: #c7d2fe;
     font-size: 0.72rem;
     font-weight: 800;
     line-height: 1.15;
     text-align: center;
-    white-space: normal;
   }
 
   .footer-live-pill-expanded strong {
-    display: block;
     min-width: auto;
-    margin-top: 0;
     color: #ffffff;
     font-size: 1rem;
     font-weight: 900;
@@ -1187,43 +1195,12 @@ footer {
     text-align: center;
   }
 
-  .footer-live-caption,
-  .footer-live-divider,
-  .footer-daily-divider,
-  .footer-daily-label,
-  [data-firebase-today-visitors] {
+  .footer-live-caption {
     display: none !important;
   }
 
-  .footer-live-label:nth-of-type(1) {
-    grid-column: 1;
-    grid-row: 1;
-    padding-left: 16px;
-  }
-
-  [data-firebase-live-visitors] {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .footer-live-label:nth-of-type(2) {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  [data-firebase-total-visitors] {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .footer-live-label:nth-of-type(3) {
-    grid-column: 3;
-    grid-row: 1;
-  }
-
-  [data-firebase-total-visits] {
-    grid-column: 3;
-    grid-row: 2;
+  .footer-visitor-today {
+    display: none !important;
   }
 }
 
@@ -1363,7 +1340,6 @@ footer {
 
   .footer-live-pill-expanded {
     width: 100%;
-    gap: 6px 4px;
     padding: 11px 9px 12px;
   }
 
@@ -1373,10 +1349,6 @@ footer {
 
   .footer-live-pill-expanded strong {
     font-size: 0.95rem;
-  }
-
-  .footer-live-label:nth-of-type(1) {
-    padding-left: 14px;
   }
 }
 
