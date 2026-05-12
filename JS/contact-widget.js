@@ -5,6 +5,12 @@
   const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
   const allowedPages = new Set([
     "index.html",
+    "latest-jobs.html",
+    "admitcard.html",
+    "answer-key.html",
+    "results.html",
+    "quiz.html",
+    "documents.html",
     "about-us.html"
   ]);
   const blockedPages = new Set(["rank-predictor.html"]);
@@ -14,8 +20,8 @@
   if (document.getElementById("gjuContactWidget")) return;
 
   function isQuizExamMode() {
-    return document.body.classList.contains("gju-quiz-exam-mode") ||
-      Boolean(document.getElementById("examView") && !document.getElementById("examView").classList.contains("hidden"));
+    const examView = document.getElementById("examView");
+    return document.body.classList.contains("gju-quiz-exam-mode") || Boolean(examView && !examView.classList.contains("hidden"));
   }
 
   function injectStyle() {
@@ -23,12 +29,15 @@
     const style = document.createElement("style");
     style.id = "gjuContactWidgetStyle";
     style.textContent = `
-      .gju-contact-widget{position:fixed;right:18px;bottom:92px;z-index:9998;font-family:inherit}.gju-contact-widget.is-hidden,.gju-contact-widget.is-footer-visible{display:none!important}.gju-contact-fab{display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 16px;border:0;border-radius:999px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:900;font-size:14px;box-shadow:0 14px 32px rgba(37,99,235,.32);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}.gju-contact-fab:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(37,99,235,.42)}.gju-contact-fab i{font-size:16px}.gju-contact-panel{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(15,23,42,.58);backdrop-filter:blur(8px);z-index:100000}.gju-contact-panel.is-open{display:flex}.gju-contact-card{width:min(100%,440px);max-height:min(92dvh,680px);display:flex;flex-direction:column;background:#fff;border:1px solid #dbe5f4;border-radius:22px;box-shadow:0 26px 80px rgba(15,23,42,.28);overflow:hidden;color:#0f172a}.gju-contact-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:18px 18px 13px;background:linear-gradient(135deg,#eff6ff,#fff);border-bottom:1px solid #edf2fb}.gju-contact-kicker{display:inline-flex;padding:5px 10px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.gju-contact-head h2{margin:8px 0 4px;font-size:1.32rem;line-height:1.15;letter-spacing:-.02em}.gju-contact-head p{margin:0;color:#64748b;font-size:.9rem;line-height:1.45}.gju-contact-close{flex:0 0 auto;width:38px;height:38px;border:1px solid #dbe5f4;border-radius:12px;background:#fff;color:#0f172a;cursor:pointer}.gju-contact-form{display:grid;gap:11px;padding:15px 18px 18px;overflow:auto;-webkit-overflow-scrolling:touch}.gju-contact-field{display:grid;gap:6px}.gju-contact-field label{font-size:.84rem;font-weight:900;color:#0f172a}.gju-contact-field input,.gju-contact-field textarea{width:100%;box-sizing:border-box;border:1px solid #dbe5f4;border-radius:13px;padding:12px;font:inherit;font-size:15px;background:#fff;color:#0f172a;outline:none}.gju-contact-field textarea{min-height:104px;resize:vertical;line-height:1.45}.gju-contact-field input:focus,.gju-contact-field textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}.gju-contact-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gju-contact-submit{min-height:46px;border:0;border-radius:14px;background:#2563eb;color:#fff;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 10px 22px rgba(37,99,235,.18)}.gju-contact-submit:disabled{opacity:.65;cursor:not-allowed}.gju-contact-status{display:none;border-radius:13px;padding:10px 12px;font-size:.88rem;font-weight:800;line-height:1.4}.gju-contact-status.show{display:block}.gju-contact-status.success{background:#dcfce7;color:#166534}.gju-contact-status.error{background:#fee2e2;color:#991b1b}.gju-contact-honeypot{position:absolute;left:-9999px;opacity:0}.gju-contact-note{font-size:.76rem;color:#64748b;text-align:center;line-height:1.35}.gju-contact-body-lock{overflow:hidden!important;touch-action:none!important}
-      @media(max-width:640px){.gju-contact-widget{right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:9997}.gju-contact-fab{width:52px;height:52px;min-height:52px;padding:0;justify-content:center;border-radius:18px;box-shadow:0 12px 28px rgba(37,99,235,.34)}.gju-contact-fab span{display:none}.gju-contact-fab i{font-size:18px}.gju-contact-panel{align-items:flex-end;padding:0;background:rgba(15,23,42,.55)}.gju-contact-card{width:100%;max-height:88dvh;border-radius:22px 22px 0 0;border-left:0;border-right:0;border-bottom:0;box-shadow:0 -18px 52px rgba(15,23,42,.28);animation:gjuContactSheetIn .2s ease-out}.gju-contact-card:before{content:"";width:42px;height:4px;border-radius:999px;background:#cbd5e1;margin:9px auto 0}.gju-contact-head{padding:12px 16px 10px}.gju-contact-kicker{font-size:10px;padding:4px 9px}.gju-contact-head h2{font-size:1.12rem;margin:6px 0 2px}.gju-contact-head p{font-size:.82rem}.gju-contact-close{width:36px;height:36px;border-radius:12px}.gju-contact-form{gap:9px;padding:12px 16px max(14px,env(safe-area-inset-bottom));max-height:calc(88dvh - 104px)}.gju-contact-row{grid-template-columns:1fr;gap:9px}.gju-contact-field{gap:5px}.gju-contact-field label{font-size:.8rem}.gju-contact-field input,.gju-contact-field textarea{border-radius:12px;padding:10px 11px;font-size:15px}.gju-contact-field textarea{min-height:92px}.gju-contact-submit{min-height:44px;border-radius:13px}.gju-contact-note{font-size:.72rem}.has-candidate-bottom-nav .gju-contact-widget{bottom:calc(78px + env(safe-area-inset-bottom))}}
-      @media(max-width:380px){.gju-contact-widget{right:12px}.gju-contact-card{max-height:90dvh}.gju-contact-form{max-height:calc(90dvh - 98px);padding-left:14px;padding-right:14px}.gju-contact-head{padding-left:14px;padding-right:14px}.gju-contact-field textarea{min-height:84px}}
+      .gju-contact-widget{position:fixed;right:18px;bottom:92px;z-index:9998;font-family:inherit}.gju-contact-widget.is-hidden,.gju-contact-widget.is-footer-visible{display:none!important}.gju-contact-fab{display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 16px;border:0;border-radius:999px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:900;font-size:14px;box-shadow:0 14px 32px rgba(37,99,235,.32);cursor:pointer}.gju-contact-fab i{font-size:16px}.gju-contact-panel{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(15,23,42,.58);backdrop-filter:blur(8px);z-index:100000}.gju-contact-panel.is-open{display:flex}.gju-contact-card{width:min(100%,440px);max-height:min(92dvh,680px);display:flex;flex-direction:column;background:#fff;border:1px solid #dbe5f4;border-radius:22px;box-shadow:0 26px 80px rgba(15,23,42,.28);overflow:hidden;color:#0f172a}.gju-contact-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:18px 18px 13px;background:linear-gradient(135deg,#eff6ff,#fff);border-bottom:1px solid #edf2fb}.gju-contact-kicker{display:inline-flex;padding:5px 10px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.gju-contact-head h2{margin:8px 0 4px;font-size:1.32rem;line-height:1.15}.gju-contact-head p{margin:0;color:#64748b;font-size:.9rem;line-height:1.45}.gju-contact-close{flex:0 0 auto;width:38px;height:38px;border:1px solid #dbe5f4;border-radius:12px;background:#fff;color:#0f172a;cursor:pointer}.gju-contact-form{display:grid;gap:11px;padding:15px 18px 18px;overflow:auto;-webkit-overflow-scrolling:touch}.gju-contact-field{display:grid;gap:6px}.gju-contact-field label{font-size:.84rem;font-weight:900;color:#0f172a}.gju-contact-field input,.gju-contact-field textarea{width:100%;box-sizing:border-box;border:1px solid #dbe5f4;border-radius:13px;padding:12px;font:inherit;font-size:15px;background:#fff;color:#0f172a;outline:none}.gju-contact-field textarea{min-height:104px;resize:vertical;line-height:1.45}.gju-contact-field input:focus,.gju-contact-field textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}.gju-contact-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gju-contact-submit{min-height:46px;border:0;border-radius:14px;background:#2563eb;color:#fff;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 10px 22px rgba(37,99,235,.18)}.gju-contact-submit:disabled{opacity:.65;cursor:not-allowed}.gju-contact-status{display:none;border-radius:13px;padding:10px 12px;font-size:.88rem;font-weight:800;line-height:1.4}.gju-contact-status.show{display:block}.gju-contact-status.success{background:#dcfce7;color:#166534}.gju-contact-status.error{background:#fee2e2;color:#991b1b}.gju-contact-honeypot{position:absolute;left:-9999px;opacity:0}.gju-contact-note{font-size:.76rem;color:#64748b;text-align:center;line-height:1.35}.gju-contact-note a{color:#2563eb;font-weight:900}.gju-contact-body-lock{overflow:hidden!important;touch-action:none!important}
+      @media(max-width:640px){.gju-contact-widget{right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:9997}.gju-contact-fab{width:52px;height:52px;min-height:52px;padding:0;justify-content:center;border-radius:18px}.gju-contact-fab span{display:none}.gju-contact-fab i{font-size:18px}.gju-contact-panel{align-items:flex-end;padding:0;background:rgba(15,23,42,.55)}.gju-contact-card{width:100%;max-height:88dvh;border-radius:22px 22px 0 0;border-left:0;border-right:0;border-bottom:0;box-shadow:0 -18px 52px rgba(15,23,42,.28);animation:gjuContactSheetIn .2s ease-out}.gju-contact-card:before{content:"";width:42px;height:4px;border-radius:999px;background:#cbd5e1;margin:9px auto 0}.gju-contact-head{padding:12px 16px 10px}.gju-contact-kicker{font-size:10px;padding:4px 9px}.gju-contact-head h2{font-size:1.12rem;margin:6px 0 2px}.gju-contact-head p{font-size:.82rem}.gju-contact-close{width:36px;height:36px;border-radius:12px}.gju-contact-form{gap:9px;padding:12px 16px max(14px,env(safe-area-inset-bottom));max-height:calc(88dvh - 104px)}.gju-contact-row{grid-template-columns:1fr;gap:9px}.gju-contact-field{gap:5px}.gju-contact-field label{font-size:.8rem}.gju-contact-field input,.gju-contact-field textarea{border-radius:12px;padding:10px 11px;font-size:15px}.gju-contact-field textarea{min-height:92px}.gju-contact-submit{min-height:44px;border-radius:13px}.gju-contact-note{font-size:.72rem}.has-candidate-bottom-nav .gju-contact-widget{bottom:calc(78px + env(safe-area-inset-bottom))}}
       @keyframes gjuContactSheetIn{from{transform:translateY(18px);opacity:.72}to{transform:translateY(0);opacity:1}}
     `;
     document.head.appendChild(style);
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[character]));
   }
 
   function getPageLabel() {
@@ -42,42 +51,27 @@
     wrapper.id = "gjuContactWidget";
     wrapper.className = "gju-contact-widget";
     wrapper.innerHTML = `
-      <button class="gju-contact-fab" type="button" id="gjuContactOpen" aria-haspopup="dialog" aria-controls="gjuContactPanel" aria-label="Contact GovJobUpdates support">
-        <i class="fas fa-headset" aria-hidden="true"></i><span>Contact Us</span>
-      </button>
+      <button class="gju-contact-fab" type="button" id="gjuContactOpen" aria-haspopup="dialog" aria-controls="gjuContactPanel" aria-label="Contact GovJobUpdates support"><i class="fas fa-headset" aria-hidden="true"></i><span>Contact Us</span></button>
       <div class="gju-contact-panel" id="gjuContactPanel" role="dialog" aria-modal="true" aria-labelledby="gjuContactTitle">
         <article class="gju-contact-card">
-          <div class="gju-contact-head">
-            <div><span class="gju-contact-kicker">Help & Support</span><h2 id="gjuContactTitle">Contact GovJobUpdates</h2><p>Send your issue, correction, or request directly to support.</p></div>
-            <button class="gju-contact-close" type="button" id="gjuContactClose" aria-label="Close contact form"><i class="fas fa-times" aria-hidden="true"></i></button>
-          </div>
+          <div class="gju-contact-head"><div><span class="gju-contact-kicker">Help & Support</span><h2 id="gjuContactTitle">Contact GovJobUpdates</h2><p>Send your issue, correction, or request directly to support.</p></div><button class="gju-contact-close" type="button" id="gjuContactClose" aria-label="Close contact form"><i class="fas fa-times" aria-hidden="true"></i></button></div>
           <form class="gju-contact-form" id="gjuContactForm">
             <input type="text" name="_honey" class="gju-contact-honeypot" tabindex="-1" autocomplete="off">
             <input type="hidden" name="Website Page" id="gjuContactPage" value="${escapeHtml(getPageLabel())}">
-            <div class="gju-contact-row">
-              <div class="gju-contact-field"><label for="gjuContactName">Name</label><input id="gjuContactName" name="Name" type="text" maxlength="80" placeholder="Your name"></div>
-              <div class="gju-contact-field"><label for="gjuContactPhone">Mobile / Email</label><input id="gjuContactPhone" name="Contact" type="text" maxlength="120" placeholder="Optional"></div>
-            </div>
+            <div class="gju-contact-row"><div class="gju-contact-field"><label for="gjuContactName">Name</label><input id="gjuContactName" name="Name" type="text" maxlength="80" placeholder="Your name"></div><div class="gju-contact-field"><label for="gjuContactPhone">Mobile / Email</label><input id="gjuContactPhone" name="Contact" type="text" maxlength="120" placeholder="Optional"></div></div>
             <div class="gju-contact-field"><label for="gjuContactSubject">Subject</label><input id="gjuContactSubject" name="Subject" type="text" maxlength="120" required placeholder="Quiz issue, job update, correction"></div>
             <div class="gju-contact-field"><label for="gjuContactMessage">Description</label><textarea id="gjuContactMessage" name="Description" maxlength="1500" required placeholder="Write your problem or purpose clearly..."></textarea></div>
             <div class="gju-contact-status" id="gjuContactStatus" role="status" aria-live="polite"></div>
             <button class="gju-contact-submit" type="submit" id="gjuContactSubmit">Submit Request</button>
-            <div class="gju-contact-note">Message goes to GovJobUpdates support email.</div>
+            <div class="gju-contact-note">Message goes to support email. <a href="mailto:${CONTACT_EMAIL}">Email directly</a></div>
           </form>
         </article>
-      </div>
-    `;
+      </div>`;
     document.body.appendChild(wrapper);
     bindWidget(wrapper);
     syncVisibility(wrapper);
     hideWidgetInFooter(wrapper);
     return wrapper;
-  }
-
-  function escapeHtml(value) {
-    return String(value ?? "").replace(/[&<>"']/g, (character) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;"
-    }[character]));
   }
 
   function setStatus(message, type) {
@@ -99,6 +93,40 @@
     document.body.classList.remove("gju-contact-body-lock");
   }
 
+  function buildPayload(subject, message) {
+    return {
+      action: "sendContactRequest",
+      name: document.getElementById("gjuContactName")?.value.trim() || "",
+      contact: document.getElementById("gjuContactPhone")?.value.trim() || "",
+      subject,
+      description: message,
+      page: getPageLabel(),
+      pageUrl: window.location.href,
+      userAgent: navigator.userAgent || "",
+      submittedAt: new Date().toISOString()
+    };
+  }
+
+  async function sendByPost(payload) {
+    const response = await fetch(CONTACT_API_URL, {
+      method: "POST",
+      redirect: "follow",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    const text = await response.text();
+    const result = JSON.parse(text);
+    if (!result.success) throw new Error(result.message || "Request failed");
+    return result;
+  }
+
+  async function sendByNoCorsGet(payload) {
+    const url = new URL(CONTACT_API_URL);
+    Object.keys(payload).forEach((key) => url.searchParams.set(key, payload[key]));
+    await fetch(url.toString(), { method: "GET", mode: "no-cors", cache: "no-store" });
+    return { success: true, fallback: true };
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -111,58 +139,34 @@
       setStatus("Please enter subject and description.", "error");
       return;
     }
-    if (submit) {
-      submit.disabled = true;
-      submit.textContent = "Sending...";
-    }
+    const payload = buildPayload(subject, message);
+    if (submit) { submit.disabled = true; submit.textContent = "Sending..."; }
     setStatus("Sending your request...", "");
     try {
-      const payload = {
-        action: "sendContactRequest",
-        name: document.getElementById("gjuContactName")?.value.trim() || "",
-        contact: document.getElementById("gjuContactPhone")?.value.trim() || "",
-        subject,
-        description: message,
-        page: getPageLabel(),
-        pageUrl: window.location.href,
-        userAgent: navigator.userAgent || "",
-        submittedAt: new Date().toISOString()
-      };
-      const response = await fetch(CONTACT_API_URL, {
-        method: "POST",
-        redirect: "follow",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
-      });
-      const text = await response.text();
-      const result = JSON.parse(text);
-      if (!result.success) throw new Error(result.message || "Request failed");
+      try {
+        await sendByPost(payload);
+      } catch (postError) {
+        await sendByNoCorsGet(payload);
+      }
       form.reset();
       document.getElementById("gjuContactPage").value = getPageLabel();
-      setStatus("Request submitted successfully. We will review it soon.", "success");
+      setStatus("Request submitted successfully. Please check support email inbox/spam once.", "success");
     } catch (error) {
       const mailSubject = encodeURIComponent(`GovJobUpdates Contact: ${subject}`);
       const mailBody = encodeURIComponent(`${message}\n\nPage: ${window.location.href}`);
-      setStatus("Automatic mail is not active yet. Opening email fallback...", "error");
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
+      setStatus("Could not submit automatically. Use direct email link below.", "error");
+      window.setTimeout(() => { window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`; }, 600);
     } finally {
-      if (submit) {
-        submit.disabled = false;
-        submit.textContent = "Submit Request";
-      }
+      if (submit) { submit.disabled = false; submit.textContent = "Submit Request"; }
     }
   }
 
   function bindWidget(wrapper) {
     wrapper.querySelector("#gjuContactOpen")?.addEventListener("click", openPanel);
     wrapper.querySelector("#gjuContactClose")?.addEventListener("click", closePanel);
-    wrapper.querySelector("#gjuContactPanel")?.addEventListener("click", (event) => {
-      if (event.target.id === "gjuContactPanel") closePanel();
-    });
+    wrapper.querySelector("#gjuContactPanel")?.addEventListener("click", (event) => { if (event.target.id === "gjuContactPanel") closePanel(); });
     wrapper.querySelector("#gjuContactForm")?.addEventListener("submit", handleSubmit);
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closePanel();
-    });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") closePanel(); });
   }
 
   function syncVisibility(widget) {
@@ -172,23 +176,12 @@
   function hideWidgetInFooter(widget) {
     const footer = document.querySelector("footer");
     if (!footer) return;
-
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver((entries) => {
-        const isFooterVisible = entries.some((entry) => entry.isIntersecting);
-        widget.classList.toggle("is-footer-visible", isFooterVisible);
+        widget.classList.toggle("is-footer-visible", entries.some((entry) => entry.isIntersecting));
       }, { threshold: 0.01, rootMargin: "0px 0px 80px 0px" });
       observer.observe(footer);
-      return;
     }
-
-    const updateFooterState = () => {
-      const footerTop = footer.getBoundingClientRect().top;
-      widget.classList.toggle("is-footer-visible", footerTop < window.innerHeight + 80);
-    };
-    window.addEventListener("scroll", updateFooterState, { passive: true });
-    window.addEventListener("resize", updateFooterState);
-    updateFooterState();
   }
 
   function initWatchers(widget) {
