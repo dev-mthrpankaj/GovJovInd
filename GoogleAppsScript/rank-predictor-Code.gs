@@ -111,6 +111,7 @@ function doPost(e) {
     if (data.action === "changeCandidatePassword") return changeCandidatePassword(data);
     if (data.action === "getCandidateDashboard") return getCandidateDashboard(data);
     if (data.action === "getCandidateAttempts") return getCandidateAttempts(data);
+    if (data.action === "sendContactRequest") return sendContactRequest(data);
     if (data.action === "trackVisitor") return trackVisitor(data);
     if (data.action === "submitData") return submitData(data);
     if (data.action === "checkRank") return checkRank(data);
@@ -1913,4 +1914,53 @@ function getFirebaseRankAttemptRows(spreadsheet, user) {
   });
 
   return attempts.sort(sortDashboardAttempts);
+}
+function sendContactRequest(data) {
+  const name = normalizeText(data.name || "Website Visitor");
+  const contact = normalizeText(data.contact || "Not provided");
+  const subject = normalizeText(data.subject);
+  const description = normalizeText(data.description);
+  const page = normalizeText(data.page || "");
+  const pageUrl = String(data.pageUrl || "").slice(0, 500);
+  const userAgent = String(data.userAgent || "").slice(0, 500);
+  const submittedAt = normalizeText(data.submittedAt || new Date().toISOString());
+
+  if (!subject) {
+    return sendJSON({
+      success: false,
+      message: "Subject is required."
+    });
+  }
+
+  if (!description) {
+    return sendJSON({
+      success: false,
+      message: "Description is required."
+    });
+  }
+
+  const to = "dmagstudio2023@outlook.com";
+  const mailSubject = "GovJobUpdates Contact: " + subject;
+
+  const body =
+    "New contact request from GovJobUpdates website\n\n" +
+    "Name: " + name + "\n" +
+    "Contact: " + contact + "\n" +
+    "Subject: " + subject + "\n\n" +
+    "Description:\n" + description + "\n\n" +
+    "Page: " + page + "\n" +
+    "Page URL: " + pageUrl + "\n" +
+    "Submitted At: " + submittedAt + "\n" +
+    "User Agent: " + userAgent + "\n";
+
+  MailApp.sendEmail({
+    to: to,
+    subject: mailSubject,
+    body: body
+  });
+
+  return sendJSON({
+    success: true,
+    message: "Contact request sent successfully."
+  });
 }
