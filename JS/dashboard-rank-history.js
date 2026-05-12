@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 (function () {
   "use strict";
@@ -13,6 +13,8 @@ import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.
   const app = getApps().length ? getApps()[0] : initializeApp(config);
   const auth = getAuth(app);
   const db = getDatabase(app);
+  let currentUser = null;
+  let currentProfile = null;
 
   const $ = (selector) => document.querySelector(selector);
   const setText = (selector, value) => {
@@ -73,6 +75,53 @@ import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.
     return JSON.parse(text);
   }
 
+  function renderMobileForm(message) {
+    const box = $("#mobileUpdateBox");
+    if (!box) return;
+    box.innerHTML = `
+      <form id="mobileUpdateForm" class="mobile-update-form">
+        <label for="dashboardMobileInput">Add mobile number to match Rank Predictor records</label>
+        <div class="mobile-update-row">
+          <input id="dashboardMobileInput" type="tel" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10 digit mobile number" value="${currentProfile?.mobile || ""}" required>
+          <button class="auth-btn auth-btn-primary" type="submit">Save Mobile</button>
+        </div>
+        <small>${message || "Use the same mobile number that you entered in Rank Predictor."}</small>
+      </form>
+    `;
+    const form = $("#mobileUpdateForm");
+    form?.addEventListener("submit", saveMobileFromForm);
+  }
+
+  async function saveMobileFromForm(event) {
+    event.preventDefault();
+    if (!currentUser) return;
+    const mobile = cleanMobile($("#dashboardMobileInput")?.value);
+    if (mobile.length !== 10) {
+      setText("#rankHistoryStatus", "Please enter a valid 10 digit mobile number.");
+      return;
+    }
+    const button = event.currentTarget.querySelector("button");
+    if (button) button.disabled = true;
+    try {
+      await update(ref(db, `users/${currentUser.uid}`), {
+        mobile,
+        email: currentUser.email || currentProfile?.email || "",
+        name: currentUser.displayName || currentProfile?.name || "",
+        updatedAt: serverTimestamp()
+      });
+      setText("#profileMobile", mobile);
+      currentProfile = { ...(currentProfile || {}), mobile };
+      const box = $("#mobileUpdateBox");
+      if (box) box.innerHTML = `<div class="user-mini-card"><strong>Mobile saved</strong><span>${mobile} is now used for Rank Predictor matching.</span></div>`;
+      await load(currentUser);
+    } catch (error) {
+      console.warn("[GovJobUpdates] Mobile save failed:", error.message);
+      setText("#rankHistoryStatus", "Mobile save failed. Check Firebase users rules.");
+    } finally {
+      if (button) button.disabled = false;
+    }
+  }
+
   function renderEmpty(message) {
     setText("#rankPredictionCount", "0");
     setText("#bestEstimatedRank", "--");
@@ -113,12 +162,17 @@ import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.
 
   async function load(user) {
     setText("#rankHistoryStatus", "Loading rank predictor history from Google Sheet...");
+    currentUser = user;
     const profile = await getProfile(user);
-    if (profile.mobile) setText("#profileMobile", profile.mobile);
-    if (!profile.mobile && !profile.email) {
-      renderEmpty("Mobile/email not available in profile. Update signup profile first.");
+    currentProfile = profile;
+    setText("#profileMobile", profile.mobile || "Not available");
+    if (!profile.mobile) {
+      renderMobileForm("Mobile is missing in your Firebase profile, so rank history cannot be matched yet.");
+      renderEmpty("Save the same mobile number used in Rank Predictor to load records.");
       return;
     }
+    const box = $("#mobileUpdateBox");
+    if (box) box.innerHTML = `<div class="user-mini-card"><strong>Mobile matching active</strong><span>${profile.mobile} is used for Rank Predictor history.</span></div>`;
     try {
       const data = await fetchRankHistory(user, profile);
       renderDashboard(data);
