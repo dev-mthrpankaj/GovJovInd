@@ -27,6 +27,10 @@
     return Math.max(0, Math.min(100, Math.round(number(value))));
   }
 
+  function compactLimit(desktopCount, mobileCount) {
+    return window.matchMedia("(max-width: 640px)").matches ? mobileCount : desktopCount;
+  }
+
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"']/g, (character) => ({
       "&": "&amp;",
@@ -56,7 +60,7 @@
     return Object.values(buckets)
       .map((item) => ({ ...item, average: item.count ? item.total / item.count : 0 }))
       .sort((a, b) => b.average - a.average)
-      .slice(0, 6);
+      .slice(0, compactLimit(5, 4));
   }
 
   function renderEmpty() {
@@ -73,9 +77,15 @@
   function renderScoreChart(attempts) {
     const chart = $("#quizScoreChart");
     if (!chart) return;
-    const recent = attempts.slice(0, 8).reverse();
+    const limit = compactLimit(6, 4);
+    const recent = attempts.slice(0, limit).reverse();
+    const hiddenCount = Math.max(0, attempts.length - recent.length);
     chart.innerHTML = `
-      <div class="dash-bar-chart" aria-label="Recent quiz score chart">
+      <div class="dash-chart-summary">
+        <strong>Latest ${recent.length} attempts</strong>
+        <span>${hiddenCount ? `${hiddenCount} older attempts kept in history` : "All attempts shown"}</span>
+      </div>
+      <div class="dash-bar-chart compact" aria-label="Recent quiz score chart">
         ${recent.map((attempt, index) => {
           const value = percent(attempt.percentage);
           const title = attempt.quizTitle || attempt.title || `Attempt ${index + 1}`;
@@ -100,7 +110,7 @@
       return;
     }
     chart.innerHTML = `
-      <div class="dash-horizontal-bars">
+      <div class="dash-horizontal-bars compact">
         ${stats.map((item) => {
           const value = percent(item.average);
           return `
@@ -117,21 +127,29 @@
   function renderHistory(attempts) {
     const list = $("#quizHistoryList");
     if (!list) return;
-    list.innerHTML = attempts.slice(0, 5).map((attempt) => {
-      const title = attempt.quizTitle || attempt.title || "Quiz Attempt";
-      const score = number(attempt.score);
-      const maxScore = number(attempt.maxScore);
-      const percentage = percent(attempt.percentage);
-      return `
-        <article class="rank-history-item">
-          <div>
-            <strong>${escapeHtml(title)}</strong>
-            <span>Score: ${score}/${maxScore || "--"} | Accuracy: ${percentage}%</span>
-          </div>
-          <small>${formatDate(attempt.completedAt || attempt.timestamp)}</small>
-        </article>
-      `;
-    }).join("");
+    const limit = compactLimit(4, 3);
+    const visible = attempts.slice(0, limit);
+    const hiddenCount = Math.max(0, attempts.length - visible.length);
+    list.innerHTML = `
+      <div class="dash-compact-list">
+        ${visible.map((attempt) => {
+          const title = attempt.quizTitle || attempt.title || "Quiz Attempt";
+          const score = number(attempt.score);
+          const maxScore = number(attempt.maxScore);
+          const percentage = percent(attempt.percentage);
+          return `
+            <article class="rank-history-item compact">
+              <div>
+                <strong>${escapeHtml(title)}</strong>
+                <span>Score: ${score}/${maxScore || "--"} | Accuracy: ${percentage}%</span>
+              </div>
+              <small>${formatDate(attempt.completedAt || attempt.timestamp)}</small>
+            </article>
+          `;
+        }).join("")}
+        ${hiddenCount ? `<div class="user-mini-card"><strong>${hiddenCount}+ older attempts</strong><span>Showing latest attempts only to keep dashboard clean.</span></div>` : ""}
+      </div>
+    `;
   }
 
   function render() {
@@ -149,6 +167,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", render);
+  window.addEventListener("resize", () => window.requestAnimationFrame(render));
   window.addEventListener("storage", (event) => {
     if (event.key === STORAGE_KEY) render();
   });
