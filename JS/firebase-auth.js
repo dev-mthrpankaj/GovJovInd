@@ -11,6 +11,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   const db = getDatabase(app);
   const provider = new GoogleAuthProvider();
   const page = document.body.dataset.authPage || "";
+  const SESSION_KEY = "gju:candidate-session";
   const $ = (s) => document.querySelector(s);
 
   function show(msg, isError){ const n=$("#authMessage"); if(!n) return; n.textContent=msg; n.classList.remove("hidden"); n.classList.toggle("error", !!isError); }
@@ -21,29 +22,72 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   async function saveUserSoft(user, extra={}){ try{ await saveUser(user, extra); }catch(error){ console.warn("[GovJobUpdates] User profile save failed:", error.message); } }
   function go(path){ window.location.href = path; }
 
+  function rememberSession(user){
+    if(!user) return;
+    const data = { userId:user.uid, name:user.displayName||"", email:user.email||"", provider:user.providerData?.[0]?.providerId||"password", loggedInAt:Date.now() };
+    try { localStorage.setItem(SESSION_KEY, JSON.stringify(data)); } catch {}
+  }
+
+  function clearSession(){
+    try { localStorage.removeItem(SESSION_KEY); sessionStorage.removeItem(SESSION_KEY); } catch {}
+  }
+
+  function headerHref(pageName){
+    const path = window.location.pathname.replace(/\\/g,"/");
+    if(/\/HTML\/[^/]+\.html$/i.test(path)) return pageName;
+    if(/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../HTML/${pageName}`;
+    return `HTML/${pageName}`;
+  }
+
+  function syncHeader(user){
+    const link = document.querySelector("[data-auth-entry], .header-login-btn");
+    if(!link) return;
+    const label = link.querySelector("span") || link;
+    if(user){
+      link.href = link.dataset.dashboardHref || headerHref("dashboard.html");
+      link.classList.add("is-active");
+      link.setAttribute("aria-label", "Open candidate dashboard");
+      label.textContent = "Dashboard";
+    } else {
+      link.href = link.dataset.loginHref || headerHref("login.html");
+      link.classList.remove("is-active");
+      link.setAttribute("aria-label", "Login to candidate dashboard");
+      label.textContent = "Login";
+    }
+  }
+
+  window.CandidateAuth = window.CandidateAuth || {};
+  window.CandidateAuth.syncHeaderEntry = function(){ syncHeader(auth.currentUser); };
+
   function bindLogin(){
     const loginForm = $("#loginForm"), signupForm = $("#signupForm"), googleBtn = $("#googleLoginBtn");
     document.querySelectorAll("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>{
       const target=btn.dataset.authTab; document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active", b===btn));
       loginForm.classList.toggle("hidden", target!=="login"); signupForm.classList.toggle("hidden", target!=="signup"); show("",false); $("#authMessage")?.classList.add("hidden");
     }));
-    loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
-    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
-    googleBtn?.addEventListener("click", async()=>{ googleBtn.disabled=true; try{ const res=await signInWithPopup(auth,provider); await saveUserSoft(res.user,{createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ googleBtn.disabled=false; } });
+    loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
+    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
+    googleBtn?.addEventListener("click", async()=>{ googleBtn.disabled=true; try{ const res=await signInWithPopup(auth,provider); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ googleBtn.disabled=false; } });
   }
 
   function bindDashboard(){
     const loading=$("#dashboardLoading"), content=$("#dashboardContent"), guest=$("#dashboardGuest"), logoutBtn=$("#logoutBtn");
     onAuthStateChanged(auth,(user)=>{
       if(loading) loading.hidden=true;
-      if(!user){ if(guest) guest.hidden=false; if(content) content.hidden=true; return; }
+      syncHeader(user);
+      if(!user){ clearSession(); if(guest) guest.hidden=false; if(content) content.hidden=true; return; }
+      rememberSession(user);
       if(guest) guest.hidden=true; if(content) content.hidden=false;
       $("#userName") && ($("#userName").textContent = user.displayName || "GovJobUpdates User");
       $("#userEmail") && ($("#userEmail").textContent = user.email || "No email available");
+      $("#profileName") && ($("#profileName").textContent = user.displayName || "GovJobUpdates User");
+      $("#profileEmail") && ($("#profileEmail").textContent = user.email || "No email available");
       saveUserSoft(user);
     });
-    logoutBtn?.addEventListener("click", async()=>{ await signOut(auth); go("login.html"); });
+    logoutBtn?.addEventListener("click", async()=>{ await signOut(auth); clearSession(); syncHeader(null); go("login.html"); });
   }
+
+  onAuthStateChanged(auth,(user)=>{ if(user) rememberSession(user); else clearSession(); syncHeader(user); });
 
   function readableError(err){ const code=String(err?.code||""); if(code.includes("invalid-credential")) return "Email ya password galat hai."; if(code.includes("email-already-in-use")) return "Is email se account already bana hua hai."; if(code.includes("weak-password")) return "Password kam se kam 6 characters ka rakho."; if(code.includes("unauthorized-domain")) return "Firebase me govjobupdates.com ko Authorized domains me add karo."; if(code.includes("popup")) return "Google popup complete nahi hua. Dobara try karo."; if(String(err?.message||"").includes("permission_denied")) return "Login ho gaya, par profile save rules me users node allow nahi hai."; return "Login request failed. Please try again."; }
   if(page==="login") bindLogin();
