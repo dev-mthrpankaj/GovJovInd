@@ -1,7 +1,16 @@
-/* Header sticky hardening + floating contact button + quiz modal scroll lock */
+/* Fixed header hardening + contact widget/footer behavior + quiz modal scroll lock */
+:root {
+  --gju-header-height: 76px;
+}
+
 html,
 body {
   max-width: 100%;
+  scroll-padding-top: var(--gju-header-height);
+}
+
+body {
+  padding-top: var(--gju-header-height) !important;
 }
 
 body.page-loaded {
@@ -11,16 +20,24 @@ body.page-loaded {
 header,
 body > header,
 .site-header {
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
   z-index: 10000 !important;
   transform: translateZ(0);
   will-change: transform;
   isolation: isolate;
+  margin-top: 0 !important;
 }
 
 header .header-container {
   background: rgba(255, 255, 255, 0.98);
+}
+
+.ticker-wrap {
+  margin-top: 0 !important;
 }
 
 .floating-contact-btn {
@@ -60,7 +77,25 @@ header .header-container {
   transform: translateY(10px);
 }
 
+.gju-contact-widget.is-footer-visible {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .gju-contact-widget {
+    right: 12px !important;
+  }
+
+  body:not(.has-candidate-bottom-nav) .gju-contact-widget {
+    bottom: max(18px, env(safe-area-inset-bottom)) !important;
+  }
+}
+
 @media (max-width: 520px) {
+  :root {
+    --gju-header-height: 74px;
+  }
+
   .floating-contact-btn {
     right: 14px;
     bottom: max(84px, env(safe-area-inset-bottom));
@@ -71,11 +106,17 @@ header .header-container {
 }
 
 @media (min-width: 1280px) {
+  :root {
+    --gju-header-height: 68px;
+  }
+
   header,
   body > header,
   .site-header {
-    position: sticky !important;
+    position: fixed !important;
     top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     z-index: 10000 !important;
   }
 
@@ -90,7 +131,7 @@ header .header-container {
   header,
   body > header,
   .site-header {
-    position: sticky !important;
+    position: fixed !important;
     top: 0 !important;
   }
 
@@ -104,9 +145,9 @@ header .header-container {
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
-    top: 68px !important;
+    top: var(--gju-header-height) !important;
     z-index: 10001 !important;
-    max-height: calc(100dvh - 68px) !important;
+    max-height: calc(100dvh - var(--gju-header-height)) !important;
     overflow-y: auto !important;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
@@ -115,7 +156,7 @@ header .header-container {
 
 @media (max-width: 767px) {
   header nav {
-    top: 68px !important;
+    top: var(--gju-header-height) !important;
   }
 }
 
