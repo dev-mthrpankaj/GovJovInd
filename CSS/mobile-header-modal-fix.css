@@ -1,0 +1,87 @@
+/* Mobile header sticky hardening + quiz modal scroll lock */
+html,
+body {
+  max-width: 100%;
+}
+
+body.page-loaded {
+  transform: none !important;
+}
+
+header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10000 !important;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@media (max-width: 1279px) {
+  header {
+    position: sticky !important;
+    top: 0 !important;
+  }
+
+  header .header-container {
+    position: relative;
+    z-index: 10002;
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  header nav {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 68px !important;
+    z-index: 10001 !important;
+    max-height: calc(100dvh - 68px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 767px) {
+  header nav {
+    top: 68px !important;
+  }
+}
+
+body.quiz-modal-open,
+html:has(body.quiz-modal-open) {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+body.quiz-modal-open {
+  touch-action: none !important;
+}
+
+body.quiz-modal-open .quiz-page,
+body.quiz-modal-open header,
+body.quiz-modal-open footer {
+  overscroll-behavior: none !important;
+}
+
+.quiz-modal:not(.hidden) {
+  overflow: hidden !important;
+  overscroll-behavior: contain !important;
+  touch-action: none !important;
+}
+
+.quiz-modal:not(.hidden) .modal-card {
+  overflow: visible !important;
+  max-height: min(92dvh, 520px) !important;
+  touch-action: auto !important;
+}
+
+@media (max-width: 640px) {
+  .quiz-modal:not(.hidden) {
+    padding: 16px !important;
+  }
+
+  .quiz-modal:not(.hidden) .modal-card {
+    width: min(100%, 380px) !important;
+    max-height: min(88dvh, 520px) !important;
+  }
+}
