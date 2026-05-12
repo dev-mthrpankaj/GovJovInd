@@ -1,0 +1,146 @@
+.job-detail-standard {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.job-detail-hero {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #ffffff, #eff6ff);
+  box-shadow: var(--shadow);
+}
+
+.job-detail-kicker {
+  display: inline-flex;
+  width: max-content;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.job-detail-hero h1 {
+  margin: 0;
+  color: var(--secondary);
+  font-size: clamp(1.55rem, 5vw, 2.35rem);
+  line-height: 1.18;
+}
+
+.job-detail-org {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.job-detail-actions,
+.job-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+}
+
+.job-detail-tags span {
+  padding: .35rem .65rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #fff;
+  color: #1e3a8a;
+  font-size: .82rem;
+  font-weight: 800;
+}
+
+.job-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.job-detail-card {
+  display: grid;
+  gap: .8rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.job-detail-card h2 {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 1.18rem;
+}
+
+.job-detail-list {
+  display: grid;
+  gap: .65rem;
+}
+
+.job-detail-row {
+  display: grid;
+  grid-template-columns: minmax(105px, .4fr) minmax(0, 1fr);
+  gap: .7rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.job-detail-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.job-detail-row dt {
+  color: var(--muted);
+  font-size: .86rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.job-detail-row dd {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.job-alert-box {
+  padding: .9rem;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  background: #fff7ed;
+  color: #7c2d12;
+}
+
+.job-alert-box strong {
+  color: #9a3412;
+}
+
+.job-step-list {
+  display: grid;
+  gap: .55rem;
+  padding-left: 1.1rem;
+}
+
+.job-step-list li {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.job-meta-note {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+@media (min-width: 820px) {
+  .job-detail-grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+    align-items: start;
+  }
+
+  .job-detail-hero {
+    padding: 1.35rem;
+  }
+}
