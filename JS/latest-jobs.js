@@ -161,10 +161,16 @@
         return Number.isNaN(number) ? 0 : number;
     }
 
+    function getJobId(job) {
+        const raw = getText(job.id || job.jobId || job.ID, "");
+        if (!raw) return "";
+        return raw.startsWith("job-") ? raw : `job-${raw.replace(/[^0-9]/g, "")}`;
+    }
+
     function getDetailPage(job) {
-        if (!job || !job.id) return "";
-        const expectedPath = `../Job_Details/HTML/job-details-${job.id}.html`;
-        return getText(job.detailPage, expectedPath);
+        const jobId = getJobId(job);
+        if (!jobId) return "";
+        return `../Job_Details/HTML/job-details.html?id=${encodeURIComponent(jobId)}`;
     }
 
     function populateSelect(select, values) {
@@ -205,9 +211,7 @@
             url.searchParams.delete("q");
             url.searchParams.delete("search");
             window.history.replaceState({}, "", url.toString());
-        } catch {
-            // URL cleanup is optional; filtering already works without it.
-        }
+        } catch {}
     }
 
     function filterJobs() {
@@ -270,14 +274,8 @@
             `<span class="job-badge badge-category">${escapeHtml(job.category || job.department)}</span>`
         ];
 
-        if (isNewJob(job)) {
-            badges.push('<span class="job-badge badge-new">New</span>');
-        }
-
-        if (isLastDateSoon(job)) {
-            badges.push('<span class="job-badge badge-soon">Last Date Soon</span>');
-        }
-
+        if (isNewJob(job)) badges.push('<span class="job-badge badge-new">New</span>');
+        if (isLastDateSoon(job)) badges.push('<span class="job-badge badge-soon">Last Date Soon</span>');
         return badges.join("");
     }
 
@@ -295,10 +293,7 @@
         return `
             <article class="job-card">
                 <div class="job-card-header">
-                    <div>
-                        <p class="job-organization">${escapeHtml(job.organization)}</p>
-                        <h3>${escapeHtml(job.title)}</h3>
-                    </div>
+                    <div><p class="job-organization">${escapeHtml(job.organization)}</p><h3>${escapeHtml(job.title)}</h3></div>
                     <div class="job-badges">${renderBadges(job)}</div>
                 </div>
                 <dl class="job-meta">
@@ -308,10 +303,7 @@
                     <div><dt>Last Date</dt><dd>${formatDate(job.lastDate)}</dd></div>
                     <div><dt>Updated</dt><dd>${formatDate(job.updatedAt)}</dd></div>
                 </dl>
-                <div class="job-actions">
-                    ${applyAction}
-                    ${detailAction}
-                </div>
+                <div class="job-actions">${applyAction}${detailAction}</div>
             </article>
         `;
     }
@@ -320,21 +312,13 @@
         if (!elements.emptyState || !elements.listings) return;
         elements.listings.innerHTML = "";
         elements.emptyState.hidden = false;
-        elements.emptyState.innerHTML = `
-            <div class="empty-state-card">
-                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                <h3>${escapeHtml(message || "No jobs found")}</h3>
-                <p>Try changing filters or search keyword.</p>
-                <button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button>
-            </div>
-        `;
+        elements.emptyState.innerHTML = `<div class="empty-state-card"><i class="fas fa-briefcase" aria-hidden="true"></i><h3>${escapeHtml(message || "No jobs found")}</h3><p>Try changing filters or search keyword.</p><button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button></div>`;
         const resetButton = elements.emptyState.querySelector("[data-reset-empty]");
         if (resetButton) resetButton.addEventListener("click", resetFilters);
     }
 
     function renderJobs() {
         if (!elements.listings || !elements.jobCount) return;
-
         if (!jobs.length) {
             elements.jobCount.textContent = "Showing 0 of 0 jobs";
             renderEmptyState("Jobs data is currently unavailable");
@@ -344,22 +328,16 @@
 
         currentJobs = sortJobs(filterJobs());
         const visibleJobs = currentJobs.slice(0, visibleCount);
-
         elements.jobCount.textContent = `Showing ${visibleJobs.length} of ${currentJobs.length} jobs`;
         if (elements.emptyState) {
             elements.emptyState.hidden = true;
             elements.emptyState.innerHTML = "";
         }
 
-        if (!currentJobs.length) {
-            renderEmptyState("No jobs found");
-        } else {
-            elements.listings.innerHTML = renderCardsWithAds(visibleJobs, renderJobCard);
-        }
+        if (!currentJobs.length) renderEmptyState("No jobs found");
+        else elements.listings.innerHTML = renderCardsWithAds(visibleJobs, renderJobCard);
 
-        if (elements.loadMore) {
-            elements.loadMore.hidden = visibleJobs.length >= currentJobs.length;
-        }
+        if (elements.loadMore) elements.loadMore.hidden = visibleJobs.length >= currentJobs.length;
     }
 
     function resetFilters() {
@@ -377,26 +355,11 @@
     function bindEvents() {
         [elements.search, elements.department, elements.qualification, elements.year, elements.status, elements.sort].forEach((element) => {
             if (!element) return;
-            element.addEventListener("input", () => {
-                visibleCount = pageSize;
-                renderJobs();
-            });
-            element.addEventListener("change", () => {
-                visibleCount = pageSize;
-                renderJobs();
-            });
+            element.addEventListener("input", () => { visibleCount = pageSize; renderJobs(); });
+            element.addEventListener("change", () => { visibleCount = pageSize; renderJobs(); });
         });
-
-        if (elements.reset) {
-            elements.reset.addEventListener("click", resetFilters);
-        }
-
-        if (elements.loadMore) {
-            elements.loadMore.addEventListener("click", () => {
-                visibleCount += pageSize;
-                renderJobs();
-            });
-        }
+        if (elements.reset) elements.reset.addEventListener("click", resetFilters);
+        if (elements.loadMore) elements.loadMore.addEventListener("click", () => { visibleCount += pageSize; renderJobs(); });
     }
 
     async function loadJobsFromSheet() {
@@ -417,12 +380,5 @@
         loadJobsFromSheet();
     });
 
-    window.latestJobsPage = {
-        getJobStatus,
-        filterJobs,
-        sortJobs,
-        renderJobs,
-        renderEmptyState,
-        resetFilters
-    };
+    window.latestJobsPage = { getJobStatus, filterJobs, sortJobs, renderJobs, renderEmptyState, resetFilters };
 }());
