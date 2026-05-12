@@ -82,7 +82,14 @@ const RANK_EXAM_HEADERS = [
 ];
 
 function doGet(e) {
-  const type = String(e && e.parameter && e.parameter.type || "").trim();
+  const params = e && e.parameter ? e.parameter : {};
+  const action = String(params.action || "").trim();
+  const type = String(params.type || "").trim();
+
+  // Contact form fallback route. This allows the website to submit contact
+  // requests through a simple GET/no-cors call when browser CORS blocks POST.
+  if (action === "sendContactRequest") return sendContactRequest(params);
+
   if (type === "exams") return sendJSON(getRankPredictorExamConfigResponse());
 
   return sendJSON({
@@ -95,14 +102,20 @@ function doPost(e) {
   try {
     const raw = e && e.postData && e.postData.contents;
 
-    if (!raw) return sendJSON({ success: false, message: "No data received" });
-
-    let data;
-    try {
-      data = JSON.parse(raw);
-    } catch (err) {
-      return sendJSON({ success: false, message: "Invalid JSON format" });
+    let data = null;
+    if (raw) {
+      try {
+        data = JSON.parse(raw);
+      } catch (err) {
+        // If a normal HTML form posts to the web app, Apps Script may provide
+        // fields in e.parameter instead of a JSON body. Keep this as fallback.
+        data = e && e.parameter ? e.parameter : null;
+      }
+    } else {
+      data = e && e.parameter ? e.parameter : null;
     }
+
+    if (!data) return sendJSON({ success: false, message: "No data received" });
 
     if (!data.action) return sendJSON({ success: false, message: "Missing action" });
     if (data.action === "registerCandidate") return registerCandidate(data);
@@ -1985,4 +1998,17 @@ function testSendContactRequest() {
     pageUrl: "Manual test",
     userAgent: "Apps Script"
   });
+}
+
+function getContactTestUrl() {
+  const url = ScriptApp.getService().getUrl();
+  const query = '?action=sendContactRequest' +
+    '&name=' + encodeURIComponent('Test User') +
+    '&contact=' + encodeURIComponent('test@example.com') +
+    '&subject=' + encodeURIComponent('Test Contact Mail') +
+    '&description=' + encodeURIComponent('This is a test contact request through doGet route.') +
+    '&page=' + encodeURIComponent('Apps Script doGet Test') +
+    '&pageUrl=' + encodeURIComponent('Manual test');
+  Logger.log(url + query);
+  return url + query;
 }
