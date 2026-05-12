@@ -1,93 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Login | GovJobUpdates</title>
-    <meta name="description" content="Login to your GovJobUpdates candidate dashboard to track rank predictor attempts, percentile trend, and subject analytics.">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
-    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
-    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/auth.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | GovJobUpdates</title>
+<meta name="description" content="Login to GovJobUpdates to access your dashboard, quiz history and rank prediction history.">
+<link rel="canonical" href="https://govjobupdates.com/HTML/login.html">
+<link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+<link rel="stylesheet" href="../CSS/style.css"><link rel="stylesheet" href="../CSS/auth-lite.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
-                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
-            </div>
-            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
-                    <li><a href="admitcard.html">Admit Card</a></li>
-                    <li><a href="results.html">Results</a></li>
-                    <li><a href="answer-key.html">Answer Key</a></li>
-                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
-                    <li><a href="documents.html">Documents</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main class="auth-page">
-        <section class="auth-shell" aria-labelledby="loginTitle">
-            <div class="auth-panel">
-                <span class="auth-eyebrow">Candidate workspace</span>
-                <h1 id="loginTitle">Track every rank attempt in one place.</h1>
-                <p>Login with your mobile number or email to view previous exams, percentile growth, rank history, and subject-wise improvement.</p>
-                <div class="auth-stats" aria-label="Dashboard features">
-                    <div class="auth-stat"><span>Trend</span><strong>Percentile</strong></div>
-                    <div class="auth-stat"><span>Focus</span><strong>Weak Subject</strong></div>
-                    <div class="auth-stat"><span>History</span><strong>Attempts</strong></div>
-                </div>
-                <div class="auth-note"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Your account stays lightweight and works with the existing Google Sheets rank predictor backend.</span></div>
-            </div>
-
-            <section class="auth-card" aria-labelledby="loginFormTitle">
-                <div>
-                    <h2 id="loginFormTitle">Login</h2>
-                    <p>Use your registered mobile number or email.</p>
-                </div>
-                <form class="auth-form" id="loginForm" novalidate>
-                    <label class="auth-field" for="loginContact">Mobile or Email
-                        <input id="loginContact" name="contact" type="text" autocomplete="username" inputmode="email" required>
-                    </label>
-                    <label class="auth-field" for="loginPassword">Password
-                        <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
-                    </label>
-                    <label class="auth-check" for="rememberLogin">
-                        <input id="rememberLogin" name="remember" type="checkbox" checked>
-                        <span>Keep me logged in on this device.</span>
-                    </label>
-                    <div class="auth-message hidden" id="loginMessage" role="status" aria-live="polite"></div>
-                    <div class="auth-actions">
-                        <button class="btn btn-primary" id="loginSubmit" type="submit">Login</button>
-                        <a class="btn btn-outline" href="rank-predictor.html">Open Rank Predictor</a>
-                    </div>
-                </form>
-                <p class="auth-switch"><a href="forgot-password.html">Forgot password?</a></p>
-                <p class="auth-switch">New candidate? <a href="register.html">Create account</a></p>
-            </section>
-        </section>
-    </main>
-
-    <footer>
-        <div class="copyright">
-            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
-        </div>
-    </footer>
-<script src="../JS/rank-predictor-config.js"></script>
-<script src="../JS/candidate-auth.js"></script>
-<script src="../JS/login.js"></script>
-<script src="../JS/script.js"></script>
-<script src="JS/firebase-config.js"></script>
-<script type="module" src="JS/firebase-visitors.js"></script>
+<body data-auth-page="login">
+<header><div class="header-container"><div class="logo-container"><img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img"><a href="../index.html" class="logo">GovJob<span>Updates</span></a></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Job</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="about-us.html">About Us</a></li></ul></nav></div></header>
+<main class="auth-page"><section class="auth-shell"><div class="auth-card"><span class="auth-kicker">Free Account</span><h1>Login to GovJobUpdates</h1><p>Save your quiz attempts and rank prediction history. Firebase Auth loads only on login/dashboard pages, so Quiz remains fast.</p><div class="auth-tabs"><button class="auth-tab is-active" type="button" data-auth-tab="login">Login</button><button class="auth-tab" type="button" data-auth-tab="signup">Sign Up</button></div><div id="authMessage" class="auth-message hidden"></div><form class="auth-form" id="loginForm"><div class="auth-field"><label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="email" required></div><div class="auth-field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required></div><button class="auth-btn auth-btn-primary" type="submit">Login</button></form><form class="auth-form hidden" id="signupForm"><div class="auth-field"><label for="signupName">Full Name</label><input id="signupName" type="text" autocomplete="name" required></div><div class="auth-field"><label for="signupEmail">Email</label><input id="signupEmail" type="email" autocomplete="email" required></div><div class="auth-field"><label for="signupPassword">Password</label><input id="signupPassword" type="password" autocomplete="new-password" minlength="6" required></div><button class="auth-btn auth-btn-primary" type="submit">Create Account</button></form><div class="auth-divider">or</div><button class="auth-btn auth-btn-outline" id="googleLoginBtn" type="button"><i class="fab fa-google"></i> Continue with Google</button><p class="auth-note">By continuing, you agree to our <a href="terms.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p></div><aside class="auth-info-card"><h2>Why login?</h2><div class="auth-info-list"><div class="auth-info-item"><i class="fas fa-chart-line"></i><div><strong>Rank history</strong><p>Keep your rank predictions in one dashboard.</p></div></div><div class="auth-info-item"><i class="fas fa-clipboard-check"></i><div><strong>Quiz progress</strong><p>Track attempts and improve preparation.</p></div></div><div class="auth-info-item"><i class="fas fa-bolt"></i><div><strong>Fast website</strong><p>Auth scripts are not loaded on quiz exam screen.</p></div></div></div></aside></section></main>
+<footer><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
+<script src="../JS/script.js"></script><script src="../JS/firebase-config.js"></script><script type="module" src="../JS/firebase-auth.js"></script><script type="module" src="../JS/firebase-visitors.js"></script>
 </body>
 </html>
