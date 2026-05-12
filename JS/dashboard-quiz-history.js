@@ -77,26 +77,28 @@
   function renderScoreChart(attempts) {
     const chart = $("#quizScoreChart");
     if (!chart) return;
-    const limit = compactLimit(6, 4);
-    const recent = attempts.slice(0, limit).reverse();
+    const recent = attempts.slice(0, 10).reverse();
     const hiddenCount = Math.max(0, attempts.length - recent.length);
     chart.innerHTML = `
       <div class="dash-chart-summary">
-        <strong>Latest ${recent.length} attempts</strong>
-        <span>${hiddenCount ? `${hiddenCount} older attempts kept in history` : "All attempts shown"}</span>
+        <strong>Last ${recent.length} quiz attempts</strong>
+        <span>${hiddenCount ? `${hiddenCount} older attempts saved` : "Swipe horizontally if needed"}</span>
       </div>
-      <div class="dash-bar-chart compact" aria-label="Recent quiz score chart">
-        ${recent.map((attempt, index) => {
-          const value = percent(attempt.percentage);
-          const title = attempt.quizTitle || attempt.title || `Attempt ${index + 1}`;
-          return `
-            <div class="dash-bar-item">
-              <div class="dash-bar-track"><i style="height:${value}%"></i></div>
-              <strong>${value}%</strong>
-              <span title="${escapeHtml(title)}">${index + 1}</span>
-            </div>
-          `;
-        }).join("")}
+      <div class="dash-scroll-hint">← Swipe / scroll to see all last 10 quizzes →</div>
+      <div class="dash-bar-scroll" aria-label="Last 10 quiz score chart">
+        <div class="dash-bar-chart scrollable">
+          ${recent.map((attempt, index) => {
+            const value = percent(attempt.percentage);
+            const title = attempt.quizTitle || attempt.title || `Attempt ${index + 1}`;
+            return `
+              <div class="dash-bar-item wide">
+                <div class="dash-bar-track"><i style="height:${value}%"></i></div>
+                <strong>${value}%</strong>
+                <span title="${escapeHtml(title)}">Q${index + 1}</span>
+              </div>
+            `;
+          }).join("")}
+        </div>
       </div>
     `;
   }
@@ -127,7 +129,7 @@
   function renderHistory(attempts) {
     const list = $("#quizHistoryList");
     if (!list) return;
-    const limit = compactLimit(4, 3);
+    const limit = compactLimit(5, 4);
     const visible = attempts.slice(0, limit);
     const hiddenCount = Math.max(0, attempts.length - visible.length);
     list.innerHTML = `
@@ -147,7 +149,7 @@
             </article>
           `;
         }).join("")}
-        ${hiddenCount ? `<div class="user-mini-card"><strong>${hiddenCount}+ older attempts</strong><span>Showing latest attempts only to keep dashboard clean.</span></div>` : ""}
+        ${hiddenCount ? `<div class="user-mini-card"><strong>${hiddenCount}+ older attempts</strong><span>Graph shows last 10; list shows latest ${visible.length} to keep layout clean.</span></div>` : ""}
       </div>
     `;
   }
