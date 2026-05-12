@@ -204,9 +204,11 @@
   width: 100vw !important;
   height: 100dvh !important;
   padding: clamp(14px, 3vw, 28px) !important;
-  overflow: auto !important;
+  overflow: hidden !important;
   background: rgba(15, 23, 42, 0.66) !important;
   backdrop-filter: blur(8px);
+  overscroll-behavior: contain !important;
+  touch-action: none !important;
 }
 
 .quiz-modal.hidden {
@@ -217,14 +219,15 @@
   position: relative !important;
   width: min(100%, 460px) !important;
   margin: auto !important;
-  max-height: calc(100dvh - 32px) !important;
-  overflow-y: auto !important;
+  max-height: min(88dvh, 520px) !important;
+  overflow: visible !important;
   border-radius: 18px !important;
   padding: 20px !important;
   background: #ffffff !important;
   color: #0f172a !important;
   box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28) !important;
   transform: none !important;
+  touch-action: auto !important;
 }
 
 .quiz-modal .modal-card h2 {
@@ -243,6 +246,22 @@
 
 .quiz-modal .modal-actions .quiz-btn {
   min-width: 130px !important;
+}
+
+body.quiz-modal-open,
+html:has(body.quiz-modal-open) {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+body.quiz-modal-open {
+  touch-action: none !important;
+}
+
+body.quiz-modal-open header,
+body.quiz-modal-open .quiz-page,
+body.quiz-modal-open footer {
+  overscroll-behavior: none !important;
 }
 
 @media (min-width: 1120px) {
@@ -285,6 +304,18 @@
 }
 
 @media (max-width: 640px) {
+  header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+  }
+
+  nav {
+    top: 68px !important;
+    max-height: calc(100dvh - 68px) !important;
+    overscroll-behavior: contain !important;
+  }
+
   .quiz-page {
     padding: 10px;
   }
