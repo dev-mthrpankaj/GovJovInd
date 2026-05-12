@@ -40,6 +40,15 @@ import {
     presence: `presence/${visitorId}/${sessionId}`
   };
 
+  const statsState = {
+    liveVisitors: "--",
+    totalUniqueVisitors: "--",
+    totalPageViews: "--",
+    todayUniqueVisitors: "--",
+    todayPageViews: "--",
+    state: "loading"
+  };
+
   startVisitorSystem();
 
   function startVisitorSystem() {
@@ -143,7 +152,10 @@ import {
       alreadyCounted = false;
     }
 
-    if (alreadyCounted) return;
+    if (alreadyCounted) {
+      updateExistingVisitorLastSeen();
+      return;
+    }
 
     const visitorData = {
       firstSeen: serverTimestamp(),
@@ -156,6 +168,7 @@ import {
     set(ref(db, paths.visitorIndex), visitorData)
       .then(() => {
         const updates = {};
+
         updates[`${paths.siteStats}/totalUniqueVisitors`] = increment(1);
         updates[`${paths.siteStats}/lastUpdated`] = serverTimestamp();
 
@@ -168,10 +181,20 @@ import {
         return update(ref(db), updates);
       })
       .catch((error) => {
-        // If the visitor already exists in Firebase, rules may reject duplicate writes.
-        // In that case we should not increment total unique visitors again.
         console.warn("[GovJobUpdates] Unique visitor already counted or blocked:", error.message);
+        updateExistingVisitorLastSeen();
       });
+  }
+
+  function updateExistingVisitorLastSeen() {
+    const updates = {};
+
+    updates[`${paths.visitorIndex}/lastSeen`] = serverTimestamp();
+    updates[`${paths.visitorIndex}/lastPage`] = getCurrentPagePath();
+
+    update(ref(db), updates).catch(() => {
+      // Ignore visitor index update failure.
+    });
   }
 
   function trackDailyUniqueVisitor() {
@@ -188,6 +211,7 @@ import {
     if (alreadyCountedToday) return;
 
     const updates = {};
+
     updates[`${paths.dailyStats}/uniqueVisitors`] = increment(1);
     updates[`${paths.dailyStats}/lastUpdated`] = serverTimestamp();
 
@@ -225,41 +249,64 @@ import {
   }
 
   function listenForStats() {
-    onValue(ref(db, paths.siteStats), (snapshot) => {
-      const stats = snapshot.val() || {};
-      updateStatsUi({
-        totalUniqueVisitors: Number(stats.totalUniqueVisitors || 0),
-        totalPageViews: Number(stats.totalPageViews || 0)
-      });
-    });
+    onValue(
+      ref(db, paths.siteStats),
+      (snapshot) => {
+        const stats = snapshot.val() || {};
 
-    onValue(ref(db, paths.dailyStats), (snapshot) => {
-      const stats = snapshot.val() || {};
-      updateStatsUi({
-        todayUniqueVisitors: Number(stats.uniqueVisitors || 0),
-        todayPageViews: Number(stats.totalPageViews || 0)
-      });
-    });
+        updateStatsUi({
+          totalUniqueVisitors: Number(stats.totalUniqueVisitors || 0),
+          totalPageViews: Number(stats.totalPageViews || 0),
+          state: "ready"
+        });
+      },
+      (error) => {
+        console.warn("[GovJobUpdates] Site stats listener failed:", error.message);
+      }
+    );
+
+    onValue(
+      ref(db, paths.dailyStats),
+      (snapshot) => {
+        const stats = snapshot.val() || {};
+
+        updateStatsUi({
+          todayUniqueVisitors: Number(stats.uniqueVisitors || 0),
+          todayPageViews: Number(stats.totalPageViews || 0),
+          state: "ready"
+        });
+      },
+      (error) => {
+        console.warn("[GovJobUpdates] Daily stats listener failed:", error.message);
+      }
+    );
   }
 
   function listenForLiveVisitors() {
-    onValue(ref(db, "presence"), (snapshot) => {
-      const presence = snapshot.val() || {};
-      const liveVisitorCount = Object.keys(presence).filter((visitorKey) => {
-        const sessions = presence[visitorKey];
-        return sessions && typeof sessions === "object" && Object.keys(sessions).length > 0;
-      }).length;
+    onValue(
+      ref(db, "presence"),
+      (snapshot) => {
+        const presence = snapshot.val() || {};
 
-      updateStatsUi({
-        liveVisitors: liveVisitorCount
-      });
-    }, (error) => {
-      console.warn("[GovJobUpdates] Live visitor listener failed:", error.message);
-      updateStatsUi({
-        liveVisitors: "--",
-        state: "offline"
-      });
-    });
+        const liveVisitorCount = Object.keys(presence).filter((visitorKey) => {
+          const sessions = presence[visitorKey];
+          return sessions && typeof sessions === "object" && Object.keys(sessions).length > 0;
+        }).length;
+
+        updateStatsUi({
+          liveVisitors: liveVisitorCount,
+          state: "ready"
+        });
+      },
+      (error) => {
+        console.warn("[GovJobUpdates] Live visitor listener failed:", error.message);
+
+        updateStatsUi({
+          liveVisitors: "--",
+          state: "offline"
+        });
+      }
+    );
   }
 
   function ensureVisitorWidget() {
@@ -271,8 +318,35 @@ import {
     if (!widget) {
       widget = document.createElement("div");
       widget.className = "footer-live-visitors";
+      widget.setAttribute("aria-live", "polite");
+
+      widget.innerHTML = `
+        <div class="footer-live-pill footer-live-pill-expanded">
+          <span class="footer-live-dot" aria-hidden="true"></span>
+
+          <span class="footer-live-label">Live visitors</span>
+          <strong data-firebase-live-visitors>--</strong>
+          <span class="footer-live-caption">online now</span>
+
+          <span class="footer-live-divider" aria-hidden="true">|</span>
+
+          <span class="footer-live-label">Total visitors</span>
+          <strong data-firebase-total-visitors>--</strong>
+
+          <span class="footer-live-divider" aria-hidden="true">|</span>
+
+          <span class="footer-live-label">Total visits</span>
+          <strong data-firebase-total-visits>--</strong>
+
+          <span class="footer-live-divider footer-daily-divider" aria-hidden="true">|</span>
+
+          <span class="footer-live-label footer-daily-label">Today</span>
+          <strong data-firebase-today-visitors>--</strong>
+        </div>
+      `;
 
       const copyright = footer.querySelector(".copyright");
+
       if (copyright) {
         footer.insertBefore(widget, copyright);
       } else {
@@ -280,49 +354,21 @@ import {
       }
     }
 
-    widget.setAttribute("aria-live", "polite");
-    widget.innerHTML = `
-      <div class="footer-live-pill footer-live-pill-expanded">
-        <span class="footer-live-dot" aria-hidden="true"></span>
-
-        <span class="footer-live-label">Live visitors</span>
-        <strong data-firebase-live-visitors>--</strong>
-        <span class="footer-live-caption">online now</span>
-
-        <span class="footer-live-divider" aria-hidden="true">|</span>
-
-        <span class="footer-live-label">Total visitors</span>
-        <strong data-firebase-total-visitors>--</strong>
-
-        <span class="footer-live-divider" aria-hidden="true">|</span>
-
-        <span class="footer-live-label">Total visits</span>
-        <strong data-firebase-total-visits>--</strong>
-
-        <span class="footer-live-divider footer-daily-divider" aria-hidden="true">|</span>
-
-        <span class="footer-live-label footer-daily-label">Today</span>
-        <strong data-firebase-today-visitors>--</strong>
-      </div>
-    `;
-
     return widget;
   }
 
   function updateStatsUi(nextStats) {
+    Object.assign(statsState, nextStats || {});
+
     const widget = ensureVisitorWidget();
     if (!widget) return;
 
-    if (nextStats.state) {
-      widget.dataset.visitorState = nextStats.state;
-    } else {
-      widget.dataset.visitorState = "ready";
-    }
+    widget.dataset.visitorState = statsState.state || "ready";
 
-    setMetric("[data-firebase-live-visitors]", nextStats.liveVisitors);
-    setMetric("[data-firebase-total-visitors]", nextStats.totalUniqueVisitors);
-    setMetric("[data-firebase-total-visits]", nextStats.totalPageViews);
-    setMetric("[data-firebase-today-visitors]", nextStats.todayUniqueVisitors);
+    setMetric("[data-firebase-live-visitors]", statsState.liveVisitors);
+    setMetric("[data-firebase-total-visitors]", statsState.totalUniqueVisitors);
+    setMetric("[data-firebase-total-visits]", statsState.totalPageViews);
+    setMetric("[data-firebase-today-visitors]", statsState.todayUniqueVisitors);
   }
 
   function setMetric(selector, value) {
