@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz System | GovJobUpdates</title>
     <meta name="description" content="Subject-wise government exam quizzes with timer, progress tracking, question palette, analytics, and answer review.">
+    <link rel="canonical" href="https://govjobupdates.com/HTML/quiz.html">
+    <meta property="og:site_name" content="GovJobUpdates">
+    <meta property="og:title" content="Quiz System | GovJobUpdates">
+    <meta property="og:description" content="Practice government exam quizzes with timer, palette and answer review.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://govjobupdates.com/HTML/quiz.html">
+    <meta property="og:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
@@ -54,60 +62,38 @@
 
             <section class="quiz-workspace" aria-label="Quiz launcher">
                 <aside class="quiz-panel subject-panel">
-                    <div class="panel-heading">
-                        <span>Subjects</span>
-                        <h2>Pick a Subject</h2>
-                    </div>
+                    <div class="panel-heading"><span>Subjects</span><h2>Pick a Subject</h2></div>
                     <div class="subject-filter-list" id="subjectFilters" role="tablist" aria-label="Quiz subjects"></div>
                 </aside>
-
                 <section class="quiz-panel quiz-list-panel" aria-labelledby="quizSetTitle">
                     <div class="quiz-list-head">
-                        <div class="panel-heading">
-                            <span id="selectedSubjectLabel">All Subjects</span>
-                            <h2 id="quizSetTitle">Quiz Sets</h2>
-                        </div>
-                        <label class="quiz-search" for="quizSearch">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                            <input id="quizSearch" type="search" placeholder="Search quiz sets" autocomplete="off">
-                        </label>
+                        <div class="panel-heading"><span id="selectedSubjectLabel">All Subjects</span><h2 id="quizSetTitle">Quiz Sets</h2></div>
+                        <label class="quiz-search" for="quizSearch"><i class="fas fa-search" aria-hidden="true"></i><input id="quizSearch" type="search" placeholder="Search quiz sets" autocomplete="off"></label>
                     </div>
                     <div class="quiz-message hidden" id="quizMessage" role="status" aria-live="polite"></div>
                     <div class="quiz-loading hidden" id="quizLoading" aria-hidden="true"><span></span><span></span><span></span></div>
                     <div class="quiz-set-grid" id="quizSetList"></div>
                 </section>
-
                 <aside class="quiz-panel history-panel" aria-labelledby="recentQuizTitle">
-                    <div class="panel-heading">
-                        <span>On this device</span>
-                        <h2 id="recentQuizTitle">Recent Attempts</h2>
-                    </div>
+                    <div class="panel-heading"><span>On this device</span><h2 id="recentQuizTitle">Recent Attempts</h2></div>
                     <div class="history-list" id="recentAttempts"></div>
                 </aside>
             </section>
         </section>
 
-        <section class="quiz-exam-view hidden" id="examView" aria-labelledby="examTitle">
+        <section class="quiz-exam-view hidden quiz-single-section-mode" id="examView" aria-labelledby="examTitle">
             <div class="exam-shell">
                 <div class="exam-main">
                     <section class="exam-topbar">
                         <div class="exam-appbar">
                             <div class="exam-title-block">
                                 <button class="exam-icon-btn" type="button" data-action="pause-confirm" aria-label="Pause test"><i class="fas fa-pause" aria-hidden="true"></i></button>
-                                <div>
-                                    <strong id="timerText">00:00</strong>
-                                    <span id="examTitle">Quiz</span>
-                                </div>
+                                <div><strong id="timerText">00:00</strong><span id="examTitle">Quiz</span></div>
                             </div>
                             <button class="exam-icon-btn exam-menu-btn" type="button" data-action="toggle-palette" aria-label="Open question palette"><i class="fas fa-bars" aria-hidden="true"></i></button>
                         </div>
-                        <div class="exam-section-tabs" role="tablist" aria-label="Test sections">
-                            <button class="is-active" type="button">Section - I</button>
-                            <button type="button">Section - II</button>
-                            <button type="button">Section - III</button>
-                        </div>
                         <div class="exam-answer-strip">
-                            <span>Total Questions Answered: <strong id="answeredCount">0</strong></span>
+                            <span>Answered: <strong id="answeredCount">0</strong></span>
                             <span class="duration-chip" id="examDurationLabel">Last 30 Mins</span>
                         </div>
                         <div class="progress-track" aria-hidden="true"><span id="quizProgress"></span></div>
@@ -136,10 +122,7 @@
                             <button class="answer-option" type="button" data-option-index="2" aria-pressed="false"><span class="option-key">3.</span><span class="option-text"></span></button>
                             <button class="answer-option" type="button" data-option-index="3" aria-pressed="false"><span class="option-key">4.</span><span class="option-text"></span></button>
                         </div>
-                        <div class="question-footnote">
-                            <span id="questionMarks">+1</span>
-                            <span id="questionNegative">-0.25</span>
-                        </div>
+                        <div class="question-footnote"><span id="questionMarks">+1</span><span id="questionNegative">-0.25</span></div>
                     </article>
 
                     <section class="exam-actions" aria-label="Question navigation">
@@ -151,30 +134,14 @@
 
                 <aside class="palette-panel" id="palettePanel" aria-label="Question palette">
                     <div class="palette-head">
-                        <div class="palette-links" aria-label="Palette helpers">
-                            <span><i class="fas fa-circle-question" aria-hidden="true"></i> Symbols</span>
-                            <span><i class="fas fa-circle-info" aria-hidden="true"></i> Instructions</span>
-                        </div>
+                        <div class="palette-links" aria-label="Palette helpers"><span><i class="fas fa-circle-question" aria-hidden="true"></i> Symbols</span><span><i class="fas fa-circle-info" aria-hidden="true"></i> Instructions</span></div>
                         <button class="palette-close" type="button" data-action="close-palette" aria-label="Close question palette"><i class="fas fa-times" aria-hidden="true"></i></button>
                     </div>
-                    <div class="palette-parts" aria-label="Question parts">
-                        <button class="is-active" type="button">PART - A</button>
-                        <button type="button">PART - B</button>
-                        <button type="button">PART - C</button>
-                    </div>
-                    <h2>Section - I</h2>
+                    <h2 id="paletteTitle">Question Palette</h2>
                     <div class="palette-summary" id="paletteSummary"></div>
                     <div class="palette-grid" id="questionPalette"></div>
-                    <div class="palette-legend">
-                        <span><i class="status-dot answered" aria-hidden="true"></i>Answered</span>
-                        <span><i class="status-dot not-answered" aria-hidden="true"></i>Not answered</span>
-                        <span><i class="status-dot marked" aria-hidden="true"></i>Marked</span>
-                        <span><i class="status-dot answered-marked" aria-hidden="true"></i>Answered + marked</span>
-                    </div>
-                    <div class="palette-actions">
-                        <button class="quiz-btn quiz-btn-primary" type="button" data-action="submit-confirm">Submit Section</button>
-                        <button class="quiz-btn quiz-btn-danger" type="button" data-action="submit-confirm">Submit Test</button>
-                    </div>
+                    <div class="palette-legend"><span><i class="status-dot answered" aria-hidden="true"></i>Answered</span><span><i class="status-dot not-answered" aria-hidden="true"></i>Not answered</span><span><i class="status-dot marked" aria-hidden="true"></i>Marked</span><span><i class="status-dot answered-marked" aria-hidden="true"></i>Answered + marked</span></div>
+                    <div class="palette-actions"><button class="quiz-btn quiz-btn-danger" type="button" data-action="submit-confirm">Submit Test</button></div>
                 </aside>
             </div>
         </section>
@@ -183,50 +150,16 @@
         <section class="quiz-review-view hidden" id="reviewView" aria-live="polite"></section>
     </main>
 
-    <div class="quiz-modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
-        <article class="modal-card">
-            <h2 id="submitModalTitle">Submit Test?</h2>
-            <p id="submitSummary">Review your attempt before final submission.</p>
-            <div class="modal-actions">
-                <button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-submit">Continue Test</button>
-                <button class="quiz-btn quiz-btn-primary" type="button" data-action="submit-now">Submit Now</button>
-            </div>
-        </article>
-    </div>
+    <div class="quiz-modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle"><article class="modal-card"><h2 id="submitModalTitle">Submit Test?</h2><p id="submitSummary">Review your attempt before final submission.</p><div class="modal-actions"><button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-submit">Continue Test</button><button class="quiz-btn quiz-btn-primary" type="button" data-action="submit-now">Submit Now</button></div></article></div>
+    <div class="quiz-modal hidden" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle"><article class="modal-card"><h2 id="pauseModalTitle">Are you sure you want to pause the test?</h2><div class="modal-actions"><button class="quiz-btn quiz-btn-primary" type="button" data-action="pause-test">Yes</button><button class="quiz-btn quiz-btn-ghost" type="button" data-action="cancel-pause">No</button></div></article></div>
+    <div class="quiz-modal hidden" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle"><article class="modal-card"><h2 id="resumeModalTitle">Resume Saved Attempt?</h2><p id="resumeSummary">An unfinished quiz is available on this device.</p><div class="modal-actions"><button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-resume">Cancel</button><button class="quiz-btn quiz-btn-ghost" type="button" data-action="start-fresh">Start Fresh</button><button class="quiz-btn quiz-btn-primary" type="button" data-action="resume-saved">Resume</button></div></article></div>
 
-    <div class="quiz-modal hidden" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle">
-        <article class="modal-card">
-            <h2 id="pauseModalTitle">Are you sure you want to pause the test?</h2>
-            <div class="modal-actions">
-                <button class="quiz-btn quiz-btn-primary" type="button" data-action="pause-test">Yes</button>
-                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="cancel-pause">No</button>
-            </div>
-        </article>
-    </div>
-
-    <div class="quiz-modal hidden" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle">
-        <article class="modal-card">
-            <h2 id="resumeModalTitle">Resume Saved Attempt?</h2>
-            <p id="resumeSummary">An unfinished quiz is available on this device.</p>
-            <div class="modal-actions">
-                <button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-resume">Cancel</button>
-                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="start-fresh">Start Fresh</button>
-                <button class="quiz-btn quiz-btn-primary" type="button" data-action="resume-saved">Resume</button>
-            </div>
-        </article>
-    </div>
-
-    <footer>
-        <div class="copyright">
-            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
-        </div>
-    </footer>
+    <footer><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
 <script src="../JS/quiz-storage.js" defer></script>
 <script src="../JS/quiz-registry.js" defer></script>
 <script src="../JS/quizzes.js" defer></script>
 <script src="../JS/script.js"></script>
 <script src="../JS/firebase-config.js"></script>
 <script type="module" src="../JS/firebase-visitors.js"></script>
-
 </body>
 </html>
