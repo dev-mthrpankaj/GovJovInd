@@ -1964,3 +1964,62 @@ function sendContactRequest(data) {
     message: "Contact request sent successfully."
   });
 }
+function sendContactRequest(data) {
+  const name = normalizeContactText(data.name || "Website Visitor", 80);
+  const contact = normalizeContactText(data.contact || "Not provided", 120);
+  const subject = normalizeContactText(data.subject, 120);
+  const description = normalizeContactText(data.description, 1500);
+  const page = normalizeContactText(data.page || "", 160);
+  const pageUrl = String(data.pageUrl || "").slice(0, 500);
+  const userAgent = String(data.userAgent || "").slice(0, 500);
+  const submittedAt = normalizeContactText(data.submittedAt || new Date().toISOString(), 80);
+
+  if (!subject) {
+    return sendJSON({
+      success: false,
+      message: "Subject is required."
+    });
+  }
+
+  if (!description) {
+    return sendJSON({
+      success: false,
+      message: "Description is required."
+    });
+  }
+
+  const to = "dmagstudio2023@outlook.com";
+  const mailSubject = "GovJobUpdates Contact: " + subject;
+
+  const body =
+    "New contact request from GovJobUpdates website\n\n" +
+    "Name: " + name + "\n" +
+    "Contact: " + contact + "\n" +
+    "Subject: " + subject + "\n\n" +
+    "Description:\n" + description + "\n\n" +
+    "Page: " + page + "\n" +
+    "Page URL: " + pageUrl + "\n" +
+    "Submitted At: " + submittedAt + "\n" +
+    "User Agent: " + userAgent + "\n";
+
+  MailApp.sendEmail({
+    to: to,
+    subject: mailSubject,
+    body: body,
+    name: "GovJobUpdates Contact"
+  });
+
+  return sendJSON({
+    success: true,
+    message: "Contact request sent successfully."
+  });
+}
+
+function normalizeContactText(value, maxLength) {
+  return String(value || "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/[{}[\]`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength || 500);
+}
