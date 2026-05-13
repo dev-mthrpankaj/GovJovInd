@@ -47,13 +47,6 @@
   function polishPageShell() {
     document.body.classList.add("up-certificate-page");
 
-    const oldTopNavItem = Array.from(document.querySelectorAll("header nav a"))
-      .find((link) => /up-certificate-services\.html/i.test(link.getAttribute("href") || ""));
-
-    if (oldTopNavItem) {
-      oldTopNavItem.closest("li")?.remove();
-    }
-
     const style = document.createElement("style");
     style.id = "upCertificatePageShellStyle";
     style.textContent = `
