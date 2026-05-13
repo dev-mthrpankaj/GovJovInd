@@ -51,7 +51,8 @@
         <form class="cert-form" id="upCertificateForm">
           <div class="cert-field"><label for="serviceType">Service Type</label><select id="serviceType" required><option value="">Select service</option><option>SC Caste Certificate</option><option>ST Caste Certificate</option><option>OBC State Caste Certificate</option><option>OBC Central Caste Certificate</option><option>Domicile Certificate</option><option>Income Certificate</option></select></div>
           <div class="cert-row"><div class="cert-field"><label for="applicantName">Applicant Name</label><input id="applicantName" type="text" required placeholder="Full name"></div><div class="cert-field"><label for="fatherName">Father / Husband Name</label><input id="fatherName" type="text" required placeholder="Father or husband name"></div></div>
-          <div class="cert-row"><div class="cert-field"><label for="mobileNumber">Phone Number for OTP</label><input id="mobileNumber" type="tel" required maxlength="10" placeholder="10 digit mobile number"></div><div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" type="email" required placeholder="Email address"></div></div>
+          <div class="cert-row"><div class="cert-field"><label for="mobileNumber">Aadhaar-linked Active Mobile Number for OTP</label><input id="mobileNumber" type="tel" required maxlength="10" placeholder="Aadhaar se linked 10 digit mobile number"></div><div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" type="email" required placeholder="Email address"></div></div>
+          <p class="cert-note"><strong>Important:</strong> Aadhaar authentication ke liye OTP applicant ke Aadhaar-linked active mobile number par aayega. Please wahi number enter karein.</p>
           <div class="cert-row"><div class="cert-field"><label for="district">District</label><input id="district" type="text" required placeholder="District in UP"></div><div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" type="text" required placeholder="Tehsil"></div></div>
           <div class="cert-field"><label for="address">Full Address</label><textarea id="address" required placeholder="Village/Ward/Mohalla, post, district, PIN"></textarea></div>
           <div class="cert-field"><label for="aadhaarLast4">Aadhaar Last 4 Digits</label><input id="aadhaarLast4" inputmode="numeric" maxlength="4" placeholder="Only last 4 digits"></div>
@@ -83,7 +84,7 @@
             <li><i class="fas fa-check-circle"></i><span>Aadhaar Card</span></li>
             <li><i class="fas fa-check-circle"></i><span>Letter Pad of Sabhasad / Pradhan</span></li>
             <li><i class="fas fa-check-circle"></i><span>Passport size photo</span></li>
-            <li><i class="fas fa-check-circle"></i><span>Active phone number for OTP</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Aadhaar-linked active mobile number for OTP/authentication</span></li>
             <li><i class="fas fa-check-circle"></i><span>Email ID</span></li>
           </ul>
         </div>
