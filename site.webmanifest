@@ -1,0 +1,27 @@
+{
+  "name": "GovJobUpdates - Smart Government Exam Platform",
+  "short_name": "GovJobUpdates",
+  "description": "Latest government exam updates, rank predictor, quiz analytics, and document tools for Indian aspirants.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Assets/Home%20Page/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Assets/Home%20Page/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity", "utilities"],
+  "lang": "en-IN"
+}
