@@ -145,6 +145,7 @@
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget || $("#upCertificateForm");
     const data = {
       requestId: makeRequestId(),
       serviceType: clean($("#serviceType")?.value),
@@ -194,7 +195,7 @@
       saveLocalRequest({ ...data, folderUrl: result.folderUrl || "" });
       setSuccess(`<strong>Request submitted successfully.</strong><br>Request ID: <strong>${data.requestId}</strong><br>Your documents have been uploaded. Payment UTR will be manually verified. Keep this Request ID for future reference.`);
       setProgress("Upload complete.", false);
-      event.currentTarget.reset();
+      if (form && typeof form.reset === "function") form.reset();
     } catch (error) {
       setProgress("Upload failed.", false);
       alert(error.message || "Could not submit request. Please try again.");
