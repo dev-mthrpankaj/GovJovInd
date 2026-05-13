@@ -4,7 +4,7 @@ const path = require('path');
 const root = process.cwd();
 const htmlFiles = [];
 const missing = [];
-const skipPrefixes = ['http:', 'https:', 'mailto:', 'tel:', 'sms:', 'javascript:', 'data:', '#'];
+const skipPrefixes = ['http:', 'https:', '//', 'file:', 'mailto:', 'tel:', 'sms:', 'javascript:', 'data:', '#'];
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -29,7 +29,9 @@ function targetExists(fromFile, rawTarget) {
   if (shouldSkip(clean)) return true;
   let target = clean;
   try { target = decodeURIComponent(clean); } catch (_) {}
-  const abs = path.resolve(path.dirname(fromFile), target);
+  const abs = target.startsWith('/')
+    ? path.join(root, target.slice(1))
+    : path.resolve(path.dirname(fromFile), target);
   return fs.existsSync(abs) || fs.existsSync(abs + '.html') || fs.existsSync(path.join(abs, 'index.html'));
 }
 

@@ -151,7 +151,12 @@ const ensureHeaderAuthEntry = () => {
 
 const getHomeHref = () => {
   const homeLink = document.querySelector('header a[href$="index.html"], header a[href="../index.html"], header a[href="../../index.html"]');
-  return homeLink?.getAttribute('href') || getCandidatePageHref('index.html').replace(/HTML\/index\.html$/i, 'index.html');
+  if (homeLink) return homeLink.getAttribute('href');
+
+  const path = window.location.pathname.replace(/\\/g, '/');
+  if (/\/HTML\/[^/]+\.html$/i.test(path)) return '../index.html';
+  if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return '../../index.html';
+  return 'index.html';
 };
 
 const getSharedPageHref = (pageName) => {
