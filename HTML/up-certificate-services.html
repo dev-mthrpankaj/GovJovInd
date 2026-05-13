@@ -56,10 +56,10 @@
           <div class="cert-row"><div class="cert-field"><label for="district">District</label><input id="district" type="text" required placeholder="District in UP"></div><div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" type="text" required placeholder="Tehsil"></div></div>
           <div class="cert-field"><label for="address">Full Address</label><textarea id="address" required placeholder="Village/Ward/Mohalla, post, district, PIN"></textarea></div>
           <div class="cert-field"><label for="aadhaarLast4">Aadhaar Last 4 Digits</label><input id="aadhaarLast4" inputmode="numeric" maxlength="4" placeholder="Only last 4 digits"></div>
-          <div class="cert-field"><label for="paymentUtr">Payment UTR / Transaction ID</label><input id="paymentUtr" type="text" required placeholder="Enter UPI transaction ID after ₹80 payment"></div>
+          <div class="cert-row"><div class="cert-field"><label for="paymentUtr">Payment UTR / Transaction ID</label><input id="paymentUtr" type="text" required placeholder="Enter UPI transaction ID after ₹80 payment"></div><div class="cert-field"><label for="paymentScreenshotFile">Upload Payment Screenshot</label><input id="paymentScreenshotFile" type="file" required accept="image/*,.pdf"></div></div>
           <div class="cert-row"><div class="cert-field"><label for="aadhaarFile">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" required accept="image/*,.pdf"></div><div class="cert-field"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" required accept="image/*,.pdf"></div></div>
           <div class="cert-row"><div class="cert-field"><label for="photoFile">Upload Passport Size Photo</label><input id="photoFile" type="file" required accept="image/*"></div><div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div></div>
-          <p class="cert-note"><strong>File limit:</strong> Upload clear JPG/PNG/PDF files. Each file should be under 1.5 MB for smooth upload.</p>
+          <p class="cert-note"><strong>File limit:</strong> Upload clear JPG/PNG/PDF files. Each file should be under 1.5 MB for smooth upload. Payment screenshot is required for verification.</p>
           <div class="cert-field"><label for="extraNote">Extra Note</label><textarea id="extraNote" placeholder="Any additional information"></textarea></div>
           <div class="cert-progress" id="certProgress">Preparing upload...</div>
           <button class="btn btn-primary" type="submit" id="certSubmitBtn"><i class="fas fa-cloud-arrow-up"></i> Submit Request with Documents</button>
@@ -86,6 +86,7 @@
             <li><i class="fas fa-check-circle"></i><span>Passport size photo</span></li>
             <li><i class="fas fa-check-circle"></i><span>Aadhaar-linked active mobile number for OTP/authentication</span></li>
             <li><i class="fas fa-check-circle"></i><span>Email ID</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Payment screenshot with visible UTR/transaction details</span></li>
           </ul>
         </div>
 
@@ -97,11 +98,11 @@
     </section>
   </main>
   <footer></footer>
-  <script src="../JS/script.js?v=20260513-up3"></script>
-  <script src="../JS/up-services-home-fix.js?v=20260513-up3"></script>
-  <script src="../JS/up-services-qr-ui.js?v=20260513-up3"></script>
-  <script src="../JS/up-certificate-services.js?v=20260513-up3"></script>
-  <script src="../JS/firebase-config.js?v=20260513-up3"></script>
-  <script type="module" src="../JS/firebase-visitors.js?v=20260513-up3"></script>
+  <script src="../JS/script.js?v=20260513-up4"></script>
+  <script src="../JS/up-services-home-fix.js?v=20260513-up4"></script>
+  <script src="../JS/up-services-qr-ui.js?v=20260513-up4"></script>
+  <script src="../JS/up-certificate-services.js?v=20260513-up4"></script>
+  <script src="../JS/firebase-config.js?v=20260513-up4"></script>
+  <script type="module" src="../JS/firebase-visitors.js?v=20260513-up4"></script>
 </body>
 </html>
