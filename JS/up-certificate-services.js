@@ -4,7 +4,7 @@
   const UPI_ID = "YOUR_UPI_ID@upi";
   const PAYEE_NAME = "GovJobUpdates CSC";
   const FEE_AMOUNT = 80;
-  const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
+  const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
   const MAX_FILE_SIZE_BYTES = 1.5 * 1024 * 1024;
 
   const $ = (selector) => document.querySelector(selector);
