@@ -254,6 +254,14 @@ const ensureSharedFooter = () => {
     <div class="footer-section">
       <h3>GovJobUpdates</h3>
       <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools.</p>
+      <div class="social-icons footer-social" aria-label="GovJobUpdates social links">
+        <a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
     <div class="footer-section">
       <h3>Quick Links</h3>
