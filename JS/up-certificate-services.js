@@ -9,6 +9,25 @@
 
   const $ = (selector) => document.querySelector(selector);
 
+  function polishPageShell() {
+    document.body.classList.add("up-certificate-page");
+
+    const oldTopNavItem = Array.from(document.querySelectorAll("header nav a"))
+      .find((link) => /up-certificate-services\.html/i.test(link.getAttribute("href") || ""));
+
+    if (oldTopNavItem) {
+      oldTopNavItem.closest("li")?.remove();
+    }
+
+    const style = document.createElement("style");
+    style.id = "upCertificatePageShellStyle";
+    style.textContent = `
+      body.up-certificate-page{background:#f4f7fb;overflow-x:hidden}.up-certificate-page main.cert-page{width:min(1180px,calc(100% - 28px));margin:1.2rem auto 2rem;padding:0 0 1.5rem}.up-certificate-page header{position:sticky;top:0;z-index:1000}.up-certificate-page .cert-hero{margin-top:.25rem}.up-service-link-card{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem;border:1px solid #bfdbfe;border-radius:18px;background:linear-gradient(135deg,#eff6ff,#fff);text-decoration:none;color:#0f172a}.up-service-link-card strong{display:block;color:#0f172a}.up-service-link-card span{display:block;color:#64748b;font-size:.9rem}.up-service-link-card i{color:#2563eb}.up-certificate-page nav.active{max-height:calc(100dvh - 88px);overflow-y:auto;-webkit-overflow-scrolling:touch}.up-certificate-page nav.active ul{padding-bottom:1rem}.up-certificate-page .candidate-bottom-nav a[href*="up-certificate-services"]{color:#2563eb}
+      @media(max-width:640px){.up-certificate-page main.cert-page{width:min(100% - 18px,680px);margin:.75rem auto 5.6rem}.up-certificate-page .cert-hero{margin-top:.15rem}.up-service-link-card{padding:.85rem;border-radius:15px}.up-certificate-page .cert-card,.up-certificate-page .cert-hero{box-shadow:0 10px 30px rgba(15,23,42,.06)}}
+    `;
+    if (!document.getElementById(style.id)) document.head.appendChild(style);
+  }
+
   function setPaymentUi() {
     const upiText = $("#upiIdText");
     const upiBtn = $("#upiPayBtn");
@@ -185,6 +204,8 @@
   }
 
   function init() {
+    polishPageShell();
+    window.setTimeout(polishPageShell, 250);
     setPaymentUi();
     $("#copyUpiBtn")?.addEventListener("click", async () => {
       try {
