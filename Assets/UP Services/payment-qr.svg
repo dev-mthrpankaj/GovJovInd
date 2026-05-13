@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="28" fill="#ffffff"/>
+  <rect x="18" y="18" width="476" height="476" rx="24" fill="none" stroke="#2563eb" stroke-width="10"/>
+  <rect x="54" y="54" width="112" height="112" rx="10" fill="#0f172a"/>
+  <rect x="78" y="78" width="64" height="64" rx="8" fill="#ffffff"/>
+  <rect x="96" y="96" width="28" height="28" rx="4" fill="#2563eb"/>
+  <rect x="346" y="54" width="112" height="112" rx="10" fill="#0f172a"/>
+  <rect x="370" y="78" width="64" height="64" rx="8" fill="#ffffff"/>
+  <rect x="388" y="96" width="28" height="28" rx="4" fill="#2563eb"/>
+  <rect x="54" y="346" width="112" height="112" rx="10" fill="#0f172a"/>
+  <rect x="78" y="370" width="64" height="64" rx="8" fill="#ffffff"/>
+  <rect x="96" y="388" width="28" height="28" rx="4" fill="#2563eb"/>
+  <g fill="#0f172a">
+    <rect x="214" y="62" width="36" height="36"/><rect x="270" y="62" width="26" height="26"/><rect x="214" y="118" width="24" height="24"/><rect x="270" y="116" width="54" height="24"/>
+    <rect x="198" y="202" width="28" height="28"/><rect x="246" y="202" width="54" height="28"/><rect x="322" y="202" width="28" height="28"/><rect x="386" y="202" width="52" height="28"/>
+    <rect x="198" y="252" width="54" height="28"/><rect x="280" y="252" width="28" height="28"/><rect x="336" y="252" width="86" height="28"/>
+    <rect x="198" y="304" width="28" height="28"/><rect x="252" y="304" width="28" height="28"/><rect x="306" y="304" width="52" height="28"/><rect x="402" y="304" width="28" height="28"/>
+    <rect x="202" y="356" width="56" height="28"/><rect x="286" y="356" width="28" height="28"/><rect x="342" y="356" width="96" height="28"/>
+    <rect x="202" y="410" width="28" height="28"/><rect x="258" y="410" width="82" height="28"/><rect x="372" y="410" width="28" height="28"/><rect x="428" y="410" width="28" height="28"/>
+  </g>
+  <rect x="82" y="236" width="348" height="48" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="256" y="266" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1d4ed8">Replace with your QR</text>
+  <text x="256" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#166534">Pay ₹80</text>
+</svg>
