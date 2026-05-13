@@ -173,6 +173,7 @@ const getSharedNavMarkup = () => {
     ['quiz.html', 'Quiz'],
     ['rank-predictor.html', 'Rank Predictor'],
     ['documents.html', 'Document'],
+    ['up-certificate-services.html', 'UP Services'],
     ['about-us.html', 'About Us']
   ];
   return items.map(([page, label]) => `<li><a href="${getSharedPageHref(page)}"${getActivePageClass(page)}>${label}</a></li>`).join('');
@@ -244,7 +245,7 @@ const ensureSharedFooter = () => {
   content.innerHTML = `
     <div class="footer-section">
       <h3>GovJobUpdates</h3>
-      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, and document tools.</p>
+      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools.</p>
     </div>
     <div class="footer-section">
       <h3>Quick Links</h3>
@@ -262,6 +263,7 @@ const ensureSharedFooter = () => {
         <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
         <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
         <li><a href="${getSharedPageHref('documents.html')}">Document</a></li>
+        <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
       </ul>
     </div>
@@ -299,7 +301,7 @@ const ensureCandidateBottomNav = () => {
     { label: 'Home', icon: 'fa-home', href: getHomeHref(), match: /index\.html$/i },
     { label: 'Rank', icon: 'fa-chart-line', href: getCandidatePageHref('rank-predictor.html'), match: /rank-predictor\.html$/i },
     { label: 'Quiz', icon: 'fa-stopwatch', href: getCandidatePageHref('quiz.html'), match: /quiz\.html$/i },
-    { label: 'Dashboard', icon: 'fa-border-all', href: getCandidatePageHref('dashboard.html'), match: /dashboard\.html|scorecard\.html$/i },
+    { label: 'UP Doc', icon: 'fa-certificate', href: getCandidatePageHref('up-certificate-services.html'), match: /up-certificate-services\.html$/i },
     { label: 'Jobs', icon: 'fa-briefcase', href: getCandidatePageHref('latest-jobs.html'), match: /latest-jobs\.html$/i }
   ];
   const currentPage = getCurrentPageName();
@@ -508,8 +510,12 @@ const getHomeSearchRoute = (query) => {
     return 'HTML/admitcard.html';
   }
 
-  if (/\b(results?|marks?|cut\s*offs?|cutoffs?|certificates?)\b/.test(text)) {
+  if (/\b(results?|marks?|cut\s*offs?|cutoffs?)\b/.test(text)) {
     return 'HTML/results.html';
+  }
+
+  if (/\b(certificates?|caste|jati|niwas|domicile|income|aay|mool)\b/.test(text)) {
+    return 'HTML/up-certificate-services.html';
   }
 
   return 'HTML/latest-jobs.html';
