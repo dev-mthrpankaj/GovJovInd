@@ -5,12 +5,6 @@
   const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
   const allowedPages = new Set([
     "index.html",
-    "latest-jobs.html",
-    "admitcard.html",
-    "answer-key.html",
-    "results.html",
-    "quiz.html",
-    "documents.html",
     "about-us.html"
   ]);
   const blockedPages = new Set(["rank-predictor.html"]);
