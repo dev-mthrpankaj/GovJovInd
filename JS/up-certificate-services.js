@@ -91,6 +91,7 @@
 
   async function getFilesPayload() {
     return {
+      paymentScreenshot: await fileToBase64($("#paymentScreenshotFile")?.files?.[0]),
       aadhaar: await fileToBase64($("#aadhaarFile")?.files?.[0]),
       letter: await fileToBase64($("#letterFile")?.files?.[0]),
       photo: await fileToBase64($("#photoFile")?.files?.[0]),
@@ -176,6 +177,10 @@
       alert("Aadhaar last 4 digits should be exactly 4 numbers.");
       return;
     }
+    if (!$("#paymentScreenshotFile")?.files?.[0]) {
+      alert("Please upload payment screenshot for verification.");
+      return;
+    }
     if (!$("#aadhaarFile")?.files?.[0] || !$("#letterFile")?.files?.[0] || !$("#photoFile")?.files?.[0]) {
       alert("Please upload Aadhaar, Sabhasad/Pradhan letter pad, and photo.");
       return;
@@ -193,7 +198,7 @@
       };
       const result = await submitToAppsScript(payload);
       saveLocalRequest({ ...data, folderUrl: result.folderUrl || "" });
-      setSuccess(`<strong>Request submitted successfully.</strong><br>Request ID: <strong>${data.requestId}</strong><br>Your documents have been uploaded. Payment UTR will be manually verified. Keep this Request ID for future reference.`);
+      setSuccess(`<strong>Request submitted successfully.</strong><br>Request ID: <strong>${data.requestId}</strong><br>Your documents and payment screenshot have been uploaded. Payment UTR will be manually verified. Keep this Request ID for future reference.`);
       setProgress("Upload complete.", false);
       if (form && typeof form.reset === "function") form.reset();
     } catch (error) {
