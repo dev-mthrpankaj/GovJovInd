@@ -13,7 +13,7 @@
     if(!/\/HTML\/up-certificate-services\.html$/i.test(location.pathname)) return;
     injectStyle();
     var old = document.getElementById("upiIdText");
-    var card = old ? old.closest(".cert-card") : null;
+    var card = document.getElementById("paymentCard") || (old ? old.closest(".cert-card") : null);
     if(card && card.dataset.qrReady !== "1"){
       card.dataset.qrReady = "1";
       card.classList.add("payment-first-panel");
@@ -36,13 +36,17 @@
 (function () {
   "use strict";
 
-  const UPI_ID = "YOUR_UPI_ID@upi";
+  const UPI_ID = "";
   const PAYEE_NAME = "GovJobUpdates CSC";
   const FEE_AMOUNT = 80;
   const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
   const MAX_FILE_SIZE_BYTES = 1.5 * 1024 * 1024;
 
   const $ = (selector) => document.querySelector(selector);
+
+  function hasConfiguredUpiId() {
+    return Boolean(UPI_ID && !UPI_ID.includes("YOUR_UPI_ID"));
+  }
 
   function polishPageShell() {
     document.body.classList.add("up-certificate-page");
@@ -59,8 +63,16 @@
   function setPaymentUi() {
     const upiText = $("#upiIdText");
     const upiBtn = $("#upiPayBtn");
-    if (upiText) upiText.textContent = UPI_ID;
+    const canUseUpiDeepLink = hasConfiguredUpiId();
+    if (upiText) {
+      if (canUseUpiDeepLink) upiText.textContent = UPI_ID;
+      else upiText.closest(".payment-upi-id")?.remove();
+    }
     if (upiBtn) {
+      if (!canUseUpiDeepLink) {
+        upiBtn.remove();
+        return;
+      }
       const params = new URLSearchParams({
         pa: UPI_ID,
         pn: PAYEE_NAME,
@@ -69,11 +81,6 @@
         tn: "UP Certificate CSC Assistance"
       });
       upiBtn.href = `upi://pay?${params.toString()}`;
-      if (UPI_ID.includes("YOUR_UPI_ID")) {
-        upiBtn.classList.add("btn-disabled");
-        upiBtn.setAttribute("aria-disabled", "true");
-        upiBtn.title = "Add real UPI ID in JS/up-certificate-services.js first";
-      }
     }
   }
 
@@ -242,6 +249,7 @@
     window.setTimeout(polishPageShell, 250);
     setPaymentUi();
     $("#copyUpiBtn")?.addEventListener("click", async () => {
+      if (!hasConfiguredUpiId()) return;
       try {
         await navigator.clipboard.writeText(UPI_ID);
         alert("UPI ID copied");

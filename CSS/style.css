@@ -32,14 +32,19 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
-  opacity: 0;
-  transform: translateY(8px);
+  opacity: 1;
+  transform: none;
   transition: opacity .25s ease, transform .25s ease;
 }
 
 body.page-loaded {
   opacity: 1;
   transform: translateY(0);
+}
+
+body.page-leaving {
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 a {

@@ -10,8 +10,6 @@
   const blockedPages = new Set(["rank-predictor.html"]);
 
   const pageName = decodeURIComponent(window.location.pathname.split("/").pop() || "index.html").toLowerCase();
-  if (blockedPages.has(pageName) || !allowedPages.has(pageName)) return;
-  if (document.getElementById("gjuContactWidget")) return;
 
   function isQuizExamMode() {
     const examView = document.getElementById("examView");
@@ -37,6 +35,26 @@
   function getPageLabel() {
     const title = document.title || "GovJobUpdates";
     return title.replace(/\s*\|\s*GovJobUpdates\s*$/i, "").trim() || pageName;
+  }
+
+  function normalizePayload(payload) {
+    return {
+      action: "sendContactRequest",
+      name: String(payload?.name || "").trim(),
+      contact: String(payload?.contact || "").trim(),
+      subject: String(payload?.subject || "").trim(),
+      description: String(payload?.description || "").trim(),
+      page: String(payload?.page || getPageLabel()).trim(),
+      pageUrl: String(payload?.pageUrl || window.location.href).trim(),
+      userAgent: navigator.userAgent || "",
+      submittedAt: payload?.submittedAt || new Date().toISOString()
+    };
+  }
+
+  function buildMailtoHref(subject, message) {
+    const mailSubject = encodeURIComponent(`GovJobUpdates Contact: ${subject || "Support Request"}`);
+    const mailBody = encodeURIComponent(`${message || ""}\n\nPage: ${window.location.href}`);
+    return `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
   }
 
   function createWidget() {
@@ -88,17 +106,14 @@
   }
 
   function buildPayload(subject, message) {
-    return {
-      action: "sendContactRequest",
+    return normalizePayload({
       name: document.getElementById("gjuContactName")?.value.trim() || "",
       contact: document.getElementById("gjuContactPhone")?.value.trim() || "",
       subject,
       description: message,
       page: getPageLabel(),
-      pageUrl: window.location.href,
-      userAgent: navigator.userAgent || "",
-      submittedAt: new Date().toISOString()
-    };
+      pageUrl: window.location.href
+    });
   }
 
   async function sendByPost(payload) {
@@ -121,6 +136,19 @@
     return { success: true, fallback: true };
   }
 
+  async function submitContactRequest(payload) {
+    const normalizedPayload = normalizePayload(payload);
+    if (!normalizedPayload.subject || !normalizedPayload.description) {
+      throw new Error("Please enter subject and description.");
+    }
+
+    try {
+      return await sendByPost(normalizedPayload);
+    } catch {
+      return sendByNoCorsGet(normalizedPayload);
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -137,19 +165,13 @@
     if (submit) { submit.disabled = true; submit.textContent = "Sending..."; }
     setStatus("Sending your request...", "");
     try {
-      try {
-        await sendByPost(payload);
-      } catch (postError) {
-        await sendByNoCorsGet(payload);
-      }
+      await submitContactRequest(payload);
       form.reset();
       document.getElementById("gjuContactPage").value = getPageLabel();
       setStatus("Request submitted successfully. Please check support email inbox/spam once.", "success");
     } catch (error) {
-      const mailSubject = encodeURIComponent(`GovJobUpdates Contact: ${subject}`);
-      const mailBody = encodeURIComponent(`${message}\n\nPage: ${window.location.href}`);
       setStatus("Could not submit automatically. Use direct email link below.", "error");
-      window.setTimeout(() => { window.location.href = `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`; }, 600);
+      window.setTimeout(() => { window.location.href = buildMailtoHref(subject, message); }, 600);
     } finally {
       if (submit) { submit.disabled = false; submit.textContent = "Submit Request"; }
     }
@@ -186,10 +208,21 @@
     window.addEventListener("resize", () => syncVisibility(widget), { passive: true });
   }
 
+  function shouldCreateWidget() {
+    return !blockedPages.has(pageName) && allowedPages.has(pageName) && !document.getElementById("gjuContactWidget");
+  }
+
   function init() {
+    if (!shouldCreateWidget()) return;
     const widget = createWidget();
     initWatchers(widget);
   }
+
+  window.GovJobContact = {
+    submitRequest: submitContactRequest,
+    getMailtoHref: buildMailtoHref,
+    email: CONTACT_EMAIL
+  };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

@@ -1,5 +1,8 @@
 (() => {
-const markPageLoaded = () => document.body.classList.add('page-loaded');
+const markPageLoaded = () => {
+  document.body.classList.add('page-loaded');
+  document.body.classList.remove('page-leaving');
+};
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ADS_CONFIG = {
   enabled: true,
@@ -463,6 +466,7 @@ if (document.readyState === 'loading') {
   applyAdControls();
   startVisitorCounter();
 }
+window.addEventListener('pageshow', markPageLoaded);
 
 document.addEventListener('click', (event) => {
   const link = event.target.closest('a[href]');
@@ -485,7 +489,7 @@ document.addEventListener('click', (event) => {
   }
 
   event.preventDefault();
-  document.body.classList.remove('page-loaded');
+  document.body.classList.add('page-leaving');
 
   setTimeout(() => {
     window.location.href = href;
@@ -542,7 +546,7 @@ if (homeSearchForm && homeSearchInput) {
     event.preventDefault();
     const url = new URL(getHomeSearchRoute(query), window.location.href);
     url.searchParams.set('q', query);
-    document.body.classList.remove('page-loaded');
+    document.body.classList.add('page-leaving');
 
     setTimeout(() => {
       window.location.href = url.toString();
@@ -627,7 +631,8 @@ if (statsSection && 'IntersectionObserver' in window) {
 }
 
 document.querySelectorAll('img').forEach((img) => {
-  if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+  const isPriorityImage = img.getAttribute('fetchpriority') === 'high' || Boolean(img.closest('.hero-image, .logo-container'));
+  if (!img.hasAttribute('loading')) img.setAttribute('loading', isPriorityImage ? 'eager' : 'lazy');
   if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
 });
 })();
