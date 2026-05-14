@@ -27,7 +27,13 @@ body.quiz-palette-open {
 
 body.quiz-exam-active {
     background: #f8fafc;
+    padding-top: 0 !important;
     padding-bottom: 0;
+}
+
+html:has(body.quiz-exam-active),
+body.quiz-exam-active {
+    scroll-padding-top: 0 !important;
 }
 
 body.quiz-exam-active > header,
