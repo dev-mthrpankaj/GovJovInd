@@ -35,6 +35,32 @@ quizMeta("math-percentage-abhinay-set-2", "Mathematics", "Percentage Practice Se
 
 
         //Hindi_Registry
+        quizMeta(
+    "hindi-varnmala-practice-set-1",
+    "Hindi",
+    "Hindi Varnmala Practice Set 1",
+    "50 tough-level Hindi Varnmala questions for UPSI, UPPCS, PCS and other competitive exams.",
+    "Hard",
+    "quiz-data/hindi/hindi-varnmala-practice-set-1.js"
+),
+
+quizMeta(
+    "hindi-varnmala-practice-set-2",
+    "Hindi",
+    "Hindi Varnmala Practice Set 2",
+    "50 tough-level Hindi Varnmala questions for UPSI, UPPCS, PCS and other competitive exams.",
+    "Hard",
+    "quiz-data/hindi/hindi-varnmala-practice-set-2.js"
+),
+
+quizMeta(
+    "hindi-varnmala-practice-set-3",
+    "Hindi",
+    "Hindi Varnmala Practice Set 3",
+    "50 tough-level Hindi Varnmala questions for UPSI, UPPCS, PCS and other competitive exams.",
+    "Hard",
+    "quiz-data/hindi/hindi-varnmala-practice-set-3.js"
+),
         quizMeta("hindi-muhavare-upsi-pcs-set-1", "Hindi", "Hindi Muhavare UPSI PCS Practice Set 1", "50 tough-level Hindi Muhavare questions for UPSI, UPPCS and PCS exams.", "Hard", "quiz-data/hindi/hindi-muhavare-upsi-pcs-set-1.js"),
         quizMeta("hindi-alankar-upsi-set-1", "Hindi", "Hindi Alankar UPSI Practice Set 1", "50 most important Hindi Alankar questions for UPSI and other police exams.", "Hard", "quiz-data/hindi/hindi-alankar-upsi-set-1.js"),
         quizMeta("hindi-vyakaran-set-1", "Hindi", "Hindi Vyakaran Practice Set 1", "50 Hindi grammar questions for government exams.", "Mixed", "quiz-data/hindi/hindi-vyakaran-set-1.js"),
