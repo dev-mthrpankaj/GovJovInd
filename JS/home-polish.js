@@ -61,7 +61,7 @@
     intel.className = "home-intel-strip";
     intel.innerHTML = `
       <div class="home-intel-card"><strong data-home-counter="jobs">0</strong><span><i class="fas fa-briefcase"></i>Exam update categories</span></div>
-      <div class="home-intel-card"><strong data-home-counter="tools">0</strong><span><i class="fas fa-bolt"></i>Free student tools</span></div>
+      <div class="home-intel-card"><strong data-home-counter="tools">0</strong><span><i class="fas fa-bolt"></i>Student tools and services</span></div>
       <div class="home-intel-card"><strong data-home-counter="speed">0%</strong><span><i class="fas fa-mobile-screen"></i>Mobile-first experience</span></div>
     `;
     panel.appendChild(intel);
@@ -71,12 +71,12 @@
     trust.innerHTML = `
       <span class="home-trust-pill"><i class="fas fa-shield-halved"></i>Official-source verification advised</span>
       <span class="home-trust-pill"><i class="fas fa-chart-line"></i>Rank + quiz dashboard</span>
-      <span class="home-trust-pill"><i class="fas fa-indian-rupee-sign"></i>Free to use</span>
+      <span class="home-trust-pill"><i class="fas fa-certificate"></i>UP certificate assistance</span>
     `;
     panel.appendChild(trust);
 
     animateCounter(panel.querySelector('[data-home-counter="jobs"]'), 6, "");
-    animateCounter(panel.querySelector('[data-home-counter="tools"]'), 5, "");
+    animateCounter(panel.querySelector('[data-home-counter="tools"]'), 6, "");
     animateCounter(panel.querySelector('[data-home-counter="speed"]'), 100, "%");
   }
 
@@ -86,7 +86,7 @@
     stats.dataset.homePolished = "true";
     const items = [
       ["6+", "Exam Streams", "SSC, Railway, Banking, Police, Teaching, State"],
-      ["5+", "Free Tools", "Quiz, Rank Predictor, Dashboard, Documents, Search"],
+      ["6+", "Useful Tools", "Quiz, Rank Predictor, Dashboard, Documents, UP Services, Search"],
       ["10+", "Quiz History", "Last attempts with analytics and graphs"],
       ["100%", "Mobile Focus", "Designed for mobile aspirants first"]
     ];
@@ -97,7 +97,7 @@
         <small class="stat-note">${note}</small>
       </div>
     `).join("");
-    const targets = [6, 5, 10, 100];
+    const targets = [6, 6, 10, 100];
     stats.querySelectorAll(".stat-number").forEach((node, index) => {
       animateCounter(node, targets[index], index === 3 ? "%" : "+");
     });
