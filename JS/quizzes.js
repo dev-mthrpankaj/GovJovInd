@@ -17,22 +17,21 @@
         return String(value || "").trim().replace(/\s+/g, " ");
     };
 
-    const ALL_SUBJECTS = "All";
     const PERSIST_DELAY_MS = 900;
+    const SEARCH_DEBOUNCE_MS = 100;
     const subjectIcons = {
         Mathematics: "fa-calculator",
         English: "fa-language",
         Hindi: "fa-book",
         "General Awareness": "fa-globe-asia",
         Reasoning: "fa-brain",
-        Computer: "fa-laptop-code",
-        All: "fa-layer-group"
+        Computer: "fa-laptop-code"
     };
 
     const views = {};
     const elements = {};
     const state = {
-        subject: ALL_SUBJECTS,
+        subject: "",
         search: "",
         quizSet: null,
         questions: [],
@@ -54,15 +53,15 @@
         lastPaletteCurrent: -1,
         questionEnteredAt: 0
     };
+    let quizSearchRecords = null;
 
-    const debouncedRenderQuizList = debounce(renderQuizList, 120);
+    const debouncedRenderQuizList = debounce(renderQuizList, SEARCH_DEBOUNCE_MS);
 
     document.addEventListener("DOMContentLoaded", initQuizPage);
 
     function initQuizPage() {
         cacheDom();
         bindEvents();
-        renderHome();
         openInitialRoute();
     }
 
@@ -73,8 +72,12 @@
         views.review = document.getElementById("reviewView");
 
         elements.subjectFilters = document.getElementById("subjectFilters");
+        elements.subjectSelect = document.getElementById("subjectSelect");
+        elements.subjectSelectNote = document.getElementById("subjectSelectNote");
         elements.quizSetList = document.getElementById("quizSetList");
         elements.quizSearch = document.getElementById("quizSearch");
+        elements.quizSearchClear = document.querySelector("[data-action='clear-quiz-search']");
+        elements.quizSearchMeta = document.getElementById("quizSearchMeta");
         elements.quizMessage = document.getElementById("quizMessage");
         elements.quizLoading = document.getElementById("quizLoading");
         elements.selectedSubjectLabel = document.getElementById("selectedSubjectLabel");
@@ -119,8 +122,12 @@
         document.body.addEventListener("click", handleClick);
         document.addEventListener("keydown", handleKeyboard);
         elements.quizSearch?.addEventListener("input", function (event) {
-            state.search = event.target.value.trim().toLowerCase();
+            state.search = event.target.value;
+            syncSearchUi();
             debouncedRenderQuizList();
+        });
+        elements.subjectSelect?.addEventListener("change", function (event) {
+            setSubject(event.target.value);
         });
         window.addEventListener("beforeunload", function () { persistUnfinished(true); });
         window.addEventListener("pagehide", function () { persistUnfinished(true); });
@@ -144,7 +151,7 @@
         }
 
         if (subjectButton) {
-            setSubject(subjectButton.dataset.subjectFilter || ALL_SUBJECTS);
+            setSubject(subjectButton.dataset.subjectFilter);
             return;
         }
 
@@ -185,6 +192,7 @@
             "pause-confirm": openPauseModal,
             "pause-test": pauseTest,
             "cancel-pause": closePauseModal,
+            "clear-quiz-search": clearQuizSearch,
             "resume-saved": resumeSavedAttempt,
             "start-fresh": startFreshAttempt,
             "cancel-resume": closeResumeModal,
@@ -244,9 +252,21 @@
         const params = new URLSearchParams(window.location.search);
         const subject = params.get("subject");
         const quizId = params.get("quiz");
+        const query = params.get("q");
+        const directQuiz = quizId ? registry.getQuizById(quizId) : null;
 
         if (subject && getSubjects().includes(subject)) setSubject(subject, false);
-        if (quizId && registry.getQuizById(quizId)) {
+        else if (directQuiz?.subject) setSubject(directQuiz.subject, false);
+        if (query) {
+            state.search = query.trim();
+            if (elements.quizSearch) elements.quizSearch.value = state.search;
+            if (!state.subject) setSubject(inferSubjectFromSearch(state.search), false);
+        }
+        ensureSubjectSelected();
+
+        renderHome();
+
+        if (directQuiz) {
             startQuiz(quizId);
             return;
         }
@@ -255,6 +275,8 @@
     }
 
     function renderHome() {
+        ensureSubjectSelected();
+        syncSearchUi();
         renderStats();
         renderSubjectFilters();
         renderQuizList();
@@ -267,33 +289,36 @@
             return Math.max(highest, Number(attempt.percentage) || 0);
         }, 0);
 
-        setText(elements.availableQuizCount, String(getAllQuizzes().length));
+        setText(elements.availableQuizCount, String(getCurrentSubjectQuizzes().length));
         setText(elements.savedAttemptCount, String(attempts.length));
         setText(elements.bestScoreValue, `${Math.round(best)}%`);
     }
 
     function renderSubjectFilters() {
-        const subjects = [ALL_SUBJECTS].concat(getSubjects());
-        elements.subjectFilters.innerHTML = subjects.map(function (subject) {
-            const count = subject === ALL_SUBJECTS ? getAllQuizzes().length : registry.getQuizzesBySubject(subject).length;
-            const active = subject === state.subject;
-            return `
-                <button class="subject-chip${active ? " is-active" : ""}" type="button" data-subject-filter="${escapeAttr(subject)}" role="tab" aria-selected="${active}">
-                    <i class="fas ${subjectIcons[subject] || "fa-book"}" aria-hidden="true"></i>
-                    <strong>${escapeHtml(subject === ALL_SUBJECTS ? "All Subjects" : subject)}</strong>
-                    <span>${count}</span>
-                </button>
-            `;
-        }).join("");
+        ensureSubjectSelected();
+        const subjects = getSubjects();
+        if (elements.subjectSelect) {
+            elements.subjectSelect.innerHTML = subjects.map(function (subject) {
+                const count = registry.getQuizzesBySubject(subject).length;
+                return `<option value="${escapeAttr(subject)}">${escapeHtml(subject)} (${formatNumber(count)})</option>`;
+            }).join("");
+            elements.subjectSelect.value = state.subject;
+        }
+        if (elements.subjectFilters) {
+            elements.subjectFilters.innerHTML = "";
+        }
+        updateSubjectSelectNote();
     }
 
     function renderQuizList() {
         const quizzes = getFilteredQuizzes();
-        setText(elements.selectedSubjectLabel, state.subject === ALL_SUBJECTS ? "All Subjects" : state.subject);
+        const subjectTotal = getCurrentSubjectQuizzes().length;
+        setText(elements.selectedSubjectLabel, state.subject || "Choose Subject");
+        updateSearchMeta(quizzes.length, subjectTotal);
 
         if (!quizzes.length) {
             elements.quizSetList.innerHTML = "";
-            showMessage("No quiz set matches your search.", "error");
+            showMessage(hasSearchQuery() ? "No quiz set matches your search. Try another subject or keyword." : "No quiz sets are available yet.", "error");
             return;
         }
 
@@ -356,12 +381,59 @@
     }
 
     function setSubject(subject, rerender = true) {
-        state.subject = subject && (subject === ALL_SUBJECTS || getSubjects().includes(subject)) ? subject : ALL_SUBJECTS;
+        state.subject = getValidSubject(subject) || getDefaultSubject();
+        if (elements.subjectSelect) elements.subjectSelect.value = state.subject;
         if (rerender) {
             renderSubjectFilters();
+            renderStats();
             renderQuizList();
             scrollQuizListIntoView();
         }
+    }
+
+    function ensureSubjectSelected() {
+        if (getValidSubject(state.subject)) return;
+        state.subject = getDefaultSubject();
+    }
+
+    function getDefaultSubject() {
+        return getSubjects()[0] || "";
+    }
+
+    function getValidSubject(subject) {
+        return getSubjects().includes(subject) ? subject : "";
+    }
+
+    function updateSubjectSelectNote() {
+        if (!elements.subjectSelectNote) return;
+        const count = getCurrentSubjectQuizzes().length;
+        setText(elements.subjectSelectNote, `${formatNumber(count)} quiz set${count === 1 ? "" : "s"} in ${state.subject}.`);
+    }
+
+    function clearQuizSearch() {
+        state.search = "";
+        if (elements.quizSearch) {
+            elements.quizSearch.value = "";
+            elements.quizSearch.focus();
+        }
+        syncSearchUi();
+        renderQuizList();
+    }
+
+    function syncSearchUi() {
+        const hasSearch = hasSearchQuery();
+        elements.quizSearchClear?.classList.toggle("hidden", !hasSearch);
+    }
+
+    function updateSearchMeta(matchCount, subjectTotal) {
+        if (!elements.quizSearchMeta) return;
+        const subjectLabel = state.subject || "selected subject";
+        const totalText = `${formatNumber(subjectTotal)} quiz set${subjectTotal === 1 ? "" : "s"}`;
+        const matchText = `${formatNumber(matchCount)} of ${totalText}`;
+        const text = hasSearchQuery()
+            ? `${matchText} found in ${subjectLabel}`
+            : `${totalText} available in ${subjectLabel}`;
+        setText(elements.quizSearchMeta, text);
     }
 
     async function startQuiz(quizId, forceNew = false) {
@@ -1129,12 +1201,91 @@
     }
 
     function getFilteredQuizzes() {
-        const base = state.subject === ALL_SUBJECTS ? getAllQuizzes() : registry.getQuizzesBySubject(state.subject);
-        if (!state.search) return base;
-        return base.filter(function (quiz) {
-            const haystack = [quiz.title, quiz.subject, quiz.description, quiz.difficulty, (quiz.tags || []).join(" ")].join(" ").toLowerCase();
-            return haystack.includes(state.search);
+        const base = getCurrentSubjectQuizzes();
+        const tokens = getSearchTokens(state.search);
+        if (!tokens.length) return base;
+
+        const allowedIds = new Set(base.map(function (quiz) { return quiz.id; }));
+        return getQuizSearchRecords().filter(function (record) {
+            return allowedIds.has(record.quiz.id) && tokens.every(function (token) {
+                return record.searchText.includes(token);
+            });
+        }).map(function (record) {
+            return record.quiz;
         });
+    }
+
+    function getCurrentSubjectQuizzes() {
+        return state.subject ? registry.getQuizzesBySubject(state.subject) : [];
+    }
+
+    function inferSubjectFromSearch(value) {
+        const tokens = getSearchTokens(value);
+        if (!tokens.length) return "";
+        const exactSubject = getSubjects().find(function (subject) {
+            return normalizeSearchText(subject) === tokens.join(" ");
+        });
+        if (exactSubject) return exactSubject;
+
+        const match = getQuizSearchRecords().find(function (record) {
+            return tokens.every(function (token) {
+                return record.searchText.includes(token);
+            });
+        });
+        return match?.quiz?.subject || "";
+    }
+
+    function getQuizSearchRecords() {
+        const quizzes = getAllQuizzes();
+        if (quizSearchRecords && quizSearchRecords.length === quizzes.length) return quizSearchRecords;
+
+        quizSearchRecords = quizzes.map(function (quiz) {
+            return {
+                quiz,
+                searchText: buildQuizSearchText(quiz)
+            };
+        });
+        return quizSearchRecords;
+    }
+
+    function buildQuizSearchText(quiz) {
+        const setNumber = getSetNumber(quiz.title);
+        return normalizeSearchText([
+            quiz.id,
+            quiz.title,
+            quiz.subject,
+            quiz.description,
+            quiz.difficulty,
+            quiz.totalQuestions,
+            quiz.durationMinutes,
+            `${quiz.totalQuestions} questions`,
+            `${quiz.durationMinutes} minutes`,
+            "quiz test practice mock question",
+            setNumber ? `set ${setNumber}` : "",
+            (quiz.tags || []).join(" ")
+        ].join(" "));
+    }
+
+    function getSetNumber(value) {
+        const match = String(value || "").match(/\bset\s*(\d+)\b/i);
+        return match ? match[1] : "";
+    }
+
+    function hasSearchQuery() {
+        return getSearchTokens(state.search).length > 0;
+    }
+
+    function getSearchTokens(value) {
+        return normalizeSearchText(value).split(" ").filter(Boolean).slice(0, 8);
+    }
+
+    function normalizeSearchText(value) {
+        return String(value || "")
+            .toLowerCase()
+            .replace(/[-_]+/g, " ")
+            .replace(/[^a-z0-9\s]/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
     }
 
     function getSubjects() {

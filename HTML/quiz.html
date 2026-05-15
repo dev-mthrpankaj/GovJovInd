@@ -61,15 +61,30 @@
                 </div>
             </section>
 
+            <section class="quiz-discovery-bar" aria-label="Quiz search">
+                <div class="quiz-search" role="search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <label class="sr-only" for="quizSearch">Search quiz sets</label>
+                    <input id="quizSearch" type="search" placeholder="Search quiz sets, subjects, topics" autocomplete="off">
+                    <button class="quiz-search-clear hidden" type="button" data-action="clear-quiz-search" aria-label="Clear quiz search">
+                        <i class="fas fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <p class="quiz-search-meta" id="quizSearchMeta" aria-live="polite">Showing all quiz sets</p>
+            </section>
+
             <section class="quiz-workspace" aria-label="Quiz launcher">
                 <aside class="quiz-panel subject-panel">
                     <div class="panel-heading"><span>Subjects</span><h2>Pick a Subject</h2></div>
-                    <div class="subject-filter-list" id="subjectFilters" role="tablist" aria-label="Quiz subjects"></div>
+                    <label class="subject-select-field" for="subjectSelect">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
+                        <select id="subjectSelect" aria-label="Choose quiz subject"></select>
+                    </label>
+                    <p class="subject-select-note" id="subjectSelectNote">Choose a subject to view its quiz sets.</p>
                 </aside>
                 <section class="quiz-panel quiz-list-panel" aria-labelledby="quizSetTitle">
                     <div class="quiz-list-head">
-                        <div class="panel-heading"><span id="selectedSubjectLabel">All Subjects</span><h2 id="quizSetTitle">Quiz Sets</h2></div>
-                        <label class="quiz-search" for="quizSearch"><i class="fas fa-search" aria-hidden="true"></i><input id="quizSearch" type="search" placeholder="Search quiz sets" autocomplete="off"></label>
+                        <div class="panel-heading"><span id="selectedSubjectLabel">Choose Subject</span><h2 id="quizSetTitle">Quiz Sets</h2></div>
                     </div>
                     <div class="quiz-message hidden" id="quizMessage" role="status" aria-live="polite"></div>
                     <div class="quiz-loading hidden" id="quizLoading" aria-hidden="true"><span></span><span></span><span></span></div>

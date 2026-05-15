@@ -171,6 +171,26 @@ const getActivePageClass = (pageName) => {
   return currentPage === pageName || (!currentPage && pageName === 'index.html') ? ' class="active"' : '';
 };
 
+const getHrefPageName = (href) => {
+  try {
+    const url = new URL(href, window.location.href);
+    return decodeURIComponent(url.pathname.split('/').pop() || 'index.html').toLowerCase();
+  } catch {
+    return '';
+  }
+};
+
+const normalizeHeaderActiveLinks = (navRoot = document.querySelector('header nav')) => {
+  if (!navRoot) return;
+  const currentPage = getCurrentPageName() || 'index.html';
+  const links = Array.from(navRoot.querySelectorAll('a[href]'));
+  const activeLink = links.find((link) => getHrefPageName(link.getAttribute('href')) === currentPage);
+
+  links.forEach((link) => {
+    link.classList.toggle('active', link === activeLink);
+  });
+};
+
 const getSharedNavMarkup = () => {
   const items = [
     ['index.html', 'Home'],
@@ -230,6 +250,7 @@ const ensureSharedHeader = () => {
     container.appendChild(nav);
   }
   nav.innerHTML = `<ul>${getSharedNavMarkup()}</ul>`;
+  normalizeHeaderActiveLinks(nav);
 
   container.querySelectorAll('.header-auth-actions').forEach((node) => {
     if (!node.querySelector('[data-auth-entry]')) node.remove();
@@ -307,6 +328,65 @@ const ensureSharedSiteChrome = () => {
   ensureSharedFooter();
 };
 
+let mobileNavScrollY = 0;
+
+const isMobileNavViewport = () => window.matchMedia('(max-width: 1279px)').matches;
+
+const setMobileNavScrollLock = (locked) => {
+  const body = document.body;
+  const root = document.documentElement;
+  if (!body) return;
+
+  if (locked && !body.classList.contains('gju-mobile-nav-open')) {
+    mobileNavScrollY = window.scrollY || root.scrollTop || 0;
+    body.style.top = `-${mobileNavScrollY}px`;
+    root.classList.add('gju-mobile-nav-open');
+    body.classList.add('gju-mobile-nav-open');
+    return;
+  }
+
+  if (!locked && body.classList.contains('gju-mobile-nav-open')) {
+    root.classList.remove('gju-mobile-nav-open');
+    body.classList.remove('gju-mobile-nav-open');
+    body.style.top = '';
+    window.scrollTo({ top: mobileNavScrollY, behavior: 'auto' });
+  }
+};
+
+const syncMobileNavScrollLock = () => {
+  const nav = document.querySelector('header nav');
+  const toggle = document.querySelector('header .menu-toggle');
+  const menuIsOpen = Boolean(nav?.classList.contains('active') || toggle?.getAttribute('aria-expanded') === 'true');
+  setMobileNavScrollLock(isMobileNavViewport() && menuIsOpen);
+};
+
+const ensureMobileNavScrollLock = () => {
+  syncMobileNavScrollLock();
+
+  if (!('MutationObserver' in window)) {
+    window.addEventListener('resize', syncMobileNavScrollLock);
+    return;
+  }
+
+  const observed = new WeakSet();
+  const observeHeaderControls = () => {
+    [document.querySelector('header nav'), document.querySelector('header .menu-toggle')].forEach((node) => {
+      if (!node || observed.has(node)) return;
+      observed.add(node);
+      new MutationObserver(syncMobileNavScrollLock).observe(node, {
+        attributes: true,
+        attributeFilter: ['class', 'aria-expanded']
+      });
+    });
+    syncMobileNavScrollLock();
+  };
+
+  observeHeaderControls();
+  new MutationObserver(observeHeaderControls).observe(document.body, { childList: true, subtree: true });
+  window.addEventListener('resize', syncMobileNavScrollLock);
+  window.addEventListener('pagehide', () => setMobileNavScrollLock(false));
+};
+
 const ensureCandidateBottomNav = () => {
   if (document.querySelector('.candidate-bottom-nav')) return;
 
@@ -331,6 +411,56 @@ const ensureCandidateBottomNav = () => {
 
 window.GovJobCandidateNav = {
   sync: ensureCandidateBottomNav
+};
+
+const ensureGoTopButton = () => {
+  if (document.querySelector('.go-top-btn')) return;
+
+  const button = document.createElement('button');
+  button.className = 'go-top-btn';
+  button.type = 'button';
+  button.setAttribute('aria-label', 'Go to top');
+  button.innerHTML = '<i class="fas fa-arrow-up" aria-hidden="true"></i><span>Top</span>';
+  document.body.appendChild(button);
+
+  let footerVisible = false;
+  const isContactWidgetVisible = () => {
+    const widget = document.getElementById('gjuContactWidget');
+    return Boolean(widget && !widget.classList.contains('is-hidden') && !widget.classList.contains('is-footer-visible'));
+  };
+  const updateVisibility = () => {
+    const longScroll = document.documentElement.scrollHeight > window.innerHeight + 900;
+    const isExam = document.body.classList.contains('quiz-exam-active');
+    button.classList.toggle('is-visible', !isExam && longScroll && footerVisible && !isContactWidgetVisible());
+  };
+
+  button.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  });
+
+  const footer = document.querySelector('footer');
+  if (footer && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      footerVisible = entries.some((entry) => entry.isIntersecting);
+      updateVisibility();
+    }, { rootMargin: '0px 0px 140px 0px' });
+    observer.observe(footer);
+  }
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  window.addEventListener('resize', updateVisibility);
+  if ('MutationObserver' in window) {
+    const watchContactWidget = () => {
+      const widget = document.getElementById('gjuContactWidget');
+      if (!widget || widget.dataset.goTopWatched) return;
+      widget.dataset.goTopWatched = 'true';
+      new MutationObserver(updateVisibility).observe(widget, { attributes: true, attributeFilter: ['class'] });
+      updateVisibility();
+    };
+    watchContactWidget();
+    new MutationObserver(watchContactWidget).observe(document.body, { childList: true, subtree: true });
+  }
+  updateVisibility();
 };
 
 const createVisitorId = () => {
@@ -461,15 +591,19 @@ window.GovJobVisitors = {
 if (document.readyState === 'loading') {
   if (document.body) ensureSharedSiteChrome();
   else window.addEventListener('DOMContentLoaded', ensureSharedSiteChrome);
+  window.addEventListener('DOMContentLoaded', ensureMobileNavScrollLock);
   window.addEventListener('DOMContentLoaded', ensureHeaderAuthEntry);
   window.addEventListener('DOMContentLoaded', ensureCandidateBottomNav);
+  window.addEventListener('DOMContentLoaded', ensureGoTopButton);
   window.addEventListener('DOMContentLoaded', markPageLoaded);
   window.addEventListener('DOMContentLoaded', applyAdControls);
   window.addEventListener('DOMContentLoaded', startVisitorCounter);
 } else {
   ensureSharedSiteChrome();
+  ensureMobileNavScrollLock();
   ensureHeaderAuthEntry();
   ensureCandidateBottomNav();
+  ensureGoTopButton();
   markPageLoaded();
   applyAdControls();
   startVisitorCounter();
@@ -569,17 +703,32 @@ const pageOwnsMenu = Boolean(
   document.querySelector('script[src*="about-us.js"], script[src*="documents.js"]')
 );
 if (menuToggle && nav && !pageOwnsMenu) {
-  menuToggle.setAttribute('aria-label', 'Open navigation menu');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('active');
+  const setMenuIcon = (isOpen) => {
+    const icon = menuToggle.querySelector('i');
+    if (!icon) return;
+    icon.classList.toggle('fa-bars', !isOpen);
+    icon.classList.toggle('fa-times', isOpen);
+    icon.classList.toggle('fa-xmark', false);
+  };
+
+  const setMenuState = (isOpen) => {
+    nav.classList.toggle('active', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    setMenuIcon(isOpen);
+  };
+
+  menuToggle.setAttribute('aria-label', 'Open navigation menu');
+  setMenuIcon(nav.classList.contains('active'));
+  menuToggle.addEventListener('click', () => {
+    setMenuState(!nav.classList.contains('active'));
   });
   nav.addEventListener('click', (event) => {
-    if (!event.target.closest('a')) return;
-    nav.classList.remove('active');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.setAttribute('aria-label', 'Open navigation menu');
+    const link = event.target.closest('a');
+    if (!link) return;
+    link.blur();
+    normalizeHeaderActiveLinks(nav);
+    setMenuState(false);
   });
 }
 
