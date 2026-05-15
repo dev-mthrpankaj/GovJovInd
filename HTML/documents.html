@@ -64,7 +64,7 @@
             <section id="image-resizer" class="tool-content active" role="tabpanel" aria-labelledby="tab-image-resizer">
                 <div class="tool-heading">
                     <h2><i class="fas fa-image"></i> Resize Photo or Signature</h2>
-                    <p>Use common government form sizes or enter your own dimensions.</p>
+                    <p>Resize, crop, convert format, and target exact upload sizes for government forms.</p>
                 </div>
 
                 <div class="preset-grid" aria-label="Quick image presets">
@@ -90,9 +90,9 @@
 
                 <label class="upload-area" id="image-upload-area" for="image-upload" tabindex="0" aria-label="Upload image for resizing">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <strong>Upload JPG, PNG, or WEBP</strong>
+                    <strong>Upload JPG, PNG, WEBP, AVIF, GIF, BMP, or SVG</strong>
                     <span>Tap to browse or drag and drop image here. Max 8 MB.</span>
-                    <input type="file" id="image-upload" accept="image/jpeg,image/png,image/webp">
+                    <input type="file" id="image-upload" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/bmp,image/svg+xml,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.svg">
                 </label>
 
                 <div class="file-summary hidden" id="image-file-summary">
@@ -107,13 +107,27 @@
                     </div>
                     <div class="controls">
                         <div class="control-group">
+                            <label for="image-size-mode">Resize Mode</label>
+                            <select id="image-size-mode">
+                                <option value="exact">Exact size</option>
+                                <option value="contain">Keep ratio - fit inside</option>
+                                <option value="cover">Fill size - crop</option>
+                            </select>
+                        </div>
+                        <div class="control-group checkbox-group">
+                            <input type="checkbox" id="image-lock-ratio" checked>
+                            <label for="image-lock-ratio">Lock aspect ratio</label>
+                        </div>
+                        <div class="control-group">
                             <label for="image-width">Width</label>
                             <div class="input-group">
                                 <input type="number" id="image-width" min="1" inputmode="decimal">
                                 <select id="image-width-unit" aria-label="Width unit">
                                     <option value="px">px</option>
+                                    <option value="mm">mm</option>
                                     <option value="cm">cm</option>
                                     <option value="inch">inch</option>
+                                    <option value="%">%</option>
                                 </select>
                             </div>
                         </div>
@@ -123,8 +137,10 @@
                                 <input type="number" id="image-height" min="1" inputmode="decimal">
                                 <select id="image-height-unit" aria-label="Height unit">
                                     <option value="px">px</option>
+                                    <option value="mm">mm</option>
                                     <option value="cm">cm</option>
                                     <option value="inch">inch</option>
+                                    <option value="%">%</option>
                                 </select>
                             </div>
                         </div>
@@ -135,10 +151,25 @@
                         <div class="control-group">
                             <label for="image-format">Format</label>
                             <select id="image-format">
-                                <option value="jpg">JPG</option>
+                                <option value="jpg">JPG / JPEG</option>
                                 <option value="png">PNG</option>
                                 <option value="webp">WEBP</option>
+                                <option value="avif">AVIF</option>
+                                <option value="original">Original / best supported</option>
                             </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="image-background">Background</label>
+                            <select id="image-background">
+                                <option value="white">White</option>
+                                <option value="transparent">Transparent</option>
+                                <option value="black">Black</option>
+                                <option value="custom">Custom color</option>
+                            </select>
+                        </div>
+                        <div class="control-group hidden" id="image-bg-color-group">
+                            <label for="image-bg-color">Background Color</label>
+                            <input type="color" id="image-bg-color" value="#ffffff">
                         </div>
                         <div class="control-group">
                             <label for="image-quality">Quality <span id="image-quality-value">85%</span></label>
@@ -176,6 +207,8 @@
                             <p>Original size: <span id="result-original-image-size">-</span></p>
                             <p>New size: <span id="new-image-size">-</span></p>
                             <p>New dimensions: <span id="new-image-dimensions">-</span></p>
+                            <p>Output format: <span id="new-image-format">-</span></p>
+                            <p>Target status: <span id="new-image-target-status">-</span></p>
                             <button id="download-image-btn" class="btn btn-download" type="button" aria-label="Download resized image">
                                 <i class="fas fa-download"></i> Download Image
                             </button>
@@ -187,16 +220,16 @@
             <section id="image-to-pdf" class="tool-content" role="tabpanel" aria-labelledby="tab-image-to-pdf" tabindex="0" hidden>
                 <div class="tool-heading">
                     <h2><i class="fas fa-file-pdf"></i> Convert Image to PDF</h2>
-                    <p>Create a clean A4 PDF for online application forms.</p>
+                    <p>Create a clean PDF for online application forms with page size and file size control.</p>
                 </div>
 
                 <div class="message-box hidden" id="pdf-message" role="status" aria-live="polite"></div>
 
                 <label class="upload-area" id="pdf-upload-area" for="pdf-upload" tabindex="0" aria-label="Upload image to convert into PDF">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <strong>Upload JPG, PNG, or WEBP</strong>
+                    <strong>Upload JPG, PNG, WEBP, AVIF, GIF, BMP, or SVG</strong>
                     <span>Tap to browse or drag and drop image here. Max 8 MB.</span>
-                    <input type="file" id="pdf-upload" accept="image/jpeg,image/png,image/webp">
+                    <input type="file" id="pdf-upload" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/bmp,image/svg+xml,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.svg">
                 </label>
 
                 <div class="file-summary hidden" id="pdf-file-summary">
@@ -244,6 +277,20 @@
                             <input type="checkbox" id="pdf-fit-page" checked>
                             <label for="pdf-fit-page">Fit image to page</label>
                         </div>
+                        <div class="control-group">
+                            <label for="image-pdf-target-size-value">Target PDF Size</label>
+                            <div class="input-group">
+                                <input type="number" id="image-pdf-target-size-value" min="10" value="100" inputmode="decimal">
+                                <select id="image-pdf-target-size-unit" aria-label="Image to PDF target size unit">
+                                    <option value="KB">KB</option>
+                                    <option value="MB">MB</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="image-pdf-quality">Image Quality <span id="image-pdf-quality-value">85%</span></label>
+                            <input type="range" id="image-pdf-quality" min="30" max="100" value="85">
+                        </div>
                     </div>
                 </div>
 
@@ -260,6 +307,7 @@
                     <div class="result-info">
                         <p>Generated PDF size: <span id="new-pdf-size">-</span></p>
                         <p>Page dimensions: <span id="new-pdf-dimensions">-</span></p>
+                        <p>Target status: <span id="new-pdf-target-status">-</span></p>
                         <button id="download-pdf-btn" class="btn btn-download" type="button" aria-label="Download generated PDF">
                             <i class="fas fa-download"></i> Download PDF
                         </button>
@@ -270,13 +318,17 @@
             <section id="pdf-resizer" class="tool-content" role="tabpanel" aria-labelledby="tab-pdf-resizer" tabindex="0" hidden>
                 <div class="tool-heading">
                     <h2><i class="fas fa-compress-alt"></i> PDF Resizer</h2>
-                    <p>Compression depends on PDF content. Text PDFs may reduce well; scanned image PDFs may not reduce much in the browser.</p>
+                    <p>Compress scanned PDFs and form PDFs by rebuilding pages into an optimized downloadable PDF.</p>
                 </div>
 
                 <div class="message-box info" id="resize-pdf-note" role="note">
-                    For privacy, this tool does not upload PDFs to a server. If your PDF is already optimized, the new file may be similar in size.
+                    Files stay in your browser. This tool re-renders PDF pages for real size reduction, so text in the compressed PDF may not remain selectable.
                 </div>
                 <div class="message-box hidden" id="resize-pdf-message" role="status" aria-live="polite"></div>
+                <div class="pdf-progress hidden" id="resize-pdf-progress" aria-live="polite">
+                    <div class="pdf-progress-track"><span id="resize-pdf-progress-bar"></span></div>
+                    <strong id="resize-pdf-progress-text">Ready</strong>
+                </div>
 
                 <label class="upload-area" id="resize-pdf-upload-area" for="resize-pdf-upload" tabindex="0" aria-label="Upload PDF to resize">
                     <i class="fas fa-cloud-upload-alt"></i>
@@ -311,7 +363,7 @@
                             </select>
                         </div>
                         <div class="control-group">
-                            <label for="pdf-quality">Estimated Image Quality <span id="pdf-quality-value">150 DPI</span></label>
+                            <label for="pdf-quality">Render DPI <span id="pdf-quality-value">150 DPI</span></label>
                             <input type="range" id="pdf-quality" min="72" max="300" value="150">
                         </div>
                     </div>
@@ -329,7 +381,7 @@
                 <div class="download-area hidden" id="resize-pdf-download-area">
                     <div class="result-info">
                         <p>Original size: <span id="result-original-resize-pdf-size">-</span></p>
-                        <p>Estimated/new size: <span id="new-resize-pdf-size">-</span></p>
+                        <p>New size: <span id="new-resize-pdf-size">-</span></p>
                         <p>Result: <span id="pdf-reduction">-</span></p>
                         <button id="download-resize-pdf-btn" class="btn btn-download" type="button" aria-label="Download resized PDF">
                             <i class="fas fa-download"></i> Download PDF
@@ -378,6 +430,7 @@
         </div>
     </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 <script src="../JS/documents.js" defer></script>
 <script src="../JS/script.js"></script>
 <script src="../JS/firebase-config.js"></script>

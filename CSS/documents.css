@@ -200,6 +200,37 @@
     color: #334155;
 }
 
+.pdf-progress {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0 0 1rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
+    background: #f8fbff;
+}
+
+.pdf-progress-track {
+    height: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #dbeafe;
+}
+
+.pdf-progress-track span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary), #0f766e);
+    transition: width 0.22s ease;
+}
+
+.pdf-progress strong {
+    color: var(--secondary);
+    font-size: 0.9rem;
+}
+
 .upload-area {
     display: grid;
     place-items: center;
@@ -355,6 +386,11 @@
     min-height: 48px;
     padding: 0;
     accent-color: var(--primary);
+}
+
+.control-group input[type="color"] {
+    padding: 0.25rem;
+    cursor: pointer;
 }
 
 .input-group {
