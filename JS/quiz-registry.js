@@ -100,8 +100,19 @@ quizMeta(
 
 
         //Reasoning_Registry
-        quizMeta("reasoning-set-1", "Reasoning", "Reasoning Practice Set 1", "50 analogy, series, coding, direction and ranking questions.", "Mixed", "quiz-data/reasoning/reasoning-set-1.js"),
-        quizMeta("reasoning-set-2", "Reasoning", "Reasoning Practice Set 2", "50 verbal and non-verbal reasoning practice questions.", "Moderate", "quiz-data/reasoning/reasoning-set-2.js"),
+        quizMeta("reasoning-mirror-image-very-hard-set-1", "Reasoning", "Reasoning Mirror Image Very Hard Practice Set 1", "50 very hard Mirror Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-mirror-image-very-hard-set-1.js"),
+        quizMeta("reasoning-mirror-image-very-hard-set-2", "Reasoning", "Reasoning Mirror Image Very Hard Practice Set 2", "50 very hard Mirror Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-mirror-image-very-hard-set-2.js"),
+        quizMeta("reasoning-water-image-very-hard-set-1", "Reasoning", "Reasoning Water Image Very Hard Practice Set 1", "50 very hard Water Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-water-image-very-hard-set-1.js"),
+        quizMeta("reasoning-water-image-very-hard-set-2", "Reasoning", "Reasoning Water Image Very Hard Practice Set 2", "50 very hard Water Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-water-image-very-hard-set-2.js"),
+        quizMeta("reasoning-clock-very-hard-set-1", "Reasoning", "Reasoning Clock Very Hard Practice Set 1", "50 very hard Clock reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-clock-very-hard-set-1.js"),
+        quizMeta("reasoning-clock-very-hard-set-2", "Reasoning", "Reasoning Clock Very Hard Practice Set 2", "50 very hard Clock reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-clock-very-hard-set-2.js"),
+        quizMeta("reasoning-calendar-very-hard-set-1", "Reasoning", "Reasoning Calendar Very Hard Practice Set 1", "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-calendar-very-hard-set-1.js"),
+        quizMeta("reasoning-calendar-very-hard-set-2", "Reasoning", "Reasoning Calendar Very Hard Practice Set 2", "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-calendar-very-hard-set-2.js"),
+
+
+
+
+
 
 
 
