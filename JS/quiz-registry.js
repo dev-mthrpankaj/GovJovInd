@@ -59,6 +59,12 @@ quizMeta("english-one-word-substitution-set-24", "English", "English One Word Su
 
 
         //Hindi_Registry
+
+        quizMeta("hindi-mixed-grammar-gk-set-1", "Hindi", "Hindi Mixed Grammar GK Practice Set 1", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-1.js"),
+quizMeta("hindi-mixed-grammar-gk-set-2", "Hindi", "Hindi Mixed Grammar GK Practice Set 2", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-2.js"),
+quizMeta("hindi-mixed-grammar-gk-set-3", "Hindi", "Hindi Mixed Grammar GK Practice Set 3", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-3.js"),
+quizMeta("hindi-mixed-grammar-gk-set-4", "Hindi", "Hindi Mixed Grammar GK Practice Set 4", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-4.js"),
+
         quizMeta(
     "hindi-varnmala-practice-set-1",
     "Hindi",
