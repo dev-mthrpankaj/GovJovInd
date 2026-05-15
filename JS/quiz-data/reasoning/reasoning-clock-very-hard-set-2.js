@@ -466,7 +466,7 @@
         durationMinutes: 40,
         totalQuestions: questions.length,
         marksPerQuestion: 1,
-        negativeMarks: 0.25
+        negativeMarks: 0.25,
         difficulty: "Very Hard",
         tags: ["SSC", "UPSI", "Police", "Railway", "Reasoning", "Clock"],
         questions
