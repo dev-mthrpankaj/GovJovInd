@@ -70,6 +70,14 @@
         return String(value).trim();
     }
 
+    function normalizeActionUrl(value) {
+        const url = getText(value, "");
+        if (!url || url === "#") return "";
+        if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
+        if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+        return "";
+    }
+
     function normalizeSearchText(value) {
         return getText(value, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
     }
@@ -130,7 +138,7 @@
         const current = today();
         const releaseDate = parseDate(item.releaseDate);
         const objectionLastDate = parseDate(item.objectionLastDate);
-        const hasLink = getText(item.downloadLink, "#") !== "#";
+        const hasLink = Boolean(normalizeActionUrl(item.downloadLink));
 
         if (objectionLastDate && current > objectionLastDate) return "objection-closed";
         if (releaseDate && releaseDate > current) return "upcoming";
@@ -241,7 +249,7 @@
 
     function getDetailPage(item) {
         if (!item || !item.id) return "";
-        return getText(item.detailPage, `../AnswerKey_Details/HTML/answerkey-details-${item.id}.html`);
+        return normalizeActionUrl(item.detailPage) || `../AnswerKey_Details/HTML/answerkey-details-${item.id}.html`;
     }
 
     function renderBadges(item) {
@@ -255,12 +263,12 @@
     }
 
     function renderCard(item) {
-        const downloadLink = getText(item.downloadLink, "#");
-        const objectionLink = getText(item.objectionLink, "#");
-        const downloadAction = downloadLink !== "#"
+        const downloadLink = normalizeActionUrl(item.downloadLink);
+        const objectionLink = normalizeActionUrl(item.objectionLink);
+        const downloadAction = downloadLink
             ? `<a href="${escapeHtml(downloadLink)}" target="_blank" rel="noopener" class="btn btn-primary">Download Answer Key</a>`
             : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
-        const objectionAction = objectionLink !== "#"
+        const objectionAction = objectionLink
             ? `<a href="${escapeHtml(objectionLink)}" target="_blank" rel="noopener" class="btn btn-outline">Raise Objection</a>`
             : "";
         const detailPage = getDetailPage(item);

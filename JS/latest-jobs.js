@@ -96,6 +96,14 @@
         return String(value).trim();
     }
 
+    function normalizeActionUrl(value) {
+        const url = getText(value, "");
+        if (!url || url === "#") return "";
+        if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
+        if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+        return "";
+    }
+
     function normalizeSearchText(value) {
         return getText(value, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
     }
@@ -280,9 +288,8 @@
     }
 
     function renderJobCard(job) {
-        const applyLink = getText(job.applyLink, "#");
-        const canApply = applyLink !== "#";
-        const applyAction = canApply
+        const applyLink = normalizeActionUrl(job.applyLink);
+        const applyAction = applyLink
             ? `<a href="${escapeHtml(applyLink)}" target="_blank" rel="noopener" class="btn btn-primary">Apply Now</a>`
             : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
         const detailPage = getDetailPage(job);

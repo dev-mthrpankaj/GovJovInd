@@ -18,9 +18,9 @@ const CONTENT_SHEETS = {
       ["Last Date", "lastDate", "date"],
       ["Status", "status"],
       ["Tags", "tags", "tags"],
-      ["Apply Link", "applyLink"],
-      ["Official Notification", "officialNotification"],
-      ["Detail Page", "detailPage"],
+      ["Apply Link", "applyLink", "link"],
+      ["Official Notification", "officialNotification", "link"],
+      ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
     ]
   },
@@ -38,8 +38,8 @@ const CONTENT_SHEETS = {
       ["Release Date", "releaseDate", "date"],
       ["Status", "status"],
       ["Tags", "tags", "tags"],
-      ["Download Link", "downloadLink"],
-      ["Detail Page", "detailPage"],
+      ["Download Link", "downloadLink", "link"],
+      ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
     ]
   },
@@ -56,8 +56,8 @@ const CONTENT_SHEETS = {
       ["Result Date", "resultDate", "date"],
       ["Status", "status"],
       ["Tags", "tags", "tags"],
-      ["Result Link", "resultLink"],
-      ["Detail Page", "detailPage"],
+      ["Result Link", "resultLink", "link"],
+      ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
     ]
   },
@@ -76,9 +76,9 @@ const CONTENT_SHEETS = {
       ["Objection Last Date", "objectionLastDate", "date"],
       ["Status", "status"],
       ["Tags", "tags", "tags"],
-      ["Download Link", "downloadLink"],
-      ["Objection Link", "objectionLink"],
-      ["Detail Page", "detailPage"],
+      ["Download Link", "downloadLink", "link"],
+      ["Objection Link", "objectionLink", "link"],
+      ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
     ]
   }
@@ -314,12 +314,15 @@ function getContentResult(type) {
 
   const lastRow = sheet.getLastRow();
   const lastColumn = sheet.getLastColumn();
-  const values = sheet.getRange(1, 1, lastRow, lastColumn).getValues();
+  const range = sheet.getRange(1, 1, lastRow, lastColumn);
+  const values = range.getValues();
+  const richTextValues = range.getRichTextValues();
+  const formulas = range.getFormulas();
   const headerMap = buildContentHeaderMap(values[0]);
 
   const items = values.slice(1)
     .map(function (row, index) {
-      return buildContentItem(row, headerMap, config, index + 2);
+      return buildContentItem(row, headerMap, config, index + 2, richTextValues[index + 1], formulas[index + 1]);
     })
     .filter(function (item) {
       if (!item || !hasContentItemData(item, config)) {
@@ -415,7 +418,7 @@ function getContentHeaders(config) {
   }));
 }
 
-function buildContentItem(row, headerMap, config, rowNumber) {
+function buildContentItem(row, headerMap, config, rowNumber, richTextRow, formulaRow) {
   const item = {
     __published: getCellByHeader(row, headerMap, "Published"),
     __order: toNumber(getCellByHeader(row, headerMap, "Order")),
@@ -426,8 +429,11 @@ function buildContentItem(row, headerMap, config, rowNumber) {
     const header = fieldConfig[0];
     const field = fieldConfig[1];
     const type = fieldConfig[2] || "text";
+    const columnIndex = getHeaderIndex(headerMap, header);
     const value = getCellByHeader(row, headerMap, header);
-    const normalizedValue = normalizeContentValue(value, type);
+    const richTextValue = columnIndex === undefined || !richTextRow ? null : richTextRow[columnIndex];
+    const formula = columnIndex === undefined || !formulaRow ? "" : formulaRow[columnIndex];
+    const normalizedValue = normalizeContentValue(value, type, richTextValue, formula);
     item[field] = normalizedValue;
     if (hasEnteredContentValue(normalizedValue)) item.__hasRowData = true;
   });
@@ -449,14 +455,64 @@ function hasEnteredContentValue(value) {
 }
 
 function getCellByHeader(row, headerMap, header) {
-  const index = headerMap[normalizeContentHeader(header)];
+  const index = getHeaderIndex(headerMap, header);
   return index === undefined ? "" : row[index];
 }
 
-function normalizeContentValue(value, type) {
+function getHeaderIndex(headerMap, header) {
+  return headerMap[normalizeContentHeader(header)];
+}
+
+function normalizeContentValue(value, type, richTextValue, formula) {
   if (type === "date") return formatContentDate(value);
   if (type === "tags") return splitContentTags(value);
+  if (type === "link") return normalizeContentLinkValue(value, richTextValue, formula);
   return String(value === undefined || value === null ? "" : value).trim();
+}
+
+function normalizeContentLinkValue(value, richTextValue, formula) {
+  return getRichTextLinkUrl(richTextValue)
+    || getHyperlinkFormulaUrl(formula)
+    || String(value === undefined || value === null ? "" : value).trim();
+}
+
+function getRichTextLinkUrl(richTextValue) {
+  if (!richTextValue || typeof richTextValue.getLinkUrl !== "function") return "";
+
+  try {
+    const cellLink = richTextValue.getLinkUrl();
+    if (cellLink) return String(cellLink).trim();
+  } catch (error) {
+    // Rich text without a single whole-cell link can still contain linked runs.
+  }
+
+  if (typeof richTextValue.getRuns !== "function") return "";
+
+  try {
+    const runs = richTextValue.getRuns();
+    for (let index = 0; index < runs.length; index += 1) {
+      const run = runs[index];
+      const runLink = run && typeof run.getLinkUrl === "function" ? run.getLinkUrl() : "";
+      if (runLink) return String(runLink).trim();
+    }
+  } catch (error) {
+    return "";
+  }
+
+  return "";
+}
+
+function getHyperlinkFormulaUrl(formula) {
+  const text = String(formula || "").trim();
+  if (!text) return "";
+
+  const doubleQuotedMatch = text.match(/^=\s*HYPERLINK\s*\(\s*"((?:[^"]|"")*)"/i);
+  if (doubleQuotedMatch) return doubleQuotedMatch[1].replace(/""/g, '"').trim();
+
+  const singleQuotedMatch = text.match(/^=\s*HYPERLINK\s*\(\s*'((?:[^']|'')*)'/i);
+  if (singleQuotedMatch) return singleQuotedMatch[1].replace(/''/g, "'").trim();
+
+  return "";
 }
 
 function formatContentDate(value) {

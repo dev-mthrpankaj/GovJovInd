@@ -70,6 +70,14 @@
         return String(value).trim();
     }
 
+    function normalizeActionUrl(value) {
+        const url = getText(value, "");
+        if (!url || url === "#") return "";
+        if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
+        if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+        return "";
+    }
+
     function normalizeSearchText(value) {
         return getText(value, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
     }
@@ -128,7 +136,7 @@
 
     function getStatus(item) {
         const resultDate = parseDate(item.resultDate);
-        const hasLink = getText(item.resultLink, "#") !== "#";
+        const hasLink = Boolean(normalizeActionUrl(item.resultLink));
         if (resultDate && resultDate > today()) return "upcoming";
         if (hasLink && resultDate && resultDate <= today()) return "released";
         if (item.status === "released" || item.status === "upcoming") return item.status;
@@ -231,7 +239,7 @@
 
     function getDetailPage(item) {
         if (!item || !item.id) return "";
-        return getText(item.detailPage, `../Result_Details/HTML/result-details-${item.id}.html`);
+        return normalizeActionUrl(item.detailPage) || `../Result_Details/HTML/result-details-${item.id}.html`;
     }
 
     function renderBadges(item) {
@@ -245,8 +253,8 @@
     }
 
     function renderCard(item) {
-        const resultLink = getText(item.resultLink, "#");
-        const resultAction = resultLink !== "#"
+        const resultLink = normalizeActionUrl(item.resultLink);
+        const resultAction = resultLink
             ? `<a href="${escapeHtml(resultLink)}" target="_blank" rel="noopener" class="btn btn-primary">Check Result</a>`
             : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
         const detailPage = getDetailPage(item);

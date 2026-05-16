@@ -11,6 +11,14 @@
     return String(value).trim();
   }
 
+  function normalizeActionUrl(value) {
+    const url = getText(value, "");
+    if (!url || url === "#") return "";
+    if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
+    if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+    return "";
+  }
+
   function escapeHtml(value) {
     return getText(value, "").replace(/[&<>"']/g, (character) => ({
       "&": "&amp;",
@@ -128,8 +136,8 @@
   }
 
   function linkButton(url, label, primary) {
-    const safe = getText(url, "#");
-    if (!safe || safe === "#") return `<button class="btn btn-disabled" type="button" disabled>${label} Coming Soon</button>`;
+    const safe = normalizeActionUrl(url);
+    if (!safe) return `<button class="btn btn-disabled" type="button" disabled>${label} Coming Soon</button>`;
     return `<a class="btn ${primary ? "btn-primary" : "btn-outline"}" href="${escapeHtml(safe)}" target="_blank" rel="noopener">${label}</a>`;
   }
 
