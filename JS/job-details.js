@@ -11,14 +11,6 @@
     return String(value).trim();
   }
 
-  function normalizeActionUrl(value) {
-    const url = getText(value, "");
-    if (!url || url === "#") return "";
-    if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
-    if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
-    return "";
-  }
-
   function escapeHtml(value) {
     return getText(value, "").replace(/[&<>"']/g, (character) => ({
       "&": "&amp;",
@@ -27,6 +19,14 @@
       "\"": "&quot;",
       "'": "&#039;"
     }[character]));
+  }
+
+  function normalizeActionUrl(value) {
+    const url = getText(value, "");
+    if (!url || url === "#") return "";
+    if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
+    if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+    return "";
   }
 
   function parseDate(value) {
@@ -95,9 +95,11 @@
   async function loadJobs() {
     let jobs = fallbackJobs.map(normalizeJob).filter((job) => job.id);
     if (window.GovJobUpdatesSheetData && typeof window.GovJobUpdatesSheetData.load === "function") {
-      const sheetJobs = await window.GovJobUpdatesSheetData.load("jobs", jobs);
-      if (Array.isArray(sheetJobs) && sheetJobs.length) {
-        jobs = sheetJobs.map(normalizeJob).filter((job) => job.id);
+      try {
+        const sheetJobs = await window.GovJobUpdatesSheetData.load("jobs", jobs);
+        if (Array.isArray(sheetJobs) && sheetJobs.length) jobs = sheetJobs.map(normalizeJob).filter((job) => job.id);
+      } catch {
+        // Keep fallback data if sheet loading fails.
       }
     }
     return jobs;
@@ -137,11 +139,16 @@
 
   function linkButton(url, label, primary) {
     const safe = normalizeActionUrl(url);
-    if (!safe) return `<button class="btn btn-disabled" type="button" disabled>${label} Coming Soon</button>`;
-    return `<a class="btn ${primary ? "btn-primary" : "btn-outline"}" href="${escapeHtml(safe)}" target="_blank" rel="noopener">${label}</a>`;
+    if (!safe) return `<button class="btn btn-disabled" type="button" disabled>${escapeHtml(label)} Coming Soon</button>`;
+    return `<a class="btn ${primary ? "btn-primary" : "btn-outline"}" href="${escapeHtml(safe)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
+  }
+
+  function row(label, value) {
+    return `<div class="job-detail-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
   }
 
   function renderNotFound(id) {
+    document.title = "Job Not Found | GovJobUpdates";
     root.innerHTML = `
       <section class="job-detail-hero">
         <span class="job-detail-kicker">Job Not Found</span>
@@ -150,10 +157,6 @@
         <div class="job-detail-actions"><a class="btn btn-primary" href="../../HTML/latest-jobs.html">Back to Latest Jobs</a></div>
       </section>
     `;
-  }
-
-  function row(label, value) {
-    return `<div class="job-detail-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
   }
 
   function renderJob(job) {
@@ -195,7 +198,41 @@
     `;
   }
 
+  function initMenu() {
+    const toggle = document.querySelector("[data-job-menu-toggle]");
+    const nav = document.querySelector("[data-job-nav]");
+    if (!toggle || !nav) return;
+    const icon = toggle.querySelector("i");
+    const setOpen = (open) => {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      if (icon) {
+        icon.classList.toggle("fa-bars", !open);
+        icon.classList.toggle("fa-times", open);
+      }
+    };
+    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
+    nav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setOpen(false);
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1024) setOpen(false);
+    });
+  }
+
+  function initLogoFallback() {
+    document.querySelectorAll(".job-detail-logo-mark img").forEach((img) => {
+      img.addEventListener("error", () => {
+        img.style.display = "none";
+      }, { once: true });
+      if (img.complete && img.naturalWidth === 0) img.style.display = "none";
+    });
+  }
+
   async function init() {
+    initMenu();
+    initLogoFallback();
     root.innerHTML = `<section class="job-detail-card"><h2>Loading job details...</h2><p>Please wait while we fetch the latest job data.</p></section>`;
     const id = getRequestedId();
     const jobs = await loadJobs();
@@ -204,5 +241,6 @@
     else renderJob(job);
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
 }());
