@@ -1,10 +1,70 @@
 (function () {
   "use strict";
 
-  const root = document.getElementById("jobDetailRoot");
-  if (!root) return;
+  function initMenu() {
+    const toggle = document.querySelector("[data-job-menu-toggle]");
+    const nav = document.querySelector("[data-job-nav]");
+    if (!toggle || !nav || toggle.dataset.bound === "true") return;
+    toggle.dataset.bound = "true";
+    const icon = toggle.querySelector("i");
+    const setOpen = (open) => {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      if (icon) {
+        icon.classList.toggle("fa-bars", !open);
+        icon.classList.toggle("fa-times", open);
+      }
+    };
+    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
+    nav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setOpen(false);
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1024) setOpen(false);
+    });
+  }
 
-  const fallbackJobs = Array.isArray(window.GovJobUpdatesJobs) ? window.GovJobUpdatesJobs : [];
+  function initLogoFallback() {
+    document.querySelectorAll(".job-detail-logo-mark img, .logo-img").forEach((img) => {
+      if (img.dataset.logoFallbackBound === "true") return;
+      img.dataset.logoFallbackBound = "true";
+      img.addEventListener("error", () => {
+        const fallback = img.closest(".job-detail-logo-mark")?.querySelector(".job-detail-logo-fallback");
+        img.style.display = "none";
+        if (fallback) fallback.style.display = "grid";
+      }, { once: true });
+      if (img.complete && img.naturalWidth === 0) img.style.display = "none";
+    });
+  }
+
+  function initStaticActions() {
+    document.querySelectorAll(".copy-link").forEach((button) => {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          const old = button.innerHTML;
+          button.innerHTML = '<i class="fas fa-check"></i> Copied';
+          setTimeout(() => { button.innerHTML = old; }, 1500);
+        } catch {
+          window.prompt("Copy this link", window.location.href);
+        }
+      });
+    });
+    document.querySelectorAll(".print-page").forEach((button) => {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => window.print());
+    });
+  }
+
+  function runSharedHelpers() {
+    initMenu();
+    initLogoFallback();
+    initStaticActions();
+  }
 
   function getText(value, fallback = "Not specified") {
     if (value === undefined || value === null || String(value).trim() === "") return fallback;
@@ -93,14 +153,12 @@
   }
 
   async function loadJobs() {
-    let jobs = fallbackJobs.map(normalizeJob).filter((job) => job.id);
+    let jobs = (Array.isArray(window.GovJobUpdatesJobs) ? window.GovJobUpdatesJobs : []).map(normalizeJob).filter((job) => job.id);
     if (window.GovJobUpdatesSheetData && typeof window.GovJobUpdatesSheetData.load === "function") {
       try {
         const sheetJobs = await window.GovJobUpdatesSheetData.load("jobs", jobs);
         if (Array.isArray(sheetJobs) && sheetJobs.length) jobs = sheetJobs.map(normalizeJob).filter((job) => job.id);
-      } catch {
-        // Keep fallback data if sheet loading fails.
-      }
+      } catch {}
     }
     return jobs;
   }
@@ -147,98 +205,34 @@
     return `<div class="job-detail-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
   }
 
-  function renderNotFound(id) {
+  function renderNotFound(root, id) {
     document.title = "Job Not Found | GovJobUpdates";
-    root.innerHTML = `
-      <section class="job-detail-hero">
-        <span class="job-detail-kicker">Job Not Found</span>
-        <h1>Job detail is unavailable</h1>
-        <p class="job-detail-org">No matching job was found for <strong>${escapeHtml(id || "this URL")}</strong>.</p>
-        <div class="job-detail-actions"><a class="btn btn-primary" href="../../HTML/latest-jobs.html">Back to Latest Jobs</a></div>
-      </section>
-    `;
+    root.innerHTML = `<section class="job-detail-hero"><span class="job-detail-kicker">Job Not Found</span><h1>Job detail is unavailable</h1><p class="job-detail-org">No matching job was found for <strong>${escapeHtml(id || "this URL")}</strong>.</p><div class="job-detail-actions"><a class="btn btn-primary" href="../../HTML/latest-jobs.html">Back to Latest Jobs</a></div></section>`;
   }
 
-  function renderJob(job) {
+  function renderJob(root, job) {
     const status = getStatus(job);
     updateSeo(job);
     root.innerHTML = `
-      <section class="job-detail-hero">
-        <span class="job-detail-kicker">${escapeHtml(status)} Recruitment Update</span>
-        <h1>${escapeHtml(job.title)}</h1>
-        <p class="job-detail-org"><strong>Organization:</strong> ${escapeHtml(job.organization)}</p>
-        <div class="job-detail-tags">
-          <span>${escapeHtml(job.category)}</span>
-          <span>${escapeHtml(job.year)}</span>
-          <span>${escapeHtml(job.totalPosts)} Posts</span>
-        </div>
-        <div class="job-detail-actions">
-          ${linkButton(job.applyLink, "Apply / Official Website", true)}
-          ${linkButton(job.officialNotification, "Official Notification", false)}
-          <a class="btn btn-outline" href="../../HTML/latest-jobs.html">Back to Jobs</a>
-        </div>
-      </section>
-
-      <section class="job-alert-box">
-        <strong>Important:</strong> GovJobUpdates is not a government website. Always verify dates, eligibility, fees, vacancies and instructions from the official notification or official recruitment portal before applying.
-      </section>
-
-      <section class="job-detail-grid">
-        <article class="job-detail-card"><h2>Important Details</h2><dl class="job-detail-list">
-          ${row("Job ID", job.id)}${row("Department", job.department)}${row("Category", job.category)}${row("Qualification", job.qualification)}${row("Total Posts", job.totalPosts)}${row("Status", status)}
-        </dl></article>
-        <article class="job-detail-card"><h2>Important Dates</h2><dl class="job-detail-list">
-          ${row("Start Date", formatDate(job.startDate))}${row("Last Date", formatDate(job.lastDate))}${row("Updated On", formatDate(job.updatedAt))}
-        </dl></article>
-        <article class="job-detail-card"><h2>Eligibility Overview</h2><p>Available qualification summary: <strong>${escapeHtml(job.qualification)}</strong>.</p><p class="job-meta-note">For post-wise qualification, age limit, reservation, fee, experience, physical standards and document requirements, read the official notification.</p></article>
-        <article class="job-detail-card"><h2>How to Apply</h2><ol class="job-step-list"><li>Open the official apply link / official website.</li><li>Read the official notification carefully.</li><li>Check eligibility, age limit, fees and documents.</li><li>Fill the form with correct details.</li><li>Submit and save the final printout / PDF.</li></ol></article>
-        <article class="job-detail-card"><h2>Selection Process</h2><p>The selection process may include written exam, skill test, physical test, interview, document verification or medical examination depending on the recruitment. Check the official notification for exact stages.</p></article>
-        <article class="job-detail-card"><h2>Tags</h2><div class="job-detail-tags">${job.tags.length ? job.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("") : "<span>Government Job</span>"}</div></article>
-      </section>
-    `;
+      <section class="job-detail-hero"><span class="job-detail-kicker">${escapeHtml(status)} Recruitment Update</span><h1>${escapeHtml(job.title)}</h1><p class="job-detail-org"><strong>Organization:</strong> ${escapeHtml(job.organization)}</p><div class="job-detail-tags"><span>${escapeHtml(job.category)}</span><span>${escapeHtml(job.year)}</span><span>${escapeHtml(job.totalPosts)} Posts</span></div><div class="job-detail-actions">${linkButton(job.applyLink, "Apply / Official Website", true)}${linkButton(job.officialNotification, "Official Notification", false)}<a class="btn btn-outline" href="../../HTML/latest-jobs.html">Back to Jobs</a></div></section>
+      <section class="job-alert-box"><strong>Important:</strong> GovJobUpdates is not a government website. Always verify dates, eligibility, fees, vacancies and instructions from the official notification or official recruitment portal before applying.</section>
+      <section class="job-detail-grid"><article class="job-detail-card"><h2>Important Details</h2><dl class="job-detail-list">${row("Job ID", job.id)}${row("Department", job.department)}${row("Category", job.category)}${row("Qualification", job.qualification)}${row("Total Posts", job.totalPosts)}${row("Status", status)}</dl></article><article class="job-detail-card"><h2>Important Dates</h2><dl class="job-detail-list">${row("Start Date", formatDate(job.startDate))}${row("Last Date", formatDate(job.lastDate))}${row("Updated On", formatDate(job.updatedAt))}</dl></article><article class="job-detail-card"><h2>Eligibility Overview</h2><p>Available qualification summary: <strong>${escapeHtml(job.qualification)}</strong>.</p><p class="job-meta-note">For post-wise qualification, age limit, reservation, fee, experience, physical standards and document requirements, read the official notification.</p></article><article class="job-detail-card"><h2>How to Apply</h2><ol class="job-step-list"><li>Open the official apply link / official website.</li><li>Read the official notification carefully.</li><li>Check eligibility, age limit, fees and documents.</li><li>Fill the form with correct details.</li><li>Submit and save the final printout / PDF.</li></ol></article><article class="job-detail-card"><h2>Selection Process</h2><p>The selection process may include written exam, skill test, physical test, interview, document verification or medical examination depending on the recruitment. Check the official notification for exact stages.</p></article><article class="job-detail-card"><h2>Tags</h2><div class="job-detail-tags">${job.tags.length ? job.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("") : "<span>Government Job</span>"}</div></article></section>`;
   }
 
-  function initMenu() {
-    const toggle = document.querySelector("[data-job-menu-toggle]");
-    const nav = document.querySelector("[data-job-nav]");
-    if (!toggle || !nav) return;
-    const icon = toggle.querySelector("i");
-    const setOpen = (open) => {
-      nav.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
-      if (icon) {
-        icon.classList.toggle("fa-bars", !open);
-        icon.classList.toggle("fa-times", open);
-      }
-    };
-    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
-    nav.addEventListener("click", (event) => {
-      if (event.target.closest("a")) setOpen(false);
-    });
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 1024) setOpen(false);
-    });
-  }
-
-  function initLogoFallback() {
-    document.querySelectorAll(".job-detail-logo-mark img").forEach((img) => {
-      img.addEventListener("error", () => {
-        img.style.display = "none";
-      }, { once: true });
-      if (img.complete && img.naturalWidth === 0) img.style.display = "none";
-    });
-  }
-
-  async function init() {
-    initMenu();
-    initLogoFallback();
+  async function initDynamicDetail() {
+    const root = document.getElementById("jobDetailRoot");
+    if (!root) return;
     root.innerHTML = `<section class="job-detail-card"><h2>Loading job details...</h2><p>Please wait while we fetch the latest job data.</p></section>`;
     const id = getRequestedId();
     const jobs = await loadJobs();
     const job = jobs.find((item) => item.id === id);
-    if (!job) renderNotFound(id);
-    else renderJob(job);
+    if (!job) renderNotFound(root, id);
+    else renderJob(root, job);
+  }
+
+  async function init() {
+    runSharedHelpers();
+    await initDynamicDetail();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
