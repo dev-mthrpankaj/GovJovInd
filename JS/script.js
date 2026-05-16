@@ -228,8 +228,10 @@ const ensureSharedHeader = () => {
     container.prepend(logoContainer);
   }
 
+  const logo96 = getRootRelativeHref('Assets/Home%20Page/favicon-96x96.png');
+  const logo32 = getRootRelativeHref('Assets/Home%20Page/favicon-32x32.png');
   logoContainer.innerHTML = `
-    <img src="${getRootRelativeHref('Assets/Home Page/favicon-96x96.png')}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async">
+    <img src="${logo96}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async" onerror="this.onerror=null;this.src='${logo32}'">
     <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>
   `;
 
@@ -763,33 +765,36 @@ const startCounters = () => {
       counter.textContent = formatCounterValue(counter, target, target);
       return;
     }
-    let count = 0;
-    const step = Math.max(1, Math.floor(target / 120));
-    const timer = setInterval(() => {
-      count += step;
-      if (count >= target) {
-        clearInterval(timer);
-        count = target;
-      }
-      counter.textContent = formatCounterValue(counter, count, target);
-    }, 16);
+
+    let start = 0;
+    const duration = 1200;
+    const startedAt = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      start = target * eased;
+      counter.textContent = formatCounterValue(counter, start, target);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
   });
 };
 
-const statsSection = document.querySelector('.stats');
-if (statsSection && 'IntersectionObserver' in window) {
-  const obs = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      startCounters();
-      obs.disconnect();
-    }
-  }, { threshold: 0.3 });
-  obs.observe(statsSection);
-}
+const observerOptions = { threshold: 0.35 };
 
-document.querySelectorAll('img').forEach((img) => {
-  const isPriorityImage = img.getAttribute('fetchpriority') === 'high' || Boolean(img.closest('.hero-image, .logo-container'));
-  if (!img.hasAttribute('loading')) img.setAttribute('loading', isPriorityImage ? 'eager' : 'lazy');
-  if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
-});
+if ('IntersectionObserver' in window) {
+  const statsObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      startCounters();
+      observer.disconnect();
+    });
+  }, observerOptions);
+
+  stats.forEach((stat) => statsObserver.observe(stat));
+} else {
+  startCounters();
+}
 })();
