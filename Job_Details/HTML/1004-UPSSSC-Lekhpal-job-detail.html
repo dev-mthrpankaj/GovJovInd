@@ -11,23 +11,18 @@
   <link rel="shortcut icon" href="../../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../../Assets/Home%20Page/apple-icon.png">
   <link rel="stylesheet" href="../../CSS/style.css">
-  <link rel="stylesheet" href="../../CSS/job-detail-standard.css?v=lekhpalfix1">
+  <link rel="stylesheet" href="../CSS/job-details.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="job-detail-page">
-  <header class="job-detail-site-header">
-    <div class="job-detail-header-container">
-      <a href="../../index.html" class="job-detail-brand" aria-label="GovJobUpdates Home">
-        <span class="job-detail-logo-mark" aria-hidden="true">
-          <img src="../../Assets/Home%20Page/favicon-96x96.png" alt="" width="46" height="46" decoding="async">
-          <span class="job-detail-logo-fallback">G</span>
-        </span>
-        <span class="job-detail-brand-text">GovJob<span>Updates</span></span>
-      </a>
-      <button class="job-detail-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" data-job-menu-toggle>
-        <i class="fas fa-bars" aria-hidden="true"></i>
-      </button>
-      <nav class="job-detail-nav" aria-label="Primary navigation" data-job-nav>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="../../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+        <a href="../../index.html" class="logo">GovJob<span>Updates</span></a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
+      <nav>
         <ul>
           <li><a href="../../index.html">Home</a></li>
           <li><a href="../../HTML/latest-jobs.html" class="active">Job</a></li>
@@ -44,182 +39,307 @@
     </div>
   </header>
 
-  <main class="job-detail-standard">
-    <section class="job-header">
-      <span class="notice-line">Advt. No. 02-Exam/2025</span>
-      <h1>UPSSSC Lekhpal Main Examination 2025 Online Form 2026</h1>
-      <p class="org-name"><strong>Organization:</strong> Uttar Pradesh Subordinate Services Selection Commission (UPSSSC), Lucknow</p>
-      <p class="org-name"><strong>Post:</strong> Lekhpal under Board of Revenue, Uttar Pradesh</p>
-      <div class="important-dates">
-        <div class="date-card"><h3><i class="fas fa-calendar-check"></i> Application Begin</h3><p>29-12-2025</p></div>
-        <div class="date-card"><h3><i class="fas fa-calendar-times"></i> Last Date Apply / Fee</h3><p>28-01-2026</p></div>
-        <div class="date-card"><h3><i class="fas fa-edit"></i> Correction Last Date</h3><p>04-02-2026</p></div>
-        <div class="date-card"><h3><i class="fas fa-ticket-alt"></i> Admit Card</h3><p>16-05-2026</p></div>
+  <main class="container job-detail-page lekhpal-detail">
+    <section class="lekhpal-hero">
+      <div class="lekhpal-hero-content">
+        <div class="lekhpal-badges" aria-label="Recruitment highlights">
+          <span>Advt. No. 02-Exam/2025</span>
+          <span>7994 Posts</span>
+          <span>Exam: 21 May 2026</span>
+        </div>
+        <h1>UPSSSC Lekhpal Main Examination 2025 Online Form 2026</h1>
+        <p class="lekhpal-lead">Uttar Pradesh Subordinate Services Selection Commission has issued the Lekhpal recruitment for the Board of Revenue, Uttar Pradesh. Candidates shortlisted through PET 2025 will appear in the Lekhpal Main Examination.</p>
+        <div class="lekhpal-meta">
+          <p><strong>Organization:</strong> Uttar Pradesh Subordinate Services Selection Commission (UPSSSC), Lucknow</p>
+          <p><strong>Post:</strong> Lekhpal, Board of Revenue, Uttar Pradesh</p>
+        </div>
+        <div class="job-actions lekhpal-actions">
+          <a href="https://upsssc.gov.in" class="btn" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Apply / Official Website</a>
+          <a href="https://upsssc.gov.in/ApplicantSegment.aspx" class="btn btn-outline" target="_blank" rel="noopener"><i class="fas fa-user-check" aria-hidden="true"></i> Candidate Login</a>
+          <button class="btn btn-outline copy-link" type="button"><i class="fas fa-link" aria-hidden="true"></i> Copy Link</button>
+          <button class="btn btn-outline print-page" type="button"><i class="fas fa-print" aria-hidden="true"></i> Print</button>
+        </div>
       </div>
-      <div class="job-actions">
-        <a href="https://upsssc.gov.in" class="btn btn-primary" target="_blank" rel="noopener">Apply / Official Website</a>
-        <a href="../../HTML/latest-jobs.html" class="btn btn-outline">Back to Jobs</a>
-        <button class="btn btn-outline copy-link" type="button"><i class="fas fa-link"></i> Copy Link</button>
-        <button class="btn btn-outline print-page" type="button"><i class="fas fa-print"></i> Print</button>
-      </div>
+      <aside class="lekhpal-status-panel" aria-label="Current recruitment status">
+        <span class="status-label">Current Status</span>
+        <strong>Admit Card Released</strong>
+        <p>Main Exam date is listed as <b>21-05-2026</b>. Candidates should verify all instructions from the official UPSSSC portal before the exam.</p>
+      </aside>
     </section>
 
-    <section class="job-alert-box">
-      <strong>Important:</strong> GovJobUpdates is not a government website. Always verify dates, eligibility, fees, vacancies and instructions from the official notification or official recruitment portal before applying.
+    <section class="lekhpal-quick-grid" aria-label="Important dates">
+      <article>
+        <span>Application Begin</span>
+        <strong>29-12-2025</strong>
+      </article>
+      <article>
+        <span>Last Date Apply / Fee</span>
+        <strong>28-01-2026</strong>
+      </article>
+      <article>
+        <span>Correction Last Date</span>
+        <strong>04-02-2026</strong>
+      </article>
+      <article>
+        <span>Admit Card</span>
+        <strong>16-05-2026</strong>
+      </article>
     </section>
 
-    <section class="section updates-section">
-      <h2><i class="fas fa-bullhorn"></i> Latest Updates</h2>
-      <div class="notification-box">
-        <h3><i class="fas fa-info-circle"></i> Important Information</h3>
-        <p>UPSSSC has invited online applications for <strong>7994 Lekhpal posts</strong> under the Board of Revenue, Uttar Pradesh.</p>
-        <p>Only candidates who appeared in <strong>UPSSSC PET 2025</strong> and have a valid PET 2025 score card can apply.</p>
-        <p>Shortlisting for the Main Examination will be done on the basis of <strong>PET 2025 normalized score</strong>.</p>
-        <p>Candidates with <strong>zero or negative marks</strong> in PET 2025 will not be shortlisted for the Main Examination.</p>
-      </div>
-      <div class="update-links">
-        <h4><i class="fas fa-link"></i> Important Links & Notices</h4>
-        <a href="https://upsssc.gov.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> UPSSSC Official Website</a>
-        <a href="https://upsssc.gov.in/ApplicantSegment.aspx" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Applicant Segment / Candidate Login</a>
-      </div>
+    <section class="job-alert-box lekhpal-alert">
+      <strong>Important:</strong> GovJobUpdates is not a government website. Always verify dates, eligibility, fees, vacancies, syllabus, reservation rules and instructions from the official UPSSSC notification or official portal before applying.
     </section>
 
-    <section class="section">
-      <h2><i class="fas fa-calendar-alt"></i> Important Dates</h2>
-      <table class="fees-table">
-        <thead><tr><th>Event</th><th>Date</th></tr></thead>
-        <tbody>
-          <tr><td>Notification Publication Date</td><td>16-12-2025</td></tr>
-          <tr><td>Online Application / Fee Payment Start</td><td>29-12-2025</td></tr>
-          <tr><td>Last Date for Online Application / Fee Payment / Final Submission</td><td>28-01-2026</td></tr>
-          <tr><td>Last Date for Fee Adjustment and Application Correction</td><td>04-02-2026</td></tr>
-          <tr><td>Main Exam Date</td><td>21-05-2026</td></tr>
-          <tr><td>Admit Card</td><td>16-05-2026</td></tr>
-        </tbody>
-      </table>
-      <p class="table-note"><strong>Note:</strong> Application printout will be available only after successful fee payment / fee adjustment.</p>
-    </section>
+    <div class="lekhpal-layout">
+      <div class="lekhpal-main">
+        <section class="section updates-section">
+          <h2><i class="fas fa-bullhorn" aria-hidden="true"></i> Latest Updates</h2>
+          <div class="notification-box">
+            <h3><i class="fas fa-circle-info" aria-hidden="true"></i> Recruitment Snapshot</h3>
+            <ul class="lekhpal-list">
+              <li>UPSSSC has invited online applications for <strong>7994 Lekhpal posts</strong> under the Board of Revenue, Uttar Pradesh.</li>
+              <li>Only candidates who appeared in <strong>UPSSSC PET 2025</strong> and have a valid PET 2025 score card can apply.</li>
+              <li>Shortlisting for the Main Examination will be done on the basis of the <strong>PET 2025 normalized score</strong>.</li>
+              <li>Candidates with <strong>zero or negative marks</strong> in PET 2025 will not be shortlisted for the Main Examination.</li>
+            </ul>
+          </div>
+          <div class="update-links">
+            <h4><i class="fas fa-link" aria-hidden="true"></i> Important Links & Notices</h4>
+            <a href="https://upsssc.gov.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i> UPSSSC Official Website</a>
+            <a href="https://upsssc.gov.in/ApplicantSegment.aspx" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Applicant Segment / Candidate Login</a>
+          </div>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-money-bill"></i> Application Fees</h2>
-      <table class="fees-table">
-        <thead><tr><th>Category</th><th>Application Fee</th><th>Online Processing Fee</th><th>Total Fee</th></tr></thead>
-        <tbody>
-          <tr><td>General / Unreserved</td><td>₹0</td><td>₹25</td><td>₹25</td></tr>
-          <tr><td>OBC</td><td>₹0</td><td>₹25</td><td>₹25</td></tr>
-          <tr><td>SC</td><td>₹0</td><td>₹25</td><td>₹25</td></tr>
-          <tr><td>ST</td><td>₹0</td><td>₹25</td><td>₹25</td></tr>
-        </tbody>
-      </table>
-      <p><strong>Payment Mode:</strong> Credit Card, Debit Card, Internet Banking, UPI or SBI e-Challan.</p>
-      <p><strong>Main Exam Fee:</strong> Candidates shortlisted for the Main Examination will have to pay the prescribed Main Examination fee separately before downloading the Main Exam admit card.</p>
-    </section>
+        <section class="section">
+          <h2><i class="fas fa-calendar-alt" aria-hidden="true"></i> Important Dates</h2>
+          <div class="table-scroll">
+            <table class="fees-table">
+              <thead>
+                <tr><th>Event</th><th>Date</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Notification Publication Date</td><td>16-12-2025</td></tr>
+                <tr><td>Online Application / Fee Payment Start</td><td>29-12-2025</td></tr>
+                <tr><td>Last Date for Online Application / Fee Payment / Final Submission</td><td>28-01-2026</td></tr>
+                <tr><td>Last Date for Fee Adjustment and Application Correction</td><td>04-02-2026</td></tr>
+                <tr><td>Main Exam Date</td><td>21-05-2026</td></tr>
+                <tr><td>Admit Card</td><td>16-05-2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note"><strong>Note:</strong> Application printout will be available only after successful fee payment / fee adjustment.</p>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-briefcase"></i> Vacancy Details</h2>
-      <div class="info-cards compact-cards">
-        <div class="info-card"><h3><i class="fas fa-users"></i> Total Posts</h3><p><strong>7994 Posts</strong></p><p>Post Name: Lekhpal</p><p>Department: Board of Revenue, Uttar Pradesh</p></div>
-        <div class="info-card"><h3><i class="fas fa-map-marker-alt"></i> Job Location</h3><p>Uttar Pradesh</p><p>Recruitment will be conducted as per UPSSSC rules.</p></div>
-      </div>
-      <h3>Category Wise Vacancy</h3>
-      <table class="vacancy-table">
-        <thead><tr><th>UR</th><th>SC</th><th>ST</th><th>OBC</th><th>EWS</th><th>Total</th></tr></thead>
-        <tbody><tr><td>4165</td><td>1446</td><td>150</td><td>1441</td><td>792</td><td><strong>7994</strong></td></tr></tbody>
-      </table>
-      <h3>Horizontal Reservation Summary</h3>
-      <table class="vacancy-table">
-        <thead><tr><th>Dependent of Freedom Fighter</th><th>Ex-Servicemen</th><th>Female</th><th>PwD / Divyang</th></tr></thead>
-        <tbody><tr><td>152</td><td>391</td><td>1592</td><td>152</td></tr></tbody>
-      </table>
-      <p class="table-note"><strong>Note:</strong> Reservation benefits will be applicable as per Uttar Pradesh Government rules and valid certificates.</p>
-    </section>
+        <section class="section">
+          <h2><i class="fas fa-money-bill" aria-hidden="true"></i> Application Fees</h2>
+          <div class="table-scroll">
+            <table class="fees-table">
+              <thead>
+                <tr><th>Category</th><th>Application Fee</th><th>Online Processing Fee</th><th>Total Fee</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>General / Unreserved</td><td>Rs. 0</td><td>Rs. 25</td><td>Rs. 25</td></tr>
+                <tr><td>OBC</td><td>Rs. 0</td><td>Rs. 25</td><td>Rs. 25</td></tr>
+                <tr><td>SC</td><td>Rs. 0</td><td>Rs. 25</td><td>Rs. 25</td></tr>
+                <tr><td>ST</td><td>Rs. 0</td><td>Rs. 25</td><td>Rs. 25</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Payment Mode:</strong> Credit Card, Debit Card, Internet Banking, UPI or SBI e-Challan.</p>
+          <p><strong>Main Exam Fee:</strong> Candidates shortlisted for the Main Examination will have to pay the prescribed Main Examination fee separately before downloading the Main Exam admit card.</p>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-user-check"></i> Eligibility & Age Limit</h2>
-      <div class="info-cards">
-        <div class="info-card"><h3><i class="fas fa-graduation-cap"></i> Educational Qualification</h3><p>Candidate must have passed <strong>Intermediate / Class 12</strong> from the Board of High School and Intermediate Education, Uttar Pradesh, or any equivalent qualification recognized by the Government.</p></div>
-        <div class="info-card"><h3><i class="fas fa-star"></i> Preferential Qualification</h3><p>Preference may be given to candidates who have served at least <strong>2 years in Territorial Army</strong> or have obtained <strong>NCC “B” Certificate</strong>.</p></div>
-        <div class="info-card"><h3><i class="fas fa-user"></i> Age Limit as on 01-07-2025</h3><p><strong>Minimum Age:</strong> 18 Years</p><p><strong>Maximum Age:</strong> 40 Years</p><p><strong>Age Relaxation:</strong> Extra as per UPSSSC / Uttar Pradesh Government rules.</p></div>
-        <div class="info-card"><h3><i class="fas fa-id-card"></i> PET 2025 Requirement</h3><p>Only candidates included in <strong>Preliminary Eligibility Test PET 2025</strong> with a valid score card are eligible to apply.</p></div>
-      </div>
-    </section>
+        <section class="section">
+          <h2><i class="fas fa-briefcase" aria-hidden="true"></i> Vacancy Details</h2>
+          <div class="lekhpal-stat-grid">
+            <article><span>Total Posts</span><strong>7994</strong><p>Lekhpal under Board of Revenue, Uttar Pradesh</p></article>
+            <article><span>Job Location</span><strong>Uttar Pradesh</strong><p>Recruitment will be conducted as per UPSSSC rules.</p></article>
+            <article><span>Department</span><strong>Revenue</strong><p>Post name: Lekhpal</p></article>
+          </div>
+          <h3>Category Wise Vacancy</h3>
+          <div class="table-scroll">
+            <table class="vacancy-table">
+              <thead>
+                <tr><th>UR</th><th>SC</th><th>ST</th><th>OBC</th><th>EWS</th><th>Total</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>4165</td><td>1446</td><td>150</td><td>1441</td><td>792</td><td><strong>7994</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Horizontal Reservation Summary</h3>
+          <div class="table-scroll">
+            <table class="vacancy-table">
+              <thead>
+                <tr><th>Dependent of Freedom Fighter</th><th>Ex-Servicemen</th><th>Female</th><th>PwD / Divyang</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>152</td><td>391</td><td>1592</td><td>152</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note"><strong>Note:</strong> Reservation benefits will be applicable as per Uttar Pradesh Government rules and valid certificates.</p>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-tasks"></i> Selection Process</h2>
-      <div class="info-card">
-        <h3><i class="fas fa-list-ol"></i> Selection Basis</h3>
-        <p>1. Shortlisting on the basis of UPSSSC PET 2025 normalized score</p>
-        <p>2. UPSSSC Lekhpal Main Written Examination</p>
-        <p>3. Document Verification</p>
-        <p>4. Final selection / further process as per Commission rules</p>
-      </div>
-      <div class="notification-box">
-        <h3><i class="fas fa-exclamation-triangle"></i> Important PET Score Rule</h3>
-        <p>Candidates having zero or less than zero / negative marks in PET 2025 will not be shortlisted for the Main Examination.</p>
-      </div>
-    </section>
+        <section class="section">
+          <h2><i class="fas fa-user-check" aria-hidden="true"></i> Eligibility & Age Limit</h2>
+          <div class="info-cards">
+            <article class="info-card">
+              <h3><i class="fas fa-graduation-cap" aria-hidden="true"></i> Educational Qualification</h3>
+              <p>Candidate must have passed <strong>Intermediate / Class 12</strong> from the Board of High School and Intermediate Education, Uttar Pradesh, or any equivalent qualification recognized by the Government.</p>
+            </article>
+            <article class="info-card">
+              <h3><i class="fas fa-id-card" aria-hidden="true"></i> PET 2025 Requirement</h3>
+              <p>Only candidates included in <strong>Preliminary Eligibility Test PET 2025</strong> with a valid score card are eligible to apply.</p>
+            </article>
+            <article class="info-card">
+              <h3><i class="fas fa-user" aria-hidden="true"></i> Age Limit as on 01-07-2025</h3>
+              <p><strong>Minimum Age:</strong> 18 Years</p>
+              <p><strong>Maximum Age:</strong> 40 Years</p>
+              <p><strong>Age Relaxation:</strong> Extra as per UPSSSC / Uttar Pradesh Government rules.</p>
+            </article>
+            <article class="info-card">
+              <h3><i class="fas fa-star" aria-hidden="true"></i> Preferential Qualification</h3>
+              <p>Preference may be given to candidates who have served at least <strong>2 years in Territorial Army</strong> or have obtained <strong>NCC B Certificate</strong>.</p>
+            </article>
+          </div>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-laptop"></i> Main Exam Pattern</h2>
-      <div class="info-card">
-        <p><strong>Total Questions:</strong> 100 Objective Type Questions</p>
-        <p><strong>Total Marks:</strong> 100 Marks</p>
-        <p><strong>Time Duration:</strong> 02 Hours (120 Minutes)</p>
-        <p><strong>Negative Marking:</strong> 25% of the marks prescribed for that question will be deducted for each wrong answer.</p>
-      </div>
-      <table class="vacancy-table">
-        <thead><tr><th>Part</th><th>Subject</th><th>Questions</th><th>Marks</th></tr></thead>
-        <tbody>
-          <tr><td>Part 1</td><td>History of India and Indian National Movement</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Indian Polity and Indian Constitution</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Geography of India and World</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Indian Economy and Social Development</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Rural Society and Development</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Current Events of National and International Importance</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Science and Technology</td><td>05</td><td>05</td></tr>
-          <tr><td>Part 1</td><td>Environmental Ecology and Disaster Management</td><td>10</td><td>10</td></tr>
-          <tr><td>Part 1</td><td>Data Interpretation</td><td>10</td><td>10</td></tr>
-          <tr><td>Part 1</td><td>General Hindi</td><td>10</td><td>10</td></tr>
-          <tr><td>Part 2</td><td>Computer & Information Technology</td><td>15</td><td>15</td></tr>
-          <tr><td>Part 3</td><td>General Information related to Uttar Pradesh</td><td>20</td><td>20</td></tr>
-          <tr><td colspan="2"><strong>Total</strong></td><td><strong>100</strong></td><td><strong>100</strong></td></tr>
-        </tbody>
-      </table>
-    </section>
+        <section class="section">
+          <h2><i class="fas fa-tasks" aria-hidden="true"></i> Selection Process</h2>
+          <ol class="lekhpal-steps">
+            <li><span>1</span><p>Shortlisting on the basis of UPSSSC PET 2025 normalized score.</p></li>
+            <li><span>2</span><p>UPSSSC Lekhpal Main Written Examination.</p></li>
+            <li><span>3</span><p>Document Verification.</p></li>
+            <li><span>4</span><p>Final selection / further process as per Commission rules.</p></li>
+          </ol>
+          <div class="notification-box">
+            <h3><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Important PET Score Rule</h3>
+            <p>Candidates having zero or less than zero / negative marks in PET 2025 will not be shortlisted for the Main Examination.</p>
+          </div>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-book-open"></i> Syllabus Highlights</h2>
-      <div class="info-cards">
-        <div class="info-card"><h3><i class="fas fa-landmark"></i> General Studies</h3><p>Indian History, National Movement, Constitution, Governance, Geography, Economy, Social Development, Rural Development, Current Affairs, Science & Technology.</p></div>
-        <div class="info-card"><h3><i class="fas fa-leaf"></i> Environment & DI</h3><p>Environmental ecology, biodiversity, climate change, disaster management, statistical analysis, graphs and diagrams.</p></div>
-        <div class="info-card"><h3><i class="fas fa-language"></i> General Hindi</h3><p>शब्द ज्ञान, पर्यायवाची, विलोम, शब्द युग्म, वाक्य रचना, समास, उपसर्ग-प्रत्यय, संधि, वाक्य शुद्धि, मुहावरे/लोकोक्तियां आदि।</p></div>
-        <div class="info-card"><h3><i class="fas fa-desktop"></i> Computer & UP GK</h3><p>Computer basics, internet, e-mail, MS Word, MS Excel, cyber security, AI / Big Data / cloud concepts and Uttar Pradesh history, culture, economy, administration and current affairs.</p></div>
-      </div>
-    </section>
+        <section class="section">
+          <h2><i class="fas fa-laptop" aria-hidden="true"></i> Main Exam Pattern</h2>
+          <div class="lekhpal-stat-grid four">
+            <article><span>Total Questions</span><strong>100</strong><p>Objective type questions</p></article>
+            <article><span>Total Marks</span><strong>100</strong><p>One mark per question</p></article>
+            <article><span>Duration</span><strong>120 Min</strong><p>02 Hours</p></article>
+            <article><span>Negative Marking</span><strong>25%</strong><p>For each wrong answer</p></article>
+          </div>
+          <div class="table-scroll">
+            <table class="vacancy-table">
+              <thead>
+                <tr><th>Part</th><th>Subject</th><th>Questions</th><th>Marks</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Part 1</td><td>History of India and Indian National Movement</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Indian Polity and Indian Constitution</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Geography of India and World</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Indian Economy and Social Development</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Rural Society and Development</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Current Events of National and International Importance</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Science and Technology</td><td>05</td><td>05</td></tr>
+                <tr><td>Part 1</td><td>Environmental Ecology and Disaster Management</td><td>10</td><td>10</td></tr>
+                <tr><td>Part 1</td><td>Data Interpretation</td><td>10</td><td>10</td></tr>
+                <tr><td>Part 1</td><td>General Hindi</td><td>10</td><td>10</td></tr>
+                <tr><td>Part 2</td><td>Computer & Information Technology</td><td>15</td><td>15</td></tr>
+                <tr><td>Part 3</td><td>General Information related to Uttar Pradesh</td><td>20</td><td>20</td></tr>
+                <tr><td colspan="2"><strong>Total</strong></td><td><strong>100</strong></td><td><strong>100</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-    <section class="section">
-      <h2><i class="fas fa-file-download"></i> Download Notification</h2>
-      <div class="notification-box">
-        <h3><i class="fas fa-file-pdf"></i> Official Documents</h3>
-        <p>Read the complete official notification carefully before applying, especially eligibility, reservation rules, certificates, syllabus and correction instructions.</p>
-        <a href="https://upsssc.gov.in" class="btn btn-primary" target="_blank" rel="noopener"><i class="fas fa-download"></i> Official Notification / Apply Online</a>
-        <a href="../../HTML/latest-jobs.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Latest Jobs</a>
+        <section class="section">
+          <h2><i class="fas fa-book-open" aria-hidden="true"></i> Syllabus Highlights</h2>
+          <div class="info-cards">
+            <article class="info-card"><h3><i class="fas fa-landmark" aria-hidden="true"></i> General Studies</h3><p>Indian History, National Movement, Constitution, Governance, Geography, Economy, Social Development, Rural Development, Current Affairs, Science & Technology.</p></article>
+            <article class="info-card"><h3><i class="fas fa-leaf" aria-hidden="true"></i> Environment & DI</h3><p>Environmental ecology, biodiversity, climate change, disaster management, statistical analysis, graphs and diagrams.</p></article>
+            <article class="info-card"><h3><i class="fas fa-language" aria-hidden="true"></i> General Hindi</h3><p>Word knowledge, synonyms, antonyms, word pairs, sentence formation, samas, prefix-suffix, sandhi, sentence correction, idioms and proverbs.</p></article>
+            <article class="info-card"><h3><i class="fas fa-desktop" aria-hidden="true"></i> Computer & UP GK</h3><p>Computer basics, internet, e-mail, MS Word, MS Excel, cyber security, AI / Big Data / cloud concepts and Uttar Pradesh history, culture, economy, administration and current affairs.</p></article>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2><i class="fas fa-file-download" aria-hidden="true"></i> Download Notification</h2>
+          <div class="notification-box">
+            <h3><i class="fas fa-file-pdf" aria-hidden="true"></i> Official Documents</h3>
+            <p>Read the complete official notification carefully before applying, especially eligibility, reservation rules, certificates, syllabus and correction instructions.</p>
+            <a href="https://upsssc.gov.in" class="btn" target="_blank" rel="noopener"><i class="fas fa-download" aria-hidden="true"></i> Official Notification / Apply Online</a>
+            <a href="../../HTML/latest-jobs.html" class="btn btn-outline"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Latest Jobs</a>
+          </div>
+        </section>
       </div>
-    </section>
+
+      <aside class="lekhpal-side-rail" aria-label="Lekhpal quick reference">
+        <section>
+          <h2>Quick Reference</h2>
+          <dl>
+            <dt>Post</dt>
+            <dd>Lekhpal</dd>
+            <dt>Total Vacancy</dt>
+            <dd>7994 Posts</dd>
+            <dt>Qualification</dt>
+            <dd>Intermediate / Class 12</dd>
+            <dt>Age Limit</dt>
+            <dd>18-40 Years</dd>
+            <dt>Selection Base</dt>
+            <dd>PET 2025 + Main Exam</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Actions</h2>
+          <a href="https://upsssc.gov.in" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Official Website</a>
+          <a href="https://upsssc.gov.in/ApplicantSegment.aspx" target="_blank" rel="noopener"><i class="fas fa-user-check" aria-hidden="true"></i> Candidate Login</a>
+          <a href="../../HTML/latest-jobs.html"><i class="fas fa-list" aria-hidden="true"></i> Latest Jobs</a>
+        </section>
+      </aside>
+    </div>
   </main>
 
-  <footer class="job-detail-footer">
+  <footer>
     <div class="footer-content">
-      <div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys and document tools.</p></div>
-      <div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../../index.html">Home</a></li><li><a href="../../HTML/latest-jobs.html">Job</a></li><li><a href="../../HTML/admitcard.html">Admit Card</a></li><li><a href="../../HTML/answer-key.html">Answer Key</a></li><li><a href="../../HTML/results.html">Result</a></li></ul></div>
-      <div class="footer-section"><h3>Resources</h3><ul><li><a href="../../HTML/quiz.html">Quiz</a></li><li><a href="../../HTML/rank-predictor.html">Rank Predictor</a></li><li><a href="../../HTML/documents.html">Document</a></li><li><a href="../../HTML/up-certificate-services.html">UP Services</a></li><li><a href="../../HTML/about-us.html">About Us</a></li><li><a href="../../HTML/contact.html">Contact</a></li></ul></div>
-      <div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-phone"></i> +91 7300627752</li><li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li></ul></div>
+      <div class="footer-section">
+        <h3>GovJobUpdates</h3>
+        <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys and document tools.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../HTML/latest-jobs.html">Job</a></li>
+          <li><a href="../../HTML/admitcard.html">Admit Card</a></li>
+          <li><a href="../../HTML/answer-key.html">Answer Key</a></li>
+          <li><a href="../../HTML/results.html">Result</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="../../HTML/quiz.html">Quiz</a></li>
+          <li><a href="../../HTML/rank-predictor.html">Rank Predictor</a></li>
+          <li><a href="../../HTML/documents.html">Document</a></li>
+          <li><a href="../../HTML/up-certificate-services.html">UP Services</a></li>
+          <li><a href="../../HTML/about-us.html">About Us</a></li>
+          <li><a href="../../HTML/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li>
+          <li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li>
+          <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li>
+        </ul>
+      </div>
     </div>
     <div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="../../HTML/privacy-policy.html">Privacy Policy</a> | <a href="../../HTML/terms.html">Terms of Use</a> | <a href="../../HTML/disclaimer.html">Disclaimer</a></div>
   </footer>
 
-  <script src="../../JS/job-details.js?v=lekhpalfix1"></script>
-  <script src="../../JS/firebase-config.js?v=lekhpalfix1"></script>
-  <script type="module" src="../../JS/firebase-visitors.js?v=lekhpalfix1"></script>
+  <script src="../../JS/script.js"></script>
+  <script src="../JS/job-details.js"></script>
+  <script src="../../JS/firebase-config.js"></script>
+  <script type="module" src="../../JS/firebase-visitors.js"></script>
 </body>
 </html>

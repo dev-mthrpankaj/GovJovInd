@@ -28,8 +28,8 @@ const getCurrentPageName = () => {
 
 const getRootRelativeHref = (pathFromRoot) => {
   const path = window.location.pathname.replace(/\\/g, '/');
-  if (/\/HTML\/[^/]+\.html$/i.test(path)) return `../${pathFromRoot}`;
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../${pathFromRoot}`;
+  if (/\/HTML\/[^/]+\.html$/i.test(path)) return `../${pathFromRoot}`;
   return pathFromRoot;
 };
 
@@ -114,8 +114,8 @@ const getCandidatePageHref = (pageName) => {
   if (rankPredictorHref) return rankPredictorHref.replace(/rank-predictor\.html(?:[?#].*)?$/i, pageName);
 
   const path = window.location.pathname.replace(/\\/g, '/');
-  if (/\/HTML\/[^/]+\.html$/i.test(path)) return pageName;
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../HTML/${pageName}`;
+  if (/\/HTML\/[^/]+\.html$/i.test(path)) return pageName;
   return `HTML/${pageName}`;
 };
 
@@ -157,8 +157,8 @@ const getHomeHref = () => {
   if (homeLink) return homeLink.getAttribute('href');
 
   const path = window.location.pathname.replace(/\\/g, '/');
-  if (/\/HTML\/[^/]+\.html$/i.test(path)) return '../index.html';
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return '../../index.html';
+  if (/\/HTML\/[^/]+\.html$/i.test(path)) return '../index.html';
   return 'index.html';
 };
 
@@ -228,8 +228,8 @@ const ensureSharedHeader = () => {
     container.prepend(logoContainer);
   }
 
-  const logo96 = getRootRelativeHref('Assets/Home%20Page/favicon-96x96.png');
-  const logo32 = getRootRelativeHref('Assets/Home%20Page/favicon-32x32.png');
+  const logo96 = getRootRelativeHref('Assets/Home Page/favicon-96x96.png');
+  const logo32 = getRootRelativeHref('Assets/Home Page/favicon-32x32.png');
   logoContainer.innerHTML = `
     <img src="${logo96}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async" onerror="this.onerror=null;this.src='${logo32}'">
     <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>

@@ -38,6 +38,30 @@
                 window.print();
             });
         });
+
+        const pagePrintButtons = document.querySelectorAll('.print-page');
+        pagePrintButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                window.print();
+            });
+        });
+
+        const copyLinkButtons = document.querySelectorAll('.copy-link');
+        copyLinkButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const pageUrl = window.location.href;
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(pageUrl).then(() => {
+                        showNotification('Page link copied!');
+                    }).catch(() => {
+                        fallbackCopyText(pageUrl, 'Page link copied!');
+                    });
+                    return;
+                }
+
+                fallbackCopyText(pageUrl, 'Page link copied!');
+            });
+        });
         
         // Add copy to clipboard functionality for important dates
         const dateCards = document.querySelectorAll('.date-card');
@@ -65,7 +89,7 @@
         });
         
         // Fallback method for copying text to clipboard
-        function fallbackCopyText(text) {
+        function fallbackCopyText(text, successMessage) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
@@ -76,11 +100,11 @@
             
             try {
                 const successful = document.execCommand('copy');
-                const msg = successful ? 'Date copied to clipboard!' : 'Failed to copy date';
+                const msg = successful ? (successMessage || 'Date copied to clipboard!') : 'Failed to copy';
                 showNotification(msg);
             } catch (err) {
                 console.error('Fallback copy failed: ', err);
-                showNotification('Failed to copy date');
+                showNotification('Failed to copy');
             }
             
             document.body.removeChild(textArea);
