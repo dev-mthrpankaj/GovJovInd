@@ -194,13 +194,13 @@ const normalizeHeaderActiveLinks = (navRoot = document.querySelector('header nav
 const getSharedNavMarkup = () => {
   const items = [
     ['index.html', 'Home'],
-    ['latest-jobs.html', 'Job'],
+    ['latest-jobs.html', 'Jobs'],
     ['admitcard.html', 'Admit Card'],
     ['answer-key.html', 'Answer Key'],
-    ['results.html', 'Result'],
+    ['results.html', 'Results'],
     ['quiz.html', 'Quiz'],
     ['rank-predictor.html', 'Rank Predictor'],
-    ['documents.html', 'Document'],
+    ['documents.html', 'Documents'],
     ['up-certificate-services.html', 'UP Services'],
     ['about-us.html', 'About Us']
   ];
@@ -228,8 +228,8 @@ const ensureSharedHeader = () => {
     container.prepend(logoContainer);
   }
 
-  const logo96 = getRootRelativeHref('Assets/Home Page/favicon-96x96.png');
-  const logo32 = getRootRelativeHref('Assets/Home Page/favicon-32x32.png');
+  const logo96 = getRootRelativeHref('Assets/Home%20Page/favicon-96x96.png');
+  const logo32 = getRootRelativeHref('Assets/Home%20Page/favicon-32x32.png');
   logoContainer.innerHTML = `
     <img src="${logo96}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async" onerror="this.onerror=null;this.src='${logo32}'">
     <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>
@@ -276,7 +276,7 @@ const ensureSharedFooter = () => {
   content.innerHTML = `
     <div class="footer-section">
       <h3>GovJobUpdates</h3>
-      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools.</p>
+      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p>
       <div class="social-icons footer-social" aria-label="GovJobUpdates social links">
         <a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram">
           <i class="fab fa-instagram" aria-hidden="true"></i>
@@ -290,10 +290,10 @@ const ensureSharedFooter = () => {
       <h3>Quick Links</h3>
       <ul>
         <li><a href="${getSharedPageHref('index.html')}">Home</a></li>
-        <li><a href="${getSharedPageHref('latest-jobs.html')}">Job</a></li>
+        <li><a href="${getSharedPageHref('latest-jobs.html')}">Jobs</a></li>
         <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
         <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
-        <li><a href="${getSharedPageHref('results.html')}">Result</a></li>
+        <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
       </ul>
     </div>
     <div class="footer-section">
@@ -301,9 +301,11 @@ const ensureSharedFooter = () => {
       <ul>
         <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
         <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
-        <li><a href="${getSharedPageHref('documents.html')}">Document</a></li>
+        <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
         <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
+        <li><a href="${getSharedPageHref('contact.html')}">Contact</a></li>
+        <li><a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a></li>
       </ul>
     </div>
     <div class="footer-section">
@@ -322,7 +324,7 @@ const ensureSharedFooter = () => {
     copyright.className = 'copyright';
     footer.appendChild(copyright);
   }
-  copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a>`;
+  copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a> | <a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a>`;
 };
 
 const ensureSharedSiteChrome = () => {
@@ -731,6 +733,22 @@ if (menuToggle && nav && !pageOwnsMenu) {
     link.blur();
     normalizeHeaderActiveLinks(nav);
     setMenuState(false);
+  });
+}
+
+if (menuToggle && nav && !nav.dataset.sharedCloseBound) {
+  nav.dataset.sharedCloseBound = 'true';
+  nav.addEventListener('click', (event) => {
+    if (!event.target.closest('a')) return;
+    nav.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open navigation menu');
+    const icon = menuToggle.querySelector('i');
+    if (icon) {
+      icon.classList.remove('fa-times', 'fa-xmark');
+      icon.classList.add('fa-bars');
+    }
+    syncMobileNavScrollLock();
   });
 }
 

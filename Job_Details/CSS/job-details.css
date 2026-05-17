@@ -256,7 +256,7 @@
 .job-detail-page.lekhpal-detail {
     width: min(1180px, calc(100% - 28px));
     max-width: none;
-    margin: 20px auto 0;
+    margin: clamp(14px, 2vw, 22px) auto 0;
     padding: 0 0 2.5rem;
 }
 
@@ -275,10 +275,10 @@
     gap: 1rem;
     align-items: stretch;
     padding: 1.25rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
+    border: 1px solid #dbe3ee;
+    border-radius: 12px;
     background: #ffffff;
-    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 }
 
 .lekhpal-hero-content {
@@ -361,7 +361,7 @@
 .lekhpal-quick-grid article,
 .lekhpal-stat-grid article {
     border: 1px solid #dbe3ee;
-    border-radius: 8px;
+    border-radius: 10px;
     background: #f8fafc;
 }
 
@@ -439,8 +439,8 @@
 
 .lekhpal-detail .section {
     border: 1px solid #dbe3ee;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
 }
 
 .lekhpal-detail .section h2 {
@@ -455,7 +455,7 @@
 
 .lekhpal-detail .notification-box {
     margin: 0;
-    border-radius: 8px;
+    border-radius: 12px;
     background: #f0f9ff;
     border-color: #7dd3fc;
     color: #334155;
@@ -539,8 +539,9 @@
 .table-scroll {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .table-scroll + .table-scroll {
@@ -619,6 +620,7 @@
     color: #1d4ed8;
     text-decoration: underline;
     outline: 0;
+    background: #eff6ff;
 }
 
 @media (max-width: 980px) {
