@@ -1,0 +1,69 @@
+/* Final mobile overrides for UPSSSC Lekhpal detail page */
+
+.lekhpal-premium .job-detail-trust-note,
+.lekhpal-premium .lekhpal-alert,
+.job-detail-page.lekhpal-detail .job-detail-trust-note,
+.job-detail-page.lekhpal-detail .lekhpal-alert {
+  position: relative !important;
+  display: block !important;
+  grid-template-columns: none !important;
+  text-align: left !important;
+  padding: 1rem 1rem 1rem 3.05rem !important;
+  line-height: 1.6 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+.lekhpal-premium .job-detail-trust-note::before,
+.lekhpal-premium .lekhpal-alert::before,
+.job-detail-page.lekhpal-detail .job-detail-trust-note::before,
+.job-detail-page.lekhpal-detail .lekhpal-alert::before {
+  position: absolute !important;
+  left: 1rem !important;
+  top: 1.05rem !important;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 !important;
+}
+
+.lekhpal-premium .job-detail-trust-note strong,
+.lekhpal-premium .lekhpal-alert strong,
+.job-detail-page.lekhpal-detail .job-detail-trust-note strong,
+.job-detail-page.lekhpal-detail .lekhpal-alert strong {
+  display: inline !important;
+  margin: 0 .18rem 0 0 !important;
+  white-space: normal !important;
+}
+
+.lekhpal-premium .job-detail-trust-note *,
+.lekhpal-premium .lekhpal-alert *,
+.job-detail-page.lekhpal-detail .job-detail-trust-note *,
+.job-detail-page.lekhpal-detail .lekhpal-alert * {
+  min-width: 0 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+@media (max-width: 420px) {
+  .lekhpal-premium .job-detail-trust-note,
+  .lekhpal-premium .lekhpal-alert,
+  .job-detail-page.lekhpal-detail .job-detail-trust-note,
+  .job-detail-page.lekhpal-detail .lekhpal-alert {
+    padding: .95rem .9rem .95rem 2.85rem !important;
+    font-size: .92rem !important;
+    line-height: 1.58 !important;
+  }
+
+  .lekhpal-premium .job-detail-trust-note::before,
+  .lekhpal-premium .lekhpal-alert::before,
+  .job-detail-page.lekhpal-detail .job-detail-trust-note::before,
+  .job-detail-page.lekhpal-detail .lekhpal-alert::before {
+    left: .9rem !important;
+    top: 1rem !important;
+  }
+}
