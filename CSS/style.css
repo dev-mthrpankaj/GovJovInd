@@ -559,6 +559,44 @@ main {
   font-size: clamp(1rem, 2vw, 1.18rem);
 }
 
+.hero-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .7rem;
+  margin: 1.1rem 0;
+}
+
+.smart-tool-card.hero-tool-card {
+  min-height: 118px;
+  padding: .8rem;
+  align-content: center;
+  justify-items: center;
+  gap: .52rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.smart-tool-card.hero-tool-card::after {
+  right: -44px;
+  bottom: -58px;
+  width: 108px;
+  height: 108px;
+}
+
+.hero-tool-card .smart-tool-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  font-size: 1.25rem;
+}
+
+.hero-tool-label {
+  color: var(--secondary);
+  font-size: .9rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -744,6 +782,109 @@ main {
 
 .feature-card p {
   color: var(--muted);
+}
+
+.smart-tool-card {
+  --tool-start: var(--primary);
+  --tool-end: var(--primary-dark);
+  --tool-glow: rgba(37, 99, 235, .22);
+  --tool-wash: rgba(37, 99, 235, .08);
+  position: relative;
+  min-height: 206px;
+  overflow: hidden;
+  align-content: start;
+  border-color: rgba(37, 99, 235, .12);
+  background: linear-gradient(180deg, #fff, #f8fbff);
+}
+
+.smart-tool-card::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -44px;
+  width: 112px;
+  height: 112px;
+  border-radius: 999px;
+  background: var(--tool-wash);
+  pointer-events: none;
+}
+
+.smart-tool-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.smart-tool-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--tool-start), var(--tool-end));
+  color: #fff;
+  font-size: 1.65rem;
+  box-shadow: 0 16px 30px var(--tool-glow);
+}
+
+.smart-tool-card--quiz {
+  --tool-start: #7c3aed;
+  --tool-end: #c026d3;
+  --tool-glow: rgba(124, 58, 237, .25);
+  --tool-wash: rgba(124, 58, 237, .1);
+}
+
+.smart-tool-card--rank {
+  --tool-start: #0f766e;
+  --tool-end: #14b8a6;
+  --tool-glow: rgba(20, 184, 166, .24);
+  --tool-wash: rgba(20, 184, 166, .11);
+}
+
+.smart-tool-card--performance {
+  --tool-start: #f97316;
+  --tool-end: #f59e0b;
+  --tool-glow: rgba(249, 115, 22, .24);
+  --tool-wash: rgba(249, 115, 22, .11);
+}
+
+.smart-tool-card--documents {
+  --tool-start: #2563eb;
+  --tool-end: #1d4ed8;
+  --tool-glow: rgba(37, 99, 235, .25);
+  --tool-wash: rgba(37, 99, 235, .1);
+}
+
+.smart-tool-card--services {
+  --tool-start: #16a34a;
+  --tool-end: #22c55e;
+  --tool-glow: rgba(34, 197, 94, .24);
+  --tool-wash: rgba(34, 197, 94, .11);
+}
+
+.smart-tool-card--jobs {
+  --tool-start: #9333ea;
+  --tool-end: #7c3aed;
+  --tool-glow: rgba(147, 51, 234, .24);
+  --tool-wash: rgba(147, 51, 234, .1);
+}
+
+.smart-tool-card--admit {
+  --tool-start: #0ea5e9;
+  --tool-end: #2563eb;
+  --tool-glow: rgba(14, 165, 233, .24);
+  --tool-wash: rgba(14, 165, 233, .1);
+}
+
+.smart-tool-card--answer {
+  --tool-start: #ea580c;
+  --tool-end: #f97316;
+  --tool-glow: rgba(234, 88, 12, .24);
+  --tool-wash: rgba(234, 88, 12, .1);
+}
+
+.smart-tool-card--results {
+  --tool-start: #0891b2;
+  --tool-end: #14b8a6;
+  --tool-glow: rgba(8, 145, 178, .24);
+  --tool-wash: rgba(8, 145, 178, .1);
 }
 
 .feature-link {
@@ -1524,6 +1665,26 @@ footer .footer-section:first-child {
     width: 100%;
   }
 
+  .hero-tool-grid {
+    gap: .58rem;
+  }
+
+  .smart-tool-card.hero-tool-card {
+    min-height: 104px;
+    padding: .68rem .5rem;
+  }
+
+  .hero-tool-card .smart-tool-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 1.08rem;
+  }
+
+  .hero-tool-label {
+    font-size: .8rem;
+  }
+
   .section-title {
     font-size: 1.25rem;
   }
@@ -1584,6 +1745,23 @@ footer .footer-section:first-child {
 }
 
 @media (max-width: 360px) {
+  .smart-tool-card.hero-tool-card {
+    min-height: 94px;
+    padding: .56rem .36rem;
+  }
+
+  .hero-tool-card .smart-tool-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: .92rem;
+  }
+
+  .hero-tool-label {
+    font-size: .68rem;
+    line-height: 1.15;
+  }
+
   .footer-live-visitors {
     padding-left: 0.6rem;
     padding-right: 0.6rem;
