@@ -1,1 +1,20 @@
 .edge-test-profile*
+
+# Local/private backend source and credentials. Existing tracked files must be
+# removed from Git separately before these patterns can protect them.
+GoogleAppsScript/
+.private/
+private/
+secrets/
+
+# Environment and service credentials
+.env
+.env.*
+*.local
+service-account*.json
+firebase-service-account*.json
+google-credentials*.json
+client_secret*.json
+*.pem
+*.key
+*.p12

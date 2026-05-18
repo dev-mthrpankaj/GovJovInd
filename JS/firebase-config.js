@@ -1,3 +1,6 @@
+// Firebase browser config is public by design. Do not put service account,
+// admin SDK, database secrets, or private keys in this file. Protect data with
+// Firebase Auth, Authorized domains, and Realtime Database/Firestore rules.
 window.GJU_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDpVgW620QlBTbNb7OA5xcynUvOmUKLJaM",
   authDomain: "govjobupdates-99a58.firebaseapp.com",

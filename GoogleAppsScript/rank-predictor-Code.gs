@@ -3,6 +3,7 @@ const RANK_EXAMS_SHEET_NAME = "Rank Predictor Exams";
 const USERS_SHEET_NAME = "Users";
 const VISITOR_SESSIONS_SHEET_NAME = "Visitor Sessions";
 const VISITOR_ACTIVE_WINDOW_MS = 3 * 60 * 1000;
+const RETURN_DEBUG_FIELDS = false;
 
 const USER_HEADERS = [
   "User ID",
@@ -14,6 +15,9 @@ const USER_HEADERS = [
   "Password",
   "Created At"
 ];
+
+// Security note: the legacy Password column must never contain plain text.
+// Prefer Firebase Authentication for new login flows.
 
 const VISITOR_SESSION_HEADERS = [
   "Visitor ID",
@@ -134,7 +138,7 @@ function doPost(e) {
   } catch (error) {
     return sendJSON({
       success: false,
-      message: "Server error: " + error.message
+      message: "Server error. Please try again."
     });
   }
 }
@@ -1847,9 +1851,27 @@ function getAccuracyIndicator(totalSubmissions) {
 }
 
 function sendJSON(obj) {
+  const output = RETURN_DEBUG_FIELDS ? obj : stripDebugFields(obj);
   return ContentService
-    .createTextOutput(JSON.stringify(obj))
+    .createTextOutput(JSON.stringify(output))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function stripDebugFields(value) {
+  if (Array.isArray(value)) {
+    return value.map(stripDebugFields);
+  }
+
+  if (value && typeof value === "object") {
+    const cleaned = {};
+    Object.keys(value).forEach(function (key) {
+      if (key === "debug") return;
+      cleaned[key] = stripDebugFields(value[key]);
+    });
+    return cleaned;
+  }
+
+  return value;
 }
 
 function round2(value) {
@@ -1929,6 +1951,8 @@ function getFirebaseRankAttemptRows(spreadsheet, user) {
   return attempts.sort(sortDashboardAttempts);
 }
 function sendContactRequest(data) {
+  // Security TODO before redeploy: enforce server-side rate limiting,
+  // CAPTCHA/honeypot verification, and mail quota protection here.
   const name = normalizeContactText(data.name || "Website Visitor", 80);
   const contact = normalizeContactText(data.contact || "Not provided", 120);
   const subject = normalizeContactText(data.subject, 120);

@@ -1,6 +1,8 @@
 // Paste Google Apps Script Web App URL in apiUrl, not Google Sheet link.
 // Use the deployed HTTPS /exec URL. Do not use the /dev URL.
 // Keep the Google Sheet ID inside GoogleAppsScript/rank-predictor-Code.gs only.
+// This public endpoint must be protected by Apps Script validation, rate
+// limiting, and Firebase ID token checks for dashboard/history APIs.
 const RANK_PREDICTOR_CONFIG = {
     apiUrl: "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec",
     examLoadTimeoutMs: 8000,
