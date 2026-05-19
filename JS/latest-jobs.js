@@ -175,9 +175,18 @@
         return raw.startsWith("job-") ? raw : `job-${raw.replace(/[^0-9]/g, "")}`;
     }
 
+    const detailPageOverrides = {
+        "job-1103": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html"
+    };
+
     function getDetailPage(job) {
         const jobId = getJobId(job);
         if (!jobId) return "";
+        if (detailPageOverrides[jobId]) return detailPageOverrides[jobId];
+        const explicitDetailPage = getText(job.detailPage || job.detailsPage || job.detailUrl, "");
+        if (explicitDetailPage && explicitDetailPage !== "#" && !/job-details-job-/i.test(explicitDetailPage)) {
+            return explicitDetailPage;
+        }
         return `../Job_Details/HTML/job-details.html?id=${encodeURIComponent(jobId)}`;
     }
 
