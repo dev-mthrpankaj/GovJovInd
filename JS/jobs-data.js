@@ -20,7 +20,7 @@ window.GovJobUpdatesJobs = [
             "CGL",
             "Central"
         ],
-        "applyLink": "https://www.apprenticeshipindia.gov.in/",
+        "applyLink": "",
         "officialNotification": "https://secr.indianrailways.gov.in/uploads/files/1779104439050-Notification.pdf",
         "detailPage": "#",
         "updatedAt": "2026-05-19"
@@ -41,7 +41,7 @@ window.GovJobUpdatesJobs = [
             "Railway",
             "RRB"
         ],
-        "applyLink": "",
+        "applyLink": "https://www.apprenticeshipindia.gov.in/",
         "officialNotification": "#",
         "detailPage": "",
         "updatedAt": "2026-05-19"
