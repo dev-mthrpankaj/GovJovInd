@@ -20,10 +20,31 @@ window.GovJobUpdatesJobs = [
             "CGL",
             "Central"
         ],
+        "applyLink": "https://www.apprenticeshipindia.gov.in/",
+        "officialNotification": "https://secr.indianrailways.gov.in/uploads/files/1779104439050-Notification.pdf",
+        "detailPage": "#",
+        "updatedAt": "2026-05-19"
+    },
+    {
+        "id": "job-1103",
+        "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
+        "organization": "South East Central Railway",
+        "department": "SECR Nagpur",
+        "category": "Railway",
+        "year": "2026",
+        "qualification": "Class 10 High School",
+        "totalPosts": "1079",
+        "startDate": "2026-05-19",
+        "lastDate": "2026-06-18",
+        "status": "active",
+        "tags": [
+            "Railway",
+            "RRB"
+        ],
         "applyLink": "",
-        "officialNotification": "",
+        "officialNotification": "#",
         "detailPage": "",
-        "updatedAt": "2026-05-10"
+        "updatedAt": "2026-05-19"
     },
     {
         "id": "job-1100",
@@ -44,7 +65,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
-        "detailPage": "",
+        "detailPage": "#",
         "updatedAt": "2026-05-07"
     },
     {
@@ -66,7 +87,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/index.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
-        "detailPage": "",
+        "detailPage": "#",
         "updatedAt": "2026-05-07"
     },
     {
