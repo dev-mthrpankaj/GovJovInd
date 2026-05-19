@@ -3,7 +3,7 @@ name: Sync listing data from Google Sheet
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
