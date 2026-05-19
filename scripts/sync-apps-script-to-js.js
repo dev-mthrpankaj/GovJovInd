@@ -42,6 +42,17 @@ function sortRecords(records) {
   });
 }
 
+function isUsableUrl(value) {
+  const text = normalizeText(value);
+  if (!text || text.includes("PASTE_")) return false;
+  try {
+    const url = new URL(text);
+    return url.protocol === "https:" || url.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
 function readApiUrlFromPublicConfig() {
   if (!fs.existsSync(PUBLIC_SHEET_CONFIG_PATH)) return "";
   const configText = fs.readFileSync(PUBLIC_SHEET_CONFIG_PATH, "utf8");
@@ -50,7 +61,8 @@ function readApiUrlFromPublicConfig() {
 }
 
 function resolveApiUrl(config) {
-  return normalizeText(process.env.GJU_SHEET_API_URL || config.apiUrl || readApiUrlFromPublicConfig());
+  const candidates = [process.env.GJU_SHEET_API_URL, config.apiUrl, readApiUrlFromPublicConfig()];
+  return normalizeText(candidates.find(isUsableUrl) || "");
 }
 
 function buildApiUrl(baseUrl, type) {
@@ -86,7 +98,7 @@ async function fetchItems(baseUrl, type, payloadKey) {
 }
 
 function buildJs(globalVariable, records, label) {
-  return `// Auto-generated from Google Sheet through Apps Script.\n// Source: ${label}\n// Generated at: ${new Date().toISOString()}\n// Do not edit manually when sync is enabled.\n\nwindow.${globalVariable} = ${JSON.stringify(records, null, 4)};\n`;
+  return `// Auto-generated from Google Sheet through Apps Script.\n// Source: ${label}\n// Do not edit manually when sync is enabled.\n\nwindow.${globalVariable} = ${JSON.stringify(records, null, 4)};\n`;
 }
 
 function writeIfValid(filePath, content) {
