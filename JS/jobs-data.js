@@ -21,7 +21,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.apprenticeshipindia.gov.in/",
         "officialNotification": "https://secr.indianrailways.gov.in/uploads/files/1779104439050-Notification.pdf",
-        "detailPage": "1103-Railway-SECR-Nagpur-Apprentice-2026.html",
+        "detailPage": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html",
         "updatedAt": "2026-05-19"
     },
     {
