@@ -2,9 +2,11 @@
     "use strict";
 
     window.GovJobUpdatesSheetConfig = {
-        // Paste the deployed /exec URL from GoogleAppsScript/content-updates-Code.gs here.
-        apiUrl: "https://script.google.com/macros/s/AKfycbweqlqEKOhfn_PtfRZdu_uH9KAr3226-lbeu-gCF-fLh0lq7EP6yRTDHlPwLgMIHjdn/exec",
-        cacheMinutes: 0,
-        timeoutMs: 8000
+        // Public listing pages now use fast static JS data files.
+        // Google Sheet data is synced into JS/*-data.js by GitHub Actions.
+        // Keep this blank to avoid slow live Apps Script requests in visitors' browsers.
+        apiUrl: "",
+        cacheMinutes: 5,
+        timeoutMs: 3000
     };
 }());
