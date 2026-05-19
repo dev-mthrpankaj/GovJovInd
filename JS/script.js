@@ -276,7 +276,7 @@ const ensureSharedFooter = () => {
   content.innerHTML = `
     <div class="footer-section">
       <h3>GovJobUpdates</h3>
-      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p>
+      <p>GovJobUpdates is an independent government exam updates and tools platform for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p>
       <div class="social-icons footer-social" aria-label="GovJobUpdates social links">
         <a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram">
           <i class="fab fa-instagram" aria-hidden="true"></i>
@@ -305,6 +305,10 @@ const ensureSharedFooter = () => {
         <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
         <li><a href="${getSharedPageHref('contact.html')}">Contact</a></li>
+        <li><a href="${getSharedPageHref('editorial-policy.html')}">Editorial Policy</a></li>
+        <li><a href="${getSharedPageHref('correction-policy.html')}">Correction Policy</a></li>
+        <li><a href="${getSharedPageHref('data-deletion-policy.html')}">Data Deletion Policy</a></li>
+        <li><a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a></li>
         <li><a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a></li>
       </ul>
     </div>

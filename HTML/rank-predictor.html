@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rank Predictor | GovJobUpdates</title>
-    <meta name="description" content="Advanced rank prediction for government exams using offline and online candidate submitted exam data. Estimate marks, overall rank, category rank, and state rank with GovJobUpdates.">
+    <title>TSP Based Rank Predictor for Government Exams | GovJobUpdates</title>
+    <meta name="description" content="Use the GovJobUpdates TSP based rank predictor to estimate overall rank, category rank, state rank, percentile and marks from candidate-submitted exam data.">
+    <link rel="canonical" href="https://govjobupdates.com/HTML/rank-predictor.html">
+    <meta property="og:image:alt" content="Rank Predictor on GovJobUpdates">
+    <meta name="twitter:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.png">
+    <meta name="twitter:description" content="Use the GovJobUpdates TSP based rank predictor to estimate overall rank, category rank, state rank, percentile and marks from candidate-submitted exam data.">
+    <meta name="twitter:title" content="TSP Based Rank Predictor for Government Exams | GovJobUpdates">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.png">
+    <meta property="og:url" content="https://govjobupdates.com/HTML/rank-predictor.html">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Use the GovJobUpdates TSP based rank predictor to estimate overall rank, category rank, state rank, percentile and marks from candidate-submitted exam data.">
+    <meta property="og:title" content="TSP Based Rank Predictor for Government Exams | GovJobUpdates">
+    <meta property="og:site_name" content="GovJobUpdates">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+        <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"Rank Predictor","item":"https://govjobupdates.com/HTML/rank-predictor.html"}]}</script>
+    <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this rank official?","acceptedAnswer":{"@type":"Answer","text":"No. The GovJobUpdates rank predictor provides estimated ranks based on submitted data and exam settings. Official boards publish final results and merit lists."}},{"@type":"Question","name":"When should I use the rank predictor?","acceptedAnswer":{"@type":"Answer","text":"Use it after you know your attempted, right and wrong answers from the answer key or response sheet."}},{"@type":"Question","name":"Why can rank change later?","acceptedAnswer":{"@type":"Answer","text":"Rank estimates can change as more candidates submit data or if an exam board updates answer keys, normalization or cutoff rules."}}]}</script>
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260507-mobile-ux-fix">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -41,7 +55,7 @@
             <div class="predictor-hero-copy">
                 <span class="predictor-badge"><i class="fas fa-chart-line"></i> Google Sheets powered</span>
                 <h1 id="rankPredictorTitle">Multi Exam Rank Predictor</h1>
-                <p>Submit your exam performance or securely check an existing rank using mobile number, roll number, and date of birth.</p>
+                <p>Use the TSP based Rank Predictor to estimate your overall rank, category rank, state rank and percentile from candidate-submitted exam data.</p>
             </div>
             <div class="predictor-summary" aria-label="Current predictor setup">
                 <div>
@@ -57,6 +71,22 @@
                     <strong id="normalizationLabel">Loading</strong>
                 </div>
             </div>
+        </section>
+
+        <section class="seo-content-section" aria-labelledby="rankIntroTitle">
+            <h2 id="rankIntroTitle">What is TSP Based Rank Predictor?</h2>
+            <p>The GovJobUpdates rank predictor uses total submitted performance data, category, state, shift and exam configuration to provide an estimated rank. It is useful after answer key release or after calculating your expected marks from an OMR or CBT exam.</p>
+            <div class="supporting-grid">
+                <article class="supporting-card"><i class="fas fa-list-ol" aria-hidden="true"></i><strong>How to use</strong><p>Select the exam, enter candidate details, add attempted/right/wrong answers and submit your data for estimation.</p></article>
+                <article class="supporting-card"><i class="fas fa-scale-balanced" aria-hidden="true"></i><strong>Accuracy depends on data</strong><p>The estimate improves when more genuine candidates submit their marks and details for the same exam and shift.</p></article>
+                <article class="supporting-card"><i class="fas fa-lock" aria-hidden="true"></i><strong>Private lookup</strong><p>Rank lookup uses your own mobile number, roll number and date of birth to retrieve your submitted record.</p></article>
+            </div>
+            <div class="inline-link-row">
+                <a href="quiz.html"><i class="fas fa-circle-question" aria-hidden="true"></i> Practice Free Quiz</a>
+                <a href="answer-key.html"><i class="fas fa-key" aria-hidden="true"></i> Check Answer Keys</a>
+                <a href="latest-jobs.html"><i class="fas fa-briefcase" aria-hidden="true"></i> Latest Updates</a>
+            </div>
+            <p class="site-disclaimer"><i class="fas fa-circle-info" aria-hidden="true"></i><span>Rank Predictor gives approximate results only. It is not an official rank, result, cutoff, merit list or selection guarantee.</span></p>
         </section>
 
         <section class="exam-selector-card" aria-label="Exam selection">
@@ -407,6 +437,15 @@
                 </section>
                 <p class="result-note" id="resultNote">Rank prediction accuracy improves as more candidates submit data.</p>
             </aside>
+        </section>
+
+        <section class="faq-section" aria-labelledby="rankFaqTitle">
+            <h2 id="rankFaqTitle">Rank Predictor FAQs</h2>
+            <div class="faq-grid">
+                <article class="faq-card"><strong>Is this rank official?</strong><p>No. It is an estimated rank based on submitted data and exam settings. Official boards publish final results and merit lists.</p></article>
+                <article class="faq-card"><strong>When should I use it?</strong><p>Use it after you know your attempted, right and wrong answers from the answer key or response sheet.</p></article>
+                <article class="faq-card"><strong>Why can rank change later?</strong><p>Rank estimates can change as more candidates submit data or if an exam board updates answer keys, normalization or cutoff rules.</p></article>
+            </div>
         </section>
     </main>
 

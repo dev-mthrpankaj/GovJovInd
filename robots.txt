@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# Public sitemap for current GovJobUpdates pages.
 Sitemap: https://govjobupdates.com/sitemap.xml
