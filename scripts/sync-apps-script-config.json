@@ -1,0 +1,37 @@
+{
+  "apiUrl": "PASTE_APPS_SCRIPT_EXEC_URL_HERE",
+  "sources": [
+    {
+      "label": "Latest Jobs",
+      "apiType": "jobs",
+      "payloadKey": "jobs",
+      "outputFile": "JS/jobs-data.js",
+      "globalVariable": "GovJobUpdatesJobs",
+      "fields": ["id", "title", "organization", "department", "category", "year", "qualification", "totalPosts", "startDate", "lastDate", "status", "tags", "applyLink", "officialNotification", "detailPage", "updatedAt"]
+    },
+    {
+      "label": "Admit Cards",
+      "apiType": "admitCards",
+      "payloadKey": "admitCards",
+      "outputFile": "JS/admitcard-data.js",
+      "globalVariable": "GovJobUpdatesAdmitCards",
+      "fields": ["id", "title", "organization", "department", "category", "year", "examDate", "releaseDate", "status", "tags", "downloadLink", "detailPage", "updatedAt"]
+    },
+    {
+      "label": "Answer Keys",
+      "apiType": "answerKeys",
+      "payloadKey": "answerKeys",
+      "outputFile": "JS/answerkey-data.js",
+      "globalVariable": "GovJobUpdatesAnswerKeys",
+      "fields": ["id", "title", "organization", "department", "category", "year", "examDate", "releaseDate", "objectionLastDate", "status", "tags", "downloadLink", "objectionLink", "detailPage", "updatedAt"]
+    },
+    {
+      "label": "Results",
+      "apiType": "results",
+      "payloadKey": "results",
+      "outputFile": "JS/results-data.js",
+      "globalVariable": "GovJobUpdatesResults",
+      "fields": ["id", "title", "organization", "department", "category", "year", "resultDate", "status", "tags", "resultLink", "detailPage", "updatedAt"]
+    }
+  ]
+}
