@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260507-mobile-ux-fix">
+    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260519-premium-ux">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -39,9 +39,18 @@
     <main class="rank-predictor-page" id="rankPredictorApp">
         <section class="predictor-hero" aria-labelledby="rankPredictorTitle">
             <div class="predictor-hero-copy">
-                <span class="predictor-badge"><i class="fas fa-chart-line"></i> Google Sheets powered</span>
-                <h1 id="rankPredictorTitle">Multi Exam Rank Predictor</h1>
-                <p>Submit your exam performance or securely check an existing rank using mobile number, roll number, and date of birth.</p>
+                <div class="predictor-badge-row" aria-label="Rank predictor trust badges">
+                    <span class="predictor-badge"><i class="fas fa-chart-line"></i> Rank Predictor</span>
+                    <span class="predictor-badge is-soft"><i class="fas fa-lock"></i> Privacy protected</span>
+                </div>
+                <h1 id="rankPredictorTitle">Predict Your Government Exam Rank</h1>
+                <p>Estimate raw marks, normalized marks, overall rank, category rank, and state rank using live candidate data.</p>
+                <ul class="hero-benefits" aria-label="Rank predictor benefits">
+                    <li><i class="fas fa-trophy" aria-hidden="true"></i> Predict your rank</li>
+                    <li><i class="fas fa-layer-group" aria-hidden="true"></i> Check category/state rank</li>
+                    <li><i class="fas fa-database" aria-hidden="true"></i> Uses live candidate data</li>
+                    <li><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy protected</li>
+                </ul>
             </div>
             <div class="predictor-summary" aria-label="Current predictor setup">
                 <div>
@@ -60,8 +69,14 @@
         </section>
 
         <section class="exam-selector-card" aria-label="Exam selection">
-            <label class="rp-field" for="globalExamSelect">Select Exam
+            <div class="exam-selector-heading">
+                <span>Choose Exam</span>
+                <h2>Start with the right exam setup</h2>
+                <p>Exam rules, subjects, marks, shifts, and normalization are loaded automatically.</p>
+            </div>
+            <label class="rp-field exam-select-field" for="globalExamSelect">Select Exam
                 <select id="globalExamSelect"></select>
+                <span class="field-helper">Pick the exact exam before entering attempts.</span>
             </label>
             <div class="mode-section" aria-label="Exam mode">
                 <button class="mode-card is-active" type="button" data-mode="offline" aria-pressed="true">
@@ -151,15 +166,19 @@
                         <div class="section-content form-grid">
                             <label class="rp-field" for="candidateName">Candidate Name
                                 <input id="candidateName" name="candidateName" type="text" autocomplete="name" enterkeyhint="next" required>
+                                <span class="field-helper">Use the name printed on your application or admit card.</span>
                             </label>
                             <label class="rp-field" for="rollNumber">Roll Number
-                                <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" enterkeyhint="next" required>
+                                <input id="rollNumber" name="rollNumber" type="text" autocomplete="off" autocapitalize="characters" enterkeyhint="next" required>
+                                <span class="field-helper">Enter the exact roll number used in the exam.</span>
                             </label>
                             <label class="rp-field" for="mobileNumber">Mobile Number
                                 <input id="mobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" enterkeyhint="next" required>
+                                <span class="field-helper">10 digits only. Used privately to submit or check your record.</span>
                             </label>
                             <label class="rp-field" for="dob">Date of Birth
-                                <input id="dob" name="dob" type="date" required>
+                                <input id="dob" name="dob" type="date" autocomplete="bday" required>
+                                <span class="field-helper">Used only to verify your own rank record.</span>
                             </label>
                             <label class="rp-field" for="gender">Gender
                                 <select id="gender" name="gender" required>
@@ -168,12 +187,15 @@
                                     <option value="Male">Male</option>
                                     <option value="Other">Other</option>
                                 </select>
+                                <span class="field-helper">Helps calculate gender-based rank where available.</span>
                             </label>
                             <label class="rp-field" for="category">Category
                                 <select id="category" name="category" required></select>
+                                <span class="field-helper">Choose the category used in your application.</span>
                             </label>
                             <label class="rp-field" for="state">State
-                                <select id="state" name="state" required></select>
+                                <select id="state" name="state" autocomplete="address-level1" required></select>
+                                <span class="field-helper">Used for state rank comparison.</span>
                             </label>
                         </div>
                     </details>
@@ -187,15 +209,19 @@
                         <div class="section-content form-grid">
                             <label class="rp-field" for="submitExamName">Exam Name
                                 <input id="submitExamName" name="examName" type="text" readonly>
+                                <span class="field-helper">Locked from the exam selector above.</span>
                             </label>
                             <label class="rp-field" for="examDate">Exam Date
                                 <input id="examDate" name="examDate" type="date" required>
+                                <span class="field-helper">Select the date printed on your exam schedule.</span>
                             </label>
                             <label class="rp-field shift-field" for="shift">Shift Number
                                 <input id="shift" name="shift" type="number" min="1" step="1" inputmode="numeric">
+                                <span class="field-helper">Required only for exams with multiple shifts.</span>
                             </label>
                             <label class="rp-field online-only" for="answerSheetLink">Answer Key / Response Sheet Link
-                                <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" placeholder="https://">
+                                <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" autocomplete="url" placeholder="https://">
+                                <span class="field-helper">Optional. Manual right/wrong entries are still required.</span>
                             </label>
                         </div>
                         <div class="manual-fallback online-only">
@@ -212,19 +238,24 @@
                         </summary>
                         <div class="section-content form-grid">
                             <label class="rp-field" for="totalAttempted">Total Attempted (Auto)
-                                <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" required>
+                                <input id="totalAttempted" name="totalAttempted" type="number" min="0" step="1" inputmode="numeric" required>
+                                <span class="field-helper">Auto-filled from subject right + wrong answers.</span>
                             </label>
                             <label class="rp-field" for="rightAnswers">Right Answers (Auto)
-                                <input id="rightAnswers" name="rightAnswers" type="number" min="0" step="1" required>
+                                <input id="rightAnswers" name="rightAnswers" type="number" min="0" step="1" inputmode="numeric" required>
+                                <span class="field-helper">Auto-filled from all subject correct answers.</span>
                             </label>
                             <label class="rp-field" for="wrongAnswers">Wrong Answers (Auto)
-                                <input id="wrongAnswers" name="wrongAnswers" type="number" min="0" step="1" required>
+                                <input id="wrongAnswers" name="wrongAnswers" type="number" min="0" step="1" inputmode="numeric" required>
+                                <span class="field-helper">Auto-filled from all subject wrong answers.</span>
                             </label>
                             <label class="rp-field" for="unattempted">Unattempted
-                                <input id="unattempted" name="unattempted" type="number" readonly>
+                                <input id="unattempted" name="unattempted" type="number" inputmode="numeric" readonly>
+                                <span class="field-helper">Calculated from total questions minus attempted.</span>
                             </label>
                             <label class="rp-field" for="expectedMarks">Expected Marks
                                 <input id="expectedMarks" name="expectedMarks" type="text" readonly value="0.00">
+                                <span class="field-helper">Updates instantly using the exam marking scheme.</span>
                             </label>
                         </div>
                     </details>
@@ -236,6 +267,9 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </summary>
                         <div class="subject-entry-grid" id="subjectEntryGrid"></div>
+                        <div class="attempt-rule-message is-ok" id="attemptRuleMessage" role="status" aria-live="polite">
+                            Subject totals are within exam rules.
+                        </div>
                     </details>
 
                     <section class="form-section-card consent-section" aria-labelledby="consentTitle">
@@ -251,7 +285,7 @@
                         </div>
                         <label class="consent-row" for="dataConsent">
                             <input id="dataConsent" name="dataConsent" type="checkbox" required>
-                            <span>I consent to submit this exam data for rank prediction.</span>
+                            <span>I consent to submit this exam data for rank prediction. Personal details are not shown publicly.</span>
                         </label>
                     </section>
 
@@ -271,15 +305,19 @@
                     <div class="form-grid compact">
                         <label class="rp-field" for="checkExamName">Exam Name
                             <input id="checkExamName" name="checkExamName" type="text" readonly>
+                            <span class="field-helper">Locked from the selected exam above.</span>
                         </label>
                         <label class="rp-field" for="checkRollNumber">Roll Number
-                            <input id="checkRollNumber" name="rollNumber" type="text" autocomplete="off" required>
+                            <input id="checkRollNumber" name="rollNumber" type="text" autocomplete="off" autocapitalize="characters" enterkeyhint="next" required>
+                            <span class="field-helper">Use the same roll number you submitted.</span>
                         </label>
                         <label class="rp-field" for="checkMobileNumber">Mobile Number
-                            <input id="checkMobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" required>
+                            <input id="checkMobileNumber" name="mobileNumber" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" enterkeyhint="next" required>
+                            <span class="field-helper">10 digits only. This keeps rank lookup private.</span>
                         </label>
                         <label class="rp-field" for="checkDob">Date of Birth
-                            <input id="checkDob" name="dob" type="date" required>
+                            <input id="checkDob" name="dob" type="date" autocomplete="bday" required>
+                            <span class="field-helper">Must match the DOB used during submission.</span>
                         </label>
                     </div>
                     <p class="privacy-note"><i class="fas fa-user-shield"></i> We only use mobile number, roll number, and DOB to find your own submitted record.</p>
@@ -345,7 +383,7 @@
                             <strong id="resultExpectedMarks">0.00</strong>
                         </article>
                         <article class="result-metric featured normalized-metric">
-                            <span>Normalised Marks</span>
+                            <span>Normalized Marks</span>
                             <strong id="resultNormalizedMarks">Pending</strong>
                         </article>
                         <article class="result-metric">
@@ -403,7 +441,7 @@
                         <span>Share Result</span>
                         <strong id="shareResultText">My GovJobUpdates percentile is pending.</strong>
                     </div>
-                    <button class="btn btn-outline" id="shareResultBtn" type="button"><i class="fas fa-share-alt" aria-hidden="true"></i> Share</button>
+                    <button class="btn btn-outline" id="shareResultBtn" type="button"><i class="fas fa-share-alt" aria-hidden="true"></i> Share / Copy</button>
                 </section>
                 <p class="result-note" id="resultNote">Rank prediction accuracy improves as more candidates submit data.</p>
             </aside>

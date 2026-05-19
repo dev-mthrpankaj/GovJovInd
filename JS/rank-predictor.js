@@ -6,6 +6,7 @@
     const API_NETWORK_ERROR_MESSAGE = "Server connection failed. Please try again.";
     const API_INVALID_RESPONSE_MESSAGE = "Invalid backend response.";
     const PROCESSING_TEXT = "Processing...";
+    const SHARE_BUTTON_IDLE_HTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share / Copy';
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
     const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
     const state = {
@@ -97,6 +98,7 @@
         bindSubmitForm();
         bindCheckForm();
         bindFormAccordions();
+        bindStepperNavigation();
         bindKeyboardFocusHandling(app);
         bindShareCard();
         applyExamDefaults();
@@ -229,6 +231,7 @@
             ? (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("")
             : '<option value="">No exams configured</option>';
         select.addEventListener("change", () => {
+            clearFieldError({ target: select });
             let selectedExam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
             if (selectedExam?.disabled) selectedExam = (config.exams || []).find((exam) => !exam.disabled) || null;
             setSelectedExam(selectedExam);
@@ -356,6 +359,54 @@
         });
     }
 
+    function bindStepperNavigation() {
+        document.querySelectorAll(".form-stepper [data-step-for]").forEach((item) => {
+            item.setAttribute("role", "button");
+            item.setAttribute("tabindex", "0");
+            item.setAttribute("aria-label", `${item.textContent.trim()} step`);
+            item.addEventListener("click", () => goToStep(item.getAttribute("data-step-for")));
+            item.addEventListener("keydown", (event) => {
+                if (event.key !== "Enter" && event.key !== " ") return;
+                event.preventDefault();
+                goToStep(item.getAttribute("data-step-for"));
+            });
+        });
+    }
+
+    function goToStep(stepFor) {
+        const target = normalizeStepTarget(stepFor);
+        if (target === "dataConsent") {
+            if (isMobileLayout()) {
+                dom.formAccordions.forEach((section) => setDetailsOpenSilently(section, false));
+            }
+            updateStepIndicators(target);
+            focusField(getById("dataConsent"));
+            return;
+        }
+
+        const section = getById(target);
+        if (!section || section.tagName !== "DETAILS") return;
+        if (isMobileLayout()) {
+            dom.formAccordions.forEach((otherSection) => {
+                const keepSubjectAttempts = target === "attemptDetailsSection" && otherSection.id === "subjectScorecardDetails";
+                if (otherSection !== section && !keepSubjectAttempts) setDetailsOpenSilently(otherSection, false);
+            });
+        }
+        setDetailsOpenSilently(section, true);
+        if (target === "attemptDetailsSection") setDetailsOpenSilently(getById("subjectScorecardDetails"), true);
+        updateStepIndicators(target);
+        window.setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
+    }
+
+    function setDetailsOpenSilently(section, open) {
+        if (!section || section.tagName !== "DETAILS") return;
+        section.dataset.applyingDefault = "true";
+        section.open = Boolean(open);
+        window.setTimeout(() => {
+            delete section.dataset.applyingDefault;
+        }, 0);
+    }
+
     function bindShareCard() {
         const button = getById("shareResultBtn");
         if (!button) return;
@@ -373,27 +424,39 @@
                 await navigator.clipboard?.writeText(`${text} ${window.location.href}`.trim());
                 button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Copied';
                 window.setTimeout(() => {
-                    button.innerHTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share';
+                    button.innerHTML = SHARE_BUTTON_IDLE_HTML;
                 }, 1400);
             } catch {
-                button.innerHTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share';
+                button.innerHTML = SHARE_BUTTON_IDLE_HTML;
             }
         });
     }
 
     function updateStepIndicators(activeTarget) {
-        const target = activeTarget || "candidateDetailsSection";
+        const target = normalizeStepTarget(activeTarget || "candidateDetailsSection");
         document.querySelectorAll(".form-stepper [data-step-for]").forEach((item) => {
-            const stepFor = item.getAttribute("data-step-for");
+            const stepFor = normalizeStepTarget(item.getAttribute("data-step-for"));
             item.classList.toggle("is-active", stepFor === target);
             item.classList.toggle("is-complete", isStepComplete(stepFor));
+            if (stepFor === target) {
+                item.setAttribute("aria-current", "step");
+            } else {
+                item.removeAttribute("aria-current");
+            }
         });
     }
 
+    function normalizeStepTarget(stepFor) {
+        if (stepFor === "subjectScorecardDetails") return "attemptDetailsSection";
+        return stepFor || "candidateDetailsSection";
+    }
+
     function getActiveStepTarget() {
+        const focusedSection = document.activeElement?.closest?.(".form-accordion");
+        if (focusedSection) return focusedSection.id;
+        if (document.activeElement?.closest?.(".consent-section")) return "dataConsent";
         const openSection = dom.formAccordions.find((section) => section.open);
         if (openSection) return openSection.id;
-        if (document.activeElement?.closest?.(".consent-section")) return "dataConsent";
         return "candidateDetailsSection";
     }
 
@@ -581,6 +644,7 @@
         setValue("unattempted", unattempted);
         setValue("expectedMarks", formatMarks(state.expectedMarks));
         syncLiveSummary(attempted, right, wrong, state.expectedMarks);
+        syncAttemptRuleState(selectedExam, subjectData, attempted, right, wrong, total);
         return state.expectedMarks;
     }
 
@@ -593,6 +657,53 @@
         setText("reviewCorrect", String(right));
         setText("reviewWrong", String(wrong));
         setText("reviewExpectedMarks", formatMarks(expectedMarks));
+    }
+
+    function syncAttemptRuleState(exam, subjectData, attempted, right, wrong, total) {
+        const box = getById("attemptRuleMessage");
+        const liveSummary = document.querySelector(".live-summary-card");
+        if (!box) return;
+
+        dom.subjectControls.forEach(({ card }, index) => {
+            const subject = subjectData[index];
+            card?.classList.toggle("has-rule-warning", Boolean(subject && subject.attempted > subject.questions));
+        });
+
+        const subjectOverflow = subjectData.find((subject) => subject.attempted > subject.questions);
+        let message = "";
+        let warning = false;
+
+        if (!exam) {
+            message = "Select an exam to load attempt rules.";
+        } else if (total <= 0) {
+            message = "Total questions are not configured for this exam.";
+            warning = true;
+        } else if (subjectOverflow) {
+            message = `${subjectOverflow.name} exceeds ${subjectOverflow.questions} questions. Reduce correct or wrong answers.`;
+            warning = true;
+        } else if (attempted > total) {
+            message = `Attempted answers cannot be greater than ${total} total questions.`;
+            warning = true;
+        } else if (right + wrong > attempted) {
+            message = "Right and wrong answers cannot exceed total attempted.";
+            warning = true;
+        } else if (!subjectData.length && right + wrong < attempted) {
+            message = "Right + wrong is lower than attempted. Check totals before submitting.";
+            warning = true;
+        } else if (attempted === 0) {
+            message = subjectData.length
+                ? "Enter subject correct and wrong answers to see expected marks."
+                : "Enter attempt totals to see expected marks.";
+        } else {
+            message = subjectData.length
+                ? `Subject totals are within ${total}-question exam rules.`
+                : `Manual totals are within ${total}-question exam rules.`;
+        }
+
+        setNodeText(box, message);
+        box.classList.toggle("is-warning", warning);
+        box.classList.toggle("is-ok", !warning);
+        liveSummary?.classList.toggle("is-warning", warning);
     }
 
     function scheduleMarksCalculation() {
@@ -746,7 +857,7 @@
         const selectedExam = getSelectedExam();
         if (!selectedExam || selectedExam.disabled || !String(selectedExam.sheetName || "").trim()) {
             const field = getById("globalExamSelect");
-            markInvalid(field);
+            markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
         }
         const required = ["candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
@@ -755,7 +866,7 @@
         for (const id of required) {
             const field = getById(id);
             if (field && String(field.value).trim()) continue;
-            markInvalid(field);
+            markInvalid(field, "This field is required.");
             return { ok: false, field, message: "Please fill all required fields." };
         }
 
@@ -776,8 +887,8 @@
         if (!Number.isFinite(state.expectedMarks)) return invalidNumber("expectedMarks", "Marks could not be calculated. Please check your answers.");
         if (!getById("dataConsent")?.checked) {
             const field = getById("dataConsent");
-            markInvalid(field);
-            return { ok: false, field, message: "Please fill all required fields." };
+            markInvalid(field, "Please confirm consent before submitting.");
+            return { ok: false, field, message: "Please confirm consent before submitting." };
         }
         return { ok: true };
     }
@@ -787,13 +898,13 @@
         const selectedExam = getSelectedExam();
         if (!selectedExam || selectedExam.disabled || !String(selectedExam.sheetName || "").trim()) {
             const field = getById("globalExamSelect");
-            markInvalid(field);
+            markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
         }
         for (const id of ["checkRollNumber", "checkMobileNumber", "checkDob"]) {
             const field = getById(id);
             if (field && String(field.value).trim()) continue;
-            markInvalid(field);
+            markInvalid(field, "This field is required.");
             return { ok: false, field, message: "Please fill all required fields." };
         }
         if (!isValidMobileInput("checkMobileNumber")) return invalidNumber("checkMobileNumber", "Please enter a valid 10-digit mobile number.");
@@ -1018,7 +1129,7 @@
 
     function invalidSubject(index, field, message) {
         const input = dom.subjectControls[index]?.[field];
-        markInvalid(input);
+        markInvalid(input, message);
         return { ok: false, field: input, message };
     }
 
@@ -1259,18 +1370,43 @@
 
     function invalidNumber(id, message) {
         const field = getById(id);
-        markInvalid(field);
+        markInvalid(field, message);
         return { ok: false, field, message };
     }
 
-    function markInvalid(field) {
+    function markInvalid(field, message = "Please check this field.") {
         if (!field) return;
         openContainingDetails(field);
         field.setAttribute("aria-invalid", "true");
         dom.invalidFields.add(field);
         const container = field.closest(".rp-field, .consent-row, .subject-card");
         container?.classList.add("has-error");
+        if (container) ensureInlineError(container, message);
         if (container) dom.errorContainers.add(container);
+    }
+
+    function ensureInlineError(container, message) {
+        const target = getErrorMessageTarget(container);
+        if (!target || !message) return;
+        let error = target.querySelector(".field-error-message");
+        if (!error) {
+            error = document.createElement("div");
+            error.className = "field-error-message";
+            error.setAttribute("role", "alert");
+            target.appendChild(error);
+        }
+        error.textContent = message;
+    }
+
+    function removeInlineError(container) {
+        const target = getErrorMessageTarget(container);
+        target?.querySelector(".field-error-message")?.remove();
+    }
+
+    function getErrorMessageTarget(container) {
+        if (!container) return null;
+        if (container.classList.contains("subject-card")) return container.querySelector(".subject-card-body") || container;
+        return container;
     }
 
     function clearFieldError(event) {
@@ -1281,6 +1417,7 @@
             : event.target.closest(".has-error");
         if (!hasInvalidFlag && !field) return;
         field?.classList.remove("has-error");
+        removeInlineError(field);
         event.target.removeAttribute("aria-invalid");
         dom.invalidFields.delete(event.target);
         if (field) dom.errorContainers.delete(field);
@@ -1297,14 +1434,15 @@
             field.removeAttribute("aria-invalid");
             dom.invalidFields.delete(field);
         });
-        dom.errorContainers.forEach((field) => {
-            if (!document.documentElement.contains(field)) {
-                dom.errorContainers.delete(field);
+        dom.errorContainers.forEach((container) => {
+            if (!document.documentElement.contains(container)) {
+                dom.errorContainers.delete(container);
                 return;
             }
-            if (!scope.contains(field)) return;
-            field.classList.remove("has-error");
-            dom.errorContainers.delete(field);
+            if (!scope.contains(container)) return;
+            container.classList.remove("has-error");
+            removeInlineError(container);
+            dom.errorContainers.delete(container);
         });
     }
 
