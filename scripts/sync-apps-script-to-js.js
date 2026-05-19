@@ -4,6 +4,7 @@ const path = require("path");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const CONFIG_PATH = path.join(__dirname, "sync-apps-script-config.json");
+const PUBLIC_SHEET_CONFIG_PATH = path.join(ROOT_DIR, "JS", "google-sheet-updates-config.js");
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -41,6 +42,17 @@ function sortRecords(records) {
   });
 }
 
+function readApiUrlFromPublicConfig() {
+  if (!fs.existsSync(PUBLIC_SHEET_CONFIG_PATH)) return "";
+  const configText = fs.readFileSync(PUBLIC_SHEET_CONFIG_PATH, "utf8");
+  const match = configText.match(/apiUrl:\s*["']([^"']+)["']/);
+  return match ? match[1].trim() : "";
+}
+
+function resolveApiUrl(config) {
+  return normalizeText(process.env.GJU_SHEET_API_URL || config.apiUrl || readApiUrlFromPublicConfig());
+}
+
 function buildApiUrl(baseUrl, type) {
   const url = new URL(baseUrl);
   url.searchParams.set("type", type);
@@ -70,8 +82,7 @@ async function fetchItems(baseUrl, type, payloadKey) {
   }
 
   const items = Array.isArray(payload?.[payloadKey]) ? payload[payloadKey] : Array.isArray(payload?.items) ? payload.items : [];
-  if (!Array.isArray(items)) return [];
-  return items;
+  return Array.isArray(items) ? items : [];
 }
 
 function buildJs(globalVariable, records, label) {
@@ -109,14 +120,15 @@ async function syncOne(apiUrl, source) {
 
 async function main() {
   const config = readJson(CONFIG_PATH);
-  if (!config.apiUrl) throw new Error("Missing apiUrl in sync-apps-script-config.json");
+  const apiUrl = resolveApiUrl(config);
+  if (!apiUrl) throw new Error("Missing Apps Script API URL. Set GJU_SHEET_API_URL, config.apiUrl, or JS/google-sheet-updates-config.js apiUrl.");
 
   let changed = false;
   let failed = false;
 
   for (const source of config.sources) {
     try {
-      const didChange = await syncOne(config.apiUrl, source);
+      const didChange = await syncOne(apiUrl, source);
       changed = changed || didChange;
     } catch (error) {
       failed = true;
