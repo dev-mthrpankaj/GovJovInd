@@ -554,5 +554,37 @@ const trigonometryToughSet3 = [
   }
 ];
 
-// Registry Code
-quizMeta("trigonometry-tough-set-3", "Maths", "Trigonometry Tough Set 3", "Trigonometry", trigonometryToughSet3);
+window.GJU_QUIZ_BANK = window.GJU_QUIZ_BANK || [];
+
+function buildTrigonometryQuestions(rawQuestions, quizId) {
+  return rawQuestions.map(function (item, index) {
+    const correctAnswer = item.options.indexOf(item.answer);
+    const number = index + 1;
+    if (correctAnswer < 0) throw new Error("Missing answer option in " + quizId + " question " + number);
+
+    return {
+      id: quizId + "-q" + String(number).padStart(2, "0"),
+      subject: "Mathematics",
+      topic: "Trigonometry",
+      difficulty: "hard",
+      question: item.question,
+      options: item.options.slice(),
+      correctAnswer,
+      explanation: item.explanation
+    };
+  });
+}
+
+window.GJU_QUIZ_BANK.push({
+  id: "trigonometry-tough-set-3",
+  subject: "Mathematics",
+  title: "Trigonometry Tough Set 3",
+  description: "50 tough trigonometry questions for government exam practice.",
+  durationMinutes: 45,
+  totalQuestions: 50,
+  marksPerQuestion: 1,
+  negativeMarks: 0.25,
+  difficulty: "Hard",
+  tags: ["SSC", "CGL", "CPO", "CHSL", "Trigonometry"],
+  questions: buildTrigonometryQuestions(trigonometryToughSet3, "trigonometry-tough-set-3")
+});
