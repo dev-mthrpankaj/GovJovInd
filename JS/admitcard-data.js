@@ -1,32 +1,635 @@
+// Auto-generated from Google Sheet through Apps Script.
+// Source: Admit Cards
+// Do not edit manually when sync is enabled.
+
 window.GovJobUpdatesAdmitCards = [
-    { id: "admit-2001", title: "SSC GD Constable Admit Card 2026", organization: "Staff Selection Commission", department: "SSC", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["SSC", "GD Constable", "Admit Card"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2001.html", updatedAt: "2026-05-01" },
-    { id: "admit-2002", title: "RRB NTPC 10+2 UG Exam City Details 2026", organization: "Railway Recruitment Board", department: "Railway", category: "Exam City", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["RRB", "NTPC", "Exam City"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html", updatedAt: "2026-05-01" },
-    { id: "admit-2003", title: "Bihar Police BPSSC SI Mains Exam Date 2026", organization: "Bihar Police Subordinate Services Commission", department: "Police", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["BPSSC", "Bihar Police", "SI Mains"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2003.html", updatedAt: "2026-05-01" },
-    { id: "admit-2004", title: "Bihar BSSC Office Attendant Mains Exam Date 2026", organization: "Bihar Staff Selection Commission", department: "State SSC", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["BSSC", "Office Attendant", "Mains"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2004.html", updatedAt: "2026-05-01" },
-    { id: "admit-2005", title: "Indian Navy SSR Medical Exam Date 2026", organization: "Indian Navy", department: "Defence", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["Indian Navy", "SSR", "Medical"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2005.html", updatedAt: "2026-05-01" },
-    { id: "admit-2006", title: "UP PGT Exam City Details 2026", organization: "Uttar Pradesh Secondary Education Service Selection Board", department: "Teaching", category: "Exam City", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["UP PGT", "Teaching", "Exam City"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html", updatedAt: "2026-05-01" },
-    { id: "admit-2007", title: "NTA CUET UG Exam City Details 2026", organization: "National Testing Agency", department: "Entrance Exam", category: "Exam City", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["NTA", "CUET UG", "Exam City"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html", updatedAt: "2026-05-01" },
-    { id: "admit-2008", title: "Indian Navy Agniveer SSR / MR Exam Date 2026", organization: "Indian Navy", department: "Defence", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["Indian Navy", "Agniveer", "SSR MR"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2008.html", updatedAt: "2026-05-01" },
-    { id: "admit-2009", title: "Punjab and Sind Bank LBO Exam Date 2026", organization: "Punjab and Sind Bank", department: "Banking", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["Punjab and Sind Bank", "LBO", "Banking"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2009.html", updatedAt: "2026-05-01" },
-    { id: "admit-2010", title: "Bihar Vidhan Parishad PA, Stenographer Phase-II Admit Card 2026", organization: "Bihar Vidhan Parishad", department: "Legislature", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["Bihar Vidhan Parishad", "PA", "Stenographer"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html", updatedAt: "2026-05-01" },
-    { id: "admit-2011", title: "NTA NEET UG Admit Card 2026", organization: "National Testing Agency", department: "Medical Entrance", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["NTA", "NEET UG", "Medical"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html", updatedAt: "2026-05-01" },
-    { id: "admit-2012", title: "UPSSSC Junior Engineer Admit Card 2026", organization: "Uttar Pradesh Subordinate Services Selection Commission", department: "Engineering", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["UPSSSC", "Junior Engineer", "Admit Card"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html", updatedAt: "2026-05-01" },
-    { id: "admit-2013", title: "AIIMS NORCET 10th Nursing Officer CBT-II Admit Card 2026", organization: "All India Institute of Medical Sciences", department: "Health", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["AIIMS", "NORCET", "Nursing Officer"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html", updatedAt: "2026-05-01" },
-    { id: "admit-2014", title: "Bihar BPSSC Home Guard Havildar Clerk Exam Date 2026", organization: "Bihar Police Subordinate Services Commission", department: "Police", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "upcoming", tags: ["BPSSC", "Home Guard", "Havildar Clerk"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html", updatedAt: "2026-05-01" },
-    { id: "admit-2015", title: "MPESB Police SI and Subedar Phase-II Admit Card 2026", organization: "Madhya Pradesh Employee Selection Board", department: "Police", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["MPESB", "Police SI", "Subedar"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html", updatedAt: "2026-05-01" },
-    { id: "admit-2016", title: "NTA NTET Admit Card 2026", organization: "National Testing Agency", department: "Teaching", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["NTA", "NTET", "Teaching"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html", updatedAt: "2026-05-01" },
-    { id: "admit-2017", title: "Jharkhand High Court DV & Interview Letter 2026", organization: "Jharkhand High Court", department: "Court", category: "Interview Letter", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["Jharkhand High Court", "DV", "Interview"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html", updatedAt: "2026-05-01" },
-    { id: "admit-2018", title: "CBSE Board Class 10th Second Board Exam Date Sheet 2026", organization: "Central Board of Secondary Education", department: "Board Exam", category: "Date Sheet", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "upcoming", tags: ["CBSE", "Class 10", "Date Sheet"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2018.html", updatedAt: "2026-05-01" },
-    { id: "admit-2019", title: "JPSC JET Admit Card 2026", organization: "Jharkhand Public Service Commission", department: "State PSC", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["JPSC", "JET", "Jharkhand"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html", updatedAt: "2026-05-01" },
-    { id: "admit-2020", title: "NTA NCHM JEE Admit Card 2026", organization: "National Testing Agency", department: "Entrance Exam", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["NTA", "NCHM JEE", "Admit Card"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html", updatedAt: "2026-05-01" },
-    { id: "admit-2021", title: "NTA NIFTEE Stage-II Admit Card 2026", organization: "National Testing Agency", department: "Entrance Exam", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["NTA", "NIFTEE", "Stage II"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html", updatedAt: "2026-05-01" },
-    { id: "admit-2022", title: "BPSC Project Manager Pre Exam Date 2026", organization: "Bihar Public Service Commission", department: "State PSC", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["BPSC", "Project Manager", "Pre Exam"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2022.html", updatedAt: "2026-05-01" },
-    { id: "admit-2023", title: "RSSB Lab Assistant Exam Date 2026", organization: "Rajasthan Staff Selection Board", department: "Lab Assistant", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["RSSB", "Lab Assistant", "Rajasthan"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2023.html", updatedAt: "2026-05-01" },
-    { id: "admit-2024", title: "Bihar BPSC Stenographer New Exam Date 2026", organization: "Bihar Public Service Commission", department: "State PSC", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "upcoming", tags: ["BPSC", "Stenographer", "Bihar"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2024.html", updatedAt: "2026-05-01" },
-    { id: "admit-2025", title: "UP LT Grade Assistant Teacher Mains Admit Card 2026", organization: "Uttar Pradesh Public Service Commission", department: "Teaching", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "upcoming", tags: ["UP LT Grade", "Assistant Teacher", "Mains"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html", updatedAt: "2026-05-01" },
-    { id: "admit-2026", title: "UPSC CAPF AC Interview Schedule 2026", organization: "Union Public Service Commission", department: "Defence", category: "Interview Schedule", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "upcoming", tags: ["UPSC", "CAPF AC", "Interview"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2026.html", updatedAt: "2026-05-01" },
-    { id: "admit-2027", title: "HPSC PGT Computer Science New Exam Date 2026", organization: "Haryana Public Service Commission", department: "Teaching", category: "Exam Date", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "upcoming", tags: ["HPSC", "PGT", "Computer Science"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2027.html", updatedAt: "2026-05-01" },
-    { id: "admit-2028", title: "HSSC Constable PMT Admit Card 2026", organization: "Haryana Staff Selection Commission", department: "Police", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["HSSC", "Constable", "PMT"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html", updatedAt: "2026-05-01" },
-    { id: "admit-2029", title: "BPSC 71th Mains Admit Card 2026", organization: "Bihar Public Service Commission", department: "State PSC", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["BPSC", "71th Mains", "Admit Card"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html", updatedAt: "2026-05-01" },
-    { id: "admit-2030", title: "NCL Assistant Foreman Admit Card 2026", organization: "Northern Coalfields Limited", department: "Public Sector", category: "Admit Card", year: "2026", examDate: "", releaseDate: "2026-05-01", status: "available", tags: ["NCL", "Assistant Foreman", "PSU"], downloadLink: "#", detailPage: "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html", updatedAt: "2026-05-01" }
+    {
+        "id": "admit-2033",
+        "title": "UP Police Constable Admit Card 2026",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-08",
+        "releaseDate": "soon",
+        "status": "not available",
+        "tags": [
+            "UPPRPB",
+            "Police",
+            "Constable"
+        ],
+        "downloadLink": "",
+        "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
+        "updatedAt": "2026-05-19"
+    },
+    {
+        "id": "admit-2032",
+        "title": "UPSC Civil Services IAS IFS Admit Card 2026",
+        "organization": "Union Public Service Commision",
+        "department": "Central",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-05-24",
+        "releaseDate": "2026-05-17",
+        "status": "available",
+        "tags": [
+            "UPSC",
+            "IAS",
+            "IPS",
+            "IFS",
+            "Central"
+        ],
+        "downloadLink": "https://upsconline.nic.in/login",
+        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+        "updatedAt": "2026-05-18"
+    },
+    {
+        "id": "admit-2031",
+        "title": "Uttar Pradesh Lekhpal Admit Card 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "State",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-05-21",
+        "releaseDate": "2026-05-16",
+        "status": "available",
+        "tags": [
+            "upsssc",
+            "lekhpal",
+            "uttar pradesh"
+        ],
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
+        "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
+        "updatedAt": "2026-05-16"
+    },
+    {
+        "id": "admit-2001",
+        "title": "SSC GD Constable Admit Card 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "SSC",
+            "GD Constable",
+            "Admit Card"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2001.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2002",
+        "title": "RRB NTPC 10+2 UG Exam City Details 2026",
+        "organization": "Railway Recruitment Board",
+        "department": "Railway",
+        "category": "Exam City",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "RRB",
+            "NTPC",
+            "Exam City"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2003",
+        "title": "Bihar Police BPSSC SI Mains Exam Date 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "Police",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "BPSSC",
+            "Bihar Police",
+            "SI Mains"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2003.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2004",
+        "title": "Bihar BSSC Office Attendant Mains Exam Date 2026",
+        "organization": "Bihar Staff Selection Commission",
+        "department": "State SSC",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "BSSC",
+            "Office Attendant",
+            "Mains"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2004.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2005",
+        "title": "Indian Navy SSR Medical Exam Date 2026",
+        "organization": "Indian Navy",
+        "department": "Defence",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "Indian Navy",
+            "SSR",
+            "Medical"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2005.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2006",
+        "title": "UP PGT Exam City Details 2026",
+        "organization": "Uttar Pradesh Secondary Education Service Selection Board",
+        "department": "Teaching",
+        "category": "Exam City",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "UP PGT",
+            "Teaching",
+            "Exam City"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2007",
+        "title": "NTA CUET UG Exam City Details 2026",
+        "organization": "National Testing Agency",
+        "department": "Entrance Exam",
+        "category": "Exam City",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "NTA",
+            "CUET UG",
+            "Exam City"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2008",
+        "title": "Indian Navy Agniveer SSR / MR Exam Date 2026",
+        "organization": "Indian Navy",
+        "department": "Defence",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "Indian Navy",
+            "Agniveer",
+            "SSR MR"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2008.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2009",
+        "title": "Punjab and Sind Bank LBO Exam Date 2026",
+        "organization": "Punjab and Sind Bank",
+        "department": "Banking",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "Punjab and Sind Bank",
+            "LBO",
+            "Banking"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2009.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2010",
+        "title": "Bihar Vidhan Parishad PA, Stenographer Phase-II Admit Card 2026",
+        "organization": "Bihar Vidhan Parishad",
+        "department": "Legislature",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "Bihar Vidhan Parishad",
+            "PA",
+            "Stenographer"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2011",
+        "title": "NTA NEET UG Admit Card 2026",
+        "organization": "National Testing Agency",
+        "department": "Medical Entrance",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "NTA",
+            "NEET UG",
+            "Medical"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2012",
+        "title": "UPSSSC Junior Engineer Admit Card 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Engineering",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "UPSSSC",
+            "Junior Engineer",
+            "Admit Card"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2013",
+        "title": "AIIMS NORCET 10th Nursing Officer CBT-II Admit Card 2026",
+        "organization": "All India Institute of Medical Sciences",
+        "department": "Health",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "AIIMS",
+            "NORCET",
+            "Nursing Officer"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2014",
+        "title": "Bihar BPSSC Home Guard Havildar Clerk Exam Date 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "Police",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "upcoming",
+        "tags": [
+            "BPSSC",
+            "Home Guard",
+            "Havildar Clerk"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2015",
+        "title": "MPESB Police SI and Subedar Phase-II Admit Card 2026",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "MPESB",
+            "Police SI",
+            "Subedar"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2016",
+        "title": "NTA NTET Admit Card 2026",
+        "organization": "National Testing Agency",
+        "department": "Teaching",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "NTA",
+            "NTET",
+            "Teaching"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2017",
+        "title": "Jharkhand High Court DV & Interview Letter 2026",
+        "organization": "Jharkhand High Court",
+        "department": "Court",
+        "category": "Interview Letter",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "Jharkhand High Court",
+            "DV",
+            "Interview"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2018",
+        "title": "CBSE Board Class 10th Second Board Exam Date Sheet 2026",
+        "organization": "Central Board of Secondary Education",
+        "department": "Board Exam",
+        "category": "Date Sheet",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "upcoming",
+        "tags": [
+            "CBSE",
+            "Class 10",
+            "Date Sheet"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2018.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2019",
+        "title": "JPSC JET Admit Card 2026",
+        "organization": "Jharkhand Public Service Commission",
+        "department": "State PSC",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "JPSC",
+            "JET",
+            "Jharkhand"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2020",
+        "title": "NTA NCHM JEE Admit Card 2026",
+        "organization": "National Testing Agency",
+        "department": "Entrance Exam",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "NTA",
+            "NCHM JEE",
+            "Admit Card"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2021",
+        "title": "NTA NIFTEE Stage-II Admit Card 2026",
+        "organization": "National Testing Agency",
+        "department": "Entrance Exam",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "NTA",
+            "NIFTEE",
+            "Stage II"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2022",
+        "title": "BPSC Project Manager Pre Exam Date 2026",
+        "organization": "Bihar Public Service Commission",
+        "department": "State PSC",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "BPSC",
+            "Project Manager",
+            "Pre Exam"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2022.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2023",
+        "title": "RSSB Lab Assistant Exam Date 2026",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "Lab Assistant",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "RSSB",
+            "Lab Assistant",
+            "Rajasthan"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2023.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2024",
+        "title": "Bihar BPSC Stenographer New Exam Date 2026",
+        "organization": "Bihar Public Service Commission",
+        "department": "State PSC",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "upcoming",
+        "tags": [
+            "BPSC",
+            "Stenographer",
+            "Bihar"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2024.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2025",
+        "title": "UP LT Grade Assistant Teacher Mains Admit Card 2026",
+        "organization": "Uttar Pradesh Public Service Commission",
+        "department": "Teaching",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "upcoming",
+        "tags": [
+            "UP LT Grade",
+            "Assistant Teacher",
+            "Mains"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2026",
+        "title": "UPSC CAPF AC Interview Schedule 2026",
+        "organization": "Union Public Service Commission",
+        "department": "Defence",
+        "category": "Interview Schedule",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "upcoming",
+        "tags": [
+            "UPSC",
+            "CAPF AC",
+            "Interview"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2026.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2027",
+        "title": "HPSC PGT Computer Science New Exam Date 2026",
+        "organization": "Haryana Public Service Commission",
+        "department": "Teaching",
+        "category": "Exam Date",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "upcoming",
+        "tags": [
+            "HPSC",
+            "PGT",
+            "Computer Science"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2027.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2028",
+        "title": "HSSC Constable PMT Admit Card 2026",
+        "organization": "Haryana Staff Selection Commission",
+        "department": "Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "HSSC",
+            "Constable",
+            "PMT"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2029",
+        "title": "BPSC 71th Mains Admit Card 2026",
+        "organization": "Bihar Public Service Commission",
+        "department": "State PSC",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "BPSC",
+            "71th Mains",
+            "Admit Card"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html",
+        "updatedAt": "2026-05-01"
+    },
+    {
+        "id": "admit-2030",
+        "title": "NCL Assistant Foreman Admit Card 2026",
+        "organization": "Northern Coalfields Limited",
+        "department": "Public Sector",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-05-01",
+        "status": "available",
+        "tags": [
+            "NCL",
+            "Assistant Foreman",
+            "PSU"
+        ],
+        "downloadLink": "#",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
+        "updatedAt": "2026-05-01"
+    }
 ];
