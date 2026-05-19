@@ -4,25 +4,6 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
-        "id": "admit-2031",
-        "title": "Uttar Pradesh Lekhpal Admit Card 2026",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "State",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-05-21",
-        "releaseDate": "2026-05-16",
-        "status": "available",
-        "tags": [
-            "upsssc",
-            "lekhpal",
-            "uttar pradesh"
-        ],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
-        "updatedAt": "2026-05-21"
-    },
-    {
         "id": "admit-2033",
         "title": "UP Police Constable Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
@@ -61,6 +42,25 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://upsconline.nic.in/login",
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-05-18"
+    },
+    {
+        "id": "admit-2031",
+        "title": "Uttar Pradesh Lekhpal Admit Card 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "State",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-05-21",
+        "releaseDate": "2026-05-16",
+        "status": "available",
+        "tags": [
+            "upsssc",
+            "lekhpal",
+            "uttar pradesh"
+        ],
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
+        "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
+        "updatedAt": "2026-05-16"
     },
     {
         "id": "admit-2001",
