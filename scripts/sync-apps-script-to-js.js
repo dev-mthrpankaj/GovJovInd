@@ -6,6 +6,25 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 const CONFIG_PATH = path.join(__dirname, "sync-apps-script-config.json");
 const PUBLIC_SHEET_CONFIG_PATH = path.join(ROOT_DIR, "JS", "google-sheet-updates-config.js");
 
+const HTML_CACHE_TARGETS = [
+  {
+    file: "HTML/latest-jobs.html",
+    scripts: ["jobs-data", "latest-jobs"]
+  },
+  {
+    file: "HTML/admitcard.html",
+    scripts: ["admitcard-data", "admit-cards"]
+  },
+  {
+    file: "HTML/answer-key.html",
+    scripts: ["answerkey-data", "answer-key"]
+  },
+  {
+    file: "HTML/results.html",
+    scripts: ["results-data", "results"]
+  }
+];
+
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
@@ -101,7 +120,7 @@ function buildJs(globalVariable, records, label) {
   return `// Auto-generated from Google Sheet through Apps Script.\n// Source: ${label}\n// Do not edit manually when sync is enabled.\n\nwindow.${globalVariable} = ${JSON.stringify(records, null, 4)};\n`;
 }
 
-function writeIfValid(filePath, content) {
+function writeIfChanged(filePath, content) {
   const absolutePath = path.join(ROOT_DIR, filePath);
   const oldContent = fs.existsSync(absolutePath) ? fs.readFileSync(absolutePath, "utf8") : "";
   if (oldContent === content) {
@@ -112,6 +131,41 @@ function writeIfValid(filePath, content) {
   fs.writeFileSync(absolutePath, content, "utf8");
   console.log(`Updated: ${filePath}`);
   return true;
+}
+
+function removeLiveSheetScripts(html) {
+  return html
+    .replace(/^\s*<script\s+src=["']\.\.\/JS\/google-sheet-updates-config\.js(?:\?[^"']*)?["']><\/script>\s*\r?\n?/gim, "")
+    .replace(/^\s*<script\s+src=["']\.\.\/JS\/google-sheet-updates\.js(?:\?[^"']*)?["']><\/script>\s*\r?\n?/gim, "");
+}
+
+function updateScriptVersion(html, scriptName, version) {
+  const pattern = new RegExp(`(<script\\s+src=["']\\.\\.\\/JS\\/${scriptName}\\.js)(?:\\?v=[^"']*)?(["']><\\/script>)`, "gi");
+  return html.replace(pattern, `$1?v=${version}$2`);
+}
+
+function updatePublicHtmlCacheVersions(version) {
+  let changed = false;
+
+  HTML_CACHE_TARGETS.forEach((target) => {
+    const relativeFile = target.file;
+    const absoluteFile = path.join(ROOT_DIR, relativeFile);
+
+    if (!fs.existsSync(absoluteFile)) {
+      console.warn(`Skipped missing HTML file: ${relativeFile}`);
+      return;
+    }
+
+    let html = fs.readFileSync(absoluteFile, "utf8");
+    html = removeLiveSheetScripts(html);
+    target.scripts.forEach((scriptName) => {
+      html = updateScriptVersion(html, scriptName, version);
+    });
+
+    changed = writeIfChanged(relativeFile, html) || changed;
+  });
+
+  return changed;
 }
 
 async function syncOne(apiUrl, source) {
@@ -127,7 +181,13 @@ async function syncOne(apiUrl, source) {
   }
 
   const content = buildJs(source.globalVariable, sortRecords(records), source.label);
-  return writeIfValid(source.outputFile, content);
+  return writeIfChanged(source.outputFile, content);
+}
+
+function buildVersion() {
+  const date = new Date();
+  const pad = (value) => String(value).padStart(2, "0");
+  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}-${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}`;
 }
 
 async function main() {
@@ -135,20 +195,28 @@ async function main() {
   const apiUrl = resolveApiUrl(config);
   if (!apiUrl) throw new Error("Missing Apps Script API URL. Set GJU_SHEET_API_URL, config.apiUrl, or JS/google-sheet-updates-config.js apiUrl.");
 
-  let changed = false;
+  let dataChanged = false;
   let failed = false;
 
   for (const source of config.sources) {
     try {
       const didChange = await syncOne(apiUrl, source);
-      changed = changed || didChange;
+      dataChanged = dataChanged || didChange;
     } catch (error) {
       failed = true;
       console.error(`Failed: ${source.label}: ${error.message}`);
     }
   }
 
+  let htmlChanged = false;
+  if (dataChanged) {
+    const version = buildVersion();
+    console.log(`Updating public HTML cache version: ${version}`);
+    htmlChanged = updatePublicHtmlCacheVersions(version);
+  }
+
   if (failed) process.exitCode = 1;
+  const changed = dataChanged || htmlChanged;
   console.log(changed ? "Sync completed with file updates." : "Sync completed with no file changes.");
 }
 
