@@ -205,18 +205,115 @@
     return `<div class="job-detail-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
   }
 
+  function renderTags(tags) {
+    const values = Array.isArray(tags) && tags.length ? tags : ["Government Job"];
+    return values.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
+  }
+
+  function summaryItem(label, value) {
+    return `<li><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></li>`;
+  }
+
+  function statCard(label, value, icon) {
+    return `<article><i class="fas ${escapeHtml(icon)}" aria-hidden="true"></i><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></article>`;
+  }
+
+  function dateCard(label, value) {
+    return `<article><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></article>`;
+  }
+
   function renderNotFound(root, id) {
     document.title = "Job Not Found | GovJobUpdates";
-    root.innerHTML = `<section class="job-detail-hero"><span class="job-detail-kicker">Job Not Found</span><h1>Job detail is unavailable</h1><p class="job-detail-org">No matching job was found for <strong>${escapeHtml(id || "this URL")}</strong>.</p><div class="job-detail-actions"><a class="btn btn-primary" href="../../HTML/latest-jobs.html">Back to Latest Jobs</a></div></section>`;
+    root.innerHTML = `<section class="job-detail-hero job-detail-empty-state"><span class="job-detail-kicker">Job Not Found</span><h1>Job detail is unavailable</h1><p class="job-detail-org">No matching job was found for <strong>${escapeHtml(id || "this URL")}</strong>. Please return to Latest Jobs and choose another update.</p><div class="job-detail-actions"><a class="btn btn-primary" href="../../HTML/latest-jobs.html">Back to Latest Jobs</a><a class="btn btn-outline" href="../../HTML/contact.html">Report Issue</a></div></section>`;
   }
 
   function renderJob(root, job) {
     const status = getStatus(job);
     updateSeo(job);
+    const startDate = formatDate(job.startDate);
+    const lastDate = formatDate(job.lastDate);
+    const updatedAt = formatDate(job.updatedAt);
     root.innerHTML = `
-      <section class="job-detail-hero"><span class="job-detail-kicker">${escapeHtml(status)} Recruitment Update</span><h1>${escapeHtml(job.title)}</h1><p class="job-detail-org"><strong>Organization:</strong> ${escapeHtml(job.organization)}</p><div class="job-detail-tags"><span>${escapeHtml(job.category)}</span><span>${escapeHtml(job.year)}</span><span>${escapeHtml(job.totalPosts)} Posts</span></div><div class="job-detail-actions">${linkButton(job.applyLink, "Apply / Official Website", true)}${linkButton(job.officialNotification, "Official Notification", false)}<a class="btn btn-outline" href="../../HTML/latest-jobs.html">Back to Jobs</a></div></section>
-      <section class="job-alert-box job-detail-trust-note"><strong>Important:</strong> GovJobUpdates is not a government website. Always verify details from the official website before applying.</section>
-      <section class="job-detail-grid"><article class="job-detail-card"><h2>Important Details</h2><dl class="job-detail-list">${row("Job ID", job.id)}${row("Department", job.department)}${row("Category", job.category)}${row("Qualification", job.qualification)}${row("Total Posts", job.totalPosts)}${row("Status", status)}</dl></article><article class="job-detail-card"><h2>Important Dates</h2><dl class="job-detail-list">${row("Start Date", formatDate(job.startDate))}${row("Last Date", formatDate(job.lastDate))}${row("Updated On", formatDate(job.updatedAt))}</dl></article><article class="job-detail-card"><h2>Eligibility Overview</h2><p>Available qualification summary: <strong>${escapeHtml(job.qualification)}</strong>.</p><p class="job-meta-note">For post-wise qualification, age limit, reservation, fee, experience, physical standards and document requirements, read the official notification.</p></article><article class="job-detail-card"><h2>How to Apply</h2><ol class="job-step-list"><li>Open the official apply link / official website.</li><li>Read the official notification carefully.</li><li>Check eligibility, age limit, fees and documents.</li><li>Fill the form with correct details.</li><li>Submit and save the final printout / PDF.</li></ol></article><article class="job-detail-card"><h2>Selection Process</h2><p>The selection process may include written exam, skill test, physical test, interview, document verification or medical examination depending on the recruitment. Check the official notification for exact stages.</p></article><article class="job-detail-card"><h2>Tags</h2><div class="job-detail-tags">${job.tags.length ? job.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("") : "<span>Government Job</span>"}</div></article></section>`;
+      <section class="job-detail-hero job-detail-universal-hero">
+        <div class="job-detail-hero-copy">
+          <span class="job-detail-kicker">${escapeHtml(status)} Recruitment Update</span>
+          <h1>${escapeHtml(job.title)}</h1>
+          <p class="job-detail-org"><strong>Organization:</strong> ${escapeHtml(job.organization)}</p>
+          <div class="job-detail-tags"><span>${escapeHtml(job.category)}</span><span>${escapeHtml(job.year)}</span><span>${escapeHtml(job.totalPosts)} Posts</span></div>
+          <div class="job-detail-actions">${linkButton(job.applyLink, "Apply / Official Website", true)}${linkButton(job.officialNotification, "Official Notification", false)}<a class="btn btn-outline" href="../../HTML/latest-jobs.html">Back to Jobs</a></div>
+        </div>
+        <aside class="job-detail-hero-panel" aria-label="Job quick facts">
+          <span>Quick Status</span>
+          <strong>${escapeHtml(status)}</strong>
+          <p>Check eligibility, dates, vacancy and official links before applying.</p>
+        </aside>
+      </section>
+      <section class="job-detail-stat-grid" aria-label="Important job summary">
+        ${statCard("Total Posts", job.totalPosts, "fa-users")}
+        ${statCard("Qualification", job.qualification, "fa-graduation-cap")}
+        ${statCard("Last Date", lastDate, "fa-calendar-day")}
+        ${statCard("Department", job.department, "fa-building")}
+      </section>
+      <section class="job-alert-box job-detail-trust-note"><span><strong>Important:</strong> GovJobUpdates is not a government website. Always verify details from the official website before applying.</span></section>
+      <section class="job-detail-dashboard">
+        <div class="job-detail-main-stack">
+          <article class="job-detail-card">
+            <h2><i class="fas fa-circle-info" aria-hidden="true"></i> Recruitment Overview</h2>
+            <dl class="job-detail-list">${row("Job ID", job.id)}${row("Organization", job.organization)}${row("Department", job.department)}${row("Category", job.category)}${row("Year", job.year)}${row("Status", status)}</dl>
+          </article>
+          <article class="job-detail-card">
+            <h2><i class="fas fa-calendar-alt" aria-hidden="true"></i> Important Dates</h2>
+            <div class="job-date-grid">
+              ${dateCard("Application Start", startDate)}
+              ${dateCard("Last Date", lastDate)}
+              ${dateCard("Updated On", updatedAt)}
+            </div>
+            <p class="job-meta-note">Dates may change through official corrigendum or portal notice. Always check the official notification before taking action.</p>
+          </article>
+          <article class="job-detail-card">
+            <h2><i class="fas fa-user-check" aria-hidden="true"></i> Eligibility & Vacancy</h2>
+            <dl class="job-detail-list">${row("Qualification", job.qualification)}${row("Total Vacancy", `${job.totalPosts} posts`)}</dl>
+            <p class="job-meta-note">For post-wise qualification, age limit, reservation, fee, experience, physical standards and document requirements, read the official notification.</p>
+          </article>
+          <article class="job-detail-card">
+            <h2><i class="fas fa-list-check" aria-hidden="true"></i> How to Apply</h2>
+            <ol class="job-step-list">
+              <li>Open the official apply link or official website.</li>
+              <li>Read the official notification carefully.</li>
+              <li>Check eligibility, age limit, fees and documents.</li>
+              <li>Fill the form with correct details only.</li>
+              <li>Submit and save the final printout or PDF.</li>
+            </ol>
+          </article>
+          <article class="job-detail-card">
+            <h2><i class="fas fa-clipboard-check" aria-hidden="true"></i> Selection Process</h2>
+            <p>The selection process may include written exam, skill test, physical test, interview, document verification or medical examination depending on the recruitment. Check the official notification for exact stages.</p>
+          </article>
+        </div>
+        <aside class="job-detail-side-rail" aria-label="Job summary and useful links">
+          <section class="job-detail-side-card">
+            <h2>Quick Summary</h2>
+            <ul class="job-summary-list">
+              ${summaryItem("Status", status)}
+              ${summaryItem("Posts", `${job.totalPosts} Posts`)}
+              ${summaryItem("Qualification", job.qualification)}
+              ${summaryItem("Last Date", lastDate)}
+            </ul>
+          </section>
+          <section class="job-detail-side-card">
+            <h2>Important Links</h2>
+            <div class="job-side-actions">${linkButton(job.applyLink, "Apply / Official Website", true)}${linkButton(job.officialNotification, "Official Notification", false)}<a class="btn btn-outline" href="../../HTML/latest-jobs.html">Latest Jobs</a></div>
+          </section>
+          <section class="job-detail-side-card">
+            <h2>Related Tools</h2>
+            <div class="job-side-actions"><a class="btn btn-outline" href="../../HTML/documents.html">Document Tools</a><a class="btn btn-outline" href="../../HTML/quiz.html">Quiz Practice</a></div>
+          </section>
+          <section class="job-detail-side-card">
+            <h2>Tags</h2>
+            <div class="job-detail-tags">${renderTags(job.tags)}</div>
+          </section>
+        </aside>
+      </section>`;
   }
 
   async function initDynamicDetail() {
