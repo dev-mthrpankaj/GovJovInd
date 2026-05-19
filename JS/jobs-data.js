@@ -10,20 +10,18 @@ window.GovJobUpdatesJobs = [
         "department": "SECR Nagpur",
         "category": "Railway",
         "year": "2026",
-        "qualification": "Class 10 with 50% Marks + ITI",
+        "qualification": "Class 10 High School",
         "totalPosts": "1079",
         "startDate": "2026-05-19",
         "lastDate": "2026-06-18",
         "status": "active",
         "tags": [
             "Railway",
-            "SECR",
-            "Apprentice",
-            "ITI"
+            "RRB"
         ],
         "applyLink": "https://www.apprenticeshipindia.gov.in/",
         "officialNotification": "https://secr.indianrailways.gov.in/uploads/files/1779104439050-Notification.pdf",
-        "detailPage": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html",
+        "detailPage": "1103-Railway-SECR-Nagpur-Apprentice-2026.html",
         "updatedAt": "2026-05-19"
     },
     {
