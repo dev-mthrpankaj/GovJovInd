@@ -11,6 +11,8 @@ permissions:
 jobs:
   sync-listing-data:
     runs-on: ubuntu-latest
+    env:
+      GJU_SHEET_API_URL: "https://script.google.com/macros/s/AKfycbweqlqEKOhfn_PtfRZdu_uH9KAr3226-lbeu-gCF-fLh0lq7EP6yRTDHlPwLgMIHjdn/exec"
 
     steps:
       - name: Checkout repository
