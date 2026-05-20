@@ -15,9 +15,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-05-20",
         "lastDate": "2026-06-18",
         "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
+        "tags": [
+            "Scientist",
+            "Central",
+            "ITI"
+        ],
+        "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
+        "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
         "detailPage": "",
         "updatedAt": "2026-05-20"
     },
