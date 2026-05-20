@@ -18,7 +18,7 @@ window.GovJobUpdatesAdmitCards = [
             "GD Constable",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://ssc.gov.in/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2001.html",
         "updatedAt": "2026-05-20"
     },
