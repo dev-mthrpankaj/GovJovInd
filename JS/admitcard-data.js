@@ -4,6 +4,25 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-2001",
+        "title": "SSC GD Constable Admit Card 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "releaseDate": "2026-04-24",
+        "status": "available",
+        "tags": [
+            "SSC",
+            "GD Constable",
+            "Admit Card"
+        ],
+        "downloadLink": "https://ssc.gov.in/",
+        "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
+        "updatedAt": "2026-05-20"
+    },
+    {
         "id": "admit-2033",
         "title": "UP Police Constable Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
@@ -61,25 +80,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-16"
-    },
-    {
-        "id": "admit-2001",
-        "title": "SSC GD Constable Admit Card 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "SSC",
-            "GD Constable",
-            "Admit Card"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2001.html",
-        "updatedAt": "2026-05-01"
     },
     {
         "id": "admit-2002",
