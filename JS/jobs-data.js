@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2417",
+        "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-20"
+    },
+    {
         "id": "job-1103",
         "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
         "organization": "South East Central Railway",
