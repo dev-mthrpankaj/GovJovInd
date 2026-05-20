@@ -52,6 +52,7 @@ quizMeta("english-one-word-substitution-set-21", "English", "English One Word Su
 quizMeta("english-one-word-substitution-set-22", "English", "English One Word Substitution Practice Set 22", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-22.js"),
 quizMeta("english-one-word-substitution-set-23", "English", "English One Word Substitution Practice Set 23", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-23.js"),
 quizMeta("english-one-word-substitution-set-24", "English", "English One Word Substitution Practice Set 24", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-24.js"),
+quizMeta("detecting-errors-adjective-set-1", "English", "Detecting Errors - Adjective Set 1");
 
 
 
