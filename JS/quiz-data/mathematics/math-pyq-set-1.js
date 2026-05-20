@@ -5,45 +5,151 @@
 
     const quizId = "math-pyq-set-1";
     const seeds = [
-        { topic: "PYQ Arithmetic", difficulty: "medium", question: "Two numbers are in the ratio 5:7 and their sum is 144. What is the smaller number?", options: ["50", "55", "60", "65"], correctAnswer: 2, explanation: "One part = 144/12 = 12. Smaller number = 5 x 12 = 60." },
-        { topic: "PYQ Percentage", difficulty: "medium", question: "What is 35% of 480?", options: ["148", "158", "168", "178"], correctAnswer: 2, explanation: "35% of 480 = 0.35 x 480 = 168." },
-        { topic: "PYQ Work", difficulty: "medium", question: "8 workers finish a job in 15 days. In how many days will 12 workers finish it?", options: ["8 days", "10 days", "12 days", "18 days"], correctAnswer: 1, explanation: "Workers and days are inversely proportional: 8 x 15 / 12 = 10 days." },
-        { topic: "PYQ Average", difficulty: "easy", question: "The average of 7 numbers is 18. What is their sum?", options: ["108", "116", "126", "136"], correctAnswer: 2, explanation: "Sum = average x count = 18 x 7 = 126." },
-        { topic: "PYQ Time Speed", difficulty: "medium", question: "72 km/h is equal to how many m/s?", options: ["18", "20", "22", "24"], correctAnswer: 1, explanation: "72 x 5/18 = 20 m/s." },
-        { topic: "PYQ Number System", difficulty: "easy", question: "What is the smallest prime number?", options: ["0", "1", "2", "3"], correctAnswer: 2, explanation: "2 is the smallest and only even prime number." },
-        { topic: "PYQ Mensuration", difficulty: "medium", question: "The area of a square is 144 sq cm. What is its side?", options: ["10 cm", "11 cm", "12 cm", "14 cm"], correctAnswer: 2, explanation: "Side = square root of 144 = 12 cm." },
-        { topic: "PYQ Discount", difficulty: "medium", question: "The marked price is 1000 and the discount is 15%. What is the selling price?", options: ["750", "800", "850", "900"], correctAnswer: 2, explanation: "Selling price = 1000 - 15% of 1000 = 850." },
-        { topic: "PYQ Algebra", difficulty: "easy", question: "If 3x = 45, what is x?", options: ["12", "15", "18", "20"], correctAnswer: 1, explanation: "x = 45/3 = 15." },
-        { topic: "PYQ Mixture", difficulty: "medium", question: "The ratio of milk to water is 4:1 in 25 litres. What is the quantity of milk?", options: ["15 L", "18 L", "20 L", "22 L"], correctAnswer: 2, explanation: "Milk = 4/5 x 25 = 20 litres." }
+            {
+                    "topic": "PYQ अनुपात",
+                    "difficulty": "medium",
+                    "question": "दो संख्याएँ 5:7 के अनुपात में हैं और उनका योग 144 है। छोटी संख्या ज्ञात कीजिए।",
+                    "options": [
+                            "50",
+                            "55",
+                            "60",
+                            "65"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "कुल भाग = 12, एक भाग = 144/12 = 12। छोटी संख्या = 5 × 12 = 60।"
+            },
+            {
+                    "topic": "PYQ प्रतिशत",
+                    "difficulty": "medium",
+                    "question": "480 का 35% कितना है?",
+                    "options": [
+                            "148",
+                            "158",
+                            "168",
+                            "178"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "480 का 35% = 0.35 × 480 = 168।"
+            },
+            {
+                    "topic": "PYQ काम",
+                    "difficulty": "medium",
+                    "question": "8 मजदूर किसी काम को 15 दिन में करते हैं। वही काम 12 मजदूर कितने दिन में करेंगे?",
+                    "options": [
+                            "8 दिन",
+                            "10 दिन",
+                            "12 दिन",
+                            "18 दिन"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "मजदूर और दिन व्युत्क्रमानुपाती हैं: 8 × 15 / 12 = 10 दिन।"
+            },
+            {
+                    "topic": "PYQ गुणा",
+                    "difficulty": "easy",
+                    "question": "7 और 18 का गुणनफल कितना है?",
+                    "options": [
+                            "108",
+                            "116",
+                            "126",
+                            "136"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "गुणनफल = 18 × 7 = 126।"
+            },
+            {
+                    "topic": "PYQ इकाई-परिवर्तन",
+                    "difficulty": "medium",
+                    "question": "72 किमी/घंटा कितने मीटर/सेकंड के बराबर है?",
+                    "options": [
+                            "18",
+                            "20",
+                            "22",
+                            "24"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "72 × 5/18 = 20 मीटर/सेकंड।"
+            },
+            {
+                    "topic": "PYQ अभाज्य संख्या",
+                    "difficulty": "easy",
+                    "question": "सबसे छोटी अभाज्य संख्या कौन-सी है?",
+                    "options": [
+                            "0",
+                            "1",
+                            "2",
+                            "3"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "2 सबसे छोटी और एकमात्र सम अभाज्य संख्या है।"
+            },
+            {
+                    "topic": "PYQ वर्गमूल",
+                    "difficulty": "medium",
+                    "question": "किस संख्या का वर्ग 144 होता है?",
+                    "options": [
+                            "10",
+                            "11",
+                            "12",
+                            "14"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "12 का वर्ग 144 होता है।"
+            },
+            {
+                    "topic": "PYQ छूट",
+                    "difficulty": "medium",
+                    "question": "अंकित मूल्य ₹1000 हो और 15% छूट मिले, तो विक्रय मूल्य कितना होगा?",
+                    "options": [
+                            "750",
+                            "800",
+                            "850",
+                            "900"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "विक्रय मूल्य = 1000 - 1000 का 15% = 850।"
+            },
+            {
+                    "topic": "PYQ समीकरण",
+                    "difficulty": "easy",
+                    "question": "यदि 3x = 45 है, तो x का मान क्या है?",
+                    "options": [
+                            "12",
+                            "15",
+                            "18",
+                            "20"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "x = 45/3 = 15।"
+            },
+            {
+                    "topic": "PYQ अनुपात",
+                    "difficulty": "medium",
+                    "question": "25 लीटर मिश्रण में दूध और पानी का अनुपात 4:1 है। दूध की मात्रा ज्ञात कीजिए।",
+                    "options": [
+                            "15 लीटर",
+                            "18 लीटर",
+                            "20 लीटर",
+                            "22 लीटर"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "दूध = 4/5 × 25 = 20 लीटर।"
+            }
+    ];
+
+    const prefixes = [
+            "सही उत्तर चुनिए: ",
+            "सबसे उपयुक्त विकल्प चुनिए: ",
+            "सही विकल्प अंकित कीजिए: ",
+            "निम्न प्रश्न हल कीजिए: "
     ];
 
     function formatQuestionText(question, variantIndex) {
         const text = String(question).trim();
         if (variantIndex === 0) return text;
-
-        const variant = (variantIndex - 1) % 4;
-        const instructionPatterns = [
-            { pattern: /^Choose\b/i, verbs: ["Select", "Pick", "Mark", "Identify"] },
-            { pattern: /^Select\b/i, verbs: ["Choose", "Pick", "Mark", "Identify"] },
-            { pattern: /^Identify\b/i, verbs: ["Find", "Select", "Choose", "Mark"] },
-            { pattern: /^Find\b/i, verbs: ["Determine", "Select", "Choose", "Mark"] },
-            { pattern: /^Fill in the blank\b/i, verbs: ["Complete the sentence", "Choose the option that completes the sentence", "Select the option that fits the blank", "Mark the option that fits the blank"] }
-        ];
-        const matchedInstruction = instructionPatterns.find((item) => item.pattern.test(text));
-
-        if (matchedInstruction) {
-            return text.replace(matchedInstruction.pattern, matchedInstruction.verbs[variant]);
-        }
-
-        const prefixes = [
-            "Select the correct answer: ",
-            "Choose the most appropriate option: ",
-            "Mark the correct response: ",
-            "Answer the following: "
-        ];
-
-        return `${prefixes[variant]}${text}`;
+        return `${prefixes[(variantIndex - 1) % prefixes.length]}${text}`;
     }
+
     function buildQuestions() {
         const questions = [];
         for (let index = 0; index < 50; index += 1) {
@@ -67,15 +173,13 @@
         id: quizId,
         subject: "Mathematics",
         title: "Mathematics PYQ Practice Set 1",
-        description: "50 previous-year style quantitative aptitude questions.",
+        description: "50 पिछले वर्षों की शैली के हिंदी गणित अभ्यास प्रश्न।",
         durationMinutes: 30,
         totalQuestions: 50,
         marksPerQuestion: 1,
         negativeMarks: 0.25,
         difficulty: "Previous Year",
-        tags: ["SSC", "Railway", "State Exams"],
+        tags: ["SSC","Railway","State Exams","Mathematics"],
         questions: buildQuestions()
     });
 }());
-
-

@@ -5,207 +5,207 @@
 
     const quizId = "math-percentage-abhinay-set-1";
     const seeds = [
-        {
-                "question": "After an increment of 16 2/3% in the cost of a machine, it becomes Rs. 4900. Find the initial cost of the machine.",
-                "answer": "Rs. 4200"
-        },
-        {
-                "question": "A student required 36% marks to pass. He scored 24% marks and failed by 18 marks. Find the passing marks.",
-                "answer": "54"
-        },
-        {
-                "question": "A student scored 30% and failed by 45 marks. Another scored 42% and got 45 marks more than passing marks. Find the passing marks.",
-                "answer": "270"
-        },
-        {
-                "question": "A student got 20% and failed by 30 marks. Another got 32% and got 42 marks more than passing marks. Find the passing marks.",
-                "answer": "150"
-        },
-        {
-                "question": "In an election, one of two candidates got 41% of total votes and lost by 5580 votes. Find total votes.",
-                "answer": "31000"
-        },
-        {
-                "question": "In an election, one candidate got 55% of total valid votes and 20% votes were invalid. Total votes are 5500. How many valid votes did the other candidate get?",
-                "answer": "1980"
-        },
-        {
-                "question": "8% voters did not vote. The winner secured 48% of total votes and won by 1100 votes. Find total voters.",
-                "answer": "27500"
-        },
-        {
-                "question": "10% voters did not vote and 10% polled votes were invalid. Winner got 54% of valid votes and won by 1620 votes. Find enrolled voters.",
-                "answer": "25000"
-        },
-        {
-                "question": "75% voters cast votes; 2% of polled votes were invalid. A candidate got 9261 votes, which were 75% of valid votes. Find enrolled voters.",
-                "answer": "16800"
-        },
-        {
-                "question": "10% voters did not vote. 60 votes were invalid. Winner got 47% of valid votes and won by 308 votes. Find enrolled voters.",
-                "answer": "6200"
-        },
-        {
-                "question": "In an election, 10000 voters did not vote. 75% of cast votes were valid. Winner won by 2250 votes and loser got 18% of total votes. Find total votes.",
-                "answer": "25000"
-        },
-        {
-                "question": "2/5 voters promised to vote for Mulayam Singh and the rest for Mayawati. On election day 15% of Mulayam supporters and 25% of Mayawati supporters changed. Mayawati won by 1500 votes. Find total voters.",
-                "answer": "75000"
-        },
-        {
-                "question": "Income of A is 30% more than income of B. B's income is how much percent less than A's?",
-                "answer": "23 1/13%"
-        },
-        {
-                "question": "Income of A is 40% less than B's income. B's income is how much percent more than A's?",
-                "answer": "66 2/3%"
-        },
-        {
-                "question": "Income of A is 40% more than B's. B's income is 20% less than C's. Find ratio of income of A and C.",
-                "answer": "28 : 25"
-        },
-        {
-                "question": "A's income is 50% more than B's. C's income is 2/3 of A's. D's income is half of C's. D increases by 10%. B is what percent of D after increment?",
-                "answer": "2000/11%"
-        },
-        {
-                "question": "An agent gets 5% commission on sales up to Rs. 10000 and 4% on sales exceeding it. After deducting commission he gives Rs. 31100 to company. Find total sales.",
-                "answer": "Rs. 32500"
-        },
-        {
-                "question": "A company gives 9% commission up to Rs. 15000 and 7% on sales above Rs. 15000. Sales deposited after commission is Rs. 32250. Find total sale.",
-                "answer": "Rs. 35000"
-        },
-        {
-                "question": "A company gives 8.5% commission up to Rs. 20000 and 7% on sales above Rs. 20000. Sales deposited after commission is Rs. 42480. Find total sale.",
-                "answer": "Rs. 46000"
-        },
-        {
-                "question": "A salesman gets 5.5% commission up to Rs. 10000 and additional bonus of 0.5% on sales above Rs. 10000. Total earning is Rs. 1990. Find total sales.",
-                "answer": "Rs. 34000"
-        },
-        {
-                "question": "A salesman gets 12% commission up to Rs. 15000 and additional bonus of 1% on sales above Rs. 15000. Total earning is Rs. 7650. Find total sales.",
-                "answer": "Rs. 60000"
-        },
-        {
-                "question": "A salesman gets 7.5% commission up to Rs. 12000 and additional bonus of 1.5% on sales above Rs. 12000. Total earning is Rs. 4185. Find total sales.",
-                "answer": "Rs. 48500"
-        },
-        {
-                "question": "A salesman gets 9.25% commission up to Rs. 20000 and additional bonus of 0.75% on sales above Rs. 20000. Total earning is Rs. 6170. Find total sales.",
-                "answer": "Rs. 63200"
-        },
-        {
-                "question": "Company allows 7% commission on total sales. If appointed on fixed salary Rs. 3000 plus 4% commission on sales above Rs. 10000, salesman gets Rs. 800 more. Find total sales.",
-                "answer": "Rs. 60000"
-        },
-        {
-                "question": "Company allows 9% commission on total sales. If appointed on fixed salary Rs. 4000 plus 3% commission on sales above Rs. 10000, salesman gets Rs. 700 more. Find total sales.",
-                "answer": "Rs. 50000"
-        },
-        {
-                "question": "Company allows 11% commission on total sales. If appointed on fixed salary Rs. 8200 plus 5% commission on sales above Rs. 20000, salesman gets Rs. 1200 more. Find total sales.",
-                "answer": "Rs. 100000"
-        },
-        {
-                "question": "A salesman gets a% commission on first Rs. 3000 sales and b% on further sales. He earns Rs. 960 on Rs. 7000 sales and Rs. 1110 on Rs. 8000 sales. Find a and b.",
-                "answer": "15%, 12%"
-        },
-        {
-                "question": "A person usually spent Rs. 48 on groundnuts. Once he bought 1.5 kg less for Rs. 48 as price rose by 25%. Find earlier price per kg.",
-                "answer": "Rs. 6.40"
-        },
-        {
-                "question": "Rate of income tax is increased by 19%. Net income is decreased by 1%. Find original income-tax rate.",
-                "answer": "5%"
-        },
-        {
-                "question": "Rate of income tax is increased by 23%. Net income is decreased by 2%. Find original income-tax rate.",
-                "answer": "20%"
-        },
-        {
-                "question": "By what percent will rectangle area increase if length increases by 23% and breadth by 9%?",
-                "answer": "34.07%"
-        },
-        {
-                "question": "Milk price increases by 35%. By what percent must consumption be reduced so expenditure increases only by 8%?",
-                "answer": "20%"
-        },
-        {
-                "question": "In a triangle, altitude increases by 22% and base decreases by 6%. Find net effect on area.",
-                "answer": "14.68% increase"
-        },
-        {
-                "question": "Length of a cuboid increases by 12% and breadth by 25%. By what percent should height decrease so volume increases only by 4%?",
-                "answer": "25.7%"
-        },
-        {
-                "question": "A labourer works 60 hours/week and gets Rs. 2400. Hourly wages increase by 40% and working hours reduce by 16 2/3%. Find wage increase/decrease.",
-                "answer": "16 2/3% increase"
-        },
-        {
-                "question": "Wages of a labourer increase by 12 1/2% and working hours decrease by 8%. Initially he earned Rs. 1200 for 50 hours/week. Find percentage increase in weekly wages.",
-                "answer": "3.5%"
-        },
-        {
-                "question": "Cinema ticket is Rs. 250. Price is reduced and ticket sales increase by 50%, while overall collection reduces by 17.5%. Find percentage decrease in ticket price.",
-                "answer": "45%"
-        },
-        {
-                "question": "Circus ticket costs Rs. 12. After price reduction, audience increases by 80% and total income increases by 20%. Find reduced ticket price.",
-                "answer": "Rs. 8"
-        },
-        {
-                "question": "A person spends 75% of income. Income increases by 60% and expenditure increases by 70%. Find percentage change in savings.",
-                "answer": "30% increase"
-        },
-        {
-                "question": "A person spends 80% of income. Income increases by 35% and expenditure increases by 37 1/2%. Find percentage change in savings.",
-                "answer": "25% increase"
-        },
-        {
-                "question": "A person spends 87.5% of income. Income increases by 59% and expenditure increases by 67%. Find percentage change in savings.",
-                "answer": "3% increase"
-        },
-        {
-                "question": "A person saves 6% of income. After 2 years income increases by 15% but savings remain same. Find percentage increase in expenditure.",
-                "answer": "15.85%"
-        },
-        {
-                "question": "Ratio of Rama's expenditure and saving is 5:3. Income increases by 12% and expenditure by 15%. Find percentage increase in savings.",
-                "answer": "7%"
-        },
-        {
-                "question": "Ramesh earns Rs. 5000 and spends in ratio 2:5 on clothes and food. Cloth price increases 10%, food price 20%. By what percent should income increase to keep same consumption ratio?",
-                "answer": "17 1/7%"
-        },
-        {
-                "question": "Due to 20% increase in sugar price, a person buys 5 kg less for Rs. 600. Find original and increased price of sugar.",
-                "answer": "Rs. 20, Rs. 24"
-        },
-        {
-                "question": "Due to 10% decrease in wheat price, a person buys 50 g more wheat for Rs. 1. Find initial quantity for Rs. 1.",
-                "answer": "450 gm"
-        },
-        {
-                "question": "Due to 10% reduction in milk price, a person buys 6.2 litres more for Rs. 1116. Find reduced price per litre.",
-                "answer": "Rs. 18/litre"
-        },
-        {
-                "question": "Due to 50% increase in egg price, a person buys 4 eggs less for Rs. 24. Find initial cost per dozen eggs.",
-                "answer": "Rs. 36"
-        },
-        {
-                "question": "Due to 16 2/3% increase in banana price, a person buys 5 bananas less for Rs. 1. How many bananas could he buy initially for Rs. 1?",
-                "answer": "35 bananas"
-        },
-        {
-                "question": "A solution contains 15% salt. From it 30 kg water is removed and salt becomes 20% of solution. Find initial quantity of solution.",
-                "answer": "120 kg"
-        }
-];
+            {
+                    "question": "किसी मशीन की कीमत में 16 2/3% वृद्धि के बाद कीमत ₹4900 हो जाती है। मशीन की प्रारंभिक कीमत ज्ञात कीजिए।",
+                    "answer": "₹4200"
+            },
+            {
+                    "question": "एक विद्यार्थी को उत्तीर्ण होने के लिए 36% अंक चाहिए थे। उसने 24% अंक प्राप्त किए और 18 अंकों से असफल हुआ। उत्तीर्णांक ज्ञात कीजिए।",
+                    "answer": "54"
+            },
+            {
+                    "question": "एक विद्यार्थी ने 30% अंक प्राप्त किए और 45 अंकों से असफल हुआ। दूसरे विद्यार्थी ने 42% अंक प्राप्त किए और उत्तीर्णांक से 45 अंक अधिक पाए। उत्तीर्णांक ज्ञात कीजिए।",
+                    "answer": "270"
+            },
+            {
+                    "question": "एक विद्यार्थी ने 20% अंक प्राप्त किए और 30 अंकों से असफल हुआ। दूसरे विद्यार्थी ने 32% अंक प्राप्त किए और उत्तीर्णांक से 42 अंक अधिक पाए। उत्तीर्णांक ज्ञात कीजिए।",
+                    "answer": "150"
+            },
+            {
+                    "question": "एक चुनाव में दो उम्मीदवारों में से एक को कुल मतों के 41% मत मिले और वह 5580 मतों से हार गया। कुल मत ज्ञात कीजिए।",
+                    "answer": "31000"
+            },
+            {
+                    "question": "एक चुनाव में एक उम्मीदवार को कुल वैध मतों के 55% मत मिले और 20% मत अवैध थे। कुल मत 5500 हैं। दूसरे उम्मीदवार को कितने वैध मत मिले?",
+                    "answer": "1980"
+            },
+            {
+                    "question": "8% मतदाताओं ने मतदान नहीं किया। विजेता ने कुल मतों के 48% मत प्राप्त किए और 1100 मतों से जीता। कुल मतदाता ज्ञात कीजिए।",
+                    "answer": "27500"
+            },
+            {
+                    "question": "10% मतदाताओं ने मतदान नहीं किया और पड़े हुए मतों के 10% मत अवैध थे। विजेता को वैध मतों के 54% मत मिले और वह 1620 मतों से जीता। पंजीकृत मतदाता ज्ञात कीजिए।",
+                    "answer": "25000"
+            },
+            {
+                    "question": "75% मतदाताओं ने मतदान किया; पड़े हुए मतों के 2% मत अवैध थे। एक उम्मीदवार को 9261 मत मिले, जो वैध मतों के 75% थे। पंजीकृत मतदाता ज्ञात कीजिए।",
+                    "answer": "16800"
+            },
+            {
+                    "question": "10% मतदाताओं ने मतदान नहीं किया। 60 मत अवैध थे। विजेता को कुल मतों के 47% मत मिले और वह 308 मतों से जीता। पंजीकृत मतदाता ज्ञात कीजिए।",
+                    "answer": "6200"
+            },
+            {
+                    "question": "एक चुनाव में 10000 मतदाताओं ने मतदान नहीं किया। पड़े हुए मतों के 75% मत वैध थे। विजेता 2250 मतों से जीता और पराजित उम्मीदवार को कुल मतों के 18% मत मिले। कुल मत ज्ञात कीजिए।",
+                    "answer": "25000"
+            },
+            {
+                    "question": "2/5 मतदाताओं ने मुलायम सिंह को और शेष ने मायावती को वोट देने का वादा किया। चुनाव के दिन मुलायम सिंह के 15% समर्थक और मायावती के 25% समर्थक बदल गए। मायावती 1500 मतों से जीती। कुल मतदाता ज्ञात कीजिए।",
+                    "answer": "75000"
+            },
+            {
+                    "question": "A की आय B की आय से 30% अधिक है। B की आय A की आय से कितने प्रतिशत कम है?",
+                    "answer": "23 1/13%"
+            },
+            {
+                    "question": "A की आय B की आय से 40% कम है। B की आय A की आय से कितने प्रतिशत अधिक है?",
+                    "answer": "66 2/3%"
+            },
+            {
+                    "question": "A की आय B की आय से 40% अधिक है। B की आय C की आय से 20% कम है। A और C की आय का अनुपात ज्ञात कीजिए।",
+                    "answer": "28 : 25"
+            },
+            {
+                    "question": "A की आय B की आय से 50% अधिक है। C की आय A की आय की 2/3 है। D की आय C की आय की आधी है। D की आय 10% बढ़ जाती है। वृद्धि के बाद B की आय D की आय का कितना प्रतिशत है?",
+                    "answer": "2000/11%"
+            },
+            {
+                    "question": "एक एजेंट को ₹10000 तक की बिक्री पर 5% और उससे अधिक बिक्री पर 4% कमीशन मिलता है। कमीशन काटने के बाद वह कंपनी को ₹31100 देता है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹32500"
+            },
+            {
+                    "question": "एक कंपनी ₹15000 तक की बिक्री पर 9% और ₹15000 से अधिक बिक्री पर 7% कमीशन देती है। कमीशन काटने के बाद जमा राशि ₹32250 है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹35000"
+            },
+            {
+                    "question": "एक कंपनी ₹20000 तक की बिक्री पर 8.5% और ₹20000 से अधिक बिक्री पर 7% कमीशन देती है। कमीशन काटने के बाद जमा राशि ₹42480 है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹46000"
+            },
+            {
+                    "question": "एक विक्रेता को ₹10000 तक की बिक्री पर 5.5% कमीशन और ₹10000 से अधिक बिक्री पर 0.5% अतिरिक्त बोनस मिलता है। कुल आय ₹1990 है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹34000"
+            },
+            {
+                    "question": "एक विक्रेता को ₹15000 तक की बिक्री पर 12% कमीशन और ₹15000 से अधिक बिक्री पर 1% अतिरिक्त बोनस मिलता है। कुल आय ₹7650 है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹60000"
+            },
+            {
+                    "question": "एक विक्रेता को ₹12000 तक की बिक्री पर 7.5% कमीशन और ₹12000 से अधिक बिक्री पर 1.5% अतिरिक्त बोनस मिलता है। कुल आय ₹4185 है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹48500"
+            },
+            {
+                    "question": "एक विक्रेता को ₹20000 तक की बिक्री पर 9.25% कमीशन और ₹20000 से अधिक बिक्री पर 0.75% अतिरिक्त बोनस मिलता है। कुल आय ₹6170 है। कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹63200"
+            },
+            {
+                    "question": "कंपनी कुल बिक्री पर 7% कमीशन देती है। यदि ₹3000 निश्चित वेतन और ₹10000 से अधिक बिक्री पर 4% कमीशन वाली नियुक्ति में विक्रेता को ₹800 अधिक मिलते हैं, तो कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹60000"
+            },
+            {
+                    "question": "कंपनी कुल बिक्री पर 9% कमीशन देती है। यदि ₹4000 निश्चित वेतन और ₹10000 से अधिक बिक्री पर 3% कमीशन वाली नियुक्ति में विक्रेता को ₹700 अधिक मिलते हैं, तो कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹50000"
+            },
+            {
+                    "question": "कंपनी कुल बिक्री पर 11% कमीशन देती है। यदि ₹8200 निश्चित वेतन और ₹20000 से अधिक बिक्री पर 5% कमीशन वाली नियुक्ति में विक्रेता को ₹1200 अधिक मिलते हैं, तो कुल बिक्री ज्ञात कीजिए।",
+                    "answer": "₹100000"
+            },
+            {
+                    "question": "एक विक्रेता को पहली ₹3000 की बिक्री पर a% और उसके बाद की बिक्री पर b% कमीशन मिलता है। उसे ₹7000 की बिक्री पर ₹960 और ₹8000 की बिक्री पर ₹1110 मिलते हैं। a और b ज्ञात कीजिए।",
+                    "answer": "15%, 12%"
+            },
+            {
+                    "question": "एक व्यक्ति सामान्यतः मूंगफली पर ₹48 खर्च करता था। एक बार कीमत 25% बढ़ने पर उसने ₹48 में 1.5 किग्रा कम मूंगफली खरीदी। पहले प्रति किग्रा कीमत ज्ञात कीजिए।",
+                    "answer": "₹6.40"
+            },
+            {
+                    "question": "आयकर दर 19% बढ़ा दी गई। शुद्ध आय 1% घट गई। मूल आयकर दर ज्ञात कीजिए।",
+                    "answer": "5%"
+            },
+            {
+                    "question": "आयकर दर 23% बढ़ा दी गई। शुद्ध आय 2% घट गई। मूल आयकर दर ज्ञात कीजिए।",
+                    "answer": "20%"
+            },
+            {
+                    "question": "यदि आयत की लंबाई 23% और चौड़ाई 9% बढ़ जाए, तो क्षेत्रफल कितने प्रतिशत बढ़ेगा?",
+                    "answer": "34.07%"
+            },
+            {
+                    "question": "दूध की कीमत 35% बढ़ जाती है। खर्च केवल 8% बढ़ाने के लिए खपत कितने प्रतिशत घटानी होगी?",
+                    "answer": "20%"
+            },
+            {
+                    "question": "एक त्रिभुज की ऊँचाई 22% बढ़ती है और आधार 6% घटता है। क्षेत्रफल पर कुल प्रभाव ज्ञात कीजिए।",
+                    "answer": "14.68% वृद्धि"
+            },
+            {
+                    "question": "एक घनाभ की लंबाई 12% और चौड़ाई 25% बढ़ जाती है। आयतन केवल 4% बढ़े, इसके लिए ऊँचाई कितने प्रतिशत घटानी होगी?",
+                    "answer": "25.7%"
+            },
+            {
+                    "question": "एक मजदूर 60 घंटे प्रति सप्ताह काम करके ₹2400 पाता है। प्रति घंटा मजदूरी 40% बढ़ती है और काम के घंटे 16 2/3% घटते हैं। साप्ताहिक मजदूरी में प्रतिशत वृद्धि या कमी ज्ञात कीजिए।",
+                    "answer": "16 2/3% वृद्धि"
+            },
+            {
+                    "question": "एक मजदूर की मजदूरी 12 1/2% बढ़ती है और काम के घंटे 8% घटते हैं। प्रारंभ में वह 50 घंटे प्रति सप्ताह के लिए ₹1200 कमाता था। साप्ताहिक मजदूरी में प्रतिशत वृद्धि ज्ञात कीजिए।",
+                    "answer": "3.5% वृद्धि"
+            },
+            {
+                    "question": "सिनेमा टिकट ₹250 का है। कीमत घटाने पर टिकट बिक्री 50% बढ़ती है, जबकि कुल संग्रह 17.5% घटता है। टिकट की कीमत में प्रतिशत कमी ज्ञात कीजिए।",
+                    "answer": "45%"
+            },
+            {
+                    "question": "सर्कस टिकट की कीमत ₹12 है। कीमत घटाने के बाद दर्शक 80% बढ़ जाते हैं और कुल आय 20% बढ़ती है। घटा हुआ टिकट मूल्य ज्ञात कीजिए।",
+                    "answer": "₹8"
+            },
+            {
+                    "question": "एक व्यक्ति अपनी आय का 75% खर्च करता है। आय 60% और व्यय 70% बढ़ते हैं। बचत में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+                    "answer": "30% वृद्धि"
+            },
+            {
+                    "question": "एक व्यक्ति अपनी आय का 80% खर्च करता है। आय 35% और व्यय 37 1/2% बढ़ते हैं। बचत में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+                    "answer": "25% वृद्धि"
+            },
+            {
+                    "question": "एक व्यक्ति अपनी आय का 87.5% खर्च करता है। आय 59% और व्यय 67% बढ़ते हैं। बचत में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+                    "answer": "3% वृद्धि"
+            },
+            {
+                    "question": "एक व्यक्ति अपनी आय का 6% बचाता है। 2 वर्ष बाद आय 15% बढ़ती है, लेकिन बचत की राशि समान रहती है। व्यय में प्रतिशत वृद्धि ज्ञात कीजिए।",
+                    "answer": "15.96%"
+            },
+            {
+                    "question": "रमा के व्यय और बचत का अनुपात 5:3 है। आय 12% और व्यय 15% बढ़ता है। बचत में प्रतिशत वृद्धि ज्ञात कीजिए।",
+                    "answer": "7%"
+            },
+            {
+                    "question": "रमेश ₹5000 कमाता है और कपड़ों व भोजन पर 2:5 के अनुपात में खर्च करता है। कपड़ों की कीमत 10% और भोजन की कीमत 20% बढ़ती है। समान उपभोग अनुपात बनाए रखने के लिए आय कितने प्रतिशत बढ़नी चाहिए?",
+                    "answer": "17 1/7%"
+            },
+            {
+                    "question": "चीनी की कीमत 20% बढ़ने से एक व्यक्ति ₹600 में 5 किग्रा कम चीनी खरीदता है। चीनी की मूल और बढ़ी हुई कीमत ज्ञात कीजिए।",
+                    "answer": "₹20, ₹24"
+            },
+            {
+                    "question": "गेहूँ की कीमत 10% घटने से एक व्यक्ति ₹1 में 50 ग्राम अधिक गेहूँ खरीदता है। ₹1 में प्रारंभिक मात्रा ज्ञात कीजिए।",
+                    "answer": "450 ग्राम"
+            },
+            {
+                    "question": "दूध की कीमत 10% घटने से एक व्यक्ति ₹1116 में 6.2 लीटर अधिक दूध खरीदता है। घटा हुआ प्रति लीटर मूल्य ज्ञात कीजिए।",
+                    "answer": "₹18/लीटर"
+            },
+            {
+                    "question": "अंडों की कीमत 50% बढ़ने से एक व्यक्ति ₹24 में 4 अंडे कम खरीदता है। बढ़ी हुई कीमत पर प्रति दर्जन अंडों की कीमत ज्ञात कीजिए।",
+                    "answer": "₹36"
+            },
+            {
+                    "question": "केलों की कीमत 16 2/3% बढ़ने से एक व्यक्ति ₹1 में 5 केले कम खरीदता है। पहले वह ₹1 में कितने केले खरीद सकता था?",
+                    "answer": "35 केले"
+            },
+            {
+                    "question": "एक विलयन में 15% नमक है। उसमें से 30 किग्रा पानी निकालने पर नमक विलयन का 20% हो जाता है। विलयन की प्रारंभिक मात्रा ज्ञात कीजिए।",
+                    "answer": "120 किग्रा"
+            }
+    ];
 
     function buildOptions(index) {
         const correct = seeds[index].answer;
@@ -236,7 +236,7 @@
                 question: seed.question,
                 options: optionData.options,
                 correctAnswer: optionData.correctIndex,
-                explanation: `Correct answer: ${seed.answer}. Use percentage base-value method, successive percentage change, or equation formation as applicable.`
+                explanation: `सही उत्तर: ${seed.answer}। प्रतिशत में आधार-मान विधि, क्रमिक परिवर्तन या समीकरण विधि का उपयोग करें।`
             };
         });
     }
@@ -245,7 +245,7 @@
         id: quizId,
         subject: "Mathematics",
         title: "Percentage Practice Set 1",
-        description: "50 hard percentage questions prepared from Abhinay Maths Classes Percentage PDF.",
+        description: "50 कठिन प्रतिशत प्रश्न, हिंदी माध्यम अभ्यास के लिए।",
         durationMinutes: 45,
         totalQuestions: 50,
         marksPerQuestion: 1,

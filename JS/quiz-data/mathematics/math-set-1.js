@@ -5,45 +5,151 @@
 
     const quizId = "math-set-1";
     const seeds = [
-        { topic: "Arithmetic", difficulty: "easy", question: "what is 25% of 240?", options: ["40", "50", "60", "80"], correctAnswer: 2, explanation: "25% is one-fourth. One-fourth of 240 is 60." },
-        { topic: "Profit and Loss", difficulty: "medium", question: "An item bought for 800 is sold for 920. What is the profit percent?", options: ["12%", "15%", "18%", "20%"], correctAnswer: 1, explanation: "Profit is 120. Profit percent = 120/800 x 100 = 15%." },
-        { topic: "Number System", difficulty: "easy", question: "Find the LCM of 18 and 24.", options: ["48", "54", "72", "96"], correctAnswer: 2, explanation: "18 = 2 x 3 x 3 and 24 = 2 x 2 x 2 x 3. LCM is 72." },
-        { topic: "Time and Work", difficulty: "medium", question: "A completes a work in 12 days and B in 18 days. In how many days will they finish it together?", options: ["6.2 days", "7.2 days", "8 days", "9 days"], correctAnswer: 1, explanation: "Combined work per day = 1/12 + 1/18 = 5/36, so time = 36/5 = 7.2 days." },
-        { topic: "Percentage", difficulty: "easy", question: "If 40% of a number is 160, find the number.", options: ["320", "360", "400", "420"], correctAnswer: 2, explanation: "Number = 160 x 100 / 40 = 400." },
-        { topic: "Simple Interest", difficulty: "medium", question: "What is the simple interest on 5000 at 8% per annum for 2 years?", options: ["600", "700", "800", "900"], correctAnswer: 2, explanation: "SI = PRT/100 = 5000 x 8 x 2 / 100 = 800." },
-        { topic: "Ratio", difficulty: "easy", question: "Reduce the ratio 24:36 to its simplest form.", options: ["2:3", "3:4", "4:5", "5:6"], correctAnswer: 0, explanation: "Divide both terms by 12 to get 2:3." },
-        { topic: "Average", difficulty: "medium", question: "What is the average of 12, 18, 20, 30 and 40?", options: ["22", "24", "26", "28"], correctAnswer: 1, explanation: "Sum is 120 and count is 5. Average is 24." },
-        { topic: "Geometry", difficulty: "easy", question: "What is the sum of the interior angles of a triangle?", options: ["90 degrees", "180 degrees", "270 degrees", "360 degrees"], correctAnswer: 1, explanation: "Every triangle has angle sum of 180 degrees." },
-        { topic: "Mensuration", difficulty: "medium", question: "What is the area of a rectangle with length 15 cm and breadth 8 cm?", options: ["96 sq cm", "110 sq cm", "120 sq cm", "128 sq cm"], correctAnswer: 2, explanation: "Area = length x breadth = 15 x 8 = 120 sq cm." }
+            {
+                    "topic": "प्रतिशत",
+                    "difficulty": "easy",
+                    "question": "240 का 25% कितना होगा?",
+                    "options": [
+                            "40",
+                            "50",
+                            "60",
+                            "80"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "25% का अर्थ एक-चौथाई होता है। 240 का एक-चौथाई 60 है।"
+            },
+            {
+                    "topic": "लाभ और हानि",
+                    "difficulty": "medium",
+                    "question": "एक वस्तु ₹800 में खरीदी गई और ₹920 में बेची गई। लाभ प्रतिशत ज्ञात कीजिए।",
+                    "options": [
+                            "12%",
+                            "15%",
+                            "18%",
+                            "20%"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "लाभ = 920 - 800 = 120। लाभ प्रतिशत = 120/800 × 100 = 15%।"
+            },
+            {
+                    "topic": "लघुत्तम समापवर्त्य",
+                    "difficulty": "easy",
+                    "question": "18 और 24 का लघुत्तम समापवर्त्य कितना है?",
+                    "options": [
+                            "48",
+                            "54",
+                            "72",
+                            "96"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "18 = 2 × 3 × 3 और 24 = 2 × 2 × 2 × 3, अतः लघुत्तम समापवर्त्य 72 है।"
+            },
+            {
+                    "topic": "काम और समय",
+                    "difficulty": "medium",
+                    "question": "A किसी काम को 12 दिन में और B 18 दिन में पूरा करता है। दोनों मिलकर काम कितने दिन में करेंगे?",
+                    "options": [
+                            "6.2 दिन",
+                            "7.2 दिन",
+                            "8 दिन",
+                            "9 दिन"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "संयुक्त कार्य-दर = 1/12 + 1/18 = 5/36, इसलिए समय = 36/5 = 7.2 दिन।"
+            },
+            {
+                    "topic": "प्रतिशत",
+                    "difficulty": "easy",
+                    "question": "किसी संख्या का 40% यदि 160 है, तो संख्या कितनी है?",
+                    "options": [
+                            "320",
+                            "360",
+                            "400",
+                            "420"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "संख्या = 160 × 100 / 40 = 400।"
+            },
+            {
+                    "topic": "साधारण ब्याज",
+                    "difficulty": "medium",
+                    "question": "₹5000 पर 8% वार्षिक दर से 2 वर्ष का साधारण ब्याज कितना होगा?",
+                    "options": [
+                            "600",
+                            "700",
+                            "800",
+                            "900"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "साधारण ब्याज = PRT/100 = 5000 × 8 × 2 / 100 = 800।"
+            },
+            {
+                    "topic": "अनुपात",
+                    "difficulty": "easy",
+                    "question": "24:36 का सरलतम रूप क्या है?",
+                    "options": [
+                            "2:3",
+                            "3:4",
+                            "4:5",
+                            "5:6"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "दोनों पदों को 12 से भाग देने पर अनुपात 2:3 मिलता है।"
+            },
+            {
+                    "topic": "औसत",
+                    "difficulty": "medium",
+                    "question": "12, 18, 20, 30 और 40 का औसत कितना है?",
+                    "options": [
+                            "22",
+                            "24",
+                            "26",
+                            "28"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "योग = 120 और कुल 5 संख्याएँ हैं, इसलिए औसत = 120/5 = 24।"
+            },
+            {
+                    "topic": "ज्यामिति",
+                    "difficulty": "easy",
+                    "question": "त्रिभुज के तीनों कोणों का योग कितना होता है?",
+                    "options": [
+                            "90 डिग्री",
+                            "180 डिग्री",
+                            "270 डिग्री",
+                            "360 डिग्री"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "किसी भी त्रिभुज के तीनों कोणों का योग 180 डिग्री होता है।"
+            },
+            {
+                    "topic": "क्षेत्रफल",
+                    "difficulty": "medium",
+                    "question": "15 मीटर लंबाई और 8 मीटर चौड़ाई वाले आयत का क्षेत्रफल कितना होगा?",
+                    "options": [
+                            "96 वर्ग मीटर",
+                            "110 वर्ग मीटर",
+                            "120 वर्ग मीटर",
+                            "128 वर्ग मीटर"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "क्षेत्रफल = लंबाई × चौड़ाई = 15 × 8 = 120 वर्ग मीटर।"
+            }
+    ];
+
+    const prefixes = [
+            "सही उत्तर चुनिए: ",
+            "सबसे उपयुक्त विकल्प चुनिए: ",
+            "सही विकल्प अंकित कीजिए: ",
+            "निम्न प्रश्न हल कीजिए: "
     ];
 
     function formatQuestionText(question, variantIndex) {
         const text = String(question).trim();
         if (variantIndex === 0) return text;
-
-        const variant = (variantIndex - 1) % 4;
-        const instructionPatterns = [
-            { pattern: /^Choose\b/i, verbs: ["Select", "Pick", "Mark", "Identify"] },
-            { pattern: /^Select\b/i, verbs: ["Choose", "Pick", "Mark", "Identify"] },
-            { pattern: /^Identify\b/i, verbs: ["Find", "Select", "Choose", "Mark"] },
-            { pattern: /^Find\b/i, verbs: ["Determine", "Select", "Choose", "Mark"] },
-            { pattern: /^Fill in the blank\b/i, verbs: ["Complete the sentence", "Choose the option that completes the sentence", "Select the option that fits the blank", "Mark the option that fits the blank"] }
-        ];
-        const matchedInstruction = instructionPatterns.find((item) => item.pattern.test(text));
-
-        if (matchedInstruction) {
-            return text.replace(matchedInstruction.pattern, matchedInstruction.verbs[variant]);
-        }
-
-        const prefixes = [
-            "Select the correct answer: ",
-            "Choose the most appropriate option: ",
-            "Mark the correct response: ",
-            "Answer the following: "
-        ];
-
-        return `${prefixes[variant]}${text}`;
+        return `${prefixes[(variantIndex - 1) % prefixes.length]}${text}`;
     }
+
     function buildQuestions() {
         const questions = [];
         for (let index = 0; index < 50; index += 1) {
@@ -67,15 +173,13 @@
         id: quizId,
         subject: "Mathematics",
         title: "Mathematics Practice Set 1",
-        description: "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.",
+        description: "50 हिंदी अंकगणित और गणित अभ्यास प्रश्न।",
         durationMinutes: 30,
         totalQuestions: 50,
         marksPerQuestion: 1,
         negativeMarks: 0.25,
         difficulty: "Mixed",
-        tags: ["SSC", "Railway", "Police"],
+        tags: ["SSC","Railway","Police","Mathematics"],
         questions: buildQuestions()
     });
 }());
-
-

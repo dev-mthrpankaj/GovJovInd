@@ -5,207 +5,207 @@
 
     const quizId = "math-percentage-abhinay-set-2";
     const seeds = [
-        {
-                "question": "Fresh fruit contains 68% water and dry fruit contains 20% water. How much dry fruit can be obtained from 55 kg fresh fruit?",
-                "answer": "22 kg"
-        },
-        {
-                "question": "A person's income increases by Rs. 4800. Tax rate decreases from 12% to 10%. Payable tax is same; in both cases 20% income is tax-free. Find current income.",
-                "answer": "Rs. 28800"
-        },
-        {
-                "question": "Income of a man increases by Rs. 1800 and payable tax rate decreases from 18% to 15%. In both cases 29.95% income is tax-free. Find initial income.",
-                "answer": "Rs. 9000"
-        },
-        {
-                "question": "Income decreases by Rs. 3000 and income-tax rate increases from 15% to 18%. Ratio of paid tax is 3:2 and 26.5% income is tax-free. Find initial income.",
-                "answer": "Rs. 6750"
-        },
-        {
-                "question": "My income is Rs. 20000 and I spend 80%. When income increases by 20%, I spend Rs. 5000 more. Find increase in savings.",
-                "answer": "25%"
-        },
-        {
-                "question": "A father gives 1% of monthly income to his two sons. He gives 80% of that amount to elder son, who spends 80% and saves Rs. 20. Find father's income.",
-                "answer": "Rs. 12500"
-        },
-        {
-                "question": "A person gives 20% income to elder son, 30% of remaining to younger son and 10% of balance to a trust. He is left with Rs. 10080. Find income.",
-                "answer": "Rs. 20000"
-        },
-        {
-                "question": "In a school, ratio of boys to girls is 4:1. 75% boys and 70% girls got scholarship. Find percentage of students who did not get scholarship.",
-                "answer": "26%"
-        },
-        {
-                "question": "In an institute, 60% students are boys. 15% boys and 7.5% girls get fee waiver. Total getting fee waiver is 90. If 50% of those not getting waiver get half concession, find number getting 50% concession.",
-                "answer": "330"
-        },
-        {
-                "question": "Total income of A, B and C is Rs. 72000. They spend 80%, 85% and 75% respectively. Savings ratio is 8:9:20. Find income of A.",
-                "answer": "Rs. 16000"
-        },
-        {
-                "question": "A number is divided into two parts such that 80% of first exceeds 60% of second by 3, and 80% of second exceeds 90% of first by 6. Find the number.",
-                "answer": "135"
-        },
-        {
-                "question": "In a city, 45% men and 25% women are married. Nobody is married more than once. What percent of population is married?",
-                "answer": "32 1/7%"
-        },
-        {
-                "question": "In a village, 2/3 are men and rest women. 80% men and 70% women are literate. 40% literate men and 30% literate women are graduates. 20% graduate men and 25% graduate women have government jobs. Working population is what percent of total?",
-                "answer": "6.01%"
-        },
-        {
-                "question": "In a climate conference, there are 700 men, 500 women and 800 children. 20% men, 40% women and 10% children are Indians. Find percent of people not Indian.",
-                "answer": "79%"
-        },
-        {
-                "question": "If numerator of a fraction increases by 20% and denominator decreases by 5%, fraction becomes 5/2. Find original fraction.",
-                "answer": "95/48"
-        },
-        {
-                "question": "If numerator of a fraction increases by 15% and denominator decreases by 8%, value becomes 15/16. Find original fraction.",
-                "answer": "3/4"
-        },
-        {
-                "question": "A family consumes rice, daal and wheat in expenditure ratio 12:17:3. Prices increase by 20%, 30% and 50% respectively. By how much does total expenditure increase?",
-                "answer": "28 1/8%"
-        },
-        {
-                "question": "In an examination, A secured 25% more than B. B secured 10% less than C. C secured 25% more than D. D secured 320 out of 500. Find A's marks.",
-                "answer": "450"
-        },
-        {
-                "question": "There is 15% rebate if electric bills are paid in time. A man got rebate of Rs. 54 by paying in time. Find his electric bill.",
-                "answer": "Rs. 360"
-        },
-        {
-                "question": "To pass an examination, a candidate needs 40% marks. All questions carry equal marks. A candidate just passed with 10 correct answers out of 15 attempted. Find total questions.",
-                "answer": "25"
-        },
-        {
-                "question": "In a test of 80 questions, a student answered 75% of first 60 correctly. What percentage of remaining questions must be correct to score 80% overall?",
-                "answer": "95%"
-        },
-        {
-                "question": "An exam has 80 questions of 1 mark each. Arpita answered 65% of first 40 questions correctly. What percent of remaining questions must be right to score 75% overall?",
-                "answer": "85%"
-        },
-        {
-                "question": "A businessman earned 20% profit on investment in 1995. In 1996, investment was Rs. 5000 less but income was same; profit percent increased by 26%. Find investment in 1995.",
-                "answer": "Rs. 105000"
-        },
-        {
-                "question": "Difference of two numbers is 1660. If 6 1/2% of one equals 8 1/2% of other, find smaller number.",
-                "answer": "5395"
-        },
-        {
-                "question": "In a class, 70% pass English, 65% pass Maths, 27% fail both and 248 pass both. Find total students.",
-                "answer": "400"
-        },
-        {
-                "question": "In a class, 80% pass Maths, 70% pass English, 10% fail both and 144 pass both. Find total students.",
-                "answer": "240"
-        },
-        {
-                "question": "In a village, 60% families have one cow, 30% have one buffalo and 15% have both. There are 96 families. Find families having neither cow nor buffalo.",
-                "answer": "24"
-        },
-        {
-                "question": "In a company, 55% workers drink tea, 45% coffee and 40% milk. 20% drink tea and milk, 20% coffee and milk, 25% tea and coffee, and 15% all three. Find percentage who like none.",
-                "answer": "10%"
-        },
-        {
-                "question": "Population of a village is 5000. Male population increases by 10% and female by 15%, making population 5600. Find number of males initially.",
-                "answer": "3000"
-        },
-        {
-                "question": "Population of a village is 8000. Male population increases by 10% and female by 8%, overall increase is 9%. Find number of males.",
-                "answer": "4000"
-        },
-        {
-                "question": "A person pays 10% tax, then spends 20% of remaining on education and 25% of remaining on food. He is left with Rs. 2700. Find income.",
-                "answer": "Rs. 5000"
-        },
-        {
-                "question": "Sameer spends 24% monthly income on food, 15% on children's education, 25% of remaining on entertainment and 20% on travelling. He is left with Rs. 10736. Find income.",
-                "answer": "Rs. 32000"
-        },
-        {
-                "question": "From an officer's salary, 10% is house rent, 15% of rest is children's education and 10% of balance is clothes. He is left with Rs. 1377. Find salary.",
-                "answer": "Rs. 2000"
-        },
-        {
-                "question": "Santosh's expenditure and saving ratio is 8:5. He spends 20% of expenditure on food and 40% on clothes. He deposits 60% of savings in bank. Clothes spending is what percent of bank deposit?",
-                "answer": "106 2/3%"
-        },
-        {
-                "question": "A person has some money. 25% is stolen, 10% is lost from remaining, 50% of remainder is spent on food, then he buys a Rs. 26 book and has nothing left. Find initial amount.",
-                "answer": "Rs. 80"
-        },
-        {
-                "question": "A man spent 25% of money on an article and 10% of remaining on clothes. Then he donated Rs. 531.25 and was left with Rs. 8000. Find amount spent on clothes.",
-                "answer": "Rs. 947.916"
-        },
-        {
-                "question": "A family's savings to expenditure ratio last month was 2:13. Savings this month fell to 50% of last month's saving. Last month's salary was Rs. 10000 and this month salary rose by 15%. Find this month's expenditure.",
-                "answer": "Rs. 10833"
-        },
-        {
-                "question": "Packing cost of mangoes is 40% of fresh mango cost. Mango price increases by 30% but packing cost decreases by 50%. Find percentage change in packed mango cost.",
-                "answer": "15/7%"
-        },
-        {
-                "question": "Sugar price increase is 2% more than inflation. On Jan 1, 2004 sugar is Rs. 20/kg. Inflation in 2004 and 2005 is 8% each. Find assumed price on Jan 1, 2006.",
-                "answer": "Rs. 24.2"
-        },
-        {
-                "question": "A report has 20 pages, each 55 lines, each line 65 characters. It is reduced to pages of 65 lines with 70 characters each. Find percentage reduction in pages.",
-                "answer": "20%"
-        },
-        {
-                "question": "Sugar price increase is 2% more than inflation. Price on Jan 1, 1994 is Rs. 20/kg. Inflation for 1994 and 1995 is 8% each. Expected price on Jan 1, 1996 is?",
-                "answer": "Rs. 24.20"
-        },
-        {
-                "question": "Every month a man consumes 25 kg rice and 9 kg wheat. Rice price is 20% of wheat price and total expense is Rs. 350. If wheat price increases by 20%, find percentage reduction in rice consumption to keep expense same.",
-                "answer": "36%"
-        },
-        {
-                "question": "Raw material price rises 15%, and labour cost rises from 25% to 30% of raw material cost. By what percent should raw material usage reduce to keep cost same?",
-                "answer": "17%"
-        },
-        {
-                "question": "Three machines M1, M2, M3 produce 25%, 35%, 40% of products. Their defective rates are 2%, 4%, 5%. Find percentage of non-defective products.",
-                "answer": "96.1%"
-        },
-        {
-                "question": "Connie has gold coins of different weights. She gives 24 lightest coins weighing 45% total to Brennan, 13 heaviest weighing 26% total to Maya, and rest to Blair. How many coins did Blair get?",
-                "answer": "15"
-        },
-        {
-                "question": "A jeweller raises price by x% and lowers by x%; after one cycle price reduces by Rs. 100. After second same cycle, price is Rs. 2304. Find original price.",
-                "answer": "Rs. 2500"
-        },
-        {
-                "question": "A person gives 30% income to elder daughter and 40% of remaining to younger daughter. Rest is equally distributed among 3 sons; each son gets Rs. 672. Find total amount given to elder and younger daughters.",
-                "answer": "Rs. 1344"
-        },
-        {
-                "question": "40% marks are required to pass. A got 10% less than passing marks. B got 11 1/9% less than A. C got 41 3/17% less than A+B. Find C's marks percentage.",
-                "answer": "40%"
-        },
-        {
-                "question": "Five questions were asked. 5% examinees answered all 5 and 5% none. Of the rest, 25% answered only 1, 20% answered 4, and 24 1/2% of total answered only 2. If 200 answered 3, find total examinees.",
-                "answer": "800"
-        },
-        {
-                "question": "A number N is divided into three parts so that sum of first two parts is K% of the third part. Find the third part.",
-                "answer": "100N/(K+100)"
-        }
-];
+            {
+                    "question": "ताजे फल में 68% पानी और सूखे फल में 20% पानी होता है। 55 किग्रा ताजे फल से कितना सूखा फल प्राप्त होगा?",
+                    "answer": "22 किग्रा"
+            },
+            {
+                    "question": "एक व्यक्ति की आय ₹4800 बढ़ती है। कर दर 12% से घटकर 10% हो जाती है। देय कर समान रहता है; दोनों स्थितियों में आय का 20% कर-मुक्त है। वर्तमान आय ज्ञात कीजिए।",
+                    "answer": "₹28800"
+            },
+            {
+                    "question": "एक व्यक्ति की आय ₹1800 बढ़ती है और देय कर दर 18% से घटकर 15% हो जाती है। दोनों स्थितियों में आय का 29.95% कर-मुक्त है। प्रारंभिक आय ज्ञात कीजिए।",
+                    "answer": "₹9000"
+            },
+            {
+                    "question": "आय ₹3000 घटती है और आयकर दर 15% से बढ़कर 18% हो जाती है। दिए गए कर का अनुपात 3:2 है और आय का 26.5% कर-मुक्त है। प्रारंभिक आय ज्ञात कीजिए।",
+                    "answer": "₹6750"
+            },
+            {
+                    "question": "मेरी आय ₹20000 है और मैं 80% खर्च करता हूँ। आय 20% बढ़ने पर मेरा खर्च ₹5000 बढ़ जाता है। बचत में प्रतिशत कमी ज्ञात कीजिए।",
+                    "answer": "25%"
+            },
+            {
+                    "question": "एक पिता अपनी मासिक आय का 1% अपने दो पुत्रों को देता है। वह इस राशि का 80% बड़े पुत्र को देता है, जो 80% खर्च कर ₹20 बचाता है। पिता की आय ज्ञात कीजिए।",
+                    "answer": "₹12500"
+            },
+            {
+                    "question": "एक व्यक्ति अपनी आय का 20% बड़े पुत्र को, शेष का 30% छोटे पुत्र को और बचे हुए का 10% एक ट्रस्ट को देता है। उसके पास ₹10080 बचते हैं। आय ज्ञात कीजिए।",
+                    "answer": "₹20000"
+            },
+            {
+                    "question": "एक विद्यालय में लड़कों और लड़कियों का अनुपात 4:1 है। 75% लड़कों और 70% लड़कियों को छात्रवृत्ति मिली। छात्रवृत्ति न पाने वाले विद्यार्थियों का प्रतिशत ज्ञात कीजिए।",
+                    "answer": "26%"
+            },
+            {
+                    "question": "एक संस्थान में 60% विद्यार्थी लड़के हैं। 15% लड़कों और 7.5% लड़कियों को शुल्क माफी मिलती है। कुल शुल्क माफी पाने वाले 90 हैं। यदि माफी न पाने वालों में से 50% को आधी रियायत मिलती है, तो 50% रियायत पाने वालों की संख्या ज्ञात कीजिए।",
+                    "answer": "330"
+            },
+            {
+                    "question": "A, B और C की कुल आय ₹72000 है। वे क्रमशः 80%, 85% और 75% खर्च करते हैं। बचत का अनुपात 8:9:20 है। A की आय ज्ञात कीजिए।",
+                    "answer": "₹16000"
+            },
+            {
+                    "question": "एक संख्या को दो भागों में इस प्रकार बाँटा गया है कि पहले भाग का 80%, दूसरे भाग के 60% से 3 अधिक है, और दूसरे भाग का 80%, पहले भाग के 90% से 6 अधिक है। संख्या ज्ञात कीजिए।",
+                    "answer": "135"
+            },
+            {
+                    "question": "एक शहर में 45% पुरुष और 25% महिलाएँ विवाहित हैं। कोई भी व्यक्ति एक से अधिक बार विवाहित नहीं है। जनसंख्या का कितने प्रतिशत भाग विवाहित है?",
+                    "answer": "32 1/7%"
+            },
+            {
+                    "question": "एक गाँव में 2/3 पुरुष और शेष महिलाएँ हैं। 80% पुरुष और 70% महिलाएँ साक्षर हैं। 40% साक्षर पुरुष और 30% साक्षर महिलाएँ स्नातक हैं। 20% स्नातक पुरुष और 25% स्नातक महिलाएँ सरकारी नौकरी में हैं। कार्यरत जनसंख्या कुल जनसंख्या का कितना प्रतिशत है?",
+                    "answer": "6.01%"
+            },
+            {
+                    "question": "एक जलवायु सम्मेलन में 700 पुरुष, 500 महिलाएँ और 800 बच्चे हैं। 20% पुरुष, 40% महिलाएँ और 10% बच्चे भारतीय हैं। गैर-भारतीय लोगों का प्रतिशत ज्ञात कीजिए।",
+                    "answer": "79%"
+            },
+            {
+                    "question": "यदि किसी भिन्न का अंश 20% बढ़े और हर 5% घटे, तो भिन्न 5/2 हो जाती है। मूल भिन्न ज्ञात कीजिए।",
+                    "answer": "95/48"
+            },
+            {
+                    "question": "यदि किसी भिन्न का अंश 15% बढ़े और हर 8% घटे, तो मान 15/16 हो जाता है। मूल भिन्न ज्ञात कीजिए।",
+                    "answer": "3/4"
+            },
+            {
+                    "question": "एक परिवार चावल, दाल और गेहूँ पर 12:17:3 के व्यय अनुपात में खर्च करता है। इनके मूल्य क्रमशः 20%, 30% और 50% बढ़ते हैं। कुल व्यय कितने प्रतिशत बढ़ेगा?",
+                    "answer": "28 1/8%"
+            },
+            {
+                    "question": "एक परीक्षा में A ने B से 25% अधिक अंक प्राप्त किए। B ने C से 10% कम अंक प्राप्त किए। C ने D से 25% अधिक अंक प्राप्त किए। D ने 500 में से 320 अंक प्राप्त किए। A के अंक ज्ञात कीजिए।",
+                    "answer": "450"
+            },
+            {
+                    "question": "बिजली बिल समय पर जमा करने पर 15% छूट मिलती है। एक व्यक्ति को समय पर भुगतान करने से ₹54 की छूट मिली। उसका बिजली बिल ज्ञात कीजिए।",
+                    "answer": "₹360"
+            },
+            {
+                    "question": "एक परीक्षा में उत्तीर्ण होने के लिए 40% अंक चाहिए। सभी प्रश्न समान अंक के हैं। एक अभ्यर्थी 15 प्रयास किए गए प्रश्नों में से 10 सही करके ठीक-ठीक उत्तीर्ण हुआ। कुल प्रश्न ज्ञात कीजिए।",
+                    "answer": "25"
+            },
+            {
+                    "question": "80 प्रश्नों की परीक्षा में एक विद्यार्थी ने पहले 60 प्रश्नों में से 75% सही किए। कुल 80% अंक पाने के लिए शेष प्रश्नों में कितने प्रतिशत सही होने चाहिए?",
+                    "answer": "95%"
+            },
+            {
+                    "question": "80 प्रश्नों की परीक्षा में प्रत्येक प्रश्न 1 अंक का है। अर्पिता ने पहले 40 प्रश्नों में से 65% सही किए। कुल 75% अंक पाने के लिए शेष प्रश्नों में कितने प्रतिशत सही होने चाहिए?",
+                    "answer": "85%"
+            },
+            {
+                    "question": "एक व्यापारी ने 1995 में निवेश पर 20% लाभ कमाया। 1996 में निवेश ₹5000 कम था लेकिन आय समान रही; लाभ प्रतिशत 26% हो गया। 1995 का निवेश ज्ञात कीजिए।",
+                    "answer": "₹105000"
+            },
+            {
+                    "question": "दो संख्याओं का अंतर 1660 है। यदि एक संख्या का 6 1/2%, दूसरी संख्या के 8 1/2% के बराबर है, तो छोटी संख्या ज्ञात कीजिए।",
+                    "answer": "5395"
+            },
+            {
+                    "question": "एक कक्षा में 70% विद्यार्थी अंग्रेजी में, 65% गणित में उत्तीर्ण हैं, 27% दोनों में असफल हैं और 248 दोनों में उत्तीर्ण हैं। कुल विद्यार्थी ज्ञात कीजिए।",
+                    "answer": "400"
+            },
+            {
+                    "question": "एक कक्षा में 80% विद्यार्थी गणित में, 70% अंग्रेजी में उत्तीर्ण हैं, 10% दोनों में असफल हैं और 144 दोनों में उत्तीर्ण हैं। कुल विद्यार्थी ज्ञात कीजिए।",
+                    "answer": "240"
+            },
+            {
+                    "question": "एक गाँव में 60% परिवारों के पास एक गाय, 30% के पास एक भैंस और 15% के पास दोनों हैं। कुल 96 परिवार हैं। न गाय न भैंस रखने वाले परिवारों की संख्या ज्ञात कीजिए।",
+                    "answer": "24"
+            },
+            {
+                    "question": "एक कंपनी में 55% कर्मचारी चाय, 45% कॉफी और 40% दूध पीते हैं। 20% चाय और दूध, 20% कॉफी और दूध, 25% चाय और कॉफी, तथा 15% तीनों पीते हैं। इनमें से कोई भी पसंद न करने वालों का प्रतिशत ज्ञात कीजिए।",
+                    "answer": "10%"
+            },
+            {
+                    "question": "एक गाँव की जनसंख्या 5000 है। पुरुष जनसंख्या 10% और महिला जनसंख्या 15% बढ़ने पर कुल जनसंख्या 5600 हो जाती है। प्रारंभिक पुरुषों की संख्या ज्ञात कीजिए।",
+                    "answer": "3000"
+            },
+            {
+                    "question": "एक गाँव की जनसंख्या 8000 है। पुरुष जनसंख्या 10% और महिला जनसंख्या 8% बढ़ती है, जिससे कुल वृद्धि 9% होती है। पुरुषों की संख्या ज्ञात कीजिए।",
+                    "answer": "4000"
+            },
+            {
+                    "question": "एक व्यक्ति 10% कर देता है, फिर शेष का 20% शिक्षा पर और उसके बाद शेष का 25% भोजन पर खर्च करता है। उसके पास ₹2700 बचते हैं। आय ज्ञात कीजिए।",
+                    "answer": "₹5000"
+            },
+            {
+                    "question": "समीर अपनी मासिक आय का 24% भोजन पर, 15% बच्चों की शिक्षा पर, शेष का 25% मनोरंजन पर और उसके बाद शेष का 20% यात्रा पर खर्च करता है। उसके पास ₹11712 बचते हैं। आय ज्ञात कीजिए।",
+                    "answer": "₹32000"
+            },
+            {
+                    "question": "एक अधिकारी के वेतन में से 10% मकान किराया, शेष का 15% बच्चों की शिक्षा और शेष राशि का 10% कपड़ों पर खर्च होता है। उसके पास ₹1377 बचते हैं। वेतन ज्ञात कीजिए।",
+                    "answer": "₹2000"
+            },
+            {
+                    "question": "संतोष के व्यय और बचत का अनुपात 8:5 है। वह व्यय का 20% भोजन पर और 40% कपड़ों पर खर्च करता है। वह बचत का 60% बैंक में जमा करता है। कपड़ों पर खर्च, बैंक जमा का कितना प्रतिशत है?",
+                    "answer": "106 2/3%"
+            },
+            {
+                    "question": "एक व्यक्ति के पास कुछ धन है। 25% चोरी हो जाता है, शेष का 10% खो जाता है, बचे हुए का 50% भोजन पर खर्च होता है, फिर वह ₹27 की पुस्तक खरीदता है और उसके पास कुछ नहीं बचता। प्रारंभिक राशि ज्ञात कीजिए।",
+                    "answer": "₹80"
+            },
+            {
+                    "question": "एक व्यक्ति ने धन का 25% एक वस्तु पर और शेष का 10% कपड़ों पर खर्च किया। फिर उसने ₹531.25 दान किए और उसके पास ₹8000 बचे। कपड़ों पर खर्च की गई राशि ज्ञात कीजिए।",
+                    "answer": "₹947.916"
+            },
+            {
+                    "question": "पिछले महीने एक परिवार की बचत और व्यय का अनुपात 2:13 था। इस महीने बचत पिछले महीने की बचत की 50% रह गई। पिछले महीने का वेतन ₹10000 था और इस महीने वेतन 15% बढ़ा। इस महीने का व्यय ज्ञात कीजिए।",
+                    "answer": "₹10833"
+            },
+            {
+                    "question": "आम की पैकिंग लागत ताजे आम की लागत की 40% है। आम की कीमत 30% बढ़ती है लेकिन पैकिंग लागत 50% घटती है। पैक किए हुए आम की कुल लागत में प्रतिशत परिवर्तन ज्ञात कीजिए।",
+                    "answer": "50/7%"
+            },
+            {
+                    "question": "चीनी की कीमत में वृद्धि मुद्रास्फीति से 2% अधिक है। 1 जनवरी 2004 को चीनी ₹20/किग्रा है। 2004 और 2005 में मुद्रास्फीति 8% प्रति वर्ष है। 1 जनवरी 2006 को अनुमानित कीमत ज्ञात कीजिए।",
+                    "answer": "₹24.2"
+            },
+            {
+                    "question": "एक रिपोर्ट में 20 पृष्ठ हैं, प्रत्येक पृष्ठ में 55 पंक्तियाँ और प्रत्येक पंक्ति में 65 अक्षर हैं। इसे 65 पंक्तियों और 70 अक्षरों प्रति पंक्ति वाले पृष्ठों में बदला जाता है। पृष्ठों में प्रतिशत कमी ज्ञात कीजिए।",
+                    "answer": "20%"
+            },
+            {
+                    "question": "चीनी की कीमत में वृद्धि मुद्रास्फीति से 2% अधिक है। 1 जनवरी 1994 को कीमत ₹20/किग्रा है। 1994 और 1995 में मुद्रास्फीति 8% प्रति वर्ष है। 1 जनवरी 1996 को अपेक्षित कीमत क्या होगी?",
+                    "answer": "₹24.20"
+            },
+            {
+                    "question": "हर महीने एक व्यक्ति 25 किग्रा चावल और 9 किग्रा गेहूँ खाता है। चावल की कीमत गेहूँ की कीमत की 20% है और कुल खर्च ₹350 है। यदि गेहूँ की कीमत 20% बढ़ जाए, तो खर्च समान रखने के लिए चावल की खपत कितने प्रतिशत घटानी होगी?",
+                    "answer": "36%"
+            },
+            {
+                    "question": "कच्चे माल की कीमत 15% बढ़ती है, और मजदूरी लागत कच्चे माल की लागत के 25% से बढ़कर 30% हो जाती है। कुल लागत समान रखने के लिए कच्चे माल की खपत कितने प्रतिशत घटानी चाहिए?",
+                    "answer": "16.39%"
+            },
+            {
+                    "question": "तीन मशीनें M1, M2 और M3 क्रमशः 25%, 35% और 40% उत्पाद बनाती हैं। उनकी दोषपूर्ण दरें क्रमशः 2%, 4% और 5% हैं। दोषरहित उत्पादों का प्रतिशत ज्ञात कीजिए।",
+                    "answer": "96.1%"
+            },
+            {
+                    "question": "कोनी के पास अलग-अलग वजन के सोने के सिक्के हैं। वह 24 सबसे हल्के सिक्के, जिनका वजन कुल वजन का 45% है, ब्रेनन को देती है; 13 सबसे भारी सिक्के, जिनका वजन कुल वजन का 26% है, माया को देती है; और शेष ब्लेयर को देती है। ब्लेयर को कितने सिक्के मिले?",
+                    "answer": "15"
+            },
+            {
+                    "question": "एक जौहरी कीमत x% बढ़ाता है और फिर x% घटाता है। एक चक्र के बाद कीमत ₹100 घट जाती है। दूसरे समान चक्र के बाद कीमत ₹2304 है। मूल कीमत ज्ञात कीजिए।",
+                    "answer": "₹2500"
+            },
+            {
+                    "question": "एक व्यक्ति अपनी आय का 30% बड़ी पुत्री को और शेष का 40% छोटी पुत्री को देता है। बची हुई राशि 3 पुत्रों में बराबर बाँटी जाती है; प्रत्येक पुत्र को ₹672 मिलते हैं। छोटी पुत्री को दी गई राशि ज्ञात कीजिए।",
+                    "answer": "₹1344"
+            },
+            {
+                    "question": "उत्तीर्ण होने के लिए 40% अंक चाहिए। A को उत्तीर्णांक से 10% कम अंक मिले। B को A से 11 1/9% कम अंक मिले। C को A+B से 41 3/17% कम अंक मिले। C के अंकों का प्रतिशत ज्ञात कीजिए।",
+                    "answer": "40%"
+            },
+            {
+                    "question": "पाँच प्रश्न पूछे गए। 5% परीक्षार्थियों ने सभी 5 प्रश्नों का उत्तर दिया और 5% ने कोई उत्तर नहीं दिया। शेष में से 25% ने केवल 1, 20% ने 4, और कुल का 24 1/2% ने केवल 2 प्रश्नों का उत्तर दिया। यदि 200 ने 3 प्रश्नों का उत्तर दिया, तो कुल परीक्षार्थी ज्ञात कीजिए।",
+                    "answer": "800"
+            },
+            {
+                    "question": "एक संख्या N को तीन भागों में इस प्रकार बाँटा गया है कि पहले दो भागों का योग, तीसरे भाग का K% है। तीसरा भाग ज्ञात कीजिए।",
+                    "answer": "100N/(K+100)"
+            }
+    ];
 
     function buildOptions(index) {
         const correct = seeds[index].answer;
@@ -236,7 +236,7 @@
                 question: seed.question,
                 options: optionData.options,
                 correctAnswer: optionData.correctIndex,
-                explanation: `Correct answer: ${seed.answer}. Use percentage base-value method, successive percentage change, or equation formation as applicable.`
+                explanation: `सही उत्तर: ${seed.answer}। प्रतिशत में आधार-मान विधि, क्रमिक परिवर्तन या समीकरण विधि का उपयोग करें।`
             };
         });
     }
@@ -245,7 +245,7 @@
         id: quizId,
         subject: "Mathematics",
         title: "Percentage Practice Set 2",
-        description: "50 hard percentage questions prepared from Abhinay Maths Classes Percentage PDF.",
+        description: "50 कठिन प्रतिशत प्रश्न, हिंदी माध्यम अभ्यास के लिए।",
         durationMinutes: 45,
         totalQuestions: 50,
         marksPerQuestion: 1,

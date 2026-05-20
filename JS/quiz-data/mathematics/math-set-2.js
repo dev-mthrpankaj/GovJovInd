@@ -5,45 +5,151 @@
 
     const quizId = "math-set-2";
     const seeds = [
-        { topic: "Number System", difficulty: "easy", question: "What is the HCF of 36 and 60?", options: ["6", "9", "12", "18"], correctAnswer: 2, explanation: "The greatest common factor of 36 and 60 is 12." },
-        { topic: "Percentage", difficulty: "medium", question: "A value increases from 500 to 650. What is the percentage increase?", options: ["20%", "25%", "30%", "35%"], correctAnswer: 2, explanation: "Increase is 150. Percentage increase = 150/500 x 100 = 30%." },
-        { topic: "Average", difficulty: "easy", question: "What is the average of the first five even natural numbers?", options: ["4", "5", "6", "8"], correctAnswer: 2, explanation: "2+4+6+8+10 = 30, and 30/5 = 6." },
-        { topic: "Time and Distance", difficulty: "medium", question: "A train covers 180 km in 3 hours. What is its speed?", options: ["45 km/h", "50 km/h", "60 km/h", "75 km/h"], correctAnswer: 2, explanation: "Speed = distance/time = 180/3 = 60 km/h." },
-        { topic: "Simplification", difficulty: "easy", question: "Simplify 18 + 6 x 4 - 8.", options: ["26", "34", "40", "88"], correctAnswer: 1, explanation: "Using BODMAS, 6 x 4 = 24, so 18 + 24 - 8 = 34." },
-        { topic: "Ratio", difficulty: "medium", question: "If A:B = 3:5 and the total is 64, find A.", options: ["20", "24", "30", "40"], correctAnswer: 1, explanation: "A share = 3/(3+5) x 64 = 24." },
-        { topic: "Mensuration", difficulty: "medium", question: "What is the perimeter of a square of side 9 cm?", options: ["18 cm", "27 cm", "36 cm", "81 cm"], correctAnswer: 2, explanation: "Perimeter of square = 4 x side = 36 cm." },
-        { topic: "Simple Interest", difficulty: "medium", question: "A principal of 4000 earns interest of 600 in 3 years. What is the rate?", options: ["4%", "5%", "6%", "8%"], correctAnswer: 1, explanation: "Rate = SI x 100 / (P x T) = 60000/12000 = 5%." },
-        { topic: "Algebra", difficulty: "easy", question: "If x + 7 = 19, what is x?", options: ["10", "11", "12", "13"], correctAnswer: 2, explanation: "Subtract 7 from both sides: x = 12." },
-        { topic: "Profit and Loss", difficulty: "medium", question: "The selling price is 720 and the loss is 10%. What is the cost price?", options: ["780", "800", "820", "900"], correctAnswer: 1, explanation: "SP = 90% of CP, so CP = 720/0.9 = 800." }
+            {
+                    "topic": "महत्तम समापवर्तक",
+                    "difficulty": "easy",
+                    "question": "36 और 60 का महत्तम समापवर्तक कितना है?",
+                    "options": [
+                            "6",
+                            "9",
+                            "12",
+                            "18"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "36 और 60 का सबसे बड़ा समान गुणनखंड 12 है।"
+            },
+            {
+                    "topic": "प्रतिशत",
+                    "difficulty": "medium",
+                    "question": "एक मान 500 से बढ़कर 650 हो गया। प्रतिशत वृद्धि कितनी है?",
+                    "options": [
+                            "20%",
+                            "25%",
+                            "30%",
+                            "35%"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "वृद्धि = 150। प्रतिशत वृद्धि = 150/500 × 100 = 30%।"
+            },
+            {
+                    "topic": "औसत",
+                    "difficulty": "easy",
+                    "question": "पहली पाँच सम संख्याओं का औसत कितना है?",
+                    "options": [
+                            "4",
+                            "5",
+                            "6",
+                            "8"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "2 + 4 + 6 + 8 + 10 = 30 और 30/5 = 6।"
+            },
+            {
+                    "topic": "चाल और दूरी",
+                    "difficulty": "medium",
+                    "question": "एक वाहन 3 घंटे में 180 किमी चलता है। उसकी चाल ज्ञात कीजिए।",
+                    "options": [
+                            "45 किमी/घंटा",
+                            "50 किमी/घंटा",
+                            "60 किमी/घंटा",
+                            "75 किमी/घंटा"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "चाल = दूरी/समय = 180/3 = 60 किमी/घंटा।"
+            },
+            {
+                    "topic": "सरलीकरण",
+                    "difficulty": "easy",
+                    "question": "18 + 6 × 4 - 8 का मान कितना है?",
+                    "options": [
+                            "26",
+                            "34",
+                            "40",
+                            "88"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "BODMAS के अनुसार 6 × 4 = 24, अतः 18 + 24 - 8 = 34।"
+            },
+            {
+                    "topic": "अनुपात",
+                    "difficulty": "medium",
+                    "question": "यदि A:B = 3:5 और कुल योग 64 है, तो A का मान कितना है?",
+                    "options": [
+                            "20",
+                            "24",
+                            "30",
+                            "40"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "A का मान = 3/(3+5) × 64 = 24।"
+            },
+            {
+                    "topic": "परिमाप",
+                    "difficulty": "medium",
+                    "question": "9 सेमी भुजा वाले वर्ग का परिमाप कितना है?",
+                    "options": [
+                            "18 सेमी",
+                            "27 सेमी",
+                            "36 सेमी",
+                            "81 सेमी"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "वर्ग का परिमाप = 4 × भुजा = 36 सेमी।"
+            },
+            {
+                    "topic": "साधारण ब्याज",
+                    "difficulty": "medium",
+                    "question": "₹4000 मूलधन पर 3 वर्ष में ₹600 साधारण ब्याज मिलता है। दर ज्ञात कीजिए।",
+                    "options": [
+                            "4%",
+                            "5%",
+                            "6%",
+                            "8%"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "दर = SI × 100 / (P × T) = 600 × 100 / (4000 × 3) = 5%।"
+            },
+            {
+                    "topic": "समीकरण",
+                    "difficulty": "easy",
+                    "question": "यदि x + 7 = 19 है, तो x का मान क्या है?",
+                    "options": [
+                            "10",
+                            "11",
+                            "12",
+                            "13"
+                    ],
+                    "correctAnswer": 2,
+                    "explanation": "दोनों पक्षों से 7 घटाने पर x = 12 मिलता है।"
+            },
+            {
+                    "topic": "छूट और मूल्य",
+                    "difficulty": "medium",
+                    "question": "विक्रय मूल्य ₹720 है और छूट 10% है। अंकित मूल्य ज्ञात कीजिए।",
+                    "options": [
+                            "780",
+                            "800",
+                            "820",
+                            "900"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "विक्रय मूल्य अंकित मूल्य का 90% है, इसलिए अंकित मूल्य = 720/0.9 = 800।"
+            }
+    ];
+
+    const prefixes = [
+            "सही उत्तर चुनिए: ",
+            "सबसे उपयुक्त विकल्प चुनिए: ",
+            "सही विकल्प अंकित कीजिए: ",
+            "निम्न प्रश्न हल कीजिए: "
     ];
 
     function formatQuestionText(question, variantIndex) {
         const text = String(question).trim();
         if (variantIndex === 0) return text;
-
-        const variant = (variantIndex - 1) % 4;
-        const instructionPatterns = [
-            { pattern: /^Choose\b/i, verbs: ["Select", "Pick", "Mark", "Identify"] },
-            { pattern: /^Select\b/i, verbs: ["Choose", "Pick", "Mark", "Identify"] },
-            { pattern: /^Identify\b/i, verbs: ["Find", "Select", "Choose", "Mark"] },
-            { pattern: /^Find\b/i, verbs: ["Determine", "Select", "Choose", "Mark"] },
-            { pattern: /^Fill in the blank\b/i, verbs: ["Complete the sentence", "Choose the option that completes the sentence", "Select the option that fits the blank", "Mark the option that fits the blank"] }
-        ];
-        const matchedInstruction = instructionPatterns.find((item) => item.pattern.test(text));
-
-        if (matchedInstruction) {
-            return text.replace(matchedInstruction.pattern, matchedInstruction.verbs[variant]);
-        }
-
-        const prefixes = [
-            "Select the correct answer: ",
-            "Choose the most appropriate option: ",
-            "Mark the correct response: ",
-            "Answer the following: "
-        ];
-
-        return `${prefixes[variant]}${text}`;
+        return `${prefixes[(variantIndex - 1) % prefixes.length]}${text}`;
     }
+
     function buildQuestions() {
         const questions = [];
         for (let index = 0; index < 50; index += 1) {
@@ -67,15 +173,13 @@
         id: quizId,
         subject: "Mathematics",
         title: "Mathematics Practice Set 2",
-        description: "50 calculation speed, number system, work, average and applied maths questions.",
+        description: "50 हिंदी गणित अभ्यास प्रश्न, गणना और अनुप्रयोग के लिए।",
         durationMinutes: 30,
         totalQuestions: 50,
         marksPerQuestion: 1,
         negativeMarks: 0.25,
         difficulty: "Moderate",
-        tags: ["SSC", "Railway", "Banking"],
+        tags: ["SSC","Railway","Banking","Mathematics"],
         questions: buildQuestions()
     });
 }());
-
-
