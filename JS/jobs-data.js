@@ -4,6 +4,96 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2417",
+        "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
+        "organization": "Council of Scientific & Industrial Research",
+        "department": "CSIR",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Class 10 High School / Matric with 50% Marks\n(View Details for More Information)",
+        "totalPosts": "30",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-18",
+        "status": "active",
+        "tags": [
+            "Scientist",
+            "Central",
+            "ITI"
+        ],
+        "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
+        "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
+        "detailPage": "",
+        "updatedAt": "2026-05-20"
+    },
+    {
+        "id": "2418",
+        "title": "AFCAT 02/2026 Online Form",
+        "organization": "Indian Air Force",
+        "department": "IAF",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Graduate (View Details For More Information)",
+        "totalPosts": "",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-19",
+        "status": "active",
+        "tags": [
+            "Indian Air Force",
+            "VayuSena",
+            "IAF"
+        ],
+        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
+        "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
+        "detailPage": "",
+        "updatedAt": "2026-05-20"
+    },
+    {
+        "id": "2419",
+        "title": "UPSC NDA II Online Form 2026 for 394 Post",
+        "organization": "Union Public Service Commission",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "10+2 (View Details for more Information)",
+        "totalPosts": "394",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-09",
+        "status": "active",
+        "tags": [
+            "NDA",
+            "Indian Army",
+            "UPSC",
+            "Defence"
+        ],
+        "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
+        "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
+        "detailPage": "",
+        "updatedAt": "2026-05-20"
+    },
+    {
+        "id": "2420",
+        "title": "UPSC CDS II Online Form 2026 for 451 Post",
+        "organization": "Union Public Service Commission",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Graduation (View Details for more Information)",
+        "totalPosts": "451",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-09",
+        "status": "active",
+        "tags": [
+            "CDS",
+            "Defence",
+            "Indian Army",
+            "UPSC"
+        ],
+        "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
+        "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
+        "detailPage": "2420-UPSC-CDS-II-2026",
+        "updatedAt": "2026-05-20"
+    },
+    {
         "id": "job-1103",
         "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
         "organization": "South East Central Railway",
