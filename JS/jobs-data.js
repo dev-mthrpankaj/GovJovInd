@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2419",
+        "title": "UPSC NDA II Online Form 2026 for 394 Post",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-21"
+    },
+    {
         "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
@@ -26,7 +44,7 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-20"
     },
     {
-        "id": "2417",
+        "id": "2418",
         "title": "AFCAT 02/2026 Online Form",
         "organization": "Indian Air Force",
         "department": "IAF",
