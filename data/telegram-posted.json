@@ -421,8 +421,69 @@
       "updatedAt": "2026-05-01",
       "title": "HSSC Constable PMT Admit Card 2026",
       "lastPostedAt": "2026-05-21T19:16:35.000Z"
+    },
+    "admitCards:admit-2029": {
+      "hash": "830062ecf91ebd7e14b16fefed952327bf546bd3fbf27612b66dcbc281496334",
+      "updatedAt": "2026-05-01",
+      "title": "BPSC 71th Mains Admit Card 2026",
+      "lastPostedAt": "2026-05-21T20:48:48.018Z"
+    },
+    "admitCards:admit-2030": {
+      "hash": "fc27b93f67af44705ac5f9e80e9c169996b67a024a7cb4d5a784678529602753",
+      "updatedAt": "2026-05-01",
+      "title": "NCL Assistant Foreman Admit Card 2026",
+      "lastPostedAt": "2026-05-21T20:48:49.199Z"
     }
   },
-  "answerKeys": {},
+  "answerKeys": {
+    "answerKeys:2031": {
+      "hash": "ec5f0af74225c7630580d537f8c4c17f25b6008aca7d5f5ebe9e645c0ba8ce40",
+      "updatedAt": "2026-05-21",
+      "title": "UPSSSC Lekhpal Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:50.400Z"
+    },
+    "answerKeys:answerkey-4032": {
+      "hash": "9eacf751c1117a9050f2a84e9396949b1ac1e3cd3c795b9b7d6e8e737e4aa04a",
+      "updatedAt": "2026-05-07",
+      "title": "Madhya Pradesh MP Police Subedar Stenographer & ASI Ministerial Answer Key 2025",
+      "lastPostedAt": "2026-05-21T20:48:51.589Z"
+    },
+    "answerKeys:answerkey-4031": {
+      "hash": "f67363b78e5de7e99307e334c382502b31c89ff842ace9a055432081f30d7ee9",
+      "updatedAt": "2026-05-07",
+      "title": "UPSSSC Junior Engineer Civi Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:52.868Z"
+    },
+    "answerKeys:answerkey-4001": {
+      "hash": "e8cca364519c976a6e0463a010e92ae05a830c47c2ccef101606451a42f854ff",
+      "updatedAt": "2026-05-01",
+      "title": "UPSC CAPF AC Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:54.146Z"
+    },
+    "answerKeys:answerkey-4002": {
+      "hash": "0e758d2d39bc644b84e605798cb4174e1edb8b9e307be46101ff2e9f0cfa4b47",
+      "updatedAt": "2026-05-01",
+      "title": "RSMSSB Hostel Superintendent Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:55.296Z"
+    },
+    "answerKeys:answerkey-4003": {
+      "hash": "6fb3d53f773d5857b5aefe4b385f48e432a1254a167cef2bf73cc4f2c53f9005",
+      "updatedAt": "2026-05-01",
+      "title": "UPSSSC Technical Assistant Group C Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:56.488Z"
+    },
+    "answerKeys:answerkey-4004": {
+      "hash": "d36a4d97514c5f7dc17cb5ba92c2a740cc2711cea3add3d009c2ae584203d9a7",
+      "updatedAt": "2026-05-01",
+      "title": "UPPSC RO / ARO Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:57.661Z"
+    },
+    "answerKeys:answerkey-4005": {
+      "hash": "9c067aa5b3abb40846fe6920b601daf8b6087a924b6ee471ceb145fe8c7191a1",
+      "updatedAt": "2026-05-01",
+      "title": "UKPSC Lab Assistant Answer Key 2026",
+      "lastPostedAt": "2026-05-21T20:48:58.811Z"
+    }
+  },
   "results": {}
 }
