@@ -4,13 +4,31 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-37",
+        "title": "AFCAT 02/2026 Online Form",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-21"
+    },
+    {
         "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
         "department": "CSIR",
         "category": "Central Government",
         "year": "2026",
-        "qualification": "Class 10 High School / Matric with 50% Marks",
+        "qualification": "Class 10 High School / Matric with 50% Marks\nITI Certificate in Related Trade.\nfor Trade Wise Eligibility Details Read the Notification",
         "totalPosts": "30",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-18",
