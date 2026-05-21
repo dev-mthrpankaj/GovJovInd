@@ -179,12 +179,31 @@
         "job-1103": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html"
     };
 
+    function withHtmlExtension(url) {
+        const match = String(url || "").match(/^([^?#]+)([?#].*)?$/);
+        if (!match) return url;
+        const pathPart = match[1];
+        if (/\/$/.test(pathPart) || /\.[a-z0-9]+$/i.test(pathPart)) return url;
+        return `${pathPart}.html${match[2] || ""}`;
+    }
+
+    function normalizeDetailPageUrl(value) {
+        let url = getText(value, "").replace(/\\/g, "/");
+        if (!url || url === "#" || /job-details-job-/i.test(url)) return "";
+        if (/^(https?:|mailto:|tel:|\/)/i.test(url)) return url;
+        if (/^\.\.\/Job_Details\/HTML\//i.test(url)) return withHtmlExtension(url);
+        url = url.replace(/^\.\//, "");
+        if (/^Job_Details\/HTML\//i.test(url)) return withHtmlExtension(`../${url}`);
+        if (!url.includes("/")) return withHtmlExtension(`../Job_Details/HTML/${url}`);
+        return withHtmlExtension(url);
+    }
+
     function getDetailPage(job) {
         const jobId = getJobId(job);
         if (!jobId) return "";
         if (detailPageOverrides[jobId]) return detailPageOverrides[jobId];
-        const explicitDetailPage = getText(job.detailPage || job.detailsPage || job.detailUrl, "");
-        if (explicitDetailPage && explicitDetailPage !== "#" && !/job-details-job-/i.test(explicitDetailPage)) {
+        const explicitDetailPage = normalizeDetailPageUrl(job.detailPage || job.detailsPage || job.detailUrl);
+        if (explicitDetailPage) {
             return explicitDetailPage;
         }
         return `../Job_Details/HTML/job-details.html?id=${encodeURIComponent(jobId)}`;
