@@ -94,49 +94,6 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-20"
     },
     {
-        "id": "2416",
-        "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
-        "organization": "South East Central Railway",
-        "department": "SECR Nagpur",
-        "category": "Railway",
-        "year": "2026",
-        "qualification": "Class 10 High School",
-        "totalPosts": "1079",
-        "startDate": "2026-05-19",
-        "lastDate": "2026-06-18",
-        "status": "active",
-        "tags": [
-            "Railway",
-            "RRB"
-        ],
-        "applyLink": "https://www.apprenticeshipindia.gov.in/",
-        "officialNotification": "https://secr.indianrailways.gov.in/uploads/files/1779104439050-Notification.pdf",
-        "detailPage": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html",
-        "updatedAt": "2026-05-19"
-    },
-    {
-        "id": "job-1102",
-        "title": "SSC CGL 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Staff Selection",
-        "year": "2026",
-        "qualification": "Graduation",
-        "totalPosts": "10500",
-        "startDate": "2026-05-13",
-        "lastDate": "2026-06-12",
-        "status": "active",
-        "tags": [
-            "SSC",
-            "CGL",
-            "Central"
-        ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "#",
-        "updatedAt": "2026-05-16"
-    },
-    {
         "id": "job-1100",
         "title": "BTSC Laboratory Assistant Online Form 2026 for 1090 Post",
         "organization": "Bihar Technichal Service Commision",
