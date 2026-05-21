@@ -4,29 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2420",
-        "title": "UPSC CDS II Online Form 2026 for 451 Post",
-        "organization": "Union Public Service Commission",
-        "department": "Defence",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
-        "totalPosts": "451",
-        "startDate": "2026-05-20",
-        "lastDate": "2026-06-09",
-        "status": "active",
-        "tags": [
-            "CDS",
-            "Defence",
-            "Indian Army",
-            "UPSC"
-        ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "2026-05-21"
-    },
-    {
         "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
@@ -91,6 +68,29 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
         "detailPage": "",
+        "updatedAt": "2026-05-20"
+    },
+    {
+        "id": "2420",
+        "title": "UPSC CDS II Online Form 2026 for 451 Post",
+        "organization": "Union Public Service Commission",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Graduation (View Details for more Information)",
+        "totalPosts": "451",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-09",
+        "status": "active",
+        "tags": [
+            "CDS",
+            "Defence",
+            "Indian Army",
+            "UPSC"
+        ],
+        "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
+        "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
+        "detailPage": "2420-UPSC-CDS-II-2026",
         "updatedAt": "2026-05-20"
     },
     {
