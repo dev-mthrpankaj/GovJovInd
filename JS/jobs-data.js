@@ -4,7 +4,7 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "job-sheet-39",
+        "id": "2422",
         "title": "Punjab & Sind Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
         "department": "Banking",
@@ -22,7 +22,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
         "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
-        "detailPage": "",
+        "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
         "updatedAt": "2026-05-22"
     },
     {
