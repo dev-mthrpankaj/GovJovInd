@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2420",
+        "title": "UPSC CDS II Online Form 2026 for 451 Post",
+        "organization": "Union Public Service Commission",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-21"
+    },
+    {
         "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
@@ -51,7 +69,7 @@ window.GovJobUpdatesJobs = [
         "id": "2419",
         "title": "UPSC NDA II Online Form 2026 for 394 Post",
         "organization": "Union Public Service Commission",
-        "department": "NDA",
+        "department": "Defence",
         "category": "Central Government",
         "year": "2026",
         "qualification": "10+2 (Check Details for more Information)",
