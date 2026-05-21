@@ -13,9 +13,12 @@ window.GovJobUpdatesJobs = [
         "qualification": "Graduation (View Details for more Information)",
         "totalPosts": "635",
         "startDate": "2026-05-21",
-        "lastDate": "",
+        "lastDate": "2026-06-06",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Banking",
+            "P"
+        ],
         "applyLink": "",
         "officialNotification": "",
         "detailPage": "",
