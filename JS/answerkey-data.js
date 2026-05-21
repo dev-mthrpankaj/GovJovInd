@@ -14,10 +14,14 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-05-22",
         "objectionLastDate": "",
         "status": "not available",
-        "tags": [],
+        "tags": [
+            "UPSSSC",
+            "Lekhpal",
+            "Revenue"
+        ],
         "downloadLink": "",
-        "objectionLink": "",
-        "detailPage": "",
+        "objectionLink": "#",
+        "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-21"
     },
     {
