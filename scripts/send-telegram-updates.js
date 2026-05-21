@@ -49,6 +49,10 @@ function clean(value, fallback = 'Not mentioned') {
   return text || fallback;
 }
 
+function requiredUpdatedAt(item) {
+  return clean(item.updatedAt, '');
+}
+
 function trimLine(value, max = 180) {
   const text = clean(value, '').replace(/\s+/g, ' ').trim();
   return text.length > max ? text.slice(0, max - 1).trim() + '…' : text;
@@ -94,10 +98,21 @@ function ensureState(state) {
   return next;
 }
 
+function makeStateEntry(source, item, reason) {
+  return {
+    hash: snapshotHash(source, item),
+    updatedAt: requiredUpdatedAt(item),
+    title: clean(item.title, ''),
+    lastPostedAt: reason === 'seed' ? '' : new Date().toISOString(),
+    stateReason: reason
+  };
+}
+
 function hasImportantUpdate(previous, source, item) {
   if (!previous) return false;
-  const nextUpdatedAt = clean(item.updatedAt, '');
-  if (previous.updatedAt && nextUpdatedAt && previous.updatedAt !== nextUpdatedAt) return true;
+  const nextUpdatedAt = requiredUpdatedAt(item);
+  if (!nextUpdatedAt) return false;
+  if (previous.updatedAt && previous.updatedAt !== nextUpdatedAt) return true;
   const nextHash = snapshotHash(source, item);
   if (previous.hash && previous.hash !== nextHash) return true;
   return Boolean(previous.legacy && nextUpdatedAt);
@@ -116,7 +131,7 @@ function formatJob(item, mode = 'new') {
     `📅 Form Start: ${clean(item.startDate)}`,
     `⏳ Last Date: ${clean(item.lastDate)}`,
     `📌 Status: ${clean(item.status)}`,
-    `🕒 Updated At: ${clean(item.updatedAt)}`,
+    `🕒 Updated At: ${requiredUpdatedAt(item)}`,
     ''
   ];
   if (notification) lines.push(`📄 Notification: ${notification}`);
@@ -135,7 +150,7 @@ function formatAdmitCard(item, mode = 'new') {
     `📅 Release Date: ${clean(item.releaseDate)}`,
     `📅 Exam Date: ${clean(item.examDate)}`,
     `📌 Status: ${clean(item.status)}`,
-    `🕒 Updated At: ${clean(item.updatedAt)}`,
+    `🕒 Updated At: ${requiredUpdatedAt(item)}`,
     ''
   ];
   if (details) lines.push(`🔗 Full Details: ${details}`);
@@ -154,7 +169,7 @@ function formatAnswerKey(item, mode = 'new') {
     `📅 Release Date: ${clean(item.releaseDate)}`,
     `⏳ Objection Last Date: ${clean(item.objectionLastDate)}`,
     `📌 Status: ${clean(item.status)}`,
-    `🕒 Updated At: ${clean(item.updatedAt)}`,
+    `🕒 Updated At: ${requiredUpdatedAt(item)}`,
     ''
   ];
   if (details) lines.push(`🔗 Full Details: ${details}`);
@@ -171,7 +186,7 @@ function formatResult(item, mode = 'new') {
     `🏢 Organization: ${trimLine(item.organization)}`,
     `📅 Result Date: ${clean(item.resultDate)}`,
     `📌 Status: ${clean(item.status)}`,
-    `🕒 Updated At: ${clean(item.updatedAt)}`,
+    `🕒 Updated At: ${requiredUpdatedAt(item)}`,
     ''
   ];
   if (details) lines.push(`🔗 Full Details: ${details}`);
@@ -213,8 +228,11 @@ function sortNewestFirst(items) {
 
 async function main() {
   const state = ensureState(readJson(STATE_PATH, {}));
+  const seedOnly = String(process.env.SEED_ONLY || '').toLowerCase() === 'true';
   let sentCount = 0;
-  const maxMessages = Number(process.env.MAX_TELEGRAM_MESSAGES || 10);
+  let seededCount = 0;
+  let skippedDraftCount = 0;
+  const maxMessages = Number(process.env.MAX_TELEGRAM_MESSAGES || 3);
 
   for (const source of SOURCES) {
     const items = sortNewestFirst(loadWindowArray(source));
@@ -222,10 +240,30 @@ async function main() {
 
     for (const item of items) {
       if (!item || !item.id) continue;
+      const updatedAt = requiredUpdatedAt(item);
       const key = itemKey(source, item);
+
+      if (!updatedAt) {
+        skippedDraftCount += 1;
+        console.log(`[Telegram Updates] Skipped draft without updatedAt: ${key}`);
+        continue;
+      }
+
       const previous = state[source.key][key] || state[source.key][String(item.id)];
+
+      if (seedOnly) {
+        state[source.key][key] = makeStateEntry(source, item, 'seed');
+        seededCount += 1;
+        continue;
+      }
+
       if (!previous) planned.push({ item, key, mode: 'new' });
       else if (hasImportantUpdate(previous, source, item)) planned.push({ item, key, mode: 'update' });
+    }
+
+    if (seedOnly) {
+      console.log(`[Telegram Updates] ${source.label}: seeded current items, no Telegram messages sent.`);
+      continue;
     }
 
     console.log(`[Telegram Updates] ${source.label}: ${planned.length} new/update item(s).`);
@@ -238,19 +276,15 @@ async function main() {
       const message = formatMessage(source, entry.item, entry.mode);
       console.log(`[Telegram Updates] Sending ${entry.mode} ${entry.key}: ${entry.item.title}`);
       await sendTelegramMessage(message);
-      state[source.key][entry.key] = {
-        hash: snapshotHash(source, entry.item),
-        updatedAt: clean(entry.item.updatedAt, ''),
-        title: clean(entry.item.title, ''),
-        lastPostedAt: new Date().toISOString()
-      };
+      state[source.key][entry.key] = makeStateEntry(source, entry.item, entry.mode);
       sentCount += 1;
       await new Promise((resolve) => setTimeout(resolve, 800));
     }
   }
 
   writeJson(STATE_PATH, state);
-  console.log(`[Telegram Updates] Sent ${sentCount} message(s).`);
+  console.log(`[Telegram Updates] Seed mode: ${seedOnly ? 'ON' : 'OFF'}.`);
+  console.log(`[Telegram Updates] Sent ${sentCount} message(s). Seeded ${seededCount} item(s). Skipped ${skippedDraftCount} draft item(s) without updatedAt.`);
 }
 
 main().catch((error) => {
