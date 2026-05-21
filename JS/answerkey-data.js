@@ -5,7 +5,7 @@
 window.GovJobUpdatesAnswerKeys = [
     {
         "id": "2031",
-        "title": "UPSSSC Lekhpal Answer Key",
+        "title": "UPSSSC Lekhpal Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "State",
         "category": "Answer Key",
