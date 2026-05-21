@@ -11,7 +11,7 @@ window.GovJobUpdatesJobs = [
         "category": "Central Government",
         "year": "2026",
         "qualification": "Graduation (View Details for more Information)",
-        "totalPosts": "",
+        "totalPosts": "approx. 12256",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-22",
         "status": "active",
@@ -21,8 +21,8 @@ window.GovJobUpdatesJobs = [
             "Revenue",
             "Excise"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ssc.gov.in/",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
         "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
         "updatedAt": "2026-05-21"
     },
