@@ -4,13 +4,13 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "job-sheet-37",
+        "id": "2417",
         "title": "AFCAT 02/2026 Online Form",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "qualification": "",
+        "organization": "Indian Air Force",
+        "department": "IAF",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Bachelor Degree in Any Stream with Physics and Mathematics at 10+2 Level / B.E / B.Tech Course",
         "totalPosts": "",
         "startDate": "",
         "lastDate": "",
