@@ -1,0 +1,46 @@
+name: Telegram Auto Updates
+
+'on':
+  push:
+    branches:
+      - main
+    paths:
+      - 'JS/jobs-data.js'
+      - 'JS/admitcard-data.js'
+      - 'JS/answerkey-data.js'
+      - 'JS/results-data.js'
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  send-telegram-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Send Telegram updates
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          MAX_TELEGRAM_MESSAGES: 10
+        run: node scripts/send-telegram-updates.js
+
+      - name: Commit posted update state
+        run: |
+          if git diff --quiet -- data/telegram-posted.json; then
+            echo "No Telegram state changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/telegram-posted.json
+          git commit -m "Update Telegram posted state"
+          git push
