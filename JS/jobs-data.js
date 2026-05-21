@@ -5,24 +5,6 @@
 window.GovJobUpdatesJobs = [
     {
         "id": "2417",
-        "title": "AFCAT 02/2026 Online Form",
-        "organization": "Indian Air Force",
-        "department": "IAF",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Graduate (Check Details For More Details)",
-        "totalPosts": "",
-        "startDate": "2026-05-20",
-        "lastDate": "2026-06-19",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "2026-05-21"
-    },
-    {
-        "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
         "department": "CSIR",
@@ -40,6 +22,28 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
+        "detailPage": "",
+        "updatedAt": "2026-05-20"
+    },
+    {
+        "id": "2417",
+        "title": "AFCAT 02/2026 Online Form",
+        "organization": "Indian Air Force",
+        "department": "IAF",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Graduate (Check Details For More Details)",
+        "totalPosts": "",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-19",
+        "status": "active",
+        "tags": [
+            "Indian Air Force",
+            "VayuSena",
+            "IAF"
+        ],
+        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
+        "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
         "detailPage": "",
         "updatedAt": "2026-05-20"
     },
