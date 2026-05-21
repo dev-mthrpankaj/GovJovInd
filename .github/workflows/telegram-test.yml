@@ -1,0 +1,44 @@
+name: Telegram Bot Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_title:
+        description: "Test message title"
+        required: false
+        default: "GovJobUpdates Telegram Bot Connected"
+
+jobs:
+  send-test-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram test message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TEST_TITLE: ${{ github.event.inputs.test_title }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
+            echo "TELEGRAM_BOT_TOKEN secret is missing."
+            exit 1
+          fi
+
+          if [ -z "$TELEGRAM_CHANNEL_ID" ]; then
+            echo "TELEGRAM_CHANNEL_ID secret is missing."
+            exit 1
+          fi
+
+          MESSAGE="✅ ${TEST_TITLE}
+
+🚀 Auto update system is ready for GovJobUpdates.com
+
+📢 Channel: ${TELEGRAM_CHANNEL_ID}
+🌐 Website: https://govjobupdates.com
+
+This is a test message from GitHub Actions."
+
+          curl --fail --show-error --silent \
+            --request POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHANNEL_ID}" \
+            --data-urlencode "text=${MESSAGE}" \
+            --data-urlencode "disable_web_page_preview=true"
