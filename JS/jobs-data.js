@@ -15,10 +15,15 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-05-21",
         "lastDate": "2026-06-22",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "SSC",
+            "Income Tax",
+            "Revenue",
+            "Excise"
+        ],
         "applyLink": "",
         "officialNotification": "",
-        "detailPage": "",
+        "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
         "updatedAt": "2026-05-21"
     },
     {
