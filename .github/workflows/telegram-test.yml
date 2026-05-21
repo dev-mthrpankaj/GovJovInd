@@ -11,10 +11,27 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-        run: >-
-          curl --fail --show-error --silent
-          --request POST
-          "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
-          --data-urlencode "chat_id=${TELEGRAM_CHANNEL_ID}"
-          --data-urlencode "text=✅ GovJobUpdates Telegram Bot Connected%0A%0A🚀 Auto update system is ready for GovJobUpdates.com%0A%0A🌐 Website: https://govjobupdates.com%0A%0AThis is a test message from GitHub Actions."
-          --data-urlencode "disable_web_page_preview=true"
+        run: |
+          set +e
+          RESPONSE=$(curl --show-error --silent \
+            --request POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHANNEL_ID}" \
+            --data-urlencode "text=✅ GovJobUpdates Telegram Bot Connected
+
+🚀 Auto update system is ready for GovJobUpdates.com
+
+🌐 Website: https://govjobupdates.com
+
+This is a test message from GitHub Actions." \
+            --data-urlencode "disable_web_page_preview=true")
+          STATUS=$?
+          echo "Telegram API response:"
+          echo "$RESPONSE"
+          echo "$RESPONSE" | grep -q '"ok":true'
+          OK=$?
+          if [ "$STATUS" -ne 0 ] || [ "$OK" -ne 0 ]; then
+            echo "Telegram test failed. Check bot admin rights, channel id, and token."
+            exit 1
+          fi
+          echo "Telegram test message sent successfully."
