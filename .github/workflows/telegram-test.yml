@@ -1,6 +1,6 @@
 name: Telegram Bot Test
 
-on:
+'on':
   workflow_dispatch:
 
 jobs:
@@ -8,34 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Telegram test message
-        shell: bash
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-        run: |
-          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
-            echo "TELEGRAM_BOT_TOKEN secret is missing."
-            exit 1
-          fi
-
-          if [ -z "$TELEGRAM_CHANNEL_ID" ]; then
-            echo "TELEGRAM_CHANNEL_ID secret is missing."
-            exit 1
-          fi
-
-          MESSAGE=$(cat <<'EOF'
-✅ GovJobUpdates Telegram Bot Connected
-
-🚀 Auto update system is ready for GovJobUpdates.com
-
-🌐 Website: https://govjobupdates.com
-
-This is a test message from GitHub Actions.
-EOF
-)
-
-          curl --fail --show-error --silent \
-            --request POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${TELEGRAM_CHANNEL_ID}" \
-            --data-urlencode "text=${MESSAGE}" \
-            --data-urlencode "disable_web_page_preview=true"
+        run: >-
+          curl --fail --show-error --silent
+          --request POST
+          "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
+          --data-urlencode "chat_id=${TELEGRAM_CHANNEL_ID}"
+          --data-urlencode "text=✅ GovJobUpdates Telegram Bot Connected%0A%0A🚀 Auto update system is ready for GovJobUpdates.com%0A%0A🌐 Website: https://govjobupdates.com%0A%0AThis is a test message from GitHub Actions."
+          --data-urlencode "disable_web_page_preview=true"
