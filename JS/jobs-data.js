@@ -17,10 +17,11 @@ window.GovJobUpdatesJobs = [
         "status": "active",
         "tags": [
             "Banking",
-            "P"
+            "Punjab and Singh Bank",
+            "IBPS"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
+        "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
         "detailPage": "",
         "updatedAt": "2026-05-22"
     },
