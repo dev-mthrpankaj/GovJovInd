@@ -44,7 +44,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
-        "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
+        "detailPage": "../Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026.html",
         "updatedAt": "2026-05-20"
     },
     {
@@ -67,7 +67,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
-        "detailPage": "./Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
+        "detailPage": "../Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
         "updatedAt": "2026-05-20"
     },
     {
@@ -90,7 +90,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
-        "detailPage": "./Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
+        "detailPage": "../Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
         "updatedAt": "2026-05-20"
     },
     {
