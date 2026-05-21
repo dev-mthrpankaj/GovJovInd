@@ -6,9 +6,9 @@ window.GovJobUpdatesJobs = [
     {
         "id": "2419",
         "title": "UPSC NDA II Online Form 2026 for 394 Post",
-        "organization": "",
-        "department": "",
-        "category": "",
+        "organization": "Union Public Service Commission",
+        "department": "NDA",
+        "category": "Central Government",
         "year": "",
         "qualification": "",
         "totalPosts": "",
