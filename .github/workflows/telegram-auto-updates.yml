@@ -9,6 +9,11 @@ name: Telegram Auto Updates
       - 'JS/admitcard-data.js'
       - 'JS/answerkey-data.js'
       - 'JS/results-data.js'
+  workflow_run:
+    workflows:
+      - Sync listing data from Google Sheet
+    types:
+      - completed
   workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'
@@ -18,11 +23,13 @@ permissions:
 
 jobs:
   send-telegram-updates:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Send Telegram updates
