@@ -4,6 +4,23 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "2031",
+        "title": "UPSSSC Lekhpal Answer Key",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "releaseDate": "",
+        "objectionLastDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-21"
+    },
+    {
         "id": "answerkey-4032",
         "title": "Madhya Pradesh MP Police Subedar Stenographer & ASI Ministerial Answer Key 2025",
         "organization": "Madhya Pradesh Employees Selection Board",
