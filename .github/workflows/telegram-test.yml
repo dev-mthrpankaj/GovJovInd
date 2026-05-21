@@ -27,6 +27,18 @@ jobs:
               return;
             }
 
+            const meResponse = await fetch(`https://api.telegram.org/bot${token}/getMe`);
+            const meData = await meResponse.json().catch(() => ({}));
+            console.log('Token bot identity:', JSON.stringify(meData, null, 2));
+
+            if (!meResponse.ok || !meData.ok) {
+              core.setFailed(`Bot token test failed: ${meData.description || meResponse.statusText}`);
+              return;
+            }
+
+            core.notice(`Token belongs to bot: @${meData.result.username}`);
+            core.notice(`Target channel id: ${chatId}`);
+
             const message = [
               '✅ GovJobUpdates Telegram Bot Connected',
               '',
