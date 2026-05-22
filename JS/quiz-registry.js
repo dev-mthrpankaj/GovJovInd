@@ -8,19 +8,39 @@
     const loadedScripts = new Map();
     const validatedQuizzes = new Map();
 
-    const manifest = [
+    function createQuizSeries(prefix, count, subject, titleFactory, descriptionFactory, difficulty, pathFactory) {
+        return Array.from({ length: count }, (_, index) => {
+            const setNo = index + 1;
+            const id = `${prefix}-${setNo}`;
+            return quizMeta(
+                id,
+                subject,
+                titleFactory(setNo, id),
+                descriptionFactory(setNo, id),
+                difficulty,
+                pathFactory ? pathFactory(setNo, id) : `quiz-data/${subject.toLowerCase().replace(/\s+/g, "-")}/${id}.js`
+            );
+        });
+    }
 
+    function createHindiSeries(prefix, count, topic, difficulty = "Hard") {
+        return createQuizSeries(
+            prefix,
+            count,
+            "Hindi",
+            (setNo) => `${topic} अभ्यास सेट ${setNo}`,
+            () => `UP पुलिस कांस्टेबल, UPSI, UPPCS, SSC, Railway और अन्य प्रतियोगी परीक्षाओं के लिए 50 महत्वपूर्ण ${topic} प्रश्न, मजबूत विकल्पों और विस्तृत व्याख्या के साथ।`,
+            difficulty,
+            (setNo, id) => `quiz-data/hindi/${id}.js`
+        );
+    }
+
+    const manifest = [
         //Mathematics_Registry
-        quizMeta("math-percentage-abhinay-set-1", "Mathematics", "Percentage Practice Set 1", "50 hard percentage questions.", "Hard", "quiz-data/mathematics/math-percentage-abhinay-set-1.js"),
-quizMeta("math-percentage-abhinay-set-2", "Mathematics", "Percentage Practice Set 2", "50 hard percentage questions.", "Hard", "quiz-data/mathematics/math-percentage-abhinay-set-2.js"),
+        ...createQuizSeries("math-percentage-abhinay-set", 2, "Mathematics", (n) => `Percentage Practice Set ${n}`, () => "50 hard percentage questions.", "Hard", (n, id) => `quiz-data/mathematics/${id}.js`),
         quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
         quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
         quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
-
-
-
-
-
 
         //English_Registry
         quizMeta("english-active-passive-set-1", "English", "English Active Passive Practice Set 1", "50 SSC CGL, CHSL and CPO active-passive voice questions.", "Hard", "quiz-data/english/english-active-passive-set-1.js"),
@@ -28,215 +48,58 @@ quizMeta("math-percentage-abhinay-set-2", "Mathematics", "Percentage Practice Se
         quizMeta("english-vocabulary-set-1", "English", "English Vocabulary Practice Set 1", "50 vocabulary, antonym, synonym, spelling and usage questions.", "Moderate", "quiz-data/english/english-vocabulary-set-1.js"),
         quizMeta("english-mixed-set-1", "English", "English Mixed Practice Set 1", "50 mixed English grammar and vocabulary questions.", "Mixed", "quiz-data/english/english-mixed-set-1.js"),
         quizMeta("english-narration-set-1", "English", "English Narration Practice Set 1", "50 SSC CGL, CHSL and CPO direct-indirect speech narration questions.", "Previous Year", "quiz-data/english/english-narration-set-1.js"),
-        quizMeta("english-one-word-substitution-set-1", "English", "English One Word Substitution Practice Set 1", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-1.js"),
-quizMeta("english-one-word-substitution-set-2", "English", "English One Word Substitution Practice Set 2", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-2.js"),
-quizMeta("english-one-word-substitution-set-3", "English", "English One Word Substitution Practice Set 3", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-3.js"),
-quizMeta("english-one-word-substitution-set-4", "English", "English One Word Substitution Practice Set 4", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-4.js"),
-quizMeta("english-one-word-substitution-set-5", "English", "English One Word Substitution Practice Set 5", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-5.js"),
-quizMeta("english-one-word-substitution-set-6", "English", "English One Word Substitution Practice Set 6", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-6.js"),
-quizMeta("english-one-word-substitution-set-7", "English", "English One Word Substitution Practice Set 7", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-7.js"),
-quizMeta("english-one-word-substitution-set-8", "English", "English One Word Substitution Practice Set 8", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-8.js"),
-quizMeta("english-one-word-substitution-set-9", "English", "English One Word Substitution Practice Set 9", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-9.js"),
-quizMeta("english-one-word-substitution-set-10", "English", "English One Word Substitution Practice Set 10", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-10.js"),
-quizMeta("english-one-word-substitution-set-11", "English", "English One Word Substitution Practice Set 11", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-11.js"),
-quizMeta("english-one-word-substitution-set-12", "English", "English One Word Substitution Practice Set 12", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-12.js"),
-quizMeta("english-one-word-substitution-set-13", "English", "English One Word Substitution Practice Set 13", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-13.js"),
-quizMeta("english-one-word-substitution-set-14", "English", "English One Word Substitution Practice Set 14", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-14.js"),
-quizMeta("english-one-word-substitution-set-15", "English", "English One Word Substitution Practice Set 15", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-15.js"),
-quizMeta("english-one-word-substitution-set-16", "English", "English One Word Substitution Practice Set 16", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-16.js"),
-quizMeta("english-one-word-substitution-set-17", "English", "English One Word Substitution Practice Set 17", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-17.js"),
-quizMeta("english-one-word-substitution-set-18", "English", "English One Word Substitution Practice Set 18", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-18.js"),
-quizMeta("english-one-word-substitution-set-19", "English", "English One Word Substitution Practice Set 19", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-19.js"),
-quizMeta("english-one-word-substitution-set-20", "English", "English One Word Substitution Practice Set 20", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-20.js"),
-quizMeta("english-one-word-substitution-set-21", "English", "English One Word Substitution Practice Set 21", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-21.js"),
-quizMeta("english-one-word-substitution-set-22", "English", "English One Word Substitution Practice Set 22", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-22.js"),
-quizMeta("english-one-word-substitution-set-23", "English", "English One Word Substitution Practice Set 23", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-23.js"),
-quizMeta("english-one-word-substitution-set-24", "English", "English One Word Substitution Practice Set 24", "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", "quiz-data/english/english-one-word-substitution-set-24.js"),
-quizMeta("english-detecting-errors-set-1", "English", "English Detecting Errors Practice Set 1", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-1.js"),
-quizMeta("english-detecting-errors-set-2", "English", "English Detecting Errors Practice Set 2", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-2.js"),
-quizMeta("english-detecting-errors-set-3", "English", "English Detecting Errors Practice Set 3", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-3.js"),
-quizMeta("english-detecting-errors-set-4", "English", "English Detecting Errors Practice Set 4", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-4.js"),
-quizMeta("english-detecting-errors-set-5", "English", "English Detecting Errors Practice Set 5", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-5.js"),
-quizMeta("english-detecting-errors-set-6", "English", "English Detecting Errors Practice Set 6", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-6.js"),
-quizMeta("english-detecting-errors-set-7", "English", "English Detecting Errors Practice Set 7", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-7.js"),
-quizMeta("english-detecting-errors-set-8", "English", "English Detecting Errors Practice Set 8", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-8.js"),
-quizMeta("english-detecting-errors-set-9", "English", "English Detecting Errors Practice Set 9", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-9.js"),
-quizMeta("english-detecting-errors-set-10", "English", "English Detecting Errors Practice Set 10", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-10.js"),
-quizMeta("english-detecting-errors-set-11", "English", "English Detecting Errors Practice Set 11", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-11.js"),
-quizMeta("english-detecting-errors-set-12", "English", "English Detecting Errors Practice Set 12", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-12.js"),
-quizMeta("english-detecting-errors-set-13", "English", "English Detecting Errors Practice Set 13", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-13.js"),
-quizMeta("english-detecting-errors-set-14", "English", "English Detecting Errors Practice Set 14", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-14.js"),
-quizMeta("english-detecting-errors-set-15", "English", "English Detecting Errors Practice Set 15", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-15.js"),
-quizMeta("english-detecting-errors-set-16", "English", "English Detecting Errors Practice Set 16", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-16.js"),
-quizMeta("english-detecting-errors-set-17", "English", "English Detecting Errors Practice Set 17", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-17.js"),
-quizMeta("english-detecting-errors-set-18", "English", "English Detecting Errors Practice Set 18", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-18.js"),
-quizMeta("english-detecting-errors-set-19", "English", "English Detecting Errors Practice Set 19", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-19.js"),
-quizMeta("english-detecting-errors-set-20", "English", "English Detecting Errors Practice Set 20", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-20.js"),
-quizMeta("english-detecting-errors-set-21", "English", "English Detecting Errors Practice Set 21", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-21.js"),
-quizMeta("english-detecting-errors-set-22", "English", "English Detecting Errors Practice Set 22", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-22.js"),
-quizMeta("english-detecting-errors-set-23", "English", "English Detecting Errors Practice Set 23", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-23.js"),
-quizMeta("english-detecting-errors-set-24", "English", "English Detecting Errors Practice Set 24", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-24.js"),
-quizMeta("english-detecting-errors-set-25", "English", "English Detecting Errors Practice Set 25", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-25.js"),
-quizMeta("english-detecting-errors-set-26", "English", "English Detecting Errors Practice Set 26", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-26.js"),
-quizMeta("english-detecting-errors-set-27", "English", "English Detecting Errors Practice Set 27", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-27.js"),
-quizMeta("english-detecting-errors-set-28", "English", "English Detecting Errors Practice Set 28", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-28.js"),
-quizMeta("english-detecting-errors-set-29", "English", "English Detecting Errors Practice Set 29", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-29.js"),
-quizMeta("english-detecting-errors-set-30", "English", "English Detecting Errors Practice Set 30", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-30.js"),
-quizMeta("english-detecting-errors-set-31", "English", "English Detecting Errors Practice Set 31", "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", "quiz-data/english/english-detecting-errors-set-31.js"),
-
+        ...createQuizSeries("english-one-word-substitution-set", 24, "English", (n) => `English One Word Substitution Practice Set ${n}`, () => "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", (n, id) => `quiz-data/english/${id}.js`),
+        ...createQuizSeries("english-detecting-errors-set", 31, "English", (n) => `English Detecting Errors Practice Set ${n}`, () => "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", (n, id) => `quiz-data/english/${id}.js`),
 
         //Hindi_Registry
-
-        quizMeta("hindi-mixed-grammar-gk-set-1", "Hindi", "Hindi Mixed Grammar GK Practice Set 1", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-1.js"),
-quizMeta("hindi-mixed-grammar-gk-set-2", "Hindi", "Hindi Mixed Grammar GK Practice Set 2", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-2.js"),
-quizMeta("hindi-mixed-grammar-gk-set-3", "Hindi", "Hindi Mixed Grammar GK Practice Set 3", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-3.js"),
-quizMeta("hindi-mixed-grammar-gk-set-4", "Hindi", "Hindi Mixed Grammar GK Practice Set 4", "50 tough-level mixed Hindi Grammar GK MCQs for SSC, UPSI, UPPCS, Police and other competitive exams with professional explanations.", "Hard", "quiz-data/hindi/hindi-mixed-grammar-gk-set-4.js"),
-
-
-        quizMeta(
-    "hindi-varnmala-practice-set-1",
-    "Hindi",
-    "Hindi Varnmala Practice Set 1",
-    "50 tough-level Hindi Varnmala questions for UPSI, UPPCS, PCS and other competitive exams.",
-    "Hard",
-    "quiz-data/hindi/hindi-varnmala-practice-set-1.js"
-),
-
-quizMeta(
-    "hindi-varnmala-practice-set-2",
-    "Hindi",
-    "Hindi Varnmala Practice Set 2",
-    "50 tough-level Hindi Varnmala questions for UPSI, UPPCS, PCS and other competitive exams.",
-    "Hard",
-    "quiz-data/hindi/hindi-varnmala-practice-set-2.js"
-),
-
-quizMeta(
-    "hindi-varnmala-practice-set-3",
-    "Hindi",
-    "Hindi Varnmala Practice Set 3",
-    "50 tough-level Hindi Varnmala questions for UPSI, UPPCS, PCS and other competitive exams.",
-    "Hard",
-    "quiz-data/hindi/hindi-varnmala-practice-set-3.js"
-),
-        quizMeta("hindi-muhavare-upsi-pcs-set-1", "Hindi", "Hindi Muhavare UPSI PCS Practice Set 1", "50 tough-level Hindi Muhavare questions for UPSI, UPPCS and PCS exams.", "Hard", "quiz-data/hindi/hindi-muhavare-upsi-pcs-set-1.js"),
-        quizMeta("hindi-alankar-upsi-set-1", "Hindi", "Hindi Alankar UPSI Practice Set 1", "50 most important Hindi Alankar questions for UPSI and other police exams.", "Hard", "quiz-data/hindi/hindi-alankar-upsi-set-1.js"),
-        quizMeta("hindi-vyakaran-set-1", "Hindi", "Hindi Vyakaran Practice Set 1", "50 Hindi grammar questions for government exams.", "Mixed", "quiz-data/hindi/hindi-vyakaran-set-1.js"),
-        quizMeta("hindi-mixed-set-1", "Hindi", "Hindi Mixed Practice Set 1", "50 mixed Hindi language questions.", "Mixed", "quiz-data/hindi/hindi-mixed-set-1.js"),
-        quizMeta("hindi-bharatiya-bhashayen-up-police-set-1", "Hindi", "Hindi Hindi and Indian Languages UP Police Set 1", "50 very important हिन्दी और अन्य भारतीय भाषायें questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-bharatiya-bhashayen-up-police-set-1.js"),
-quizMeta("hindi-bharatiya-bhashayen-up-police-set-2", "Hindi", "Hindi Hindi and Indian Languages UP Police Set 2", "50 very important हिन्दी और अन्य भारतीय भाषायें questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-bharatiya-bhashayen-up-police-set-2.js"),
-quizMeta("hindi-varnmala-up-police-set-1", "Hindi", "Hindi Hindi Varnmala UP Police Set 1", "50 very important हिन्दी वर्णमाला questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-varnmala-up-police-set-1.js"),
-quizMeta("hindi-varnmala-up-police-set-2", "Hindi", "Hindi Hindi Varnmala UP Police Set 2", "50 very important हिन्दी वर्णमाला questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-varnmala-up-police-set-2.js"),
-quizMeta("hindi-varnmala-up-police-set-3", "Hindi", "Hindi Hindi Varnmala UP Police Set 3", "50 very important हिन्दी वर्णमाला questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-varnmala-up-police-set-3.js"),
-quizMeta("hindi-tadbhav-up-police-set-1", "Hindi", "Hindi Tadbhav UP Police Set 1", "50 very important तद्भव questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-tadbhav-up-police-set-1.js"),
-quizMeta("hindi-tadbhav-up-police-set-2", "Hindi", "Hindi Tadbhav UP Police Set 2", "50 very important तद्भव questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-tadbhav-up-police-set-2.js"),
-quizMeta("hindi-tadbhav-up-police-set-3", "Hindi", "Hindi Tadbhav UP Police Set 3", "50 very important तद्भव questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-tadbhav-up-police-set-3.js"),
-quizMeta("hindi-tatsam-up-police-set-1", "Hindi", "Hindi Tatsam UP Police Set 1", "50 very important तत्सम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-tatsam-up-police-set-1.js"),
-quizMeta("hindi-tatsam-up-police-set-2", "Hindi", "Hindi Tatsam UP Police Set 2", "50 very important तत्सम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-tatsam-up-police-set-2.js"),
-quizMeta("hindi-tatsam-up-police-set-3", "Hindi", "Hindi Tatsam UP Police Set 3", "50 very important तत्सम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-tatsam-up-police-set-3.js"),
-quizMeta("hindi-paryayvachi-up-police-set-1", "Hindi", "Hindi Paryayvachi UP Police Set 1", "50 very important पर्यायवाची questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-paryayvachi-up-police-set-1.js"),
-quizMeta("hindi-paryayvachi-up-police-set-2", "Hindi", "Hindi Paryayvachi UP Police Set 2", "50 very important पर्यायवाची questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-paryayvachi-up-police-set-2.js"),
-quizMeta("hindi-paryayvachi-up-police-set-3", "Hindi", "Hindi Paryayvachi UP Police Set 3", "50 very important पर्यायवाची questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-paryayvachi-up-police-set-3.js"),
-quizMeta("hindi-paryayvachi-up-police-set-4", "Hindi", "Hindi Paryayvachi UP Police Set 4", "50 very important पर्यायवाची questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-paryayvachi-up-police-set-4.js"),
-quizMeta("hindi-vilom-up-police-set-1", "Hindi", "Hindi Vilom UP Police Set 1", "50 very important विलोम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vilom-up-police-set-1.js"),
-quizMeta("hindi-vilom-up-police-set-2", "Hindi", "Hindi Vilom UP Police Set 2", "50 very important विलोम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vilom-up-police-set-2.js"),
-quizMeta("hindi-vilom-up-police-set-3", "Hindi", "Hindi Vilom UP Police Set 3", "50 very important विलोम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vilom-up-police-set-3.js"),
-quizMeta("hindi-vilom-up-police-set-4", "Hindi", "Hindi Vilom UP Police Set 4", "50 very important विलोम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vilom-up-police-set-4.js"),
-quizMeta("hindi-anekarthak-up-police-set-1", "Hindi", "Hindi Anekarthak UP Police Set 1", "50 very important अनेकार्थक questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-anekarthak-up-police-set-1.js"),
-quizMeta("hindi-anekarthak-up-police-set-2", "Hindi", "Hindi Anekarthak UP Police Set 2", "50 very important अनेकार्थक questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-anekarthak-up-police-set-2.js"),
-quizMeta("hindi-one-word-up-police-set-1", "Hindi", "Hindi One Word Substitution UP Police Set 1", "50 very important वाक्यांशों के स्थान पर एक शब्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-one-word-up-police-set-1.js"),
-quizMeta("hindi-one-word-up-police-set-2", "Hindi", "Hindi One Word Substitution UP Police Set 2", "50 very important वाक्यांशों के स्थान पर एक शब्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-one-word-up-police-set-2.js"),
-quizMeta("hindi-one-word-up-police-set-3", "Hindi", "Hindi One Word Substitution UP Police Set 3", "50 very important वाक्यांशों के स्थान पर एक शब्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-one-word-up-police-set-3.js"),
-quizMeta("hindi-samroopi-bhinnarthak-up-police-set-1", "Hindi", "Hindi Homophones UP Police Set 1", "50 very important समरूपी भिन्नार्थक शब्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-samroopi-bhinnarthak-up-police-set-1.js"),
-quizMeta("hindi-samroopi-bhinnarthak-up-police-set-2", "Hindi", "Hindi Homophones UP Police Set 2", "50 very important समरूपी भिन्नार्थक शब्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-samroopi-bhinnarthak-up-police-set-2.js"),
-quizMeta("hindi-vakya-shuddhi-up-police-set-1", "Hindi", "Hindi Sentence Correction UP Police Set 1", "50 very important अशुद्ध वाक्यों को शुद्ध करना questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vakya-shuddhi-up-police-set-1.js"),
-quizMeta("hindi-vakya-shuddhi-up-police-set-2", "Hindi", "Hindi Sentence Correction UP Police Set 2", "50 very important अशुद्ध वाक्यों को शुद्ध करना questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vakya-shuddhi-up-police-set-2.js"),
-quizMeta("hindi-vakya-shuddhi-up-police-set-3", "Hindi", "Hindi Sentence Correction UP Police Set 3", "50 very important अशुद्ध वाक्यों को शुद्ध करना questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vakya-shuddhi-up-police-set-3.js"),
-quizMeta("hindi-vakya-shuddhi-up-police-set-4", "Hindi", "Hindi Sentence Correction UP Police Set 4", "50 very important अशुद्ध वाक्यों को शुद्ध करना questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vakya-shuddhi-up-police-set-4.js"),
-quizMeta("hindi-ling-up-police-set-1", "Hindi", "Hindi Gender UP Police Set 1", "50 very important लिंग questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-ling-up-police-set-1.js"),
-quizMeta("hindi-ling-up-police-set-2", "Hindi", "Hindi Gender UP Police Set 2", "50 very important लिंग questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-ling-up-police-set-2.js"),
-quizMeta("hindi-vachan-up-police-set-1", "Hindi", "Hindi Number UP Police Set 1", "50 very important वचन questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vachan-up-police-set-1.js"),
-quizMeta("hindi-vachan-up-police-set-2", "Hindi", "Hindi Number UP Police Set 2", "50 very important वचन questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vachan-up-police-set-2.js"),
-quizMeta("hindi-karak-up-police-set-1", "Hindi", "Hindi Karak UP Police Set 1", "50 very important कारक questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-karak-up-police-set-1.js"),
-quizMeta("hindi-karak-up-police-set-2", "Hindi", "Hindi Karak UP Police Set 2", "50 very important कारक questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-karak-up-police-set-2.js"),
-quizMeta("hindi-sarvanam-up-police-set-1", "Hindi", "Hindi Pronoun UP Police Set 1", "50 very important सर्वनाम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-sarvanam-up-police-set-1.js"),
-quizMeta("hindi-sarvanam-up-police-set-2", "Hindi", "Hindi Pronoun UP Police Set 2", "50 very important सर्वनाम questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-sarvanam-up-police-set-2.js"),
-quizMeta("hindi-visheshan-up-police-set-1", "Hindi", "Hindi Adjective UP Police Set 1", "50 very important विशेषण questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-visheshan-up-police-set-1.js"),
-quizMeta("hindi-visheshan-up-police-set-2", "Hindi", "Hindi Adjective UP Police Set 2", "50 very important विशेषण questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-visheshan-up-police-set-2.js"),
-quizMeta("hindi-kriya-kaal-up-police-set-1", "Hindi", "Hindi Verb Tense UP Police Set 1", "50 very important क्रिया काल questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-kriya-kaal-up-police-set-1.js"),
-quizMeta("hindi-kriya-kaal-up-police-set-2", "Hindi", "Hindi Verb Tense UP Police Set 2", "50 very important क्रिया काल questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-kriya-kaal-up-police-set-2.js"),
-quizMeta("hindi-kriya-kaal-up-police-set-3", "Hindi", "Hindi Verb Tense UP Police Set 3", "50 very important क्रिया काल questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-kriya-kaal-up-police-set-3.js"),
-quizMeta("hindi-vachya-up-police-set-1", "Hindi", "Hindi Voice UP Police Set 1", "50 very important वाच्य questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vachya-up-police-set-1.js"),
-quizMeta("hindi-vachya-up-police-set-2", "Hindi", "Hindi Voice UP Police Set 2", "50 very important वाच्य questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vachya-up-police-set-2.js"),
-quizMeta("hindi-avyay-up-police-set-1", "Hindi", "Hindi Indeclinables UP Police Set 1", "50 very important अव्यय questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-avyay-up-police-set-1.js"),
-quizMeta("hindi-avyay-up-police-set-2", "Hindi", "Hindi Indeclinables UP Police Set 2", "50 very important अव्यय questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-avyay-up-police-set-2.js"),
-quizMeta("hindi-upsarg-up-police-set-1", "Hindi", "Hindi Prefix UP Police Set 1", "50 very important उपसर्ग questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-upsarg-up-police-set-1.js"),
-quizMeta("hindi-upsarg-up-police-set-2", "Hindi", "Hindi Prefix UP Police Set 2", "50 very important उपसर्ग questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-upsarg-up-police-set-2.js"),
-quizMeta("hindi-upsarg-up-police-set-3", "Hindi", "Hindi Prefix UP Police Set 3", "50 very important उपसर्ग questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-upsarg-up-police-set-3.js"),
-quizMeta("hindi-pratyay-up-police-set-1", "Hindi", "Hindi Suffix UP Police Set 1", "50 very important प्रत्यय questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-pratyay-up-police-set-1.js"),
-quizMeta("hindi-pratyay-up-police-set-2", "Hindi", "Hindi Suffix UP Police Set 2", "50 very important प्रत्यय questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-pratyay-up-police-set-2.js"),
-quizMeta("hindi-pratyay-up-police-set-3", "Hindi", "Hindi Suffix UP Police Set 3", "50 very important प्रत्यय questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-pratyay-up-police-set-3.js"),
-quizMeta("hindi-sandhi-up-police-set-1", "Hindi", "Hindi Sandhi UP Police Set 1", "50 very important सन्धि questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-sandhi-up-police-set-1.js"),
-quizMeta("hindi-sandhi-up-police-set-2", "Hindi", "Hindi Sandhi UP Police Set 2", "50 very important सन्धि questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-sandhi-up-police-set-2.js"),
-quizMeta("hindi-sandhi-up-police-set-3", "Hindi", "Hindi Sandhi UP Police Set 3", "50 very important सन्धि questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-sandhi-up-police-set-3.js"),
-quizMeta("hindi-sandhi-up-police-set-4", "Hindi", "Hindi Sandhi UP Police Set 4", "50 very important सन्धि questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-sandhi-up-police-set-4.js"),
-quizMeta("hindi-samas-up-police-set-1", "Hindi", "Hindi Samas UP Police Set 1", "50 very important समास questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-samas-up-police-set-1.js"),
-quizMeta("hindi-samas-up-police-set-2", "Hindi", "Hindi Samas UP Police Set 2", "50 very important समास questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-samas-up-police-set-2.js"),
-quizMeta("hindi-samas-up-police-set-3", "Hindi", "Hindi Samas UP Police Set 3", "50 very important समास questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-samas-up-police-set-3.js"),
-quizMeta("hindi-samas-up-police-set-4", "Hindi", "Hindi Samas UP Police Set 4", "50 very important समास questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-samas-up-police-set-4.js"),
-quizMeta("hindi-viram-chinh-up-police-set-1", "Hindi", "Hindi Punctuation UP Police Set 1", "50 very important विराम-चिह्न questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-viram-chinh-up-police-set-1.js"),
-quizMeta("hindi-viram-chinh-up-police-set-2", "Hindi", "Hindi Punctuation UP Police Set 2", "50 very important विराम-चिह्न questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-viram-chinh-up-police-set-2.js"),
-quizMeta("hindi-muhavare-lokoktiyan-up-police-set-1", "Hindi", "Hindi Idioms and Proverbs UP Police Set 1", "50 very important मुहावरे एवं लोकोक्तियां questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-muhavare-lokoktiyan-up-police-set-1.js"),
-quizMeta("hindi-muhavare-lokoktiyan-up-police-set-2", "Hindi", "Hindi Idioms and Proverbs UP Police Set 2", "50 very important मुहावरे एवं लोकोक्तियां questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-muhavare-lokoktiyan-up-police-set-2.js"),
-quizMeta("hindi-muhavare-lokoktiyan-up-police-set-3", "Hindi", "Hindi Idioms and Proverbs UP Police Set 3", "50 very important मुहावरे एवं लोकोक्तियां questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-muhavare-lokoktiyan-up-police-set-3.js"),
-quizMeta("hindi-muhavare-lokoktiyan-up-police-set-4", "Hindi", "Hindi Idioms and Proverbs UP Police Set 4", "50 very important मुहावरे एवं लोकोक्तियां questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-muhavare-lokoktiyan-up-police-set-4.js"),
-quizMeta("hindi-ras-up-police-set-1", "Hindi", "Hindi Ras UP Police Set 1", "50 very important रस questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-ras-up-police-set-1.js"),
-quizMeta("hindi-ras-up-police-set-2", "Hindi", "Hindi Ras UP Police Set 2", "50 very important रस questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-ras-up-police-set-2.js"),
-quizMeta("hindi-chhand-up-police-set-1", "Hindi", "Hindi Chhand UP Police Set 1", "50 very important छन्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-chhand-up-police-set-1.js"),
-quizMeta("hindi-chhand-up-police-set-2", "Hindi", "Hindi Chhand UP Police Set 2", "50 very important छन्द questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-chhand-up-police-set-2.js"),
-quizMeta("hindi-alankar-up-police-set-1", "Hindi", "Hindi Alankar UP Police Set 1", "50 very important अलंकार questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-alankar-up-police-set-1.js"),
-quizMeta("hindi-alankar-up-police-set-2", "Hindi", "Hindi Alankar UP Police Set 2", "50 very important अलंकार questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-alankar-up-police-set-2.js"),
-quizMeta("hindi-alankar-up-police-set-3", "Hindi", "Hindi Alankar UP Police Set 3", "50 very important अलंकार questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-alankar-up-police-set-3.js"),
-quizMeta("hindi-apathit-bodh-up-police-set-1", "Hindi", "Hindi Reading Comprehension UP Police Set 1", "50 very important अपठित बोध questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-apathit-bodh-up-police-set-1.js"),
-quizMeta("hindi-apathit-bodh-up-police-set-2", "Hindi", "Hindi Reading Comprehension UP Police Set 2", "50 very important अपठित बोध questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-apathit-bodh-up-police-set-2.js"),
-quizMeta("hindi-apathit-bodh-up-police-set-3", "Hindi", "Hindi Reading Comprehension UP Police Set 3", "50 very important अपठित बोध questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-apathit-bodh-up-police-set-3.js"),
-quizMeta("hindi-prasiddh-kavi-up-police-set-1", "Hindi", "Hindi Famous Poets UP Police Set 1", "50 very important प्रसिद्ध कवि questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-prasiddh-kavi-up-police-set-1.js"),
-quizMeta("hindi-prasiddh-kavi-up-police-set-2", "Hindi", "Hindi Famous Poets UP Police Set 2", "50 very important प्रसिद्ध कवि questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-prasiddh-kavi-up-police-set-2.js"),
-quizMeta("hindi-lekhak-rachnaye-up-police-set-1", "Hindi", "Hindi Authors and Works UP Police Set 1", "50 very important लेखक एवं उनकी प्रसिद्ध रचनायें questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-lekhak-rachnaye-up-police-set-1.js"),
-quizMeta("hindi-lekhak-rachnaye-up-police-set-2", "Hindi", "Hindi Authors and Works UP Police Set 2", "50 very important लेखक एवं उनकी प्रसिद्ध रचनायें questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-lekhak-rachnaye-up-police-set-2.js"),
-quizMeta("hindi-lekhak-rachnaye-up-police-set-3", "Hindi", "Hindi Authors and Works UP Police Set 3", "50 very important लेखक एवं उनकी प्रसिद्ध रचनायें questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-lekhak-rachnaye-up-police-set-3.js"),
-quizMeta("hindi-bhasha-puraskar-up-police-set-1", "Hindi", "Hindi Hindi Awards UP Police Set 1", "50 very important हिन्दी भाषा में पुरस्कार questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-bhasha-puraskar-up-police-set-1.js"),
-quizMeta("hindi-bhasha-puraskar-up-police-set-2", "Hindi", "Hindi Hindi Awards UP Police Set 2", "50 very important हिन्दी भाषा में पुरस्कार questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-bhasha-puraskar-up-police-set-2.js"),
-quizMeta("hindi-vividh-up-police-set-1", "Hindi", "Hindi Miscellaneous UP Police Set 1", "50 very important विविध questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vividh-up-police-set-1.js"),
-quizMeta("hindi-vividh-up-police-set-2", "Hindi", "Hindi Miscellaneous UP Police Set 2", "50 very important विविध questions for UP Police Constable, UPPRPB, SSC, Railway and other competitive exams with close options and professional explanations.", "Hard", "quiz-data/hindi/hindi-vividh-up-police-set-2.js"),
-
-
-
+        ...createHindiSeries("hindi-mixed-grammar-gk-set", 4, "मिश्रित हिंदी व्याकरण व सामान्य ज्ञान"),
+        ...createHindiSeries("hindi-varnmala-practice-set", 3, "हिंदी वर्णमाला"),
+        ...createHindiSeries("hindi-muhavare-upsi-pcs-set", 1, "मुहावरे"),
+        ...createHindiSeries("hindi-alankar-upsi-set", 1, "अलंकार"),
+        ...createHindiSeries("hindi-vyakaran-set", 1, "हिंदी व्याकरण", "Mixed"),
+        ...createHindiSeries("hindi-mixed-set", 1, "मिश्रित हिंदी अभ्यास", "Mixed"),
+        ...createHindiSeries("hindi-bharatiya-bhashayen-up-police-set", 2, "हिंदी और अन्य भारतीय भाषाएं"),
+        ...createHindiSeries("hindi-varnmala-up-police-set", 3, "हिंदी वर्णमाला"),
+        ...createHindiSeries("hindi-tadbhav-up-police-set", 3, "तद्भव शब्द"),
+        ...createHindiSeries("hindi-tatsam-up-police-set", 3, "तत्सम शब्द"),
+        ...createHindiSeries("hindi-paryayvachi-up-police-set", 4, "पर्यायवाची शब्द"),
+        ...createHindiSeries("hindi-vilom-up-police-set", 4, "विलोम शब्द"),
+        ...createHindiSeries("hindi-anekarthak-up-police-set", 2, "अनेकार्थक शब्द"),
+        ...createHindiSeries("hindi-one-word-up-police-set", 3, "वाक्यांश के लिए एक शब्द"),
+        ...createHindiSeries("hindi-samroopi-bhinnarthak-up-police-set", 2, "समरूपी भिन्नार्थक शब्द"),
+        ...createHindiSeries("hindi-vakya-shuddhi-up-police-set", 4, "वाक्य शुद्धि"),
+        ...createHindiSeries("hindi-ling-up-police-set", 2, "लिंग"),
+        ...createHindiSeries("hindi-vachan-up-police-set", 2, "वचन"),
+        ...createHindiSeries("hindi-karak-up-police-set", 2, "कारक"),
+        ...createHindiSeries("hindi-sarvanam-up-police-set", 2, "सर्वनाम"),
+        ...createHindiSeries("hindi-visheshan-up-police-set", 2, "विशेषण"),
+        ...createHindiSeries("hindi-kriya-kaal-up-police-set", 3, "क्रिया काल"),
+        ...createHindiSeries("hindi-vachya-up-police-set", 2, "वाच्य"),
+        ...createHindiSeries("hindi-avyay-up-police-set", 2, "अव्यय"),
+        ...createHindiSeries("hindi-upsarg-up-police-set", 3, "उपसर्ग"),
+        ...createHindiSeries("hindi-pratyay-up-police-set", 3, "प्रत्यय"),
+        ...createHindiSeries("hindi-sandhi-up-police-set", 4, "संधि"),
+        ...createHindiSeries("hindi-samas-up-police-set", 4, "समास"),
+        ...createHindiSeries("hindi-viram-chinh-up-police-set", 2, "विराम चिह्न"),
+        ...createHindiSeries("hindi-muhavare-lokoktiyan-up-police-set", 4, "मुहावरे एवं लोकोक्तियां"),
+        ...createHindiSeries("hindi-ras-up-police-set", 2, "रस"),
+        ...createHindiSeries("hindi-chhand-up-police-set", 2, "छंद"),
+        ...createHindiSeries("hindi-alankar-up-police-set", 3, "अलंकार"),
+        ...createHindiSeries("hindi-apathit-bodh-up-police-set", 3, "अपठित बोध"),
+        ...createHindiSeries("hindi-prasiddh-kavi-up-police-set", 2, "प्रसिद्ध कवि"),
+        ...createHindiSeries("hindi-lekhak-rachnaye-up-police-set", 3, "लेखक एवं प्रमुख रचनाएं"),
+        ...createHindiSeries("hindi-bhasha-puraskar-up-police-set", 2, "हिंदी भाषा में पुरस्कार"),
+        ...createHindiSeries("hindi-vividh-up-police-set", 2, "विविध हिंदी प्रश्न"),
 
         //Reasoning_Registry
-        quizMeta("reasoning-mirror-image-very-hard-set-1", "Reasoning", "Reasoning Mirror Image Very Hard Practice Set 1", "50 very hard Mirror Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-mirror-image-very-hard-set-1.js"),
-        quizMeta("reasoning-mirror-image-very-hard-set-2", "Reasoning", "Reasoning Mirror Image Very Hard Practice Set 2", "50 very hard Mirror Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-mirror-image-very-hard-set-2.js"),
-        quizMeta("reasoning-water-image-very-hard-set-1", "Reasoning", "Reasoning Water Image Very Hard Practice Set 1", "50 very hard Water Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-water-image-very-hard-set-1.js"),
-        quizMeta("reasoning-water-image-very-hard-set-2", "Reasoning", "Reasoning Water Image Very Hard Practice Set 2", "50 very hard Water Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-water-image-very-hard-set-2.js"),
-        quizMeta("reasoning-clock-very-hard-set-1", "Reasoning", "Reasoning Clock Very Hard Practice Set 1", "50 very hard Clock reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-clock-very-hard-set-1.js"),
-        quizMeta("reasoning-clock-very-hard-set-2", "Reasoning", "Reasoning Clock Very Hard Practice Set 2", "50 very hard Clock reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-clock-very-hard-set-2.js"),
-        quizMeta("reasoning-calendar-very-hard-set-1", "Reasoning", "Reasoning Calendar Very Hard Practice Set 1", "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-calendar-very-hard-set-1.js"),
-        quizMeta("reasoning-calendar-very-hard-set-2", "Reasoning", "Reasoning Calendar Very Hard Practice Set 2", "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", "quiz-data/reasoning/reasoning-calendar-very-hard-set-2.js"),
-
-
-
-
-
-
-
-
+        ...createQuizSeries("reasoning-mirror-image-very-hard-set", 2, "Reasoning", (n) => `Reasoning Mirror Image Very Hard Practice Set ${n}`, () => "50 very hard Mirror Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
+        ...createQuizSeries("reasoning-water-image-very-hard-set", 2, "Reasoning", (n) => `Reasoning Water Image Very Hard Practice Set ${n}`, () => "50 very hard Water Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
+        ...createQuizSeries("reasoning-clock-very-hard-set", 2, "Reasoning", (n) => `Reasoning Clock Very Hard Practice Set ${n}`, () => "50 very hard Clock reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
+        ...createQuizSeries("reasoning-calendar-very-hard-set", 2, "Reasoning", (n) => `Reasoning Calendar Very Hard Practice Set ${n}`, () => "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
 
         //General_Awareness_Registry
         quizMeta("ga-set-1", "General Awareness", "General Awareness Static GK Set 1", "50 polity, history, geography, economy and science questions.", "Mixed", "quiz-data/general-awareness/ga-set-1.js"),
         quizMeta("ga-current-affairs-set-1", "General Awareness", "General Awareness Current Affairs Set 1", "50 current and static awareness questions for competitive exams.", "Moderate", "quiz-data/general-awareness/ga-current-affairs-set-1.js"),
-
-
-
 
         //Computer_Registry
         quizMeta("computer-set-1", "Computer", "Computer Basics Practice Set 1", "50 computer basics, hardware, software and internet questions.", "Mixed", "quiz-data/computer/computer-set-1.js"),
@@ -286,7 +149,7 @@ quizMeta("hindi-vividh-up-police-set-2", "Hindi", "Hindi Miscellaneous UP Police
 
         text = text.charAt(0).toUpperCase() + text.slice(1);
 
-        if (!/[?.!:'")\]]$/.test(text)) {
+        if (!/[?.!:')\]]$/.test(text)) {
             text += ".";
         }
 
