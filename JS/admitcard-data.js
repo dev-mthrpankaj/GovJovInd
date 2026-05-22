@@ -4,6 +4,21 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-36",
+        "title": "UP B.Ed Admit Card 2026",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-22"
+    },
+    {
         "id": "admit-2001",
         "title": "SSC GD Constable Admit Card 2026",
         "organization": "Staff Selection Commission",
