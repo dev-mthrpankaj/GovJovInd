@@ -24,8 +24,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
         "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
         "updatedAt": "2026-05-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2421",
