@@ -24,7 +24,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://ssc.gov.in/",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
         "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
-        "updatedAt": "2026-05-22"
+        "updatedAt": "2026-05-22",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2422",
@@ -46,7 +48,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
         "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
         "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
-        "updatedAt": "2026-05-22"
+        "updatedAt": "2026-05-22",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "2417",
@@ -68,7 +72,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
         "detailPage": "./Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
-        "updatedAt": "2026-05-20"
+        "updatedAt": "2026-05-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "2418",
@@ -90,7 +96,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
         "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
-        "updatedAt": "2026-05-20"
+        "updatedAt": "2026-05-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "2419",
@@ -113,7 +121,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
         "detailPage": "./Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
-        "updatedAt": "2026-05-20"
+        "updatedAt": "2026-05-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "2420",
@@ -136,7 +146,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
         "detailPage": "./Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
-        "updatedAt": "2026-05-20"
+        "updatedAt": "2026-05-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1100",
@@ -158,7 +170,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
         "detailPage": "#",
-        "updatedAt": "2026-05-07"
+        "updatedAt": "2026-05-07",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1101",
@@ -180,7 +194,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://careers.ntpc.co.in/recruitment/index.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
         "detailPage": "#",
-        "updatedAt": "2026-05-07"
+        "updatedAt": "2026-05-07",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1001",
@@ -202,7 +218,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1001.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1002",
@@ -224,7 +242,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1002.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1003",
@@ -246,7 +266,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://recruitment.crpf.gov.in/login",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/1003.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1004",
@@ -268,7 +290,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1004.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1005",
@@ -290,7 +314,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/1005.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1006",
@@ -312,7 +338,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1006.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1007",
@@ -334,7 +362,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1007.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1008",
@@ -356,7 +386,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1008.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1009",
@@ -378,7 +410,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1009.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1010",
@@ -400,7 +434,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1010.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1011",
@@ -422,7 +458,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1011.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1012",
@@ -444,7 +482,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1012.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1013",
@@ -466,7 +506,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1013.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1014",
@@ -488,7 +530,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1014.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1015",
@@ -510,7 +554,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1015.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1016",
@@ -532,7 +578,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1016.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1017",
@@ -554,7 +602,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1017.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1018",
@@ -576,7 +626,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1018.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1019",
@@ -598,7 +650,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1019.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1020",
@@ -620,7 +674,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1020.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1021",
@@ -642,7 +698,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1021.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1022",
@@ -664,7 +722,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1022.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1023",
@@ -686,7 +746,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1023.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1024",
@@ -708,7 +770,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1024.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1025",
@@ -730,7 +794,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1025.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1026",
@@ -752,7 +818,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1026.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1027",
@@ -774,7 +842,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1027.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1028",
@@ -796,7 +866,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1028.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1029",
@@ -818,7 +890,9 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1029.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "job-1030",
@@ -840,6 +914,8 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];

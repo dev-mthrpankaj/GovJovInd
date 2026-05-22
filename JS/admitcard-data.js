@@ -19,7 +19,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "https://cdn3.digialm.com/EForms/configuredHtml/1936/97469/login.html",
         "detailPage": "",
-        "updatedAt": "2026-05-22"
+        "updatedAt": "2026-05-22",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2001",
@@ -38,7 +40,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "https://ssc.gov.in/",
         "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
-        "updatedAt": "2026-05-20"
+        "updatedAt": "2026-05-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2033",
@@ -57,7 +61,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
-        "updatedAt": "2026-05-19"
+        "updatedAt": "2026-05-19",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-sheet-35",
@@ -76,7 +82,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
-        "updatedAt": "2026-05-19"
+        "updatedAt": "2026-05-19",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2032",
@@ -97,7 +105,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "https://upsconline.nic.in/login",
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
-        "updatedAt": "2026-05-18"
+        "updatedAt": "2026-05-18",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2031",
@@ -116,7 +126,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
-        "updatedAt": "2026-05-16"
+        "updatedAt": "2026-05-16",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2002",
@@ -135,7 +147,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2003",
@@ -154,7 +168,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2003.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2004",
@@ -173,7 +189,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2004.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2005",
@@ -192,7 +210,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2005.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2006",
@@ -211,7 +231,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2007",
@@ -230,7 +252,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2008",
@@ -249,7 +273,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2008.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2009",
@@ -268,7 +294,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2009.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2010",
@@ -287,7 +315,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2011",
@@ -306,7 +336,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2012",
@@ -325,7 +357,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2013",
@@ -344,7 +378,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2014",
@@ -363,7 +399,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2015",
@@ -382,7 +420,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2016",
@@ -401,7 +441,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2017",
@@ -420,7 +462,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2018",
@@ -439,7 +483,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2018.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2019",
@@ -458,7 +504,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2020",
@@ -477,7 +525,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2021",
@@ -496,7 +546,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2022",
@@ -515,7 +567,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2022.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2023",
@@ -534,7 +588,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2023.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2024",
@@ -553,7 +609,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2024.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2025",
@@ -572,7 +630,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2026",
@@ -591,7 +651,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2026.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2027",
@@ -610,7 +672,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2027.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2028",
@@ -629,7 +693,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2029",
@@ -648,7 +714,9 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "admit-2030",
@@ -667,6 +735,8 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];

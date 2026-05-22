@@ -19,7 +19,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3031.html",
-        "updatedAt": "2026-05-02"
+        "updatedAt": "2026-05-02",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3001",
@@ -37,7 +39,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3001.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3002",
@@ -55,7 +59,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3002.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3003",
@@ -73,7 +79,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3003.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3004",
@@ -91,7 +99,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3004.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3005",
@@ -109,7 +119,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3005.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3006",
@@ -127,7 +139,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3006.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3007",
@@ -145,7 +159,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3007.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3008",
@@ -163,7 +179,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3008.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3009",
@@ -181,7 +199,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3009.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3010",
@@ -199,7 +219,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3010.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3011",
@@ -217,7 +239,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3011.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3012",
@@ -235,7 +259,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3012.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3013",
@@ -253,7 +279,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3013.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3014",
@@ -271,7 +299,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3014.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3016",
@@ -289,7 +319,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3016.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3017",
@@ -307,7 +339,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3017.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3018",
@@ -325,7 +359,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3018.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3019",
@@ -343,7 +379,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3019.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3020",
@@ -361,7 +399,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3020.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3021",
@@ -379,7 +419,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3021.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3022",
@@ -397,7 +439,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3022.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3023",
@@ -415,7 +459,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3023.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3024",
@@ -433,7 +479,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3024.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3025",
@@ -451,7 +499,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3025.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3026",
@@ -469,7 +519,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3026.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3027",
@@ -487,7 +539,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3027.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3028",
@@ -505,7 +559,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3028.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3029",
@@ -523,7 +579,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3029.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "result-3030",
@@ -541,6 +599,8 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
-        "updatedAt": "2026-05-01"
+        "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
