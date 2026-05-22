@@ -7,7 +7,7 @@
       "payloadKey": "jobs",
       "outputFile": "JS/jobs-data.js",
       "globalVariable": "GovJobUpdatesJobs",
-      "fields": ["id", "title", "organization", "department", "category", "year", "qualification", "totalPosts", "startDate", "lastDate", "status", "tags", "applyLink", "officialNotification", "detailPage", "updatedAt"]
+      "fields": ["id", "title", "organization", "department", "category", "year", "qualification", "totalPosts", "startDate", "lastDate", "status", "tags", "applyLink", "officialNotification", "detailPage", "updatedAt", "telegramStatus", "telegramReady"]
     },
     {
       "label": "Admit Cards",
@@ -15,7 +15,7 @@
       "payloadKey": "admitCards",
       "outputFile": "JS/admitcard-data.js",
       "globalVariable": "GovJobUpdatesAdmitCards",
-      "fields": ["id", "title", "organization", "department", "category", "year", "examDate", "releaseDate", "status", "tags", "downloadLink", "detailPage", "updatedAt"]
+      "fields": ["id", "title", "organization", "department", "category", "year", "examDate", "releaseDate", "status", "tags", "downloadLink", "detailPage", "updatedAt", "telegramStatus", "telegramReady"]
     },
     {
       "label": "Answer Keys",
@@ -23,7 +23,7 @@
       "payloadKey": "answerKeys",
       "outputFile": "JS/answerkey-data.js",
       "globalVariable": "GovJobUpdatesAnswerKeys",
-      "fields": ["id", "title", "organization", "department", "category", "year", "examDate", "releaseDate", "objectionLastDate", "status", "tags", "downloadLink", "objectionLink", "detailPage", "updatedAt"]
+      "fields": ["id", "title", "organization", "department", "category", "year", "examDate", "releaseDate", "objectionLastDate", "status", "tags", "downloadLink", "objectionLink", "detailPage", "updatedAt", "telegramStatus", "telegramReady"]
     },
     {
       "label": "Results",
@@ -31,7 +31,7 @@
       "payloadKey": "results",
       "outputFile": "JS/results-data.js",
       "globalVariable": "GovJobUpdatesResults",
-      "fields": ["id", "title", "organization", "department", "category", "year", "resultDate", "status", "tags", "resultLink", "detailPage", "updatedAt"]
+      "fields": ["id", "title", "organization", "department", "category", "year", "resultDate", "status", "tags", "resultLink", "detailPage", "updatedAt", "telegramStatus", "telegramReady"]
     }
   ]
 }
