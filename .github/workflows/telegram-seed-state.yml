@@ -1,0 +1,35 @@
+name: Telegram Seed State
+
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  seed-telegram-state:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Seed Telegram state
+        env:
+          SEED_ONLY: true
+        run: node scripts/send-telegram-updates.js
+
+      - name: Commit seeded state
+        run: |
+          if git diff --quiet -- data/telegram-posted.json; then
+            echo "No state changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/telegram-posted.json
+          git commit -m "Seed Telegram posted state"
+          git push

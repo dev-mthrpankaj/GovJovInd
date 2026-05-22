@@ -27,6 +27,28 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-21"
     },
     {
+        "id": "2422",
+        "title": "Punjab & Sind Bank Apprentice Online Form 2026 for 635",
+        "organization": "Punjab and Sindh Bank",
+        "department": "Banking",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Graduation (View Details for more Information)",
+        "totalPosts": "635",
+        "startDate": "2026-05-21",
+        "lastDate": "2026-06-06",
+        "status": "active",
+        "tags": [
+            "Banking",
+            "Punjab and Singh Bank",
+            "IBPS"
+        ],
+        "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
+        "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
+        "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
+        "updatedAt": "2026-05-21"
+    },
+    {
         "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",

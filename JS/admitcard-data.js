@@ -42,6 +42,25 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-19"
     },
     {
+        "id": "admit-sheet-35",
+        "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "State Poilce",
+        "category": "Admit Card",
+        "year": "2025",
+        "examDate": "2026-05-21",
+        "releaseDate": "2026-05-19",
+        "status": "available",
+        "tags": [
+            "MPESB",
+            "Police SI",
+            "Subedar"
+        ],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
+        "updatedAt": "2026-05-19"
+    },
+    {
         "id": "admit-2032",
         "title": "UPSC Civil Services IAS IFS Admit Card 2026",
         "organization": "Union Public Service Commision",
