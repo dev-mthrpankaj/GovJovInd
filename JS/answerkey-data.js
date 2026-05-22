@@ -13,7 +13,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examDate": "2026-05-21",
         "releaseDate": "2026-05-22",
         "objectionLastDate": "",
-        "status": "not available",
+        "status": "available",
         "tags": [
             "UPSSSC",
             "Lekhpal",
