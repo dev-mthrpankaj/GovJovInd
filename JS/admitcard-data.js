@@ -4,25 +4,6 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
-        "id": "admit-sheet-35",
-        "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
-        "organization": "Madhya Pradesh Employee Selection Board",
-        "department": "State Poilce",
-        "category": "Admit Card",
-        "year": "2025",
-        "examDate": "21/05/2026",
-        "releaseDate": "2026-05-19",
-        "status": "available",
-        "tags": [
-            "MPESB",
-            "Police SI",
-            "Subedar"
-        ],
-        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
-        "detailPage": "",
-        "updatedAt": "2026-05-22"
-    },
-    {
         "id": "admit-2001",
         "title": "SSC GD Constable Admit Card 2026",
         "organization": "Staff Selection Commission",
@@ -58,6 +39,25 @@ window.GovJobUpdatesAdmitCards = [
         ],
         "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
+        "updatedAt": "2026-05-19"
+    },
+    {
+        "id": "admit-sheet-35",
+        "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "State Poilce",
+        "category": "Admit Card",
+        "year": "2025",
+        "examDate": "2026-05-21",
+        "releaseDate": "2026-05-19",
+        "status": "available",
+        "tags": [
+            "MPESB",
+            "Police SI",
+            "Subedar"
+        ],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
+        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
         "updatedAt": "2026-05-19"
     },
     {
