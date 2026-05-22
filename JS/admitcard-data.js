@@ -10,11 +10,15 @@ window.GovJobUpdatesAdmitCards = [
         "department": "State Poilce",
         "category": "Admit Card",
         "year": "2025",
-        "examDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
+        "examDate": "21/05/2026",
+        "releaseDate": "2026-05-19",
+        "status": "available",
+        "tags": [
+            "MPESB",
+            "Police SI",
+            "Subedar"
+        ],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
         "detailPage": "",
         "updatedAt": "2026-05-22"
     },
