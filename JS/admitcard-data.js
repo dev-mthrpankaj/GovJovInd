@@ -4,7 +4,7 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
-        "id": "admit-sheet-36",
+        "id": "2044",
         "title": "UP B.Ed Admit Card 2026",
         "organization": "Uttar Pradesh B.Ed. Joint Entrance Examination",
         "department": "State",
