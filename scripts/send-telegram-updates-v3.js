@@ -78,19 +78,84 @@ function valid(type, item) {
   if (type === 'results') return Boolean(text(item.resultDate) && (text(item.resultLink) || text(item.detailPage)));
   return false;
 }
+function statusText(status) {
+  const s = text(status, 'Not mentioned');
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 function message(type, label, item, mode) {
   const details = normalizeUrl(item.detailPage) || normalizeUrl(item.applyLink) || normalizeUrl(item.downloadLink) || normalizeUrl(item.resultLink);
   const notification = normalizeUrl(item.officialNotification);
-  const lines = [mode === 'new' ? `New ${label} Update` : `Important ${label} Update`, '', `Title: ${text(item.title)}`, `Organization: ${text(item.organization)}`];
-  if (type === 'jobs') lines.push(`Total Posts: ${text(item.totalPosts)}`, `Form Start: ${text(item.startDate)}`, `Last Date: ${text(item.lastDate)}`);
-  if (type === 'admitCards') lines.push(`Release Date: ${text(item.releaseDate)}`, `Exam Date: ${text(item.examDate)}`);
-  if (type === 'answerKeys') lines.push(`Release Date: ${text(item.releaseDate)}`, `Exam Date: ${text(item.examDate)}`);
-  if (type === 'results') lines.push(`Result Date: ${text(item.resultDate)}`);
-  lines.push(`Status: ${text(item.status)}`, `Updated At: ${text(item.updatedAt)}`, '');
-  if (notification) lines.push(`Notification: ${notification}`);
-  if (details) lines.push(`Full Details: ${details}`);
-  lines.push('', 'GovJobUpdates.com');
-  return lines.join('\n');
+  const updatePrefix = mode === 'new' ? 'New' : 'Important';
+  const footer = ['━━━━━━━━━━━━━━━━━━━━', '🌐 GovJobUpdates.com', '📢 Join for fastest exam updates'];
+
+  if (type === 'jobs') {
+    const lines = [
+      mode === 'new' ? '🚨 New Job Update' : '🔔 Important Job Update',
+      '',
+      `📝 Vacancy: ${text(item.title)}`,
+      `🏢 Organization: ${text(item.organization)}`,
+      `📌 Total Posts: ${text(item.totalPosts)}`,
+      `🎓 Qualification: ${text(item.qualification, 'View details')}`,
+      `📅 Form Start: ${text(item.startDate)}`,
+      `⏳ Last Date: ${text(item.lastDate)}`,
+      `✅ Status: ${statusText(item.status)}`,
+      `🕒 Updated: ${text(item.updatedAt)}`,
+      ''
+    ];
+    if (notification) lines.push(`📄 Notification: ${notification}`);
+    if (details) lines.push(`🔗 Full Details: ${details}`);
+    return lines.concat('', footer).join('\n');
+  }
+
+  if (type === 'admitCards') {
+    const lines = [
+      mode === 'new' ? '🎫 New Admit Card Update' : '🔔 Admit Card Update',
+      '',
+      `📝 Exam: ${text(item.title)}`,
+      `🏢 Organization: ${text(item.organization)}`,
+      `📅 Release Date: ${text(item.releaseDate)}`,
+      `🗓️ Exam Date: ${text(item.examDate)}`,
+      `✅ Status: ${statusText(item.status)}`,
+      `🕒 Updated: ${text(item.updatedAt)}`,
+      ''
+    ];
+    if (details) lines.push(`⬇️ Download / Details: ${details}`);
+    return lines.concat('', footer).join('\n');
+  }
+
+  if (type === 'answerKeys') {
+    const lines = [
+      mode === 'new' ? '✅ New Answer Key Update' : '🔔 Answer Key Update',
+      '',
+      `📝 Exam: ${text(item.title)}`,
+      `🏢 Organization: ${text(item.organization)}`,
+      `🗓️ Exam Date: ${text(item.examDate)}`,
+      `📅 Release Date: ${text(item.releaseDate)}`,
+      `⏳ Objection Last Date: ${text(item.objectionLastDate, 'Not mentioned')}`,
+      `✅ Status: ${statusText(item.status)}`,
+      `🕒 Updated: ${text(item.updatedAt)}`,
+      ''
+    ];
+    if (details) lines.push(`🔗 Check Answer Key: ${details}`);
+    return lines.concat('', footer).join('\n');
+  }
+
+  if (type === 'results') {
+    const lines = [
+      mode === 'new' ? '🏆 New Result Update' : '🔔 Result Update',
+      '',
+      `📝 Result: ${text(item.title)}`,
+      `🏢 Organization: ${text(item.organization)}`,
+      `📅 Result Date: ${text(item.resultDate)}`,
+      `✅ Status: ${statusText(item.status)}`,
+      `🕒 Updated: ${text(item.updatedAt)}`,
+      ''
+    ];
+    if (details) lines.push(`🔗 Check Result: ${details}`);
+    return lines.concat('', footer).join('\n');
+  }
+
+  return [`📢 ${updatePrefix} ${label} Update`, '', `📝 ${text(item.title)}`, '', ...footer].join('\n');
 }
 async function sendTelegram(body) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
