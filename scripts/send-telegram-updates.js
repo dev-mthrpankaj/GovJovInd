@@ -1,1 +1,1 @@
-require('./send-telegram-updates-v2.js');
+require('./send-telegram-updates-v3.js');
