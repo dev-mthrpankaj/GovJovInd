@@ -1,11 +1,20 @@
 const CONTENT_SPREADSHEET_ID = "1dRnOLInUsS73ejKj86xh0AHsckqMFoKz6kDRJ4updRo";
 const CONTENT_ADMIN_TOKEN = "gju-live-test-20260506-8f4c2b91";
 
+const TELEGRAM_SAFE_FIELDS = [
+  ["Telegram Status", "telegramStatus"],
+  ["Telegram Ready", "telegramReady"]
+];
+
+function withTelegramSafeFields(fields) {
+  return fields.concat(TELEGRAM_SAFE_FIELDS);
+}
+
 const CONTENT_SHEETS = {
   jobs: {
     sheetName: "Latest Jobs",
     idPrefix: "job-sheet",
-    fields: [
+    fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
       ["Organization", "organization"],
@@ -22,12 +31,12 @@ const CONTENT_SHEETS = {
       ["Official Notification", "officialNotification", "link"],
       ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
-    ]
+    ])
   },
   admitCards: {
     sheetName: "Admit Cards",
     idPrefix: "admit-sheet",
-    fields: [
+    fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
       ["Organization", "organization"],
@@ -41,12 +50,12 @@ const CONTENT_SHEETS = {
       ["Download Link", "downloadLink", "link"],
       ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
-    ]
+    ])
   },
   results: {
     sheetName: "Results",
     idPrefix: "result-sheet",
-    fields: [
+    fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
       ["Organization", "organization"],
@@ -59,12 +68,12 @@ const CONTENT_SHEETS = {
       ["Result Link", "resultLink", "link"],
       ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
-    ]
+    ])
   },
   answerKeys: {
     sheetName: "Answer Keys",
     idPrefix: "answerkey-sheet",
-    fields: [
+    fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
       ["Organization", "organization"],
@@ -80,7 +89,7 @@ const CONTENT_SHEETS = {
       ["Objection Link", "objectionLink", "link"],
       ["Detail Page", "detailPage", "link"],
       ["Updated At", "updatedAt", "date"]
-    ]
+    ])
   }
 };
 
@@ -103,33 +112,23 @@ function doGet(e) {
     response[type] = result.items;
     return sendContentJson(response);
   } catch (error) {
-    return sendContentJson({
-      success: false,
-      message: error.message
-    });
+    return sendContentJson({ success: false, message: error.message });
   }
 }
 
 function handleContentAdminAction(action, params) {
   if (!isValidContentAdminToken(params.token)) {
-    return sendContentJson({
-      success: false,
-      message: "Unauthorized admin action."
-    });
+    return sendContentJson({ success: false, message: "Unauthorized admin action." });
   }
 
-  if (action === "addTestRows") {
-    return sendContentJson(addContentLiveTestRows());
+  if (action === "addTestRows") return sendContentJson(addContentLiveTestRows());
+  if (action === "removeTestRows") return sendContentJson(removeContentLiveTestRows());
+  if (action === "setupSheets") {
+    setupContentSheets();
+    return sendContentJson({ success: true, action: "setupSheets", updatedAt: new Date().toISOString() });
   }
 
-  if (action === "removeTestRows") {
-    return sendContentJson(removeContentLiveTestRows());
-  }
-
-  return sendContentJson({
-    success: false,
-    message: "Invalid admin action."
-  });
+  return sendContentJson({ success: false, message: "Invalid admin action." });
 }
 
 function isValidContentAdminToken(token) {
@@ -168,12 +167,7 @@ function addContentLiveTestRows() {
     };
   });
 
-  return {
-    success: true,
-    action: "addTestRows",
-    updatedAt: new Date().toISOString(),
-    summary: summary
-  };
+  return { success: true, action: "addTestRows", updatedAt: new Date().toISOString(), summary: summary };
 }
 
 function removeContentLiveTestRows() {
@@ -190,17 +184,18 @@ function removeContentLiveTestRows() {
     };
   });
 
-  return {
-    success: true,
-    action: "removeTestRows",
-    updatedAt: new Date().toISOString(),
-    summary: summary
-  };
+  return { success: true, action: "removeTestRows", updatedAt: new Date().toISOString(), summary: summary };
 }
 
 function buildContentLiveTestItems(today) {
+  const base = {
+    telegramStatus: "ready",
+    telegramReady: "yes",
+    updatedAt: today
+  };
+
   return {
-    jobs: {
+    jobs: Object.assign({}, base, {
       id: "gju-live-test-jobs",
       title: "TEST LIVE JOB FROM GOOGLE SHEET",
       organization: "GovJobUpdates Test",
@@ -215,10 +210,9 @@ function buildContentLiveTestItems(today) {
       tags: ["Live Test", "Google Sheet"],
       applyLink: "#",
       officialNotification: "#",
-      detailPage: "",
-      updatedAt: today
-    },
-    admitCards: {
+      detailPage: ""
+    }),
+    admitCards: Object.assign({}, base, {
       id: "gju-live-test-admitCards",
       title: "TEST LIVE ADMIT CARD FROM GOOGLE SHEET",
       organization: "GovJobUpdates Test",
@@ -230,10 +224,9 @@ function buildContentLiveTestItems(today) {
       status: "available",
       tags: ["Live Test", "Google Sheet"],
       downloadLink: "#",
-      detailPage: "",
-      updatedAt: today
-    },
-    results: {
+      detailPage: ""
+    }),
+    results: Object.assign({}, base, {
       id: "gju-live-test-results",
       title: "TEST LIVE RESULT FROM GOOGLE SHEET",
       organization: "GovJobUpdates Test",
@@ -244,10 +237,9 @@ function buildContentLiveTestItems(today) {
       status: "released",
       tags: ["Live Test", "Google Sheet"],
       resultLink: "#",
-      detailPage: "",
-      updatedAt: today
-    },
-    answerKeys: {
+      detailPage: ""
+    }),
+    answerKeys: Object.assign({}, base, {
       id: "gju-live-test-answerKeys",
       title: "TEST LIVE ANSWER KEY FROM GOOGLE SHEET",
       organization: "GovJobUpdates Test",
@@ -261,9 +253,8 @@ function buildContentLiveTestItems(today) {
       tags: ["Live Test", "Google Sheet"],
       downloadLink: "#",
       objectionLink: "#",
-      detailPage: "",
-      updatedAt: today
-    }
+      detailPage: ""
+    })
   };
 }
 
@@ -280,11 +271,7 @@ function normalizeContentCellValue(value) {
 }
 
 function buildAllContent() {
-  const response = {
-    success: true,
-    updatedAt: new Date().toISOString(),
-    meta: {}
-  };
+  const response = { success: true, updatedAt: new Date().toISOString(), meta: {} };
   Object.keys(CONTENT_SHEETS).forEach(function (type) {
     const result = getContentResult(type);
     response[type] = result.items;
@@ -439,8 +426,10 @@ function buildContentItem(row, headerMap, config, rowNumber, richTextRow, formul
   });
 
   if (!item.id) item.id = config.idPrefix + "-" + rowNumber;
-  if (!item.updatedAt) item.updatedAt = formatContentDate(new Date());
+  if (!item.updatedAt) item.updatedAt = "";
   if (!item.status) item.status = "active";
+  if (!item.telegramStatus) item.telegramStatus = "draft";
+  if (!item.telegramReady) item.telegramReady = "no";
   if (!Array.isArray(item.tags)) item.tags = [];
 
   return item;
@@ -482,9 +471,7 @@ function getRichTextLinkUrl(richTextValue) {
   try {
     const cellLink = richTextValue.getLinkUrl();
     if (cellLink) return String(cellLink).trim();
-  } catch (error) {
-    // Rich text without a single whole-cell link can still contain linked runs.
-  }
+  } catch (error) {}
 
   if (typeof richTextValue.getRuns !== "function") return "";
 
