@@ -5,7 +5,7 @@
 window.GovJobUpdatesJobs = [
     {
         "id": "2422",
-        "title": "Punjab & Sind Bank Apprentice Online Form 2026 for 635",
+        "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
         "department": "Banking",
         "category": "Banking",
