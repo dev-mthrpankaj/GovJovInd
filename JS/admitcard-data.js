@@ -10,11 +10,14 @@ window.GovJobUpdatesAdmitCards = [
         "department": "State",
         "category": "Admit Card",
         "year": "2026",
-        "examDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
+        "examDate": "2026-05-31",
+        "releaseDate": "2026-05-22",
+        "status": "available",
+        "tags": [
+            "Edcation",
+            "B.ed"
+        ],
+        "downloadLink": "https://cdn3.digialm.com/EForms/configuredHtml/1936/97469/login.html",
         "detailPage": "",
         "updatedAt": "2026-05-22"
     },
