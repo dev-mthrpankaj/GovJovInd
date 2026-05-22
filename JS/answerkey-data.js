@@ -19,7 +19,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Lekhpal",
             "Revenue"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://drive.google.com/file/d/13w6WvB7OLcx1l0Clntsv3DPqIfXGwnyR/view",
         "objectionLink": "#",
         "detailPage": "./Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-21",
