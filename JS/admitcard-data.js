@@ -4,6 +4,21 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-35",
+        "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "State Poilce",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-22"
+    },
+    {
         "id": "admit-2001",
         "title": "SSC GD Constable Admit Card 2026",
         "organization": "Staff Selection Commission",
