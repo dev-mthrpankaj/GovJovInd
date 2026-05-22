@@ -4,31 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2421",
-        "title": "SSC CGL 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
-        "totalPosts": "approx. 12256",
-        "startDate": "2026-05-21",
-        "lastDate": "2026-06-22",
-        "status": "active",
-        "tags": [
-            "SSC",
-            "Income Tax",
-            "Revenue",
-            "Excise"
-        ],
-        "applyLink": "https://ssc.gov.in/",
-        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
-        "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
-        "updatedAt": "2026-05-22",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -51,6 +26,31 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-22",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2421",
+        "title": "SSC CGL 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Graduation (View Details for more Information)",
+        "totalPosts": "approx. 12256",
+        "startDate": "2026-05-21",
+        "lastDate": "2026-06-22",
+        "status": "active",
+        "tags": [
+            "SSC",
+            "Income Tax",
+            "Revenue",
+            "Excise"
+        ],
+        "applyLink": "https://ssc.gov.in/",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
+        "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
+        "updatedAt": "2026-05-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2417",
