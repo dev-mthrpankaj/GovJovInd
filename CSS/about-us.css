@@ -658,6 +658,7 @@ body {
     z-index: -1;
     height: 62%;
     background: linear-gradient(180deg, rgba(15, 23, 42, 0), rgba(15, 23, 42, 0.94));
+    pointer-events: none;
 }
 
 .team-card img,
@@ -671,6 +672,7 @@ body {
     border-radius: 0;
     object-fit: cover;
     box-shadow: none;
+    pointer-events: none;
 }
 
 .team-avatar-fallback {
@@ -684,6 +686,8 @@ body {
 }
 
 .team-card-body {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 0.45rem;
     width: 100%;
@@ -726,6 +730,11 @@ body {
     background: rgba(255, 255, 255, 0.12);
     color: #fff;
     backdrop-filter: blur(10px);
+}
+
+.team-card .social-links a {
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .team-card .social-instagram i {
