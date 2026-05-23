@@ -21,9 +21,9 @@ window.GovJobUpdatesJobs = [
             "Haryana",
             "Chandigarh"
         ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
+        "applyLink": "#",
+        "officialNotification": "#",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -1039,6 +1039,26 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2428",
+        "title": "NALCO Non Executive Online Form 2026 for 268 Post",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
