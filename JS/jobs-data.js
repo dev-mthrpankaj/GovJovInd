@@ -4,6 +4,31 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2423",
+        "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
+        "organization": "Rajasthan Public Service Commission",
+        "department": "Edhcation",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Post Graduation (View Details for more Information)",
+        "totalPosts": "121",
+        "startDate": "2026-06-01",
+        "lastDate": "30/06/2026",
+        "status": "upcoming",
+        "tags": [
+            "Education",
+            "Rajsthan",
+            "Teacher",
+            "RPSC"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -915,26 +940,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2423",
-        "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "Edhcation",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Post Graduation (View Details for more Information)",
-        "totalPosts": "121",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
