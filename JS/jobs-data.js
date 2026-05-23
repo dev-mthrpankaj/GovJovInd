@@ -4,6 +4,32 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2426",
+        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "Education",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduate and Masters (View Details for More Information)",
+        "totalPosts": "3951",
+        "startDate": "2026-05-25",
+        "lastDate": "2026-06-23",
+        "status": "upcoming",
+        "tags": [
+            "Education",
+            "Rajsthan",
+            "Teacher",
+            "RPSC",
+            "Computer"
+        ],
+        "applyLink": "#",
+        "officialNotification": "#",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2425",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -988,26 +1014,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2426",
-        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Education",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduate and Masters (View Details for More Information)",
-        "totalPosts": "3951",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
