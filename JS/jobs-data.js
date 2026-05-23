@@ -176,6 +176,29 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2429",
+        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
+        "organization": "EDCIL India Limited",
+        "department": "Medical Education",
+        "category": "Public Sector",
+        "year": "",
+        "qualification": "10+2 (View Details for more Information)",
+        "totalPosts": "879",
+        "startDate": "2026-05-22",
+        "lastDate": "2026-06-04",
+        "status": "active",
+        "tags": [
+            "Medical",
+            "Physiotherapy"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2418",
         "title": "AFCAT 02/2026 Online Form",
         "organization": "Indian Air Force",
@@ -1063,26 +1086,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2429",
-        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-        "organization": "EDCIL India Limited",
-        "department": "Medical Education",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
