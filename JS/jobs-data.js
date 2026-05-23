@@ -4,57 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2427",
-        "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
-        "organization": "High Court of Punjab and Haryana SSSC",
-        "department": "Judiciary",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
-        "totalPosts": "1265",
-        "startDate": "2026-05-26",
-        "lastDate": "2026-06-23",
-        "status": "upcoming",
-        "tags": [
-            "Judiciary",
-            "Punjab",
-            "Haryana",
-            "Chandigarh"
-        ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2426",
-        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Education",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduate and Masters (View Details for More Information)",
-        "totalPosts": "3951",
-        "startDate": "2026-05-25",
-        "lastDate": "2026-06-23",
-        "status": "upcoming",
-        "tags": [
-            "Education",
-            "Rajsthan",
-            "Teacher",
-            "RPSC",
-            "Computer"
-        ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -152,6 +101,57 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2426",
+        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "Education",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduate and Masters (View Details for More Information)",
+        "totalPosts": "3951",
+        "startDate": "2026-05-25",
+        "lastDate": "2026-06-23",
+        "status": "upcoming",
+        "tags": [
+            "Education",
+            "Rajsthan",
+            "Teacher",
+            "RPSC",
+            "Computer"
+        ],
+        "applyLink": "#",
+        "officialNotification": "#",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
+        "updatedAt": "2026-05-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
+        "id": "2427",
+        "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
+        "organization": "High Court of Punjab and Haryana SSSC",
+        "department": "Judiciary",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduation (View Details for more Information)",
+        "totalPosts": "1265",
+        "startDate": "2026-05-26",
+        "lastDate": "2026-06-23",
+        "status": "upcoming",
+        "tags": [
+            "Judiciary",
+            "Punjab",
+            "Haryana",
+            "Chandigarh"
+        ],
+        "applyLink": "#",
+        "officialNotification": "#",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
+        "updatedAt": "2026-05-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2428",
         "title": "NALCO Non Executive Online Form 2026 for 268 Post",
         "organization": "National Aluminium Company Limited",
@@ -170,7 +170,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://recruitment.nhidcl.com/login",
         "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2428",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -191,12 +191,12 @@ window.GovJobUpdatesJobs = [
             "Medical",
             "Physiotherapy"
         ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
+        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2429",
+        "updatedAt": "2026-05-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2418",
