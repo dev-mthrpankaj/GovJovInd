@@ -966,5 +966,25 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2425",
+        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
