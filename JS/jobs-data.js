@@ -985,8 +985,8 @@ window.GovJobUpdatesJobs = [
             "UPSSSC"
         ],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
-        "officialNotification": "",
-        "detailPage": "",
+        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2425",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
