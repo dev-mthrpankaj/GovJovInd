@@ -77,6 +77,54 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2425",
+        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Engineering",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
+        "totalPosts": "2759",
+        "startDate": "22/05/2026",
+        "lastDate": "2026-11-06",
+        "status": "active",
+        "tags": [
+            "Engineering",
+            "Assistant",
+            "UPSSSC"
+        ],
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
+        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2425",
+        "updatedAt": "2026-05-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
+        "id": "2418",
+        "title": "AFCAT 02/2026 Online Form",
+        "organization": "Indian Air Force",
+        "department": "IAF",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Graduate (View Details For More Information)",
+        "totalPosts": "361",
+        "startDate": "2026-05-20",
+        "lastDate": "2026-06-19",
+        "status": "active",
+        "tags": [
+            "Indian Air Force",
+            "VayuSena",
+            "IAF"
+        ],
+        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
+        "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
+        "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
+        "updatedAt": "2026-05-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2421",
         "title": "SSC CGL 2026",
         "organization": "Staff Selection Commission",
@@ -121,30 +169,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
         "detailPage": "./Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
-        "updatedAt": "2026-05-20",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2418",
-        "title": "AFCAT 02/2026 Online Form",
-        "organization": "Indian Air Force",
-        "department": "IAF",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Graduate (View Details For More Information)",
-        "totalPosts": "361",
-        "startDate": "2026-05-20",
-        "lastDate": "2026-06-19",
-        "status": "active",
-        "tags": [
-            "Indian Air Force",
-            "VayuSena",
-            "IAF"
-        ],
-        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
-        "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
-        "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -964,30 +988,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2425",
-        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Engineering",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
-        "totalPosts": "2759",
-        "startDate": "22/05/2026",
-        "lastDate": "2026-11-06",
-        "status": "active",
-        "tags": [
-            "Engineering",
-            "Assistant",
-            "UPSSSC"
-        ],
-        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
-        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2425",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
