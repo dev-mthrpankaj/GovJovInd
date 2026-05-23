@@ -979,8 +979,12 @@ window.GovJobUpdatesJobs = [
         "startDate": "22/05/2026",
         "lastDate": "2026-11-06",
         "status": "active",
-        "tags": [],
-        "applyLink": "",
+        "tags": [
+            "Engineering",
+            "Assistant",
+            "UPSSSC"
+        ],
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "",
         "detailPage": "",
         "updatedAt": "",
