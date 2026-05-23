@@ -24,7 +24,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "#",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2425",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -1014,6 +1014,26 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2427",
+        "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
+        "organization": "High Court of Punjab and Haryana SSSC",
+        "department": "Judiciary",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
