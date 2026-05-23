@@ -320,7 +320,8 @@ body {
     gap: 0.55rem;
 }
 
-.social-links a {
+.social-links a,
+.social-links .social-icon {
     display: grid;
     place-items: center;
     width: 36px;
@@ -332,7 +333,8 @@ body {
     transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.social-links a:hover {
+.social-links a:hover,
+.social-links .social-icon:hover {
     background: var(--primary);
     color: #fff;
     transform: translateY(-2px);
@@ -709,17 +711,37 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.team-card-body > p:last-child {
+.team-card-body > .team-bio {
     color: #e2e8f0;
 }
 
 .team-card .social-links {
+    margin-top: 0.1rem;
     justify-content: start;
 }
 
-.team-card .social-links a {
+.team-card .social-links a,
+.team-card .social-links .social-icon {
     border-color: rgba(255, 255, 255, 0.28);
     background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    backdrop-filter: blur(10px);
+}
+
+.team-card .social-instagram i {
+    color: #f472b6;
+}
+
+.team-card .social-twitter i {
+    color: #7dd3fc;
+}
+
+.team-card .social-linkedin i {
+    color: #93c5fd;
+}
+
+.team-card .social-icon:hover i,
+.team-card .social-links a:hover i {
     color: #fff;
 }
 
