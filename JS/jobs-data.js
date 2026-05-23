@@ -49,8 +49,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2423",
         "updatedAt": "2026-05-23",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2421",
