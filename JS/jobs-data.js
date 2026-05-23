@@ -37,7 +37,7 @@ window.GovJobUpdatesJobs = [
         "qualification": "Post Graduation (View Details for more Information)",
         "totalPosts": "121",
         "startDate": "2026-06-01",
-        "lastDate": "30/06/2026",
+        "lastDate": "2026-06-30",
         "status": "upcoming",
         "tags": [
             "Education",
