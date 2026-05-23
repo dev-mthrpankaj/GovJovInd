@@ -4,6 +4,31 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2427",
+        "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
+        "organization": "High Court of Punjab and Haryana SSSC",
+        "department": "Judiciary",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduation (View Details for more Information)",
+        "totalPosts": "1265",
+        "startDate": "2026-05-26",
+        "lastDate": "2026-06-23",
+        "status": "upcoming",
+        "tags": [
+            "Judiciary",
+            "Punjab",
+            "Haryana",
+            "Chandigarh"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2426",
         "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
         "organization": "Rajasthan Staff Selection Board",
@@ -1014,26 +1039,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2427",
-        "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
-        "organization": "High Court of Punjab and Haryana SSSC",
-        "department": "Judiciary",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
