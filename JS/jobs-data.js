@@ -1065,5 +1065,25 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2429",
+        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
+        "organization": "EDCIL India Limited",
+        "department": "Medical Education",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
