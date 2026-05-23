@@ -944,7 +944,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-41",
+        "id": "2424",
         "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
         "organization": "Join Indian Navy",
         "department": "Defence",
@@ -955,10 +955,14 @@ window.GovJobUpdatesJobs = [
         "startDate": "29/05/2026",
         "lastDate": "18/06/2026",
         "status": "upcoming",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
+        "tags": [
+            "Navy",
+            "Defence",
+            "Indian Army"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2424",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
