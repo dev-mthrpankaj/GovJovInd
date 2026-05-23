@@ -4,31 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2423",
-        "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "Edhcation",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Post Graduation (View Details for more Information)",
-        "totalPosts": "121",
-        "startDate": "2026-06-01",
-        "lastDate": "30/06/2026",
-        "status": "upcoming",
-        "tags": [
-            "Education",
-            "Rajsthan",
-            "Teacher",
-            "RPSC"
-        ],
-        "applyLink": "#",
-        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -51,6 +26,31 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
+    },
+    {
+        "id": "2423",
+        "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
+        "organization": "Rajasthan Public Service Commission",
+        "department": "Edhcation",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Post Graduation (View Details for more Information)",
+        "totalPosts": "121",
+        "startDate": "2026-06-01",
+        "lastDate": "30/06/2026",
+        "status": "upcoming",
+        "tags": [
+            "Education",
+            "Rajsthan",
+            "Teacher",
+            "RPSC"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
+        "detailPage": "./Job_Details/HTML/job-details.html",
+        "updatedAt": "2026-05-23",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "2421",
@@ -98,8 +98,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
         "detailPage": "./Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
         "updatedAt": "2026-05-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2418",
@@ -122,8 +122,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
         "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
         "updatedAt": "2026-05-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2419",
@@ -147,8 +147,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
         "detailPage": "./Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
         "updatedAt": "2026-05-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2420",
@@ -172,8 +172,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
         "detailPage": "./Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
         "updatedAt": "2026-05-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "job-1100",
