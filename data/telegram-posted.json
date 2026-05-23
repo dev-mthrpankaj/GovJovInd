@@ -8,11 +8,11 @@
       "stateReason": "seed"
     },
     "jobs:2418": {
-      "hash": "4f05cf550eca51ecb2cb65202788112cf064a68b61db00711943dfbc76f74430",
-      "updatedAt": "2026-05-20",
+      "updatedAt": "2026-05-21",
+      "hash": "1a11e6617bf41e9a1e1617dea122b1d5df6587b73431123472da68b9b4281c7f",
       "title": "AFCAT 02/2026 Online Form",
-      "lastPostedAt": "",
-      "stateReason": "seed"
+      "lastPostedAt": "2026-05-23T07:28:57.024Z",
+      "stateReason": "update"
     },
     "jobs:2419": {
       "hash": "7693de7caf4795a2e388edde41bce1e5f6d00aeb84e505907b1b538226789f0a",
@@ -296,6 +296,13 @@
       "hash": "821168f406fc73d41522a108a82b022f5c6a7c1ec4baca95f1fca430e96d9d26",
       "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
       "lastPostedAt": "2026-05-23T07:12:11.462Z",
+      "stateReason": "new"
+    },
+    "jobs:2425": {
+      "updatedAt": "2026-05-23",
+      "hash": "720721e6d8fd8aef79fae65f36c228210d43b8585362e054dec75b3a5dcb9054",
+      "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
+      "lastPostedAt": "2026-05-23T07:28:56.264Z",
       "stateReason": "new"
     }
   },
