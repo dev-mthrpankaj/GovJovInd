@@ -22,7 +22,7 @@ window.GovJobUpdatesJobs = [
             "RPSC"
         ],
         "applyLink": "",
-        "officialNotification": "",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
@@ -46,8 +46,8 @@ window.GovJobUpdatesJobs = [
             "IBPS"
         ],
         "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
-        "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
-        "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
+        "officialNotification": "",
+        "detailPage": "",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
