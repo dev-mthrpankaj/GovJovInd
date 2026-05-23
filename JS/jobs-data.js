@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2424",
+        "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
+        "organization": "Join Indian Navy",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
+        "totalPosts": "60",
+        "startDate": "29/05/2026",
+        "lastDate": "18/06/2026",
+        "status": "upcoming",
+        "tags": [
+            "Navy",
+            "Defence",
+            "Indian Army"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2424",
+        "updatedAt": "2026-05-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -940,30 +964,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2424",
-        "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
-        "organization": "Join Indian Navy",
-        "department": "Defence",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
-        "totalPosts": "60",
-        "startDate": "29/05/2026",
-        "lastDate": "18/06/2026",
-        "status": "upcoming",
-        "tags": [
-            "Navy",
-            "Defence",
-            "Indian Army"
-        ],
-        "applyLink": "#",
-        "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2424",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
