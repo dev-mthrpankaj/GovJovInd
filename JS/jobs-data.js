@@ -61,8 +61,8 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
         "totalPosts": "60",
-        "startDate": "29/05/2026",
-        "lastDate": "18/06/2026",
+        "startDate": "2026-05-29",
+        "lastDate": "2026-06-18",
         "status": "upcoming",
         "tags": [
             "Navy",
@@ -85,8 +85,8 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
         "totalPosts": "2759",
-        "startDate": "22/05/2026",
-        "lastDate": "2026-11-06",
+        "startDate": "2026-05-22",
+        "lastDate": "2026-06-11",
         "status": "active",
         "tags": [
             "Engineering",
