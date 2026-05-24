@@ -170,7 +170,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://recruitment.nhidcl.com/login",
         "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2428",
+        "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
