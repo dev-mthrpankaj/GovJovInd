@@ -22,7 +22,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2424",
+        "detailPage": "./Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes"
