@@ -1180,6 +1180,11 @@ footer .social-icons .social-youtube:focus-visible {
   background: #ff0033;
 }
 
+footer .social-icons .social-telegram:hover,
+footer .social-icons .social-telegram:focus-visible {
+  background: #229ed9;
+}
+
 footer .footer-section:first-child {
   text-align: center;
 }

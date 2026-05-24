@@ -284,6 +284,9 @@ const ensureSharedFooter = () => {
         <a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube">
           <i class="fab fa-youtube" aria-hidden="true"></i>
         </a>
+        <a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram">
+          <i class="fab fa-telegram" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
     <div class="footer-section">
