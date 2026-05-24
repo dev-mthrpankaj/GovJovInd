@@ -47,7 +47,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2423",
+        "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
