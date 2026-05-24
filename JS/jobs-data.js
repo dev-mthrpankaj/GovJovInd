@@ -28,6 +28,30 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2425",
+        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Engineering",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
+        "totalPosts": "2759",
+        "startDate": "2026-05-22",
+        "lastDate": "2026-06-11",
+        "status": "active",
+        "tags": [
+            "Engineering",
+            "Assistant",
+            "UPSSSC"
+        ],
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
+        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
+        "detailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
+        "updatedAt": "2026-05-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -72,30 +96,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
-        "updatedAt": "2026-05-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2425",
-        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Engineering",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
-        "totalPosts": "2759",
-        "startDate": "2026-05-22",
-        "lastDate": "2026-06-11",
-        "status": "active",
-        "tags": [
-            "Engineering",
-            "Assistant",
-            "UPSSSC"
-        ],
-        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
-        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2425",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
