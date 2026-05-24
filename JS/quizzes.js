@@ -100,6 +100,7 @@
         elements.questionStatusLabel = document.getElementById("questionStatusLabel");
         elements.questionElapsedText = document.getElementById("questionElapsedText");
         elements.questionText = document.getElementById("questionText");
+        elements.questionMedia = document.getElementById("questionMedia");
         elements.optionList = document.getElementById("optionList");
         elements.optionButtons = Array.from(document.querySelectorAll("#optionList [data-option-index]"));
         elements.optionTexts = elements.optionButtons.map((button) => button.querySelector(".option-text"));
@@ -541,15 +542,19 @@
     function getQuestionsForSet(quizSet) {
         const questions = Array.isArray(quizSet.questions) ? quizSet.questions : [];
         return questions.slice(0, Number(quizSet.totalQuestions) || 50).map(function (question, index) {
+            const normalizedOptions = normalizeOptions(question.options);
             return {
                 id: question.id || `${quizSet.id}-${index + 1}`,
                 subject: question.subject || quizSet.subject,
                 topic: question.topic || "General",
                 difficulty: question.difficulty || quizSet.difficulty || "Mixed",
                 question: question.question || "",
-                options: Array.isArray(question.options) ? question.options.slice(0, 4) : [],
+                questionImage: normalizeMedia(question.image || question.questionImage, question.imageAlt || question.questionImageAlt || `Question ${index + 1} image`),
+                options: normalizedOptions.map(function (option) { return option.text; }),
+                optionImages: normalizeOptionImages(question.optionImages, normalizedOptions),
                 correctAnswer: Number(question.correctAnswer),
                 explanation: question.explanation || "Explanation is not available.",
+                explanationImage: normalizeMedia(question.explanationImage || question.solutionImage, question.explanationImageAlt || question.solutionImageAlt || `Question ${index + 1} explanation image`),
                 marks: Number(question.marks) || Number(quizSet.marksPerQuestion) || 1,
                 negativeMarks: Number(question.negativeMarks) || Number(quizSet.negativeMarks) || 0
             };
@@ -572,6 +577,7 @@
         setText(elements.totalQuestionNo, String(state.questions.length));
         setText(elements.questionNumberLabel, String(state.current + 1));
         setText(elements.questionText, question.question);
+        renderQuestionMedia(question);
         setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
         setText(elements.examDurationLabel, `Last ${formatNumber(state.quizSet.durationMinutes || 30)} Mins`);
@@ -590,10 +596,30 @@
             ? "Mark For Review"
             : "Mark For Review";
 
+        elements.optionButtons.forEach(function (button, index) {
+            const hasImage = Boolean(question.optionImages?.[index]?.src);
+            button.classList.toggle("has-option-image", hasImage);
+        });
         elements.optionTexts.forEach(function (node, index) {
-            setText(node, question.options[index] || "");
+            renderOptionContent(node, question, index);
         });
         syncQuestionState();
+    }
+
+    function renderQuestionMedia(question) {
+        if (!elements.questionMedia) return;
+        elements.questionMedia.innerHTML = renderMedia(question.questionImage, "question-image", "Question image");
+        elements.questionMedia.classList.toggle("hidden", !question.questionImage?.src);
+    }
+
+    function renderOptionContent(node, question, index) {
+        if (!node) return;
+        const optionText = question.options[index] || "";
+        const optionImage = question.optionImages?.[index];
+        node.innerHTML = `
+            ${optionText ? `<span class="option-label">${escapeHtml(optionText)}</span>` : ""}
+            ${renderMedia(optionImage, "option-image", `Option ${index + 1} image`)}
+        `;
     }
 
     function renderPalette(options = {}) {
@@ -1151,10 +1177,24 @@
                     ${marked ? '<span class="meta-pill">Marked</span>' : ""}
                 </div>
                 <h3>${escapeHtml(question.question)}</h3>
-                <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}">Your answer: ${selected === null ? "Not attempted" : escapeHtml(question.options[selected])}</div>
-                <div class="review-answer correct">Correct answer: ${escapeHtml(question.options[question.correctAnswer])}</div>
-                <p><strong>Explanation:</strong> ${escapeHtml(question.explanation)}</p>
+                ${renderMedia(question.questionImage, "review-question-image", "Question image")}
+                <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}">Your answer: ${selected === null ? "Not attempted" : renderReviewOptionAnswer(question, selected)}</div>
+                <div class="review-answer correct">Correct answer: ${renderReviewOptionAnswer(question, question.correctAnswer)}</div>
+                <div class="review-explanation">
+                    <p><strong>Explanation:</strong> ${escapeHtml(question.explanation)}</p>
+                    ${renderMedia(question.explanationImage, "explanation-image", "Explanation image")}
+                </div>
             </article>
+        `;
+    }
+
+    function renderReviewOptionAnswer(question, index) {
+        if (!Number.isInteger(index) || index < 0 || index >= question.options.length) return "Not available";
+        const optionText = question.options[index] || "";
+        const optionImage = question.optionImages?.[index];
+        return `
+            ${optionText ? `<span>${escapeHtml(optionText)}</span>` : ""}
+            ${renderMedia(optionImage, "review-option-image", `Option ${index + 1} image`)}
         `;
     }
 
@@ -1405,6 +1445,65 @@
         const source = Array.isArray(value) ? value.slice(0, length) : [];
         while (source.length < length) source.push(fallback);
         return source;
+    }
+
+    function normalizeOptions(value) {
+        const source = Array.isArray(value) ? value.slice(0, 4) : [];
+        return source.map(function (option, index) {
+            if (option && typeof option === "object") {
+                return {
+                    text: String(option.text ?? option.label ?? option.value ?? "").trim(),
+                    image: normalizeMedia(option.image || option.src || option.url, option.imageAlt || option.alt || `Option ${index + 1} image`)
+                };
+            }
+
+            return {
+                text: String(option ?? "").trim(),
+                image: null
+            };
+        });
+    }
+
+    function normalizeOptionImages(optionImages, normalizedOptions) {
+        const source = Array.isArray(optionImages) ? optionImages.slice(0, 4) : [];
+        return [0, 1, 2, 3].map(function (index) {
+            return normalizeMedia(source[index], `Option ${index + 1} image`) || normalizedOptions[index]?.image || null;
+        });
+    }
+
+    function normalizeMedia(value, fallbackAlt) {
+        if (!value) return null;
+
+        if (typeof value === "string") {
+            const src = value.trim();
+            return src ? { src, alt: fallbackAlt || "" } : null;
+        }
+
+        if (typeof value !== "object") return null;
+
+        const src = String(value.src || value.url || value.path || "").trim();
+        if (!src) return null;
+
+        return {
+            src,
+            alt: String(value.alt || value.imageAlt || fallbackAlt || "").trim(),
+            caption: String(value.caption || "").trim()
+        };
+    }
+
+    function renderMedia(media, modifierClass, fallbackAlt) {
+        if (!media?.src) return "";
+        const className = modifierClass ? ` quiz-media-${escapeAttr(modifierClass)}` : "";
+        const caption = media.caption ? `<figcaption>${escapeHtml(media.caption)}</figcaption>` : "";
+
+        return `
+            <figure class="quiz-media${className}">
+                <div class="quiz-media-frame">
+                    <img src="${escapeAttr(media.src)}" alt="${escapeAttr(media.alt || fallbackAlt || "")}" loading="lazy" decoding="async">
+                </div>
+                ${caption}
+            </figure>
+        `;
     }
 
     function setText(node, value) {

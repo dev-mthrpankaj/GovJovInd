@@ -661,7 +661,75 @@ body.quiz-exam-active .exam-topbar {
 }
 
 .option-text {
+    display: grid;
+    gap: 10px;
     overflow-wrap: anywhere;
+}
+
+.option-label {
+    overflow-wrap: anywhere;
+}
+
+.question-media {
+    display: grid;
+    gap: 10px;
+}
+
+.quiz-media {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.quiz-media-frame {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 8px;
+    border: 1px solid var(--quiz-border);
+    border-radius: 8px;
+    background: #f8fafc;
+    -webkit-overflow-scrolling: touch;
+}
+
+.quiz-media img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.quiz-media figcaption {
+    margin-top: 6px;
+    color: var(--quiz-muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.quiz-media-question-image .quiz-media-frame,
+.quiz-media-review-question-image .quiz-media-frame,
+.quiz-media-explanation-image .quiz-media-frame {
+    max-width: 760px;
+}
+
+.quiz-media-option-image .quiz-media-frame,
+.quiz-media-review-option-image .quiz-media-frame {
+    width: fit-content;
+    max-width: 100%;
+    padding: 6px;
+}
+
+.quiz-media-option-image img,
+.quiz-media-review-option-image img {
+    width: auto;
+    max-height: 180px;
+}
+
+.answer-option.has-option-image {
+    align-items: start;
 }
 
 .question-footnote {
@@ -868,6 +936,8 @@ body.quiz-exam-active .exam-topbar {
 }
 
 .review-answer {
+    display: grid;
+    gap: 8px;
     padding: 10px 12px;
     border-radius: 8px;
     background: #f8fafc;
@@ -883,6 +953,16 @@ body.quiz-exam-active .exam-topbar {
 .review-answer.wrong {
     background: #fef2f2;
     color: #991b1b;
+}
+
+.review-explanation {
+    display: grid;
+    gap: 10px;
+}
+
+.review-explanation p {
+    margin: 0;
+    color: var(--quiz-muted);
 }
 
 .quiz-modal {
@@ -1040,6 +1120,15 @@ body.quiz-exam-active .exam-topbar {
 @media (max-width: 425px) {
     .quiz-page {
         padding: 10px;
+    }
+
+    .quiz-media-frame {
+        padding: 6px;
+    }
+
+    .quiz-media-option-image img,
+    .quiz-media-review-option-image img {
+        max-height: 140px;
     }
 
     .exam-topbar {
@@ -1376,6 +1465,15 @@ body.quiz-exam-active .option-key {
 
 body.quiz-exam-active .option-text {
     color: #f8fafc;
+}
+
+body.quiz-exam-active .quiz-media-frame {
+    border-color: #55585d;
+    background: #242629;
+}
+
+body.quiz-exam-active .quiz-media figcaption {
+    color: #d1d5db;
 }
 
 body.quiz-exam-active .question-footnote {
