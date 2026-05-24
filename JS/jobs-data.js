@@ -76,6 +76,29 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2429",
+        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
+        "organization": "EDCIL India Limited",
+        "department": "Medical Education",
+        "category": "Public Sector",
+        "year": "",
+        "qualification": "10+2 (View Details for more Information)",
+        "totalPosts": "879",
+        "startDate": "2026-05-22",
+        "lastDate": "2026-06-04",
+        "status": "active",
+        "tags": [
+            "Medical",
+            "Physiotherapy"
+        ],
+        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
+        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
+        "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
+        "updatedAt": "2026-05-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -171,29 +194,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
-        "updatedAt": "2026-05-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2429",
-        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-        "organization": "EDCIL India Limited",
-        "department": "Medical Education",
-        "category": "Public Sector",
-        "year": "",
-        "qualification": "10+2 (View Details for more Information)",
-        "totalPosts": "879",
-        "startDate": "2026-05-22",
-        "lastDate": "2026-06-04",
-        "status": "active",
-        "tags": [
-            "Medical",
-            "Physiotherapy"
-        ],
-        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
-        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2429",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
