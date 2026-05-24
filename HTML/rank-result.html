@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rank Result | GovJobUpdates</title>
+    <meta name="description" content="View your GovJobUpdates rank prediction result, rank estimates, marks, percentile, and subject scorecard.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/rank-result.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+            </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                    <li><a href="rank-predictor.html" class="active">Rank Predictor</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="rank-result-page" id="rankResultApp">
+        <section class="empty-result-state" id="emptyResultState" hidden>
+            <span class="result-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Rank Result</span>
+            <h1>No rank result found.</h1>
+            <p>Please submit data or check your rank first.</p>
+            <a class="btn btn-primary" href="rank-predictor.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Rank Predictor</a>
+        </section>
+
+        <section class="result-dashboard" id="resultDashboard" hidden>
+            <section class="result-hero" aria-labelledby="rankResultTitle">
+                <div class="result-hero-copy">
+                    <span class="result-badge"><i class="fas fa-chart-line" aria-hidden="true"></i> Rank Result</span>
+                    <h1 id="rankResultTitle">Rank Prediction Result</h1>
+                    <div class="candidate-context" aria-label="Candidate result context">
+                        <span>Exam: <strong id="resultExamName">Pending</strong></span>
+                        <span>Roll Number: <strong id="resultRollNumber">Not available</strong></span>
+                    </div>
+                </div>
+                <div class="result-hero-actions">
+                    <button class="btn btn-outline" id="shareResultBtn" type="button"><i class="fas fa-share-alt" aria-hidden="true"></i> Share / Copy</button>
+                    <a class="btn btn-primary" href="rank-predictor.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Rank Predictor</a>
+                </div>
+            </section>
+
+            <p class="trust-note"><i class="fas fa-shield-alt" aria-hidden="true"></i> Rank prediction accuracy improves as more candidates submit data.</p>
+
+            <section class="rank-basis-grid" aria-label="Rank estimates by marks basis">
+                <section class="result-panel rank-basis-card" aria-labelledby="rawRanksTitle">
+                    <div class="panel-heading">
+                        <span>Raw Marks Rank</span>
+                        <h2 id="rawRanksTitle">On the basis of raw marks</h2>
+                    </div>
+                    <div class="metric-grid rank-set-grid">
+                        <article class="metric-card is-primary"><span>Overall Rank</span><strong id="rawOverallRank">Pending</strong></article>
+                        <article class="metric-card"><span>Category Rank</span><strong id="rawCategoryRank">Pending</strong></article>
+                        <article class="metric-card"><span>State/District Rank</span><strong id="rawStateRank">Pending</strong></article>
+                        <article class="metric-card"><span>Shift Rank</span><strong id="rawShiftRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender Rank</span><strong id="rawGenderRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender Category Rank</span><strong id="rawGenderCategoryRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender State/District Rank</span><strong id="rawGenderStateRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender Shift Rank</span><strong id="rawGenderShiftRank">Pending</strong></article>
+                    </div>
+                </section>
+
+                <section class="result-panel rank-basis-card is-normalised" aria-labelledby="normalisedRanksTitle">
+                    <div class="panel-heading">
+                        <span>Normalised Marks Rank</span>
+                        <h2 id="normalisedRanksTitle">On the basis of normalised marks</h2>
+                    </div>
+                    <div class="metric-grid rank-set-grid">
+                        <article class="metric-card is-primary is-green"><span>Overall Rank</span><strong id="normalizedOverallRank">Pending</strong></article>
+                        <article class="metric-card"><span>Category Rank</span><strong id="normalizedCategoryRank">Pending</strong></article>
+                        <article class="metric-card"><span>State/District Rank</span><strong id="normalizedStateRank">Pending</strong></article>
+                        <article class="metric-card"><span>Shift Rank</span><strong id="normalizedShiftRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender Rank</span><strong id="normalizedGenderRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender Category Rank</span><strong id="normalizedGenderCategoryRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender State/District Rank</span><strong id="normalizedGenderStateRank">Pending</strong></article>
+                        <article class="metric-card"><span>Gender Shift Rank</span><strong id="normalizedGenderShiftRank">Pending</strong></article>
+                    </div>
+                </section>
+            </section>
+
+            <section class="result-panel" aria-labelledby="performanceTitle">
+                <div class="panel-heading">
+                    <span>Performance</span>
+                    <h2 id="performanceTitle">Marks and comparison</h2>
+                </div>
+                <div class="metric-grid performance-grid">
+                    <article class="metric-card is-featured"><span>Raw Marks</span><strong id="resultRawMarks">Pending</strong></article>
+                    <article class="metric-card is-featured is-green"><span>Normalised Marks</span><strong id="resultNormalizedMarks">Pending</strong></article>
+                    <article class="metric-card"><span>Percentile</span><strong id="resultPercentile">Pending</strong></article>
+                    <article class="metric-card"><span>Average Marks</span><strong id="resultAverageMarks">Pending</strong></article>
+                    <article class="metric-card"><span>Average Shift Marks</span><strong id="resultAverageShiftMarks">Pending</strong></article>
+                    <article class="metric-card"><span>Category Average Marks</span><strong id="resultCategoryAverageMarks">Pending</strong></article>
+                    <article class="metric-card"><span>Total Submissions</span><strong id="resultTotalSubmissions">Pending</strong></article>
+                    <article class="metric-card"><span>Accuracy Indicator</span><strong id="resultAccuracyIndicator">Pending</strong></article>
+                    <article class="metric-card"><span>Last Updated</span><strong id="resultLastUpdated">Pending</strong></article>
+                </div>
+            </section>
+
+            <section class="result-panel subject-scorecard-panel" aria-labelledby="subjectScorecardTitle">
+                <div class="panel-heading">
+                    <span>Scorecard</span>
+                    <h2 id="subjectScorecardTitle">Subject scorecard</h2>
+                </div>
+                <div class="subject-table-wrap">
+                    <table class="subject-score-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Your Score</th>
+                                <th>Attempted</th>
+                                <th>Correct</th>
+                                <th>Wrong</th>
+                                <th>Avg Score</th>
+                                <th>Accuracy</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultSubjectBody">
+                            <tr>
+                                <td colspan="7">Not available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="share-panel" aria-label="Shareable rank result">
+                <div>
+                    <span>Share Result</span>
+                    <strong id="shareResultText">My GovJobUpdates rank prediction is ready.</strong>
+                </div>
+                <button class="btn btn-outline" id="copyResultBtn" type="button"><i class="fas fa-copy" aria-hidden="true"></i> Copy Summary</button>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GovJobUpdates</h3>
+                <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, and document tools.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="latest-jobs.html">Latest Jobs</a></li>
+                    <li><a href="admitcard.html">Admit Card</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="answer-key.html">Answer Key</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="rank-predictor.html">Rank Predictor</a></li>
+                    <li><a href="dashboard.html">Candidate Dashboard</a></li>
+                    <li><a href="documents.html">Documents</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li>
+                    <li><i class="fas fa-phone"></i> +91 7300627752</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+        </div>
+    </footer>
+<script src="../JS/rank-result.js" defer></script>
+<script src="../JS/script.js"></script>
+<script src="../JS/firebase-config.js"></script>
+<script type="module" src="../JS/firebase-visitors.js"></script>
+</body>
+</html>

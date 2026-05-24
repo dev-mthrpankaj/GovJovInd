@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rank Predictor | GovJobUpdates</title>
-    <meta name="description" content="Advanced rank prediction for government exams using offline and online candidate submitted exam data. Estimate marks, overall rank, category rank, and state rank with GovJobUpdates.">
+    <meta name="description" content="Advanced rank prediction for government exams using offline and online candidate submitted exam data. Estimate marks, overall rank, category rank, and state/district rank with GovJobUpdates.">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260519-premium-ux">
+    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260524-result-page">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -44,10 +44,10 @@
                     <span class="predictor-badge is-soft"><i class="fas fa-lock"></i> Privacy protected</span>
                 </div>
                 <h1 id="rankPredictorTitle">Predict Your Government Exam Rank</h1>
-                <p>Estimate raw marks, normalized marks, overall rank, category rank, and state rank using live candidate data.</p>
+                <p>Estimate raw marks, normalised marks, overall rank, category rank, and state/district rank using live candidate data.</p>
                 <ul class="hero-benefits" aria-label="Rank predictor benefits">
                     <li><i class="fas fa-trophy" aria-hidden="true"></i> Predict your rank</li>
-                    <li><i class="fas fa-layer-group" aria-hidden="true"></i> Check category/state rank</li>
+                    <li><i class="fas fa-layer-group" aria-hidden="true"></i> Check category and state/district rank</li>
                     <li><i class="fas fa-database" aria-hidden="true"></i> Uses live candidate data</li>
                     <li><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy protected</li>
                 </ul>
@@ -101,6 +101,15 @@
 
         <section class="predictor-workspace">
             <div class="forms-column">
+                <aside class="result-flow-card" aria-label="Rank result delivery">
+                    <div class="result-flow-icon" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    <div>
+                        <span>Result Page</span>
+                        <strong>Rank result opens after submit or check rank.</strong>
+                        <p>Your full rank card, performance metrics, subject scorecard, and share option will appear on a separate clean result page.</p>
+                    </div>
+                </aside>
+
                 <form class="predictor-form tab-panel is-active" id="rankSubmitForm" data-panel="submit" role="tabpanel" aria-labelledby="submitTab" aria-busy="false" novalidate>
                     <div class="form-heading">
                         <span>Submit Data</span>
@@ -193,9 +202,9 @@
                                 <select id="category" name="category" required></select>
                                 <span class="field-helper">Choose the category used in your application.</span>
                             </label>
-                            <label class="rp-field" for="state">State
+                            <label class="rp-field" for="state">State/District
                                 <select id="state" name="state" autocomplete="address-level1" required></select>
-                                <span class="field-helper">Used for state rank comparison.</span>
+                                <span class="field-helper">Used for state/district rank comparison.</span>
                             </label>
                         </div>
                     </details>
@@ -328,123 +337,6 @@
                 </form>
             </div>
 
-            <aside class="prediction-result" aria-labelledby="predictionResultTitle">
-                <div class="result-heading">
-                    <span>Result Card</span>
-                    <h2 id="predictionResultTitle">Rank Estimate</h2>
-                </div>
-                <section class="result-section" aria-label="Rank section">
-                    <h3>Main Rank</h3>
-                    <div class="result-grid">
-                        <article class="result-metric">
-                            <span>Overall Rank</span>
-                            <strong id="overallRank">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Category Rank</span>
-                            <strong id="categoryRank">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>State Rank</span>
-                            <strong id="stateRank">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Shift Rank</span>
-                            <strong id="shiftRank">Pending</strong>
-                        </article>
-                    </div>
-                </section>
-                <section class="result-section" aria-label="Gender rank section">
-                    <h3>Gender Rank</h3>
-                    <div class="result-grid">
-                        <article class="result-metric">
-                            <span>Gender Rank</span>
-                            <strong id="genderRank">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Gender Category Rank</span>
-                            <strong id="genderCategoryRank">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Gender State Rank</span>
-                            <strong id="genderStateRank">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Gender Shift Rank</span>
-                            <strong id="genderShiftRank">Pending</strong>
-                        </article>
-                    </div>
-                </section>
-                <section class="result-section" aria-label="Performance section">
-                    <h3>Performance</h3>
-                    <div class="result-grid">
-                        <article class="result-metric featured">
-                            <span>Raw Marks</span>
-                            <strong id="resultExpectedMarks">0.00</strong>
-                        </article>
-                        <article class="result-metric featured normalized-metric">
-                            <span>Normalized Marks</span>
-                            <strong id="resultNormalizedMarks">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Percentile</span>
-                            <strong id="resultPercentile">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Average Marks</span>
-                            <strong id="averageMarks">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Average Shift Marks</span>
-                            <strong id="averageShiftMarks">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Category Average Marks</span>
-                            <strong id="categoryAverageMarks">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Total Submissions</span>
-                            <strong id="totalSubmissions">0</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Accuracy Indicator</span>
-                            <strong id="accuracyIndicator">Pending</strong>
-                        </article>
-                        <article class="result-metric">
-                            <span>Last Updated</span>
-                            <strong id="lastUpdated">Pending</strong>
-                        </article>
-                    </div>
-                </section>
-                <section class="result-section subject-scorecard" aria-label="Subject scorecard">
-                    <h3>Subject Scorecard</h3>
-                    <div class="subject-table-wrap">
-                        <table class="subject-score-table">
-                            <thead>
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>Your Score</th>
-                                    <th>Avg Score</th>
-                                    <th>Accuracy</th>
-                                </tr>
-                            </thead>
-                            <tbody id="subjectAnalysisBody">
-                                <tr class="subject-empty-row">
-                                    <td colspan="4" data-label="Status">Pending</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-                <section class="result-section share-result-card" aria-label="Shareable result">
-                    <div>
-                        <span>Share Result</span>
-                        <strong id="shareResultText">My GovJobUpdates percentile is pending.</strong>
-                    </div>
-                    <button class="btn btn-outline" id="shareResultBtn" type="button"><i class="fas fa-share-alt" aria-hidden="true"></i> Share / Copy</button>
-                </section>
-                <p class="result-note" id="resultNote">Rank prediction accuracy improves as more candidates submit data.</p>
-            </aside>
         </section>
     </main>
 
@@ -489,8 +381,8 @@
 <script src="../JS/rank-predictor-config.js?v=20260506-sheet-exams" defer></script>
 <script src="../JS/rank-predictor-sheet-filter.js?v=disabled-filter1" defer></script>
 <script src="../JS/candidate-auth.js" defer></script>
-<script src="../JS/rank-predictor.js?v=20260507-candidate-session" defer></script>
-<script src="../JS/rank-predictor-accordion-fix.js?v=scrollfix1" defer></script>
+<script src="../JS/rank-predictor.js?v=20260524-result-page" defer></script>
+<script src="../JS/rank-predictor-accordion-fix.js?v=scrollfix2" defer></script>
 <script src="../JS/script.js"></script>
 <script src="../JS/firebase-config.js"></script>
 <script type="module" src="../JS/firebase-visitors.js"></script>

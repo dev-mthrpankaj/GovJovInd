@@ -1358,9 +1358,9 @@ function calculateAnalytics(rows, targetRow, examConfig) {
     normalizedMarks: normalizationEnabled ? Number(targetRow.rawMarks) || 0 : Number(targetRow.rawMarks) || 0
   });
   const rankScoreField = normalizationEnabled ? "normalizedMarks" : "rawMarks";
-  const targetRankMarks = Number(scoredTargetRow[rankScoreField]) || 0;
-
-  const overallRank = calculateTieAwareRank(scoredRows, scoredTargetRow, rankScoreField);
+  const rawRanks = buildRankSet(scoredRows, scoredTargetRow, "rawMarks");
+  const normalizedRanks = buildRankSet(scoredRows, scoredTargetRow, "normalizedMarks");
+  const activeRanks = normalizationEnabled ? normalizedRanks : rawRanks;
   const totalSubmissions = rowsForExam.length;
   const percentile = calculatePercentile(scoredRows, scoredTargetRow, rankScoreField);
   const sameShiftRows = scoredRows.filter(function (row) {
@@ -1377,27 +1377,17 @@ function calculateAnalytics(rows, targetRow, examConfig) {
     normalizedMarks: Number(scoredTargetRow.normalizedMarks),
     normalisedMarks: Number(scoredTargetRow.normalizedMarks),
     percentile: percentile,
-    overallRank: overallRank,
-    categoryRank: calculateTieAwareRank(sameCategoryRows, scoredTargetRow, rankScoreField),
-    stateRank: calculateTieAwareRank(scoredRows.filter(function (row) {
-      return normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
-    }), scoredTargetRow, rankScoreField),
-    shiftRank: calculateTieAwareRank(sameShiftRows, scoredTargetRow, rankScoreField),
-    genderRank: countAtLeast(scoredRows.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender);
-    }), targetRankMarks, rankScoreField),
-    genderCategoryRank: countAtLeast(scoredRows.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender) &&
-        normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
-    }), targetRankMarks, rankScoreField),
-    genderStateRank: countAtLeast(scoredRows.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender) &&
-        normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
-    }), targetRankMarks, rankScoreField),
-    genderShiftRank: countAtLeast(scoredRows.filter(function (row) {
-      return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender) &&
-        normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
-    }), targetRankMarks, rankScoreField),
+    overallRank: activeRanks.overallRank,
+    categoryRank: activeRanks.categoryRank,
+    stateRank: activeRanks.stateRank,
+    shiftRank: activeRanks.shiftRank,
+    genderRank: activeRanks.genderRank,
+    genderCategoryRank: activeRanks.genderCategoryRank,
+    genderStateRank: activeRanks.genderStateRank,
+    genderShiftRank: activeRanks.genderShiftRank,
+    rawRanks: rawRanks,
+    normalizedRanks: normalizedRanks,
+    normalisedRanks: normalizedRanks,
     averageMarks: averageMarks(scoredRows, "rawMarks"),
     averageShiftMarks: averageMarks(sameShiftRows, "rawMarks"),
     categoryAverageMarks: averageMarks(sameCategoryRows, "rawMarks"),
@@ -1406,6 +1396,40 @@ function calculateAnalytics(rows, targetRow, examConfig) {
     accuracyIndicator: getAccuracyIndicator(totalSubmissions),
     rankBasis: normalizationEnabled ? "normalized" : "raw",
     lastUpdated: new Date().toISOString()
+  };
+}
+
+function buildRankSet(scoredRows, scoredTargetRow, scoreField) {
+  const field = scoreField || "rawMarks";
+  const targetRankMarks = Number(scoredTargetRow[field]) || 0;
+  const sameShiftRows = scoredRows.filter(function (row) {
+    return normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
+  });
+  const sameCategoryRows = scoredRows.filter(function (row) {
+    return normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
+  });
+  const sameStateRows = scoredRows.filter(function (row) {
+    return normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
+  });
+  const sameGenderRows = scoredRows.filter(function (row) {
+    return normalizeKey(row.gender) === normalizeKey(scoredTargetRow.gender);
+  });
+
+  return {
+    overallRank: calculateTieAwareRank(scoredRows, scoredTargetRow, field),
+    categoryRank: calculateTieAwareRank(sameCategoryRows, scoredTargetRow, field),
+    stateRank: calculateTieAwareRank(sameStateRows, scoredTargetRow, field),
+    shiftRank: calculateTieAwareRank(sameShiftRows, scoredTargetRow, field),
+    genderRank: countAtLeast(sameGenderRows, targetRankMarks, field),
+    genderCategoryRank: countAtLeast(sameGenderRows.filter(function (row) {
+      return normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
+    }), targetRankMarks, field),
+    genderStateRank: countAtLeast(sameGenderRows.filter(function (row) {
+      return normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
+    }), targetRankMarks, field),
+    genderShiftRank: countAtLeast(sameGenderRows.filter(function (row) {
+      return normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
+    }), targetRankMarks, field)
   };
 }
 

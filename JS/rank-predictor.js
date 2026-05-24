@@ -7,6 +7,8 @@
     const API_INVALID_RESPONSE_MESSAGE = "Invalid backend response.";
     const PROCESSING_TEXT = "Processing...";
     const SHARE_BUTTON_IDLE_HTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share / Copy';
+    const RESULT_STORAGE_KEY = "gju_rank_predictor_latest_result";
+    const RESULT_PAGE_URL = "rank-result.html";
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
     const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
     const state = {
@@ -388,14 +390,13 @@
         if (!section || section.tagName !== "DETAILS") return;
         if (isMobileLayout()) {
             dom.formAccordions.forEach((otherSection) => {
-                const keepSubjectAttempts = target === "attemptDetailsSection" && otherSection.id === "subjectScorecardDetails";
-                if (otherSection !== section && !keepSubjectAttempts) setDetailsOpenSilently(otherSection, false);
+                if (otherSection !== section) setDetailsOpenSilently(otherSection, false);
             });
         }
         setDetailsOpenSilently(section, true);
-        if (target === "attemptDetailsSection") setDetailsOpenSilently(getById("subjectScorecardDetails"), true);
+        if (!isMobileLayout() && target === "attemptDetailsSection") setDetailsOpenSilently(getById("subjectScorecardDetails"), true);
         updateStepIndicators(target);
-        window.setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
+        window.setTimeout(() => scrollToSectionTop(section), 40);
     }
 
     function setDetailsOpenSilently(section, open) {
@@ -405,6 +406,20 @@
         window.setTimeout(() => {
             delete section.dataset.applyingDefault;
         }, 0);
+    }
+
+    function getHeaderOffset() {
+        const header = document.querySelector("header");
+        const height = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+        return Math.max(height + 14, 86);
+    }
+
+    function scrollToSectionTop(section) {
+        if (!section || !document.documentElement.contains(section)) return;
+        window.requestAnimationFrame(() => {
+            const targetTop = Math.max(0, window.scrollY + section.getBoundingClientRect().top - getHeaderOffset());
+            window.scrollTo({ top: targetTop, behavior: "smooth" });
+        });
     }
 
     function bindShareCard() {
@@ -749,7 +764,7 @@
                 }
                 const resultData = getResponseData(data);
                 showMessage("submitMessage", data.message || "Data submitted successfully.", "success");
-                renderResult(resultData, payload);
+                openRankResultPage(resultData, payload);
             })
             .catch(() => {
                 clearResultCard();
@@ -791,12 +806,108 @@
                 }
                 const resultData = getResponseData(data);
                 showMessage("checkMessage", data.message || "Rank found successfully.", "success");
-                renderResult(resultData, payload);
+                openRankResultPage(resultData, payload);
             })
             .catch(() => {
                 clearResultCard();
                 showMessage("checkMessage", getBackendErrorMessage(), "error");
             });
+    }
+
+    function openRankResultPage(resultData, payload) {
+        const stored = storeLatestRankResult(resultData, payload);
+        if (!stored) {
+            const messageId = payload?.action === "checkRank" ? "checkMessage" : "submitMessage";
+            showMessage(messageId, "Result is ready, but your browser blocked local result storage. Please try again.", "error");
+            return;
+        }
+        window.location.href = RESULT_PAGE_URL;
+    }
+
+    function storeLatestRankResult(resultData, payload) {
+        try {
+            const safeResultData = sanitizeForResultStorage(resultData || {});
+            const safePayload = buildSafePayloadContext(payload || {});
+            const marks = safeResultData.rawMarks ?? safeResultData.marks ?? safePayload.rawMarks;
+            const normalizedMarks = calculateNormalizedMarks(safeResultData, safePayload, marks);
+            const snapshot = {
+                resultData: safeResultData,
+                payload: safePayload,
+                examName: safePayload.examName || getSelectedExam()?.examName || "",
+                exam: buildSafeExamContext(getSelectedExam()),
+                derived: {
+                    normalizedMarks
+                },
+                savedAt: new Date().toISOString()
+            };
+            sessionStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(snapshot));
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    function buildSafePayloadContext(payload) {
+        return {
+            action: payload.action || "",
+            examId: payload.examId || "",
+            examName: payload.examName || "",
+            sheetName: payload.sheetName || "",
+            mode: payload.mode || "",
+            rollNumber: payload.rollNumber || "",
+            gender: payload.gender || "",
+            category: payload.category || "",
+            state: payload.state || "",
+            examDate: payload.examDate || "",
+            shift: payload.shift || "",
+            totalQuestions: payload.totalQuestions,
+            totalAttempted: payload.totalAttempted,
+            rightAnswers: payload.rightAnswers,
+            wrongAnswers: payload.wrongAnswers,
+            unattempted: payload.unattempted,
+            marksPerCorrect: payload.marksPerCorrect,
+            negativeMarking: payload.negativeMarking,
+            rawMarks: payload.rawMarks,
+            subjectData: sanitizeForResultStorage(payload.subjectData || [])
+        };
+    }
+
+    function buildSafeExamContext(exam) {
+        if (!exam) return null;
+        return {
+            examId: exam.examId || "",
+            examName: exam.examName || "",
+            totalQuestions: exam.totalQuestions,
+            marksPerCorrect: exam.marksPerCorrect,
+            negativeMarking: exam.negativeMarking,
+            normalization: Boolean(exam.normalization),
+            hasShifts: Boolean(exam.hasShifts),
+            subjects: sanitizeForResultStorage(exam.subjects || [])
+        };
+    }
+
+    function sanitizeForResultStorage(value) {
+        const sensitiveKeys = new Set([
+            "candidatename",
+            "mobile",
+            "mobilenumber",
+            "phone",
+            "phonenumber",
+            "contactnumber",
+            "dob",
+            "dateofbirth",
+            "birthdate",
+            "useragent",
+            "userid",
+            "email"
+        ]);
+        if (Array.isArray(value)) return value.map(sanitizeForResultStorage);
+        if (!value || typeof value !== "object") return value;
+        return Object.entries(value).reduce((safe, [key, entryValue]) => {
+            if (sensitiveKeys.has(String(key).toLowerCase())) return safe;
+            safe[key] = sanitizeForResultStorage(entryValue);
+            return safe;
+        }, {});
     }
 
     function requestBackend(payload, buttonId) {

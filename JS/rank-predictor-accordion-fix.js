@@ -2,6 +2,8 @@
     "use strict";
 
     const MOBILE_QUERY = "(max-width: 767px)";
+    const ACCORDION_SELECTOR = ".form-accordion";
+    const SUMMARY_SELECTOR = ".form-accordion > summary";
 
     function isMobileLayout() {
         return Boolean(window.matchMedia?.(MOBILE_QUERY)?.matches || window.innerWidth <= 767);
@@ -33,13 +35,22 @@
         });
     }
 
+    function setDetailsOpenSilently(section, open) {
+        if (!section || section.tagName !== "DETAILS") return;
+        section.dataset.applyingDefault = "true";
+        section.open = Boolean(open);
+        window.setTimeout(() => {
+            delete section.dataset.applyingDefault;
+        }, 0);
+    }
+
     function openAccordion(section) {
         if (!section || section.tagName !== "DETAILS") return;
         const willOpen = !section.open;
 
         if (isMobileLayout() && willOpen) {
-            document.querySelectorAll(".form-accordion").forEach((other) => {
-                if (other !== section) other.open = false;
+            document.querySelectorAll(ACCORDION_SELECTOR).forEach((other) => {
+                if (other !== section) setDetailsOpenSilently(other, false);
             });
         }
 
@@ -53,7 +64,7 @@
     }
 
     document.addEventListener("click", (event) => {
-        const summary = event.target?.closest?.(".form-accordion > summary");
+        const summary = event.target?.closest?.(SUMMARY_SELECTOR);
         if (!summary) return;
         const section = summary.parentElement;
         if (!section || !document.getElementById("rankPredictorApp")?.contains(section)) return;
@@ -66,7 +77,7 @@
 
     document.addEventListener("keydown", (event) => {
         if (event.key !== "Enter" && event.key !== " ") return;
-        const summary = event.target?.closest?.(".form-accordion > summary");
+        const summary = event.target?.closest?.(SUMMARY_SELECTOR);
         if (!summary) return;
         const section = summary.parentElement;
         if (!section || !document.getElementById("rankPredictorApp")?.contains(section)) return;
