@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2424",
+        "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
+        "organization": "Join Indian Navy",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
+        "totalPosts": "60",
+        "startDate": "2026-05-29",
+        "lastDate": "2026-06-18",
+        "status": "upcoming",
+        "tags": [
+            "Navy",
+            "Defence",
+            "Indian Army"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
+        "detailPage": "./Job_Details/HTML/job-details.html?id=2424",
+        "updatedAt": "2026-05-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -48,30 +72,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
-        "updatedAt": "2026-05-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2424",
-        "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
-        "organization": "Join Indian Navy",
-        "department": "Defence",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
-        "totalPosts": "60",
-        "startDate": "2026-05-29",
-        "lastDate": "2026-06-18",
-        "status": "upcoming",
-        "tags": [
-            "Navy",
-            "Defence",
-            "Indian Army"
-        ],
-        "applyLink": "#",
-        "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2424",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
