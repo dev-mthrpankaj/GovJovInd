@@ -52,6 +52,30 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2428",
+        "title": "NALCO Non Executive Online Form 2026 for 268 Post",
+        "organization": "National Aluminium Company Limited",
+        "department": "Metals",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
+        "totalPosts": "268",
+        "startDate": "2026-05-21",
+        "lastDate": "2026-06-10",
+        "status": "active",
+        "tags": [
+            "almunium",
+            "Public Sector",
+            "Metal"
+        ],
+        "applyLink": "https://recruitment.nhidcl.com/login",
+        "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
+        "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
+        "updatedAt": "2026-05-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -147,30 +171,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "#",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
-        "updatedAt": "2026-05-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2428",
-        "title": "NALCO Non Executive Online Form 2026 for 268 Post",
-        "organization": "National Aluminium Company Limited",
-        "department": "Metals",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
-        "totalPosts": "268",
-        "startDate": "2026-05-21",
-        "lastDate": "2026-06-10",
-        "status": "active",
-        "tags": [
-            "almunium",
-            "Public Sector",
-            "Metal"
-        ],
-        "applyLink": "https://recruitment.nhidcl.com/login",
-        "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
-        "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
