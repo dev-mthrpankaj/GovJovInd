@@ -327,10 +327,10 @@
       "stateReason": "new"
     },
     "jobs:2429": {
-      "updatedAt": "2026-05-24",
-      "hash": "ecbf7e971e86785d6cd96581b74019e115f6d488597603ff035d9bce3afc557c",
+      "updatedAt": "2026-05-25",
+      "hash": "984c83ef5c86c3fc7ed82da7e022595532ee0828fc5edff0002a012e30b493e5",
       "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-      "lastPostedAt": "2026-05-24T03:00:43.034Z",
+      "lastPostedAt": "2026-05-25T10:48:21.979Z",
       "stateReason": "update"
     }
   },
@@ -592,6 +592,13 @@
       "hash": "fbb91e768757ae3e61ae6e0928354390c94f97170246458adeb7afd8964127b2",
       "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
       "lastPostedAt": "2026-05-25T10:24:31.147Z",
+      "stateReason": "new"
+    },
+    "admitCards:2045": {
+      "updatedAt": "2026-05-25",
+      "hash": "95c873484d5ec8cf942b8b0e0e5dc00b89f6edfbbb9e876163a7edc8e6076b70",
+      "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+      "lastPostedAt": "2026-05-25T10:48:22.789Z",
       "stateReason": "new"
     }
   },
