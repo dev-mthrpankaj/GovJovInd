@@ -4,7 +4,7 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
-        "id": "admit-sheet-37",
+        "id": "2045",
         "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Police",
@@ -17,11 +17,11 @@ window.GovJobUpdatesAdmitCards = [
             "Police",
             "MPESB"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://esb.mp.gov.in/e_default.html",
         "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2044",
@@ -40,8 +40,8 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://cdn3.digialm.com/EForms/configuredHtml/1936/97469/login.html",
         "detailPage": "",
         "updatedAt": "2026-05-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "admit-2001",
