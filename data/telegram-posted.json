@@ -313,11 +313,11 @@
       "stateReason": "update"
     },
     "jobs:2426": {
-      "updatedAt": "2026-05-23",
-      "hash": "6a1487b8763b0973f2d29745b686c9a171ca655b9a9444baf1c8370a8828b655",
+      "updatedAt": "2026-05-25",
+      "hash": "28d4adb8a14d27083fefe6e2a9e6bf0eb7895de7fe0705f9d1df9aaaa98b40b8",
       "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
-      "lastPostedAt": "2026-05-23T16:30:58.072Z",
-      "stateReason": "new"
+      "lastPostedAt": "2026-05-25T11:16:17.074Z",
+      "stateReason": "update"
     },
     "jobs:2427": {
       "updatedAt": "2026-05-23",
@@ -327,10 +327,10 @@
       "stateReason": "new"
     },
     "jobs:2429": {
-      "updatedAt": "2026-05-24",
-      "hash": "ecbf7e971e86785d6cd96581b74019e115f6d488597603ff035d9bce3afc557c",
+      "updatedAt": "2026-05-25",
+      "hash": "984c83ef5c86c3fc7ed82da7e022595532ee0828fc5edff0002a012e30b493e5",
       "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-      "lastPostedAt": "2026-05-24T03:00:43.034Z",
+      "lastPostedAt": "2026-05-25T10:48:21.979Z",
       "stateReason": "update"
     }
   },
@@ -585,6 +585,20 @@
       "hash": "430c3bc25519a6d639428c3d9185877196f1c58c99933e89dbda498208cfb498",
       "title": "UP B.Ed Admit Card 2026",
       "lastPostedAt": "2026-05-25T01:37:59.694Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-38": {
+      "updatedAt": "2026-05-25",
+      "hash": "fbb91e768757ae3e61ae6e0928354390c94f97170246458adeb7afd8964127b2",
+      "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+      "lastPostedAt": "2026-05-25T10:24:31.147Z",
+      "stateReason": "new"
+    },
+    "admitCards:2045": {
+      "updatedAt": "2026-05-25",
+      "hash": "95c873484d5ec8cf942b8b0e0e5dc00b89f6edfbbb9e876163a7edc8e6076b70",
+      "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+      "lastPostedAt": "2026-05-25T10:48:22.789Z",
       "stateReason": "new"
     }
   },

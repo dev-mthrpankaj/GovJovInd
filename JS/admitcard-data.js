@@ -11,6 +11,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-04",
+        "examEndDate": "",
         "releaseDate": "",
         "status": "available",
         "tags": [
@@ -24,6 +25,26 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes"
     },
     {
+        "id": "2045",
+        "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-10",
+        "examEndDate": "",
+        "releaseDate": "2026-05-25",
+        "status": "available",
+        "tags": [
+            "Bihar Police"
+        ],
+        "downloadLink": "https://apply-bpssc.com/bpssc_1_2026_we_admitcards/searchApplication",
+        "detailPage": "",
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2044",
         "title": "UP B.Ed Admit Card 2026",
         "organization": "Uttar Pradesh B.Ed. Joint Entrance Examination",
@@ -31,6 +52,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-05-31",
+        "examEndDate": "",
         "releaseDate": "2026-05-22",
         "status": "available",
         "tags": [
@@ -51,6 +73,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-04-24",
         "status": "available",
         "tags": [
@@ -72,6 +95,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-08",
+        "examEndDate": "",
         "releaseDate": "soon",
         "status": "not available",
         "tags": [
@@ -93,6 +117,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2025",
         "examDate": "2026-05-21",
+        "examEndDate": "",
         "releaseDate": "2026-05-19",
         "status": "available",
         "tags": [
@@ -114,6 +139,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-05-24",
+        "examEndDate": "",
         "releaseDate": "2026-05-17",
         "status": "available",
         "tags": [
@@ -137,6 +163,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-05-21",
+        "examEndDate": "",
         "releaseDate": "2026-05-16",
         "status": "available",
         "tags": [
@@ -158,6 +185,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam City",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -179,6 +207,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -200,6 +229,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -221,6 +251,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -242,6 +273,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam City",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -263,6 +295,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam City",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -284,6 +317,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -305,6 +339,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -326,6 +361,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -347,6 +383,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -368,6 +405,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -389,6 +427,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -410,6 +449,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "upcoming",
         "tags": [
@@ -431,6 +471,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -452,6 +493,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -473,6 +515,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Interview Letter",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -494,6 +537,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Date Sheet",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "upcoming",
         "tags": [
@@ -515,6 +559,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -536,6 +581,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -557,6 +603,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -578,6 +625,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -599,6 +647,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -620,6 +669,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "upcoming",
         "tags": [
@@ -641,6 +691,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "upcoming",
         "tags": [
@@ -662,6 +713,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Interview Schedule",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "upcoming",
         "tags": [
@@ -683,6 +735,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Exam Date",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "upcoming",
         "tags": [
@@ -704,6 +757,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -725,6 +779,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [
@@ -746,6 +801,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "",
+        "examEndDate": "",
         "releaseDate": "2026-05-01",
         "status": "available",
         "tags": [

@@ -4,6 +4,55 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2426",
+        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "Education",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduate and Masters (View Details for More Information)",
+        "totalPosts": "3951",
+        "startDate": "2026-05-25",
+        "lastDate": "2026-06-23",
+        "status": "upcoming",
+        "tags": [
+            "Education",
+            "Rajsthan",
+            "Teacher",
+            "RPSC",
+            "Computer"
+        ],
+        "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
+        "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
+        "detailPage": "./Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
+        "id": "2429",
+        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
+        "organization": "EDCIL India Limited",
+        "department": "Medical Education",
+        "category": "Central Government",
+        "year": "",
+        "qualification": "10+2 (View Details for more Information)",
+        "totalPosts": "879",
+        "startDate": "2026-05-22",
+        "lastDate": "2026-06-04",
+        "status": "active",
+        "tags": [
+            "Medical",
+            "Physiotherapy"
+        ],
+        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
+        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
+        "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2424",
         "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
         "organization": "Join Indian Navy",
@@ -76,29 +125,6 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "2429",
-        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-        "organization": "EDCIL India Limited",
-        "department": "Medical Education",
-        "category": "Public Sector",
-        "year": "",
-        "qualification": "10+2 (View Details for more Information)",
-        "totalPosts": "879",
-        "startDate": "2026-05-22",
-        "lastDate": "2026-06-04",
-        "status": "active",
-        "tags": [
-            "Medical",
-            "Physiotherapy"
-        ],
-        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
-        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
-        "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
-        "updatedAt": "2026-05-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2422",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
@@ -143,32 +169,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
-        "updatedAt": "2026-05-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2426",
-        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Education",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduate and Masters (View Details for More Information)",
-        "totalPosts": "3951",
-        "startDate": "2026-05-25",
-        "lastDate": "2026-06-23",
-        "status": "upcoming",
-        "tags": [
-            "Education",
-            "Rajsthan",
-            "Teacher",
-            "RPSC",
-            "Computer"
-        ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -1086,6 +1086,26 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2430",
+        "title": "UGC NET June 2026 Online Form",
+        "organization": "The University Grants Commission (UGC)",
+        "department": "Education",
+        "category": "Education",
+        "year": "2026",
+        "qualification": "Online Form Extend",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
