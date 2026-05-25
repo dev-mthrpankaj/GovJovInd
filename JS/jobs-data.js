@@ -1096,7 +1096,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "",
         "year": "2026",
-        "qualification": "",
+        "qualification": "Online Form Extend",
         "totalPosts": "",
         "startDate": "",
         "lastDate": "",

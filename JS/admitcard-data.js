@@ -794,5 +794,23 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "admit-sheet-38",
+        "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
