@@ -4,6 +4,32 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2426",
+        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "Education",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduate and Masters (View Details for More Information)",
+        "totalPosts": "3951",
+        "startDate": "2026-05-25",
+        "lastDate": "2026-06-23",
+        "status": "upcoming",
+        "tags": [
+            "Education",
+            "Rajsthan",
+            "Teacher",
+            "RPSC",
+            "Computer"
+        ],
+        "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
+        "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
+        "detailPage": "./Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2429",
         "title": "EDCIL Various Post Online Form 2026 for 879 Post",
         "organization": "EDCIL India Limited",
@@ -143,32 +169,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
-        "updatedAt": "2026-05-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2426",
-        "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Education",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduate and Masters (View Details for More Information)",
-        "totalPosts": "3951",
-        "startDate": "2026-05-25",
-        "lastDate": "2026-06-23",
-        "status": "upcoming",
-        "tags": [
-            "Education",
-            "Rajsthan",
-            "Teacher",
-            "RPSC",
-            "Computer"
-        ],
-        "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
-        "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes"
