@@ -602,6 +602,10 @@ body {
     box-shadow: none;
 }
 
+.attempt-entry-section[hidden] {
+    display: none;
+}
+
 .form-accordion {
     gap: 0;
     padding: 0;

@@ -24,11 +24,8 @@
     }
 
     function setStepperActive(sectionId) {
-        const normalized = sectionId === "subjectScorecardDetails" ? "attemptDetailsSection" : sectionId;
         document.querySelectorAll(".form-stepper [data-step-for]").forEach((item) => {
-            const stepFor = item.getAttribute("data-step-for");
-            const itemTarget = stepFor === "subjectScorecardDetails" ? "attemptDetailsSection" : stepFor;
-            const active = itemTarget === normalized;
+            const active = item.getAttribute("data-step-for") === sectionId;
             item.classList.toggle("is-active", active);
             if (active) item.setAttribute("aria-current", "step");
             else item.removeAttribute("aria-current");

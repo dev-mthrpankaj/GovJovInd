@@ -259,6 +259,7 @@
         setText("normalizationLabel", exam.normalization ? "Yes" : "No");
         setFixedExamInfo(exam);
         renderSubjectInputs(exam);
+        syncAttemptEntrySections(exam);
         setAggregateAttemptFieldsReadonly(exam);
         populateSelect(getById("category"), exam.categories || []);
         populateSelect(getById("state"), exam.states || []);
@@ -394,7 +395,6 @@
             });
         }
         setDetailsOpenSilently(section, true);
-        if (!isMobileLayout() && target === "attemptDetailsSection") setDetailsOpenSilently(getById("subjectScorecardDetails"), true);
         updateStepIndicators(target);
         window.setTimeout(() => scrollToSectionTop(section), 40);
     }
@@ -462,7 +462,6 @@
     }
 
     function normalizeStepTarget(stepFor) {
-        if (stepFor === "subjectScorecardDetails") return "attemptDetailsSection";
         return stepFor || "candidateDetailsSection";
     }
 
@@ -482,7 +481,7 @@
         if (stepFor === "examDetailsSection") {
             return ["submitExamName", "examDate"].every((id) => String(getById(id)?.value || "").trim());
         }
-        if (stepFor === "attemptDetailsSection") {
+        if (stepFor === "attemptDetailsSection" || stepFor === "subjectScorecardDetails") {
             return readNumber("totalAttempted") > 0 || readNumber("rightAnswers") > 0 || readNumber("wrongAnswers") > 0;
         }
         if (stepFor === "dataConsent") return Boolean(getById("dataConsent")?.checked);
@@ -492,6 +491,10 @@
     function applyAccordionDefaults() {
         const mobile = isMobileLayout();
         dom.formAccordions.forEach((section) => {
+            if (section.hidden) {
+                setDetailsOpenSilently(section, false);
+                return;
+            }
             if (mobile && section.dataset.userToggled === "true") return;
             section.dataset.applyingDefault = "true";
             section.open = !mobile || section.id === "candidateDetailsSection";
@@ -1156,6 +1159,24 @@
                 }
             });
         });
+    }
+
+    function syncAttemptEntrySections(exam) {
+        const hasSubjects = Array.isArray(exam?.subjects) && exam.subjects.length > 0;
+        const manualSection = getById("attemptDetailsSection");
+        const subjectSection = getById("subjectScorecardDetails");
+        const step = document.querySelector("[data-attempt-step]");
+
+        manualSection?.toggleAttribute("hidden", hasSubjects);
+        subjectSection?.toggleAttribute("hidden", !hasSubjects);
+        if (manualSection?.hidden) setDetailsOpenSilently(manualSection, false);
+        if (subjectSection?.hidden) setDetailsOpenSilently(subjectSection, false);
+
+        if (step) {
+            step.setAttribute("data-step-for", hasSubjects ? "subjectScorecardDetails" : "attemptDetailsSection");
+            const label = step.querySelector("strong");
+            if (label) label.textContent = hasSubjects ? "Subjects" : "Attempts";
+        }
     }
 
     function collectSubjectData(exam) {
