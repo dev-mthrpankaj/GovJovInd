@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-35",
+        "title": "IIT JEE Advanced Admissions 2026 Answer Key",
+        "organization": "IIT Roorkee",
+        "department": "Engineering",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-05-25",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "B.TECH"
+        ],
+        "downloadLink": "",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2031",
         "title": "UPSSSC Lekhpal Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
@@ -792,26 +814,6 @@ window.GovJobUpdatesAnswerKeys = [
         "objectionLink": "#",
         "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "answerkey-sheet-35",
-        "title": "IIT JEE Advanced Admissions 2026 Answer Key",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "",
-        "objectionLastDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "objectionLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
