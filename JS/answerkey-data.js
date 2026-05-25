@@ -794,5 +794,25 @@ window.GovJobUpdatesAnswerKeys = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "answerkey-sheet-35",
+        "title": "IIT JEE Advanced Admissions 2026 Answer Key",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "objectionLastDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
