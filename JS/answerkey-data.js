@@ -18,7 +18,7 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [
             "B.TECH"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://jeeadv.ac.in/documents/p1_provisional_keys.pdf",
         "objectionLink": "",
         "detailPage": "",
         "updatedAt": "2026-05-25",
