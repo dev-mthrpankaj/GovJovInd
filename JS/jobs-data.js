@@ -4,6 +4,29 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2429",
+        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
+        "organization": "EDCIL India Limited",
+        "department": "Medical Education",
+        "category": "Central Government",
+        "year": "",
+        "qualification": "10+2 (View Details for more Information)",
+        "totalPosts": "879",
+        "startDate": "2026-05-22",
+        "lastDate": "2026-06-04",
+        "status": "active",
+        "tags": [
+            "Medical",
+            "Physiotherapy"
+        ],
+        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
+        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
+        "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2424",
         "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
         "organization": "Join Indian Navy",
@@ -71,29 +94,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://recruitment.nhidcl.com/login",
         "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
         "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
-        "updatedAt": "2026-05-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2429",
-        "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-        "organization": "EDCIL India Limited",
-        "department": "Medical Education",
-        "category": "Central Government",
-        "year": "",
-        "qualification": "10+2 (View Details for more Information)",
-        "totalPosts": "879",
-        "startDate": "2026-05-22",
-        "lastDate": "2026-06-04",
-        "status": "active",
-        "tags": [
-            "Medical",
-            "Physiotherapy"
-        ],
-        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
-        "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
-        "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes"
