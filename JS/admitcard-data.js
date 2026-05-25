@@ -25,6 +25,26 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes"
     },
     {
+        "id": "admit-sheet-38",
+        "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-10",
+        "examEndDate": "",
+        "releaseDate": "2026-05-25",
+        "status": "available",
+        "tags": [
+            "Bihar Police"
+        ],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2044",
         "title": "UP B.Ed Admit Card 2026",
         "organization": "Uttar Pradesh B.Ed. Joint Entrance Examination",
@@ -792,24 +812,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-sheet-38",
-        "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
-        "organization": "Bihar Police Subordinate Services Commission",
-        "department": "State Police",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
