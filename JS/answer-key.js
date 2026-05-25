@@ -1,6 +1,7 @@
 (function () {
     "use strict";
 
+    const RANK_CHECK_WINDOW_DAYS = 45;
     const menuToggle = document.getElementById("menuToggle");
     const mainNav = document.getElementById("mainNav");
 
@@ -154,6 +155,36 @@
         return diff >= 0 && diff <= 3;
     }
 
+    function getRankCheckAvailability(item) {
+        const releaseDate = parseDate(item.releaseDate);
+        const current = today();
+        if (!releaseDate || releaseDate > current) {
+            return {
+                enabled: false,
+                message: "Available after the answer key is released."
+            };
+        }
+
+        const expiresAt = new Date(releaseDate);
+        expiresAt.setDate(expiresAt.getDate() + RANK_CHECK_WINDOW_DAYS);
+        if (current > expiresAt) {
+            return {
+                enabled: false,
+                message: `Closed ${RANK_CHECK_WINDOW_DAYS} days after answer key release.`
+            };
+        }
+
+        return {
+            enabled: true,
+            message: `Available until ${formatDateValue(expiresAt)}.`
+        };
+    }
+
+    function formatDateValue(date) {
+        if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "Not specified";
+        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
     function statusLabel(status) {
         return {
             "available": "Available",
@@ -275,6 +306,10 @@
         const detailAction = detailPage
             ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
             : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+        const rankCheck = getRankCheckAvailability(item);
+        const rankCheckAction = rankCheck.enabled
+            ? `<a href="rank-predictor.html" class="btn rank-check-btn is-active" title="${escapeHtml(rankCheck.message)}">Check Your Rank</a>`
+            : `<button class="btn rank-check-btn is-disabled" type="button" title="${escapeHtml(rankCheck.message)}" disabled>Check Your Rank</button>`;
 
         return `
             <article class="record-card">
@@ -295,6 +330,7 @@
                     ${downloadAction}
                     ${objectionAction}
                     ${detailAction}
+                    ${rankCheckAction}
                 </div>
             </article>
         `;
@@ -396,5 +432,5 @@
         loadItemsFromSheet();
     });
 
-    window.answerKeysPage = { getStatus, isNew, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
+    window.answerKeysPage = { getStatus, isNew, getRankCheckAvailability, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
 }());

@@ -1,2 +1,23 @@
 /* Shared listing styles for Answer Key page */
 @import url("./admitcard.css");
+
+.answer-key-page .rank-check-btn.is-active {
+    border-color: #15803d;
+    background: #15803d;
+    color: #ffffff;
+}
+
+.answer-key-page .rank-check-btn.is-active:hover,
+.answer-key-page .rank-check-btn.is-active:focus-visible {
+    border-color: #166534;
+    background: #166534;
+    color: #ffffff;
+}
+
+.answer-key-page .rank-check-btn.is-disabled,
+.answer-key-page .rank-check-btn.is-disabled:disabled {
+    border-color: #b91c1c;
+    background: #dc2626;
+    color: #ffffff;
+    cursor: not-allowed;
+}
