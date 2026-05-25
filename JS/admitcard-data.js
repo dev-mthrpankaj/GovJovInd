@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-37",
+        "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-04",
+        "releaseDate": "",
+        "status": "available",
+        "tags": [
+            "Police",
+            "MPESB"
+        ],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2044",
         "title": "UP B.Ed Admit Card 2026",
         "organization": "Uttar Pradesh B.Ed. Joint Entrance Examination",
@@ -736,23 +756,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-sheet-37",
-        "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
-        "organization": "Madhya Pradesh Employee Selection Board",
-        "department": "",
-        "category": "",
-        "year": "",
-        "examDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
