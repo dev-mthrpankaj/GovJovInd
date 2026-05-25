@@ -104,6 +104,22 @@
         return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
     }
 
+    function getExamStartDate(item) {
+        return parseDate(item.examDate);
+    }
+
+    function getExamEndDate(item) {
+        return parseDate(item.examEndDate) || getExamStartDate(item);
+    }
+
+    function formatExamDates(item) {
+        const startDate = getExamStartDate(item);
+        const endDate = getExamEndDate(item);
+        if (!startDate) return "Not specified";
+        if (!endDate || endDate.getTime() === startDate.getTime()) return formatDate(item.examDate);
+        return `${formatDate(item.examDate)} - ${formatDate(item.examEndDate)}`;
+    }
+
     function getInlineAdFrequency() {
         const configuredFrequency = Number(window.ADS_CONFIG && window.ADS_CONFIG.inlineFrequency);
         return Number.isFinite(configuredFrequency) && configuredFrequency > 0 ? configuredFrequency : 6;
@@ -264,7 +280,7 @@
         const sortBy = elements.sort ? elements.sort.value : "latest";
         return [...filteredItems].sort((first, second) => {
             if (sortBy === "exam") {
-                return (parseDate(first.examDate) || new Date(8640000000000000)) - (parseDate(second.examDate) || new Date(8640000000000000));
+                return (getExamStartDate(first) || new Date(8640000000000000)) - (getExamStartDate(second) || new Date(8640000000000000));
             }
             if (sortBy === "objection") {
                 const firstDate = parseDate(first.objectionLastDate);
@@ -321,7 +337,7 @@
                     <div class="record-badges">${renderBadges(item)}</div>
                 </div>
                 <dl class="record-meta">
-                    <div><dt>Exam Date</dt><dd>${formatDate(item.examDate)}</dd></div>
+                    <div><dt>Exam Dates</dt><dd>${formatExamDates(item)}</dd></div>
                     <div><dt>Release Date</dt><dd>${formatDate(item.releaseDate)}</dd></div>
                     <div><dt>Objection Last Date</dt><dd>${formatDate(item.objectionLastDate)}</dd></div>
                     <div><dt>Updated</dt><dd>${formatDate(item.updatedAt)}</dd></div>
@@ -432,5 +448,5 @@
         loadItemsFromSheet();
     });
 
-    window.answerKeysPage = { getStatus, isNew, getRankCheckAvailability, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
+    window.answerKeysPage = { getStatus, isNew, getRankCheckAvailability, formatExamDates, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
 }());

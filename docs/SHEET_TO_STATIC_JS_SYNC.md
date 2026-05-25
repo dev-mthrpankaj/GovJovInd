@@ -80,7 +80,7 @@ window.GovJobUpdatesJobs
 Expected fields:
 
 ```text
-id, title, organization, department, category, year, examDate, releaseDate, status, tags, downloadLink, detailPage, updatedAt
+id, title, organization, department, category, year, examDate, examEndDate, releaseDate, status, tags, downloadLink, detailPage, updatedAt
 ```
 
 Generated variable:
@@ -89,13 +89,17 @@ Generated variable:
 window.GovJobUpdatesAdmitCards
 ```
 
+In the Admit Cards sheet, use `Exam Date` for the first exam date and `Exam Day Over` (`examEndDate`) for the final exam date. For a one-day exam, `Exam Day Over` can be left blank.
+
 ### Answer Keys
 
 Expected fields:
 
 ```text
-id, title, organization, department, category, year, examDate, releaseDate, objectionLastDate, status, tags, downloadLink, objectionLink, detailPage, updatedAt
+id, title, organization, department, category, year, examDate, examEndDate, releaseDate, objectionLastDate, status, tags, downloadLink, objectionLink, detailPage, updatedAt
 ```
+
+In the Answer Keys sheet, use `Exam Date` for the first exam date and `Exam Day Over` (`examEndDate`) for the final exam date. For a one-day exam, `Exam Day Over` can be left blank.
 
 Generated variable:
 

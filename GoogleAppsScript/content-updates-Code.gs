@@ -7,7 +7,7 @@ const TELEGRAM_SAFE_FIELDS = [
 ];
 
 function withTelegramSafeFields(fields) {
-  return fields.concat(TELEGRAM_SAFE_FIELDS);
+  return (Array.isArray(fields) ? fields : []).concat(TELEGRAM_SAFE_FIELDS);
 }
 
 const CONTENT_SHEETS = {
@@ -44,6 +44,7 @@ const CONTENT_SHEETS = {
       ["Category", "category"],
       ["Year", "year"],
       ["Exam Date", "examDate", "date"],
+      ["Exam Day Over", "examEndDate", "date"],
       ["Release Date", "releaseDate", "date"],
       ["Status", "status"],
       ["Tags", "tags", "tags"],
@@ -81,6 +82,7 @@ const CONTENT_SHEETS = {
       ["Category", "category"],
       ["Year", "year"],
       ["Exam Date", "examDate", "date"],
+      ["Exam Day Over", "examEndDate", "date"],
       ["Release Date", "releaseDate", "date"],
       ["Objection Last Date", "objectionLastDate", "date"],
       ["Status", "status"],
@@ -142,6 +144,86 @@ function setupContentSheets() {
     const sheet = getOrCreateContentSheet(spreadsheet, config);
     ensureContentHeaders(sheet, config);
   });
+}
+
+function addExamDayOverColumn() {
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  const headerName = "Exam Day Over";
+  const oldHeaderName = "Exam Last Date";
+  const messages = ["admitCards", "answerKeys"].map(function (type) {
+    const config = CONTENT_SHEETS[type];
+    const sheetName = config.sheetName;
+    const sheet = spreadsheet.getSheetByName(sheetName) || spreadsheet.insertSheet(sheetName);
+    let action = "already exists";
+    let currentHeaders = sheet.getLastColumn() > 0
+      ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+      : [];
+    let headerMap = buildContentHeaderMap(currentHeaders);
+    const hadHeader = getHeaderIndex(headerMap, headerName) !== undefined;
+    const oldIndex = getHeaderIndex(headerMap, oldHeaderName);
+
+    if (!hadHeader && oldIndex !== undefined) {
+      sheet.getRange(1, oldIndex + 1).setValue(headerName);
+      action = "renamed";
+    } else if (!hadHeader) {
+      action = "added";
+    }
+
+    if (!currentHeaders.some(function (header) { return String(header || "").trim(); })) {
+      ensureContentHeaders(sheet, config);
+    }
+
+    currentHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    headerMap = buildContentHeaderMap(currentHeaders);
+    const examDateIndex = getHeaderIndex(headerMap, "Exam Date");
+    let examDayOverIndex = getHeaderIndex(headerMap, headerName);
+
+    if (examDateIndex === undefined) {
+      return "Exam Date column not found in " + sheetName + "; Exam Day Over not added.";
+    }
+
+    const targetColumn = examDateIndex + 2;
+    if (examDayOverIndex === undefined) {
+      sheet.insertColumnAfter(examDateIndex + 1);
+      sheet.getRange(1, targetColumn).setValue(headerName);
+      examDayOverIndex = targetColumn - 1;
+    } else if (examDayOverIndex + 1 !== targetColumn) {
+      const rowCount = Math.max(sheet.getLastRow(), 1);
+      sheet.insertColumnAfter(examDateIndex + 1);
+      let sourceColumn = examDayOverIndex + 1;
+      if (sourceColumn >= targetColumn) sourceColumn += 1;
+      sheet.getRange(1, sourceColumn, rowCount, 1)
+        .copyTo(sheet.getRange(1, targetColumn, rowCount, 1));
+      sheet.deleteColumn(sourceColumn);
+      if (action === "already exists") action = "moved";
+    }
+
+    sheet.getRange(1, targetColumn)
+      .setBackground("#34a853")
+      .setFontColor("#ffffff")
+      .setFontWeight("bold");
+
+    if (action === "already exists") {
+      return "Exam Day Over is already after Exam Date in " + sheetName + ".";
+    }
+    if (action === "renamed") {
+      return "Exam Last Date renamed and moved after Exam Date in " + sheetName + ".";
+    }
+    if (action === "moved") {
+      return "Exam Day Over moved after Exam Date in " + sheetName + ".";
+    }
+    return "Exam Day Over column added after Exam Date in " + sheetName + ".";
+  });
+
+  const message = messages.join(" ");
+  SpreadsheetApp.flush();
+  spreadsheet.toast(message, "Column Setup Done", 10);
+  Logger.log(message);
+  return message;
+}
+
+function addExamLastDateColumn() {
+  return addExamDayOverColumn();
 }
 
 function addContentLiveTestRows() {
@@ -220,6 +302,7 @@ function buildContentLiveTestItems(today) {
       category: "Admit Card",
       year: "2026",
       examDate: today,
+      examEndDate: today,
       releaseDate: today,
       status: "available",
       tags: ["Live Test", "Google Sheet"],
@@ -247,6 +330,7 @@ function buildContentLiveTestItems(today) {
       category: "Answer Key",
       year: "2026",
       examDate: today,
+      examEndDate: today,
       releaseDate: today,
       objectionLastDate: today,
       status: "available",

@@ -103,6 +103,22 @@
         return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
     }
 
+    function getExamStartDate(item) {
+        return parseDate(item.examDate);
+    }
+
+    function getExamEndDate(item) {
+        return parseDate(item.examEndDate) || getExamStartDate(item);
+    }
+
+    function formatExamDates(item) {
+        const startDate = getExamStartDate(item);
+        const endDate = getExamEndDate(item);
+        if (!startDate) return "Not specified";
+        if (!endDate || endDate.getTime() === startDate.getTime()) return formatDate(item.examDate);
+        return `${formatDate(item.examDate)} - ${formatDate(item.examEndDate)}`;
+    }
+
     function getInlineAdFrequency() {
         const configuredFrequency = Number(window.ADS_CONFIG && window.ADS_CONFIG.inlineFrequency);
         return Number.isFinite(configuredFrequency) && configuredFrequency > 0 ? configuredFrequency : 6;
@@ -136,11 +152,11 @@
 
     function getStatus(item) {
         const current = today();
-        const examDate = parseDate(item.examDate);
+        const examEndDate = getExamEndDate(item);
         const releaseDate = parseDate(item.releaseDate);
         const hasLink = Boolean(normalizeActionUrl(item.downloadLink));
 
-        if (examDate && examDate < current) return "exam-over";
+        if (examEndDate && examEndDate < current) return "exam-over";
         if (releaseDate && releaseDate > current) return "upcoming";
         if (hasLink && releaseDate && releaseDate <= current) return "available";
         if (item.status === "available" || item.status === "upcoming") return item.status;
@@ -236,7 +252,7 @@
                 const firstPast = getStatus(first) === "exam-over";
                 const secondPast = getStatus(second) === "exam-over";
                 if (firstPast !== secondPast) return firstPast ? 1 : -1;
-                return (parseDate(first.examDate) || new Date(8640000000000000)) - (parseDate(second.examDate) || new Date(8640000000000000));
+                return (getExamStartDate(first) || new Date(8640000000000000)) - (getExamStartDate(second) || new Date(8640000000000000));
             }
             if (sortBy === "release") {
                 return (parseDate(second.releaseDate) || new Date(0)) - (parseDate(first.releaseDate) || new Date(0));
@@ -280,7 +296,7 @@
                     <div class="record-badges">${renderBadges(item)}</div>
                 </div>
                 <dl class="record-meta">
-                    <div><dt>Exam Date</dt><dd>${formatDate(item.examDate)}</dd></div>
+                    <div><dt>Exam Dates</dt><dd>${formatExamDates(item)}</dd></div>
                     <div><dt>Release Date</dt><dd>${formatDate(item.releaseDate)}</dd></div>
                     <div><dt>Updated</dt><dd>${formatDate(item.updatedAt)}</dd></div>
                 </dl>
@@ -388,5 +404,5 @@
         loadItemsFromSheet();
     });
 
-    window.admitCardsPage = { getStatus, isNew, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
+    window.admitCardsPage = { getStatus, isNew, formatExamDates, filterItems, sortItems, renderItems, renderEmptyState, resetFilters, loadMore };
 }());
