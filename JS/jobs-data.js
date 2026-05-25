@@ -167,7 +167,7 @@ window.GovJobUpdatesJobs = [
             "Computer"
         ],
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
-        "officialNotification": "#",
+        "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",

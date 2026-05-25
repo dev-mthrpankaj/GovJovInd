@@ -18,7 +18,7 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [
             "B.TECH"
         ],
-        "downloadLink": "https://rojgarresult.com/iit-jee-advanced-2026/",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "",
         "updatedAt": "2026-05-25",
