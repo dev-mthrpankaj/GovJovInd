@@ -166,7 +166,7 @@ window.GovJobUpdatesJobs = [
             "RPSC",
             "Computer"
         ],
-        "applyLink": "#",
+        "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "#",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2426",
         "updatedAt": "2026-05-23",
