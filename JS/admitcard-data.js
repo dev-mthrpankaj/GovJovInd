@@ -738,5 +738,22 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "admit-sheet-37",
+        "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
