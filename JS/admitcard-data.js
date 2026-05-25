@@ -39,7 +39,7 @@ window.GovJobUpdatesAdmitCards = [
             "Bihar Police"
         ],
         "downloadLink": "https://apply-bpssc.com/bpssc_1_2026_we_admitcards/searchApplication",
-        "detailPage": "https://rojgarresult.com/bpssc-bihar-police-havildar-clerk-2026/",
+        "detailPage": "",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"

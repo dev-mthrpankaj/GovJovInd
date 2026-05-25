@@ -18,12 +18,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [
             "B.TECH"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://rojgarresult.com/iit-jee-advanced-2026/",
         "objectionLink": "",
         "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2031",
