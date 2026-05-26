@@ -99,6 +99,29 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "job-sheet-48",
+        "title": "Rajasthan Staff Selection Board Computer Instructor Recruitment 2026",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "OPERATOR",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Graduate (View Details For More Information)",
+        "totalPosts": "3951",
+        "startDate": "2026-05-25",
+        "lastDate": "2026-06-23",
+        "status": "active",
+        "tags": [
+            "RSSB",
+            "Rajasthan"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2424",
         "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
         "organization": "Join Indian Navy",
@@ -1108,26 +1131,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "job-sheet-48",
-        "title": "Rajasthan Staff Selection Board Computer Instructor Recruitment 2026",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "OPERATOR",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduate (View Details For More Information)",
-        "totalPosts": "3951",
-        "startDate": "2026-04-29",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
