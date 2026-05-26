@@ -954,7 +954,7 @@
 
 .lekhpal-premium .side-list li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(7.25rem, 42%) minmax(0, 1fr);
   align-items: center;
   gap: .75rem;
   min-width: 0;
@@ -976,6 +976,8 @@
   font-size: .76rem;
   font-weight: 900;
   text-transform: uppercase;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .lekhpal-premium .lekhpal-side-rail dd {
@@ -1171,6 +1173,18 @@
 }
 
 @media (max-width: 640px) {
+  .job-summary-list li,
+  .lekhpal-premium .side-list li {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: .18rem;
+  }
+
+  .job-summary-list strong,
+  .lekhpal-premium .side-list strong {
+    text-align: left;
+  }
+
   .job-detail-header-container {
     min-height: 68px;
     padding: .55rem .75rem;

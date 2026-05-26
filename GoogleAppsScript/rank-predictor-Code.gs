@@ -357,8 +357,8 @@ function submitData(data) {
     });
   }
 
-  const rankData = calculateAnalytics(refreshedRows, targetRow, examConfig);
-  writeAnalytics(sheet, refreshedMap, targetRow.rowNumber, rankData);
+  const refreshedAnalytics = recalculateStoredAnalytics(sheet, refreshedMap, refreshedRows, examConfig);
+  const rankData = getAnalyticsForRow(refreshedAnalytics, targetRow.rowNumber) || calculateAnalytics(refreshedRows, targetRow, examConfig);
 
   return sendJSON({
     success: true,
@@ -562,6 +562,28 @@ function setupCandidateLoginSheets() {
     if (!exam.sheetName || exam.disabled) return;
     ensureSheetSchema(getSheetByExam(exam.sheetName, spreadsheet));
   });
+}
+
+function recalculateAllRankPredictorAnalytics() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const summary = [];
+
+  getRankPredictorExamConfigs(spreadsheet).exams.forEach(function (examConfig) {
+    if (!examConfig.sheetName || examConfig.disabled) return;
+    const sheet = spreadsheet.getSheetByName(examConfig.sheetName);
+    if (!sheet) return;
+
+    const columnMap = ensureSheetSchema(sheet);
+    const rows = getRowsByHeaders(sheet, columnMap);
+    const recalculated = recalculateStoredAnalytics(sheet, columnMap, rows, examConfig);
+    summary.push({
+      examName: examConfig.examName,
+      sheetName: examConfig.sheetName,
+      updatedRows: recalculated.length
+    });
+  });
+
+  return summary;
 }
 
 function getUserRows(sheet, columnMap) {
@@ -1351,6 +1373,7 @@ function calculateAnalytics(rows, targetRow, examConfig) {
   });
 
   const normalizationEnabled = Boolean(examConfig && examConfig.normalization);
+  const hasShifts = Boolean(examConfig && examConfig.hasShifts);
   const scoredRows = applyNormalizedMarks(rowsForExam, examConfig, normalizationEnabled);
   const scoredTargetRow = scoredRows.find(function (row) {
     return row.rowNumber === targetRow.rowNumber;
@@ -1358,14 +1381,14 @@ function calculateAnalytics(rows, targetRow, examConfig) {
     normalizedMarks: normalizationEnabled ? Number(targetRow.rawMarks) || 0 : Number(targetRow.rawMarks) || 0
   });
   const rankScoreField = normalizationEnabled ? "normalizedMarks" : "rawMarks";
-  const rawRanks = buildRankSet(scoredRows, scoredTargetRow, "rawMarks");
-  const normalizedRanks = buildRankSet(scoredRows, scoredTargetRow, "normalizedMarks");
+  const rawRanks = buildRankSet(scoredRows, scoredTargetRow, "rawMarks", hasShifts);
+  const normalizedRanks = buildRankSet(scoredRows, scoredTargetRow, "normalizedMarks", hasShifts);
   const activeRanks = normalizationEnabled ? normalizedRanks : rawRanks;
   const totalSubmissions = rowsForExam.length;
   const percentile = calculatePercentile(scoredRows, scoredTargetRow, rankScoreField);
-  const sameShiftRows = scoredRows.filter(function (row) {
+  const sameShiftRows = hasShifts ? scoredRows.filter(function (row) {
     return normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
-  });
+  }) : [];
   const sameCategoryRows = scoredRows.filter(function (row) {
     return normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
   });
@@ -1389,17 +1412,18 @@ function calculateAnalytics(rows, targetRow, examConfig) {
     normalizedRanks: normalizedRanks,
     normalisedRanks: normalizedRanks,
     averageMarks: averageMarks(scoredRows, "rawMarks"),
-    averageShiftMarks: averageMarks(sameShiftRows, "rawMarks"),
+    averageShiftMarks: hasShifts ? averageMarks(sameShiftRows, "rawMarks") : "",
     categoryAverageMarks: averageMarks(sameCategoryRows, "rawMarks"),
     subjectAnalysis: buildSubjectAnalysis(rowsForExam, targetRow),
     totalSubmissions: totalSubmissions,
     accuracyIndicator: getAccuracyIndicator(totalSubmissions),
     rankBasis: normalizationEnabled ? "normalized" : "raw",
+    hasShifts: hasShifts,
     lastUpdated: new Date().toISOString()
   };
 }
 
-function buildRankSet(scoredRows, scoredTargetRow, scoreField) {
+function buildRankSet(scoredRows, scoredTargetRow, scoreField, hasShifts) {
   const field = scoreField || "rawMarks";
   const targetRankMarks = Number(scoredTargetRow[field]) || 0;
   const sameShiftRows = scoredRows.filter(function (row) {
@@ -1419,7 +1443,7 @@ function buildRankSet(scoredRows, scoredTargetRow, scoreField) {
     overallRank: calculateTieAwareRank(scoredRows, scoredTargetRow, field),
     categoryRank: calculateTieAwareRank(sameCategoryRows, scoredTargetRow, field),
     stateRank: calculateTieAwareRank(sameStateRows, scoredTargetRow, field),
-    shiftRank: calculateTieAwareRank(sameShiftRows, scoredTargetRow, field),
+    shiftRank: hasShifts ? calculateTieAwareRank(sameShiftRows, scoredTargetRow, field) : "",
     genderRank: countAtLeast(sameGenderRows, targetRankMarks, field),
     genderCategoryRank: countAtLeast(sameGenderRows.filter(function (row) {
       return normalizeKey(row.category) === normalizeKey(scoredTargetRow.category);
@@ -1427,9 +1451,9 @@ function buildRankSet(scoredRows, scoredTargetRow, scoreField) {
     genderStateRank: countAtLeast(sameGenderRows.filter(function (row) {
       return normalizeKey(row.state) === normalizeKey(scoredTargetRow.state);
     }), targetRankMarks, field),
-    genderShiftRank: countAtLeast(sameGenderRows.filter(function (row) {
+    genderShiftRank: hasShifts ? countAtLeast(sameGenderRows.filter(function (row) {
       return normalizeKey(row.shift) === normalizeKey(scoredTargetRow.shift);
-    }), targetRankMarks, field)
+    }), targetRankMarks, field) : ""
   };
 }
 
@@ -1643,7 +1667,16 @@ function calculatePercentile(rows, targetRow, scoreField) {
 }
 
 function writeAnalytics(sheet, columnMap, rowNumber, analytics) {
-  const values = {
+  const values = getStoredAnalyticsValues(analytics);
+
+  Object.keys(values).forEach(function (header) {
+    const index = columnMap[normalizeHeader(header)];
+    if (index !== undefined) sheet.getRange(rowNumber, index + 1).setValue(values[header]);
+  });
+}
+
+function getStoredAnalyticsValues(analytics) {
+  return {
     "Normalized Marks": analytics.normalizedMarks,
     "Percentile": analytics.percentile,
     "Gender Rank": analytics.genderRank,
@@ -1654,10 +1687,56 @@ function writeAnalytics(sheet, columnMap, rowNumber, analytics) {
     "Average Shift Marks": analytics.averageShiftMarks,
     "Category Average Marks": analytics.categoryAverageMarks
   };
+}
 
-  Object.keys(values).forEach(function (header) {
+function recalculateStoredAnalytics(sheet, columnMap, rows, examConfig) {
+  const recalculated = rows.filter(function (row) {
+    return row.rollNumber && row.dob;
+  }).map(function (row) {
+    return {
+      rowNumber: row.rowNumber,
+      analytics: calculateAnalytics(rows, row, examConfig)
+    };
+  });
+
+  writeAnalyticsBatch(sheet, columnMap, recalculated);
+  return recalculated;
+}
+
+function getAnalyticsForRow(recalculated, rowNumber) {
+  const match = recalculated.find(function (item) {
+    return item.rowNumber === rowNumber;
+  });
+  return match ? match.analytics : null;
+}
+
+function writeAnalyticsBatch(sheet, columnMap, recalculated) {
+  if (!recalculated.length) return;
+
+  const firstRow = recalculated.reduce(function (lowest, item) {
+    return Math.min(lowest, item.rowNumber);
+  }, recalculated[0].rowNumber);
+  const lastRow = recalculated.reduce(function (highest, item) {
+    return Math.max(highest, item.rowNumber);
+  }, recalculated[0].rowNumber);
+  const rowCount = lastRow - firstRow + 1;
+  const writableRows = recalculated.map(function (item) {
+    return {
+      rowNumber: item.rowNumber,
+      values: getStoredAnalyticsValues(item.analytics)
+    };
+  });
+
+  Object.keys(writableRows[0].values).forEach(function (header) {
     const index = columnMap[normalizeHeader(header)];
-    if (index !== undefined) sheet.getRange(rowNumber, index + 1).setValue(values[header]);
+    if (index === undefined) return;
+
+    const range = sheet.getRange(firstRow, index + 1, rowCount, 1);
+    const values = range.getValues();
+    writableRows.forEach(function (item) {
+      values[item.rowNumber - firstRow][0] = item.values[header];
+    });
+    range.setValues(values);
   });
 }
 

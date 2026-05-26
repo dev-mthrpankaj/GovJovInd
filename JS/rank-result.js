@@ -53,6 +53,7 @@
         const accuracyIndicator = firstValue(data.accuracyIndicator, getAccuracyIndicator(totalSubmissions), "Pending");
         const lastUpdated = firstValue(data.lastUpdated, snapshot.savedAt, null);
         const rankSets = getRankSets(data);
+        toggleShiftMetrics(getHasShifts(snapshot, data));
 
         setText("rankResultTitle", examName);
         setText("resultExamName", examName);
@@ -71,6 +72,18 @@
 
         renderSubjectScorecard(data.subjectAnalysis, payload.subjectData, data.subjectData);
         setText("shareResultText", buildShareText(snapshot, examName, normalizedMarks));
+    }
+
+    function getHasShifts(snapshot, data) {
+        if (typeof data.hasShifts === "boolean") return data.hasShifts;
+        if (snapshot.exam && typeof snapshot.exam.hasShifts === "boolean") return snapshot.exam.hasShifts;
+        return Boolean(snapshot.payload && snapshot.payload.shift);
+    }
+
+    function toggleShiftMetrics(hasShifts) {
+        document.querySelectorAll("[data-shift-metric]").forEach((card) => {
+            card.hidden = !hasShifts;
+        });
     }
 
     function getRankSets(data) {
