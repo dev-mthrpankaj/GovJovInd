@@ -26,7 +26,11 @@ const getCurrentPageName = () => {
   return decodeURIComponent(pageName || 'index.html').toLowerCase();
 };
 
+const isNotFoundPage = () => document.body?.classList.contains('not-found-page');
+
 const getRootRelativeHref = (pathFromRoot) => {
+  if (isNotFoundPage()) return `/${String(pathFromRoot).replace(/^\/+/, '')}`;
+
   const path = window.location.pathname.replace(/\\/g, '/');
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../${pathFromRoot}`;
   if (/\/HTML\/[^/]+\.html$/i.test(path)) return `../${pathFromRoot}`;
@@ -109,6 +113,8 @@ const getCandidateHeaderSession = () => {
 };
 
 const getCandidatePageHref = (pageName) => {
+  if (isNotFoundPage()) return `/HTML/${pageName}`;
+
   const rankPredictorLink = document.querySelector('header a[href*="rank-predictor.html"]');
   const rankPredictorHref = rankPredictorLink?.getAttribute('href') || '';
   if (rankPredictorHref) return rankPredictorHref.replace(/rank-predictor\.html(?:[?#].*)?$/i, pageName);
@@ -153,6 +159,8 @@ const ensureHeaderAuthEntry = () => {
 };
 
 const getHomeHref = () => {
+  if (isNotFoundPage()) return '/';
+
   const homeLink = document.querySelector('header a[href$="index.html"], header a[href="../index.html"], header a[href="../../index.html"]');
   if (homeLink) return homeLink.getAttribute('href');
 
@@ -167,6 +175,8 @@ const getSharedPageHref = (pageName) => {
 };
 
 const getActivePageClass = (pageName) => {
+  if (isNotFoundPage()) return '';
+
   const currentPage = getCurrentPageName();
   return currentPage === pageName || (!currentPage && pageName === 'index.html') ? ' class="active"' : '';
 };
@@ -184,6 +194,10 @@ const normalizeHeaderActiveLinks = (navRoot = document.querySelector('header nav
   if (!navRoot) return;
   const currentPage = getCurrentPageName() || 'index.html';
   const links = Array.from(navRoot.querySelectorAll('a[href]'));
+  if (isNotFoundPage()) {
+    links.forEach((link) => link.classList.remove('active'));
+    return;
+  }
   const activeLink = links.find((link) => getHrefPageName(link.getAttribute('href')) === currentPage);
 
   links.forEach((link) => {
@@ -409,7 +423,7 @@ const ensureCandidateBottomNav = () => {
   ];
   const currentPage = getCurrentPageName();
   nav.innerHTML = items.map((item) => {
-    const active = item.match.test(currentPage) || (item.label === 'Dashboard' && currentPage === 'dashboard.html');
+    const active = !isNotFoundPage() && (item.match.test(currentPage) || (item.label === 'Dashboard' && currentPage === 'dashboard.html'));
     return `<a href="${item.href}" class="${active ? 'is-active' : ''}" aria-label="${item.label}"><i class="fas ${item.icon}" aria-hidden="true"></i><span>${item.label}</span></a>`;
   }).join('');
   document.body.appendChild(nav);
