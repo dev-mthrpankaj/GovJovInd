@@ -26,29 +26,6 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "2431",
-        "title": "Rajasthan Staff Selection Board Computer Instructor Recruitment 2026",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "OPERATOR",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Graduate (View Details For More Information)",
-        "totalPosts": "3951",
-        "startDate": "2026-05-25",
-        "lastDate": "2026-06-23",
-        "status": "active",
-        "tags": [
-            "RSSB",
-            "Rajasthan"
-        ],
-        "applyLink": "https://sso.rajasthan.gov.in/",
-        "officialNotification": "https://rojgarresult.com/rssb-computer-instructor-2026/",
-        "detailPage": "https://rojgarresult.com/wp-content/uploads/2026/05/1779453807-2.pdf",
-        "updatedAt": "2026-05-26",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2426",
         "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
         "organization": "Rajasthan Staff Selection Board",

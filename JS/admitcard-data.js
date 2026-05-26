@@ -26,26 +26,6 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes"
     },
     {
-        "id": "admit-sheet-41",
-        "title": "All India Bar Examination AIBE XXI Examination 2026",
-        "organization": "AIBE",
-        "department": "central",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-22",
-        "status": "available",
-        "tags": [
-            "AIBE"
-        ],
-        "downloadLink": "https://aibe.digivarsity.online/WebApp/Forms/UserAuthentication.aspx",
-        "detailPage": "https://aibe.digivarsity.online/WebApp/Forms/Home.aspx",
-        "updatedAt": "2026-05-26",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2045",
         "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board",
@@ -85,26 +65,6 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "admit-sheet-40",
-        "title": "Haryana Teacher Eligibility Test 2025",
-        "organization": "Haryana STATE",
-        "department": "Teaching",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-13",
-        "examEndDate": "",
-        "releaseDate": "2026-05-25",
-        "status": "not available",
-        "tags": [
-            "Edcation"
-        ],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "2044",
