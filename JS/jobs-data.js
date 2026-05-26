@@ -1099,10 +1099,12 @@ window.GovJobUpdatesJobs = [
         "qualification": "Post Graduation (View Details for more Information)",
         "totalPosts": "",
         "startDate": "2026-04-29",
-        "lastDate": "",
+        "lastDate": "2026-05-23",
         "status": "active",
-        "tags": [],
-        "applyLink": "",
+        "tags": [
+            "EDUCATION"
+        ],
+        "applyLink": "https://examinationservices.nic.in/ExaminationServices/",
         "officialNotification": "",
         "detailPage": "",
         "updatedAt": "",
