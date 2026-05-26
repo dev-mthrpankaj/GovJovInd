@@ -26,6 +26,26 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes"
     },
     {
+        "id": "admit-sheet-41",
+        "title": "All India Bar Examination AIBE XXI Examination 2026",
+        "organization": "AIBE",
+        "department": "central",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-05-22",
+        "status": "available",
+        "tags": [
+            "AIBE"
+        ],
+        "downloadLink": "https://aibe.digivarsity.online/WebApp/Forms/UserAuthentication.aspx",
+        "detailPage": "https://aibe.digivarsity.online/WebApp/Forms/Home.aspx",
+        "updatedAt": "2026-05-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2045",
         "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board",
@@ -106,26 +126,6 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-22",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "admit-sheet-41",
-        "title": "All India Bar Examination AIBE XXI Examination 2026",
-        "organization": "AIBE",
-        "department": "central",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-22",
-        "status": "available",
-        "tags": [
-            "AIBE"
-        ],
-        "downloadLink": "https://aibe.digivarsity.online/WebApp/Forms/UserAuthentication.aspx",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "admit-2001",
