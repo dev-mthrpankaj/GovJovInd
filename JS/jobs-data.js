@@ -322,7 +322,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "job-1100",
+        "id": "job-sheet-31",
         "title": "BTSC Laboratory Assistant Online Form 2026 for 1090 Post",
         "organization": "Bihar Technichal Service Commision",
         "department": "BTSC",
@@ -346,7 +346,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1101",
+        "id": "job-sheet-32",
         "title": "NTPC Assistant Executive Online Form 2026 for 250 Post",
         "organization": "NTPC",
         "department": "NTPC",
@@ -386,7 +386,7 @@ window.GovJobUpdatesJobs = [
             "Rajasthan",
             "Teaching"
         ],
-        "applyLink": "#",
+        "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1001.html",
         "updatedAt": "2026-05-01",
@@ -395,30 +395,6 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "job-sheet-3",
-        "title": "UP Police 1 Lakh New Recruitment Notice 2026",
-        "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
-        "department": "Police",
-        "category": "Police",
-        "year": "2026",
-        "qualification": "Not specified",
-        "totalPosts": "100000",
-        "startDate": "",
-        "lastDate": "",
-        "status": "upcoming",
-        "tags": [
-            "UP Police",
-            "Police",
-            "Upcoming"
-        ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1002.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "job-sheet-4",
         "title": "CRPF Constable Tradesman Online Form 2026 (9195 Posts)",
         "organization": "Central Reserve Police Force",
         "department": "Defence",
@@ -442,7 +418,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-5",
+        "id": "job-sheet-4",
         "title": "Railway RRB ALP Online Form 2026 (11127 Posts)",
         "organization": "Railway Recruitment Board",
         "department": "Railway",
@@ -466,7 +442,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-6",
+        "id": "job-sheet-5",
         "title": "MPESB Nursing Officer / Sister Tutor Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Health",
@@ -490,7 +466,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-7",
+        "id": "job-sheet-6",
         "title": "MPESB Hospital Assistant Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Health",
@@ -514,7 +490,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1007",
+        "id": "job-sheet-7",
         "title": "MPESB Van Rakshak / Jail Prahari Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Forest and Jail",
@@ -538,7 +514,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1008",
+        "id": "job-sheet-8",
         "title": "Bihar BPSC 33rd Judicial Services Online Form 2026",
         "organization": "Bihar Public Service Commission",
         "department": "Judiciary",
@@ -562,7 +538,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1009",
+        "id": "job-sheet-9",
         "title": "Patna High Court Technical Assistant Online Form 2026",
         "organization": "Patna High Court",
         "department": "Court",
@@ -586,7 +562,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1010",
+        "id": "job-sheet-10",
         "title": "NPCIL Executive Trainee Online Form 2026",
         "organization": "Nuclear Power Corporation of India Limited",
         "department": "Public Sector",
@@ -610,7 +586,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1011",
+        "id": "job-sheet-11",
         "title": "BSNL Senior Executive Trainee Online Form 2026",
         "organization": "Bharat Sanchar Nigam Limited",
         "department": "Telecom",
@@ -634,7 +610,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1012",
+        "id": "job-sheet-12",
         "title": "Bihar BCECE Senior Resident / Tutor Online Form 2026",
         "organization": "Bihar Combined Entrance Competitive Examination Board",
         "department": "Medical Education",
@@ -658,7 +634,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1013",
+        "id": "job-sheet-13",
         "title": "LIC HFL Junior Assistant Online Form 2026",
         "organization": "LIC Housing Finance Limited",
         "department": "Banking",
@@ -682,7 +658,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1014",
+        "id": "job-sheet-14",
         "title": "BPSSC Bihar Police Havildar Instructor Online Form 2026",
         "organization": "Bihar Police Subordinate Services Commission",
         "department": "Police",
@@ -706,7 +682,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1015",
+        "id": "job-sheet-15",
         "title": "Union Bank of India Apprentice Online Form 2026",
         "organization": "Union Bank of India",
         "department": "Banking",
@@ -730,7 +706,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1016",
+        "id": "job-sheet-16",
         "title": "UPTET Online Form 2026",
         "organization": "Uttar Pradesh Exam Regulatory Authority",
         "department": "Education",
@@ -754,7 +730,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1017",
+        "id": "job-sheet-17",
         "title": "Bihar CET B.Ed Online Form 2026",
         "organization": "Bihar CET B.Ed",
         "department": "Admission",
@@ -778,7 +754,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1018",
+        "id": "job-sheet-18",
         "title": "RBI Officer Grade-B Online Form 2026",
         "organization": "Reserve Bank of India",
         "department": "Banking",
@@ -802,7 +778,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1019",
+        "id": "job-sheet-19",
         "title": "UPESSC Assistant Professor B.Ed Online Form 2025",
         "organization": "Uttar Pradesh Education Service Selection Commission",
         "department": "Education",
@@ -826,7 +802,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1020",
+        "id": "job-sheet-20",
         "title": "MPPSC ADPO Online Form 2026",
         "organization": "Madhya Pradesh Public Service Commission",
         "department": "State PSC",
@@ -850,7 +826,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1021",
+        "id": "job-sheet-21",
         "title": "UPSSSC Havildar Instructor Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "State SSC",
@@ -874,7 +850,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1022",
+        "id": "job-sheet-22",
         "title": "UP Anganwadi Bharti Online Form 2026",
         "organization": "Uttar Pradesh Anganwadi",
         "department": "Women and Child Development",
@@ -898,7 +874,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1023",
+        "id": "job-sheet-23",
         "title": "UP Cooperative Bank Various Post Online Form 2026",
         "organization": "Uttar Pradesh Cooperative Institution Service Board",
         "department": "Banking",
@@ -922,7 +898,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1024",
+        "id": "job-sheet-24",
         "title": "SSC Stenographer Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -946,7 +922,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1025",
+        "id": "job-sheet-25",
         "title": "SSC Selection Phase 14 Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -970,7 +946,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1026",
+        "id": "job-sheet-26",
         "title": "SSC JHT Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -994,7 +970,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1027",
+        "id": "job-sheet-27",
         "title": "SSB Constable Tradesman Online Form 2026",
         "organization": "Sashastra Seema Bal",
         "department": "Defence",
@@ -1018,7 +994,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1028",
+        "id": "job-sheet-28",
         "title": "UPSSSC Assistant Statistical Officer ASO Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "State SSC",
@@ -1042,7 +1018,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1029",
+        "id": "job-sheet-29",
         "title": "Punjab PSPCL JE Electrical Online Form 2026",
         "organization": "Punjab State Power Corporation Limited",
         "department": "Power",
@@ -1066,7 +1042,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1030",
+        "id": "job-sheet-30",
         "title": "UPSSSC Forest Guard / Wildlife Guard Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Forest",
