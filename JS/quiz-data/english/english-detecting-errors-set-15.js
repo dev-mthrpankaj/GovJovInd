@@ -88,7 +88,7 @@
                 "Wealth creators"
             ],
             correctAnswer: 0,
-            explanation: "Replace 'to distributed' with 'to be distributed (Passive Infinitive)'. ssc Prepared by Neetu Singh (1997–2016) 1000 1000 Revised Updated 1"
+            explanation: "Replace 'to distributed' with 'to be distributed (Passive Infinitive)'."
         },
         {
             id: `${quizId}-q07`,
@@ -284,7 +284,7 @@
                 "You could find"
             ],
             correctAnswer: 0,
-            explanation: "Replace 'didn't you' with 'couldn't you'. ssc Prepared by Neetu Singh (1997–2016) 1000 1000 Revised Updated 1"
+            explanation: "Replace 'didn't you' with 'couldn't you'. ssc "
         },
         {
             id: `${quizId}-q21`,
@@ -634,7 +634,7 @@
                 "the Indian Stock Market will fall"
             ],
             correctAnswer: 1,
-            explanation: "Remove 'be'. It is said – ^dgk tkrk gS* ssc Prepared by Neetu Singh (1997–2016) 1000 1000 Revised Updated 1"
+            explanation: "Remove 'be'. It is said – ^dgk tkrk gS* ssc"
         },
         {
             id: `${quizId}-q46`,
@@ -648,7 +648,7 @@
                 "No error"
             ],
             correctAnswer: 3,
-            explanation: "Explanation not clearly extracted from the PDF text layer; please verify once with the source PDF."
+            explanation: "Replace 'losing' with 'to lose'. The comparison should use parallel infinitive forms: 'to keep one's head' and 'to lose one's courage'."
         },
         {
             id: `${quizId}-q47`,
@@ -662,7 +662,7 @@
                 "No error"
             ],
             correctAnswer: 3,
-            explanation: "Explanation not clearly extracted from the PDF text layer; please verify once with the source PDF."
+            explanation: "Replace 'live' with 'to live'. The sentence compares two alternatives in the same form: 'To die with honour' and 'to live with dishonour'."
         },
         {
             id: `${quizId}-q48`,
@@ -676,7 +676,7 @@
                 "No error"
             ],
             correctAnswer: 3,
-            explanation: "Explanation not clearly extracted from the PDF text layer; please verify once with the source PDF."
+            explanation: "Replace 'to read' with 'to reading'. Here 'to' is a preposition after 'attention', so the parallel forms are 'to seeing films' and 'to reading books'."
         },
         {
             id: `${quizId}-q49`,
@@ -690,7 +690,7 @@
                 "No error"
             ],
             correctAnswer: 3,
-            explanation: "Explanation not clearly extracted from the PDF text layer; please verify once with the source PDF."
+            explanation: "The correction shown is based on parallel structure: 'to keep' should be compared with 'to lose', not with the gerund 'losing'."
         },
         {
             id: `${quizId}-q50`,
@@ -704,7 +704,7 @@
                 "No error"
             ],
             correctAnswer: 3,
-            explanation: "Explanation not clearly extracted from the PDF text layer; please verify once with the source PDF."
+            explanation: "The correction shown is based on parallel structure: 'To die' should be compared with 'to live', not with the bare verb 'live'."
         }
     ];
 
