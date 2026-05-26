@@ -370,7 +370,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1001",
+        "id": "job-sheet-2",
         "title": "Rajasthan RSSB Teaching Associate Online Form 2026 (3540 Posts)",
         "organization": "Rajasthan Staff Selection Board",
         "department": "Teaching",
@@ -394,7 +394,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1002",
+        "id": "job-sheet-3",
         "title": "UP Police 1 Lakh New Recruitment Notice 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
         "department": "Police",
@@ -418,7 +418,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1003",
+        "id": "job-sheet-4",
         "title": "CRPF Constable Tradesman Online Form 2026 (9195 Posts)",
         "organization": "Central Reserve Police Force",
         "department": "Defence",
@@ -442,7 +442,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1004",
+        "id": "job-sheet-5",
         "title": "Railway RRB ALP Online Form 2026 (11127 Posts)",
         "organization": "Railway Recruitment Board",
         "department": "Railway",
@@ -466,7 +466,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1005",
+        "id": "job-sheet-6",
         "title": "MPESB Nursing Officer / Sister Tutor Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Health",
@@ -490,7 +490,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-1006",
+        "id": "job-sheet-7",
         "title": "MPESB Hospital Assistant Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Health",
