@@ -38,6 +38,7 @@
     const manifest = [
         //Mathematics_Registry
         ...createQuizSeries("math-percentage-abhinay-set", 2, "Mathematics", (n) => `Percentage Practice Set ${n}`, () => "50 hard percentage questions.", "Hard", (n, id) => `quiz-data/mathematics/${id}.js`),
+        quizMeta("math-circle-image-set-1", "Mathematics", "Mathematics Circle Image Based Practice Set 1", "50 unique diagram-based Circle questions covering arcs, sectors, chords, tangents and circular applications.", "Moderate", "quiz-data/mathematics/math-circle-image-set-1.js"),
         quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
         quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
         quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
@@ -160,6 +161,23 @@
         return String(value || "").trim().replace(/\s+/g, " ").toLowerCase();
     }
 
+    function hasMediaSource(value) {
+        if (typeof value === "string") return Boolean(value.trim());
+        if (!value || typeof value !== "object") return false;
+        return Boolean(String(value.src || value.url || value.path || "").trim());
+    }
+
+    function hasOptionContent(option) {
+        if (typeof option === "string" || typeof option === "number") {
+            return Boolean(String(option).trim());
+        }
+
+        if (!option || typeof option !== "object") return false;
+
+        const label = String(option.text ?? option.label ?? option.value ?? "").trim();
+        return Boolean(label || hasMediaSource(option.image || option));
+    }
+
     function hasQuestionShape(question) {
         return Boolean(
             question &&
@@ -169,7 +187,7 @@
             question.question &&
             Array.isArray(question.options) &&
             question.options.length === 4 &&
-            question.options.every((option) => option !== undefined && option !== null && String(option).trim()) &&
+            question.options.every(hasOptionContent) &&
             Number.isInteger(question.correctAnswer) &&
             question.correctAnswer >= 0 &&
             question.correctAnswer <= 3 &&
