@@ -4,24 +4,6 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
-        "id": "2047",
-        "title": "UKSSSC Group C Driver Admit Card 2026",
-        "organization": "Uttarakhand Subordinate Service Selection Commission",
-        "department": "Driver",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-21",
-        "examEndDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "2045",
         "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board",
@@ -61,6 +43,28 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
+    },
+    {
+        "id": "2047",
+        "title": "UKSSSC Group C Driver Admit Card 2026",
+        "organization": "Uttarakhand Subordinate Service Selection Commission",
+        "department": "Driver",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-21",
+        "examEndDate": "",
+        "releaseDate": "2026-05-25",
+        "status": "active",
+        "tags": [
+            "Driver",
+            "Uttarakhad",
+            "UKSSSC"
+        ],
+        "downloadLink": "https://ukssscrecruitment.in/UKSSSC_PAGES/AdmitCard_Advt74.aspx",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     },
     {
         "id": "2044",
