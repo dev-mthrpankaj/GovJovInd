@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2430",
+        "title": "UGC NET June 2026 Online Form",
+        "organization": "The University Grants Commission (UGC)",
+        "department": "Education",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Post Graduation (View Details for more Information)",
+        "totalPosts": "",
+        "startDate": "2026-04-29",
+        "lastDate": "2026-05-23",
+        "status": "active",
+        "tags": [
+            "EDUCATION"
+        ],
+        "applyLink": "https://examinationservices.nic.in/ExaminationServices/",
+        "officialNotification": "",
+        "detailPage": "https://rojgarresult.com/ugc-net-june-2026/",
+        "updatedAt": "2026-05-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2426",
         "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
         "organization": "Rajasthan Staff Selection Board",
@@ -25,6 +47,30 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
         "detailPage": "./Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
+        "updatedAt": "2026-05-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
+        "id": "2428",
+        "title": "NALCO Non Executive Online Form 2026 for 268 Post",
+        "organization": "National Aluminium Company Limited",
+        "department": "Metals",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
+        "totalPosts": "268",
+        "startDate": "2026-05-21",
+        "lastDate": "2026-06-10",
+        "status": "active",
+        "tags": [
+            "almunium",
+            "Public Sector",
+            "Metal"
+        ],
+        "applyLink": "https://recruitment.nhidcl.com/login",
+        "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
+        "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -96,30 +142,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
         "detailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
-        "updatedAt": "2026-05-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
-        "id": "2428",
-        "title": "NALCO Non Executive Online Form 2026 for 268 Post",
-        "organization": "National Aluminium Company Limited",
-        "department": "Metals",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
-        "totalPosts": "268",
-        "startDate": "2026-05-21",
-        "lastDate": "2026-06-10",
-        "status": "active",
-        "tags": [
-            "almunium",
-            "Public Sector",
-            "Metal"
-        ],
-        "applyLink": "https://recruitment.nhidcl.com/login",
-        "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
-        "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -1090,21 +1112,19 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "2430",
-        "title": "UGC NET June 2026 Online Form",
-        "organization": "The University Grants Commission (UGC)",
-        "department": "Education",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Post Graduation (View Details for more Information)",
+        "id": "job-sheet-48",
+        "title": "Rajasthan Staff Selection Board RSSB has released  Computer Instructor Recruitment 2026",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
         "totalPosts": "",
-        "startDate": "2026-04-29",
-        "lastDate": "2026-05-23",
+        "startDate": "",
+        "lastDate": "",
         "status": "active",
-        "tags": [
-            "EDUCATION"
-        ],
-        "applyLink": "https://examinationservices.nic.in/ExaminationServices/",
+        "tags": [],
+        "applyLink": "",
         "officialNotification": "",
         "detailPage": "",
         "updatedAt": "",
