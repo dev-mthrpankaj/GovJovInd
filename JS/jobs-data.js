@@ -4,28 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2430",
-        "title": "UGC NET June 2026 Online Form",
-        "organization": "The University Grants Commission (UGC)",
-        "department": "Education",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Post Graduation (View Details for more Information)",
-        "totalPosts": "",
-        "startDate": "2026-04-29",
-        "lastDate": "2026-05-23",
-        "status": "active",
-        "tags": [
-            "EDUCATION"
-        ],
-        "applyLink": "https://examinationservices.nic.in/ExaminationServices/",
-        "officialNotification": "",
-        "detailPage": "https://rojgarresult.com/ugc-net-june-2026/",
-        "updatedAt": "2026-05-26",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2426",
         "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
         "organization": "Rajasthan Staff Selection Board",
