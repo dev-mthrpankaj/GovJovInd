@@ -118,8 +118,10 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-05-22",
         "status": "available",
-        "tags": [],
-        "downloadLink": "",
+        "tags": [
+            "AIBE"
+        ],
+        "downloadLink": "https://aibe.digivarsity.online/WebApp/Forms/UserAuthentication.aspx",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
