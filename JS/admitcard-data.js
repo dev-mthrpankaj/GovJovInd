@@ -77,7 +77,9 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-05-25",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "Edcation"
+        ],
         "downloadLink": "",
         "detailPage": "",
         "updatedAt": "",
@@ -852,6 +854,24 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "admit-sheet-41",
+        "title": "All India Bar Examination AIBE XXI Examination 2026",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
