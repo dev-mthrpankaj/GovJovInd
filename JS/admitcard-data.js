@@ -836,5 +836,23 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "admit-sheet-40",
+        "title": "Haryana Teacher Eligibility Test 2025",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
