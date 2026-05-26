@@ -34,7 +34,29 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    let items = Array.isArray(window.GovJobUpdatesResults) ? window.GovJobUpdatesResults : [];
+    const excludedNonJobIds = new Set([
+        "result-3004",
+        "result-3008",
+        "result-3010",
+        "result-3013",
+        "result-3016",
+        "result-3017",
+        "result-3018",
+        "result-3022",
+        "result-3023",
+        "result-3024",
+        "result-3027",
+        "result-3028",
+        "result-3029"
+    ]);
+
+    function filterJobLifecycleRecords(records) {
+        return Array.isArray(records)
+            ? records.filter((record) => !excludedNonJobIds.has(String(record.id || "")))
+            : [];
+    }
+
+    let items = filterJobLifecycleRecords(window.GovJobUpdatesResults);
 
     const elements = {
         search: document.getElementById("resultSearch"),
@@ -75,6 +97,15 @@
         if (!url || url === "#") return "";
         if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
         if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+        return "";
+    }
+
+    function normalizeJobDetailPage(value) {
+        let url = normalizeActionUrl(value).replace(/\\/g, "/");
+        if (!url) return "";
+        url = url.replace(/^\.\/Job_Details\/HTML\//i, "../Job_Details/HTML/");
+        if (/^(?:\.\.\/|\/)Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
         return "";
     }
 
@@ -239,7 +270,7 @@
 
     function getDetailPage(item) {
         if (!item || !item.id) return "";
-        return normalizeActionUrl(item.detailPage) || `../Result_Details/HTML/result-details-${item.id}.html`;
+        return normalizeJobDetailPage(item.detailPage);
     }
 
     function renderBadges(item) {
@@ -365,7 +396,7 @@
         if (!window.GovJobUpdatesSheetData) return;
         const sheetItems = await window.GovJobUpdatesSheetData.load("results", items);
         if (!Array.isArray(sheetItems) || !sheetItems.length || sheetItems === items) return;
-        items = sheetItems;
+        items = filterJobLifecycleRecords(sheetItems);
         visibleCount = pageSize;
         hydrateFilters();
         renderItems();

@@ -34,7 +34,24 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    let items = Array.isArray(window.GovJobUpdatesAdmitCards) ? window.GovJobUpdatesAdmitCards : [];
+    const excludedNonJobIds = new Set([
+        "2044",
+        "admit-2007",
+        "admit-2011",
+        "admit-2016",
+        "admit-2018",
+        "admit-2019",
+        "admit-2020",
+        "admit-2021"
+    ]);
+
+    function filterJobLifecycleRecords(records) {
+        return Array.isArray(records)
+            ? records.filter((record) => !excludedNonJobIds.has(String(record.id || "")))
+            : [];
+    }
+
+    let items = filterJobLifecycleRecords(window.GovJobUpdatesAdmitCards);
 
     const elements = {
         search: document.getElementById("admitSearch"),
@@ -75,6 +92,15 @@
         if (!url || url === "#") return "";
         if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
         if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+        return "";
+    }
+
+    function normalizeJobDetailPage(value) {
+        let url = normalizeActionUrl(value).replace(/\\/g, "/");
+        if (!url) return "";
+        url = url.replace(/^\.\/Job_Details\/HTML\//i, "../Job_Details/HTML/");
+        if (/^(?:\.\.\/|\/)Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
         return "";
     }
 
@@ -263,7 +289,7 @@
 
     function getDetailPage(item) {
         if (!item || !item.id) return "";
-        return getText(item.detailPage, `../AdmitCard_Details/HTML/admitcard-details-${item.id}.html`);
+        return normalizeJobDetailPage(item.detailPage);
     }
 
     function renderBadges(item) {
@@ -390,7 +416,7 @@
         if (!window.GovJobUpdatesSheetData) return;
         const sheetItems = await window.GovJobUpdatesSheetData.load("admitCards", items);
         if (!Array.isArray(sheetItems) || !sheetItems.length || sheetItems === items) return;
-        items = sheetItems;
+        items = filterJobLifecycleRecords(sheetItems);
         visibleCount = pageSize;
         hydrateFilters();
         renderItems();

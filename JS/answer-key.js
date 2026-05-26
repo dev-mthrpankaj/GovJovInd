@@ -35,7 +35,15 @@
     const pageSize = 10;
     let visibleCount = pageSize;
     let currentItems = [];
-    let items = Array.isArray(window.GovJobUpdatesAnswerKeys) ? window.GovJobUpdatesAnswerKeys : [];
+    const excludedNonJobIds = new Set(["2032"]);
+
+    function filterJobLifecycleRecords(records) {
+        return Array.isArray(records)
+            ? records.filter((record) => !excludedNonJobIds.has(String(record.id || "")))
+            : [];
+    }
+
+    let items = filterJobLifecycleRecords(window.GovJobUpdatesAnswerKeys);
 
     const elements = {
         search: document.getElementById("answerKeySearch"),
@@ -76,6 +84,15 @@
         if (!url || url === "#") return "";
         if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
         if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
+        return "";
+    }
+
+    function normalizeJobDetailPage(value) {
+        let url = normalizeActionUrl(value).replace(/\\/g, "/");
+        if (!url) return "";
+        url = url.replace(/^\.\/Job_Details\/HTML\//i, "../Job_Details/HTML/");
+        if (/^(?:\.\.\/|\/)Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
         return "";
     }
 
@@ -294,9 +311,13 @@
         });
     }
 
+    const detailPageOverrides = {
+        "2031": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html"
+    };
+
     function getDetailPage(item) {
         if (!item || !item.id) return "";
-        return normalizeActionUrl(item.detailPage) || `../AnswerKey_Details/HTML/answerkey-details-${item.id}.html`;
+        return detailPageOverrides[item.id] || normalizeJobDetailPage(item.detailPage);
     }
 
     function renderBadges(item) {
@@ -434,7 +455,7 @@
         if (!window.GovJobUpdatesSheetData) return;
         const sheetItems = await window.GovJobUpdatesSheetData.load("answerKeys", items);
         if (!Array.isArray(sheetItems) || !sheetItems.length || sheetItems === items) return;
-        items = sheetItems;
+        items = filterJobLifecycleRecords(sheetItems);
         visibleCount = pageSize;
         hydrateFilters();
         renderItems();

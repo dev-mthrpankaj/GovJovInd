@@ -35,7 +35,15 @@
     let visibleCount = pageSize;
     let currentJobs = [];
 
-    let jobs = Array.isArray(window.GovJobUpdatesJobs) ? window.GovJobUpdatesJobs : [];
+    const excludedNonJobIds = new Set(["job-1017"]);
+
+    function filterJobLifecycleRecords(records) {
+        return Array.isArray(records)
+            ? records.filter((record) => !excludedNonJobIds.has(String(record.id || "")))
+            : [];
+    }
+
+    let jobs = filterJobLifecycleRecords(window.GovJobUpdatesJobs);
     const elements = {
         search: document.getElementById("jobSearch"),
         department: document.getElementById("departmentFilter"),
@@ -176,7 +184,8 @@
     }
 
     const detailPageOverrides = {
-        "job-1103": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html"
+        "job-1103": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html",
+        "job-2422": "../Job_Details/HTML/job-details.html?id=2422"
     };
 
     function withHtmlExtension(url) {
@@ -401,7 +410,7 @@
         if (!window.GovJobUpdatesSheetData) return;
         const sheetJobs = await window.GovJobUpdatesSheetData.load("jobs", jobs);
         if (!Array.isArray(sheetJobs) || !sheetJobs.length || sheetJobs === jobs) return;
-        jobs = sheetJobs;
+        jobs = filterJobLifecycleRecords(sheetJobs);
         visibleCount = pageSize;
         hydrateFilters();
         renderJobs();
