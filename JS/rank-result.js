@@ -71,7 +71,17 @@
         setText("resultLastUpdated", formatDateTime(lastUpdated));
 
         renderSubjectScorecard(data.subjectAnalysis, payload.subjectData, data.subjectData);
+        renderResultAdSlot();
         setText("shareResultText", buildShareText(snapshot, examName, normalizedMarks));
+    }
+
+    function renderResultAdSlot() {
+        const host = getById("rankResultAdHost");
+        const ads = window.GovJobAds;
+        if (!host || !ads || ads.isBlockedPage() || host.querySelector(".ad-slot")) return;
+
+        host.appendChild(ads.createSlot("inline", "rank-result-valid"));
+        host.hidden = false;
     }
 
     function getHasShifts(snapshot, data) {

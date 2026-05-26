@@ -6,7 +6,21 @@ const markPageLoaded = () => {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ADS_CONFIG = {
   enabled: true,
-  blockedPages: ['rank-predictor.html', 'documents.html'],
+  // Keep controlled ad slots off forms, personal-data tools, and content under review.
+  blockedPages: [
+    'rank-predictor.html',
+    'scorecard.html',
+    'documents.html',
+    'up-certificate-services.html',
+    'login.html',
+    'register.html',
+    'forgot-password.html',
+    'profile.html',
+    'dashboard.html',
+    'contact.html',
+    'quiz.html'
+  ],
+  // rank-result.html adds its own slot only after a complete result is rendered.
   inlineFrequency: 6
 };
 const CANDIDATE_SESSION_KEY = 'gju:candidate-session';
