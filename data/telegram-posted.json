@@ -306,10 +306,10 @@
       "stateReason": "update"
     },
     "jobs:2428": {
-      "updatedAt": "2026-05-24",
-      "hash": "41cba719bf1f4b16df820eea588f8dfa1ac7dd68b3032ac5f456c7abe64af762",
+      "updatedAt": "2026-05-25",
+      "hash": "0637f0863fd826dfd542dcc6fbbaf9bf61c40cb03ffa8c7edce2af148b900dd4",
       "title": "NALCO Non Executive Online Form 2026 for 268 Post",
-      "lastPostedAt": "2026-05-24T02:56:01.754Z",
+      "lastPostedAt": "2026-05-26T06:25:09.077Z",
       "stateReason": "update"
     },
     "jobs:2426": {
@@ -332,6 +332,13 @@
       "title": "EDCIL Various Post Online Form 2026 for 879 Post",
       "lastPostedAt": "2026-05-25T10:48:21.979Z",
       "stateReason": "update"
+    },
+    "jobs:2431": {
+      "updatedAt": "2026-05-26",
+      "hash": "2f970d142b06f2c85fd4f4a593c4a8bb27fb7ce0198fcfb11ef74c781f85a49b",
+      "title": "Rajasthan Staff Selection Board Computer Instructor Recruitment 2026",
+      "lastPostedAt": "2026-05-26T06:31:29.300Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -599,6 +606,20 @@
       "hash": "95c873484d5ec8cf942b8b0e0e5dc00b89f6edfbbb9e876163a7edc8e6076b70",
       "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
       "lastPostedAt": "2026-05-25T10:48:22.789Z",
+      "stateReason": "new"
+    },
+    "admitCards:2046": {
+      "updatedAt": "2026-05-25",
+      "hash": "de6bd318fbacfe52a44ebf9981ca4e73af7a76842bebec0a224853e1de35081d",
+      "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+      "lastPostedAt": "2026-05-26T02:59:49.079Z",
+      "stateReason": "new"
+    },
+    "admitCards:2047": {
+      "updatedAt": "2026-05-26",
+      "hash": "69edb38f4f0f66fe93cf80c258f9d931aff9fbdc52c1a9b6128c137aaf397b98",
+      "title": "UKSSSC Group C Driver Admit Card 2026",
+      "lastPostedAt": "2026-05-26T03:07:16.654Z",
       "stateReason": "new"
     }
   },
