@@ -1088,25 +1088,5 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
-    },
-    {
-        "id": "2430",
-        "title": "UGC NET June 2026 Online Form",
-        "organization": "The University Grants Commission (UGC)",
-        "department": "Education",
-        "category": "Education",
-        "year": "2026",
-        "qualification": "Online Form Extend",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     }
 ];
