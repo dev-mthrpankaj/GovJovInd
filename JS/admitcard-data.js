@@ -67,6 +67,24 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes"
     },
     {
+        "id": "admit-sheet-40",
+        "title": "Haryana Teacher Eligibility Test 2025",
+        "organization": "Haryana STATE",
+        "department": "Teaching",
+        "category": "Admit Card",
+        "year": "2025",
+        "examDate": "2026-06-13",
+        "examEndDate": "",
+        "releaseDate": "2026-05-25",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2044",
         "title": "UP B.Ed Admit Card 2026",
         "organization": "Uttar Pradesh B.Ed. Joint Entrance Examination",
@@ -834,24 +852,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-sheet-40",
-        "title": "Haryana Teacher Eligibility Test 2025",
-        "organization": "Haryana STATE",
-        "department": "Teaching",
-        "category": "Admit Card",
-        "year": "2025",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
