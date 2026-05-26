@@ -1090,7 +1090,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-47",
+        "id": "2430",
         "title": "UGC NET June 2026 Online Form",
         "organization": "The University Grants Commission (UGC)",
         "department": "Education",
@@ -1098,7 +1098,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "Post Graduation (View Details for more Information)",
         "totalPosts": "",
-        "startDate": "",
+        "startDate": "2026-04-29",
         "lastDate": "",
         "status": "active",
         "tags": [],
