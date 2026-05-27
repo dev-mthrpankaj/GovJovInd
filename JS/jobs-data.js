@@ -772,7 +772,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/rbisbmar26/",
         "officialNotification": "https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DEPR29042026BE94DEA85E3C4753A82B191EB6A795ED.PDF",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2401",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2402",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -794,9 +794,9 @@ window.GovJobUpdatesJobs = [
             "Assistant Professor",
             "B.Ed"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1019.html",
+        "applyLink": "https://bed.upessc.org/otr/",
+        "officialNotification": "https://upessc.up.gov.in/Advertisment/462d7ee7-86da-4c19-80cf-877e0c787c50.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2403",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
