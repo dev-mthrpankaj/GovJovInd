@@ -538,7 +538,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-9",
+        "id": "2393",
         "title": "Patna High Court Technical Assistant Online Form 2026",
         "organization": "Patna High Court",
         "department": "Court",
