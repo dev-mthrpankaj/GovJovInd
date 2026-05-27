@@ -562,7 +562,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-10",
+        "id": "2394",
         "title": "NPCIL Executive Trainee Online Form 2026",
         "organization": "Nuclear Power Corporation of India Limited",
         "department": "Public Sector",
@@ -578,9 +578,9 @@ window.GovJobUpdatesJobs = [
             "Executive Trainee",
             "PSU"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1010.html",
+        "applyLink": "https://www.npcilcareers.co.in/ETHQ10042026/candidate/default.aspx",
+        "officialNotification": "https://www.npcilcareers.co.in/ETHQ10042026/documents/advt.pdf",
+        "detailPage": "../Job_Details/HTML/",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
