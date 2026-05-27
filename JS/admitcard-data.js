@@ -26,6 +26,28 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes"
     },
     {
+        "id": "admit-sheet-40",
+        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
+        "organization": "Join Indian Army",
+        "department": "Defence",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-01",
+        "examEndDate": "2026-06-15",
+        "releaseDate": "2026-05-15",
+        "status": "available",
+        "tags": [
+            "Army",
+            "Defence",
+            "Agniveer"
+        ],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
+        "detailPage": "#",
+        "updatedAt": "2026-05-26",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2045",
         "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board",
@@ -196,24 +218,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-16",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-sheet-40",
-        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
-        "organization": "Join Indian Army",
-        "department": "Defence",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-01",
-        "examEndDate": "2026-06-15",
-        "releaseDate": "2026-05-15",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
