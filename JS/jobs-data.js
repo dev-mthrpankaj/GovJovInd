@@ -953,7 +953,7 @@ window.GovJobUpdatesJobs = [
         "category": "Staff Selection",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
-        "totalPosts": "Not specified",
+        "totalPosts": "84",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-14",
         "status": "active",
@@ -962,15 +962,15 @@ window.GovJobUpdatesJobs = [
             "JHT",
             "Translator"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1026.html",
+        "applyLink": "https://ssc.gov.in/login",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cht_2026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2410",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-27",
+        "id": "2411",
         "title": "SSB Constable Tradesman Online Form 2026",
         "organization": "Sashastra Seema Bal",
         "department": "Defence",
