@@ -501,7 +501,7 @@ window.GovJobUpdatesAdmitCards = [
             "NCHM JEE",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=02jsGbPXRnlNklWmUL0mr0//xbCyJx3VCiGP6Cn924w=",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -523,7 +523,7 @@ window.GovJobUpdatesAdmitCards = [
             "NIFTEE",
             "Stage II"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=b/zXyDRWih1jyvh1zE9EhuZG+7ttNGJXcQr4SICSpNb0+8SWQTa1F+JVF5CSIC1H",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
