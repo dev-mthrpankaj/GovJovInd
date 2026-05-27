@@ -20,7 +20,7 @@ window.GovJobUpdatesAdmitCards = [
             "Agniveer"
         ],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
-        "detailPage": "#",
+        "detailPage": "../Job_Details/HTML/job-detail=2048?",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes"
