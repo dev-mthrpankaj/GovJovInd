@@ -400,7 +400,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "",
+        "qualification": "High School (View Details for More Information)",
         "totalPosts": "9195",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-19",
@@ -411,7 +411,7 @@ window.GovJobUpdatesJobs = [
             "Tradesman"
         ],
         "applyLink": "https://recruitment.crpf.gov.in/login",
-        "officialNotification": "#",
+        "officialNotification": "https://rect.crpf.gov.in/Upload/Recruitment/Recruitment%20Notice%20103042026-720.pdf",
         "detailPage": "../Job_Details/HTML/1003.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
