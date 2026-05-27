@@ -322,7 +322,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "job-sheet-31",
+        "id": "2415",
         "title": "BTSC Laboratory Assistant Online Form 2026 for 1090 Post",
         "organization": "Bihar Technichal Service Commision",
         "department": "BTSC",
@@ -346,7 +346,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-32",
+        "id": "2416",
         "title": "NTPC Assistant Executive Online Form 2026 for 250 Post",
         "organization": "NTPC",
         "department": "NTPC",
@@ -1034,21 +1034,21 @@ window.GovJobUpdatesJobs = [
             "Junior Engineer",
             "Electrical"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1029.html",
+        "applyLink": "https://recruitment.pspcl.in/",
+        "officialNotification": "https://www.pspcl.in/media/Advertisement_of_CRA_316-26_JE_Electrical_final_13042026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2413",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-30",
+        "id": "2414",
         "title": "UPSSSC Forest Guard / Wildlife Guard Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Forest",
         "category": "State Government",
         "year": "2026",
-        "qualification": "Intermediate ( Kindly Read Notification (",
+        "qualification": "View Details For Educational Qualification",
         "totalPosts": "708",
         "startDate": "2026-05-01",
         "lastDate": "2026-07-20",
