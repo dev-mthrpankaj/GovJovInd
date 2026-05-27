@@ -520,7 +520,7 @@ window.GovJobUpdatesJobs = [
         "department": "Judiciary",
         "category": "State PSC",
         "year": "2026",
-        "qualification": "Graduate",
+        "qualification": "View Details For Educational Qualification",
         "totalPosts": "173",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
