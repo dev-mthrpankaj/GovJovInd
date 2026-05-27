@@ -712,7 +712,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "Teaching",
         "year": "2026",
-        "qualification": "Not specified",
+        "qualification": "View Details For Educational Qualification",
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-03",
@@ -722,9 +722,9 @@ window.GovJobUpdatesJobs = [
             "Teacher Eligibility",
             "UP"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1016.html",
+        "applyLink": "https://uptet.upessc.org/otr/",
+        "officialNotification": "https://www.upessc.up.gov.in/Notice/334a-b177-4450-4fbc-98be.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2399",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
