@@ -289,8 +289,9 @@
         const best = attempts.reduce(function (highest, attempt) {
             return Math.max(highest, Number(attempt.percentage) || 0);
         }, 0);
+        const availableQuizCount = getCurrentSubjectQuizzes().length;
 
-        setText(elements.availableQuizCount, String(getCurrentSubjectQuizzes().length));
+        setText(elements.availableQuizCount, availableQuizCount ? String(availableQuizCount) : "--");
         setText(elements.savedAttemptCount, String(attempts.length));
         setText(elements.bestScoreValue, `${Math.round(best)}%`);
     }
@@ -318,8 +319,14 @@
         updateSearchMeta(quizzes.length, subjectTotal);
 
         if (!quizzes.length) {
-            elements.quizSetList.innerHTML = "";
-            showMessage(hasSearchQuery() ? "No quiz set matches your search. Try another subject or keyword." : "No quiz sets are available yet.", "error");
+            elements.quizSetList.innerHTML = `
+                <article class="content-fallback">
+                    <h3>${hasSearchQuery() ? "No matching quiz sets" : "Practice sets are being prepared"}</h3>
+                    <p>${hasSearchQuery() ? "Try another subject or keyword to find available practice sets." : "Use the preparation guide below while new topic-wise quiz sets are made available."}</p>
+                    <p class="official-note">Practice quizzes are for preparation only. Always follow the official exam syllabus and notification.</p>
+                </article>
+            `;
+            hideMessage();
             return;
         }
 

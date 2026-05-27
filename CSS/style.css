@@ -1009,6 +1009,154 @@ main {
   flex-wrap: wrap;
 }
 
+/* Helpful content shown before or alongside dynamic records */
+.content-fallback,
+.page-guide,
+.seo-faq {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.content-fallback {
+  display: grid;
+  gap: .7rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  background: linear-gradient(135deg, #f8fbff 0%, #fff 100%);
+}
+
+.content-fallback h3,
+.page-guide h2,
+.seo-faq h2 {
+  margin: 0;
+  color: var(--text);
+}
+
+.content-fallback p,
+.page-guide p,
+.seo-faq p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.content-fallback ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.job-listings > .content-fallback,
+.listing-cards > .content-fallback,
+.quiz-set-grid > .content-fallback {
+  grid-column: 1 / -1;
+}
+
+.page-guide,
+.seo-faq {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(1.15rem, 2.5vw, 2rem);
+  padding: clamp(1rem, 2.4vw, 1.55rem);
+}
+
+.guide-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: .28rem .65rem;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: var(--primary) !important;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 215px), 1fr));
+  gap: .8rem;
+}
+
+.guide-card {
+  padding: .9rem;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  background: #fafcff;
+}
+
+.guide-card h3 {
+  margin: 0 0 .45rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.official-note {
+  padding: .8rem .9rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: #f1f7ff;
+  color: #334155 !important;
+}
+
+.related-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.related-links h3 {
+  width: 100%;
+  margin: 0 0 .1rem;
+  font-size: 1rem;
+}
+
+.related-links a {
+  padding: .5rem .75rem;
+  border: 1px solid #d7e4fa;
+  border-radius: 999px;
+  background: #f8fbff;
+  color: var(--primary);
+  font-size: .92rem;
+  font-weight: 600;
+}
+
+.related-links a:hover {
+  background: #edf4ff;
+  text-decoration: none;
+}
+
+.seo-faq-list {
+  display: grid;
+  gap: .65rem;
+}
+
+.seo-faq details {
+  padding: .78rem .9rem;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  background: #fafcff;
+}
+
+.seo-faq summary {
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 650;
+}
+
+.seo-faq details p {
+  padding-top: .55rem;
+}
+
+.noscript-note {
+  margin-top: 1rem;
+}
+
 /* Ads */
 .ad-slot {
   width: 100%;

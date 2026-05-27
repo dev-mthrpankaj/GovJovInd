@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rank Predictor | GovJobUpdates</title>
-    <meta name="description" content="Advanced rank prediction for government exams using offline and online candidate submitted exam data. Estimate marks, overall rank, category rank, and state/district rank with GovJobUpdates.">
+    <meta name="description" content="Estimate government exam rank using user-submitted score data. Rank Predictor is not an official result or cutoff; verify final results officially.">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
@@ -55,15 +55,15 @@
             <div class="predictor-summary" aria-label="Current predictor setup">
                 <div>
                     <span>Active Exam</span>
-                    <strong id="activeExamLabel">Loading</strong>
+                    <strong id="activeExamLabel">--</strong>
                 </div>
                 <div>
                     <span>Supported Mode</span>
-                    <strong id="activeModeLabel">Loading</strong>
+                    <strong id="activeModeLabel">--</strong>
                 </div>
                 <div>
                     <span>Normalization</span>
-                    <strong id="normalizationLabel">Loading</strong>
+                    <strong id="normalizationLabel">--</strong>
                 </div>
             </div>
         </section>
@@ -338,6 +338,42 @@
             </div>
 
         </section>
+
+        <noscript>
+            <div class="content-fallback noscript-note">
+                <h3>JavaScript is required for Rank Predictor calculations</h3>
+                <p>Please enable JavaScript to use the prediction form. You can still use the navigation links to check official-result guidance and important pages.</p>
+            </div>
+        </noscript>
+
+        <section class="page-guide" aria-labelledby="rankGuideTitle">
+            <p class="guide-kicker">Estimate Guidance</p>
+            <h2 id="rankGuideTitle">Understand your rank estimate</h2>
+            <p>Rank Predictor uses submitted answer or score data to calculate an estimate. It is a preparation and comparison tool, not an official result service.</p>
+            <div class="guide-grid">
+                <article class="guide-card"><h3>Not an official rank</h3><p>Official marks, normalization, cutoff and selection status are issued only by the examination authority.</p></article>
+                <article class="guide-card"><h3>Data-based estimate</h3><p>Accuracy can vary with the number and quality of user-submitted records and the exam's final evaluation rules.</p></article>
+                <article class="guide-card"><h3>Protect your details</h3><p>Use the form only for its intended lookup purpose. Advertising is not placed inside personal-data input areas.</p></article>
+            </div>
+            <nav class="related-links" aria-label="Related exam resources">
+                <h3>Related resources</h3>
+                <a href="answer-key.html">Answer Keys</a>
+                <a href="results.html">Official Result Updates</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </nav>
+            <p class="official-note"><strong>Official verification:</strong> Check final results, cutoff marks and selection notices directly on the official examination website.</p>
+        </section>
+
+        <section class="seo-faq" aria-labelledby="rankFaqTitle">
+            <h2 id="rankFaqTitle">Rank Predictor FAQs</h2>
+            <div class="seo-faq-list">
+                <details><summary>Is the predicted rank official?</summary><p>No. It is an estimate and cannot replace an official result, scorecard, cutoff or merit list.</p></details>
+                <details><summary>What is the estimate based on?</summary><p>It is based on entered attempt or score information and available user-submitted exam data, subject to the configured calculation method.</p></details>
+                <details><summary>Can the final cutoff differ from an estimate?</summary><p>Yes. Final keys, normalization, category rules, attendance and official evaluation decisions can change outcomes.</p></details>
+                <details><summary>Where should I verify my actual result?</summary><p>Use the official examining authority result portal or published result notice for confirmed marks and selection status.</p></details>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -363,6 +399,8 @@
                     <li><a href="dashboard.html">Candidate Dashboard</a></li>
                     <li><a href="documents.html">Documents</a></li>
                     <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -375,7 +413,7 @@
             </div>
         </div>
         <div class="copyright">
-            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+            &copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a>
         </div>
     </footer>
 <script src="../JS/rank-predictor-config.js?v=20260506-sheet-exams" defer></script>

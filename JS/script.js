@@ -5,7 +5,8 @@ const markPageLoaded = () => {
 };
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ADS_CONFIG = {
-  enabled: true,
+  // Enable only after advertising is approved and real ad units are configured.
+  enabled: false,
   // Keep controlled ad slots off forms, personal-data tools, and content under review.
   blockedPages: [
     'rank-predictor.html',

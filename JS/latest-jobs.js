@@ -150,7 +150,7 @@
         const config = window.ADS_CONFIG || {};
         const pageName = decodeURIComponent((window.location.pathname.split("/").pop() || "").toLowerCase());
         const blockedPages = Array.isArray(config.blockedPages) ? config.blockedPages : [];
-        return config.enabled !== false && !blockedPages.includes(pageName);
+        return config.enabled === true && !blockedPages.includes(pageName);
     }
 
     function renderInlineAdSlot(sequence) {
@@ -356,7 +356,7 @@
         if (!elements.emptyState || !elements.listings) return;
         elements.listings.innerHTML = "";
         elements.emptyState.hidden = false;
-        elements.emptyState.innerHTML = `<div class="empty-state-card"><i class="fas fa-briefcase" aria-hidden="true"></i><h3>${escapeHtml(message || "No jobs found")}</h3><p>Try changing filters or search keyword.</p><button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button></div>`;
+        elements.emptyState.innerHTML = `<div class="empty-state-card"><i class="fas fa-briefcase" aria-hidden="true"></i><h3>${escapeHtml(message || "No matching job updates")}</h3><p>Try another keyword or reset filters. Always verify eligibility and dates on the official recruitment website.</p><button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button></div>`;
         const resetButton = elements.emptyState.querySelector("[data-reset-empty]");
         if (resetButton) resetButton.addEventListener("click", resetFilters);
     }
@@ -378,7 +378,7 @@
             elements.emptyState.innerHTML = "";
         }
 
-        if (!currentJobs.length) renderEmptyState("No jobs found");
+        if (!currentJobs.length) renderEmptyState("No matching job updates");
         else elements.listings.innerHTML = renderCardsWithAds(visibleJobs, renderJobCard);
 
         if (elements.loadMore) elements.loadMore.hidden = visibleJobs.length >= currentJobs.length;

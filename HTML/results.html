@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results | GovJobUpdates</title>
-    <meta name="description" content="GovJobUpdates provides latest government jobs, admit cards, results, answer keys and document tools for Indian aspirants.">
+    <title>Government Exam Results | GovJobUpdates</title>
+    <meta name="description" content="Check government exam results, scorecards, merit lists, cutoff updates and official result verification guidance.">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home%20Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
     <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
@@ -84,20 +84,61 @@
             </div>
         </section>
         
-        <div class="ad-slot ad-slot-top" data-ad-location="top" data-ad-placeholder="true">
-            <span class="ad-label">Advertisement</span>
-            <!-- Replace with Google AdSense ad unit after approval -->
-        </div>
-        
         <section class="listing-results" aria-labelledby="resultRecordsHeading">
             <div class="results-bar">
                 <h2 id="resultRecordsHeading">Result Updates</h2>
-                <p id="resultCount" aria-live="polite">Loading results...</p>
+                <p id="resultCount" aria-live="polite">Published result updates will appear here.</p>
             </div>
-            <div class="listing-cards result-listings" id="resultListings"></div>
+            <div class="listing-cards result-listings" id="resultListings">
+                <article class="content-fallback">
+                    <h3>Check official exam result updates</h3>
+                    <p>Live result cards load from our updates system. For a released result, prepare to:</p>
+                    <ul>
+                        <li>Use your roll or registration number on the official result portal.</li>
+                        <li>Download the scorecard or merit list where the authority provides it.</li>
+                        <li>Review cutoff, document verification and next-stage notices.</li>
+                    </ul>
+                    <p class="official-note"><strong>Official verification:</strong> Only the issuing authority can confirm marks, merit status and final selection.</p>
+                </article>
+            </div>
             <div class="empty-state" id="resultEmptyState" aria-live="polite" hidden></div>
             <div class="load-more-wrap">
                 <button id="resultLoadMore" class="btn btn-primary load-more-btn" type="button" hidden>Load More Results</button>
+            </div>
+            <noscript>
+                <div class="content-fallback noscript-note">
+                    <h3>JavaScript is required for live result updates</h3>
+                    <p>Please enable JavaScript to view the latest live updates. You can still use the navigation links to visit job details and important pages.</p>
+                </div>
+            </noscript>
+        </section>
+
+        <section class="page-guide" aria-labelledby="resultGuideTitle">
+            <p class="guide-kicker">Result Guide</p>
+            <h2 id="resultGuideTitle">How to check a government exam result</h2>
+            <p>Open the official result notice or login page from a relevant update, then use the required credentials and keep a saved copy for future verification.</p>
+            <div class="guide-grid">
+                <article class="guide-card"><h3>Prepare credentials</h3><p>Keep roll number, registration number, date of birth or password ready according to the official login instructions.</p></article>
+                <article class="guide-card"><h3>Read the result file</h3><p>Check your scorecard or merit list carefully and note category cutoff, qualifying status and document verification dates.</p></article>
+                <article class="guide-card"><h3>Understand selection</h3><p>A written-result qualification may be followed by skill test, PET, interview, medical or document verification.</p></article>
+            </div>
+            <nav class="related-links" aria-label="Related exam resources">
+                <h3>Related resources</h3>
+                <a href="latest-jobs.html">Latest Jobs</a>
+                <a href="admitcard.html">Admit Cards</a>
+                <a href="answer-key.html">Answer Keys</a>
+                <a href="rank-predictor.html">Rank Predictor</a>
+            </nav>
+            <p class="official-note"><strong>Reminder:</strong> Cutoff and selection lists should always be downloaded or checked from the authority's official website.</p>
+        </section>
+
+        <section class="seo-faq" aria-labelledby="resultFaqTitle">
+            <h2 id="resultFaqTitle">Result FAQs</h2>
+            <div class="seo-faq-list">
+                <details><summary>What information may be needed to check a result?</summary><p>Depending on the exam, you may need a roll number, registration number, date of birth, password or captcha on the official portal.</p></details>
+                <details><summary>Is a merit list the same as a scorecard?</summary><p>No. A scorecard usually shows individual marks; a merit list identifies candidates shortlisted or selected under the authority's rules.</p></details>
+                <details><summary>Does clearing the cutoff mean final selection?</summary><p>Not always. Many recruitments require additional stages such as document verification, physical tests, skill tests or medical examination.</p></details>
+                <details><summary>Where can I confirm revised results or cutoffs?</summary><p>Check the official result section and corrigendum notices published by the recruiting or examining authority.</p></details>
             </div>
         </section>
     </main>

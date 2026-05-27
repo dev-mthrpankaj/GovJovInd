@@ -146,7 +146,7 @@
         const config = window.ADS_CONFIG || {};
         const pageName = decodeURIComponent((window.location.pathname.split("/").pop() || "").toLowerCase());
         const blockedPages = Array.isArray(config.blockedPages) ? config.blockedPages : [];
-        return config.enabled !== false && !blockedPages.includes(pageName);
+        return config.enabled === true && !blockedPages.includes(pageName);
     }
 
     function renderInlineAdSlot(sequence) {
@@ -381,7 +381,7 @@
             <div class="empty-state-card">
                 <i class="fas fa-key" aria-hidden="true"></i>
                 <h3>${escapeHtml(message || "No records found")}</h3>
-                <p>Try changing filters or search keyword.</p>
+                <p>Try another keyword or reset filters. Verify provisional, final and objection notices on the official website.</p>
                 <button class="btn btn-primary" type="button" data-reset-empty>Reset Filters</button>
             </div>
         `;
@@ -409,7 +409,7 @@
         }
 
         if (!currentItems.length) {
-            renderEmptyState("No records found");
+            renderEmptyState("No matching answer key updates");
         } else {
             elements.listings.innerHTML = renderCardsWithAds(visibleItems, renderCard);
         }

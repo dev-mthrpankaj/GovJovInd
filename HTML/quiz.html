@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz System | GovJobUpdates</title>
-    <meta name="description" content="Subject-wise government exam quizzes with timer, progress tracking, question palette, analytics, and answer review.">
+    <title>Government Exam Practice Quiz | GovJobUpdates</title>
+    <meta name="description" content="Practice topic-wise quizzes for SSC, Railway, Police and state exams with timer, score tracking, revision and answer review.">
     <link rel="canonical" href="https://govjobupdates.com/HTML/quiz.html">
     <meta property="og:site_name" content="GovJobUpdates">
     <meta property="og:title" content="Quiz System | GovJobUpdates">
@@ -55,7 +55,7 @@
                     <p>Choose a subject, start a timed set, navigate with a question palette, and review accuracy after submission.</p>
                 </div>
                 <div class="quiz-stat-row" aria-label="Quiz stats">
-                    <div><span>Quiz Sets</span><strong id="availableQuizCount">0</strong></div>
+                    <div><span>Quiz Sets</span><strong id="availableQuizCount">--</strong></div>
                     <div><span>Attempts</span><strong id="savedAttemptCount">0</strong></div>
                     <div><span>Best Score</span><strong id="bestScoreValue">0%</strong></div>
                 </div>
@@ -88,12 +88,57 @@
                     </div>
                     <div class="quiz-message hidden" id="quizMessage" role="status" aria-live="polite"></div>
                     <div class="quiz-loading hidden" id="quizLoading" aria-hidden="true"><span></span><span></span><span></span></div>
-                    <div class="quiz-set-grid" id="quizSetList"></div>
+                    <div class="quiz-set-grid" id="quizSetList">
+                        <article class="content-fallback">
+                            <h3>Choose a subject for practice sets</h3>
+                            <p>Available quiz sets load from the quiz library. Use practice sessions to improve speed and accuracy.</p>
+                            <ul>
+                                <li>Practice SSC, Railway, Police and state-exam topics.</li>
+                                <li>Review answers after submission and revisit weak topics.</li>
+                                <li>Track attempts stored on this device for revision.</li>
+                            </ul>
+                        </article>
+                    </div>
                 </section>
                 <aside class="quiz-panel history-panel" aria-labelledby="recentQuizTitle">
                     <div class="panel-heading"><span>On this device</span><h2 id="recentQuizTitle">Recent Attempts</h2></div>
                     <div class="history-list" id="recentAttempts"></div>
                 </aside>
+            </section>
+
+            <noscript>
+                <div class="content-fallback noscript-note">
+                    <h3>JavaScript is required to start practice quizzes</h3>
+                    <p>Please enable JavaScript to view the latest live updates. You can still use the navigation links to visit job details and important pages.</p>
+                </div>
+            </noscript>
+
+            <section class="page-guide" aria-labelledby="quizGuideTitle">
+                <p class="guide-kicker">Preparation Guide</p>
+                <h2 id="quizGuideTitle">Practice quizzes for government exams</h2>
+                <p>Regular timed practice can help you build subject accuracy and time management before SSC, Railway, Police and state-level examinations.</p>
+                <div class="guide-grid">
+                    <article class="guide-card"><h3>Topic-wise revision</h3><p>Select a subject and attempt focused sets to identify topics that need another revision cycle.</p></article>
+                    <article class="guide-card"><h3>Track performance</h3><p>Use saved attempts and answer review to compare accuracy and avoid repeating common mistakes.</p></article>
+                    <article class="guide-card"><h3>Use official syllabus</h3><p>Align practice with the official syllabus, exam pattern and notified marking scheme of your exam.</p></article>
+                </div>
+                <nav class="related-links" aria-label="Related exam resources">
+                    <h3>Related resources</h3>
+                    <a href="latest-jobs.html">Latest Jobs</a>
+                    <a href="admitcard.html">Admit Cards</a>
+                    <a href="answer-key.html">Answer Keys</a>
+                    <a href="rank-predictor.html">Rank Predictor</a>
+                </nav>
+            </section>
+
+            <section class="seo-faq" aria-labelledby="quizFaqTitle">
+                <h2 id="quizFaqTitle">Quiz FAQs</h2>
+                <div class="seo-faq-list">
+                    <details><summary>Which examinations are these quizzes useful for?</summary><p>Practice topics may support preparation for SSC, Railway, Police and state exams; check your official syllabus for exact coverage.</p></details>
+                    <details><summary>How should I use topic-wise quiz practice?</summary><p>Attempt a set, review incorrect answers, revise the related topic and repeat later to measure improvement.</p></details>
+                    <details><summary>Are quiz scores an official exam result?</summary><p>No. Practice scores help preparation only and have no connection with an official examination score or selection.</p></details>
+                    <details><summary>Where are my practice attempts stored?</summary><p>Recent attempt information is maintained on this device so you can review progress in the quiz workspace.</p></details>
+                </div>
             </section>
         </section>
 
@@ -129,7 +174,14 @@
     <div class="quiz-modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle"><article class="modal-card"><h2 id="submitModalTitle">Submit Test?</h2><p id="submitSummary">Review your attempt before final submission.</p><div class="modal-actions submit-modal-actions"><button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-submit"><i class="fas fa-arrow-left" aria-hidden="true"></i> Continue Test</button><button class="quiz-btn quiz-btn-primary" type="button" data-action="submit-now"><i class="fas fa-check" aria-hidden="true"></i> Submit Now</button></div></article></div>
     <div class="quiz-modal hidden" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle"><article class="modal-card"><h2 id="pauseModalTitle">Are you sure you want to pause the test?</h2><div class="modal-actions pause-modal-actions"><button class="quiz-btn quiz-btn-primary" type="button" data-action="pause-test"><i class="fas fa-pause" aria-hidden="true"></i> Pause Test</button><button class="quiz-btn quiz-btn-ghost" type="button" data-action="cancel-pause"><i class="fas fa-play" aria-hidden="true"></i> Continue Test</button></div></article></div>
     <div class="quiz-modal hidden" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle"><article class="modal-card"><h2 id="resumeModalTitle">Resume Saved Attempt?</h2><p id="resumeSummary">An unfinished quiz is available on this device.</p><div class="modal-actions resume-modal-actions"><button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-resume"><i class="fas fa-xmark" aria-hidden="true"></i> Cancel</button><button class="quiz-btn quiz-btn-ghost" type="button" data-action="start-fresh"><i class="fas fa-rotate-right" aria-hidden="true"></i> Start Fresh</button><button class="quiz-btn quiz-btn-primary" type="button" data-action="resume-saved"><i class="fas fa-play" aria-hidden="true"></i> Resume</button></div></article></div>
-    <footer><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section"><h3>GovJobUpdates</h3><p>Government exam updates, practice tools and guidance. Always verify official notices before applying or appearing in an exam.</p></div>
+            <div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li></ul></div>
+            <div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="documents.html">Documents</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li></ul></div>
+        </div>
+        <div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div>
+    </footer>
 <script src="../JS/quiz-storage.js" defer></script>
 <script src="../JS/quiz-registry.js" defer></script>
 <script src="../JS/quiz-registry-guard.js" defer></script>
