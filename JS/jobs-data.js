@@ -400,7 +400,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "Not specified",
+        "qualification": "",
         "totalPosts": "9195",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-19",
