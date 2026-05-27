@@ -435,11 +435,11 @@ window.GovJobUpdatesJobs = [
             "Railway"
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1004.html",
+        "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2388",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "job-sheet-5",
