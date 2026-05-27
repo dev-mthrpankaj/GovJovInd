@@ -413,7 +413,7 @@ window.GovJobUpdatesAdmitCards = [
             "Police SI",
             "Subedar"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/SI_SUBEDAR_TAC25/SECOND_PHASE/default_tac.htm",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -435,7 +435,7 @@ window.GovJobUpdatesAdmitCards = [
             "NTET",
             "Teaching"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=EEP+dlELs9l9omgfzwkwilTQxlMGXkWU55AE5Wb1VH8=",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
