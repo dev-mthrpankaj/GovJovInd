@@ -866,7 +866,7 @@ window.GovJobUpdatesJobs = [
             "Bharti",
             "UP"
         ],
-        "applyLink": "#",
+        "applyLink": "https://upanganwadibharti.in/",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1022.html",
         "updatedAt": "2026-05-01",
