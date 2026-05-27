@@ -628,7 +628,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://admissions.nic.in/Bihar/Applicant/Root/OTHome.aspx?enc=k5U5Gp8NR6abhZ8Lld4oWvvSsCkKcG+Kcizck0pVdCvJE10jNAB9fCwdCq9SngLzv5wfQK8DbPTS5JsnelmH5g==",
         "officialNotification": "https://bceceboard.bihar.gov.in/pdf_Adv/ADV_SR26_01.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1012.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2396",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -640,8 +640,8 @@ window.GovJobUpdatesJobs = [
         "department": "Banking",
         "category": "Banking",
         "year": "2026",
-        "qualification": "Not specified",
-        "totalPosts": "Not specified",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "180",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
         "status": "closed",
@@ -652,7 +652,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/licjamar26/",
         "officialNotification": "https://cdn.lichousing.com/2026/04/Detailed-Advertisement-Recruitment-of-Junior-Assistants-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1013.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2397",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
