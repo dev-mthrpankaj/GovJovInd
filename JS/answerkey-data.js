@@ -91,7 +91,7 @@ window.GovJobUpdatesAnswerKeys = [
             "JE"
         ],
         "downloadLink": "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2026/05/04191714/UPSSSC-Junior-Engineer-Answer-Key-2026-PDF.pdf",
-        "objectionLink": "",
+        "objectionLink": "https://examqp.com/upssscLekhv02n/",
         "detailPage": "",
         "updatedAt": "2026-05-07",
         "telegramStatus": "draft",
