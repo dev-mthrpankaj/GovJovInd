@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-sheet-30",
+        "id": "admit-sheet-29",
         "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Poilce",
@@ -457,30 +457,8 @@ window.GovJobUpdatesAdmitCards = [
             "DV",
             "Interview"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://typist.jhc.org.in/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2018",
-        "title": "CBSE Board Class 10th Second Board Exam Date Sheet 2026",
-        "organization": "Central Board of Secondary Education",
-        "department": "Board Exam",
-        "category": "Date Sheet",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "CBSE",
-            "Class 10",
-            "Date Sheet"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2018.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -501,7 +479,7 @@ window.GovJobUpdatesAdmitCards = [
             "JET",
             "Jharkhand"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://jpscotr.com/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
