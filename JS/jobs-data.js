@@ -482,9 +482,9 @@ window.GovJobUpdatesJobs = [
             "Hospital Assistant",
             "Health"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1006.html",
+        "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
+        "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Hospital_Assistant_rulebook_2026_30042026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2390",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
