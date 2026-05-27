@@ -424,7 +424,7 @@ window.GovJobUpdatesJobs = [
         "department": "Railway",
         "category": "Railway",
         "year": "2026",
-        "qualification": "Not specified",
+        "qualification": "High School (View Details for More Information)",
         "totalPosts": "11127",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-14",
@@ -458,7 +458,7 @@ window.GovJobUpdatesJobs = [
             "Nursing Officer",
             "Sister Tutor"
         ],
-        "applyLink": "#",
+        "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/1005.html",
         "updatedAt": "2026-05-01",
