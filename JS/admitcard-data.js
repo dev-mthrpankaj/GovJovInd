@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2048",
+        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
+        "organization": "Join Indian Army",
+        "department": "Defence",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-01",
+        "examEndDate": "2026-06-15",
+        "releaseDate": "2026-05-15",
+        "status": "available",
+        "tags": [
+            "Army",
+            "Defence",
+            "Agniveer"
+        ],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
+        "detailPage": "#",
+        "updatedAt": "2026-05-27",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2047",
         "title": "UKSSSC Group C Driver Admit Card 2026",
         "organization": "Uttarakhand Subordinate Service Selection Commission",
@@ -24,28 +46,6 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-26",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "admit-sheet-40",
-        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
-        "organization": "Join Indian Army",
-        "department": "Defence",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-01",
-        "examEndDate": "2026-06-15",
-        "releaseDate": "2026-05-15",
-        "status": "available",
-        "tags": [
-            "Army",
-            "Defence",
-            "Agniveer"
-        ],
-        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
-        "detailPage": "#",
-        "updatedAt": "2026-05-26",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "2045",
