@@ -906,7 +906,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "731",
-        "startDate": "2026-05-01",
+        "startDate": "2026-04-24",
         "lastDate": "2026-05-15",
         "status": "active",
         "tags": [
@@ -914,15 +914,15 @@ window.GovJobUpdatesJobs = [
             "Stenographer",
             "Grade C D"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1024.html",
+        "applyLink": "https://ssc.gov.in/login",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_steno_2026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2408",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-25",
+        "id": "2409",
         "title": "SSC Selection Phase 14 Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
