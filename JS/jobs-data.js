@@ -650,8 +650,8 @@ window.GovJobUpdatesJobs = [
             "Junior Assistant",
             "Banking"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
+        "applyLink": "https://ibpsreg.ibps.in/licjamar26/",
+        "officialNotification": "https://cdn.lichousing.com/2026/04/Detailed-Advertisement-Recruitment-of-Junior-Assistants-2026.pdf",
         "detailPage": "../Job_Details/HTML/job-details-job-1013.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
