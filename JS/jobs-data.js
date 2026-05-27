@@ -698,8 +698,8 @@ window.GovJobUpdatesJobs = [
             "Apprentice",
             "Banking"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
+        "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
+        "officialNotification": "https://www.unionbankofindia.bank.in/pdf/notification-final-1865-april26.pdf",
         "detailPage": "../Job_Details/HTML/job-details-job-1015.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
