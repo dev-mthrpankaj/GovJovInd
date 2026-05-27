@@ -611,7 +611,7 @@ window.GovJobUpdatesAdmitCards = [
             "Assistant Foreman",
             "PSU"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/97756/login.html",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
