@@ -370,7 +370,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-2",
+        "id": "2386",
         "title": "Rajasthan RSSB Teaching Associate Online Form 2026 (3540 Posts)",
         "organization": "Rajasthan Staff Selection Board",
         "department": "Teaching",
@@ -388,7 +388,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1777546753.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2427",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2386",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
