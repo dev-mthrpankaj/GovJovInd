@@ -616,8 +616,8 @@ window.GovJobUpdatesJobs = [
         "department": "Medical Education",
         "category": "Health",
         "year": "2026",
-        "qualification": "Not specified",
-        "totalPosts": "Not specified",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "642",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
         "status": "closed",
@@ -634,7 +634,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-13",
+        "id": "2397",
         "title": "LIC HFL Junior Assistant Online Form 2026",
         "organization": "LIC Housing Finance Limited",
         "department": "Banking",
