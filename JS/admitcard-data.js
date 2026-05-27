@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-sheet-32",
+        "id": "admit-sheet-30",
         "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Poilce",
@@ -281,52 +281,8 @@ window.GovJobUpdatesAdmitCards = [
             "CUET UG",
             "Exam City"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/AcCuetUG/Login?enc=kEinmH8aTDfj7UJERQYzpuwaXWY32HbjAGdMV/iRIao=",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2008",
-        "title": "Indian Navy Agniveer SSR / MR Exam Date 2026",
-        "organization": "Indian Navy",
-        "department": "Defence",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "Indian Navy",
-            "Agniveer",
-            "SSR MR"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2008.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2009",
-        "title": "Punjab and Sind Bank LBO Exam Date 2026",
-        "organization": "Punjab and Sind Bank",
-        "department": "Banking",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "Punjab and Sind Bank",
-            "LBO",
-            "Banking"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2009.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -347,7 +303,7 @@ window.GovJobUpdatesAdmitCards = [
             "PA",
             "Stenographer"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://blcsrecruitment.com/pa-admit-login.aspx",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
