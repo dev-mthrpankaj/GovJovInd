@@ -388,7 +388,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1777546753.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1001.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2427",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"

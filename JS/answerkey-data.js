@@ -4,28 +4,6 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
-        "id": "2032",
-        "title": "IIT JEE Advanced Admissions 2026 Answer Key",
-        "organization": "National Testing Agency",
-        "department": "Engineering",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-25",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "B.TECH"
-        ],
-        "downloadLink": "https://jeeadv.ac.in/documents/p1_provisional_keys.pdf",
-        "objectionLink": "",
-        "detailPage": "",
-        "updatedAt": "2026-05-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2031",
         "title": "UPSSSC Lekhpal Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
@@ -45,7 +23,29 @@ window.GovJobUpdatesAnswerKeys = [
         "downloadLink": "https://drive.google.com/file/d/13w6WvB7OLcx1l0Clntsv3DPqIfXGwnyR/view",
         "objectionLink": "#",
         "detailPage": "./Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
-        "updatedAt": "2026-05-22",
+        "updatedAt": "2026-05-27",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
+        "id": "2032",
+        "title": "IIT JEE Advanced Admissions 2026 Answer Key",
+        "organization": "National Testing Agency",
+        "department": "Engineering",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-05-25",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "B.TECH"
+        ],
+        "downloadLink": "https://jeeadv.ac.in/documents/p1_provisional_keys.pdf",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
     },
