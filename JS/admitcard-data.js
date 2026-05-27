@@ -20,7 +20,7 @@ window.GovJobUpdatesAdmitCards = [
             "Agniveer"
         ],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
-        "detailPage": "#",
+        "detailPage": "../Job_Details/HTML/job-detail=2048?",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-sheet-35",
+        "id": "admit-sheet-24",
         "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Poilce",
@@ -237,74 +237,8 @@ window.GovJobUpdatesAdmitCards = [
             "NTPC",
             "Exam City"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/100181/login.html",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2003",
-        "title": "Bihar Police BPSSC SI Mains Exam Date 2026",
-        "organization": "Bihar Police Subordinate Services Commission",
-        "department": "Police",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BPSSC",
-            "Bihar Police",
-            "SI Mains"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2003.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2004",
-        "title": "Bihar BSSC Office Attendant Mains Exam Date 2026",
-        "organization": "Bihar Staff Selection Commission",
-        "department": "State SSC",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BSSC",
-            "Office Attendant",
-            "Mains"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2004.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2005",
-        "title": "Indian Navy SSR Medical Exam Date 2026",
-        "organization": "Indian Navy",
-        "department": "Defence",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "Indian Navy",
-            "SSR",
-            "Medical"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2005.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -325,7 +259,7 @@ window.GovJobUpdatesAdmitCards = [
             "Teaching",
             "Exam City"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://admitcards.upessc.org/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -347,52 +281,8 @@ window.GovJobUpdatesAdmitCards = [
             "CUET UG",
             "Exam City"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/AcCuetUG/Login?enc=kEinmH8aTDfj7UJERQYzpuwaXWY32HbjAGdMV/iRIao=",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2008",
-        "title": "Indian Navy Agniveer SSR / MR Exam Date 2026",
-        "organization": "Indian Navy",
-        "department": "Defence",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "Indian Navy",
-            "Agniveer",
-            "SSR MR"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2008.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2009",
-        "title": "Punjab and Sind Bank LBO Exam Date 2026",
-        "organization": "Punjab and Sind Bank",
-        "department": "Banking",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "Punjab and Sind Bank",
-            "LBO",
-            "Banking"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2009.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -413,7 +303,7 @@ window.GovJobUpdatesAdmitCards = [
             "PA",
             "Stenographer"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://blcsrecruitment.com/pa-admit-login.aspx",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -435,7 +325,7 @@ window.GovJobUpdatesAdmitCards = [
             "NEET UG",
             "Medical"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/AdmitCardNeet/Login",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -457,7 +347,7 @@ window.GovJobUpdatesAdmitCards = [
             "Junior Engineer",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -479,7 +369,7 @@ window.GovJobUpdatesAdmitCards = [
             "NORCET",
             "Nursing Officer"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://aiimsexams.ac.in/auth/login",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -501,7 +391,7 @@ window.GovJobUpdatesAdmitCards = [
             "Home Guard",
             "Havildar Clerk"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://apply-bpssc.com/bpssc_2_26_weadmtcards/searchApplication",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -523,7 +413,7 @@ window.GovJobUpdatesAdmitCards = [
             "Police SI",
             "Subedar"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/SI_SUBEDAR_TAC25/SECOND_PHASE/default_tac.htm",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -545,7 +435,7 @@ window.GovJobUpdatesAdmitCards = [
             "NTET",
             "Teaching"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=EEP+dlELs9l9omgfzwkwilTQxlMGXkWU55AE5Wb1VH8=",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -567,30 +457,8 @@ window.GovJobUpdatesAdmitCards = [
             "DV",
             "Interview"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://typist.jhc.org.in/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2018",
-        "title": "CBSE Board Class 10th Second Board Exam Date Sheet 2026",
-        "organization": "Central Board of Secondary Education",
-        "department": "Board Exam",
-        "category": "Date Sheet",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "CBSE",
-            "Class 10",
-            "Date Sheet"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2018.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -611,7 +479,7 @@ window.GovJobUpdatesAdmitCards = [
             "JET",
             "Jharkhand"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://jpscotr.com/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -633,7 +501,7 @@ window.GovJobUpdatesAdmitCards = [
             "NCHM JEE",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=02jsGbPXRnlNklWmUL0mr0//xbCyJx3VCiGP6Cn924w=",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -655,74 +523,8 @@ window.GovJobUpdatesAdmitCards = [
             "NIFTEE",
             "Stage II"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=b/zXyDRWih1jyvh1zE9EhuZG+7ttNGJXcQr4SICSpNb0+8SWQTa1F+JVF5CSIC1H",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2022",
-        "title": "BPSC Project Manager Pre Exam Date 2026",
-        "organization": "Bihar Public Service Commission",
-        "department": "State PSC",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BPSC",
-            "Project Manager",
-            "Pre Exam"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2022.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2023",
-        "title": "RSSB Lab Assistant Exam Date 2026",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Lab Assistant",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "RSSB",
-            "Lab Assistant",
-            "Rajasthan"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2023.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2024",
-        "title": "Bihar BPSC Stenographer New Exam Date 2026",
-        "organization": "Bihar Public Service Commission",
-        "department": "State PSC",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "BPSC",
-            "Stenographer",
-            "Bihar"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2024.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -743,52 +545,8 @@ window.GovJobUpdatesAdmitCards = [
             "Assistant Teacher",
             "Mains"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2026",
-        "title": "UPSC CAPF AC Interview Schedule 2026",
-        "organization": "Union Public Service Commission",
-        "department": "Defence",
-        "category": "Interview Schedule",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "UPSC",
-            "CAPF AC",
-            "Interview"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2026.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2027",
-        "title": "HPSC PGT Computer Science New Exam Date 2026",
-        "organization": "Haryana Public Service Commission",
-        "department": "Teaching",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "HPSC",
-            "PGT",
-            "Computer Science"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2027.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -809,7 +567,7 @@ window.GovJobUpdatesAdmitCards = [
             "Constable",
             "PMT"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://adv012026.hryssc.com/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -831,7 +589,7 @@ window.GovJobUpdatesAdmitCards = [
             "71th Mains",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -853,7 +611,7 @@ window.GovJobUpdatesAdmitCards = [
             "Assistant Foreman",
             "PSU"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/97756/login.html",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
