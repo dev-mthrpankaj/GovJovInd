@@ -554,7 +554,7 @@ window.GovJobUpdatesJobs = [
             "Technical Assistant",
             "Bihar"
         ],
-        "applyLink": "#",
+        "applyLink": "https://phc-recruitment.com/",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1009.html",
         "updatedAt": "2026-05-01",
