@@ -786,8 +786,8 @@ window.GovJobUpdatesJobs = [
         "year": "2025",
         "qualification": "Not specified",
         "totalPosts": "Not specified",
-        "startDate": "",
-        "lastDate": "",
+        "startDate": "2026-05-23",
+        "lastDate": "2026-05-30",
         "status": "active",
         "tags": [
             "UPESSC",
