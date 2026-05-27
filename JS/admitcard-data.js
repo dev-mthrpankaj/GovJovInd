@@ -836,5 +836,23 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "admit-sheet-40",
+        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
