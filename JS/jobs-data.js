@@ -676,7 +676,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://apply-bpssc.com/bpssc_havr_clerk_5_26_v1/applicationIndex",
         "officialNotification": "https://bpssc.bihar.gov.in/Notices/Advt.%20no.-05-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1014.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2398",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -700,7 +700,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
         "officialNotification": "https://www.unionbankofindia.bank.in/pdf/notification-final-1865-april26.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1015.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2399",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
