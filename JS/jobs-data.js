@@ -802,15 +802,15 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-20",
+        "id": "2404",
         "title": "MPPSC ADPO Online Form 2026",
         "organization": "Madhya Pradesh Public Service Commission",
         "department": "State PSC",
         "category": "State PSC",
         "year": "2026",
         "qualification": "Not specified",
-        "totalPosts": "Not specified",
-        "startDate": "2026-05-01",
+        "totalPosts": "17",
+        "startDate": "2026-04-09",
         "lastDate": "2026-05-08",
         "status": "active",
         "tags": [
@@ -819,8 +819,8 @@ window.GovJobUpdatesJobs = [
             "Madhya Pradesh"
         ],
         "applyLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/PO26/Declaration.aspx",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1020.html",
+        "officialNotification": "https://mppsc.mp.gov.in/uploads/advertisement/Advt_ADPO_Exam_2026_Dated_10_03_2026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2404",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
