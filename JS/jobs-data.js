@@ -15,9 +15,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
         "status": "upcoming",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
+        "tags": [
+            "railway",
+            "technician",
+            "rrb"
+        ],
+        "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
+        "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
