@@ -545,7 +545,7 @@ window.GovJobUpdatesJobs = [
         "category": "Judiciary",
         "year": "2026",
         "qualification": "Not specified",
-        "totalPosts": "Not specified",
+        "totalPosts": "53",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
         "status": "closed",
@@ -555,8 +555,8 @@ window.GovJobUpdatesJobs = [
             "Bihar"
         ],
         "applyLink": "https://phc-recruitment.com/",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1009.html",
+        "officialNotification": "https://patnahighcourt.gov.in/getfile/MTA0NTQ=-q0vlRLd1RTE=",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2393",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
