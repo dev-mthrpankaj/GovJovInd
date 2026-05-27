@@ -490,14 +490,14 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-7",
+        "id": "2391",
         "title": "MPESB Van Rakshak / Jail Prahari Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Forest and Jail",
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
-        "totalPosts": "Not specified",
+        "totalPosts": "1679",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
         "status": "closed",
