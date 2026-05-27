@@ -1064,5 +1064,25 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2430",
+        "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
