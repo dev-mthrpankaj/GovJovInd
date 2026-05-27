@@ -59,7 +59,7 @@ window.GovJobUpdatesJobs = [
         "organization": "EDCIL India Limited",
         "department": "Medical Education",
         "category": "Central Government",
-        "year": "",
+        "year": "2026",
         "qualification": "10+2 (View Details for more Information)",
         "totalPosts": "879",
         "startDate": "2026-05-22",
