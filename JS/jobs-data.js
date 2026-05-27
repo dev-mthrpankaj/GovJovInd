@@ -706,7 +706,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-16",
+        "id": "2400",
         "title": "UPTET Online Form 2026",
         "organization": "Uttar Pradesh Exam Regulatory Authority",
         "department": "Education",
@@ -724,13 +724,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://uptet.upessc.org/otr/",
         "officialNotification": "https://www.upessc.up.gov.in/Notice/334a-b177-4450-4fbc-98be.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2399",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2400",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-17",
+        "id": "2401",
         "title": "Bihar CET B.Ed Online Form 2026",
         "organization": "Bihar CET B.Ed",
         "department": "Admission",
@@ -746,8 +746,8 @@ window.GovJobUpdatesJobs = [
             "CET B.Ed",
             "Education"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
+        "applyLink": "https://cetbed.ucanapply.com/univer/public/secure?app_id=UElZMDAwMDEwMA==",
+        "officialNotification": "https://d1fij890xi0cmd.cloudfront.net/ums/cetbed-brabu/2026/notices/1777289328_prospectus-cet-bed2026.pdf",
         "detailPage": "../Job_Details/HTML/job-details-job-1017.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
