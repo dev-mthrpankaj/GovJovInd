@@ -857,7 +857,7 @@ window.GovJobUpdatesJobs = [
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
-        "totalPosts": "Not specified",
+        "totalPosts": "61601",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-16",
         "status": "active",
@@ -867,14 +867,14 @@ window.GovJobUpdatesJobs = [
             "UP"
         ],
         "applyLink": "https://upanganwadibharti.in/",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1022.html",
+        "officialNotification": "https://upanganwadibharti.in/",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2406",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-23",
+        "id": "2407",
         "title": "UP Cooperative Bank Various Post Online Form 2026",
         "organization": "Uttar Pradesh Cooperative Institution Service Board",
         "department": "Banking",
