@@ -390,11 +390,11 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1777546753.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2386",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
-        "id": "job-sheet-3",
+        "id": "2387",
         "title": "CRPF Constable Tradesman Online Form 2026 (9195 Posts)",
         "organization": "Central Reserve Police Force",
         "department": "Defence",
