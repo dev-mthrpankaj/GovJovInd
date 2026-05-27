@@ -369,7 +369,7 @@ window.GovJobUpdatesAdmitCards = [
             "NORCET",
             "Nursing Officer"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://aiimsexams.ac.in/auth/login",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -391,7 +391,7 @@ window.GovJobUpdatesAdmitCards = [
             "Home Guard",
             "Havildar Clerk"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://apply-bpssc.com/bpssc_2_26_weadmtcards/searchApplication",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
