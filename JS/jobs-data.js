@@ -514,7 +514,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-8",
+        "id": "2392",
         "title": "Bihar BPSC 33rd Judicial Services Online Form 2026",
         "organization": "Bihar Public Service Commission",
         "department": "Judiciary",
