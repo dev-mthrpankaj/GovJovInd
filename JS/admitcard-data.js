@@ -325,7 +325,7 @@ window.GovJobUpdatesAdmitCards = [
             "NEET UG",
             "Medical"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://examinationservices.nic.in/AdmitCardService/AdmitCardNeet/Login",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -347,7 +347,7 @@ window.GovJobUpdatesAdmitCards = [
             "Junior Engineer",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
