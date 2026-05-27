@@ -418,7 +418,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "job-sheet-4",
+        "id": "2388",
         "title": "Railway RRB ALP Online Form 2026 (11127 Posts)",
         "organization": "Railway Recruitment Board",
         "department": "Railway",
@@ -442,7 +442,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "job-sheet-5",
+        "id": "2389",
         "title": "MPESB Nursing Officer / Sister Tutor Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Health",
@@ -459,14 +459,14 @@ window.GovJobUpdatesJobs = [
             "Sister Tutor"
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/1005.html",
+        "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Health_Nursing_2026RuleBook02_04_2026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2389",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-6",
+        "id": "2390",
         "title": "MPESB Hospital Assistant Online Form 2026",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Health",
