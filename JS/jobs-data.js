@@ -530,8 +530,8 @@ window.GovJobUpdatesJobs = [
             "Judicial Services",
             "Bihar"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
+        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
+        "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-122026-33rd-BJSE_BPSC-20260223-82eskn.pdf",
         "detailPage": "../Job_Details/HTML/job-details-job-1008.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
