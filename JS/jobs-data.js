@@ -836,7 +836,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "209",
         "startDate": "2026-05-01",
         "lastDate": "2026-07-09",
-        "status": "active",
+        "status": "upcoming",
         "tags": [
             "UPSSSC",
             "Havildar Instructor",
@@ -844,13 +844,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?DnnJcRACgDWbxJiEHVQZfB4I2Z6BHMLb+KVay71xLuw=",
-        "detailPage": "../Job_Details/HTML/job-details-job-1021.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2405",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-22",
+        "id": "2406",
         "title": "UP Anganwadi Bharti Online Form 2026",
         "organization": "Uttar Pradesh Anganwadi",
         "department": "Women and Child Development",
