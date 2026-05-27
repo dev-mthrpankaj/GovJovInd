@@ -237,7 +237,7 @@ window.GovJobUpdatesAdmitCards = [
             "NTPC",
             "Exam City"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/100181/login.html",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
