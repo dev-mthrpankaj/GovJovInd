@@ -748,13 +748,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cetbed.ucanapply.com/univer/public/secure?app_id=UElZMDAwMDEwMA==",
         "officialNotification": "https://d1fij890xi0cmd.cloudfront.net/ums/cetbed-brabu/2026/notices/1777289328_prospectus-cet-bed2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1017.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2401",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-18",
+        "id": "2402",
         "title": "RBI Officer Grade-B Online Form 2026",
         "organization": "Reserve Bank of India",
         "department": "Banking",
