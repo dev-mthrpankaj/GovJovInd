@@ -22,10 +22,10 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2430",
+        "updatedAt": "2026-05-27",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2426",
