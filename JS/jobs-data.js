@@ -586,7 +586,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-11",
+        "id": "2395",
         "title": "BSNL Senior Executive Trainee Online Form 2026",
         "organization": "Bharat Sanchar Nigam Limited",
         "department": "Telecom",
@@ -602,7 +602,7 @@ window.GovJobUpdatesJobs = [
             "Senior Executive Trainee",
             "Telecom"
         ],
-        "applyLink": "#",
+        "applyLink": "https://bsnlregistration.ibtexamination.com/",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1011.html",
         "updatedAt": "2026-05-01",
