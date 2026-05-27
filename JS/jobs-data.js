@@ -626,8 +626,8 @@ window.GovJobUpdatesJobs = [
             "Senior Resident",
             "Tutor"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
+        "applyLink": "https://admissions.nic.in/Bihar/Applicant/Root/OTHome.aspx?enc=k5U5Gp8NR6abhZ8Lld4oWvvSsCkKcG+Kcizck0pVdCvJE10jNAB9fCwdCq9SngLzv5wfQK8DbPTS5JsnelmH5g==",
+        "officialNotification": "https://bceceboard.bihar.gov.in/pdf_Adv/ADV_SR26_01.pdf",
         "detailPage": "../Job_Details/HTML/job-details-job-1012.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
