@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-sheet-29",
+        "id": "admit-sheet-24",
         "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Poilce",
@@ -530,72 +530,6 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-2022",
-        "title": "BPSC Project Manager Pre Exam Date 2026",
-        "organization": "Bihar Public Service Commission",
-        "department": "State PSC",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BPSC",
-            "Project Manager",
-            "Pre Exam"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2022.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2023",
-        "title": "RSSB Lab Assistant Exam Date 2026",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Lab Assistant",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "RSSB",
-            "Lab Assistant",
-            "Rajasthan"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2023.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2024",
-        "title": "Bihar BPSC Stenographer New Exam Date 2026",
-        "organization": "Bihar Public Service Commission",
-        "department": "State PSC",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "BPSC",
-            "Stenographer",
-            "Bihar"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2024.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "admit-2025",
         "title": "UP LT Grade Assistant Teacher Mains Admit Card 2026",
         "organization": "Uttar Pradesh Public Service Commission",
@@ -611,52 +545,8 @@ window.GovJobUpdatesAdmitCards = [
             "Assistant Teacher",
             "Mains"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2026",
-        "title": "UPSC CAPF AC Interview Schedule 2026",
-        "organization": "Union Public Service Commission",
-        "department": "Defence",
-        "category": "Interview Schedule",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "UPSC",
-            "CAPF AC",
-            "Interview"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2026.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2027",
-        "title": "HPSC PGT Computer Science New Exam Date 2026",
-        "organization": "Haryana Public Service Commission",
-        "department": "Teaching",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "upcoming",
-        "tags": [
-            "HPSC",
-            "PGT",
-            "Computer Science"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2027.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -677,7 +567,7 @@ window.GovJobUpdatesAdmitCards = [
             "Constable",
             "PMT"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://adv012026.hryssc.com/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -699,7 +589,7 @@ window.GovJobUpdatesAdmitCards = [
             "71th Mains",
             "Admit Card"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
