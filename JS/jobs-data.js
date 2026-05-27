@@ -521,7 +521,7 @@ window.GovJobUpdatesJobs = [
         "category": "State PSC",
         "year": "2026",
         "qualification": "Graduate",
-        "totalPosts": "Not specified",
+        "totalPosts": "173",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
         "status": "closed",
@@ -532,7 +532,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-122026-33rd-BJSE_BPSC-20260223-82eskn.pdf",
-        "detailPage": "../Job_Details/HTML/job-details-job-1008.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2392",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
