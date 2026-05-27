@@ -929,8 +929,8 @@ window.GovJobUpdatesJobs = [
         "category": "Staff Selection",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
-        "totalPosts": "Not specified",
-        "startDate": "2026-05-01",
+        "totalPosts": "3003",
+        "startDate": "2026-05-13",
         "lastDate": "2026-05-04",
         "status": "active",
         "tags": [
@@ -938,15 +938,15 @@ window.GovJobUpdatesJobs = [
             "Selection Phase",
             "Phase 14"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1025.html",
+        "applyLink": "https://ssc.gov.in/login",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_RHQ_2026_phase_xiv.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2409",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-26",
+        "id": "2410",
         "title": "SSC JHT Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
