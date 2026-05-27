@@ -761,7 +761,7 @@ window.GovJobUpdatesJobs = [
         "category": "Banking",
         "year": "2026",
         "qualification": "Graduate",
-        "totalPosts": "Not specified",
+        "totalPosts": "60",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-20",
         "status": "active",
@@ -770,9 +770,9 @@ window.GovJobUpdatesJobs = [
             "Grade B",
             "Officer"
         ],
-        "applyLink": "#",
-        "officialNotification": "#",
-        "detailPage": "../Job_Details/HTML/job-details-job-1018.html",
+        "applyLink": "https://ibpsreg.ibps.in/rbisbmar26/",
+        "officialNotification": "https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DEPR29042026BE94DEA85E3C4753A82B191EB6A795ED.PDF",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2401",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
