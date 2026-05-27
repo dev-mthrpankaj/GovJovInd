@@ -412,10 +412,10 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://recruitment.crpf.gov.in/login",
         "officialNotification": "https://rect.crpf.gov.in/Upload/Recruitment/Recruitment%20Notice%20103042026-720.pdf",
-        "detailPage": "../Job_Details/HTML/1003.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2387",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "job-sheet-4",
@@ -434,7 +434,7 @@ window.GovJobUpdatesJobs = [
             "ALP",
             "Railway"
         ],
-        "applyLink": "#",
+        "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "#",
         "detailPage": "../Job_Details/HTML/job-details-job-1004.html",
         "updatedAt": "2026-05-01",
