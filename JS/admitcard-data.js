@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-sheet-35",
+        "id": "admit-sheet-32",
         "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Poilce",
@@ -244,72 +244,6 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-2003",
-        "title": "Bihar Police BPSSC SI Mains Exam Date 2026",
-        "organization": "Bihar Police Subordinate Services Commission",
-        "department": "Police",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BPSSC",
-            "Bihar Police",
-            "SI Mains"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2003.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2004",
-        "title": "Bihar BSSC Office Attendant Mains Exam Date 2026",
-        "organization": "Bihar Staff Selection Commission",
-        "department": "State SSC",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BSSC",
-            "Office Attendant",
-            "Mains"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2004.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-2005",
-        "title": "Indian Navy SSR Medical Exam Date 2026",
-        "organization": "Indian Navy",
-        "department": "Defence",
-        "category": "Exam Date",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "Indian Navy",
-            "SSR",
-            "Medical"
-        ],
-        "downloadLink": "#",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2005.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "admit-2006",
         "title": "UP PGT Exam City Details 2026",
         "organization": "Uttar Pradesh Secondary Education Service Selection Board",
@@ -325,7 +259,7 @@ window.GovJobUpdatesAdmitCards = [
             "Teaching",
             "Exam City"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://admitcards.upessc.org/",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
