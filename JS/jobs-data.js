@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2430",
+        "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
+        "organization": "Railway Recruitment Board",
+        "department": "Railway",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "6565",
+        "startDate": "2026-06-30",
+        "lastDate": "2026-07-29",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2426",
         "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
         "organization": "Rajasthan Staff Selection Board",
@@ -1062,26 +1082,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2430",
-        "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
-        "organization": "Railway Recruitment Board",
-        "department": "Railway",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "6565",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
