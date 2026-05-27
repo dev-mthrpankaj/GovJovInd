@@ -14,7 +14,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3951",
         "startDate": "2026-05-25",
         "lastDate": "2026-06-23",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Education",
             "Rajsthan",
