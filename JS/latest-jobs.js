@@ -185,7 +185,8 @@
 
     const detailPageOverrides = {
         "job-1103": "../Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html",
-        "job-2422": "../Job_Details/HTML/job-details.html?id=2422"
+        "job-2422": "../Job_Details/HTML/job-details.html?id=2422",
+        "job-2430": "../Job_Details/HTML/2430-Railway-RRB-Technician-Online-Form-2026.html"
     };
 
     function withHtmlExtension(url) {
