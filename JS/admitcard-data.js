@@ -200,6 +200,24 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
+        "id": "admit-sheet-40",
+        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
+        "organization": "Join Indian Army",
+        "department": "Defence",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-01",
+        "examEndDate": "2026-06-15",
+        "releaseDate": "2026-05-15",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "admit-2002",
         "title": "RRB NTPC 10+2 UG Exam City Details 2026",
         "organization": "Railway Recruitment Board",
@@ -834,24 +852,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "#",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "admit-sheet-40",
-        "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
-        "organization": "Join Indian Army",
-        "department": "Defence",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
