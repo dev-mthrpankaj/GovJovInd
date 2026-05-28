@@ -3,6 +3,11 @@
 
   const CONTACT_EMAIL = "dmagstudio2023@outlook.com";
   const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
+  const CONTACT_MESSAGES = {
+    success: "Request submitted successfully. We will review it soon.",
+    fallback: "Automatic submission could not be verified. Please send using the email fallback.",
+    error: "Could not submit automatically. Opening direct email fallback."
+  };
   const allowedPages = new Set([
     "index.html",
     "about-us.html"
@@ -10,6 +15,15 @@
   const blockedPages = new Set(["rank-predictor.html"]);
 
   const pageName = decodeURIComponent(window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+  class ContactSubmissionError extends Error {
+    constructor(message, code, cause) {
+      super(message);
+      this.name = "ContactSubmissionError";
+      this.code = code || "unknown";
+      if (cause) this.cause = cause;
+    }
+  }
 
   function isQuizExamMode() {
     const examView = document.getElementById("examView");
@@ -51,10 +65,31 @@
     };
   }
 
-  function buildMailtoHref(subject, message) {
-    const mailSubject = encodeURIComponent(`GovJobUpdates Contact: ${subject || "Support Request"}`);
-    const mailBody = encodeURIComponent(`${message || ""}\n\nPage: ${window.location.href}`);
+  function buildMailtoHref(subject, message, payload) {
+    const details = normalizePayload({
+      ...(payload || {}),
+      subject: subject || payload?.subject || "Support Request",
+      description: message || payload?.description || ""
+    });
+    const mailSubject = encodeURIComponent(`GovJobUpdates Contact: ${details.subject || "Support Request"}`);
+    const mailBody = encodeURIComponent([
+      details.description || "",
+      "",
+      `Name: ${details.name || "Not provided"}`,
+      `Contact: ${details.contact || "Not provided"}`,
+      `Page: ${details.page || getPageLabel()}`,
+      `Page URL: ${details.pageUrl || window.location.href}`,
+      `Submitted At: ${details.submittedAt}`
+    ].join("\n"));
     return `mailto:${CONTACT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
+  }
+
+  function openMailFallback(payload) {
+    window.location.href = buildMailtoHref(payload?.subject, payload?.description, payload);
+  }
+
+  function getFailureMessage(error) {
+    return error?.code === "unverified" ? CONTACT_MESSAGES.fallback : CONTACT_MESSAGES.error;
   }
 
   function createWidget() {
@@ -117,35 +152,54 @@
   }
 
   async function sendByPost(payload) {
-    const response = await fetch(CONTACT_API_URL, {
-      method: "POST",
-      redirect: "follow",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    });
-    const text = await response.text();
-    const result = JSON.parse(text);
-    if (!result.success) throw new Error(result.message || "Request failed");
-    return result;
-  }
+    let response;
+    try {
+      response = await fetch(CONTACT_API_URL, {
+        method: "POST",
+        redirect: "follow",
+        cache: "no-store",
+        credentials: "omit",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+    } catch (error) {
+      throw new ContactSubmissionError("Contact backend request could not be verified.", "unverified", error);
+    }
 
-  async function sendByNoCorsGet(payload) {
-    const url = new URL(CONTACT_API_URL);
-    Object.keys(payload).forEach((key) => url.searchParams.set(key, payload[key]));
-    await fetch(url.toString(), { method: "GET", mode: "no-cors", cache: "no-store" });
-    return { success: true, fallback: true };
+    if (!response.ok) {
+      throw new ContactSubmissionError(`Contact backend returned HTTP ${response.status}.`, "http");
+    }
+
+    let result;
+    try {
+      result = JSON.parse(await response.text());
+    } catch (error) {
+      throw new ContactSubmissionError("Contact backend returned invalid JSON.", "unverified", error);
+    }
+
+    if (result?.success !== true) {
+      throw new ContactSubmissionError(result?.message || "Contact backend rejected the request.", "backend");
+    }
+
+    return result;
   }
 
   async function submitContactRequest(payload) {
     const normalizedPayload = normalizePayload(payload);
     if (!normalizedPayload.subject || !normalizedPayload.description) {
-      throw new Error("Please enter subject and description.");
+      throw new ContactSubmissionError("Please enter subject and description.", "validation");
     }
 
     try {
       return await sendByPost(normalizedPayload);
-    } catch {
-      return sendByNoCorsGet(normalizedPayload);
+    } catch (error) {
+      // no-cors returns an opaque response, so JavaScript cannot confirm
+      // whether Apps Script accepted the request or actually sent email.
+      console.error("[GovJobContact] Contact submission failed", error);
+      throw error;
     }
   }
 
@@ -168,10 +222,12 @@
       await submitContactRequest(payload);
       form.reset();
       document.getElementById("gjuContactPage").value = getPageLabel();
-      setStatus("Request submitted successfully. Please check support email inbox/spam once.", "success");
+      setStatus(CONTACT_MESSAGES.success, "success");
     } catch (error) {
-      setStatus("Could not submit automatically. Use direct email link below.", "error");
-      window.setTimeout(() => { window.location.href = buildMailtoHref(subject, message); }, 600);
+      setStatus(getFailureMessage(error), "error");
+      if (error?.code !== "validation") {
+        window.setTimeout(() => openMailFallback(payload), 700);
+      }
     } finally {
       if (submit) { submit.disabled = false; submit.textContent = "Submit Request"; }
     }
@@ -221,6 +277,8 @@
   window.GovJobContact = {
     submitRequest: submitContactRequest,
     getMailtoHref: buildMailtoHref,
+    openMailFallback,
+    messages: CONTACT_MESSAGES,
     email: CONTACT_EMAIL
   };
 

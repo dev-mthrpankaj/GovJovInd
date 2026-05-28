@@ -27,7 +27,71 @@
 <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="disclaimer.html">Disclaimer</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
 <script src="../JS/contact-widget.js"></script>
 <script>
-(function(){const form=document.getElementById('contactRequestForm');const btn=document.getElementById('contactSubmitBtn');const toast=document.getElementById('successToast');const toastText=toast?toast.querySelector('span'):null;if(!form||!btn||!toast||!toastText)return;function showToast(message,isError){toastText.textContent=message;toast.classList.toggle('error',Boolean(isError));toast.hidden=false;}form.addEventListener('submit',async function(e){e.preventDefault();if(!form.checkValidity()){form.reportValidity();return;}const payload={name:document.getElementById('requestName')?.value||'',contact:document.getElementById('requestContact')?.value||'',subject:document.getElementById('requestSubject')?.value||'',description:document.getElementById('requestDescription')?.value||'',page:'Contact Us',pageUrl:window.location.href};btn.disabled=true;btn.textContent='Sending...';showToast('Sending your request...',false);try{if(!window.GovJobContact?.submitRequest)throw new Error('Contact sender is not loaded.');await window.GovJobContact.submitRequest(payload);form.reset();btn.textContent='Request Submitted';showToast('Request submitted successfully. We will review it soon.',false);}catch(error){btn.textContent='Submit Request';showToast('Could not submit automatically. Opening email fallback.',true);window.setTimeout(function(){window.location.href=(window.GovJobContact?.getMailtoHref?window.GovJobContact.getMailtoHref(payload.subject,payload.description):'mailto:dmagstudio2023@outlook.com');},700);}finally{window.setTimeout(function(){toast.hidden=true;toast.classList.remove('error');btn.disabled=false;btn.textContent='Submit Request';},5000);}});})();
+(function(){
+  const form=document.getElementById('contactRequestForm');
+  const btn=document.getElementById('contactSubmitBtn');
+  const toast=document.getElementById('successToast');
+  const toastText=toast?toast.querySelector('span'):null;
+  const messages=window.GovJobContact?.messages||{
+    success:'Request submitted successfully. We will review it soon.',
+    fallback:'Automatic submission could not be verified. Please send using the email fallback.',
+    error:'Could not submit automatically. Opening direct email fallback.'
+  };
+  if(!form||!btn||!toast||!toastText)return;
+  function showToast(message,isError){
+    toastText.textContent=message;
+    toast.classList.toggle('error',Boolean(isError));
+    toast.hidden=false;
+  }
+  function openFallback(payload){
+    if(window.GovJobContact?.openMailFallback){
+      window.GovJobContact.openMailFallback(payload);
+      return;
+    }
+    const subject=encodeURIComponent('GovJobUpdates Contact: '+(payload.subject||'Support Request'));
+    const body=encodeURIComponent((payload.description||'')+'\n\nPage: '+window.location.href);
+    window.location.href='mailto:dmagstudio2023@outlook.com?subject='+subject+'&body='+body;
+  }
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+    const payload={
+      name:document.getElementById('requestName')?.value||'',
+      contact:document.getElementById('requestContact')?.value||'',
+      subject:document.getElementById('requestSubject')?.value||'',
+      description:document.getElementById('requestDescription')?.value||'',
+      page:'Contact Us',
+      pageUrl:window.location.href
+    };
+    btn.disabled=true;
+    btn.textContent='Sending...';
+    showToast('Sending your request...',false);
+    try{
+      if(!window.GovJobContact?.submitRequest)throw new Error('Contact sender is not loaded.');
+      await window.GovJobContact.submitRequest(payload);
+      form.reset();
+      btn.textContent='Request Submitted';
+      showToast(messages.success,false);
+    }catch(error){
+      console.error('[GovJobContact] Contact page submission failed',error);
+      btn.textContent='Submit Request';
+      showToast(error?.code==='unverified'?messages.fallback:messages.error,true);
+      if(error?.code!=='validation'){
+        window.setTimeout(function(){openFallback(payload);},700);
+      }
+    }finally{
+      window.setTimeout(function(){
+        toast.hidden=true;
+        toast.classList.remove('error');
+        btn.disabled=false;
+        btn.textContent='Submit Request';
+      },5000);
+    }
+  });
+})();
 </script>
 <script src="../JS/script.js"></script>
 <script src="../JS/firebase-config.js"></script>

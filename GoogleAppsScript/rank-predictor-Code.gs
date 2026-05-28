@@ -86,9 +86,12 @@ function doGet(e) {
   const action = String(params.action || "").trim();
   const type = String(params.type || "").trim();
 
-  // Contact form fallback route. This allows the website to submit contact
-  // requests through a simple GET/no-cors call when browser CORS blocks POST.
-  if (action === "sendContactRequest") return sendContactRequest(params);
+  if (action === "sendContactRequest") {
+    return sendJSON({
+      success: false,
+      message: "Use POST for contact requests."
+    });
+  }
 
   if (type === "exams") return sendJSON(getRankPredictorExamConfigResponse());
 
@@ -98,6 +101,13 @@ function doGet(e) {
   });
 }
 
+/*
+Contact form deployment:
+1. Deploy as Web App.
+2. Execute as: Me.
+3. Who has access: Anyone.
+4. Copy the /exec URL into the frontend contact API URL constant in JS/contact-widget.js.
+*/
 function doPost(e) {
   try {
     const raw = e && e.postData && e.postData.contents;
@@ -2069,17 +2079,25 @@ function sendContactRequest(data) {
     "Submitted At: " + submittedAt + "\n" +
     "User Agent: " + userAgent + "\n";
 
-  MailApp.sendEmail({
-    to: to,
-    subject: mailSubject,
-    body: body,
-    name: "GovJobUpdates Contact"
-  });
+  try {
+    MailApp.sendEmail({
+      to: to,
+      subject: mailSubject,
+      body: body,
+      name: "GovJobUpdates Contact"
+    });
 
-  return sendJSON({
-    success: true,
-    message: "Contact request sent successfully."
-  });
+    return sendJSON({
+      success: true,
+      message: "Email sent"
+    });
+  } catch (error) {
+    console.error("Contact email failed", error);
+    return sendJSON({
+      success: false,
+      message: "Email could not be sent."
+    });
+  }
 }
 
 function normalizeContactText(value, maxLength) {
@@ -2105,13 +2123,6 @@ function testSendContactRequest() {
 
 function getContactTestUrl() {
   const url = ScriptApp.getService().getUrl();
-  const query = '?action=sendContactRequest' +
-    '&name=' + encodeURIComponent('Test User') +
-    '&contact=' + encodeURIComponent('test@example.com') +
-    '&subject=' + encodeURIComponent('Test Contact Mail') +
-    '&description=' + encodeURIComponent('This is a test contact request through doGet route.') +
-    '&page=' + encodeURIComponent('Apps Script doGet Test') +
-    '&pageUrl=' + encodeURIComponent('Manual test');
-  Logger.log(url + query);
-  return url + query;
+  Logger.log("Use POST with JSON to test the contact route: " + url);
+  return url;
 }
