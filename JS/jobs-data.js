@@ -4,6 +4,29 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-49",
+        "title": "RPSC APO Recruitment 2026",
+        "organization": "Rajasthan Public Service Commision",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "371",
+        "startDate": "2026-06-08",
+        "lastDate": "2026-07-07",
+        "status": "upcoming",
+        "tags": [
+            "rpsc",
+            "rajashthan"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2431",
         "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -1133,26 +1156,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "job-sheet-49",
-        "title": "RPSC APO Recruitment 2026",
-        "organization": "Rajasthan Public Service Commision",
-        "department": "",
-        "category": "",
-        "year": "",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
