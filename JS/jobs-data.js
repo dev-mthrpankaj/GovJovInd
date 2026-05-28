@@ -20,17 +20,17 @@ window.GovJobUpdatesJobs = [
             "telecom",
             "JTO"
         ],
-        "applyLink": "",
+        "applyLink": "#",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2431",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
     {
-        "id": "job-sheet-48",
+        "id": "2432",
         "title": "RPSC RAS Pre Recruitment 2026",
-        "organization": "Rajsthan Public Service Commision",
+        "organization": "Rajasthan Public Service Commision",
         "department": "Adminstration",
         "category": "State Government",
         "year": "2026",
@@ -39,10 +39,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-04",
         "lastDate": "2026-07-03",
         "status": "upcoming",
-        "tags": [],
-        "applyLink": "",
+        "tags": [
+            "rpsc",
+            "rajashthan"
+        ],
+        "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2432",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
