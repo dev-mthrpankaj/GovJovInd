@@ -21,7 +21,7 @@ window.GovJobUpdatesJobs = [
             "JTO"
         ],
         "applyLink": "",
-        "officialNotification": "",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
