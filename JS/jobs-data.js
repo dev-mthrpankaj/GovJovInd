@@ -47,8 +47,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
         "detailPage": "../Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2433",
