@@ -4,6 +4,76 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2431",
+        "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
+        "organization": "Bharat Sanchar Nigam Limited",
+        "department": "Telecom",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "100",
+        "startDate": "2026-06-04",
+        "lastDate": "2026-07-03",
+        "status": "upcoming",
+        "tags": [
+            "bsnl",
+            "telecom",
+            "JTO"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2431",
+        "updatedAt": "2026-05-28",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2432",
+        "title": "RPSC RAS Pre Recruitment 2026",
+        "organization": "Rajasthan Public Service Commision",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "607",
+        "startDate": "2026-06-04",
+        "lastDate": "2026-07-03",
+        "status": "upcoming",
+        "tags": [
+            "rpsc",
+            "rajashthan"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2432",
+        "updatedAt": "2026-05-28",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2433",
+        "title": "RPSC APO Recruitment 2026",
+        "organization": "Rajasthan Public Service Commision",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "371",
+        "startDate": "2026-06-08",
+        "lastDate": "2026-07-07",
+        "status": "upcoming",
+        "tags": [
+            "rpsc",
+            "rajashthan"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/3ABD11DA80374279A39F1BF78AAB0950.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2433",
+        "updatedAt": "2026-05-28",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2430",
         "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
         "organization": "Railway Recruitment Board",
@@ -22,7 +92,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2430",
+        "detailPage": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes"
