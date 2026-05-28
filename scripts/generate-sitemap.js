@@ -49,9 +49,20 @@ function isNoIndexPage(filePath) {
   ));
 }
 
+function isMetaRefreshRedirectPage(filePath) {
+  const html = fs.readFileSync(filePath, "utf8");
+  const metaTags = html.match(/<meta\b[^>]*>/gi) || [];
+
+  return metaTags.some((tag) => (
+    /\bhttp-equiv\s*=\s*["']refresh["']/i.test(tag)
+    && /\bcontent\s*=\s*["'][^"']*\burl\s*=/i.test(tag)
+  ));
+}
+
 function shouldExcludeFile(relativePath, filePath) {
   if (relativePath.toLowerCase() === "404.html") return true;
   if (relativePath.split("/").some((segment) => excludedNameToken.test(segment))) return true;
+  if (isMetaRefreshRedirectPage(filePath)) return true;
   return isNoIndexPage(filePath);
 }
 
