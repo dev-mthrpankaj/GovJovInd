@@ -24,8 +24,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
         "detailPage": "../Job_Details/HTML/2431-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2432",
