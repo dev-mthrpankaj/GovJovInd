@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2431",
+        "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
+        "organization": "Bharat Sanchar Nigam Limited",
+        "department": "Telecom",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "100",
+        "startDate": "2026-06-04",
+        "lastDate": "2026-07-03",
+        "status": "upcoming",
+        "tags": [
+            "bsnl",
+            "telecom",
+            "JTO"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2430",
         "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
         "organization": "Railway Recruitment Board",
@@ -1086,26 +1110,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2431",
-        "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
-        "organization": "Bharat Sanchar Nigam Limited",
-        "department": "Telecom",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
