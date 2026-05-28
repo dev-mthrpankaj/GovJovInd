@@ -188,7 +188,7 @@
         "job-2388": "../Job_Details/HTML/2388-Railway-RRB-ALP-Online-Form-2026.html",
         "job-2422": "../Job_Details/HTML/2422-Punjab-and-Sind-Bank-Apprentice-2026.html",
         "job-2427": "../Job_Details/HTML/2427-Punjab-Haryana-High-Court-Clerk-2026.html",
-        "job-2430": "../Job_Details/HTML/2430-Railway-RRB-Technician-Online-Form-2026.html"
+        "job-2430": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html"
     };
 
     function withHtmlExtension(url) {
