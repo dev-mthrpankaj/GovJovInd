@@ -4,29 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "job-sheet-49",
-        "title": "RPSC APO Recruitment 2026",
-        "organization": "Rajasthan Public Service Commision",
-        "department": "Adminstration",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "371",
-        "startDate": "2026-06-08",
-        "lastDate": "2026-07-07",
-        "status": "upcoming",
-        "tags": [
-            "rpsc",
-            "rajashthan"
-        ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "2431",
         "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -46,7 +23,7 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2431",
-        "updatedAt": "",
+        "updatedAt": "2026-05-28",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
@@ -69,7 +46,30 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2432",
-        "updatedAt": "",
+        "updatedAt": "2026-05-28",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2433",
+        "title": "RPSC APO Recruitment 2026",
+        "organization": "Rajasthan Public Service Commision",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "371",
+        "startDate": "2026-06-08",
+        "lastDate": "2026-07-07",
+        "status": "upcoming",
+        "tags": [
+            "rpsc",
+            "rajashthan"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/3ABD11DA80374279A39F1BF78AAB0950.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2433",
+        "updatedAt": "2026-05-28",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
