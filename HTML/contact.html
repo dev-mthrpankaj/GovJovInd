@@ -79,7 +79,7 @@
       console.error('[GovJobContact] Contact page submission failed',error);
       btn.textContent='Submit Request';
       showToast(error?.code==='unverified'?messages.fallback:messages.error,true);
-      if(error?.code!=='validation'){
+      if(error?.code!=='validation'&&error?.code!=='unverified'){
         window.setTimeout(function(){openFallback(payload);},700);
       }
     }finally{

@@ -2121,6 +2121,15 @@ function testSendContactRequest() {
   });
 }
 
+function authorizeContactEmail() {
+  MailApp.sendEmail({
+    to: "dmagstudio2023@outlook.com",
+    subject: "GovJobUpdates Contact Mail Authorization Test",
+    body: "MailApp authorization is working for GovJobUpdates contact feedback.",
+    name: "GovJobUpdates Contact"
+  });
+}
+
 function getContactTestUrl() {
   const url = ScriptApp.getService().getUrl();
   Logger.log("Use POST with JSON to test the contact route: " + url);

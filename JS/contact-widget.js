@@ -187,6 +187,19 @@
     return result;
   }
 
+  async function sendByNoCorsPost(payload) {
+    // no-cors returns an opaque response, so JavaScript cannot confirm
+    // whether Apps Script accepted the request or actually sent email.
+    await fetch(CONTACT_API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      cache: "no-store",
+      credentials: "omit",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+  }
+
   async function submitContactRequest(payload) {
     const normalizedPayload = normalizePayload(payload);
     if (!normalizedPayload.subject || !normalizedPayload.description) {
@@ -196,9 +209,16 @@
     try {
       return await sendByPost(normalizedPayload);
     } catch (error) {
-      // no-cors returns an opaque response, so JavaScript cannot confirm
-      // whether Apps Script accepted the request or actually sent email.
       console.error("[GovJobContact] Contact submission failed", error);
+      if (error?.code === "unverified" || error?.code === "http") {
+        try {
+          await sendByNoCorsPost(normalizedPayload);
+          throw new ContactSubmissionError("Contact request was sent but could not be verified.", "unverified", error);
+        } catch (fallbackError) {
+          if (fallbackError?.code === "unverified") throw fallbackError;
+          console.error("[GovJobContact] Contact no-cors fallback failed", fallbackError);
+        }
+      }
       throw error;
     }
   }
@@ -225,7 +245,7 @@
       setStatus(CONTACT_MESSAGES.success, "success");
     } catch (error) {
       setStatus(getFailureMessage(error), "error");
-      if (error?.code !== "validation") {
+      if (error?.code !== "validation" && error?.code !== "unverified") {
         window.setTimeout(() => openMailFallback(payload), 700);
       }
     } finally {
