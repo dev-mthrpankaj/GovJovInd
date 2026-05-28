@@ -68,10 +68,10 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/3ABD11DA80374279A39F1BF78AAB0950.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2433",
+        "detailPage": "../Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2430",
