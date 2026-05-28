@@ -146,7 +146,7 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "no"
     },
     {
-        "id": "answerkey-4003",
+        "id": "2425",
         "title": "UPSSSC Technical Assistant Group C Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Technical",
