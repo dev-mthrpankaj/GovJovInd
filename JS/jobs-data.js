@@ -92,7 +92,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2430",
+        "detailPage": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes"
