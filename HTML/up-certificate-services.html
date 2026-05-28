@@ -56,7 +56,7 @@
     }
     .cert-hero p{color:var(--muted);max-width:72ch;font-size:clamp(.96rem,2.5vw,1.05rem)}
     .cert-badge{display:inline-flex;width:max-content;max-width:100%;align-items:center;gap:.45rem;padding:.42rem .72rem;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-weight:900;font-size:.82rem;line-height:1.2}
-    .cert-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.9rem}.cert-actions .btn{min-height:44px;justify-content:center}
+    .cert-tabs{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:.9rem;padding:.35rem;border:1px solid #bfdbfe;border-radius:16px;background:#fff;box-shadow:0 10px 24px rgba(37,99,235,.08);width:max-content;max-width:100%}.cert-tab{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:44px;padding:.72rem 1rem;border-radius:12px;color:#1d4ed8;text-decoration:none;font-weight:900;line-height:1.2}.cert-tab.active{background:#2563eb;color:#fff}.cert-tab:hover{background:#dbeafe;color:#1d4ed8}.cert-tab.active:hover{background:#1d4ed8;color:#fff}
     .cert-card{display:grid;gap:.75rem;padding:clamp(.95rem,2.5vw,1.15rem);border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:var(--shadow);min-width:0;overflow:hidden}
     .cert-card h2,.cert-card h3{color:var(--secondary);line-height:1.2;letter-spacing:-.02em}.cert-card h2{font-size:clamp(1.25rem,4.5vw,1.65rem)}.cert-card h3{font-size:1.05rem}
     .cert-service-grid,.safety-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.8rem}
@@ -73,9 +73,9 @@
     .payment-qr-wrap{display:grid;place-items:center;padding:1rem;border:1px dashed #93c5fd;border-radius:16px;background:#fff}.payment-qr-wrap img{width:min(100%,260px);max-width:260px;aspect-ratio:1/1;object-fit:contain;display:block;border-radius:14px;box-shadow:0 10px 24px rgba(37,99,235,.12);background:#fff}
     .doc-list{display:grid;gap:.62rem;list-style:none}.doc-list li{display:flex;gap:.55rem;align-items:flex-start;line-height:1.4}.doc-list i{color:#16a34a;margin-top:.22rem;flex:0 0 auto}.btn-disabled{opacity:.65;pointer-events:none}
     .process-list{display:grid;gap:.65rem;counter-reset:step;list-style:none}.process-list li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:start;padding:.8rem;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc}.process-list li::before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:30px;height:30px;border-radius:999px;background:#2563eb;color:#fff;font-weight:900}.process-list strong{display:block;color:#0f172a;line-height:1.25}.process-list span{display:block;color:#64748b;font-size:.9rem;line-height:1.45;margin-top:.15rem}
-    @media(min-width:760px){.cert-row{grid-template-columns:1fr 1fr}.cert-hero{grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);align-items:center}.cert-actions .btn{width:auto}}
+    @media(min-width:760px){.cert-row{grid-template-columns:1fr 1fr}.cert-hero{grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);align-items:center}}
     @media(min-width:1040px){.cert-grid{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)}}
-    @media(max-width:759px){.cert-page{width:100%;padding:.65rem .65rem 5.5rem}.cert-hero,.cert-card{border-radius:16px}.cert-actions{display:grid}.cert-actions .btn{width:100%;padding-inline:.8rem}.cert-fee,.payment-upi-id{display:grid}.cert-badge{font-size:.78rem}.cert-service-grid,.safety-grid{grid-template-columns:1fr}.cert-field input[type=file]{font-size:.9rem}}
+    @media(max-width:759px){.cert-page{width:100%;padding:.65rem .65rem 5.5rem}.cert-hero,.cert-card{border-radius:16px}.cert-tabs{display:grid;width:100%;grid-template-columns:1fr 1fr}.cert-tab{padding-inline:.55rem}.cert-fee,.payment-upi-id{display:grid}.cert-badge{font-size:.78rem}.cert-service-grid,.safety-grid{grid-template-columns:1fr}.cert-field input[type=file]{font-size:.9rem}}
     @media(max-width:380px){.cert-page{padding-left:.5rem;padding-right:.5rem}.cert-card,.cert-hero{padding:.85rem}.cert-hero h1{font-size:1.75rem}.cert-note{font-size:.88rem}.cert-service,.safety-card{padding:.85rem}}
   </style>
 </head>
@@ -87,9 +87,9 @@
         <span class="cert-badge"><i class="fas fa-certificate" aria-hidden="true"></i> UP CSC/eDistrict Assistance</span>
         <h1>Apply UP Caste, Domicile & Income Certificate</h1>
         <p>Uttar Pradesh residents can request assistance for caste, domicile and income certificate applications. This is an application-help service, not a government approval service.</p>
-        <div class="cert-actions">
-          <a class="btn btn-primary" href="#certificateForm"><i class="fas fa-file-signature" aria-hidden="true"></i> Apply Now</a>
-          <a class="btn btn-outline" href="#requiredDocs"><i class="fas fa-list-check" aria-hidden="true"></i> Required Documents</a>
+        <div class="cert-tabs" aria-label="UP services actions">
+          <a class="cert-tab active" href="#certificateForm"><i class="fas fa-file-signature" aria-hidden="true"></i> Apply Now</a>
+          <a class="cert-tab" href="https://edistrict.up.gov.in/edistrictup/" target="_blank" rel="noopener"><i class="fas fa-magnifying-glass-location" aria-hidden="true"></i> Check Status</a>
         </div>
       </div>
       <div class="cert-card">
