@@ -28,6 +28,26 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
+        "id": "job-sheet-48",
+        "title": "RPSC RAS Pre Recruitment 2026",
+        "organization": "Rajsthan Public Service Commision",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "607",
+        "startDate": "2026-06-04",
+        "lastDate": "2026-07-03",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2430",
         "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
         "organization": "Railway Recruitment Board",
@@ -1110,26 +1130,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "job-sheet-48",
-        "title": "RPSC RAS Pre Recruitment 2026",
-        "organization": "Rajsthan Public Service Commision",
-        "department": "Adminstration",
-        "category": "",
-        "year": "",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
