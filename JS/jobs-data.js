@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2434",
+        "title": "UPSSSC Lower PCS Recruitment 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Administration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "2285",
+        "startDate": "2026-06-29",
+        "lastDate": "2026-06-18",
+        "status": "active",
+        "tags": [
+            "upsssc",
+            "lower pcs",
+            "uttar pradesh"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2431",
         "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -1156,26 +1180,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2434",
-        "title": "UPSSSC Lower PCS Recruitment 2026",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Administration",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
