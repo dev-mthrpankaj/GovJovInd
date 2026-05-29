@@ -20,9 +20,9 @@ window.GovJobUpdatesJobs = [
             "lower pcs",
             "uttar pradesh"
         ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
+        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?HA04nYKkgpncofLRuXT6k7Np5V3U8T3Cr2bvb1DZAsc=",
+        "detailPage": "../Job_Details/HTML/2434-upsssc.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
