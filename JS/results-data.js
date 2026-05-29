@@ -20,10 +20,10 @@ window.GovJobUpdatesResults = [
             "head constable"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
+        "updatedAt": "2026-05-29",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "result-3031",
