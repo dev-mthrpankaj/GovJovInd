@@ -132,7 +132,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-2033",
+        "id": "2042",
         "title": "UP Police Constable Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
         "department": "State Police",
@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-sheet-24",
+        "id": "2043",
         "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "State Poilce",
@@ -176,7 +176,7 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "no"
     },
     {
-        "id": "admit-2032",
+        "id": "2041",
         "title": "UPSC Civil Services IAS IFS Admit Card 2026",
         "organization": "Union Public Service Commision",
         "department": "Central",

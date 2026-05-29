@@ -50,6 +50,26 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "yes"
     },
     {
+        "id": "answerkey-sheet-36",
+        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-05-24",
+        "examEndDate": "",
+        "releaseDate": "",
+        "objectionLastDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "answerkey-4032",
         "title": "Madhya Pradesh MP Police Subedar Stenographer & ASI Ministerial Answer Key 2025",
         "organization": "Madhya Pradesh Employees Selection Board",
@@ -814,26 +834,6 @@ window.GovJobUpdatesAnswerKeys = [
         "objectionLink": "#",
         "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "answerkey-sheet-36",
-        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "",
-        "objectionLastDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "objectionLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
