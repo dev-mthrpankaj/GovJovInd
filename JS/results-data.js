@@ -602,5 +602,21 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "result-sheet-33",
+        "title": "SSC Delhi Police HC (AWO/TPO) Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2025",
+        "resultDate": "2026-05-01",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
