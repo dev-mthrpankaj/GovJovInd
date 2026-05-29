@@ -28,6 +28,31 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "yes"
     },
     {
+        "id": "answerkey-sheet-36",
+        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-05-24",
+        "examEndDate": "",
+        "releaseDate": "2026-05-27",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "UPSC",
+            "CSE Pre",
+            "IAS",
+            "IFS"
+        ],
+        "downloadLink": "",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2032",
         "title": "IIT JEE Advanced Admissions 2026 Answer Key",
         "organization": "National Testing Agency",
@@ -48,26 +73,6 @@ window.GovJobUpdatesAnswerKeys = [
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "answerkey-sheet-36",
-        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
-        "organization": "Union Public Service Commission",
-        "department": "UPSC",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-05-24",
-        "examEndDate": "",
-        "releaseDate": "",
-        "objectionLastDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "objectionLink": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "answerkey-4032",
