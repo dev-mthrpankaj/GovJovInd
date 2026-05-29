@@ -6,6 +6,8 @@
     --rr-green-soft: #ecfdf5;
     --rr-amber: #b45309;
     --rr-amber-soft: #fff7ed;
+    --rr-red: #b91c1c;
+    --rr-red-soft: #fef2f2;
     --rr-ink: #0f172a;
     --rr-muted: #5b6575;
     --rr-bg: #f4f7fb;
@@ -52,6 +54,7 @@ body {
 .empty-result-state,
 .result-hero,
 .result-panel,
+.qualification-panel,
 .trust-note,
 .rank-stat,
 .metric-card,
@@ -177,6 +180,49 @@ body {
     font-size: 14px;
     font-weight: 800;
     line-height: 1.5;
+}
+
+.qualification-panel {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border-color: #bbf7d0;
+    background: var(--rr-green-soft);
+    color: var(--rr-green);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.5;
+}
+
+.qualification-panel.is-failed {
+    border-color: #fecaca;
+    background: var(--rr-red-soft);
+    color: var(--rr-red);
+}
+
+.qualification-panel div {
+    display: grid;
+    gap: 4px;
+}
+
+.qualification-panel span {
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.qualification-panel strong {
+    color: inherit;
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+.qualification-panel ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-left: 18px;
 }
 
 .primary-rank-grid,
@@ -307,6 +353,18 @@ body {
     min-width: 520px;
 }
 
+.subject-score-table.has-passing-columns {
+    min-width: 920px;
+}
+
+.subject-score-table.has-subject-rank-column {
+    min-width: 860px;
+}
+
+.subject-score-table.has-passing-columns.has-subject-rank-column {
+    min-width: 1040px;
+}
+
 .subject-score-table th,
 .subject-score-table td {
     padding: 12px;
@@ -326,6 +384,12 @@ body {
 
 .subject-score-table tr:last-child td {
     border-bottom: 0;
+}
+
+.subject-score-table tr.is-failed-subject td {
+    background: var(--rr-red-soft);
+    color: var(--rr-red);
+    font-weight: 800;
 }
 
 .share-panel {

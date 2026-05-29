@@ -206,15 +206,52 @@
 
     function normalizeSubjectPassingCriteria(criteria) {
         if (!criteria || typeof criteria !== "object") return null;
+        const categoryRules = normalizePassingCriteriaRuleMap(criteria.categoryRules || criteria.categoryCriteria || criteria.categories);
+        const horizontalCategoryRules = normalizePassingCriteriaRuleMap(criteria.horizontalCategoryRules || criteria.horizontalCriteria || criteria.horizontalCategories);
+        const implicitRules = !hasPassingCriteriaThreshold(criteria) && !hasPassingCriteriaRuleMap(categoryRules) && !hasPassingCriteriaRuleMap(horizontalCategoryRules)
+            ? normalizePassingCriteriaRuleMap(criteria)
+            : {};
         const normalized = {
             name: getString(criteria.name || criteria.subject || criteria.subjectName),
             minMarks: getOptionalNumber(criteria.minMarks ?? criteria.minimumMarks ?? criteria.marks ?? criteria.min),
             minPercentage: getOptionalNumber(criteria.minPercentage ?? criteria.minimumPercentage ?? criteria.percentage ?? criteria.percent),
-            minCorrect: getOptionalNumber(criteria.minCorrect ?? criteria.minimumCorrect ?? criteria.correct)
+            minCorrect: getOptionalNumber(criteria.minCorrect ?? criteria.minimumCorrect ?? criteria.correct),
+            categoryRules: hasPassingCriteriaRuleMap(categoryRules) ? categoryRules : implicitRules,
+            horizontalCategoryRules
         };
-        return normalized.name && (normalized.minMarks !== null || normalized.minPercentage !== null || normalized.minCorrect !== null)
+        return normalized.name && (hasPassingCriteriaThreshold(normalized) || hasPassingCriteriaRuleMap(normalized.categoryRules) || hasPassingCriteriaRuleMap(normalized.horizontalCategoryRules))
             ? normalized
             : null;
+    }
+
+    function normalizePassingCriteriaRuleMap(value) {
+        if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+        const ignoredKeys = new Set(["name", "subject", "subjectname", "minmarks", "minimummarks", "marks", "min", "minpercentage", "minimumpercentage", "percentage", "percent", "mincorrect", "minimumcorrect", "correct"]);
+        return Object.entries(value).reduce((rules, [key, source]) => {
+            if (!getString(key) || ignoredKeys.has(normalizeKey(key))) return rules;
+            const rule = source && typeof source === "object"
+                ? normalizePassingCriteriaThreshold(source)
+                : normalizePassingCriteriaThreshold({ minMarks: source });
+            if (hasPassingCriteriaThreshold(rule)) rules[getString(key)] = rule;
+            return rules;
+        }, {});
+    }
+
+    function normalizePassingCriteriaThreshold(criteria) {
+        if (!criteria || typeof criteria !== "object") return null;
+        return {
+            minMarks: getOptionalNumber(criteria.minMarks ?? criteria.minimumMarks ?? criteria.marks ?? criteria.min),
+            minPercentage: getOptionalNumber(criteria.minPercentage ?? criteria.minimumPercentage ?? criteria.percentage ?? criteria.percent),
+            minCorrect: getOptionalNumber(criteria.minCorrect ?? criteria.minimumCorrect ?? criteria.correct)
+        };
+    }
+
+    function hasPassingCriteriaThreshold(criteria) {
+        return Boolean(criteria && (criteria.minMarks !== null || criteria.minPercentage !== null || criteria.minCorrect !== null));
+    }
+
+    function hasPassingCriteriaRuleMap(rules) {
+        return Boolean(rules && Object.values(rules).some(hasPassingCriteriaThreshold));
     }
 
     function getPassingCriteriaForSubject(name, criteriaList) {
@@ -1512,6 +1549,8 @@
         if (criteria.minMarks !== null && criteria.minMarks !== undefined && criteria.minMarks !== "") parts.push(`Min ${criteria.minMarks} marks`);
         if (criteria.minPercentage !== null && criteria.minPercentage !== undefined && criteria.minPercentage !== "") parts.push(`Min ${criteria.minPercentage}%`);
         if (criteria.minCorrect !== null && criteria.minCorrect !== undefined && criteria.minCorrect !== "") parts.push(`Min ${criteria.minCorrect} correct`);
+        if (!parts.length && hasPassingCriteriaRuleMap(criteria.categoryRules)) parts.push("Category-wise qualifying criteria");
+        if (!parts.length && hasPassingCriteriaRuleMap(criteria.horizontalCategoryRules)) parts.push("Horizontal category qualifying criteria");
         return parts.join(", ");
     }
 

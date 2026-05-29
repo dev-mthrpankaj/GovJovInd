@@ -70,9 +70,34 @@
         setText("resultAccuracyIndicator", accuracyIndicator);
         setText("resultLastUpdated", formatDateTime(lastUpdated));
 
+        renderQualificationPanel(data);
         renderSubjectScorecard(data.subjectAnalysis, payload.subjectData, data.subjectData);
         renderResultAdSlot();
         setText("shareResultText", buildShareText(snapshot, examName, normalizedMarks));
+    }
+
+    function renderQualificationPanel(data) {
+        const panel = getById("qualificationPanel");
+        const statusNode = getById("qualificationStatus");
+        const messageNode = getById("qualificationMessage");
+        const failedList = getById("failedSubjectList");
+        if (!panel || !statusNode || !messageNode || !failedList) return;
+
+        const failedSubjects = Array.isArray(data.failedSubjects) ? data.failedSubjects : [];
+        const hasQualificationData = typeof data.isQualified === "boolean" || data.qualificationStatus || failedSubjects.length;
+        if (!hasQualificationData) {
+            panel.hidden = true;
+            return;
+        }
+
+        const failed = data.isQualified === false || String(data.qualificationStatus || "").toLowerCase() === "not qualified";
+        panel.hidden = false;
+        panel.classList.toggle("is-failed", failed);
+        setText("qualificationStatus", failed ? "Not eligible for merit rank" : data.qualificationStatus || "Qualified");
+        setText("qualificationMessage", data.qualificationMessage || (failed ? "Subject qualifying criteria was not met." : "Subject qualifying criteria met."));
+        failedList.innerHTML = failedSubjects.map((subject) => (
+            `<li>${escapeHtml(formatFailedSubject(subject))}</li>`
+        )).join("");
     }
 
     function renderResultAdSlot() {
@@ -240,22 +265,26 @@
             !isMissing(subject.attempted) || !isMissing(subject.correct) || !isMissing(subject.wrong)
         ));
         const showPassingColumns = rows.some((subject) => subject.passingCriteria || subject.passingStatus);
+        const showSubjectRankColumn = rows.some((subject) => !isMissing(subject.subjectRank));
 
         if (!rows.length) {
-            setSubjectTableHeaders(showAttemptColumns, showPassingColumns);
+            setSubjectTableHeaders(showAttemptColumns, showPassingColumns, showSubjectRankColumn);
             body.innerHTML = '<tr><td colspan="4">Not available</td></tr>';
             return;
         }
 
-        setSubjectTableHeaders(showAttemptColumns, showPassingColumns);
-        body.innerHTML = rows.map((subject) => renderSubjectRow(subject, showAttemptColumns, showPassingColumns)).join("");
+        setSubjectTableHeaders(showAttemptColumns, showPassingColumns, showSubjectRankColumn);
+        body.innerHTML = rows.map((subject) => renderSubjectRow(subject, showAttemptColumns, showPassingColumns, showSubjectRankColumn)).join("");
     }
 
-    function setSubjectTableHeaders(showAttemptColumns, showPassingColumns) {
+    function setSubjectTableHeaders(showAttemptColumns, showPassingColumns, showSubjectRankColumn) {
         const tableHead = getById("resultSubjectBody")?.closest("table")?.querySelector("thead");
         if (!tableHead) return;
         const attemptHeaders = showAttemptColumns
             ? "<th>Attempted</th><th>Correct</th><th>Wrong</th>"
+            : "";
+        const subjectRankHeader = showSubjectRankColumn
+            ? "<th>Subject Rank</th>"
             : "";
         const passingHeaders = showPassingColumns
             ? "<th>Passing Criteria</th><th>Status</th>"
@@ -264,6 +293,7 @@
             <tr>
                 <th>Subject</th>
                 <th>Your Score</th>
+                ${subjectRankHeader}
                 ${attemptHeaders}
                 ${passingHeaders}
                 <th>Avg Score</th>
@@ -272,9 +302,14 @@
         `;
         tableHead.closest("table")?.classList.toggle("has-attempt-columns", showAttemptColumns);
         tableHead.closest("table")?.classList.toggle("has-passing-columns", showPassingColumns);
+        tableHead.closest("table")?.classList.toggle("has-subject-rank-column", showSubjectRankColumn);
     }
 
-    function renderSubjectRow(subject, showAttemptColumns, showPassingColumns) {
+    function renderSubjectRow(subject, showAttemptColumns, showPassingColumns, showSubjectRankColumn) {
+        const passingStatus = firstValue(subject.passingStatus, getPassingStatus(subject), null);
+        const subjectRankCell = showSubjectRankColumn
+            ? `<td>${escapeHtml(formatSubjectRank(subject.subjectRank, subject.subjectTotalSubmissions))}</td>`
+            : "";
         const attemptCells = showAttemptColumns
             ? `
                 <td>${escapeHtml(formatPlain(firstValue(subject.attempted, null)))}</td>
@@ -285,13 +320,14 @@
         const passingCells = showPassingColumns
             ? `
                 <td>${escapeHtml(formatPassingCriteria(subject.passingCriteria))}</td>
-                <td>${escapeHtml(formatPlain(firstValue(subject.passingStatus, getPassingStatus(subject), null)))}</td>
+                <td>${escapeHtml(formatPlain(passingStatus))}</td>
             `
             : "";
         return `
-            <tr>
+            <tr class="${passingStatus === "Fail" ? "is-failed-subject" : ""}">
                 <td>${escapeHtml(firstValue(subject.name, "Subject"))}</td>
                 <td>${escapeHtml(formatMarks(firstValue(subject.score, subject.marks, null)))}</td>
+                ${subjectRankCell}
                 ${attemptCells}
                 ${passingCells}
                 <td>${escapeHtml(formatMarks(subject.avgScore))}</td>
@@ -308,6 +344,8 @@
             attempted: firstValue(subject.attempted, subject.totalAttempted, match.attempted, match.totalAttempted, null),
             correct: firstValue(subject.correct, subject.rightAnswers, match.correct, match.rightAnswers, null),
             wrong: firstValue(subject.wrong, subject.wrongAnswers, match.wrong, match.wrongAnswers, null),
+            subjectRank: firstValue(subject.subjectRank, match.subjectRank, null),
+            subjectTotalSubmissions: firstValue(subject.subjectTotalSubmissions, match.subjectTotalSubmissions, null),
             passingCriteria: firstValue(subject.passingCriteria, match.passingCriteria, null),
             passingStatus: firstValue(subject.passingStatus, match.passingStatus, null),
             avgScore: firstValue(subject.avgScore, subject.averageScore, null),
@@ -321,7 +359,23 @@
         if (!isMissing(criteria.minMarks)) parts.push(`Min ${criteria.minMarks} marks`);
         if (!isMissing(criteria.minPercentage)) parts.push(`Min ${criteria.minPercentage}%`);
         if (!isMissing(criteria.minCorrect)) parts.push(`Min ${criteria.minCorrect} correct`);
-        return parts.join(", ") || "Not available";
+        const ruleContext = criteria.ruleBasis && criteria.ruleCategory ? ` (${criteria.ruleBasis}: ${criteria.ruleCategory})` : "";
+        return (parts.join(", ") || "Not available") + ruleContext;
+    }
+
+    function formatFailedSubject(subject) {
+        const criteria = formatPassingCriteria(subject.passingCriteria);
+        const score = formatMarks(firstValue(subject.score, subject.marks, null));
+        const percentage = isMissing(subject.obtainedPercentage) ? "" : `, ${formatPercentile(subject.obtainedPercentage)}`;
+        const message = subject.passingMessage ? ` - ${subject.passingMessage}` : "";
+        return `${firstValue(subject.name, "Subject")}: ${score}${percentage}. Required: ${criteria}${message}`;
+    }
+
+    function formatSubjectRank(rank, total) {
+        if (isMissing(rank)) return "Not available";
+        const rankText = formatRank(rank);
+        const totalNumber = toNumber(total);
+        return Number.isFinite(totalNumber) && totalNumber > 0 ? `${rankText} of ${totalNumber}` : rankText;
     }
 
     function getPassingStatus(subject) {
@@ -329,8 +383,10 @@
         if (!criteria) return null;
         const score = toNumber(firstValue(subject.score, subject.marks, null));
         const correct = toNumber(subject.correct);
+        const percentage = toNumber(subject.obtainedPercentage);
         if (Number.isFinite(toNumber(criteria.minMarks)) && Number.isFinite(score) && score < toNumber(criteria.minMarks)) return "Fail";
         if (Number.isFinite(toNumber(criteria.minCorrect)) && Number.isFinite(correct) && correct < toNumber(criteria.minCorrect)) return "Fail";
+        if (Number.isFinite(toNumber(criteria.minPercentage)) && Number.isFinite(percentage) && percentage < toNumber(criteria.minPercentage)) return "Fail";
         if (!isMissing(criteria.minMarks) || !isMissing(criteria.minCorrect) || !isMissing(criteria.minPercentage)) return "Pass";
         return null;
     }
