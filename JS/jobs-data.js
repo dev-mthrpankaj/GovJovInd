@@ -25,7 +25,7 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
-        "telegramReady": "no"
+        "telegramReady": "yes"
     },
     {
         "id": "2431",
@@ -108,7 +108,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "railway",
             "technician",
