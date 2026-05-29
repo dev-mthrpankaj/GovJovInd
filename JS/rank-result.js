@@ -239,36 +239,42 @@
         const showAttemptColumns = rows.some((subject) => (
             !isMissing(subject.attempted) || !isMissing(subject.correct) || !isMissing(subject.wrong)
         ));
+        const showPassingColumns = rows.some((subject) => subject.passingCriteria || subject.passingStatus);
 
         if (!rows.length) {
-            setSubjectTableHeaders(showAttemptColumns);
+            setSubjectTableHeaders(showAttemptColumns, showPassingColumns);
             body.innerHTML = '<tr><td colspan="4">Not available</td></tr>';
             return;
         }
 
-        setSubjectTableHeaders(showAttemptColumns);
-        body.innerHTML = rows.map((subject) => renderSubjectRow(subject, showAttemptColumns)).join("");
+        setSubjectTableHeaders(showAttemptColumns, showPassingColumns);
+        body.innerHTML = rows.map((subject) => renderSubjectRow(subject, showAttemptColumns, showPassingColumns)).join("");
     }
 
-    function setSubjectTableHeaders(showAttemptColumns) {
+    function setSubjectTableHeaders(showAttemptColumns, showPassingColumns) {
         const tableHead = getById("resultSubjectBody")?.closest("table")?.querySelector("thead");
         if (!tableHead) return;
         const attemptHeaders = showAttemptColumns
             ? "<th>Attempted</th><th>Correct</th><th>Wrong</th>"
+            : "";
+        const passingHeaders = showPassingColumns
+            ? "<th>Passing Criteria</th><th>Status</th>"
             : "";
         tableHead.innerHTML = `
             <tr>
                 <th>Subject</th>
                 <th>Your Score</th>
                 ${attemptHeaders}
+                ${passingHeaders}
                 <th>Avg Score</th>
                 <th>Accuracy</th>
             </tr>
         `;
         tableHead.closest("table")?.classList.toggle("has-attempt-columns", showAttemptColumns);
+        tableHead.closest("table")?.classList.toggle("has-passing-columns", showPassingColumns);
     }
 
-    function renderSubjectRow(subject, showAttemptColumns) {
+    function renderSubjectRow(subject, showAttemptColumns, showPassingColumns) {
         const attemptCells = showAttemptColumns
             ? `
                 <td>${escapeHtml(formatPlain(firstValue(subject.attempted, null)))}</td>
@@ -276,11 +282,18 @@
                 <td>${escapeHtml(formatPlain(firstValue(subject.wrong, null)))}</td>
             `
             : "";
+        const passingCells = showPassingColumns
+            ? `
+                <td>${escapeHtml(formatPassingCriteria(subject.passingCriteria))}</td>
+                <td>${escapeHtml(formatPlain(firstValue(subject.passingStatus, getPassingStatus(subject), null)))}</td>
+            `
+            : "";
         return `
             <tr>
                 <td>${escapeHtml(firstValue(subject.name, "Subject"))}</td>
                 <td>${escapeHtml(formatMarks(firstValue(subject.score, subject.marks, null)))}</td>
                 ${attemptCells}
+                ${passingCells}
                 <td>${escapeHtml(formatMarks(subject.avgScore))}</td>
                 <td>${escapeHtml(formatPercentile(subject.accuracy))}</td>
             </tr>
@@ -295,9 +308,31 @@
             attempted: firstValue(subject.attempted, subject.totalAttempted, match.attempted, match.totalAttempted, null),
             correct: firstValue(subject.correct, subject.rightAnswers, match.correct, match.rightAnswers, null),
             wrong: firstValue(subject.wrong, subject.wrongAnswers, match.wrong, match.wrongAnswers, null),
+            passingCriteria: firstValue(subject.passingCriteria, match.passingCriteria, null),
+            passingStatus: firstValue(subject.passingStatus, match.passingStatus, null),
             avgScore: firstValue(subject.avgScore, subject.averageScore, null),
             accuracy: firstValue(subject.accuracy, getSubjectAccuracy(match), null)
         };
+    }
+
+    function formatPassingCriteria(criteria) {
+        if (!criteria || typeof criteria !== "object") return "Not available";
+        const parts = [];
+        if (!isMissing(criteria.minMarks)) parts.push(`Min ${criteria.minMarks} marks`);
+        if (!isMissing(criteria.minPercentage)) parts.push(`Min ${criteria.minPercentage}%`);
+        if (!isMissing(criteria.minCorrect)) parts.push(`Min ${criteria.minCorrect} correct`);
+        return parts.join(", ") || "Not available";
+    }
+
+    function getPassingStatus(subject) {
+        const criteria = subject?.passingCriteria;
+        if (!criteria) return null;
+        const score = toNumber(firstValue(subject.score, subject.marks, null));
+        const correct = toNumber(subject.correct);
+        if (Number.isFinite(toNumber(criteria.minMarks)) && Number.isFinite(score) && score < toNumber(criteria.minMarks)) return "Fail";
+        if (Number.isFinite(toNumber(criteria.minCorrect)) && Number.isFinite(correct) && correct < toNumber(criteria.minCorrect)) return "Fail";
+        if (!isMissing(criteria.minMarks) || !isMissing(criteria.minCorrect) || !isMissing(criteria.minPercentage)) return "Pass";
+        return null;
     }
 
     function getSubjectAccuracy(subject) {

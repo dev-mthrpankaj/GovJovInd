@@ -36,6 +36,7 @@ const HEADERS = [
   "Candidate Name",
   "Gender",
   "Category",
+  "Horizontal Category",
   "State",
   "Exam Date",
   "Shift",
@@ -76,7 +77,9 @@ const RANK_EXAM_HEADERS = [
   "Normalization",
   "Supported Modes",
   "Subjects",
+  "Subject Passing Criteria",
   "Categories",
+  "Horizontal Categories",
   "States",
   "Disabled"
 ];
@@ -330,6 +333,7 @@ function submitData(data) {
   data.shift = normalizeShift(data.shift);
   data.gender = normalizeText(data.gender);
   data.category = normalizeText(data.category);
+  data.horizontalCategory = normalizeText(data.horizontalCategory);
   data.state = normalizeText(data.state);
   data.subjectData = normalizeSubjectData(data.subjectData, data);
   data.rawMarks = isFinite(Number(data.rawMarks)) ? Number(data.rawMarks) : calculateRawMarks(data);
@@ -805,6 +809,7 @@ function buildDashboardAttempt(row, analytics, examConfig) {
     examDate: row.examDate,
     shift: row.shift,
     category: row.category,
+    horizontalCategory: row.horizontalCategory,
     state: row.state,
     totalQuestions: row.totalQuestions,
     totalAttempted: row.totalAttempted,
@@ -1019,10 +1024,6 @@ function getRankExamSheet(spreadsheet) {
 }
 
 function ensureRankExamSheetSchema(sheet) {
-  if (sheet.getMaxColumns() < RANK_EXAM_HEADERS.length) {
-    sheet.insertColumnsAfter(sheet.getMaxColumns(), RANK_EXAM_HEADERS.length - sheet.getMaxColumns());
-  }
-
   const lastColumn = sheet.getLastColumn();
   const currentHeaders = lastColumn > 0 ? sheet.getRange(1, 1, 1, lastColumn).getValues()[0] : [];
   const hasAnyHeader = currentHeaders.some(function (header) {
@@ -1030,25 +1031,61 @@ function ensureRankExamSheetSchema(sheet) {
   });
 
   if (!hasAnyHeader) {
+    if (sheet.getMaxColumns() < RANK_EXAM_HEADERS.length) {
+      sheet.insertColumnsAfter(sheet.getMaxColumns(), RANK_EXAM_HEADERS.length - sheet.getMaxColumns());
+    }
     sheet.getRange(1, 1, 1, RANK_EXAM_HEADERS.length).setValues([RANK_EXAM_HEADERS]);
     sheet.setFrozenRows(1);
     sheet.autoResizeColumns(1, RANK_EXAM_HEADERS.length);
     return;
   }
 
-  const currentMap = buildColumnMapFromHeaders(currentHeaders);
-  const missingHeaders = RANK_EXAM_HEADERS.filter(function (header) {
-    return currentMap[normalizeHeader(header)] === undefined;
+  const rankHeadersInOrder = RANK_EXAM_HEADERS.every(function (header, index) {
+    return normalizeHeader(currentHeaders[index]) === normalizeHeader(header);
   });
 
-  if (missingHeaders.length) {
-    const startColumn = sheet.getLastColumn() + 1;
-    sheet.insertColumnsAfter(sheet.getLastColumn(), missingHeaders.length);
-    sheet.getRange(1, startColumn, 1, missingHeaders.length).setValues([missingHeaders]);
+  if (rankHeadersInOrder) {
+    sheet.setFrozenRows(1);
+    sheet.autoResizeColumns(1, sheet.getLastColumn());
+    return;
+  }
+
+  const currentMap = buildColumnMapFromHeaders(currentHeaders);
+  const knownHeaderKeys = {};
+  RANK_EXAM_HEADERS.forEach(function (header) {
+    knownHeaderKeys[normalizeHeader(header)] = true;
+  });
+
+  const extraHeaders = [];
+  const extraHeaderKeys = {};
+  currentHeaders.forEach(function (header) {
+    const text = normalizeText(header);
+    const key = normalizeHeader(text);
+    if (!key || knownHeaderKeys[key] || extraHeaderKeys[key]) return;
+    extraHeaders.push(text);
+    extraHeaderKeys[key] = true;
+  });
+
+  const nextHeaders = RANK_EXAM_HEADERS.concat(extraHeaders);
+  const oldRows = sheet.getLastRow() > 1 ? sheet.getRange(2, 1, sheet.getLastRow() - 1, lastColumn).getValues() : [];
+  const migratedRows = oldRows.map(function (row) {
+    return nextHeaders.map(function (header) {
+      return getHeaderValue(row, currentMap, header);
+    });
+  });
+
+  if (sheet.getMaxColumns() < nextHeaders.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), nextHeaders.length - sheet.getMaxColumns());
+  }
+
+  sheet.clearContents();
+  sheet.getRange(1, 1, 1, nextHeaders.length).setValues([nextHeaders]);
+  if (migratedRows.length) {
+    sheet.getRange(2, 1, migratedRows.length, nextHeaders.length).setValues(migratedRows);
   }
 
   sheet.setFrozenRows(1);
-  sheet.autoResizeColumns(1, sheet.getLastColumn());
+  sheet.autoResizeColumns(1, nextHeaders.length);
 }
 
 function buildRankExamConfig(row, headerMap, rowNumber) {
@@ -1083,14 +1120,17 @@ function buildRankExamConfig(row, headerMap, rowNumber) {
     return mode === "online" || mode === "offline";
   });
   exam.subjects = parseRankExamSubjects(getHeaderValue(row, headerMap, "Subjects"));
+  exam.subjectPassingCriteria = parseSubjectPassingCriteria(getHeaderValue(row, headerMap, "Subject Passing Criteria"));
+  exam.subjects = applySubjectPassingCriteriaToSubjects(exam.subjects, exam.subjectPassingCriteria);
   exam.categories = parseRankExamList(getHeaderValue(row, headerMap, "Categories"));
+  exam.horizontalCategories = parseRankExamList(getHeaderValue(row, headerMap, "Horizontal Categories"));
   exam.states = parseRankExamList(getHeaderValue(row, headerMap, "States"));
   exam.disabled = toRankExamBoolean(getHeaderValue(row, headerMap, "Disabled"));
 
   if (hasEnteredRankExamValue(exam.totalQuestions)) exam.__hasRowData = true;
   if (hasEnteredRankExamValue(exam.marksPerCorrect)) exam.__hasRowData = true;
   if (hasEnteredRankExamValue(exam.negativeMarking)) exam.__hasRowData = true;
-  if (exam.supportedModes.length || exam.subjects.length || exam.categories.length || exam.states.length) exam.__hasRowData = true;
+  if (exam.supportedModes.length || exam.subjects.length || exam.subjectPassingCriteria.length || exam.categories.length || exam.horizontalCategories.length || exam.states.length) exam.__hasRowData = true;
 
   if (!exam.examId && exam.examName) exam.examId = slugifyRankExamId(exam.examName) + "-" + rowNumber;
   if (!exam.sheetName && exam.examName && !exam.disabled) exam.sheetName = exam.examName;
@@ -1120,9 +1160,11 @@ function parseRankExamSubjects(value) {
     const parsed = JSON.parse(text);
     if (Array.isArray(parsed)) {
       return parsed.map(function (subject) {
+        const criteria = normalizeSubjectPassingCriteria(subject.passingCriteria || subject.criteria || subject);
         return {
           name: normalizeText(subject.name),
-          questions: toRankExamNumber(subject.questions)
+          questions: toRankExamNumber(subject.questions),
+          passingCriteria: criteria && hasSubjectPassingCriteria(criteria) ? criteria : null
         };
       }).filter(function (subject) {
         return subject.name && Number(subject.questions) > 0;
@@ -1142,6 +1184,92 @@ function parseRankExamSubjects(value) {
     };
   }).filter(function (subject) {
     return subject && subject.name && Number(subject.questions) > 0;
+  });
+}
+
+function parseSubjectPassingCriteria(value) {
+  const text = String(value || "").trim();
+  if (!text) return [];
+
+  try {
+    const parsed = JSON.parse(text);
+    if (Array.isArray(parsed)) {
+      return parsed.map(normalizeSubjectPassingCriteria).filter(hasSubjectPassingCriteria);
+    }
+    if (parsed && typeof parsed === "object") {
+      return Object.keys(parsed).map(function (name) {
+        const criteria = parsed[name];
+        if (criteria && typeof criteria === "object") {
+          return normalizeSubjectPassingCriteria(Object.assign({ name: name }, criteria));
+        }
+        return normalizeSubjectPassingCriteria({ name: name, minMarks: criteria });
+      }).filter(hasSubjectPassingCriteria);
+    }
+  } catch (error) {
+    // Plain text criteria are supported below.
+  }
+
+  return text.split(/[,|;]/).map(function (part) {
+    const piece = normalizeText(part);
+    const match = piece.match(/^(.+?)(?:\s*[:=-]\s*)(\d+(?:\.\d+)?)(?:\s*(%|marks?|correct))?$/i);
+    if (!match) return null;
+    const valueText = normalizeText(match[2]);
+    const unit = normalizeKey(match[3]);
+    const criteria = { name: normalizeText(match[1]) };
+    if (unit === "%") {
+      criteria.minPercentage = toRankExamNumber(valueText);
+    } else if (unit === "correct") {
+      criteria.minCorrect = toRankExamNumber(valueText);
+    } else {
+      criteria.minMarks = toRankExamNumber(valueText);
+    }
+    return normalizeSubjectPassingCriteria(criteria);
+  }).filter(hasSubjectPassingCriteria);
+}
+
+function normalizeSubjectPassingCriteria(criteria) {
+  if (!criteria || typeof criteria !== "object") return null;
+  const normalized = {
+    name: normalizeText(criteria.name || criteria.subject || criteria.subjectName),
+    minMarks: firstRankExamNumber(criteria.minMarks, criteria.minimumMarks, criteria.marks, criteria.min),
+    minPercentage: firstRankExamNumber(criteria.minPercentage, criteria.minimumPercentage, criteria.percentage, criteria.percent),
+    minCorrect: firstRankExamNumber(criteria.minCorrect, criteria.minimumCorrect, criteria.correct)
+  };
+  return normalized;
+}
+
+function firstRankExamNumber() {
+  for (let index = 0; index < arguments.length; index += 1) {
+    const value = toRankExamNumber(arguments[index]);
+    if (hasEnteredRankExamValue(value)) return value;
+  }
+  return "";
+}
+
+function hasSubjectPassingCriteria(criteria) {
+  return Boolean(criteria && criteria.name && (
+    hasEnteredRankExamValue(criteria.minMarks) ||
+    hasEnteredRankExamValue(criteria.minPercentage) ||
+    hasEnteredRankExamValue(criteria.minCorrect)
+  ));
+}
+
+function applySubjectPassingCriteriaToSubjects(subjects, criteriaList) {
+  if (!Array.isArray(subjects) || !subjects.length) return [];
+  const criteriaByName = {};
+  (criteriaList || []).forEach(function (criteria) {
+    criteriaByName[normalizeKey(criteria.name)] = criteria;
+  });
+  return subjects.map(function (subject) {
+    const ownCriteria = subject.passingCriteria && hasSubjectPassingCriteria(subject.passingCriteria)
+      ? subject.passingCriteria
+      : criteriaByName[normalizeKey(subject.name)] || null;
+    const nextSubject = {
+      name: subject.name,
+      questions: subject.questions
+    };
+    if (ownCriteria) nextSubject.passingCriteria = ownCriteria;
+    return nextSubject;
   });
 }
 
@@ -1172,7 +1300,9 @@ function toRankExamBoolean(value) {
 }
 
 function toRankExamNumber(value) {
-  const number = Number(value);
+  const text = String(value === undefined || value === null ? "" : value).replace(/%$/, "").trim();
+  if (!text) return "";
+  const number = Number(text);
   return Number.isFinite(number) ? number : "";
 }
 
@@ -1262,6 +1392,7 @@ function appendCandidateData(sheet, columnMap, data) {
   setHeaderValue(row, columnMap, "Candidate Name", data.candidateName || "Private");
   setHeaderValue(row, columnMap, "Gender", data.gender || "");
   setHeaderValue(row, columnMap, "Category", data.category || "");
+  setHeaderValue(row, columnMap, "Horizontal Category", data.horizontalCategory || "");
   setHeaderValue(row, columnMap, "State", data.state || "");
   setHeaderValue(row, columnMap, "Exam Date", data.examDate);
   setHeaderValue(row, columnMap, "Shift", data.shift);
@@ -1306,6 +1437,7 @@ function getRowsByHeaders(sheet, columnMap) {
       candidateName: getHeaderValue(row, columnMap, "Candidate Name"),
       gender: normalizeText(getHeaderValue(row, columnMap, "Gender")),
       category: normalizeText(getHeaderValue(row, columnMap, "Category")),
+      horizontalCategory: normalizeText(getHeaderValue(row, columnMap, "Horizontal Category")),
       state: normalizeText(getHeaderValue(row, columnMap, "State")),
       examDate: normalizeDob(getHeaderValue(row, columnMap, "Exam Date")),
       shift: normalizeShift(getHeaderValue(row, columnMap, "Shift")),
@@ -1424,7 +1556,7 @@ function calculateAnalytics(rows, targetRow, examConfig) {
     averageMarks: averageMarks(scoredRows, "rawMarks"),
     averageShiftMarks: hasShifts ? averageMarks(sameShiftRows, "rawMarks") : "",
     categoryAverageMarks: averageMarks(sameCategoryRows, "rawMarks"),
-    subjectAnalysis: buildSubjectAnalysis(rowsForExam, targetRow),
+    subjectAnalysis: buildSubjectAnalysis(rowsForExam, targetRow, examConfig),
     totalSubmissions: totalSubmissions,
     accuracyIndicator: getAccuracyIndicator(totalSubmissions),
     rankBasis: normalizationEnabled ? "normalized" : "raw",
@@ -1636,11 +1768,12 @@ function averageMarks(rows, scoreField) {
   }, 0) / rows.length);
 }
 
-function buildSubjectAnalysis(rowsForExam, targetRow) {
+function buildSubjectAnalysis(rowsForExam, targetRow, examConfig) {
   if (!Array.isArray(targetRow.subjectData) || !targetRow.subjectData.length) return [];
 
   return targetRow.subjectData.map(function (subject) {
     const name = normalizeText(subject.name);
+    const passingCriteria = getSubjectPassingCriteria(name, subject, examConfig);
     const matchingScores = rowsForExam.map(function (row) {
       const match = (row.subjectData || []).find(function (item) {
         return normalizeKey(item.name) === normalizeKey(name);
@@ -1657,12 +1790,43 @@ function buildSubjectAnalysis(rowsForExam, targetRow) {
     return {
       name: name,
       score: round2(score),
+      passingCriteria: passingCriteria || null,
+      passingStatus: passingCriteria ? getSubjectPassingStatus(subject, passingCriteria) : "",
       avgScore: matchingScores.length ? round2(matchingScores.reduce(function (total, value) {
         return total + value;
       }, 0) / matchingScores.length) : 0,
       accuracy: attempted ? round2((correct / attempted) * 100) : 0
     };
   });
+}
+
+function getSubjectPassingCriteria(name, subject, examConfig) {
+  if (subject && subject.passingCriteria && hasSubjectPassingCriteria(subject.passingCriteria)) {
+    return subject.passingCriteria;
+  }
+  const subjectConfig = (examConfig && Array.isArray(examConfig.subjects) ? examConfig.subjects : []).find(function (item) {
+    return normalizeKey(item.name) === normalizeKey(name);
+  });
+  if (subjectConfig && subjectConfig.passingCriteria && hasSubjectPassingCriteria(subjectConfig.passingCriteria)) {
+    return subjectConfig.passingCriteria;
+  }
+  return (examConfig && Array.isArray(examConfig.subjectPassingCriteria) ? examConfig.subjectPassingCriteria : []).find(function (criteria) {
+    return normalizeKey(criteria.name) === normalizeKey(name);
+  }) || null;
+}
+
+function getSubjectPassingStatus(subject, criteria) {
+  if (!criteria) return "";
+
+  const marks = Number(subject.marks || subject.score || 0);
+  const correct = Number(subject.correct) || 0;
+  const maxMarks = Number(subject.maxMarks) || 0;
+  const percentage = maxMarks > 0 ? (marks / maxMarks) * 100 : Number(subject.accuracy) || 0;
+
+  if (hasEnteredRankExamValue(criteria.minMarks) && marks < Number(criteria.minMarks)) return "Fail";
+  if (hasEnteredRankExamValue(criteria.minCorrect) && correct < Number(criteria.minCorrect)) return "Fail";
+  if (hasEnteredRankExamValue(criteria.minPercentage) && percentage < Number(criteria.minPercentage)) return "Fail";
+  return "Pass";
 }
 
 function calculatePercentile(rows, targetRow, scoreField) {
@@ -1814,6 +1978,7 @@ function normalizeSubjectData(subjectData, data) {
     const correct = Number(subject.correct) || 0;
     const wrong = Number(subject.wrong) || 0;
     const maxMarks = isFinite(Number(subject.maxMarks)) ? Number(subject.maxMarks) : "";
+    const passingCriteria = normalizeSubjectPassingCriteria(subject.passingCriteria);
     const marks = isFinite(Number(subject.marks))
       ? Number(subject.marks)
       : round2((correct * (Number(data.marksPerCorrect) || 0)) - (wrong * (Number(data.negativeMarking) || 0)));
@@ -1827,6 +1992,7 @@ function normalizeSubjectData(subjectData, data) {
       wrong: wrong,
       marks: round2(marks),
       maxMarks: maxMarks === "" ? "" : round2(maxMarks),
+      passingCriteria: passingCriteria && hasSubjectPassingCriteria(passingCriteria) ? passingCriteria : null,
       accuracy: round2(accuracy)
     };
   }).filter(function (subject) {

@@ -700,6 +700,17 @@ body {
     background: var(--rp-card-soft);
 }
 
+.static-form-section > .section-summary {
+    grid-template-columns: minmax(0, 1fr);
+    cursor: default;
+}
+
+.static-form-section > .section-summary:hover,
+.static-form-section > .section-summary:focus-visible {
+    background: transparent;
+    box-shadow: none;
+}
+
 .section-summary::-webkit-details-marker {
     display: none;
 }
@@ -714,6 +725,10 @@ body {
     grid-row: 1 / span 2;
     color: var(--rp-blue);
     transition: transform 0.2s ease;
+}
+
+.static-form-section > .section-summary i {
+    display: none;
 }
 
 .subject-entry-card[open] .section-summary i {
@@ -861,6 +876,11 @@ body {
     list-style: none;
 }
 
+.subject-card[data-static-subject] .subject-card-heading {
+    grid-template-columns: minmax(0, 1fr) auto;
+    cursor: default;
+}
+
 .subject-card-heading::-webkit-details-marker {
     display: none;
 }
@@ -868,6 +888,10 @@ body {
 .subject-card-heading i {
     color: var(--rp-blue);
     transition: transform 0.2s ease;
+}
+
+.subject-card[data-static-subject] .subject-card-heading i {
+    display: none;
 }
 
 .subject-card[open] .subject-card-heading i {
@@ -964,6 +988,59 @@ body {
     line-height: 1.4;
 }
 
+.choice-field {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.choice-field legend {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--rp-ink);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.choice-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.category-chip {
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--rp-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.2;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+}
+
+.category-chip:hover,
+.category-chip:focus-visible {
+    border-color: var(--rp-blue);
+    background: var(--rp-blue-soft);
+    color: var(--rp-blue-dark);
+}
+
+.category-chip.is-selected {
+    border-color: var(--rp-blue);
+    background: var(--rp-blue);
+    color: #fff;
+    box-shadow: 0 8px 16px rgba(11, 94, 215, 0.18);
+}
+
 .subject-input-grid label {
     color: var(--rp-muted);
     font-weight: 900;
@@ -1040,6 +1117,7 @@ body {
 .rp-field input:focus,
 .rp-field select:focus,
 .rp-field textarea:focus,
+.category-chip:focus-visible,
 .subject-input-grid input:focus {
     border-color: var(--rp-blue);
     outline: 0;
@@ -1049,6 +1127,7 @@ body {
 .rp-field.has-error input,
 .rp-field.has-error select,
 .rp-field.has-error textarea,
+.choice-field.has-error .choice-chip-row,
 .consent-row.has-error,
 .subject-card.has-error {
     border-color: #fca5a5;
@@ -1063,8 +1142,15 @@ body {
 .rp-field.has-error input,
 .rp-field.has-error select,
 .rp-field.has-error textarea,
+.choice-field.has-error .choice-chip-row,
 .subject-card.has-error input {
     box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+}
+
+.choice-field.has-error .choice-chip-row {
+    padding: 8px;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
 }
 
 .online-only {
@@ -1700,6 +1786,7 @@ body {
     .rp-field input,
     .rp-field select,
     .rp-field textarea,
+    .category-chip,
     .subject-input-grid input {
         transition: none;
     }

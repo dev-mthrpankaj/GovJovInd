@@ -11,6 +11,8 @@
     const RESULT_PAGE_URL = "rank-result.html";
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
     const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
+    const DEFAULT_CATEGORY_OPTIONS = ["UR", "OBC", "EWS", "SC", "ST", "PwD", "Ex-Serviceman"];
+    const DEFAULT_HORIZONTAL_CATEGORY_OPTIONS = ["None", "PwD", "Ex-Serviceman", "Female", "Freedom Fighter Dependent", "Departmental Candidate", "Other"];
     const state = {
         exam: null,
         mode: "offline",
@@ -96,6 +98,8 @@
         setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
+        bindCategoryOptions();
+        bindHorizontalCategoryOptions();
         bindModeToggle(app);
         bindSubmitForm();
         bindCheckForm();
@@ -167,23 +171,55 @@
             hasShifts: Boolean(exam.hasShifts),
             normalization: Boolean(exam.normalization),
             supportedModes: normalizeStringList(exam.supportedModes, true).filter((mode) => ["online", "offline"].includes(mode)),
-            subjects: normalizeSheetSubjects(exam.subjects),
+            subjectPassingCriteria: normalizeSubjectPassingCriteriaList(exam.subjectPassingCriteria),
+            subjects: [],
             categories: normalizeStringList(exam.categories),
+            horizontalCategories: normalizeStringList(exam.horizontalCategories),
             states: normalizeStringList(exam.states),
             disabled: Boolean(exam.disabled)
         };
+        normalized.subjects = normalizeSheetSubjects(exam.subjects, normalized.subjectPassingCriteria);
         if (!normalized.supportedModes.length && !normalized.disabled) {
             normalized.supportedModes = [normalized.examType === "online" ? "online" : "offline"];
         }
         return normalized;
     }
 
-    function normalizeSheetSubjects(subjects) {
+    function normalizeSheetSubjects(subjects, criteriaList = []) {
         if (!Array.isArray(subjects)) return [];
-        return subjects.map((subject) => ({
-            name: getString(subject.name),
-            questions: getFiniteNumber(subject.questions, 0)
-        })).filter((subject) => subject.name && subject.questions > 0);
+        return subjects.map((subject) => {
+            const name = getString(subject.name);
+            const criteria = normalizeSubjectPassingCriteria(subject.passingCriteria || subject.criteria) || getPassingCriteriaForSubject(name, criteriaList);
+            const normalizedSubject = {
+                name,
+                questions: getFiniteNumber(subject.questions, 0)
+            };
+            if (criteria) normalizedSubject.passingCriteria = criteria;
+            return normalizedSubject;
+        }).filter((subject) => subject.name && subject.questions > 0);
+    }
+
+    function normalizeSubjectPassingCriteriaList(criteriaList) {
+        if (!Array.isArray(criteriaList)) return [];
+        return criteriaList.map(normalizeSubjectPassingCriteria).filter(Boolean);
+    }
+
+    function normalizeSubjectPassingCriteria(criteria) {
+        if (!criteria || typeof criteria !== "object") return null;
+        const normalized = {
+            name: getString(criteria.name || criteria.subject || criteria.subjectName),
+            minMarks: getOptionalNumber(criteria.minMarks ?? criteria.minimumMarks ?? criteria.marks ?? criteria.min),
+            minPercentage: getOptionalNumber(criteria.minPercentage ?? criteria.minimumPercentage ?? criteria.percentage ?? criteria.percent),
+            minCorrect: getOptionalNumber(criteria.minCorrect ?? criteria.minimumCorrect ?? criteria.correct)
+        };
+        return normalized.name && (normalized.minMarks !== null || normalized.minPercentage !== null || normalized.minCorrect !== null)
+            ? normalized
+            : null;
+    }
+
+    function getPassingCriteriaForSubject(name, criteriaList) {
+        const key = normalizeKey(name);
+        return (criteriaList || []).find((criteria) => normalizeKey(criteria.name) === key) || null;
     }
 
     function normalizeStringList(value, lowerCase = false) {
@@ -200,9 +236,19 @@
         return text || fallback;
     }
 
+    function normalizeKey(value) {
+        return getString(value).toLowerCase().replace(/\s+/g, " ");
+    }
+
     function getFiniteNumber(value, fallback) {
         const number = Number(value);
         return Number.isFinite(number) ? number : fallback;
+    }
+
+    function getOptionalNumber(value) {
+        if (value === undefined || value === null || value === "") return null;
+        const number = Number(String(value).replace(/%$/, "").trim());
+        return Number.isFinite(number) ? number : null;
     }
 
     function bindTabs() {
@@ -261,7 +307,8 @@
         renderSubjectInputs(exam);
         syncAttemptEntrySections(exam);
         setAggregateAttemptFieldsReadonly(exam);
-        populateSelect(getById("category"), exam.categories || []);
+        populateCategoryOptions(exam.categories || []);
+        populateHorizontalCategoryOptions(exam.horizontalCategories || []);
         populateSelect(getById("state"), exam.states || []);
         getById("rankPredictorApp")?.classList.toggle("has-shift", Boolean(exam.hasShifts));
         const shift = getById("shift");
@@ -281,6 +328,185 @@
     function populateSelect(select, values, placeholder = "Select") {
         if (!select) return;
         select.innerHTML = `<option value="">${escapeHtml(placeholder)}</option>${values.map((value) => `<option value="${escapeAttr(value)}">${escapeHtml(value)}</option>`).join("")}`;
+    }
+
+    function bindCategoryOptions() {
+        const group = getById("categoryOptions");
+        if (!group) return;
+
+        group.addEventListener("click", (event) => {
+            const button = event.target?.closest?.("[data-category-value]");
+            if (!button || !group.contains(button)) return;
+            setCategoryOption(button.dataset.categoryValue, { focus: true });
+        });
+
+        group.addEventListener("keydown", (event) => {
+            const button = event.target?.closest?.("[data-category-value]");
+            if (!button || !group.contains(button)) return;
+
+            if (event.key === " " || event.key === "Enter") {
+                event.preventDefault();
+                setCategoryOption(button.dataset.categoryValue, { focus: true });
+                return;
+            }
+
+            const buttons = Array.from(group.querySelectorAll("[data-category-value]"));
+            if (!buttons.length || !["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "Home", "End"].includes(event.key)) return;
+            event.preventDefault();
+
+            const currentIndex = Math.max(buttons.indexOf(button), 0);
+            let nextIndex = currentIndex;
+            if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (currentIndex + 1) % buttons.length;
+            if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+            if (event.key === "Home") nextIndex = 0;
+            if (event.key === "End") nextIndex = buttons.length - 1;
+            setCategoryOption(buttons[nextIndex].dataset.categoryValue, { focus: true });
+        });
+    }
+
+    function populateCategoryOptions(values) {
+        const group = getById("categoryOptions");
+        const hiddenInput = getById("category");
+        if (!group || !hiddenInput) return;
+
+        const options = normalizeCategoryOptions(values);
+        group.innerHTML = options.map((value, index) => `
+            <button class="category-chip" type="button" role="radio" aria-checked="false" tabindex="${index === 0 ? "0" : "-1"}" data-category-value="${escapeAttr(value)}">
+                ${escapeHtml(value)}
+            </button>`).join("");
+        setCategoryOption("");
+    }
+
+    function normalizeCategoryOptions(values) {
+        const options = normalizeStringList(values);
+        const source = options.length ? options : DEFAULT_CATEGORY_OPTIONS;
+        return source.filter((value, index, list) => list.indexOf(value) === index);
+    }
+
+    function setCategoryOption(value, options = {}) {
+        const group = getById("categoryOptions");
+        const hiddenInput = getById("category");
+        if (!group || !hiddenInput) return;
+
+        const selectedValue = String(value || "").trim();
+        hiddenInput.value = selectedValue;
+        syncCategoryOptionState(selectedValue);
+
+        hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
+        hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+
+        if (options.focus) {
+            const selectedButton = getCategoryButton(selectedValue) || group.querySelector("[data-category-value]");
+            selectedButton?.focus({ preventScroll: true });
+        }
+    }
+
+    function syncCategoryOptionState(selectedValue) {
+        const group = getById("categoryOptions");
+        if (!group) return;
+        const buttons = Array.from(group.querySelectorAll("[data-category-value]"));
+        buttons.forEach((button, index) => {
+            const selected = button.dataset.categoryValue === selectedValue;
+            button.classList.toggle("is-selected", selected);
+            button.setAttribute("aria-checked", String(selected));
+            button.tabIndex = selected || (!selectedValue && index === 0) ? 0 : -1;
+        });
+    }
+
+    function getCategoryButton(value) {
+        const group = getById("categoryOptions");
+        if (!group) return null;
+        return Array.from(group.querySelectorAll("[data-category-value]")).find((button) => button.dataset.categoryValue === value) || null;
+    }
+
+    function bindHorizontalCategoryOptions() {
+        const group = getById("horizontalCategoryOptions");
+        if (!group) return;
+
+        group.addEventListener("click", (event) => {
+            const button = event.target?.closest?.("[data-horizontal-category-value]");
+            if (!button || !group.contains(button)) return;
+            setHorizontalCategoryOption(button.dataset.horizontalCategoryValue, { focus: true });
+        });
+
+        group.addEventListener("keydown", (event) => {
+            const button = event.target?.closest?.("[data-horizontal-category-value]");
+            if (!button || !group.contains(button)) return;
+
+            if (event.key === " " || event.key === "Enter") {
+                event.preventDefault();
+                setHorizontalCategoryOption(button.dataset.horizontalCategoryValue, { focus: true });
+                return;
+            }
+
+            const buttons = Array.from(group.querySelectorAll("[data-horizontal-category-value]"));
+            if (!buttons.length || !["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "Home", "End"].includes(event.key)) return;
+            event.preventDefault();
+
+            const currentIndex = Math.max(buttons.indexOf(button), 0);
+            let nextIndex = currentIndex;
+            if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (currentIndex + 1) % buttons.length;
+            if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+            if (event.key === "Home") nextIndex = 0;
+            if (event.key === "End") nextIndex = buttons.length - 1;
+            setHorizontalCategoryOption(buttons[nextIndex].dataset.horizontalCategoryValue, { focus: true });
+        });
+    }
+
+    function populateHorizontalCategoryOptions(values) {
+        const group = getById("horizontalCategoryOptions");
+        const hiddenInput = getById("horizontalCategory");
+        if (!group || !hiddenInput) return;
+
+        const options = normalizeHorizontalCategoryOptions(values);
+        group.innerHTML = options.map((value, index) => `
+            <button class="category-chip" type="button" role="radio" aria-checked="false" tabindex="${index === 0 ? "0" : "-1"}" data-horizontal-category-value="${escapeAttr(value)}">
+                ${escapeHtml(value)}
+            </button>`).join("");
+        setHorizontalCategoryOption(options[0] || "");
+    }
+
+    function normalizeHorizontalCategoryOptions(values) {
+        const options = normalizeStringList(values);
+        const source = options.length ? options : DEFAULT_HORIZONTAL_CATEGORY_OPTIONS;
+        const withNone = source.some((value) => normalizeKey(value) === "none") ? source : ["None"].concat(source);
+        return withNone.filter((value, index, list) => list.indexOf(value) === index);
+    }
+
+    function setHorizontalCategoryOption(value, options = {}) {
+        const group = getById("horizontalCategoryOptions");
+        const hiddenInput = getById("horizontalCategory");
+        if (!group || !hiddenInput) return;
+
+        const selectedValue = String(value || "").trim();
+        hiddenInput.value = selectedValue;
+        syncHorizontalCategoryOptionState(selectedValue);
+
+        hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
+        hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+
+        if (options.focus) {
+            const selectedButton = getHorizontalCategoryButton(selectedValue) || group.querySelector("[data-horizontal-category-value]");
+            selectedButton?.focus({ preventScroll: true });
+        }
+    }
+
+    function syncHorizontalCategoryOptionState(selectedValue) {
+        const group = getById("horizontalCategoryOptions");
+        if (!group) return;
+        const buttons = Array.from(group.querySelectorAll("[data-horizontal-category-value]"));
+        buttons.forEach((button, index) => {
+            const selected = button.dataset.horizontalCategoryValue === selectedValue;
+            button.classList.toggle("is-selected", selected);
+            button.setAttribute("aria-checked", String(selected));
+            button.tabIndex = selected || (!selectedValue && index === 0) ? 0 : -1;
+        });
+    }
+
+    function getHorizontalCategoryButton(value) {
+        const group = getById("horizontalCategoryOptions");
+        if (!group) return null;
+        return Array.from(group.querySelectorAll("[data-horizontal-category-value]")).find((button) => button.dataset.horizontalCategoryValue === value) || null;
     }
 
     function bindModeToggle(app) {
@@ -347,19 +573,47 @@
 
     function bindFormAccordions() {
         dom.formAccordions.forEach((section) => {
+            if (isStaticAccordion(section)) {
+                bindStaticAccordion(section);
+                return;
+            }
             section.addEventListener("toggle", () => {
                 if (section.dataset.applyingDefault === "true") return;
                 section.dataset.userToggled = "true";
                 if (section.open) {
                     if (isMobileLayout()) {
                         dom.formAccordions.forEach((otherSection) => {
-                            if (otherSection !== section) otherSection.open = false;
+                            if (otherSection !== section && !isStaticAccordion(otherSection)) otherSection.open = false;
                         });
                     }
                     updateStepIndicators(section.id);
                 }
             });
         });
+    }
+
+    function bindStaticAccordion(section) {
+        setDetailsOpenSilently(section, true);
+        const summary = section.querySelector("summary");
+        if (summary) {
+            summary.setAttribute("aria-disabled", "true");
+            summary.tabIndex = -1;
+            summary.addEventListener("click", preventStaticDetailsToggle);
+            summary.addEventListener("keydown", preventStaticDetailsToggle);
+        }
+        section.addEventListener("toggle", () => {
+            if (section.dataset.applyingDefault === "true") return;
+            if (!section.hidden && !section.open) setDetailsOpenSilently(section, true);
+        });
+    }
+
+    function preventStaticDetailsToggle(event) {
+        if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+    }
+
+    function isStaticAccordion(section) {
+        return Boolean(section?.hasAttribute?.("data-static-section"));
     }
 
     function bindStepperNavigation() {
@@ -380,7 +634,9 @@
         const target = normalizeStepTarget(stepFor);
         if (target === "dataConsent") {
             if (isMobileLayout()) {
-                dom.formAccordions.forEach((section) => setDetailsOpenSilently(section, false));
+                dom.formAccordions.forEach((section) => {
+                    if (!isStaticAccordion(section)) setDetailsOpenSilently(section, false);
+                });
             }
             updateStepIndicators(target);
             focusField(getById("dataConsent"));
@@ -391,7 +647,7 @@
         if (!section || section.tagName !== "DETAILS") return;
         if (isMobileLayout()) {
             dom.formAccordions.forEach((otherSection) => {
-                if (otherSection !== section) setDetailsOpenSilently(otherSection, false);
+                if (otherSection !== section && !isStaticAccordion(otherSection)) setDetailsOpenSilently(otherSection, false);
             });
         }
         setDetailsOpenSilently(section, true);
@@ -495,6 +751,10 @@
                 setDetailsOpenSilently(section, false);
                 return;
             }
+            if (isStaticAccordion(section)) {
+                setDetailsOpenSilently(section, true);
+                return;
+            }
             if (mobile && section.dataset.userToggled === "true") return;
             section.dataset.applyingDefault = "true";
             section.open = !mobile || section.id === "candidateDetailsSection";
@@ -505,6 +765,10 @@
 
         dom.subjectControls.forEach(({ card }) => {
             if (!card || card.dataset.userToggled === "true") return;
+            if (isStaticSubjectCard(card)) {
+                setDetailsOpenSilently(card, true);
+                return;
+            }
             card.dataset.applyingDefault = "true";
             card.open = !mobile;
             window.setTimeout(() => {
@@ -582,10 +846,21 @@
     function focusField(field) {
         if (!field) return;
         openContainingDetails(field);
+        const focusTarget = getVisibleFocusTarget(field);
         window.setTimeout(() => {
-            field.focus({ preventScroll: true });
-            scrollFieldIntoView(field);
+            focusTarget?.focus?.({ preventScroll: true });
+            scrollFieldIntoView(focusTarget || field);
         }, 0);
+    }
+
+    function getVisibleFocusTarget(field) {
+        if (field?.id === "category" && field.type === "hidden") {
+            return getCategoryButton(field.value) || getById("categoryOptions")?.querySelector("[data-category-value]") || field.closest(".category-field");
+        }
+        if (field?.id === "horizontalCategory" && field.type === "hidden") {
+            return getHorizontalCategoryButton(field.value) || getById("horizontalCategoryOptions")?.querySelector("[data-horizontal-category-value]") || field.closest(".category-field");
+        }
+        return field;
     }
 
     function handleTotalMarksInput() {
@@ -860,6 +1135,7 @@
             rollNumber: payload.rollNumber || "",
             gender: payload.gender || "",
             category: payload.category || "",
+            horizontalCategory: payload.horizontalCategory || "",
             state: payload.state || "",
             examDate: payload.examDate || "",
             shift: payload.shift || "",
@@ -1062,6 +1338,7 @@
             dob,
             gender: readValue("gender"),
             category: readValue("category"),
+            horizontalCategory: readValue("horizontalCategory"),
             state: readValue("state"),
             examDate: examDateInput?.value || "",
             shift: readValue("shift"),
@@ -1117,16 +1394,17 @@
         grid.innerHTML = subjects.map((subject, index) => {
             const name = String(subject.name || `Subject ${index + 1}`);
             const questions = Number(subject.questions) || 0;
+            const criteriaText = formatPassingCriteria(subject.passingCriteria);
             const maxLength = Math.max(String(questions).length, 1);
             const correctId = `subject-${index}-correct`;
             const wrongId = `subject-${index}-wrong`;
-            const openAttr = isMobileLayout() ? "" : " open";
+            const openAttr = " open";
             return `
-                <details class="subject-card" data-subject-index="${index}"${openAttr}>
+                <details class="subject-card" data-subject-index="${index}" data-static-subject${openAttr}>
                     <summary class="subject-card-heading">
                         <span class="subject-title">
                             <strong>${escapeHtml(name)}</strong>
-                            <small>${questions} questions</small>
+                            <small>${escapeHtml([`${questions} questions`, criteriaText].filter(Boolean).join(" | "))}</small>
                         </span>
                         <span class="subject-card-total"><small>Attempted</small><strong data-subject-summary="attempted">0/${questions}</strong></span>
                         <i class="fas fa-chevron-down" aria-hidden="true"></i>
@@ -1149,6 +1427,10 @@
         }).join("");
         cacheSubjectControls(grid);
         dom.subjectControls.forEach(({ card }) => {
+            if (isStaticSubjectCard(card)) {
+                bindStaticSubjectCard(card);
+                return;
+            }
             card.addEventListener("toggle", () => {
                 if (card.dataset.applyingDefault === "true") return;
                 card.dataset.userToggled = "true";
@@ -1159,6 +1441,25 @@
                 }
             });
         });
+    }
+
+    function bindStaticSubjectCard(card) {
+        setDetailsOpenSilently(card, true);
+        const summary = card.querySelector("summary");
+        if (summary) {
+            summary.setAttribute("aria-disabled", "true");
+            summary.tabIndex = -1;
+            summary.addEventListener("click", preventStaticDetailsToggle);
+            summary.addEventListener("keydown", preventStaticDetailsToggle);
+        }
+        card.addEventListener("toggle", () => {
+            if (card.dataset.applyingDefault === "true") return;
+            if (!card.open) setDetailsOpenSilently(card, true);
+        });
+    }
+
+    function isStaticSubjectCard(card) {
+        return Boolean(card?.hasAttribute?.("data-static-subject"));
     }
 
     function syncAttemptEntrySections(exam) {
@@ -1191,15 +1492,27 @@
             const correct = readSubjectNumber(control, "correct");
             const wrong = readSubjectNumber(control, "wrong");
             const attempted = correct + wrong;
+            const maxMarks = round2((Number(subject.questions) || 0) * marksPerCorrect);
             return {
                 name: String(subject.name || `Subject ${index + 1}`),
                 questions: Number(subject.questions) || 0,
                 attempted,
                 correct,
                 wrong,
-                marks: round2((correct * marksPerCorrect) - (wrong * negativeMarking))
+                marks: round2((correct * marksPerCorrect) - (wrong * negativeMarking)),
+                maxMarks,
+                passingCriteria: subject.passingCriteria || null
             };
         });
+    }
+
+    function formatPassingCriteria(criteria) {
+        if (!criteria) return "";
+        const parts = [];
+        if (criteria.minMarks !== null && criteria.minMarks !== undefined && criteria.minMarks !== "") parts.push(`Min ${criteria.minMarks} marks`);
+        if (criteria.minPercentage !== null && criteria.minPercentage !== undefined && criteria.minPercentage !== "") parts.push(`Min ${criteria.minPercentage}%`);
+        if (criteria.minCorrect !== null && criteria.minCorrect !== undefined && criteria.minCorrect !== "") parts.push(`Min ${criteria.minCorrect} correct`);
+        return parts.join(", ");
     }
 
     function readSubjectNumber(control, field) {

@@ -43,6 +43,10 @@
 
     function openAccordion(section) {
         if (!section || section.tagName !== "DETAILS") return;
+        if (section.hasAttribute("data-static-section")) {
+            setDetailsOpenSilently(section, true);
+            return;
+        }
         const willOpen = !section.open;
 
         if (isMobileLayout() && willOpen) {
@@ -66,6 +70,14 @@
         const section = summary.parentElement;
         if (!section || !document.getElementById("rankPredictorApp")?.contains(section)) return;
 
+        if (section.hasAttribute("data-static-section")) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            setDetailsOpenSilently(section, true);
+            return;
+        }
+
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -78,6 +90,14 @@
         if (!summary) return;
         const section = summary.parentElement;
         if (!section || !document.getElementById("rankPredictorApp")?.contains(section)) return;
+
+        if (section.hasAttribute("data-static-section")) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            setDetailsOpenSilently(section, true);
+            return;
+        }
 
         event.preventDefault();
         event.stopPropagation();

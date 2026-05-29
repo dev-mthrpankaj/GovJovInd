@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
     <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260525-subject-entry">
+    <link rel="stylesheet" href="../CSS/rank-predictor.css?v=20260529-category-static">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -198,10 +198,18 @@
                                 </select>
                                 <span class="field-helper">Helps calculate gender-based rank where available.</span>
                             </label>
-                            <label class="rp-field" for="category">Category
-                                <select id="category" name="category" required></select>
+                            <fieldset class="rp-field choice-field category-field">
+                                <legend>Category</legend>
+                                <input id="category" name="category" type="hidden" required>
+                                <div class="choice-chip-row" id="categoryOptions" role="radiogroup" aria-label="Category"></div>
                                 <span class="field-helper">Choose the category used in your application.</span>
-                            </label>
+                            </fieldset>
+                            <fieldset class="rp-field choice-field category-field">
+                                <legend>Horizontal Category</legend>
+                                <input id="horizontalCategory" name="horizontalCategory" type="hidden">
+                                <div class="choice-chip-row" id="horizontalCategoryOptions" role="radiogroup" aria-label="Horizontal Category"></div>
+                                <span class="field-helper">Choose if you applied under PwD, Ex-Serviceman, or another horizontal reservation.</span>
+                            </fieldset>
                             <label class="rp-field" for="state">State/District
                                 <select id="state" name="state" autocomplete="address-level1" required></select>
                                 <span class="field-helper">Used for state/district rank comparison.</span>
@@ -209,7 +217,7 @@
                         </div>
                     </details>
 
-                    <details class="form-section-card form-accordion" id="examDetailsSection" aria-labelledby="examDetailsTitle">
+                    <details class="form-section-card form-accordion static-form-section" id="examDetailsSection" aria-labelledby="examDetailsTitle" data-static-section open>
                         <summary class="section-summary">
                             <span>Step 2</span>
                             <strong id="examDetailsTitle">Exam Details</strong>
@@ -269,7 +277,7 @@
                         </div>
                     </details>
 
-                    <details class="form-section-card form-accordion subject-entry-card attempt-entry-section" id="subjectScorecardDetails" aria-labelledby="subjectEntryTitle">
+                    <details class="form-section-card form-accordion subject-entry-card attempt-entry-section static-form-section" id="subjectScorecardDetails" aria-labelledby="subjectEntryTitle" data-static-section open>
                         <summary class="section-summary">
                             <span>Step 3</span>
                             <strong id="subjectEntryTitle">Subject-wise Attempts</strong>
@@ -419,8 +427,8 @@
 <script src="../JS/rank-predictor-config.js?v=20260506-sheet-exams" defer></script>
 <script src="../JS/rank-predictor-sheet-filter.js?v=disabled-filter1" defer></script>
 <script src="../JS/candidate-auth.js" defer></script>
-<script src="../JS/rank-predictor.js?v=20260525-subject-entry" defer></script>
-<script src="../JS/rank-predictor-accordion-fix.js?v=20260525-subject-entry" defer></script>
+<script src="../JS/rank-predictor.js?v=20260529-category-static" defer></script>
+<script src="../JS/rank-predictor-accordion-fix.js?v=20260529-category-static" defer></script>
 <script src="../JS/script.js"></script>
 <script src="../JS/firebase-config.js"></script>
 <script type="module" src="../JS/firebase-visitors.js"></script>

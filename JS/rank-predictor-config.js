@@ -21,7 +21,9 @@ const RANK_PREDICTOR_CONFIG = {
                 { name: "General Awareness", questions: 100 },
                 
             ],
-            categories: ["UR", "OBC", "EWS", "SC", "ST", "Ex-Serviceman"],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None", "Ex-Serviceman"],
             states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
         },
         {
@@ -42,7 +44,9 @@ const RANK_PREDICTOR_CONFIG = {
                 { name: "English", questions: 50 },
                 { name: "General Awareness", questions: 50 }
             ],
-            categories: ["UR", "OBC", "EWS", "SC", "ST", "Ex-Serviceman"],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None", "Ex-Serviceman"],
             states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
         },
         {
@@ -63,7 +67,9 @@ const RANK_PREDICTOR_CONFIG = {
                 { name: "English", questions: 25 },
                 { name: "General Awareness", questions: 25 }
             ],
-            categories: ["UR", "OBC", "EWS", "SC", "ST", "PwD", "Ex-Serviceman"],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None", "PwD", "Ex-Serviceman"],
             states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"]
         },
         {
@@ -84,7 +90,9 @@ const RANK_PREDICTOR_CONFIG = {
                 { name: "English", questions: 40 },
                 { name: "General Awareness", questions: 40 }
             ],
+            subjectPassingCriteria: [],
             categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None"],
             states: ["Uttar Pradesh", "Other"]
         },
         {
@@ -100,7 +108,9 @@ const RANK_PREDICTOR_CONFIG = {
             normalization: false,
             supportedModes: [],
             subjects: [],
+            subjectPassingCriteria: [],
             categories: [],
+            horizontalCategories: [],
             states: [],
             disabled: true
         }

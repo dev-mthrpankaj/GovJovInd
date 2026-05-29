@@ -14,7 +14,9 @@ const RANK_PREDICTOR_EXAM_SEED_DATA = [
     subjects: [
       { name: "General Awareness", questions: 100 }
     ],
-    categories: ["UR", "OBC", "EWS", "SC", "ST", "Ex-Serviceman"],
+    subjectPassingCriteria: [],
+    categories: ["UR", "OBC", "EWS", "SC", "ST"],
+    horizontalCategories: ["None", "Ex-Serviceman"],
     states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"],
     disabled: false
   },
@@ -36,7 +38,9 @@ const RANK_PREDICTOR_EXAM_SEED_DATA = [
       { name: "English", questions: 50 },
       { name: "General Awareness", questions: 50 }
     ],
-    categories: ["UR", "OBC", "EWS", "SC", "ST", "Ex-Serviceman"],
+    subjectPassingCriteria: [],
+    categories: ["UR", "OBC", "EWS", "SC", "ST"],
+    horizontalCategories: ["None", "Ex-Serviceman"],
     states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"],
     disabled: false
   },
@@ -58,7 +62,9 @@ const RANK_PREDICTOR_EXAM_SEED_DATA = [
       { name: "English", questions: 25 },
       { name: "General Awareness", questions: 25 }
     ],
-    categories: ["UR", "OBC", "EWS", "SC", "ST", "PwD", "Ex-Serviceman"],
+    subjectPassingCriteria: [],
+    categories: ["UR", "OBC", "EWS", "SC", "ST"],
+    horizontalCategories: ["None", "PwD", "Ex-Serviceman"],
     states: ["Uttar Pradesh", "Bihar", "Rajasthan", "Delhi", "Madhya Pradesh", "Other"],
     disabled: false
   },
@@ -80,7 +86,9 @@ const RANK_PREDICTOR_EXAM_SEED_DATA = [
       { name: "English", questions: 40 },
       { name: "General Awareness", questions: 40 }
     ],
+    subjectPassingCriteria: [],
     categories: ["UR", "OBC", "EWS", "SC", "ST"],
+    horizontalCategories: ["None"],
     states: ["Uttar Pradesh", "Other"],
     disabled: false
   },
@@ -97,7 +105,9 @@ const RANK_PREDICTOR_EXAM_SEED_DATA = [
     normalization: false,
     supportedModes: [],
     subjects: [],
+    subjectPassingCriteria: [],
     categories: [],
+    horizontalCategories: [],
     states: [],
     disabled: true
   }
@@ -162,7 +172,9 @@ function buildRankExamSeedRow(exam, order) {
     exam.normalization ? "yes" : "no",
     exam.supportedModes.join(", "),
     serializeRankExamSeedSubjects(exam.subjects),
+    serializeRankExamSeedPassingCriteria(exam.subjectPassingCriteria || []),
     exam.categories.join(", "),
+    (exam.horizontalCategories || []).join(", "),
     exam.states.join(", "),
     exam.disabled ? "yes" : "no"
   ];
@@ -171,5 +183,17 @@ function buildRankExamSeedRow(exam, order) {
 function serializeRankExamSeedSubjects(subjects) {
   return subjects.map(function (subject) {
     return subject.name + ":" + subject.questions;
+  }).join(", ");
+}
+
+function serializeRankExamSeedPassingCriteria(criteria) {
+  return criteria.map(function (item) {
+    if (item.minPercentage !== undefined && item.minPercentage !== null && item.minPercentage !== "") {
+      return item.name + ":" + item.minPercentage + "%";
+    }
+    if (item.minCorrect !== undefined && item.minCorrect !== null && item.minCorrect !== "") {
+      return item.name + ":" + item.minCorrect + " correct";
+    }
+    return item.name + ":" + item.minMarks;
   }).join(", ");
 }
