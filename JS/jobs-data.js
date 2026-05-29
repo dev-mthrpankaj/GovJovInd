@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2434",
+        "title": "UPSSSC Lower PCS Recruitment 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Administration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "2285",
+        "startDate": "2026-06-29",
+        "lastDate": "2026-06-18",
+        "status": "active",
+        "tags": [
+            "upsssc",
+            "lower pcs",
+            "uttar pradesh"
+        ],
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
+        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?HA04nYKkgpncofLRuXT6k7Np5V3U8T3Cr2bvb1DZAsc=",
+        "detailPage": "../Job_Details/HTML/2434-upsssc.html",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2431",
         "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -196,7 +220,7 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "2425",
-        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
+        "title": "State Government",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Engineering",
         "category": "State Government",
