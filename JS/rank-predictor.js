@@ -172,6 +172,7 @@
             normalization: Boolean(exam.normalization),
             supportedModes: normalizeStringList(exam.supportedModes, true).filter((mode) => ["online", "offline"].includes(mode)),
             subjectPassingCriteria: normalizeSubjectPassingCriteriaList(exam.subjectPassingCriteria),
+            overallPassingCriteria: normalizeOverallPassingCriteria(exam.overallPassingCriteria),
             subjects: [],
             categories: normalizeStringList(exam.categories),
             horizontalCategories: normalizeStringList(exam.horizontalCategories),
@@ -224,9 +225,26 @@
             : null;
     }
 
+    function normalizeOverallPassingCriteria(criteria) {
+        if (!criteria || typeof criteria !== "object") return null;
+        const directRules = normalizePassingCriteriaRuleMap(criteria);
+        const explicitCategoryRules = normalizePassingCriteriaRuleMap(criteria.categoryRules || criteria.categoryCriteria || criteria.categories);
+        const horizontalCategoryRules = normalizePassingCriteriaRuleMap(criteria.horizontalCategoryRules || criteria.horizontalCriteria || criteria.horizontalCategories);
+        const normalized = {
+            minMarks: getOptionalNumber(criteria.minMarks ?? criteria.minimumMarks ?? criteria.marks ?? criteria.min),
+            minPercentage: getOptionalNumber(criteria.minPercentage ?? criteria.minimumPercentage ?? criteria.percentage ?? criteria.percent),
+            minCorrect: getOptionalNumber(criteria.minCorrect ?? criteria.minimumCorrect ?? criteria.correct),
+            categoryRules: { ...directRules, ...explicitCategoryRules },
+            horizontalCategoryRules
+        };
+        return hasPassingCriteriaThreshold(normalized) || hasPassingCriteriaRuleMap(normalized.categoryRules) || hasPassingCriteriaRuleMap(normalized.horizontalCategoryRules)
+            ? normalized
+            : null;
+    }
+
     function normalizePassingCriteriaRuleMap(value) {
         if (!value || typeof value !== "object" || Array.isArray(value)) return {};
-        const ignoredKeys = new Set(["name", "subject", "subjectname", "minmarks", "minimummarks", "marks", "min", "minpercentage", "minimumpercentage", "percentage", "percent", "mincorrect", "minimumcorrect", "correct"]);
+        const ignoredKeys = new Set(["name", "subject", "subjectname", "minmarks", "minimummarks", "marks", "min", "minpercentage", "minimumpercentage", "percentage", "percent", "mincorrect", "minimumcorrect", "correct", "categoryrules", "categorycriteria", "categories", "horizontalcategoryrules", "horizontalcriteria", "horizontalcategories"]);
         return Object.entries(value).reduce((rules, [key, source]) => {
             if (!getString(key) || ignoredKeys.has(normalizeKey(key))) return rules;
             const rule = source && typeof source === "object"

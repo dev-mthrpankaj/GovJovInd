@@ -94,7 +94,7 @@
         panel.hidden = false;
         panel.classList.toggle("is-failed", failed);
         setText("qualificationStatus", failed ? "Not eligible for merit rank" : data.qualificationStatus || "Qualified");
-        setText("qualificationMessage", data.qualificationMessage || (failed ? "Subject qualifying criteria was not met." : "Subject qualifying criteria met."));
+        setText("qualificationMessage", data.qualificationMessage || (failed ? "Qualifying criteria was not met." : "Qualifying criteria met."));
         failedList.innerHTML = failedSubjects.map((subject) => (
             `<li>${escapeHtml(formatFailedSubject(subject))}</li>`
         )).join("");

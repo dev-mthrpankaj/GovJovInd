@@ -173,6 +173,7 @@ function buildRankExamSeedRow(exam, order) {
     exam.supportedModes.join(", "),
     serializeRankExamSeedSubjects(exam.subjects),
     serializeRankExamSeedPassingCriteria(exam.subjectPassingCriteria || []),
+    serializeRankExamSeedOverallCriteria(exam.overallPassingCriteria || null),
     exam.categories.join(", "),
     (exam.horizontalCategories || []).join(", "),
     exam.states.join(", "),
@@ -196,4 +197,9 @@ function serializeRankExamSeedPassingCriteria(criteria) {
     }
     return item.name + ":" + item.minMarks;
   }).join(", ");
+}
+
+function serializeRankExamSeedOverallCriteria(criteria) {
+  if (!criteria) return "";
+  return JSON.stringify(criteria);
 }
