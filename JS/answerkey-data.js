@@ -816,5 +816,25 @@ window.GovJobUpdatesAnswerKeys = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "answerkey-sheet-36",
+        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "objectionLastDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "objectionLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
