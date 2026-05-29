@@ -45,7 +45,7 @@ window.GovJobUpdatesAnswerKeys = [
             "IAS",
             "IFS"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey%E2%80%93GS-I-CSP-Exam-2026-270526.pdf",
         "objectionLink": "",
         "detailPage": "",
         "updatedAt": "",
