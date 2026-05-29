@@ -4,6 +4,31 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "2041",
+        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-05-24",
+        "examEndDate": "",
+        "releaseDate": "2026-05-27",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "UPSC",
+            "CSE Pre",
+            "IAS",
+            "IFS"
+        ],
+        "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey%E2%80%93GS-I-CSP-Exam-2026-270526.pdf",
+        "objectionLink": "#",
+        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+        "updatedAt": "2026-05-29",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2031",
         "title": "UPSSSC Lekhpal Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
@@ -26,31 +51,6 @@ window.GovJobUpdatesAnswerKeys = [
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "answerkey-sheet-36",
-        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
-        "organization": "Union Public Service Commission",
-        "department": "UPSC",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-05-24",
-        "examEndDate": "",
-        "releaseDate": "2026-05-27",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "UPSC",
-            "CSE Pre",
-            "IAS",
-            "IFS"
-        ],
-        "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey%E2%80%93GS-I-CSP-Exam-2026-270526.pdf",
-        "objectionLink": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "2032",
