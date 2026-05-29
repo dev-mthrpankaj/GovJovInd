@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1000",
+        "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-05-29",
+        "status": "relesed",
+        "tags": [
+            "ssc",
+            "awo",
+            "tpo",
+            "delhi police",
+            "head constable"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "result-3031",
         "title": "SSC Delhi Police Constable Executive Exam Result 2025",
         "organization": "Staff Selection Commission",
@@ -600,22 +622,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "#",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "result-sheet-33",
-        "title": "SSC Delhi Police HC (AWO/TPO) Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2025",
-        "resultDate": "2026-05-01",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
