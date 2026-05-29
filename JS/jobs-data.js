@@ -196,7 +196,7 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "2425",
-        "title": "UPSSSC Technical Assistant Group C Online Form 2026 for 2759 Post",
+        "title": "State Government",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Engineering",
         "category": "State Government",
@@ -1156,6 +1156,26 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "2434",
+        "title": "UPSSSC Lower PCS Recruitment 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Administration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
