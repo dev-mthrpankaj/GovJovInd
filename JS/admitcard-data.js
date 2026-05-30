@@ -63,7 +63,7 @@ window.GovJobUpdatesAdmitCards = [
             "MPESB"
         ],
         "downloadLink": "https://esb.mp.gov.in/e_default.html",
-        "detailPage": "",
+        "detailPage": "MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
