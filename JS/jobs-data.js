@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2395",
+        "title": "BSNL Senior Executive Trainee Online Form 2026",
+        "organization": "Bharat Sanchar Nigam Limited",
+        "department": "Telecom",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "120",
+        "startDate": "2026-05-01",
+        "lastDate": "2026-04-30",
+        "status": "closed",
+        "tags": [
+            "BSNL",
+            "Senior Executive Trainee",
+            "Telecom"
+        ],
+        "applyLink": "https://bsnlregistration.ibtexamination.com/",
+        "officialNotification": "https://bsnl.co.in/documents/jobs/SET_Notification_29012026.pdf",
+        "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
+        "updatedAt": "2026-05-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2434",
         "title": "UPSSSC Lower PCS Recruitment 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
@@ -699,30 +723,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://www.npcilcareers.co.in/ETHQ10042026/candidate/default.aspx",
         "officialNotification": "https://www.npcilcareers.co.in/ETHQ10042026/documents/advt.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2394",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2395",
-        "title": "BSNL Senior Executive Trainee Online Form 2026",
-        "organization": "Bharat Sanchar Nigam Limited",
-        "department": "Telecom",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "120",
-        "startDate": "2026-05-01",
-        "lastDate": "2026-04-30",
-        "status": "closed",
-        "tags": [
-            "BSNL",
-            "Senior Executive Trainee",
-            "Telecom"
-        ],
-        "applyLink": "https://bsnlregistration.ibtexamination.com/",
-        "officialNotification": "https://bsnl.co.in/documents/jobs/SET_Notification_29012026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2395",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
