@@ -22,10 +22,10 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?HA04nYKkgpncofLRuXT6k7Np5V3U8T3Cr2bvb1DZAsc=",
-        "detailPage": "../Job_Details/HTML/2434-upsssc.html",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "detailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
+        "updatedAt": "2026-05-29",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2431",
@@ -108,7 +108,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "railway",
             "technician",
