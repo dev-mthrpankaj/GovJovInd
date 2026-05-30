@@ -20,7 +20,7 @@ window.GovJobUpdatesAdmitCards = [
             "Agniveer"
         ],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
-        "detailPage": "../Job_Details/HTML/job-detail=2048?",
+        "detailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes"
