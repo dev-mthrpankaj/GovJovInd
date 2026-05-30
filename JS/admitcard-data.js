@@ -55,7 +55,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-04",
-        "examEndDate": "",
+        "examEndDate": "2026-06-19",
         "releaseDate": "2026-05-28",
         "status": "available",
         "tags": [
