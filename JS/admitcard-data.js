@@ -42,7 +42,7 @@ window.GovJobUpdatesAdmitCards = [
             "UKSSSC"
         ],
         "downloadLink": "https://ukssscrecruitment.in/UKSSSC_PAGES/AdmitCard_Advt74.aspx",
-        "detailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026",
+        "detailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
         "updatedAt": "2026-05-26",
         "telegramStatus": "ready",
         "telegramReady": "yes"
