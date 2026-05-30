@@ -63,7 +63,7 @@ window.GovJobUpdatesAdmitCards = [
             "MPESB"
         ],
         "downloadLink": "https://esb.mp.gov.in/e_default.html",
-        "detailPage": "MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
+        "detailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -139,7 +139,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-08",
-        "examEndDate": "",
+        "examEndDate": "2026-06-10",
         "releaseDate": "soon",
         "status": "not available",
         "tags": [
