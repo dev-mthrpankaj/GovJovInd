@@ -116,8 +116,8 @@ window.GovJobUpdatesAdmitCards = [
         "department": "SSC",
         "category": "Admit Card",
         "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
+        "examDate": "2026-04-27",
+        "examEndDate": "2026-05-30",
         "releaseDate": "2026-04-24",
         "status": "available",
         "tags": [
@@ -140,8 +140,8 @@ window.GovJobUpdatesAdmitCards = [
         "year": "2026",
         "examDate": "2026-06-08",
         "examEndDate": "2026-06-10",
-        "releaseDate": "soon",
-        "status": "not available",
+        "releaseDate": "2026-05-31",
+        "status": "available",
         "tags": [
             "UPPRPB",
             "Police",
