@@ -55,7 +55,7 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-04",
-        "examEndDate": "",
+        "examEndDate": "2026-06-19",
         "releaseDate": "2026-05-28",
         "status": "available",
         "tags": [
@@ -63,7 +63,7 @@ window.GovJobUpdatesAdmitCards = [
             "MPESB"
         ],
         "downloadLink": "https://esb.mp.gov.in/e_default.html",
-        "detailPage": "MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
+        "detailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -83,7 +83,7 @@ window.GovJobUpdatesAdmitCards = [
             "Bihar Police"
         ],
         "downloadLink": "https://apply-bpssc.com/bpssc_1_2026_we_admitcards/searchApplication",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/2047-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes"
@@ -116,8 +116,8 @@ window.GovJobUpdatesAdmitCards = [
         "department": "SSC",
         "category": "Admit Card",
         "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
+        "examDate": "2026-04-27",
+        "examEndDate": "2026-05-30",
         "releaseDate": "2026-04-24",
         "status": "available",
         "tags": [
@@ -139,9 +139,9 @@ window.GovJobUpdatesAdmitCards = [
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-08",
-        "examEndDate": "",
-        "releaseDate": "soon",
-        "status": "not available",
+        "examEndDate": "2026-06-10",
+        "releaseDate": "2026-05-31",
+        "status": "available",
         "tags": [
             "UPPRPB",
             "Police",
