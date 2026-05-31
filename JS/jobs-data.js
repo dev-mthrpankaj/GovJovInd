@@ -350,7 +350,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1265",
         "startDate": "2026-05-26",
         "lastDate": "2026-06-23",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Judiciary",
             "Punjab",
