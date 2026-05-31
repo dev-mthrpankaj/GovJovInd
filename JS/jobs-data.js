@@ -529,8 +529,8 @@ window.GovJobUpdatesJobs = [
             "administration"
         ],
         "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
-        "officialNotification": "",
-        "detailPage": "",
+        "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-Integrated-72th-CCE-PT_BPSC-20260505-p1euvo.pdf",
+        "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
