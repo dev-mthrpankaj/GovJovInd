@@ -35,7 +35,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-01",
         "examEndDate": "2026-06-15",
         "releaseDate": "2026-05-15",
-        "status": "not available",
+        "status": "available",
         "tags": [
             "Army",
             "Defence",
