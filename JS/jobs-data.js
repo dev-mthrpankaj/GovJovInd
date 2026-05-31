@@ -1206,5 +1206,25 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "job-sheet-52",
+        "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
