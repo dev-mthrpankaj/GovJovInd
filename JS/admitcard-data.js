@@ -616,5 +616,23 @@ window.GovJobUpdatesAdmitCards = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2395",
+        "title": "BSNL Senior Executive Trainee",
+        "organization": "Bharat Sanchar Nigam Limited",
+        "department": "Telecom",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "",
+        "status": "active",
+        "tags": [],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
