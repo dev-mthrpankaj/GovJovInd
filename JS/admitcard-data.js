@@ -20,7 +20,7 @@ window.GovJobUpdatesAdmitCards = [
             "Telecom"
         ],
         "downloadLink": "#",
-        "detailPage": "https://bsnl.co.in/documents/jobs/SET_Notification_29012026.pdf",
+        "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "draft",
         "telegramReady": "no"
