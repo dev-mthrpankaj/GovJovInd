@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2435",
+        "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
+        "organization": "Bihar Public Service Commission",
+        "department": "Administration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "1189",
+        "startDate": "2026-05-07",
+        "lastDate": "2026-05-31",
+        "status": "active",
+        "tags": [
+            "bpsc",
+            "bihar",
+            "administration"
+        ],
+        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
+        "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-Integrated-72th-CCE-PT_BPSC-20260505-p1euvo.pdf",
+        "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
+        "updatedAt": "2026-05-31",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2395",
         "title": "BSNL Senior Executive Trainee Online Form 2026",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -36,7 +60,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "2285",
-        "startDate": "2026-06-29",
+        "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
         "status": "active",
         "tags": [
@@ -132,7 +156,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
-        "status": "active",
+        "status": "upcoming",
         "tags": [
             "railway",
             "technician",
@@ -229,13 +253,13 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Navy",
             "Defence",
             "Indian Army"
         ],
-        "applyLink": "#",
+        "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
         "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
         "detailPage": "./Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
         "updatedAt": "2026-05-24",
@@ -326,14 +350,14 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1265",
         "startDate": "2026-05-26",
         "lastDate": "2026-06-23",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Judiciary",
             "Punjab",
             "Haryana",
             "Chandigarh"
         ],
-        "applyLink": "#",
+        "applyLink": "https://cdn3.digialm.com/EForms/configuredHtml/32046/96555/Registration.html",
         "officialNotification": "https://sssc.gov.in/storage/notices/haryana%20clerk%2036C.pdf",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
         "updatedAt": "2026-05-23",
@@ -474,7 +498,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1090",
         "startDate": "2026-04-06",
         "lastDate": "2026-05-06",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "BTSC",
             "Laboratory Assistant",
@@ -498,7 +522,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "250",
         "startDate": "2026-04-23",
         "lastDate": "2026-05-07",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "NTPC",
             "Engineering",
@@ -546,7 +570,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "9195",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-19",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "CRPF",
             "Constable",
@@ -594,7 +618,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "2317",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "MPESB",
             "Nursing Officer",
@@ -618,7 +642,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1200",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "MPESB",
             "Hospital Assistant",
@@ -810,7 +834,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-19",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Union Bank",
             "Apprentice",
@@ -834,7 +858,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UPTET",
             "Teacher Eligibility",
@@ -858,7 +882,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Bihar",
             "CET B.Ed",
@@ -882,7 +906,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-20",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "RBI",
             "Grade B",
@@ -906,7 +930,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "107",
         "startDate": "2026-05-23",
         "lastDate": "2026-05-30",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UPESSC",
             "Assistant Professor",
@@ -930,7 +954,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "17",
         "startDate": "2026-04-09",
         "lastDate": "2026-05-08",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "MPPSC",
             "ADPO",
@@ -952,7 +976,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "209",
-        "startDate": "2026-05-01",
+        "startDate": "2026-06-19",
         "lastDate": "2026-07-09",
         "status": "upcoming",
         "tags": [
@@ -978,7 +1002,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "61601",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-16",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UP Anganwadi",
             "Bharti",
@@ -1002,7 +1026,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "116",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-15",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UP Cooperative Bank",
             "Banking",
@@ -1026,7 +1050,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "731",
         "startDate": "2026-04-24",
         "lastDate": "2026-05-15",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "SSC",
             "Stenographer",
@@ -1050,7 +1074,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3003",
         "startDate": "2026-05-13",
         "lastDate": "2026-05-04",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "SSC",
             "Selection Phase",
@@ -1074,7 +1098,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "84",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-14",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "SSC",
             "JHT",
@@ -1098,7 +1122,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "887",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-04",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "SSB",
             "Constable",
@@ -1122,7 +1146,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "929",
         "startDate": "2026-04-21",
         "lastDate": "2026-05-15",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UPSSSC",
             "ASO",
@@ -1146,7 +1170,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "622",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-10",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "PSPCL",
             "Junior Engineer",
