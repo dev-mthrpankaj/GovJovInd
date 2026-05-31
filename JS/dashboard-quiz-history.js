@@ -100,7 +100,7 @@
         <strong>Last ${recent.length} quiz attempts</strong>
         <span>${escapeHtml(sourceLabel || (hiddenCount ? `${hiddenCount} older attempts saved` : "Swipe horizontally if needed"))}</span>
       </div>
-      <div class="dash-scroll-hint">Swipe / scroll to see all last 10 quizzes</div>
+      <div class="dash-scroll-hint">← Swipe / scroll to see all last 10 quizzes →</div>
       <div class="dash-bar-scroll" aria-label="Last 10 quiz score chart">
         <div class="dash-bar-chart scrollable">
           ${recent.map((attempt, index) => {

@@ -27,14 +27,13 @@
     <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/documents.css">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="96" height="96">
+                <img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
                 <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
             </div>
             <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
@@ -123,7 +122,7 @@
                 <div class="preview-container hidden" id="image-preview-container">
                     <div class="preview-card">
                         <h3>Original Preview</h3>
-                        <img id="image-preview" src="#" alt="Original uploaded document image preview" width="260" height="260">
+                        <img id="image-preview" src="#" alt="Original uploaded document image preview">
                     </div>
                     <div class="controls">
                         <div class="control-group">
@@ -221,7 +220,7 @@
                     <div class="result-layout">
                         <div class="preview-card">
                             <h3>Resized Preview</h3>
-                            <img id="resized-image-preview" src="#" alt="Resized image preview" width="260" height="260">
+                            <img id="resized-image-preview" src="#" alt="Resized image preview">
                         </div>
                         <div class="result-info">
                             <p>Original size: <span id="result-original-image-size">-</span></p>
@@ -260,7 +259,7 @@
                 <div class="preview-container hidden" id="pdf-preview-container">
                     <div class="preview-card">
                         <h3>Image Preview</h3>
-                        <img id="pdf-preview" src="#" alt="Image selected for PDF conversion" width="260" height="260">
+                        <img id="pdf-preview" src="#" alt="Image selected for PDF conversion">
                     </div>
                     <div class="controls">
                         <div class="control-group">
@@ -484,8 +483,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 <script src="../JS/documents.js" defer></script>
-<script src="../JS/script.js" defer></script>
-<script src="../JS/firebase-config.js" defer></script>
+<script src="../JS/script.js"></script>
+<script src="../JS/firebase-config.js"></script>
 <script type="module" src="../JS/firebase-visitors.js"></script>
 </body>
 </html>
