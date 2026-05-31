@@ -976,9 +976,9 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "209",
-        "startDate": "2026-05-01",
+        "startDate": "2026-06-19",
         "lastDate": "2026-07-09",
-        "status": "active",
+        "status": "upcoming",
         "tags": [
             "UPSSSC",
             "Havildar Instructor",
