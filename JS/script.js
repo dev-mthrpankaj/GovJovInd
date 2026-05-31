@@ -364,28 +364,18 @@ const ensureSharedSiteChrome = () => {
   ensureSharedFooter();
 };
 
-let mobileNavScrollY = 0;
-
 const isMobileNavViewport = () => window.matchMedia('(max-width: 1279px)').matches;
 
 const setMobileNavScrollLock = (locked) => {
   const body = document.body;
-  const root = document.documentElement;
   if (!body) return;
 
-  if (locked && !body.classList.contains('gju-mobile-nav-open')) {
-    mobileNavScrollY = window.scrollY || root.scrollTop || 0;
-    body.style.top = `-${mobileNavScrollY}px`;
-    root.classList.add('gju-mobile-nav-open');
+  if (locked) {
     body.classList.add('gju-mobile-nav-open');
-    return;
-  }
-
-  if (!locked && body.classList.contains('gju-mobile-nav-open')) {
-    root.classList.remove('gju-mobile-nav-open');
+    body.removeAttribute('style');
+  } else {
     body.classList.remove('gju-mobile-nav-open');
-    body.style.top = '';
-    window.scrollTo({ top: mobileNavScrollY, behavior: 'auto' });
+    body.removeAttribute('style');
   }
 };
 
