@@ -174,6 +174,10 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   }
 
   function renderRankGraphs(attempts) {
+    if (!document.querySelector("#rankPercentileChart")) {
+      return;
+    }
+
     const lazyRender = (containerId, renderFn) => {
       const container = $(containerId);
       if (!container) return;
