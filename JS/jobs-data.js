@@ -565,7 +565,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/index.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
-        "detailPage": "#",
+        "detailPage": "./Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "draft",
         "telegramReady": "no"
