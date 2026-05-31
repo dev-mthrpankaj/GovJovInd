@@ -174,43 +174,23 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   }
 
   function renderRankGraphs(attempts) {
-    if (!document.querySelector("#rankPercentileChart")) {
-      return;
-    }
-
-    const lazyRender = (containerId, renderFn) => {
-      const container = $(containerId);
-      if (!container) return;
-      
-      if (!('IntersectionObserver' in window)) {
-        renderFn(container);
-        return;
-      }
-
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            renderFn(container);
-            obs.disconnect();
-          }
-        });
-      }, { rootMargin: "50px" });
-      observer.observe(container);
-    };
+    const percentileChart = $("#rankPercentileChart");
+    const rankChart = $("#rankTrendChart");
+    const examChart = $("#rankExamChart");
+    const insightBox = $("#rankAnalysisBox");
 
     if (!attempts.length) {
       const empty = `<div class="user-mini-card"><strong>No rank predictor graph yet</strong><span>Save mobile number and use Rank Predictor to show analysis here.</span></div>`;
-      lazyRender("#rankPercentileChart", (el) => el.innerHTML = empty);
-      lazyRender("#rankTrendChart", (el) => el.innerHTML = empty);
-      lazyRender("#rankExamChart", (el) => el.innerHTML = empty);
-      lazyRender("#rankAnalysisBox", (el) => el.innerHTML = empty);
+      if (percentileChart) percentileChart.innerHTML = empty;
+      if (rankChart) rankChart.innerHTML = empty;
+      if (examChart) examChart.innerHTML = empty;
+      if (insightBox) insightBox.innerHTML = empty;
       return;
     }
 
     const recent = attempts.slice(0, 8).reverse();
-    
-    lazyRender("#rankPercentileChart", (el) => {
-      el.innerHTML = `
+    if (percentileChart) {
+      percentileChart.innerHTML = `
         <div class="dash-bar-chart" aria-label="Rank predictor percentile chart">
           ${recent.map((attempt, index) => {
             const value = percent(attempt.percentile);
@@ -224,12 +204,12 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
           }).join("")}
         </div>
       `;
-    });
+    }
 
-    lazyRender("#rankTrendChart", (el) => {
+    if (rankChart) {
       const ranks = recent.map((attempt) => number(attempt.overallRank)).filter((rank) => rank > 0);
       const worstRank = Math.max(...ranks, 1);
-      el.innerHTML = `
+      rankChart.innerHTML = `
         <div class="dash-horizontal-bars">
           ${recent.map((attempt) => {
             const rank = number(attempt.overallRank);
@@ -243,11 +223,11 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
           }).join("")}
         </div>
       `;
-    });
+    }
 
-    lazyRender("#rankExamChart", (el) => {
+    if (examChart) {
       const stats = buildExamStats(attempts);
-      el.innerHTML = `
+      examChart.innerHTML = `
         <div class="dash-horizontal-bars">
           ${stats.map((item) => {
             const value = percent(item.averagePercentile);
@@ -260,20 +240,20 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
           }).join("")}
         </div>
       `;
-    });
+    }
 
-    lazyRender("#rankAnalysisBox", (el) => {
+    if (insightBox) {
       const bestRankAttempt = attempts.filter((attempt) => number(attempt.overallRank) > 0).sort((a, b) => number(a.overallRank) - number(b.overallRank))[0];
       const bestPercentileAttempt = attempts.slice().sort((a, b) => number(b.percentile) - number(a.percentile))[0];
       const avgPercentile = attempts.reduce((sum, attempt) => sum + number(attempt.percentile), 0) / attempts.length;
-      el.innerHTML = `
+      insightBox.innerHTML = `
         <div class="dash-insight-grid">
           <div class="user-mini-card"><strong>${Math.round(avgPercentile)}%</strong><span>Average percentile</span></div>
           <div class="user-mini-card"><strong>${formatRank(bestRankAttempt?.overallRank)}</strong><span>Best rank${bestRankAttempt?.examName ? ` in ${escapeHtml(bestRankAttempt.examName)}` : ""}</span></div>
           <div class="user-mini-card"><strong>${formatValue(bestPercentileAttempt?.rawMarks)}</strong><span>Best marks${bestPercentileAttempt?.examName ? ` in ${escapeHtml(bestPercentileAttempt.examName)}` : ""}</span></div>
         </div>
       `;
-    });
+    }
   }
 
   function renderDashboard(data) {
