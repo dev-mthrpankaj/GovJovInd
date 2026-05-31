@@ -60,7 +60,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "2285",
-        "startDate": "2026-06-29",
+        "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
         "status": "active",
         "tags": [
@@ -156,7 +156,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
-        "status": "active",
+        "status": "upcoming",
         "tags": [
             "railway",
             "technician",
