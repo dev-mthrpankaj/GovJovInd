@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2435",
+        "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
+        "organization": "Bihar Public Service Commission",
+        "department": "Administration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "1189",
+        "startDate": "2026-05-07",
+        "lastDate": "2026-05-31",
+        "status": "active",
+        "tags": [
+            "bpsc",
+            "bihar",
+            "administration"
+        ],
+        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
+        "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-Integrated-72th-CCE-PT_BPSC-20260505-p1euvo.pdf",
+        "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
+        "updatedAt": "2026-05-31",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2436",
         "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -34,30 +58,6 @@ window.GovJobUpdatesJobs = [
         "applyLink": "#",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
         "detailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2435",
-        "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
-        "organization": "Bihar Public Service Commission",
-        "department": "Administration",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "1189",
-        "startDate": "2026-05-07",
-        "lastDate": "2026-05-31",
-        "status": "active",
-        "tags": [
-            "bpsc",
-            "bihar",
-            "administration"
-        ],
-        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
-        "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-Integrated-72th-CCE-PT_BPSC-20260505-p1euvo.pdf",
-        "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
         "telegramReady": "yes"
