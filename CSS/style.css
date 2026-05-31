@@ -1,5 +1,4 @@
 @import url("./mobile-header-modal-fix.css?v=20260512-1");
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
   --primary: #2563eb;
@@ -34,7 +33,7 @@ html {
 }
 
 body {
-  font-family: Inter, sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -80,6 +79,150 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.fa,
+.fas,
+.fab {
+  display: inline-block;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.fa-bars::before {
+  content: "\2630";
+}
+
+.fa-times::before,
+.fa-xmark::before {
+  content: "\00d7";
+}
+
+.fa-chevron-left::before {
+  content: "\2039";
+}
+
+.fa-chevron-right::before {
+  content: "\203a";
+}
+
+.fa-bolt::before {
+  content: "\26a1";
+}
+
+.fa-chart-line::before {
+  content: "\2197";
+}
+
+.fa-list-check::before {
+  content: "\2713";
+}
+
+.fa-file-alt::before {
+  content: "\25a3";
+}
+
+.fa-shield-alt::before {
+  content: "\25c8";
+}
+
+.fa-briefcase::before {
+  content: "\25a3";
+}
+
+.fa-book-open::before {
+  content: "\25eb";
+}
+
+.fa-bell::before {
+  content: "\25c9";
+}
+
+.fa-check-circle::before {
+  content: "\2713";
+}
+
+.fa-mobile-alt::before {
+  content: "\25af";
+}
+
+.fa-tools::before {
+  content: "\2699";
+}
+
+.fa-route::before {
+  content: "\2192";
+}
+
+.fa-envelope::before {
+  content: "\2709";
+}
+
+.fa-phone::before {
+  content: "\260e";
+}
+
+.fa-map-marker-alt::before {
+  content: "\25cf";
+}
+
+.fa-user-circle::before {
+  content: "\25c9";
+}
+
+.fa-home::before {
+  content: "\2302";
+}
+
+.fa-stopwatch::before {
+  content: "\25cc";
+}
+
+.fa-certificate::before {
+  content: "\25c8";
+}
+
+.fa-arrow-up::before {
+  content: "\2191";
+}
+
+.fa-play::before {
+  content: "\25b6";
+}
+
+.fa-pause::before {
+  content: "\2016";
+}
+
+.fa-headset::before {
+  content: "\260e";
+}
+
+.fa-instagram::before {
+  content: "IG";
+  font-size: 0.72em;
+  letter-spacing: 0;
+}
+
+.fa-twitter::before {
+  content: "X";
+  font-size: 0.82em;
+}
+
+.fa-linkedin-in::before {
+  content: "in";
+  font-size: 0.78em;
+}
+
+.fa-youtube::before {
+  content: "\25b6";
+}
+
+.fa-telegram::before {
+  content: "\2197";
 }
 
 :where(main, section, article, aside, div, form, nav, header, footer) {
