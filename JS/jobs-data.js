@@ -541,7 +541,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
-        "detailPage": "#",
+        "detailPage": "./Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "draft",
         "telegramReady": "no"
