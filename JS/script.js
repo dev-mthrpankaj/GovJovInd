@@ -364,11 +364,29 @@ const ensureSharedSiteChrome = () => {
   ensureSharedFooter();
 };
 
+let mobileNavScrollY = 0;
+
 const isMobileNavViewport = () => window.matchMedia('(max-width: 1279px)').matches;
 
 const setMobileNavScrollLock = (locked) => {
-  document.body.classList.toggle('gju-mobile-nav-open');
-  document.body.removeAttribute('style');
+  const body = document.body;
+  const root = document.documentElement;
+  if (!body) return;
+
+  if (locked && !body.classList.contains('gju-mobile-nav-open')) {
+    mobileNavScrollY = window.scrollY || root.scrollTop || 0;
+    body.style.top = `-${mobileNavScrollY}px`;
+    root.classList.add('gju-mobile-nav-open');
+    body.classList.add('gju-mobile-nav-open');
+    return;
+  }
+
+  if (!locked && body.classList.contains('gju-mobile-nav-open')) {
+    root.classList.remove('gju-mobile-nav-open');
+    body.classList.remove('gju-mobile-nav-open');
+    body.style.top = '';
+    window.scrollTo({ top: mobileNavScrollY, behavior: 'auto' });
+  }
 };
 
 const syncMobileNavScrollLock = () => {

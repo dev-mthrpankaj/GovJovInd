@@ -49,15 +49,7 @@ import {
     state: "loading"
   };
 
-  function deferVisitorSystem() {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => startVisitorSystem(), { timeout: 5000 });
-    } else {
-      setTimeout(startVisitorSystem, 1000);
-    }
-  }
-
-  deferVisitorSystem();
+  startVisitorSystem();
 
   function startVisitorSystem() {
     ensureVisitorWidget();
