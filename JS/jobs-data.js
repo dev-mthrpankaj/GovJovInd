@@ -253,13 +253,13 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Navy",
             "Defence",
             "Indian Army"
         ],
-        "applyLink": "#",
+        "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
         "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
         "detailPage": "./Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
         "updatedAt": "2026-05-24",
