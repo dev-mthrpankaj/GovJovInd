@@ -38,7 +38,8 @@
     <link rel="dns-prefetch" href="//www.gstatic.com">
     <link rel="stylesheet" href="dist/css/main.min.css">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -49,10 +50,10 @@
     <section class="exam-categories platform-section" aria-labelledby="examCategoriesTitle"><h2 class="section-title" id="examCategoriesTitle">Exam Categories</h2><p class="section-subtitle">Jump into the exam stream you are preparing for.</p><div class="category-grid"><a class="category-card" href="HTML/latest-jobs.html?q=SSC"><i class="fas fa-building-columns" aria-hidden="true"></i><strong>SSC</strong><span>CGL, CHSL, GD, MTS</span></a><a class="category-card" href="HTML/latest-jobs.html?q=Railway"><i class="fas fa-train" aria-hidden="true"></i><strong>Railway</strong><span>RRB, ALP, Group D</span></a><a class="category-card" href="HTML/latest-jobs.html?q=Banking"><i class="fas fa-landmark" aria-hidden="true"></i><strong>Banking</strong><span>IBPS, SBI, RBI</span></a><a class="category-card" href="HTML/latest-jobs.html?q=Police"><i class="fas fa-shield-halved" aria-hidden="true"></i><strong>Police</strong><span>Constable, SI, State Police</span></a><a class="category-card" href="HTML/latest-jobs.html?q=Teaching"><i class="fas fa-chalkboard-user" aria-hidden="true"></i><strong>Teaching</strong><span>TET, Assistant Professor</span></a><a class="category-card" href="HTML/latest-jobs.html?q=State"><i class="fas fa-map-location-dot" aria-hidden="true"></i><strong>State Exams</strong><span>PSC, state boards, local exams</span></a></div></section>
     <section class="stats platform-stats" aria-label="Platform highlights"><div class="stat-item"><span class="stat-number">Smart</span><span class="stat-label">Rank Prediction</span></div><div class="stat-item"><span class="stat-number">Timed</span><span class="stat-label">Quiz Practice</span></div><div class="stat-item"><span class="stat-number">Fast</span><span class="stat-label">Exam Updates</span></div><div class="stat-item"><span class="stat-number">Useful</span><span class="stat-label">UP Services</span></div></section></main>
     <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government exam platform for latest jobs, admit cards, results, answer keys, rank prediction, quiz, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="HTML/latest-jobs.html">Jobs</a></li><li><a href="HTML/admitcard.html">Admit Card</a></li><li><a href="HTML/answer-key.html">Answer Key</a></li><li><a href="HTML/results.html">Results</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="HTML/quiz.html">Quiz</a></li><li><a href="HTML/rank-predictor.html">Rank Predictor</a></li><li><a href="HTML/documents.html">Documents</a></li><li><a href="HTML/up-certificate-services.html">UP Services</a></li><li><a href="HTML/about-us.html">About Us</a></li><li><a href="HTML/contact.html">Contact</a></li><li><a href="HTML/disclaimer.html">Disclaimer</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="HTML/privacy-policy.html">Privacy Policy</a> | <a href="HTML/terms.html">Terms of Use</a> | <a href="HTML/disclaimer.html">Disclaimer</a></div></footer>
-<script src="JS/script.js"></script>
-<script src="JS/home-polish.js"></script>
-<script src="JS/contact-widget.js"></script>
-<script src="JS/firebase-config.js"></script>
+<script src="JS/script.js" defer></script>
+<script src="JS/home-polish.js" defer></script>
+<script src="JS/contact-widget.js" defer></script>
+<script src="JS/firebase-config.js" defer></script>
 <script type="module" src="JS/firebase-visitors.js"></script>
 </body>
 </html>
