@@ -4,6 +4,41 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2436",
+        "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
+        "organization": "Bharat Sanchar Nigam Limited",
+        "department": "Telecom",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "100",
+        "startDate": "2026-06-04",
+        "lastDate": "2026-06-04",
+        "status": "upcoming",
+        "tags": [
+            "BSNL JTO Recruitment 2026",
+            "BSNL Junior Telecom Officer",
+            "BSNL JTO Notification",
+            "Sarkari Naukri 2026",
+            "Govt Jobs for Engineers",
+            "PSU Jobs 2026",
+            "BTech Telecom Jobs",
+            "ECE Govt Jobs",
+            "CSE Govt Jobs",
+            "BSNL JTO Syllabus",
+            "BSNL JTO Salary",
+            "BSNL JTO Apply Online",
+            "Engineering Government Jobs",
+            "Central Govt Jobs 2026"
+        ],
+        "applyLink": "#",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
+        "detailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2435",
         "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
         "organization": "Bihar Public Service Commission",
