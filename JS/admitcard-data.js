@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2395",
+        "title": "BSNL Senior Executive Trainee",
+        "organization": "Bharat Sanchar Nigam Limited",
+        "department": "Telecom",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-07-05",
+        "examEndDate": "",
+        "releaseDate": "",
+        "status": "upcoming",
+        "tags": [
+            "BSNL",
+            "Senior Executive Trainee",
+            "Telecom"
+        ],
+        "downloadLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2048",
         "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
         "organization": "Join Indian Army",
@@ -614,24 +636,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/97756/login.html",
         "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2395",
-        "title": "BSNL Senior Executive Trainee",
-        "organization": "Bharat Sanchar Nigam Limited",
-        "department": "Telecom",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "",
-        "status": "active",
-        "tags": [],
-        "downloadLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
