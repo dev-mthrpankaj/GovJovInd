@@ -14,7 +14,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1189",
         "startDate": "2026-05-07",
         "lastDate": "2026-05-31",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "bpsc",
             "bihar",
@@ -360,7 +360,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "121",
         "startDate": "2026-06-01",
         "lastDate": "2026-06-30",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Education",
             "Rajsthan",
@@ -543,8 +543,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
         "detailPage": "./Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
         "updatedAt": "2026-05-07",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2416",
