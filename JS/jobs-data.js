@@ -357,7 +357,7 @@ window.GovJobUpdatesJobs = [
             "Haryana",
             "Chandigarh"
         ],
-        "applyLink": "#",
+        "applyLink": "https://cdn3.digialm.com/EForms/configuredHtml/32046/96555/Registration.html",
         "officialNotification": "https://sssc.gov.in/storage/notices/haryana%20clerk%2036C.pdf",
         "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
         "updatedAt": "2026-05-23",
