@@ -523,8 +523,12 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-05-07",
         "lastDate": "2026-05-31",
         "status": "active",
-        "tags": [],
-        "applyLink": "",
+        "tags": [
+            "bpsc",
+            "bihar",
+            "administration"
+        ],
+        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "",
         "detailPage": "",
         "updatedAt": "",
