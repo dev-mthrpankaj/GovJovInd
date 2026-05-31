@@ -33,7 +33,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "",
         "officialNotification": "",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
