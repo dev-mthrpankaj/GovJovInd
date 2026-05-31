@@ -37,7 +37,7 @@ window.GovJobUpdatesJobs = [
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "100",
         "startDate": "2026-06-04",
-        "lastDate": "2026-06-04",
+        "lastDate": "2026-07-04",
         "status": "upcoming",
         "tags": [
             "BSNL JTO Recruitment 2026",
