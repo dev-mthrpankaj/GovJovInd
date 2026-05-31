@@ -31,9 +31,9 @@ window.GovJobUpdatesJobs = [
             "Engineering Government Jobs",
             "Central Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
+        "applyLink": "#",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
+        "detailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
