@@ -367,16 +367,8 @@ const ensureSharedSiteChrome = () => {
 const isMobileNavViewport = () => window.matchMedia('(max-width: 1279px)').matches;
 
 const setMobileNavScrollLock = (locked) => {
-  const body = document.body;
-  if (!body) return;
-
-  if (locked) {
-    body.classList.add('gju-mobile-nav-open');
-    body.removeAttribute('style');
-  } else {
-    body.classList.remove('gju-mobile-nav-open');
-    body.removeAttribute('style');
-  }
+  document.body.classList.toggle('gju-mobile-nav-open');
+  document.body.removeAttribute('style');
 };
 
 const syncMobileNavScrollLock = () => {
