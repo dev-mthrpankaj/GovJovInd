@@ -541,7 +541,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
-        "detailPage": "#",
+        "detailPage": "./Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -567,8 +567,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
         "detailPage": "./Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html",
         "updatedAt": "2026-05-07",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2386",
