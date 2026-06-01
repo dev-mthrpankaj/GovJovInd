@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check:links": "node scripts/check-links.js"
+    "check:links": "node scripts/check-links.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js"
   }
 }

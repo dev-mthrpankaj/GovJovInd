@@ -46,6 +46,10 @@
   const createBlogCard = (blog) => {
     const article = document.createElement("article");
     article.className = "blog-card";
+    const readMore = blog.url
+      ? `<a class="btn btn-outline" href="${escapeHtml(blog.url)}">Read More</a>`
+      : `<button class="btn btn-outline" type="button" data-blog-id="${escapeHtml(blog.id)}">Read More</button>`;
+
     article.innerHTML = `
       <div class="blog-card-thumb">
         <img src="${escapeHtml(blog.image)}" alt="${escapeHtml(blog.title)}" loading="lazy" decoding="async">
@@ -55,7 +59,7 @@
         <span class="blog-card-date">${escapeHtml(formatDate(blog.date))}</span>
         <h3>${escapeHtml(blog.title)}</h3>
         <p>${escapeHtml(blog.excerpt)}</p>
-        <button class="btn btn-outline" type="button" data-blog-id="${escapeHtml(blog.id)}">Read More</button>
+        ${readMore}
       </div>
     `;
     return article;

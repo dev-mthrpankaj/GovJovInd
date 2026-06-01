@@ -43,13 +43,22 @@ const getCurrentPageName = () => {
 
 const isNotFoundPage = () => document.body?.classList.contains('not-found-page');
 
+const getHtmlDepthFromRoot = () => {
+  const path = window.location.pathname.replace(/\\/g, '/');
+  if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return 2;
+
+  const htmlMatch = path.match(/\/HTML\/(.+\.html)$/i);
+  if (htmlMatch) return htmlMatch[1].split('/').filter(Boolean).length;
+
+  return 0;
+};
+
+const getRootPrefix = () => '../'.repeat(getHtmlDepthFromRoot());
+
 const getRootRelativeHref = (pathFromRoot) => {
   if (isNotFoundPage()) return `/${String(pathFromRoot).replace(/^\/+/, '')}`;
 
-  const path = window.location.pathname.replace(/\\/g, '/');
-  if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../${pathFromRoot}`;
-  if (/\/HTML\/[^/]+\.html$/i.test(path)) return `../${pathFromRoot}`;
-  return pathFromRoot;
+  return `${getRootPrefix()}${pathFromRoot}`;
 };
 
 const isAdsBlockedPage = () => {
@@ -136,7 +145,8 @@ const getCandidatePageHref = (pageName) => {
 
   const path = window.location.pathname.replace(/\\/g, '/');
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../HTML/${pageName}`;
-  if (/\/HTML\/[^/]+\.html$/i.test(path)) return pageName;
+  const htmlDepth = getHtmlDepthFromRoot();
+  if (htmlDepth) return `${'../'.repeat(Math.max(htmlDepth - 1, 0))}${pageName}`;
   return `HTML/${pageName}`;
 };
 
@@ -181,7 +191,8 @@ const getHomeHref = () => {
 
   const path = window.location.pathname.replace(/\\/g, '/');
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return '../../index.html';
-  if (/\/HTML\/[^/]+\.html$/i.test(path)) return '../index.html';
+  const htmlDepth = getHtmlDepthFromRoot();
+  if (htmlDepth) return `${'../'.repeat(htmlDepth)}index.html`;
   return 'index.html';
 };
 
@@ -193,6 +204,9 @@ const getActivePageClass = (pageName) => {
   if (isNotFoundPage()) return '';
 
   const currentPage = getCurrentPageName();
+  const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
+  if (pageName === 'student-hub.html' && /\/html\/student-hub\/[^/]+\.html$/i.test(path)) return ' class="active"';
+
   return currentPage === pageName || (!currentPage && pageName === 'index.html') ? ' class="active"' : '';
 };
 
@@ -213,7 +227,11 @@ const normalizeHeaderActiveLinks = (navRoot = document.querySelector('header nav
     links.forEach((link) => link.classList.remove('active'));
     return;
   }
-  const activeLink = links.find((link) => getHrefPageName(link.getAttribute('href')) === currentPage);
+  const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
+  const activeLink = links.find((link) => getHrefPageName(link.getAttribute('href')) === currentPage)
+    || (/\/html\/student-hub\/[^/]+\.html$/i.test(path)
+      ? links.find((link) => getHrefPageName(link.getAttribute('href')) === 'student-hub.html')
+      : null);
 
   links.forEach((link) => {
     link.classList.toggle('active', link === activeLink);

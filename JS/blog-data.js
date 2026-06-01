@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "uncertainty-in-ssc-gd-exams",
+      title: "Uncertainty in SSC GD Exams: What Aspirants Should Do",
+      category: "SSC",
+      date: "2026-06-01",
+      image: thumbnail,
+      url: "student-hub/uncertainty-in-ssc-gd-exams.html",
+      excerpt: "SSC GD dates can feel uncertain when schedules shift, city slips appear late or admit cards release close to exam day. Here is a calm, official-source-first plan for aspirants."
+    },
+    {
       id: "ssc-cgl-preparation-plan",
       title: "SSC CGL 2026 Preparation Plan for First-Time Aspirants",
       category: "SSC",
