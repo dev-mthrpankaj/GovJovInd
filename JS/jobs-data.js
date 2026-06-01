@@ -4,6 +4,37 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2438",
+        "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
+        "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "1979",
+        "startDate": "2026-06-16",
+        "lastDate": "2026-07-15",
+        "status": "upcoming",
+        "tags": [
+            "DSSSB Various Post Recruitment 2026",
+            "DSSSB 03/2026 Notification",
+            "Delhi DSSSB 1979 Posts Vacancy",
+            "DSSSB Various Post Online Form 2026",
+            "DSSSB TGT Computer Science Recruitment",
+            "DSSSB Special Educator Primary Vacancy",
+            "dsssbonline.nic.in Apply Online",
+            "Delhi Govt Jobs 2026",
+            "DSSSB Junior Scientific Assistant Form",
+            "DSSSB Recruitment 2026 Notification PDF"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2437",
         "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
         "organization": "Allahabad High Court",
@@ -1270,26 +1301,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2438",
-        "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
-        "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
-        "department": "Adminstration",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
