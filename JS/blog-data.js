@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "up-police-constable-last-10-days-exam-strategy",
+  title: "UP Police Constable Last 10 Days Exam Strategy: आखिरी दिनों की अचूक रणनीति और माइंडसेट",
+  category: "Career Guidance",
+  date: "2026-06-01",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/up-police-constable-last-10-days-exam-strategy.html",
+  excerpt: "UP पुलिस कांस्टेबल परीक्षा की सिटी इंटीमेशन स्लिप आउट होने के बाद बचे हुए आखिरी 10 दिनों में कैसे करें सटीक रिवीजन? जानिए पूरा सिलेबस प्रिव्यू और बिना नेगेटिव मार्किंग के परीक्षा के दिन का बेस्ट माइंडसेट।"
+},
+    {
   id: "kanpur-bed-exam-center-mismanagement-report",
   title: "Kanpur B.Ed Exam Center Mismanagement: नाले में गिरे छात्र, कुप्रबंधन और भ्रष्टाचार की पूरी ग्राउंड रिपोर्ट",
   category: "State Exams",
