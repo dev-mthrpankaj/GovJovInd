@@ -35,6 +35,31 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
+        "id": "2439",
+        "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
+        "organization": "Jharkhand Staff Selection Comission",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "611",
+        "startDate": "2026-06-01",
+        "lastDate": "2026-06-30",
+        "status": "active",
+        "tags": [
+            "JSSC",
+            "CGL",
+            "SSC",
+            "GRADUATE"
+        ],
+        "applyLink": "http://jssc.nic.in/",
+        "officialNotification": "https://jssc.jharkhand.gov.in/sites/default/files/JTGLCCE-2026%20Brochure%20(Regular%20Vacancy).pdf",
+        "detailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
+        "updatedAt": "2026-06-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2437",
         "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
         "organization": "Allahabad High Court",
@@ -123,26 +148,6 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "2439",
-        "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
-        "organization": "Jharkhand Staff Selection Comission",
-        "department": "Adminstration",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "611",
-        "startDate": "2026-06-01",
-        "lastDate": "2026-06-30",
-        "status": "active",
-        "tags": [],
-        "applyLink": "http://jssc.nic.in/",
-        "officialNotification": "https://jssc.jharkhand.gov.in/sites/default/files/JTGLCCE-2026%20Brochure%20(Regular%20Vacancy).pdf",
-        "detailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
-        "updatedAt": "2026-05-31",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "2395",
