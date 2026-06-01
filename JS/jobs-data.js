@@ -43,9 +43,9 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "543",
-        "startDate": "2026-06-01",
-        "lastDate": "2026-06-21",
-        "status": "active",
+        "startDate": "2026-06-06",
+        "lastDate": "2026-06-20",
+        "status": "upcoming",
         "tags": [
             "Allahabad High Court RO ARO Recruitment 2026",
             "AHC RO ARO CA Notification 2026",
@@ -62,8 +62,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://www.allahabadhighcourt.in/event/event_25857_01-06-2026.pdf",
         "detailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
         "updatedAt": "2026-06-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2439",
