@@ -504,6 +504,46 @@ body.quiz-exam-active .go-top-btn {
   display: none;
 }
 
+.telegram-float-btn {
+  position: fixed;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 1300;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 44px;
+  padding: .68rem .95rem;
+  border: 0;
+  border-radius: 999px;
+  background: #229ed9;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 14px 32px rgba(34, 158, 217, .26);
+}
+
+.telegram-float-btn:hover,
+.telegram-float-btn:focus-visible {
+  background: #1b8fc6;
+  color: #fff;
+  text-decoration: none;
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(34, 158, 217, .18), 0 16px 34px rgba(34, 158, 217, .32);
+}
+
+.telegram-float-btn i {
+  font-size: 1.05rem;
+}
+
+.telegram-float-btn.is-hidden,
+.telegram-float-btn.is-footer-visible {
+  display: none !important;
+}
+
 /* Main layout */
 main {
   max-width: 1200px;
@@ -1534,6 +1574,22 @@ footer {
   list-style: none;
   display: grid;
   gap: .35rem;
+}
+
+.footer-section:last-child li {
+  display: flex;
+  align-items: flex-start;
+  gap: .45rem;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.footer-section:last-child li i {
+  width: 1.1em;
+  flex: 0 0 1.1em;
+  margin-top: .18em;
+  text-align: center;
 }
 
 .footer-section a:hover,
