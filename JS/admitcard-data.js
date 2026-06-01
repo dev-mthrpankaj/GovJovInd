@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2042",
+        "title": "UP Police Constable Admit Card 2026",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-08",
+        "examEndDate": "2026-06-10",
+        "releaseDate": "2026-05-31",
+        "status": "available",
+        "tags": [
+            "UPPRPB",
+            "Police",
+            "Constable"
+        ],
+        "downloadLink": "https://upcons2025.com/upcondiad2025/index.aspx",
+        "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
+        "updatedAt": "2026-06-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2395",
         "title": "BSNL Senior Executive Trainee",
         "organization": "Bharat Sanchar Nigam Limited",
@@ -150,28 +172,6 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://ssc.gov.in/",
         "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
         "updatedAt": "2026-05-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2042",
-        "title": "UP Police Constable Admit Card 2026",
-        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
-        "department": "State Police",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-08",
-        "examEndDate": "2026-06-10",
-        "releaseDate": "2026-05-31",
-        "status": "available",
-        "tags": [
-            "UPPRPB",
-            "Police",
-            "Constable"
-        ],
-        "downloadLink": "",
-        "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
-        "updatedAt": "2026-05-19",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
