@@ -7,7 +7,7 @@
   title: "UP Police Constable Last 10 Days Exam Strategy: आखिरी दिनों की अचूक रणनीति और माइंडसेट",
   category: "Career Guidance",
   date: "2026-06-01",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/up-police-strategy.webp",
   url: "student-hub/up-police-constable-last-10-days-exam-strategy.html",
   excerpt: "UP पुलिस कांस्टेबल परीक्षा की सिटी इंटीमेशन स्लिप आउट होने के बाद बचे हुए आखिरी 10 दिनों में कैसे करें सटीक रिवीजन? जानिए पूरा सिलेबस प्रिव्यू और बिना नेगेटिव मार्किंग के परीक्षा के दिन का बेस्ट माइंडसेट।"
 },
