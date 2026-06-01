@@ -229,6 +229,7 @@ const getSharedNavMarkup = () => {
     ['results.html', 'Results'],
     ['quiz.html', 'Quiz'],
     ['rank-predictor.html', 'Rank Predictor'],
+    ['student-hub.html', 'Student Hub'],
     ['documents.html', 'Documents'],
     ['up-certificate-services.html', 'UP Services'],
     ['about-us.html', 'About Us']
@@ -333,6 +334,7 @@ const ensureSharedFooter = () => {
       <ul>
         <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
         <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
+        <li><a href="${getSharedPageHref('student-hub.html')}">Student Hub</a></li>
         <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
         <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
