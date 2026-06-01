@@ -1307,7 +1307,7 @@ window.GovJobUpdatesJobs = [
     {
         "id": "job-sheet-55",
         "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
-        "organization": "",
+        "organization": "Jharkhand Staff Selection Comission",
         "department": "",
         "category": "",
         "year": "",
