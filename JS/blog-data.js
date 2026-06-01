@@ -11,14 +11,15 @@
       url: "student-hub/uncertainty-in-ssc-gd-exams.html",
       excerpt: "SSC GD dates can feel uncertain when schedules shift, city slips appear late or admit cards release close to exam day. Here is a calm, official-source-first plan for aspirants."
     },
-    {
-      id: "ssc-cgl-preparation-plan",
-      title: "SSC CGL 2026 Preparation Plan for First-Time Aspirants",
-      category: "SSC",
-      date: "2026-05-30",
-      image: thumbnail,
-      excerpt: "Build a practical SSC CGL routine with topic blocks for Quant, Reasoning, English and General Awareness. Focus on syllabus coverage first, then shift to timed practice and revision."
-    },
+{
+  id: "up-lekhpal-exam-leak-systemic-negligence",
+  title: "UP Lekhpal Exam Leak और परीक्षा प्रणाली की चुनौतियाँ: छात्रों के लिए एक नया नज़रिया",
+  category: "Career Guidance",
+  date: "2026-06-01",
+  image: "../Assets/Home%20Page/up-lekhpal-exam-leak-systemic-negligence.webp",
+  url: "student-hub/up-lekhpal-exam-leak-systemic-negligence.html",
+  excerpt: "UP Lekhpal और राज्य स्तरीय परीक्षाओं में बार-बार सामने आ रही पेपर लीक और प्रशासनिक उपेक्षा की घटनाओं के बीच उम्मीदवारों के लिए एक व्यावहारिक गाइडेंस और मानसिक मजबूती की नई रणनीति।"
+},
     {
       id: "railway-rrb-ntpc-study-roadmap",
       title: "Railway RRB NTPC Study Roadmap: What to Cover First",
