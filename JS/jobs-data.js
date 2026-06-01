@@ -27,8 +27,8 @@ window.GovJobUpdatesJobs = [
             "DSSSB Junior Scientific Assistant Form",
             "DSSSB Recruitment 2026 Notification PDF"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://dsssbonline.nic.in/",
+        "officialNotification": "#",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
