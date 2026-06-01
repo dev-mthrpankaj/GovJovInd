@@ -1272,5 +1272,25 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2438",
+        "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
+        "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
+        "department": "Adminstration",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
