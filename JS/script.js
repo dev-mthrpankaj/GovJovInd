@@ -816,6 +816,90 @@ document.querySelectorAll('.ticker-wrap').forEach((ticker) => {
   });
 });
 
+// Telegram floating button widget
+(() => {
+  const TELEGRAM_URL = 'https://t.me/GovJobUpdates_official';
+  const TELEGRAM_BLOCKED = new Set(['rank-predictor.html', 'quiz.html', 'documents.html']);
+
+  function injectTelegramStyle() {
+    if (document.getElementById('gjuTelegramStyle')) return;
+    const style = document.createElement('style');
+    style.id = 'gjuTelegramStyle';
+    style.textContent = `
+      .gju-telegram-widget{position:fixed;left:18px;bottom:92px;z-index:9998;font-family:inherit}
+      .gju-telegram-widget.is-hidden,.gju-telegram-widget.is-footer-visible{display:none!important}
+      .gju-telegram-fab{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:linear-gradient(135deg,#06a3d3,#0077b6);color:#fff;font-weight:900;font-size:14px;box-shadow:0 14px 32px rgba(6,163,211,.28);cursor:pointer;text-decoration:none;overflow:hidden;transition:width .18s ease,padding .18s ease}
+      .gju-telegram-fab i{font-size:18px;display:inline-block;padding:10px}
+      .gju-telegram-fab span{display:inline-block;opacity:0;transform:translateX(-6px);transition:opacity .14s ease .04s,transform .14s ease .04s;margin-right:8px;white-space:nowrap}
+      .gju-telegram-fab{width:52px;padding:0 0;justify-content:center;min-height:46px}
+      .gju-telegram-fab:hover{width:auto;padding:0 16px;justify-content:center}
+      .gju-telegram-fab:hover span{opacity:1;transform:translateX(0)}
+      @media(max-width:640px){.gju-telegram-widget{left:14px;bottom:calc(76px + env(safe-area-inset-bottom))}.gju-telegram-fab{width:52px;height:52px;min-height:52px;padding:0;justify-content:center;border-radius:18px}.gju-telegram-fab span{display:none}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function getPageName() {
+    return decodeURIComponent(window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  }
+
+  function isQuizExamMode() {
+    const examView = document.getElementById('examView');
+    return document.body.classList.contains('gju-quiz-exam-mode') || document.body.classList.contains('quiz-exam-active') || Boolean(examView && !examView.classList.contains('hidden'));
+  }
+
+  function shouldCreateTelegram() {
+    const page = getPageName();
+    if (TELEGRAM_BLOCKED.has(page)) return false;
+    if (document.getElementById('gjuTelegramWidget')) return false;
+    return true;
+  }
+
+  function createTelegramWidget() {
+    injectTelegramStyle();
+    const wrapper = document.createElement('div');
+    wrapper.id = 'gjuTelegramWidget';
+    wrapper.className = 'gju-telegram-widget';
+    wrapper.innerHTML = `<a class="gju-telegram-fab" href="${TELEGRAM_URL}" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram"><i class="fab fa-telegram" aria-hidden="true"></i><span>Join Telegram</span></a>`;
+    document.body.appendChild(wrapper);
+    syncTelegramVisibility(wrapper);
+    hideTelegramInFooter(wrapper);
+    if ('MutationObserver' in window) {
+      const obs = new MutationObserver(() => syncTelegramVisibility(wrapper));
+      obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+    window.addEventListener('resize', () => syncTelegramVisibility(wrapper));
+    return wrapper;
+  }
+
+  function syncTelegramVisibility(widget) {
+    widget.classList.toggle('is-hidden', isQuizExamMode());
+  }
+
+  function hideTelegramInFooter(widget) {
+    const footer = document.querySelector('footer');
+    if (!footer || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      widget.classList.toggle('is-footer-visible', entries.some((entry) => entry.isIntersecting));
+    }, { threshold: 0.01, rootMargin: '0px 0px 80px 0px' });
+    observer.observe(footer);
+  }
+
+  function init() {
+    try {
+      if (!shouldCreateTelegram()) return;
+      createTelegramWidget();
+    } catch (e) {
+      console.error('[GovJobTelegram] init failed', e);
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+// Contact widget loader removed — contact widget is loaded only where explicitly included.
+
 const stats = document.querySelectorAll('.stat-number');
 
 const formatCounterValue = (counter, value, target) => {
