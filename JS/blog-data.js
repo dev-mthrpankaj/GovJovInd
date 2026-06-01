@@ -2,6 +2,15 @@
   const thumbnail = "../Assets/Home%20Page/Government%20Job%20Banner.webp";
 
   window.GOVJOB_BLOGS = [
+    {
+  id: "kanpur-bed-exam-center-mismanagement-report",
+  title: "Kanpur B.Ed Exam Center Mismanagement: नाले में गिरे छात्र, कुप्रबंधन और भ्रष्टाचार की पूरी ग्राउंड रिपोर्ट",
+  category: "State Exams",
+  date: "2026-06-01",
+  image: "../Assets/Home%20Page/b.ed kanpur.avif",
+  url: "student-hub/kanpur-bed-exam-center-mismanagement-report.html",
+  excerpt: "UP B.Ed प्रवेश परीक्षा के दौरान कानपुर में भारी प्रशासनिक लापरवाही और कुप्रबंधन के कारण नाले में गिरे छात्र। पढ़ें ग्राउंड रिपोर्ट, करप्शन एंगल और स्टूडेंट्स की प्रमुख समस्याओं का गहरा विश्लेषण।"
+},
    {
   id: "ssc-gd-exam-malpractice-ground-report",
   title: "SSC GD Pariksha Dhandhli 2026: क्या सच में लीक हुआ पेपर? सॉल्वर गैंग और सेंटर्स की पूरी सच्चाई",
