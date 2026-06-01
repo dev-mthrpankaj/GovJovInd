@@ -932,7 +932,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1865",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-01",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "BPSSC",
             "Bihar Police",
