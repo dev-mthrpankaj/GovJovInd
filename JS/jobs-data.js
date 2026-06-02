@@ -46,7 +46,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-04",
         "lastDate": "2026-06-24",
         "status": "upcoming",
-        "tags": [],
+        "tags": [
+            "UPSSSC",
+            "Exise COnstable",
+            "Police",
+            "Uttar Pradesh",
+            "Sarkari Naukari"
+        ],
         "applyLink": "",
         "officialNotification": "",
         "detailPage": "",
