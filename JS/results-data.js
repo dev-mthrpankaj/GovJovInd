@@ -11,7 +11,7 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2026",
         "resultDate": "2026-05-29",
-        "status": "relesed",
+        "status": "released",
         "tags": [
             "ssc",
             "awo",
@@ -33,9 +33,9 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2026",
         "resultDate": "2026-05-29",
-        "status": "active",
+        "status": "released",
         "tags": [],
-        "resultLink": "",
+        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98076/login.html",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
@@ -75,7 +75,7 @@ window.GovJobUpdatesResults = [
             "Sachiv Grade-II",
             "Final Result"
         ],
-        "resultLink": "http://upsssc.gov.in",
+        "resultLink": "https://upsssc.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3001.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
@@ -95,7 +95,7 @@ window.GovJobUpdatesResults = [
             "Forest Guard",
             "PET"
         ],
-        "resultLink": "http://upsssc.gov.in/",
+        "resultLink": "https://upsssc.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3002.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
