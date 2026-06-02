@@ -35,6 +35,26 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no"
     },
     {
+        "id": "2440",
+        "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "Administration",
+        "category": "StateGovernment",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "772",
+        "startDate": "2026-06-04",
+        "lastDate": "2026-06-24",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2437",
         "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
         "organization": "Allahabad High Court",
@@ -1326,26 +1346,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2440",
-        "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
