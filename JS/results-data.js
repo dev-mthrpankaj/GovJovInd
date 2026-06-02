@@ -624,5 +624,21 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "result-sheet-34",
+        "title": "Railway RRB Paramedical Result 2026 | CEN 03/2025",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "resultDate": "",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
