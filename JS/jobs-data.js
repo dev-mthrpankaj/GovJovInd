@@ -28,11 +28,11 @@ window.GovJobUpdatesJobs = [
             "DSSSB Recruitment 2026 Notification PDF"
         ],
         "applyLink": "https://dsssbonline.nic.in/",
-        "officialNotification": "#",
+        "officialNotification": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/final_advt-03-2026_1.pdf",
         "detailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979- 2026.html",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "updatedAt": "2026-06-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "2440",
