@@ -4,6 +4,22 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1002",
+        "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
+        "organization": "Railway Recuitment Board",
+        "department": "RRB",
+        "category": "Result",
+        "year": "",
+        "resultDate": "2026-05-30",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1000",
         "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
         "organization": "Staff Selection Commission",
@@ -644,22 +660,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "result-sheet-35",
-        "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
-        "organization": "Railway Recuitment Board",
-        "department": "RRB",
-        "category": "Result",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
