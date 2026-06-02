@@ -27,6 +27,22 @@ window.GovJobUpdatesResults = [
         "telegramReady": "no"
     },
     {
+        "id": "1003",
+        "title": "UP PGT 2026 Exam Result",
+        "organization": "UP Secondary Education Service Selection Board",
+        "department": "UPESSB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-02",
+        "status": "released",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1000",
         "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
         "organization": "Staff Selection Commission",
@@ -667,22 +683,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "1003",
-        "title": "UP PGT 2026 Exam Result",
-        "organization": "UP Secondary Education Service Selection Board",
-        "department": "",
-        "category": "",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
