@@ -29,7 +29,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://dsssbonline.nic.in/",
         "officialNotification": "#",
-        "detailPage": "",
+        "detailPage": "DSSSB Various Post Online Form 2026 for 1979 Post",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
