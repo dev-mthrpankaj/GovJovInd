@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "coaching-sealed-exampur-up-student-protest-report",
+  title: "Coaching Sealed Exampur News: क्या यूपी में छात्रों का विरोध दबाया जा रहा है? जानें पूरी सच्चाई",
+  category: "State",
+  date: "2026-06-02",
+  image: "../Assets/Home%20Page/1780306097901-prayagraj-coaching-centers.webp",
+  url: "student-hub/coaching-sealed-exampur-up-student-protest-report.html",
+  excerpt: "एग्जामपुर समेत कई बड़ी कोचिंगों पर प्रशासनिक ताले और यूपी में छात्र आंदोलनों को रोकने के लिए प्रशासनिक रणनीतियों का विस्तृत विश्लेषण। जानें पिछले रिकॉर्ड्स और प्रतियोगी छात्रों के अधिकार।"
+},
+    {
   id: "up-police-constable-last-10-days-exam-strategy",
   title: "UP Police Constable Last 10 Days Exam Strategy: आखिरी दिनों की अचूक रणनीति और माइंडसेट",
   category: "Career Guidance",
