@@ -53,9 +53,9 @@ window.GovJobUpdatesJobs = [
             "Uttar Pradesh",
             "Sarkari Naukari"
         ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
+        "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?YZU401HhdRlnlrDYvh3AOvDVEFsrgFoVeB0byWs3ePs=",
+        "detailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
