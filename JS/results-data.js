@@ -34,7 +34,13 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-05-29",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "Railway",
+            "RRB",
+            "Paramedical",
+            "CEN 03/2025",
+            "Result"
+        ],
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98076/login.html",
         "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
         "updatedAt": "2026-05-29",
@@ -638,6 +644,22 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "result-sheet-35",
+        "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
+        "organization": "Railway Recuitment Board",
+        "department": "RRB",
+        "category": "Result",
+        "year": "",
+        "resultDate": "",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
