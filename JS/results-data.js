@@ -669,5 +669,21 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "1003",
+        "title": "UP PGT 2026 Exam Result",
+        "organization": "UP Secondary Education Service Selection Board",
+        "department": "",
+        "category": "",
+        "year": "",
+        "resultDate": "",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
