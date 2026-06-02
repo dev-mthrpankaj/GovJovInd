@@ -7,7 +7,7 @@ window.GovJobUpdatesJobs = [
         "id": "2438",
         "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
         "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
-        "department": "Adminstration",
+        "department": "Administration",
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -16,16 +16,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-15",
         "status": "upcoming",
         "tags": [
-            "DSSSB Various Post Recruitment 2026",
-            "DSSSB 03/2026 Notification",
-            "Delhi DSSSB 1979 Posts Vacancy",
-            "DSSSB Various Post Online Form 2026",
-            "DSSSB TGT Computer Science Recruitment",
-            "DSSSB Special Educator Primary Vacancy",
-            "dsssbonline.nic.in Apply Online",
-            "Delhi Govt Jobs 2026",
-            "DSSSB Junior Scientific Assistant Form",
-            "DSSSB Recruitment 2026 Notification PDF"
+            "Delhi Subordinate Services Selection Board (DSSSB) Recruitment 2026",
+            "DSSSB Various Post",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://dsssbonline.nic.in/",
         "officialNotification": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/final_advt-03-2026_1.pdf",
@@ -38,8 +33,8 @@ window.GovJobUpdatesJobs = [
         "id": "2440",
         "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Administration",
-        "category": "StateGovernment",
+        "department": "Excise",
+        "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "772",
@@ -47,11 +42,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-24",
         "status": "upcoming",
         "tags": [
-            "UPSSSC",
-            "Exise COnstable",
-            "Police",
-            "Uttar Pradesh",
-            "Sarkari Naukari"
+            "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
+            "UPSSSC Excise Constable",
+            "Sarkari Naukri",
+            "StateGovernment Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?YZU401HhdRlnlrDYvh3AOvDVEFsrgFoVeB0byWs3ePs=",
@@ -73,16 +68,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-20",
         "status": "upcoming",
         "tags": [
-            "Allahabad High Court RO ARO Recruitment 2026",
-            "AHC RO ARO CA Notification 2026",
-            "Allahabad High Court Vacancy 2026",
-            "AHC Review Officer Online Form",
-            "Allahabad High Court Assistant Review Officer 2026",
-            "AHC Computer Assistant Vacancy 2026",
-            "NTA Allahabad High Court Recruitment",
-            "AHC RO ARO 543 Posts",
-            "Allahabad High Court Notification PDF",
-            "AHC RO ARO Apply Online 2026"
+            "Allahabad High Court Recruitment 2026",
+            "Allahabad High Court RO / ARO / CA",
+            "Sarkari Naukri",
+            "Judiciary Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://www.allahabadhighcourt.in/event/event_25857_01-06-2026.pdf",
@@ -95,7 +85,7 @@ window.GovJobUpdatesJobs = [
         "id": "2439",
         "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
         "organization": "Jharkhand Staff Selection Comission",
-        "department": "Adminstration",
+        "department": "Technical",
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -104,10 +94,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-30",
         "status": "active",
         "tags": [
-            "JSSC",
-            "CGL",
-            "SSC",
-            "GRADUATE"
+            "Jharkhand Staff Selection Comission Recruitment 2026",
+            "JSSC CGL Technician",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "http://jssc.nic.in/",
         "officialNotification": "https://jssc.jharkhand.gov.in/sites/default/files/JTGLCCE-2026%20Brochure%20(Regular%20Vacancy).pdf",
@@ -129,9 +120,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-31",
         "status": "closed",
         "tags": [
-            "bpsc",
-            "bihar",
-            "administration"
+            "Bihar Public Service Commission Recruitment 2026",
+            "BPSC 72nd Pre",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-Integrated-72th-CCE-PT_BPSC-20260505-p1euvo.pdf",
@@ -153,20 +146,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-04",
         "status": "upcoming",
         "tags": [
-            "BSNL JTO Recruitment 2026",
-            "BSNL Junior Telecom Officer",
-            "BSNL JTO Notification",
-            "Sarkari Naukri 2026",
-            "Govt Jobs for Engineers",
-            "PSU Jobs 2026",
-            "BTech Telecom Jobs",
-            "ECE Govt Jobs",
-            "CSE Govt Jobs",
-            "BSNL JTO Syllabus",
-            "BSNL JTO Salary",
-            "BSNL JTO Apply Online",
-            "Engineering Government Jobs",
-            "Central Govt Jobs 2026"
+            "Bharat Sanchar Nigam Limited Recruitment 2026",
+            "BSNL Junior Telecom Officer JTO",
+            "Sarkari Naukri",
+            "Public Sector Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
@@ -188,9 +172,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "BSNL",
-            "Senior Executive Trainee",
-            "Telecom"
+            "Bharat Sanchar Nigam Limited Recruitment 2026",
+            "BSNL Senior Executive Trainee",
+            "Sarkari Naukri",
+            "Public Sector Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://bsnlregistration.ibtexamination.com/",
         "officialNotification": "https://bsnl.co.in/documents/jobs/SET_Notification_29012026.pdf",
@@ -212,9 +198,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-18",
         "status": "active",
         "tags": [
-            "upsssc",
-            "lower pcs",
-            "uttar pradesh"
+            "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
+            "UPSSSC Lower PCS",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?HA04nYKkgpncofLRuXT6k7Np5V3U8T3Cr2bvb1DZAsc=",
@@ -236,9 +224,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-03",
         "status": "upcoming",
         "tags": [
-            "bsnl",
-            "telecom",
-            "JTO"
+            "Bharat Sanchar Nigam Limited Recruitment 2026",
+            "BSNL Junior Telecom Officer JTO",
+            "Sarkari Naukri",
+            "Public Sector Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
@@ -251,7 +241,7 @@ window.GovJobUpdatesJobs = [
         "id": "2432",
         "title": "RPSC RAS Pre Recruitment 2026",
         "organization": "Rajasthan Public Service Commision",
-        "department": "Adminstration",
+        "department": "Administration",
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -260,8 +250,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-03",
         "status": "upcoming",
         "tags": [
-            "rpsc",
-            "rajashthan"
+            "Rajasthan Public Service Commision Recruitment 2026",
+            "RPSC RAS Pre",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
@@ -274,7 +267,7 @@ window.GovJobUpdatesJobs = [
         "id": "2433",
         "title": "RPSC APO Recruitment 2026",
         "organization": "Rajasthan Public Service Commision",
-        "department": "Adminstration",
+        "department": "Law/Judiciary",
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -283,8 +276,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-07",
         "status": "upcoming",
         "tags": [
-            "rpsc",
-            "rajashthan"
+            "Rajasthan Public Service Commision Recruitment 2026",
+            "RPSC APO",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/3ABD11DA80374279A39F1BF78AAB0950.pdf",
@@ -298,7 +294,7 @@ window.GovJobUpdatesJobs = [
         "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
         "organization": "Railway Recruitment Board",
         "department": "Railway",
-        "category": "Central Government",
+        "category": "Railway",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "6565",
@@ -306,9 +302,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-29",
         "status": "upcoming",
         "tags": [
-            "railway",
-            "technician",
-            "rrb"
+            "Railway Recruitment Board Recruitment 2026",
+            "Railway RRB Technician",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
@@ -322,7 +320,7 @@ window.GovJobUpdatesJobs = [
         "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
         "organization": "Rajasthan Staff Selection Board",
         "department": "Education",
-        "category": "State Government",
+        "category": "Teaching",
         "year": "2026",
         "qualification": "Graduate and Masters (View Details for More Information)",
         "totalPosts": "3951",
@@ -330,11 +328,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-23",
         "status": "active",
         "tags": [
-            "Education",
-            "Rajsthan",
-            "Teacher",
-            "RPSC",
-            "Computer"
+            "Rajasthan Staff Selection Board Recruitment 2026",
+            "RSSB Computer Instructor",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
@@ -356,9 +354,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-10",
         "status": "active",
         "tags": [
-            "almunium",
-            "Public Sector",
-            "Metal"
+            "National Aluminium Company Limited Recruitment 2026",
+            "NALCO Non Executive",
+            "Sarkari Naukri",
+            "Public Sector Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://recruitment.nhidcl.com/login",
         "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
@@ -371,7 +371,7 @@ window.GovJobUpdatesJobs = [
         "id": "2429",
         "title": "EDCIL Various Post Online Form 2026 for 879 Post",
         "organization": "EDCIL India Limited",
-        "department": "Medical Education",
+        "department": "Education",
         "category": "Central Government",
         "year": "2026",
         "qualification": "10+2 (View Details for more Information)",
@@ -380,8 +380,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-04",
         "status": "active",
         "tags": [
-            "Medical",
-            "Physiotherapy"
+            "EDCIL India Limited Recruitment 2026",
+            "EDCIL Various Post",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://tsgrecruitment.edcil.co.in/login",
         "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
@@ -395,7 +398,7 @@ window.GovJobUpdatesJobs = [
         "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
         "organization": "Join Indian Navy",
         "department": "Defence",
-        "category": "Central Government",
+        "category": "Defence",
         "year": "2026",
         "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
         "totalPosts": "60",
@@ -403,9 +406,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-18",
         "status": "active",
         "tags": [
-            "Navy",
-            "Defence",
-            "Indian Army"
+            "Join Indian Navy Recruitment 2026",
+            "Indian Navy 10+2 B.Tech Cadet Entry",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
         "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
@@ -418,7 +423,7 @@ window.GovJobUpdatesJobs = [
         "id": "2425",
         "title": "State Government",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Engineering",
+        "department": "Agriculture",
         "category": "State Government",
         "year": "2026",
         "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
@@ -427,9 +432,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-11",
         "status": "active",
         "tags": [
-            "Engineering",
-            "Assistant",
-            "UPSSSC"
+            "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
+            "State Government",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
@@ -451,9 +458,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-06",
         "status": "active",
         "tags": [
-            "Banking",
-            "Punjab and Singh Bank",
-            "IBPS"
+            "Punjab and Sindh Bank Recruitment 2026",
+            "Punjab & Sindh Bank Apprentice",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
         "officialNotification": "",
@@ -467,7 +476,7 @@ window.GovJobUpdatesJobs = [
         "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
         "organization": "Rajasthan Public Service Commission",
         "department": "Education",
-        "category": "State Government",
+        "category": "Teaching",
         "year": "2026",
         "qualification": "Post Graduation (View Details for more Information)",
         "totalPosts": "121",
@@ -475,10 +484,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-30",
         "status": "active",
         "tags": [
-            "Education",
-            "Rajsthan",
-            "Teacher",
-            "RPSC"
+            "Rajasthan Public Service Commission Recruitment 2026",
+            "RPSC School Lecturer Special Education",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
@@ -492,7 +502,7 @@ window.GovJobUpdatesJobs = [
         "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
         "organization": "High Court of Punjab and Haryana SSSC",
         "department": "Judiciary",
-        "category": "State Government",
+        "category": "Judiciary",
         "year": "2026",
         "qualification": "Graduation (View Details for more Information)",
         "totalPosts": "1265",
@@ -500,10 +510,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-23",
         "status": "active",
         "tags": [
-            "Judiciary",
-            "Punjab",
-            "Haryana",
-            "Chandigarh"
+            "High Court of Punjab and Haryana SSSC Recruitment 2026",
+            "Punjab and Haryana High Court Clerk",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://cdn3.digialm.com/EForms/configuredHtml/32046/96555/Registration.html",
         "officialNotification": "https://sssc.gov.in/storage/notices/haryana%20clerk%2036C.pdf",
@@ -516,8 +527,8 @@ window.GovJobUpdatesJobs = [
         "id": "2418",
         "title": "AFCAT 02/2026 Online Form",
         "organization": "Indian Air Force",
-        "department": "IAF",
-        "category": "Central Government",
+        "department": "Defence",
+        "category": "Defence",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "361",
@@ -525,9 +536,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-19",
         "status": "active",
         "tags": [
-            "Indian Air Force",
-            "VayuSena",
-            "IAF"
+            "Indian Air Force Recruitment 2026",
+            "AFCAT 02/2026",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
@@ -541,7 +554,7 @@ window.GovJobUpdatesJobs = [
         "title": "SSC CGL 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
-        "category": "Central Government",
+        "category": "Staff Selection",
         "year": "2026",
         "qualification": "Graduation (View Details for more Information)",
         "totalPosts": "approx. 12256",
@@ -549,10 +562,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-22",
         "status": "active",
         "tags": [
-            "SSC",
-            "Income Tax",
-            "Revenue",
-            "Excise"
+            "Staff Selection Commission Recruitment 2026",
+            "SSC CGL 2026",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ssc.gov.in/",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
@@ -565,7 +579,7 @@ window.GovJobUpdatesJobs = [
         "id": "2417",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
-        "department": "CSIR",
+        "department": "Research",
         "category": "Central Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -574,9 +588,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-18",
         "status": "active",
         "tags": [
-            "Scientist",
-            "Central",
-            "ITI"
+            "Council of Scientific & Industrial Research Recruitment 2026",
+            "CSIR CIMFR Technician/Grade II",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
@@ -590,7 +606,7 @@ window.GovJobUpdatesJobs = [
         "title": "UPSC NDA II Online Form 2026 for 394 Post",
         "organization": "Union Public Service Commission",
         "department": "Defence",
-        "category": "Central Government",
+        "category": "Defence",
         "year": "2026",
         "qualification": "10+2 (View Details for more Information)",
         "totalPosts": "394",
@@ -598,10 +614,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-09",
         "status": "active",
         "tags": [
-            "NDA",
-            "Indian Army",
-            "UPSC",
-            "Defence"
+            "Union Public Service Commission Recruitment 2026",
+            "UPSC NDA II",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
@@ -615,7 +632,7 @@ window.GovJobUpdatesJobs = [
         "title": "UPSC CDS II Online Form 2026 for 451 Post",
         "organization": "Union Public Service Commission",
         "department": "Defence",
-        "category": "Central Government",
+        "category": "Defence",
         "year": "2026",
         "qualification": "Graduation (View Details for more Information)",
         "totalPosts": "451",
@@ -623,10 +640,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-09",
         "status": "active",
         "tags": [
-            "CDS",
-            "Defence",
-            "Indian Army",
-            "UPSC"
+            "Union Public Service Commission Recruitment 2026",
+            "UPSC CDS II",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
@@ -639,7 +657,7 @@ window.GovJobUpdatesJobs = [
         "id": "2415",
         "title": "BTSC Laboratory Assistant Online Form 2026 for 1090 Post",
         "organization": "Bihar Technichal Service Commision",
-        "department": "BTSC",
+        "department": "Technical",
         "category": "State Government",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -648,9 +666,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-06",
         "status": "closed",
         "tags": [
-            "BTSC",
-            "Laboratory Assistant",
-            "Bihar"
+            "Bihar Technichal Service Commision Recruitment 2026",
+            "BTSC Laboratory Assistant",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
@@ -663,7 +683,7 @@ window.GovJobUpdatesJobs = [
         "id": "2416",
         "title": "NTPC Assistant Executive Online Form 2026 for 250 Post",
         "organization": "NTPC",
-        "department": "NTPC",
+        "department": "Power",
         "category": "Public Sector",
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
@@ -672,9 +692,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-07",
         "status": "closed",
         "tags": [
-            "NTPC",
-            "Engineering",
-            "Assistant"
+            "NTPC Recruitment 2026",
+            "NTPC Assistant Executive",
+            "Sarkari Naukri",
+            "Public Sector Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/index.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
@@ -696,9 +718,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-03",
         "status": "active",
         "tags": [
-            "RSSB",
-            "Rajasthan",
-            "Teaching"
+            "Rajasthan Staff Selection Board Recruitment 2026",
+            "Rajasthan RSSB Teaching Associate",
+            "Sarkari Naukri",
+            "Teaching Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1777546753.pdf",
@@ -720,9 +744,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-19",
         "status": "closed",
         "tags": [
-            "CRPF",
-            "Constable",
-            "Tradesman"
+            "Central Reserve Police Force Recruitment 2026",
+            "CRPF Constable Tradesman",
+            "Sarkari Naukri",
+            "Defence Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://recruitment.crpf.gov.in/login",
         "officialNotification": "https://rect.crpf.gov.in/Upload/Recruitment/Recruitment%20Notice%20103042026-720.pdf",
@@ -744,9 +770,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-14",
         "status": "active",
         "tags": [
-            "RRB",
-            "ALP",
-            "Railway"
+            "Railway Recruitment Board Recruitment 2026",
+            "Railway RRB ALP",
+            "Sarkari Naukri",
+            "Railway Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
@@ -768,9 +796,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-03",
         "status": "closed",
         "tags": [
-            "MPESB",
-            "Nursing Officer",
-            "Sister Tutor"
+            "Madhya Pradesh Employee Selection Board Recruitment 2026",
+            "MPESB Nursing Officer / Sister Tutor",
+            "Sarkari Naukri",
+            "Health Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Health_Nursing_2026RuleBook02_04_2026.pdf",
@@ -792,9 +822,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-21",
         "status": "closed",
         "tags": [
-            "MPESB",
-            "Hospital Assistant",
-            "Health"
+            "Madhya Pradesh Employee Selection Board Recruitment 2026",
+            "MPESB Hospital Assistant",
+            "Sarkari Naukri",
+            "Health Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Hospital_Assistant_rulebook_2026_30042026.pdf",
@@ -816,9 +848,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "MPESB",
-            "Van Rakshak",
-            "Jail Prahari"
+            "Madhya Pradesh Employee Selection Board Recruitment 2026",
+            "MPESB Van Rakshak / Jail Prahari",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/JAIL_VAN_2026_RuleBook_Updated_PAGES_16042026.pdf",
@@ -840,9 +874,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "BPSC",
-            "Judicial Services",
-            "Bihar"
+            "Bihar Public Service Commission Recruitment 2026",
+            "Bihar BPSC 33rd Judicial Services",
+            "Sarkari Naukri",
+            "State PSC Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-122026-33rd-BJSE_BPSC-20260223-82eskn.pdf",
@@ -864,9 +900,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "Patna High Court",
-            "Technical Assistant",
-            "Bihar"
+            "Patna High Court Recruitment 2026",
+            "Patna High Court Technical Assistant",
+            "Sarkari Naukri",
+            "Judiciary Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://phc-recruitment.com/",
         "officialNotification": "https://patnahighcourt.gov.in/getfile/MTA0NTQ=-q0vlRLd1RTE=",
@@ -888,9 +926,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "NPCIL",
-            "Executive Trainee",
-            "PSU"
+            "Nuclear Power Corporation of India Limited Recruitment 2026",
+            "NPCIL Executive Trainee",
+            "Sarkari Naukri",
+            "Public Sector Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://www.npcilcareers.co.in/ETHQ10042026/candidate/default.aspx",
         "officialNotification": "https://www.npcilcareers.co.in/ETHQ10042026/documents/advt.pdf",
@@ -912,9 +952,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "BCECE",
-            "Senior Resident",
-            "Tutor"
+            "Bihar Combined Entrance Competitive Examination Board Recruitment 2026",
+            "Bihar BCECE Senior Resident / Tutor",
+            "Sarkari Naukri",
+            "Health Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://admissions.nic.in/Bihar/Applicant/Root/OTHome.aspx?enc=k5U5Gp8NR6abhZ8Lld4oWvvSsCkKcG+Kcizck0pVdCvJE10jNAB9fCwdCq9SngLzv5wfQK8DbPTS5JsnelmH5g==",
         "officialNotification": "https://bceceboard.bihar.gov.in/pdf_Adv/ADV_SR26_01.pdf",
@@ -936,9 +978,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-04-30",
         "status": "closed",
         "tags": [
-            "LIC HFL",
-            "Junior Assistant",
-            "Banking"
+            "LIC Housing Finance Limited Recruitment 2026",
+            "LIC HFL Junior Assistant",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ibpsreg.ibps.in/licjamar26/",
         "officialNotification": "https://cdn.lichousing.com/2026/04/Detailed-Advertisement-Recruitment-of-Junior-Assistants-2026.pdf",
@@ -960,9 +1004,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-06-01",
         "status": "closed",
         "tags": [
-            "BPSSC",
-            "Bihar Police",
-            "Havildar Instructor"
+            "Bihar Police Subordinate Services Commission Recruitment 2026",
+            "BPSSC Bihar Police Havildar Instructor",
+            "Sarkari Naukri",
+            "Police Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://apply-bpssc.com/bpssc_havr_clerk_5_26_v1/applicationIndex",
         "officialNotification": "https://bpssc.bihar.gov.in/Notices/Advt.%20no.-05-2026.pdf",
@@ -984,9 +1030,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-19",
         "status": "closed",
         "tags": [
-            "Union Bank",
-            "Apprentice",
-            "Banking"
+            "Union Bank of India Recruitment 2026",
+            "Union Bank of India Apprentice",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
         "officialNotification": "https://www.unionbankofindia.bank.in/pdf/notification-final-1865-april26.pdf",
@@ -1008,9 +1056,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-03",
         "status": "closed",
         "tags": [
+            "Uttar Pradesh Exam Regulatory Authority Recruitment 2026",
             "UPTET",
-            "Teacher Eligibility",
-            "UP"
+            "Sarkari Naukri",
+            "Teaching Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://uptet.upessc.org/otr/",
         "officialNotification": "https://www.upessc.up.gov.in/Notice/334a-b177-4450-4fbc-98be.pdf",
@@ -1032,9 +1082,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-18",
         "status": "closed",
         "tags": [
-            "Bihar",
-            "CET B.Ed",
-            "Education"
+            "Bihar CET B.Ed Recruitment 2026",
+            "Bihar CET B.Ed",
+            "Sarkari Naukri",
+            "Education Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://cetbed.ucanapply.com/univer/public/secure?app_id=UElZMDAwMDEwMA==",
         "officialNotification": "https://d1fij890xi0cmd.cloudfront.net/ums/cetbed-brabu/2026/notices/1777289328_prospectus-cet-bed2026.pdf",
@@ -1056,9 +1108,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-20",
         "status": "closed",
         "tags": [
-            "RBI",
-            "Grade B",
-            "Officer"
+            "Reserve Bank of India Recruitment 2026",
+            "RBI Officer Grade-B",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ibpsreg.ibps.in/rbisbmar26/",
         "officialNotification": "https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DEPR29042026BE94DEA85E3C4753A82B191EB6A795ED.PDF",
@@ -1080,9 +1134,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-30",
         "status": "closed",
         "tags": [
-            "UPESSC",
-            "Assistant Professor",
-            "B.Ed"
+            "Uttar Pradesh Education Service Selection Commission Recruitment 2025",
+            "UPESSC Assistant Professor B.Ed",
+            "Sarkari Naukri",
+            "Teaching Jobs",
+            "Govt Jobs 2025"
         ],
         "applyLink": "https://bed.upessc.org/otr/",
         "officialNotification": "https://upessc.up.gov.in/Advertisment/462d7ee7-86da-4c19-80cf-877e0c787c50.pdf",
@@ -1104,9 +1160,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-08",
         "status": "closed",
         "tags": [
-            "MPPSC",
-            "ADPO",
-            "Madhya Pradesh"
+            "Madhya Pradesh Public Service Commission Recruitment 2026",
+            "MPPSC ADPO",
+            "Sarkari Naukri",
+            "State PSC Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/PO26/Declaration.aspx",
         "officialNotification": "https://mppsc.mp.gov.in/uploads/advertisement/Advt_ADPO_Exam_2026_Dated_10_03_2026.pdf",
@@ -1128,9 +1186,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-09",
         "status": "upcoming",
         "tags": [
-            "UPSSSC",
-            "Havildar Instructor",
-            "UP"
+            "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
+            "UPSSSC Havildar Instructor",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?DnnJcRACgDWbxJiEHVQZfB4I2Z6BHMLb+KVay71xLuw=",
@@ -1152,9 +1212,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-16",
         "status": "closed",
         "tags": [
+            "Uttar Pradesh Anganwadi Recruitment 2026",
             "UP Anganwadi",
-            "Bharti",
-            "UP"
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upanganwadibharti.in/",
         "officialNotification": "https://upanganwadibharti.in/",
@@ -1176,9 +1238,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-15",
         "status": "closed",
         "tags": [
-            "UP Cooperative Bank",
-            "Banking",
-            "Various Post"
+            "Uttar Pradesh Cooperative Institution Service Board Recruitment 2026",
+            "UP Cooperative Bank Various Post",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ibpsreg.ibps.in/upcisbfeb26/",
         "officialNotification": "https://upcisb.upsdc.gov.in/Content/A.1_S.R_2026_English.pdf",
@@ -1200,9 +1264,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-15",
         "status": "closed",
         "tags": [
-            "SSC",
-            "Stenographer",
-            "Grade C D"
+            "Staff Selection Commission Recruitment 2026",
+            "SSC Stenographer",
+            "Sarkari Naukri",
+            "Staff Selection Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ssc.gov.in/login",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_steno_2026.pdf",
@@ -1224,9 +1290,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-04",
         "status": "closed",
         "tags": [
-            "SSC",
-            "Selection Phase",
-            "Phase 14"
+            "Staff Selection Commission Recruitment 2026",
+            "SSC Selection Phase 14",
+            "Sarkari Naukri",
+            "Staff Selection Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ssc.gov.in/login",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_RHQ_2026_phase_xiv.pdf",
@@ -1248,9 +1316,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-14",
         "status": "closed",
         "tags": [
-            "SSC",
-            "JHT",
-            "Translator"
+            "Staff Selection Commission Recruitment 2026",
+            "SSC JHT",
+            "Sarkari Naukri",
+            "Staff Selection Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://ssc.gov.in/login",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cht_2026.pdf",
@@ -1272,9 +1342,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-04",
         "status": "closed",
         "tags": [
-            "SSB",
-            "Constable",
-            "Tradesman"
+            "Sashastra Seema Bal Recruitment 2026",
+            "SSB Constable Tradesman",
+            "Sarkari Naukri",
+            "Defence Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://applyssb.com/SSB_CT_25/applicationIndex",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/03/RNoti_210326_125417.pdf",
@@ -1296,9 +1368,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-15",
         "status": "closed",
         "tags": [
-            "UPSSSC",
-            "ASO",
-            "Assistant Statistical Officer"
+            "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
+            "UPSSSC Assistant Statistical Officer ASO",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?C3EutJadcl32074LCUjboR7E3HN9UhHGFlls4qSunh0=",
@@ -1320,9 +1394,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-05-10",
         "status": "closed",
         "tags": [
-            "PSPCL",
-            "Junior Engineer",
-            "Electrical"
+            "Punjab State Power Corporation Limited Recruitment 2026",
+            "Punjab PSPCL JE Electrical",
+            "Sarkari Naukri",
+            "Engineering Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "https://recruitment.pspcl.in/",
         "officialNotification": "https://www.pspcl.in/media/Advertisement_of_CRA_316-26_JE_Electrical_final_13042026.pdf",
@@ -1344,9 +1420,11 @@ window.GovJobUpdatesJobs = [
         "lastDate": "2026-07-20",
         "status": "active",
         "tags": [
-            "UPSSSC",
-            "Forest Guard",
-            "Wildlife Guard"
+            "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
+            "UPSSSC Forest Guard / Wildlife Guard",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
         ],
         "applyLink": "#",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
