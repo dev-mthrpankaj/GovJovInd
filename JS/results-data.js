@@ -26,6 +26,22 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes"
     },
     {
+        "id": "1001",
+        "title": "Railway RRB Paramedical Result 2026 | CEN 03/2025",
+        "organization": "Railway Recuitment Board",
+        "department": "RRB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-05-29",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "result-3031",
         "title": "SSC Delhi Police Constable Executive Exam Result 2025",
         "organization": "Staff Selection Commission",
@@ -622,22 +638,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "1001",
-        "title": "Railway RRB Paramedical Result 2026 | CEN 03/2025",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
