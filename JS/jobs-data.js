@@ -29,7 +29,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://dsssbonline.nic.in/",
         "officialNotification": "#",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979- 2026.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
