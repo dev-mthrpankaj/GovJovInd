@@ -108,6 +108,26 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2441",
+        "title": "UKSSSC AAO Online Form 2026 for 90 Post",
+        "organization": "Uttarakhand Subordinate Service Selection Commission",
+        "department": "",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "90",
+        "startDate": "2026-06-01",
+        "lastDate": "2026-06-21",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ukssscrecruitment.in/",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2435",
         "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
         "organization": "Bihar Public Service Commission",
@@ -1430,26 +1450,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "job-sheet-57",
-        "title": "UKSSSC AAO Online Form 2026 for 90 Post",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
