@@ -105,7 +105,7 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98076/login.html",
-        "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
+        "detailPage": "../Job_Details/HTML/#1001-Railway-RRB-Paramedical-2026.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
         "telegramReady": "yes"
