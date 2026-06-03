@@ -1462,7 +1462,7 @@ window.GovJobUpdatesJobs = [
     {
         "id": "2442",
         "title": "DRDO RAC Scientist Online Form 2026",
-        "organization": "",
+        "organization": "Defence Research & Development Organization (DRDO RAC)",
         "department": "",
         "category": "",
         "year": "",
