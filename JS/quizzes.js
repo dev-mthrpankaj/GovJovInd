@@ -444,8 +444,37 @@
         setText(elements.quizSearchMeta, text);
     }
 
+    async function requireFirebaseAuth() {
+        if (!window.GJU_FIREBASE_CONFIG || typeof window.GJU_FIREBASE_CONFIG !== "object") {
+            return false;
+        }
+
+        try {
+            const [{ initializeApp, getApps }, { getAuth, onAuthStateChanged }] = await Promise.all([
+                import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),
+                import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js')
+            ]);
+            const app = getApps().length ? getApps()[0] : initializeApp(window.GJU_FIREBASE_CONFIG);
+            const auth = getAuth(app);
+            const user = await new Promise((resolve) => {
+                const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+                    unsubscribe();
+                    resolve(firebaseUser);
+                });
+            });
+            if (user) return true;
+        } catch (error) {
+            console.warn("[GJU Quizzes] Auth check failed:", error);
+        }
+
+        window.alert("Quiz attempt karne ke liye kripya pehle Login karein.");
+        window.location.href = "login.html";
+        return false;
+    }
+
     async function startQuiz(quizId, forceNew = false) {
         if (state.isLoading) return;
+        if (!(await requireFirebaseAuth())) return;
         const meta = registry.getQuizById(quizId);
         if (!meta) return;
 

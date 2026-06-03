@@ -128,30 +128,34 @@
         firebaseImportPromise = Promise.all([
             import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),
             import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js'),
-            import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js')
-        ]).then(([appMod, authMod, firestoreMod]) => ({ appMod, authMod, firestoreMod }));
+            import('https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js')
+        ]).then(([appMod, authMod, databaseMod]) => ({ appMod, authMod, databaseMod }));
         return firebaseImportPromise;
     }
 
-    async function syncAttemptToFirestore(attempt) {
+    async function syncAttemptToRealtimeDb(attempt) {
         const config = window.GJU_FIREBASE_CONFIG;
         if (!config || !config.apiKey || !attempt) return;
         try {
-            const { appMod, authMod, firestoreMod } = await getFirebaseModules();
+            const { appMod, authMod, databaseMod } = await getFirebaseModules();
             const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(config);
             const auth = authMod.getAuth(app);
             const user = auth.currentUser;
             if (!user) return;
-            const db = firestoreMod.getFirestore(app);
+            const db = databaseMod.getDatabase(app);
             const safeAttempt = toSafeAttempt(attempt);
-            const docRef = firestoreMod.doc(db, 'users', user.uid, 'quizAttempts', safeAttempt.id);
-            await firestoreMod.setDoc(docRef, {
-                ...safeAttempt,
-                userId: user.uid,
-                userEmail: user.email || '',
-                updatedAt: firestoreMod.serverTimestamp()
-            }, { merge: true });
-            window.dispatchEvent(new CustomEvent('gju:quiz-attempt-synced', { detail: { attemptId: safeAttempt.id } }));
+            const quizKey = String(safeAttempt.quizId || '').replace(/[.#$\[\]\/]/g, '-');
+            const attemptRef = databaseMod.ref(db, `user_quiz_attempts/${user.uid}/${quizKey}`);
+            await databaseMod.update(attemptRef, {
+                quizTitle: safeAttempt.quizTitle,
+                subject: safeAttempt.subject,
+                score: safeAttempt.score,
+                totalQuestions: safeAttempt.totalQuestions,
+                correct: safeAttempt.correct,
+                wrong: safeAttempt.wrong,
+                lastAttemptedAt: databaseMod.serverTimestamp()
+            });
+            window.dispatchEvent(new CustomEvent('gju:quiz-attempt-synced', { detail: { attemptId: safeAttempt.id, quizId: safeAttempt.quizId } }));
         } catch (error) {
             console.warn('[GovJobUpdates] Quiz Firebase sync skipped:', error.message);
         }
@@ -163,7 +167,7 @@
         const syncKey = getAttemptDocId(latest);
         if (!syncKey || syncKey === lastSyncedAttemptKey) return;
         lastSyncedAttemptKey = syncKey;
-        scheduleIdle(() => syncAttemptToFirestore(latest));
+        scheduleIdle(() => syncAttemptToRealtimeDb(latest));
     }
 
     function write(key, value) {
