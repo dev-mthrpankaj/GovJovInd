@@ -42,7 +42,7 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
         "detailPage": "../Job_Details/HTML/1003-UP-PGT-2026.html",
-        "updatedAt": "",
+        "updatedAt": "2026-06-02",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
@@ -62,9 +62,9 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=149&Result_Type=P&Exam_Code=5&Advt_Code=570&Dept_Code=563&Post_Code=1&OnlyIntview=No",
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "updatedAt": "2026-06-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "1000",
