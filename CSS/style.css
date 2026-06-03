@@ -1604,8 +1604,8 @@ footer {
 footer .social-icons {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  justify-content: center;
   gap: .65rem;
   margin-top: .85rem;
 }
@@ -2354,5 +2354,11 @@ footer .footer-section:first-child {
   .feature-card:hover,
   .subject-card:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  footer .social-icons {
+    justify-content: center;
   }
 }
