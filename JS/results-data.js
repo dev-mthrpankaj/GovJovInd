@@ -41,7 +41,7 @@ window.GovJobUpdatesResults = [
             "Exam Result"
         ],
         "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/1003-UP-PGT-2026.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -687,6 +687,22 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "1004",
+        "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "resultDate": "",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
