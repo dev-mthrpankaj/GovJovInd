@@ -189,8 +189,8 @@
     firebaseImportPromise = Promise.all([
       import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
       import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js")
-    ]).then(([appMod, authMod, firestoreMod]) => ({ appMod, authMod, firestoreMod }));
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js")
+    ]).then(([appMod, authMod, databaseMod]) => ({ appMod, authMod, databaseMod }));
     return firebaseImportPromise;
   }
 
@@ -214,33 +214,51 @@
     });
   }
 
-  async function loadFirestoreAttempts() {
+  function buildRealtimeAttempts(snapshotValue) {
+    if (!snapshotValue || typeof snapshotValue !== "object") return [];
+    return Object.keys(snapshotValue).map((quizId) => {
+      const attempt = snapshotValue[quizId] || {};
+      return {
+        id: quizId,
+        quizId: quizId,
+        quizTitle: attempt.quizTitle || attempt.title || `Quiz ${quizId}`,
+        subject: attempt.subject || attempt.category || "Quiz",
+        score: number(attempt.score),
+        totalQuestions: number(attempt.totalQuestions),
+        correct: number(attempt.correct),
+        wrong: number(attempt.wrong),
+        percentage: percent(attempt.percentage || attempt.score),
+        lastAttemptedAt: Number(attempt.lastAttemptedAt) || 0
+      };
+    });
+  }
+
+  async function loadRealtimeAttempts() {
     const config = window.GJU_FIREBASE_CONFIG;
     if (!config || !config.apiKey) return;
     try {
-      const { appMod, authMod, firestoreMod } = await getFirebaseModules();
+      const { appMod, authMod, databaseMod } = await getFirebaseModules();
       const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(config);
       const auth = authMod.getAuth(app);
       const user = await waitForAuthUser(authMod, auth);
       if (!user) return;
-      const db = firestoreMod.getFirestore(app);
-      const attemptsRef = firestoreMod.collection(db, "users", user.uid, "quizAttempts");
-      const q = firestoreMod.query(attemptsRef, firestoreMod.orderBy("completedAt", "desc"), firestoreMod.limit(50));
-      const snapshot = await firestoreMod.getDocs(q);
-      const cloudAttempts = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+      const db = databaseMod.getDatabase(app);
+      const attemptsRef = databaseMod.ref(db, `user_quiz_attempts/${user.uid}`);
+      const snapshot = await databaseMod.get(attemptsRef);
+      const remoteAttempts = buildRealtimeAttempts(snapshot.val());
       const localAttempts = readLocalAttempts();
-      const merged = mergeAttempts(cloudAttempts, localAttempts);
-      renderAttempts(merged, cloudAttempts.length ? "Synced from Firebase account history" : "No Firebase quiz history found yet");
+      const merged = mergeAttempts(remoteAttempts, localAttempts);
+      renderAttempts(merged, remoteAttempts.length ? "Realtime DB sync complete" : "No quiz attempts found in your account yet");
     } catch (error) {
-      console.warn("[GovJobUpdates] Firestore quiz history load failed:", error.message);
+      console.warn("[GovJobUpdates] Realtime DB quiz history load failed:", error.message);
     }
   }
 
   function render() {
     const localAttempts = sortAttempts(readLocalAttempts());
     if (localAttempts.length) renderAttempts(localAttempts, "Local history loading; Firebase sync checking...");
-    else renderEmpty("Checking Firebase quiz history...");
-    loadFirestoreAttempts();
+    else renderEmpty("Checking Realtime Database quiz history...");
+    loadRealtimeAttempts();
   }
 
   document.addEventListener("DOMContentLoaded", render);
