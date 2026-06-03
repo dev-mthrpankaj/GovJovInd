@@ -713,8 +713,8 @@ window.GovJobUpdatesResults = [
     {
         "id": "1005",
         "title": "IB ACIO Gr-II Executive Final Result 2026 – Out",
-        "organization": "",
-        "department": "",
+        "organization": "Investigation Bu",
+        "department": "Intelligence",
         "category": "",
         "year": "",
         "resultDate": "",
