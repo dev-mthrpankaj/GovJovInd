@@ -1461,7 +1461,7 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "2442",
-        "title": "https://rojgarresult.com/drdo-rac-scientist-2026/",
+        "title": "DRDO RAC Scientist Online Form 2026",
         "organization": "",
         "department": "",
         "category": "",
