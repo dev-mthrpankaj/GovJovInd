@@ -7,7 +7,9 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
 
   const config = window.GJU_FIREBASE_CONFIG;
   const rankConfig = window.RANK_PREDICTOR_CONFIG || {};
-  if (!config || !config.apiKey) return;
+  const apiUrl = String(rankConfig.apiUrl || "").trim();
+  if (!config || !config.apiKey || !apiUrl) return;
+
   const app = getApps().length ? getApps()[0] : initializeApp(config);
   const auth = getAuth(app);
   const db = getDatabase(app);
@@ -78,38 +80,24 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     return profile;
   }
 
-  async function fetchRankHistory(user) {
-    if (!user) return { attempts: [], summary: {} };
-
-    const snapshot = await get(ref(db, `user_rank_attempts/${user.uid}`));
-    const attempts = [];
-
-    if (snapshot.exists()) {
-      const value = snapshot.val();
-      if (value && typeof value === "object") {
-        for (const attempt of Object.values(value)) {
-          if (attempt && typeof attempt === "object") {
-            attempts.push(attempt);
-          }
-        }
-      }
-    }
-
-    attempts.sort((a, b) => {
-      const aTime = String(a?.createdAt || a?.savedAt || a?.timestamp || "");
-      const bTime = String(b?.createdAt || b?.savedAt || b?.timestamp || "");
-      return bTime.localeCompare(aTime);
-    });
-
-    const bestRankAttempt = attempts.filter((attempt) => Number.isFinite(Number(attempt.overallRank)) && Number(attempt.overallRank) > 0)
-      .sort((a, b) => Number(a.overallRank) - Number(b.overallRank))[0] || {};
-    const summary = {
-      totalRankPredictorAttempts: attempts.length,
-      bestRank: Number(bestRankAttempt.overallRank) || 0,
-      bestRankExam: bestRankAttempt.examName || ""
+  async function fetchRankHistory(user, profile) {
+    const payload = {
+      action: "getFirebaseRankDashboard",
+      firebaseUid: user.uid,
+      userId: user.uid,
+      name: profile.name,
+      email: profile.email,
+      mobile: profile.mobile
     };
 
-    return { attempts, summary };
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      redirect: "follow",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    const text = await response.text();
+    return JSON.parse(text);
   }
 
   function renderMobileForm(message) {
@@ -161,9 +149,9 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   function renderEmpty(message) {
     setText("#rankPredictionCount", "0");
     setText("#bestEstimatedRank", "--");
-    setText("#rankHistoryStatus", message || "No rank predictor record found for your account.");
+    setText("#rankHistoryStatus", message || "No rank predictor record found for your login mobile/email.");
     const list = $("#rankHistoryList");
-    if (list) list.innerHTML = `<div class="user-mini-card"><strong>No rank history yet</strong><span>${message || "Use Rank Predictor to save your latest rank attempts."}</span></div>`;
+    if (list) list.innerHTML = `<div class="user-mini-card"><strong>No rank history yet</strong><span>${message || "Use Rank Predictor with the same mobile number used in signup."}</span></div>`;
     renderRankGraphs([]);
   }
 
@@ -269,23 +257,23 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   }
 
   function renderDashboard(data) {
-    if (!data) {
-      renderEmpty("Rank history could not be loaded.");
+    if (!data || data.success === false) {
+      renderEmpty(data?.message || "Rank history could not be loaded.");
       return;
     }
-    const attempts = Array.isArray(data.attempts) ? data.attempts : [];
+    const attempts = Array.isArray(data.rankAttempts || data.attempts) ? (data.rankAttempts || data.attempts) : [];
     const summary = data.summary || {};
     setText("#rankPredictionCount", String(summary.totalRankPredictorAttempts ?? attempts.length ?? 0));
     setText("#bestEstimatedRank", formatRank(summary.bestRank));
     setText("#bestRankExam", summary.bestRankExam ? `Best in ${summary.bestRankExam}` : "Will show after prediction");
-    setText("#rankHistoryStatus", attempts.length ? "Latest rank predictor records loaded from Firebase." : "No rank predictor records found yet.");
+    setText("#rankHistoryStatus", attempts.length ? "Latest rank predictor records loaded from Google Sheet." : "No rank predictor records found yet.");
 
     renderRankGraphs(attempts);
 
     const list = $("#rankHistoryList");
     if (!list) return;
     if (!attempts.length) {
-      renderEmpty("Use Rank Predictor to save your latest rank attempts.");
+      renderEmpty("Use Rank Predictor with the same mobile number used in signup.");
       return;
     }
 
@@ -301,25 +289,24 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   }
 
   async function load(user) {
-    setText("#rankHistoryStatus", "Loading rank predictor history from Firebase...");
+    setText("#rankHistoryStatus", "Loading rank predictor history from Google Sheet...");
     currentUser = user;
     const profile = await getProfile(user);
     currentProfile = profile;
     setText("#profileMobile", profile.mobile || "Not available");
-
     if (!profile.mobile) {
-      renderMobileForm("Mobile is missing in your Firebase profile. Adding it helps if you need matching by contact later.");
-    } else {
-      const box = $("#mobileUpdateBox");
-      if (box) box.innerHTML = `<div class="user-mini-card"><strong>Mobile matching active</strong><span>${profile.mobile} is used for Rank Predictor history.</span></div>`;
+      renderMobileForm("Mobile is missing in your Firebase profile, so rank history cannot be matched yet.");
+      renderEmpty("Save the same mobile number used in Rank Predictor to load records.");
+      return;
     }
-
+    const box = $("#mobileUpdateBox");
+    if (box) box.innerHTML = `<div class="user-mini-card"><strong>Mobile matching active</strong><span>${profile.mobile} is used for Rank Predictor history.</span></div>`;
     try {
-      const data = await fetchRankHistory(user);
+      const data = await fetchRankHistory(user, profile);
       renderDashboard(data);
     } catch (error) {
       console.warn("[GovJobUpdates] Rank dashboard fetch failed:", error.message);
-      renderEmpty("Could not load rank history from Firebase.");
+      renderEmpty("Rank history API is not deployed yet. Deploy the Apps Script bridge patch.");
     }
   }
 
