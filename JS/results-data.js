@@ -251,7 +251,7 @@ window.GovJobUpdatesResults = [
         "telegramReady": "no"
     },
     {
-        "id": "result-3007",
+        "id": "998",
         "title": "SSC Delhi Police Driver Result 2026",
         "organization": "Staff Selection Commission",
         "department": "Police",
