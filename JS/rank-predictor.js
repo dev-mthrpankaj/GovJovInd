@@ -1154,6 +1154,11 @@
             showMessage(messageId, "Result is ready, but your browser blocked local result storage. Please try again.", "error");
             return;
         }
+
+        persistRankAttemptToFirebase(resultData, payload).catch((error) => {
+            console.warn("[GovJobUpdates] Rank attempt persistence failed:", error?.message || error);
+        });
+
         window.location.href = RESULT_PAGE_URL;
     }
 
@@ -1177,6 +1182,47 @@
             return true;
         } catch {
             return false;
+        }
+    }
+
+    async function persistRankAttemptToFirebase(resultData, payload) {
+        try {
+            const config = window.GJU_FIREBASE_CONFIG;
+            if (!config || !config.apiKey) return;
+
+            const [{ initializeApp, getApps }, { getAuth }, { getDatabase, ref, set, serverTimestamp }] = await Promise.all([
+                import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+                import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
+                import("https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js")
+            ]);
+
+            const app = getApps().length ? getApps()[0] : initializeApp(config);
+            const auth = getAuth(app);
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const safeResultData = sanitizeForResultStorage(resultData || {});
+            const safePayload = buildSafePayloadContext(payload || {});
+            const rawMarks = safeResultData.rawMarks ?? safeResultData.marks ?? safePayload.rawMarks;
+            const normalizedMarks = calculateNormalizedMarks(safeResultData, safePayload, rawMarks);
+            const attemptId = `attempt_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+            const record = {
+                examId: safePayload.examId || "",
+                examName: safePayload.examName || getSelectedExam()?.examName || "",
+                rawMarks: Number.isFinite(Number(rawMarks)) ? Number(rawMarks) : null,
+                normalizedMarks: Number.isFinite(Number(normalizedMarks)) ? Number(normalizedMarks) : null,
+                overallRank: safeResultData.overallRank ?? safeResultData.rank ?? null,
+                percentile: safeResultData.percentile ?? null,
+                categoryRank: safeResultData.categoryRank ?? null,
+                stateRank: safeResultData.stateRank ?? null,
+                shift: safePayload.shift || "",
+                category: safePayload.category || "",
+                createdAt: serverTimestamp()
+            };
+
+            await set(ref(getDatabase(app), `user_rank_attempts/${user.uid}/${attemptId}`), record);
+        } catch (error) {
+            console.warn("[GovJobUpdates] Could not persist rank attempt:", error?.message || error);
         }
     }
 
