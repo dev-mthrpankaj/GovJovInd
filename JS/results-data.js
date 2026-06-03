@@ -118,14 +118,14 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2025",
         "resultDate": "2026-05-29",
-        "status": "released",
+        "status": "upcoming",
         "tags": [
             "SSC",
             "Delhi Police",
             "Constable"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/result-details-result-3031.html",
+        "detailPage": "../Job_Details/HTML/999-DPC-execuitive-2026.html",
         "updatedAt": "2026-05-02",
         "telegramStatus": "draft",
         "telegramReady": "no"
