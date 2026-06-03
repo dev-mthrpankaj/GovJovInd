@@ -1458,5 +1458,25 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "2442",
+        "title": "https://rojgarresult.com/drdo-rac-scientist-2026/",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
