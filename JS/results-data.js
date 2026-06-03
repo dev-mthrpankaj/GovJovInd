@@ -47,6 +47,22 @@ window.GovJobUpdatesResults = [
         "telegramReady": "no"
     },
     {
+        "id": "1004",
+        "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-02",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=149&Result_Type=P&Exam_Code=5&Advt_Code=570&Dept_Code=563&Post_Code=1&OnlyIntview=No",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1000",
         "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
         "organization": "Staff Selection Commission",
@@ -687,22 +703,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "1004",
-        "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
