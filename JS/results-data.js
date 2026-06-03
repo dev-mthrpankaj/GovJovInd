@@ -118,7 +118,7 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2025",
         "resultDate": "2026-05-29",
-        "status": "released",
+        "status": "upcoming",
         "tags": [
             "SSC",
             "Delhi Police",
