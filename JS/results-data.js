@@ -55,9 +55,13 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-02",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "UPSSSC",
+            "Assistant Boring Technician",
+            "Eligibility Result"
+        ],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=149&Result_Type=P&Exam_Code=5&Advt_Code=570&Dept_Code=563&Post_Code=1&OnlyIntview=No",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html",
         "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
@@ -700,7 +704,7 @@ window.GovJobUpdatesResults = [
             "RAS",
             "Final Result"
         ],
-        "resultLink": "https://rpsc.rajasthan.gov.in",
+        "resultLink": "https://rpsc.rajasthan.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
