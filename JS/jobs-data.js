@@ -92,7 +92,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "772",
         "startDate": "2026-06-04",
         "lastDate": "2026-06-24",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Excise Constable",
@@ -196,7 +196,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "100",
         "startDate": "2026-06-04",
         "lastDate": "2026-07-04",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Bharat Sanchar Nigam Limited Recruitment 2026",
             "BSNL Junior Telecom Officer JTO",
@@ -274,7 +274,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "100",
         "startDate": "2026-06-04",
         "lastDate": "2026-07-03",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Bharat Sanchar Nigam Limited Recruitment 2026",
             "BSNL Junior Telecom Officer JTO",
@@ -300,7 +300,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "607",
         "startDate": "2026-06-04",
         "lastDate": "2026-07-03",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Rajasthan Public Service Commision Recruitment 2026",
             "RPSC RAS Pre",
@@ -768,7 +768,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3540",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Rajasthan Staff Selection Board Recruitment 2026",
             "Rajasthan RSSB Teaching Associate",
