@@ -39,10 +39,10 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://g03.tcsion.com//per/g03/pub/726/EForms/image/ImageDocUpload/71161/5/5401281513.pdf",
-        "detailPage": "",
+        "detailPage": "../Job_Details/HTML/1005-IB-ACIO-Executive-2026.html",
         "updatedAt": "2026-06-03",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "1002",
