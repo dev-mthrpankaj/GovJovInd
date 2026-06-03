@@ -30,6 +30,32 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2442",
+        "title": "DRDO RAC Scientist Online Form 2026",
+        "organization": "Defence Research & Development Organization (DRDO RAC)",
+        "department": "DRDO",
+        "category": "Research",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "33",
+        "startDate": "2026-05-30",
+        "lastDate": "2026-06-19",
+        "status": "active",
+        "tags": [
+            "Defence Research & Development Organization (DRDO RAC) Recruitment 2026",
+            "DRDO RAC Scientist",
+            "Sarkari Naukri",
+            "Research Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://rac.gov.in/drdo/public/register",
+        "officialNotification": "https://rac.gov.in/download/advt_157.pdf",
+        "detailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
+        "updatedAt": "2026-06-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2438",
         "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
         "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
@@ -210,26 +236,6 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-30",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "2442",
-        "title": "DRDO RAC Scientist Online Form 2026",
-        "organization": "Defence Research & Development Organization (DRDO RAC)",
-        "department": "DRDO",
-        "category": "Research",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "33",
-        "startDate": "2026-05-30",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "2434",
