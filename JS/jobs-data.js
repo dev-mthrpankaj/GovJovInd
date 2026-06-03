@@ -478,7 +478,7 @@ window.GovJobUpdatesJobs = [
         "department": "Agriculture",
         "category": "State Government",
         "year": "2026",
-        "qualification": "UPSSSC PET 2025 Score Card.\nGraduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
+        "qualification": "UPSSSC PET 2025 Score Card. Graduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
         "totalPosts": "2759",
         "startDate": "2026-05-22",
         "lastDate": "2026-06-11",
@@ -1488,7 +1488,7 @@ window.GovJobUpdatesJobs = [
     {
         "id": "2443",
         "title": "UPSSSC Recruitment 2026 Auditor and Assistant Accountant Online Form 2026",
-        "organization": "",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
         "department": "",
         "category": "",
         "year": "",
