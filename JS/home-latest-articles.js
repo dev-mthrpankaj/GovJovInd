@@ -59,7 +59,7 @@
       <h3 class="article-card-title">${article.title || 'Untitled article'}</h3>
       <p class="article-card-meta">${formatDate(article.date)}${article.author ? ` · ${article.author}` : ''}</p>
       <p class="article-card-excerpt">${article.excerpt || article.summary || ''}</p>
-      <a class="section-link" href="${article.url || 'HTML/student-hub.html'}">Read more <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      <a class="section-link" href="${article.url ? `HTML/student-hub/${article.url.split('/').pop()}` : 'HTML/student-hub.html'}">Read more <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
     `;
 
     card.appendChild(imageWrapper);
