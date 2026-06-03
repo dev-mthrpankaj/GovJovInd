@@ -1484,25 +1484,5 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
-    },
-    {
-        "id": "2443",
-        "title": "UPSSSC Recruitment 2026 Auditor and Assistant Accountant Online Form 2026",
-        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
-        "department": "UPSSSC",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "closed",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     }
 ];
