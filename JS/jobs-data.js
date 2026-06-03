@@ -4,6 +4,32 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2441",
+        "title": "UKSSSC AAO Online Form 2026 for 90 Post",
+        "organization": "Uttarakhand Subordinate Service Selection Commission",
+        "department": "Agriculture",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "90",
+        "startDate": "2026-06-01",
+        "lastDate": "2026-06-21",
+        "status": "active",
+        "tags": [
+            "Uttarakhand Subordinate Service Selection Commission Recruitment 2026",
+            "UKSSSC AAO",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://ukssscrecruitment.in/",
+        "officialNotification": "https://ukssscrecruitment.in/PDF_Documents/Adv_77.pdf",
+        "detailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
+        "updatedAt": "2026-06-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "2438",
         "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
         "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
@@ -106,26 +132,6 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "2441",
-        "title": "UKSSSC AAO Online Form 2026 for 90 Post",
-        "organization": "Uttarakhand Subordinate Service Selection Commission",
-        "department": "",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "90",
-        "startDate": "2026-06-01",
-        "lastDate": "2026-06-21",
-        "status": "active",
-        "tags": [],
-        "applyLink": "https://ukssscrecruitment.in/",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "2435",
