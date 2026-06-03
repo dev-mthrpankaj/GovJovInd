@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "lucknow-eco-garden-student-protest-12-june",
+  title: "Lucknow Eco Garden Protest 12 June: छात्रों और अभिभावकों का महाआंदोलन, क्यों है यह आखिरी मौका?",
+  category: "Career Guidance",
+  date: "2026-06-03",
+  image: "../Assets/Home%20Page/eco-garden.webp",
+  url: "student-hub/lucknow-eco-garden-student-protest-12-june.html",
+  excerpt: "12 जून को लखनऊ के इको गार्डन में प्रतियोगी परीक्षाओं में धांधली और पेपर लीक के खिलाफ होने जा रहे ऐतिहासिक छात्र महाआंदोलन की पूरी ग्राउंड रिपोर्ट और विश्लेषण।"
+},
+    {
   id: "coaching-sealed-exampur-up-student-protest-report",
   title: "Coaching Sealed Exampur News: क्या यूपी में छात्रों का विरोध दबाया जा रहा है? जानें पूरी सच्चाई",
   category: "State",
