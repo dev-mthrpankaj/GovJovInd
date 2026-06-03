@@ -24,6 +24,27 @@ window.GovJobUpdatesResults = [
         "telegramReady": "no"
     },
     {
+        "id": "1005",
+        "title": "IB ACIO Gr-II Executive Final Result 2026 – Out",
+        "organization": "Intelligence Bureau",
+        "department": "Intelligence",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-03",
+        "status": "released",
+        "tags": [
+            "IB",
+            "ACIO",
+            "Executive",
+            "Final Result"
+        ],
+        "resultLink": "https://g03.tcsion.com//per/g03/pub/726/EForms/image/ImageDocUpload/71161/5/5401281513.pdf",
+        "detailPage": "",
+        "updatedAt": "2026-06-03",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1002",
         "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
         "organization": "Railway Recuitment Board",
