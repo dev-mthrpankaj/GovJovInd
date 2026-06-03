@@ -27,6 +27,46 @@ window.GovJobUpdatesResults = [
         "telegramReady": "no"
     },
     {
+        "id": "1003",
+        "title": "UP PGT 2026 Exam Result",
+        "organization": "UP Secondary Education Service Selection Board",
+        "department": "UPESSB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-02",
+        "status": "released",
+        "tags": [
+            "UPESSB",
+            "UP PGT",
+            "Exam Result"
+        ],
+        "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
+        "detailPage": "../Job_Details/HTML/1003-UP-PGT-2026.html",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
+        "id": "1004",
+        "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-02",
+        "status": "released",
+        "tags": [
+            "UPSSSC",
+            "Assistant Boring Technician",
+            "Eligibility Result"
+        ],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=149&Result_Type=P&Exam_Code=5&Advt_Code=570&Dept_Code=563&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1000",
         "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
         "organization": "Staff Selection Commission",
@@ -664,25 +704,9 @@ window.GovJobUpdatesResults = [
             "RAS",
             "Final Result"
         ],
-        "resultLink": "https://rpsc.rajasthan.gov.in",
+        "resultLink": "https://rpsc.rajasthan.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "1003",
-        "title": "UP PGT 2026 Exam Result",
-        "organization": "UP Secondary Education Service Selection Board",
-        "department": "",
-        "category": "",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
