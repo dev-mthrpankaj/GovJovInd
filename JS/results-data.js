@@ -35,8 +35,12 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-02",
         "status": "released",
-        "tags": [],
-        "resultLink": "",
+        "tags": [
+            "UPESSB",
+            "UP PGT",
+            "Exam Result"
+        ],
+        "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
         "detailPage": "",
         "updatedAt": "",
         "telegramStatus": "draft",
