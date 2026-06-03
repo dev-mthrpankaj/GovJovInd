@@ -212,6 +212,26 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
+        "id": "2442",
+        "title": "DRDO RAC Scientist Online Form 2026",
+        "organization": "Defence Research & Development Organization (DRDO RAC)",
+        "department": "DRDO",
+        "category": "Research",
+        "year": "2026",
+        "qualification": "View Details For Educational Qualification",
+        "totalPosts": "33",
+        "startDate": "2026-05-30",
+        "lastDate": "",
+        "status": "active",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "2434",
         "title": "UPSSSC Lower PCS Recruitment 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
@@ -1456,26 +1476,6 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "2442",
-        "title": "DRDO RAC Scientist Online Form 2026",
-        "organization": "Defence Research & Development Organization (DRDO RAC)",
-        "department": "",
-        "category": "",
-        "year": "",
-        "qualification": "",
-        "totalPosts": "",
-        "startDate": "",
-        "lastDate": "",
-        "status": "active",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
