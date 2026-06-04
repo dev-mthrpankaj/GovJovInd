@@ -25,7 +25,7 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes"
     },
     {
-        "id": "result-sheet-40",
+        "id": "1007",
         "title": "Rajasthan REET Upper Primary Teacher Result 2026",
         "organization": "Rajasthan Staff Selection Board (RSSB)",
         "department": "RSSB",
@@ -33,10 +33,14 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-04",
         "status": "released",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
+        "tags": [
+            "RSSB",
+            "REET",
+            "Upper Primary Teacher"
+        ],
+        "resultLink": "https://rssb.rajasthan.gov.in/results",
+        "detailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
+        "updatedAt": "2026-06-04",
         "telegramStatus": "draft",
         "telegramReady": "no"
     },
