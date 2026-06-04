@@ -126,7 +126,7 @@ window.GovJobUpdatesJobs = [
             "Judiciary Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "#",
+        "applyLink": "https://examinationservices.nic.in/recsys2026/root/Home.aspx?enc=Ei4cajBkK1gZSfgr53ImFdjoojMEdElwjdIyoUFL7zFG0/iUe3TLUpr8BDubooUX",
         "officialNotification": "https://www.allahabadhighcourt.in/event/event_25857_01-06-2026.pdf",
         "detailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
         "updatedAt": "2026-06-01",
