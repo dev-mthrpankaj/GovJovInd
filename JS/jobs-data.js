@@ -204,7 +204,7 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "#",
+        "applyLink": "https://externalexam.bsnl.co.in/",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
         "detailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
         "updatedAt": "2026-05-31",
@@ -308,7 +308,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "#",
+        "applyLink": "https://sso.rajasthan.gov.in/signin",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/76C02A7D61A54708AFFCDD7A2A60DBB2.pdf",
         "detailPage": "../Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
