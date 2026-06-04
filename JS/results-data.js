@@ -45,6 +45,22 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes"
     },
     {
+        "id": "1006",
+        "title": "SSC JHT Paper-II Result 2026 – Out",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-03",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1002",
         "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
         "organization": "Railway Recuitment Board",
@@ -728,22 +744,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "1006",
-        "title": "SSC JHT Paper-II Result 2026 – Out",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Results",
-        "year": "2026",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
