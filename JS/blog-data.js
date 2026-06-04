@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "delhi-police-result-delay-and-exam-malpractice",
+  title: "Delhi Police Result Delay 2026: 5 महीने से इंतजार, परीक्षा में गड़बड़ी और धांधली के आरोपों की पूरी सच्चाई",
+  category: "SSC",
+  date: "2026-06-04",
+  image: "../Assets/Home%20Page/delhipoilceartivle.webp",
+  url: "student-hub/delhi-police-result-delay-and-exam-malpractice.html",
+  excerpt: "दिल्ली पुलिस परीक्षा संपन्न हुए 5 महीने से अधिक का समय बीत चुका है। रिमोट एक्सेस गड़बड़ियों की वेब खबरों और रिजल्ट में हो रही असाधारण देरी का एक निष्पक्ष विश्लेषण।"
+},
+    {
   id: "lucknow-eco-garden-student-protest-12-june",
   title: "Lucknow Eco Garden Protest 12 June: छात्रों और अभिभावकों का महाआंदोलन, क्यों है यह आखिरी मौका?",
   category: "Career Guidance",
