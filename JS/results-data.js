@@ -730,5 +730,21 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no"
+    },
+    {
+        "id": "1006",
+        "title": "SSC JHT Paper-II Result 2026 – Out",
+        "organization": "",
+        "department": "",
+        "category": "",
+        "year": "",
+        "resultDate": "",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
     }
 ];
