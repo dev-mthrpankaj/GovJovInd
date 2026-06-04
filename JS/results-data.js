@@ -41,8 +41,8 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rssb.rajasthan.gov.in/results",
         "detailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
         "updatedAt": "2026-06-04",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "999",
