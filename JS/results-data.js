@@ -25,6 +25,22 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes"
     },
     {
+        "id": "result-sheet-40",
+        "title": "Rajasthan REET Upper Primary Teacher Result 2026",
+        "organization": "Rajasthan Staff Selection Board (RSSB)",
+        "department": "RSSB",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-04",
+        "status": "released",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "999",
         "title": "SSC Delhi Police Constable Executive Exam Result 2025",
         "organization": "Staff Selection Commission",
@@ -749,22 +765,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "result-sheet-40",
-        "title": "Rajasthan REET Upper Primary Teacher Result 2026",
-        "organization": "",
-        "department": "",
-        "category": "",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
