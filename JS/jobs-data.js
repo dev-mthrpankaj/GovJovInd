@@ -264,32 +264,6 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes"
     },
     {
-        "id": "2431",
-        "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
-        "organization": "Bharat Sanchar Nigam Limited",
-        "department": "Telecom",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "View Details For Educational Qualification",
-        "totalPosts": "100",
-        "startDate": "2026-06-04",
-        "lastDate": "2026-07-03",
-        "status": "active",
-        "tags": [
-            "Bharat Sanchar Nigam Limited Recruitment 2026",
-            "BSNL Junior Telecom Officer JTO",
-            "Sarkari Naukri",
-            "Public Sector Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "#",
-        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
-        "detailPage": "../Job_Details/HTML/2431-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
-        "updatedAt": "2026-05-28",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "2432",
         "title": "RPSC RAS Pre Recruitment 2026",
         "organization": "Rajasthan Public Service Commision",

@@ -53,28 +53,6 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "yes"
     },
     {
-        "id": "2032",
-        "title": "IIT JEE Advanced Admissions 2026 Answer Key",
-        "organization": "National Testing Agency",
-        "department": "Engineering",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-25",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "B.TECH"
-        ],
-        "downloadLink": "https://jeeadv.ac.in/documents/p1_provisional_keys.pdf",
-        "objectionLink": "",
-        "detailPage": "",
-        "updatedAt": "2026-05-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes"
-    },
-    {
         "id": "answerkey-4032",
         "title": "Madhya Pradesh MP Police Subedar Stenographer & ASI Ministerial Answer Key 2025",
         "organization": "Madhya Pradesh Employees Selection Board",
