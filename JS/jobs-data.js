@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "View Details For Educational Qualification",
         "totalPosts": "33",
-        "startDate": "2026-06-04",
+        "startDate": "2026-05-30",
         "lastDate": "2026-06-19",
         "status": "active",
         "tags": [
