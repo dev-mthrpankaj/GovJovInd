@@ -342,11 +342,18 @@ import { getDatabase, ref, get, update, remove, push, onValue, off, query, order
     try {
       const commentRef = ref(db, `article_engagement/${articleId}/comments/${commentId}`);
       await remove(commentRef);
-      // Clean up the comment's replies stored under the separate root node
-      await remove(ref(db, `article_replies/${commentId}`));
     } catch (error) {
       console.error("[ArticleInteractions] Error deleting comment:", error);
       showError("Failed to delete comment. Please try again.");
+      return;
+    }
+
+    // Best-effort cleanup of the comment's replies (separate root node).
+    // May be denied by security rules; that should not surface as a delete failure.
+    try {
+      await remove(ref(db, `article_replies/${commentId}`));
+    } catch (error) {
+      console.warn("[ArticleInteractions] Could not clean up replies for deleted comment:", error);
     }
   }
 
