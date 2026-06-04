@@ -404,7 +404,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "879",
         "startDate": "2026-05-22",
         "lastDate": "2026-06-04",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "EDCIL India Limited Recruitment 2026",
             "EDCIL Various Post",
