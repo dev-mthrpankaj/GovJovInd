@@ -85,8 +85,8 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98138/login.html",
         "detailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
         "updatedAt": "2026-06-02",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
     },
     {
         "id": "1003",
