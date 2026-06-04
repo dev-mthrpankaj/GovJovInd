@@ -45,11 +45,11 @@
   border: 1.5px solid #cbd5e1;
   background: #fff;
   color: #475569;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   user-select: none;
   min-width: 100px;
 }
@@ -58,24 +58,38 @@
   border-color: #3b82f6;
   background: #eff6ff;
   color: #1e40af;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.18);
 }
 
 .vote-btn:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: translateY(-1px) scale(0.98);
 }
 
+/* Royal Blue gradient for an active Like */
 .vote-btn.liked {
-  border-color: #3b82f6;
-  background: #dbeafe;
-  color: #1e40af;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: transparent;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.35);
 }
 
+.vote-btn.liked:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: #fff;
+}
+
+/* Soft Crimson gradient for an active Dislike */
 .vote-btn.disliked {
-  border-color: #ef4444;
-  background: #fee2e2;
-  color: #991b1b;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-color: transparent;
+  background: linear-gradient(135deg, #f43f5e 0%, #dc2626 100%);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(220, 38, 38, 0.35);
+}
+
+.vote-btn.disliked:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e11d48 0%, #b91c1c 100%);
+  color: #fff;
 }
 
 .vote-btn:disabled {
@@ -176,14 +190,14 @@
 }
 
 .comment-btn-submit {
-  background: #3b82f6;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #fff;
   min-width: 120px;
 }
 
 .comment-btn-submit:hover:not(:disabled) {
-  background: #2563eb;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.32);
 }
 
 .comment-btn-submit:disabled {
@@ -258,23 +272,49 @@
 }
 
 .comment-item {
-  padding: 1.5rem;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem;
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border-radius: 14px;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .comment-item:hover {
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+}
+
+/* Colourful letter avatar */
+.comment-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+}
+
+.comment-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .comment-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
@@ -320,6 +360,188 @@
 .comment-text {
   font-size: 0.95rem;
   line-height: 1.6;
+  color: #334155;
+  word-break: break-word;
+}
+
+/* Reply trigger */
+.comment-footer {
+  margin-top: 0.6rem;
+}
+
+.comment-reply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.comment-reply-btn:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Reply input form */
+.reply-form {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.85rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.reply-textarea {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 60px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reply-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.reply-form-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.reply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.reply-btn-submit {
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.reply-btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
+}
+
+.reply-btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.reply-btn-cancel {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.reply-btn-cancel:hover {
+  background: #e2e8f0;
+}
+
+/* Reply thread */
+.comment-replies {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.comment-replies:not(:empty) {
+  padding-left: 0.85rem;
+  border-left: 2px solid #e2e8f0;
+}
+
+.reply-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.reply-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.15);
+}
+
+.reply-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.reply-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.reply-user-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.reply-timestamp {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.reply-delete-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.reply-delete-btn:hover {
+  color: #991b1b;
+  text-decoration: underline;
+}
+
+.reply-text {
+  font-size: 0.9rem;
+  line-height: 1.55;
   color: #334155;
   word-break: break-word;
 }
