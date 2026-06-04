@@ -4,6 +4,27 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1006",
+        "title": "SSC JHT Paper-II Result 2026 – Out",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-03",
+        "status": "released",
+        "tags": [
+            "SSC",
+            "JHT",
+            "Paper-II",
+            "Result"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html",
+        "updatedAt": "2026-06-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes"
+    },
+    {
         "id": "999",
         "title": "SSC Delhi Police Constable Executive Exam Result 2025",
         "organization": "Staff Selection Commission",
@@ -43,22 +64,6 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
         "telegramReady": "yes"
-    },
-    {
-        "id": "1006",
-        "title": "SSC JHT Paper-II Result 2026 – Out",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Results",
-        "year": "2026",
-        "resultDate": "2026-06-03",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
     },
     {
         "id": "1002",
