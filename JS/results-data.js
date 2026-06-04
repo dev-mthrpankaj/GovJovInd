@@ -10,7 +10,7 @@ window.GovJobUpdatesResults = [
         "department": "SSC",
         "category": "Results",
         "year": "2026",
-        "resultDate": "2026-06-03",
+        "resultDate": "2026-06-04",
         "status": "released",
         "tags": [
             "SSC",
