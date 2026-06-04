@@ -4,26 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2443",
-        "title": "RPSC RAS State Service Exam Recruitment",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "RPSC RAS Recruitment",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "",
-        "totalPosts": "607",
-        "startDate": "2026-06-04",
-        "lastDate": "",
-        "status": "closed",
-        "tags": [],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "",
-        "updatedAt": "",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
         "id": "2441",
         "title": "UKSSSC AAO Online Form 2026 for 90 Post",
         "organization": "Uttarakhand Subordinate Service Selection Commission",
