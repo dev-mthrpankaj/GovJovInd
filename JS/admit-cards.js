@@ -306,11 +306,11 @@
         const downloadLink = normalizeActionUrl(item.downloadLink);
         const downloadAction = downloadLink
             ? `<a href="${escapeHtml(downloadLink)}" target="_blank" rel="noopener" class="btn btn-primary">Download Admit Card</a>`
-            : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
+            : "";
         const detailPage = getDetailPage(item);
         const detailAction = detailPage
             ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
-            : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+            : "";
 
         return `
             <article class="record-card">

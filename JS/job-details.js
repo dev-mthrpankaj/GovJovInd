@@ -246,27 +246,41 @@
     const description = `${job.title} by ${job.organization}: important dates, eligibility, vacancy, salary, selection process, apply link, notification, FAQ and preparation resources.`;
     const canonical = window.location.href.split("#")[0];
     document.title = title;
-    setMeta("description", description.slice(0, 158));
+    const metaDescription = truncateMetaDescription(description, 158);
+    const socialDescription = truncateMetaDescription(description, 180);
+    setMeta("description", metaDescription);
     setProperty("og:title", title);
-    setProperty("og:description", description.slice(0, 180));
+    setProperty("og:description", socialDescription);
     setProperty("og:type", "article");
     setProperty("og:url", canonical);
     setProperty("og:site_name", "GovJobUpdates");
     setProperty("twitter:card", "summary_large_image");
     setProperty("twitter:title", title);
-    setProperty("twitter:description", description.slice(0, 180));
+    setProperty("twitter:description", socialDescription);
     ensureCanonical(canonical);
+  }
+
+  function truncateMetaDescription(value, maxLength) {
+    const text = getText(value, "").replace(/\s+/g, " ").trim();
+    if (text.length <= maxLength) return text;
+    const limit = Math.max(40, maxLength - 1);
+    const clipped = text.slice(0, limit);
+    const sentenceEnd = Math.max(clipped.lastIndexOf("."), clipped.lastIndexOf("!"), clipped.lastIndexOf("?"));
+    if (sentenceEnd >= 80) return clipped.slice(0, sentenceEnd + 1).trim();
+    const wordEnd = clipped.lastIndexOf(" ");
+    const ending = wordEnd >= 80 ? clipped.slice(0, wordEnd) : clipped;
+    return `${ending.replace(/[,:;|\-–—]+$/u, "").trim()}.`;
   }
 
   function linkButton(url, label, primary) {
     const safe = normalizeActionUrl(url);
-    if (!safe) return `<button class="btn btn-disabled" type="button" disabled>${escapeHtml(label)} Coming Soon</button>`;
+    if (!safe) return "";
     return `<a class="btn ${primary ? "btn-primary" : "btn-outline"}" href="${escapeHtml(safe)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
   }
 
   function linkTableRow(label, url, fallbackUrl, note) {
     const safe = normalizeActionUrl(url || fallbackUrl);
-    const target = safe ? `<a href="${escapeHtml(safe)}"${/^https?:/i.test(safe) ? ' target="_blank" rel="noopener"' : ""}>Open Link</a>` : "<span>Coming Soon</span>";
+    const target = safe ? `<a href="${escapeHtml(safe)}"${/^https?:/i.test(safe) ? ' target="_blank" rel="noopener"' : ""}>Open Link</a>` : "<span>Verify from official source</span>";
     return `<tr><th scope="row">${escapeHtml(label)}</th><td>${target}</td><td>${escapeHtml(note)}</td></tr>`;
   }
 

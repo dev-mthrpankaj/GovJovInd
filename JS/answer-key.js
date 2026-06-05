@@ -335,14 +335,14 @@
         const objectionLink = normalizeActionUrl(item.objectionLink);
         const downloadAction = downloadLink
             ? `<a href="${escapeHtml(downloadLink)}" target="_blank" rel="noopener" class="btn btn-primary">Download Answer Key</a>`
-            : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
+            : "";
         const objectionAction = objectionLink
             ? `<a href="${escapeHtml(objectionLink)}" target="_blank" rel="noopener" class="btn btn-outline">Raise Objection</a>`
             : "";
         const detailPage = getDetailPage(item);
         const detailAction = detailPage
             ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
-            : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+            : "";
         const rankCheck = getRankCheckAvailability(item);
         const rankCheckAction = rankCheck.enabled
             ? `<a href="rank-predictor.html" class="btn rank-check-btn is-active" title="${escapeHtml(rankCheck.message)}">Check Your Rank</a>`

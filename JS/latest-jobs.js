@@ -331,11 +331,11 @@
         const applyLink = normalizeActionUrl(job.applyLink);
         const applyAction = applyLink
             ? `<a href="${escapeHtml(applyLink)}" target="_blank" rel="noopener" class="btn btn-primary">Apply Now</a>`
-            : '<button class="btn btn-disabled" type="button" disabled>Link Coming Soon</button>';
+            : "";
         const detailPage = getDetailPage(job);
         const detailAction = detailPage
             ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
-            : '<button class="btn btn-disabled" type="button" disabled>Details Coming Soon</button>';
+            : "";
 
         return `
             <article class="job-card">
