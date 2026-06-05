@@ -1682,5 +1682,29 @@ window.GovJobUpdatesJobs = [
         "qualificationSource": "fallback",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "2443",
+        "title": "Junior Secretariat Assistant / Lower Division Clerk Grade Limited Departmental Competitive Examination, 2026",
+        "organization": "Staff Selection Commission",
+        "department": "",
+        "category": "",
+        "year": "",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
+        "totalPosts": "",
+        "startDate": "",
+        "lastDate": "",
+        "status": "closed",
+        "tags": [],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2443",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];
