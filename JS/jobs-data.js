@@ -25,14 +25,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ssc.gov.in/",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/departmental_notice_05062026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2443",
+        "detailPage": "../Job_Details/HTML/2443-SSC-JSA-LDC-2026.html",
         "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2441",
