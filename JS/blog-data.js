@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "best-ssc-cgl-books-2026",
+  title: "Best SSC CGL Books 2026: Maths, English, Reasoning, GK & Computer की Best Books",
+  category: "SSC",
+  date: "2026-06-05",
+  image: "../Assets/Home%20Page/sscbooks.webp",
+  url: "student-hub/best-ssc-cgl-books-2026.html",
+  excerpt: "SSC CGL 2026 preparation ke liye subject-wise best books: Gagan Pratap Maths, Abhinay Sharma Advanced Maths, BlackBook English, S.P. Bakshi, Lucent GK, R.S. Aggarwal Reasoning aur Arihant Computer Awareness."
+},
+    {
   id: "delhi-police-result-delay-and-exam-malpractice",
   title: "Delhi Police Result Delay 2026: 5 महीने से इंतजार, परीक्षा में गड़बड़ी और धांधली के आरोपों की पूरी सच्चाई",
   category: "SSC",
