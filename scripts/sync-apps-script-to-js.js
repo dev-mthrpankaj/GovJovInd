@@ -25,12 +25,69 @@ const HTML_CACHE_TARGETS = [
   }
 ];
 
+const REPORT_DIR = path.join(ROOT_DIR, "reports");
+const SHEET_VALIDATION_REPORT_PATH = path.join(REPORT_DIR, "sheet-validation-report.json");
+const PLACEHOLDER_QUALIFICATIONS = new Set([
+  "view details for educational qualification",
+  "view details",
+  "view details for more information",
+  "read official notification",
+  "read the official notification",
+  "check notification",
+  "check official notification",
+  "n/a",
+  "na",
+  "nil",
+  "none",
+  "not available",
+  "not specified",
+  "*",
+  "-",
+  "--"
+]);
+const ACCEPTED_SHORT_QUALIFICATIONS = new Set(["10th pass", "12th pass", "iti", "diploma", "graduate"]);
+const QUALIFICATION_SIGNALS = [
+  "10th",
+  "high school",
+  "matric",
+  "12th",
+  "intermediate",
+  "iti",
+  "diploma",
+  "graduate",
+  "graduation",
+  "bachelor",
+  "degree",
+  "b.sc",
+  "b.tech",
+  "b.e",
+  "master",
+  "postgraduate",
+  "law",
+  "nursing",
+  "gnm",
+  "engineering",
+  "agriculture",
+  "b.ed",
+  "net",
+  "tet",
+  "pet"
+];
+
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
 function normalizeText(value) {
   return String(value ?? "").trim();
+}
+
+function normalizeQualificationForCheck(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .replace(/[.:-]+$/g, "")
+    .trim();
 }
 
 function normalizeTags(value) {
@@ -44,6 +101,162 @@ function normalizeRecord(record, fields) {
     output[field] = field === "tags" ? normalizeTags(record[field]) : normalizeText(record[field]);
   });
   return output;
+}
+
+function validateQualificationValue(value) {
+  const text = normalizeText(value);
+  const normalized = normalizeQualificationForCheck(text);
+  if (isPlaceholderQualification(value)) {
+    return { valid: false, weak: false, reason: normalized ? "placeholder qualification" : "empty qualification" };
+  }
+  if (normalized.length < 12 && !ACCEPTED_SHORT_QUALIFICATIONS.has(normalized)) {
+    return { valid: false, weak: true, reason: "qualification is too short" };
+  }
+  const hasSignal = QUALIFICATION_SIGNALS.some((signal) => normalized.includes(signal));
+  if (!hasSignal) return { valid: false, weak: true, reason: "qualification has no clear education signal" };
+  return { valid: true, weak: false, reason: "valid qualification" };
+}
+
+function isPlaceholderQualification(value) {
+  const normalized = normalizeQualificationForCheck(value);
+  if (!normalized || PLACEHOLDER_QUALIFICATIONS.has(normalized)) return true;
+  return [
+    "view details",
+    "read official notification",
+    "read the official notification",
+    "check notification",
+    "check official notification"
+  ].some((placeholder) => normalized.includes(placeholder));
+}
+
+function inferQualificationFallback(record) {
+  const haystack = normalizeQualificationForCheck([
+    record.title,
+    record.category,
+    record.department
+  ].filter(Boolean).join(" "));
+
+  if (/\b(police|constable)\b/.test(haystack)) {
+    return "Class 10/12 or equivalent eligibility with physical standards as per official notification.";
+  }
+  if (/\b(ssc cgl|graduate level)\b/.test(haystack)) {
+    return "Graduate degree from a recognized university as per official notification.";
+  }
+  if (/\b(teaching|teacher|lecturer|school|education|b\.ed|tet)\b/.test(haystack)) {
+    return "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.";
+  }
+  if (/\b(technical|technician|engineer|engineering|scientist|science|telecom|laboratory)\b/.test(haystack)) {
+    return "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.";
+  }
+  if (/\b(apprentice|apprenticeship)\b/.test(haystack)) {
+    return "ITI, diploma, graduation or trade-wise qualification as per official notification.";
+  }
+  if (/\b(bank|banking|ibps|sbi|rbi|nabard|financial|finance)\b/.test(haystack)) {
+    return "Graduate degree or post-wise banking qualification as per official notification.";
+  }
+  return "Post-wise educational qualification as specified in the official notification.";
+}
+
+function sanitizeJobQualification(record) {
+  const qualificationSummary = normalizeText(record.qualificationSummary);
+  const qualification = normalizeText(record.qualification);
+  const summaryValidation = validateQualificationValue(qualificationSummary);
+  if (summaryValidation.valid) {
+    return {
+      ...record,
+      qualification: qualificationSummary,
+      needsReview: "no",
+      qualificationSource: "qualificationSummary",
+      __qualificationValidation: {
+        originalQualification: qualification || qualificationSummary,
+        publishedQualification: qualificationSummary,
+        needsReview: "no",
+        reason: "valid qualification summary",
+        source: "qualificationSummary",
+        usedFallback: false,
+        blockedPlaceholder: false
+      }
+    };
+  }
+
+  const qualificationValidation = validateQualificationValue(qualification);
+  if (qualificationValidation.valid) {
+    return {
+      ...record,
+      qualification,
+      needsReview: "no",
+      qualificationSource: "qualification",
+      __qualificationValidation: {
+        originalQualification: qualification,
+        publishedQualification: qualification,
+        needsReview: "no",
+        reason: "valid qualification",
+        source: "qualification",
+        usedFallback: false,
+        blockedPlaceholder: false
+      }
+    };
+  }
+
+  const fallback = inferQualificationFallback(record);
+  const reason = qualificationSummary
+    ? `qualificationSummary ${summaryValidation.reason}; qualification ${qualificationValidation.reason}`
+    : qualificationValidation.reason;
+  return {
+    ...record,
+    qualification: fallback,
+    needsReview: "yes",
+    qualificationSource: "fallback",
+    __qualificationValidation: {
+      originalQualification: qualification || qualificationSummary,
+      publishedQualification: fallback,
+      needsReview: "yes",
+      reason,
+      source: "fallback",
+      usedFallback: true,
+      blockedPlaceholder: !qualification || PLACEHOLDER_QUALIFICATIONS.has(normalizeQualificationForCheck(qualification))
+    }
+  };
+}
+
+function sanitizeJobRecords(records) {
+  const rows = [];
+  const sanitizedRecords = records.map((record) => {
+    const sanitized = sanitizeJobQualification(record);
+    rows.push({
+      id: sanitized.id,
+      title: sanitized.title,
+      originalQualification: sanitized.__qualificationValidation.originalQualification,
+      publishedQualification: sanitized.__qualificationValidation.publishedQualification,
+      needsReview: sanitized.__qualificationValidation.needsReview,
+      reason: sanitized.__qualificationValidation.reason,
+      source: sanitized.__qualificationValidation.source
+    });
+    delete sanitized.__qualificationValidation;
+    return sanitized;
+  });
+  return { records: sanitizedRecords, rows };
+}
+
+function buildSheetValidationReport(sourceLabel, records, rows) {
+  const fallbackRows = rows.filter((row) => row.source === "fallback");
+  const blockedRows = rows.filter((row) => isPlaceholderQualification(row.originalQualification));
+  return {
+    generatedAt: new Date().toISOString(),
+    source: sourceLabel,
+    totalJobs: records.length,
+    validQualifications: rows.filter((row) => row.needsReview === "no").length,
+    fallbackQualifications: fallbackRows.length,
+    invalidPlaceholdersBlocked: blockedRows.length,
+    needsReview: rows.filter((row) => row.needsReview === "yes").length,
+    rows
+  };
+}
+
+function writeSheetValidationReport(report) {
+  fs.mkdirSync(REPORT_DIR, { recursive: true });
+  fs.writeFileSync(SHEET_VALIDATION_REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  console.log(`Validation report: ${path.relative(ROOT_DIR, SHEET_VALIDATION_REPORT_PATH)}`);
 }
 
 function getSortDate(record) {
@@ -171,7 +384,7 @@ function updatePublicHtmlCacheVersions(version) {
 async function syncOne(apiUrl, source) {
   console.log(`Fetching ${source.label}...`);
   const rawItems = await fetchItems(apiUrl, source.apiType, source.payloadKey);
-  const records = rawItems
+  let records = rawItems
     .map((record) => normalizeRecord(record, source.fields))
     .filter((record) => record.id && record.title);
 
@@ -180,8 +393,44 @@ async function syncOne(apiUrl, source) {
     return false;
   }
 
+  if (source.apiType === "jobs") {
+    const sanitized = sanitizeJobRecords(records);
+    records = sanitized.records;
+    writeSheetValidationReport(buildSheetValidationReport(source.label, records, sanitized.rows));
+  }
+
   const content = buildJs(source.globalVariable, sortRecords(records), source.label);
   return writeIfChanged(source.outputFile, content);
+}
+
+function extractGeneratedJobs(content) {
+  const match = content.match(/window\.GovJobUpdatesJobs\s*=\s*(\[[\s\S]*?\]);?\s*$/);
+  if (!match) throw new Error("Could not parse JS/jobs-data.js.");
+  return JSON.parse(match[1]);
+}
+
+function validateGeneratedSheetData() {
+  const jobsPath = path.join(ROOT_DIR, "JS", "jobs-data.js");
+  if (!fs.existsSync(jobsPath)) throw new Error("JS/jobs-data.js does not exist.");
+  if (!fs.existsSync(SHEET_VALIDATION_REPORT_PATH)) throw new Error("reports/sheet-validation-report.json does not exist.");
+
+  const jobs = extractGeneratedJobs(fs.readFileSync(jobsPath, "utf8"));
+  const placeholders = jobs.filter((job) => isPlaceholderQualification(job.qualification));
+  if (placeholders.length) {
+    throw new Error(`Found ${placeholders.length} placeholder or weak qualifications in JS/jobs-data.js.`);
+  }
+
+  const report = readJson(SHEET_VALIDATION_REPORT_PATH);
+  if (!Array.isArray(report.rows)) throw new Error("Validation report rows array is missing.");
+  const fallbackRows = report.rows.filter((row) => row.source === "fallback");
+  if (Number(report.fallbackQualifications || 0) !== fallbackRows.length) {
+    throw new Error("Validation report fallbackQualifications count does not match rows.");
+  }
+  const missingReviewFlag = jobs.filter((job) => job.qualificationSource === "fallback" && job.needsReview !== "yes");
+  if (missingReviewFlag.length) {
+    throw new Error("Fallback qualification rows must include needsReview: yes.");
+  }
+  console.log(`Sheet data validation passed. Jobs: ${jobs.length}. Fallback rows: ${fallbackRows.length}.`);
 }
 
 function buildVersion() {
@@ -191,6 +440,11 @@ function buildVersion() {
 }
 
 async function main() {
+  if (process.argv.includes("--validate-sheet-data")) {
+    validateGeneratedSheetData();
+    return;
+  }
+
   const config = readJson(CONFIG_PATH);
   const apiUrl = resolveApiUrl(config);
   if (!apiUrl) throw new Error("Missing Apps Script API URL. Set GJU_SHEET_API_URL, config.apiUrl, or JS/google-sheet-updates-config.js apiUrl.");
