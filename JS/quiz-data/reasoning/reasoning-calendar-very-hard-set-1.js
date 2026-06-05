@@ -230,7 +230,7 @@
             options: ["Wednesday", "Saturday", "Friday", "Thursday"],
             correctAnswer: 3,
             explanation: "Calendar method में complete years, leap years और महीने/दिन के odd days जोड़े जाते हैं। वास्तविक गणना के अनुसार 15-08-2030 का दिन Thursday (गुरुवार) है।"
-        },
+        }
     
     ];
 
