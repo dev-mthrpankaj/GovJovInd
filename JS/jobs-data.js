@@ -10,7 +10,7 @@ window.GovJobUpdatesJobs = [
         "department": "Agriculture",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "90",
         "startDate": "2026-06-01",
         "lastDate": "2026-06-21",
@@ -27,7 +27,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2442",
@@ -36,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "department": "DRDO",
         "category": "Research",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "33",
         "startDate": "2026-05-30",
         "lastDate": "2026-06-19",
@@ -53,7 +55,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2438",
@@ -62,7 +66,7 @@ window.GovJobUpdatesJobs = [
         "department": "Administration",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "1979",
         "startDate": "2026-06-16",
         "lastDate": "2026-07-15",
@@ -79,7 +83,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2440",
@@ -88,7 +94,7 @@ window.GovJobUpdatesJobs = [
         "department": "Excise",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
         "totalPosts": "772",
         "startDate": "2026-06-04",
         "lastDate": "2026-06-24",
@@ -105,7 +111,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2437",
@@ -114,7 +122,7 @@ window.GovJobUpdatesJobs = [
         "department": "Judiciary",
         "category": "Judiciary",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "543",
         "startDate": "2026-06-06",
         "lastDate": "2026-06-20",
@@ -131,7 +139,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2439",
@@ -140,7 +150,7 @@ window.GovJobUpdatesJobs = [
         "department": "Technical",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "611",
         "startDate": "2026-06-01",
         "lastDate": "2026-06-30",
@@ -157,7 +167,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2435",
@@ -166,7 +178,7 @@ window.GovJobUpdatesJobs = [
         "department": "Administration",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "1189",
         "startDate": "2026-05-07",
         "lastDate": "2026-05-31",
@@ -183,7 +195,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2436",
@@ -192,7 +206,7 @@ window.GovJobUpdatesJobs = [
         "department": "Telecom",
         "category": "Public Sector",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "100",
         "startDate": "2026-06-04",
         "lastDate": "2026-07-04",
@@ -209,7 +223,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2395",
@@ -218,7 +234,7 @@ window.GovJobUpdatesJobs = [
         "department": "Telecom",
         "category": "Public Sector",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "120",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -235,7 +251,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-30",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2434",
@@ -244,7 +262,7 @@ window.GovJobUpdatesJobs = [
         "department": "Administration",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "2285",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
@@ -261,7 +279,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2432",
@@ -270,7 +290,7 @@ window.GovJobUpdatesJobs = [
         "department": "Administration",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "607",
         "startDate": "2026-06-04",
         "lastDate": "2026-07-03",
@@ -287,7 +307,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2433",
@@ -296,7 +318,7 @@ window.GovJobUpdatesJobs = [
         "department": "Law/Judiciary",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "371",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
@@ -313,7 +335,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2430",
@@ -322,7 +346,7 @@ window.GovJobUpdatesJobs = [
         "department": "Railway",
         "category": "Railway",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
@@ -339,7 +363,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2426",
@@ -348,7 +374,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "Teaching",
         "year": "2026",
-        "qualification": "Graduate and Masters (View Details for More Information)",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "3951",
         "startDate": "2026-05-25",
         "lastDate": "2026-06-23",
@@ -365,7 +391,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2428",
@@ -374,7 +402,7 @@ window.GovJobUpdatesJobs = [
         "department": "Metals",
         "category": "Public Sector",
         "year": "2026",
-        "qualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "268",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-10",
@@ -391,7 +419,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2429",
@@ -400,7 +430,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "Central Government",
         "year": "2026",
-        "qualification": "10+2 (View Details for more Information)",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "879",
         "startDate": "2026-05-22",
         "lastDate": "2026-06-04",
@@ -417,7 +447,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2424",
@@ -426,7 +458,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "60",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
@@ -443,7 +475,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2425",
@@ -469,7 +503,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification"
     },
     {
         "id": "2422",
@@ -478,7 +514,7 @@ window.GovJobUpdatesJobs = [
         "department": "Banking",
         "category": "Banking",
         "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
+        "qualification": "ITI, diploma, graduation or trade-wise qualification as per official notification.",
         "totalPosts": "635",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-06",
@@ -495,7 +531,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2423",
@@ -504,7 +542,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "Teaching",
         "year": "2026",
-        "qualification": "Post Graduation (View Details for more Information)",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "121",
         "startDate": "2026-06-01",
         "lastDate": "2026-06-30",
@@ -521,7 +559,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2427",
@@ -530,7 +570,7 @@ window.GovJobUpdatesJobs = [
         "department": "Judiciary",
         "category": "Judiciary",
         "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "1265",
         "startDate": "2026-05-26",
         "lastDate": "2026-06-23",
@@ -547,7 +587,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2418",
@@ -556,7 +598,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "361",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-19",
@@ -573,7 +615,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2421",
@@ -582,7 +626,7 @@ window.GovJobUpdatesJobs = [
         "department": "SSC",
         "category": "Staff Selection",
         "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
+        "qualification": "Graduate degree from a recognized university as per official notification.",
         "totalPosts": "approx. 12256",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-22",
@@ -599,7 +643,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2417",
@@ -608,7 +654,7 @@ window.GovJobUpdatesJobs = [
         "department": "Research",
         "category": "Central Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "30",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-18",
@@ -625,7 +671,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2419",
@@ -634,7 +682,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "10+2 (View Details for more Information)",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "394",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-09",
@@ -651,7 +699,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2420",
@@ -660,7 +710,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "Graduation (View Details for more Information)",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "451",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-09",
@@ -677,7 +727,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2415",
@@ -686,7 +738,7 @@ window.GovJobUpdatesJobs = [
         "department": "Technical",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "1090",
         "startDate": "2026-04-06",
         "lastDate": "2026-05-06",
@@ -703,7 +755,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2416",
@@ -712,7 +766,7 @@ window.GovJobUpdatesJobs = [
         "department": "Power",
         "category": "Public Sector",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "250",
         "startDate": "2026-04-23",
         "lastDate": "2026-05-07",
@@ -729,7 +783,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "./Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2386",
@@ -738,7 +794,7 @@ window.GovJobUpdatesJobs = [
         "department": "Teaching",
         "category": "Teaching",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "3540",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-03",
@@ -755,7 +811,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/2386-Rajasthan RSSB Teaching Associate Online Form 2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2387",
@@ -764,7 +822,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "High School (View Details for More Information)",
+        "qualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
         "totalPosts": "9195",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-19",
@@ -781,7 +839,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2387",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2388",
@@ -790,7 +850,7 @@ window.GovJobUpdatesJobs = [
         "department": "Railway",
         "category": "Railway",
         "year": "2026",
-        "qualification": "High School (View Details for More Information)",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "11127",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-14",
@@ -807,7 +867,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2388",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2389",
@@ -816,7 +878,7 @@ window.GovJobUpdatesJobs = [
         "department": "Health",
         "category": "Health",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "2317",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-03",
@@ -833,7 +895,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2389",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2390",
@@ -842,7 +906,7 @@ window.GovJobUpdatesJobs = [
         "department": "Health",
         "category": "Health",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "1200",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-21",
@@ -859,7 +923,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2390",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2391",
@@ -868,7 +934,7 @@ window.GovJobUpdatesJobs = [
         "department": "Forest and Jail",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "1679",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -885,7 +951,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2391",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2392",
@@ -894,7 +962,7 @@ window.GovJobUpdatesJobs = [
         "department": "Judiciary",
         "category": "State PSC",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "173",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -911,7 +979,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2392",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2393",
@@ -920,7 +990,7 @@ window.GovJobUpdatesJobs = [
         "department": "Court",
         "category": "Judiciary",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "53",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -937,7 +1007,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2393",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2394",
@@ -946,7 +1018,7 @@ window.GovJobUpdatesJobs = [
         "department": "Public Sector",
         "category": "Public Sector",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "330",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -963,7 +1035,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2394",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2396",
@@ -972,7 +1046,7 @@ window.GovJobUpdatesJobs = [
         "department": "Medical Education",
         "category": "Health",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "642",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -989,7 +1063,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2396",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2397",
@@ -998,7 +1074,7 @@ window.GovJobUpdatesJobs = [
         "department": "Banking",
         "category": "Banking",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Graduate degree or post-wise banking qualification as per official notification.",
         "totalPosts": "180",
         "startDate": "2026-05-01",
         "lastDate": "2026-04-30",
@@ -1015,7 +1091,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2397",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2398",
@@ -1024,7 +1102,7 @@ window.GovJobUpdatesJobs = [
         "department": "Police",
         "category": "Police",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
         "totalPosts": "1865",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-01",
@@ -1041,7 +1119,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2398",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2399",
@@ -1050,7 +1130,7 @@ window.GovJobUpdatesJobs = [
         "department": "Banking",
         "category": "Banking",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "ITI, diploma, graduation or trade-wise qualification as per official notification.",
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-19",
@@ -1067,7 +1147,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2399",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2400",
@@ -1076,7 +1158,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "Teaching",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-03",
@@ -1093,7 +1175,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2400",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2401",
@@ -1102,7 +1186,7 @@ window.GovJobUpdatesJobs = [
         "department": "Admission",
         "category": "Education",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "Not specified",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-18",
@@ -1119,7 +1203,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2401",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2402",
@@ -1128,7 +1214,7 @@ window.GovJobUpdatesJobs = [
         "department": "Banking",
         "category": "Banking",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Graduate degree or post-wise banking qualification as per official notification.",
         "totalPosts": "60",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-20",
@@ -1145,7 +1231,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2402",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2403",
@@ -1154,7 +1242,7 @@ window.GovJobUpdatesJobs = [
         "department": "Education",
         "category": "Teaching",
         "year": "2025",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
         "totalPosts": "107",
         "startDate": "2026-05-23",
         "lastDate": "2026-05-30",
@@ -1171,7 +1259,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2403",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2404",
@@ -1180,7 +1270,7 @@ window.GovJobUpdatesJobs = [
         "department": "State PSC",
         "category": "State PSC",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "17",
         "startDate": "2026-04-09",
         "lastDate": "2026-05-08",
@@ -1197,7 +1287,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2404",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2405",
@@ -1206,7 +1298,7 @@ window.GovJobUpdatesJobs = [
         "department": "State SSC",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "209",
         "startDate": "2026-06-19",
         "lastDate": "2026-07-09",
@@ -1223,7 +1315,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2405",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2406",
@@ -1232,7 +1326,7 @@ window.GovJobUpdatesJobs = [
         "department": "Women and Child Development",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "61601",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-16",
@@ -1249,7 +1343,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2406",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2407",
@@ -1258,7 +1354,7 @@ window.GovJobUpdatesJobs = [
         "department": "Banking",
         "category": "Banking",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Graduate degree or post-wise banking qualification as per official notification.",
         "totalPosts": "116",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-15",
@@ -1275,7 +1371,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2407",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2408",
@@ -1284,7 +1382,7 @@ window.GovJobUpdatesJobs = [
         "department": "SSC",
         "category": "Staff Selection",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "731",
         "startDate": "2026-04-24",
         "lastDate": "2026-05-15",
@@ -1301,7 +1399,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2408",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2409",
@@ -1310,7 +1410,7 @@ window.GovJobUpdatesJobs = [
         "department": "SSC",
         "category": "Staff Selection",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "3003",
         "startDate": "2026-05-13",
         "lastDate": "2026-05-04",
@@ -1327,7 +1427,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2409",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2410",
@@ -1336,7 +1438,7 @@ window.GovJobUpdatesJobs = [
         "department": "SSC",
         "category": "Staff Selection",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "84",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-14",
@@ -1353,7 +1455,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2410",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2411",
@@ -1362,7 +1466,7 @@ window.GovJobUpdatesJobs = [
         "department": "Defence",
         "category": "Defence",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
         "totalPosts": "887",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-04",
@@ -1379,7 +1483,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2411",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2412",
@@ -1388,7 +1494,7 @@ window.GovJobUpdatesJobs = [
         "department": "State SSC",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "929",
         "startDate": "2026-04-21",
         "lastDate": "2026-05-15",
@@ -1405,7 +1511,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2412",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2413",
@@ -1414,7 +1522,7 @@ window.GovJobUpdatesJobs = [
         "department": "Power",
         "category": "Engineering",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
         "totalPosts": "622",
         "startDate": "2026-05-01",
         "lastDate": "2026-05-10",
@@ -1431,7 +1539,9 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details.html?id=2413",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     },
     {
         "id": "2414",
@@ -1440,7 +1550,7 @@ window.GovJobUpdatesJobs = [
         "department": "Forest",
         "category": "State Government",
         "year": "2026",
-        "qualification": "View Details For Educational Qualification",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "708",
         "startDate": "2026-05-01",
         "lastDate": "2026-07-20",
@@ -1457,6 +1567,8 @@ window.GovJobUpdatesJobs = [
         "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "needsReview": "yes",
+        "qualificationSource": "fallback"
     }
 ];

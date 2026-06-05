@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "check:links": "node scripts/check-links.js",
+    "validate:links": "node scripts/validate-site-links.js",
+    "validate:sheet-data": "node scripts/sync-apps-script-to-js.js --validate-sheet-data",
     "generate:sitemap": "node scripts/generate-sitemap.js"
   }
 }

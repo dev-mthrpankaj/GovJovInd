@@ -59,6 +59,47 @@ A valid record must have:
 
 If one source fails, the script logs the error clearly. Existing data files remain safe.
 
+### Qualification sanitization
+
+`Latest Jobs` qualifications are sanitized during static export before `JS/jobs-data.js` is written.
+
+The export script checks `qualificationSummary` first when that field is available in the API response, then falls back to the existing `qualification` value. Placeholder values such as `View Details`, `View Details For Educational Qualification`, `Read Official Notification`, `Check Notification`, `N/A`, `NA`, `*`, and empty values are never published unchanged.
+
+If neither `qualificationSummary` nor `qualification` is usable, the script publishes a conservative fallback based on the job title, category, and department, then adds:
+
+```js
+needsReview: "yes",
+qualificationSource: "fallback"
+```
+
+Rows with valid source qualification text receive:
+
+```js
+needsReview: "no",
+qualificationSource: "qualification"
+```
+
+or:
+
+```js
+needsReview: "no",
+qualificationSource: "qualificationSummary"
+```
+
+Each export writes a validation report:
+
+```text
+reports/sheet-validation-report.json
+```
+
+Run the report/data check with:
+
+```bash
+npm run validate:sheet-data
+```
+
+This confirms that placeholder qualification values were not published, that the validation report exists, and that fallback rows are listed without failing the sync.
+
 ## Data format
 
 ### Latest Jobs
@@ -73,6 +114,12 @@ Generated variable:
 
 ```js
 window.GovJobUpdatesJobs
+```
+
+Generated job records may also include:
+
+```text
+needsReview, qualificationSource
 ```
 
 ### Admit Cards
