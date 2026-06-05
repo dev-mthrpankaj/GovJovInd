@@ -577,7 +577,7 @@
 
     function getQuestionsForSet(quizSet) {
         const questions = Array.isArray(quizSet.questions) ? quizSet.questions : [];
-        return questions.slice(0, Number(quizSet.totalQuestions) || 50).map(function (question, index) {
+        return questions.slice(0, Number(quizSet.totalQuestions) || questions.length).map(function (question, index) {
             const normalizedOptions = normalizeOptions(question.options);
             return {
                 id: question.id || `${quizSet.id}-${index + 1}`,
@@ -842,7 +842,10 @@
 
     function openResumeModal(quizSet, saved) {
         state.pendingResume = { quizSet, saved };
-        const current = clamp(Number(saved.current) || 0, 0, Math.max(0, Number(quizSet.totalQuestions) || 50) - 1) + 1;
+        const questionCount = Array.isArray(quizSet.questions) && quizSet.questions.length
+            ? quizSet.questions.length
+            : Number(quizSet.totalQuestions) || (Array.isArray(saved.answers) ? saved.answers.length : 1);
+        const current = clamp(Number(saved.current) || 0, 0, Math.max(1, questionCount) - 1) + 1;
         const remaining = Math.max(0, Math.ceil((Number(saved.endsAt) - Date.now()) / 1000));
         setText(elements.resumeSummary, `You have an unfinished attempt on Question ${current}. Time left: ${formatTime(remaining)}.`);
         elements.resumeModal?.classList.remove("hidden");

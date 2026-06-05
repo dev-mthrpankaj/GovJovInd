@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    const REQUIRED_QUESTION_COUNT = 50;
+    const DEFAULT_QUESTION_COUNT = 50;
     const SCRIPT_TIMEOUT_MS = 15000;
     const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "Reasoning", "Computer"];
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
@@ -114,7 +114,7 @@
             title,
             description,
             durationMinutes: 30,
-            totalQuestions: REQUIRED_QUESTION_COUNT,
+            totalQuestions: DEFAULT_QUESTION_COUNT,
             marksPerQuestion: 1,
             negativeMarks: 0.25,
             difficulty,
@@ -202,7 +202,9 @@
             title: rawQuiz.title,
             description: rawQuiz.description || "",
             durationMinutes: Number(rawQuiz.durationMinutes) || 30,
-            totalQuestions: Number(rawQuiz.totalQuestions) || REQUIRED_QUESTION_COUNT,
+            totalQuestions: Array.isArray(rawQuiz.questions) && rawQuiz.questions.length
+                ? rawQuiz.questions.length
+                : Number(rawQuiz.totalQuestions) || DEFAULT_QUESTION_COUNT,
             marksPerQuestion: Number(rawQuiz.marksPerQuestion) || 1,
             negativeMarks: Number(rawQuiz.negativeMarks) || 0,
             difficulty: rawQuiz.difficulty || "Mixed",
@@ -228,8 +230,8 @@
             negativeMarks: Number(question.negativeMarks) || quiz.negativeMarks
         }));
 
-        if (quiz.questions.length !== REQUIRED_QUESTION_COUNT) {
-            quiz.validation.errors.push(`Quiz must contain exactly ${REQUIRED_QUESTION_COUNT} questions.`);
+        if (!quiz.questions.length) {
+            quiz.validation.errors.push("Quiz must contain at least 1 question.");
         }
 
         const ids = new Set();
