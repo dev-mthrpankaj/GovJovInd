@@ -22,8 +22,8 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1006",

@@ -3,7 +3,10 @@
 // Do not edit manually when sync is enabled.
 
 window.GovJobUpdatesJobs = [
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95ce7dda05cbdf90c9f9597cf041aa7eff7e3af2
     {
         "id": "2443",
         "title": "Junior Secretariat Assistant / Lower Division Clerk Grade Limited Departmental Competitive Examination, 2026",
