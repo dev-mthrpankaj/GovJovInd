@@ -3,37 +3,7 @@
 // Do not edit manually when sync is enabled.
 
 window.GovJobUpdatesJobs = [
-    {
-        "id": "1008",
-        "title": "SSC Delhi Police Head Constable Ministerial Recruitment 2026",
-        "organization": "Staff Selection Commission / Delhi Police",
-        "department": "SSC",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "10+2 Senior Secondary pass or equivalent from a recognized board with English typing speed 30 WPM or Hindi typing speed 25 WPM.",
-        "totalPosts": "509",
-        "startDate": "2025-09-29",
-        "lastDate": "2025-10-20",
-        "status": "closed",
-        "tags": [
-            "SSC Delhi Police Head Constable Ministerial Recruitment 2026",
-            "Head Constable Ministerial",
-            "Delhi Police",
-            "Sarkari Naukri",
-            "Central Government Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "https://ssc.gov.in/",
-        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_DPHCM_2025.pdf",
-        "detailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
-        "updatedAt": "2026-06-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "no",
-        "qualificationSource": "official-notification",
-        "detailPageSource": "manual",
-        "detailPageNeedsReview": "no"
-    },
+
     {
         "id": "2443",
         "title": "Junior Secretariat Assistant / Lower Division Clerk Grade Limited Departmental Competitive Examination, 2026",
