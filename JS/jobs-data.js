@@ -165,7 +165,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "543",
         "startDate": "2026-06-06",
         "lastDate": "2026-06-20",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Allahabad High Court Recruitment 2026",
             "Allahabad High Court RO / ARO / CA",
