@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1008",
+        "title": "SSC Delhi Police Head Constable (Ministerial) Result",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Results",
+        "year": "2026",
+        "resultDate": "2026-06-05",
+        "status": "released",
+        "tags": [
+            "SSC"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no"
+    },
+    {
         "id": "1006",
         "title": "SSC JHT Paper-II Result 2026 – Out",
         "organization": "Staff Selection Commission",
@@ -38,7 +56,7 @@ window.GovJobUpdatesResults = [
             "REET",
             "Upper Primary Teacher"
         ],
-        "resultLink": "https://rssb.rajasthan.gov.in/results",
+        "resultLink": "",
         "detailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
@@ -769,22 +787,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in/",
         "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no"
-    },
-    {
-        "id": "1008",
-        "title": "SSC Delhi Police Head Constable (Ministerial) Result",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Results",
-        "year": "2026",
-        "resultDate": "2026",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no"
     }
