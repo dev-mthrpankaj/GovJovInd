@@ -26,7 +26,9 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2031",
@@ -47,10 +49,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://drive.google.com/file/d/13w6WvB7OLcx1l0Clntsv3DPqIfXGwnyR/view",
         "objectionLink": "#",
-        "detailPage": "./Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4032",
@@ -72,10 +76,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://subsi2025mains.cbtexam.in/Home/ListofExam.aspx",
         "objectionLink": "https://subsi2025mains.cbtexam.in/Home/ListofExam.aspx",
-        "detailPage": "",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4031",
@@ -95,10 +101,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2026/05/04191714/UPSSSC-Junior-Engineer-Answer-Key-2026-PDF.pdf",
         "objectionLink": "https://examqp.com/upssscLekhv02n/",
-        "detailPage": "",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4001",
@@ -119,10 +127,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4001.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4002",
@@ -143,10 +153,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4002.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2425",
@@ -167,10 +179,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4004",
@@ -191,10 +205,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4004.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4005",
@@ -215,10 +231,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4005.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4006",
@@ -239,10 +257,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4006.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4007",
@@ -263,10 +283,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4007.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4008",
@@ -287,10 +309,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4008.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4009",
@@ -311,10 +335,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4009.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4010",
@@ -335,10 +361,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4010.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4011",
@@ -359,10 +387,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4011.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4012",
@@ -383,10 +413,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4012.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4013",
@@ -407,10 +439,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4013.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4014",
@@ -431,10 +465,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4014.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4015",
@@ -455,10 +491,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4015.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4016",
@@ -479,10 +517,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4016.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4017",
@@ -503,10 +543,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4017.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4018",
@@ -527,10 +569,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4018.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4019",
@@ -551,10 +595,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4019.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4020",
@@ -575,10 +621,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4020.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4021",
@@ -599,10 +647,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4021.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4022",
@@ -623,10 +673,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4022.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4023",
@@ -647,10 +699,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4023.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4024",
@@ -671,10 +725,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4024.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4025",
@@ -695,10 +751,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4025.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4026",
@@ -719,10 +777,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4027",
@@ -743,10 +803,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4027.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4028",
@@ -767,10 +829,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4028.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4029",
@@ -791,10 +855,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4029.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-4030",
@@ -815,9 +881,11 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "#",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4030.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];

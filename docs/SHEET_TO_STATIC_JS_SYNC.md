@@ -100,6 +100,47 @@ npm run validate:sheet-data
 
 This confirms that placeholder qualification values were not published, that the validation report exists, and that fallback rows are listed without failing the sync.
 
+### Detail page link sanitization
+
+Every exported `detailPage` value is validated before the static JS files are written. Broken local links from the Sheet are replaced with safe listing/detail fallbacks so generated data does not publish missing detail pages.
+
+The script treats a `detailPage` value as broken when it is empty, malformed, contains `.html.html`, points at a missing local file, uses the wrong relative path, or targets a missing job/result/answer key/admit card detail page.
+
+Fallbacks are:
+
+```text
+jobs: ../Job_Details/HTML/job-details.html?id=<id>
+admitCards: ../HTML/admitcard.html
+answerKeys: ../HTML/answer-key.html
+results: ../HTML/results.html
+```
+
+Rows with a Sheet detail page that exists receive:
+
+```js
+detailPageSource: "sheet",
+detailPageNeedsReview: "no"
+```
+
+Rows where the fallback is used receive:
+
+```js
+detailPageSource: "fallback",
+detailPageNeedsReview: "yes"
+```
+
+Each export also writes:
+
+```text
+reports/sheet-link-validation-report.json
+```
+
+Run the generated link-data check with:
+
+```bash
+npm run validate:sheet-links
+```
+
 ## Data format
 
 ### Latest Jobs
@@ -119,7 +160,7 @@ window.GovJobUpdatesJobs
 Generated job records may also include:
 
 ```text
-needsReview, qualificationSource
+needsReview, qualificationSource, detailPageSource, detailPageNeedsReview
 ```
 
 ### Admit Cards

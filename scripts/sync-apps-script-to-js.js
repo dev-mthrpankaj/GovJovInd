@@ -27,6 +27,19 @@ const HTML_CACHE_TARGETS = [
 
 const REPORT_DIR = path.join(ROOT_DIR, "reports");
 const SHEET_VALIDATION_REPORT_PATH = path.join(REPORT_DIR, "sheet-validation-report.json");
+const SHEET_LINK_VALIDATION_REPORT_PATH = path.join(REPORT_DIR, "sheet-link-validation-report.json");
+const GENERATED_DATA_FILES = {
+  jobs: { file: path.join(ROOT_DIR, "JS", "jobs-data.js"), globalVariable: "GovJobUpdatesJobs" },
+  admitCards: { file: path.join(ROOT_DIR, "JS", "admitcard-data.js"), globalVariable: "GovJobUpdatesAdmitCards" },
+  answerKeys: { file: path.join(ROOT_DIR, "JS", "answerkey-data.js"), globalVariable: "GovJobUpdatesAnswerKeys" },
+  results: { file: path.join(ROOT_DIR, "JS", "results-data.js"), globalVariable: "GovJobUpdatesResults" }
+};
+const DETAIL_PAGE_FALLBACKS = {
+  jobs: (record) => `../Job_Details/HTML/job-details.html?id=${encodeURIComponent(String(record.id || "").replace(/^job-/, ""))}`,
+  admitCards: () => "../HTML/admitcard.html",
+  answerKeys: () => "../HTML/answer-key.html",
+  results: () => "../HTML/results.html"
+};
 const PLACEHOLDER_QUALIFICATIONS = new Set([
   "view details for educational qualification",
   "view details",
@@ -259,6 +272,129 @@ function writeSheetValidationReport(report) {
   console.log(`Validation report: ${path.relative(ROOT_DIR, SHEET_VALIDATION_REPORT_PATH)}`);
 }
 
+function stripUrlFragmentAndQuery(value) {
+  return String(value || "").split("#")[0].split("?")[0].trim();
+}
+
+function decodeLocalPath(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function isExternalLink(value) {
+  return /^(https?:)?\/\//i.test(value);
+}
+
+function isMalformedDetailPage(value) {
+  if (!value) return true;
+  if (/[\u0000-\u001f]/.test(value)) return true;
+  if (/\.html\.html(?:$|[?#])/i.test(value)) return true;
+  if (/^(mailto:|tel:|sms:|javascript:|data:)/i.test(value)) return true;
+  return false;
+}
+
+function localDetailPageExists(rawTarget) {
+  const clean = stripUrlFragmentAndQuery(rawTarget);
+  if (!clean || isExternalLink(clean)) return false;
+  const decoded = decodeLocalPath(clean);
+  const absolute = decoded.startsWith("/")
+    ? path.join(ROOT_DIR, decoded.slice(1))
+    : path.resolve(ROOT_DIR, "JS", decoded);
+  return fs.existsSync(absolute)
+    || fs.existsSync(`${absolute}.html`)
+    || fs.existsSync(path.join(absolute, "index.html"));
+}
+
+function getDetailPageFallback(record, contentType) {
+  const fallback = DETAIL_PAGE_FALLBACKS[contentType];
+  return fallback ? fallback(record) : "";
+}
+
+function getDetailPageValidationReason(detailPage) {
+  const value = normalizeText(detailPage);
+  if (!value) return "empty detailPage";
+  if (/\.html\.html(?:$|[?#])/i.test(value)) return ".html.html detailPage";
+  if (isMalformedDetailPage(value)) return "malformed detailPage";
+  if (isExternalLink(value)) return "external detailPage is not allowed for listing detail pages";
+  if (!localDetailPageExists(value)) return "missing local detailPage target";
+  return "valid detailPage";
+}
+
+function sanitizeDetailPage(record, contentType) {
+  const originalDetailPage = normalizeText(record.detailPage);
+  const reason = getDetailPageValidationReason(originalDetailPage);
+  if (reason === "valid detailPage") {
+    return {
+      ...record,
+      detailPage: originalDetailPage,
+      detailPageSource: "sheet",
+      detailPageNeedsReview: "no",
+      __detailPageValidation: {
+        originalDetailPage,
+        publishedDetailPage: originalDetailPage,
+        reason,
+        detailPageNeedsReview: "no",
+        source: "sheet"
+      }
+    };
+  }
+
+  const fallback = getDetailPageFallback(record, contentType);
+  return {
+    ...record,
+    detailPage: fallback,
+    detailPageSource: "fallback",
+    detailPageNeedsReview: "yes",
+    __detailPageValidation: {
+      originalDetailPage,
+      publishedDetailPage: fallback,
+      reason,
+      detailPageNeedsReview: "yes",
+      source: "fallback"
+    }
+  };
+}
+
+function sanitizeDetailPageRecords(records, contentType) {
+  const rows = [];
+  const sanitizedRecords = records.map((record) => {
+    const sanitized = sanitizeDetailPage(record, contentType);
+    rows.push({
+      type: contentType,
+      id: sanitized.id,
+      title: sanitized.title,
+      originalDetailPage: sanitized.__detailPageValidation.originalDetailPage,
+      publishedDetailPage: sanitized.__detailPageValidation.publishedDetailPage,
+      reason: sanitized.__detailPageValidation.reason,
+      detailPageNeedsReview: sanitized.__detailPageValidation.detailPageNeedsReview
+    });
+    delete sanitized.__detailPageValidation;
+    return sanitized;
+  });
+  return { records: sanitizedRecords, rows };
+}
+
+function buildSheetLinkValidationReport(rows) {
+  const fallbackRows = rows.filter((row) => row.detailPageNeedsReview === "yes");
+  return {
+    generatedAt: new Date().toISOString(),
+    totalRecords: rows.length,
+    validDetailPages: rows.filter((row) => row.detailPageNeedsReview === "no").length,
+    fallbackDetailPages: fallbackRows.length,
+    brokenLinksBlocked: fallbackRows.length,
+    rows
+  };
+}
+
+function writeSheetLinkValidationReport(report) {
+  fs.mkdirSync(REPORT_DIR, { recursive: true });
+  fs.writeFileSync(SHEET_LINK_VALIDATION_REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  console.log(`Link validation report: ${path.relative(ROOT_DIR, SHEET_LINK_VALIDATION_REPORT_PATH)}`);
+}
+
 function getSortDate(record) {
   return Date.parse(record.updatedAt || record.releaseDate || record.startDate || record.resultDate || record.examDate || "");
 }
@@ -390,7 +526,7 @@ async function syncOne(apiUrl, source) {
 
   if (!records.length) {
     console.warn(`${source.label}: No valid records found. Existing file was not overwritten.`);
-    return false;
+    return { changed: false, detailPageRows: [] };
   }
 
   if (source.apiType === "jobs") {
@@ -399,13 +535,26 @@ async function syncOne(apiUrl, source) {
     writeSheetValidationReport(buildSheetValidationReport(source.label, records, sanitized.rows));
   }
 
+  const detailPages = sanitizeDetailPageRecords(records, source.apiType);
+  records = detailPages.records;
+
   const content = buildJs(source.globalVariable, sortRecords(records), source.label);
-  return writeIfChanged(source.outputFile, content);
+  return {
+    changed: writeIfChanged(source.outputFile, content),
+    detailPageRows: detailPages.rows
+  };
 }
 
 function extractGeneratedJobs(content) {
   const match = content.match(/window\.GovJobUpdatesJobs\s*=\s*(\[[\s\S]*?\]);?\s*$/);
   if (!match) throw new Error("Could not parse JS/jobs-data.js.");
+  return JSON.parse(match[1]);
+}
+
+function extractGeneratedRecords(content, globalVariable) {
+  const pattern = new RegExp(`window\\.${globalVariable}\\s*=\\s*(\\[[\\s\\S]*?\\]);?\\s*$`);
+  const match = content.match(pattern);
+  if (!match) throw new Error(`Could not parse generated data for ${globalVariable}.`);
   return JSON.parse(match[1]);
 }
 
@@ -433,6 +582,30 @@ function validateGeneratedSheetData() {
   console.log(`Sheet data validation passed. Jobs: ${jobs.length}. Fallback rows: ${fallbackRows.length}.`);
 }
 
+function validateGeneratedSheetLinks() {
+  if (!fs.existsSync(SHEET_LINK_VALIDATION_REPORT_PATH)) {
+    throw new Error("reports/sheet-link-validation-report.json does not exist.");
+  }
+
+  const report = readJson(SHEET_LINK_VALIDATION_REPORT_PATH);
+  if (!Array.isArray(report.rows)) throw new Error("Link validation report rows array is missing.");
+  const fallbackRows = report.rows.filter((row) => row.detailPageNeedsReview === "yes");
+  if (Number(report.fallbackDetailPages || 0) !== fallbackRows.length) {
+    throw new Error("Link validation report fallbackDetailPages count does not match rows.");
+  }
+
+  Object.entries(GENERATED_DATA_FILES).forEach(([type, config]) => {
+    if (!fs.existsSync(config.file)) throw new Error(`${path.relative(ROOT_DIR, config.file)} does not exist.`);
+    const records = extractGeneratedRecords(fs.readFileSync(config.file, "utf8"), config.globalVariable);
+    const broken = records.filter((record) => getDetailPageValidationReason(record.detailPage) !== "valid detailPage");
+    if (broken.length) throw new Error(`${type}: found ${broken.length} invalid generated detailPage values.`);
+    const missingReviewFlag = records.filter((record) => record.detailPageSource === "fallback" && record.detailPageNeedsReview !== "yes");
+    if (missingReviewFlag.length) throw new Error(`${type}: fallback detailPage rows must include detailPageNeedsReview: yes.`);
+  });
+
+  console.log(`Sheet link validation passed. Records: ${report.totalRecords}. Fallback detailPages: ${fallbackRows.length}.`);
+}
+
 function buildVersion() {
   const date = new Date();
   const pad = (value) => String(value).padStart(2, "0");
@@ -444,6 +617,10 @@ async function main() {
     validateGeneratedSheetData();
     return;
   }
+  if (process.argv.includes("--validate-sheet-links")) {
+    validateGeneratedSheetLinks();
+    return;
+  }
 
   const config = readJson(CONFIG_PATH);
   const apiUrl = resolveApiUrl(config);
@@ -451,15 +628,21 @@ async function main() {
 
   let dataChanged = false;
   let failed = false;
+  const detailPageRows = [];
 
   for (const source of config.sources) {
     try {
-      const didChange = await syncOne(apiUrl, source);
-      dataChanged = dataChanged || didChange;
+      const result = await syncOne(apiUrl, source);
+      dataChanged = dataChanged || result.changed;
+      detailPageRows.push(...result.detailPageRows);
     } catch (error) {
       failed = true;
       console.error(`Failed: ${source.label}: ${error.message}`);
     }
+  }
+
+  if (detailPageRows.length) {
+    writeSheetLinkValidationReport(buildSheetLinkValidationReport(detailPageRows));
   }
 
   let htmlChanged = false;

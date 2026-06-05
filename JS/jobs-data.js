@@ -29,7 +29,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2442",
@@ -57,7 +59,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2438",
@@ -85,7 +89,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2440",
@@ -113,7 +119,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2437",
@@ -141,7 +149,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2439",
@@ -169,7 +179,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2435",
@@ -197,7 +209,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2436",
@@ -225,7 +239,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2395",
@@ -253,7 +269,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2434",
@@ -281,7 +299,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2432",
@@ -309,7 +329,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2433",
@@ -337,7 +359,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2430",
@@ -365,7 +389,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2426",
@@ -388,12 +414,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
-        "detailPage": "./Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2426",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2428",
@@ -416,12 +444,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://recruitment.nhidcl.com/login",
         "officialNotification": "https://mudira.nalcoindia.co.in/iorms/Uploaded_Data/Advertisement/639144655968105605_Final%20Adv%2010260213%2014%20May2026.pdf",
-        "detailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2428",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2429",
@@ -444,12 +474,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://tsgrecruitment.edcil.co.in/login",
         "officialNotification": "https://www.edcilindia.co.in/Default/ViewFile/?id=1779401966084_Deatailed%20Advertisment%20for%20the%20Recruitment%20of%20875%20Multidisciplinary%20Staff%20(Inclusive%20Education-AP).pdf&path=TCareer",
-        "detailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2429",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2424",
@@ -472,12 +504,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
         "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
-        "detailPage": "./Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2424",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2425",
@@ -500,12 +534,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpWKZKwi+DnPk65dPKCM/WfAewISjjqbPGo=",
-        "detailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2425",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
-        "qualificationSource": "qualification"
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2422",
@@ -528,12 +564,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
         "officialNotification": "",
-        "detailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2422",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2423",
@@ -556,12 +594,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
-        "detailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2423",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2427",
@@ -584,12 +624,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn3.digialm.com/EForms/configuredHtml/32046/96555/Registration.html",
         "officialNotification": "https://sssc.gov.in/storage/notices/haryana%20clerk%2036C.pdf",
-        "detailPage": "./Job_Details/HTML/job-details.html?id=2427",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2427",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2418",
@@ -612,12 +654,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
-        "detailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2418",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2421",
@@ -640,12 +684,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ssc.gov.in/",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
-        "detailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2421",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2417",
@@ -668,12 +714,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
-        "detailPage": "./Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2417",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2419",
@@ -696,12 +744,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-NDA-II-2026-Engl-200526.pdf",
-        "detailPage": "./Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2419",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2420",
@@ -724,12 +774,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://upsc.gov.in/sites/default/files/Notif-CDS-II-2026-Engl-200526.pdf",
-        "detailPage": "./Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2420",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2415",
@@ -752,12 +804,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
-        "detailPage": "./Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2415",
         "updatedAt": "2026-05-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2416",
@@ -780,12 +834,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/index.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
-        "detailPage": "./Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2416",
         "updatedAt": "2026-05-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2386",
@@ -813,7 +869,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2387",
@@ -841,7 +899,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2388",
@@ -869,7 +929,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2389",
@@ -897,7 +959,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2390",
@@ -925,7 +989,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2391",
@@ -953,7 +1019,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2392",
@@ -981,7 +1049,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2393",
@@ -1009,7 +1079,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2394",
@@ -1037,7 +1109,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2396",
@@ -1065,7 +1139,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2397",
@@ -1093,7 +1169,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2398",
@@ -1121,7 +1199,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2399",
@@ -1149,7 +1229,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2400",
@@ -1177,7 +1259,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2401",
@@ -1205,7 +1289,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2402",
@@ -1233,7 +1319,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2403",
@@ -1261,7 +1349,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2404",
@@ -1289,7 +1379,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2405",
@@ -1317,7 +1409,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2406",
@@ -1345,7 +1439,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2407",
@@ -1373,7 +1469,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2408",
@@ -1401,7 +1499,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2409",
@@ -1429,7 +1529,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2410",
@@ -1457,7 +1559,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2411",
@@ -1485,7 +1589,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2412",
@@ -1513,7 +1619,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2413",
@@ -1541,7 +1649,9 @@ window.GovJobUpdatesJobs = [
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2414",
@@ -1564,11 +1674,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
-        "detailPage": "../Job_Details/HTML/job-details-job-1030.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2414",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
-        "qualificationSource": "fallback"
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];

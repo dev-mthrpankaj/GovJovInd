@@ -23,7 +23,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2395",
@@ -45,7 +47,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2048",
@@ -67,7 +71,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2047",
@@ -89,7 +95,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
         "updatedAt": "2026-05-26",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2045",
@@ -110,7 +118,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2046",
@@ -130,7 +140,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2044",
@@ -148,10 +160,12 @@ window.GovJobUpdatesAdmitCards = [
             "B.ed"
         ],
         "downloadLink": "https://cdn3.digialm.com/EForms/configuredHtml/1936/97469/login.html",
-        "detailPage": "",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-22",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2001",
@@ -173,7 +187,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2043",
@@ -192,10 +208,12 @@ window.GovJobUpdatesAdmitCards = [
             "Subedar"
         ],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-19",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2041",
@@ -219,7 +237,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-05-18",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-2031",
@@ -241,7 +261,9 @@ window.GovJobUpdatesAdmitCards = [
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-16",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-2002",
@@ -260,10 +282,12 @@ window.GovJobUpdatesAdmitCards = [
             "Exam City"
         ],
         "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/100181/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2006",
@@ -282,10 +306,12 @@ window.GovJobUpdatesAdmitCards = [
             "Exam City"
         ],
         "downloadLink": "https://admitcards.upessc.org/",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2007",
@@ -304,10 +330,12 @@ window.GovJobUpdatesAdmitCards = [
             "Exam City"
         ],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/AcCuetUG/Login?enc=kEinmH8aTDfj7UJERQYzpuwaXWY32HbjAGdMV/iRIao=",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2010",
@@ -326,10 +354,12 @@ window.GovJobUpdatesAdmitCards = [
             "Stenographer"
         ],
         "downloadLink": "https://blcsrecruitment.com/pa-admit-login.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2011",
@@ -348,10 +378,12 @@ window.GovJobUpdatesAdmitCards = [
             "Medical"
         ],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/AdmitCardNeet/Login",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2012",
@@ -370,10 +402,12 @@ window.GovJobUpdatesAdmitCards = [
             "Admit Card"
         ],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2013",
@@ -392,10 +426,12 @@ window.GovJobUpdatesAdmitCards = [
             "Nursing Officer"
         ],
         "downloadLink": "https://aiimsexams.ac.in/auth/login",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2014",
@@ -414,10 +450,12 @@ window.GovJobUpdatesAdmitCards = [
             "Havildar Clerk"
         ],
         "downloadLink": "https://apply-bpssc.com/bpssc_2_26_weadmtcards/searchApplication",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2015",
@@ -436,10 +474,12 @@ window.GovJobUpdatesAdmitCards = [
             "Subedar"
         ],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/SI_SUBEDAR_TAC25/SECOND_PHASE/default_tac.htm",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2016",
@@ -458,10 +498,12 @@ window.GovJobUpdatesAdmitCards = [
             "Teaching"
         ],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=EEP+dlELs9l9omgfzwkwilTQxlMGXkWU55AE5Wb1VH8=",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2017",
@@ -480,10 +522,12 @@ window.GovJobUpdatesAdmitCards = [
             "Interview"
         ],
         "downloadLink": "https://typist.jhc.org.in/",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2019",
@@ -502,10 +546,12 @@ window.GovJobUpdatesAdmitCards = [
             "Jharkhand"
         ],
         "downloadLink": "https://jpscotr.com/",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2020",
@@ -524,10 +570,12 @@ window.GovJobUpdatesAdmitCards = [
             "Admit Card"
         ],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=02jsGbPXRnlNklWmUL0mr0//xbCyJx3VCiGP6Cn924w=",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2021",
@@ -546,10 +594,12 @@ window.GovJobUpdatesAdmitCards = [
             "Stage II"
         ],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=b/zXyDRWih1jyvh1zE9EhuZG+7ttNGJXcQr4SICSpNb0+8SWQTa1F+JVF5CSIC1H",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2025",
@@ -568,10 +618,12 @@ window.GovJobUpdatesAdmitCards = [
             "Mains"
         ],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2028",
@@ -590,10 +642,12 @@ window.GovJobUpdatesAdmitCards = [
             "PMT"
         ],
         "downloadLink": "https://adv012026.hryssc.com/",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2029",
@@ -612,10 +666,12 @@ window.GovJobUpdatesAdmitCards = [
             "Admit Card"
         ],
         "downloadLink": "https://bpsconline.bihar.gov.in/candidate/login",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-2030",
@@ -634,9 +690,11 @@ window.GovJobUpdatesAdmitCards = [
             "PSU"
         ],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/97756/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];

@@ -22,7 +22,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1007",
@@ -42,7 +44,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "999",
@@ -62,7 +66,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/999-DPC-execuitive-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1005",
@@ -83,7 +89,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1005-IB-ACIO-Executive-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1002",
@@ -106,7 +114,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1003",
@@ -123,10 +133,12 @@ window.GovJobUpdatesResults = [
             "Exam Result"
         ],
         "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
-        "detailPage": "../Job_Details/HTML/1003-UP-PGT-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "1004",
@@ -146,7 +158,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1000",
@@ -168,7 +182,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1001",
@@ -190,7 +206,9 @@ window.GovJobUpdatesResults = [
         "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
-        "telegramReady": "yes"
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-3001",
@@ -207,10 +225,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://upsssc.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3001.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3002",
@@ -227,10 +247,12 @@ window.GovJobUpdatesResults = [
             "PET"
         ],
         "resultLink": "https://upsssc.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3002.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3003",
@@ -247,10 +269,12 @@ window.GovJobUpdatesResults = [
             "PET"
         ],
         "resultLink": "http://upsssc.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3003.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3004",
@@ -267,10 +291,12 @@ window.GovJobUpdatesResults = [
             "Class 12"
         ],
         "resultLink": "https://results.cisce.org/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3004.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3005",
@@ -287,10 +313,12 @@ window.GovJobUpdatesResults = [
             "Rajasthan"
         ],
         "resultLink": "https://rpsc.rajasthan.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3005.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3006",
@@ -307,10 +335,12 @@ window.GovJobUpdatesResults = [
             "Rajasthan"
         ],
         "resultLink": "https://rpsc.rajasthan.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3006.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "998",
@@ -327,10 +357,12 @@ window.GovJobUpdatesResults = [
             "Driver"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/result-details-result-3007.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3008",
@@ -347,10 +379,12 @@ window.GovJobUpdatesResults = [
             "Class 12"
         ],
         "resultLink": "https://cgbse.nic.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3008.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3009",
@@ -367,10 +401,12 @@ window.GovJobUpdatesResults = [
             "Pre Result"
         ],
         "resultLink": "https://vidhanparishad.bihar.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3009.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3010",
@@ -387,10 +423,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://navodaya.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3010.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3011",
@@ -407,10 +445,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://uppsc.up.nic.in/CandidatePages/Result/Results.aspx",
-        "detailPage": "../Result_Details/HTML/result-details-result-3011.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3012",
@@ -427,10 +467,12 @@ window.GovJobUpdatesResults = [
             "PET"
         ],
         "resultLink": "https://csbc.bihar.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3012.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3013",
@@ -447,10 +489,12 @@ window.GovJobUpdatesResults = [
             "Board Result"
         ],
         "resultLink": "https://ahsec.assam.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3013.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3014",
@@ -467,10 +511,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://brlps.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3014.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3016",
@@ -487,10 +533,12 @@ window.GovJobUpdatesResults = [
             "Class 12"
         ],
         "resultLink": "https://www.upmsp.edu.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3016.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3017",
@@ -507,10 +555,12 @@ window.GovJobUpdatesResults = [
             "Class 12"
         ],
         "resultLink": "https://ubse.uk.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3017.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3018",
@@ -527,10 +577,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://exams.nta.nic.in/cuet-pg/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3018.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3019",
@@ -547,10 +599,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://delhihighcourt.nic.in/web/recruitment-results-current",
-        "detailPage": "../Result_Details/HTML/result-details-result-3019.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3020",
@@ -567,10 +621,12 @@ window.GovJobUpdatesResults = [
             "Banking"
         ],
         "resultLink": "https://pnb.bank.in/Recruitments.aspx",
-        "detailPage": "../Result_Details/HTML/result-details-result-3020.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3021",
@@ -587,10 +643,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://patnahighcourt.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3021.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3022",
@@ -607,10 +665,12 @@ window.GovJobUpdatesResults = [
             "Class 10"
         ],
         "resultLink": "https://jacresults.com/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3022.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3023",
@@ -627,10 +687,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://karresults.nic.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3023.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3024",
@@ -647,10 +709,12 @@ window.GovJobUpdatesResults = [
             "E-Certificate"
         ],
         "resultLink": "https://ugcnet.nta.nic.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3024.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3025",
@@ -667,10 +731,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://yantraindia.co.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3025.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3026",
@@ -687,10 +753,12 @@ window.GovJobUpdatesResults = [
             "Marks"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/result-details-result-3026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3027",
@@ -707,10 +775,12 @@ window.GovJobUpdatesResults = [
             "Answer Key"
         ],
         "resultLink": "https://www.jpsc.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3027.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3028",
@@ -727,10 +797,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://jkbose.jk.gov.in/results/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3028.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3029",
@@ -747,10 +819,12 @@ window.GovJobUpdatesResults = [
             "Session II"
         ],
         "resultLink": "https://jeemain.nta.nic.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3029.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-3030",
@@ -767,9 +841,29 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://rpsc.rajasthan.gov.in/",
-        "detailPage": "../Result_Details/HTML/result-details-result-3030.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
-        "telegramReady": "no"
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "1008",
+        "title": "SSC Delhi Police Head Constable (Ministerial) Result",
+        "organization": "Staff Selection Commission",
+        "department": "",
+        "category": "",
+        "year": "",
+        "resultDate": "",
+        "status": "active",
+        "tags": [],
+        "resultLink": "",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];
