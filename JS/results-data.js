@@ -18,10 +18,12 @@ window.GovJobUpdatesResults = [
             "Delhi Police Head Constable"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
-        "telegramReady": "no"
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "1006",
@@ -863,24 +865,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rpsc.rajasthan.gov.in/",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "1008",
-        "title": "SSC Delhi Police Head Constable (Ministerial) Result",
-        "organization": "Staff Selection Commission",
-        "department": "",
-        "category": "",
-        "year": "",
-        "resultDate": "",
-        "status": "active",
-        "tags": [],
-        "resultLink": "",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "detailPageSource": "fallback",
