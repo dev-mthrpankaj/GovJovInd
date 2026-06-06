@@ -72,19 +72,23 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
 
   function bindDashboard(){
     const loading=$("#dashboardLoading"), content=$("#dashboardContent"), guest=$("#dashboardGuest"), logoutBtn=$("#logoutBtn");
+    const dashboardLoginForm=$("#dashboardLoginForm"), dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"), dashboardMessage=$("#dashboardAuthMessage");
+    const showDashboardMessage=(msg,isError)=>{ if(!dashboardMessage) return; dashboardMessage.textContent=msg; dashboardMessage.classList.toggle("hidden", !msg); dashboardMessage.classList.toggle("error", !!isError); };
+    dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
+    dashboardGoogleBtn?.addEventListener("click", async()=>{ dashboardGoogleBtn.disabled=true; showDashboardMessage("",false); try{ const res=await signInWithPopup(auth,provider); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{createdAt:serverTimestamp(),role:"user"}); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ dashboardGoogleBtn.disabled=false; } });
     onAuthStateChanged(auth,(user)=>{
-      if(loading) loading.hidden=true;
       syncHeader(user);
-      if(!user){ clearSession(); if(guest) guest.hidden=false; if(content) content.hidden=true; return; }
+      if(!user){ clearSession(); if(logoutBtn) logoutBtn.textContent="Login"; if(loading) loading.hidden=false; if(guest) guest.hidden=true; if(content) content.hidden=true; return; }
       rememberSession(user);
-      if(guest) guest.hidden=true; if(content) content.hidden=false;
+      if(logoutBtn) logoutBtn.textContent="Logout";
+      if(loading) loading.hidden=true; if(guest) guest.hidden=true; if(content) content.hidden=false;
       $("#userName") && ($("#userName").textContent = user.displayName || "GovJobUpdates User");
       $("#userEmail") && ($("#userEmail").textContent = user.email || "No email available");
       $("#profileName") && ($("#profileName").textContent = user.displayName || "GovJobUpdates User");
       $("#profileEmail") && ($("#profileEmail").textContent = user.email || "No email available");
       saveUserSoft(user);
     });
-    logoutBtn?.addEventListener("click", async()=>{ await signOut(auth); clearSession(); syncHeader(null); go("login.html"); });
+    logoutBtn?.addEventListener("click", async()=>{ if(!auth.currentUser){ go("login.html"); return; } await signOut(auth); clearSession(); syncHeader(null); go("login.html"); });
   }
 
   onAuthStateChanged(auth,(user)=>{ if(user) rememberSession(user); else clearSession(); syncHeader(user); });

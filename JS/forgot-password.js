@@ -1,58 +1,68 @@
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
 (function () {
     "use strict";
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const auth = window.CandidateAuth;
-        const form = document.getElementById("forgotPasswordForm");
-        const message = document.getElementById("forgotPasswordMessage");
-        const button = document.getElementById("forgotPasswordSubmit");
+    const config = window.GJU_FIREBASE_CONFIG;
+    const form = document.getElementById("forgotPasswordForm");
+    const message = document.getElementById("forgotPasswordMessage");
+    const button = document.getElementById("forgotPasswordSubmit");
 
-        if (!auth || !form) return;
+    function showMessage(text, type = "info") {
+        if (!message) return;
+        message.textContent = text || "";
+        message.className = text ? `auth-message ${type}` : "auth-message hidden";
+    }
 
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const mobile = form.mobile.value.trim();
-            const email = form.email.value.trim();
-            const dob = form.dob.value.trim();
-            const password = form.password.value;
-            const normalizedMobile = auth.normalizeContact(mobile);
-            const normalizedEmail = auth.normalizeContact(email);
+    function setBusy(isBusy) {
+        if (!button) return;
+        button.disabled = isBusy;
+        button.textContent = isBusy ? "Sending..." : "Send Reset Link";
+    }
 
-            if (!mobile || !email || !dob || !password) {
-                auth.showMessage(message, "Please enter mobile number, email, date of birth, and new password.", "error");
-                return;
-            }
+    function readableError(error) {
+        const code = String(error?.code || "");
+        if (code.includes("invalid-email")) return "Please enter a valid email address.";
+        if (code.includes("user-not-found")) return "No account was found with this email address.";
+        if (code.includes("unauthorized-domain")) return "This domain is not authorized in Firebase Auth settings.";
+        return "Could not send reset email. Please try again.";
+    }
 
-            if (!/^\d{10}$/.test(normalizedMobile)) {
-                auth.showMessage(message, "Please enter a valid 10-digit mobile number.", "error");
-                return;
-            }
+    if (!form) return;
 
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
-                auth.showMessage(message, "Please enter a valid email address.", "error");
-                return;
-            }
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = String(form.email?.value || "").trim().toLowerCase();
 
-            if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/.test(password)) {
-                auth.showMessage(message, "New password must be alphanumeric with at least one letter and one number.", "error");
-                return;
-            }
+        if (!email) {
+            showMessage("Please enter your registered email address.", "error");
+            return;
+        }
 
-            const original = auth.setButtonBusy(button, true);
-            auth.showMessage(message, "");
-            try {
-                const result = await auth.resetCandidatePassword({ mobile, email, dob, password });
-                if (!result.success) {
-                    auth.showMessage(message, result.message || "Password reset failed. Please check your details.", "error");
-                    return;
-                }
-                form.reset();
-                auth.showMessage(message, "Password reset successfully. You can login now.", "success");
-            } catch {
-                auth.showMessage(message, "Server connection failed. Please try again.", "error");
-            } finally {
-                auth.setButtonBusy(button, false, original);
-            }
-        });
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showMessage("Please enter a valid email address.", "error");
+            return;
+        }
+
+        if (!config || !config.apiKey) {
+            showMessage("Firebase Auth is not configured on this page.", "error");
+            return;
+        }
+
+        setBusy(true);
+        showMessage("");
+
+        try {
+            const app = getApps().length ? getApps()[0] : initializeApp(config);
+            const auth = getAuth(app);
+            await sendPasswordResetEmail(auth, email);
+            form.reset();
+            showMessage("Password reset link sent. Please check your email inbox.", "success");
+        } catch (error) {
+            showMessage(readableError(error), "error");
+        } finally {
+            setBusy(false);
+        }
     });
 }());

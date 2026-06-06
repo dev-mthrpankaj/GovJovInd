@@ -644,6 +644,30 @@ window.GovJobVisitors = {
   start: startVisitorCounter
 };
 
+const bindAuthTabsFallback = () => {
+  const tabs = Array.from(document.querySelectorAll('[data-auth-tab]'));
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const authMessage = document.getElementById('authMessage');
+  if (!tabs.length || !loginForm || !signupForm) return;
+
+  tabs.forEach((tab) => {
+    if (tab.dataset.authTabFallbackBound) return;
+    tab.dataset.authTabFallbackBound = 'true';
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.authTab || 'login';
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+      loginForm.classList.toggle('hidden', target !== 'login');
+      signupForm.classList.toggle('hidden', target !== 'signup');
+      authMessage?.classList.add('hidden');
+    });
+  });
+};
+
 if (document.readyState === 'loading') {
   if (document.body) ensureSharedSiteChrome();
   else window.addEventListener('DOMContentLoaded', ensureSharedSiteChrome);
@@ -654,6 +678,7 @@ if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', markPageLoaded);
   window.addEventListener('DOMContentLoaded', applyAdControls);
   window.addEventListener('DOMContentLoaded', startVisitorCounter);
+  window.addEventListener('DOMContentLoaded', bindAuthTabsFallback);
 } else {
   ensureSharedSiteChrome();
   ensureMobileNavScrollLock();
@@ -663,6 +688,7 @@ if (document.readyState === 'loading') {
   markPageLoaded();
   applyAdControls();
   startVisitorCounter();
+  bindAuthTabsFallback();
 }
 window.addEventListener('pageshow', markPageLoaded);
 
