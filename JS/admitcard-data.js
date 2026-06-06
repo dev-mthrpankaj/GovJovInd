@@ -43,7 +43,7 @@ window.GovJobUpdatesAdmitCards = [
             "Senior Executive Trainee",
             "Telecom"
         ],
-        "downloadLink": "#",
+        "downloadLink": "https://www.externalexam.bsnl.co.in/",
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "draft",
