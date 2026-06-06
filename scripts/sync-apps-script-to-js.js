@@ -26,6 +26,7 @@ const HTML_CACHE_TARGETS = [
 ];
 
 const REPORT_DIR = path.join(ROOT_DIR, "reports");
+const SHEET_PREFLIGHT_REPORT_PATH = path.join(REPORT_DIR, "sheet-preflight-report.json");
 const SHEET_VALIDATION_REPORT_PATH = path.join(REPORT_DIR, "sheet-validation-report.json");
 const SHEET_LINK_VALIDATION_REPORT_PATH = path.join(REPORT_DIR, "sheet-link-validation-report.json");
 const GENERATED_DATA_FILES = {
@@ -86,6 +87,59 @@ const QUALIFICATION_SIGNALS = [
   "tet",
   "pet"
 ];
+const DATE_FIELDS = new Set([
+  "startDate",
+  "lastDate",
+  "examDate",
+  "examEndDate",
+  "releaseDate",
+  "objectionLastDate",
+  "resultDate",
+  "updatedAt"
+]);
+const OFFICIAL_LINK_FIELDS = new Set([
+  "applyLink",
+  "officialNotification",
+  "downloadLink",
+  "objectionLink",
+  "resultLink"
+]);
+const TELEGRAM_READY_VALUES = new Set(["yes", "no"]);
+const TELEGRAM_STATUS_VALUES = new Set(["draft", "ready", "posted", "skipped"]);
+const REQUIRED_FIELD_RULES = {
+  jobs: [
+    ["id"],
+    ["title"],
+    ["organization"],
+    ["category"],
+    ["status"],
+    ["updatedAt"]
+  ],
+  admitCards: [
+    ["id"],
+    ["title"],
+    ["organization"],
+    ["examDate", "releaseDate"],
+    ["status"],
+    ["updatedAt"]
+  ],
+  answerKeys: [
+    ["id"],
+    ["title"],
+    ["organization"],
+    ["examDate", "releaseDate"],
+    ["status"],
+    ["updatedAt"]
+  ],
+  results: [
+    ["id"],
+    ["title"],
+    ["organization"],
+    ["resultDate"],
+    ["status"],
+    ["updatedAt"]
+  ]
+};
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -114,6 +168,212 @@ function normalizeRecord(record, fields) {
     output[field] = field === "tags" ? normalizeTags(record[field]) : normalizeText(record[field]);
   });
   return output;
+}
+
+function getRecordLabel(record, index) {
+  const id = normalizeText(record.id);
+  return id || `row ${index + 2}`;
+}
+
+function formatRequiredFieldLabel(fields) {
+  return fields.length === 1 ? fields[0] : fields.join(" or ");
+}
+
+function isValidIsoDate(value) {
+  const text = normalizeText(value);
+  const match = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return false;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.getUTCFullYear() === year
+    && date.getUTCMonth() === month - 1
+    && date.getUTCDate() === day;
+}
+
+function normalizeTelegramFields(record) {
+  const output = { ...record };
+  ["telegramReady", "telegramStatus"].forEach((field) => {
+    if (normalizeText(output[field])) output[field] = normalizeText(output[field]).toLowerCase();
+  });
+  return output;
+}
+
+function getDangerousLinkReason(value) {
+  const text = normalizeText(value);
+  if (!text || text === "#") return "";
+  if (/[\u0000-\u001f\u007f]/.test(text)) return "contains control characters";
+  if (/^(javascript|data|mailto|tel|sms):/i.test(text)) return "uses a blocked protocol";
+  if (/^https?:\/\//i.test(text)) return "";
+  return "must be empty, #, http://, or https://";
+}
+
+function buildEmptyPreflightReport() {
+  return {
+    generatedAt: new Date().toISOString(),
+    totals: {},
+    warnings: [],
+    errors: [],
+    duplicateIds: [],
+    missingRequiredFields: [],
+    invalidDates: [],
+    invalidTelegramValues: [],
+    dangerousLinks: []
+  };
+}
+
+function addPreflightError(report, bucket, entry, message) {
+  report[bucket].push(entry);
+  report.errors.push(message);
+}
+
+function collectPreflightIssues(source, records, report) {
+  const type = source.apiType;
+  report.totals[type] = records.length;
+
+  const ids = new Map();
+  records.forEach((record, index) => {
+    const id = normalizeText(record.id);
+    if (!id) return;
+    if (!ids.has(id)) ids.set(id, []);
+    ids.get(id).push(index);
+  });
+
+  ids.forEach((indexes, id) => {
+    if (indexes.length < 2) return;
+    const entry = {
+      type,
+      label: source.label,
+      id,
+      rows: indexes.map((index) => index + 2)
+    };
+    addPreflightError(
+      report,
+      "duplicateIds",
+      entry,
+      `${source.label}: duplicate id "${id}" found in rows ${entry.rows.join(", ")}.`
+    );
+  });
+
+  const requiredRules = REQUIRED_FIELD_RULES[type] || [];
+  records.forEach((record, index) => {
+    const missingFields = requiredRules
+      .filter((fields) => !fields.some((field) => normalizeText(record[field])))
+      .map(formatRequiredFieldLabel);
+
+    if (missingFields.length) {
+      const entry = {
+        type,
+        label: source.label,
+        id: normalizeText(record.id),
+        row: index + 2,
+        item: getRecordLabel(record, index),
+        missingFields
+      };
+      addPreflightError(
+        report,
+        "missingRequiredFields",
+        entry,
+        `${source.label}: ${entry.item} is missing required field(s): ${missingFields.join(", ")}.`
+      );
+    }
+
+    Object.entries(record).forEach(([field, value]) => {
+      const text = normalizeText(value);
+      if (DATE_FIELDS.has(field) && text && !isValidIsoDate(text)) {
+        const entry = {
+          type,
+          label: source.label,
+          id: normalizeText(record.id),
+          row: index + 2,
+          field,
+          value: text
+        };
+        addPreflightError(
+          report,
+          "invalidDates",
+          entry,
+          `${source.label}: ${getRecordLabel(record, index)} has invalid ${field} "${text}". Use YYYY-MM-DD.`
+        );
+      }
+
+      if (OFFICIAL_LINK_FIELDS.has(field)) {
+        const reason = getDangerousLinkReason(value);
+        if (reason) {
+          const entry = {
+            type,
+            label: source.label,
+            id: normalizeText(record.id),
+            row: index + 2,
+            field,
+            value: text,
+            reason
+          };
+          addPreflightError(
+            report,
+            "dangerousLinks",
+            entry,
+            `${source.label}: ${getRecordLabel(record, index)} has blocked ${field} "${text}" (${reason}).`
+          );
+        }
+      }
+    });
+
+    const telegramReady = normalizeText(record.telegramReady);
+    if (telegramReady && !TELEGRAM_READY_VALUES.has(telegramReady)) {
+      const entry = {
+        type,
+        label: source.label,
+        id: normalizeText(record.id),
+        row: index + 2,
+        field: "telegramReady",
+        value: telegramReady
+      };
+      addPreflightError(
+        report,
+        "invalidTelegramValues",
+        entry,
+        `${source.label}: ${getRecordLabel(record, index)} has invalid telegramReady "${telegramReady}".`
+      );
+    }
+
+    const telegramStatus = normalizeText(record.telegramStatus);
+    if (telegramStatus && !TELEGRAM_STATUS_VALUES.has(telegramStatus)) {
+      const entry = {
+        type,
+        label: source.label,
+        id: normalizeText(record.id),
+        row: index + 2,
+        field: "telegramStatus",
+        value: telegramStatus
+      };
+      addPreflightError(
+        report,
+        "invalidTelegramValues",
+        entry,
+        `${source.label}: ${getRecordLabel(record, index)} has invalid telegramStatus "${telegramStatus}".`
+      );
+    }
+  });
+}
+
+function writeSheetPreflightReport(report) {
+  fs.mkdirSync(REPORT_DIR, { recursive: true });
+  fs.writeFileSync(SHEET_PREFLIGHT_REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  console.log(`Preflight report: ${path.relative(ROOT_DIR, SHEET_PREFLIGHT_REPORT_PATH)}`);
+}
+
+function validateSheetPreflightReport() {
+  if (!fs.existsSync(SHEET_PREFLIGHT_REPORT_PATH)) {
+    throw new Error("reports/sheet-preflight-report.json does not exist.");
+  }
+  const report = readJson(SHEET_PREFLIGHT_REPORT_PATH);
+  if (!report || !Array.isArray(report.errors)) throw new Error("Preflight report errors array is missing.");
+  if (report.errors.length) {
+    throw new Error(`Sheet preflight failed with ${report.errors.length} error(s).`);
+  }
+  console.log("Sheet preflight validation passed.");
 }
 
 function validateQualificationValue(value) {
@@ -517,30 +777,44 @@ function updatePublicHtmlCacheVersions(version) {
   return changed;
 }
 
-async function syncOne(apiUrl, source) {
+async function fetchNormalizedRecords(apiUrl, source) {
   console.log(`Fetching ${source.label}...`);
   const rawItems = await fetchItems(apiUrl, source.apiType, source.payloadKey);
-  let records = rawItems
+  const records = rawItems
     .map((record) => normalizeRecord(record, source.fields))
-    .filter((record) => record.id && record.title);
+    .map(normalizeTelegramFields);
 
+  return { source, records };
+}
+
+function prepareSyncOutput(source, records) {
   if (!records.length) {
     console.warn(`${source.label}: No valid records found. Existing file was not overwritten.`);
-    return { changed: false, detailPageRows: [] };
+    return { source, content: "", qualificationReport: null, detailPageRows: [] };
   }
+
+  records = records.filter((record) => record.id && record.title);
 
   if (source.apiType === "jobs") {
     const sanitized = sanitizeJobRecords(records);
     records = sanitized.records;
-    writeSheetValidationReport(buildSheetValidationReport(source.label, records, sanitized.rows));
+    const detailPages = sanitizeDetailPageRecords(records, source.apiType);
+    records = detailPages.records;
+    return {
+      source,
+      content: buildJs(source.globalVariable, sortRecords(records), source.label),
+      qualificationReport: buildSheetValidationReport(source.label, records, sanitized.rows),
+      detailPageRows: detailPages.rows
+    };
   }
 
   const detailPages = sanitizeDetailPageRecords(records, source.apiType);
   records = detailPages.records;
 
-  const content = buildJs(source.globalVariable, sortRecords(records), source.label);
   return {
-    changed: writeIfChanged(source.outputFile, content),
+    source,
+    content: buildJs(source.globalVariable, sortRecords(records), source.label),
+    qualificationReport: null,
     detailPageRows: detailPages.rows
   };
 }
@@ -621,6 +895,10 @@ async function main() {
     validateGeneratedSheetLinks();
     return;
   }
+  if (process.argv.includes("--validate-sheet-preflight")) {
+    validateSheetPreflightReport();
+    return;
+  }
 
   const config = readJson(CONFIG_PATH);
   const apiUrl = resolveApiUrl(config);
@@ -628,25 +906,45 @@ async function main() {
 
   let dataChanged = false;
   let failed = false;
+  const preflightReport = buildEmptyPreflightReport();
+  const fetchedSources = [];
   const detailPageRows = [];
 
   for (const source of config.sources) {
     try {
-      const result = await syncOne(apiUrl, source);
-      dataChanged = dataChanged || result.changed;
-      detailPageRows.push(...result.detailPageRows);
+      const result = await fetchNormalizedRecords(apiUrl, source);
+      fetchedSources.push(result);
+      collectPreflightIssues(source, result.records, preflightReport);
     } catch (error) {
       failed = true;
       console.error(`Failed: ${source.label}: ${error.message}`);
     }
   }
 
-  if (detailPageRows.length) {
-    writeSheetLinkValidationReport(buildSheetLinkValidationReport(detailPageRows));
+  writeSheetPreflightReport(preflightReport);
+
+  if (preflightReport.errors.length) {
+    failed = true;
+    console.error(`Sheet preflight failed with ${preflightReport.errors.length} error(s). Generated JS files were not written.`);
+  }
+
+  if (!failed) {
+    const preparedSources = fetchedSources.map(({ source, records }) => prepareSyncOutput(source, records));
+    preparedSources.forEach((prepared) => {
+      if (prepared.qualificationReport) writeSheetValidationReport(prepared.qualificationReport);
+      if (prepared.content) {
+        dataChanged = writeIfChanged(prepared.source.outputFile, prepared.content) || dataChanged;
+      }
+      detailPageRows.push(...prepared.detailPageRows);
+    });
+
+    if (detailPageRows.length) {
+      writeSheetLinkValidationReport(buildSheetLinkValidationReport(detailPageRows));
+    }
   }
 
   let htmlChanged = false;
-  if (dataChanged) {
+  if (!failed && dataChanged) {
     const version = buildVersion();
     console.log(`Updating public HTML cache version: ${version}`);
     htmlChanged = updatePublicHtmlCacheVersions(version);

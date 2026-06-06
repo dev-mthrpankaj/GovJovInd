@@ -5,6 +5,7 @@
   "scripts": {
     "check:links": "node scripts/check-links.js",
     "validate:links": "node scripts/validate-site-links.js",
+    "validate:sheet-preflight": "node scripts/sync-apps-script-to-js.js --validate-sheet-preflight",
     "validate:sheet-data": "node scripts/sync-apps-script-to-js.js --validate-sheet-data",
     "validate:sheet-links": "node scripts/sync-apps-script-to-js.js --validate-sheet-links",
     "generate:sitemap": "node scripts/generate-sitemap.js"
