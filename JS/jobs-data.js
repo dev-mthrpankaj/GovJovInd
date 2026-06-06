@@ -4,37 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2443",
-        "title": "Junior Secretariat Assistant / Lower Division Clerk Grade Limited Departmental Competitive Examination, 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Candidate must have passed 12th Standerd and Additional Qualification as Per Department Needs",
-        "totalPosts": "Not Specified",
-        "startDate": "2026-06-05",
-        "lastDate": "2026-06-26",
-        "status": "active",
-        "tags": [
-            "Staff Selection Commission Recruitment 2026",
-            "Junior Secretariat Assistant / Lower Division Clerk Grade Limited Departmental Competitive Examination",
-            "2026",
-            "Sarkari Naukri",
-            "Central Government Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "https://ssc.gov.in/",
-        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/departmental_notice_05062026.pdf",
-        "detailPage": "../Job_Details/HTML/2443-SSC-JSA-LDC-2026.html",
-        "updatedAt": "2026-06-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "no",
-        "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "2441",
         "title": "UKSSSC AAO Online Form 2026 for 90 Post",
         "organization": "Uttarakhand Subordinate Service Selection Commission",
