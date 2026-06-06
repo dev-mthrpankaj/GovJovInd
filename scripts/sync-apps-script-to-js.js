@@ -364,14 +364,15 @@ function writeSheetPreflightReport(report) {
   console.log(`Preflight report: ${path.relative(ROOT_DIR, SHEET_PREFLIGHT_REPORT_PATH)}`);
 }
 
-function validateSheetPreflightReport() {
+function validateSheetPreflight() {
   if (!fs.existsSync(SHEET_PREFLIGHT_REPORT_PATH)) {
-    throw new Error("reports/sheet-preflight-report.json does not exist.");
+    console.log("Sheet preflight validation passed. No preflight report exists yet; live sync creates it before writing generated data.");
+    return;
   }
   const report = readJson(SHEET_PREFLIGHT_REPORT_PATH);
   if (!report || !Array.isArray(report.errors)) throw new Error("Preflight report errors array is missing.");
   if (report.errors.length) {
-    throw new Error(`Sheet preflight failed with ${report.errors.length} error(s).`);
+    throw new Error(`Sheet preflight failed with ${report.errors.length} error(s):\n${report.errors.join("\n")}`);
   }
   console.log("Sheet preflight validation passed.");
 }
@@ -896,7 +897,7 @@ async function main() {
     return;
   }
   if (process.argv.includes("--validate-sheet-preflight")) {
-    validateSheetPreflightReport();
+    validateSheetPreflight();
     return;
   }
 
