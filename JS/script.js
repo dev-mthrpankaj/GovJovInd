@@ -127,6 +127,59 @@ window.GovJobAds = {
   isBlockedPage: isAdsBlockedPage
 };
 
+const COOKIE_CONSENT_KEY = 'gju:cookie-consent:v1';
+
+const hasCookieConsent = () => {
+  try {
+    return localStorage.getItem(COOKIE_CONSENT_KEY) === 'accepted';
+  } catch {
+    return true;
+  }
+};
+
+const setCookieConsent = () => {
+  try {
+    localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
+  } catch {
+    // If storage is unavailable, hide for the current page view.
+  }
+};
+
+const initCookieConsentBanner = () => {
+  if (hasCookieConsent() || document.getElementById('gjuCookieConsent')) return;
+
+  const banner = document.createElement('section');
+  const message = document.createElement('p');
+  const link = document.createElement('a');
+  const acceptButton = document.createElement('button');
+
+  banner.id = 'gjuCookieConsent';
+  banner.className = 'gju-cookie-consent';
+  banner.setAttribute('role', 'region');
+  banner.setAttribute('aria-label', 'Cookie consent');
+
+  message.className = 'gju-cookie-consent__text';
+  message.textContent = 'We use cookies and analytics to improve your experience. By continuing to use GovJobUpdates, you agree to our ';
+
+  link.className = 'gju-cookie-consent__link';
+  link.href = getRootRelativeHref('HTML/privacy-policy.html');
+  link.textContent = 'Privacy Policy';
+
+  acceptButton.className = 'gju-cookie-consent__button';
+  acceptButton.type = 'button';
+  acceptButton.textContent = 'Accept';
+  acceptButton.addEventListener('click', () => {
+    setCookieConsent();
+    banner.hidden = true;
+    document.body.classList.remove('gju-cookie-consent-visible');
+  });
+
+  message.append(link, '.');
+  banner.append(message, acceptButton);
+  document.body.appendChild(banner);
+  document.body.classList.add('gju-cookie-consent-visible');
+};
+
 const getCandidateHeaderSession = () => {
   try {
     const saved = JSON.parse(localStorage.getItem(CANDIDATE_SESSION_KEY) || sessionStorage.getItem(CANDIDATE_SESSION_KEY) || 'null');
@@ -679,6 +732,7 @@ if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', applyAdControls);
   window.addEventListener('DOMContentLoaded', startVisitorCounter);
   window.addEventListener('DOMContentLoaded', bindAuthTabsFallback);
+  window.addEventListener('DOMContentLoaded', initCookieConsentBanner);
 } else {
   ensureSharedSiteChrome();
   ensureMobileNavScrollLock();
@@ -689,6 +743,7 @@ if (document.readyState === 'loading') {
   applyAdControls();
   startVisitorCounter();
   bindAuthTabsFallback();
+  initCookieConsentBanner();
 }
 window.addEventListener('pageshow', markPageLoaded);
 
