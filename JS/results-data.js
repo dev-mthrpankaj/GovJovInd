@@ -77,7 +77,7 @@ window.GovJobUpdatesResults = [
         "department": "Police",
         "category": "Result",
         "year": "2025",
-        "resultDate": "#",
+        "resultDate": "2026-04-30",
         "status": "upcoming",
         "tags": [
             "SSC",
