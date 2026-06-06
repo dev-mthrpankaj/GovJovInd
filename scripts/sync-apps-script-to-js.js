@@ -364,6 +364,59 @@ function writeSheetPreflightReport(report) {
   console.log(`Preflight report: ${path.relative(ROOT_DIR, SHEET_PREFLIGHT_REPORT_PATH)}`);
 }
 
+function printPreflightErrors(report) {
+  const printBlock = (entry, lines) => {
+    const label = entry.label || entry.type || "Sheet";
+    console.error(`ERROR [${label}] Row ID: ${entry.id || entry.item || "missing"}`);
+    lines.filter(Boolean).forEach((line) => console.error(line));
+  };
+
+  report.duplicateIds.forEach((entry) => {
+    printBlock(entry, [
+      `Field: id`,
+      `Value: ${entry.id}`,
+      `Rows: ${entry.rows.join(", ")}`,
+      "Reason: Duplicate ID"
+    ]);
+  });
+
+  report.missingRequiredFields.forEach((entry) => {
+    printBlock(entry, [
+      `Row: ${entry.row}`,
+      `Field: ${entry.missingFields.join(", ")}`,
+      "Value: ",
+      "Reason: Missing required field"
+    ]);
+  });
+
+  report.invalidDates.forEach((entry) => {
+    printBlock(entry, [
+      `Row: ${entry.row}`,
+      `Field: ${entry.field}`,
+      `Value: ${entry.value}`,
+      "Reason: Invalid date format. Expected YYYY-MM-DD"
+    ]);
+  });
+
+  report.invalidTelegramValues.forEach((entry) => {
+    printBlock(entry, [
+      `Row: ${entry.row}`,
+      `Field: ${entry.field}`,
+      `Value: ${entry.value}`,
+      "Reason: Invalid Telegram value"
+    ]);
+  });
+
+  report.dangerousLinks.forEach((entry) => {
+    printBlock(entry, [
+      `Row: ${entry.row}`,
+      `Field: ${entry.field}`,
+      `Value: ${entry.value}`,
+      `Reason: ${entry.reason}`
+    ]);
+  });
+}
+
 function validateSheetPreflight() {
   if (!fs.existsSync(SHEET_PREFLIGHT_REPORT_PATH)) {
     console.log("Sheet preflight validation passed. No preflight report exists yet; live sync creates it before writing generated data.");
@@ -372,6 +425,7 @@ function validateSheetPreflight() {
   const report = readJson(SHEET_PREFLIGHT_REPORT_PATH);
   if (!report || !Array.isArray(report.errors)) throw new Error("Preflight report errors array is missing.");
   if (report.errors.length) {
+    printPreflightErrors(report);
     throw new Error(`Sheet preflight failed with ${report.errors.length} error(s):\n${report.errors.join("\n")}`);
   }
   console.log("Sheet preflight validation passed.");
@@ -926,6 +980,7 @@ async function main() {
 
   if (preflightReport.errors.length) {
     failed = true;
+    printPreflightErrors(preflightReport);
     console.error(`Sheet preflight failed with ${preflightReport.errors.length} error(s). Generated JS files were not written.`);
   }
 
