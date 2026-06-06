@@ -620,10 +620,14 @@
 
 .job-detail-table-wrap {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: block;
   overflow-x: auto;
   border: 1px solid #dbeafe;
   border-radius: 12px;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
 }
 
 .job-detail-table-wrap table {
@@ -1048,13 +1052,19 @@
 
 .lekhpal-premium .table-scroll {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: block;
   overflow-x: auto;
   border-radius: 14px;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
 }
 
 .lekhpal-premium .table-scroll table {
+  width: 100%;
   min-width: 640px;
+  margin: 0;
 }
 
 .lekhpal-premium .lekhpal-steps {
@@ -1424,18 +1434,9 @@
     width: 100%;
   }
 
-  .fees-table,
-  .vacancy-table,
-  .salary-table,
-  .important-links-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
   .job-detail-table-wrap table {
-    min-width: 0;
-    table-layout: fixed;
+    min-width: 560px;
+    table-layout: auto;
   }
 
   .job-detail-table-wrap th,
@@ -1456,6 +1457,6 @@
   }
 
   .job-detail-table-wrap table {
-    min-width: 0;
+    min-width: 520px;
   }
 }

@@ -538,10 +538,33 @@
 
 .table-scroll {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-inline: contain;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
+}
+
+.table-scroll > table {
+    width: 100%;
+    min-width: 620px;
+    margin: 0;
+}
+
+.job-detail-page .table-scroll > .fees-table,
+.job-detail-page .table-scroll > .vacancy-table {
+    display: table;
+    overflow: visible;
+}
+
+.table-scroll th,
+.table-scroll td {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    white-space: normal;
 }
 
 .table-scroll + .table-scroll {
