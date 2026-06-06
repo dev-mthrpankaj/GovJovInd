@@ -2156,8 +2156,9 @@ body.quiz-exam-active .exam-actions .quiz-btn {
     }
 
     body.quiz-exam-active .palette-panel {
-        display: grid !important;
-        align-content: start !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-content: stretch !important;
         position: relative !important;
         inset: auto !important;
         top: auto !important;
@@ -2177,6 +2178,20 @@ body.quiz-exam-active .exam-actions .quiz-btn {
         border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
         background: #252628 !important;
         color: #f8fafc !important;
+    }
+
+    body.quiz-exam-active .palette-actions {
+        position: sticky !important;
+        bottom: 0 !important;
+        z-index: 2 !important;
+        margin-top: auto !important;
+        padding-top: 16px !important;
+        padding-bottom: 4px !important;
+        background: #252628 !important;
+    }
+
+    body.quiz-exam-active .palette-actions [data-action="submit-confirm"] {
+        width: 100% !important;
     }
 
     body.quiz-exam-active .palette-close {

@@ -2034,7 +2034,7 @@ footer .footer-section:first-child {
   }
 
   body.has-candidate-bottom-nav footer {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
   }
 
   .stats {
