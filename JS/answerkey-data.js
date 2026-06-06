@@ -4,6 +4,32 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "2042",
+        "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
+        "organization": "Join Indian Navy",
+        "department": "Defence",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-02-02",
+        "examEndDate": "",
+        "releaseDate": "2026-05-29",
+        "objectionLastDate": "2026-06-11",
+        "status": "available",
+        "tags": [
+            "Indian Navy",
+            "INCET",
+            "Civilian"
+        ],
+        "downloadLink": "https://akc.cbt-exam.in/",
+        "objectionLink": "https://akc.cbt-exam.in/",
+        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+        "updatedAt": "2026-06-06",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2041",
         "title": "UPSC Civil Services IAS IFS Answer Key 2026",
         "organization": "Union Public Service Commission",
