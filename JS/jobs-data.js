@@ -554,7 +554,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "635",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-06",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Punjab and Sindh Bank Recruitment 2026",
             "Punjab & Sindh Bank Apprentice",
