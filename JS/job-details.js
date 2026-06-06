@@ -293,6 +293,14 @@
     return values.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
   }
 
+  function relatedJobTerms(job) {
+    return [job.category, job.department, job.organization].concat(Array.isArray(job.tags) ? job.tags : [])
+      .map((item) => getText(item, ""))
+      .filter(Boolean)
+      .slice(0, 10)
+      .join(",");
+  }
+
   function summaryItem(label, value) {
     return `<li><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></li>`;
   }
@@ -545,7 +553,8 @@
             <a class="btn btn-primary" href="${PATHS.rankPredictor}">Open Rank Predictor</a>
           </article>
           <article class="job-detail-card" id="related-articles">
-            <h2><i class="fas fa-newspaper" aria-hidden="true"></i> Related Articles</h2>
+            <h2><i class="fas fa-newspaper" aria-hidden="true"></i> Related Open Jobs</h2>
+            <div class="related-open-jobs-mount" data-related-open-jobs data-current-job-id="${escapeHtml(job.id)}" data-current-tags="${escapeHtml(relatedJobTerms(job))}" data-max-jobs="10"></div>
             <div class="job-related-links"><a href="${PATHS.articles}">Latest Student Hub Reports</a><a href="${PATHS.latestJobs}">More Government Job Updates</a><a href="${PATHS.quiz}">Practice Quizzes</a><a href="${PATHS.results}">Latest Results</a></div>
           </article>
           <article class="job-detail-card" id="faq">
@@ -574,6 +583,7 @@
         </aside>
       </section>`;
     runSharedHelpers();
+    document.dispatchEvent(new CustomEvent("govjobupdates:job-detail-rendered", { detail: { jobId: job.id } }));
   }
 
   async function initDynamicDetail() {

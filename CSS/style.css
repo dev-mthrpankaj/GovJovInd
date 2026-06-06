@@ -122,7 +122,8 @@ img {
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: .7rem;
-  min-height: 44px;
+  height: 52px;
+  min-height: 52px;
   background: linear-gradient(90deg, #0f172a, #1e293b);
   color: #fff;
   overflow: hidden;
@@ -149,10 +150,24 @@ img {
   display: flex;
   align-items: center;
   width: max-content;
-  padding-left: 2.5rem;
   white-space: nowrap;
   will-change: transform;
-  animation: ticker-scroll 34s linear infinite;
+  animation: ticker-scroll var(--ticker-duration, 72s) linear infinite;
+  opacity: 1;
+  transition: opacity .35s ease;
+}
+
+.ticker-track.ticker-track-welcome {
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  animation: none;
+  will-change: auto;
+  overflow: hidden;
+}
+
+.ticker-track.ticker-is-swapping {
+  opacity: 0;
 }
 
 .ticker-item {
@@ -185,8 +200,10 @@ img {
 }
 
 .ticker-toggle {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, .22);
@@ -194,6 +211,8 @@ img {
   background: rgba(255, 255, 255, .08);
   color: #fff;
   cursor: pointer;
+  opacity: 1;
+  transition: background .18s ease, opacity .28s ease;
 }
 
 .ticker-toggle:hover,
@@ -210,11 +229,11 @@ img {
 
 @keyframes ticker-scroll {
   from {
-    transform: translateX(0);
+    transform: translateX(var(--ticker-start, 100%));
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
@@ -2163,11 +2182,9 @@ footer .footer-section:first-child {
   }
 
   .ticker-wrap {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .ticker-toggle {
-    display: none;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: .5rem;
+    padding: .35rem .5rem;
   }
 
   .logo {
@@ -2265,6 +2282,25 @@ footer .footer-section:first-child {
   }
 }
 
+.ticker-welcome {
+  width: 100%;
+  padding-right: 0;
+  margin-right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  justify-content: center;
+  text-align: center;
+}
+
+.ticker-welcome-short {
+  display: none;
+}
+
+.ticker-welcome::after {
+  display: none;
+}
+
 .gju-cookie-consent {
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
@@ -2318,6 +2354,23 @@ footer .footer-section:first-child {
 }
 
 @media (max-width: 640px) {
+  .ticker-wrap.ticker-welcome-active {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ticker-wrap.ticker-welcome-active .ticker-title,
+  .ticker-wrap.ticker-welcome-active .ticker-toggle {
+    display: none;
+  }
+
+  .ticker-welcome-full {
+    display: none;
+  }
+
+  .ticker-welcome-short {
+    display: inline;
+  }
+
   .gju-cookie-consent {
     left: max(.75rem, env(safe-area-inset-left));
     right: max(.75rem, env(safe-area-inset-right));
