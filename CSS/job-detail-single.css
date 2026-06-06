@@ -1,17 +1,17 @@
 .job-detail-v2 {
-  --jd-ink: #172033;
-  --jd-muted: #5f6b7a;
-  --jd-line: #dce4ee;
-  --jd-soft: #f6f9fc;
-  --jd-panel: #ffffff;
-  --jd-primary: #0d6b5f;
-  --jd-primary-dark: #084f47;
-  --jd-accent: #b3261e;
-  --jd-gold: #a66a00;
+  --jd-ink: var(--secondary, #0f172a);
+  --jd-muted: var(--muted, #5b6575);
+  --jd-line: var(--border, #dbe3ee);
+  --jd-soft: #f8fbff;
+  --jd-panel: var(--surface, #ffffff);
+  --jd-primary: var(--primary, #2563eb);
+  --jd-primary-dark: var(--primary-dark, #1d4ed8);
+  --jd-accent: var(--accent, #f59e0b);
+  --jd-gold: #b45309;
   color: var(--jd-ink);
   background:
-    linear-gradient(180deg, #eef7f4 0, rgba(238, 247, 244, 0) 360px),
-    #ffffff;
+    linear-gradient(180deg, #eff6ff 0, rgba(239, 246, 255, 0) 360px),
+    var(--bg, #f4f7fb);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.65;
   width: 100%;
@@ -95,10 +95,10 @@
   width: fit-content;
   margin-bottom: 14px;
   padding: 5px 10px;
-  border: 1px solid #b7ded6;
+  border: 1px solid #bfdbfe;
   border-radius: 999px;
   color: var(--jd-primary-dark);
-  background: #e8f7f3;
+  background: #eff6ff;
   font-size: 0.82rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -184,7 +184,7 @@
 
 .job-detail-v2 .btn:hover,
 .job-detail-v2 .btn:focus-visible {
-  outline: 3px solid rgba(13, 107, 95, 0.2);
+  outline: 3px solid rgba(37, 99, 235, 0.2);
   outline-offset: 2px;
 }
 
@@ -196,7 +196,7 @@
   min-height: 0;
   padding: 16px;
   border-radius: 8px;
-  background: #17334f;
+  background: var(--jd-ink);
   color: #fff;
 }
 
@@ -257,7 +257,7 @@
   margin: 18px auto 28px;
   padding: 16px 18px;
   border-left: 5px solid var(--jd-accent);
-  background: #fff8f6;
+  background: #fffbeb;
 }
 
 .job-detail-v2 .content-stack {
@@ -302,7 +302,7 @@
 .job-detail-v2 .border-panel h3 {
   padding: 14px 16px;
   border-bottom: 1px solid var(--jd-line);
-  background: #edf5f3;
+  background: #eff6ff;
 }
 
 .job-detail-v2 .fact-list {
@@ -359,8 +359,8 @@
 }
 
 .job-detail-v2 th {
-  background: #eef4f8;
-  color: #26384e;
+  background: #eff6ff;
+  color: var(--jd-ink);
 }
 
 .job-detail-v2 .note {
@@ -395,7 +395,7 @@
 }
 
 .job-detail-v2 .tool-link {
-  background: #f0f7f5;
+  background: #eff6ff;
 }
 
 .job-detail-v2 .links-table td:first-child {
