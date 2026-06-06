@@ -2217,14 +2217,9 @@ body.quiz-exam-active .exam-actions .quiz-btn {
 /* Keep mobile drawer behavior unchanged */
 @media (max-width: 899px) {
     body.quiz-exam-active .palette-panel {
-        display: flex !important;
-        flex-direction: column !important;
         position: fixed;
         inset: auto 0 0;
         width: 100%;
-        height: min(82dvh, 640px) !important;
-        max-height: calc(100dvh - 64px) !important;
-        overflow-y: auto !important;
         transform: translateY(105%);
     }
 
@@ -2236,7 +2231,6 @@ body.quiz-exam-active .exam-actions .quiz-btn {
         position: sticky !important;
         bottom: 0 !important;
         z-index: 2 !important;
-        margin-top: auto !important;
         padding: 12px 0 max(2px, env(safe-area-inset-bottom)) !important;
         background: #252628 !important;
     }
