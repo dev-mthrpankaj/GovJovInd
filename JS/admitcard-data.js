@@ -36,7 +36,7 @@ window.GovJobUpdatesAdmitCards = [
         "year": "2026",
         "examDate": "2026-07-05",
         "examEndDate": "",
-        "releaseDate": "",
+        "releaseDate": "2026-05-27",
         "status": "upcoming",
         "tags": [
             "BSNL",
