@@ -14,7 +14,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "24",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Central Industrial Security Force (CISF) Recruitment 2026",
             "CISF ASI Paramedical Staff",
@@ -434,7 +434,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "371",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Rajasthan Public Service Commision Recruitment 2026",
             "RPSC APO",
