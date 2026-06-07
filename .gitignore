@@ -8,3 +8,5 @@ live-test/includes/payment-secrets.php
 live-test/includes/payment-secrets.php
 .env
 *.local.php
+
+live-test/
