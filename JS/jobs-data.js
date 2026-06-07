@@ -605,7 +605,7 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "2425",
-        "title": "State Government",
+        "title": "UPSSSC Agriculture Technical Assistant Group-C Recruitment 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Agriculture",
         "category": "State Government",
