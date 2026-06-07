@@ -2736,3 +2736,19 @@ footer .footer-section:first-child {
     justify-content: center;
   }
 }
+
+/* Phase 8E: homepage live-test registration CTA refinement */
+.live-test-cta__desc strong {
+  color: var(--primary-dark);
+  font-weight: 900;
+}
+
+.live-test-cta__chip:nth-child(4) {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: var(--primary-dark);
+}
+
+.live-test-cta__meta {
+  overflow-wrap: normal;
+}

@@ -1,1 +1,10 @@
-.edge-test-profile*
+
+# Local/payment secrets
+live-test/includes/payment-secrets.php
+.env
+*.local.php
+
+# Local/payment secrets
+live-test/includes/payment-secrets.php
+.env
+*.local.php
