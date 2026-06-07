@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "2043",
+        "title": "UP TGT",
+        "organization": "UP Secondary Education Service Selection Board",
+        "department": "Education",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-06-07",
+        "objectionLastDate": "",
+        "status": "avalilable",
+        "tags": [],
+        "downloadLink": "https://www.upessc.net/tgtqsobj2026/Login.aspx",
+        "objectionLink": "#",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-07",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2042",
         "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
         "organization": "Join Indian Navy",
@@ -14,7 +36,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-05-29",
         "objectionLastDate": "2026-06-11",
-        "status": "available",
+        "status": "UP Secondary Education Service Selection Board",
         "tags": [
             "Indian Navy",
             "INCET",
