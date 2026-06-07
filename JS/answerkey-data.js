@@ -15,12 +15,14 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-07",
         "objectionLastDate": "",
         "status": "avalilable",
-        "tags": [],
+        "tags": [
+            "UPSESSB UP TGT"
+        ],
         "downloadLink": "https://www.upessc.net/tgtqsobj2026/Login.aspx",
         "objectionLink": "#",
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-07",
-        "telegramStatus": "draft",
+        "telegramStatus": "ready",
         "telegramReady": "no",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
