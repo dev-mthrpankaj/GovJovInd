@@ -4,6 +4,36 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2443",
+        "title": "CISF Recruitment 2026 Apply Online for ASI Paramedical Staff",
+        "organization": "Central Industrial Security Force (CISF",
+        "department": "Defence",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "10+2 from a recognised Board and Supporting Degree or Diploma for Every Post to know more click on view Detail",
+        "totalPosts": "24",
+        "startDate": "2026-06-08",
+        "lastDate": "2026-07-07",
+        "status": "upcoming",
+        "tags": [
+            "Central Industrial Security Force (CISF) Recruitment 2026",
+            "CISF ASI Paramedical Staff",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://cisfrectt.cisf.gov.in/index.php",
+        "officialNotification": "https://cisfrectt.cisf.gov.in/file_open.php?fnm=ADKtCiCedbhHIKPApKXuC1bMlGcQ-hR9g5v4P3DQpLGwMkYnUuqGvSRnxlRsQmfLt33AVOT7YUXNGmhh49Uo4P83IdSWZtjZ6EXbRXAlTiY",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2443",
+        "updatedAt": "2026-06-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2441",
         "title": "UKSSSC AAO Online Form 2026 for 90 Post",
         "organization": "Uttarakhand Subordinate Service Selection Commission",
