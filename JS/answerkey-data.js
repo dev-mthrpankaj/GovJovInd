@@ -5,7 +5,7 @@
 window.GovJobUpdatesAnswerKeys = [
     {
         "id": "2043",
-        "title": "UP TGT",
+        "title": "UP TGT Answer Key",
         "organization": "UP Secondary Education Service Selection Board",
         "department": "Education",
         "category": "Answer Key",
@@ -23,7 +23,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
-        "telegramReady": "no",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
