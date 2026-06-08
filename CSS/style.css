@@ -3338,49 +3338,63 @@ footer .footer-section:first-child {
   }
 }
 
-/* Live Test Info hero contrast fix - 2026-06-08
-   Keeps the top hero readable even if older/light hero styles are cached or overridden. */
+
+/* Live Test Info hero dark text contrast fix */
 body.live-test-info-page .live-test-info-hero {
   background:
-    linear-gradient(135deg, rgba(7, 21, 47, .98) 0%, rgba(20, 55, 132, .97) 54%, rgba(37, 99, 235, .94) 100%),
-    #07152f !important;
-  color: #ffffff !important;
+    radial-gradient(circle at 92% 10%, rgba(245, 158, 11, .18), transparent 32%),
+    radial-gradient(circle at 8% 0%, rgba(37, 99, 235, .12), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #eff6ff 58%, #fff7ed 100%) !important;
+  color: #0f172a !important;
+  border-color: #bfdbfe !important;
+  box-shadow: 0 22px 56px rgba(15, 23, 42, .12) !important;
+}
+
+body.live-test-info-page .live-test-info-hero::before,
+body.live-test-info-page .live-test-info-hero::after {
+  opacity: .55;
+  z-index: -1;
+}
+
+body.live-test-info-page .live-test-info-eyebrow {
+  background: #e8f0ff !important;
+  border-color: #bfdbfe !important;
+  color: #1d4ed8 !important;
 }
 
 body.live-test-info-page .live-test-info-hero h1,
 body.live-test-info-page .live-test-info-hero h2,
 body.live-test-info-page .live-test-info-hero strong {
-  color: #ffffff !important;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, .22);
+  color: #0f172a !important;
+  text-shadow: none !important;
 }
 
-body.live-test-info-page .live-test-info-hero p,
-body.live-test-info-page .live-test-server-note,
-body.live-test-info-page .live-test-prize-card p,
-body.live-test-info-page .live-test-promo-card p {
-  color: #eaf2ff !important;
+body.live-test-info-page .live-test-info-hero p {
+  color: #334155 !important;
+  text-shadow: none !important;
 }
 
-body.live-test-info-page .live-test-info-eyebrow,
-body.live-test-info-page .live-test-prize-card span,
-body.live-test-info-page .live-test-promo-card span {
-  color: #bfdbfe !important;
+body.live-test-info-page .live-test-server-note {
+  background: #ffffff !important;
+  border-color: #bfdbfe !important;
+  color: #334155 !important;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, .08);
 }
 
 body.live-test-info-page .live-test-prize-card,
-body.live-test-info-page .live-test-promo-card,
-body.live-test-info-page .live-test-server-note {
-  background: rgba(15, 23, 42, .46) !important;
-  border-color: rgba(255, 255, 255, .28) !important;
-  box-shadow: 0 18px 38px rgba(0, 0, 0, .22) !important;
-}
-
-body.live-test-info-page .live-test-promo-card strong {
-  color: #fde68a !important;
-}
-
-body.live-test-info-page .live-test-info-actions .btn-outline {
+body.live-test-info-page .live-test-promo-card {
   background: rgba(255, 255, 255, .96) !important;
+  border-color: #dbeafe !important;
+  color: #0f172a !important;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, .12) !important;
+}
+
+body.live-test-info-page .live-test-prize-card span,
+body.live-test-info-page .live-test-promo-card span {
   color: #1d4ed8 !important;
-  border-color: rgba(255, 255, 255, .7) !important;
+}
+
+body.live-test-info-page .live-test-prize-card p,
+body.live-test-info-page .live-test-promo-card p {
+  color: #475569 !important;
 }
