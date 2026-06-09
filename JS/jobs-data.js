@@ -824,7 +824,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "394",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-09",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Union Public Service Commission Recruitment 2026",
             "UPSC NDA II",
@@ -854,7 +854,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "451",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-09",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Union Public Service Commission Recruitment 2026",
             "UPSC CDS II",
