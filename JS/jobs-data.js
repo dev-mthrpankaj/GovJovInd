@@ -524,7 +524,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "268",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-10",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "National Aluminium Company Limited Recruitment 2026",
             "NALCO Non Executive",
