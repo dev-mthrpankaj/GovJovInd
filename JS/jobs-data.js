@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2446",
+        "title": "Karnataka Police Constable Online Form 2026 for 3991 Post",
+        "organization": "Karnataka Examination Authority (KEA)",
+        "department": "Police",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+        "totalPosts": "3991",
+        "startDate": "2026-06-08",
+        "lastDate": "2026-07-03",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://cetonline.karnataka.gov.in/kea/cpcrpc2026",
+        "officialNotification": "https://cetonline.karnataka.gov.in/keawebentry456/cpckk2026/kk-cpckannada.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2446",
+        "updatedAt": "2026-06-11",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2443",
         "title": "CISF Recruitment 2026 Apply Online for ASI Paramedical Staff",
         "organization": "Central Industrial Security Force",
@@ -74,7 +98,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "276",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Coal India Limited (CIL) Recruitment 2026",
             "CIL Management Trainee Mining",
