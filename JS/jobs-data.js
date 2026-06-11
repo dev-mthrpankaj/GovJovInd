@@ -638,7 +638,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "2759",
         "startDate": "2026-05-22",
         "lastDate": "2026-06-11",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "State Government",
