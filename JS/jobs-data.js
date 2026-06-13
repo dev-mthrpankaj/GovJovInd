@@ -54,7 +54,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cetonline.karnataka.gov.in/kea/cpcrpc2026",
         "officialNotification": "https://cetonline.karnataka.gov.in/keawebentry456/cpcrpc2026/rpc-cpckannada.pdf",
-        "detailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026",
+        "detailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026.html",
         "updatedAt": "2026-06-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
