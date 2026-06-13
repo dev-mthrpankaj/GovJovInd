@@ -5,13 +5,13 @@
 window.GovJobUpdatesJobs = [
     {
         "id": "2446",
-        "title": "Karnataka Police Constable Online Form 2026 for 3991 Post",
+        "title": "Karnataka Police Constable Online Form 2026 for 596 Post",
         "organization": "Karnataka Examination Authority (KEA)",
         "department": "Police",
         "category": "State Government",
         "year": "2026",
         "qualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
-        "totalPosts": "3991",
+        "totalPosts": "596",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-03",
         "status": "active",
