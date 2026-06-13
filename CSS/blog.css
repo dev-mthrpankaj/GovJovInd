@@ -315,6 +315,17 @@
   font-weight: 800;
 }
 
+.blog-article-content .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .blog-empty,
 .blog-load-more-wrap {
   margin-top: 1.2rem;
@@ -365,5 +376,13 @@
 
   .blog-filter-btn {
     flex: 1 1 calc(50% - .55rem);
+  }
+
+  .blog-article-content p > .btn:only-child {
+    min-height: 40px;
+    max-width: min(100%, 320px);
+    padding: .58rem .78rem;
+    font-size: .88rem;
+    box-shadow: 0 6px 14px rgba(37, 99, 235, .14);
   }
 }

@@ -10,3 +10,4 @@ live-test/includes/payment-secrets.php
 *.local.php
 
 live-test/
+android-webview-app/
