@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 (function(){
@@ -44,7 +44,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     if(button) button.disabled=true;
     try{
       if(isAndroidApp){
-        await signInWithRedirect(auth,provider);
+        messageFn("Google login Android app WebView me Google policy ki wajah se blocked hai. Please email/password login use karein.", true);
         return;
       }
       const res=await signInWithPopup(auth,provider);
@@ -57,14 +57,17 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   }
 
   async function handleRedirectLogin(){
-    try{
-      const result = await getRedirectResult(auth);
-      if(result?.user){
-        await completeGoogleLogin(result.user, page==="login");
-      }
-    }catch(err){
-      if(page==="login") show(readableError(err),true);
-    }
+    return Promise.resolve();
+  }
+
+  function prepareGoogleButton(button){
+    if(!isAndroidApp || !button) return false;
+    button.hidden = true;
+    const note = document.createElement("p");
+    note.className = "auth-note";
+    note.textContent = "Android app me Google login Google policy ki wajah se blocked hai. Email/password login use karein.";
+    button.insertAdjacentElement("afterend", note);
+    return true;
   }
 
   function headerHref(pageName){
@@ -102,7 +105,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     }));
     loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
     signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
-    googleBtn?.addEventListener("click", ()=>startGoogleLogin(googleBtn, show, true));
+    if(!prepareGoogleButton(googleBtn)) googleBtn?.addEventListener("click", ()=>startGoogleLogin(googleBtn, show, true));
   }
 
   function bindDashboard(){
@@ -110,7 +113,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     const dashboardLoginForm=$("#dashboardLoginForm"), dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"), dashboardMessage=$("#dashboardAuthMessage");
     const showDashboardMessage=(msg,isError)=>{ if(!dashboardMessage) return; dashboardMessage.textContent=msg; dashboardMessage.classList.toggle("hidden", !msg); dashboardMessage.classList.toggle("error", !!isError); };
     dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
-    dashboardGoogleBtn?.addEventListener("click", ()=>{ showDashboardMessage("",false); startGoogleLogin(dashboardGoogleBtn, showDashboardMessage, false); });
+    if(!prepareGoogleButton(dashboardGoogleBtn)) dashboardGoogleBtn?.addEventListener("click", ()=>{ showDashboardMessage("",false); startGoogleLogin(dashboardGoogleBtn, showDashboardMessage, false); });
     onAuthStateChanged(auth,(user)=>{
       syncHeader(user);
       if(!user){ clearSession(); if(logoutBtn) logoutBtn.textContent="Login"; if(loading) loading.hidden=false; if(guest) guest.hidden=true; if(content) content.hidden=true; return; }
