@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://cetonline.karnataka.gov.in/kea/cpcrpc2026",
         "officialNotification": "https://cetonline.karnataka.gov.in/keawebentry456/cpckk2026/kk-cpckannada.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2446",
+        "detailPage": "../Job_Details/HTML/2446-Karnataka-Police-Civil-Constable-2026.html",
         "updatedAt": "2026-06-11",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2443",
