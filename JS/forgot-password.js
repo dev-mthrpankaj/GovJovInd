@@ -58,7 +58,7 @@ import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebas
             const auth = getAuth(app);
             await sendPasswordResetEmail(auth, email);
             form.reset();
-            showMessage("Password reset link sent. Please check your email inbox.", "success");
+            showMessage("Password reset link sent. Please check your inbox. If you do not receive it, check Spam or Promotions folder.", "success");
         } catch (error) {
             showMessage(readableError(error), "error");
         } finally {

@@ -63,10 +63,8 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   function prepareGoogleButton(button){
     if(!isAndroidApp || !button) return false;
     button.hidden = true;
-    const note = document.createElement("p");
-    note.className = "auth-note";
-    note.textContent = "Android app me Google login Google policy ki wajah se blocked hai. Email/password login use karein.";
-    button.insertAdjacentElement("afterend", note);
+    const divider = button.previousElementSibling;
+    if(divider?.classList?.contains("auth-divider")) divider.hidden = true;
     return true;
   }
 
