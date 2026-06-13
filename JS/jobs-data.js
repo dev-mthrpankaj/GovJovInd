@@ -54,7 +54,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cetonline.karnataka.gov.in/kea/cpcrpc2026",
         "officialNotification": "https://cetonline.karnataka.gov.in/keawebentry456/cpcrpc2026/rpc-cpckannada.pdf",
-        "detailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026",
+        "detailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026.html",
         "updatedAt": "2026-06-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
@@ -114,14 +114,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.hindustancopper.com/RecruitmentDraft/CandidateLogin/141",
         "officialNotification": "https://www.hindustancopper.com/Upload/Notice/0-639145466897053750-NoticeFILE.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2444",
+        "detailPage": "../Job_Details/HTML/2444-Hindustan-Copper-Executive-2026.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2445",
@@ -144,14 +144,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100589/Index.html",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/05/cil-mt-mining-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2445",
+        "detailPage": "../Job_Details/HTML/2445-Coal-India-MT-Mining-2026.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2441",
