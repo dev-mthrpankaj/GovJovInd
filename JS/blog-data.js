@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "kyu-nahi-ho-rahi-padhai-distraction-control",
+  title: "क्यों नहीं हो रही पढ़ाई? Distraction से बचने की Funny लेकिन Practical Guide",
+  category: "Guidance",
+  date: "2026-06-13",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1781330379602.webp",
+  url: "student-hub/kyu-nahi-ho-rahi-padhai-distraction-control.html",
+  excerpt: "पढ़ाई शुरू होते ही mobile, reels, overthinking और नींद क्यों आने लगती है? जानिए government exam aspirants के लिए distraction रोकने की मजेदार लेकिन practical strategy।"
+},
+    {
   id: "best-ssc-cgl-books-2026",
   title: "Best SSC CGL Books 2026: Maths, English, Reasoning, GK & Computer की Best Books",
   category: "SSC",
