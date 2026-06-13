@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 (function(){
@@ -13,6 +13,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   const page = document.body.dataset.authPage || "";
   const SESSION_KEY = "gju:candidate-session";
   const $ = (s) => document.querySelector(s);
+  const isAndroidApp = /GovJobUpdatesApp/i.test(navigator.userAgent || "");
 
   function show(msg, isError){ const n=$("#authMessage"); if(!n) return; n.textContent=msg; n.classList.remove("hidden"); n.classList.toggle("error", !!isError); }
   function busy(form, state){ if(!form) return; form.querySelectorAll("button").forEach(b=>b.disabled=!!state); }
@@ -30,6 +31,40 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
 
   function clearSession(){
     try { localStorage.removeItem(SESSION_KEY); sessionStorage.removeItem(SESSION_KEY); } catch {}
+  }
+
+  async function completeGoogleLogin(user, redirectToDashboard=true){
+    rememberSession(user);
+    syncHeader(user);
+    await saveUserSoft(user,{createdAt:serverTimestamp(),role:"user"});
+    if(redirectToDashboard) go("dashboard.html");
+  }
+
+  async function startGoogleLogin(button, messageFn=show, redirectToDashboard=true){
+    if(button) button.disabled=true;
+    try{
+      if(isAndroidApp){
+        await signInWithRedirect(auth,provider);
+        return;
+      }
+      const res=await signInWithPopup(auth,provider);
+      await completeGoogleLogin(res.user, redirectToDashboard);
+    }catch(err){
+      messageFn(readableError(err),true);
+    }finally{
+      if(button) button.disabled=false;
+    }
+  }
+
+  async function handleRedirectLogin(){
+    try{
+      const result = await getRedirectResult(auth);
+      if(result?.user){
+        await completeGoogleLogin(result.user, page==="login");
+      }
+    }catch(err){
+      if(page==="login") show(readableError(err),true);
+    }
   }
 
   function headerHref(pageName){
@@ -67,7 +102,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     }));
     loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
     signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
-    googleBtn?.addEventListener("click", async()=>{ googleBtn.disabled=true; try{ const res=await signInWithPopup(auth,provider); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ googleBtn.disabled=false; } });
+    googleBtn?.addEventListener("click", ()=>startGoogleLogin(googleBtn, show, true));
   }
 
   function bindDashboard(){
@@ -75,7 +110,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     const dashboardLoginForm=$("#dashboardLoginForm"), dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"), dashboardMessage=$("#dashboardAuthMessage");
     const showDashboardMessage=(msg,isError)=>{ if(!dashboardMessage) return; dashboardMessage.textContent=msg; dashboardMessage.classList.toggle("hidden", !msg); dashboardMessage.classList.toggle("error", !!isError); };
     dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
-    dashboardGoogleBtn?.addEventListener("click", async()=>{ dashboardGoogleBtn.disabled=true; showDashboardMessage("",false); try{ const res=await signInWithPopup(auth,provider); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{createdAt:serverTimestamp(),role:"user"}); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ dashboardGoogleBtn.disabled=false; } });
+    dashboardGoogleBtn?.addEventListener("click", ()=>{ showDashboardMessage("",false); startGoogleLogin(dashboardGoogleBtn, showDashboardMessage, false); });
     onAuthStateChanged(auth,(user)=>{
       syncHeader(user);
       if(!user){ clearSession(); if(logoutBtn) logoutBtn.textContent="Login"; if(loading) loading.hidden=false; if(guest) guest.hidden=true; if(content) content.hidden=true; return; }
@@ -92,6 +127,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   }
 
   onAuthStateChanged(auth,(user)=>{ if(user) rememberSession(user); else clearSession(); syncHeader(user); });
+  handleRedirectLogin();
 
   function readableError(err){ const code=String(err?.code||""); if(code.includes("invalid-credential")) return "Email ya password galat hai."; if(code.includes("email-already-in-use")) return "Is email se account already bana hua hai."; if(code.includes("weak-password")) return "Password kam se kam 6 characters ka rakho."; if(code.includes("unauthorized-domain")) return "Firebase me govjobupdates.com ko Authorized domains me add karo."; if(code.includes("popup")) return "Google popup complete nahi hua. Dobara try karo."; if(String(err?.message||"").includes("permission_denied")) return "Login ho gaya, par profile save rules me users node allow nahi hai."; return "Login request failed. Please try again."; }
   if(page==="login") bindLogin();
