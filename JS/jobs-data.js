@@ -84,14 +84,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cisfrectt.cisf.gov.in/index.php",
         "officialNotification": "https://cisfrectt.cisf.gov.in/file_open.php?fnm=ADKtCiCedbhHIKPApKXuC1bMlGcQ-hR9g5v4P3DQpLGwMkYnUuqGvSRnxlRsQmfLt33AVOT7YUXNGmhh49Uo4P83IdSWZtjZ6EXbRXAlTiY",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2443",
+        "detailPage": "../Job_Details/HTML/2443-CISF-Para-Medical-Staff-2026.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2444",
