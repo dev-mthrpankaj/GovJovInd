@@ -1094,7 +1094,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "11127",
         "startDate": "2026-05-01",
         "lastDate": "2026-06-14",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Railway Recruitment Board Recruitment 2026",
             "Railway RRB ALP",
