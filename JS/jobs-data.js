@@ -742,7 +742,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "#",
+        "applyLink": "https://sso.rajasthan.gov.in/signin",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2423",
         "updatedAt": "2026-05-23",
@@ -1812,9 +1812,9 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "708",
-        "startDate": "2026-05-01",
+        "startDate": "2026-06-30",
         "lastDate": "2026-07-20",
-        "status": "active",
+        "status": "upcoming",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Forest Guard / Wildlife Guard",
