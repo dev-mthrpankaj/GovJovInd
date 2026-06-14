@@ -502,7 +502,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "#",
+        "applyLink": "https://sso.rajasthan.gov.in/signin?encq=6JkTF7D/fPuyiLpqlTuv+tsssIL22cKEce/qYZMZKsM=",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/3ABD11DA80374279A39F1BF78AAB0950.pdf",
         "detailPage": "../Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
