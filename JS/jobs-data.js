@@ -4,6 +4,36 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2448",
+        "title": "AIIMS CRE 5th Group B & C Various Post Online Form 2026 for 1484 Post",
+        "organization": "All India Institute of Medical Sciences (AIIMS)",
+        "department": "Medical Education",
+        "category": "Medical",
+        "year": "2026",
+        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
+        "totalPosts": "1484",
+        "startDate": "2026-06-13",
+        "lastDate": "2026-07-03",
+        "status": "active",
+        "tags": [
+            "All India Institute of Medical Sciences (AIIMS) Recruitment 2026",
+            "AIIMS CRE 5th Group B & C Various Post",
+            "Sarkari Naukri",
+            "Medical Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://www.aiimsexams.ac.in/advertisement/6a2cdd89be81945a8330d450",
+        "officialNotification": "https://rrpdocuments.aiimsexams.ac.in/1781413479061-353276887.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVRUVRLXWMSLVSAP7%2F20260614%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260614T050937Z&X-Amz-Expires=18000&X-Amz-Signature=f8140ab6cd21164cb7ea30b6bfe49b8733797a0f652cea223d1e82ed0de0c2e6&X-Amz-SignedHeaders=host&response-content-type=application%2Fpdf",
+        "detailPage": "../Job_Details/HTML/2448-AIIMS-CRE-5-Recruitment-2026.html",
+        "updatedAt": "2026-06-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2446",
         "title": "Karnataka Police Constable Online Form 2026 for 596 Post (KK)",
         "organization": "Karnataka Examination Authority (KEA)",
