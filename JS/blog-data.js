@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "khan-sir-faisal-khan-controversy-analysis",
+      title: "Khan Sir (Faisal Khan) Controversy Analysis: छात्रों के लिए सोशल मीडिया विवाद और करियर गाइडेंस",
+      category: "Career Guidance",
+      date: "2026-06-14",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1781411696353.webp",
+      url: "student-hub/khan-sir-faisal-khan-controversy-analysis.html",
+      excerpt: "पटना के प्रसिद्ध शिक्षक खान सर (फैसेल खान) से जुड़े सोशल मीडिया विवादों का एक निष्पक्ष विश्लेषण। जानिए कैसे प्रतियोगी परीक्षाओं की तैयारी करने वाले छात्र इन डिजिटल विकर्षणों से बचकर अपने लक्ष्य पर केंद्रित रह सकते हैं।"
+    },
+    {
   id: "kyu-nahi-ho-rahi-padhai-distraction-control",
   title: "क्यों नहीं हो रही पढ़ाई? Distraction से बचने की Funny लेकिन Practical Guide",
   category: "Guidance",
