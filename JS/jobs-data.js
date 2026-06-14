@@ -1796,12 +1796,12 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?C3EutJadcl32074LCUjboR7E3HN9UhHGFlls4qSunh0=",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2412",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2413",
