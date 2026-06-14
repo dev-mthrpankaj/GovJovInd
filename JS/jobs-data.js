@@ -1764,7 +1764,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://applyssb.com/SSB_CT_25/applicationIndex",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/03/RNoti_210326_125417.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2411",
+        "detailPage": "../Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
@@ -1794,14 +1794,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?C3EutJadcl32074LCUjboR7E3HN9UhHGFlls4qSunh0=",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2412",
+        "detailPage": "../Job_Details/HTML/2412-UPSSSC-ASO-ARO-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2413",
