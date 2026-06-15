@@ -19,6 +19,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   const SESSION_KEY = "gju:candidate-session";
   const $ = (s) => document.querySelector(s);
   const isAndroidApp = /GovJobUpdatesApp/i.test(navigator.userAgent || "");
+  let authStateKnown = false;
 
   function show(msg, isError){ const n=$("#authMessage"); if(!n) return; n.textContent=msg; n.classList.remove("hidden"); n.classList.toggle("error", !!isError); }
   function busy(form, state){ if(!form) return; form.querySelectorAll("button").forEach(b=>b.disabled=!!state); }
@@ -99,7 +100,11 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   }
 
   window.CandidateAuth = window.CandidateAuth || {};
-  window.CandidateAuth.syncHeaderEntry = function(){ syncHeader(auth.currentUser); markAuthReady(); };
+  window.CandidateAuth.syncHeaderEntry = function(){
+    if(!authStateKnown) return;
+    syncHeader(auth.currentUser);
+    markAuthReady();
+  };
 
   function bindLogin(){
     const loginForm = $("#loginForm"), signupForm = $("#signupForm"), googleBtn = $("#googleLoginBtn");
@@ -119,6 +124,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
     if(!prepareGoogleButton(dashboardGoogleBtn)) dashboardGoogleBtn?.addEventListener("click", ()=>{ showDashboardMessage("",false); startGoogleLogin(dashboardGoogleBtn, showDashboardMessage, false); });
     onAuthStateChanged(auth,(user)=>{
+      authStateKnown = true;
       syncHeader(user);
       markAuthReady();
       if(!user){ clearSession(); if(logoutBtn) logoutBtn.textContent="Login"; if(loading) loading.hidden=false; if(guest) guest.hidden=true; if(content) content.hidden=true; return; }
@@ -134,7 +140,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     logoutBtn?.addEventListener("click", async()=>{ if(!auth.currentUser){ go("login.html"); return; } await signOut(auth); clearSession(); syncHeader(null); markAuthReady(); go("login.html"); });
   }
 
-  onAuthStateChanged(auth,(user)=>{ if(user) rememberSession(user); else clearSession(); syncHeader(user); markAuthReady(); });
+  onAuthStateChanged(auth,(user)=>{ authStateKnown = true; if(user) rememberSession(user); else clearSession(); syncHeader(user); markAuthReady(); });
   handleRedirectLogin();
 
   function readableError(err){ const code=String(err?.code||""); if(code.includes("invalid-credential")) return "Email ya password galat hai."; if(code.includes("email-already-in-use")) return "Is email se account already bana hua hai."; if(code.includes("weak-password")) return "Password kam se kam 6 characters ka rakho."; if(code.includes("unauthorized-domain")) return "Firebase me govjobupdates.com ko Authorized domains me add karo."; if(code.includes("popup")) return "Google popup complete nahi hua. Dobara try karo."; if(String(err?.message||"").includes("permission_denied")) return "Login ho gaya, par profile save rules me users node allow nahi hai."; return "Login request failed. Please try again."; }
