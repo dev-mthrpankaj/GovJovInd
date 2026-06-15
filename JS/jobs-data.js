@@ -1892,5 +1892,29 @@ window.GovJobUpdatesJobs = [
         "qualificationSource": "fallback",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "2450",
+        "title": "SSC Delhi Police Head Constable (Ministerial) 2025",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2025",
+        "qualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+        "totalPosts": "509",
+        "startDate": "2025-09-29",
+        "lastDate": "2025-10-20",
+        "status": "closed",
+        "tags": [],
+        "applyLink": "https://ssc.gov.in/",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_DPHCM_2025.pdf",
+        "detailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
+        "updatedAt": "2025-09-29",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     }
 ];
