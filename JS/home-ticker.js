@@ -2,14 +2,16 @@
   "use strict";
 
   const MAX_PER_TYPE = 4;
-  const WELCOME_DELAY_MS = 4000;
-  const SWAP_FADE_MS = 350;
+  const WELCOME_DELAY_MS = 1200;
+  const SWAP_FADE_MS = 250;
+  const RETRY_DELAY_MS = 250;
+  const MAX_RETRIES = 24;
 
   const SOURCES = [
     {
       label: "Latest Job",
       items: () => window.GovJobUpdatesJobs,
-      mode: "nearestLastDate",
+      mode: "nearestFuture",
       dateFields: ["lastDate"],
       fallbackDateFields: ["updatedAt", "startDate"],
       fallbackHref: "HTML/latest-jobs.html"
@@ -17,7 +19,7 @@
     {
       label: "Admit Card",
       items: () => window.GovJobUpdatesAdmitCards,
-      mode: "nearestExamDate",
+      mode: "nearestFuture",
       dateFields: ["examDate", "examEndDate"],
       fallbackDateFields: ["updatedAt", "releaseDate"],
       fallbackHref: "HTML/admitcard.html"
@@ -37,6 +39,8 @@
       fallbackHref: "HTML/results.html"
     }
   ];
+
+  const CLOSED_STATUSES = new Set(["closed", "expired", "ended", "inactive"]);
 
   function clean(value) {
     return String(value ?? "").trim();
@@ -79,6 +83,21 @@
     return fallbackHref;
   }
 
+  function rankNearestItems(records) {
+    const activeItems = records.filter(({ status }) => !CLOSED_STATUSES.has(status));
+    const futureItems = activeItems
+      .filter(({ nearestTime }) => nearestTime)
+      .sort((a, b) => a.nearestTime - b.nearestTime || b.latestTime - a.latestTime);
+    const fallbackItems = activeItems
+      .filter(({ nearestTime }) => !nearestTime)
+      .sort((a, b) => b.latestTime - a.latestTime);
+    const closedFallback = records
+      .filter(({ status }) => CLOSED_STATUSES.has(status))
+      .sort((a, b) => b.latestTime - a.latestTime);
+
+    return futureItems.concat(fallbackItems, closedFallback).slice(0, MAX_PER_TYPE);
+  }
+
   function buildItems(source) {
     const records = source.items();
     if (!Array.isArray(records)) return [];
@@ -94,14 +113,7 @@
 
     const sorted = source.mode === "latest"
       ? withTiming.sort((a, b) => b.latestTime - a.latestTime)
-      : withTiming.sort((a, b) => {
-        const aClosed = a.status === "closed";
-        const bClosed = b.status === "closed";
-        if (aClosed !== bClosed) return aClosed ? 1 : -1;
-        if (a.nearestTime && b.nearestTime && a.nearestTime !== b.nearestTime) return a.nearestTime - b.nearestTime;
-        if (a.nearestTime !== b.nearestTime) return a.nearestTime ? -1 : 1;
-        return b.latestTime - a.latestTime;
-      });
+      : rankNearestItems(withTiming);
 
     return sorted
       .slice(0, MAX_PER_TYPE)
@@ -111,11 +123,15 @@
       }));
   }
 
+  function getTickerItems() {
+    return SOURCES.flatMap(buildItems);
+  }
+
   function renderTicker(ticker) {
     const track = ticker.querySelector(".ticker-track");
-    if (!track || track.dataset.dynamicTicker === "true") return;
-    const items = SOURCES.flatMap(buildItems);
-    if (!items.length) return;
+    if (!track || track.dataset.dynamicTicker === "true") return true;
+    const items = getTickerItems();
+    if (!items.length) return false;
 
     const links = items.concat(items).map((item, index) => {
       const link = document.createElement("a");
@@ -144,12 +160,21 @@
         window.requestAnimationFrame(() => track.classList.remove("ticker-is-swapping"));
       }, SWAP_FADE_MS);
     }, WELCOME_DELAY_MS);
+
+    return true;
   }
 
-  function init() {
-    document.querySelectorAll(".ticker-wrap").forEach(renderTicker);
+  function init(attempt = 0) {
+    const tickers = Array.from(document.querySelectorAll(".ticker-wrap"));
+    if (!tickers.length) return;
+    const rendered = tickers.map(renderTicker).some(Boolean);
+    if (!rendered && attempt < MAX_RETRIES) {
+      window.setTimeout(() => init(attempt + 1), RETRY_DELAY_MS);
+    }
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  window.GovJobHomeTicker = { refresh: init };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => init());
   else init();
 }());
