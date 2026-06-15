@@ -71,10 +71,10 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="dns-prefetch" href="//www.gstatic.com">
   <link rel="stylesheet" href="../CSS/style.css?v=download-app-header-footer-20260615">
-  <link rel="stylesheet" href="../CSS/download-app.css?v=20260615">
+  <link rel="stylesheet" href="../CSS/download-app.css?v=20260615-auth-ready">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="download-app-page">
+<body class="download-app-page gju-auth-pending">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <div class="header-container">
@@ -212,7 +212,13 @@
   <script src="../JS/script.js?v=download-app-20260615"></script>
   <script src="../JS/firebase-config.js"></script>
   <script type="module" src="../JS/firebase-analytics.js"></script>
-  <script type="module" src="../JS/firebase-auth.js?v=20260613-app-redirect"></script>
+  <script type="module" src="../JS/firebase-auth.js?v=20260615-auth-ready"></script>
   <script type="module" src="../JS/firebase-visitors.js"></script>
+  <script>
+    window.setTimeout(function(){
+      document.body.classList.remove('gju-auth-pending');
+      document.body.classList.add('gju-auth-ready');
+    }, 4500);
+  </script>
 </body>
 </html>
