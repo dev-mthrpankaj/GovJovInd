@@ -29,6 +29,7 @@
       items: () => window.GovJobUpdatesAnswerKeys,
       mode: "latest",
       dateFields: ["updatedAt", "releaseDate", "examDate"],
+      skipStatuses: ["upcoming", "not available", "closed", "expired", "inactive"],
       fallbackHref: "HTML/answer-key.html"
     },
     {
@@ -36,6 +37,7 @@
       items: () => window.GovJobUpdatesResults,
       mode: "latest",
       dateFields: ["updatedAt", "resultDate", "releaseDate"],
+      skipStatuses: ["upcoming", "not available", "closed", "expired", "inactive"],
       fallbackHref: "HTML/results.html"
     }
   ];
@@ -98,18 +100,25 @@
     return futureItems.concat(fallbackItems, closedFallback).slice(0, MAX_PER_TYPE);
   }
 
+  function filterByStatus(records, source) {
+    if (!source.skipStatuses?.length) return records;
+    const skipped = new Set(source.skipStatuses);
+    const filtered = records.filter(({ status }) => !skipped.has(status));
+    return filtered.length ? filtered : records;
+  }
+
   function buildItems(source) {
     const records = source.items();
     if (!Array.isArray(records)) return [];
     const today = todayTime();
-    const withTiming = records
+    const withTiming = filterByStatus(records
       .filter((item) => clean(item.title))
       .map((item) => {
         const status = clean(item.status).toLowerCase();
         const nearestTime = getNearestFutureTime(item, source.dateFields, today);
         const latestTime = getSortTime(item, source.fallbackDateFields || source.dateFields);
         return { item, status, nearestTime, latestTime };
-      });
+      }), source);
 
     const sorted = source.mode === "latest"
       ? withTiming.sort((a, b) => b.latestTime - a.latestTime)
