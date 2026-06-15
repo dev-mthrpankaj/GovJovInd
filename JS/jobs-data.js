@@ -4,6 +4,36 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2449",
+        "title": "BPSSC ASI Technical Online Form 2026",
+        "organization": "Bihar Police Sub-Ordinate Services Commission",
+        "department": "Police",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Candidates must possess a Diploma in Electronics & Communication Engineering / Electronics & Telecommunication Engineering / Electrical & Electronics Engineering / Information Technology from a recognized University/Institute in India, with a minimum of 50% marks",
+        "totalPosts": "22",
+        "startDate": "2026-05-21",
+        "lastDate": "2026-06-21",
+        "status": "active",
+        "tags": [
+            "Bihar Police Sub-Ordinate Services Commission Recruitment 2026",
+            "BPSSC ASI Technical",
+            "Sarkari Naukri",
+            "Police Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://apply-bpssc.com/bpssc_asi_tech_7_26_v1/applicationIndex",
+        "officialNotification": "https://bpssc.bihar.gov.in/Notices/Final%20Advt.-%2007-2026.pdf",
+        "detailPage": "../Job_Details/HTML/2449-BPSSC-Bihar-Police-ASI-Technical-2026.html",
+        "updatedAt": "2026-06-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2448",
         "title": "AIIMS CRE 5th Group B & C Various Post Online Form 2026 for 1484 Post",
         "organization": "All India Institute of Medical Sciences (AIIMS)",
