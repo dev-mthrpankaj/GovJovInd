@@ -14,7 +14,12 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-06-22",
         "status": "upcoming",
-        "tags": [],
+        "tags": [
+            "CSBC",
+            "Bihar Police",
+            "Constable",
+            "Operator"
+        ],
         "downloadLink": "https://apply-csbc.com/csbc_2_2026_weadmitcards/applicationIndex",
         "detailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
         "updatedAt": "2026-06-15",

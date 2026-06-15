@@ -18,12 +18,12 @@ window.GovJobUpdatesResults = [
             "Delhi Police Head Constable"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "1006",
