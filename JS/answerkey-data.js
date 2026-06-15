@@ -22,12 +22,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://ssc.gov.in/",
         "objectionLink": "https://ssc.gov.in/",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-15",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2043",

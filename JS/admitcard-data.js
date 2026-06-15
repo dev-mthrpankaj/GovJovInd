@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2396",
+        "title": "CSBC Bihar Police Constable Operator Exam City / Admit Card 2026 | 993 Post",
+        "organization": "Central Selection Board of Constable CSBC",
+        "department": "State Police",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-28",
+        "examEndDate": "",
+        "releaseDate": "2026-06-22",
+        "status": "upcoming",
+        "tags": [],
+        "downloadLink": "https://apply-csbc.com/csbc_2_2026_weadmitcards/applicationIndex",
+        "detailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
+        "updatedAt": "2026-06-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2042",
         "title": "UP Police Constable Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
@@ -13,7 +33,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-08",
         "examEndDate": "2026-06-10",
         "releaseDate": "2026-05-31",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "UPPRPB",
             "Police",
@@ -37,7 +57,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-05",
         "examEndDate": "",
         "releaseDate": "2026-05-27",
-        "status": "upcoming",
+        "status": "available",
         "tags": [
             "BSNL",
             "Senior Executive Trainee",
@@ -46,8 +66,8 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://www.externalexam.bsnl.co.in/",
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-31",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
@@ -132,7 +152,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-10",
         "examEndDate": "",
         "releaseDate": "2026-05-25",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "Bihar Police"
         ],
@@ -154,7 +174,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-31",
         "examEndDate": "",
         "releaseDate": "2026-05-22",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "Edcation",
             "B.ed"
@@ -177,7 +197,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-04-27",
         "examEndDate": "2026-05-30",
         "releaseDate": "2026-04-24",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "SSC",
             "GD Constable",
@@ -201,7 +221,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-21",
         "examEndDate": "",
         "releaseDate": "2026-05-19",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "MPESB",
             "Police SI",
@@ -225,7 +245,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-24",
         "examEndDate": "",
         "releaseDate": "2026-05-17",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "UPSC",
             "IAS",
@@ -251,7 +271,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-21",
         "examEndDate": "",
         "releaseDate": "2026-05-16",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "upsssc",
             "lekhpal",
@@ -443,7 +463,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "",
         "examEndDate": "",
         "releaseDate": "2026-05-01",
-        "status": "upcoming",
+        "status": "available",
         "tags": [
             "BPSSC",
             "Home Guard",
@@ -611,7 +631,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "",
         "examEndDate": "",
         "releaseDate": "2026-05-01",
-        "status": "upcoming",
+        "status": "available",
         "tags": [
             "UP LT Grade",
             "Assistant Teacher",
