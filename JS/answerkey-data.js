@@ -4,6 +4,32 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "1104",
+        "title": "SSC GD Constable Answer Key 2026 for 25487 Post",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-04-27",
+        "examEndDate": "2026-05-30",
+        "releaseDate": "2026-06-15",
+        "objectionLastDate": "2026-06-20",
+        "status": "available",
+        "tags": [
+            "SSC",
+            "GD Constable",
+            "Answer Key"
+        ],
+        "downloadLink": "https://ssc.gov.in/",
+        "objectionLink": "https://ssc.gov.in/",
+        "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
+        "updatedAt": "2026-06-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2043",
         "title": "UP TGT Answer Key",
         "organization": "UP Secondary Education Service Selection Board",
@@ -38,7 +64,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-05-29",
         "objectionLastDate": "2026-06-11",
-        "status": "UP Secondary Education Service Selection Board",
+        "status": "available",
         "tags": [
             "Indian Navy",
             "INCET",
