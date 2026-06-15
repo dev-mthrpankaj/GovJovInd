@@ -20,6 +20,11 @@
   color:var(--download-ink);
 }
 
+.download-app-page.gju-auth-pending .header-auth-actions{
+  visibility:hidden;
+  pointer-events:none;
+}
+
 .download-app-main{
   overflow:hidden;
 }
