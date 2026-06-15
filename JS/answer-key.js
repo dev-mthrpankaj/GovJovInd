@@ -87,12 +87,12 @@
         return "";
     }
 
-    function normalizeJobDetailPage(value) {
+    function normalizeDetailPage(value) {
         let url = normalizeActionUrl(value).replace(/\\/g, "/");
         if (!url) return "";
-        url = url.replace(/^\.\/Job_Details\/HTML\//i, "../Job_Details/HTML/");
-        if (/^(?:\.\.\/|\/)Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
-        if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/Job_Details\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        url = url.replace(/^\.\/(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details)\/HTML\//i, "../$1/HTML/");
+        if (/^(?:\.\.\/|\/)(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details)\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details)\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
         return "";
     }
 
@@ -317,7 +317,7 @@
 
     function getDetailPage(item) {
         if (!item || !item.id) return "";
-        return detailPageOverrides[item.id] || normalizeJobDetailPage(item.detailPage);
+        return detailPageOverrides[item.id] || normalizeDetailPage(item.detailPage);
     }
 
     function renderBadges(item) {
