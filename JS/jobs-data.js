@@ -284,7 +284,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1979",
         "startDate": "2026-06-16",
         "lastDate": "2026-07-15",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Delhi Subordinate Services Selection Board (DSSSB) Recruitment 2026",
             "DSSSB Various Post",
