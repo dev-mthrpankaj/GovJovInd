@@ -4,8 +4,13 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
 
 (function(){
   "use strict";
+  function markAuthReady(){
+    document.body.classList.remove("gju-auth-pending");
+    document.body.classList.add("gju-auth-ready");
+  }
+
   const config = window.GJU_FIREBASE_CONFIG;
-  if(!config || !config.apiKey){ console.warn("[GovJobUpdates] Firebase auth config missing."); return; }
+  if(!config || !config.apiKey){ console.warn("[GovJobUpdates] Firebase auth config missing."); markAuthReady(); return; }
   const app = getApps().length ? getApps()[0] : initializeApp(config);
   const auth = getAuth(app);
   const db = getDatabase(app);
@@ -36,6 +41,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   async function completeGoogleLogin(user, redirectToDashboard=true){
     rememberSession(user);
     syncHeader(user);
+    markAuthReady();
     await saveUserSoft(user,{createdAt:serverTimestamp(),role:"user"});
     if(redirectToDashboard) go("dashboard.html");
   }
@@ -93,7 +99,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   }
 
   window.CandidateAuth = window.CandidateAuth || {};
-  window.CandidateAuth.syncHeaderEntry = function(){ syncHeader(auth.currentUser); };
+  window.CandidateAuth.syncHeaderEntry = function(){ syncHeader(auth.currentUser); markAuthReady(); };
 
   function bindLogin(){
     const loginForm = $("#loginForm"), signupForm = $("#signupForm"), googleBtn = $("#googleLoginBtn");
@@ -101,8 +107,8 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
       const target=btn.dataset.authTab; document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active", b===btn));
       loginForm.classList.toggle("hidden", target!=="login"); signupForm.classList.toggle("hidden", target!=="signup"); show("",false); $("#authMessage")?.classList.add("hidden");
     }));
-    loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
-    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
+    loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
+    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
     if(!prepareGoogleButton(googleBtn)) googleBtn?.addEventListener("click", ()=>startGoogleLogin(googleBtn, show, true));
   }
 
@@ -110,10 +116,11 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     const loading=$("#dashboardLoading"), content=$("#dashboardContent"), guest=$("#dashboardGuest"), logoutBtn=$("#logoutBtn");
     const dashboardLoginForm=$("#dashboardLoginForm"), dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"), dashboardMessage=$("#dashboardAuthMessage");
     const showDashboardMessage=(msg,isError)=>{ if(!dashboardMessage) return; dashboardMessage.textContent=msg; dashboardMessage.classList.toggle("hidden", !msg); dashboardMessage.classList.toggle("error", !!isError); };
-    dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
+    dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
     if(!prepareGoogleButton(dashboardGoogleBtn)) dashboardGoogleBtn?.addEventListener("click", ()=>{ showDashboardMessage("",false); startGoogleLogin(dashboardGoogleBtn, showDashboardMessage, false); });
     onAuthStateChanged(auth,(user)=>{
       syncHeader(user);
+      markAuthReady();
       if(!user){ clearSession(); if(logoutBtn) logoutBtn.textContent="Login"; if(loading) loading.hidden=false; if(guest) guest.hidden=true; if(content) content.hidden=true; return; }
       rememberSession(user);
       if(logoutBtn) logoutBtn.textContent="Logout";
@@ -124,10 +131,10 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
       $("#profileEmail") && ($("#profileEmail").textContent = user.email || "No email available");
       saveUserSoft(user);
     });
-    logoutBtn?.addEventListener("click", async()=>{ if(!auth.currentUser){ go("login.html"); return; } await signOut(auth); clearSession(); syncHeader(null); go("login.html"); });
+    logoutBtn?.addEventListener("click", async()=>{ if(!auth.currentUser){ go("login.html"); return; } await signOut(auth); clearSession(); syncHeader(null); markAuthReady(); go("login.html"); });
   }
 
-  onAuthStateChanged(auth,(user)=>{ if(user) rememberSession(user); else clearSession(); syncHeader(user); });
+  onAuthStateChanged(auth,(user)=>{ if(user) rememberSession(user); else clearSession(); syncHeader(user); markAuthReady(); });
   handleRedirectLogin();
 
   function readableError(err){ const code=String(err?.code||""); if(code.includes("invalid-credential")) return "Email ya password galat hai."; if(code.includes("email-already-in-use")) return "Is email se account already bana hua hai."; if(code.includes("weak-password")) return "Password kam se kam 6 characters ka rakho."; if(code.includes("unauthorized-domain")) return "Firebase me govjobupdates.com ko Authorized domains me add karo."; if(code.includes("popup")) return "Google popup complete nahi hua. Dobara try karo."; if(String(err?.message||"").includes("permission_denied")) return "Login ho gaya, par profile save rules me users node allow nahi hai."; return "Login request failed. Please try again."; }
