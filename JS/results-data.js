@@ -22,8 +22,28 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://www.upsc.gov.in/exams-related-info/written-result",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-16",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "1009",
+        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
+        "organization": "Border Security force",
+        "department": "BSF",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-09",
+        "status": "released",
+        "tags": [
+            "BSF"
+        ],
+        "resultLink": "https://d3t79nicn48uzj.cloudfront.net/bsf/custom/1781085489.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-10",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
