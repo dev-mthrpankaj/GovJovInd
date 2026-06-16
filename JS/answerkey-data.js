@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "2025",
+        "title": "SSC Delhi Police Head Constable AWO / TPO Final Answer Key with Marks 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-01-15",
+        "examEndDate": "2026-01-22",
+        "releaseDate": "2026-06-16",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://sscexams.cbexams.com/DPCawoPost2025finalsheetskmdlandingpage/loginnew.aspx",
+        "objectionLink": "",
+        "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
+        "updatedAt": "2026-06-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1104",
         "title": "SSC GD Constable Answer Key 2026 for 25487 Post",
         "organization": "Staff Selection Commission",
@@ -39,7 +61,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examDate": "",
         "examEndDate": "",
         "releaseDate": "2026-06-07",
-        "objectionLastDate": "",
+        "objectionLastDate": "2026-06-12",
         "status": "avalilable",
         "tags": [
             "UPSESSB UP TGT"
