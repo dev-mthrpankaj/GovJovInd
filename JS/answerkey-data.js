@@ -61,19 +61,19 @@ window.GovJobUpdatesAnswerKeys = [
         "examDate": "",
         "examEndDate": "",
         "releaseDate": "2026-06-07",
-        "objectionLastDate": "",
+        "objectionLastDate": "2026-06-12",
         "status": "avalilable",
         "tags": [
             "UPSESSB UP TGT"
         ],
         "downloadLink": "https://www.upessc.net/tgtqsobj2026/Login.aspx",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2042",
