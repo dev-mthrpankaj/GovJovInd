@@ -4,7 +4,7 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
-        "id": "2025",
+        "id": "4005",
         "title": "SSC Delhi Police Head Constable AWO / TPO Final Answer Key with Marks 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -15,7 +15,12 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-16",
         "objectionLastDate": "",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "AWO TPO",
+            "Answer Key"
+        ],
         "downloadLink": "https://sscexams.cbexams.com/DPCawoPost2025finalsheetskmdlandingpage/loginnew.aspx",
         "objectionLink": "",
         "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
@@ -26,7 +31,29 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1104",
+        "id": "4006",
+        "title": "Rajasthan RSSB Lab Assistant Answer Key 2026",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "RSSB",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-05-09",
+        "examEndDate": "2026-05-10",
+        "releaseDate": "2026-06-16",
+        "objectionLastDate": "2026-06-20",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rssb.rajasthan.gov.in/storage/answerkey_item/1781521971.pdf",
+        "objectionLink": "",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "4004",
         "title": "SSC GD Constable Answer Key 2026 for 25487 Post",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -52,14 +79,14 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2043",
+        "id": "4003",
         "title": "UP TGT Answer Key",
         "organization": "UP Secondary Education Service Selection Board",
         "department": "Education",
         "category": "Answer Key",
         "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
+        "examDate": "2026-06-03",
+        "examEndDate": "2026-06-04",
         "releaseDate": "2026-06-07",
         "objectionLastDate": "2026-06-12",
         "status": "avalilable",
@@ -68,15 +95,15 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://www.upessc.net/tgtqsobj2026/Login.aspx",
         "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/UP-TGT-2022-Answer-Key-2026.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
-        "id": "2042",
+        "id": "4002",
         "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
         "organization": "Join Indian Navy",
         "department": "Defence",
@@ -102,7 +129,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2041",
+        "id": "4001",
         "title": "UPSC Civil Services IAS IFS Answer Key 2026",
         "organization": "Union Public Service Commission",
         "department": "Civil Services",
@@ -123,13 +150,13 @@ window.GovJobUpdatesAnswerKeys = [
         "objectionLink": "#",
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-05-29",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2031",
+        "id": "4000",
         "title": "UPSSSC Lekhpal Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Revenue",
