@@ -4,6 +4,50 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1010",
+        "title": "UPSC Civil Services IAS IFS Result 2026",
+        "organization": "Union Public Service Commission",
+        "department": "IAS&IFS",
+        "category": "Ruselt",
+        "year": "2026",
+        "resultDate": "2026-06-15",
+        "status": "released",
+        "tags": [
+            "UPSC",
+            "IAS",
+            "IPS",
+            "IFS",
+            "Central"
+        ],
+        "resultLink": "https://www.upsc.gov.in/exams-related-info/written-result",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "1009",
+        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
+        "organization": "Border Security force",
+        "department": "BSF",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-09",
+        "status": "released",
+        "tags": [
+            "BSF"
+        ],
+        "resultLink": "https://d3t79nicn48uzj.cloudfront.net/bsf/custom/1781085489.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-10",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1008",
         "title": "SSC Delhi Police Head Constable (Ministerial) Result",
         "organization": "Staff Selection Commission",
