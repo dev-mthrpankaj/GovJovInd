@@ -68,12 +68,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://www.upessc.net/tgtqsobj2026/Login.aspx",
         "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2042",
