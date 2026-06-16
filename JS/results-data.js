@@ -20,12 +20,12 @@ window.GovJobUpdatesResults = [
             "Central"
         ],
         "resultLink": "https://www.upsc.gov.in/exams-related-info/written-result",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html",
         "updatedAt": "2026-06-16",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1009",
@@ -40,12 +40,12 @@ window.GovJobUpdatesResults = [
             "BSF"
         ],
         "resultLink": "https://d3t79nicn48uzj.cloudfront.net/bsf/custom/1781085489.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
         "updatedAt": "2026-06-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1008",
