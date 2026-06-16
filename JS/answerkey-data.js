@@ -42,7 +42,11 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-16",
         "objectionLastDate": "2026-06-20",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "RSSB",
+            "Lab Assistant",
+            "Answer Key"
+        ],
         "downloadLink": "https://rssb.rajasthan.gov.in/storage/answerkey_item/1781521971.pdf",
         "objectionLink": "",
         "detailPage": "../HTML/answer-key.html",
