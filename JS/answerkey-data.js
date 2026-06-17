@@ -83,6 +83,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "4007",
+        "title": "UPSSSC Junior Assistant Revised Answer Key 2026 | Advt No 12-Exam/2024",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-02-01",
+        "examEndDate": "",
+        "releaseDate": "2026-06-13",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rojgarresult.com/wp-content/uploads/2026/06/UPSSSC-Revised-Answer-Key-26.pdf",
+        "objectionLink": "",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-15",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "4003",
         "title": "UP TGT Answer Key",
         "organization": "UP Secondary Education Service Selection Board",
