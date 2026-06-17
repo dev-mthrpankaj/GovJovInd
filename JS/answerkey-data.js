@@ -49,12 +49,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://rssb.rajasthan.gov.in/storage/answerkey_item/1781521971.pdf",
         "objectionLink": "",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html",
         "updatedAt": "2026-06-16",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4004",
