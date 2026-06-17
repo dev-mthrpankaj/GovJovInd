@@ -101,7 +101,7 @@
         //General_Awareness_Registry
         quizMeta("ga-set-1", "General Awareness", "General Awareness Static GK Set 1", "50 polity, history, geography, economy and science questions.", "Mixed", "quiz-data/general-awareness/ga-set-1.js"),
         quizMeta("ga-current-affairs-set-1", "General Awareness", "General Awareness Current Affairs Set 1", "50 current and static awareness questions for competitive exams.", "Moderate", "quiz-data/general-awareness/ga-current-affairs-set-1.js"),
-        quizMeta("gkgs-current-static-26-50-set-1", "General Awareness", "GK/GS Current Static Practice Set 1", "25 GK/GS questions covering polity, history, geography, science and current affairs.", "Mixed", "quiz-data/general-awareness/gkgs-current-static-26-50-set-1.js", 25),
+        quizMeta("gkgs-current-static-26-50-set-1", "General Awareness", "GK/GS Current Static Practice Set 1 (17-06-2026)", "25 GK/GS questions covering polity, history, geography, science and current affairs.", "Mixed", "quiz-data/general-awareness/gkgs-current-static-26-50-set-1.js", 25),
 
         //Computer_Registry
         quizMeta("computer-set-1", "Computer", "Computer Basics Practice Set 1", "50 computer basics, hardware, software and internet questions.", "Mixed", "quiz-data/computer/computer-set-1.js"),
