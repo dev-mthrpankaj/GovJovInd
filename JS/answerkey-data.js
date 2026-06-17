@@ -94,15 +94,19 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-13",
         "objectionLastDate": "",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "UPSSSC",
+            "Junior Assistant",
+            "Revised Answer Key"
+        ],
         "downloadLink": "https://rojgarresult.com/wp-content/uploads/2026/06/UPSSSC-Revised-Answer-Key-26.pdf",
         "objectionLink": "",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/UPSSSC-Junior-Assistant-Revised-Answer-Key-2026.html",
         "updatedAt": "2026-06-15",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4003",
@@ -153,6 +157,33 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "4008",
+        "title": "UPPSC Assistant Professor GDC Answer Key 2026 for 1253 Post",
+        "organization": "Uttar Pradesh Public Service Commission",
+        "department": "UPPSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-05-31",
+        "examEndDate": "",
+        "releaseDate": "2026-06-03",
+        "objectionLastDate": "2026-06-09",
+        "status": "available",
+        "tags": [
+            "UPPSC",
+            "Assistant Professor",
+            "GDC",
+            "Answer Key"
+        ],
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
+        "objectionLink": "",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "4001",
