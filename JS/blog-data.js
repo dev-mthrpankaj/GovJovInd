@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "telegram-ban-in-india-paper-leak-social-media-truth",
+  title: "Telegram Ban in India: क्या Telegram Paper Leak करवाता है या इंसान?",
+  category: "Career Guidance",
+  date: "2026-06-16",
+  image: "../Assets/Home%20Page/telegram-ban-paper-leak-awareness.webp",
+  url: "student-hub/telegram-ban-in-india-paper-leak-social-media-truth.html",
+  excerpt: "Telegram ban in India, paper leak और social media misuse की पूरी logical सच्चाई: app जिम्मेदार है या उसे गलत इस्तेमाल करने वाले लोग?"
+},
+    {
       id: "khan-sir-faisal-khan-controversy-analysis",
       title: "Khan Sir (Faisal Khan) Controversy Analysis: छात्रों के लिए सोशल मीडिया विवाद और करियर गाइडेंस",
       category: "Career Guidance",
