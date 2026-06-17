@@ -4,36 +4,6 @@
 
 window.GovJobUpdatesJobs = [
     {
-        "id": "2451",
-        "title": "NIACL Apprentice Online Form 2026 for 550 Post",
-        "organization": "The New India Assurance Co. Ltd. (NIACL)",
-        "department": "NIACL",
-        "category": "Central Government",
-        "year": "2026",
-        "qualification": "Bachelor Degree in Any Stream in Any Recognized University in India. To Know more Click on View Detail Page",
-        "totalPosts": "550",
-        "startDate": "2026-06-23",
-        "lastDate": "2026-07-07",
-        "status": "upcoming",
-        "tags": [
-            "The New India Assurance Co. Ltd. (NIACL) Recruitment 2026",
-            "NIACL Apprentice",
-            "Sarkari Naukri",
-            "Central Government Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "",
-        "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2451",
-        "updatedAt": "2026-06-17",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "needsReview": "no",
-        "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "2452",
         "title": "CGPSC Assistant District Prosecution Officer ADPO Online Form 2026",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
@@ -92,6 +62,36 @@ window.GovJobUpdatesJobs = [
         "qualificationSource": "qualification",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "2451",
+        "title": "NIACL Apprentice Online Form 2026 for 550 Post",
+        "organization": "The New India Assurance Co. Ltd. (NIACL)",
+        "department": "NIACL",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Bachelor Degree in Any Stream in Any Recognized University in India. To Know more Click on View Detail Page",
+        "totalPosts": "550",
+        "startDate": "2026-06-23",
+        "lastDate": "2026-07-07",
+        "status": "upcoming",
+        "tags": [
+            "The New India Assurance Co. Ltd. (NIACL) Recruitment 2026",
+            "NIACL Apprentice",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "",
+        "officialNotification": "",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2451",
+        "updatedAt": "2026-06-16",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2449",
