@@ -26,6 +26,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "1012",
+        "title": "MPESB Pre Agriculture Test PAT Result 2026",
+        "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
+        "department": "MPESB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-18",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://esb.mp.gov.in/results/RESULT_26/PAT_RES26/default_Results.htm",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-18",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1010",
         "title": "UPSC Civil Services IAS IFS Result 2026",
         "organization": "Union Public Service Commission",
