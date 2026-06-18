@@ -64,6 +64,36 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "2454",
+        "title": "BOB Corporate and Institutional Credit Online Form 2026",
+        "organization": "Bank of Baroda",
+        "department": "Banking",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Bachelor Degree in Any Stream in Any Recognized University.\nPost Graduate Degree/ Diploma with specialization in Finance or equivalent to Finance.\nRead Notification for more Details or click on View Detail Page",
+        "totalPosts": "86",
+        "startDate": "2026-06-16",
+        "lastDate": "2026-07-06",
+        "status": "active",
+        "tags": [
+            "Bank of Baroda Recruitment 2026",
+            "BOB Corporate and Institutional Credit",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://bankappsweb.bankofbaroda.bank.in/BOBRECRUITMENT_JUN_CIC2507621/",
+        "officialNotification": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2026/26-06/Advertisement-16-22.pdf",
+        "detailPage": "../Job_Details/HTML/BOB-Credit-Officers-Recruitment-2026.html",
+        "updatedAt": "2026-06-17",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2451",
         "title": "NIACL Apprentice Online Form 2026 for 550 Post",
         "organization": "The New India Assurance Co. Ltd. (NIACL)",
@@ -1842,7 +1872,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "84",
-        "startDate": "2026-05-01",
+        "startDate": "2026-04-23",
         "lastDate": "2026-05-14",
         "status": "closed",
         "tags": [
@@ -1856,12 +1886,12 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cht_2026.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2410",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2411",
@@ -1886,8 +1916,8 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/03/RNoti_210326_125417.pdf",
         "detailPage": "../Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
         "detailPageSource": "sheet",
