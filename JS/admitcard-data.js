@@ -16,7 +16,7 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://apply-csbc.com/csbc_12026_weadmitcard/searchApplication",
-        "detailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Answer-Key-2026",
+        "detailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
