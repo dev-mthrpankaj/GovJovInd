@@ -18,12 +18,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1010",

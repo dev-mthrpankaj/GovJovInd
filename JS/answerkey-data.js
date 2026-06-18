@@ -49,12 +49,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
         "objectionLink": "",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4005",
