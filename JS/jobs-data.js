@@ -1704,14 +1704,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/rbisbmar26/",
         "officialNotification": "https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DEPR29042026BE94DEA85E3C4753A82B191EB6A795ED.PDF",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2402",
+        "detailPage": "../Job_Details/HTML/1211-RBI-Officer-Grade-B-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2403",
@@ -1734,14 +1734,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://bed.upessc.org/otr/",
         "officialNotification": "https://upessc.up.gov.in/Advertisment/462d7ee7-86da-4c19-80cf-877e0c787c50.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2403",
+        "detailPage": "../Job_Details/HTML/1210-UPESSC-Aided-School-Teacher-2025.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2404",
@@ -1764,14 +1764,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/PO26/Declaration.aspx",
         "officialNotification": "https://mppsc.mp.gov.in/uploads/advertisement/Advt_ADPO_Exam_2026_Dated_10_03_2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2404",
+        "detailPage": "../Job_Details/HTML/1209-MPPSC-ADPO-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2405",
@@ -1794,14 +1794,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "#",
         "officialNotification": "https://upsssc.gov.in//ViewPdf.aspx?DnnJcRACgDWbxJiEHVQZfB4I2Z6BHMLb+KVay71xLuw=",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2405",
+        "detailPage": "../Job_Details/HTML/1208-UPSSSC-PET-Based-Main-Exam-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2406",
@@ -1854,14 +1854,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/upcisbfeb26/",
         "officialNotification": "https://upcisb.upsdc.gov.in/Content/A.1_S.R_2026_English.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2407",
+        "detailPage": "../Job_Details/HTML/1207-UP-Cooperative-Banking-Technical-Services-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2408",
