@@ -4,11 +4,29 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1011",
+        "title": "SSC Stenographer 2025 Final Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-18",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1010",
         "title": "UPSC Civil Services IAS IFS Result 2026",
         "organization": "Union Public Service Commission",
         "department": "IAS&IFS",
-        "category": "Ruselt",
+        "category": "Result",
         "year": "2026",
         "resultDate": "2026-06-15",
         "status": "released",
