@@ -1524,14 +1524,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://admissions.nic.in/Bihar/Applicant/Root/OTHome.aspx?enc=k5U5Gp8NR6abhZ8Lld4oWvvSsCkKcG+Kcizck0pVdCvJE10jNAB9fCwdCq9SngLzv5wfQK8DbPTS5JsnelmH5g==",
         "officialNotification": "https://bceceboard.bihar.gov.in/pdf_Adv/ADV_SR26_01.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2396",
+        "detailPage": "../Job_Details/HTML/1206-BCECEB-Senior-Resident-Tutor-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2397",
@@ -1554,14 +1554,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/licjamar26/",
         "officialNotification": "https://cdn.lichousing.com/2026/04/Detailed-Advertisement-Recruitment-of-Junior-Assistants-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2397",
+        "detailPage": "../Job_Details/HTML/1205-LIC-HFL-Junior-Assistant-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2398",
@@ -1584,14 +1584,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://apply-bpssc.com/bpssc_havr_clerk_5_26_v1/applicationIndex",
         "officialNotification": "https://bpssc.bihar.gov.in/Notices/Advt.%20no.-05-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2398",
+        "detailPage": "../Job_Details/HTML/1204-BPSSC-Adhinayak-Anudeshak-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2399",
@@ -1614,14 +1614,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
         "officialNotification": "https://www.unionbankofindia.bank.in/pdf/notification-final-1865-april26.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2399",
+        "detailPage": "../Job_Details/HTML/1203-Union-Bank-Apprentice-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2400",
@@ -1644,14 +1644,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://uptet.upessc.org/otr/",
         "officialNotification": "https://www.upessc.up.gov.in/Notice/334a-b177-4450-4fbc-98be.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2400",
+        "detailPage": "../Job_Details/HTML/1202-UPTET-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2401",
@@ -1674,7 +1674,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cetbed.ucanapply.com/univer/public/secure?app_id=UElZMDAwMDEwMA==",
         "officialNotification": "https://d1fij890xi0cmd.cloudfront.net/ums/cetbed-brabu/2026/notices/1777289328_prospectus-cet-bed2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2401",
+        "detailPage": "../Job_Details/HTML/1201-Bihar-BEd-CET-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
