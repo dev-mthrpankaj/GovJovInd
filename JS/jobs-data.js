@@ -1740,8 +1740,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2404",
@@ -1770,8 +1770,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2405",
