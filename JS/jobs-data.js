@@ -1872,7 +1872,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "84",
-        "startDate": "2026-05-01",
+        "startDate": "2026-04-23",
         "lastDate": "2026-05-14",
         "status": "closed",
         "tags": [
