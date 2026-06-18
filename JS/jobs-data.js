@@ -674,7 +674,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "2285",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Lower PCS",
@@ -884,7 +884,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Join Indian Navy Recruitment 2026",
             "Indian Navy 10+2 B.Tech Cadet Entry",
@@ -1094,7 +1094,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "30",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Council of Scientific & Industrial Research Recruitment 2026",
             "CSIR CIMFR Technician/Grade II",
@@ -1784,7 +1784,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "209",
         "startDate": "2026-06-19",
         "lastDate": "2026-07-09",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Havildar Instructor",
