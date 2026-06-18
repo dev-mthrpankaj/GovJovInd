@@ -15,15 +15,20 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-18",
         "objectionLastDate": "",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "SSC",
+            "CGL",
+            "Tier II",
+            "Answer Key"
+        ],
         "downloadLink": "https://ssc.digialm.com/EForms/configuredHtml/32874/97464/login.html",
         "objectionLink": "",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/13059-SSC-CGL-Tier-2-Final-Answer-Key-2025.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4005",
