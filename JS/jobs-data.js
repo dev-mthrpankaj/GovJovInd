@@ -1886,12 +1886,12 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cht_2026.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=2410",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2411",
@@ -1916,7 +1916,7 @@ window.GovJobUpdatesJobs = [
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/03/RNoti_210326_125417.pdf",
         "detailPage": "../Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
+        "telegramStatus": "ready",
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
