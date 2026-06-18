@@ -1560,8 +1560,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2398",
@@ -1590,8 +1590,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2399",
@@ -1620,8 +1620,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2400",
@@ -1650,8 +1650,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2401",
