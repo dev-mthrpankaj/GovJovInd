@@ -1434,10 +1434,10 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advertisement-122026-33rd-BJSE_BPSC-20260223-82eskn.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2392",
+        "detailPage": "../Job_Details/HTML/1016-BPSC-33rd-Bihar-Judicial-Service-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
         "detailPageSource": "sheet",
@@ -1464,10 +1464,10 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://phc-recruitment.com/",
         "officialNotification": "https://patnahighcourt.gov.in/getfile/MTA0NTQ=-q0vlRLd1RTE=",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2393",
+        "detailPage": "../Job_Details/HTML/1015-Patna-High-Court-Technical-Assistant-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
         "detailPageSource": "sheet",
@@ -1494,14 +1494,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.npcilcareers.co.in/ETHQ10042026/candidate/default.aspx",
         "officialNotification": "https://www.npcilcareers.co.in/ETHQ10042026/documents/advt.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2394",
+        "detailPage": "../Job_Details/HTML/1014-NPCIL-Executive-Trainee-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2396",
@@ -1530,8 +1530,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2397",
@@ -1560,8 +1560,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2398",
@@ -1590,8 +1590,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2399",
@@ -1620,8 +1620,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2400",
@@ -1650,8 +1650,8 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "no",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2401",
