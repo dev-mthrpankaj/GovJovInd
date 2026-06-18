@@ -31,6 +31,32 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "4010",
+        "title": "UPPSC GIC Lecturer Government Inter College Answer Key 2026",
+        "organization": "Uttar Pradesh Public Service Commission",
+        "department": "UPPSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-06-14",
+        "examEndDate": "2026-06-17",
+        "releaseDate": "2026-06-18",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "UPPSC",
+            "GIC Lecturer",
+            "Answer Key"
+        ],
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
+        "objectionLink": "",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "4005",
         "title": "SSC Delhi Police Head Constable AWO / TPO Final Answer Key with Marks 2026",
         "organization": "Staff Selection Commission",

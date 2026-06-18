@@ -12,7 +12,11 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-18",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "SSC",
+            "Stenographer",
+            "Final Result"
+        ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-18",
