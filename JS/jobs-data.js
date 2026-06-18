@@ -1284,7 +1284,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://recruitment.crpf.gov.in/login",
         "officialNotification": "https://rect.crpf.gov.in/Upload/Recruitment/Recruitment%20Notice%20103042026-720.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2387",
+        "detailPage": "../Job_Details/HTML/1013-CRPF-Constable-Tradesman-Pioneer-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
@@ -1314,14 +1314,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2388",
+        "detailPage": "../Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2389",
@@ -1344,14 +1344,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Health_Nursing_2026RuleBook02_04_2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2389",
+        "detailPage": "../Job_Details/HTML/1011-MPESB-Nursing-Officer-Sister-Tutor-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2390",
@@ -1374,14 +1374,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Hospital_Assistant_rulebook_2026_30042026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2390",
+        "detailPage": "../Job_Details/HTML/1010-MPESB-Hospital-Assistant-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2391",
@@ -1404,14 +1404,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/JAIL_VAN_2026_RuleBook_Updated_PAGES_16042026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2391",
+        "detailPage": "../Job_Details/HTML/1009-MPESB-Forest-Guard-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2392",
