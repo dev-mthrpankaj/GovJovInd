@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "4009",
+        "title": "SSC CGL 2025 Graduate Level Tier II Marks 2026 & Answer Key",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-01-18",
+        "examEndDate": "2026-01-19",
+        "releaseDate": "2026-06-18",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ssc.digialm.com/EForms/configuredHtml/32874/97464/login.html",
+        "objectionLink": "",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "4005",
         "title": "SSC Delhi Police Head Constable AWO / TPO Final Answer Key with Marks 2026",
         "organization": "Staff Selection Commission",
