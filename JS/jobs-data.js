@@ -1854,7 +1854,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ssc.gov.in/login",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_RHQ_2026_phase_xiv.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2409",
+        "detailPage": "../Job_Details/HTML/1009-SSC-Phase-XIV-Selection-Posts-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
@@ -1884,14 +1884,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ssc.gov.in/login",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cht_2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2410",
+        "detailPage": "../Job_Details/HTML/1009-SSC-Combined-Hindi-Translators-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2411",
