@@ -584,6 +584,27 @@
       "title": "SSB Constable Tradesman Online Form 2026",
       "lastPostedAt": "2026-06-18T05:13:25.819Z",
       "stateReason": "new"
+    },
+    "jobs:2455": {
+      "updatedAt": "2026-06-03",
+      "hash": "a523f0eeef43456a03770835172b0fb4921f84171b3ce9bc5d5ba5984b6ffd97",
+      "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
+      "lastPostedAt": "2026-06-18T05:36:33.858Z",
+      "stateReason": "new"
+    },
+    "jobs:2408": {
+      "updatedAt": "2026-05-01",
+      "hash": "e80c3da3d3b1cf24fed918ae46cb2e27ba79c9acae6f50f006c877af17c9d09b",
+      "title": "SSC Stenographer Online Form 2026",
+      "lastPostedAt": "2026-06-18T05:36:34.501Z",
+      "stateReason": "new"
+    },
+    "jobs:2409": {
+      "updatedAt": "2026-05-01",
+      "hash": "ca912ed7ac3fcec1a1a97792b6059358f4959e741b3a9856b7fb701afc3facd1",
+      "title": "SSC Selection Phase 14 Online Form 2026",
+      "lastPostedAt": "2026-06-18T05:36:34.890Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -893,6 +914,27 @@
       "hash": "c4c4d99021d640fe2446209d4808df8e543f1e706ee15f7c9986ebbc005f6c71",
       "title": "BSNL Senior Executive Trainee",
       "lastPostedAt": "2026-06-15T16:34:24.575Z",
+      "stateReason": "new"
+    },
+    "admitCards:2397": {
+      "updatedAt": "2026-06-18",
+      "hash": "52fa4bf71aabae5d649d80602d2ca7dc29196876cc86dc69c20dc9023551cd98",
+      "title": "CSBC Bihar Police Constable GD Special Branch Admit Card 2026",
+      "lastPostedAt": "2026-06-18T06:04:07.265Z",
+      "stateReason": "new"
+    },
+    "admitCards:2043": {
+      "updatedAt": "2026-05-19",
+      "hash": "61945f0b7fad0717f8dcb73d190598becd7d9568474bbc74842ac5d959d8f5ed",
+      "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
+      "lastPostedAt": "2026-06-18T06:04:07.878Z",
+      "stateReason": "new"
+    },
+    "admitCards:2041": {
+      "updatedAt": "2026-05-18",
+      "hash": "940076b7907d710469244cc25e91fafa19c07ec091acc33cd37bd704915c56fa",
+      "title": "UPSC Civil Services IAS IFS Admit Card 2026",
+      "lastPostedAt": "2026-06-18T06:04:08.446Z",
       "stateReason": "new"
     }
   },
