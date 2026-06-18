@@ -4,6 +4,36 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2456",
+        "title": "SBI PO Recruitment 2026",
+        "organization": "State Bank of India",
+        "department": "Banking",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Candidates must have passed or be appearing in the final year of a Bachelor’s Degree in any stream from a recognized university in India.",
+        "totalPosts": "1500",
+        "startDate": "2026-05-18",
+        "lastDate": "2026-07-08",
+        "status": "active",
+        "tags": [
+            "State Bank of India Recruitment 2026",
+            "SBI PO",
+            "Sarkari Naukri",
+            "Banking Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://ibpsreg.ibps.in/sbipojun26/",
+        "officialNotification": "https://sbi.bank.in/documents/77530/57941/18062026_1_Detailed_Adv.2026.pdf/1f1a9532-8a2f-6e59-08a0-616d62a497b1?t=1781759726353",
+        "detailPage": "../Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html",
+        "updatedAt": "2026-06-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2452",
         "title": "CGPSC Assistant District Prosecution Officer ADPO Online Form 2026",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
