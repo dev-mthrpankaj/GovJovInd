@@ -12,14 +12,20 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-19",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "Constable",
+            "Executive",
+            "Result"
+        ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html",
         "updatedAt": "2026-06-19",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1011",
@@ -52,7 +58,12 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-18",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "MPESB",
+            "PAT",
+            "Pre Agriculture Test",
+            "Result"
+        ],
         "resultLink": "https://esb.mp.gov.in/results/RESULT_26/PAT_RES26/default_Results.htm",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-18",
