@@ -94,7 +94,7 @@
           <i class="fas fa-bullseye" aria-hidden="true"></i>
         </div>
         <div class="my-desk-mission-grid">
-          <div><span>Study Target</span><strong id="missionStudyTarget">Not set</strong></div>
+          <div><span>Study</span><strong id="missionStudyTarget">0m / Not set</strong></div>
           <div><span>Quiz Target</span><strong id="missionQuizTarget">Not set</strong></div>
           <div><span>Focus Subject</span><strong id="missionFocusSubject">Not set</strong></div>
           <div><span>Streak</span><strong>0 days</strong></div>
@@ -112,10 +112,32 @@
         </div>
         <div class="my-desk-action-grid">
           <button type="button" data-scroll-target="#myTargetForm"><i class="fas fa-bullseye" aria-hidden="true"></i><span>Set Target</span></button>
-          <button type="button"><i class="fas fa-play" aria-hidden="true"></i><span>Start Study</span></button>
-          <button type="button"><i class="fas fa-plus" aria-hidden="true"></i><span>Add Study Time</span></button>
+          <button type="button" data-scroll-target="#studyTimerForm"><i class="fas fa-play" aria-hidden="true"></i><span>Start Study</span></button>
+          <button type="button" data-scroll-target="#manualStudyForm"><i class="fas fa-plus" aria-hidden="true"></i><span>Add Study Time</span></button>
           <button type="button"><i class="fas fa-calendar-days" aria-hidden="true"></i><span>View Planner</span></button>
         </div>
+      </section>
+
+      <section class="my-desk-card" aria-labelledby="todaySummaryTitle">
+        <div class="my-desk-card-head">
+          <div>
+            <span class="section-kicker">Progress</span>
+            <h2 id="todaySummaryTitle">Today Summary</h2>
+          </div>
+          <i class="fas fa-chart-simple" aria-hidden="true"></i>
+        </div>
+        <div id="studyStatus" class="my-desk-status" role="status" aria-live="polite">Loading today's study summary...</div>
+        <div class="my-desk-progress-summary">
+          <div>
+            <span>Total Study Time</span>
+            <strong id="todayTotalStudy">0m</strong>
+          </div>
+          <div>
+            <span>Target Progress</span>
+            <strong id="todayStudyProgress">0m / Not set</strong>
+          </div>
+        </div>
+        <div class="my-desk-subject-bars" id="subjectProgressList" aria-label="Subject-wise study progress"></div>
       </section>
 
       <section class="my-desk-grid">
@@ -201,11 +223,53 @@
             </div>
             <i class="fas fa-hourglass-half" aria-hidden="true"></i>
           </div>
-          <div class="my-desk-coming-list">
-            <span><i class="fas fa-clock" aria-hidden="true"></i> Timer coming soon</span>
-            <span><i class="fas fa-pen-to-square" aria-hidden="true"></i> Manual study log coming soon</span>
-            <span><i class="fas fa-chart-simple" aria-hidden="true"></i> Subject progress coming soon</span>
-          </div>
+          <form id="studyTimerForm" class="my-desk-form">
+            <div class="my-desk-field">
+              <label for="timerSubject">Study Timer Subject</label>
+              <select id="timerSubject" name="timerSubject">
+                <option value="">Select subject</option>
+                <option value="Hindi">Hindi</option>
+                <option value="English">English</option>
+                <option value="GK/GS">GK/GS</option>
+                <option value="Maths">Maths</option>
+                <option value="Reasoning">Reasoning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="my-desk-timer-display" id="studyTimerDisplay" aria-live="polite">00:00:00</div>
+            <div class="my-desk-form-actions my-desk-timer-actions">
+              <button id="startTimerBtn" class="btn btn-primary" type="button">Start</button>
+              <button id="pauseTimerBtn" class="btn btn-outline" type="button" disabled>Pause</button>
+              <button id="resumeTimerBtn" class="btn btn-outline" type="button" disabled>Resume</button>
+              <button id="finishTimerBtn" class="btn btn-primary" type="button" disabled>Finish &amp; Save</button>
+              <button id="cancelTimerBtn" class="btn btn-outline" type="button" disabled>Cancel</button>
+            </div>
+            <p class="my-desk-note">Keep the timer running only while you are actually studying.</p>
+          </form>
+
+          <form id="manualStudyForm" class="my-desk-form my-desk-manual-form">
+            <div class="my-desk-field">
+              <label for="manualSubject">Manual Study Subject</label>
+              <select id="manualSubject" name="manualSubject">
+                <option value="">Select subject</option>
+                <option value="Hindi">Hindi</option>
+                <option value="English">English</option>
+                <option value="GK/GS">GK/GS</option>
+                <option value="Maths">Maths</option>
+                <option value="Reasoning">Reasoning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="my-desk-field">
+              <label for="manualMinutes">Minutes</label>
+              <input id="manualMinutes" name="manualMinutes" type="number" min="1" max="720" step="1" inputmode="numeric" placeholder="e.g. 45">
+            </div>
+            <div class="my-desk-field">
+              <label for="manualTopic">Topic Optional</label>
+              <input id="manualTopic" name="manualTopic" type="text" maxlength="100" placeholder="e.g. Percentage">
+            </div>
+            <button id="saveManualTimeBtn" class="btn btn-primary my-desk-full-btn" type="submit">Save Manual Time</button>
+          </form>
         </article>
 
         <article class="my-desk-card">

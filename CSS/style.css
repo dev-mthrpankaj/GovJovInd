@@ -3801,6 +3801,99 @@ body.live-test-info-page .live-test-promo-card p {
   opacity: .65;
 }
 
+.my-desk-progress-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+
+.my-desk-progress-summary div {
+  min-width: 0;
+  padding: .78rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.my-desk-progress-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 900;
+}
+
+.my-desk-progress-summary strong {
+  display: block;
+  margin-top: .18rem;
+  color: var(--secondary);
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.my-desk-subject-bars {
+  display: grid;
+  gap: .58rem;
+}
+
+.my-desk-subject-row {
+  display: grid;
+  gap: .32rem;
+}
+
+.my-desk-subject-row label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  color: var(--secondary);
+  font-size: .88rem;
+  font-weight: 900;
+}
+
+.my-desk-subject-row label span,
+.my-desk-subject-row label strong {
+  overflow-wrap: anywhere;
+}
+
+.my-desk-subject-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.my-desk-subject-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #22c55e);
+}
+
+.my-desk-timer-display {
+  display: grid;
+  place-items: center;
+  min-height: 78px;
+  border: 1px solid #bfdbfe;
+  border-radius: 18px;
+  background: #eff6ff;
+  color: var(--secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(2rem, 10vw, 2.7rem);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.my-desk-timer-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.my-desk-manual-form {
+  margin-top: .15rem;
+  padding-top: .9rem;
+  border-top: 1px dashed #dbe3ee;
+}
+
 .my-desk-full-btn {
   width: 100%;
   justify-content: center;
@@ -3844,7 +3937,9 @@ body.live-test-info-page .live-test-promo-card p {
   }
 
   .my-desk-mission-grid,
-  .my-desk-action-grid {
+  .my-desk-action-grid,
+  .my-desk-progress-summary,
+  .my-desk-timer-actions {
     grid-template-columns: 1fr;
   }
 
