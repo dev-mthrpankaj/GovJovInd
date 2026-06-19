@@ -94,11 +94,11 @@
           <i class="fas fa-bullseye" aria-hidden="true"></i>
         </div>
         <div class="my-desk-mission-grid">
-          <div><span>Study Target</span><strong>Not set</strong></div>
-          <div><span>Quiz Target</span><strong>Not set</strong></div>
-          <div><span>Focus Subject</span><strong>Not set</strong></div>
+          <div><span>Study Target</span><strong id="missionStudyTarget">Not set</strong></div>
+          <div><span>Quiz Target</span><strong id="missionQuizTarget">Not set</strong></div>
+          <div><span>Focus Subject</span><strong id="missionFocusSubject">Not set</strong></div>
           <div><span>Streak</span><strong>0 days</strong></div>
-          <div><span>Exam Countdown</span><strong>Set target exam</strong></div>
+          <div><span>Exam Countdown</span><strong id="missionExamCountdown">Set target exam</strong></div>
         </div>
       </section>
 
@@ -111,7 +111,7 @@
           <i class="fas fa-bolt" aria-hidden="true"></i>
         </div>
         <div class="my-desk-action-grid">
-          <button type="button"><i class="fas fa-bullseye" aria-hidden="true"></i><span>Set Target</span></button>
+          <button type="button" data-scroll-target="#myTargetForm"><i class="fas fa-bullseye" aria-hidden="true"></i><span>Set Target</span></button>
           <button type="button"><i class="fas fa-play" aria-hidden="true"></i><span>Start Study</span></button>
           <button type="button"><i class="fas fa-plus" aria-hidden="true"></i><span>Add Study Time</span></button>
           <button type="button"><i class="fas fa-calendar-days" aria-hidden="true"></i><span>View Planner</span></button>
@@ -127,14 +127,70 @@
             </div>
             <i class="fas fa-flag-checkered" aria-hidden="true"></i>
           </div>
-          <div class="my-desk-list">
-            <div><span>Target Exam</span><strong>Not set</strong></div>
-            <div><span>Daily Study Hours</span><strong>Not set</strong></div>
-            <div><span>Daily Quiz Questions</span><strong>Not set</strong></div>
-            <div><span>Weak Subjects</span><strong>Not set</strong></div>
-            <div><span>Exam Date</span><strong>Not set</strong></div>
-          </div>
-          <button class="btn btn-primary my-desk-full-btn" type="button">Setup My Target</button>
+          <div id="targetStatus" class="my-desk-status" role="status" aria-live="polite">Loading target settings...</div>
+          <form id="myTargetForm" class="my-desk-form">
+            <div class="my-desk-field">
+              <label for="targetExam">Target Exam</label>
+              <input id="targetExam" name="targetExam" type="text" maxlength="80" list="targetExamSuggestions" placeholder="e.g. SSC CGL, UP Police, Railway Group D">
+              <datalist id="targetExamSuggestions">
+                <option value="SSC CGL"></option>
+                <option value="SSC CHSL"></option>
+                <option value="UP Police"></option>
+                <option value="Railway Group D"></option>
+                <option value="Railway NTPC"></option>
+                <option value="Banking"></option>
+              </datalist>
+            </div>
+
+            <div class="my-desk-field">
+              <label for="targetCategory">Target Category</label>
+              <select id="targetCategory" name="targetCategory">
+                <option value="">Select category</option>
+                <option value="SSC">SSC</option>
+                <option value="Police">Police</option>
+                <option value="Railway">Railway</option>
+                <option value="Banking">Banking</option>
+                <option value="Teaching">Teaching</option>
+                <option value="State Exams">State Exams</option>
+                <option value="Defence">Defence</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="my-desk-field">
+              <label for="dailyStudyHours">Daily Study Hours</label>
+              <input id="dailyStudyHours" name="dailyStudyHours" type="number" min="0.5" max="16" step="0.5" inputmode="decimal" placeholder="e.g. 4">
+              <small>Allowed range: 0.5 to 16 hours.</small>
+            </div>
+
+            <div class="my-desk-field">
+              <label for="dailyQuizQuestions">Daily Quiz Questions Target</label>
+              <input id="dailyQuizQuestions" name="dailyQuizQuestions" type="number" min="0" max="500" step="1" inputmode="numeric" placeholder="e.g. 50">
+              <small>Allowed range: 0 to 500 questions.</small>
+            </div>
+
+            <fieldset class="my-desk-field my-desk-chip-field">
+              <legend>Weak Subjects</legend>
+              <div class="my-desk-chip-grid">
+                <label><input type="checkbox" name="weakSubjects" value="Hindi"><span>Hindi</span></label>
+                <label><input type="checkbox" name="weakSubjects" value="English"><span>English</span></label>
+                <label><input type="checkbox" name="weakSubjects" value="GK/GS"><span>GK/GS</span></label>
+                <label><input type="checkbox" name="weakSubjects" value="Maths"><span>Maths</span></label>
+                <label><input type="checkbox" name="weakSubjects" value="Reasoning"><span>Reasoning</span></label>
+                <label><input type="checkbox" name="weakSubjects" value="Other"><span>Other</span></label>
+              </div>
+            </fieldset>
+
+            <div class="my-desk-field">
+              <label for="targetExamDate">Target Exam Date</label>
+              <input id="targetExamDate" name="targetExamDate" type="date">
+            </div>
+
+            <div class="my-desk-form-actions">
+              <button id="saveTargetBtn" class="btn btn-primary" type="submit">Save Target</button>
+              <button id="clearTargetBtn" class="btn btn-outline" type="button">Reset Changes</button>
+            </div>
+          </form>
         </article>
 
         <article class="my-desk-card">

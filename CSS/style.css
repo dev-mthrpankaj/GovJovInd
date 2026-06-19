@@ -3676,6 +3676,131 @@ body.live-test-info-page .live-test-promo-card p {
   color: var(--primary);
 }
 
+.my-desk-status {
+  padding: .7rem .8rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.my-desk-status[data-state="success"] {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.my-desk-status[data-state="error"] {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #b91c1c;
+}
+
+.my-desk-form {
+  display: grid;
+  gap: .8rem;
+  min-width: 0;
+}
+
+.my-desk-field {
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.my-desk-field label,
+.my-desk-field legend {
+  color: var(--secondary);
+  font-size: .9rem;
+  font-weight: 900;
+}
+
+.my-desk-field input,
+.my-desk-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: .68rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--secondary);
+  font: inherit;
+  font-size: 16px;
+}
+
+.my-desk-field input:focus,
+.my-desk-field select:focus {
+  border-color: #93c5fd;
+  outline: 3px solid rgba(37, 99, 235, .14);
+}
+
+.my-desk-field small {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.my-desk-chip-field {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.my-desk-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.my-desk-chip-grid label {
+  cursor: pointer;
+}
+
+.my-desk-chip-grid input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.my-desk-chip-grid span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: .45rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #f8fafc;
+  color: var(--secondary);
+  font-weight: 900;
+}
+
+.my-desk-chip-grid input:checked + span {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.my-desk-chip-grid input:focus-visible + span {
+  outline: 3px solid rgba(37, 99, 235, .16);
+}
+
+.my-desk-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+
+.my-desk-form-actions .btn {
+  justify-content: center;
+}
+
+.my-desk-form-actions .btn:disabled {
+  cursor: not-allowed;
+  opacity: .65;
+}
+
 .my-desk-full-btn {
   width: 100%;
   justify-content: center;
@@ -3730,6 +3855,14 @@ body.live-test-info-page .live-test-promo-card p {
 
   .my-desk-actions .btn {
     justify-content: center;
+    width: 100%;
+  }
+
+  .my-desk-form-actions {
+    display: grid;
+  }
+
+  .my-desk-form-actions .btn {
     width: 100%;
   }
 
