@@ -1,13 +1,11 @@
-
 # Local/payment secrets
-live-test/includes/payment-secrets.php
 .env
 *.local.php
-
-# Local/payment secrets
 live-test/includes/payment-secrets.php
-.env
-*.local.php
+live-test/includes/fcm-config.local.php
+live-test/includes/app-token-config.local.php
+live-test/includes/*secrets*.php
 
+# Generated/local app workspaces
 live-test/
 android-webview-app/

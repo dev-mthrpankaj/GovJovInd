@@ -410,6 +410,7 @@ const ensureSharedFooter = () => {
         <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
         <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
         <li><a href="${getSharedPageHref('contact.html')}">Contact</a></li>
+        <li><a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a></li>
         <li><a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a></li>
       </ul>
     </div>
@@ -429,7 +430,7 @@ const ensureSharedFooter = () => {
     copyright.className = 'copyright';
     footer.appendChild(copyright);
   }
-  copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a> | <a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a>`;
+  copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a> | <a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a> | <a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a>`;
 };
 
 const ensureSharedSiteChrome = () => {

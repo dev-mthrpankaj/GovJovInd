@@ -1,4 +1,20 @@
 User-agent: *
+Disallow: /live-test/admin/
+Disallow: /live-test/payment-
+Disallow: /live-test/attempt.php
+Disallow: /live-test/preload-attempt.php
+Disallow: /live-test/autosave.php
+Disallow: /live-test/submit.php
+Disallow: /live-test/api/
+Disallow: /live-test/log-violation.php
+Disallow: /android-webview-app/
+Disallow: /reports/
+Disallow: /.edge-
+Disallow: /.sixth/
+Disallow: /generated-job-pages/
+Disallow: /generated_job_pages/
+Disallow: /tmp-live-test-
+Disallow: /.cache/
 Allow: /
 
 Sitemap: https://govjobupdates.com/sitemap.xml
