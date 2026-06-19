@@ -15,17 +15,23 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-19",
         "lastDate": "2026-07-03",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Haryana Staff Selection Commission Recruitment 2026",
+            "Haryana HSSC Group D Common Eligibility Test CET",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://hssc.gov.in/applyOnline",
         "officialNotification": "https://hssc.gov.in/file/ac1f23cd-9d9c-1328-819e-da8c1fe70055/advertisements",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2457",
+        "detailPage": "../Job_Details/HTML/1009-HSSC-CET-Group-D-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2456",
