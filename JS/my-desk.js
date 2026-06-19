@@ -17,6 +17,7 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     user: null,
     settings: null,
     todaySummary: null,
+    streak: null,
     saving: false,
     studySaving: false,
     timer: {
@@ -49,6 +50,9 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     missionStudyTarget: document.getElementById("missionStudyTarget"),
     missionQuizTarget: document.getElementById("missionQuizTarget"),
     missionFocusSubject: document.getElementById("missionFocusSubject"),
+    missionStreak: document.getElementById("missionStreak"),
+    missionFocusScore: document.getElementById("missionFocusScore"),
+    missionDayStatus: document.getElementById("missionDayStatus"),
     missionExamCountdown: document.getElementById("missionExamCountdown"),
     studyStatus: document.getElementById("studyStatus"),
     todayTotalStudy: document.getElementById("todayTotalStudy"),
@@ -66,7 +70,16 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     manualSubject: document.getElementById("manualSubject"),
     manualMinutes: document.getElementById("manualMinutes"),
     manualTopic: document.getElementById("manualTopic"),
-    saveManualTimeBtn: document.getElementById("saveManualTimeBtn")
+    saveManualTimeBtn: document.getElementById("saveManualTimeBtn"),
+    currentStreakValue: document.getElementById("currentStreakValue"),
+    bestStreakValue: document.getElementById("bestStreakValue"),
+    lastCompletedDateValue: document.getElementById("lastCompletedDateValue"),
+    streakMessage: document.getElementById("streakMessage"),
+    focusScoreValue: document.getElementById("focusScoreValue"),
+    focusScoreMessage: document.getElementById("focusScoreMessage"),
+    studyScoreBreakdown: document.getElementById("studyScoreBreakdown"),
+    quizScoreBreakdown: document.getElementById("quizScoreBreakdown"),
+    streakScoreBreakdown: document.getElementById("streakScoreBreakdown")
   };
 
   function show(viewName) {
@@ -125,11 +138,24 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
   }
 
   function todayKey() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
+    return dateKey(new Date());
+  }
+
+  function dateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
+  }
+
+  function addDays(dateValue, days) {
+    const base = dateValue ? new Date(`${dateValue}T00:00:00`) : new Date();
+    base.setDate(base.getDate() + days);
+    return dateKey(base);
+  }
+
+  function yesterdayKey() {
+    return addDays(todayKey(), -1);
   }
 
   function emptySubjectMinutes() {
@@ -145,6 +171,8 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
       totalStudyMinutes: 0,
       subjectMinutes: emptySubjectMinutes(),
       studyTargetMet: false,
+      dayCompleted: false,
+      focusScore: 0,
       updatedAt: Date.now()
     };
     if (!summary || typeof summary !== "object") return base;
@@ -159,7 +187,20 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
       date: summary.date || todayKey(),
       totalStudyMinutes: Number(summary.totalStudyMinutes) || 0,
       subjectMinutes,
-      studyTargetMet: Boolean(summary.studyTargetMet)
+      studyTargetMet: Boolean(summary.studyTargetMet),
+      dayCompleted: Boolean(summary.dayCompleted),
+      focusScore: Math.max(0, Math.min(100, Math.round(Number(summary.focusScore) || 0)))
+    };
+  }
+
+  function normalizeStreak(streak) {
+    return {
+      currentStreak: Math.max(0, Math.round(Number(streak?.currentStreak) || 0)),
+      bestStreak: Math.max(0, Math.round(Number(streak?.bestStreak) || 0)),
+      lastCompletedDate: dateIsValid(streak?.lastCompletedDate) ? streak.lastCompletedDate : "",
+      lastCheckedDate: dateIsValid(streak?.lastCheckedDate) ? streak.lastCheckedDate : "",
+      lastMissedDate: dateIsValid(streak?.lastMissedDate) ? streak.lastMissedDate : null,
+      updatedAt: streak?.updatedAt || Date.now()
     };
   }
 
@@ -224,6 +265,10 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     return `users/${uid}/myDesk/dailySummaries/${todayKey()}`;
   }
 
+  function streakPath(uid) {
+    return `users/${uid}/myDesk/streak`;
+  }
+
   function formatDuration(minutes) {
     const value = Math.max(0, Math.round(Number(minutes) || 0));
     const hours = Math.floor(value / 60);
@@ -245,6 +290,57 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     return `${formatDuration(summary.totalStudyMinutes)} / ${target > 0 ? formatDuration(target) : "Not set"}`;
   }
 
+  function effectiveCurrentStreak(streak = state.streak) {
+    const safe = normalizeStreak(streak);
+    if (!safe.lastCompletedDate) return 0;
+    if (safe.lastCompletedDate === todayKey() || safe.lastCompletedDate === yesterdayKey()) {
+      return safe.currentStreak;
+    }
+    return 0;
+  }
+
+  function dayStatusText(summary = state.todaySummary) {
+    const target = Number(state.settings?.dailyStudyMinutesTarget) || 0;
+    if (target <= 0) return "Target Not Set";
+    return normalizeSummary(summary).dayCompleted ? "Target Complete" : "In Progress";
+  }
+
+  function streakMessage(summary = state.todaySummary) {
+    const target = Number(state.settings?.dailyStudyMinutesTarget) || 0;
+    if (target <= 0) return "Set your target to start your first streak.";
+    if (normalizeSummary(summary).dayCompleted) return "Great! Today's mission complete.";
+    return "Aaj ka target complete karo, streak tootne mat do.";
+  }
+
+  function calculateFocusScore(summary = state.todaySummary, streak = state.streak) {
+    const safeSummary = normalizeSummary(summary);
+    const target = Number(state.settings?.dailyStudyMinutesTarget) || 0;
+    if (target <= 0) {
+      return {
+        total: 0,
+        studyScore: 0,
+        quizScore: 0,
+        streakScore: 0,
+        message: "Set your daily study target to start focus tracking."
+      };
+    }
+    const studyScore = Math.min(safeSummary.totalStudyMinutes / target, 1) * 70;
+    const quizTarget = Number(state.settings?.dailyQuizQuestionsTarget);
+    const quizScore = Number.isFinite(quizTarget) && quizTarget > 0 ? 0 : 10;
+    const streakScore = Math.min(effectiveCurrentStreak(streak), 7) / 7 * 10;
+    const total = Math.round(studyScore + quizScore + streakScore);
+    const message = safeSummary.dayCompleted
+      ? "Great! Today's mission complete."
+      : "Complete today's study target to improve your focus score.";
+    return {
+      total,
+      studyScore: Math.round(studyScore),
+      quizScore: Math.round(quizScore),
+      streakScore: Math.round(streakScore),
+      message
+    };
+  }
+
   function countdownText(dateValue) {
     if (!dateValue || !dateIsValid(dateValue)) return "Set target exam";
     const today = new Date();
@@ -259,13 +355,33 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
 
   function renderMission() {
     const settings = state.settings;
+    const summary = normalizeSummary(state.todaySummary);
+    const focus = calculateFocusScore(summary, state.streak);
     if (nodes.missionStudyTarget) nodes.missionStudyTarget.textContent = currentStudyProgressText();
     if (nodes.missionQuizTarget) nodes.missionQuizTarget.textContent = settings ? formatQuizTarget(settings.dailyQuizQuestionsTarget) : "Not set";
     if (nodes.missionFocusSubject) {
       const weakSubjects = Array.isArray(settings?.weakSubjects) ? settings.weakSubjects : [];
       nodes.missionFocusSubject.textContent = weakSubjects.length ? weakSubjects.join(", ") : (settings ? "Balanced" : "Not set");
     }
+    if (nodes.missionStreak) nodes.missionStreak.textContent = `${effectiveCurrentStreak()} days`;
+    if (nodes.missionFocusScore) nodes.missionFocusScore.textContent = `${focus.total}/100`;
+    if (nodes.missionDayStatus) nodes.missionDayStatus.textContent = dayStatusText(summary);
     if (nodes.missionExamCountdown) nodes.missionExamCountdown.textContent = settings ? countdownText(settings.targetExamDate) : "Set target exam";
+  }
+
+  function renderStreakAndFocus() {
+    const streak = normalizeStreak(state.streak);
+    const focus = calculateFocusScore();
+    if (nodes.currentStreakValue) nodes.currentStreakValue.textContent = `${effectiveCurrentStreak(streak)} days`;
+    if (nodes.bestStreakValue) nodes.bestStreakValue.textContent = `${streak.bestStreak} days`;
+    if (nodes.lastCompletedDateValue) nodes.lastCompletedDateValue.textContent = streak.lastCompletedDate || "Not yet";
+    if (nodes.streakMessage) nodes.streakMessage.textContent = streakMessage();
+    if (nodes.focusScoreValue) nodes.focusScoreValue.textContent = `${focus.total}/100`;
+    if (nodes.focusScoreMessage) nodes.focusScoreMessage.textContent = focus.message;
+    if (nodes.studyScoreBreakdown) nodes.studyScoreBreakdown.textContent = `${focus.studyScore}/70`;
+    if (nodes.quizScoreBreakdown) nodes.quizScoreBreakdown.textContent = `${focus.quizScore}/20`;
+    if (nodes.streakScoreBreakdown) nodes.streakScoreBreakdown.textContent = `${focus.streakScore}/10`;
+    renderMission();
   }
 
   function renderTodaySummary() {
@@ -286,6 +402,7 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
         `;
       }).join("");
     }
+    renderStreakAndFocus();
     renderMission();
   }
 
@@ -339,6 +456,83 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     }
   }
 
+  async function loadStreak() {
+    if (!state.user || !state.db) return;
+    try {
+      const snapshot = await get(ref(state.db, streakPath(state.user.uid)));
+      state.streak = normalizeStreak(snapshot.exists() ? snapshot.val() : null);
+      renderStreakAndFocus();
+      await syncCompletionAndFocus({ writeIfNeeded: true });
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk streak load failed:", error.message);
+      state.streak = normalizeStreak(null);
+      renderStreakAndFocus();
+      setStudyStatus("Streak load nahi ho paayi. Study summary phir bhi available hai.", "error");
+    }
+  }
+
+  function applyCompletionAndFocus(summary = state.todaySummary, streak = state.streak) {
+    const target = Number(state.settings?.dailyStudyMinutesTarget) || 0;
+    const safeSummary = normalizeSummary(summary);
+    safeSummary.studyTargetMet = Boolean(target > 0 && safeSummary.totalStudyMinutes >= target);
+    safeSummary.dayCompleted = safeSummary.studyTargetMet;
+    safeSummary.focusScore = calculateFocusScore(safeSummary, streak).total;
+    return safeSummary;
+  }
+
+  function nextCompletedStreak(current = state.streak) {
+    const today = todayKey();
+    const yesterday = yesterdayKey();
+    const safe = normalizeStreak(current);
+    let currentStreak = safe.currentStreak;
+    if (safe.lastCompletedDate === today) {
+      currentStreak = Math.max(1, currentStreak);
+    } else if (safe.lastCompletedDate === yesterday) {
+      currentStreak += 1;
+    } else {
+      currentStreak = 1;
+    }
+    return {
+      currentStreak,
+      bestStreak: Math.max(safe.bestStreak, currentStreak),
+      lastCompletedDate: today,
+      lastCheckedDate: today,
+      lastMissedDate: null,
+      updatedAt: serverTimestamp()
+    };
+  }
+
+  async function syncCompletionAndFocus({ writeIfNeeded = false, allowSummaryOnlyWrite = false } = {}) {
+    if (!state.user || !state.db) return;
+    let summary = applyCompletionAndFocus(state.todaySummary, state.streak);
+    let streak = normalizeStreak(state.streak);
+    let shouldWriteStreak = false;
+
+    if (summary.dayCompleted && streak.lastCompletedDate !== todayKey()) {
+      streak = nextCompletedStreak(streak);
+      shouldWriteStreak = true;
+    }
+
+    summary = applyCompletionAndFocus(summary, streak);
+    const summaryChanged = summary.dayCompleted !== normalizeSummary(state.todaySummary).dayCompleted
+      || summary.focusScore !== normalizeSummary(state.todaySummary).focusScore
+      || summary.studyTargetMet !== normalizeSummary(state.todaySummary).studyTargetMet;
+
+    state.todaySummary = summary;
+    state.streak = streak;
+    renderTodaySummary();
+    renderStreakAndFocus();
+
+    if (!writeIfNeeded || (!shouldWriteStreak && (!allowSummaryOnlyWrite || !summaryChanged))) return;
+
+    const writes = [];
+    if (shouldWriteStreak || (allowSummaryOnlyWrite && summaryChanged)) {
+      writes.push(set(ref(state.db, todaySummaryPath(state.user.uid)), { ...summary, updatedAt: serverTimestamp() }));
+    }
+    if (shouldWriteStreak) writes.push(set(ref(state.db, streakPath(state.user.uid)), streak));
+    await Promise.all(writes);
+  }
+
   async function saveSettings(event) {
     event.preventDefault();
     if (!state.user || !state.db || state.saving) return;
@@ -356,10 +550,7 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
       await set(ref(state.db, settingsPath(state.user.uid)), settings);
       state.settings = { ...settings, updatedAt: Date.now() };
       state.todaySummary = normalizeSummary(state.todaySummary);
-      state.todaySummary.studyTargetMet = Boolean((state.todaySummary.totalStudyMinutes || 0) >= (state.settings.dailyStudyMinutesTarget || 0) && state.settings.dailyStudyMinutesTarget > 0);
-      await set(ref(state.db, todaySummaryPath(state.user.uid)), { ...state.todaySummary, updatedAt: serverTimestamp() });
-      renderMission();
-      renderTodaySummary();
+      await syncCompletionAndFocus({ writeIfNeeded: true, allowSummaryOnlyWrite: true });
       setStatus("Target saved successfully.", "success");
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk settings save failed:", error.message);
@@ -505,15 +696,14 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
       summary.date = todayKey();
       summary.totalStudyMinutes = Math.max(0, Math.round((summary.totalStudyMinutes || 0) + session.durationMinutes));
       summary.subjectMinutes[session.subject] = Math.max(0, Math.round((summary.subjectMinutes[session.subject] || 0) + session.durationMinutes));
-      const target = Number(state.settings?.dailyStudyMinutesTarget) || 0;
-      summary.studyTargetMet = Boolean(target > 0 && summary.totalStudyMinutes >= target);
+      const preparedSummary = applyCompletionAndFocus(summary, state.streak);
       summary.updatedAt = serverTimestamp();
       await Promise.all([
         set(sessionRef, session),
-        set(ref(state.db, todaySummaryPath(state.user.uid)), summary)
+        set(ref(state.db, todaySummaryPath(state.user.uid)), { ...preparedSummary, updatedAt: serverTimestamp() })
       ]);
-      state.todaySummary = { ...summary, updatedAt: Date.now() };
-      renderTodaySummary();
+      state.todaySummary = { ...preparedSummary, updatedAt: Date.now() };
+      await syncCompletionAndFocus({ writeIfNeeded: true, allowSummaryOnlyWrite: true });
       setStudyStatus(`${formatDuration(session.durationMinutes)} ${session.subject} study time saved.`, "success");
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk study save failed:", error.message);
@@ -608,6 +798,7 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
           show("loginRequired");
           state.settings = null;
           state.todaySummary = normalizeSummary(null);
+          state.streak = normalizeStreak(null);
           renderMission();
           renderTodaySummary();
           return;
@@ -616,6 +807,7 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
         show("dashboard");
         await loadSettings();
         await loadTodaySummary();
+        await loadStreak();
       });
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
@@ -628,6 +820,7 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
   bindForms();
   resetTimer();
   state.todaySummary = normalizeSummary(null);
+  state.streak = normalizeStreak(null);
   renderTodaySummary();
 
   if (!isApp) {

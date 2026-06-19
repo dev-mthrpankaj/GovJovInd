@@ -3660,6 +3660,10 @@ body.live-test-info-page .live-test-promo-card p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.my-desk-insight-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .my-desk-coming-list span {
   display: flex;
   align-items: center;
@@ -3830,6 +3834,56 @@ body.live-test-info-page .live-test-promo-card p {
   overflow-wrap: anywhere;
 }
 
+.my-desk-strong-note {
+  font-weight: 900;
+}
+
+.my-desk-score-panel {
+  display: grid;
+  gap: .35rem;
+  justify-items: start;
+  padding: 1rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 18px;
+  background: #eff6ff;
+}
+
+.my-desk-score-panel strong {
+  color: var(--secondary);
+  font-size: clamp(2rem, 9vw, 3rem);
+  line-height: 1;
+}
+
+.my-desk-score-panel span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.my-desk-score-breakdown {
+  display: grid;
+  gap: .55rem;
+}
+
+.my-desk-score-breakdown div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .65rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.my-desk-score-breakdown span {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.my-desk-score-breakdown strong {
+  color: var(--secondary);
+}
+
 .my-desk-subject-bars {
   display: grid;
   gap: .58rem;
@@ -3926,7 +3980,8 @@ body.live-test-info-page .live-test-promo-card p {
 }
 
 @media (max-width: 820px) {
-  .my-desk-grid {
+  .my-desk-grid,
+  .my-desk-insight-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -97,7 +97,9 @@
           <div><span>Study</span><strong id="missionStudyTarget">0m / Not set</strong></div>
           <div><span>Quiz Target</span><strong id="missionQuizTarget">Not set</strong></div>
           <div><span>Focus Subject</span><strong id="missionFocusSubject">Not set</strong></div>
-          <div><span>Streak</span><strong>0 days</strong></div>
+          <div><span>Streak</span><strong id="missionStreak">0 days</strong></div>
+          <div><span>Focus Score</span><strong id="missionFocusScore">0/100</strong></div>
+          <div><span>Day Status</span><strong id="missionDayStatus">Target Not Set</strong></div>
           <div><span>Exam Countdown</span><strong id="missionExamCountdown">Set target exam</strong></div>
         </div>
       </section>
@@ -138,6 +140,44 @@
           </div>
         </div>
         <div class="my-desk-subject-bars" id="subjectProgressList" aria-label="Subject-wise study progress"></div>
+      </section>
+
+      <section class="my-desk-grid my-desk-insight-grid">
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Consistency</span>
+              <h2>Study Streak</h2>
+            </div>
+            <i class="fas fa-fire" aria-hidden="true"></i>
+          </div>
+          <div class="my-desk-progress-summary">
+            <div><span>Current Streak</span><strong id="currentStreakValue">0 days</strong></div>
+            <div><span>Best Streak</span><strong id="bestStreakValue">0 days</strong></div>
+            <div><span>Last Completed</span><strong id="lastCompletedDateValue">Not yet</strong></div>
+          </div>
+          <p class="my-desk-note my-desk-strong-note" id="streakMessage">Set your target to start your first streak.</p>
+        </article>
+
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Readiness</span>
+              <h2>Focus Score</h2>
+            </div>
+            <i class="fas fa-gauge-high" aria-hidden="true"></i>
+          </div>
+          <div class="my-desk-score-panel">
+            <strong id="focusScoreValue">0/100</strong>
+            <span id="focusScoreMessage">Set your daily study target to start focus tracking.</span>
+          </div>
+          <div class="my-desk-score-breakdown">
+            <div><span>Study progress</span><strong id="studyScoreBreakdown">0/70</strong></div>
+            <div><span>Quiz target</span><strong id="quizScoreBreakdown">0/20</strong></div>
+            <div><span>Streak bonus</span><strong id="streakScoreBreakdown">0/10</strong></div>
+          </div>
+          <p class="my-desk-note">Quiz sync coming soon.</p>
+        </article>
       </section>
 
       <section class="my-desk-grid">
