@@ -43,19 +43,19 @@ window.GovJobUpdatesJobs = [
         "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "3447",
         "startDate": "2026-06-15",
-        "lastDate": "2026-06-01",
+        "lastDate": "2026-07-01",
         "status": "active",
         "tags": [],
         "applyLink": "https://sewayojan.up.nic.in/IEP/Login.aspx",
         "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/06/UPSRLM-Comprehensive-Recruitment-Advertisement-2026-SewayojanGJobDoc221613_compressed.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2458",
+        "detailPage": "../Job_Details/HTML/221613-UPSRLM-District-Block-Recruitment-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2456",
