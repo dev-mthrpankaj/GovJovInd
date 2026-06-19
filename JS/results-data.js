@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1013",
+        "title": "SSC Delhi Police Constable Executive Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-19",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-19",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1011",
         "title": "SSC Stenographer 2025 Final Result 2026",
         "organization": "Staff Selection Commission",
