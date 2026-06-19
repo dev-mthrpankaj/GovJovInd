@@ -154,7 +154,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-04",
         "examEndDate": "2026-06-19",
         "releaseDate": "2026-05-28",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "Police",
             "MPESB"
