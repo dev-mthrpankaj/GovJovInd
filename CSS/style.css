@@ -3948,6 +3948,102 @@ body.live-test-info-page .live-test-promo-card p {
   border-top: 1px dashed #dbe3ee;
 }
 
+.my-desk-inline-form {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  align-items: end;
+}
+
+.my-desk-planner-list,
+.my-desk-reminder-list {
+  display: grid;
+  gap: .7rem;
+}
+
+.my-desk-empty {
+  padding: .85rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.my-desk-day-card {
+  display: grid;
+  gap: .5rem;
+  padding: .75rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.my-desk-day-card h3 {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 1rem;
+}
+
+.my-desk-day-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.my-desk-plan-item,
+.my-desk-reminder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  padding: .7rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fff;
+  min-width: 0;
+}
+
+.my-desk-plan-item strong,
+.my-desk-reminder-item strong {
+  display: block;
+  color: var(--secondary);
+  overflow-wrap: anywhere;
+}
+
+.my-desk-plan-item span,
+.my-desk-reminder-item span {
+  display: block;
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: .84rem;
+  overflow-wrap: anywhere;
+}
+
+.my-desk-plan-item button,
+.my-desk-row-actions button {
+  min-height: 34px;
+  padding: .35rem .58rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 900;
+}
+
+.my-desk-reminder-item.is-overdue {
+  border-color: #fecaca;
+  background: #fff7f7;
+}
+
+.my-desk-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .4rem;
+  flex: 0 0 auto;
+}
+
 .my-desk-full-btn {
   width: 100%;
   justify-content: center;
@@ -4014,6 +4110,19 @@ body.live-test-info-page .live-test-promo-card p {
 
   .my-desk-form-actions .btn {
     width: 100%;
+  }
+
+  .my-desk-inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .my-desk-plan-item,
+  .my-desk-reminder-item {
+    display: grid;
+  }
+
+  .my-desk-row-actions {
+    justify-content: start;
   }
 
   .my-desk-user {

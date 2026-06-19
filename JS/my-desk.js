@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 (function () {
   "use strict";
@@ -8,6 +8,17 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
   const isApp = /GovJobUpdatesApp/i.test(navigator.userAgent || "");
   const config = window.GJU_FIREBASE_CONFIG;
   const subjects = ["Hindi", "English", "GK/GS", "Maths", "Reasoning", "Other"];
+  const dayKeys = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+  const dayLabels = {
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    thursday: "Thursday",
+    friday: "Friday",
+    saturday: "Saturday",
+    sunday: "Sunday"
+  };
+  const prioritySet = new Set(["Low", "Medium", "High"]);
   const allowedCategories = new Set(["", "SSC", "Police", "Railway", "Banking", "Teaching", "State Exams", "Defence", "Other"]);
   const allowedSubjects = new Set(subjects);
 
@@ -18,8 +29,12 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     settings: null,
     todaySummary: null,
     streak: null,
+    weeklyPlanner: {},
+    revisionReminders: [],
     saving: false,
     studySaving: false,
+    plannerSaving: false,
+    reminderSaving: false,
     timer: {
       subject: "",
       startedAt: null,
@@ -80,6 +95,26 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     studyScoreBreakdown: document.getElementById("studyScoreBreakdown"),
     quizScoreBreakdown: document.getElementById("quizScoreBreakdown"),
     streakScoreBreakdown: document.getElementById("streakScoreBreakdown")
+    ,
+    missionPlannedSessions: document.getElementById("missionPlannedSessions"),
+    missionRevisionDue: document.getElementById("missionRevisionDue"),
+    plannerStatus: document.getElementById("plannerStatus"),
+    plannerSlotForm: document.getElementById("plannerSlotForm"),
+    plannerDay: document.getElementById("plannerDay"),
+    plannerTime: document.getElementById("plannerTime"),
+    plannerSubject: document.getElementById("plannerSubject"),
+    plannerTopic: document.getElementById("plannerTopic"),
+    plannerDuration: document.getElementById("plannerDuration"),
+    savePlannerSlotBtn: document.getElementById("savePlannerSlotBtn"),
+    weeklyPlannerList: document.getElementById("weeklyPlannerList"),
+    revisionStatus: document.getElementById("revisionStatus"),
+    revisionReminderForm: document.getElementById("revisionReminderForm"),
+    revisionSubject: document.getElementById("revisionSubject"),
+    revisionTopic: document.getElementById("revisionTopic"),
+    revisionDate: document.getElementById("revisionDate"),
+    revisionPriority: document.getElementById("revisionPriority"),
+    saveRevisionBtn: document.getElementById("saveRevisionBtn"),
+    revisionReminderList: document.getElementById("revisionReminderList")
   };
 
   function show(viewName) {
@@ -110,6 +145,18 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     nodes.studyStatus.dataset.state = type;
   }
 
+  function setPlannerStatus(message, type = "info") {
+    if (!nodes.plannerStatus) return;
+    nodes.plannerStatus.textContent = message || "";
+    nodes.plannerStatus.dataset.state = type;
+  }
+
+  function setRevisionStatus(message, type = "info") {
+    if (!nodes.revisionStatus) return;
+    nodes.revisionStatus.textContent = message || "";
+    nodes.revisionStatus.dataset.state = type;
+  }
+
   function setSaving(isSaving) {
     state.saving = isSaving;
     if (nodes.saveTargetBtn) {
@@ -126,6 +173,22 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
       nodes.saveManualTimeBtn.textContent = isSaving ? "Saving..." : "Save Manual Time";
     }
     updateTimerButtons();
+  }
+
+  function setPlannerSaving(isSaving) {
+    state.plannerSaving = isSaving;
+    if (nodes.savePlannerSlotBtn) {
+      nodes.savePlannerSlotBtn.disabled = isSaving;
+      nodes.savePlannerSlotBtn.textContent = isSaving ? "Saving..." : "Save Slot";
+    }
+  }
+
+  function setReminderSaving(isSaving) {
+    state.reminderSaving = isSaving;
+    if (nodes.saveRevisionBtn) {
+      nodes.saveRevisionBtn.disabled = isSaving;
+      nodes.saveRevisionBtn.textContent = isSaving ? "Saving..." : "Save Reminder";
+    }
   }
 
   function userDisplayName(user) {
@@ -156,6 +219,11 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
 
   function yesterdayKey() {
     return addDays(todayKey(), -1);
+  }
+
+  function todayDayKey() {
+    const index = new Date().getDay();
+    return dayKeys[(index + 6) % 7];
   }
 
   function emptySubjectMinutes() {
@@ -269,6 +337,18 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     return `users/${uid}/myDesk/streak`;
   }
 
+  function weeklyPlannerPath(uid) {
+    return `users/${uid}/myDesk/weeklyPlanner`;
+  }
+
+  function plannerDayPath(uid, dayKey) {
+    return `users/${uid}/myDesk/weeklyPlanner/${dayKey}`;
+  }
+
+  function revisionRemindersPath(uid) {
+    return `users/${uid}/myDesk/revisionReminders`;
+  }
+
   function formatDuration(minutes) {
     const value = Math.max(0, Math.round(Number(minutes) || 0));
     const hours = Math.floor(value / 60);
@@ -366,6 +446,8 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     if (nodes.missionStreak) nodes.missionStreak.textContent = `${effectiveCurrentStreak()} days`;
     if (nodes.missionFocusScore) nodes.missionFocusScore.textContent = `${focus.total}/100`;
     if (nodes.missionDayStatus) nodes.missionDayStatus.textContent = dayStatusText(summary);
+    if (nodes.missionPlannedSessions) nodes.missionPlannedSessions.textContent = `${todayPlannerSlots().length} sessions`;
+    if (nodes.missionRevisionDue) nodes.missionRevisionDue.textContent = `${todayDueReminders().length} due`;
     if (nodes.missionExamCountdown) nodes.missionExamCountdown.textContent = settings ? countdownText(settings.targetExamDate) : "Set target exam";
   }
 
@@ -381,6 +463,128 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     if (nodes.studyScoreBreakdown) nodes.studyScoreBreakdown.textContent = `${focus.studyScore}/70`;
     if (nodes.quizScoreBreakdown) nodes.quizScoreBreakdown.textContent = `${focus.quizScore}/20`;
     if (nodes.streakScoreBreakdown) nodes.streakScoreBreakdown.textContent = `${focus.streakScore}/10`;
+    renderMission();
+  }
+
+  function todayPlannerSlots() {
+    const slots = state.weeklyPlanner?.[todayDayKey()] || [];
+    return Array.isArray(slots) ? slots : [];
+  }
+
+  function todayDueReminders() {
+    const today = todayKey();
+    return state.revisionReminders.filter((reminder) => reminder.status !== "completed" && reminder.revisionDate <= today);
+  }
+
+  function normalizePlanner(value) {
+    const planner = {};
+    dayKeys.forEach((dayKey) => {
+      const daySlots = value?.[dayKey] || {};
+      planner[dayKey] = Object.keys(daySlots).map((slotId) => ({
+        id: slotId,
+        dayKey,
+        time: String(daySlots[slotId]?.time || ""),
+        subject: allowedSubjects.has(daySlots[slotId]?.subject) ? daySlots[slotId].subject : "Other",
+        topic: String(daySlots[slotId]?.topic || "").slice(0, 100),
+        durationMinutes: Math.max(10, Math.min(720, Math.round(Number(daySlots[slotId]?.durationMinutes) || 10))),
+        createdAt: daySlots[slotId]?.createdAt || 0,
+        updatedAt: daySlots[slotId]?.updatedAt || 0
+      })).sort((a, b) => a.time.localeCompare(b.time));
+    });
+    return planner;
+  }
+
+  function normalizeReminders(value) {
+    if (!value || typeof value !== "object") return [];
+    return Object.keys(value).map((id) => {
+      const reminder = value[id] || {};
+      return {
+        id,
+        subject: allowedSubjects.has(reminder.subject) ? reminder.subject : "Other",
+        topic: String(reminder.topic || "").slice(0, 100),
+        revisionDate: dateIsValid(reminder.revisionDate) ? reminder.revisionDate : todayKey(),
+        priority: prioritySet.has(reminder.priority) ? reminder.priority : "Medium",
+        status: reminder.status === "completed" ? "completed" : "pending",
+        createdAt: reminder.createdAt || 0,
+        completedAt: reminder.completedAt || null,
+        updatedAt: reminder.updatedAt || 0
+      };
+    }).sort((a, b) => {
+      if (a.status !== b.status) return a.status === "pending" ? -1 : 1;
+      return a.revisionDate.localeCompare(b.revisionDate);
+    });
+  }
+
+  function formatTimeLabel(value) {
+    if (!/^\d{2}:\d{2}$/.test(value || "")) return "Time not set";
+    const [hourText, minuteText] = value.split(":");
+    let hour = Number(hourText);
+    const suffix = hour >= 12 ? "PM" : "AM";
+    hour = hour % 12 || 12;
+    return `${hour}:${minuteText} ${suffix}`;
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#039;"
+    }[char]));
+  }
+
+  function renderPlanner() {
+    if (!nodes.weeklyPlannerList) return;
+    const total = dayKeys.reduce((sum, dayKey) => sum + (state.weeklyPlanner?.[dayKey]?.length || 0), 0);
+    if (!total) {
+      nodes.weeklyPlannerList.innerHTML = `<div class="my-desk-empty">No study plan added yet.</div>`;
+      renderMission();
+      return;
+    }
+    nodes.weeklyPlannerList.innerHTML = dayKeys.map((dayKey) => {
+      const slots = state.weeklyPlanner[dayKey] || [];
+      return `
+        <section class="my-desk-day-card">
+          <h3>${dayLabels[dayKey]}</h3>
+          ${slots.length ? slots.map((slot) => `
+            <article class="my-desk-plan-item">
+              <div>
+                <strong>${formatTimeLabel(slot.time)} · ${escapeHtml(slot.subject)}</strong>
+                <span>${escapeHtml(slot.topic || "Study session")} · ${formatDuration(slot.durationMinutes)}</span>
+              </div>
+              <button type="button" data-delete-planner="${escapeHtml(slot.dayKey)}:${escapeHtml(slot.id)}">Delete</button>
+            </article>
+          `).join("") : `<p>No study plan added yet.</p>`}
+        </section>
+      `;
+    }).join("");
+    renderMission();
+  }
+
+  function renderReminders() {
+    if (!nodes.revisionReminderList) return;
+    const today = todayKey();
+    if (!state.revisionReminders.length) {
+      nodes.revisionReminderList.innerHTML = `<div class="my-desk-empty">No revision reminders yet.</div>`;
+      renderMission();
+      return;
+    }
+    nodes.revisionReminderList.innerHTML = state.revisionReminders.map((reminder) => {
+      const overdue = reminder.status !== "completed" && reminder.revisionDate < today;
+      return `
+        <article class="my-desk-reminder-item ${overdue ? "is-overdue" : ""}">
+          <div>
+            <strong>${escapeHtml(reminder.subject)} · ${escapeHtml(reminder.topic || "Revision")}</strong>
+            <span>${escapeHtml(reminder.revisionDate)} · ${escapeHtml(reminder.priority)} · ${overdue ? "Overdue" : escapeHtml(reminder.status)}</span>
+          </div>
+          <div class="my-desk-row-actions">
+            ${reminder.status === "completed" ? "" : `<button type="button" data-complete-reminder="${escapeHtml(reminder.id)}">Done</button>`}
+            <button type="button" data-delete-reminder="${escapeHtml(reminder.id)}">Delete</button>
+          </div>
+        </article>
+      `;
+    }).join("");
     renderMission();
   }
 
@@ -468,6 +672,176 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
       state.streak = normalizeStreak(null);
       renderStreakAndFocus();
       setStudyStatus("Streak load nahi ho paayi. Study summary phir bhi available hai.", "error");
+    }
+  }
+
+  async function loadPlanner() {
+    if (!state.user || !state.db) return;
+    setPlannerStatus("Loading weekly planner...", "info");
+    try {
+      const snapshot = await get(ref(state.db, weeklyPlannerPath(state.user.uid)));
+      state.weeklyPlanner = normalizePlanner(snapshot.exists() ? snapshot.val() : null);
+      renderPlanner();
+      setPlannerStatus("Weekly planner ready.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk planner load failed:", error.message);
+      state.weeklyPlanner = normalizePlanner(null);
+      renderPlanner();
+      setPlannerStatus("Weekly planner load nahi ho paaya. Please connection check karke retry karein.", "error");
+    }
+  }
+
+  async function loadReminders() {
+    if (!state.user || !state.db) return;
+    setRevisionStatus("Loading revision reminders...", "info");
+    try {
+      const snapshot = await get(ref(state.db, revisionRemindersPath(state.user.uid)));
+      state.revisionReminders = normalizeReminders(snapshot.exists() ? snapshot.val() : null);
+      renderReminders();
+      setRevisionStatus("Revision reminders ready.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk reminders load failed:", error.message);
+      state.revisionReminders = [];
+      renderReminders();
+      setRevisionStatus("Revision reminders load nahi ho paaye. Please connection check karke retry karein.", "error");
+    }
+  }
+
+  function collectPlannerSlot() {
+    const dayKey = nodes.plannerDay?.value || "";
+    const time = nodes.plannerTime?.value || "";
+    const subject = nodes.plannerSubject?.value || "";
+    const topic = (nodes.plannerTopic?.value || "").trim();
+    const durationMinutes = Number(nodes.plannerDuration?.value);
+    if (!dayKeys.includes(dayKey)) throw new Error("Please select a valid day.");
+    if (!/^\d{2}:\d{2}$/.test(time)) throw new Error("Please select a valid time.");
+    const [hour, minute] = time.split(":").map(Number);
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) throw new Error("Please select a valid time.");
+    if (!allowedSubjects.has(subject)) throw new Error("Please select a subject.");
+    if (topic.length > 100) throw new Error("Topic 100 characters se zyada nahi hona chahiye.");
+    if (!Number.isFinite(durationMinutes) || durationMinutes < 10 || durationMinutes > 720) throw new Error("Duration 10 se 720 minutes ke beech rakhein.");
+    return { dayKey, time, subject, topic, durationMinutes: Math.round(durationMinutes) };
+  }
+
+  async function savePlannerSlot(event) {
+    event.preventDefault();
+    if (!state.user || !state.db || state.plannerSaving) return;
+    let data;
+    try {
+      data = collectPlannerSlot();
+    } catch (error) {
+      setPlannerStatus(error.message, "error");
+      return;
+    }
+    setPlannerSaving(true);
+    setPlannerStatus("Saving planner slot...", "info");
+    try {
+      const slotRef = push(ref(state.db, plannerDayPath(state.user.uid, data.dayKey)));
+      await set(slotRef, {
+        id: slotRef.key,
+        ...data,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      if (nodes.plannerTopic) nodes.plannerTopic.value = "";
+      if (nodes.plannerDuration) nodes.plannerDuration.value = "";
+      await loadPlanner();
+      setPlannerStatus("Planner slot saved.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Planner slot save failed:", error.message);
+      setPlannerStatus("Planner slot save nahi ho paaya. Please dobara try karein.", "error");
+    } finally {
+      setPlannerSaving(false);
+    }
+  }
+
+  async function deletePlannerSlot(dayKey, slotId) {
+    if (!state.user || !state.db || !dayKeys.includes(dayKey) || !slotId) return;
+    setPlannerStatus("Deleting planner slot...", "info");
+    try {
+      await remove(ref(state.db, `${plannerDayPath(state.user.uid, dayKey)}/${slotId}`));
+      await loadPlanner();
+      setPlannerStatus("Planner slot deleted.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Planner slot delete failed:", error.message);
+      setPlannerStatus("Planner slot delete nahi ho paaya.", "error");
+    }
+  }
+
+  function collectReminder() {
+    const subject = nodes.revisionSubject?.value || "";
+    const topic = (nodes.revisionTopic?.value || "").trim();
+    const revisionDate = nodes.revisionDate?.value || "";
+    const priority = nodes.revisionPriority?.value || "Medium";
+    if (!allowedSubjects.has(subject)) throw new Error("Please select a subject.");
+    if (!topic) throw new Error("Please enter a revision topic.");
+    if (topic.length > 100) throw new Error("Topic 100 characters se zyada nahi hona chahiye.");
+    if (!revisionDate || !dateIsValid(revisionDate)) throw new Error("Please select a valid revision date.");
+    if (!prioritySet.has(priority)) throw new Error("Please select a valid priority.");
+    return { subject, topic, revisionDate, priority };
+  }
+
+  async function saveReminder(event) {
+    event.preventDefault();
+    if (!state.user || !state.db || state.reminderSaving) return;
+    let data;
+    try {
+      data = collectReminder();
+    } catch (error) {
+      setRevisionStatus(error.message, "error");
+      return;
+    }
+    setReminderSaving(true);
+    setRevisionStatus("Saving revision reminder...", "info");
+    try {
+      const reminderRef = push(ref(state.db, revisionRemindersPath(state.user.uid)));
+      await set(reminderRef, {
+        id: reminderRef.key,
+        ...data,
+        status: "pending",
+        createdAt: serverTimestamp(),
+        completedAt: null,
+        updatedAt: serverTimestamp()
+      });
+      if (nodes.revisionTopic) nodes.revisionTopic.value = "";
+      if (nodes.revisionDate) nodes.revisionDate.value = "";
+      await loadReminders();
+      setRevisionStatus("Revision reminder saved.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Revision reminder save failed:", error.message);
+      setRevisionStatus("Revision reminder save nahi ho paaya. Please dobara try karein.", "error");
+    } finally {
+      setReminderSaving(false);
+    }
+  }
+
+  async function completeReminder(reminderId) {
+    if (!state.user || !state.db || !reminderId) return;
+    setRevisionStatus("Marking reminder completed...", "info");
+    try {
+      await update(ref(state.db, `${revisionRemindersPath(state.user.uid)}/${reminderId}`), {
+        status: "completed",
+        completedAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      await loadReminders();
+      setRevisionStatus("Revision reminder completed.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Revision reminder complete failed:", error.message);
+      setRevisionStatus("Reminder complete nahi ho paaya.", "error");
+    }
+  }
+
+  async function deleteReminder(reminderId) {
+    if (!state.user || !state.db || !reminderId) return;
+    setRevisionStatus("Deleting revision reminder...", "info");
+    try {
+      await remove(ref(state.db, `${revisionRemindersPath(state.user.uid)}/${reminderId}`));
+      await loadReminders();
+      setRevisionStatus("Revision reminder deleted.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Revision reminder delete failed:", error.message);
+      setRevisionStatus("Reminder delete nahi ho paaya.", "error");
     }
   }
 
@@ -767,6 +1141,20 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
     nodes.finishTimerBtn?.addEventListener("click", finishTimer);
     nodes.cancelTimerBtn?.addEventListener("click", cancelTimer);
     nodes.manualStudyForm?.addEventListener("submit", saveManualTime);
+    nodes.plannerSlotForm?.addEventListener("submit", savePlannerSlot);
+    nodes.revisionReminderForm?.addEventListener("submit", saveReminder);
+    nodes.weeklyPlannerList?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-delete-planner]");
+      if (!button) return;
+      const [dayKey, slotId] = String(button.dataset.deletePlanner || "").split(":");
+      deletePlannerSlot(dayKey, slotId);
+    });
+    nodes.revisionReminderList?.addEventListener("click", (event) => {
+      const completeButton = event.target.closest("[data-complete-reminder]");
+      const deleteButton = event.target.closest("[data-delete-reminder]");
+      if (completeButton) completeReminder(completeButton.dataset.completeReminder);
+      if (deleteButton) deleteReminder(deleteButton.dataset.deleteReminder);
+    });
     document.querySelectorAll("[data-scroll-target]").forEach((button) => {
       button.addEventListener("click", () => {
         const target = document.querySelector(button.dataset.scrollTarget || "");
@@ -799,8 +1187,12 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
           state.settings = null;
           state.todaySummary = normalizeSummary(null);
           state.streak = normalizeStreak(null);
+          state.weeklyPlanner = normalizePlanner(null);
+          state.revisionReminders = [];
           renderMission();
           renderTodaySummary();
+          renderPlanner();
+          renderReminders();
           return;
         }
         renderUser(user);
@@ -808,6 +1200,8 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
         await loadSettings();
         await loadTodaySummary();
         await loadStreak();
+        await loadPlanner();
+        await loadReminders();
       });
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
@@ -821,7 +1215,11 @@ import { getDatabase, ref, get, set, push, serverTimestamp } from "https://www.g
   resetTimer();
   state.todaySummary = normalizeSummary(null);
   state.streak = normalizeStreak(null);
+  state.weeklyPlanner = normalizePlanner(null);
+  state.revisionReminders = [];
   renderTodaySummary();
+  renderPlanner();
+  renderReminders();
 
   if (!isApp) {
     show("appOnly");

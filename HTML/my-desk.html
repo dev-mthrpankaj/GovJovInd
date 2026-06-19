@@ -100,6 +100,8 @@
           <div><span>Streak</span><strong id="missionStreak">0 days</strong></div>
           <div><span>Focus Score</span><strong id="missionFocusScore">0/100</strong></div>
           <div><span>Day Status</span><strong id="missionDayStatus">Target Not Set</strong></div>
+          <div><span>Planned</span><strong id="missionPlannedSessions">0 sessions</strong></div>
+          <div><span>Revision</span><strong id="missionRevisionDue">0 due</strong></div>
           <div><span>Exam Countdown</span><strong id="missionExamCountdown">Set target exam</strong></div>
         </div>
       </section>
@@ -312,20 +314,99 @@
           </form>
         </article>
 
-        <article class="my-desk-card">
+        <article class="my-desk-card my-desk-planner-card">
           <div class="my-desk-card-head">
             <div>
               <span class="section-kicker">Planning</span>
-              <h2>Planner</h2>
+              <h2>Weekly Study Planner</h2>
             </div>
             <i class="fas fa-list-check" aria-hidden="true"></i>
           </div>
-          <div class="my-desk-coming-list">
-            <span><i class="fas fa-calendar-week" aria-hidden="true"></i> Weekly planner coming soon</span>
-            <span><i class="fas fa-bell" aria-hidden="true"></i> Revision reminder coming soon</span>
-            <span><i class="fas fa-book-open" aria-hidden="true"></i> Wrong question notebook coming soon</span>
-          </div>
+          <div id="plannerStatus" class="my-desk-status" role="status" aria-live="polite">Loading weekly planner...</div>
+          <form id="plannerSlotForm" class="my-desk-form">
+            <div class="my-desk-field">
+              <label for="plannerDay">Day</label>
+              <select id="plannerDay" name="plannerDay">
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+              </select>
+            </div>
+            <div class="my-desk-field">
+              <label for="plannerTime">Time</label>
+              <input id="plannerTime" name="plannerTime" type="time">
+            </div>
+            <div class="my-desk-field">
+              <label for="plannerSubject">Subject</label>
+              <select id="plannerSubject" name="plannerSubject">
+                <option value="">Select subject</option>
+                <option value="Hindi">Hindi</option>
+                <option value="English">English</option>
+                <option value="GK/GS">GK/GS</option>
+                <option value="Maths">Maths</option>
+                <option value="Reasoning">Reasoning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="my-desk-field">
+              <label for="plannerTopic">Topic</label>
+              <input id="plannerTopic" name="plannerTopic" type="text" maxlength="100" placeholder="e.g. Percentage practice">
+            </div>
+            <div class="my-desk-field">
+              <label for="plannerDuration">Duration Minutes</label>
+              <input id="plannerDuration" name="plannerDuration" type="number" min="10" max="720" step="5" inputmode="numeric" placeholder="60">
+            </div>
+            <button id="savePlannerSlotBtn" class="btn btn-primary my-desk-full-btn" type="submit">Save Slot</button>
+          </form>
+          <div id="weeklyPlannerList" class="my-desk-planner-list" aria-label="Weekly study planner slots"></div>
         </article>
+      </section>
+
+      <section class="my-desk-card" aria-labelledby="revisionRemindersTitle">
+        <div class="my-desk-card-head">
+          <div>
+            <span class="section-kicker">Revision</span>
+            <h2 id="revisionRemindersTitle">Revision Reminders</h2>
+          </div>
+          <i class="fas fa-bell" aria-hidden="true"></i>
+        </div>
+        <div id="revisionStatus" class="my-desk-status" role="status" aria-live="polite">Loading revision reminders...</div>
+        <form id="revisionReminderForm" class="my-desk-form my-desk-inline-form">
+          <div class="my-desk-field">
+            <label for="revisionSubject">Subject</label>
+            <select id="revisionSubject" name="revisionSubject">
+              <option value="">Select subject</option>
+              <option value="Hindi">Hindi</option>
+              <option value="English">English</option>
+              <option value="GK/GS">GK/GS</option>
+              <option value="Maths">Maths</option>
+              <option value="Reasoning">Reasoning</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="my-desk-field">
+            <label for="revisionTopic">Topic</label>
+            <input id="revisionTopic" name="revisionTopic" type="text" maxlength="100" placeholder="e.g. Polity Fundamental Rights">
+          </div>
+          <div class="my-desk-field">
+            <label for="revisionDate">Revision Date</label>
+            <input id="revisionDate" name="revisionDate" type="date">
+          </div>
+          <div class="my-desk-field">
+            <label for="revisionPriority">Priority</label>
+            <select id="revisionPriority" name="revisionPriority">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <button id="saveRevisionBtn" class="btn btn-primary" type="submit">Save Reminder</button>
+        </form>
+        <div id="revisionReminderList" class="my-desk-reminder-list" aria-label="Revision reminders"></div>
       </section>
 
       <section class="my-desk-motivation" aria-label="Motivation note">
