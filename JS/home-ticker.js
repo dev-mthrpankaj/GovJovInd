@@ -2,7 +2,7 @@
   "use strict";
 
   const MAX_PER_TYPE = 4;
-  const WELCOME_DELAY_MS = 1200;
+  const WELCOME_DELAY_MS = 4000;
   const SWAP_FADE_MS = 250;
   const RETRY_DELAY_MS = 250;
   const MAX_RETRIES = 24;
@@ -11,7 +11,7 @@
     {
       label: "Latest Job",
       items: () => window.GovJobUpdatesJobs,
-      mode: "nearestFuture",
+      mode: "upcoming",
       dateFields: ["lastDate"],
       fallbackDateFields: ["updatedAt", "startDate"],
       fallbackHref: "HTML/latest-jobs.html"
@@ -19,7 +19,7 @@
     {
       label: "Admit Card",
       items: () => window.GovJobUpdatesAdmitCards,
-      mode: "nearestFuture",
+      mode: "upcoming",
       dateFields: ["examDate", "examEndDate"],
       fallbackDateFields: ["updatedAt", "releaseDate"],
       fallbackHref: "HTML/admitcard.html"
@@ -43,6 +43,7 @@
   ];
 
   const CLOSED_STATUSES = new Set(["closed", "expired", "ended", "inactive"]);
+  const SKIPPED_STATUSES = new Set(["upcoming", "closed", "expired", "ended", "inactive", "not available"]);
 
   function clean(value) {
     return String(value ?? "").trim();
@@ -78,33 +79,27 @@
     if (!href || href === "#") return fallbackHref;
     if (/^(javascript|data|mailto|tel|sms):/i.test(href)) return fallbackHref;
     href = href.replace(/^\.\.\/Job_Details\/HTML\//, "Job_Details/HTML/");
+    href = href.replace(/^\.\.\/AdmitCard_Details\/HTML\//, "AdmitCard_Details/HTML/");
+    href = href.replace(/^\.\.\/AnswerKey_Details\/HTML\//, "AnswerKey_Details/HTML/");
+    href = href.replace(/^\.\.\/Result_Details\/HTML\//, "Result_Details/HTML/");
     href = href.replace(/^\.\.\/HTML\//, "HTML/");
     href = href.replace(/^\/+/, "");
     if (/^(https?:|\.\/|\/)/i.test(href)) return href;
-    if (/^(Job_Details|HTML)\//i.test(href)) return href;
+    if (/^(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details|HTML)\//i.test(href)) return href;
     return fallbackHref;
   }
 
-  function rankNearestItems(records) {
-    const activeItems = records.filter(({ status }) => !CLOSED_STATUSES.has(status));
-    const futureItems = activeItems
-      .filter(({ nearestTime }) => nearestTime)
-      .sort((a, b) => a.nearestTime - b.nearestTime || b.latestTime - a.latestTime);
-    const fallbackItems = activeItems
-      .filter(({ nearestTime }) => !nearestTime)
-      .sort((a, b) => b.latestTime - a.latestTime);
-    const closedFallback = records
-      .filter(({ status }) => CLOSED_STATUSES.has(status))
-      .sort((a, b) => b.latestTime - a.latestTime);
-
-    return futureItems.concat(fallbackItems, closedFallback).slice(0, MAX_PER_TYPE);
+  function rankUpcomingItems(records) {
+    return records
+      .filter(({ status, nearestTime }) => nearestTime && !CLOSED_STATUSES.has(status))
+      .sort((a, b) => a.nearestTime - b.nearestTime || b.latestTime - a.latestTime)
+      .slice(0, MAX_PER_TYPE);
   }
 
   function filterByStatus(records, source) {
     if (!source.skipStatuses?.length) return records;
     const skipped = new Set(source.skipStatuses);
-    const filtered = records.filter(({ status }) => !skipped.has(status));
-    return filtered.length ? filtered : records;
+    return records.filter(({ status }) => !skipped.has(status));
   }
 
   function buildItems(source) {
@@ -120,9 +115,10 @@
         return { item, status, nearestTime, latestTime };
       }), source);
 
+    const activeRecords = withTiming.filter(({ status }) => !SKIPPED_STATUSES.has(status));
     const sorted = source.mode === "latest"
-      ? withTiming.sort((a, b) => b.latestTime - a.latestTime)
-      : rankNearestItems(withTiming);
+      ? activeRecords.sort((a, b) => b.latestTime - a.latestTime)
+      : rankUpcomingItems(activeRecords);
 
     return sorted
       .slice(0, MAX_PER_TYPE)
