@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2457",
+        "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
+        "organization": "Haryana Staff Selection Commission",
+        "department": "HSSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Class 10th Matric Exam Passed from Any Recognized Board in India and for more detail view notification or click on view detail button",
+        "totalPosts": "",
+        "startDate": "2026-06-19",
+        "lastDate": "2026-07-03",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://hssc.gov.in/applyOnline",
+        "officialNotification": "https://hssc.gov.in/file/ac1f23cd-9d9c-1328-819e-da8c1fe70055/advertisements",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2457",
+        "updatedAt": "2026-06-19",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2456",
         "title": "SBI PO Recruitment 2026",
         "organization": "State Bank of India",
@@ -12,7 +36,7 @@ window.GovJobUpdatesJobs = [
         "year": "2026",
         "qualification": "Candidates must have passed or be appearing in the final year of a Bachelor’s Degree in any stream from a recognized university in India.",
         "totalPosts": "1500",
-        "startDate": "2026-05-18",
+        "startDate": "2026-06-18",
         "lastDate": "2026-07-08",
         "status": "active",
         "tags": [
@@ -674,7 +698,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "2285",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Lower PCS",
@@ -884,7 +908,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Join Indian Navy Recruitment 2026",
             "Indian Navy 10+2 B.Tech Cadet Entry",
@@ -1094,7 +1118,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "30",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-18",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Council of Scientific & Industrial Research Recruitment 2026",
             "CSIR CIMFR Technician/Grade II",
@@ -1784,7 +1808,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "209",
         "startDate": "2026-06-19",
         "lastDate": "2026-07-09",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Havildar Instructor",
