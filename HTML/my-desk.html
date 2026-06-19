@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>My Desk - GovJobUpdates App</title>
+  <meta name="description" content="My Desk is an app-only GovJobUpdates student dashboard for study planning, daily mission tracking and exam focus.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://govjobupdates.com/HTML/my-desk.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home%20Page/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
+  <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
+  <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
+  <link rel="stylesheet" href="../CSS/style.css?v=my-desk-v1">
+  <link rel="stylesheet" href="../CSS/auth-lite.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="my-desk-page gju-auth-pending">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+        <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="latest-jobs.html">Jobs</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="rank-predictor.html">Rank Predictor</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="download-app.html">App</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="my-desk-shell" aria-live="polite">
+    <section id="myDeskLoading" class="my-desk-state">
+      <div class="my-desk-state-icon"><i class="fas fa-table-columns" aria-hidden="true"></i></div>
+      <span class="section-kicker">GovJobUpdates App</span>
+      <h1>Loading My Desk</h1>
+      <p>Checking app and login status.</p>
+    </section>
+
+    <section id="myDeskAppOnly" class="my-desk-state" hidden>
+      <div class="my-desk-state-icon"><i class="fas fa-mobile-screen-button" aria-hidden="true"></i></div>
+      <span class="section-kicker">App Only</span>
+      <h1>Open My Desk in the GovJobUpdates App</h1>
+      <p>My Desk is a personal student dashboard made for the Android app experience. Open the app to use study planning, targets and focus tools.</p>
+      <div class="my-desk-actions">
+        <a class="btn btn-primary" href="intent://govjobupdates.com/HTML/my-desk.html#Intent;scheme=https;package=com.govjobupdates.app;end"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open in App</a>
+        <a class="btn btn-outline" href="download-app.html"><i class="fas fa-download" aria-hidden="true"></i> Download App</a>
+      </div>
+      <p class="my-desk-note">Agar app open na ho, official APK download page se GovJobUpdates app install karke try karein.</p>
+    </section>
+
+    <section id="myDeskLoginRequired" class="my-desk-state" hidden>
+      <div class="my-desk-state-icon"><i class="fas fa-user-lock" aria-hidden="true"></i></div>
+      <span class="section-kicker">Login Required</span>
+      <h1>Login to access My Desk</h1>
+      <p>Your My Desk dashboard is connected with your GovJobUpdates account, so your study setup can stay linked with your profile.</p>
+      <div class="my-desk-actions">
+        <a class="btn btn-primary" href="login.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i> Login / Sign Up</a>
+        <a class="btn btn-outline" href="quiz.html"><i class="fas fa-stopwatch" aria-hidden="true"></i> Start Quiz</a>
+      </div>
+    </section>
+
+    <section id="myDeskDashboard" class="my-desk-dashboard" hidden>
+      <section class="my-desk-hero" aria-labelledby="myDeskTitle">
+        <div class="my-desk-hero-copy">
+          <span class="section-kicker">Student Mission Control</span>
+          <h1 id="myDeskTitle">My Desk</h1>
+          <p>Your personal study planner and focus dashboard.</p>
+          <div class="my-desk-user">
+            <i class="fas fa-user-graduate" aria-hidden="true"></i>
+            <span id="myDeskUserName">GovJobUpdates User</span>
+            <small id="myDeskUserEmail">Account active</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="my-desk-card" aria-labelledby="todayMissionTitle">
+        <div class="my-desk-card-head">
+          <div>
+            <span class="section-kicker">Today</span>
+            <h2 id="todayMissionTitle">Today's Mission</h2>
+          </div>
+          <i class="fas fa-bullseye" aria-hidden="true"></i>
+        </div>
+        <div class="my-desk-mission-grid">
+          <div><span>Study Target</span><strong>Not set</strong></div>
+          <div><span>Quiz Target</span><strong>Not set</strong></div>
+          <div><span>Focus Subject</span><strong>Not set</strong></div>
+          <div><span>Streak</span><strong>0 days</strong></div>
+          <div><span>Exam Countdown</span><strong>Set target exam</strong></div>
+        </div>
+      </section>
+
+      <section class="my-desk-card" aria-labelledby="quickActionsTitle">
+        <div class="my-desk-card-head">
+          <div>
+            <span class="section-kicker">Shortcuts</span>
+            <h2 id="quickActionsTitle">Quick Actions</h2>
+          </div>
+          <i class="fas fa-bolt" aria-hidden="true"></i>
+        </div>
+        <div class="my-desk-action-grid">
+          <button type="button"><i class="fas fa-bullseye" aria-hidden="true"></i><span>Set Target</span></button>
+          <button type="button"><i class="fas fa-play" aria-hidden="true"></i><span>Start Study</span></button>
+          <button type="button"><i class="fas fa-plus" aria-hidden="true"></i><span>Add Study Time</span></button>
+          <button type="button"><i class="fas fa-calendar-days" aria-hidden="true"></i><span>View Planner</span></button>
+        </div>
+      </section>
+
+      <section class="my-desk-grid">
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Setup</span>
+              <h2>Setup Target</h2>
+            </div>
+            <i class="fas fa-flag-checkered" aria-hidden="true"></i>
+          </div>
+          <div class="my-desk-list">
+            <div><span>Target Exam</span><strong>Not set</strong></div>
+            <div><span>Daily Study Hours</span><strong>Not set</strong></div>
+            <div><span>Daily Quiz Questions</span><strong>Not set</strong></div>
+            <div><span>Weak Subjects</span><strong>Not set</strong></div>
+            <div><span>Exam Date</span><strong>Not set</strong></div>
+          </div>
+          <button class="btn btn-primary my-desk-full-btn" type="button">Setup My Target</button>
+        </article>
+
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Focus</span>
+              <h2>Study Focus</h2>
+            </div>
+            <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+          </div>
+          <div class="my-desk-coming-list">
+            <span><i class="fas fa-clock" aria-hidden="true"></i> Timer coming soon</span>
+            <span><i class="fas fa-pen-to-square" aria-hidden="true"></i> Manual study log coming soon</span>
+            <span><i class="fas fa-chart-simple" aria-hidden="true"></i> Subject progress coming soon</span>
+          </div>
+        </article>
+
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Planning</span>
+              <h2>Planner</h2>
+            </div>
+            <i class="fas fa-list-check" aria-hidden="true"></i>
+          </div>
+          <div class="my-desk-coming-list">
+            <span><i class="fas fa-calendar-week" aria-hidden="true"></i> Weekly planner coming soon</span>
+            <span><i class="fas fa-bell" aria-hidden="true"></i> Revision reminder coming soon</span>
+            <span><i class="fas fa-book-open" aria-hidden="true"></i> Wrong question notebook coming soon</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="my-desk-motivation" aria-label="Motivation note">
+        <i class="fas fa-seedling" aria-hidden="true"></i>
+        <p>Small daily targets create big results. Complete today's mission and keep your streak alive.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div>
+  </footer>
+
+  <script src="../JS/script.js?v=my-desk-v1"></script>
+  <script src="../JS/firebase-config.js"></script>
+  <script type="module" src="../JS/firebase-auth.js?v=20260613-app-email-only"></script>
+  <script type="module" src="../JS/my-desk.js?v=v1"></script>
+</body>
+</html>
