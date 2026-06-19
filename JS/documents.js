@@ -1,5 +1,9 @@
 const IMAGE_MAX_BYTES = 8 * 1024 * 1024;
 const PDF_MAX_BYTES = 15 * 1024 * 1024;
+const PDF_TOTAL_MAX_BYTES = 60 * 1024 * 1024;
+const IMAGE_WARNING_PIXELS = 24 * 1000 * 1000;
+const IMAGE_MAX_PROCESS_PIXELS = 48 * 1000 * 1000;
+const IMAGE_MAX_OUTPUT_PIXELS = 36 * 1000 * 1000;
 const MM_TO_POINTS = 2.83465;
 const READABLE_IMAGE_TYPES = new Set([
     'image/jpeg',
@@ -69,6 +73,40 @@ function bytesFromTarget(valueId, unitId) {
     return $(unitId).value === 'MB' ? value * 1024 * 1024 : value * 1024;
 }
 
+function bindTargetPresetButtons(scope, valueSelector, unitSelector) {
+    const host = typeof scope === 'string' ? document.querySelector(scope) : scope;
+    if (!host) return;
+
+    host.querySelectorAll('[data-target-value][data-target-unit]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const valueInput = $(valueSelector);
+            const unitSelect = $(unitSelector);
+            if (!valueInput || !unitSelect) return;
+            valueInput.value = button.dataset.targetValue || '';
+            unitSelect.value = button.dataset.targetUnit || 'KB';
+        });
+    });
+}
+
+function getImagePixelCount(image) {
+    return (image.naturalWidth || image.width || 0) * (image.naturalHeight || image.height || 0);
+}
+
+function formatPixelCount(pixels) {
+    if (!Number.isFinite(pixels) || pixels <= 0) return '0';
+    if (pixels >= 1000000) return `${(pixels / 1000000).toFixed(1)}MP`;
+    return `${Math.round(pixels / 1000)}K`;
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function isImageFile(file) {
     if (!file) return false;
     return READABLE_IMAGE_TYPES.has(file.type) || READABLE_IMAGE_EXTENSIONS.has(getFileExtension(file.name));
@@ -76,6 +114,23 @@ function isImageFile(file) {
 
 function isPdfFile(file) {
     return file && (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
+}
+
+function ensurePdfLib() {
+    if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+        throw new Error('PDF library failed to load. Please check your internet connection and reload this page.');
+    }
+}
+
+function getPdfErrorMessage(error) {
+    const message = error?.message || '';
+    if (/password|encrypted/i.test(message)) {
+        return 'This PDF appears to be password protected or encrypted. Please unlock it first, then try again.';
+    }
+    if (/invalid|damaged|corrupt/i.test(message)) {
+        return 'This PDF could not be opened. It may be damaged or unsupported.';
+    }
+    return message || 'Processing failed. Please try a smaller file.';
 }
 
 function validateFile(file, options) {
@@ -116,6 +171,120 @@ function setupUploadArea(area, input, options) {
     input.addEventListener('change', () => {
         handleFile(input.files[0], input, options);
     });
+}
+
+function setupMultiUploadArea(area, input, options) {
+    const pickFile = () => input.click();
+
+    area.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            pickFile();
+        }
+    });
+
+    ['dragenter', 'dragover'].forEach((eventName) => {
+        area.addEventListener(eventName, (event) => {
+            event.preventDefault();
+            area.classList.add('dragover');
+        });
+    });
+
+    ['dragleave', 'drop'].forEach((eventName) => {
+        area.addEventListener(eventName, () => area.classList.remove('dragover'));
+    });
+
+    area.addEventListener('drop', (event) => {
+        event.preventDefault();
+        handleFiles(Array.from(event.dataTransfer.files || []), input, options);
+    });
+
+    input.addEventListener('change', () => {
+        handleFiles(Array.from(input.files || []), input, options);
+    });
+}
+
+function handleFiles(files, input, options) {
+    clearMessage(options.messageBox);
+    if (!files.length) {
+        input.value = '';
+        showMessage(options.messageBox, 'error', 'Please select at least one file.');
+        options.onInvalid?.();
+        return;
+    }
+
+    if (options.minFiles && files.length < options.minFiles) {
+        input.value = '';
+        showMessage(options.messageBox, 'error', `Please select at least ${options.minFiles} files.`);
+        options.onInvalid?.();
+        return;
+    }
+
+    if (options.maxFiles && files.length > options.maxFiles) {
+        input.value = '';
+        showMessage(options.messageBox, 'error', `Please select ${options.maxFiles} files or fewer.`);
+        options.onInvalid?.();
+        return;
+    }
+
+    const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
+    if (options.maxTotalBytes && totalBytes > options.maxTotalBytes) {
+        input.value = '';
+        showMessage(options.messageBox, 'error', `Selected files are too large together. Maximum total size is ${formatFileSize(options.maxTotalBytes)}.`);
+        options.onInvalid?.();
+        return;
+    }
+
+    const badFile = files.find((file) => validateFile(file, options));
+    if (badFile) {
+        input.value = '';
+        showMessage(options.messageBox, 'error', validateFile(badFile, options));
+        options.onInvalid?.();
+        return;
+    }
+
+    options.onValid(files);
+}
+
+function moveArrayItem(items, fromIndex, toIndex) {
+    if (toIndex < 0 || toIndex >= items.length) return items;
+    const copy = items.slice();
+    const [item] = copy.splice(fromIndex, 1);
+    copy.splice(toIndex, 0, item);
+    return copy;
+}
+
+function parsePageRange(rangeText, pageCount) {
+    const text = String(rangeText || '').trim();
+    if (!text) return Array.from({ length: pageCount }, (_, index) => index);
+    const pages = [];
+    const seen = new Set();
+
+    text.split(',').forEach((chunk) => {
+        const part = chunk.trim();
+        if (!part) return;
+        const match = part.match(/^(\d+)(?:\s*-\s*(\d+))?$/);
+        if (!match) throw new Error('Please enter page range like 1-3,5,8-10.');
+        const start = Number(match[1]);
+        const end = Number(match[2] || match[1]);
+        if (start < 1 || end < 1 || start > pageCount || end > pageCount) {
+            throw new Error(`Page range must be between 1 and ${pageCount}.`);
+        }
+        if (end < start) {
+            throw new Error('Please enter page ranges in increasing order, e.g. 3-5.');
+        }
+        const step = start <= end ? 1 : -1;
+        for (let page = start; step === 1 ? page <= end : page >= end; page += step) {
+            const index = page - 1;
+            if (!seen.has(index)) {
+                pages.push(index);
+                seen.add(index);
+            }
+        }
+    });
+
+    if (!pages.length) throw new Error('Please enter at least one page.');
+    return pages;
 }
 
 function handleFile(file, input, options) {
@@ -319,6 +488,10 @@ function initImageResizer() {
     const backgroundSelect = $('#image-background');
     const bgColorGroup = $('#image-bg-color-group');
     const bgColorInput = $('#image-bg-color');
+    const rotateLeftBtn = $('#rotate-left-btn');
+    const rotateRightBtn = $('#rotate-right-btn');
+    const flipHorizontalBtn = $('#flip-horizontal-btn');
+    const flipVerticalBtn = $('#flip-vertical-btn');
 
     let originalFile = null;
     let originalImage = null;
@@ -326,12 +499,24 @@ function initImageResizer() {
     let resizedUrl = '';
     let resizedFormat = 'jpg';
     let syncingDimensions = false;
+    let rotation = 0;
+    let flipHorizontal = false;
+    let flipVertical = false;
 
     const presets = {
-        passport: { width: 3.5, height: 4.5, unit: 'cm', dpi: 300, format: 'jpg', quality: 90, target: 100, mode: 'exact', lockRatio: false },
-        signature: { width: 4, height: 2, unit: 'cm', dpi: 300, format: 'jpg', quality: 90, target: 50, mode: 'exact', lockRatio: false },
-        small: { width: 800, height: 800, unit: 'px', dpi: 300, format: 'jpg', quality: 82, target: 50, mode: 'contain', lockRatio: true },
-        form: { width: 1000, height: 1000, unit: 'px', dpi: 300, format: 'jpg', quality: 85, target: 100, mode: 'contain', lockRatio: true }
+        passport: { label: 'Passport Photo', width: 3.5, height: 4.5, unit: 'cm', dpi: 300, format: 'jpg', quality: 90, target: 100, mode: 'exact', lockRatio: false },
+        signature: { label: 'Signature', width: 4, height: 2, unit: 'cm', dpi: 300, format: 'jpg', quality: 90, target: 50, mode: 'exact', lockRatio: false },
+        small: { label: 'Small Upload', width: 800, height: 800, unit: 'px', dpi: 300, format: 'jpg', quality: 82, target: 50, mode: 'contain', lockRatio: true },
+        form: { label: 'Form Upload', width: 1000, height: 1000, unit: 'px', dpi: 300, format: 'jpg', quality: 85, target: 100, mode: 'contain', lockRatio: true },
+        photo20: { label: 'Photo 20 KB', width: 3.5, height: 4.5, unit: 'cm', dpi: 200, format: 'jpg', quality: 72, target: 20, mode: 'exact', lockRatio: false },
+        photo50: { label: 'Photo 50 KB', width: 3.5, height: 4.5, unit: 'cm', dpi: 250, format: 'jpg', quality: 82, target: 50, mode: 'exact', lockRatio: false },
+        signature20: { label: 'Signature 20 KB', width: 4, height: 2, unit: 'cm', dpi: 200, format: 'jpg', quality: 72, target: 20, mode: 'exact', lockRatio: false },
+        signature50: { label: 'Signature 50 KB', width: 4, height: 2, unit: 'cm', dpi: 250, format: 'jpg', quality: 82, target: 50, mode: 'exact', lockRatio: false },
+        sscPhoto: { label: 'SSC Photo', width: 3.5, height: 4.5, unit: 'cm', dpi: 300, format: 'jpg', quality: 88, target: 50, mode: 'exact', lockRatio: false },
+        railwayPhoto: { label: 'Railway Photo', width: 35, height: 45, unit: 'mm', dpi: 300, format: 'jpg', quality: 86, target: 50, mode: 'exact', lockRatio: false },
+        upssscPhoto: { label: 'UPSSSC Photo', width: 600, height: 800, unit: 'px', dpi: 300, format: 'jpg', quality: 84, target: 100, mode: 'cover', lockRatio: false },
+        policePhoto: { label: 'Police Form Photo', width: 600, height: 800, unit: 'px', dpi: 300, format: 'jpg', quality: 84, target: 100, mode: 'cover', lockRatio: false },
+        aadhaarPan: { label: 'Aadhaar/PAN Upload', width: 1000, height: 700, unit: 'px', dpi: 200, format: 'jpg', quality: 82, target: 200, mode: 'contain', lockRatio: true }
     };
 
     setupUploadArea($('#image-upload-area'), fileInput, {
@@ -357,6 +542,10 @@ function initImageResizer() {
     lockRatioInput.addEventListener('change', () => {
         if (lockRatioInput.checked) syncLockedImageDimension('width');
     });
+    rotateLeftBtn?.addEventListener('click', () => updateImageTransform(-90));
+    rotateRightBtn?.addEventListener('click', () => updateImageTransform(90));
+    flipHorizontalBtn?.addEventListener('click', () => updateImageTransform(0, 'horizontal'));
+    flipVerticalBtn?.addEventListener('click', () => updateImageTransform(0, 'vertical'));
 
     resizeBtn.addEventListener('click', resizeImage);
     resetBtn.addEventListener('click', resetImage);
@@ -372,6 +561,7 @@ function initImageResizer() {
     updateImageQualityLabel();
     updateImageFormatControls();
     updateBackgroundControls();
+    bindTargetPresetButtons('[data-target-for="image"]', '#target-size-value', '#target-size-unit');
 
     function refreshImageFormatOptions() {
         Array.from(formatSelect.options).forEach((option) => {
@@ -400,6 +590,31 @@ function initImageResizer() {
 
     function updateBackgroundControls() {
         bgColorGroup.classList.toggle('hidden', backgroundSelect.value !== 'custom');
+    }
+
+    function updateImageTransform(degrees, flipAxis) {
+        rotation = ((rotation + degrees) % 360 + 360) % 360;
+        if (flipAxis === 'horizontal') flipHorizontal = !flipHorizontal;
+        if (flipAxis === 'vertical') flipVertical = !flipVertical;
+        applyImageTransformPreview();
+        resetImageResult();
+        showMessage(messageBox, 'info', 'Rotate/flip applied. Press Resize Image to generate the updated download.');
+    }
+
+    function applyImageTransformPreview() {
+        const scaleX = flipHorizontal ? -1 : 1;
+        const scaleY = flipVertical ? -1 : 1;
+        originalPreview.style.transform = `rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+        originalPreview.style.transition = 'transform 0.18s ease';
+        flipHorizontalBtn?.classList.toggle('is-active', flipHorizontal);
+        flipVerticalBtn?.classList.toggle('is-active', flipVertical);
+    }
+
+    function resetImageTransform() {
+        rotation = 0;
+        flipHorizontal = false;
+        flipVertical = false;
+        applyImageTransformPreview();
     }
 
     function syncLockedImageDimension(source) {
@@ -439,8 +654,9 @@ function initImageResizer() {
         const preset = presets[name];
         if (!preset) return;
 
-        const width = (name === 'small' || name === 'form') && originalImage ? originalImage.width : preset.width;
-        const height = (name === 'small' || name === 'form') && originalImage ? originalImage.height : preset.height;
+        const useOriginalDimensions = ['small', 'form'].includes(name) && originalImage;
+        const width = useOriginalDimensions ? originalImage.width : preset.width;
+        const height = useOriginalDimensions ? originalImage.height : preset.height;
 
         widthInput.value = width;
         heightInput.value = height;
@@ -456,22 +672,23 @@ function initImageResizer() {
         $('#target-size-unit').value = 'KB';
         updateImageFormatControls();
         updateBackgroundControls();
-        showMessage(messageBox, 'info', `${buttonLabel(name)} preset applied. Upload an image or press Resize Image if your file is already selected.`);
-    }
-
-    function buttonLabel(name) {
-        if (name === 'passport') return 'Passport Photo';
-        if (name === 'signature') return 'Signature';
-        if (name === 'small') return 'Small Upload';
-        return 'Form Upload';
+        showMessage(messageBox, 'info', `${preset.label} preset applied. Official portal ki exact limit hamesha notification/portal se verify karein.`);
     }
 
     async function handleImageUpload(file) {
         try {
             resetImageResult();
+            resetImageTransform();
             originalFile = file;
             const dataUrl = await readFileAsDataUrl(file);
             originalImage = await loadImage(dataUrl);
+            const sourcePixels = getImagePixelCount(originalImage);
+
+            if (sourcePixels > IMAGE_MAX_PROCESS_PIXELS) {
+                resetImage();
+                showMessage(messageBox, 'error', `This image is very large (${formatPixelCount(sourcePixels)} pixels). Browser freeze ho sakta hai. Please pehle dimensions reduce karke smaller image upload karein.`);
+                return;
+            }
 
             originalPreview.src = dataUrl;
             $('#image-file-name').textContent = file.name;
@@ -484,13 +701,17 @@ function initImageResizer() {
             $('#new-image-size').textContent = '-';
             $('#new-image-dimensions').textContent = '-';
             $('#new-image-format').textContent = '-';
+            $('#new-image-reduction').textContent = '-';
             $('#new-image-target-status').textContent = '-';
             updateImageFormatControls();
 
             $('#image-file-summary').classList.remove('hidden');
             previewContainer.classList.remove('hidden');
             actionBtns.classList.remove('hidden');
-            showMessage(messageBox, 'success', 'Image ready. Choose format, mode, dimensions, and target size.');
+            const warning = sourcePixels > IMAGE_WARNING_PIXELS
+                ? ` Image dimensions are large (${formatPixelCount(sourcePixels)} pixels). Browser slow/freeze ho sakta hai; resize output ko smaller dimensions par rakhein.`
+                : '';
+            showMessage(messageBox, warning ? 'info' : 'success', `Image ready. Choose format, mode, dimensions, and target size.${warning}`);
         } catch (error) {
             showMessage(messageBox, 'error', error.message || 'Unable to open this image.');
         }
@@ -503,6 +724,7 @@ function initImageResizer() {
         resizedFormat = 'jpg';
         downloadArea.classList.add('hidden');
         resizedPreview.removeAttribute('src');
+        $('#new-image-reduction').textContent = '-';
     }
 
     function resetImage() {
@@ -510,6 +732,7 @@ function initImageResizer() {
         originalFile = null;
         originalImage = null;
         originalPreview.removeAttribute('src');
+        resetImageTransform();
         $('#image-file-summary').classList.add('hidden');
         previewContainer.classList.add('hidden');
         actionBtns.classList.add('hidden');
@@ -525,11 +748,12 @@ function initImageResizer() {
 
         const sourceWidth = originalImage.naturalWidth || originalImage.width;
         const sourceHeight = originalImage.naturalHeight || originalImage.height;
+        const transformedSize = getTransformedImageSize(sourceWidth, sourceHeight);
         const width = parseFloat(widthInput.value);
         const height = parseFloat(heightInput.value);
         const dpi = parseInt(dpiInput.value, 10) || 300;
-        const targetWidth = convertDimension(width, widthUnitSelect.value, dpi, sourceWidth);
-        const targetHeight = convertDimension(height, heightUnitSelect.value, dpi, sourceHeight);
+        const targetWidth = convertDimension(width, widthUnitSelect.value, dpi, transformedSize.width);
+        const targetHeight = convertDimension(height, heightUnitSelect.value, dpi, transformedSize.height);
         const outputFormat = resolveImageOutputFormat(formatSelect.value);
         const mimeType = getImageMime(outputFormat);
         const targetBytes = bytesFromTarget('#target-size-value', '#target-size-unit');
@@ -539,11 +763,17 @@ function initImageResizer() {
             return;
         }
 
+        const outputPixels = targetWidth * targetHeight;
+        if (outputPixels > IMAGE_MAX_OUTPUT_PIXELS) {
+            showMessage(messageBox, 'error', `Output dimensions are too large (${formatPixelCount(outputPixels)} pixels). Browser freeze ho sakta hai. Please width/height reduce karein.`);
+            return;
+        }
+
         setBusy(resizeBtn, true, 'Processing...');
         clearMessage(messageBox);
 
         try {
-            const layout = getImageResizeLayout(sourceWidth, sourceHeight, targetWidth, targetHeight);
+            const layout = getImageResizeLayout(transformedSize.width, transformedSize.height, targetWidth, targetHeight);
             const background = getImageCanvasBackground(outputFormat);
             const canvas = document.createElement('canvas');
             canvas.width = layout.canvasWidth;
@@ -559,7 +789,7 @@ function initImageResizer() {
 
             context.imageSmoothingEnabled = true;
             context.imageSmoothingQuality = 'high';
-            context.drawImage(originalImage, layout.drawX, layout.drawY, layout.drawWidth, layout.drawHeight);
+            drawTransformedImage(context, originalImage, layout);
 
             const initialQuality = qualityInput.disabled ? 1 : parseInt(qualityInput.value, 10) / 100;
             const result = await createTargetImageBlob(canvas, mimeType, initialQuality, targetBytes);
@@ -572,6 +802,7 @@ function initImageResizer() {
             $('#new-image-size').textContent = formatFileSize(resizedBlob.size);
             $('#new-image-dimensions').textContent = `${canvas.width} x ${canvas.height} px`;
             $('#new-image-format').textContent = getImageFormatLabel(outputFormat);
+            $('#new-image-reduction').textContent = buildImageReductionText(originalFile.size, resizedBlob.size);
             $('#new-image-target-status').textContent = buildImageTargetStatus(result, targetBytes, outputFormat);
             downloadArea.classList.remove('hidden');
 
@@ -587,6 +818,26 @@ function initImageResizer() {
         } finally {
             setBusy(resizeBtn, false);
         }
+    }
+
+    function getTransformedImageSize(width, height) {
+        const quarterTurn = rotation === 90 || rotation === 270;
+        return quarterTurn ? { width: height, height: width } : { width, height };
+    }
+
+    function drawTransformedImage(context, image, layout) {
+        const quarterTurn = rotation === 90 || rotation === 270;
+        const drawWidth = quarterTurn ? layout.drawHeight : layout.drawWidth;
+        const drawHeight = quarterTurn ? layout.drawWidth : layout.drawHeight;
+        const centerX = layout.drawX + layout.drawWidth / 2;
+        const centerY = layout.drawY + layout.drawHeight / 2;
+
+        context.save();
+        context.translate(centerX, centerY);
+        context.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
+        context.rotate((rotation * Math.PI) / 180);
+        context.drawImage(image, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
+        context.restore();
     }
 
     function getImageResizeLayout(sourceWidth, sourceHeight, targetWidth, targetHeight) {
@@ -677,6 +928,15 @@ function initImageResizer() {
 
         return `Above ${formatFileSize(targetBytes)}${qualityText}. Try smaller dimensions or JPG/WEBP.`;
     }
+
+    function buildImageReductionText(originalBytes, outputBytes) {
+        if (!Number.isFinite(originalBytes) || originalBytes <= 0 || !Number.isFinite(outputBytes)) return '-';
+        if (outputBytes < originalBytes) {
+            return `${((1 - outputBytes / originalBytes) * 100).toFixed(1)}% smaller`;
+        }
+        if (outputBytes === originalBytes) return 'Same size';
+        return `${((outputBytes / originalBytes - 1) * 100).toFixed(1)}% larger`;
+    }
 }
 
 function initImageToPdf() {
@@ -692,19 +952,22 @@ function initImageToPdf() {
     const pageSizeSelect = $('#pdf-page-size');
     const qualityInput = $('#image-pdf-quality');
     const qualityValue = $('#image-pdf-quality-value');
+    const imageList = $('#image-pdf-list');
+    const orderActions = $('#image-pdf-order-actions');
+    const clearListBtn = $('#clear-image-pdf-list-btn');
 
-    let originalFile = null;
-    let originalImage = null;
-    let originalDataUrl = '';
+    let imageItems = [];
     let pdfBlob = null;
 
-    setupUploadArea($('#pdf-upload-area'), fileInput, {
+    setupMultiUploadArea($('#pdf-upload-area'), fileInput, {
         maxBytes: IMAGE_MAX_BYTES,
+        maxFiles: 20,
+        maxTotalBytes: PDF_TOTAL_MAX_BYTES,
         isValidType: isImageFile,
         invalidTypeMessage: 'Please upload a supported image: JPG, PNG, WEBP, AVIF, GIF, BMP, or SVG.',
         messageBox,
         onInvalid: resetPdfResult,
-        onValid: handlePdfImageUpload
+        onValid: handlePdfImagesUpload
     });
 
     pageSizeSelect.addEventListener('change', () => {
@@ -714,6 +977,7 @@ function initImageToPdf() {
     qualityInput.addEventListener('input', updatePdfQualityLabel);
     convertBtn.addEventListener('click', convertToPdf);
     resetBtn.addEventListener('click', resetPdf);
+    clearListBtn?.addEventListener('click', resetPdf);
     downloadBtn.addEventListener('click', () => {
         if (!pdfBlob) {
             showMessage(messageBox, 'error', 'Please convert an image before downloading.');
@@ -723,23 +987,43 @@ function initImageToPdf() {
     });
 
     updatePdfQualityLabel();
+    bindTargetPresetButtons('[data-target-for="image-pdf"]', '#image-pdf-target-size-value', '#image-pdf-target-size-unit');
 
-    async function handlePdfImageUpload(file) {
+    async function handlePdfImagesUpload(files) {
         try {
             resetPdfResult();
-            originalFile = file;
-            originalDataUrl = await readFileAsDataUrl(file);
-            originalImage = await loadImage(originalDataUrl);
-            preview.src = originalDataUrl;
-            $('#pdf-file-name').textContent = file.name;
-            $('#original-pdf-size').textContent = formatFileSize(file.size);
+            const loaded = [];
+            for (const file of files) {
+                const dataUrl = await readFileAsDataUrl(file);
+                const image = await loadImage(dataUrl);
+                const sourcePixels = getImagePixelCount(image);
+                if (sourcePixels > IMAGE_MAX_PROCESS_PIXELS) {
+                    resetPdf();
+                    showMessage(messageBox, 'error', `${file.name} is very large (${formatPixelCount(sourcePixels)} pixels). Browser freeze ho sakta hai. Please pehle dimensions reduce karke smaller image upload karein.`);
+                    return;
+                }
+                loaded.push({ file, dataUrl, image, sourcePixels });
+            }
+
+            imageItems = loaded;
+            preview.src = imageItems[0].dataUrl;
+            $('#pdf-file-name').textContent = imageItems.length === 1 ? imageItems[0].file.name : `${imageItems.length} images selected`;
+            $('#original-pdf-size').textContent = formatFileSize(imageItems.reduce((sum, item) => sum + item.file.size, 0));
             $('#new-pdf-size').textContent = '-';
             $('#new-pdf-dimensions').textContent = '-';
+            $('#new-pdf-pages').textContent = '-';
             $('#new-pdf-target-status').textContent = '-';
+            renderImagePdfList();
             $('#pdf-file-summary').classList.remove('hidden');
+            imageList.classList.remove('hidden');
+            orderActions.classList.remove('hidden');
             previewContainer.classList.remove('hidden');
             actionBtns.classList.remove('hidden');
-            showMessage(messageBox, 'success', 'Image ready. Choose page size and target PDF size.');
+            const largest = Math.max(...imageItems.map((item) => item.sourcePixels));
+            const warning = largest > IMAGE_WARNING_PIXELS
+                ? ` One or more images are large. Browser slow/freeze ho sakta hai; lower quality or smaller source image use karein.`
+                : '';
+            showMessage(messageBox, warning ? 'info' : 'success', `${imageItems.length} image${imageItems.length === 1 ? '' : 's'} ready. Arrange order, choose page size, and convert.${warning}`);
         } catch (error) {
             showMessage(messageBox, 'error', error.message || 'Unable to open this image.');
         }
@@ -752,29 +1036,70 @@ function initImageToPdf() {
 
     function resetPdf() {
         fileInput.value = '';
-        originalFile = null;
-        originalImage = null;
-        originalDataUrl = '';
+        imageItems = [];
         preview.removeAttribute('src');
         $('#pdf-file-summary').classList.add('hidden');
+        imageList.classList.add('hidden');
+        imageList.innerHTML = '';
+        orderActions.classList.add('hidden');
         previewContainer.classList.add('hidden');
         actionBtns.classList.add('hidden');
+        $('#new-pdf-pages').textContent = '-';
         resetPdfResult();
         clearMessage(messageBox);
     }
+
+    function renderImagePdfList() {
+        imageList.innerHTML = imageItems.map((item, index) => `
+            <div class="file-row" data-index="${index}">
+                <div class="file-row-info">
+                    <strong>${index + 1}. ${escapeHtml(item.file.name)}</strong>
+                    <span>${formatFileSize(item.file.size)} | ${item.image.width} x ${item.image.height} px</span>
+                </div>
+                <div class="file-row-actions">
+                    <button type="button" data-action="up" aria-label="Move image up" ${index === 0 ? 'disabled' : ''}><i class="fas fa-arrow-up"></i></button>
+                    <button type="button" data-action="down" aria-label="Move image down" ${index === imageItems.length - 1 ? 'disabled' : ''}><i class="fas fa-arrow-down"></i></button>
+                    <button type="button" data-action="delete" aria-label="Remove image"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    imageList.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-action]');
+        const row = event.target.closest('.file-row');
+        if (!button || !row) return;
+        const index = Number(row.dataset.index);
+        const action = button.dataset.action;
+        if (action === 'up') imageItems = moveArrayItem(imageItems, index, index - 1);
+        if (action === 'down') imageItems = moveArrayItem(imageItems, index, index + 1);
+        if (action === 'delete') imageItems.splice(index, 1);
+        resetPdfResult();
+        if (!imageItems.length) {
+            resetPdf();
+            showMessage(messageBox, 'info', 'Image list cleared.');
+            return;
+        }
+        preview.src = imageItems[0].dataUrl;
+        $('#pdf-file-name').textContent = imageItems.length === 1 ? imageItems[0].file.name : `${imageItems.length} images selected`;
+        $('#original-pdf-size').textContent = formatFileSize(imageItems.reduce((sum, item) => sum + item.file.size, 0));
+        renderImagePdfList();
+    });
 
     function updatePdfQualityLabel() {
         qualityValue.textContent = `${qualityInput.value}%`;
     }
 
     async function convertToPdf() {
-        if (!originalImage || !originalFile) {
-            showMessage(messageBox, 'error', 'Please upload an image before converting to PDF.');
+        if (!imageItems.length) {
+            showMessage(messageBox, 'error', 'Please upload one or more images before converting to PDF.');
             return;
         }
 
-        if (!window.PDFLib || !window.PDFLib.PDFDocument) {
-            showMessage(messageBox, 'error', 'PDF library failed to load. Please check your internet connection and reload this page.');
+        try {
+            ensurePdfLib();
+        } catch (error) {
+            showMessage(messageBox, 'error', error.message);
             return;
         }
 
@@ -783,13 +1108,13 @@ function initImageToPdf() {
 
         try {
             const pageSize = getPdfPageSize();
-            const layout = getImagePdfLayout(pageSize);
             const targetBytes = bytesFromTarget('#image-pdf-target-size-value', '#image-pdf-target-size-unit');
             const initialQuality = clampPdfQuality(parseInt(qualityInput.value, 10) / 100);
-            const result = await createTargetImagePdf(pageSize, layout, targetBytes, initialQuality);
+            const result = await createTargetImagePdf(pageSize, targetBytes, initialQuality);
             pdfBlob = result.blob;
             $('#new-pdf-size').textContent = formatFileSize(pdfBlob.size);
             $('#new-pdf-dimensions').textContent = `${Math.round(pageSize.width / MM_TO_POINTS)} x ${Math.round(pageSize.height / MM_TO_POINTS)} mm`;
+            $('#new-pdf-pages').textContent = String(imageItems.length);
             $('#new-pdf-target-status').textContent = buildImagePdfTargetStatus(result, targetBytes);
             downloadArea.classList.remove('hidden');
 
@@ -824,13 +1149,13 @@ function initImageToPdf() {
         return { width: width * MM_TO_POINTS, height: height * MM_TO_POINTS };
     }
 
-    function getImagePdfLayout(pageSize) {
+    function getImagePdfLayout(pageSize, image) {
         const margin = Math.max(0, parseFloat($('#pdf-margin').value) || 0) * MM_TO_POINTS;
         const maxWidth = Math.max(10, pageSize.width - margin * 2);
         const maxHeight = Math.max(10, pageSize.height - margin * 2);
         const fitToPage = $('#pdf-fit-page').checked;
-        const sourceWidth = originalImage.naturalWidth || originalImage.width;
-        const sourceHeight = originalImage.naturalHeight || originalImage.height;
+        const sourceWidth = image.naturalWidth || image.width;
+        const sourceHeight = image.naturalHeight || image.height;
 
         let drawWidth = sourceWidth;
         let drawHeight = sourceHeight;
@@ -854,14 +1179,14 @@ function initImageToPdf() {
         return Math.min(1, Math.max(0.3, value));
     }
 
-    async function createTargetImagePdf(pageSize, layout, targetBytes, initialQuality) {
+    async function createTargetImagePdf(pageSize, targetBytes, initialQuality) {
         const maxPasses = targetBytes ? 7 : 1;
         let bestResult = null;
         let scale = 1;
         let quality = initialQuality;
 
         for (let pass = 1; pass <= maxPasses; pass++) {
-            const result = await buildImagePdf(pageSize, layout, quality, scale);
+            const result = await buildImagePdf(pageSize, quality, scale);
             bestResult = chooseBetterImagePdfCandidate(bestResult, result, targetBytes);
 
             if (!targetBytes || result.blob.size <= targetBytes) {
@@ -893,19 +1218,22 @@ function initImageToPdf() {
         return candidate.blob.size < bestResult.blob.size ? candidate : bestResult;
     }
 
-    async function buildImagePdf(pageSize, layout, quality, scale) {
+    async function buildImagePdf(pageSize, quality, scale) {
         const { PDFDocument } = window.PDFLib;
         const pdfDoc = await PDFDocument.create();
-        const page = pdfDoc.addPage([pageSize.width, pageSize.height]);
-        const imageBytes = await getImageBytesForPdf(originalImage, quality, scale);
-        const embeddedImage = await pdfDoc.embedJpg(imageBytes);
+        for (const item of imageItems) {
+            const page = pdfDoc.addPage([pageSize.width, pageSize.height]);
+            const layout = getImagePdfLayout(pageSize, item.image);
+            const imageBytes = await getImageBytesForPdf(item.image, quality, scale);
+            const embeddedImage = await pdfDoc.embedJpg(imageBytes);
 
-        page.drawImage(embeddedImage, {
-            x: layout.x,
-            y: layout.y,
-            width: layout.drawWidth,
-            height: layout.drawHeight
-        });
+            page.drawImage(embeddedImage, {
+                x: layout.x,
+                y: layout.y,
+                width: layout.drawWidth,
+                height: layout.drawHeight
+            });
+        }
 
         const bytes = await pdfDoc.save({ useObjectStreams: true });
         return {
@@ -993,6 +1321,7 @@ function initPdfResizer() {
     });
 
     updateQualityLabel();
+    bindTargetPresetButtons('[data-target-for="pdf"]', '#pdf-target-size-value', '#pdf-target-size-unit');
 
     function handlePdfUpload(file) {
         originalPdf = file;
@@ -1318,10 +1647,323 @@ function initPdfResizer() {
     }
 }
 
+function initPdfManager() {
+    const messageBox = $('#pdf-manager-message');
+    const mergeInput = $('#merge-pdf-upload');
+    const mergeList = $('#merge-pdf-list');
+    const mergeBtn = $('#merge-pdf-btn');
+    const clearMergeBtn = $('#clear-merge-pdf-btn');
+    const mergeDownloadArea = $('#merge-pdf-download-area');
+    const mergeDownloadBtn = $('#download-merge-pdf-btn');
+    const organizeInput = $('#organize-pdf-upload');
+    const organizeSummary = $('#organize-pdf-summary');
+    const splitControls = $('#split-pdf-controls');
+    const splitActions = $('#split-pdf-action-btns');
+    const pageOrderList = $('#pdf-page-order-list');
+    const extractBtn = $('#extract-pdf-btn');
+    const saveOrganizedBtn = $('#save-organized-pdf-btn');
+    const resetOrganizeBtn = $('#reset-organize-pdf-btn');
+    const organizeDownloadArea = $('#organize-pdf-download-area');
+    const organizeDownloadBtn = $('#download-organize-pdf-btn');
+
+    let mergeItems = [];
+    let mergedPdfBlob = null;
+    let organizeFile = null;
+    let organizeBytes = null;
+    let organizePageCount = 0;
+    let pageOrder = [];
+    let organizedPdfBlob = null;
+    let organizedFilename = 'GovJobUpdates_Organized_PDF.pdf';
+
+    setupMultiUploadArea($('#merge-pdf-upload-area'), mergeInput, {
+        maxBytes: PDF_MAX_BYTES,
+        maxTotalBytes: PDF_TOTAL_MAX_BYTES,
+        minFiles: 2,
+        maxFiles: 20,
+        isValidType: isPdfFile,
+        invalidTypeMessage: 'Please upload PDF files only.',
+        messageBox,
+        onInvalid: () => resetMerge({ keepMessage: true }),
+        onValid: handleMergeFiles
+    });
+
+    setupUploadArea($('#organize-pdf-upload-area'), organizeInput, {
+        maxBytes: PDF_MAX_BYTES,
+        isValidType: isPdfFile,
+        invalidTypeMessage: 'Please upload a PDF file.',
+        messageBox,
+        onInvalid: () => resetOrganize({ keepMessage: true }),
+        onValid: handleOrganizeFile
+    });
+
+    mergeList.addEventListener('click', handleMergeListClick);
+    pageOrderList.addEventListener('click', handlePageOrderClick);
+    mergeBtn.addEventListener('click', mergePdfs);
+    clearMergeBtn.addEventListener('click', resetMerge);
+    extractBtn.addEventListener('click', extractPages);
+    saveOrganizedBtn.addEventListener('click', saveOrganizedPdf);
+    resetOrganizeBtn.addEventListener('click', resetOrganize);
+    mergeDownloadBtn.addEventListener('click', () => {
+        if (!mergedPdfBlob) {
+            showMessage(messageBox, 'error', 'Please merge PDFs before downloading.');
+            return;
+        }
+        downloadBlob(mergedPdfBlob, `GovJobUpdates_Merged_PDF_${Date.now()}.pdf`);
+    });
+    organizeDownloadBtn.addEventListener('click', () => {
+        if (!organizedPdfBlob) {
+            showMessage(messageBox, 'error', 'Please create an output PDF before downloading.');
+            return;
+        }
+        downloadBlob(organizedPdfBlob, organizedFilename || `GovJobUpdates_Organized_PDF_${Date.now()}.pdf`);
+    });
+
+    async function handleMergeFiles(files) {
+        try {
+            ensurePdfLib();
+            setBusy(mergeBtn, true, 'Reading...');
+            clearMessage(messageBox);
+            mergedPdfBlob = null;
+            mergeDownloadArea.classList.add('hidden');
+            mergeItems = [];
+
+            for (const file of files) {
+                const bytes = await file.arrayBuffer();
+                const pdfDoc = await window.PDFLib.PDFDocument.load(bytes.slice(0), { ignoreEncryption: true });
+                mergeItems.push({ file, bytes, pageCount: pdfDoc.getPageCount() });
+            }
+
+            renderMergeList();
+            mergeList.classList.remove('hidden');
+            showMessage(messageBox, 'success', `${mergeItems.length} PDFs ready. Arrange order and click Merge PDFs.`);
+        } catch (error) {
+            resetMerge();
+            showMessage(messageBox, 'error', getPdfErrorMessage(error));
+        } finally {
+            setBusy(mergeBtn, false);
+        }
+    }
+
+    function renderMergeList() {
+        mergeList.innerHTML = mergeItems.map((item, index) => `
+            <div class="file-row" data-index="${index}">
+                <div class="file-row-info">
+                    <strong>${index + 1}. ${escapeHtml(item.file.name)}</strong>
+                    <span>${item.pageCount} page${item.pageCount === 1 ? '' : 's'} | ${formatFileSize(item.file.size)}</span>
+                </div>
+                <div class="file-row-actions">
+                    <button type="button" data-action="up" aria-label="Move PDF up" ${index === 0 ? 'disabled' : ''}><i class="fas fa-arrow-up"></i></button>
+                    <button type="button" data-action="down" aria-label="Move PDF down" ${index === mergeItems.length - 1 ? 'disabled' : ''}><i class="fas fa-arrow-down"></i></button>
+                    <button type="button" data-action="delete" aria-label="Remove PDF"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function handleMergeListClick(event) {
+        const button = event.target.closest('button[data-action]');
+        const row = event.target.closest('.file-row');
+        if (!button || !row) return;
+        const index = Number(row.dataset.index);
+        const action = button.dataset.action;
+        if (action === 'up') mergeItems = moveArrayItem(mergeItems, index, index - 1);
+        if (action === 'down') mergeItems = moveArrayItem(mergeItems, index, index + 1);
+        if (action === 'delete') mergeItems.splice(index, 1);
+        mergedPdfBlob = null;
+        mergeDownloadArea.classList.add('hidden');
+        if (mergeItems.length < 2) {
+            renderMergeList();
+            showMessage(messageBox, 'info', 'Merge ke liye kam se kam 2 PDFs chahiye.');
+            return;
+        }
+        renderMergeList();
+    }
+
+    async function mergePdfs() {
+        if (mergeItems.length < 2) {
+            showMessage(messageBox, 'error', 'Please upload at least 2 PDFs to merge.');
+            return;
+        }
+
+        try {
+            ensurePdfLib();
+            setBusy(mergeBtn, true, 'Merging...');
+            clearMessage(messageBox);
+            const { PDFDocument } = window.PDFLib;
+            const outputPdf = await PDFDocument.create();
+            let totalPages = 0;
+
+            for (const item of mergeItems) {
+                const sourcePdf = await PDFDocument.load(item.bytes.slice(0), { ignoreEncryption: true });
+                const pageIndexes = sourcePdf.getPageIndices();
+                const pages = await outputPdf.copyPages(sourcePdf, pageIndexes);
+                pages.forEach((page) => outputPdf.addPage(page));
+                totalPages += pageIndexes.length;
+            }
+
+            const bytes = await outputPdf.save({ useObjectStreams: true, addDefaultPage: false });
+            mergedPdfBlob = new Blob([bytes], { type: 'application/pdf' });
+            $('#merge-pdf-size').textContent = formatFileSize(mergedPdfBlob.size);
+            $('#merge-pdf-pages').textContent = String(totalPages);
+            mergeDownloadArea.classList.remove('hidden');
+            showMessage(messageBox, 'success', 'PDFs merged successfully. Download button is ready.');
+        } catch (error) {
+            showMessage(messageBox, 'error', getPdfErrorMessage(error));
+        } finally {
+            setBusy(mergeBtn, false);
+        }
+    }
+
+    function resetMerge(options = {}) {
+        mergeInput.value = '';
+        mergeItems = [];
+        mergedPdfBlob = null;
+        mergeList.innerHTML = '';
+        mergeList.classList.add('hidden');
+        mergeDownloadArea.classList.add('hidden');
+        $('#merge-pdf-size').textContent = '-';
+        $('#merge-pdf-pages').textContent = '-';
+        if (!options.keepMessage) clearMessage(messageBox);
+    }
+
+    async function handleOrganizeFile(file) {
+        try {
+            ensurePdfLib();
+            clearMessage(messageBox);
+            organizedPdfBlob = null;
+            organizeDownloadArea.classList.add('hidden');
+            organizeFile = file;
+            organizeBytes = await file.arrayBuffer();
+            const pdfDoc = await window.PDFLib.PDFDocument.load(organizeBytes.slice(0), { ignoreEncryption: true });
+            organizePageCount = pdfDoc.getPageCount();
+            pageOrder = Array.from({ length: organizePageCount }, (_, index) => index);
+            $('#organize-pdf-name').textContent = file.name;
+            $('#organize-pdf-page-count').textContent = String(organizePageCount);
+            $('#split-page-range').value = `1-${organizePageCount}`;
+            organizeSummary.classList.remove('hidden');
+            splitControls.classList.remove('hidden');
+            splitActions.classList.remove('hidden');
+            pageOrderList.classList.remove('hidden');
+            renderPageOrderList();
+            showMessage(messageBox, 'success', `${organizePageCount} pages ready. Extract range or reorder/delete pages.`);
+        } catch (error) {
+            resetOrganize();
+            showMessage(messageBox, 'error', getPdfErrorMessage(error));
+        }
+    }
+
+    function renderPageOrderList() {
+        pageOrderList.innerHTML = pageOrder.map((pageIndex, index) => `
+            <div class="page-order-row" data-index="${index}">
+                <div class="page-order-info">
+                    <strong>Output page ${index + 1}</strong>
+                    <span>Original page ${pageIndex + 1}</span>
+                </div>
+                <div class="page-order-actions">
+                    <button type="button" data-action="up" aria-label="Move page up" ${index === 0 ? 'disabled' : ''}><i class="fas fa-arrow-up"></i></button>
+                    <button type="button" data-action="down" aria-label="Move page down" ${index === pageOrder.length - 1 ? 'disabled' : ''}><i class="fas fa-arrow-down"></i></button>
+                    <button type="button" data-action="delete" aria-label="Delete page"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function handlePageOrderClick(event) {
+        const button = event.target.closest('button[data-action]');
+        const row = event.target.closest('.page-order-row');
+        if (!button || !row) return;
+        const index = Number(row.dataset.index);
+        const action = button.dataset.action;
+        if (action === 'up') pageOrder = moveArrayItem(pageOrder, index, index - 1);
+        if (action === 'down') pageOrder = moveArrayItem(pageOrder, index, index + 1);
+        if (action === 'delete') pageOrder.splice(index, 1);
+        organizedPdfBlob = null;
+        organizeDownloadArea.classList.add('hidden');
+        if (!pageOrder.length) {
+            showMessage(messageBox, 'error', 'At least one page must remain.');
+            pageOrder = Array.from({ length: organizePageCount }, (_, pageIndex) => pageIndex);
+        }
+        renderPageOrderList();
+    }
+
+    async function extractPages() {
+        if (!organizeBytes || !organizePageCount) {
+            showMessage(messageBox, 'error', 'Please upload a PDF first.');
+            return;
+        }
+
+        try {
+            const selectedPages = parsePageRange($('#split-page-range').value, organizePageCount);
+            await buildOrganizedPdf(selectedPages, $('#split-output-name').value || 'GovJobUpdates_Extracted_Pages.pdf', extractBtn, 'Extracting...');
+            showMessage(messageBox, 'success', 'Selected page range extracted. Download button is ready.');
+        } catch (error) {
+            showMessage(messageBox, 'error', getPdfErrorMessage(error));
+        }
+    }
+
+    async function saveOrganizedPdf() {
+        if (!organizeBytes || !organizePageCount) {
+            showMessage(messageBox, 'error', 'Please upload a PDF first.');
+            return;
+        }
+        if (!pageOrder.length) {
+            showMessage(messageBox, 'error', 'At least one page must remain.');
+            return;
+        }
+
+        try {
+            await buildOrganizedPdf(pageOrder, 'GovJobUpdates_Reordered_PDF.pdf', saveOrganizedBtn, 'Saving...');
+            showMessage(messageBox, 'success', 'Reordered PDF created. Download button is ready.');
+        } catch (error) {
+            showMessage(messageBox, 'error', getPdfErrorMessage(error));
+        }
+    }
+
+    async function buildOrganizedPdf(pageIndexes, filename, button, busyText) {
+        ensurePdfLib();
+        setBusy(button, true, busyText);
+        try {
+            const { PDFDocument } = window.PDFLib;
+            const sourcePdf = await PDFDocument.load(organizeBytes.slice(0), { ignoreEncryption: true });
+            const outputPdf = await PDFDocument.create();
+            const pages = await outputPdf.copyPages(sourcePdf, pageIndexes);
+            pages.forEach((page) => outputPdf.addPage(page));
+            const bytes = await outputPdf.save({ useObjectStreams: true, addDefaultPage: false });
+            organizedPdfBlob = new Blob([bytes], { type: 'application/pdf' });
+            organizedFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
+            $('#organize-pdf-size').textContent = formatFileSize(organizedPdfBlob.size);
+            $('#organize-pdf-output-pages').textContent = String(pageIndexes.length);
+            organizeDownloadArea.classList.remove('hidden');
+        } finally {
+            setBusy(button, false);
+        }
+    }
+
+    function resetOrganize(options = {}) {
+        organizeInput.value = '';
+        organizeFile = null;
+        organizeBytes = null;
+        organizePageCount = 0;
+        pageOrder = [];
+        organizedPdfBlob = null;
+        organizedFilename = 'GovJobUpdates_Organized_PDF.pdf';
+        organizeSummary.classList.add('hidden');
+        splitControls.classList.add('hidden');
+        splitActions.classList.add('hidden');
+        pageOrderList.classList.add('hidden');
+        pageOrderList.innerHTML = '';
+        organizeDownloadArea.classList.add('hidden');
+        $('#organize-pdf-size').textContent = '-';
+        $('#organize-pdf-output-pages').textContent = '-';
+        if (!options.keepMessage) clearMessage(messageBox);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initToolTabs();
     initImageResizer();
     initImageToPdf();
     initPdfResizer();
+    initPdfManager();
 });

@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Tools for Government Forms | GovJobUpdates</title>
-    <meta name="description" content="Resize photos and signatures, convert images to PDF and reduce PDF size in your browser for government form uploads.">
+    <meta name="description" content="Resize images, convert images to PDF, compress PDFs, merge PDFs, split PDFs, and reorder or delete PDF pages in your browser for government form uploads.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://govjobupdates.com/HTML/documents.html">
     <meta property="og:site_name" content="GovJobUpdates">
     <meta property="og:title" content="Document Tools for Government Forms | GovJobUpdates">
-    <meta property="og:description" content="Resize photos and signatures, convert images to PDF, and compress PDF files in your browser for government form uploads.">
+    <meta property="og:description" content="Browser-based image resize, image to PDF, PDF compress, PDF merge, PDF split, and PDF reorder/delete tools for government form uploads.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://govjobupdates.com/HTML/documents.html">
     <meta property="og:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.webp">
     <meta property="og:image:alt" content="GovJobUpdates document tools for government forms">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Document Tools for Government Forms | GovJobUpdates">
-    <meta name="twitter:description" content="Resize photos, signatures and PDFs in your browser before government form uploads.">
+    <meta name="twitter:description" content="Resize images, create PDFs, compress PDFs, merge PDFs, split PDFs, and reorder/delete PDF pages in your browser.">
     <meta name="twitter:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.webp">
-    <script type="application/ld+json" data-schema="webapp">{"@context":"https://schema.org","@type":"WebApplication","name":"Government Form Document Tools","url":"https://govjobupdates.com/HTML/documents.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Browser-based tools to resize photos and signatures, convert images to PDF and compress PDF files for government form uploads.","publisher":{"@type":"Organization","name":"GovJobUpdates","url":"https://govjobupdates.com/"}}</script>
-    <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are my photos or PDFs uploaded to GovJobUpdates?","acceptedAnswer":{"@type":"Answer","text":"No. These document tools process selected files in your browser rather than storing them on this website."}},{"@type":"Question","name":"Which size should I choose for a photo or signature?","acceptedAnswer":{"@type":"Answer","text":"Use the size, dimensions and format specified in the official recruitment or service application instructions."}},{"@type":"Question","name":"Should I check the resized file before upload?","acceptedAnswer":{"@type":"Answer","text":"Yes. Confirm that the image is clear, correctly oriented and within the permitted size before submitting it to an official portal."}},{"@type":"Question","name":"Does converting a document complete my application?","acceptedAnswer":{"@type":"Answer","text":"No. These tools only help prepare a file; submission and acceptance happen on the official application website."}}]}</script>
+    <script type="application/ld+json" data-schema="webapp">{"@context":"https://schema.org","@type":"WebApplication","name":"Government Form Document Tools","url":"https://govjobupdates.com/HTML/documents.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Browser-based tools to resize photos and signatures, convert images to PDF, compress PDFs, merge PDFs, split or extract PDF pages, and reorder or delete PDF pages for government form uploads.","featureList":["Image resize for photos and signatures","Image to PDF conversion","PDF compression","PDF merge","PDF split and page extraction","PDF page reorder and delete"],"publisher":{"@type":"Organization","name":"GovJobUpdates","url":"https://govjobupdates.com/"}}</script>
+    <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are my photos or PDFs uploaded to GovJobUpdates?","acceptedAnswer":{"@type":"Answer","text":"No. These document tools process selected files in your browser rather than storing them on this website."}},{"@type":"Question","name":"Which size should I choose for a photo or signature?","acceptedAnswer":{"@type":"Answer","text":"Use the size, dimensions and format specified in the official recruitment or service application instructions."}},{"@type":"Question","name":"Can I merge, split or reorder PDF pages?","acceptedAnswer":{"@type":"Answer","text":"Yes. PDF Manager can merge PDFs, split or extract page ranges, and reorder or delete PDF pages in your browser."}},{"@type":"Question","name":"Should I check the resized file before upload?","acceptedAnswer":{"@type":"Answer","text":"Yes. Confirm that the image is clear, correctly oriented and within the permitted size before submitting it to an official portal."}},{"@type":"Question","name":"Does converting a document complete my application?","acceptedAnswer":{"@type":"Answer","text":"No. These tools only help prepare a file; submission and acceptance happen on the official application website."}}]}</script>
     <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"Document Tools","item":"https://govjobupdates.com/HTML/documents.html"}]}</script>
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home%20Page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
@@ -61,8 +61,19 @@
                 <h1 id="documents-title">Document Tools for Government Forms</h1>
                 <p>Resize photos, signatures, and convert images to PDF directly in your browser.</p>
             </div>
-            <p class="trust-note"><i class="fas fa-lock"></i> Your files are processed in your browser. We do not upload or store your documents.</p>
+            <div class="trust-note">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <p>Your files are processed in your browser. We do not upload or store your documents.</p>
+                    <p>Aapki files browser ke andar process hoti hain. Hum document files server par upload/store nahi karte.</p>
+                    <p>Website visit analytics alag ho sakti hai, lekin selected document file upload nahi hoti.</p>
+                </div>
+            </div>
         </section>
+
+        <noscript>
+            <div class="message-box error">Document tools use karne ke liye JavaScript enable hona zaroori hai.</div>
+        </noscript>
 
         <div class="tools-container">
             <div class="tool-tabs" role="tablist" aria-label="Document tools">
@@ -77,6 +88,10 @@
                 <button class="tab-btn" id="tab-pdf-resizer" role="tab" aria-selected="false" aria-controls="pdf-resizer" data-tab="pdf-resizer" type="button" tabindex="-1">
                     <i class="fas fa-compress-alt"></i>
                     <span>PDF Resizer</span>
+                </button>
+                <button class="tab-btn" id="tab-pdf-manager" role="tab" aria-selected="false" aria-controls="pdf-manager" data-tab="pdf-manager" type="button" tabindex="-1">
+                    <i class="fas fa-layer-group"></i>
+                    <span>PDF Manager</span>
                 </button>
             </div>
 
@@ -103,7 +118,44 @@
                         <strong>Form Upload</strong>
                         <span>Target 100KB</span>
                     </button>
+                    <button class="preset-btn" type="button" data-preset="photo20">
+                        <strong>Photo 20 KB</strong>
+                        <span>Passport-style JPG target</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="photo50">
+                        <strong>Photo 50 KB</strong>
+                        <span>Passport-style JPG target</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="signature20">
+                        <strong>Signature 20 KB</strong>
+                        <span>Signature JPG target</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="signature50">
+                        <strong>Signature 50 KB</strong>
+                        <span>Signature JPG target</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="sscPhoto">
+                        <strong>SSC Photo</strong>
+                        <span>Approx 3.5cm x 4.5cm</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="railwayPhoto">
+                        <strong>Railway Photo</strong>
+                        <span>Approx 35mm x 45mm</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="upssscPhoto">
+                        <strong>UPSSSC Photo</strong>
+                        <span>Common form upload size</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="policePhoto">
+                        <strong>Police Form Photo</strong>
+                        <span>Common form upload size</span>
+                    </button>
+                    <button class="preset-btn" type="button" data-preset="aadhaarPan">
+                        <strong>Aadhaar/PAN Upload</strong>
+                        <span>Document image target</span>
+                    </button>
                 </div>
+                <p class="preset-helper">Official portal ki exact limit hamesha notification/portal se verify karein.</p>
 
                 <div class="message-box hidden" id="image-message" role="status" aria-live="polite"></div>
 
@@ -203,6 +255,31 @@
                                     <option value="MB">MB</option>
                                 </select>
                             </div>
+                            <div class="target-preset-row" data-target-for="image">
+                                <button type="button" data-target-value="20" data-target-unit="KB">20 KB</button>
+                                <button type="button" data-target-value="50" data-target-unit="KB">50 KB</button>
+                                <button type="button" data-target-value="100" data-target-unit="KB">100 KB</button>
+                                <button type="button" data-target-value="200" data-target-unit="KB">200 KB</button>
+                                <button type="button" data-target-value="500" data-target-unit="KB">500 KB</button>
+                                <button type="button" data-target-value="1" data-target-unit="MB">1 MB</button>
+                            </div>
+                        </div>
+                        <div class="control-group control-group-wide">
+                            <label>Rotate / Flip</label>
+                            <div class="transform-actions" aria-label="Image rotate and flip controls">
+                                <button type="button" id="rotate-left-btn" class="mini-action-btn" aria-label="Rotate image left">
+                                    <i class="fas fa-rotate-left"></i> Rotate Left
+                                </button>
+                                <button type="button" id="rotate-right-btn" class="mini-action-btn" aria-label="Rotate image right">
+                                    <i class="fas fa-rotate-right"></i> Rotate Right
+                                </button>
+                                <button type="button" id="flip-horizontal-btn" class="mini-action-btn" aria-label="Flip image horizontal">
+                                    <i class="fas fa-arrows-left-right"></i> Flip Horizontal
+                                </button>
+                                <button type="button" id="flip-vertical-btn" class="mini-action-btn" aria-label="Flip image vertical">
+                                    <i class="fas fa-arrows-up-down"></i> Flip Vertical
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -227,6 +304,7 @@
                             <p>New size: <span id="new-image-size">-</span></p>
                             <p>New dimensions: <span id="new-image-dimensions">-</span></p>
                             <p>Output format: <span id="new-image-format">-</span></p>
+                            <p>Size reduction: <span id="new-image-reduction">-</span></p>
                             <p>Target status: <span id="new-image-target-status">-</span></p>
                             <button id="download-image-btn" class="btn btn-download" type="button" aria-label="Download resized image">
                                 <i class="fas fa-download"></i> Download Image
@@ -238,22 +316,28 @@
 
             <section id="image-to-pdf" class="tool-content" role="tabpanel" aria-labelledby="tab-image-to-pdf" tabindex="0" hidden>
                 <div class="tool-heading">
-                    <h2><i class="fas fa-file-pdf"></i> Convert Image to PDF</h2>
-                    <p>Create a clean PDF for online application forms with page size and file size control.</p>
+                    <h2><i class="fas fa-file-pdf"></i> Convert Images to PDF</h2>
+                    <p>Create a clean single PDF from one or more images with page size and file size control.</p>
                 </div>
 
                 <div class="message-box hidden" id="pdf-message" role="status" aria-live="polite"></div>
 
-                <label class="upload-area" id="pdf-upload-area" for="pdf-upload" tabindex="0" aria-label="Upload image to convert into PDF">
+                <label class="upload-area" id="pdf-upload-area" for="pdf-upload" tabindex="0" aria-label="Upload images to convert into PDF">
                     <i class="fas fa-cloud-upload-alt"></i>
                     <strong>Upload JPG, PNG, WEBP, AVIF, GIF, BMP, or SVG</strong>
-                    <span>Tap to browse or drag and drop image here. Max 8 MB.</span>
-                    <input type="file" id="pdf-upload" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/bmp,image/svg+xml,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.svg">
+                    <span>Tap to browse or drag and drop images here. Max 8 MB per image.</span>
+                    <input type="file" id="pdf-upload" accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/bmp,image/svg+xml,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.svg" multiple>
                 </label>
 
                 <div class="file-summary hidden" id="pdf-file-summary">
-                    <span><i class="fas fa-file-image"></i> <strong id="pdf-file-name">No file selected</strong></span>
-                    <span>Original size: <strong id="original-pdf-size">-</strong></span>
+                    <span><i class="fas fa-file-image"></i> <strong id="pdf-file-name">No files selected</strong></span>
+                    <span>Total size: <strong id="original-pdf-size">-</strong></span>
+                </div>
+
+                <div class="file-list hidden" id="image-pdf-list" aria-label="Selected images for PDF"></div>
+
+                <div class="multi-action-row hidden" id="image-pdf-order-actions">
+                    <button type="button" class="mini-action-btn" id="clear-image-pdf-list-btn"><i class="fas fa-trash"></i> Clear Images</button>
                 </div>
 
                 <div class="preview-container hidden" id="pdf-preview-container">
@@ -305,6 +389,14 @@
                                     <option value="MB">MB</option>
                                 </select>
                             </div>
+                            <div class="target-preset-row" data-target-for="image-pdf">
+                                <button type="button" data-target-value="20" data-target-unit="KB">20 KB</button>
+                                <button type="button" data-target-value="50" data-target-unit="KB">50 KB</button>
+                                <button type="button" data-target-value="100" data-target-unit="KB">100 KB</button>
+                                <button type="button" data-target-value="200" data-target-unit="KB">200 KB</button>
+                                <button type="button" data-target-value="500" data-target-unit="KB">500 KB</button>
+                                <button type="button" data-target-value="1" data-target-unit="MB">1 MB</button>
+                            </div>
                         </div>
                         <div class="control-group">
                             <label for="image-pdf-quality">Image Quality <span id="image-pdf-quality-value">85%</span></label>
@@ -326,6 +418,8 @@
                     <div class="result-info">
                         <p>Generated PDF size: <span id="new-pdf-size">-</span></p>
                         <p>Page dimensions: <span id="new-pdf-dimensions">-</span></p>
+                        <p>Output format: <span>PDF</span></p>
+                        <p>Pages: <span id="new-pdf-pages">-</span></p>
                         <p>Target status: <span id="new-pdf-target-status">-</span></p>
                         <button id="download-pdf-btn" class="btn btn-download" type="button" aria-label="Download generated PDF">
                             <i class="fas fa-download"></i> Download PDF
@@ -342,6 +436,7 @@
 
                 <div class="message-box info" id="resize-pdf-note" role="note">
                     Files stay in your browser. This tool re-renders PDF pages for real size reduction, so text in the compressed PDF may not remain selectable.
+                    High compression scanned/image-based PDF bana sakta hai aur selectable/searchable text lose ho sakta hai.
                 </div>
                 <div class="message-box hidden" id="resize-pdf-message" role="status" aria-live="polite"></div>
                 <div class="pdf-progress hidden" id="resize-pdf-progress" aria-live="polite">
@@ -372,6 +467,14 @@
                                     <option value="MB">MB</option>
                                 </select>
                             </div>
+                            <div class="target-preset-row" data-target-for="pdf">
+                                <button type="button" data-target-value="20" data-target-unit="KB">20 KB</button>
+                                <button type="button" data-target-value="50" data-target-unit="KB">50 KB</button>
+                                <button type="button" data-target-value="100" data-target-unit="KB">100 KB</button>
+                                <button type="button" data-target-value="200" data-target-unit="KB">200 KB</button>
+                                <button type="button" data-target-value="500" data-target-unit="KB">500 KB</button>
+                                <button type="button" data-target-value="1" data-target-unit="MB">1 MB</button>
+                            </div>
                         </div>
                         <div class="control-group">
                             <label for="pdf-compression">Compression Level</label>
@@ -401,11 +504,85 @@
                     <div class="result-info">
                         <p>Original size: <span id="result-original-resize-pdf-size">-</span></p>
                         <p>New size: <span id="new-resize-pdf-size">-</span></p>
+                        <p>Output format: <span>PDF</span></p>
                         <p>Result: <span id="pdf-reduction">-</span></p>
                         <button id="download-resize-pdf-btn" class="btn btn-download" type="button" aria-label="Download resized PDF">
                             <i class="fas fa-download"></i> Download PDF
                         </button>
                     </div>
+                </div>
+            </section>
+
+            <section id="pdf-manager" class="tool-content" role="tabpanel" aria-labelledby="tab-pdf-manager" tabindex="0" hidden>
+                <div class="tool-heading">
+                    <h2><i class="fas fa-layer-group"></i> PDF Merge, Split, Reorder</h2>
+                    <p>Merge multiple PDFs, extract page ranges, or reorder/delete pages locally in your browser.</p>
+                </div>
+
+                <div class="message-box info" role="note">
+                    Files stay in your browser. Password-protected or damaged PDFs may not open.
+                </div>
+                <div class="message-box hidden" id="pdf-manager-message" role="status" aria-live="polite"></div>
+
+                <div class="manager-grid">
+                    <section class="manager-card" aria-labelledby="mergePdfTitle">
+                        <h3 id="mergePdfTitle"><i class="fas fa-object-group"></i> Merge PDFs</h3>
+                        <label class="upload-area compact-upload" id="merge-pdf-upload-area" for="merge-pdf-upload" tabindex="0" aria-label="Upload PDFs to merge">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <strong>Upload 2 or more PDFs</strong>
+                            <span>Arrange order, then create one combined PDF. Max 15 MB per PDF.</span>
+                            <input type="file" id="merge-pdf-upload" accept="application/pdf,.pdf" multiple>
+                        </label>
+                        <div class="file-list hidden" id="merge-pdf-list" aria-label="PDF merge order"></div>
+                        <div class="action-btns">
+                            <button id="merge-pdf-btn" class="btn btn-primary" type="button"><i class="fas fa-code-merge"></i> Merge PDFs</button>
+                            <button id="clear-merge-pdf-btn" class="btn btn-outline" type="button"><i class="fas fa-redo"></i> Clear</button>
+                        </div>
+                        <div class="download-area hidden" id="merge-pdf-download-area">
+                            <div class="result-info">
+                                <p>Output size: <span id="merge-pdf-size">-</span></p>
+                                <p>Total pages: <span id="merge-pdf-pages">-</span></p>
+                                <button id="download-merge-pdf-btn" class="btn btn-download" type="button"><i class="fas fa-download"></i> Download Merged PDF</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="manager-card" aria-labelledby="organizePdfTitle">
+                        <h3 id="organizePdfTitle"><i class="fas fa-shuffle"></i> Split, Reorder, Delete Pages</h3>
+                        <label class="upload-area compact-upload" id="organize-pdf-upload-area" for="organize-pdf-upload" tabindex="0" aria-label="Upload PDF to organize">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <strong>Upload one PDF</strong>
+                            <span>Extract a page range, reorder pages, or delete pages. Max 15 MB.</span>
+                            <input type="file" id="organize-pdf-upload" accept="application/pdf,.pdf">
+                        </label>
+                        <div class="file-summary hidden" id="organize-pdf-summary">
+                            <span><i class="fas fa-file-pdf"></i> <strong id="organize-pdf-name">No file selected</strong></span>
+                            <span>Pages: <strong id="organize-pdf-page-count">-</strong></span>
+                        </div>
+                        <div class="controls hidden" id="split-pdf-controls">
+                            <div class="control-group">
+                                <label for="split-page-range">Extract Page Range</label>
+                                <input type="text" id="split-page-range" placeholder="Example: 1-3,5,8-10" inputmode="text">
+                            </div>
+                            <div class="control-group">
+                                <label for="split-output-name">Output Name</label>
+                                <input type="text" id="split-output-name" value="GovJobUpdates_Extracted_Pages.pdf">
+                            </div>
+                        </div>
+                        <div class="action-btns hidden" id="split-pdf-action-btns">
+                            <button id="extract-pdf-btn" class="btn btn-primary" type="button"><i class="fas fa-scissors"></i> Extract Range</button>
+                            <button id="save-organized-pdf-btn" class="btn btn-primary" type="button"><i class="fas fa-save"></i> Save Reordered PDF</button>
+                            <button id="reset-organize-pdf-btn" class="btn btn-outline" type="button"><i class="fas fa-redo"></i> Clear</button>
+                        </div>
+                        <div class="page-order-list hidden" id="pdf-page-order-list" aria-label="PDF page reorder and delete list"></div>
+                        <div class="download-area hidden" id="organize-pdf-download-area">
+                            <div class="result-info">
+                                <p>Output size: <span id="organize-pdf-size">-</span></p>
+                                <p>Output pages: <span id="organize-pdf-output-pages">-</span></p>
+                                <button id="download-organize-pdf-btn" class="btn btn-download" type="button"><i class="fas fa-download"></i> Download PDF</button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </section>
         </div>
@@ -427,6 +604,9 @@
                 <a href="contact.html">Contact</a>
             </nav>
             <p class="official-note"><strong>Privacy note:</strong> Browser-based document tools do not upload or store your selected files on GovJobUpdates.</p>
+            <p class="official-note"><strong>PDF Manager:</strong> PDF Manager se PDF merge, split/extract, reorder aur delete pages browser me kar sakte hain.</p>
+            <p class="official-note"><strong>PDF library note:</strong> PDF tools need the PDF library to load in your browser. Your selected files are still processed locally and not uploaded to our server.</p>
+            <p class="official-note"><strong>Download note:</strong> Agar app/WebView me download start na ho, page ko browser me open karke try karein.</p>
         </section>
 
         <section class="seo-faq" aria-labelledby="documentFaqTitle">
@@ -434,6 +614,8 @@
             <div class="seo-faq-list">
                 <details><summary>Are my photos or PDFs uploaded to GovJobUpdates?</summary><p>No. These document tools are designed to process selected files in your browser rather than store them on this website.</p></details>
                 <details><summary>Which size should I choose for a photo or signature?</summary><p>Use the size, dimensions and format specified in the official recruitment or service application instructions.</p></details>
+                <details><summary>Can I merge, split or reorder PDF pages?</summary><p>Yes. PDF Manager se PDF merge, split/extract, reorder aur delete pages browser me kar sakte hain.</p></details>
+                <details><summary>What if download does not start in the app?</summary><p>Agar app/WebView me download start na ho, page ko browser me open karke try karein.</p></details>
                 <details><summary>Should I check the resized file before upload?</summary><p>Yes. Confirm that the image is clear, correctly oriented and within the permitted size before submitting it to an official portal.</p></details>
                 <details><summary>Does converting a document complete my application?</summary><p>No. These tools only help prepare a file; submission and acceptance happen on the official application website.</p></details>
             </div>
