@@ -1296,6 +1296,27 @@ main {
   --tool-wash: rgba(249, 115, 22, .11);
 }
 
+.smart-tool-card--student {
+  --tool-start: #db2777;
+  --tool-end: #be185d;
+  --tool-glow: rgba(219, 39, 119, .23);
+  --tool-wash: rgba(219, 39, 119, .1);
+}
+
+.smart-tool-card--live-test {
+  --tool-start: #7c2d12;
+  --tool-end: #dc2626;
+  --tool-glow: rgba(220, 38, 38, .22);
+  --tool-wash: rgba(220, 38, 38, .1);
+}
+
+.smart-tool-card--leaderboard {
+  --tool-start: #ca8a04;
+  --tool-end: #f59e0b;
+  --tool-glow: rgba(202, 138, 4, .24);
+  --tool-wash: rgba(202, 138, 4, .11);
+}
+
 .smart-tool-card--documents {
   --tool-start: #2563eb;
   --tool-end: #1d4ed8;
