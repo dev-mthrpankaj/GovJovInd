@@ -45,7 +45,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-15",
         "lastDate": "2026-07-01",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "UPSRLM Recruitment 2026",
+            "UPSRLM Various Post",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://sewayojan.up.nic.in/IEP/Login.aspx",
         "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/06/UPSRLM-Comprehensive-Recruitment-Advertisement-2026-SewayojanGJobDoc221613_compressed.pdf",
         "detailPage": "../Job_Details/HTML/221613-UPSRLM-District-Block-Recruitment-2026.html",
