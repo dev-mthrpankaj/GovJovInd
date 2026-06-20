@@ -3426,7 +3426,8 @@ body.live-test-info-page .live-test-promo-card p {
 }
 
 .my-desk-shell {
-  width: min(100%, 1040px);
+  width: 100%;
+  max-width: 1040px;
   margin: 0 auto;
   padding: clamp(1rem, 3vw, 1.5rem);
 }
@@ -3437,6 +3438,27 @@ body.live-test-info-page .live-test-promo-card p {
 .my-desk-hero,
 .my-desk-motivation {
   min-width: 0;
+  max-width: 100%;
+}
+
+.my-desk-page header,
+.my-desk-page main,
+.my-desk-page footer,
+.my-desk-page .header-container {
+  max-width: 100%;
+}
+
+.my-desk-page .header-container,
+.my-desk-page .logo-container,
+.my-desk-page .logo,
+.my-desk-page nav,
+.my-desk-page nav ul,
+.my-desk-page nav li {
+  min-width: 0;
+}
+
+.my-desk-page :where(h1, h2, h3, p, span, strong, small, label, button, a, input, select) {
+  overflow-wrap: anywhere;
 }
 
 .my-desk-state {
@@ -3570,6 +3592,11 @@ body.live-test-info-page .live-test-promo-card p {
   align-items: flex-start;
   justify-content: space-between;
   gap: .75rem;
+  min-width: 0;
+}
+
+.my-desk-card-head > div {
+  min-width: 0;
 }
 
 .my-desk-card-head > i {
@@ -3631,6 +3658,8 @@ body.live-test-info-page .live-test-promo-card p {
   grid-template-columns: 36px minmax(0, 1fr);
   align-items: center;
   gap: .55rem;
+  min-width: 0;
+  max-width: 100%;
   min-height: 52px;
   padding: .7rem;
   border: 1px solid var(--border);
@@ -3668,6 +3697,7 @@ body.live-test-info-page .live-test-promo-card p {
   display: flex;
   align-items: center;
   gap: .55rem;
+  min-width: 0;
   padding: .75rem;
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -3771,6 +3801,7 @@ body.live-test-info-page .live-test-promo-card p {
 .my-desk-chip-grid span {
   display: inline-flex;
   align-items: center;
+  max-width: 100%;
   min-height: 38px;
   padding: .45rem .7rem;
   border: 1px solid var(--border);
@@ -3842,6 +3873,7 @@ body.live-test-info-page .live-test-promo-card p {
   display: grid;
   gap: .35rem;
   justify-items: start;
+  min-width: 0;
   padding: 1rem;
   border: 1px solid #bfdbfe;
   border-radius: 18px;
@@ -3869,6 +3901,7 @@ body.live-test-info-page .live-test-promo-card p {
   align-items: center;
   justify-content: space-between;
   gap: .75rem;
+  min-width: 0;
   padding: .65rem .75rem;
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -3878,10 +3911,12 @@ body.live-test-info-page .live-test-promo-card p {
 .my-desk-score-breakdown span {
   color: var(--muted);
   font-weight: 900;
+  min-width: 0;
 }
 
 .my-desk-score-breakdown strong {
   color: var(--secondary);
+  min-width: 0;
 }
 
 .my-desk-subject-bars {
@@ -3899,6 +3934,7 @@ body.live-test-info-page .live-test-promo-card p {
   align-items: center;
   justify-content: space-between;
   gap: .75rem;
+  min-width: 0;
   color: var(--secondary);
   font-size: .88rem;
   font-weight: 900;
@@ -4000,6 +4036,12 @@ body.live-test-info-page .live-test-promo-card p {
   border-radius: 14px;
   background: #fff;
   min-width: 0;
+  max-width: 100%;
+}
+
+.my-desk-plan-item > div,
+.my-desk-reminder-item > div {
+  min-width: 0;
 }
 
 .my-desk-plan-item strong,
@@ -4020,6 +4062,7 @@ body.live-test-info-page .live-test-promo-card p {
 
 .my-desk-plan-item button,
 .my-desk-row-actions button {
+  max-width: 100%;
   min-height: 34px;
   padding: .35rem .58rem;
   border: 1px solid #bfdbfe;
@@ -4041,7 +4084,8 @@ body.live-test-info-page .live-test-promo-card p {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: .4rem;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .my-desk-full-btn {
@@ -4122,10 +4166,42 @@ body.live-test-info-page .live-test-promo-card p {
   }
 
   .my-desk-row-actions {
+    width: 100%;
     justify-content: start;
+  }
+
+  .my-desk-score-breakdown div,
+  .my-desk-subject-row label {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    gap: .2rem;
+  }
+
+  .my-desk-row-actions button,
+  .my-desk-plan-item button {
+    white-space: normal;
   }
 
   .my-desk-user {
     width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .my-desk-shell {
+    padding-inline: .65rem;
+  }
+
+  .my-desk-page .header-container {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .my-desk-page .logo {
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
