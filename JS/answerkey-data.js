@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "4011",
+        "title": "UP Police Constable Answer Key 2026 for 32679 Post",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-06-08",
+        "examEndDate": "2026-06-10",
+        "releaseDate": "2026-06-20",
+        "objectionLastDate": "2026-06-23",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
+        "objectionLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "4009",
         "title": "SSC CGL 2025 Graduate Level Tier II Marks 2026 & Answer Key",
         "organization": "Staff Selection Commission",
