@@ -18,8 +18,8 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q==",
         "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
@@ -38,8 +38,8 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://bankofbaroda.bank.in/",
         "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
@@ -58,8 +58,8 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://rssb.rajasthan.gov.in/admitcards",
         "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
