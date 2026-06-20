@@ -3490,6 +3490,12 @@ body.live-test-info-page .live-test-promo-card p {
   animation: myDeskFallbackReveal .2s ease 10s forwards;
 }
 
+.my-desk-build-id {
+  color: #94a3b8;
+  font-size: .72rem;
+  font-weight: 800;
+}
+
 @keyframes myDeskFallbackReveal {
   to {
     max-height: 220px;
