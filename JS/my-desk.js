@@ -422,12 +422,15 @@ window.gjuMyDeskModuleStarted = true;
   }
 
   function normalizeStreak(streak) {
+    const lastCompletedDate = streak?.lastCompletedDate || "";
+    const lastCheckedDate = streak?.lastCheckedDate || "";
+    const lastMissedDate = streak?.lastMissedDate || "";
     return {
       currentStreak: Math.max(0, Math.round(Number(streak?.currentStreak) || 0)),
       bestStreak: Math.max(0, Math.round(Number(streak?.bestStreak) || 0)),
-      lastCompletedDate: dateIsValid(streak?.lastCompletedDate) ? streak.lastCompletedDate : "",
-      lastCheckedDate: dateIsValid(streak?.lastCheckedDate) ? streak.lastCheckedDate : "",
-      lastMissedDate: dateIsValid(streak?.lastMissedDate) ? streak.lastMissedDate : null,
+      lastCompletedDate: lastCompletedDate && dateIsValid(lastCompletedDate) ? lastCompletedDate : "",
+      lastCheckedDate: lastCheckedDate && dateIsValid(lastCheckedDate) ? lastCheckedDate : "",
+      lastMissedDate: lastMissedDate && dateIsValid(lastMissedDate) ? lastMissedDate : null,
       updatedAt: streak?.updatedAt || Date.now()
     };
   }
