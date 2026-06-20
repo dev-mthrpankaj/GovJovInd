@@ -3423,24 +3423,28 @@ body.live-test-info-page .live-test-promo-card p {
 /* My Desk app-only page */
 .my-desk-page {
   background: #f6f9ff;
+  position: relative;
+  left: 0;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
 
 .my-desk-page header {
-  position: sticky;
-  top: 0;
-  z-index: 1100;
-  width: 100%;
-  max-width: 100%;
+  position: sticky !important;
+  top: 0 !important;
+  left: 0;
+  right: 0;
+  z-index: 1100 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   overflow: hidden;
   transform: translateZ(0);
 }
 
 .my-desk-shell {
   width: 100%;
-  max-width: 1040px;
+  max-width: min(1040px, 100%);
   margin: 0 auto;
   padding: clamp(1rem, 3vw, 1.5rem);
 }
