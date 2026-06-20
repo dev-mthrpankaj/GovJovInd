@@ -20,12 +20,12 @@ window.GovJobUpdatesAdmitCards = [
             "Mains"
         ],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q==",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2399",
@@ -43,12 +43,12 @@ window.GovJobUpdatesAdmitCards = [
             "Apprentice"
         ],
         "downloadLink": "https://bankofbaroda.bank.in/",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2400",
@@ -66,12 +66,12 @@ window.GovJobUpdatesAdmitCards = [
             "Forester"
         ],
         "downloadLink": "https://rssb.rajasthan.gov.in/admitcards",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/1105-RSSB-Vanpal-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2397",
