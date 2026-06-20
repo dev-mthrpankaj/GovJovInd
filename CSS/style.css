@@ -3755,8 +3755,76 @@ html:has(body.my-desk-page) {
   overflow-wrap: anywhere;
 }
 
+.my-desk-next-steps {
+  display: grid;
+  gap: .55rem;
+  margin-top: .85rem;
+}
+
+.my-desk-next-steps button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: .55rem;
+  width: 100%;
+  min-width: 0;
+  padding: .7rem;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+  color: var(--secondary);
+  font: inherit;
+  text-align: left;
+}
+
+.my-desk-next-steps i {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: #dbeafe;
+  color: var(--primary);
+}
+
+.my-desk-next-steps strong,
+.my-desk-next-steps small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.my-desk-next-steps strong {
+  font-size: .9rem;
+  font-weight: 900;
+}
+
+.my-desk-next-steps small {
+  margin-top: .12rem;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 800;
+}
+
 .my-desk-action-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.my-desk-data-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .55rem;
+}
+
+.my-desk-data-actions .btn {
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.my-desk-danger-btn {
+  border-color: #fecaca !important;
+  background: #fff1f2 !important;
+  color: #b91c1c !important;
 }
 
 .my-desk-action-grid button {
@@ -4161,6 +4229,11 @@ html:has(body.my-desk-page) {
   max-width: 100%;
 }
 
+.my-desk-plan-item.is-done {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+
 .my-desk-plan-item > div,
 .my-desk-reminder-item > div {
   min-width: 0;
@@ -4225,6 +4298,41 @@ html:has(body.my-desk-page) {
   gap: .4rem;
   flex: 0 1 auto;
   min-width: 0;
+}
+
+.my-desk-filter-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  gap: .55rem;
+  align-items: center;
+  margin-top: .15rem;
+}
+
+.my-desk-filter-row select,
+.my-desk-filter-toggle {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--secondary);
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 800;
+}
+
+.my-desk-filter-row select {
+  padding: .55rem .65rem;
+}
+
+.my-desk-filter-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  padding: .55rem .65rem;
+  white-space: nowrap;
 }
 
 .my-desk-full-btn {
@@ -4321,6 +4429,7 @@ html:has(body.my-desk-page) {
 
   .my-desk-mission-grid,
   .my-desk-action-grid,
+  .my-desk-data-actions,
   .my-desk-progress-summary,
   .my-desk-timer-actions {
     grid-template-columns: minmax(0, 1fr);
@@ -4346,6 +4455,10 @@ html:has(body.my-desk-page) {
 
   .my-desk-inline-form {
     grid-template-columns: 1fr;
+  }
+
+  .my-desk-filter-row {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .my-desk-plan-item,

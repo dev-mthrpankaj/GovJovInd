@@ -16,10 +16,13 @@ window.gjuMyDeskModuleStarted = true;
   let push;
   let update;
   let remove;
+  let runTransaction;
   let serverTimestamp;
 
-  const isApp = /GovJobUpdatesApp/i.test(navigator.userAgent || "");
+  const isApp = /GovJobUpdatesApp/i.test(navigator.userAgent || "") || Boolean(window.GovJobUpdatesAndroid);
   const config = window.GJU_FIREBASE_CONFIG;
+  const timerDraftPrefix = "gju:my-desk:timer:";
+  const offlineQueuePrefix = "gju:my-desk:offline-queue:";
   const subjects = ["Hindi", "English", "GK/GS", "Maths", "Reasoning", "Other"];
   const dayKeys = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
   const dayLabels = {
@@ -49,6 +52,7 @@ window.gjuMyDeskModuleStarted = true;
     wrongQuestions: [],
     quickNotes: [],
     notificationPrefs: null,
+    quizStats: null,
     reportSummaries: [],
     saving: false,
     studySaving: false,
@@ -57,6 +61,7 @@ window.gjuMyDeskModuleStarted = true;
     wrongQuestionSaving: false,
     quickNoteSaving: false,
     notificationPrefsSaving: false,
+    offlineSyncing: false,
     timer: {
       subject: "",
       startedAt: null,
@@ -92,6 +97,7 @@ window.gjuMyDeskModuleStarted = true;
     missionFocusScore: document.getElementById("missionFocusScore"),
     missionDayStatus: document.getElementById("missionDayStatus"),
     missionExamCountdown: document.getElementById("missionExamCountdown"),
+    missionNextSteps: document.getElementById("missionNextSteps"),
     studyStatus: document.getElementById("studyStatus"),
     todayTotalStudy: document.getElementById("todayTotalStudy"),
     todayStudyProgress: document.getElementById("todayStudyProgress"),
@@ -154,6 +160,9 @@ window.gjuMyDeskModuleStarted = true;
     wrongQuestionStatusSelect: document.getElementById("wrongQuestionStatusSelect"),
     saveWrongQuestionBtn: document.getElementById("saveWrongQuestionBtn"),
     wrongQuestionList: document.getElementById("wrongQuestionList"),
+    wrongQuestionFilterSubject: document.getElementById("wrongQuestionFilterSubject"),
+    wrongQuestionFilterStatus: document.getElementById("wrongQuestionFilterStatus"),
+    wrongQuestionDueOnly: document.getElementById("wrongQuestionDueOnly"),
     quickNoteStatus: document.getElementById("quickNoteStatus"),
     quickNoteForm: document.getElementById("quickNoteForm"),
     quickNoteTitle: document.getElementById("quickNoteTitle"),
@@ -170,7 +179,11 @@ window.gjuMyDeskModuleStarted = true;
     eveningTime: document.getElementById("eveningTime"),
     nightReport: document.getElementById("nightReport"),
     nightTime: document.getElementById("nightTime"),
-    saveNotificationPrefsBtn: document.getElementById("saveNotificationPrefsBtn")
+    saveNotificationPrefsBtn: document.getElementById("saveNotificationPrefsBtn"),
+    dataControlsStatus: document.getElementById("dataControlsStatus"),
+    exportMyDeskBtn: document.getElementById("exportMyDeskBtn"),
+    syncOfflineQueueBtn: document.getElementById("syncOfflineQueueBtn"),
+    resetMyDeskBtn: document.getElementById("resetMyDeskBtn")
   };
 
   function show(viewName) {
@@ -238,6 +251,12 @@ window.gjuMyDeskModuleStarted = true;
     nodes.notificationPrefsStatus.dataset.state = type;
   }
 
+  function setDataControlsStatus(message, type = "info") {
+    if (!nodes.dataControlsStatus) return;
+    nodes.dataControlsStatus.textContent = message || "";
+    nodes.dataControlsStatus.dataset.state = type;
+  }
+
   function localSessionSummary() {
     try {
       const raw = localStorage.getItem("gju:candidate-session");
@@ -247,6 +266,48 @@ window.gjuMyDeskModuleStarted = true;
     } catch {
       return "localSession=blocked";
     }
+  }
+
+  function isOffline() {
+    return navigator.onLine === false;
+  }
+
+  function offlineQueueKey() {
+    return `${offlineQueuePrefix}${state.user?.uid || "anonymous"}`;
+  }
+
+  function readOfflineQueue() {
+    try {
+      const raw = localStorage.getItem(offlineQueueKey());
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function writeOfflineQueue(queue) {
+    try {
+      localStorage.setItem(offlineQueueKey(), JSON.stringify(queue.slice(0, 80)));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function enqueueOfflineAction(type, payload, statusSetter, message) {
+    const queue = readOfflineQueue();
+    queue.push({
+      id: `offline-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      type,
+      payload,
+      createdAt: Date.now()
+    });
+    const saved = writeOfflineQueue(queue);
+    if (typeof statusSetter === "function") {
+      statusSetter(saved ? `${message} Internet wapas aate hi sync ho jayega.` : "Offline draft save nahi ho paaya. Please internet connect karke dobara try karein.", saved ? "info" : "error");
+    }
+    return saved;
   }
 
   function setAuthDebug(message) {
@@ -284,6 +345,7 @@ window.gjuMyDeskModuleStarted = true;
     push = databaseModule.push;
     update = databaseModule.update;
     remove = databaseModule.remove;
+    runTransaction = databaseModule.runTransaction;
     serverTimestamp = databaseModule.serverTimestamp;
     setAuthDebug("firebase-import-ready");
   }
@@ -516,6 +578,10 @@ window.gjuMyDeskModuleStarted = true;
     return `users/${uid}/myDesk/settings`;
   }
 
+  function myDeskRootPath(uid) {
+    return `users/${uid}/myDesk`;
+  }
+
   function sessionsPath(uid) {
     return `users/${uid}/myDesk/studySessions`;
   }
@@ -556,6 +622,10 @@ window.gjuMyDeskModuleStarted = true;
     return `users/${uid}/myDesk/dailySummaries/${dateValue}`;
   }
 
+  function quizAttemptsPath(uid) {
+    return `user_quiz_attempts/${uid}`;
+  }
+
   function formatDuration(minutes) {
     const value = Math.max(0, Math.round(Number(minutes) || 0));
     const hours = Math.floor(value / 60);
@@ -569,6 +639,92 @@ window.gjuMyDeskModuleStarted = true;
     const value = Number(count);
     if (!Number.isFinite(value) || value < 0) return "Not set";
     return `${Math.round(value)} Questions`;
+  }
+
+  function mapQuizSubject(subject) {
+    const value = String(subject || "").trim();
+    const lower = value.toLowerCase();
+    if (lower.includes("math")) return "Maths";
+    if (lower.includes("general") || lower.includes("gk")) return "GK/GS";
+    if (lower.includes("reason")) return "Reasoning";
+    if (lower.includes("english")) return "English";
+    if (lower.includes("hindi")) return "Hindi";
+    if (lower.includes("computer")) return "Other";
+    return allowedSubjects.has(value) ? value : "Other";
+  }
+
+  function emptyQuizStats() {
+    return {
+      todayQuestions: 0,
+      todayAttempts: 0,
+      todayCorrect: 0,
+      todayWrong: 0,
+      averageAccuracy: 0,
+      weakSubject: "",
+      recentAttemptTitle: "",
+      firebaseAttemptCount: 0,
+      localAttemptCount: 0
+    };
+  }
+
+  function normalizeQuizAttempt(attempt) {
+    if (!attempt || typeof attempt !== "object") return null;
+    const completedAt = String(attempt.completedAt || attempt.timestamp || attempt.lastAttemptedAt || "");
+    return {
+      quizId: String(attempt.quizId || attempt.id || ""),
+      quizTitle: String(attempt.quizTitle || attempt.title || "Quiz Attempt").slice(0, 120),
+      subject: mapQuizSubject(attempt.subject || attempt.quizSubject || attempt.category),
+      totalQuestions: Math.max(0, Math.round(Number(attempt.totalQuestions || attempt.total || attempt.questionCount) || 0)),
+      attempted: Math.max(0, Math.round(Number(attempt.attempted) || 0)),
+      correct: Math.max(0, Math.round(Number(attempt.correct) || 0)),
+      wrong: Math.max(0, Math.round(Number(attempt.wrong) || 0)),
+      accuracy: Math.max(0, Math.min(100, Math.round(Number(attempt.accuracy || attempt.percentage) || 0))),
+      completedAt
+    };
+  }
+
+  function readLocalQuizAttempts() {
+    try {
+      const raw = localStorage.getItem("GovJobUpdatesQuiz.attempts");
+      const attempts = raw ? JSON.parse(raw) : [];
+      return Array.isArray(attempts) ? attempts.map(normalizeQuizAttempt).filter(Boolean) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function buildQuizStats(localAttempts = [], firebaseAttempts = []) {
+    const today = todayKey();
+    const stats = emptyQuizStats();
+    const todayAttempts = localAttempts.filter((attempt) => parseDateKey(attempt.completedAt.slice(0, 10)) === today);
+    const allAttempts = localAttempts.concat(firebaseAttempts);
+    stats.localAttemptCount = localAttempts.length;
+    stats.firebaseAttemptCount = firebaseAttempts.length;
+    stats.todayAttempts = todayAttempts.length;
+    stats.todayQuestions = todayAttempts.reduce((sum, attempt) => sum + Math.max(attempt.attempted || attempt.totalQuestions || 0, 0), 0);
+    stats.todayCorrect = todayAttempts.reduce((sum, attempt) => sum + attempt.correct, 0);
+    stats.todayWrong = todayAttempts.reduce((sum, attempt) => sum + attempt.wrong, 0);
+    stats.recentAttemptTitle = localAttempts[0]?.quizTitle || "";
+    const accuracyAttempts = allAttempts.filter((attempt) => Number.isFinite(attempt.accuracy) && attempt.accuracy > 0);
+    stats.averageAccuracy = accuracyAttempts.length
+      ? Math.round(accuracyAttempts.reduce((sum, attempt) => sum + attempt.accuracy, 0) / accuracyAttempts.length)
+      : 0;
+
+    const subjectBuckets = {};
+    allAttempts.forEach((attempt) => {
+      const subject = mapQuizSubject(attempt.subject);
+      if (!subjectBuckets[subject]) subjectBuckets[subject] = { attempted: 0, correct: 0 };
+      subjectBuckets[subject].attempted += Math.max(attempt.attempted || attempt.totalQuestions || 0, 0);
+      subjectBuckets[subject].correct += attempt.correct || 0;
+    });
+    stats.weakSubject = Object.keys(subjectBuckets)
+      .filter((subject) => subjectBuckets[subject].attempted >= 5)
+      .sort((a, b) => {
+        const accA = subjectBuckets[a].correct / Math.max(subjectBuckets[a].attempted, 1);
+        const accB = subjectBuckets[b].correct / Math.max(subjectBuckets[b].attempted, 1);
+        return accA - accB;
+      })[0] || "";
+    return stats;
   }
 
   function currentStudyProgressText() {
@@ -613,7 +769,10 @@ window.gjuMyDeskModuleStarted = true;
     }
     const studyScore = Math.min(safeSummary.totalStudyMinutes / target, 1) * 70;
     const quizTarget = Number(state.settings?.dailyQuizQuestionsTarget);
-    const quizScore = Number.isFinite(quizTarget) && quizTarget > 0 ? 0 : 10;
+    const quizStats = state.quizStats || emptyQuizStats();
+    const quizScore = Number.isFinite(quizTarget) && quizTarget > 0
+      ? Math.min(quizStats.todayQuestions / quizTarget, 1) * 20
+      : 10;
     const streakScore = Math.min(effectiveCurrentStreak(streak), 7) / 7 * 10;
     const total = Math.round(studyScore + quizScore + streakScore);
     const message = safeSummary.dayCompleted
@@ -645,18 +804,116 @@ window.gjuMyDeskModuleStarted = true;
     const settings = state.settings;
     const summary = normalizeSummary(state.todaySummary);
     const focus = calculateFocusScore(summary, state.streak);
+    const todaySlots = todayPlannerSlots();
+    const pendingTodaySlots = todaySlots.filter((slot) => !isPlannerSlotDoneToday(slot));
+    const quizStats = state.quizStats || emptyQuizStats();
     if (nodes.missionStudyTarget) nodes.missionStudyTarget.textContent = currentStudyProgressText();
-    if (nodes.missionQuizTarget) nodes.missionQuizTarget.textContent = settings ? formatQuizTarget(settings.dailyQuizQuestionsTarget) : "Not set";
+    if (nodes.missionQuizTarget) {
+      const quizTarget = Number(settings?.dailyQuizQuestionsTarget);
+      nodes.missionQuizTarget.textContent = settings && Number.isFinite(quizTarget) && quizTarget > 0
+        ? `${quizStats.todayQuestions}/${Math.round(quizTarget)} Questions`
+        : (settings ? formatQuizTarget(settings?.dailyQuizQuestionsTarget) : "Not set");
+    }
     if (nodes.missionFocusSubject) {
       const weakSubjects = Array.isArray(settings?.weakSubjects) ? settings.weakSubjects : [];
-      nodes.missionFocusSubject.textContent = weakSubjects.length ? weakSubjects.join(", ") : (settings ? "Balanced" : "Not set");
+      nodes.missionFocusSubject.textContent = weakSubjects.length ? weakSubjects.join(", ") : (quizStats.weakSubject || (settings ? "Balanced" : "Not set"));
     }
     if (nodes.missionStreak) nodes.missionStreak.textContent = `${effectiveCurrentStreak()} days`;
     if (nodes.missionFocusScore) nodes.missionFocusScore.textContent = `${focus.total}/100`;
     if (nodes.missionDayStatus) nodes.missionDayStatus.textContent = dayStatusText(summary);
-    if (nodes.missionPlannedSessions) nodes.missionPlannedSessions.textContent = `${todayPlannerSlots().length} sessions`;
+    if (nodes.missionPlannedSessions) nodes.missionPlannedSessions.textContent = `${todaySlots.length - pendingTodaySlots.length}/${todaySlots.length} done`;
     if (nodes.missionRevisionDue) nodes.missionRevisionDue.textContent = `${todayDueReminders().length} due`;
     if (nodes.missionExamCountdown) nodes.missionExamCountdown.textContent = settings ? countdownText(settings.targetExamDate) : "Set target exam";
+    renderMissionNextSteps(summary, pendingTodaySlots);
+  }
+
+  function renderMissionNextSteps(summary, pendingTodaySlots) {
+    if (!nodes.missionNextSteps) return;
+    const target = Number(state.settings?.dailyStudyMinutesTarget) || 0;
+    const quizTarget = Number(state.settings?.dailyQuizQuestionsTarget) || 0;
+    const quizStats = state.quizStats || emptyQuizStats();
+    const remainingStudy = Math.max(0, target - normalizeSummary(summary).totalStudyMinutes);
+    const remainingQuiz = Math.max(0, quizTarget - quizStats.todayQuestions);
+    const dueReminder = todayDueReminders()[0];
+    const dueWrong = dueWrongQuestions()[0];
+    const steps = [];
+
+    if (remainingStudy > 0) {
+      steps.push({
+        icon: "fa-hourglass-half",
+        title: `${formatDuration(remainingStudy)} study remaining`,
+        text: "Start timer ya manual study time add karein.",
+        target: "#studyTimerForm"
+      });
+    } else if (target > 0) {
+      steps.push({
+        icon: "fa-circle-check",
+        title: "Study target complete",
+        text: "Aaj revision ya wrong questions polish karein.",
+        target: "#revisionReminderForm"
+      });
+    } else {
+      steps.push({
+        icon: "fa-bullseye",
+        title: "Daily target set karein",
+        text: "Study hours set karne se streak aur focus score meaningful banenge.",
+        target: "#myTargetForm"
+      });
+    }
+
+    if (dueReminder) {
+      steps.push({
+        icon: "fa-bell",
+        title: `${dueReminder.subject} revision due`,
+        text: dueReminder.topic || "Pending revision",
+        target: "#revisionReminderForm"
+      });
+    } else if (pendingTodaySlots[0]) {
+      steps.push({
+        icon: "fa-calendar-check",
+        title: `${formatTimeLabel(pendingTodaySlots[0].time)} planner slot`,
+        text: `${pendingTodaySlots[0].subject} - ${pendingTodaySlots[0].topic || "Study session"}`,
+        target: "#plannerSlotForm"
+      });
+    } else {
+      steps.push({
+        icon: "fa-calendar-days",
+        title: "Planner clear for now",
+        text: "Next study slot add karke day structured rakhein.",
+        target: "#plannerSlotForm"
+      });
+    }
+
+    if (remainingQuiz > 0) {
+      steps.push({
+        icon: "fa-circle-question",
+        title: `${remainingQuiz} quiz questions pending`,
+        text: quizStats.recentAttemptTitle ? `Last: ${quizStats.recentAttemptTitle}` : "Practice quiz complete karke focus score improve karein.",
+        target: "quiz.html"
+      });
+    } else if (dueWrong) {
+      steps.push({
+        icon: "fa-clipboard-question",
+        title: `${dueWrong.subject} wrong question due`,
+        text: dueWrong.topic || dueWrong.mistakeReason,
+        target: "#wrongQuestionForm"
+      });
+    } else {
+      steps.push({
+        icon: "fa-pen-to-square",
+        title: "Mistake notebook update",
+        text: "Aaj ka ek weak question save ya revise karein.",
+        target: "#wrongQuestionForm"
+      });
+    }
+
+    nodes.missionNextSteps.innerHTML = steps.slice(0, 3).map((step) => `
+      <button type="button" ${step.target.endsWith(".html") ? `data-open-url="${escapeHtml(step.target)}"` : `data-scroll-target="${escapeHtml(step.target)}"`}>
+        <i class="fas ${escapeHtml(step.icon)}" aria-hidden="true"></i>
+        <span><strong>${escapeHtml(step.title)}</strong><small>${escapeHtml(step.text)}</small></span>
+      </button>
+    `).join("");
+    cleanRenderedText(nodes.missionNextSteps);
   }
 
   function renderStreakAndFocus() {
@@ -679,9 +936,31 @@ window.gjuMyDeskModuleStarted = true;
     return Array.isArray(slots) ? slots : [];
   }
 
+  function isPlannerSlotDoneToday(slot) {
+    return Boolean(slot?.completedDates?.[todayKey()]);
+  }
+
   function todayDueReminders() {
     const today = todayKey();
     return state.revisionReminders.filter((reminder) => reminder.status !== "completed" && reminder.revisionDate <= today);
+  }
+
+  function dueWrongQuestions() {
+    const today = todayKey();
+    return state.wrongQuestions.filter((item) => item.status !== "Mastered" && item.reattemptDate && item.reattemptDate <= today);
+  }
+
+  function filteredWrongQuestions() {
+    const subject = nodes.wrongQuestionFilterSubject?.value || "";
+    const status = nodes.wrongQuestionFilterStatus?.value || "";
+    const dueOnly = Boolean(nodes.wrongQuestionDueOnly?.checked);
+    const today = todayKey();
+    return state.wrongQuestions.filter((item) => {
+      if (subject && item.subject !== subject) return false;
+      if (status && item.status !== status) return false;
+      if (dueOnly && !(item.status !== "Mastered" && item.reattemptDate && item.reattemptDate <= today)) return false;
+      return true;
+    });
   }
 
   function normalizePlanner(value) {
@@ -695,6 +974,7 @@ window.gjuMyDeskModuleStarted = true;
         subject: allowedSubjects.has(daySlots[slotId]?.subject) ? daySlots[slotId].subject : "Other",
         topic: String(daySlots[slotId]?.topic || "").slice(0, 100),
         durationMinutes: Math.max(10, Math.min(720, Math.round(Number(daySlots[slotId]?.durationMinutes) || 10))),
+        completedDates: daySlots[slotId]?.completedDates && typeof daySlots[slotId].completedDates === "object" ? daySlots[slotId].completedDates : {},
         createdAt: daySlots[slotId]?.createdAt || 0,
         updatedAt: daySlots[slotId]?.updatedAt || 0
       })).sort((a, b) => a.time.localeCompare(b.time));
@@ -826,12 +1106,15 @@ window.gjuMyDeskModuleStarted = true;
         <section class="my-desk-day-card">
           <h3>${dayLabels[dayKey]}</h3>
           ${slots.length ? slots.map((slot) => `
-            <article class="my-desk-plan-item">
+            <article class="my-desk-plan-item ${isPlannerSlotDoneToday(slot) ? "is-done" : ""}">
               <div>
                 <strong>${formatTimeLabel(slot.time)} · ${escapeHtml(slot.subject)}</strong>
                 <span>${escapeHtml(slot.topic || "Study session")} · ${formatDuration(slot.durationMinutes)}</span>
               </div>
-              <button type="button" data-delete-planner="${escapeHtml(slot.dayKey)}:${escapeHtml(slot.id)}">Delete</button>
+              <div class="my-desk-row-actions">
+                ${slot.dayKey === todayDayKey() ? `<button type="button" data-toggle-planner="${escapeHtml(slot.dayKey)}:${escapeHtml(slot.id)}">${isPlannerSlotDoneToday(slot) ? "Undo" : "Done Today"}</button>` : ""}
+                <button type="button" data-delete-planner="${escapeHtml(slot.dayKey)}:${escapeHtml(slot.id)}">Delete</button>
+              </div>
             </article>
           `).join("") : `<p>No study plan added yet.</p>`}
         </section>
@@ -859,6 +1142,9 @@ window.gjuMyDeskModuleStarted = true;
           </div>
           <div class="my-desk-row-actions">
             ${reminder.status === "completed" ? "" : `<button type="button" data-complete-reminder="${escapeHtml(reminder.id)}">Done</button>`}
+            ${reminder.status === "completed" ? "" : `<button type="button" data-reschedule-reminder="${escapeHtml(reminder.id)}:1">Tomorrow</button>`}
+            ${reminder.status === "completed" ? "" : `<button type="button" data-reschedule-reminder="${escapeHtml(reminder.id)}:3">+3 Days</button>`}
+            ${reminder.status === "completed" ? "" : `<button type="button" data-reschedule-reminder="${escapeHtml(reminder.id)}:7">+7 Days</button>`}
             <button type="button" data-delete-reminder="${escapeHtml(reminder.id)}">Delete</button>
           </div>
         </article>
@@ -915,26 +1201,41 @@ window.gjuMyDeskModuleStarted = true;
 
   function renderWrongQuestions() {
     if (!nodes.wrongQuestionList) return;
+    const list = filteredWrongQuestions();
+    const today = todayKey();
     if (!state.wrongQuestions.length) {
       nodes.wrongQuestionList.innerHTML = `<div class="my-desk-empty">No wrong questions saved yet.</div>`;
+      renderMission();
       return;
     }
-    nodes.wrongQuestionList.innerHTML = state.wrongQuestions.slice(0, 20).map((item) => `
-      <article class="my-desk-reminder-item my-desk-note-item">
-        <div>
-          <strong>${escapeHtml(item.subject)} - ${escapeHtml(item.topic || "Untitled topic")}</strong>
-          <span>${escapeHtml(item.mistakeReason)} - ${escapeHtml(item.status)}${item.reattemptDate ? ` - Reattempt: ${escapeHtml(item.reattemptDate)}` : ""}</span>
-          <p>${escapeHtml(item.questionText)}</p>
-        </div>
-        <div class="my-desk-row-actions">
-          <select aria-label="Update wrong question status" data-wrong-status="${escapeHtml(item.id)}">
-            ${Array.from(questionStatuses).map((status) => `<option value="${escapeHtml(status)}"${status === item.status ? " selected" : ""}>${escapeHtml(status)}</option>`).join("")}
-          </select>
-          <button type="button" data-delete-wrong="${escapeHtml(item.id)}">Delete</button>
-        </div>
-      </article>
-    `).join("");
+    if (!list.length) {
+      nodes.wrongQuestionList.innerHTML = `<div class="my-desk-empty">No wrong questions match these filters.</div>`;
+      renderMission();
+      return;
+    }
+    nodes.wrongQuestionList.innerHTML = list.slice(0, 20).map((item) => {
+      const due = item.status !== "Mastered" && item.reattemptDate && item.reattemptDate <= today;
+      return `
+        <article class="my-desk-reminder-item my-desk-note-item ${due ? "is-overdue" : ""}">
+          <div>
+            <strong>${escapeHtml(item.subject)} - ${escapeHtml(item.topic || "Untitled topic")}</strong>
+            <span>${escapeHtml(item.mistakeReason)} - ${escapeHtml(item.status)}${item.reattemptDate ? ` - Reattempt: ${escapeHtml(item.reattemptDate)}${due ? " - Due" : ""}` : ""}</span>
+            <p>${escapeHtml(item.questionText)}</p>
+          </div>
+          <div class="my-desk-row-actions">
+            <select aria-label="Update wrong question status" data-wrong-status="${escapeHtml(item.id)}">
+              ${Array.from(questionStatuses).map((status) => `<option value="${escapeHtml(status)}"${status === item.status ? " selected" : ""}>${escapeHtml(status)}</option>`).join("")}
+            </select>
+            ${item.status !== "Mastered" ? `<button type="button" data-wrong-status-btn="${escapeHtml(item.id)}:Revised">Revised</button>` : ""}
+            ${item.status !== "Mastered" ? `<button type="button" data-wrong-reattempt="${escapeHtml(item.id)}:1">Tomorrow</button>` : ""}
+            ${item.status !== "Mastered" ? `<button type="button" data-wrong-status-btn="${escapeHtml(item.id)}:Mastered">Mastered</button>` : ""}
+            <button type="button" data-delete-wrong="${escapeHtml(item.id)}">Delete</button>
+          </div>
+        </article>
+      `;
+    }).join("");
     cleanRenderedText(nodes.wrongQuestionList);
+    renderMission();
   }
 
   function renderQuickNotes() {
@@ -1159,6 +1460,227 @@ window.gjuMyDeskModuleStarted = true;
     }
   }
 
+  async function loadQuizProgress() {
+    const localAttempts = readLocalQuizAttempts();
+    let firebaseAttempts = [];
+    if (state.user && state.db) {
+      try {
+        const snapshot = await get(ref(state.db, quizAttemptsPath(state.user.uid)));
+        if (snapshot.exists()) {
+          const value = snapshot.val() || {};
+          firebaseAttempts = Object.keys(value).map((quizId) => {
+            const item = value[quizId] || {};
+            return normalizeQuizAttempt({
+              quizId,
+              quizTitle: item.quizTitle,
+              subject: item.subject,
+              totalQuestions: item.totalQuestions || (Number(item.correct) + Number(item.wrong)),
+              attempted: Number(item.correct) + Number(item.wrong),
+              correct: item.correct,
+              wrong: item.wrong,
+              percentage: item.totalQuestions ? (Number(item.correct) / Math.max(Number(item.totalQuestions), 1)) * 100 : 0
+            });
+          }).filter(Boolean);
+        }
+      } catch (error) {
+        console.warn("[GovJobUpdates] My Desk quiz progress load skipped:", error.message);
+      }
+    }
+    state.quizStats = buildQuizStats(localAttempts, firebaseAttempts);
+    renderMission();
+    renderStreakAndFocus();
+  }
+
+  function buildMyDeskExport() {
+    return {
+      exportedAt: new Date().toISOString(),
+      app: "GovJobUpdates My Desk",
+      user: {
+        uid: state.user?.uid || "",
+        email: state.user?.email || "",
+        displayName: userDisplayName(state.user)
+      },
+      settings: state.settings || null,
+      todaySummary: normalizeSummary(state.todaySummary),
+      streak: normalizeStreak(state.streak),
+      weeklyPlanner: state.weeklyPlanner || {},
+      revisionReminders: state.revisionReminders || [],
+      wrongQuestions: state.wrongQuestions || [],
+      quickNotes: state.quickNotes || [],
+      notificationPrefs: normalizeNotificationPrefs(state.notificationPrefs),
+      quizStats: state.quizStats || emptyQuizStats(),
+      reportSummaries: state.reportSummaries || [],
+      localDrafts: {
+        offlineQueue: readOfflineQueue(),
+        activeTimer: (() => {
+          try {
+            const raw = localStorage.getItem(timerDraftKey());
+            return raw ? JSON.parse(raw) : null;
+          } catch {
+            return null;
+          }
+        })()
+      }
+    };
+  }
+
+  function exportMyDeskData() {
+    if (!state.user) {
+      setDataControlsStatus("Login ke baad hi My Desk data export ho sakta hai.", "error");
+      return;
+    }
+    try {
+      const payload = JSON.stringify(buildMyDeskExport(), null, 2);
+      const blob = new Blob([payload], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `govjobupdates-my-desk-${todayKey()}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setDataControlsStatus("My Desk data export ready.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk export failed:", error.message);
+      setDataControlsStatus("Export create nahi ho paaya. Please dobara try karein.", "error");
+    }
+  }
+
+  function resetLocalMyDeskDrafts() {
+    clearTimerDraft();
+    writeOfflineQueue([]);
+  }
+
+  async function resetMyDeskData() {
+    if (!state.user || !state.db) return;
+    const firstConfirm = window.confirm("Reset My Desk data? This will delete targets, study logs, planner, reminders, wrong questions and notes for this account.");
+    if (!firstConfirm) return;
+    const typed = window.prompt("Type RESET to confirm My Desk reset.");
+    if (typed !== "RESET") {
+      setDataControlsStatus("Reset cancelled.", "info");
+      return;
+    }
+    setDataControlsStatus("Resetting My Desk data...", "info");
+    try {
+      await remove(ref(state.db, myDeskRootPath(state.user.uid)));
+      resetLocalMyDeskDrafts();
+      state.settings = null;
+      state.todaySummary = normalizeSummary(null);
+      state.streak = normalizeStreak(null);
+      state.weeklyPlanner = normalizePlanner(null);
+      state.revisionReminders = [];
+      state.wrongQuestions = [];
+      state.quickNotes = [];
+      state.notificationPrefs = normalizeNotificationPrefs(null);
+      state.reportSummaries = [];
+      resetTimer();
+      populateForm(null);
+      populateNotificationPrefs(state.notificationPrefs);
+      renderMission();
+      renderTodaySummary();
+      renderPlanner();
+      renderReminders();
+      renderStudyReport();
+      renderWrongQuestions();
+      renderQuickNotes();
+      renderStreakAndFocus();
+      setStatus("No target set yet. Setup your first mission.", "info");
+      setStudyStatus("My Desk study data reset.", "success");
+      setDataControlsStatus("My Desk data reset complete.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk reset failed:", error.message);
+      setDataControlsStatus("My Desk reset nahi ho paaya. Please internet/login check karein.", "error");
+    }
+  }
+
+  async function executeQueuedAction(action) {
+    const payload = action?.payload || {};
+    if (!state.user || !state.db || !action?.type) throw new Error("Queue not ready.");
+
+    if (action.type === "plannerAdd") {
+      const slotRef = push(ref(state.db, plannerDayPath(state.user.uid, payload.dayKey)));
+      await set(slotRef, {
+        id: slotRef.key,
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      return;
+    }
+
+    if (action.type === "revisionAdd") {
+      const reminderRef = push(ref(state.db, revisionRemindersPath(state.user.uid)));
+      await set(reminderRef, {
+        id: reminderRef.key,
+        ...payload,
+        status: "pending",
+        createdAt: serverTimestamp(),
+        completedAt: null,
+        updatedAt: serverTimestamp()
+      });
+      return;
+    }
+
+    if (action.type === "wrongQuestionAdd") {
+      const questionRef = push(ref(state.db, wrongQuestionsPath(state.user.uid)));
+      await set(questionRef, {
+        id: questionRef.key,
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      return;
+    }
+
+    if (action.type === "quickNoteAdd") {
+      const noteRef = push(ref(state.db, quickNotesPath(state.user.uid)));
+      await set(noteRef, {
+        id: noteRef.key,
+        ...payload,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      return;
+    }
+
+    if (action.type === "studySessionAdd") {
+      const saved = await saveStudySession(payload, { fromOfflineQueue: true });
+      if (!saved) throw new Error("Queued study session save failed.");
+    }
+  }
+
+  async function flushOfflineQueue() {
+    if (!state.user || !state.db || state.offlineSyncing || isOffline()) return;
+    const queue = readOfflineQueue();
+    if (!queue.length) return;
+    state.offlineSyncing = true;
+    let remaining = queue.slice();
+    try {
+      while (remaining.length) {
+        const action = remaining[0];
+        await executeQueuedAction(action);
+        remaining = remaining.slice(1);
+        writeOfflineQueue(remaining);
+      }
+      await Promise.allSettled([
+        loadPlanner(),
+        loadReminders(),
+        loadWrongQuestions(),
+        loadQuickNotes(),
+        loadTodaySummary(),
+        loadStudyReport()
+      ]);
+      setStudyStatus("Offline My Desk entries synced.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk offline queue sync failed:", error.message);
+      writeOfflineQueue(remaining);
+      setStudyStatus("Offline entries abhi sync nahi ho paayi. Internet stable hone par dobara try hoga.", "error");
+    } finally {
+      state.offlineSyncing = false;
+    }
+  }
+
   function collectPlannerSlot() {
     const dayKey = nodes.plannerDay?.value || "";
     const time = nodes.plannerTime?.value || "";
@@ -1183,6 +1705,13 @@ window.gjuMyDeskModuleStarted = true;
       data = collectPlannerSlot();
     } catch (error) {
       setPlannerStatus(error.message, "error");
+      return;
+    }
+    if (isOffline()) {
+      if (enqueueOfflineAction("plannerAdd", data, setPlannerStatus, "Planner slot offline saved.")) {
+        if (nodes.plannerTopic) nodes.plannerTopic.value = "";
+        if (nodes.plannerDuration) nodes.plannerDuration.value = "";
+      }
       return;
     }
     setPlannerSaving(true);
@@ -1221,6 +1750,24 @@ window.gjuMyDeskModuleStarted = true;
     }
   }
 
+  async function togglePlannerSlotToday(dayKey, slotId) {
+    if (!state.user || !state.db || !dayKeys.includes(dayKey) || !slotId) return;
+    const slot = (state.weeklyPlanner?.[dayKey] || []).find((item) => item.id === slotId);
+    const isDone = isPlannerSlotDoneToday(slot);
+    setPlannerStatus(isDone ? "Marking slot pending..." : "Marking slot done...", "info");
+    try {
+      await update(ref(state.db, `${plannerDayPath(state.user.uid, dayKey)}/${slotId}`), {
+        [`completedDates/${todayKey()}`]: isDone ? null : true,
+        updatedAt: serverTimestamp()
+      });
+      await loadPlanner();
+      setPlannerStatus(isDone ? "Planner slot marked pending for today." : "Planner slot marked done for today.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Planner slot status update failed:", error.message);
+      setPlannerStatus("Planner slot status update nahi ho paaya.", "error");
+    }
+  }
+
   function collectReminder() {
     const subject = nodes.revisionSubject?.value || "";
     const topic = (nodes.revisionTopic?.value || "").trim();
@@ -1242,6 +1789,13 @@ window.gjuMyDeskModuleStarted = true;
       data = collectReminder();
     } catch (error) {
       setRevisionStatus(error.message, "error");
+      return;
+    }
+    if (isOffline()) {
+      if (enqueueOfflineAction("revisionAdd", data, setRevisionStatus, "Revision reminder offline saved.")) {
+        if (nodes.revisionTopic) nodes.revisionTopic.value = "";
+        if (nodes.revisionDate) nodes.revisionDate.value = "";
+      }
       return;
     }
     setReminderSaving(true);
@@ -1282,6 +1836,25 @@ window.gjuMyDeskModuleStarted = true;
     } catch (error) {
       console.warn("[GovJobUpdates] Revision reminder complete failed:", error.message);
       setRevisionStatus("Reminder complete nahi ho paaya.", "error");
+    }
+  }
+
+  async function rescheduleReminder(reminderId, days) {
+    const offset = Number(days);
+    if (!state.user || !state.db || !reminderId || !Number.isFinite(offset)) return;
+    setRevisionStatus("Rescheduling revision reminder...", "info");
+    try {
+      await update(ref(state.db, `${revisionRemindersPath(state.user.uid)}/${reminderId}`), {
+        revisionDate: addDays(todayKey(), offset),
+        status: "pending",
+        completedAt: null,
+        updatedAt: serverTimestamp()
+      });
+      await loadReminders();
+      setRevisionStatus("Revision reminder rescheduled.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Revision reminder reschedule failed:", error.message);
+      setRevisionStatus("Reminder reschedule nahi ho paaya.", "error");
     }
   }
 
@@ -1327,6 +1900,12 @@ window.gjuMyDeskModuleStarted = true;
       setWrongQuestionStatus(error.message, "error");
       return;
     }
+    if (isOffline()) {
+      if (enqueueOfflineAction("wrongQuestionAdd", data, setWrongQuestionStatus, "Wrong question offline saved.")) {
+        nodes.wrongQuestionForm?.reset();
+      }
+      return;
+    }
     setWrongQuestionSaving(true);
     setWrongQuestionStatus("Saving wrong question...", "info");
     try {
@@ -1364,6 +1943,23 @@ window.gjuMyDeskModuleStarted = true;
     }
   }
 
+  async function updateWrongQuestionReattempt(questionId, days) {
+    const offset = Number(days);
+    if (!state.user || !state.db || !questionId || !Number.isFinite(offset)) return;
+    setWrongQuestionStatus("Updating reattempt date...", "info");
+    try {
+      await update(ref(state.db, `${wrongQuestionsPath(state.user.uid)}/${questionId}`), {
+        reattemptDate: addDays(todayKey(), offset),
+        updatedAt: serverTimestamp()
+      });
+      await loadWrongQuestions();
+      setWrongQuestionStatus("Wrong question reattempt date updated.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Wrong question reattempt update failed:", error.message);
+      setWrongQuestionStatus("Reattempt date update nahi ho paayi.", "error");
+    }
+  }
+
   async function deleteWrongQuestion(questionId) {
     if (!state.user || !state.db || !questionId) return;
     if (!window.confirm("Delete this wrong question?")) return;
@@ -1398,6 +1994,12 @@ window.gjuMyDeskModuleStarted = true;
       data = collectQuickNote();
     } catch (error) {
       setQuickNoteStatus(error.message, "error");
+      return;
+    }
+    if (isOffline()) {
+      if (enqueueOfflineAction("quickNoteAdd", data, setQuickNoteStatus, "Quick note offline saved.")) {
+        nodes.quickNoteForm?.reset();
+      }
       return;
     }
     setQuickNoteSaving(true);
@@ -1471,12 +2073,28 @@ window.gjuMyDeskModuleStarted = true;
       await set(ref(state.db, notificationPrefsPath(state.user.uid)), prefs);
       state.notificationPrefs = normalizeNotificationPrefs({ ...prefs, updatedAt: Date.now() });
       populateNotificationPrefs(state.notificationPrefs);
-      setNotificationPrefsStatus("Reminder preferences saved. Android reminder support coming later.", "success");
+      syncNativeReminderPrefs(state.notificationPrefs);
+      setNotificationPrefsStatus("Reminder preferences saved. Android local reminders are scheduled in the app.", "success");
     } catch (error) {
       console.warn("[GovJobUpdates] Notification preferences save failed:", error.message);
       setNotificationPrefsStatus("Reminder preferences save nahi ho paayi. Please dobara try karein.", "error");
     } finally {
       setNotificationPrefsSaving(false);
+    }
+  }
+
+  function syncNativeReminderPrefs(prefs) {
+    const bridge = window.GovJobUpdatesAndroid;
+    if (!bridge) return;
+    try {
+      const safe = normalizeNotificationPrefs(prefs);
+      if (safe.enabled && typeof bridge.scheduleMyDeskReminders === "function") {
+        bridge.scheduleMyDeskReminders(JSON.stringify(safe));
+      } else if (!safe.enabled && typeof bridge.cancelMyDeskReminders === "function") {
+        bridge.cancelMyDeskReminders();
+      }
+    } catch (error) {
+      console.warn("[GovJobUpdates] Native reminder sync failed:", error.message);
     }
   }
 
@@ -1580,6 +2198,76 @@ window.gjuMyDeskModuleStarted = true;
     return timer.elapsedMs + (timer.running && timer.lastRunStartedAt ? Date.now() - timer.lastRunStartedAt : 0);
   }
 
+  function timerDraftKey() {
+    return `${timerDraftPrefix}${state.user?.uid || "anonymous"}`;
+  }
+
+  function clearTimerDraft() {
+    try {
+      localStorage.removeItem(timerDraftKey());
+    } catch {
+      // Storage can be blocked in some WebView/privacy modes.
+    }
+  }
+
+  function persistTimerDraft(force = false) {
+    if (!state.timer.active) {
+      clearTimerDraft();
+      return;
+    }
+    const now = Date.now();
+    if (!force && state.timer.lastPersistedAt && now - state.timer.lastPersistedAt < 15000) return;
+    state.timer.lastPersistedAt = now;
+    try {
+      localStorage.setItem(timerDraftKey(), JSON.stringify({
+        subject: state.timer.subject,
+        startedAt: state.timer.startedAt,
+        elapsedMs: elapsedTimerMs(),
+        running: state.timer.running,
+        savedAt: now,
+        date: todayKey()
+      }));
+    } catch {
+      // Best-effort draft only; timer still works without localStorage.
+    }
+  }
+
+  function restoreTimerDraft() {
+    if (!state.user || state.timer.active) return false;
+    let draft;
+    try {
+      const raw = localStorage.getItem(timerDraftKey());
+      draft = raw ? JSON.parse(raw) : null;
+    } catch {
+      return false;
+    }
+    if (!draft || typeof draft !== "object") return false;
+    const subject = String(draft.subject || "");
+    const elapsedMs = Math.max(0, Math.round(Number(draft.elapsedMs) || 0));
+    const startedAt = Number(draft.startedAt) || Date.now();
+    const savedAt = Number(draft.savedAt) || 0;
+    const isFresh = draft.date === todayKey() && savedAt && Date.now() - savedAt < 12 * 60 * 60 * 1000;
+    if (!allowedSubjects.has(subject) || elapsedMs < 1000 || !isFresh) {
+      clearTimerDraft();
+      return false;
+    }
+    state.timer = {
+      subject,
+      startedAt,
+      lastRunStartedAt: null,
+      elapsedMs,
+      running: false,
+      active: true,
+      intervalId: null,
+      lastPersistedAt: Date.now()
+    };
+    if (nodes.timerSubject) nodes.timerSubject.value = subject;
+    renderTimer();
+    updateTimerButtons();
+    setStudyStatus("Previous study timer restored in paused state. Continue, Finish & Save, or Cancel.", "info");
+    return true;
+  }
+
   function formatClock(ms) {
     const totalSeconds = Math.floor(Math.max(0, ms) / 1000);
     const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
@@ -1590,6 +2278,7 @@ window.gjuMyDeskModuleStarted = true;
 
   function renderTimer() {
     if (nodes.studyTimerDisplay) nodes.studyTimerDisplay.textContent = formatClock(elapsedTimerMs());
+    persistTimerDraft(false);
   }
 
   function clearTimerInterval() {
@@ -1610,7 +2299,7 @@ window.gjuMyDeskModuleStarted = true;
     if (nodes.timerSubject) nodes.timerSubject.disabled = busy || timer.active;
   }
 
-  function resetTimer() {
+  function resetTimer({ clearDraft = true } = {}) {
     clearTimerInterval();
     state.timer = {
       subject: "",
@@ -1619,8 +2308,10 @@ window.gjuMyDeskModuleStarted = true;
       elapsedMs: 0,
       running: false,
       active: false,
-      intervalId: null
+      intervalId: null,
+      lastPersistedAt: 0
     };
+    if (clearDraft) clearTimerDraft();
     renderTimer();
     updateTimerButtons();
   }
@@ -1643,9 +2334,11 @@ window.gjuMyDeskModuleStarted = true;
       elapsedMs: 0,
       running: true,
       active: true,
-      intervalId: window.setInterval(renderTimer, 1000)
+      intervalId: window.setInterval(renderTimer, 1000),
+      lastPersistedAt: 0
     };
     renderTimer();
+    persistTimerDraft(true);
     updateTimerButtons();
     setStudyStatus("Study timer started.", "info");
   }
@@ -1657,6 +2350,7 @@ window.gjuMyDeskModuleStarted = true;
     state.timer.running = false;
     clearTimerInterval();
     renderTimer();
+    persistTimerDraft(true);
     updateTimerButtons();
     setStudyStatus("Timer paused.", "info");
   }
@@ -1667,6 +2361,7 @@ window.gjuMyDeskModuleStarted = true;
     state.timer.running = true;
     state.timer.intervalId = window.setInterval(renderTimer, 1000);
     renderTimer();
+    persistTimerDraft(true);
     updateTimerButtons();
     setStudyStatus("Timer resumed.", "info");
   }
@@ -1693,31 +2388,42 @@ window.gjuMyDeskModuleStarted = true;
     };
   }
 
-  async function saveStudySession(record) {
-    if (!state.user || !state.db || state.studySaving) return;
+  async function saveStudySession(record, options = {}) {
+    if (!state.user || !state.db || state.studySaving) return false;
+    if (!options.fromOfflineQueue && isOffline()) {
+      return enqueueOfflineAction("studySessionAdd", record, setStudyStatus, "Study time offline saved.");
+    }
     setStudySaving(true);
     setStudyStatus("Saving study time...", "info");
+    let sessionRef = null;
+    let sessionWritten = false;
     try {
-      const sessionRef = push(ref(state.db, sessionsPath(state.user.uid)));
+      sessionRef = push(ref(state.db, sessionsPath(state.user.uid)));
       const session = { ...record, id: sessionRef.key };
-      const currentSummarySnapshot = await get(ref(state.db, todaySummaryPath(state.user.uid)));
-      const summary = normalizeSummary(currentSummarySnapshot.exists() ? currentSummarySnapshot.val() : state.todaySummary);
-      summary.date = todayKey();
-      summary.totalStudyMinutes = Math.max(0, Math.round((summary.totalStudyMinutes || 0) + session.durationMinutes));
-      summary.subjectMinutes[session.subject] = Math.max(0, Math.round((summary.subjectMinutes[session.subject] || 0) + session.durationMinutes));
-      const preparedSummary = applyCompletionAndFocus(summary, state.streak);
-      summary.updatedAt = serverTimestamp();
-      await Promise.all([
-        set(sessionRef, session),
-        set(ref(state.db, todaySummaryPath(state.user.uid)), { ...preparedSummary, updatedAt: serverTimestamp() })
-      ]);
-      state.todaySummary = { ...preparedSummary, updatedAt: Date.now() };
+      await set(sessionRef, session);
+      sessionWritten = true;
+      const summaryResult = await runTransaction(ref(state.db, todaySummaryPath(state.user.uid)), (currentValue) => {
+        const summary = normalizeSummary(currentValue || state.todaySummary);
+        summary.date = todayKey();
+        summary.totalStudyMinutes = Math.max(0, Math.round((summary.totalStudyMinutes || 0) + session.durationMinutes));
+        summary.subjectMinutes[session.subject] = Math.max(0, Math.round((summary.subjectMinutes[session.subject] || 0) + session.durationMinutes));
+        return { ...applyCompletionAndFocus(summary, state.streak), updatedAt: Date.now() };
+      });
+      const savedSummary = summaryResult?.snapshot?.val ? summaryResult.snapshot.val() : null;
+      state.todaySummary = normalizeSummary(savedSummary || state.todaySummary);
       await syncCompletionAndFocus({ writeIfNeeded: true, allowSummaryOnlyWrite: true });
       await loadStudyReport();
       setStudyStatus(`${formatDuration(session.durationMinutes)} ${session.subject} study time saved.`, "success");
+      return true;
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk study save failed:", error.message);
+      if (sessionWritten && sessionRef) {
+        remove(sessionRef).catch((cleanupError) => {
+          console.warn("[GovJobUpdates] My Desk failed study session cleanup failed:", cleanupError.message);
+        });
+      }
       setStudyStatus("Study time save nahi ho paaya. Please internet/login check karke dobara try karein.", "error");
+      return false;
     } finally {
       setStudySaving(false);
     }
@@ -1727,6 +2433,13 @@ window.gjuMyDeskModuleStarted = true;
     if (!state.timer.active) return;
     const endedAt = Date.now();
     const durationMinutes = Math.max(1, Math.round(elapsedTimerMs() / 60000));
+    state.timer.elapsedMs = elapsedTimerMs();
+    state.timer.lastRunStartedAt = null;
+    state.timer.running = false;
+    clearTimerInterval();
+    renderTimer();
+    persistTimerDraft(true);
+    updateTimerButtons();
     const record = sessionRecord({
       subject: state.timer.subject,
       durationMinutes,
@@ -1734,8 +2447,8 @@ window.gjuMyDeskModuleStarted = true;
       startedAt: state.timer.startedAt,
       endedAt
     });
-    resetTimer();
-    await saveStudySession(record);
+    const saved = await saveStudySession(record);
+    if (saved) resetTimer();
   }
 
   async function saveManualTime(event) {
@@ -1756,7 +2469,7 @@ window.gjuMyDeskModuleStarted = true;
       setStudyStatus("Topic 100 characters se zyada nahi hona chahiye.", "error");
       return;
     }
-    await saveStudySession(sessionRecord({
+    const saved = await saveStudySession(sessionRecord({
       subject,
       topic,
       durationMinutes: Math.round(minutes),
@@ -1764,8 +2477,10 @@ window.gjuMyDeskModuleStarted = true;
       startedAt: null,
       endedAt: null
     }));
-    if (nodes.manualMinutes) nodes.manualMinutes.value = "";
-    if (nodes.manualTopic) nodes.manualTopic.value = "";
+    if (saved) {
+      if (nodes.manualMinutes) nodes.manualMinutes.value = "";
+      if (nodes.manualTopic) nodes.manualTopic.value = "";
+    }
   }
 
   function bindForms() {
@@ -1782,17 +2497,54 @@ window.gjuMyDeskModuleStarted = true;
     nodes.wrongQuestionForm?.addEventListener("submit", saveWrongQuestion);
     nodes.quickNoteForm?.addEventListener("submit", saveQuickNote);
     nodes.notificationPrefsForm?.addEventListener("submit", saveNotificationPrefs);
+    nodes.exportMyDeskBtn?.addEventListener("click", exportMyDeskData);
+    nodes.syncOfflineQueueBtn?.addEventListener("click", () => {
+      if (isOffline()) {
+        setDataControlsStatus("Internet offline hai. Pending entries online hote hi sync hongi.", "info");
+        return;
+      }
+      setDataControlsStatus("Checking pending offline entries...", "info");
+      flushOfflineQueue();
+      window.setTimeout(() => {
+        const pending = readOfflineQueue().length;
+        setDataControlsStatus(pending ? `${pending} pending entries abhi sync nahi ho paayi.` : "No pending offline entries.", pending ? "error" : "success");
+      }, 900);
+    });
+    nodes.resetMyDeskBtn?.addEventListener("click", resetMyDeskData);
     nodes.weeklyPlannerList?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-delete-planner]");
-      if (!button) return;
-      const [dayKey, slotId] = String(button.dataset.deletePlanner || "").split(":");
-      deletePlannerSlot(dayKey, slotId);
+      const deleteButton = event.target.closest("[data-delete-planner]");
+      const toggleButton = event.target.closest("[data-toggle-planner]");
+      if (toggleButton) {
+        const [dayKey, slotId] = String(toggleButton.dataset.togglePlanner || "").split(":");
+        togglePlannerSlotToday(dayKey, slotId);
+        return;
+      }
+      if (deleteButton) {
+        const [dayKey, slotId] = String(deleteButton.dataset.deletePlanner || "").split(":");
+        deletePlannerSlot(dayKey, slotId);
+      }
     });
     nodes.revisionReminderList?.addEventListener("click", (event) => {
       const completeButton = event.target.closest("[data-complete-reminder]");
       const deleteButton = event.target.closest("[data-delete-reminder]");
+      const rescheduleButton = event.target.closest("[data-reschedule-reminder]");
       if (completeButton) completeReminder(completeButton.dataset.completeReminder);
+      if (rescheduleButton) {
+        const [reminderId, days] = String(rescheduleButton.dataset.rescheduleReminder || "").split(":");
+        rescheduleReminder(reminderId, days);
+      }
       if (deleteButton) deleteReminder(deleteButton.dataset.deleteReminder);
+    });
+    nodes.missionNextSteps?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-scroll-target]");
+      const urlButton = event.target.closest("[data-open-url]");
+      if (urlButton) {
+        window.location.href = urlButton.dataset.openUrl || "quiz.html";
+        return;
+      }
+      if (!button) return;
+      const target = document.querySelector(button.dataset.scrollTarget || "");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     nodes.wrongQuestionList?.addEventListener("change", (event) => {
       const select = event.target.closest("[data-wrong-status]");
@@ -1800,10 +2552,24 @@ window.gjuMyDeskModuleStarted = true;
       updateWrongQuestionStatus(select.dataset.wrongStatus, select.value);
     });
     nodes.wrongQuestionList?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-delete-wrong]");
-      if (!button) return;
-      deleteWrongQuestion(button.dataset.deleteWrong);
+      const deleteButton = event.target.closest("[data-delete-wrong]");
+      const statusButton = event.target.closest("[data-wrong-status-btn]");
+      const reattemptButton = event.target.closest("[data-wrong-reattempt]");
+      if (statusButton) {
+        const [questionId, status] = String(statusButton.dataset.wrongStatusBtn || "").split(":");
+        updateWrongQuestionStatus(questionId, status);
+        return;
+      }
+      if (reattemptButton) {
+        const [questionId, days] = String(reattemptButton.dataset.wrongReattempt || "").split(":");
+        updateWrongQuestionReattempt(questionId, days);
+        return;
+      }
+      if (deleteButton) deleteWrongQuestion(deleteButton.dataset.deleteWrong);
     });
+    nodes.wrongQuestionFilterSubject?.addEventListener("change", renderWrongQuestions);
+    nodes.wrongQuestionFilterStatus?.addEventListener("change", renderWrongQuestions);
+    nodes.wrongQuestionDueOnly?.addEventListener("change", renderWrongQuestions);
     nodes.quickNoteList?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-delete-note]");
       if (!button) return;
@@ -1819,6 +2585,15 @@ window.gjuMyDeskModuleStarted = true;
       if (!state.timer.active) return;
       event.preventDefault();
       event.returnValue = "";
+    });
+    window.addEventListener("online", () => {
+      flushOfflineQueue();
+    });
+    window.addEventListener("storage", (event) => {
+      if (event.key === "GovJobUpdatesQuiz.attempts") loadQuizProgress();
+    });
+    window.addEventListener("gju:quiz-attempt-synced", () => {
+      loadQuizProgress();
     });
   }
 
@@ -1869,6 +2644,7 @@ window.gjuMyDeskModuleStarted = true;
           state.wrongQuestions = [];
           state.quickNotes = [];
           state.notificationPrefs = normalizeNotificationPrefs(null);
+          state.quizStats = emptyQuizStats();
           state.reportSummaries = [];
           renderMission();
           renderTodaySummary();
@@ -1892,6 +2668,9 @@ window.gjuMyDeskModuleStarted = true;
         await loadWrongQuestions();
         await loadQuickNotes();
         await loadNotificationPrefs();
+        await loadQuizProgress();
+        restoreTimerDraft();
+        flushOfflineQueue();
       });
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
@@ -1920,6 +2699,7 @@ window.gjuMyDeskModuleStarted = true;
     state.wrongQuestions = [];
     state.quickNotes = [];
     state.notificationPrefs = normalizeNotificationPrefs(null);
+    state.quizStats = emptyQuizStats();
     state.reportSummaries = [];
     renderTodaySummary();
     renderPlanner();
