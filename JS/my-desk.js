@@ -421,15 +421,15 @@ window.gjuMyDeskModuleStarted = true;
   }
 
   function normalizeStreak(streak) {
-    const lastCompletedDate = streak?.lastCompletedDate || "";
-    const lastCheckedDate = streak?.lastCheckedDate || "";
-    const lastMissedDate = streak?.lastMissedDate || "";
+    const lastCompletedDate = parseDateKey(streak?.lastCompletedDate);
+    const lastCheckedDate = parseDateKey(streak?.lastCheckedDate);
+    const lastMissedDate = parseDateKey(streak?.lastMissedDate);
     return {
       currentStreak: Math.max(0, Math.round(Number(streak?.currentStreak) || 0)),
       bestStreak: Math.max(0, Math.round(Number(streak?.bestStreak) || 0)),
-      lastCompletedDate: lastCompletedDate && dateIsValid(lastCompletedDate) ? lastCompletedDate : "",
-      lastCheckedDate: lastCheckedDate && dateIsValid(lastCheckedDate) ? lastCheckedDate : "",
-      lastMissedDate: lastMissedDate && dateIsValid(lastMissedDate) ? lastMissedDate : null,
+      lastCompletedDate,
+      lastCheckedDate,
+      lastMissedDate: lastMissedDate || null,
       updatedAt: streak?.updatedAt || Date.now()
     };
   }
@@ -450,11 +450,40 @@ window.gjuMyDeskModuleStarted = true;
     });
   }
 
+  function parseDateKey(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return "";
+
+    let year;
+    let month;
+    let day;
+    const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    const indianMatch = raw.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+
+    if (isoMatch) {
+      year = Number(isoMatch[1]);
+      month = Number(isoMatch[2]);
+      day = Number(isoMatch[3]);
+    } else if (indianMatch) {
+      day = Number(indianMatch[1]);
+      month = Number(indianMatch[2]);
+      year = Number(indianMatch[3]);
+    } else {
+      return "";
+    }
+
+    if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) return "";
+    if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) return "";
+
+    const date = new Date(year, month - 1, day);
+    if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return "";
+
+    return dateKey(date);
+  }
+
   function dateIsValid(value) {
     if (!value) return true;
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-    const date = new Date(`${value}T00:00:00`);
-    return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+    return Boolean(parseDateKey(value));
   }
 
   function collectSettings() {
@@ -463,14 +492,14 @@ window.gjuMyDeskModuleStarted = true;
     const studyHoursRaw = Number(nodes.dailyStudyHours?.value);
     const quizTargetRaw = Number(nodes.dailyQuizQuestions?.value);
     const weakSubjects = getSelectedWeakSubjects();
-    const targetExamDate = nodes.targetExamDate?.value || "";
+    const targetExamDate = parseDateKey(nodes.targetExamDate?.value || "");
 
     if (targetExam.length > 80) throw new Error("Target exam 80 characters se zyada nahi hona chahiye.");
     if (!allowedCategories.has(targetCategory)) throw new Error("Please select a valid target category.");
     if (!Number.isFinite(studyHoursRaw) || studyHoursRaw < 0.5 || studyHoursRaw > 16) throw new Error("Daily study hours 0.5 se 16 hours ke beech rakhein.");
     if (!Number.isFinite(quizTargetRaw) || quizTargetRaw < 0 || quizTargetRaw > 500) throw new Error("Daily quiz target 0 se 500 questions ke beech rakhein.");
     if (weakSubjects.length > 6) throw new Error("Weak subjects maximum 6 select kar sakte hain.");
-    if (!dateIsValid(targetExamDate)) throw new Error("Please select a valid exam date.");
+    if ((nodes.targetExamDate?.value || "").trim() && !targetExamDate) throw new Error("Please select a valid exam date. Calendar se date choose karein.");
 
     return {
       targetExam,
@@ -600,10 +629,11 @@ window.gjuMyDeskModuleStarted = true;
   }
 
   function countdownText(dateValue) {
-    if (!dateValue || !dateIsValid(dateValue)) return "Set target exam";
+    const cleanDate = parseDateKey(dateValue);
+    if (!cleanDate) return "Set target exam";
     const today = new Date();
     const start = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
-    const target = new Date(`${dateValue}T00:00:00`).getTime();
+    const target = new Date(`${cleanDate}T00:00:00`).getTime();
     const days = Math.ceil((target - start) / 86400000);
     if (days > 1) return `${days} days left`;
     if (days === 1) return "1 day left";
@@ -680,7 +710,7 @@ window.gjuMyDeskModuleStarted = true;
         id,
         subject: allowedSubjects.has(reminder.subject) ? reminder.subject : "Other",
         topic: String(reminder.topic || "").slice(0, 100),
-        revisionDate: dateIsValid(reminder.revisionDate) ? reminder.revisionDate : todayKey(),
+        revisionDate: parseDateKey(reminder.revisionDate) || todayKey(),
         priority: prioritySet.has(reminder.priority) ? reminder.priority : "Medium",
         status: reminder.status === "completed" ? "completed" : "pending",
         createdAt: reminder.createdAt || 0,
@@ -703,7 +733,7 @@ window.gjuMyDeskModuleStarted = true;
         topic: String(item.topic || "").slice(0, 100),
         questionText: String(item.questionText || "").slice(0, 500),
         mistakeReason: mistakeReasons.has(item.mistakeReason) ? item.mistakeReason : "Other",
-        reattemptDate: item.reattemptDate && dateIsValid(item.reattemptDate) ? item.reattemptDate : "",
+        reattemptDate: parseDateKey(item.reattemptDate),
         status: questionStatuses.has(item.status) ? item.status : "Pending",
         createdAt: item.createdAt || 0,
         updatedAt: item.updatedAt || 0
@@ -975,7 +1005,7 @@ window.gjuMyDeskModuleStarted = true;
       nodes.dailyQuizQuestions.value = Number.isFinite(count) && count >= 0 ? String(Math.round(count)) : "";
     }
     setSelectedWeakSubjects(safe.weakSubjects);
-    if (nodes.targetExamDate) nodes.targetExamDate.value = dateIsValid(safe.targetExamDate) ? safe.targetExamDate : "";
+    if (nodes.targetExamDate) nodes.targetExamDate.value = parseDateKey(safe.targetExamDate) || "";
   }
 
   async function loadSettings() {
@@ -1194,12 +1224,12 @@ window.gjuMyDeskModuleStarted = true;
   function collectReminder() {
     const subject = nodes.revisionSubject?.value || "";
     const topic = (nodes.revisionTopic?.value || "").trim();
-    const revisionDate = nodes.revisionDate?.value || "";
+    const revisionDate = parseDateKey(nodes.revisionDate?.value || "");
     const priority = nodes.revisionPriority?.value || "Medium";
     if (!allowedSubjects.has(subject)) throw new Error("Please select a subject.");
     if (!topic) throw new Error("Please enter a revision topic.");
     if (topic.length > 100) throw new Error("Topic 100 characters se zyada nahi hona chahiye.");
-    if (!revisionDate || !dateIsValid(revisionDate)) throw new Error("Please select a valid revision date.");
+    if (!(nodes.revisionDate?.value || "").trim() || !revisionDate) throw new Error("Please select a valid revision date. Calendar se date choose karein.");
     if (!prioritySet.has(priority)) throw new Error("Please select a valid priority.");
     return { subject, topic, revisionDate, priority };
   }
@@ -1274,7 +1304,7 @@ window.gjuMyDeskModuleStarted = true;
     const topic = (nodes.wrongQuestionTopic?.value || "").trim();
     const questionText = (nodes.wrongQuestionText?.value || "").trim();
     const mistakeReason = nodes.wrongQuestionReason?.value || "";
-    const reattemptDate = nodes.wrongQuestionReattemptDate?.value || "";
+    const reattemptDate = parseDateKey(nodes.wrongQuestionReattemptDate?.value || "");
     const status = nodes.wrongQuestionStatusSelect?.value || "Pending";
     if (!allowedSubjects.has(subject)) throw new Error("Please select a subject.");
     if (!topic) throw new Error("Please enter topic.");
@@ -1282,7 +1312,7 @@ window.gjuMyDeskModuleStarted = true;
     if (!questionText) throw new Error("Please enter question/problem.");
     if (questionText.length > 500) throw new Error("Question/problem 500 characters se zyada nahi hona chahiye.");
     if (!mistakeReasons.has(mistakeReason)) throw new Error("Please select a valid mistake reason.");
-    if (reattemptDate && !dateIsValid(reattemptDate)) throw new Error("Please select a valid reattempt date.");
+    if ((nodes.wrongQuestionReattemptDate?.value || "").trim() && !reattemptDate) throw new Error("Please select a valid reattempt date. Calendar se date choose karein.");
     if (!questionStatuses.has(status)) throw new Error("Please select a valid status.");
     return { subject, topic, questionText, mistakeReason, reattemptDate, status };
   }
