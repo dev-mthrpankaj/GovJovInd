@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
-  <link rel="stylesheet" href="../CSS/style.css?v=my-desk-v1">
+  <link rel="stylesheet" href="../CSS/style.css?v=my-desk-loading-fallback">
   <link rel="stylesheet" href="../CSS/auth-lite.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -46,6 +46,14 @@
       <span class="section-kicker">GovJobUpdates App</span>
       <h1>Loading My Desk</h1>
       <p>Checking app and login status.</p>
+      <div class="my-desk-loading-fallback" aria-live="polite">
+        <p>Loading zyada time le raha hai. Internet check karein, Retry karein, ya dobara login karke My Desk open karein.</p>
+        <div class="my-desk-actions">
+          <button class="btn btn-primary" type="button" onclick="window.location.reload()"><i class="fas fa-rotate-right" aria-hidden="true"></i> Retry</button>
+          <a class="btn btn-outline" href="login.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i> Login</a>
+          <a class="btn btn-outline" href="dashboard.html"><i class="fas fa-table-columns" aria-hidden="true"></i> Dashboard</a>
+        </div>
+      </div>
     </section>
 
     <script>
@@ -594,7 +602,7 @@
 
   <script src="../JS/script.js?v=my-desk-v1"></script>
   <script src="../JS/firebase-config.js"></script>
-  <script type="module" src="../JS/my-desk.js?v=20260620-loading-fix"></script>
+  <script type="module" src="../JS/my-desk.js?v=20260620-loading-fix3"></script>
   <script>
     window.setTimeout(function () {
       if (typeof window.gjuMyDeskLoadingFallback === 'function') {

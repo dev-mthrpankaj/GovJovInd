@@ -3478,6 +3478,26 @@ body.live-test-info-page .live-test-promo-card p {
   display: none !important;
 }
 
+.my-desk-loading-fallback {
+  display: grid;
+  justify-items: center;
+  gap: .8rem;
+  max-width: 620px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: myDeskFallbackReveal .2s ease 10s forwards;
+}
+
+@keyframes myDeskFallbackReveal {
+  to {
+    max-height: 220px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .my-desk-state-icon {
   display: grid;
   place-items: center;
