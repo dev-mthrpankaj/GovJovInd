@@ -118,7 +118,9 @@
           <button type="button" data-scroll-target="#myTargetForm"><i class="fas fa-bullseye" aria-hidden="true"></i><span>Set Target</span></button>
           <button type="button" data-scroll-target="#studyTimerForm"><i class="fas fa-play" aria-hidden="true"></i><span>Start Study</span></button>
           <button type="button" data-scroll-target="#manualStudyForm"><i class="fas fa-plus" aria-hidden="true"></i><span>Add Study Time</span></button>
-          <button type="button"><i class="fas fa-calendar-days" aria-hidden="true"></i><span>View Planner</span></button>
+          <button type="button" data-scroll-target="#plannerSlotForm"><i class="fas fa-calendar-days" aria-hidden="true"></i><span>View Planner</span></button>
+          <button type="button" data-scroll-target="#wrongQuestionForm"><i class="fas fa-clipboard-question" aria-hidden="true"></i><span>Wrong Notebook</span></button>
+          <button type="button" data-scroll-target="#quickNoteForm"><i class="fas fa-note-sticky" aria-hidden="true"></i><span>Quick Notes</span></button>
         </div>
       </section>
 
@@ -142,6 +144,24 @@
           </div>
         </div>
         <div class="my-desk-subject-bars" id="subjectProgressList" aria-label="Subject-wise study progress"></div>
+      </section>
+
+      <section class="my-desk-card" aria-labelledby="studyReportTitle">
+        <div class="my-desk-card-head">
+          <div>
+            <span class="section-kicker">Last 7 Days</span>
+            <h2 id="studyReportTitle">Study Report</h2>
+          </div>
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+        </div>
+        <div id="reportStatus" class="my-desk-status" role="status" aria-live="polite">Loading 7-day report...</div>
+        <div class="my-desk-progress-summary">
+          <div><span>Total Study</span><strong id="reportTotalStudy">0m</strong></div>
+          <div><span>Best Day</span><strong id="reportBestDay">No data</strong></div>
+          <div><span>Daily Average</span><strong id="reportAverageStudy">0m</strong></div>
+          <div><span>Top Subject</span><strong id="reportTopSubject">No data</strong></div>
+        </div>
+        <div id="studyReportBars" class="my-desk-report-bars" aria-label="Last 7 days study report"></div>
       </section>
 
       <section class="my-desk-grid my-desk-insight-grid">
@@ -407,6 +427,136 @@
           <button id="saveRevisionBtn" class="btn btn-primary" type="submit">Save Reminder</button>
         </form>
         <div id="revisionReminderList" class="my-desk-reminder-list" aria-label="Revision reminders"></div>
+      </section>
+
+      <section class="my-desk-grid">
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Mistake Review</span>
+              <h2>Wrong Question Notebook</h2>
+            </div>
+            <i class="fas fa-clipboard-question" aria-hidden="true"></i>
+          </div>
+          <div id="wrongQuestionStatus" class="my-desk-status" role="status" aria-live="polite">Loading wrong questions...</div>
+          <form id="wrongQuestionForm" class="my-desk-form">
+            <div class="my-desk-field">
+              <label for="wrongQuestionSubject">Subject</label>
+              <select id="wrongQuestionSubject" name="wrongQuestionSubject">
+                <option value="">Select subject</option>
+                <option value="Hindi">Hindi</option>
+                <option value="English">English</option>
+                <option value="GK/GS">GK/GS</option>
+                <option value="Maths">Maths</option>
+                <option value="Reasoning">Reasoning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="my-desk-field">
+              <label for="wrongQuestionTopic">Topic</label>
+              <input id="wrongQuestionTopic" name="wrongQuestionTopic" type="text" maxlength="100" placeholder="e.g. Percentage">
+            </div>
+            <div class="my-desk-field">
+              <label for="wrongQuestionText">Question / Problem</label>
+              <textarea id="wrongQuestionText" name="wrongQuestionText" maxlength="500" rows="4" placeholder="Write the question or mistake you want to review"></textarea>
+            </div>
+            <div class="my-desk-field">
+              <label for="wrongQuestionReason">Mistake Reason</label>
+              <select id="wrongQuestionReason" name="wrongQuestionReason">
+                <option value="">Select reason</option>
+                <option value="Concept weak">Concept weak</option>
+                <option value="Calculation mistake">Calculation mistake</option>
+                <option value="Silly mistake">Silly mistake</option>
+                <option value="Time pressure">Time pressure</option>
+                <option value="Guessing">Guessing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="my-desk-field">
+              <label for="wrongQuestionReattemptDate">Reattempt Date Optional</label>
+              <input id="wrongQuestionReattemptDate" name="wrongQuestionReattemptDate" type="date">
+            </div>
+            <div class="my-desk-field">
+              <label for="wrongQuestionStatusSelect">Status</label>
+              <select id="wrongQuestionStatusSelect" name="wrongQuestionStatusSelect">
+                <option value="Pending">Pending</option>
+                <option value="Revised">Revised</option>
+                <option value="Mastered">Mastered</option>
+              </select>
+            </div>
+            <button id="saveWrongQuestionBtn" class="btn btn-primary my-desk-full-btn" type="submit">Save Wrong Question</button>
+          </form>
+          <div id="wrongQuestionList" class="my-desk-reminder-list" aria-label="Wrong question notebook"></div>
+        </article>
+
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Personal Notes</span>
+              <h2>Quick Notes</h2>
+            </div>
+            <i class="fas fa-note-sticky" aria-hidden="true"></i>
+          </div>
+          <div id="quickNoteStatus" class="my-desk-status" role="status" aria-live="polite">Loading quick notes...</div>
+          <form id="quickNoteForm" class="my-desk-form">
+            <div class="my-desk-field">
+              <label for="quickNoteTitle">Title</label>
+              <input id="quickNoteTitle" name="quickNoteTitle" type="text" maxlength="80" placeholder="e.g. Polity formula note">
+            </div>
+            <div class="my-desk-field">
+              <label for="quickNoteBody">Note</label>
+              <textarea id="quickNoteBody" name="quickNoteBody" maxlength="700" rows="5" placeholder="Write a short note for revision"></textarea>
+            </div>
+            <div class="my-desk-field">
+              <label for="quickNoteTag">Tag / Subject</label>
+              <select id="quickNoteTag" name="quickNoteTag">
+                <option value="">Select tag</option>
+                <option value="Hindi">Hindi</option>
+                <option value="English">English</option>
+                <option value="GK/GS">GK/GS</option>
+                <option value="Maths">Maths</option>
+                <option value="Reasoning">Reasoning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <button id="saveQuickNoteBtn" class="btn btn-primary my-desk-full-btn" type="submit">Save Note</button>
+          </form>
+          <div id="quickNoteList" class="my-desk-reminder-list" aria-label="Quick notes"></div>
+        </article>
+
+        <article class="my-desk-card">
+          <div class="my-desk-card-head">
+            <div>
+              <span class="section-kicker">Reminder Setup</span>
+              <h2>Study Reminders</h2>
+            </div>
+            <i class="fas fa-clock" aria-hidden="true"></i>
+          </div>
+          <div id="notificationPrefsStatus" class="my-desk-status" role="status" aria-live="polite">Loading reminder preferences...</div>
+          <form id="notificationPrefsForm" class="my-desk-form">
+            <fieldset class="my-desk-field my-desk-chip-field">
+              <legend>Reminder Preferences</legend>
+              <label class="my-desk-toggle-row">
+                <input id="notificationEnabled" name="notificationEnabled" type="checkbox">
+                <span>Enable study reminder preferences</span>
+              </label>
+              <div class="my-desk-reminder-pref">
+                <label><input id="morningReminder" name="morningReminder" type="checkbox"> Morning mission reminder</label>
+                <input id="morningTime" name="morningTime" type="time" value="07:00">
+              </div>
+              <div class="my-desk-reminder-pref">
+                <label><input id="eveningReminder" name="eveningReminder" type="checkbox"> Evening target reminder</label>
+                <input id="eveningTime" name="eveningTime" type="time" value="19:00">
+              </div>
+              <div class="my-desk-reminder-pref">
+                <label><input id="nightReport" name="nightReport" type="checkbox"> Night report</label>
+                <input id="nightTime" name="nightTime" type="time" value="21:30">
+              </div>
+            </fieldset>
+            <p class="my-desk-note">Actual reminders will work after Android reminder support is enabled.</p>
+            <button id="saveNotificationPrefsBtn" class="btn btn-primary my-desk-full-btn" type="submit">Save Reminder Preferences</button>
+          </form>
+        </article>
       </section>
 
       <section class="my-desk-motivation" aria-label="Motivation note">

@@ -19,6 +19,8 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     sunday: "Sunday"
   };
   const prioritySet = new Set(["Low", "Medium", "High"]);
+  const mistakeReasons = new Set(["Concept weak", "Calculation mistake", "Silly mistake", "Time pressure", "Guessing", "Other"]);
+  const questionStatuses = new Set(["Pending", "Revised", "Mastered"]);
   const allowedCategories = new Set(["", "SSC", "Police", "Railway", "Banking", "Teaching", "State Exams", "Defence", "Other"]);
   const allowedSubjects = new Set(subjects);
 
@@ -31,10 +33,17 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     streak: null,
     weeklyPlanner: {},
     revisionReminders: [],
+    wrongQuestions: [],
+    quickNotes: [],
+    notificationPrefs: null,
+    reportSummaries: [],
     saving: false,
     studySaving: false,
     plannerSaving: false,
     reminderSaving: false,
+    wrongQuestionSaving: false,
+    quickNoteSaving: false,
+    notificationPrefsSaving: false,
     timer: {
       subject: "",
       startedAt: null,
@@ -114,7 +123,40 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     revisionDate: document.getElementById("revisionDate"),
     revisionPriority: document.getElementById("revisionPriority"),
     saveRevisionBtn: document.getElementById("saveRevisionBtn"),
-    revisionReminderList: document.getElementById("revisionReminderList")
+    revisionReminderList: document.getElementById("revisionReminderList"),
+    reportStatus: document.getElementById("reportStatus"),
+    reportTotalStudy: document.getElementById("reportTotalStudy"),
+    reportBestDay: document.getElementById("reportBestDay"),
+    reportAverageStudy: document.getElementById("reportAverageStudy"),
+    reportTopSubject: document.getElementById("reportTopSubject"),
+    studyReportBars: document.getElementById("studyReportBars"),
+    wrongQuestionStatus: document.getElementById("wrongQuestionStatus"),
+    wrongQuestionForm: document.getElementById("wrongQuestionForm"),
+    wrongQuestionSubject: document.getElementById("wrongQuestionSubject"),
+    wrongQuestionTopic: document.getElementById("wrongQuestionTopic"),
+    wrongQuestionText: document.getElementById("wrongQuestionText"),
+    wrongQuestionReason: document.getElementById("wrongQuestionReason"),
+    wrongQuestionReattemptDate: document.getElementById("wrongQuestionReattemptDate"),
+    wrongQuestionStatusSelect: document.getElementById("wrongQuestionStatusSelect"),
+    saveWrongQuestionBtn: document.getElementById("saveWrongQuestionBtn"),
+    wrongQuestionList: document.getElementById("wrongQuestionList"),
+    quickNoteStatus: document.getElementById("quickNoteStatus"),
+    quickNoteForm: document.getElementById("quickNoteForm"),
+    quickNoteTitle: document.getElementById("quickNoteTitle"),
+    quickNoteBody: document.getElementById("quickNoteBody"),
+    quickNoteTag: document.getElementById("quickNoteTag"),
+    saveQuickNoteBtn: document.getElementById("saveQuickNoteBtn"),
+    quickNoteList: document.getElementById("quickNoteList"),
+    notificationPrefsStatus: document.getElementById("notificationPrefsStatus"),
+    notificationPrefsForm: document.getElementById("notificationPrefsForm"),
+    notificationEnabled: document.getElementById("notificationEnabled"),
+    morningReminder: document.getElementById("morningReminder"),
+    morningTime: document.getElementById("morningTime"),
+    eveningReminder: document.getElementById("eveningReminder"),
+    eveningTime: document.getElementById("eveningTime"),
+    nightReport: document.getElementById("nightReport"),
+    nightTime: document.getElementById("nightTime"),
+    saveNotificationPrefsBtn: document.getElementById("saveNotificationPrefsBtn")
   };
 
   function show(viewName) {
@@ -157,6 +199,30 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     nodes.revisionStatus.dataset.state = type;
   }
 
+  function setReportStatus(message, type = "info") {
+    if (!nodes.reportStatus) return;
+    nodes.reportStatus.textContent = message || "";
+    nodes.reportStatus.dataset.state = type;
+  }
+
+  function setWrongQuestionStatus(message, type = "info") {
+    if (!nodes.wrongQuestionStatus) return;
+    nodes.wrongQuestionStatus.textContent = message || "";
+    nodes.wrongQuestionStatus.dataset.state = type;
+  }
+
+  function setQuickNoteStatus(message, type = "info") {
+    if (!nodes.quickNoteStatus) return;
+    nodes.quickNoteStatus.textContent = message || "";
+    nodes.quickNoteStatus.dataset.state = type;
+  }
+
+  function setNotificationPrefsStatus(message, type = "info") {
+    if (!nodes.notificationPrefsStatus) return;
+    nodes.notificationPrefsStatus.textContent = message || "";
+    nodes.notificationPrefsStatus.dataset.state = type;
+  }
+
   function setSaving(isSaving) {
     state.saving = isSaving;
     if (nodes.saveTargetBtn) {
@@ -191,6 +257,30 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     }
   }
 
+  function setWrongQuestionSaving(isSaving) {
+    state.wrongQuestionSaving = isSaving;
+    if (nodes.saveWrongQuestionBtn) {
+      nodes.saveWrongQuestionBtn.disabled = isSaving;
+      nodes.saveWrongQuestionBtn.textContent = isSaving ? "Saving..." : "Save Wrong Question";
+    }
+  }
+
+  function setQuickNoteSaving(isSaving) {
+    state.quickNoteSaving = isSaving;
+    if (nodes.saveQuickNoteBtn) {
+      nodes.saveQuickNoteBtn.disabled = isSaving;
+      nodes.saveQuickNoteBtn.textContent = isSaving ? "Saving..." : "Save Note";
+    }
+  }
+
+  function setNotificationPrefsSaving(isSaving) {
+    state.notificationPrefsSaving = isSaving;
+    if (nodes.saveNotificationPrefsBtn) {
+      nodes.saveNotificationPrefsBtn.disabled = isSaving;
+      nodes.saveNotificationPrefsBtn.textContent = isSaving ? "Saving..." : "Save Reminder Preferences";
+    }
+  }
+
   function userDisplayName(user) {
     return user?.displayName || user?.email?.split("@")[0] || "GovJobUpdates User";
   }
@@ -215,6 +305,10 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     const base = dateValue ? new Date(`${dateValue}T00:00:00`) : new Date();
     base.setDate(base.getDate() + days);
     return dateKey(base);
+  }
+
+  function lastSevenDateKeys() {
+    return Array.from({ length: 7 }, (_, index) => addDays(todayKey(), index - 6));
   }
 
   function yesterdayKey() {
@@ -347,6 +441,22 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
 
   function revisionRemindersPath(uid) {
     return `users/${uid}/myDesk/revisionReminders`;
+  }
+
+  function wrongQuestionsPath(uid) {
+    return `users/${uid}/myDesk/wrongQuestions`;
+  }
+
+  function quickNotesPath(uid) {
+    return `users/${uid}/myDesk/quickNotes`;
+  }
+
+  function notificationPrefsPath(uid) {
+    return `users/${uid}/myDesk/notificationPrefs`;
+  }
+
+  function dailySummaryPath(uid, dateValue) {
+    return `users/${uid}/myDesk/dailySummaries/${dateValue}`;
   }
 
   function formatDuration(minutes) {
@@ -515,6 +625,60 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     });
   }
 
+  function normalizeWrongQuestions(value) {
+    if (!value || typeof value !== "object") return [];
+    return Object.keys(value).map((id) => {
+      const item = value[id] || {};
+      return {
+        id,
+        subject: allowedSubjects.has(item.subject) ? item.subject : "Other",
+        topic: String(item.topic || "").slice(0, 100),
+        questionText: String(item.questionText || "").slice(0, 500),
+        mistakeReason: mistakeReasons.has(item.mistakeReason) ? item.mistakeReason : "Other",
+        reattemptDate: item.reattemptDate && dateIsValid(item.reattemptDate) ? item.reattemptDate : "",
+        status: questionStatuses.has(item.status) ? item.status : "Pending",
+        createdAt: item.createdAt || 0,
+        updatedAt: item.updatedAt || 0
+      };
+    }).sort((a, b) => Number(b.updatedAt || b.createdAt || 0) - Number(a.updatedAt || a.createdAt || 0));
+  }
+
+  function normalizeQuickNotes(value) {
+    if (!value || typeof value !== "object") return [];
+    return Object.keys(value).map((id) => {
+      const note = value[id] || {};
+      return {
+        id,
+        title: String(note.title || "").slice(0, 80),
+        body: String(note.body || "").slice(0, 700),
+        tag: allowedSubjects.has(note.tag) ? note.tag : "Other",
+        createdAt: note.createdAt || 0,
+        updatedAt: note.updatedAt || 0
+      };
+    }).sort((a, b) => Number(b.updatedAt || b.createdAt || 0) - Number(a.updatedAt || a.createdAt || 0));
+  }
+
+  function normalizeNotificationPrefs(value) {
+    const safe = value && typeof value === "object" ? value : {};
+    return {
+      enabled: Boolean(safe.enabled),
+      morningReminder: Boolean(safe.morningReminder),
+      morningTime: timeIsValid(safe.morningTime) ? safe.morningTime : "07:00",
+      eveningReminder: Boolean(safe.eveningReminder),
+      eveningTime: timeIsValid(safe.eveningTime) ? safe.eveningTime : "19:00",
+      nightReport: Boolean(safe.nightReport),
+      nightTime: timeIsValid(safe.nightTime) ? safe.nightTime : "21:30",
+      timezone: safe.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata",
+      updatedAt: safe.updatedAt || Date.now()
+    };
+  }
+
+  function timeIsValid(value) {
+    if (!/^\d{2}:\d{2}$/.test(value || "")) return false;
+    const [hour, minute] = value.split(":").map(Number);
+    return hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59;
+  }
+
   function formatTimeLabel(value) {
     if (!/^\d{2}:\d{2}$/.test(value || "")) return "Time not set";
     const [hourText, minuteText] = value.split(":");
@@ -586,6 +750,104 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
       `;
     }).join("");
     renderMission();
+  }
+
+  function renderStudyReport() {
+    const summaries = Array.isArray(state.reportSummaries) ? state.reportSummaries : [];
+    const total = summaries.reduce((sum, summary) => sum + normalizeSummary(summary).totalStudyMinutes, 0);
+    const average = summaries.length ? Math.round(total / summaries.length) : 0;
+    const best = summaries.reduce((bestDay, summary) => {
+      const safe = normalizeSummary(summary);
+      return safe.totalStudyMinutes > bestDay.totalStudyMinutes ? safe : bestDay;
+    }, { date: "", totalStudyMinutes: 0 });
+    const subjectTotals = emptySubjectMinutes();
+    summaries.forEach((summary) => {
+      const safe = normalizeSummary(summary);
+      subjects.forEach((subject) => {
+        subjectTotals[subject] += safe.subjectMinutes[subject] || 0;
+      });
+    });
+    const topSubject = subjects.reduce((top, subject) => (
+      subjectTotals[subject] > subjectTotals[top] ? subject : top
+    ), subjects[0]);
+    const topSubjectText = subjectTotals[topSubject] > 0 ? `${topSubject} - ${formatDuration(subjectTotals[topSubject])}` : "No data";
+
+    if (nodes.reportTotalStudy) nodes.reportTotalStudy.textContent = formatDuration(total);
+    if (nodes.reportBestDay) nodes.reportBestDay.textContent = best.totalStudyMinutes > 0 ? `${best.date} - ${formatDuration(best.totalStudyMinutes)}` : "No data";
+    if (nodes.reportAverageStudy) nodes.reportAverageStudy.textContent = formatDuration(average);
+    if (nodes.reportTopSubject) nodes.reportTopSubject.textContent = topSubjectText;
+    if (!nodes.studyReportBars) return;
+
+    if (!total) {
+      nodes.studyReportBars.innerHTML = `<div class="my-desk-empty">No study data in the last 7 days yet.</div>`;
+      return;
+    }
+
+    const maxMinutes = Math.max(...summaries.map((summary) => normalizeSummary(summary).totalStudyMinutes), 1);
+    nodes.studyReportBars.innerHTML = summaries.map((summary) => {
+      const safe = normalizeSummary(summary);
+      const width = Math.min(100, Math.round((safe.totalStudyMinutes / maxMinutes) * 100));
+      return `
+        <div class="my-desk-report-row">
+          <label><span>${escapeHtml(safe.date)}</span><strong>${formatDuration(safe.totalStudyMinutes)}</strong></label>
+          <div class="my-desk-subject-track"><i style="width:${width}%"></i></div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderWrongQuestions() {
+    if (!nodes.wrongQuestionList) return;
+    if (!state.wrongQuestions.length) {
+      nodes.wrongQuestionList.innerHTML = `<div class="my-desk-empty">No wrong questions saved yet.</div>`;
+      return;
+    }
+    nodes.wrongQuestionList.innerHTML = state.wrongQuestions.slice(0, 20).map((item) => `
+      <article class="my-desk-reminder-item my-desk-note-item">
+        <div>
+          <strong>${escapeHtml(item.subject)} - ${escapeHtml(item.topic || "Untitled topic")}</strong>
+          <span>${escapeHtml(item.mistakeReason)} - ${escapeHtml(item.status)}${item.reattemptDate ? ` - Reattempt: ${escapeHtml(item.reattemptDate)}` : ""}</span>
+          <p>${escapeHtml(item.questionText)}</p>
+        </div>
+        <div class="my-desk-row-actions">
+          <select aria-label="Update wrong question status" data-wrong-status="${escapeHtml(item.id)}">
+            ${Array.from(questionStatuses).map((status) => `<option value="${escapeHtml(status)}"${status === item.status ? " selected" : ""}>${escapeHtml(status)}</option>`).join("")}
+          </select>
+          <button type="button" data-delete-wrong="${escapeHtml(item.id)}">Delete</button>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderQuickNotes() {
+    if (!nodes.quickNoteList) return;
+    if (!state.quickNotes.length) {
+      nodes.quickNoteList.innerHTML = `<div class="my-desk-empty">No quick notes saved yet.</div>`;
+      return;
+    }
+    nodes.quickNoteList.innerHTML = state.quickNotes.slice(0, 20).map((note) => `
+      <article class="my-desk-reminder-item my-desk-note-item">
+        <div>
+          <strong>${escapeHtml(note.title)}</strong>
+          <span>${escapeHtml(note.tag)}</span>
+          <p>${escapeHtml(note.body)}</p>
+        </div>
+        <div class="my-desk-row-actions">
+          <button type="button" data-delete-note="${escapeHtml(note.id)}">Delete</button>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function populateNotificationPrefs(prefs) {
+    const safe = normalizeNotificationPrefs(prefs);
+    if (nodes.notificationEnabled) nodes.notificationEnabled.checked = safe.enabled;
+    if (nodes.morningReminder) nodes.morningReminder.checked = safe.morningReminder;
+    if (nodes.morningTime) nodes.morningTime.value = safe.morningTime;
+    if (nodes.eveningReminder) nodes.eveningReminder.checked = safe.eveningReminder;
+    if (nodes.eveningTime) nodes.eveningTime.value = safe.eveningTime;
+    if (nodes.nightReport) nodes.nightReport.checked = safe.nightReport;
+    if (nodes.nightTime) nodes.nightTime.value = safe.nightTime;
   }
 
   function renderTodaySummary() {
@@ -707,6 +969,76 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     }
   }
 
+  async function loadStudyReport() {
+    if (!state.user || !state.db) return;
+    setReportStatus("Loading 7-day report...", "info");
+    try {
+      const keys = lastSevenDateKeys();
+      const snapshots = await Promise.all(keys.map((key) => get(ref(state.db, dailySummaryPath(state.user.uid, key)))));
+      state.reportSummaries = snapshots.map((snapshot, index) => {
+        const summary = normalizeSummary(snapshot.exists() ? snapshot.val() : null);
+        summary.date = keys[index];
+        return summary;
+      });
+      renderStudyReport();
+      const total = state.reportSummaries.reduce((sum, summary) => sum + normalizeSummary(summary).totalStudyMinutes, 0);
+      setReportStatus(total ? "7-day study report ready." : "No study data in the last 7 days yet.", total ? "success" : "info");
+    } catch (error) {
+      console.warn("[GovJobUpdates] My Desk report load failed:", error.message);
+      state.reportSummaries = [];
+      renderStudyReport();
+      setReportStatus("7-day report load nahi ho paaya. Please connection check karke retry karein.", "error");
+    }
+  }
+
+  async function loadWrongQuestions() {
+    if (!state.user || !state.db) return;
+    setWrongQuestionStatus("Loading wrong questions...", "info");
+    try {
+      const snapshot = await get(ref(state.db, wrongQuestionsPath(state.user.uid)));
+      state.wrongQuestions = normalizeWrongQuestions(snapshot.exists() ? snapshot.val() : null);
+      renderWrongQuestions();
+      setWrongQuestionStatus(state.wrongQuestions.length ? "Wrong questions ready." : "No wrong questions saved yet.", state.wrongQuestions.length ? "success" : "info");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Wrong questions load failed:", error.message);
+      state.wrongQuestions = [];
+      renderWrongQuestions();
+      setWrongQuestionStatus("Wrong questions load nahi ho paaye. Please connection check karke retry karein.", "error");
+    }
+  }
+
+  async function loadQuickNotes() {
+    if (!state.user || !state.db) return;
+    setQuickNoteStatus("Loading quick notes...", "info");
+    try {
+      const snapshot = await get(ref(state.db, quickNotesPath(state.user.uid)));
+      state.quickNotes = normalizeQuickNotes(snapshot.exists() ? snapshot.val() : null);
+      renderQuickNotes();
+      setQuickNoteStatus(state.quickNotes.length ? "Quick notes ready." : "No quick notes saved yet.", state.quickNotes.length ? "success" : "info");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Quick notes load failed:", error.message);
+      state.quickNotes = [];
+      renderQuickNotes();
+      setQuickNoteStatus("Quick notes load nahi ho paaye. Please connection check karke retry karein.", "error");
+    }
+  }
+
+  async function loadNotificationPrefs() {
+    if (!state.user || !state.db) return;
+    setNotificationPrefsStatus("Loading reminder preferences...", "info");
+    try {
+      const snapshot = await get(ref(state.db, notificationPrefsPath(state.user.uid)));
+      state.notificationPrefs = normalizeNotificationPrefs(snapshot.exists() ? snapshot.val() : null);
+      populateNotificationPrefs(state.notificationPrefs);
+      setNotificationPrefsStatus(snapshot.exists() ? "Reminder preferences loaded." : "Reminder preferences not set yet.", snapshot.exists() ? "success" : "info");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Notification preferences load failed:", error.message);
+      state.notificationPrefs = normalizeNotificationPrefs(null);
+      populateNotificationPrefs(state.notificationPrefs);
+      setNotificationPrefsStatus("Reminder preferences load nahi ho paayi. Please connection check karke retry karein.", "error");
+    }
+  }
+
   function collectPlannerSlot() {
     const dayKey = nodes.plannerDay?.value || "";
     const time = nodes.plannerTime?.value || "";
@@ -757,6 +1089,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
 
   async function deletePlannerSlot(dayKey, slotId) {
     if (!state.user || !state.db || !dayKeys.includes(dayKey) || !slotId) return;
+    if (!window.confirm("Delete this planner slot?")) return;
     setPlannerStatus("Deleting planner slot...", "info");
     try {
       await remove(ref(state.db, `${plannerDayPath(state.user.uid, dayKey)}/${slotId}`));
@@ -834,6 +1167,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
 
   async function deleteReminder(reminderId) {
     if (!state.user || !state.db || !reminderId) return;
+    if (!window.confirm("Delete this revision reminder?")) return;
     setRevisionStatus("Deleting revision reminder...", "info");
     try {
       await remove(ref(state.db, `${revisionRemindersPath(state.user.uid)}/${reminderId}`));
@@ -842,6 +1176,187 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     } catch (error) {
       console.warn("[GovJobUpdates] Revision reminder delete failed:", error.message);
       setRevisionStatus("Reminder delete nahi ho paaya.", "error");
+    }
+  }
+
+  function collectWrongQuestion() {
+    const subject = nodes.wrongQuestionSubject?.value || "";
+    const topic = (nodes.wrongQuestionTopic?.value || "").trim();
+    const questionText = (nodes.wrongQuestionText?.value || "").trim();
+    const mistakeReason = nodes.wrongQuestionReason?.value || "";
+    const reattemptDate = nodes.wrongQuestionReattemptDate?.value || "";
+    const status = nodes.wrongQuestionStatusSelect?.value || "Pending";
+    if (!allowedSubjects.has(subject)) throw new Error("Please select a subject.");
+    if (!topic) throw new Error("Please enter topic.");
+    if (topic.length > 100) throw new Error("Topic 100 characters se zyada nahi hona chahiye.");
+    if (!questionText) throw new Error("Please enter question/problem.");
+    if (questionText.length > 500) throw new Error("Question/problem 500 characters se zyada nahi hona chahiye.");
+    if (!mistakeReasons.has(mistakeReason)) throw new Error("Please select a valid mistake reason.");
+    if (reattemptDate && !dateIsValid(reattemptDate)) throw new Error("Please select a valid reattempt date.");
+    if (!questionStatuses.has(status)) throw new Error("Please select a valid status.");
+    return { subject, topic, questionText, mistakeReason, reattemptDate, status };
+  }
+
+  async function saveWrongQuestion(event) {
+    event.preventDefault();
+    if (!state.user || !state.db || state.wrongQuestionSaving) return;
+    let data;
+    try {
+      data = collectWrongQuestion();
+    } catch (error) {
+      setWrongQuestionStatus(error.message, "error");
+      return;
+    }
+    setWrongQuestionSaving(true);
+    setWrongQuestionStatus("Saving wrong question...", "info");
+    try {
+      const questionRef = push(ref(state.db, wrongQuestionsPath(state.user.uid)));
+      await set(questionRef, {
+        id: questionRef.key,
+        ...data,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      nodes.wrongQuestionForm?.reset();
+      await loadWrongQuestions();
+      setWrongQuestionStatus("Wrong question saved.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Wrong question save failed:", error.message);
+      setWrongQuestionStatus("Wrong question save nahi ho paaya. Please dobara try karein.", "error");
+    } finally {
+      setWrongQuestionSaving(false);
+    }
+  }
+
+  async function updateWrongQuestionStatus(questionId, status) {
+    if (!state.user || !state.db || !questionId || !questionStatuses.has(status)) return;
+    setWrongQuestionStatus("Updating wrong question status...", "info");
+    try {
+      await update(ref(state.db, `${wrongQuestionsPath(state.user.uid)}/${questionId}`), {
+        status,
+        updatedAt: serverTimestamp()
+      });
+      await loadWrongQuestions();
+      setWrongQuestionStatus("Wrong question status updated.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Wrong question status update failed:", error.message);
+      setWrongQuestionStatus("Status update nahi ho paaya. Please dobara try karein.", "error");
+    }
+  }
+
+  async function deleteWrongQuestion(questionId) {
+    if (!state.user || !state.db || !questionId) return;
+    if (!window.confirm("Delete this wrong question?")) return;
+    setWrongQuestionStatus("Deleting wrong question...", "info");
+    try {
+      await remove(ref(state.db, `${wrongQuestionsPath(state.user.uid)}/${questionId}`));
+      await loadWrongQuestions();
+      setWrongQuestionStatus("Wrong question deleted.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Wrong question delete failed:", error.message);
+      setWrongQuestionStatus("Wrong question delete nahi ho paaya.", "error");
+    }
+  }
+
+  function collectQuickNote() {
+    const title = (nodes.quickNoteTitle?.value || "").trim();
+    const body = (nodes.quickNoteBody?.value || "").trim();
+    const tag = nodes.quickNoteTag?.value || "";
+    if (!title) throw new Error("Please enter note title.");
+    if (title.length > 80) throw new Error("Title 80 characters se zyada nahi hona chahiye.");
+    if (!body) throw new Error("Please enter note.");
+    if (body.length > 700) throw new Error("Note 700 characters se zyada nahi hona chahiye.");
+    if (!allowedSubjects.has(tag)) throw new Error("Please select a valid tag/subject.");
+    return { title, body, tag };
+  }
+
+  async function saveQuickNote(event) {
+    event.preventDefault();
+    if (!state.user || !state.db || state.quickNoteSaving) return;
+    let data;
+    try {
+      data = collectQuickNote();
+    } catch (error) {
+      setQuickNoteStatus(error.message, "error");
+      return;
+    }
+    setQuickNoteSaving(true);
+    setQuickNoteStatus("Saving quick note...", "info");
+    try {
+      const noteRef = push(ref(state.db, quickNotesPath(state.user.uid)));
+      await set(noteRef, {
+        id: noteRef.key,
+        ...data,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      nodes.quickNoteForm?.reset();
+      await loadQuickNotes();
+      setQuickNoteStatus("Quick note saved.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Quick note save failed:", error.message);
+      setQuickNoteStatus("Quick note save nahi ho paaya. Please dobara try karein.", "error");
+    } finally {
+      setQuickNoteSaving(false);
+    }
+  }
+
+  async function deleteQuickNote(noteId) {
+    if (!state.user || !state.db || !noteId) return;
+    if (!window.confirm("Delete this quick note?")) return;
+    setQuickNoteStatus("Deleting quick note...", "info");
+    try {
+      await remove(ref(state.db, `${quickNotesPath(state.user.uid)}/${noteId}`));
+      await loadQuickNotes();
+      setQuickNoteStatus("Quick note deleted.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Quick note delete failed:", error.message);
+      setQuickNoteStatus("Quick note delete nahi ho paaya.", "error");
+    }
+  }
+
+  function collectNotificationPrefs() {
+    const morningTime = nodes.morningTime?.value || "";
+    const eveningTime = nodes.eveningTime?.value || "";
+    const nightTime = nodes.nightTime?.value || "";
+    if (!timeIsValid(morningTime)) throw new Error("Please select valid morning time.");
+    if (!timeIsValid(eveningTime)) throw new Error("Please select valid evening time.");
+    if (!timeIsValid(nightTime)) throw new Error("Please select valid night report time.");
+    return {
+      enabled: Boolean(nodes.notificationEnabled?.checked),
+      morningReminder: Boolean(nodes.morningReminder?.checked),
+      morningTime,
+      eveningReminder: Boolean(nodes.eveningReminder?.checked),
+      eveningTime,
+      nightReport: Boolean(nodes.nightReport?.checked),
+      nightTime,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata",
+      updatedAt: serverTimestamp()
+    };
+  }
+
+  async function saveNotificationPrefs(event) {
+    event.preventDefault();
+    if (!state.user || !state.db || state.notificationPrefsSaving) return;
+    let prefs;
+    try {
+      prefs = collectNotificationPrefs();
+    } catch (error) {
+      setNotificationPrefsStatus(error.message, "error");
+      return;
+    }
+    setNotificationPrefsSaving(true);
+    setNotificationPrefsStatus("Saving reminder preferences...", "info");
+    try {
+      await set(ref(state.db, notificationPrefsPath(state.user.uid)), prefs);
+      state.notificationPrefs = normalizeNotificationPrefs({ ...prefs, updatedAt: Date.now() });
+      populateNotificationPrefs(state.notificationPrefs);
+      setNotificationPrefsStatus("Reminder preferences saved. Android reminder support coming later.", "success");
+    } catch (error) {
+      console.warn("[GovJobUpdates] Notification preferences save failed:", error.message);
+      setNotificationPrefsStatus("Reminder preferences save nahi ho paayi. Please dobara try karein.", "error");
+    } finally {
+      setNotificationPrefsSaving(false);
     }
   }
 
@@ -1078,6 +1593,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
       ]);
       state.todaySummary = { ...preparedSummary, updatedAt: Date.now() };
       await syncCompletionAndFocus({ writeIfNeeded: true, allowSummaryOnlyWrite: true });
+      await loadStudyReport();
       setStudyStatus(`${formatDuration(session.durationMinutes)} ${session.subject} study time saved.`, "success");
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk study save failed:", error.message);
@@ -1143,6 +1659,9 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     nodes.manualStudyForm?.addEventListener("submit", saveManualTime);
     nodes.plannerSlotForm?.addEventListener("submit", savePlannerSlot);
     nodes.revisionReminderForm?.addEventListener("submit", saveReminder);
+    nodes.wrongQuestionForm?.addEventListener("submit", saveWrongQuestion);
+    nodes.quickNoteForm?.addEventListener("submit", saveQuickNote);
+    nodes.notificationPrefsForm?.addEventListener("submit", saveNotificationPrefs);
     nodes.weeklyPlannerList?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-delete-planner]");
       if (!button) return;
@@ -1154,6 +1673,21 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
       const deleteButton = event.target.closest("[data-delete-reminder]");
       if (completeButton) completeReminder(completeButton.dataset.completeReminder);
       if (deleteButton) deleteReminder(deleteButton.dataset.deleteReminder);
+    });
+    nodes.wrongQuestionList?.addEventListener("change", (event) => {
+      const select = event.target.closest("[data-wrong-status]");
+      if (!select) return;
+      updateWrongQuestionStatus(select.dataset.wrongStatus, select.value);
+    });
+    nodes.wrongQuestionList?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-delete-wrong]");
+      if (!button) return;
+      deleteWrongQuestion(button.dataset.deleteWrong);
+    });
+    nodes.quickNoteList?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-delete-note]");
+      if (!button) return;
+      deleteQuickNote(button.dataset.deleteNote);
     });
     document.querySelectorAll("[data-scroll-target]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -1189,10 +1723,18 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
           state.streak = normalizeStreak(null);
           state.weeklyPlanner = normalizePlanner(null);
           state.revisionReminders = [];
+          state.wrongQuestions = [];
+          state.quickNotes = [];
+          state.notificationPrefs = normalizeNotificationPrefs(null);
+          state.reportSummaries = [];
           renderMission();
           renderTodaySummary();
           renderPlanner();
           renderReminders();
+          renderStudyReport();
+          renderWrongQuestions();
+          renderQuickNotes();
+          populateNotificationPrefs(state.notificationPrefs);
           return;
         }
         renderUser(user);
@@ -1202,6 +1744,10 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
         await loadStreak();
         await loadPlanner();
         await loadReminders();
+        await loadStudyReport();
+        await loadWrongQuestions();
+        await loadQuickNotes();
+        await loadNotificationPrefs();
       });
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
@@ -1217,9 +1763,17 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
   state.streak = normalizeStreak(null);
   state.weeklyPlanner = normalizePlanner(null);
   state.revisionReminders = [];
+  state.wrongQuestions = [];
+  state.quickNotes = [];
+  state.notificationPrefs = normalizeNotificationPrefs(null);
+  state.reportSummaries = [];
   renderTodaySummary();
   renderPlanner();
   renderReminders();
+  renderStudyReport();
+  renderWrongQuestions();
+  renderQuickNotes();
+  populateNotificationPrefs(state.notificationPrefs);
 
   if (!isApp) {
     show("appOnly");

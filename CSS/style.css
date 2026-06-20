@@ -3752,7 +3752,8 @@ body.live-test-info-page .live-test-promo-card p {
 }
 
 .my-desk-field input,
-.my-desk-field select {
+.my-desk-field select,
+.my-desk-field textarea {
   width: 100%;
   min-width: 0;
   min-height: 44px;
@@ -3766,9 +3767,15 @@ body.live-test-info-page .live-test-promo-card p {
 }
 
 .my-desk-field input:focus,
-.my-desk-field select:focus {
+.my-desk-field select:focus,
+.my-desk-field textarea:focus {
   border-color: #93c5fd;
   outline: 3px solid rgba(37, 99, 235, .14);
+}
+
+.my-desk-field textarea {
+  resize: vertical;
+  line-height: 1.45;
 }
 
 .my-desk-field small {
@@ -3924,12 +3931,19 @@ body.live-test-info-page .live-test-promo-card p {
   gap: .58rem;
 }
 
-.my-desk-subject-row {
+.my-desk-subject-row,
+.my-desk-report-row {
   display: grid;
   gap: .32rem;
 }
 
-.my-desk-subject-row label {
+.my-desk-report-bars {
+  display: grid;
+  gap: .58rem;
+}
+
+.my-desk-subject-row label,
+.my-desk-report-row label {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3941,7 +3955,9 @@ body.live-test-info-page .live-test-promo-card p {
 }
 
 .my-desk-subject-row label span,
-.my-desk-subject-row label strong {
+.my-desk-subject-row label strong,
+.my-desk-report-row label span,
+.my-desk-report-row label strong {
   overflow-wrap: anywhere;
 }
 
@@ -4060,8 +4076,21 @@ body.live-test-info-page .live-test-promo-card p {
   overflow-wrap: anywhere;
 }
 
+.my-desk-note-item {
+  align-items: flex-start;
+}
+
+.my-desk-note-item p {
+  margin: .35rem 0 0;
+  color: var(--secondary);
+  font-size: .9rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
 .my-desk-plan-item button,
-.my-desk-row-actions button {
+.my-desk-row-actions button,
+.my-desk-row-actions select {
   max-width: 100%;
   min-height: 34px;
   padding: .35rem .58rem;
@@ -4072,6 +4101,10 @@ body.live-test-info-page .live-test-promo-card p {
   font: inherit;
   font-size: .8rem;
   font-weight: 900;
+}
+
+.my-desk-row-actions select {
+  background: #fff;
 }
 
 .my-desk-reminder-item.is-overdue {
@@ -4091,6 +4124,55 @@ body.live-test-info-page .live-test-promo-card p {
 .my-desk-full-btn {
   width: 100%;
   justify-content: center;
+}
+
+.my-desk-toggle-row,
+.my-desk-reminder-pref {
+  display: grid;
+  gap: .45rem;
+  min-width: 0;
+  padding: .7rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.my-desk-toggle-row {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  color: var(--secondary);
+  font-weight: 900;
+}
+
+.my-desk-reminder-pref {
+  grid-template-columns: minmax(0, 1fr) minmax(112px, 150px);
+  align-items: center;
+}
+
+.my-desk-reminder-pref label {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  min-width: 0;
+}
+
+.my-desk-toggle-row input[type="checkbox"],
+.my-desk-reminder-pref input[type="checkbox"] {
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.my-desk-reminder-pref input[type="time"] {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: .48rem .55rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--secondary);
+  font: inherit;
+  font-size: 16px;
 }
 
 .my-desk-motivation {
@@ -4171,7 +4253,8 @@ body.live-test-info-page .live-test-promo-card p {
   }
 
   .my-desk-score-breakdown div,
-  .my-desk-subject-row label {
+  .my-desk-subject-row label,
+  .my-desk-report-row label {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     justify-items: start;
@@ -4179,12 +4262,17 @@ body.live-test-info-page .live-test-promo-card p {
   }
 
   .my-desk-row-actions button,
-  .my-desk-plan-item button {
+  .my-desk-plan-item button,
+  .my-desk-row-actions select {
     white-space: normal;
   }
 
   .my-desk-user {
     width: 100%;
+  }
+
+  .my-desk-reminder-pref {
+    grid-template-columns: 1fr;
   }
 }
 
