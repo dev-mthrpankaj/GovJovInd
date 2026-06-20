@@ -58,6 +58,10 @@
     </section>
 
     <script>
+      window.gjuMyDeskDebug = function (message) {
+        var debug = document.getElementById('myDeskAuthDebug');
+        if (debug) debug.textContent = message;
+      };
       window.gjuMyDeskLoadingFallback = function () {
         var loading = document.getElementById('myDeskLoading');
         var appOnly = document.getElementById('myDeskAppOnly');
@@ -76,6 +80,11 @@
         document.body.classList.add('gju-auth-ready');
       };
       window.setTimeout(window.gjuMyDeskLoadingFallback, 10000);
+      window.setTimeout(function () {
+        if (!window.gjuMyDeskModuleStarted) {
+          window.gjuMyDeskDebug('my-desk.js not started | script file/import/CDN blocked or cached old JS');
+        }
+      }, 4000);
     </script>
 
     <section id="myDeskAppOnly" class="my-desk-state" hidden>
@@ -604,7 +613,7 @@
 
   <script src="../JS/script.js?v=my-desk-v1"></script>
   <script src="../JS/firebase-config.js"></script>
-  <script type="module" src="../JS/my-desk.js?v=20260620-loading-fix3"></script>
+  <script src="../JS/my-desk.js?v=20260620-dynamic-firebase" onerror="window.gjuMyDeskDebug && window.gjuMyDeskDebug('my-desk.js failed to load | check JS file upload/path/cache')"></script>
   <script>
     window.setTimeout(function () {
       if (typeof window.gjuMyDeskLoadingFallback === 'function') {

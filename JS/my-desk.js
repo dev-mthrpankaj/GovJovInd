@@ -1,9 +1,22 @@
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+window.gjuMyDeskModuleStarted = true;
 
 (function () {
   "use strict";
+
+  let initializeApp;
+  let getApps;
+  let getAuth;
+  let onAuthStateChanged;
+  let setPersistence;
+  let browserLocalPersistence;
+  let getDatabase;
+  let ref;
+  let get;
+  let set;
+  let push;
+  let update;
+  let remove;
+  let serverTimestamp;
 
   const isApp = /GovJobUpdatesApp/i.test(navigator.userAgent || "");
   const config = window.GJU_FIREBASE_CONFIG;
@@ -240,6 +253,33 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
   function setAuthDebug(message) {
     if (!nodes.authDebug) return;
     nodes.authDebug.textContent = `${message} | app=${isApp ? "yes" : "no"} | config=${config?.apiKey ? "yes" : "no"} | ${localSessionSummary()}`;
+  }
+
+  setAuthDebug("module-started");
+
+  async function loadFirebaseModules() {
+    if (initializeApp && getAuth && getDatabase) return;
+    setAuthDebug("firebase-import-started");
+    const [appModule, authModule, databaseModule] = await Promise.all([
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js")
+    ]);
+    initializeApp = appModule.initializeApp;
+    getApps = appModule.getApps;
+    getAuth = authModule.getAuth;
+    onAuthStateChanged = authModule.onAuthStateChanged;
+    setPersistence = authModule.setPersistence;
+    browserLocalPersistence = authModule.browserLocalPersistence;
+    getDatabase = databaseModule.getDatabase;
+    ref = databaseModule.ref;
+    get = databaseModule.get;
+    set = databaseModule.set;
+    push = databaseModule.push;
+    update = databaseModule.update;
+    remove = databaseModule.remove;
+    serverTimestamp = databaseModule.serverTimestamp;
+    setAuthDebug("firebase-import-ready");
   }
 
   function setSaving(isSaving) {
@@ -1721,7 +1761,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     });
   }
 
-  function initAuthGate() {
+  async function initAuthGate() {
     if (!config || !config.apiKey) {
       if (nodes.loginMessage) nodes.loginMessage.textContent = "Firebase setup load nahi ho paaya. Please app ko refresh karke dobara try karein.";
       setAuthDebug("config-missing");
@@ -1731,6 +1771,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     }
 
     try {
+      await loadFirebaseModules();
       const app = getApps().length ? getApps()[0] : initializeApp(config);
       state.auth = getAuth(app);
       await setPersistence(state.auth, browserLocalPersistence);
@@ -1794,7 +1835,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
       if (nodes.loginMessage) nodes.loginMessage.textContent = "My Desk login check fail ho gaya. Please Retry karein ya dobara login karein.";
-      setAuthDebug(`auth-error=${error.code || error.name || "unknown"}`);
+      setAuthDebug(`auth-error=${error.code || error.name || "unknown"} message=${String(error.message || "").slice(0, 80)}`);
       show("loginRequired");
       markReady();
     }
