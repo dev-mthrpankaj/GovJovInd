@@ -3423,6 +3423,19 @@ body.live-test-info-page .live-test-promo-card p {
 /* My Desk app-only page */
 .my-desk-page {
   background: #f6f9ff;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.my-desk-page header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  transform: translateZ(0);
 }
 
 .my-desk-shell {
@@ -3459,6 +3472,12 @@ body.live-test-info-page .live-test-promo-card p {
 
 .my-desk-page :where(h1, h2, h3, p, span, strong, small, label, button, a, input, select) {
   overflow-wrap: anywhere;
+}
+
+.my-desk-page :where(.btn, .header-login-btn, .dashboard-btn) {
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
 }
 
 .my-desk-state {
@@ -3498,6 +3517,8 @@ body.live-test-info-page .live-test-promo-card p {
 
 .my-desk-auth-debug {
   max-width: 620px;
+  width: 100%;
+  min-width: 0;
   padding: .55rem .7rem;
   border: 1px dashed #cbd5e1;
   border-radius: 12px;
@@ -3505,6 +3526,8 @@ body.live-test-info-page .live-test-promo-card p {
   color: #64748b;
   font-size: .78rem;
   font-weight: 800;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 @keyframes myDeskFallbackReveal {
@@ -4318,13 +4341,45 @@ body.live-test-info-page .live-test-promo-card p {
     padding-inline: .65rem;
   }
 
+  .my-desk-page header {
+    left: 0;
+    right: 0;
+  }
+
   .my-desk-page .header-container {
     width: 100%;
     min-width: 0;
+    gap: .45rem;
+    padding-inline: .65rem;
+  }
+
+  .my-desk-page .logo-container {
+    flex: 1 1 auto;
+    max-width: 100%;
   }
 
   .my-desk-page .logo {
-    max-width: 190px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .my-desk-page .logo-img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .my-desk-page .header-auth-actions {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .my-desk-page .header-login-btn,
+  .my-desk-page .dashboard-btn {
+    max-width: 116px;
+    min-height: 38px;
+    padding-inline: .65rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
