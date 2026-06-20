@@ -60,6 +60,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     appOnly: document.getElementById("myDeskAppOnly"),
     loginRequired: document.getElementById("myDeskLoginRequired"),
     dashboard: document.getElementById("myDeskDashboard"),
+    loginMessage: document.getElementById("myDeskLoginMessage"),
     userName: document.getElementById("myDeskUserName"),
     userEmail: document.getElementById("myDeskUserEmail"),
     targetStatus: document.getElementById("targetStatus"),
@@ -1704,6 +1705,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
 
   function initAuthGate() {
     if (!config || !config.apiKey) {
+      if (nodes.loginMessage) nodes.loginMessage.textContent = "Firebase setup load nahi ho paaya. Please app ko refresh karke dobara try karein.";
       show("loginRequired");
       markReady();
       return;
@@ -1713,10 +1715,26 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
       const app = getApps().length ? getApps()[0] : initializeApp(config);
       state.auth = getAuth(app);
       state.db = getDatabase(app);
+      let authSettled = false;
+      const authTimeoutId = window.setTimeout(() => {
+        if (authSettled) return;
+        authSettled = true;
+        if (nodes.loginMessage) {
+          nodes.loginMessage.textContent = "Login status check hone me zyada time lag raha hai. Please internet check karein, Retry karein, ya dobara login karein.";
+        }
+        show("loginRequired");
+        markReady();
+      }, 10000);
       onAuthStateChanged(state.auth, async (user) => {
+        if (authSettled && !user) return;
+        authSettled = true;
+        window.clearTimeout(authTimeoutId);
         markReady();
         state.user = user;
         if (!user) {
+          if (nodes.loginMessage) {
+            nodes.loginMessage.textContent = "Your My Desk dashboard is connected with your GovJobUpdates account, so your study setup can stay linked with your profile.";
+          }
           show("loginRequired");
           state.settings = null;
           state.todaySummary = normalizeSummary(null);
@@ -1751,6 +1769,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
       });
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
+      if (nodes.loginMessage) nodes.loginMessage.textContent = "My Desk login check fail ho gaya. Please Retry karein ya dobara login karein.";
       show("loginRequired");
       markReady();
     }

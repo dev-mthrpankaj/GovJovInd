@@ -64,9 +64,10 @@
       <div class="my-desk-state-icon"><i class="fas fa-user-lock" aria-hidden="true"></i></div>
       <span class="section-kicker">Login Required</span>
       <h1>Login to access My Desk</h1>
-      <p>Your My Desk dashboard is connected with your GovJobUpdates account, so your study setup can stay linked with your profile.</p>
+      <p id="myDeskLoginMessage">Your My Desk dashboard is connected with your GovJobUpdates account, so your study setup can stay linked with your profile.</p>
       <div class="my-desk-actions">
         <a class="btn btn-primary" href="login.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i> Login / Sign Up</a>
+        <button class="btn btn-outline" type="button" onclick="window.location.reload()"><i class="fas fa-rotate-right" aria-hidden="true"></i> Retry</button>
         <a class="btn btn-outline" href="quiz.html"><i class="fas fa-stopwatch" aria-hidden="true"></i> Start Quiz</a>
       </div>
     </section>
@@ -574,5 +575,20 @@
   <script src="../JS/firebase-config.js"></script>
   <script type="module" src="../JS/firebase-auth.js?v=20260613-app-email-only"></script>
   <script type="module" src="../JS/my-desk.js?v=v1"></script>
+  <script>
+    window.setTimeout(function () {
+      var loading = document.getElementById('myDeskLoading');
+      var login = document.getElementById('myDeskLoginRequired');
+      var message = document.getElementById('myDeskLoginMessage');
+      if (!loading || loading.hidden || !document.body.classList.contains('gju-auth-pending')) return;
+      loading.hidden = true;
+      if (login) login.hidden = false;
+      if (message) {
+        message.textContent = 'My Desk load hone me zyada time lag raha hai. Please internet check karein, Retry karein, ya dobara login karke open karein.';
+      }
+      document.body.classList.remove('gju-auth-pending');
+      document.body.classList.add('gju-auth-ready');
+    }, 12000);
+  </script>
 </body>
 </html>
