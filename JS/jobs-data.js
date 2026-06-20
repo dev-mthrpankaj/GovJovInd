@@ -464,7 +464,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "33",
         "startDate": "2026-05-30",
         "lastDate": "2026-06-19",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Defence Research & Development Organization (DRDO RAC) Recruitment 2026",
             "DRDO RAC Scientist",
@@ -1094,7 +1094,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "361",
         "startDate": "2026-05-20",
         "lastDate": "2026-06-19",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Indian Air Force Recruitment 2026",
             "AFCAT 02/2026",
