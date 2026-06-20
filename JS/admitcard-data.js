@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2398",
+        "title": "UPPSC APO Mains Admit Card 2026 for 182 Post",
+        "organization": "UPPSC Assistant Prosecution Officer",
+        "department": "uppsc",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-06-19",
+        "status": "available",
+        "tags": [
+            "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q=="
+        ],
+        "downloadLink": "",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-06-19",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2397",
         "title": "CSBC Bihar Police Constable GD Special Branch Admit Card 2026",
         "organization": "Central Selection Board of Constable CSBC",
