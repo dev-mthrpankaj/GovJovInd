@@ -48,6 +48,27 @@
       <p>Checking app and login status.</p>
     </section>
 
+    <script>
+      window.gjuMyDeskLoadingFallback = function () {
+        var loading = document.getElementById('myDeskLoading');
+        var appOnly = document.getElementById('myDeskAppOnly');
+        var login = document.getElementById('myDeskLoginRequired');
+        var dashboard = document.getElementById('myDeskDashboard');
+        var message = document.getElementById('myDeskLoginMessage');
+        if (!loading || loading.hidden || !document.body.classList.contains('gju-auth-pending')) return;
+        loading.hidden = true;
+        if (appOnly) appOnly.hidden = true;
+        if (dashboard) dashboard.hidden = true;
+        if (login) login.hidden = false;
+        if (message) {
+          message.textContent = 'My Desk load hone me zyada time lag raha hai. Please internet check karein, Retry karein, ya dobara login karke open karein.';
+        }
+        document.body.classList.remove('gju-auth-pending');
+        document.body.classList.add('gju-auth-ready');
+      };
+      window.setTimeout(window.gjuMyDeskLoadingFallback, 10000);
+    </script>
+
     <section id="myDeskAppOnly" class="my-desk-state" hidden>
       <div class="my-desk-state-icon"><i class="fas fa-mobile-screen-button" aria-hidden="true"></i></div>
       <span class="section-kicker">App Only</span>
@@ -574,20 +595,12 @@
   <script src="../JS/script.js?v=my-desk-v1"></script>
   <script src="../JS/firebase-config.js"></script>
   <script type="module" src="../JS/firebase-auth.js?v=20260613-app-email-only"></script>
-  <script type="module" src="../JS/my-desk.js?v=v1"></script>
+  <script type="module" src="../JS/my-desk.js?v=20260620-loading-fix"></script>
   <script>
     window.setTimeout(function () {
-      var loading = document.getElementById('myDeskLoading');
-      var login = document.getElementById('myDeskLoginRequired');
-      var message = document.getElementById('myDeskLoginMessage');
-      if (!loading || loading.hidden || !document.body.classList.contains('gju-auth-pending')) return;
-      loading.hidden = true;
-      if (login) login.hidden = false;
-      if (message) {
-        message.textContent = 'My Desk load hone me zyada time lag raha hai. Please internet check karein, Retry karein, ya dobara login karke open karein.';
+      if (typeof window.gjuMyDeskLoadingFallback === 'function') {
+        window.gjuMyDeskLoadingFallback();
       }
-      document.body.classList.remove('gju-auth-pending');
-      document.body.classList.add('gju-auth-ready');
     }, 12000);
   </script>
 </body>

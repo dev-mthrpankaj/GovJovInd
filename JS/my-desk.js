@@ -174,6 +174,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
   function markReady() {
     document.body.classList.remove("gju-auth-pending");
     document.body.classList.add("gju-auth-ready");
+    window.gjuMyDeskLoadingFallback = null;
   }
 
   function setStatus(message, type = "info") {
