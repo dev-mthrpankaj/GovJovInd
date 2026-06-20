@@ -74,7 +74,6 @@ window.gjuMyDeskModuleStarted = true;
     loginRequired: document.getElementById("myDeskLoginRequired"),
     dashboard: document.getElementById("myDeskDashboard"),
     loginMessage: document.getElementById("myDeskLoginMessage"),
-    authDebug: document.getElementById("myDeskAuthDebug"),
     userName: document.getElementById("myDeskUserName"),
     userEmail: document.getElementById("myDeskUserEmail"),
     targetStatus: document.getElementById("targetStatus"),
@@ -251,8 +250,8 @@ window.gjuMyDeskModuleStarted = true;
   }
 
   function setAuthDebug(message) {
-    if (!nodes.authDebug) return;
-    nodes.authDebug.textContent = `${message} | app=${isApp ? "yes" : "no"} | config=${config?.apiKey ? "yes" : "no"} | ${localSessionSummary()}`;
+    if (!new URLSearchParams(window.location.search).has("debugMyDesk")) return;
+    console.debug(`[MyDesk] ${message} | app=${isApp ? "yes" : "no"} | config=${config?.apiKey ? "yes" : "no"} | ${localSessionSummary()}`);
   }
 
   setAuthDebug("module-started");
@@ -767,6 +766,22 @@ window.gjuMyDeskModuleStarted = true;
     }[char]));
   }
 
+  function cleanRenderedText(root) {
+    if (!root) return;
+    root.querySelectorAll("strong, span, p, label").forEach((node) => {
+      node.textContent = node.textContent.replace(/\u00c2\u00b7|\u00b7/g, " - ");
+    });
+  }
+
+  function lockMyDeskViewport() {
+    document.documentElement.style.overflowX = "hidden";
+    document.body.style.overflowX = "hidden";
+    window.requestAnimationFrame(() => {
+      document.documentElement.scrollLeft = 0;
+      document.body.scrollLeft = 0;
+    });
+  }
+
   function renderPlanner() {
     if (!nodes.weeklyPlannerList) return;
     const total = dayKeys.reduce((sum, dayKey) => sum + (state.weeklyPlanner?.[dayKey]?.length || 0), 0);
@@ -792,6 +807,7 @@ window.gjuMyDeskModuleStarted = true;
         </section>
       `;
     }).join("");
+    cleanRenderedText(nodes.weeklyPlannerList);
     renderMission();
   }
 
@@ -818,6 +834,7 @@ window.gjuMyDeskModuleStarted = true;
         </article>
       `;
     }).join("");
+    cleanRenderedText(nodes.revisionReminderList);
     renderMission();
   }
 
@@ -863,6 +880,7 @@ window.gjuMyDeskModuleStarted = true;
         </div>
       `;
     }).join("");
+    cleanRenderedText(nodes.studyReportBars);
   }
 
   function renderWrongQuestions() {
@@ -886,6 +904,7 @@ window.gjuMyDeskModuleStarted = true;
         </div>
       </article>
     `).join("");
+    cleanRenderedText(nodes.wrongQuestionList);
   }
 
   function renderQuickNotes() {
@@ -906,6 +925,7 @@ window.gjuMyDeskModuleStarted = true;
         </div>
       </article>
     `).join("");
+    cleanRenderedText(nodes.quickNoteList);
   }
 
   function populateNotificationPrefs(prefs) {
@@ -936,6 +956,7 @@ window.gjuMyDeskModuleStarted = true;
           </div>
         `;
       }).join("");
+      cleanRenderedText(nodes.subjectProgressList);
     }
     renderStreakAndFocus();
     renderMission();
@@ -1853,6 +1874,9 @@ window.gjuMyDeskModuleStarted = true;
 
   try {
     setAuthDebug("bootstrap-started");
+    lockMyDeskViewport();
+    window.addEventListener("resize", lockMyDeskViewport, { passive: true });
+    window.addEventListener("orientationchange", lockMyDeskViewport);
     if (!nodes.loading) {
       setAuthDebug("bootstrap-error=loading-node-missing");
       return;

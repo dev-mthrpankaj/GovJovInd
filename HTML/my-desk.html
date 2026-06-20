@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
-  <link rel="stylesheet" href="../CSS/style.css?v=20260620-my-desk-overflow-native-fix">
+  <link rel="stylesheet" href="../CSS/style.css?v=20260620-my-desk-shell-fix">
   <link rel="stylesheet" href="../CSS/auth-lite.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -37,6 +37,11 @@
           <li><a href="download-app.html">App</a></li>
         </ul>
       </nav>
+      <div class="header-auth-actions">
+        <a class="header-login-btn dashboard-btn is-active" href="dashboard.html" aria-label="Open candidate dashboard">
+          <span>Dashboard</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -46,9 +51,8 @@
       <span class="section-kicker">GovJobUpdates App</span>
       <h1>Loading My Desk</h1>
       <p>Checking app and login status.</p>
-      <small class="my-desk-build-id">Build: my-desk-20260620-fix3</small>
       <div class="my-desk-loading-fallback" aria-live="polite">
-        <p>Loading zyada time le raha hai. Internet check karein, Retry karein, ya dobara login karke My Desk open karein.</p>
+        <p>Loading zyada time le raha hai. Internet check karein ya Retry karein.</p>
         <div class="my-desk-actions">
           <button class="btn btn-primary" type="button" onclick="window.location.reload()"><i class="fas fa-rotate-right" aria-hidden="true"></i> Retry</button>
           <a class="btn btn-outline" href="login.html?redirect=my-desk.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i> Login</a>
@@ -58,33 +62,21 @@
     </section>
 
     <script>
-      window.gjuMyDeskDebug = function (message) {
-        var debug = document.getElementById('myDeskAuthDebug');
-        if (debug) debug.textContent = message;
-      };
-      window.gjuMyDeskLoadingFallback = function () {
+      window.gjuMyDeskLoadingFallback = function (message) {
         var loading = document.getElementById('myDeskLoading');
-        var appOnly = document.getElementById('myDeskAppOnly');
-        var login = document.getElementById('myDeskLoginRequired');
-        var dashboard = document.getElementById('myDeskDashboard');
-        var message = document.getElementById('myDeskLoginMessage');
         if (!loading || loading.hidden) return;
-        loading.hidden = true;
-        if (appOnly) appOnly.hidden = true;
-        if (dashboard) dashboard.hidden = true;
-        if (login) login.hidden = false;
-        if (message) {
-          message.textContent = 'My Desk load hone me zyada time lag raha hai. Please internet check karein, Retry karein, ya dobara login karke open karein.';
+        var text = loading.querySelector('.my-desk-loading-fallback > p');
+        var fallback = loading.querySelector('.my-desk-loading-fallback');
+        if (text && message) {
+          text.textContent = message;
         }
-        document.body.classList.remove('gju-auth-pending');
-        document.body.classList.add('gju-auth-ready');
+        if (fallback) fallback.classList.add('is-visible');
       };
-      window.setTimeout(window.gjuMyDeskLoadingFallback, 10000);
       window.setTimeout(function () {
         if (!window.gjuMyDeskModuleStarted) {
-          window.gjuMyDeskDebug('my-desk.js not started | script file/import/CDN blocked or cached old JS');
+          window.gjuMyDeskLoadingFallback('My Desk script load nahi ho paaya. Please refresh karein ya internet check karein.');
         }
-      }, 4000);
+      }, 6000);
     </script>
 
     <section id="myDeskAppOnly" class="my-desk-state" hidden>
@@ -104,7 +96,6 @@
       <span class="section-kicker">Login Required</span>
       <h1>Login to access My Desk</h1>
       <p id="myDeskLoginMessage">Your My Desk dashboard is connected with your GovJobUpdates account, so your study setup can stay linked with your profile.</p>
-      <p id="myDeskAuthDebug" class="my-desk-auth-debug">Auth check pending.</p>
       <div class="my-desk-actions">
         <a class="btn btn-primary" href="login.html?redirect=my-desk.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i> Login / Sign Up</a>
         <button class="btn btn-outline" type="button" onclick="window.location.reload()"><i class="fas fa-rotate-right" aria-hidden="true"></i> Retry</button>
@@ -611,15 +602,14 @@
     <div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="disclaimer.html">Disclaimer</a></div>
   </footer>
 
-  <script src="../JS/script.js?v=my-desk-v1"></script>
   <script src="../JS/firebase-config.js"></script>
-  <script src="../JS/my-desk.js?v=20260620-streak-null-fix" onerror="window.gjuMyDeskDebug && window.gjuMyDeskDebug('my-desk.js failed to load | check JS file upload/path/cache')"></script>
+  <script src="../JS/my-desk.js?v=20260620-my-desk-shell-fix" onerror="window.gjuMyDeskLoadingFallback && window.gjuMyDeskLoadingFallback('My Desk script load nahi ho paaya. Please refresh karein ya internet check karein.')"></script>
   <script>
     window.setTimeout(function () {
       if (typeof window.gjuMyDeskLoadingFallback === 'function') {
-        window.gjuMyDeskLoadingFallback();
+        window.gjuMyDeskLoadingFallback('Login/status check zyada time le raha hai. Internet check karke Retry karein.');
       }
-    }, 12000);
+    }, 20000);
   </script>
 </body>
 </html>
