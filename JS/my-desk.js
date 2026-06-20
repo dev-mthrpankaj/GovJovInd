@@ -256,6 +256,13 @@ window.gjuMyDeskModuleStarted = true;
   }
 
   setAuthDebug("module-started");
+  window.addEventListener("error", (event) => {
+    setAuthDebug(`runtime-error=${String(event.message || "unknown").slice(0, 90)}`);
+  });
+  window.addEventListener("unhandledrejection", (event) => {
+    const reason = event.reason || {};
+    setAuthDebug(`promise-error=${String(reason.message || reason || "unknown").slice(0, 90)}`);
+  });
 
   async function loadFirebaseModules() {
     if (initializeApp && getAuth && getDatabase) return;
@@ -1841,31 +1848,45 @@ window.gjuMyDeskModuleStarted = true;
     }
   }
 
-  if (!nodes.loading) return;
-  bindForms();
-  resetTimer();
-  state.todaySummary = normalizeSummary(null);
-  state.streak = normalizeStreak(null);
-  state.weeklyPlanner = normalizePlanner(null);
-  state.revisionReminders = [];
-  state.wrongQuestions = [];
-  state.quickNotes = [];
-  state.notificationPrefs = normalizeNotificationPrefs(null);
-  state.reportSummaries = [];
-  renderTodaySummary();
-  renderPlanner();
-  renderReminders();
-  renderStudyReport();
-  renderWrongQuestions();
-  renderQuickNotes();
-  populateNotificationPrefs(state.notificationPrefs);
+  try {
+    setAuthDebug("bootstrap-started");
+    if (!nodes.loading) {
+      setAuthDebug("bootstrap-error=loading-node-missing");
+      return;
+    }
+    bindForms();
+    resetTimer();
+    state.todaySummary = normalizeSummary(null);
+    state.streak = normalizeStreak(null);
+    state.weeklyPlanner = normalizePlanner(null);
+    state.revisionReminders = [];
+    state.wrongQuestions = [];
+    state.quickNotes = [];
+    state.notificationPrefs = normalizeNotificationPrefs(null);
+    state.reportSummaries = [];
+    renderTodaySummary();
+    renderPlanner();
+    renderReminders();
+    renderStudyReport();
+    renderWrongQuestions();
+    renderQuickNotes();
+    populateNotificationPrefs(state.notificationPrefs);
+    setAuthDebug("bootstrap-rendered");
 
-  if (!isApp) {
-    show("appOnly");
+    if (!isApp) {
+      show("appOnly");
+      markReady();
+      return;
+    }
+
+    show("loading");
+    setAuthDebug("bootstrap-before-auth");
+    initAuthGate();
+  } catch (error) {
+    console.warn("[GovJobUpdates] My Desk bootstrap failed:", error.message);
+    if (nodes.loginMessage) nodes.loginMessage.textContent = "My Desk setup me error aa raha hai. Please debug line share karein.";
+    setAuthDebug(`bootstrap-error=${String(error.message || error.name || "unknown").slice(0, 90)}`);
+    show("loginRequired");
     markReady();
-    return;
   }
-
-  show("loading");
-  initAuthGate();
 })();
