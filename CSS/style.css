@@ -3496,6 +3496,17 @@ body.live-test-info-page .live-test-promo-card p {
   font-weight: 800;
 }
 
+.my-desk-auth-debug {
+  max-width: 620px;
+  padding: .55rem .7rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
 @keyframes myDeskFallbackReveal {
   to {
     max-height: 220px;

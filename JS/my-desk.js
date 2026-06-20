@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 (function () {
@@ -61,6 +61,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     loginRequired: document.getElementById("myDeskLoginRequired"),
     dashboard: document.getElementById("myDeskDashboard"),
     loginMessage: document.getElementById("myDeskLoginMessage"),
+    authDebug: document.getElementById("myDeskAuthDebug"),
     userName: document.getElementById("myDeskUserName"),
     userEmail: document.getElementById("myDeskUserEmail"),
     targetStatus: document.getElementById("targetStatus"),
@@ -223,6 +224,22 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     if (!nodes.notificationPrefsStatus) return;
     nodes.notificationPrefsStatus.textContent = message || "";
     nodes.notificationPrefsStatus.dataset.state = type;
+  }
+
+  function localSessionSummary() {
+    try {
+      const raw = localStorage.getItem("gju:candidate-session");
+      if (!raw) return "localSession=no";
+      const parsed = JSON.parse(raw);
+      return `localSession=yes email=${parsed.email ? "yes" : "no"} uid=${parsed.userId ? "yes" : "no"}`;
+    } catch {
+      return "localSession=blocked";
+    }
+  }
+
+  function setAuthDebug(message) {
+    if (!nodes.authDebug) return;
+    nodes.authDebug.textContent = `${message} | app=${isApp ? "yes" : "no"} | config=${config?.apiKey ? "yes" : "no"} | ${localSessionSummary()}`;
   }
 
   function setSaving(isSaving) {
@@ -1707,6 +1724,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
   function initAuthGate() {
     if (!config || !config.apiKey) {
       if (nodes.loginMessage) nodes.loginMessage.textContent = "Firebase setup load nahi ho paaya. Please app ko refresh karke dobara try karein.";
+      setAuthDebug("config-missing");
       show("loginRequired");
       markReady();
       return;
@@ -1715,7 +1733,9 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     try {
       const app = getApps().length ? getApps()[0] : initializeApp(config);
       state.auth = getAuth(app);
+      await setPersistence(state.auth, browserLocalPersistence);
       state.db = getDatabase(app);
+      setAuthDebug("auth-listener-started");
       let authSettled = false;
       const authTimeoutId = window.setTimeout(() => {
         if (authSettled) return;
@@ -1723,6 +1743,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
         if (nodes.loginMessage) {
           nodes.loginMessage.textContent = "Login status check hone me zyada time lag raha hai. Please internet check karein, Retry karein, ya dobara login karein.";
         }
+        setAuthDebug("auth-timeout");
         show("loginRequired");
         markReady();
       }, 10000);
@@ -1733,6 +1754,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
         markReady();
         state.user = user;
         if (!user) {
+          setAuthDebug("auth-user-null");
           if (nodes.loginMessage) {
             nodes.loginMessage.textContent = "Your My Desk dashboard is connected with your GovJobUpdates account, so your study setup can stay linked with your profile.";
           }
@@ -1756,6 +1778,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
           populateNotificationPrefs(state.notificationPrefs);
           return;
         }
+        setAuthDebug("auth-user-found");
         renderUser(user);
         show("dashboard");
         await loadSettings();
@@ -1771,6 +1794,7 @@ import { getDatabase, ref, get, set, push, update, remove, serverTimestamp } fro
     } catch (error) {
       console.warn("[GovJobUpdates] My Desk auth check failed:", error.message);
       if (nodes.loginMessage) nodes.loginMessage.textContent = "My Desk login check fail ho gaya. Please Retry karein ya dobara login karein.";
+      setAuthDebug(`auth-error=${error.code || error.name || "unknown"}`);
       show("loginRequired");
       markReady();
     }

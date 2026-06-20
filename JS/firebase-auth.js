@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 (function(){
@@ -13,6 +13,9 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   if(!config || !config.apiKey){ console.warn("[GovJobUpdates] Firebase auth config missing."); markAuthReady(); return; }
   const app = getApps().length ? getApps()[0] : initializeApp(config);
   const auth = getAuth(app);
+  const authPersistenceReady = setPersistence(auth, browserLocalPersistence).catch((error) => {
+    console.warn("[GovJobUpdates] Firebase auth persistence setup failed:", error.message);
+  });
   const db = getDatabase(app);
   const provider = new GoogleAuthProvider();
   const page = document.body.dataset.authPage || "";
@@ -27,6 +30,13 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   function safeUser(user){ return { name:user.displayName||"", email:user.email||"", photoURL:user.photoURL||"", provider:user.providerData?.[0]?.providerId||"password", updatedAt:serverTimestamp() }; }
   function saveUser(user, extra={}){ if(!user) return Promise.resolve(); return update(ref(db, `users/${user.uid}`), { ...safeUser(user), ...extra, lastLoginAt:serverTimestamp() }); }
   async function saveUserSoft(user, extra={}){ try{ await saveUser(user, extra); }catch(error){ console.warn("[GovJobUpdates] User profile save failed:", error.message); } }
+  function redirectTarget(defaultPath="dashboard.html"){
+    try{
+      const value = new URLSearchParams(window.location.search).get("redirect");
+      if(value && /^[a-z0-9-]+\.html(?:[?#].*)?$/i.test(value)) return value;
+    }catch{}
+    return defaultPath;
+  }
   function go(path){ window.location.href = path; }
 
   function rememberSession(user){
@@ -40,11 +50,12 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
   }
 
   async function completeGoogleLogin(user, redirectToDashboard=true){
+    await authPersistenceReady;
     rememberSession(user);
     syncHeader(user);
     markAuthReady();
     await saveUserSoft(user,{createdAt:serverTimestamp(),role:"user"});
-    if(redirectToDashboard) go("dashboard.html");
+    if(redirectToDashboard) go(redirectTarget("dashboard.html"));
   }
 
   async function startGoogleLogin(button, messageFn=show, redirectToDashboard=true){
@@ -112,8 +123,8 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
       const target=btn.dataset.authTab; document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active", b===btn));
       loginForm.classList.toggle("hidden", target!=="login"); signupForm.classList.toggle("hidden", target!=="signup"); show("",false); $("#authMessage")?.classList.add("hidden");
     }));
-    loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
-    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go("dashboard.html"); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
+    loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ await authPersistenceReady; const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); go(redirectTarget("dashboard.html")); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
+    signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ await authPersistenceReady; const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go(redirectTarget("dashboard.html")); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
     if(!prepareGoogleButton(googleBtn)) googleBtn?.addEventListener("click", ()=>startGoogleLogin(googleBtn, show, true));
   }
 
@@ -121,7 +132,7 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
     const loading=$("#dashboardLoading"), content=$("#dashboardContent"), guest=$("#dashboardGuest"), logoutBtn=$("#logoutBtn");
     const dashboardLoginForm=$("#dashboardLoginForm"), dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"), dashboardMessage=$("#dashboardAuthMessage");
     const showDashboardMessage=(msg,isError)=>{ if(!dashboardMessage) return; dashboardMessage.textContent=msg; dashboardMessage.classList.toggle("hidden", !msg); dashboardMessage.classList.toggle("error", !!isError); };
-    dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
+    dashboardLoginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(dashboardLoginForm,true); showDashboardMessage("",false); try{ await authPersistenceReady; const email=$("#dashboardLoginEmail").value.trim(); const pass=$("#dashboardLoginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); }catch(err){ showDashboardMessage(readableError(err),true); }finally{ busy(dashboardLoginForm,false); } });
     if(!prepareGoogleButton(dashboardGoogleBtn)) dashboardGoogleBtn?.addEventListener("click", ()=>{ showDashboardMessage("",false); startGoogleLogin(dashboardGoogleBtn, showDashboardMessage, false); });
     onAuthStateChanged(auth,(user)=>{
       authStateKnown = true;
