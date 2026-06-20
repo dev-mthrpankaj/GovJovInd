@@ -14,7 +14,11 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "2026-06-30",
         "releaseDate": "2026-06-19",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "UPPSC",
+            "APO",
+            "Mains"
+        ],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q==",
         "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
@@ -34,7 +38,10 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-06-19",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "Bank of Baroda",
+            "Apprentice"
+        ],
         "downloadLink": "https://bankofbaroda.bank.in/",
         "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
@@ -54,7 +61,10 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-06-24",
         "status": "upcoming",
-        "tags": [],
+        "tags": [
+            "RSSB",
+            "Forester"
+        ],
         "downloadLink": "https://rssb.rajasthan.gov.in/admitcards",
         "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
@@ -74,7 +84,12 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-06-17",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "CSBC",
+            "Bihar Police",
+            "Constable",
+            "Special Branch"
+        ],
         "downloadLink": "https://apply-csbc.com/csbc_12026_weadmitcard/searchApplication",
         "detailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-18",
