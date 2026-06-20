@@ -55,7 +55,7 @@
         var login = document.getElementById('myDeskLoginRequired');
         var dashboard = document.getElementById('myDeskDashboard');
         var message = document.getElementById('myDeskLoginMessage');
-        if (!loading || loading.hidden || !document.body.classList.contains('gju-auth-pending')) return;
+        if (!loading || loading.hidden) return;
         loading.hidden = true;
         if (appOnly) appOnly.hidden = true;
         if (dashboard) dashboard.hidden = true;
@@ -594,7 +594,6 @@
 
   <script src="../JS/script.js?v=my-desk-v1"></script>
   <script src="../JS/firebase-config.js"></script>
-  <script type="module" src="../JS/firebase-auth.js?v=20260613-app-email-only"></script>
   <script type="module" src="../JS/my-desk.js?v=20260620-loading-fix"></script>
   <script>
     window.setTimeout(function () {
