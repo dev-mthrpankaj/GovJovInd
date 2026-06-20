@@ -15,15 +15,20 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-20",
         "objectionLastDate": "2026-06-23",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "UPPRPB",
+            "UP Police",
+            "Constable",
+            "Answer Key"
+        ],
         "downloadLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
         "objectionLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html",
         "updatedAt": "2026-06-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4009",
