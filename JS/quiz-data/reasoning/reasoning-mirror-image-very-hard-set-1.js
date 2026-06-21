@@ -13,15 +13,15 @@
     };
 
     const sourceStrings = [
-        "R7N8Y7", "QB84A1", "4U6Y0R", "H42LU4", "XJU889", "07AJ2F", "O2O-16", "Z9Z+02", "X8X:11", "AW3-C2",
+        "R2N8Y9", "B8A1", "U6Y0R", "H2LU6", "XU889", "0A2F", "O2O-16", "Z9Z+02", "X8X:11", "AW3-C2",
         "6XL+5Z", "M3R-18", "C0DE-19", "B5N=08", "SIR-360", "LION-28", "FAME+61", "DUST-90", "BRONZ8", "NEXUS1",
         "RACE-06", "MATH+39", "BOX-51", "CROWN2", "FROST8", "SAND-69", "BOND+30", "MIND-15", "RUSH=29", "CLUB-08",
-        "STONE6", "RING-52", "BRAIN8", "SMILE3", "FIND+90", "NORTH1", "RIDER6", "CABLE5", "LUNAR3", "SCORE9",
-        "BRISK2", "DREAM8", "FENCE0", "SOLAR5", "CROSS6", "NERVE1", "RATIO3", "BASIC9", "FRAME2", "DRONE8"
+        "STONE6", "RIN-52", "BRAIN8", "SMILE3", "FIND+90", "NORTH1", "RIDER6", "CABLE5", "LUNAR3", "SCORE9",
+        "BRIS2", "DREAM8", "FENCE0", "SOLAR5", "CROSS6", "NERVE1", "RATIO3", "BASIC9", "FRAME2", "DRONE8"
     ];
 
     function mirrorText(text) {
-        return text.split("").reverse().map((char) => mirrorMap[char] || char).join("");
+        return text.split("").reverse().map((char) => mirrorMap[char]).join("");
     }
 
     function rotateOptions(options, correctText, index) {
@@ -42,7 +42,7 @@
     function createQuestion(text, index) {
         const correctText = mirrorText(text);
         const reversedOnly = text.split("").reverse().join("");
-        const mirroredOnly = text.split("").map((char) => mirrorMap[char] || char).join("");
+        const mirroredOnly = text.split("").map((char) => mirrorMap[char]).join("");
         const firstWrong = mirrorText(text.slice(1) + text[0]);
         const secondWrong = mirrorText(text.split("").reverse().join(""));
         const { options, correctAnswer } = rotateOptions([correctText, reversedOnly, mirroredOnly, firstWrong, secondWrong], correctText, index);
