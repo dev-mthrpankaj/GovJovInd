@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "neet-ug-re-exam-2026-june-21-answer-key-mismanagement",
+      title: "NEET UG 2026 Re-Exam 21 June: Answer Key, Paper Analysis, OMR और Mismanagement Reports",
+      category: "NEET",
+      date: "2026-06-21",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/neet-ug-re-exam-2026-june-21-answer-key-mismanagement.html",
+      excerpt: "NEET UG 2026 re-exam 21 June update: paper analysis, answer key/OMR process, score calculation, reported centre issues और students के next steps आसान भाषा में."
+    },
+    {
   id: "telegram-ban-in-india-paper-leak-social-media-truth",
   title: "Telegram Ban in India: क्या Telegram Paper Leak करवाता है या इंसान?",
   category: "Career Guidance",
@@ -101,6 +110,6 @@
   url: "student-hub/up-lekhpal-exam-leak-systemic-negligence.html",
   excerpt: "UP Lekhpal और राज्य स्तरीय परीक्षाओं में बार-बार सामने आ रही पेपर लीक और प्रशासनिक उपेक्षा की घटनाओं के बीच उम्मीदवारों के लिए एक व्यावहारिक गाइडेंस और मानसिक मजबूती की नई रणनीति।"
 },
-   
+    
   ];
 })();
