@@ -231,14 +231,13 @@
             correctAnswer: 3,
             explanation: "Calendar method में complete years, leap years और महीने/दिन के odd days जोड़े जाते हैं। वास्तविक गणना के अनुसार 15-08-2030 का दिन Thursday (गुरुवार) है।"
         }
-    
     ];
 
     window.GJU_QUIZ_BANK.push({
         id: quizId,
         subject: "Reasoning",
         title: "Reasoning Calendar Very Hard Practice Set 1",
-        description: "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.",
+        description: "25 verified very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.",
         durationMinutes: 15,
         totalQuestions: questions.length,
         marksPerQuestion: 1,
