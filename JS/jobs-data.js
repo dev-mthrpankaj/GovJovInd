@@ -13,7 +13,7 @@ window.GovJobUpdatesJobs = [
         "qualification": "Post-wise educational qualification as specified in the official notification.",
         "totalPosts": "2285",
         "startDate": "2026-05-29",
-        "lastDate": "2026-06-30",
+        "lastDate": "2026-06-25",
         "status": "active",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
@@ -45,7 +45,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-19",
         "lastDate": "2026-06-29",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Union Public Service Commission Recruitment 2026",
+            "UPSC IAS Mains",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/login-actions/authenticate?execution=56d7ed5e-af6b-4e9b-9a61-30d87893988d&client_id=account&tab_id=ly8dTCgNJo8&client_data=eyJydSI6Imh0dHBzOi8vdXBzY29ubGluZS5uaWMuaW4vb3JhL29yYS1jYW5kaWRhdGUvcmVhbG1zL2NhbmRpZGF0ZS1wb3J0YWwvYWNjb3VudC9sb2dpbi1yZWRpcmVjdCIsInJ0IjoiY29kZSIsInN0IjoiMC85NmVlNzkyMi1kMDI2LWQxOGItMzI4ZS1jZjY1N2RjNGExY2UifQ",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/06/upsc-ias-mains-notice-2026.pdf",
         "detailPage": "../Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html",
@@ -69,7 +75,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-17",
         "lastDate": "2026-07-14",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Himachal Pradesh Public Service Commission Recruitment 2026",
+            "HPPSC Assistant Professor",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://hppsconline.hp.gov.in/HPPSC/ApplicantRegistration/Home/Login",
         "officialNotification": "https://hppsc.hp.gov.in/CommonControls/ViewContinuousLinkPage?qs=mhlKjiXMMItGo46f60VBXX8%2B1SQ83OzVLj9MfDScpvboDSdMygkK4iLV47Bu%2FJzMpJLanI%2BihrK9p8W6JsSQUgHTy39NyiuO%2BFtbEmiPQyc%3D",
         "detailPage": "../Job_Details/HTML/1016-HPPSC-Assistant-Professor-College-Cadre-2026.html",
@@ -93,7 +105,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-21",
         "lastDate": "2026-07-20",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Central Registry of Securitisation Asset Reconstruction and Security Recruitment 2026",
+            "CERSAI Manager",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://ibpsreg.ibps.in/crsarsimay26/",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/06/cersai-notification-2026.pdf",
         "detailPage": "../Job_Details/HTML/1014-CERSAI-Regular-Employees-Recruitment-2026.html",
@@ -117,7 +135,15 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-29",
         "lastDate": "2026-07-20",
         "status": "upcoming",
-        "tags": [],
+        "tags": [
+            "National Board of Examination (NBE) Recruitment 2026",
+            "NBEMS Group A",
+            "B",
+            "C Various Post",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://natboard.edu.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1013-NBEMS-Various-Posts-Recruitment-2026.html",
