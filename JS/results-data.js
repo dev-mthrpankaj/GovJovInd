@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1014",
+        "title": "BPSC 70th Final Result 2026",
+        "organization": "Bihar Public Service Commission",
+        "department": "BPSC",
+        "category": "Ruselt",
+        "year": "2025",
+        "resultDate": "2026-06-20",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://doc.sarkariresults.org.in/sarkariresult.com_BPSC70_FinalResult.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-20",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1013",
         "title": "SSC Delhi Police Constable Executive Result 2026",
         "organization": "Staff Selection Commission",
