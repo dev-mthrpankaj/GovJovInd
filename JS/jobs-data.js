@@ -256,7 +256,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "15",
         "startDate": "2026-06-22",
         "lastDate": "2026-07-21",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Chhattisgarh Public Service Commission (CGPSC) Recruitment 2026",
             "CGPSC Assistant District Prosecution Officer ADPO",
@@ -376,7 +376,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "22",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Bihar Police Sub-Ordinate Services Commission Recruitment 2026",
             "BPSSC ASI Technical",
@@ -586,7 +586,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "90",
         "startDate": "2026-06-01",
         "lastDate": "2026-06-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttarakhand Subordinate Service Selection Commission Recruitment 2026",
             "UKSSSC AAO",

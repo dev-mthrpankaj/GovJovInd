@@ -37,7 +37,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-21",
         "examEndDate": "",
         "releaseDate": "2026-06-19",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "Bank of Baroda",
             "Apprentice"
@@ -108,7 +108,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-22",
-        "status": "upcoming",
+        "status": "available",
         "tags": [
             "CSBC",
             "Bihar Police",
@@ -205,7 +205,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-21",
         "examEndDate": "",
         "releaseDate": "2026-05-25",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "Driver",
             "Uttarakhad",
