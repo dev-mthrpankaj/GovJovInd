@@ -7,7 +7,7 @@
       title: "NEET UG 2026 Re-Exam 21 June: Answer Key, Paper Analysis, OMR और Mismanagement Reports",
       category: "NEET",
       date: "2026-06-21",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782060864815.webp",
       url: "student-hub/neet-ug-re-exam-2026-june-21-answer-key-mismanagement.html",
       excerpt: "NEET UG 2026 re-exam 21 June update: paper analysis, answer key/OMR process, score calculation, reported centre issues और students के next steps आसान भाषा में."
     },
