@@ -25,7 +25,7 @@ window.GovJobUpdatesJobs = [
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?HA04nYKkgpncofLRuXT6k7Np5V3U8T3Cr2bvb1DZAsc=",
         "detailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
-        "updatedAt": "2026-06-30",
+        "updatedAt": "2026-06-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
