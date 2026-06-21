@@ -14,12 +14,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/sarkariresult.com_BPSC70_FinalResult.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-BPSC-70th-Combined-Competitive-Exam-Final-Result-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1013",
