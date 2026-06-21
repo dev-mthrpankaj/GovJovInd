@@ -62,7 +62,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "16",
         "startDate": "2026-06-21",
         "lastDate": "2026-07-20",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/crsarsimay26/",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/06/cersai-notification-2026.pdf",
@@ -680,7 +680,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "543",
         "startDate": "2026-06-06",
         "lastDate": "2026-06-20",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Allahabad High Court Recruitment 2026",
             "Allahabad High Court RO / ARO / CA",
