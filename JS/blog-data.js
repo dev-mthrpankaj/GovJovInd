@@ -7,7 +7,7 @@
       title: "Best Running Shoes for Physical Test: Delhi Police, SSC CPO, Army aur Police Bharti Guide",
       category: "Fitness",
       date: "2026-06-21",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782062691027.webp",
       url: "student-hub/best-running-shoes-physical-test-delhi-police-cpo.html",
       excerpt: "Delhi Police, SSC CPO, Army aur Police Bharti physical test ke liye best running shoes ka evergreen guide: cushioning, grip, fit, budget aur Amazon buying tips."
     },
