@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "exam-paper-leak-crisis-india-students-trust-reforms",
+      title: "Exam Paper Leak Crisis in India: NEET से Government Jobs तक Students का Trust क्यों टूट रहा है?",
+      category: "Career Guidance",
+      date: "2026-06-21",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/exam-paper-leak-crisis-india-students-trust-reforms.html",
+      excerpt: "NEET से government job exams तक paper leak crisis, student trust, mental pressure, Telegram fraud, Public Examinations Act और reforms पर detailed analysis."
+    },
+    {
       id: "neet-ug-re-exam-2026-june-21-answer-key-mismanagement",
       title: "NEET UG 2026 Re-Exam 21 June: Answer Key, Paper Analysis, OMR और Mismanagement Reports",
       category: "NEET",
