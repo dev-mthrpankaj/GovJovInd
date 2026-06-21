@@ -16,8 +16,8 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://doc.sarkariresults.org.in/sarkariresult.com_BPSC70_FinalResult.pdf",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
