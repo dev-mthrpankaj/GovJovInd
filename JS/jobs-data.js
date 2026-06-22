@@ -346,7 +346,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "550",
         "startDate": "2026-06-23",
         "lastDate": "2026-07-07",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "The New India Assurance Co. Ltd. (NIACL) Recruitment 2026",
             "NIACL Apprentice",
@@ -1246,7 +1246,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "approx. 12256",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-22",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Staff Selection Commission Recruitment 2026",
             "SSC CGL 2026",
