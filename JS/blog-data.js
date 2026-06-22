@@ -7,7 +7,7 @@
       title: "Online Test vs Offline Coaching Test: Government Exam Students के लिए Best Option कौन सा है?",
       category: "Career Guidance",
       date: "2026-06-22",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782103488312.webp",
       url: "student-hub/online-test-vs-offline-coaching-test-govt-exam.html",
       excerpt: "Online test aur offline coaching test me real difference kya hai? Rank, speed, pressure, analysis aur Sunday Live Test strategy ka complete practical guide."
     },
