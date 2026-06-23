@@ -7,7 +7,7 @@
       title: "Lucknow Coaching Centre Fire: पढ़ाई की जगहों पर safety अब optional नहीं रह सकती",
       category: "Student Safety",
       date: "2026-06-23",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782189931876.webp",
       url: "student-hub/lucknow-coaching-centre-fire-student-safety.html",
       excerpt: "Lucknow fire tragedy के बाद coaching centres, commercial buildings, प्रशासनिक inspection और students-parents के लिए practical fire safety checklist."
     },
