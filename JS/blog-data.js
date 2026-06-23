@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "lucknow-coaching-centre-fire-student-safety",
+      title: "Lucknow Coaching Centre Fire: पढ़ाई की जगहों पर safety अब optional नहीं रह सकती",
+      category: "Student Safety",
+      date: "2026-06-23",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/lucknow-coaching-centre-fire-student-safety.html",
+      excerpt: "Lucknow fire tragedy के बाद coaching centres, commercial buildings, प्रशासनिक inspection और students-parents के लिए practical fire safety checklist."
+    },
+    {
       id: "online-test-vs-offline-coaching-test-govt-exam",
       title: "Online Test vs Offline Coaching Test: Government Exam Students के लिए Best Option कौन सा है?",
       category: "Career Guidance",
