@@ -69,10 +69,10 @@
       "stateReason": "seed"
     },
     "jobs:2421": {
-      "updatedAt": "2026-05-22",
-      "hash": "bc3eba71843d5b278afa3dde8d5c3e3c0030288a6895834952b422bf187ae001",
+      "updatedAt": "2026-06-23",
+      "hash": "59242058886b8fb4916418c209263fb28affd38d629441c65951289f757a32bd",
       "title": "SSC CGL 2026",
-      "lastPostedAt": "2026-05-22T08:33:31.020Z",
+      "lastPostedAt": "2026-06-23T17:10:19.469Z",
       "stateReason": "update"
     },
     "jobs:job-1003": {
@@ -779,6 +779,27 @@
       "hash": "a5b01542eac898ffc8d27fb8108ef8423b5701dc959cd37c3ba560a08be12725",
       "title": "UPSRTC UP Bus Conductor Online Form 2026",
       "lastPostedAt": "2026-06-23T02:48:36.714Z",
+      "stateReason": "new"
+    },
+    "jobs:2465": {
+      "updatedAt": "2026-06-23",
+      "hash": "222a1535bb7ba1c86c720bebd4e46c7e03edee7e6316fa3f89076a767265be2d",
+      "title": "CBI Apprentice Online Form 2026 for 4500 Post",
+      "lastPostedAt": "2026-06-23T17:10:20.221Z",
+      "stateReason": "new"
+    },
+    "jobs:2466": {
+      "updatedAt": "2026-06-23",
+      "hash": "b79c96e0e6c2588134cb34e6b7a4aaa992b48321cc92fe8368a9003102565fbb",
+      "title": "BEML Non Executive Operator Online Form 2026 for 362 Post",
+      "lastPostedAt": "2026-06-23T17:10:20.683Z",
+      "stateReason": "new"
+    },
+    "jobs:2467": {
+      "updatedAt": "2026-06-23",
+      "hash": "a2dd87ad5c39bf51cf711406ce1c0fcf04bb09c8b9f94b03ee2a68c45725f714",
+      "title": "NEEPCO Executive Online Form 2026",
+      "lastPostedAt": "2026-06-23T17:10:21.157Z",
       "stateReason": "new"
     }
   },
@@ -1807,6 +1828,20 @@
       "hash": "104822677c524fadf2c525f4f35a33bd4b97c9c53daf81d493920e664c4200ef",
       "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
       "lastPostedAt": "2026-06-23T03:11:39.470Z",
+      "stateReason": "new"
+    },
+    "results:1017": {
+      "updatedAt": "2026-06-23",
+      "hash": "b4b23cd4408a97fd28a7b2fdc44877370ab89cba335ec51ab84e38ca69b8101f",
+      "title": "UPPSC Staff Nurse Result 2026",
+      "lastPostedAt": "2026-06-23T17:10:21.770Z",
+      "stateReason": "new"
+    },
+    "results:1018": {
+      "updatedAt": "2026-06-23",
+      "hash": "8284288df74656be8bc19d0868432a2bb09403824539c171770c53868b212f3f",
+      "title": "PNB LBO Local Bank Officer Final Result 2026 for 750 Post",
+      "lastPostedAt": "2026-06-23T17:10:25.563Z",
       "stateReason": "new"
     }
   }
