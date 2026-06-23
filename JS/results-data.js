@@ -4,6 +4,51 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1017",
+        "title": "UPPSC Staff Nurse Result 2026",
+        "organization": "Uttar Pradesh Public Service Commission",
+        "department": "Staff Nurse",
+        "category": "Result",
+        "year": "20262026",
+        "resultDate": "2026-06-23",
+        "status": "released",
+        "tags": [
+            "UPPSC",
+            "Staff Nurse",
+            "Result"
+        ],
+        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2025/04/UPPSCStaffNurse2023finalresult.pdf",
+        "detailPage": "../Result_Details/HTML/3006-UPPSC-Staff-Nurse-Allopathy-Supplementary-Result-2026.html",
+        "updatedAt": "2026-06-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "1018",
+        "title": "PNB LBO Local Bank Officer Final Result 2026 for 750 Post",
+        "organization": "Punjab National Bank",
+        "department": "Banking",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-23",
+        "status": "released",
+        "tags": [
+            "PNB",
+            "LBO",
+            "Local Bank Officer",
+            "Final Result"
+        ],
+        "resultLink": "https://rojgarresult.com/wp-content/uploads/2026/06/pnb-lbo-final-result-26.pdf",
+        "detailPage": "../Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html",
+        "updatedAt": "2026-06-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1015",
         "title": "RBI Office Attendant Result 2026 for 572 Post",
         "organization": "Reserve Bank of India",
