@@ -4,6 +4,36 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2464",
+        "title": "CGPSC ADPPO Online Form 2026",
+        "organization": "Chhattisgarh Public Service Commission (CGPSC)",
+        "department": "CGPSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Bachelor Degree in Law Passed from any Recognized University in India\nMore Details Read the Notification.",
+        "totalPosts": "15",
+        "startDate": "2026-06-22",
+        "lastDate": "2026-07-21",
+        "status": "active",
+        "tags": [
+            "Chhattisgarh Public Service Commission (CGPSC) Recruitment 2026",
+            "CGPSC ADPPO",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://online.ecgpsconline.in/",
+        "officialNotification": "https://psc.cg.gov.in/PDFs/advertisement/SAHAYAK_JILA_LOK_ABHIYOJAN_ADHIKARI-2026_ADVERTISEMENT%20(17-06-2026).pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2464",
+        "updatedAt": "2026-06-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2434",
         "title": "UPSSSC Lower PCS Recruitment 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
@@ -154,6 +184,36 @@ window.GovJobUpdatesJobs = [
         "qualificationSource": "fallback",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "2463",
+        "title": "UPSRTC UP Bus Conductor Online Form 2026",
+        "organization": "UPSRTC",
+        "department": "UPSRTC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Intermediate Passed from Any Recognized Board in India.\nCCC Exam Qualified",
+        "totalPosts": "99",
+        "startDate": "2026-06-16",
+        "lastDate": "2026-07-24",
+        "status": "active",
+        "tags": [
+            "UPSRTC Recruitment 2026",
+            "UPSRTC UP Bus Conductor",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "https://sewayojan.up.nic.in/",
+        "officialNotification": "https://doc.sarkariresults.org.in/SewayojanGJobDoc221675.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=2463",
+        "updatedAt": "2026-06-20",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2457",
@@ -346,7 +406,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "550",
         "startDate": "2026-06-23",
         "lastDate": "2026-07-07",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "The New India Assurance Co. Ltd. (NIACL) Recruitment 2026",
             "NIACL Apprentice",
@@ -1246,7 +1306,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "approx. 12256",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-22",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Staff Selection Commission Recruitment 2026",
             "SSC CGL 2026",

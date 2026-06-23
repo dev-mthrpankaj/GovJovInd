@@ -15,13 +15,18 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-22",
         "objectionLastDate": "",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "Head Constable Ministerial",
+            "Answer Key"
+        ],
         "downloadLink": "https://sscexams.cbexams.com/DPCMpost2025FInalKeyndlandingpage/loginnew.aspx",
         "objectionLink": "",
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
@@ -34,18 +39,23 @@ window.GovJobUpdatesAnswerKeys = [
         "year": "2026",
         "examDate": "2026-06-04",
         "examEndDate": "",
-        "releaseDate": "",
+        "releaseDate": "2026-06-22",
         "objectionLastDate": "2026-06-25",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "MPESB",
+            "Van Rakshak",
+            "Jail Prahari",
+            "Answer Key"
+        ],
         "downloadLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
         "objectionLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4011",

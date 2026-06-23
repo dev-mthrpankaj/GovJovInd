@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2401",
+        "title": "UPTET Exam City 2026 | UP TET Teacher Eligibility Test",
+        "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
+        "department": "UPESSB",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-07-02",
+        "examEndDate": "2026-07-04",
+        "releaseDate": "2026-05-22",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://admitcards.upessc.org/",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-06-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2398",
         "title": "UPPSC APO Mains Admit Card 2026 for 182 Post",
         "organization": "UPPSC Assistant Prosecution Officer",
