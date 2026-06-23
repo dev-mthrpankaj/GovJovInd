@@ -6,14 +6,16 @@ window.GovJobUpdatesResults = [
     {
         "id": "1015",
         "title": "RBI Office Attendant Result 2026 for 572 Post",
-        "organization": "banking",
+        "organization": "Reserve Bank of India",
         "department": "Bank",
         "category": "Result",
         "year": "2026",
         "resultDate": "2026-06-22",
         "status": "released",
         "tags": [
-            "banking"
+            "RBI",
+            "Office Attendant",
+            "Result"
         ],
         "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/03DisplaySheet_22062026.pdf",
         "detailPage": "../Result_Details/HTML/",
@@ -32,7 +34,11 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-22",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "RVUNL",
+            "Technician",
+            "Final Result"
+        ],
         "resultLink": "https://energy.rajasthan.gov.in/rrvun/#/pages/sm/department-page/373376/2700",
         "detailPage": "../Result_Details/HTML/",
         "updatedAt": "2026-06-22",
@@ -50,7 +56,11 @@ window.GovJobUpdatesResults = [
         "year": "2025",
         "resultDate": "2026-06-20",
         "status": "released",
-        "tags": [],
+        "tags": [
+            "BPSC",
+            "70th",
+            "Final Result"
+        ],
         "resultLink": "https://doc.sarkariresults.org.in/sarkariresult.com_BPSC70_FinalResult.pdf",
         "detailPage": "../Result_Details/HTML/3006-BPSC-70th-Combined-Competitive-Exam-Final-Result-2026.html",
         "updatedAt": "2026-06-20",
