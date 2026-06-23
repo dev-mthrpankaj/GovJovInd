@@ -80,7 +80,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-24",
-        "status": "upcoming",
+        "status": "available",
         "tags": [
             "RSSB",
             "Forester"

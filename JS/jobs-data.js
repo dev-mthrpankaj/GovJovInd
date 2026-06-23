@@ -1156,7 +1156,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3951",
         "startDate": "2026-05-25",
         "lastDate": "2026-06-23",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Rajasthan Staff Selection Board Recruitment 2026",
             "RSSB Computer Instructor",
@@ -1366,7 +1366,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1265",
         "startDate": "2026-05-26",
         "lastDate": "2026-06-23",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "High Court of Punjab and Haryana SSSC Recruitment 2026",
             "Punjab and Haryana High Court Clerk",
