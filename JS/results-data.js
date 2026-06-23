@@ -18,12 +18,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/03DisplaySheet_22062026.pdf",
-        "detailPage": "../Result_Details/HTML/",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "1016",
@@ -40,12 +40,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://energy.rajasthan.gov.in/rrvun/#/pages/sm/department-page/373376/2700",
-        "detailPage": "../Result_Details/HTML/",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "1014",
