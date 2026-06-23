@@ -23,12 +23,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://sscexams.cbexams.com/DPCMpost2025FInalKeyndlandingpage/loginnew.aspx",
         "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "4013",
@@ -52,8 +52,8 @@ window.GovJobUpdatesAnswerKeys = [
         "objectionLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
         "detailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
