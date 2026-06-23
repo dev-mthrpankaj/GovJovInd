@@ -766,6 +766,20 @@
       "title": "CERSAI Manager Online Form 2026",
       "lastPostedAt": "2026-06-20T17:45:17.102Z",
       "stateReason": "new"
+    },
+    "jobs:2464": {
+      "updatedAt": "2026-06-23",
+      "hash": "0d17cb3304356d63671c7726e7a861179ceca4603def022dcbfa4996425e7d01",
+      "title": "CGPSC ADPPO Online Form 2026",
+      "lastPostedAt": "2026-06-23T02:48:36.094Z",
+      "stateReason": "new"
+    },
+    "jobs:2463": {
+      "updatedAt": "2026-06-20",
+      "hash": "a5b01542eac898ffc8d27fb8108ef8423b5701dc959cd37c3ba560a08be12725",
+      "title": "UPSRTC UP Bus Conductor Online Form 2026",
+      "lastPostedAt": "2026-06-23T02:48:36.714Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -1117,6 +1131,13 @@
       "hash": "55a210543a97ce3e2a1d641a07c8973ebbf5d8459ecf256f57d442ea4e303453",
       "title": "RSSB Forester Exam City Details 2026 for 259 Post",
       "lastPostedAt": "2026-06-20T11:37:11.190Z",
+      "stateReason": "new"
+    },
+    "admitCards:2401": {
+      "updatedAt": "2026-06-23",
+      "hash": "8ad50dae24f1e5525442867565ca4a3b2b85a8127c37e1ec4597eba887731cb9",
+      "title": "UPTET Exam City 2026 | UP TET Teacher Eligibility Test",
+      "lastPostedAt": "2026-06-23T02:48:37.089Z",
       "stateReason": "new"
     }
   },
