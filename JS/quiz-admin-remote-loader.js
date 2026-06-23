@@ -42,6 +42,7 @@
 
     patchRegistryLoadQuiz();
 
+    window.GJU_ADMIN_REMOTE_QUIZ_FORCE_HTTPS = forceHttpsUrl;
     window.GJU_ADMIN_REMOTE_QUIZZES = {
         ready: true,
         count: addedMetas.length,
@@ -98,9 +99,9 @@
             negativeMarks: Number(item.negativeMarks || item.negative_marks) || 0.25,
             difficulty: item.difficulty || "Mixed",
             tags: Array.isArray(item.tags) ? item.tags : ["GovJobUpdates", "Practice", "Admin Published"],
-            path: appendCacheBust(remoteFileUrl, version),
+            path: forceHttpsUrl(appendCacheBust(remoteFileUrl, version)),
             adminRemote: true,
-            remoteFileUrl: appendCacheBust(remoteFileUrl, version),
+            remoteFileUrl: forceHttpsUrl(appendCacheBust(remoteFileUrl, version)),
             remoteOriginalId: item.id || item.slug || quizSlug,
             remoteGeneratedAt: version,
             source: "admin-quiz-manager"
@@ -167,12 +168,12 @@
     }
 
     function loadScript(src) {
-        const absoluteSrc = appendCacheBust(src, "runtime");
+        const absoluteSrc = forceHttpsUrl(appendCacheBust(src, "runtime"));
         if (loadedScripts.has(absoluteSrc)) return loadedScripts.get(absoluteSrc);
 
         const promise = new Promise((resolve, reject) => {
             const script = document.createElement("script");
-            script.src = absoluteSrc;
+            script.src = forceHttpsUrl(absoluteSrc);
             script.async = true;
             script.onload = resolve;
             script.onerror = () => reject(new Error(`Unable to load admin quiz script: ${absoluteSrc}`));
@@ -310,9 +311,25 @@
     function resolveRemoteUrl(path) {
         const value = String(path || "").trim();
         if (!value) return "";
-        if (/^(?:https?:)?\/\//i.test(value) || /^data:/i.test(value)) return value;
+        if (/^data:/i.test(value)) return value;
+        if (/^(?:https?:)?\/\//i.test(value)) return forceHttpsUrl(value);
         const baseUrl = normalizeBaseUrl(config.baseUrl || DEFAULT_BASE_URL);
-        return new URL(value.replace(/^\/+/, ""), baseUrl).href;
+        return forceHttpsUrl(new URL(value.replace(/^\/+/, ""), baseUrl).href);
+    }
+
+    function forceHttpsUrl(url) {
+        let value = String(url || "").trim();
+        if (!value) return "";
+        if (value.startsWith("//")) value = `https:${value}`;
+        value = value.replace(/^http:\/\//i, "https://");
+        value = value.replace(/^https:\/\/test\.govjobupdates\.com/i, "https://test.govjobupdates.com");
+        try {
+            const parsed = new URL(value, window.location.href);
+            if (parsed.hostname === "test.govjobupdates.com") parsed.protocol = "https:";
+            return parsed.href;
+        } catch (_error) {
+            return value;
+        }
     }
 
     function normalizeBaseUrl(url) {
