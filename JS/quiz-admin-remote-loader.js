@@ -189,20 +189,80 @@
         const questions = Array.isArray(adminData.questions) ? adminData.questions : [];
         const preferredLanguage = getPreferredLanguage(subject);
 
-        return {
+        const convertedQuestions = questions.map((question, index) => convertQuestion(question, meta, subject, preferredLanguage, index));
+        const quiz = {
             id: meta.id,
             subject,
             title: String(adminData.title || meta.title || "Practice Quiz"),
             description: String(adminData.description || meta.description || "Practice quiz generated from GovJobUpdates Quiz Manager."),
             durationMinutes: toPositiveInt(adminData.durationMinutes || adminData.duration_minutes || meta.durationMinutes, 30),
-            totalQuestions: questions.length || meta.totalQuestions,
+            totalQuestions: convertedQuestions.length || meta.totalQuestions,
             marksPerQuestion: Number(adminData.marksPerQuestion || adminData.marks_per_question || meta.marksPerQuestion) || 1,
             negativeMarks: Number(adminData.negativeMarks || adminData.negative_marks || meta.negativeMarks) || 0.25,
             difficulty: adminData.difficulty || meta.difficulty || "Mixed",
             tags: Array.isArray(adminData.tags) ? adminData.tags : meta.tags,
             source: "admin-quiz-manager",
-            questions: questions.map((question, index) => convertQuestion(question, meta, subject, preferredLanguage, index))
+            questions: convertedQuestions
         };
+
+        quiz.validation = buildValidation(quiz);
+        return quiz;
+    }
+
+    function buildValidation(quiz) {
+        const errors = [];
+        if (!quiz.id) errors.push("Quiz id is missing.");
+        if (!quiz.subject || !quiz.title) errors.push("Quiz subject and title are required.");
+        if (!Array.isArray(quiz.questions) || !quiz.questions.length) errors.push("Quiz must contain at least 1 question.");
+
+        const duplicateQuestionIds = [];
+        const duplicateQuestionTexts = [];
+        const ids = new Set();
+        const texts = new Set();
+
+        (quiz.questions || []).forEach((question, index) => {
+            if (!isQuestionComplete(question)) {
+                errors.push(`Question ${index + 1} is missing required fields.`);
+            }
+
+            if (question.id) {
+                if (ids.has(question.id)) duplicateQuestionIds.push(question.id);
+                ids.add(question.id);
+            }
+
+            const normalizedText = String(question.question || "").trim().replace(/\s+/g, " ").toLowerCase();
+            if (normalizedText) {
+                if (texts.has(normalizedText)) duplicateQuestionTexts.push(question.id || `question-${index + 1}`);
+                texts.add(normalizedText);
+            }
+        });
+
+        if (duplicateQuestionIds.length) errors.push("Quiz contains duplicate question ids.");
+
+        return {
+            isComplete: errors.length === 0,
+            errors,
+            duplicateQuestionIds,
+            duplicateQuestionTexts,
+            duplicateSubjectQuestionTexts: []
+        };
+    }
+
+    function isQuestionComplete(question) {
+        return Boolean(
+            question &&
+            question.id &&
+            question.topic &&
+            question.difficulty &&
+            question.question &&
+            Array.isArray(question.options) &&
+            question.options.length === 4 &&
+            question.options.every((option, index) => String(option || "").trim() || question.optionImages?.[index]?.src) &&
+            Number.isInteger(question.correctAnswer) &&
+            question.correctAnswer >= 0 &&
+            question.correctAnswer <= 3 &&
+            question.explanation
+        );
     }
 
     function convertQuestion(question, meta, subject, preferredLanguage, index) {
