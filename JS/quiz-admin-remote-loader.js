@@ -78,7 +78,8 @@
         const remoteId = `${config.idPrefix}-${subjectSlug}-${quizSlug}`.replace(/-+/g, "-");
         const subject = mapSubject(item.subjectName || item.subject_name || item.subject?.name || item.subject || subjectSlug);
         const filePath = item.fileUrl || item.file_url || item.publicFileUrl || item.public_file_url || item.file || item.path || item.publicFilePath || item.public_file_path;
-        const remoteFileUrl = resolveRemoteUrl(filePath);
+        const normalizedFilePath = normalizeRemoteQuizFilePath(filePath, subjectSlug, quizSlug);
+        const remoteFileUrl = resolveRemoteUrl(normalizedFilePath);
 
         if (!remoteFileUrl) return null;
 
@@ -284,6 +285,26 @@
             computer: "Computer"
         };
         return map[slug] || raw || "General Awareness";
+    }
+
+
+    function normalizeRemoteQuizFilePath(path, subjectSlug, quizSlug) {
+        let value = String(path || "").trim();
+
+        // Some generated indexes may accidentally store a trailing hyphen before .js
+        // e.g. quiz-data/hindi/hindi-best-.js. The public file is hindi-best.js.
+        value = value.replace(/-\.(js)([?#].*)?$/i, ".$1$2");
+
+        if (!value || /\/$/.test(value)) {
+            value = `quiz-data/${subjectSlug}/${quizSlug}.js`;
+        }
+
+        if (!/\.js(?:[?#].*)?$/i.test(value)) {
+            value = `${value.replace(/\/+$/, "")}.js`;
+        }
+
+        value = value.replace(/([^:])\/{2,}/g, "$1/");
+        return value;
     }
 
     function resolveRemoteUrl(path) {
