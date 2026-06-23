@@ -18,12 +18,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/03DisplaySheet_22062026.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-RBI-Office-Attendant-Result-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1016",
@@ -40,12 +40,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://energy.rajasthan.gov.in/rrvun/#/pages/sm/department-page/373376/2700",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1014",

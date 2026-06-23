@@ -24,14 +24,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://online.ecgpsconline.in/",
         "officialNotification": "https://psc.cg.gov.in/PDFs/advertisement/SAHAYAK_JILA_LOK_ABHIYOJAN_ADHIKARI-2026_ADVERTISEMENT%20(17-06-2026).pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2464",
+        "detailPage": "../Job_Details/HTML/1009-CGPSC-ADLPO-Recruitment-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2434",
@@ -206,14 +206,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sewayojan.up.nic.in/",
         "officialNotification": "https://doc.sarkariresults.org.in/SewayojanGJobDoc221675.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2463",
+        "detailPage": "../Job_Details/HTML/1010-UP-Parivahan-Outsourcing-Driver-Recruitment-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2457",
