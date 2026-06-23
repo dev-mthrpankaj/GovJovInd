@@ -111,12 +111,12 @@ window.GovJobUpdatesAdmitCards = [
             "Special Branch"
         ],
         "downloadLink": "https://apply-csbc.com/csbc_12026_weadmitcard/searchApplication",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Admit-Card-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2396",
