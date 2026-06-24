@@ -72,7 +72,7 @@ window.GovJobUpdatesAdmitCards = [
     },
     {
         "id": "2400",
-        "title": "RSSB Forester Exam City Details 2026 for 259 Post",
+        "title": "RSSB Forester Admit Card/Exam City Details 2026 for 259 Post",
         "organization": "RSSB",
         "department": "RSSB",
         "category": "Admit card",
@@ -80,7 +80,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-24",
-        "status": "upcoming",
+        "status": "available",
         "tags": [
             "RSSB",
             "Forester"
