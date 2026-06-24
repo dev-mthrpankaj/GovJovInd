@@ -103,7 +103,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-24",
         "examEndDate": "",
         "releaseDate": "2026-06-17",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "CSBC",
             "Bihar Police",

@@ -886,7 +886,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "772",
         "startDate": "2026-06-04",
         "lastDate": "2026-06-24",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Excise Constable",
