@@ -9,7 +9,7 @@ window.GovJobUpdatesResults = [
         "organization": "Uttar Pradesh Public Service Commission",
         "department": "Staff Nurse",
         "category": "Result",
-        "year": "20262026",
+        "year": "2026",
         "resultDate": "2026-06-23",
         "status": "released",
         "tags": [
