@@ -18,12 +18,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rssb.rajasthan.gov.in/results",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3006-Rajasthan-RSSB-Agriculture-Supervisor-Result-2026.html",
         "updatedAt": "2026-06-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1017",
