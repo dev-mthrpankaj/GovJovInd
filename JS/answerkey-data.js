@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "4014",
+        "title": "UPSC ISS Answer Key 2026 for 44 Post",
+        "organization": "Union Public Service Commission",
+        "department": "IES ISS",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-06-19",
+        "examEndDate": "",
+        "releaseDate": "2026-06-24",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey-Statistics-I-ISS-Examination-2026-240626.pdf",
+        "objectionLink": "",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-24",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "4012",
         "title": "SSC Delhi Police Head Constable Ministerial Result 2026 | Marks | Final Answer Key",
         "organization": "Staff Selection Commission",
