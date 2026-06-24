@@ -22,12 +22,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey-Statistics-I-ISS-Examination-2026-240626.pdf",
         "objectionLink": "",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/1105-UPSC-ISS-Statistics-Answer-Key-2026.html",
         "updatedAt": "2026-06-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4012",
