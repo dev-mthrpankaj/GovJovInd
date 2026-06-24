@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1019",
+        "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
+        "organization": "Rajasthan RSSB Agriculture Supervisor",
+        "department": "",
+        "category": "ruselt",
+        "year": "2026",
+        "resultDate": "2026-06-24",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rssb.rajasthan.gov.in/results",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-24",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1017",
         "title": "UPPSC Staff Nurse Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",
