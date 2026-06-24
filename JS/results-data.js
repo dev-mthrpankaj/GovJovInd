@@ -8,7 +8,7 @@ window.GovJobUpdatesResults = [
         "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
         "organization": "Rajasthan RSSB Agriculture Supervisor",
         "department": "",
-        "category": "ruselt",
+        "category": "Result",
         "year": "2026",
         "resultDate": "2026-06-24",
         "status": "released",

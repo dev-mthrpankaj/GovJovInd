@@ -15,13 +15,17 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-24",
         "objectionLastDate": "",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "UPSC",
+            "IES ISS",
+            "Answer Key"
+        ],
         "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey-Statistics-I-ISS-Examination-2026-240626.pdf",
         "objectionLink": "",
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-24",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
