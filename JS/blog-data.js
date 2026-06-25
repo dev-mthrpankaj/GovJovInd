@@ -7,7 +7,7 @@
       title: "NCERT में Emergency: 1975 की कहानी, लोकतंत्र पर असर और आज की राजनीति को समझने की पूरी Guide",
       category: "Education News",
       date: "2026-06-25",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782403065885.webp",
       url: "student-hub/ncert-emergency-syllabus-1975-democracy-political-analysis.html",
       excerpt: "NCERT Class 9 में Emergency topic जुड़ने के बाद 1975-77 Emergency, 1976 के बदलाव, लोकतंत्र, rights और current politics को neutral तरीके से समझें."
     },
