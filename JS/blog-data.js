@@ -16,7 +16,7 @@
       title: "SSC CGL 2026: 15 Minute Section Timing के बाद तैयारी कैसे बदलनी चाहिए?",
       category: "SSC",
       date: "2026-06-25",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782394581976.webp",
       url: "student-hub/ssc-cgl-2026-15-minute-section-timing-strategy.html",
       excerpt: "SSC CGL 2026 section-wise timing ke baad Maths, Reasoning, English aur GK ke liye speed, accuracy aur mock-test strategy."
     },
