@@ -34,7 +34,7 @@
       title: "SSC CHSL 2025 Option-Cum-Preference: Choice Filling में गलती हुई तो Selection के बाद पछताना पड़ सकता है",
       category: "SSC",
       date: "2026-06-25",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782392681446.webp",
       url: "student-hub/ssc-chsl-2025-option-cum-preference-choice-filling-guide.html",
       excerpt: "SSC CHSL option-cum-preference form ke liye LDC, JSA, PA/SA aur DEO post preference, common mistakes aur safe choice formula."
     },
