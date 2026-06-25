@@ -52,7 +52,7 @@
       title: "UP Police Constable Answer Key 2026: Marks vs Selection Chance, Expected Cut Off और Previous Cut Off Comparison",
       category: "State Exams",
       date: "2026-06-25",
-      image: "../Assets/Home%20Page/up-police-strategy.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782389979696.webp",
       url: "student-hub/up-police-constable-answer-key-2026-marks-vs-selection-chance.html",
       excerpt: "UP Police answer key 2026 ke baad marks vs selection chance, expected cut off, previous cut off, paper level aur category-wise safe score ka practical analysis."
     },
