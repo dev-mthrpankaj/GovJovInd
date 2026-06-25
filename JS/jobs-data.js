@@ -74,7 +74,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "approx. 12256",
         "startDate": "2026-05-21",
         "lastDate": "2026-06-25",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Staff Selection Commission Recruitment 2026",
             "SSC CGL 2026",
@@ -224,7 +224,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "2285",
         "startDate": "2026-05-29",
         "lastDate": "2026-06-25",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Lower PCS",
@@ -766,7 +766,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "70",
         "startDate": "2026-06-05",
         "lastDate": "2026-06-25",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Hindustan Copper Limited (HCL) Recruitment 2026",
             "HCL Recruitment",
