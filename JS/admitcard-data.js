@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2402",
+        "title": "ICFRE Various Post Admit Card 2026 for 91 Post",
+        "organization": "ICFRE – Forest Research Institute",
+        "department": "",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-06-29",
+        "examEndDate": "2026-06-30",
+        "releaseDate": "2026-06-25",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://friexam.in/",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-06-25",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2401",
         "title": "UPTET Exam City 2026 | UP TET Teacher Eligibility Test",
         "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
@@ -142,28 +162,6 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "2402",
-        "title": "SWD IAS/PCS Free Coaching Admit Card 2026",
-        "organization": "Social Welfare Department Uttar Pradesh Lucknow",
-        "department": "SWD IAS/PCS",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-07-05",
-        "examEndDate": "",
-        "releaseDate": "2026-06-25",
-        "status": "available",
-        "tags": [
-            "IAS/PCS"
-        ],
-        "downloadLink": "https://socialwelfareup.upsdc.gov.in/main.aspx",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-06-05",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     },
     {
         "id": "2042",
