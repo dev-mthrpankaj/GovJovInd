@@ -25,7 +25,7 @@
       title: "HSSC CET Group D 2026: Form, Eligibility और Safe Preparation Plan",
       category: "State Exams",
       date: "2026-06-25",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782394446464.webp",
       url: "student-hub/hssc-cet-group-d-2026-form-safe-preparation-plan.html",
       excerpt: "Haryana CET Group D 2026 candidates ke liye form filling mistakes, eligibility checks, documents aur 30-day preparation plan."
     },
