@@ -14,7 +14,10 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "2026-06-30",
         "releaseDate": "2026-06-25",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "ICFRE",
+            "Forest Research Institute"
+        ],
         "downloadLink": "https://friexam.in/",
         "detailPage": "../AdmitCard_Details/HTML/03-ICFRE-FRI-Various-Post-Admit-Card-2026.html",
         "updatedAt": "2026-06-25",
@@ -34,7 +37,11 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "2026-07-04",
         "releaseDate": "2026-05-22",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "UPTET",
+            "UPESSC",
+            "Teacher"
+        ],
         "downloadLink": "https://admitcards.upessc.org/",
         "detailPage": "../AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html",
         "updatedAt": "2026-06-23",

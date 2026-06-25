@@ -4,6 +4,76 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1020",
+        "title": "SSC Delhi Police Constable Driver Additional Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-25",
+        "status": "released",
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "Constable",
+            "Driver"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html",
+        "updatedAt": "2026-06-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "1021",
+        "title": "SSC Delhi Police Head Constable Ministerial Additional Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-25",
+        "status": "released",
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "Head Constable",
+            "Ministerial"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html",
+        "updatedAt": "2026-06-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "1022",
+        "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-25",
+        "status": "released",
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "Head Constable",
+            "AWO",
+            "TPO"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
+        "updatedAt": "2026-06-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1019",
         "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
         "organization": "Rajasthan RSSB Agriculture Supervisor",
