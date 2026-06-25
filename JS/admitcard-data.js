@@ -144,6 +144,28 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "2402",
+        "title": "SWD IAS/PCS Free Coaching Admit Card 2026",
+        "organization": "Social Welfare Department Uttar Pradesh Lucknow",
+        "department": "SWD IAS/PCS",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-07-05",
+        "examEndDate": "",
+        "releaseDate": "2026-06-25",
+        "status": "available",
+        "tags": [
+            "IAS/PCS"
+        ],
+        "downloadLink": "https://socialwelfareup.upsdc.gov.in/main.aspx",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-06-05",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2042",
         "title": "UP Police Constable Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
