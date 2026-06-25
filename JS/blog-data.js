@@ -3,6 +3,51 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "uptet-2026-city-slip-admit-card-travel-checklist",
+      title: "UPTET 2026 City Slip, Admit Card और Travel Checklist: Exam City आने के बाद क्या करें?",
+      category: "State Exams",
+      date: "2026-06-25",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/uptet-2026-city-slip-admit-card-travel-checklist.html",
+      excerpt: "UPTET 2026 city intimation slip aur admit card ke baad travel, documents, exam city planning aur exam-day mistakes se bachne ki complete guide."
+    },
+    {
+      id: "ssc-cgl-2026-15-minute-section-timing-strategy",
+      title: "SSC CGL 2026: 15 Minute Section Timing के बाद तैयारी कैसे बदलनी चाहिए?",
+      category: "SSC",
+      date: "2026-06-25",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/ssc-cgl-2026-15-minute-section-timing-strategy.html",
+      excerpt: "SSC CGL 2026 section-wise timing ke baad Maths, Reasoning, English aur GK ke liye speed, accuracy aur mock-test strategy."
+    },
+    {
+      id: "hssc-cet-group-d-2026-form-safe-preparation-plan",
+      title: "HSSC CET Group D 2026: Form, Eligibility और Safe Preparation Plan",
+      category: "State Exams",
+      date: "2026-06-25",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/hssc-cet-group-d-2026-form-safe-preparation-plan.html",
+      excerpt: "Haryana CET Group D 2026 candidates ke liye form filling mistakes, eligibility checks, documents aur 30-day preparation plan."
+    },
+    {
+      id: "ssc-chsl-2025-option-cum-preference-choice-filling-guide",
+      title: "SSC CHSL 2025 Option-Cum-Preference: Choice Filling में गलती हुई तो Selection के बाद पछताना पड़ सकता है",
+      category: "SSC",
+      date: "2026-06-25",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/ssc-chsl-2025-option-cum-preference-choice-filling-guide.html",
+      excerpt: "SSC CHSL option-cum-preference form ke liye LDC, JSA, PA/SA aur DEO post preference, common mistakes aur safe choice formula."
+    },
+    {
+      id: "up-home-guard-2026-marks-rank-physical-document-guide",
+      title: "UP Home Guard 2026: Marks, Rank, Physical और Documents - Selection Chance कैसे समझें?",
+      category: "State Exams",
+      date: "2026-06-25",
+      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      url: "student-hub/up-home-guard-2026-marks-rank-physical-document-guide.html",
+      excerpt: "UP Home Guard candidates ke liye marks vs rank, district-wise competition, physical preparation aur document verification checklist."
+    },
+    {
       id: "up-police-constable-answer-key-2026-marks-vs-selection-chance",
       title: "UP Police Constable Answer Key 2026: Marks vs Selection Chance, Expected Cut Off और Previous Cut Off Comparison",
       category: "State Exams",
