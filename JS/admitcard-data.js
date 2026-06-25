@@ -7,7 +7,7 @@ window.GovJobUpdatesAdmitCards = [
         "id": "2402",
         "title": "ICFRE Various Post Admit Card 2026 for 91 Post",
         "organization": "ICFRE – Forest Research Institute",
-        "department": "",
+        "department": "ICFRE",
         "category": "Admit Card",
         "year": "2026",
         "examDate": "2026-06-29",
@@ -16,12 +16,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://friexam.in/",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/03-ICFRE-FRI-Various-Post-Admit-Card-2026.html",
         "updatedAt": "2026-06-25",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2401",
