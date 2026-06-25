@@ -471,11 +471,11 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://rpsc.rajasthan.gov.in/",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3007-RPSC-RAS-Final-Result-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",
         "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     }
 ];
