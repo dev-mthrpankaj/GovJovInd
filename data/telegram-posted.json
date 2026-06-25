@@ -801,6 +801,20 @@
       "title": "NEEPCO Executive Online Form 2026",
       "lastPostedAt": "2026-06-23T17:10:21.157Z",
       "stateReason": "new"
+    },
+    "jobs:2468": {
+      "updatedAt": "2026-06-25",
+      "hash": "0c6989f6d0e4504663e2726b8834abeced1ef52db0d90842d8cc7981fe282339",
+      "title": "Indian Navy SSC Officers Various Post Online Form 2026",
+      "lastPostedAt": "2026-06-25T17:23:09.661Z",
+      "stateReason": "new"
+    },
+    "jobs:2469": {
+      "updatedAt": "2026-06-25",
+      "hash": "5f0d8e03bf40f760782b9dbf3d882653437234e15b274072fcf38133fd1994bc",
+      "title": "UPPSC Pre Online Form 2026 for 500 Post",
+      "lastPostedAt": "2026-06-25T17:23:10.404Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -1863,6 +1877,27 @@
       "hash": "c1f4cb47b50f1d8335ed1cb95202241449bbdc083a2924ddabe63721373cba7c",
       "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
       "lastPostedAt": "2026-06-24T16:46:54.140Z",
+      "stateReason": "new"
+    },
+    "results:1020": {
+      "updatedAt": "2026-06-25",
+      "hash": "7fa441bf642988640673ab084611a52fff3ef6686e9b49eff4e2a591c4bf7440",
+      "title": "SSC Delhi Police Constable Driver Additional Result 2026",
+      "lastPostedAt": "2026-06-25T17:23:10.788Z",
+      "stateReason": "new"
+    },
+    "results:1021": {
+      "updatedAt": "2026-06-25",
+      "hash": "4566132e493c68f118e36911a0a5c17459005f7e8fa0b40ae59807c785a03e48",
+      "title": "SSC Delhi Police Head Constable Ministerial Additional Result 2026",
+      "lastPostedAt": "2026-06-25T17:23:11.385Z",
+      "stateReason": "new"
+    },
+    "results:1022": {
+      "updatedAt": "2026-06-25",
+      "hash": "f16a5e3352f25e0cb7c12ea02fa79dc4ad03cc60ed858c5ed30f5c37592ef402",
+      "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
+      "lastPostedAt": "2026-06-25T17:23:11.791Z",
       "stateReason": "new"
     }
   }
