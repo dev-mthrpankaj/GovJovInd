@@ -43,7 +43,7 @@
       title: "UP Home Guard 2026: Marks, Rank, Physical और Documents - Selection Chance कैसे समझें?",
       category: "State Exams",
       date: "2026-06-25",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782390214680.webp",
       url: "student-hub/up-home-guard-2026-marks-rank-physical-document-guide.html",
       excerpt: "UP Home Guard candidates ke liye marks vs rank, district-wise competition, physical preparation aur document verification checklist."
     },
