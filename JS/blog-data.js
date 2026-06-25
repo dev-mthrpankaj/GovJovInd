@@ -7,7 +7,7 @@
       title: "UPTET 2026 City Slip, Admit Card और Travel Checklist: Exam City आने के बाद क्या करें?",
       category: "State Exams",
       date: "2026-06-25",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782394694498.webp",
       url: "student-hub/uptet-2026-city-slip-admit-card-travel-checklist.html",
       excerpt: "UPTET 2026 city intimation slip aur admit card ke baad travel, documents, exam city planning aur exam-day mistakes se bachne ki complete guide."
     },
