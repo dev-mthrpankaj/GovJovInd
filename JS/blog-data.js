@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "ram-mandir-donation-fraud-row-fir-sit-transparency-explained",
+      title: "Ram Mandir Donation Fraud Row Explained: FIR, SIT जांच और धार्मिक दान में पारदर्शिता का बड़ा सवाल",
+      category: "Current Affairs",
+      date: "2026-06-26",
+      image: thumbnail,
+      url: "student-hub/ram-mandir-donation-fraud-row-fir-sit-transparency-explained.html",
+      excerpt: "Ayodhya Ram Mandir donation row पर neutral explainer: FIR, SIT preliminary report, police action, political claims और religious donations में transparency का पूरा analysis."
+    },
+    {
       id: "ncert-emergency-syllabus-1975-democracy-political-analysis",
       title: "NCERT में Emergency: 1975 की कहानी, लोकतंत्र पर असर और आज की राजनीति को समझने की पूरी Guide",
       category: "Education News",
