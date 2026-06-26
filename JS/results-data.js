@@ -551,7 +551,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-3030",
+        "id": "999",
         "title": "RPSC RAS 2024 Final Result",
         "organization": "Rajasthan Public Service Commission",
         "department": "State PSC",
