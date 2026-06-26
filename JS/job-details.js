@@ -189,6 +189,7 @@
       applyLink: getText(job.applyLink || job.apply || job.applyUrl, "#"),
       officialNotification: getText(job.officialNotification || job.notification || job.notificationLink, "#"),
       officialWebsite: getText(job.officialWebsite || job.website || job.applyLink || job.apply || "#"),
+      location: getText(job.location || job.jobLocation || job.state || job.place || ""),
       applicationFee: getText(job.applicationFee || job.fee || job.fees, "Check the official notification for category-wise application fee details."),
       ageLimit: getText(job.ageLimit || job.age || "Check the official notification for minimum age, maximum age and relaxation rules."),
       salary: getText(job.salary || job.payScale || job.pay || "Salary, stipend, honorarium or pay scale will be as notified by the recruiting organization."),
@@ -385,6 +386,47 @@
     return { questions, html: `<div class="job-faq-list">${questions.map(([q, a], index) => `<details class="job-faq-item"${index === 0 ? " open" : ""}><summary>${escapeHtml(q)}</summary><p>${escapeHtml(a)}</p></details>`).join("")}</div>` };
   }
 
+  function buildJobLocation(job) {
+    const text = `${job.location} ${job.title} ${job.organization} ${job.department} ${job.category} ${Array.isArray(job.tags) ? job.tags.join(" ") : ""}`;
+    const stateMap = [
+      ["Andhra Pradesh", /andhra|appsc/i],
+      ["Arunachal Pradesh", /arunachal/i],
+      ["Assam", /assam/i],
+      ["Bihar", /bihar|bpsc|bp(?:s)?ssc|bceceb|patna/i],
+      ["Chhattisgarh", /chhattisgarh|cgpsc/i],
+      ["Delhi", /delhi|dsssb/i],
+      ["Goa", /\bgoa\b/i],
+      ["Gujarat", /gujarat|gpsc/i],
+      ["Haryana", /haryana|hssc/i],
+      ["Himachal Pradesh", /himachal|hppsc/i],
+      ["Jharkhand", /jharkhand|jssc/i],
+      ["Karnataka", /karnataka|ksp|kea/i],
+      ["Kerala", /kerala/i],
+      ["Madhya Pradesh", /madhya pradesh|\bmp\b|mpesb|mppsc/i],
+      ["Maharashtra", /maharashtra|mumbai|nagpur/i],
+      ["Odisha", /odisha/i],
+      ["Punjab", /punjab|pspcl/i],
+      ["Rajasthan", /rajasthan|rpsc|rssb/i],
+      ["Tamil Nadu", /tamil nadu|tnpsc/i],
+      ["Telangana", /telangana/i],
+      ["Uttar Pradesh", /uttar pradesh|\bup\b|upsssc|uppsc|upessc|upsrtc|upsrlm|jhansi/i],
+      ["Uttarakhand", /uttarakhand|uksssc/i],
+      ["West Bengal", /west bengal|kolkata/i]
+    ];
+    const matched = stateMap.find(([, pattern]) => pattern.test(text));
+    const region = matched ? matched[0] : "India";
+    const address = {
+      "@type": "PostalAddress",
+      "addressRegion": region,
+      "addressCountry": "IN"
+    };
+    if (/delhi/i.test(text)) address.addressLocality = "Delhi";
+    else if (/patna/i.test(text)) address.addressLocality = "Patna";
+    else if (/nagpur/i.test(text)) address.addressLocality = "Nagpur";
+    else if (/jhansi/i.test(text)) address.addressLocality = "Jhansi";
+    return { "@type": "Place", "address": address };
+  }
+
   function renderSchemas(job, faqItems) {
     document.querySelectorAll('script[data-job-schema="true"]').forEach((node) => node.remove());
     const pageUrl = window.location.href.split("#")[0];
@@ -412,6 +454,7 @@
         "datePosted": isoDate(job.updatedAt || job.startDate) || isoDate(new Date()),
         "validThrough": isoDate(job.lastDate) ? `${isoDate(job.lastDate)}T23:59:59+05:30` : undefined,
         "employmentType": /contract|consultant/i.test(`${job.title} ${job.category}`) ? "CONTRACTOR" : "FULL_TIME",
+        "jobLocation": buildJobLocation(job),
         "url": pageUrl,
         "qualifications": job.qualification,
         "industry": job.department
