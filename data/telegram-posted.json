@@ -815,6 +815,20 @@
       "title": "UPPSC Pre Online Form 2026 for 500 Post",
       "lastPostedAt": "2026-06-25T17:23:10.404Z",
       "stateReason": "new"
+    },
+    "jobs:2470": {
+      "updatedAt": "2026-06-26",
+      "hash": "61614f4eb57637271618a93b77fa74bf67f43afa03f159f1c663b757c0a7a9a2",
+      "title": "BPSSC Bihar Police Company Commander Online Form 2026",
+      "lastPostedAt": "2026-06-26T16:39:18.181Z",
+      "stateReason": "new"
+    },
+    "jobs:2471": {
+      "updatedAt": "2026-06-26",
+      "hash": "577aeffa7c77f69780b923e66ebce66d1e651fda6c474f7f939ff1b8116c7232",
+      "title": "AAICLAS Assistant Security Online Form 2026",
+      "lastPostedAt": "2026-06-26T16:39:18.884Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -1180,6 +1194,41 @@
       "hash": "955fec599799ccf9b9c0af6231b4ca92d60d64b3de3700a6174cd75d0977ffc1",
       "title": "ICFRE Various Post Admit Card 2026 for 91 Post",
       "lastPostedAt": "2026-06-25T08:05:23.321Z",
+      "stateReason": "new"
+    },
+    "admitCards:2403": {
+      "updatedAt": "2026-06-26",
+      "hash": "0e9dcd12803b1a991463261025c0c938b39c3e5b668ee51ce3794b6709fd2af3",
+      "title": "Bihar Police BPSSC ASI Operation AdmitCard / Exam Date 2026 for 462 Post",
+      "lastPostedAt": "2026-06-26T16:39:19.542Z",
+      "stateReason": "new"
+    },
+    "admitCards:2404": {
+      "updatedAt": "2026-06-26",
+      "hash": "ac71268f8ef18a432a8c23d107dba246ffb2feee452a34923cf221c7401edfca",
+      "title": "UPSSSC Various Post UP Pollution Admit Card 2026 for 115 Post",
+      "lastPostedAt": "2026-06-26T16:39:19.954Z",
+      "stateReason": "new"
+    },
+    "admitCards:2405": {
+      "updatedAt": "2026-06-26",
+      "hash": "f8d3e2fec1d3ad614d4f6602e44cd666ee8bf45061601fc899d03ab7905d6d8f",
+      "title": "UPSSSC Pharmacist Admit Card 2026 for 560 Post",
+      "lastPostedAt": "2026-06-26T16:39:20.766Z",
+      "stateReason": "new"
+    },
+    "admitCards:2406": {
+      "updatedAt": "2026-06-26",
+      "hash": "45ae5635e014a09fba23e36c48d96be953e0ffeb0cb3968ed4a912741a095438",
+      "title": "UPSSSC BCG Technician Admit Card 2026 for 255 Post",
+      "lastPostedAt": "2026-06-26T16:39:24.621Z",
+      "stateReason": "new"
+    },
+    "admitCards:2407": {
+      "updatedAt": "2026-06-26",
+      "hash": "74e841a90f92c419aef21d1a77ab27cfd7d08c2c57d3b382b271c4ac87305d78",
+      "title": "PGCIL Non Executive Admit Card 2026 for 670 Post",
+      "lastPostedAt": "2026-06-26T16:39:25.226Z",
       "stateReason": "new"
     }
   },
