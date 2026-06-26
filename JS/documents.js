@@ -47,20 +47,38 @@ function clearMessage(box) {
 function setBusy(button, busy, text) {
     if (!button) return;
     if (busy) {
-        button.dataset.originalHtml = button.innerHTML;
+        if (!button.dataset.originalHtml) button.dataset.originalHtml = button.innerHTML;
         button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${text || 'Processing...'}`;
         button.disabled = true;
         return;
     }
     button.innerHTML = button.dataset.originalHtml || button.innerHTML;
+    delete button.dataset.originalHtml;
     button.disabled = false;
+}
+
+function sanitizeFilename(filename, fallback = 'GovJobUpdates_Document') {
+    const cleaned = String(filename || '')
+        .replace(/[\\/:*?"<>|]+/g, '-')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/^\.+|\.+$/g, '')
+        .slice(0, 140);
+    return cleaned || fallback;
+}
+
+function withExtension(filename, extension) {
+    const safeExtension = String(extension || '').replace(/^\./, '').toLowerCase();
+    const safeName = sanitizeFilename(filename);
+    if (!safeExtension) return safeName;
+    return safeName.toLowerCase().endsWith(`.${safeExtension}`) ? safeName : `${safeName}.${safeExtension}`;
 }
 
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = filename;
+    link.download = sanitizeFilename(filename);
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -270,9 +288,6 @@ function parsePageRange(rangeText, pageCount) {
         if (start < 1 || end < 1 || start > pageCount || end > pageCount) {
             throw new Error(`Page range must be between 1 and ${pageCount}.`);
         }
-        if (end < start) {
-            throw new Error('Please enter page ranges in increasing order, e.g. 3-5.');
-        }
         const step = start <= end ? 1 : -1;
         for (let page = start; step === 1 ? page <= end : page >= end; page += step) {
             const index = page - 1;
@@ -285,6 +300,20 @@ function parsePageRange(rangeText, pageCount) {
 
     if (!pages.length) throw new Error('Please enter at least one page.');
     return pages;
+}
+
+function getPdfLibraryStatus() {
+    const missing = [];
+    if (!window.PDFLib || !window.PDFLib.PDFDocument) missing.push('PDF builder');
+    if (!window.pdfjsLib) missing.push('PDF renderer');
+    return missing;
+}
+
+function showPdfLibraryWarnings() {
+    const missing = getPdfLibraryStatus();
+    if (!missing.length) return;
+    const message = `${missing.join(' and ')} library failed to load. PDF tools need internet/CDN access; image resize can still work. Please refresh after internet is stable.`;
+    ['#pdf-message', '#resize-pdf-message', '#pdf-manager-message'].forEach((selector) => showMessage($(selector), 'error', message));
 }
 
 function handleFile(file, input, options) {
@@ -555,7 +584,7 @@ function initImageResizer() {
             return;
         }
         const extension = getImageExtension(resizedFormat);
-        downloadBlob(resizedBlob, `GovJobUpdates_Resized_${Date.now()}.${extension}`);
+        downloadBlob(resizedBlob, withExtension(`GovJobUpdates_Resized_${Date.now()}`, extension));
     });
 
     updateImageQualityLabel();
@@ -983,7 +1012,7 @@ function initImageToPdf() {
             showMessage(messageBox, 'error', 'Please convert an image before downloading.');
             return;
         }
-        downloadBlob(pdfBlob, `GovJobUpdates_Image_To_PDF_${Date.now()}.pdf`);
+        downloadBlob(pdfBlob, withExtension(`GovJobUpdates_Image_To_PDF_${Date.now()}`, 'pdf'));
     });
 
     updatePdfQualityLabel();
@@ -1252,15 +1281,17 @@ function initImageToPdf() {
         canvas.width = targetWidth;
         canvas.height = targetHeight;
         const context = canvas.getContext('2d');
+        if (!context) throw new Error('Canvas is not available in this browser.');
         context.fillStyle = '#ffffff';
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.imageSmoothingEnabled = true;
         context.imageSmoothingQuality = 'high';
         context.drawImage(image, 0, 0, targetWidth, targetHeight);
         const blob = await canvasToBlob(canvas, 'image/jpeg', quality);
+        const bytes = await blob.arrayBuffer();
         canvas.width = 0;
         canvas.height = 0;
-        return blob.arrayBuffer();
+        return bytes;
     }
 
     function buildImagePdfTargetStatus(result, targetBytes) {
@@ -1317,7 +1348,7 @@ function initPdfResizer() {
             showMessage(messageBox, 'error', 'Please process a PDF before downloading.');
             return;
         }
-        downloadBlob(resizedPdf, `GovJobUpdates_Compressed_PDF_${Date.now()}.pdf`);
+        downloadBlob(resizedPdf, withExtension(`GovJobUpdates_Compressed_PDF_${Date.now()}`, 'pdf'));
     });
 
     updateQualityLabel();
@@ -1708,14 +1739,14 @@ function initPdfManager() {
             showMessage(messageBox, 'error', 'Please merge PDFs before downloading.');
             return;
         }
-        downloadBlob(mergedPdfBlob, `GovJobUpdates_Merged_PDF_${Date.now()}.pdf`);
+        downloadBlob(mergedPdfBlob, withExtension(`GovJobUpdates_Merged_PDF_${Date.now()}`, 'pdf'));
     });
     organizeDownloadBtn.addEventListener('click', () => {
         if (!organizedPdfBlob) {
             showMessage(messageBox, 'error', 'Please create an output PDF before downloading.');
             return;
         }
-        downloadBlob(organizedPdfBlob, organizedFilename || `GovJobUpdates_Organized_PDF_${Date.now()}.pdf`);
+        downloadBlob(organizedPdfBlob, withExtension(organizedFilename || `GovJobUpdates_Organized_PDF_${Date.now()}`, 'pdf'));
     });
 
     async function handleMergeFiles(files) {
@@ -1930,7 +1961,7 @@ function initPdfManager() {
             pages.forEach((page) => outputPdf.addPage(page));
             const bytes = await outputPdf.save({ useObjectStreams: true, addDefaultPage: false });
             organizedPdfBlob = new Blob([bytes], { type: 'application/pdf' });
-            organizedFilename = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
+            organizedFilename = withExtension(filename, 'pdf');
             $('#organize-pdf-size').textContent = formatFileSize(organizedPdfBlob.size);
             $('#organize-pdf-output-pages').textContent = String(pageIndexes.length);
             organizeDownloadArea.classList.remove('hidden');
@@ -1966,4 +1997,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initImageToPdf();
     initPdfResizer();
     initPdfManager();
+    showPdfLibraryWarnings();
 });
