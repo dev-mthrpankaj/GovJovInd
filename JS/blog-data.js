@@ -7,7 +7,7 @@
       title: "Ram Mandir Donation Fraud Row Explained: FIR, SIT जांच और धार्मिक दान में पारदर्शिता का बड़ा सवाल",
       category: "Current Affairs",
       date: "2026-06-26",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782513952528.webp",
       url: "student-hub/ram-mandir-donation-fraud-row-fir-sit-transparency-explained.html",
       excerpt: "Ayodhya Ram Mandir donation row पर neutral explainer: FIR, SIT preliminary report, police action, political claims और religious donations में transparency का पूरा analysis."
     },
