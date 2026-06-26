@@ -49,12 +49,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://sscexams.cbexams.com/DPCMpost2025FInalKeyndlandingpage/loginnew.aspx",
         "objectionLink": "",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4013",

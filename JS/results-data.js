@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1023",
+        "title": "BPSSC Bihar Police Havildar Clerk Result 2026",
+        "organization": "Bihar Police Subordinate Services Commission (BPSSC)",
+        "department": "BPSSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-25",
+        "status": "released",
+        "tags": [
+            "BPSSC",
+            "Bihar Police",
+            "Havildar",
+            "Clerk",
+            "Result"
+        ],
+        "resultLink": "https://bpssc.bihar.gov.in/Notices/Result_Written_24062026_Publish.pdf",
+        "detailPage": "../Result_Details/HTML/3006-BPSSC-Bihar-Home-Guard-Havildar-Clerk-Result-2026.html",
+        "updatedAt": "2026-06-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1020",
         "title": "SSC Delhi Police Constable Driver Additional Result 2026",
         "organization": "Staff Selection Commission",
