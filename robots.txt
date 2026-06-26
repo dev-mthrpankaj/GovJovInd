@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /live-test/
 Disallow: /live-test/admin/
 Disallow: /live-test/payment-
 Disallow: /live-test/attempt.php
@@ -18,3 +19,4 @@ Disallow: /.cache/
 Allow: /
 
 Sitemap: https://govjobupdates.com/sitemap.xml
+Sitemap: https://test.govjobupdates.com/live-test/sitemap.xml
