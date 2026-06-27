@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "government-exams-2026-complete-calendar-vacancy-eligibility-guide",
+      title: "Government Exams 2026: SSC, UPSC, Railway, Banking, Teaching, Police और State Exams की Complete Guide",
+      category: "Career Guidance",
+      date: "2026-06-27",
+      image: thumbnail,
+      url: "student-hub/government-exams-2026-complete-calendar-vacancy-eligibility-guide.html",
+      excerpt: "2026 में आने वाली major government exams: SSC, UPSC, Railway, Banking, Teaching, Police, Defence और State exams की vacancy, eligibility और preparation roadmap."
+    },
+    {
       id: "ram-mandir-donation-fraud-row-fir-sit-transparency-explained",
       title: "Ram Mandir Donation Fraud Row Explained: FIR, SIT जांच और धार्मिक दान में पारदर्शिता का बड़ा सवाल",
       category: "Current Affairs",
