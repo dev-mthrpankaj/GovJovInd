@@ -7,7 +7,7 @@
       title: "Government Exams 2026: SSC, UPSC, Railway, Banking, Teaching, Police और State Exams की Complete Guide",
       category: "Career Guidance",
       date: "2026-06-27",
-      image: ../Assets/Home%20Page/GovJobUpdates_Resized_1782569034519.webp",
+      image:"../Assets/Home%20Page/GovJobUpdates_Resized_1782569034519.webp",
       url: "student-hub/government-exams-2026-complete-calendar-vacancy-eligibility-guide.html",
       excerpt: "2026 में आने वाली major government exams: SSC, UPSC, Railway, Banking, Teaching, Police, Defence और State exams की vacancy, eligibility और preparation roadmap."
     },
