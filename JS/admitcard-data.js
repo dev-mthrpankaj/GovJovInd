@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2408",
+        "title": "CG Police SI 2024 Admit Card for 341 Post",
+        "organization": "Chhattisgarh Public Service Commission (CGPSC)",
+        "department": "CGPSC",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-07-12",
+        "examEndDate": "",
+        "releaseDate": "2026-06-26",
+        "status": "available",
+        "tags": [
+            "CGPSC",
+            "CG Police",
+            "SI"
+        ],
+        "downloadLink": "https://online.ecgpsconline.in/",
+        "detailPage": "../AdmitCard_Details/HTML/01-CGPSC-Subedar-SI-Platoon-Commander-Admit-Card-2026.html",
+        "updatedAt": "2026-06-27",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2403",
         "title": "Bihar Police BPSSC ASI Operation AdmitCard / Exam Date 2026 for 462 Post",
         "organization": "Bihar Police Subordinate Services Commission (BPSSC)",
@@ -107,7 +131,10 @@ window.GovJobUpdatesAdmitCards = [
         "examEndDate": "",
         "releaseDate": "2026-06-25",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "PGCIL",
+            "Non Executive"
+        ],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101292/login.html",
         "detailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
