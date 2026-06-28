@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "ketan-agarwal-case-student-safety-relationship-red-flags",
+      title: "Ketan Agarwal Murder Case से Students क्या सीखें? Relationship Red Flags, Digital Safety और Campus Awareness Guide",
+      category: "Student Safety",
+      date: "2026-06-28",
+      image: thumbnail,
+      url: "student-hub/ketan-agarwal-case-student-safety-relationship-red-flags.html",
+      excerpt: "Ketan Agarwal case और recent student incidents से relationship red flags, digital safety, travel safety, campus safety, mental health और legal awareness की practical guide."
+    },
+    {
       id: "israel-iran-war-impact-on-india-students-trade-study",
       title: "Israel-Iran War Impact on India: Study, Trade, Oil, Shipping और Students पर असर",
       category: "Current Affairs",
