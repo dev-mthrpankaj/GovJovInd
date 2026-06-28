@@ -42,15 +42,20 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-27",
         "objectionLastDate": "2026-07-05",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "RRB",
+            "NTPC",
+            "Undergraduate",
+            "Answer Key"
+        ],
         "downloadLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
         "objectionLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html",
         "updatedAt": "2026-06-28",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4014",
