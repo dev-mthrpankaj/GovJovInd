@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1024",
+        "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
+        "organization": "UPSSSC Assistant",
+        "department": "UPSSSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-27",
+        "status": "releases",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=152&Result_Type=P&Exam_Code=7&Advt_Code=729&Dept_Code=564&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-06-27",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "1023",
         "title": "BPSSC Bihar Police Havildar Clerk Result 2026",
         "organization": "Bihar Police Subordinate Services Commission (BPSSC)",
@@ -11,7 +29,7 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2026",
         "resultDate": "2026-06-25",
-        "status": "released",
+        "status": "releases",
         "tags": [
             "BPSSC",
             "Bihar Police",
