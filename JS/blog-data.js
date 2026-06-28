@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "israel-iran-war-impact-on-india-students-trade-study",
+      title: "Israel-Iran War Impact on India: Study, Trade, Oil, Shipping और Students पर असर",
+      category: "Current Affairs",
+      date: "2026-06-28",
+      image: thumbnail,
+      url: "student-hub/israel-iran-war-impact-on-india-students-trade-study.html",
+      excerpt: "Israel-Iran war और Middle East tension का India पर impact: students, study abroad, trade, oil, shipping, inflation, exports और exam-ready analysis."
+    },
+    {
       id: "government-exams-2026-complete-calendar-vacancy-eligibility-guide",
       title: "Government Exams 2026: SSC, UPSC, Railway, Banking, Teaching, Police और State Exams की Complete Guide",
       category: "Career Guidance",
