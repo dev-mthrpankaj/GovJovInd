@@ -314,7 +314,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "4500",
         "startDate": "2026-06-12",
         "lastDate": "2026-06-28",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Central Bank of India Recruitment 2026",
             "CBI Apprentice",
@@ -524,7 +524,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "53",
         "startDate": "2026-06-29",
         "lastDate": "2026-07-20",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "National Board of Examination (NBE) Recruitment 2026",
             "NBEMS Group A",

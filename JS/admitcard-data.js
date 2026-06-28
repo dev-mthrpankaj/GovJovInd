@@ -247,7 +247,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-24",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "RSSB",
             "Forester"
@@ -295,7 +295,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-22",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "CSBC",
             "Bihar Police",
