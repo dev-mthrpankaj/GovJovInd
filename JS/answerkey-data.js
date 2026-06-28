@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "4015",
+        "title": "UP Police Home Guard Final Answer Key 2026",
+        "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
+        "department": "UPPRPB",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-04-25",
+        "examEndDate": "2026-04-27",
+        "releaseDate": "2026-06-28",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://www.hgupexam2025.com/hg2025finalkey/Login.aspx",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
+        "updatedAt": "2026-06-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "4014",
         "title": "UPSC ISS Answer Key 2026 for 44 Post",
         "organization": "Union Public Service Commission",
