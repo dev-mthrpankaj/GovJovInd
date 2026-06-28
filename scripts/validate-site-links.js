@@ -9,6 +9,7 @@ const ignoredPrefixes = [
   "mailto:",
   "tel:",
   "sms:",
+  "intent:",
   "javascript:"
 ];
 
@@ -16,7 +17,7 @@ const scannedExtensions = new Set([".html", ".js", ".xml", ".txt"]);
 
 function walk(dir, files = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    if (entry.name === ".git" || entry.name === "node_modules" || entry.name === "build") continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(full, files);
     else if (scannedExtensions.has(path.extname(entry.name).toLowerCase())) files.push(full);

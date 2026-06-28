@@ -4,11 +4,11 @@ const path = require('path');
 const root = process.cwd();
 const htmlFiles = [];
 const missing = [];
-const skipPrefixes = ['http:', 'https:', '//', 'file:', 'mailto:', 'tel:', 'sms:', 'javascript:', 'data:', '#'];
+const skipPrefixes = ['http:', 'https:', '//', 'file:', 'mailto:', 'tel:', 'sms:', 'intent:', 'javascript:', 'data:', '#'];
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    if (entry.name === '.git' || entry.name === 'node_modules' || entry.name === 'build') continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(full);
     if (entry.isFile() && entry.name.toLowerCase().endsWith('.html')) htmlFiles.push(full);
