@@ -42,12 +42,12 @@ window.GovJobUpdatesResults = [
             "Eligibility Result"
         ],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=152&Result_Type=P&Exam_Code=7&Advt_Code=729&Dept_Code=564&Post_Code=1&OnlyIntview=No",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3007-UPSSSC-ASO-ARO-Mains-Shortlisted-Result-2026.html",
         "updatedAt": "2026-06-27",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1023",
