@@ -4,6 +4,29 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1025",
+        "title": "UP POLICE Home Guard Result of Written Exam 2026",
+        "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
+        "department": "UPPRPB",
+        "category": "Result",
+        "year": "26",
+        "resultDate": "2026-06-28",
+        "status": "releases",
+        "tags": [
+            "UPPRPB",
+            "UP Police",
+            "Home Guard",
+            "Result"
+        ],
+        "resultLink": "https://www.hgupexam2025.com/hg2025writtentestresults/loginpage.aspx",
+        "detailPage": "../Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html",
+        "updatedAt": "2026-06-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1024",
         "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
         "organization": "UPSSSC Assistant",
@@ -12,12 +35,17 @@ window.GovJobUpdatesResults = [
         "year": "2026",
         "resultDate": "2026-06-27",
         "status": "releases",
-        "tags": [],
+        "tags": [
+            "UPSSSC",
+            "ASO",
+            "Assistant Statistical Officer",
+            "Eligibility Result"
+        ],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=152&Result_Type=P&Exam_Code=7&Advt_Code=729&Dept_Code=564&Post_Code=1&OnlyIntview=No",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-27",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
