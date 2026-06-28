@@ -15,7 +15,12 @@ window.GovJobUpdatesAnswerKeys = [
         "releaseDate": "2026-06-28",
         "objectionLastDate": "",
         "status": "available",
-        "tags": [],
+        "tags": [
+            "UPPRPB",
+            "UP Police",
+            "Home Guard",
+            "Answer Key"
+        ],
         "downloadLink": "https://www.hgupexam2025.com/hg2025finalkey/Login.aspx",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
@@ -24,6 +29,28 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "4016",
+        "title": "Railway RRB NTPC 10+2 Level UG Answer Key 2026",
+        "organization": "Railway Recruittment Board",
+        "department": "RRB",
+        "category": "Answer Key",
+        "year": "2026",
+        "examDate": "2026-05-07",
+        "examEndDate": "2026-06-21",
+        "releaseDate": "2026-06-27",
+        "objectionLastDate": "2026-07-05",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
+        "objectionLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-06-28",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "4014",
