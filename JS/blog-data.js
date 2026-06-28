@@ -7,7 +7,7 @@
       title: "Israel-Iran War Impact on India: Study, Trade, Oil, Shipping और Students पर असर",
       category: "Current Affairs",
       date: "2026-06-28",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782634452576.webp",
       url: "student-hub/israel-iran-war-impact-on-india-students-trade-study.html",
       excerpt: "Israel-Iran war और Middle East tension का India पर impact: students, study abroad, trade, oil, shipping, inflation, exports और exam-ready analysis."
     },
