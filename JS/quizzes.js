@@ -54,6 +54,9 @@
         questionEnteredAt: 0
     };
     let quizSearchRecords = null;
+    let pendingMathRoot = null;
+    let mathRetryTimer = 0;
+    let mathRetryCount = 0;
 
     const debouncedRenderQuizList = debounce(renderQuizList, SEARCH_DEBOUNCE_MS);
 
@@ -612,7 +615,7 @@
         setText(elements.currentQuestionNo, String(state.current + 1));
         setText(elements.totalQuestionNo, String(state.questions.length));
         setText(elements.questionNumberLabel, String(state.current + 1));
-        setText(elements.questionText, question.question);
+        setRichText(elements.questionText, question.question);
         renderQuestionMedia(question);
         setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
@@ -640,6 +643,7 @@
             renderOptionContent(node, question, index);
         });
         syncQuestionState();
+        typesetQuizMath(elements.questionCard);
     }
 
     function renderQuestionMedia(question) {
@@ -653,7 +657,7 @@
         const optionText = question.options[index] || "";
         const optionImage = question.optionImages?.[index];
         node.innerHTML = `
-            ${optionText ? `<span class="option-label">${escapeHtml(optionText)}</span>` : ""}
+            ${optionText ? `<span class="option-label">${formatRichText(optionText)}</span>` : ""}
             ${renderMedia(optionImage, "option-image", `Option ${index + 1} image`)}
         `;
     }
@@ -1197,6 +1201,7 @@
                 <button class="quiz-btn quiz-btn-primary" type="button" data-action="back-home">Back to Quizzes</button>
             </div>
         `;
+        typesetQuizMath(views.review);
     }
 
     function renderReviewCard(question, index, result) {
@@ -1215,12 +1220,12 @@
                     <span class="meta-pill">${escapeHtml(titleCase(answerState))}</span>
                     ${marked ? '<span class="meta-pill">Marked</span>' : ""}
                 </div>
-                <h3>${escapeHtml(question.question)}</h3>
+                <h3 class="review-question-title">${formatRichText(question.question)}</h3>
                 ${renderMedia(question.questionImage, "review-question-image", "Question image")}
                 <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}">Your answer: ${selected === null ? "Not attempted" : renderReviewOptionAnswer(question, selected)}</div>
                 <div class="review-answer correct">Correct answer: ${renderReviewOptionAnswer(question, question.correctAnswer)}</div>
                 <div class="review-explanation">
-                    <p><strong>Explanation:</strong> ${escapeHtml(question.explanation)}</p>
+                    <p><strong>Explanation:</strong> ${formatRichText(question.explanation)}</p>
                     ${renderMedia(question.explanationImage, "explanation-image", "Explanation image")}
                 </div>
             </article>
@@ -1232,7 +1237,7 @@
         const optionText = question.options[index] || "";
         const optionImage = question.optionImages?.[index];
         return `
-            ${optionText ? `<span>${escapeHtml(optionText)}</span>` : ""}
+            ${optionText ? `<span>${formatRichText(optionText)}</span>` : ""}
             ${renderMedia(optionImage, "review-option-image", `Option ${index + 1} image`)}
         `;
     }
@@ -1543,6 +1548,57 @@
                 ${caption}
             </figure>
         `;
+    }
+
+    function normalizeRichTextSource(value) {
+        return String(value ?? "").replace(/\\\\(?=[A-Za-z()[\]])/g, "\\");
+    }
+
+    function formatRichText(value) {
+        let html = escapeHtml(normalizeRichTextSource(value));
+        const replacements = [
+            [/\[b\]([\s\S]*?)\[\/b\]/gi, '<strong class="text-bold">$1</strong>'],
+            [/\[u\]([\s\S]*?)\[\/u\]/gi, '<span class="text-underline">$1</span>'],
+            [/\[mark\]([\s\S]*?)\[\/mark\]/gi, '<mark class="text-mark">$1</mark>'],
+            [/\[red\]([\s\S]*?)\[\/red\]/gi, '<span class="text-red">$1</span>']
+        ];
+
+        for (let pass = 0; pass < 3; pass += 1) {
+            replacements.forEach(function ([pattern, replacement]) {
+                html = html.replace(pattern, replacement);
+            });
+        }
+
+        return html;
+    }
+
+    function setRichText(node, value) {
+        if (node) node.innerHTML = formatRichText(value);
+    }
+
+    function typesetQuizMath(root) {
+        if (!root) return;
+        pendingMathRoot = root;
+        if (!window.MathJax || !window.MathJax.typesetPromise) {
+            scheduleMathRetry();
+            return;
+        }
+        window.clearTimeout(mathRetryTimer);
+        mathRetryTimer = 0;
+        mathRetryCount = 0;
+        if (window.MathJax.typesetClear) {
+            window.MathJax.typesetClear([root]);
+        }
+        window.MathJax.typesetPromise([root]).catch(function () {});
+    }
+
+    function scheduleMathRetry() {
+        if (mathRetryTimer || mathRetryCount >= 20) return;
+        mathRetryTimer = window.setTimeout(function () {
+            mathRetryTimer = 0;
+            mathRetryCount += 1;
+            if (pendingMathRoot) typesetQuizMath(pendingMathRoot);
+        }, 250);
     }
 
     function setText(node, value) {

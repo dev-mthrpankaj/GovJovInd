@@ -615,6 +615,31 @@ body.quiz-exam-active .exam-topbar {
     font-size: 1.08rem;
     line-height: 1.55;
     overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.text-bold {
+    font-weight: 950;
+}
+
+.text-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    font-weight: 850;
+}
+
+.text-mark {
+    padding: 1px 5px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(254, 240, 138, .35) 0 38%, rgba(250, 204, 21, .62) 39% 100%);
+    color: #111827;
+    font-weight: 900;
+}
+
+.text-red {
+    color: #dc2626;
+    font-weight: 950;
 }
 
 .answer-option {
@@ -668,6 +693,7 @@ body.quiz-exam-active .exam-topbar {
 
 .option-label {
     overflow-wrap: anywhere;
+    white-space: pre-wrap;
 }
 
 .question-media {
@@ -943,6 +969,7 @@ body.quiz-exam-active .exam-topbar {
     background: #f8fafc;
     color: var(--quiz-ink);
     font-weight: 700;
+    white-space: pre-wrap;
 }
 
 .review-answer.correct {
@@ -963,6 +990,12 @@ body.quiz-exam-active .exam-topbar {
 .review-explanation p {
     margin: 0;
     color: var(--quiz-muted);
+    white-space: pre-wrap;
+}
+
+.review-question-title {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 
 .quiz-modal {
