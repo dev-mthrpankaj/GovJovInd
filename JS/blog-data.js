@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "ethanol-blending-e20-fuel-india-vehicle-impact-price-debate",
+      title: "Ethanol Blending E20 Fuel: गाड़ियों, Mileage, Price और Public Choice पर बड़ा सवाल",
+      category: "Current Affairs",
+      date: "2026-06-29",
+      image: thumbnail,
+      url: "student-hub/ethanol-blending-e20-fuel-india-vehicle-impact-price-debate.html",
+      excerpt: "E20 petrol और ethanol blending पर detailed analysis: vehicles, mileage, older cars, fuel price, farmers, oil companies, environment और consumer concerns."
+    },
+    {
       id: "ketan-agarwal-case-student-safety-relationship-red-flags",
       title: "Ketan Agarwal Murder Case से Students क्या सीखें? Relationship Red Flags, Digital Safety और Campus Awareness Guide",
       category: "Student Safety",
