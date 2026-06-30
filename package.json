@@ -8,6 +8,7 @@
     "validate:sheet-preflight": "node scripts/sync-apps-script-to-js.js --validate-sheet-preflight",
     "validate:sheet-data": "node scripts/sync-apps-script-to-js.js --validate-sheet-data",
     "validate:sheet-links": "node scripts/sync-apps-script-to-js.js --validate-sheet-links",
-    "generate:sitemap": "node scripts/generate-sitemap.js"
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "submit:indexnow": "node scripts/indexnow-submit.js"
   }
 }

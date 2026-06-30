@@ -94,6 +94,24 @@ govjobupdates.com
 
 Keep the `CNAME` file unchanged unless the domain changes.
 
+## IndexNow setup
+
+The GitHub Actions workflow `.github/workflows/indexnow.yml` submits recently updated sitemap URLs to IndexNow using the `INDEXNOW_KEY` repository secret.
+
+IndexNow also requires a public verification file at the website root. Create a file named exactly:
+
+```text
+/${INDEXNOW_KEY}.txt
+```
+
+The file content must be only the same IndexNow key value. For example, if the key is `abc123`, the public file must be available at:
+
+```text
+https://govjobupdates.com/abc123.txt
+```
+
+Do not print the key in workflow logs. The workflow reads it from GitHub Actions secrets.
+
 ## Contact
 
 Email: dmagstudio2023@outlook.com

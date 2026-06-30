@@ -14,6 +14,7 @@ const CONTENT_SHEETS = {
   jobs: {
     sheetName: "Latest Jobs",
     idPrefix: "job-sheet",
+    detailPrefix: "../Job_Details/HTML/",
     fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
@@ -36,6 +37,7 @@ const CONTENT_SHEETS = {
   admitCards: {
     sheetName: "Admit Cards",
     idPrefix: "admit-sheet",
+    detailPrefix: "../AdmitCard_Details/HTML/",
     fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
@@ -56,6 +58,7 @@ const CONTENT_SHEETS = {
   results: {
     sheetName: "Results",
     idPrefix: "result-sheet",
+    detailPrefix: "../Result_Details/HTML/",
     fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
@@ -74,6 +77,7 @@ const CONTENT_SHEETS = {
   answerKeys: {
     sheetName: "Answer Keys",
     idPrefix: "answerkey-sheet",
+    detailPrefix: "../AnswerKey_Details/HTML/",
     fields: withTelegramSafeFields([
       ["ID", "id"],
       ["Title", "title"],
@@ -196,6 +200,7 @@ function upsertContentAdminItem(params) {
     if (action === "updated") {
       preserveContentAdminRowState(sheet, headerMap, rowNumber, item, normalizedItem);
     }
+    assertNoDuplicateContentAdminItem(sheet, headerMap, config, normalizedItem, rowNumber);
     const row = buildContentAdminRowFromItem(normalizedItem, config, sheet.getLastColumn());
     sheet.getRange(rowNumber, 1, 1, row.length).setValues([row]);
     applyContentSheetFormatting(sheet, Math.max(sheet.getLastColumn(), row.length));
@@ -303,8 +308,9 @@ function normalizeContentAdminItem(type, item) {
 
   output.id = String(output.id || buildContentAdminId(config)).trim();
   output.title = String(output.title || "").trim();
+  output.detailPage = normalizeContentDetailPage(config, output.detailPage);
   output.updatedAt = String(output.updatedAt || formatContentDate(new Date())).trim();
-  output.status = String(output.status || "active").trim();
+  output.status = calculateContentStatus(type, output);
   output.telegramStatus = String(output.telegramStatus || "draft").trim().toLowerCase();
   output.telegramReady = String(output.telegramReady || "no").trim().toLowerCase();
   output.published = normalizeContentPublishedValue(item.published);
@@ -331,6 +337,51 @@ function normalizeContentOrderValue(value) {
   return Number.isFinite(number) ? number : "";
 }
 
+function normalizeContentDetailPage(config, value) {
+  const text = String(value || "").trim();
+  if (!text) return "";
+  const withHtml = /\.html$/i.test(text) ? text : text + ".html";
+  if (/^https?:\/\//i.test(text) || text.indexOf("../") === 0 || text.indexOf("/") === 0) return withHtml;
+  return String(config.detailPrefix || "") + text.replace(/\.html$/i, "") + ".html";
+}
+
+function calculateContentStatus(type, item) {
+  const today = formatContentDate(new Date());
+  const isFuture = function (date) {
+    const value = String(date || "").trim();
+    return value && value > today;
+  };
+  const isPast = function (date) {
+    const value = String(date || "").trim();
+    return value && value < today;
+  };
+
+  if (type === "jobs") {
+    if (isFuture(item.startDate)) return "upcoming";
+    if (isPast(item.lastDate)) return "closed";
+    return "active";
+  }
+
+  if (type === "admitCards") {
+    if (isFuture(item.releaseDate)) return "upcoming";
+    if (isPast(item.examEndDate || item.examDate)) return "exam-over";
+    return "available";
+  }
+
+  if (type === "answerKeys") {
+    if (isFuture(item.releaseDate)) return "upcoming";
+    if (isPast(item.objectionLastDate || item.examEndDate || item.examDate)) return "objection-closed";
+    return "available";
+  }
+
+  if (type === "results") {
+    if (isFuture(item.resultDate)) return "upcoming";
+    return "released";
+  }
+
+  return "active";
+}
+
 function validateContentAdminFields(config, item) {
   config.fields.forEach(function (fieldConfig) {
     const field = fieldConfig[1];
@@ -350,6 +401,51 @@ function validateContentAdminFields(config, item) {
   if (["yes", "no"].indexOf(item.telegramReady) === -1) {
     throw new Error("telegramReady must be yes or no.");
   }
+}
+
+function assertNoDuplicateContentAdminItem(sheet, headerMap, config, item, currentRowNumber) {
+  if (sheet.getLastRow() < 2) return;
+
+  const titleIndex = getHeaderIndex(headerMap, "Title");
+  const organizationIndex = getHeaderIndex(headerMap, "Organization");
+  const yearIndex = getHeaderIndex(headerMap, "Year");
+  const detailPageIndex = getHeaderIndex(headerMap, "Detail Page");
+  if (titleIndex === undefined) return;
+
+  const incomingTitle = normalizeContentDuplicateText(item.title);
+  const incomingOrganization = normalizeContentDuplicateText(item.organization);
+  const incomingYear = normalizeContentDuplicateText(item.year);
+  const incomingDetailPage = normalizeContentDuplicateLink(item.detailPage);
+  if (!incomingTitle && !incomingDetailPage) return;
+
+  const values = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues();
+  for (let index = 0; index < values.length; index += 1) {
+    const rowNumber = index + 2;
+    if (rowNumber === currentRowNumber) continue;
+
+    const row = values[index];
+    const existingTitle = normalizeContentDuplicateText(row[titleIndex]);
+    const existingOrganization = organizationIndex === undefined ? "" : normalizeContentDuplicateText(row[organizationIndex]);
+    const existingYear = yearIndex === undefined ? "" : normalizeContentDuplicateText(row[yearIndex]);
+    const existingDetailPage = detailPageIndex === undefined ? "" : normalizeContentDuplicateLink(row[detailPageIndex]);
+
+    const sameDetailPage = incomingDetailPage && existingDetailPage && incomingDetailPage === existingDetailPage;
+    const sameIdentity = incomingTitle && existingTitle === incomingTitle
+      && existingOrganization === incomingOrganization
+      && existingYear === incomingYear;
+
+    if (sameDetailPage || sameIdentity) {
+      throw new Error(config.sheetName + " already has this post. Duplicate blocked: " + item.title);
+    }
+  }
+}
+
+function normalizeContentDuplicateText(value) {
+  return String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function normalizeContentDuplicateLink(value) {
+  return String(value || "").toLowerCase().replace(/^https?:\/\/(www\.)?govjobupdates\.com\//, "/").replace(/\s+/g, "").trim();
 }
 
 function isValidContentAdminDate(value) {
@@ -417,12 +513,10 @@ function getContentAdminResult(type) {
   const lastColumn = sheet.getLastColumn();
   const range = sheet.getRange(1, 1, lastRow, lastColumn);
   const values = range.getValues();
-  const richTextValues = range.getRichTextValues();
-  const formulas = range.getFormulas();
   const headerMap = buildContentHeaderMap(values[0]);
   const items = values.slice(1)
     .map(function (row, index) {
-      const item = buildContentItem(row, headerMap, config, index + 2, richTextValues[index + 1], formulas[index + 1]);
+      const item = buildContentItem(row, headerMap, config, index + 2, null, null);
       if (!item || !hasContentItemData(item, config)) {
         meta.blankRows += 1;
         return null;
@@ -819,12 +913,22 @@ function buildContentItem(row, headerMap, config, rowNumber, richTextRow, formul
 
   if (!item.id) item.id = config.idPrefix + "-" + rowNumber;
   if (!item.updatedAt) item.updatedAt = "";
-  if (!item.status) item.status = "active";
+  item.status = calculateContentStatus(getContentTypeBySheetName(config.sheetName), item);
   if (!item.telegramStatus) item.telegramStatus = "draft";
   if (!item.telegramReady) item.telegramReady = "no";
   if (!Array.isArray(item.tags)) item.tags = [];
 
   return item;
+}
+
+function getContentTypeBySheetName(sheetName) {
+  const target = String(sheetName || "").trim();
+  const types = Object.keys(CONTENT_SHEETS);
+  for (let index = 0; index < types.length; index += 1) {
+    const type = types[index];
+    if (CONTENT_SHEETS[type].sheetName === target) return type;
+  }
+  return "";
 }
 
 function hasContentItemData(item, config) {
