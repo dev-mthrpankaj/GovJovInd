@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "global-warming-2026-heatwaves-floods-india-students-economy",
+      title: "Global Warming 2026: Heatwaves, Floods और Climate Crisis से India पर असर",
+      category: "Current Affairs",
+      date: "2026-06-30",
+      image: thumbnail,
+      url: "student-hub/global-warming-2026-heatwaves-floods-india-students-economy.html",
+      excerpt: "Global warming 2026 पर research-level guide: heatwaves, floods, wildfires, India economy, farmers, students, health और exam-ready climate notes."
+    },
+    {
       id: "ethanol-blending-e20-fuel-india-vehicle-impact-price-debate",
       title: "Ethanol Blending E20 Fuel: गाड़ियों, Mileage, Price और Public Choice पर बड़ा सवाल",
       category: "Current Affairs",
@@ -34,7 +43,7 @@
       title: "Government Exams 2026: SSC, UPSC, Railway, Banking, Teaching, Police और State Exams की Complete Guide",
       category: "Career Guidance",
       date: "2026-06-27",
-      image:"../Assets/Home%20Page/GovJobUpdates_Resized_1782569034519.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782569034519.webp",
       url: "student-hub/government-exams-2026-complete-calendar-vacancy-eligibility-guide.html",
       excerpt: "2026 में आने वाली major government exams: SSC, UPSC, Railway, Banking, Teaching, Police, Defence और State exams की vacancy, eligibility और preparation roadmap."
     },
