@@ -7,7 +7,7 @@
       title: "Global Warming 2026: Heatwaves, Floods और Climate Crisis से India पर असर",
       category: "Current Affairs",
       date: "2026-06-30",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782796326655.webp",
       url: "student-hub/global-warming-2026-heatwaves-floods-india-students-economy.html",
       excerpt: "Global warming 2026 पर research-level guide: heatwaves, floods, wildfires, India economy, farmers, students, health और exam-ready climate notes."
     },
