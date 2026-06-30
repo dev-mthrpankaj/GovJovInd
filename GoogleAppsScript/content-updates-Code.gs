@@ -118,11 +118,37 @@ function doGet(e) {
   }
 }
 
+function doPost(e) {
+  try {
+    const payload = parseContentPostPayload(e);
+    const params = Object.assign({}, e && e.parameter ? e.parameter : {}, payload);
+    const action = String(params.action || "").trim();
+    if (!action) return sendContentJson({ success: false, message: "Missing admin action." });
+    return handleContentAdminAction(action, params);
+  } catch (error) {
+    return sendContentJson({ success: false, message: error.message });
+  }
+}
+
+function parseContentPostPayload(e) {
+  const text = e && e.postData && e.postData.contents ? String(e.postData.contents) : "";
+  if (!text) return {};
+
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    return {};
+  }
+}
+
 function handleContentAdminAction(action, params) {
   if (!isValidContentAdminToken(params.token)) {
     return sendContentJson({ success: false, message: "Unauthorized admin action." });
   }
 
+  if (action === "listContentItems") return sendContentJson(listContentAdminItems(params));
+  if (action === "upsertContentItem") return sendContentJson(upsertContentAdminItem(params));
+  if (action === "deleteContentItem") return sendContentJson(deleteContentAdminItem(params));
   if (action === "addTestRows") return sendContentJson(addContentLiveTestRows());
   if (action === "removeTestRows") return sendContentJson(removeContentLiveTestRows());
   if (action === "setupSheets") {
@@ -135,6 +161,260 @@ function handleContentAdminAction(action, params) {
 
 function isValidContentAdminToken(token) {
   return String(token || "") === CONTENT_ADMIN_TOKEN;
+}
+
+function listContentAdminItems(params) {
+  const type = getContentAdminType(params.type);
+  const result = getContentAdminResult(type);
+  return {
+    success: true,
+    action: "listContentItems",
+    type: type,
+    updatedAt: new Date().toISOString(),
+    meta: result.meta,
+    items: result.items
+  };
+}
+
+function upsertContentAdminItem(params) {
+  return withContentAdminLock(function () {
+    const type = getContentAdminType(params.type);
+    const config = CONTENT_SHEETS[type];
+    const item = parseContentAdminItem(params.item);
+    const normalizedItem = normalizeContentAdminItem(type, item);
+    const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+    const sheet = getOrCreateContentSheet(spreadsheet, config);
+    ensureContentHeaders(sheet, config);
+
+    const headerMap = buildContentHeaderMap(sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]);
+    const idIndex = getHeaderIndex(headerMap, "ID");
+    if (idIndex === undefined) throw new Error("ID column not found in " + config.sheetName + ".");
+
+    const rowNumber = findContentRowById(sheet, idIndex, normalizedItem.id) || sheet.getLastRow() + 1;
+    const action = rowNumber > sheet.getLastRow() ? "created" : "updated";
+    if (action === "updated") {
+      preserveContentAdminRowState(sheet, headerMap, rowNumber, item, normalizedItem);
+    }
+    const row = buildContentAdminRowFromItem(normalizedItem, config, sheet.getLastColumn());
+    sheet.getRange(rowNumber, 1, 1, row.length).setValues([row]);
+    applyContentSheetFormatting(sheet, Math.max(sheet.getLastColumn(), row.length));
+    SpreadsheetApp.flush();
+
+    return {
+      success: true,
+      action: "upsertContentItem",
+      result: action,
+      type: type,
+      id: normalizedItem.id,
+      rowNumber: rowNumber,
+      updatedAt: new Date().toISOString()
+    };
+  });
+}
+
+function deleteContentAdminItem(params) {
+  return withContentAdminLock(function () {
+    const type = getContentAdminType(params.type);
+    const config = CONTENT_SHEETS[type];
+    const id = String(params.id || "").trim();
+    if (!id) throw new Error("Missing item id.");
+
+    const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+    const sheet = getOrCreateContentSheet(spreadsheet, config);
+    ensureContentHeaders(sheet, config);
+    const removed = removeContentRowsById(sheet, id);
+    SpreadsheetApp.flush();
+
+    return {
+      success: true,
+      action: "deleteContentItem",
+      type: type,
+      id: id,
+      removed: removed,
+      updatedAt: new Date().toISOString()
+    };
+  });
+}
+
+function withContentAdminLock(callback) {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(15000)) throw new Error("Content sheet is busy. Please try again.");
+  try {
+    return callback();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function getContentAdminType(type) {
+  const safeType = String(type || "").trim();
+  if (!CONTENT_SHEETS[safeType]) throw new Error("Invalid content type.");
+  return safeType;
+}
+
+function parseContentAdminItem(item) {
+  if (typeof item === "string") {
+    try {
+      return JSON.parse(item);
+    } catch (error) {
+      throw new Error("Invalid item JSON.");
+    }
+  }
+  if (!item || typeof item !== "object" || Array.isArray(item)) throw new Error("Invalid content item.");
+  return item;
+}
+
+function normalizeContentAdminItem(type, item) {
+  const config = CONTENT_SHEETS[type];
+  const output = {};
+
+  config.fields.forEach(function (fieldConfig) {
+    const field = fieldConfig[1];
+    output[field] = item[field];
+  });
+
+  output.id = String(output.id || buildContentAdminId(config)).trim();
+  output.title = String(output.title || "").trim();
+  output.updatedAt = String(output.updatedAt || formatContentDate(new Date())).trim();
+  output.status = String(output.status || "active").trim();
+  output.telegramStatus = String(output.telegramStatus || "draft").trim().toLowerCase();
+  output.telegramReady = String(output.telegramReady || "no").trim().toLowerCase();
+  output.published = normalizeContentPublishedValue(item.published);
+  output.order = normalizeContentOrderValue(item.order);
+
+  if (!output.title) throw new Error("Title is required.");
+  validateContentAdminFields(config, output);
+  return output;
+}
+
+function buildContentAdminId(config) {
+  const stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyyMMddHHmmss");
+  const suffix = Utilities.getUuid().slice(0, 8);
+  return config.idPrefix + "-" + stamp + "-" + suffix;
+}
+
+function normalizeContentPublishedValue(value) {
+  const text = String(value === undefined || value === null ? "yes" : value).trim().toLowerCase();
+  return ["no", "false", "0", "hidden", "draft"].indexOf(text) === -1 ? "yes" : "no";
+}
+
+function normalizeContentOrderValue(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : "";
+}
+
+function validateContentAdminFields(config, item) {
+  config.fields.forEach(function (fieldConfig) {
+    const field = fieldConfig[1];
+    const type = fieldConfig[2] || "text";
+    const value = item[field];
+    if (type === "date" && value && !isValidContentAdminDate(value)) {
+      throw new Error(field + " must use YYYY-MM-DD format.");
+    }
+    if (type === "link" && !isSafeContentAdminLink(value)) {
+      throw new Error(field + " has an unsafe or unsupported link.");
+    }
+  });
+
+  if (["draft", "ready", "posted", "skipped"].indexOf(item.telegramStatus) === -1) {
+    throw new Error("telegramStatus must be draft, ready, posted, or skipped.");
+  }
+  if (["yes", "no"].indexOf(item.telegramReady) === -1) {
+    throw new Error("telegramReady must be yes or no.");
+  }
+}
+
+function isValidContentAdminDate(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value || "").trim());
+}
+
+function isSafeContentAdminLink(value) {
+  const text = String(value || "").trim();
+  if (!text || text === "#") return true;
+  if (/[\u0000-\u001f\u007f]/.test(text)) return false;
+  if (/^(javascript|data|vbscript|file|mailto|tel|sms):/i.test(text)) return false;
+  if (/^https?:\/\//i.test(text)) return true;
+  if (/^(\.\.?\/|\/|HTML\/|Job_Details\/|Assets\/)/i.test(text)) return true;
+  return false;
+}
+
+function buildContentAdminRowFromItem(item, config, columnCount) {
+  const values = config.fields.map(function (fieldConfig) {
+    const field = fieldConfig[1];
+    return normalizeContentCellValue(item[field]);
+  });
+  const row = [item.published, item.order].concat(values);
+  while (row.length < columnCount) row.push("");
+  return row;
+}
+
+function findContentRowById(sheet, idIndex, id) {
+  if (sheet.getLastRow() < 2) return 0;
+  const rowCount = sheet.getLastRow() - 1;
+  const idValues = sheet.getRange(2, idIndex + 1, rowCount, 1).getValues();
+  for (let index = 0; index < idValues.length; index += 1) {
+    if (String(idValues[index][0] || "").trim() === id) return index + 2;
+  }
+  return 0;
+}
+
+function preserveContentAdminRowState(sheet, headerMap, rowNumber, rawItem, normalizedItem) {
+  const publishedIndex = getHeaderIndex(headerMap, "Published");
+  const orderIndex = getHeaderIndex(headerMap, "Order");
+
+  if (rawItem.published === undefined && publishedIndex !== undefined) {
+    normalizedItem.published = normalizeContentPublishedValue(sheet.getRange(rowNumber, publishedIndex + 1).getValue());
+  }
+
+  if (rawItem.order === undefined && orderIndex !== undefined) {
+    normalizedItem.order = normalizeContentOrderValue(sheet.getRange(rowNumber, orderIndex + 1).getValue());
+  }
+}
+
+function getContentAdminResult(type) {
+  const config = CONTENT_SHEETS[type];
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  const sheet = getOrCreateContentSheet(spreadsheet, config);
+  ensureContentHeaders(sheet, config);
+  const meta = {
+    sheetName: config.sheetName,
+    totalRows: Math.max(sheet.getLastRow() - 1, 0),
+    publishedRows: 0,
+    unpublishedRows: 0,
+    blankRows: 0
+  };
+  if (sheet.getLastRow() < 2) return { items: [], meta: meta };
+
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  const range = sheet.getRange(1, 1, lastRow, lastColumn);
+  const values = range.getValues();
+  const richTextValues = range.getRichTextValues();
+  const formulas = range.getFormulas();
+  const headerMap = buildContentHeaderMap(values[0]);
+  const items = values.slice(1)
+    .map(function (row, index) {
+      const item = buildContentItem(row, headerMap, config, index + 2, richTextValues[index + 1], formulas[index + 1]);
+      if (!item || !hasContentItemData(item, config)) {
+        meta.blankRows += 1;
+        return null;
+      }
+      if (isPublished(item.__published)) {
+        meta.publishedRows += 1;
+      } else {
+        meta.unpublishedRows += 1;
+      }
+      item.rowNumber = index + 2;
+      item.published = isPublished(item.__published) ? "yes" : "no";
+      item.order = item.__order;
+      delete item.__published;
+      delete item.__order;
+      delete item.__hasRowData;
+      return item;
+    })
+    .filter(Boolean);
+
+  return { items: items, meta: meta };
 }
 
 function setupContentSheets() {
