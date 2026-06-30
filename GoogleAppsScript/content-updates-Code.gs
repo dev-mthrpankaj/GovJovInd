@@ -149,6 +149,7 @@ function handleContentAdminAction(action, params) {
   if (action === "listContentItems") return sendContentJson(listContentAdminItems(params));
   if (action === "upsertContentItem") return sendContentJson(upsertContentAdminItem(params));
   if (action === "deleteContentItem") return sendContentJson(deleteContentAdminItem(params));
+  if (action === "dispatchContentSync") return sendContentJson(dispatchContentAdminSync(params));
   if (action === "addTestRows") return sendContentJson(addContentLiveTestRows());
   if (action === "removeTestRows") return sendContentJson(removeContentLiveTestRows());
   if (action === "setupSheets") {
@@ -234,6 +235,33 @@ function deleteContentAdminItem(params) {
       updatedAt: new Date().toISOString()
     };
   });
+}
+
+function dispatchContentAdminSync(params) {
+  if (typeof dispatchGjuListingSync_ !== "function") {
+    return {
+      success: false,
+      action: "dispatchContentSync",
+      message: "GitHub sync trigger is not installed in this Apps Script project."
+    };
+  }
+
+  try {
+    const reason = "Content Updates admin" + (params.type ? ": " + String(params.type) : "");
+    const message = dispatchGjuListingSync_(reason);
+    return {
+      success: true,
+      action: "dispatchContentSync",
+      message: message,
+      updatedAt: new Date().toISOString()
+    };
+  } catch (error) {
+    return {
+      success: false,
+      action: "dispatchContentSync",
+      message: error.message
+    };
+  }
 }
 
 function withContentAdminLock(callback) {
