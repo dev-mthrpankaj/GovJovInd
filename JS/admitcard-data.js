@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "2409",
+        "title": "RRB JE Junior Engineer CBT II Admit Card 2026 for 2569 Post CEN 05/2025",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Admit Card",
+        "year": "2026",
+        "examDate": "2026-07-02",
+        "examEndDate": "",
+        "releaseDate": "2026-06-29",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/97996/login.html",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-06-29",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "2408",
         "title": "CG Police SI 2024 Admit Card for 341 Post",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
@@ -19,7 +39,7 @@ window.GovJobUpdatesAdmitCards = [
             "CG Police",
             "SI"
         ],
-        "downloadLink": "https://online.ecgpsconline.in/",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/01-CGPSC-Subedar-SI-Platoon-Commander-Admit-Card-2026.html",
         "updatedAt": "2026-06-27",
         "telegramStatus": "ready",
@@ -61,7 +81,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "UPSSSC",
             "UP Pollution"
@@ -84,7 +104,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "UPSSSC",
             "Pharmacist"
@@ -107,7 +127,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "available",
+        "status": "exam over",
         "tags": [
             "UPSSSC",
             "BCG Technician"
@@ -135,7 +155,7 @@ window.GovJobUpdatesAdmitCards = [
             "PGCIL",
             "Non Executive"
         ],
-        "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101292/login.html",
+        "downloadLink": "https://online.ecgpsconline.in/",
         "detailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",

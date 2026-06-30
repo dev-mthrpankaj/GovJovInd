@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "2477",
+        "title": "IOCL Mathura Refinery Apprentices Online Form 2026",
+        "organization": "Indian Oil Corporation Limited",
+        "department": "IOCL",
+        "category": "IOCL",
+        "year": "2026",
+        "qualification": "3 Years Graduation Degree or Diploma for Postwise ELigibility Check Detailed Notification",
+        "totalPosts": "151",
+        "startDate": "2026-06-29",
+        "lastDate": "2026-07-28",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://nats.education.gov.in/student_type.php",
+        "officialNotification": "https://iocl.com/admin/img/Apprenticeships/Files/f309a3042f3b4986a3352c4dfd7d8d4d.pdf",
+        "detailPage": "../Job_Details/HTML/1020-IOCL-Mathura-Refinery-Apprentice-2026.html",
+        "updatedAt": "2026-06-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "2430",
         "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
         "organization": "Railway Recruitment Board",
@@ -14,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Railway Recruitment Board Recruitment 2026",
             "Railway RRB Technician",
@@ -24,7 +48,7 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
-        "detailPage": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html",
+        "detailPage": "../Job_Details/HTML/1021-RRB-Technician-CEN-02-2026.html",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
@@ -224,7 +248,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "65",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-30",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Bihar Police Subordinate Services Commission Recruitment 2026",
             "BPSSC Bihar Police Company Commander",
@@ -494,7 +518,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "33",
         "startDate": "2026-06-19",
         "lastDate": "2026-06-29",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Union Public Service Commission Recruitment 2026",
             "UPSC IAS Mains",
@@ -2656,7 +2680,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "708",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-20",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Forest Guard / Wildlife Guard",
