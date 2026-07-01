@@ -7,7 +7,7 @@
       title: "Indus Water Treaty Explained: History, India-Pakistan Perspective और Operation Sindoor Angle",
       category: "Current Affairs",
       date: "2026-07-01",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782920882800.webp",
       url: "student-hub/indus-water-treaty-history-india-pakistan-terrorism-operation-sindoor.html",
       excerpt: "Indus Water Treaty kya hai? History, India perspective, Pakistan perspective, water-terrorism angle, Operation Sindoor aur treaty on hold ko student-friendly language me samjhein."
     },
