@@ -14,7 +14,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-04-27",
         "releaseDate": "2026-06-28",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPPRPB",
             "UP Police",
@@ -68,7 +68,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-06-24",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPSC",
             "IES ISS",
@@ -94,7 +94,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-01-12",
         "releaseDate": "2026-06-22",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "SSC",
             "Delhi Police",
@@ -121,7 +121,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-06-22",
         "objectionLastDate": "2026-06-25",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "MPESB",
             "Van Rakshak",
@@ -148,7 +148,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-06-10",
         "releaseDate": "2026-06-20",
         "objectionLastDate": "2026-06-23",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPPRPB",
             "UP Police",
@@ -175,7 +175,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-01-19",
         "releaseDate": "2026-06-18",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "SSC",
             "CGL",
@@ -202,7 +202,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-06-17",
         "releaseDate": "2026-06-18",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPPSC",
             "GIC Lecturer",
@@ -228,7 +228,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-01-22",
         "releaseDate": "2026-06-16",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "SSC",
             "Delhi Police",
@@ -255,7 +255,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-05-10",
         "releaseDate": "2026-06-16",
         "objectionLastDate": "2026-06-20",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "RSSB",
             "Lab Assistant",
@@ -281,7 +281,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-05-30",
         "releaseDate": "2026-06-15",
         "objectionLastDate": "2026-06-20",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "SSC",
             "GD Constable",
@@ -307,7 +307,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-06-13",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPSSSC",
             "Junior Assistant",
@@ -333,7 +333,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-06-04",
         "releaseDate": "2026-06-07",
         "objectionLastDate": "2026-06-12",
-        "status": "avalilable",
+        "status": "objection-closed",
         "tags": [
             "UPSESSB UP TGT"
         ],
@@ -357,7 +357,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-05-29",
         "objectionLastDate": "2026-06-11",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "Indian Navy",
             "INCET",
@@ -383,7 +383,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-06-03",
         "objectionLastDate": "2026-06-09",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPPSC",
             "Assistant Professor",
@@ -410,7 +410,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-05-27",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPSC",
             "CSE Pre",
@@ -437,7 +437,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-05-22",
         "objectionLastDate": "",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "UPSSSC",
             "Lekhpal",
@@ -463,7 +463,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-04-30",
         "objectionLastDate": "2026-05-03",
-        "status": "not available",
+        "status": "objection-closed",
         "tags": [
             "MPESB",
             "Police",
@@ -490,7 +490,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-05-04",
         "objectionLastDate": "2026-05-10",
-        "status": "not available",
+        "status": "objection-closed",
         "tags": [
             "UPSSC",
             "JE"

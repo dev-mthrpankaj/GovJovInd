@@ -4,14 +4,38 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "1026",
+        "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
+        "organization": "MHA Intelligence Bureau IB",
+        "department": "MHA IB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-29",
+        "status": "released",
+        "tags": [
+            "MHA",
+            "IB",
+            "JIO",
+            "Junior Intelligence Officer",
+            "Final Result"
+        ],
+        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2024/11/mhaibjio2025_finalresult.pdf",
+        "detailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
+        "updatedAt": "2026-06-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1025",
         "title": "UP POLICE Home Guard Result of Written Exam 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
         "department": "UPPRPB",
         "category": "Result",
-        "year": "26",
+        "year": "2026",
         "resultDate": "2026-06-28",
-        "status": "releases",
+        "status": "released",
         "tags": [
             "UPPRPB",
             "UP Police",
@@ -34,7 +58,7 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2026",
         "resultDate": "2026-06-27",
-        "status": "releases",
+        "status": "released",
         "tags": [
             "UPSSSC",
             "ASO",
@@ -57,7 +81,7 @@ window.GovJobUpdatesResults = [
         "category": "Result",
         "year": "2026",
         "resultDate": "2026-06-25",
-        "status": "releases",
+        "status": "released",
         "tags": [
             "BPSSC",
             "Bihar Police",

@@ -81,7 +81,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "UPSSSC",
             "UP Pollution"
@@ -104,7 +104,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "UPSSSC",
             "Pharmacist"
@@ -127,7 +127,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "UPSSSC",
             "BCG Technician"
@@ -173,7 +173,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-29",
         "examEndDate": "2026-06-30",
         "releaseDate": "2026-06-25",
-        "status": "available",
+        "status": "exam-over",
         "tags": [
             "ICFRE",
             "Forest Research Institute"
@@ -220,7 +220,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "2026-06-30",
         "releaseDate": "2026-06-19",
-        "status": "available",
+        "status": "exam-over",
         "tags": [
             "UPPSC",
             "APO",
@@ -244,7 +244,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-21",
         "examEndDate": "",
         "releaseDate": "2026-06-19",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "Bank of Baroda",
             "Apprentice"
@@ -267,7 +267,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-24",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "RSSB",
             "Forester"
@@ -290,7 +290,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-24",
         "examEndDate": "",
         "releaseDate": "2026-06-17",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "CSBC",
             "Bihar Police",
@@ -315,7 +315,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-28",
         "examEndDate": "",
         "releaseDate": "2026-06-22",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "CSBC",
             "Bihar Police",
@@ -340,7 +340,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-08",
         "examEndDate": "2026-06-10",
         "releaseDate": "2026-05-31",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "UPPRPB",
             "Police",
@@ -388,7 +388,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-01",
         "examEndDate": "2026-06-15",
         "releaseDate": "2026-05-15",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "Army",
             "Defence",
@@ -412,7 +412,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-21",
         "examEndDate": "",
         "releaseDate": "2026-05-25",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "Driver",
             "Uttarakhad",
@@ -436,7 +436,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-04",
         "examEndDate": "2026-06-19",
         "releaseDate": "2026-05-28",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "Police",
             "MPESB"
@@ -459,7 +459,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-06-10",
         "examEndDate": "",
         "releaseDate": "2026-05-25",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "Bihar Police"
         ],
@@ -481,7 +481,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-31",
         "examEndDate": "",
         "releaseDate": "2026-05-22",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "Edcation",
             "B.ed"
@@ -504,7 +504,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-04-27",
         "examEndDate": "2026-05-30",
         "releaseDate": "2026-04-24",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "SSC",
             "GD Constable",
@@ -528,7 +528,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-21",
         "examEndDate": "",
         "releaseDate": "2026-05-19",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "MPESB",
             "Police SI",
@@ -552,7 +552,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-24",
         "examEndDate": "",
         "releaseDate": "2026-05-17",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "UPSC",
             "IAS",
@@ -578,7 +578,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-05-21",
         "examEndDate": "",
         "releaseDate": "2026-05-16",
-        "status": "exam over",
+        "status": "exam-over",
         "tags": [
             "upsssc",
             "lekhpal",
