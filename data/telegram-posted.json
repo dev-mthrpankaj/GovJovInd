@@ -899,6 +899,27 @@
       "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
       "lastPostedAt": "2026-07-01T06:52:04.172Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0093-20260701042734": {
+      "updatedAt": "2026-07-01",
+      "hash": "0597b71ca500eddb00276739cf1f3a0158bf5eac7636c7d625d1c37607d421f1",
+      "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 6715 Post",
+      "lastPostedAt": "2026-07-01T10:22:54.349Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0094-20260701055305": {
+      "updatedAt": "2026-07-01",
+      "hash": "eecc722a7ae2df2efea80a94eb8d919b61330471a47a5c460e90feae055c5f06",
+      "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 745 Post",
+      "lastPostedAt": "2026-07-01T10:22:54.984Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0095-20260701055726": {
+      "updatedAt": "2026-07-01",
+      "hash": "08b8ef94bcea3b523978b85570124471ed908a98cf77f4c3bbf6f9c6d12470e8",
+      "title": "Delhi High Court HJS Online Form 2026",
+      "lastPostedAt": "2026-07-01T10:22:55.436Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -2066,6 +2087,48 @@
       "hash": "6b65086ee14a61c6fe4fd10c9aa19394329871be66dff3126f3360ec8b05b639",
       "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
       "lastPostedAt": "2026-07-01T06:52:04.617Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0029-20260701093849": {
+      "updatedAt": "2026-07-01",
+      "hash": "11e2d3f24118bb8fe6a64be4f1967717c3e731dc0fb0a78a91a25ab17e638ad4",
+      "title": "RRB Group D Result Ranchi 2025",
+      "lastPostedAt": "2026-07-01T10:22:55.869Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0029-20260701093832": {
+      "updatedAt": "2026-07-01",
+      "hash": "2b966f9af6fea5a3afdaad0ed569cde3666332ebd4114f741a8a3b641c0d12c6",
+      "title": "RRB Group D Result Bilaspur 2025",
+      "lastPostedAt": "2026-07-01T10:22:56.305Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0030-20260701094250": {
+      "updatedAt": "2026-07-01",
+      "hash": "090c9b10651e184b3634b54007b372809930bc443ace8f070e22c85a93dc1ce8",
+      "title": "RRB Group D Result Ahmedabad 2025",
+      "lastPostedAt": "2026-07-01T10:23:00.052Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0031-20260701094940": {
+      "updatedAt": "2026-07-01",
+      "hash": "21b355dacf1e95e0e441742def7fb10ebb2fc32e71b8afd3fecbab45b14f6690",
+      "title": "RRB Group D Result Bhopal 2025",
+      "lastPostedAt": "2026-07-01T10:23:00.753Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0032-20260701094920": {
+      "updatedAt": "2026-07-01",
+      "hash": "8b5d0729ce4d532730647e04b14b095680a6d2cff444ba2c145a9b251e6e5901",
+      "title": "RRB Group D Result Bhubneshwar 2025",
+      "lastPostedAt": "2026-07-01T10:23:01.330Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0034-20260701095454": {
+      "updatedAt": "2026-07-01",
+      "hash": "a66ce8ac5bf44a0a83dade0d33eead7a8dfeb28b33721e4954d1b9317a4beec6",
+      "title": "RRB Group D Result Prayagraj 2025",
+      "lastPostedAt": "2026-07-01T10:23:01.916Z",
       "stateReason": "new"
     }
   }
