@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "indus-water-treaty-history-india-pakistan-terrorism-operation-sindoor",
+      title: "Indus Water Treaty Explained: History, India-Pakistan Perspective और Operation Sindoor Angle",
+      category: "Current Affairs",
+      date: "2026-07-01",
+      image: thumbnail,
+      url: "student-hub/indus-water-treaty-history-india-pakistan-terrorism-operation-sindoor.html",
+      excerpt: "Indus Water Treaty kya hai? History, India perspective, Pakistan perspective, water-terrorism angle, Operation Sindoor aur treaty on hold ko student-friendly language me samjhein."
+    },
+    {
       id: "global-warming-2026-heatwaves-floods-india-students-economy",
       title: "Global Warming 2026: Heatwaves, Floods और Climate Crisis से India पर असर",
       category: "Current Affairs",
