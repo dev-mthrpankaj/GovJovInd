@@ -871,6 +871,34 @@
       "title": "IOCL Mathura Refinery Apprentices Online Form 2026",
       "lastPostedAt": "2026-06-30T07:01:11.979Z",
       "stateReason": "new"
+    },
+    "jobs:2451": {
+      "updatedAt": "2026-07-01",
+      "hash": "390b89de46f1571c9eda5a66206f53d56567c6ebc654adf0e88e4aa5b01cac2b",
+      "title": "NIACL Apprentice Online Form 2026 for 550 Post",
+      "lastPostedAt": "2026-07-01T06:52:02.417Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0092-20260630122144": {
+      "updatedAt": "2026-06-30",
+      "hash": "83e6049be7b2ba89a7f19e49a2de745fe5bd874978398ba9e3ba557756a155c4",
+      "title": "JNU Non Teaching Post Online Form 2026 for 267 Post",
+      "lastPostedAt": "2026-07-01T06:52:03.205Z",
+      "stateReason": "new"
+    },
+    "jobs:2462": {
+      "updatedAt": "2026-06-20",
+      "hash": "4b7f625dab5c8aa705c07a4963e97f6e6e3ef7767754b882550f3334ffe20ecb",
+      "title": "NBEMS Group A, B, C Various Post Online Form 2026",
+      "lastPostedAt": "2026-07-01T06:52:03.664Z",
+      "stateReason": "new"
+    },
+    "jobs:2457": {
+      "updatedAt": "2026-06-19",
+      "hash": "df10c01933964b0443aa62459429de9405950a96f0e907c016487299ef036dd3",
+      "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
+      "lastPostedAt": "2026-07-01T06:52:04.172Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -2031,6 +2059,13 @@
       "hash": "6596783e72c8a1f6a7b4c4345e6f92f91452edcb150c52ddc3a637e2bf9543c4",
       "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
       "lastPostedAt": "2026-06-28T11:11:58.971Z",
+      "stateReason": "new"
+    },
+    "results:1026": {
+      "updatedAt": "2026-06-30",
+      "hash": "6b65086ee14a61c6fe4fd10c9aa19394329871be66dff3126f3360ec8b05b639",
+      "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
+      "lastPostedAt": "2026-07-01T06:52:04.617Z",
       "stateReason": "new"
     }
   }
