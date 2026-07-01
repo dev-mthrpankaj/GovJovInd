@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: sync-listing-data-main
+  cancel-in-progress: true
+
 jobs:
   sync-listing-data:
     runs-on: ubuntu-latest
@@ -17,6 +21,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Rebase on latest main before generating files
+        run: git pull --rebase origin main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,5 +48,6 @@ jobs:
             echo "No listing data changes to commit."
           else
             git commit -m "Sync listing data from Google Sheet"
+            git pull --rebase origin main
             git push
           fi
