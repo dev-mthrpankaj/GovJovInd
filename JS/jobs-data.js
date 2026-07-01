@@ -24,14 +24,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/06/niacl-apprentice-notification-26.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=2451",
+        "detailPage": "../Job_Details/HTML/1013-NIACL-Apprentice-2026.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2477",
@@ -45,7 +45,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-29",
         "lastDate": "2026-07-28",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Indian Oil Corporation Limited Recruitment 2026",
+            "IOCL Mathura Refinery Apprentices",
+            "Sarkari Naukri",
+            "IOCL Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://nats.education.gov.in/student_type.php",
         "officialNotification": "https://iocl.com/admin/img/Apprenticeships/Files/f309a3042f3b4986a3352c4dfd7d8d4d.pdf",
         "detailPage": "../Job_Details/HTML/1020-IOCL-Mathura-Refinery-Apprentice-2026.html",
@@ -69,7 +75,13 @@ window.GovJobUpdatesJobs = [
         "startDate": "2026-06-29",
         "lastDate": "2026-07-27",
         "status": "active",
-        "tags": [],
+        "tags": [
+            "Jawaharlal Nehru University Recruitment 2026",
+            "JNU Non Teaching Post",
+            "Sarkari Naukri",
+            "Central Government Jobs",
+            "Govt Jobs 2026"
+        ],
         "applyLink": "https://jnunt.samarth.edu.in/index.php/site/login",
         "officialNotification": "https://www.jnu.ac.in/sites/default/files/inline-files/AdvtNo_01_RC_NT_2026.pdf",
         "detailPage": "../Job_Details/HTML/1012-JNU-Non-Teaching-Posts-2026.html",
