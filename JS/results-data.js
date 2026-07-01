@@ -112,6 +112,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0036-20260701125130",
+        "title": "RRB Group D Result for All RRB,s 2025",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-07-01",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://govjobupdates.com/Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html",
+        "updatedAt": "2026-07-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "1026",
         "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
         "organization": "MHA Intelligence Bureau IB",
