@@ -275,7 +275,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-02",
         "examEndDate": "",
         "releaseDate": "2026-06-29",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/97996/login.html",
         "detailPage": "../AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html",

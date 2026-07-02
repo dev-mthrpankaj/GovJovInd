@@ -374,7 +374,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "62",
         "startDate": "2026-06-11",
         "lastDate": "2026-07-02",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "AAI Cargo Logistics and Allied Services Company Limited Recruitment 2026",
             "AAICLAS Assistant Security",
