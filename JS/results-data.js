@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0037-20260702164822",
+        "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
+        "organization": "Reserve  Bank  of India",
+        "department": "RBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-07-01",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/WEBROLL30062026.pdf",
+        "detailPage": "../Result_Details/HTML/3006-RBI-Grade-B-DEPR-Phase-I-Result-2026.html",
+        "updatedAt": "2026-07-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0038-20260702164814",
+        "title": "SBI CBO Circle Based Officers Result 2026 for 2050 Post",
+        "organization": "State Bank of India",
+        "department": "SBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-06-30",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://sbi.bank.in/csfile/cbo-2025_18-wtqual_SCREENED-15_FORMAT_-_FINAL.pdf",
+        "detailPage": "../Result_Details/HTML/1802-SBI-Circle-Based-Officer-Result-2026.html",
+        "updatedAt": "2026-07-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0029-20260701093849",
         "title": "RRB Group D Result Ranchi 2025",
         "organization": "Railway Recruitment  Board",
