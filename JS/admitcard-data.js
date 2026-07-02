@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0029-20260702035922",
+        "title": "UPPSC Assistant Town Planner Admit Card 2026",
+        "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
+        "department": "UPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-07",
+        "examEndDate": "",
+        "releaseDate": "2026-06-29",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
+        "detailPage": "../AdmitCard_Details/HTML/06-UPPSC-Assistant-Town-Planner-Admit-Card-2026.html",
+        "updatedAt": "2026-07-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0030-20260702040149",
         "title": "UPHESC Assistant Professor Interview Letter 2026 for 981 Post",
         "organization": "UP Higher Education Services Commission",
@@ -258,12 +278,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/97996/login.html",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html",
         "updatedAt": "2026-06-29",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "2408",
