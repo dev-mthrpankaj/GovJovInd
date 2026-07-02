@@ -7,7 +7,7 @@
       title: "AI vs Human: AI जरूरी क्यों है, इसके Drawbacks और Human Life पर Impact",
       category: "Technology",
       date: "2026-07-02",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783013765927.webp",
       url: "student-hub/ai-vs-human-usefulness-drawbacks-future-life-students.html",
       excerpt: "AI vs Human पर evergreen guide: AI ke fayde, drawbacks, students ke liye usefulness, jobs, education, ethics, future skills aur human life impact."
     },
