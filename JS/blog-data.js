@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "youtube-revolutionised-study-students-teachers-jio-internet-india",
+      title: "YouTube Study Revolution: Students, Teachers और Jio Internet ने India की पढ़ाई कैसे बदल दी",
+      category: "Education News",
+      date: "2026-07-02",
+      image: thumbnail,
+      url: "student-hub/youtube-revolutionised-study-students-teachers-jio-internet-india.html",
+      excerpt: "YouTube ने students, teachers, free education, online coaching और self-study culture को कैसे बदला, और Jio/cheap internet ने इस revolution को Bharat तक कैसे पहुंचाया."
+    },
+    {
       id: "indus-water-treaty-history-india-pakistan-terrorism-operation-sindoor",
       title: "Indus Water Treaty Explained: History, India-Pakistan Perspective और Operation Sindoor Angle",
       category: "Current Affairs",
@@ -126,7 +135,7 @@
       date: "2026-06-25",
       image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782389979696.webp",
       url: "student-hub/up-police-constable-answer-key-2026-marks-vs-selection-chance.html",
-      excerpt: "UP Police answer key 2026 ke baad marks vs selection chance, expected cut off, previous cut off, paper level aur category-wise safe score ka practical analysis."
+      excerpt: "UP Police answer key 2026 ke baad marks vs selection chance, expected cut off, previous cut off, paper level aur category-wise safe score का practical analysis."
     },
     {
       id: "lucknow-coaching-centre-fire-student-safety",

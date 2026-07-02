@@ -856,7 +856,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3447",
         "startDate": "2026-06-15",
         "lastDate": "2026-07-01",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UPSRLM Recruitment 2026",
             "UPSRLM Various Post",

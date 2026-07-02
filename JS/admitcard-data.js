@@ -150,7 +150,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-01",
         "examEndDate": "",
         "releaseDate": "2026-06-25",
-        "status": "available",
+        "status": "exam-over",
         "tags": [
             "PGCIL",
             "Non Executive"
