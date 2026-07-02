@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0031-20260702043148",
+        "title": "SBI Apprentice Admit Card 2026 for 7150 Post",
+        "organization": "State Bank of India",
+        "department": "SBI",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-07-11",
+        "examEndDate": "",
+        "releaseDate": "2026-06-30",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/sbiaapr26/oecla_jun26/login.php?appid=42f888ad90671cdf0f66feefc29b82ec",
+        "detailPage": "../AdmitCard_Details/HTML/04-SBI-Apprentice-Admit-Card-2026.html",
+        "updatedAt": "2026-07-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0032-20260702071451",
         "title": "Railway RRB NTPC Graduate Level CBT II Exam City Details 2026 | CEN 06/2025",
         "organization": "Railway Recruitment Board",
