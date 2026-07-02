@@ -7,7 +7,7 @@
       title: "YouTube Study Revolution: Students, Teachers और Jio Internet ने India की पढ़ाई कैसे बदल दी",
       category: "Education News",
       date: "2026-07-02",
-      image: thumbnail,
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1782971109883.webp",
       url: "student-hub/youtube-revolutionised-study-students-teachers-jio-internet-india.html",
       excerpt: "YouTube ने students, teachers, free education, online coaching और self-study culture को कैसे बदला, और Jio/cheap internet ने इस revolution को Bharat तक कैसे पहुंचाया."
     },
