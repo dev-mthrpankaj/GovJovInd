@@ -19,5 +19,4 @@ Disallow: /.cache/
 Allow: /
 
 Sitemap: https://govjobupdates.com/sitemap.xml
-Sitemap: https://govjobupdates.com/student-hub-extra-sitemap.xml
 Sitemap: https://test.govjobupdates.com/live-test/sitemap.xml
