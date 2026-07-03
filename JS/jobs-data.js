@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not Mentioned",
         "startDate": "2026-07-04",
         "lastDate": "2026-07-11",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://icsil.in/requirement-careers",
         "officialNotification": "https://icsil.in/app/uploads/advertisement/Advt__ICSIL_panel_for_various_posts_01_07_20263.pdf",
@@ -874,7 +874,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not Mentioned",
         "startDate": "2026-06-19",
         "lastDate": "2026-07-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Haryana Staff Selection Commission Recruitment 2026",
             "Haryana HSSC Group D Common Eligibility Test CET",
@@ -1084,7 +1084,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1484",
         "startDate": "2026-06-13",
         "lastDate": "2026-07-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "All India Institute of Medical Sciences (AIIMS) Recruitment 2026",
             "AIIMS CRE 5th Group B & C Various Post",
@@ -1114,7 +1114,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "596",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Karnataka Examination Authority (KEA) Recruitment 2026",
             "Karnataka Police Constable",
@@ -1144,7 +1144,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3395",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Karnataka Examination Authority (KEA) Recruitment 2026",
             "Karnataka Police Constable",
@@ -1564,7 +1564,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "607",
         "startDate": "2026-06-04",
         "lastDate": "2026-07-03",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Rajasthan Public Service Commision Recruitment 2026",
             "RPSC RAS Pre",
