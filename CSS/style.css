@@ -242,6 +242,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  min-height: 69px;
   background: rgba(255, 255, 255, .96);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(8px);
@@ -2332,6 +2333,10 @@ footer .footer-section:first-child {
 }
 
 @media (max-width: 768px) {
+  header {
+    min-height: 68px;
+  }
+
   body.has-candidate-bottom-nav {
     padding-bottom: 0;
   }

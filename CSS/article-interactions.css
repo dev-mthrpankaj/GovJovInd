@@ -222,6 +222,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 210px;
   padding: 2rem;
   background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
   border: 1.5px dashed #3b82f6;
@@ -269,6 +270,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-height: 96px;
 }
 
 .comment-item {
@@ -572,6 +574,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  min-height: 96px;
   padding: 1rem;
   color: #64748b;
   font-size: 0.9rem;
@@ -606,6 +609,10 @@
   .article-interactions {
     padding: 1.5rem;
     margin-top: 2rem;
+  }
+
+  .comment-auth-prompt {
+    min-height: 190px;
   }
 
   .interactions-votes {
