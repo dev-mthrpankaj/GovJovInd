@@ -339,6 +339,48 @@ body {
     font-weight: 800;
 }
 
+.exam-search-field input {
+    border-color: var(--rp-border-strong);
+    background: #fff;
+    font-weight: 800;
+}
+
+.exam-quick-picks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: -2px;
+}
+
+.exam-quick-chip {
+    min-height: 40px;
+    padding: 8px 12px;
+    border: 1px solid var(--rp-border-strong);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--rp-blue-dark);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.2;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+}
+
+.exam-quick-chip:hover,
+.exam-quick-chip:focus-visible {
+    border-color: var(--rp-blue);
+    background: var(--rp-blue-soft);
+    box-shadow: var(--rp-shadow-soft);
+}
+
+.exam-quick-chip.is-active {
+    border-color: var(--rp-blue);
+    background: var(--rp-blue);
+    color: #fff;
+}
+
 .tab-card {
     padding: 6px;
     background: #edf5ff;

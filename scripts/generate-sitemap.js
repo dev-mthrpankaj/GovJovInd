@@ -7,7 +7,7 @@ const { execFileSync } = require("child_process");
 const root = path.resolve(__dirname, "..");
 const baseUrl = "https://govjobupdates.com/";
 const sitemapPath = path.join(root, "sitemap.xml");
-const excludedDirectoryNames = new Set([".git", ".github", "node_modules"]);
+const excludedDirectoryNames = new Set([".git", ".github", "node_modules", "android-webview-app"]);
 const excludedNameToken = /(?:^|[ ._-])(draft|drafts|test|tests|backup|backups|bak|old|copy)(?:[ ._-]|$)/i;
 
 function toRelativePath(filePath) {

@@ -330,17 +330,138 @@
     function bindExamSelector() {
         const select = getById("globalExamSelect");
         if (!select) return;
-        select.innerHTML = (config.exams || []).length
-            ? (config.exams || []).map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("")
-            : '<option value="">No exams configured</option>';
+        renderExamOptions();
+        renderExamQuickPicks();
+        bindExamSearch();
         select.addEventListener("change", () => {
             clearFieldError({ target: select });
             let selectedExam = (config.exams || []).find((exam) => exam.examId === select.value) || null;
             if (selectedExam?.disabled) selectedExam = (config.exams || []).find((exam) => !exam.disabled) || null;
-            setSelectedExam(selectedExam);
+            setSelectedExam(selectedExam, { syncSearch: false });
             applyExamDefaults();
             renderPendingResult();
         });
+    }
+
+    function bindExamSearch() {
+        const input = getById("examSearchInput");
+        if (!input || input.dataset.bound === "true") return;
+        input.dataset.bound = "true";
+        input.addEventListener("input", () => {
+            renderExamOptions(getSelectedExam()?.examId || "", input.value);
+            updateExamQuickPickState();
+        });
+        input.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter") return;
+            const firstVisible = getVisibleExamOptions()[0];
+            if (!firstVisible) return;
+            event.preventDefault();
+            chooseExam(firstVisible.examId, { syncSearch: true, focusSelect: true });
+        });
+    }
+
+    function renderExamOptions(selectedId = getSelectedExam()?.examId || "", query = getById("examSearchInput")?.value || "") {
+        const select = getById("globalExamSelect");
+        if (!select) return;
+
+        const exams = Array.isArray(config.exams) ? config.exams : [];
+        const visibleExams = filterExamOptions(exams, query);
+        const selectedExam = exams.find((exam) => exam.examId === selectedId);
+        const optionExams = selectedExam && !visibleExams.some((exam) => exam.examId === selectedExam.examId)
+            ? [selectedExam].concat(visibleExams)
+            : visibleExams;
+
+        select.innerHTML = optionExams.length
+            ? optionExams.map((exam) => `<option value="${escapeAttr(exam.examId)}" ${exam.disabled ? "disabled" : ""}>${escapeHtml(exam.examName)}</option>`).join("")
+            : '<option value="">No matching exams found</option>';
+        if (selectedId && optionExams.some((exam) => exam.examId === selectedId)) select.value = selectedId;
+        updateExamSearchStatus(visibleExams.length, exams.filter((exam) => !exam.disabled).length, query);
+    }
+
+    function filterExamOptions(exams, query = "") {
+        const search = normalizeKey(query);
+        return exams.filter((exam) => {
+            if (!exam || exam.disabled) return false;
+            if (!search) return true;
+            const haystack = [
+                exam.examName,
+                exam.examId,
+                exam.board,
+                exam.examType,
+                exam.sheetName,
+                ...(exam.categories || []),
+                ...(exam.states || [])
+            ].join(" ");
+            return normalizeKey(haystack).includes(search);
+        });
+    }
+
+    function getVisibleExamOptions() {
+        return filterExamOptions(config.exams || [], getById("examSearchInput")?.value || "");
+    }
+
+    function updateExamSearchStatus(count, total, query = "") {
+        const status = getById("examSearchStatus");
+        if (!status) return;
+        if (!total) {
+            setNodeText(status, "No Rank Predictor exams are configured yet.");
+            return;
+        }
+        if (!String(query || "").trim()) {
+            setNodeText(status, `${total} exam setup${total === 1 ? "" : "s"} available. Search by exam name, board, state, or year.`);
+            return;
+        }
+        setNodeText(status, count ? `${count} matching exam setup${count === 1 ? "" : "s"} found.` : "No matching exam found. Clear search or use the full exam list.");
+    }
+
+    function renderExamQuickPicks() {
+        const host = getById("examQuickPicks");
+        if (!host) return;
+        const exams = (config.exams || []).filter((exam) => !exam.disabled).slice(0, 6);
+        if (!exams.length) {
+            host.hidden = true;
+            host.innerHTML = "";
+            return;
+        }
+        host.hidden = false;
+        host.innerHTML = exams.map((exam) => `
+            <button class="exam-quick-chip" type="button" data-exam-id="${escapeAttr(exam.examId)}">
+                ${escapeHtml(getShortExamLabel(exam.examName))}
+            </button>`).join("");
+        if (host.dataset.bound !== "true") {
+            host.dataset.bound = "true";
+            host.addEventListener("click", (event) => {
+                const button = event.target?.closest?.("[data-exam-id]");
+                if (!button || !host.contains(button)) return;
+                chooseExam(button.dataset.examId, { syncSearch: true, focusSelect: false });
+            });
+        }
+        updateExamQuickPickState();
+    }
+
+    function updateExamQuickPickState() {
+        const host = getById("examQuickPicks");
+        const selectedId = getSelectedExam()?.examId || "";
+        if (!host) return;
+        host.querySelectorAll("[data-exam-id]").forEach((button) => {
+            const active = button.dataset.examId === selectedId;
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+    }
+
+    function getShortExamLabel(name) {
+        return getString(name).replace(/\s+/g, " ").slice(0, 34);
+    }
+
+    function chooseExam(examId, options = {}) {
+        const exam = (config.exams || []).find((item) => item.examId === examId && !item.disabled) || null;
+        if (!exam) return;
+        setSelectedExam(exam, options);
+        renderExamOptions(exam.examId, options.syncSearch ? exam.examName : getById("examSearchInput")?.value || "");
+        applyExamDefaults();
+        renderPendingResult();
+        if (options.focusSelect) getById("globalExamSelect")?.focus({ preventScroll: true });
     }
 
     function applyExamDefaults() {
@@ -353,6 +474,7 @@
         }
 
         setValue("globalExamSelect", exam.examId);
+        updateExamQuickPickState();
         setValue("submitExamName", exam.examName);
         setValue("checkExamName", exam.examName);
         setText("activeExamLabel", exam.examName);
@@ -1792,9 +1914,10 @@
         return date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
     }
 
-    function setSelectedExam(exam) {
+    function setSelectedExam(exam, options = {}) {
         state.exam = exam;
         window.RANK_PREDICTOR_SELECTED_EXAM = exam;
+        if (options.syncSearch && exam?.examName) setValue("examSearchInput", exam.examName);
     }
 
     function getCandidateSession() {
