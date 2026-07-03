@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0025-20260703072901",
+        "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-07-02",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "Needs Action"
+        ],
+        "downloadLink": "https://drive.google.com/file/d/16u-9curqW4ld38YtoUWiQ0ApTcRf8jvQ/view?usp=drivesdk",
+        "objectionLink": "https://pharmacist-main-exam-29062026.answer-objections.com/",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-07-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "4015",
         "title": "UP Police Home Guard Final Answer Key 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
