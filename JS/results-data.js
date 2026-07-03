@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0040-20260703071804",
+        "title": "JPSC Jharkhand PCS Pre Result 2026",
+        "organization": "Jharkhand Public Service Commission",
+        "department": "JPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-03",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://jpsc.gov.in/data/Press_Release_and_P.T_Result_01_26_dated_02_07_2026.pdf",
+        "detailPage": "../Result_Details/HTML/2156-JPSC-Combined-Civil-Services-Prelims-Result-2026.html",
+        "updatedAt": "2026-07-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0037-20260702164822",
         "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
         "organization": "Reserve  Bank  of India",
