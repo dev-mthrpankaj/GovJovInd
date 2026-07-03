@@ -166,6 +166,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0033-20260701095309",
+        "title": "RRB Group D Result Chennai 2025",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central  Government",
+        "year": "2026",
+        "resultDate": "2026-07-01",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.rrbchennai.gov.in/",
+        "detailPage": "../Result_Details/HTML/3006-RRB-Chennai-Group-D-Level-1-Result-2026.html",
+        "updatedAt": "2026-07-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0034-20260701095454",
         "title": "RRB Group D Result Prayagraj 2025",
         "organization": "Railway Recruitment Board",
@@ -578,12 +596,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://esb.mp.gov.in/results/RESULT_26/PAT_RES26/default_Results.htm",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/3007-MPESB-Pre-Agriculture-Test-PAT-Result-2026.html",
         "updatedAt": "2026-06-18",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "1010",
@@ -688,13 +706,13 @@ window.GovJobUpdatesResults = [
             "REET",
             "Upper Primary Teacher"
         ],
-        "resultLink": "",
-        "detailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
+        "resultLink": "https://esb.mp.gov.in/results/RESULT_26/PAT_RES26/default_Results.htm",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "1005",
