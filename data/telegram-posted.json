@@ -2270,6 +2270,20 @@
       "title": "RRB Group D Score Card Result 2025",
       "lastPostedAt": "2026-07-03T08:35:20.280Z",
       "stateReason": "new"
+    },
+    "results:result-sheet-0033-20260701095309": {
+      "updatedAt": "2026-07-01",
+      "hash": "64ba491d0eff88e016a530d482b0c5c132dbf95ad525bad4b92611168eef35c9",
+      "title": "RRB Group D Result Chennai 2025",
+      "lastPostedAt": "2026-07-03T11:06:03.258Z",
+      "stateReason": "new"
+    },
+    "results:1012": {
+      "updatedAt": "2026-06-18",
+      "hash": "9ec90f09d39bd0fa1b0a72dfe573b168adab770bdcbac3199fb30108602d3eb2",
+      "title": "MPESB Pre Agriculture Test PAT Result 2026",
+      "lastPostedAt": "2026-07-03T11:06:04.048Z",
+      "stateReason": "new"
     }
   }
 }
