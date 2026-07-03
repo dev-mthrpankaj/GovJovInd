@@ -20,12 +20,36 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://drive.google.com/file/d/16u-9curqW4ld38YtoUWiQ0ApTcRf8jvQ/view?usp=drivesdk",
         "objectionLink": "https://pharmacist-main-exam-29062026.answer-objections.com/",
-        "detailPage": "../HTML/answer-key.html",
+        "detailPage": "../AnswerKey_Details/HTML/125-UPSSSC-Pharmacist-Answer-Key-2026.html",
         "updatedAt": "2026-07-03",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "answerkey-sheet-0026-20260703073322",
+        "title": "UPSSSC Various Post UP Pollution Answer Key 2026 for 115 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "",
+        "examEndDate": "",
+        "releaseDate": "2026-07-02",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [
+            "Needs Action"
+        ],
+        "downloadLink": "https://drive.google.com/file/d/1h6HP6ON2nVejr8iHeIurVrHY85Bc0TfI/view?usp=drivesdk",
+        "objectionLink": "https://pollution-control-board-main-exam-29062026.answer-objections.com/",
+        "detailPage": "../AnswerKey_Details/HTML/126-UPSSSC-Various-Post-UP-Pollution-Answer-Key-2026.html",
+        "updatedAt": "2026-07-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "4015",
