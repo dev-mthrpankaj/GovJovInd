@@ -689,6 +689,8 @@ body {
 .fixed-setting {
     display: grid;
     gap: 6px;
+    min-width: 0;
+    overflow: hidden;
     padding: 10px;
     box-shadow: none;
 }
@@ -699,6 +701,7 @@ body {
     font-weight: 900;
     line-height: 1.35;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .fixed-setting strong {
@@ -841,7 +844,9 @@ body {
 .live-summary-card div {
     display: grid;
     gap: 2px;
+    min-width: 0;
     min-height: 54px;
+    overflow: hidden;
     padding: 8px 10px;
     border: 1px solid var(--rp-border);
     border-radius: 8px;
@@ -854,6 +859,7 @@ body {
     font-weight: 900;
     line-height: 1.25;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .live-summary-card strong {
@@ -943,6 +949,7 @@ body {
 .subject-title {
     display: grid;
     gap: 4px;
+    min-width: 0;
 }
 
 .subject-card-heading strong {
@@ -969,6 +976,7 @@ body {
     font-weight: 900;
     line-height: 1.15;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .subject-card-total strong {
@@ -999,7 +1007,9 @@ body {
 .subject-derived-row span {
     display: grid;
     gap: 4px;
+    min-width: 0;
     min-height: 48px;
+    overflow: hidden;
     padding: 10px 12px;
     border: 1px solid var(--rp-border);
     border-radius: 8px;
@@ -1012,6 +1022,7 @@ body {
     font-weight: 900;
     line-height: 1.25;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .subject-derived-row strong {
@@ -1502,6 +1513,32 @@ body {
 }
 
 @media (max-width: 767px) {
+    .fixed-exam-settings {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .fixed-setting {
+        min-height: 82px;
+        padding: 9px;
+    }
+
+    .fixed-setting span {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .fixed-setting strong {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+
+    .fixed-exam-note {
+        gap: 8px;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
     .live-summary-card {
         position: sticky;
         top: calc(var(--gju-header-height, 74px) + 8px);
@@ -1519,10 +1556,59 @@ body {
 
     .live-summary-card span {
         font-size: 10px;
+        line-height: 1.18;
     }
 
     .live-summary-card strong {
         font-size: 0.95rem;
+    }
+
+    .subject-card-heading {
+        align-items: start;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .subject-card-heading strong {
+        font-size: 1.05rem;
+        line-height: 1.25;
+    }
+
+    .subject-card-heading small,
+    .subject-card-total small,
+    .subject-derived-row small,
+    .subject-input-grid label {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .subject-card-total {
+        min-width: 66px;
+    }
+
+    .subject-card-total strong,
+    .subject-derived-row strong {
+        font-size: 0.95rem;
+    }
+
+    .subject-card-body {
+        gap: 10px;
+        padding: 0 12px 12px;
+    }
+
+    .subject-input-grid,
+    .subject-derived-row {
+        gap: 8px;
+    }
+
+    .subject-derived-row span {
+        min-height: 44px;
+        padding: 8px 9px;
+    }
+
+    .attempt-rule-message {
+        font-size: 13px;
+        line-height: 1.4;
     }
 
     .sticky-actions {
@@ -1702,10 +1788,36 @@ body {
 
     .attempt-rule-message {
         margin: 0 14px 14px;
+        padding: 11px 12px;
     }
 
     .live-summary-card {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
         padding: 8px;
+    }
+
+    .live-summary-card div {
+        min-height: 54px;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .live-summary-card span {
+        font-size: 11px;
+    }
+
+    .fixed-exam-settings {
+        padding: 12px;
+    }
+
+    .fixed-setting {
+        min-height: 78px;
+        padding: 8px;
+    }
+
+    .fixed-exam-note {
+        font-size: 12.5px;
     }
 
     .sticky-actions {
@@ -1739,6 +1851,19 @@ body {
 
     .subject-card-heading {
         grid-template-columns: minmax(0, 1fr) auto auto;
+        padding: 12px;
+    }
+
+    .subject-card-heading strong {
+        font-size: 1rem;
+    }
+
+    .subject-card-total {
+        min-width: 62px;
+    }
+
+    .subject-card-body {
+        padding: 0 12px 12px;
     }
 }
 
@@ -1791,6 +1916,31 @@ body {
 
     .live-summary-card {
         padding: 8px;
+    }
+
+    .fixed-exam-settings,
+    .subject-input-grid,
+    .subject-derived-row {
+        gap: 7px;
+    }
+
+    .fixed-setting {
+        min-height: 74px;
+        padding: 7px;
+    }
+
+    .fixed-setting span,
+    .subject-card-total small,
+    .subject-derived-row small {
+        font-size: 11px;
+    }
+
+    .subject-card-heading {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+    }
+
+    .subject-card-total {
+        min-width: 54px;
     }
 
     .subject-input-grid {
