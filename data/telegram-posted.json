@@ -2235,6 +2235,20 @@
       "title": "RRB Group D Result for All RRB,s 2025",
       "lastPostedAt": "2026-07-01T13:36:23.570Z",
       "stateReason": "new"
+    },
+    "results:result-sheet-0037-20260702164822": {
+      "updatedAt": "2026-07-02",
+      "hash": "d1950e1b36601585ad76f93ac2cb18644a89ab576029fec38cdfd0ec3aac8ed7",
+      "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
+      "lastPostedAt": "2026-07-02T18:08:46.058Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0038-20260702164814": {
+      "updatedAt": "2026-07-02",
+      "hash": "dd16d3e7d3ea6df8b1392dcc46357a747422fdcd09e525184c415e795088d9b9",
+      "title": "SBI CBO Circle Based Officers Result 2026 for 2050 Post",
+      "lastPostedAt": "2026-07-02T18:08:46.981Z",
+      "stateReason": "new"
     }
   }
 }
