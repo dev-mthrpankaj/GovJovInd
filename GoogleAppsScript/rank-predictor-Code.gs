@@ -337,13 +337,14 @@ function submitData(data) {
   data.horizontalCategory = normalizeText(data.horizontalCategory);
   data.state = normalizeText(data.state);
   data.subjectData = normalizeSubjectData(data.subjectData, data);
-  data.rawMarks = isFinite(Number(data.rawMarks)) ? Number(data.rawMarks) : calculateRawMarks(data);
+  data.rawMarks = calculateRawMarks(data);
 
   validateSubmitPayload(data);
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = getSheetByExam(data.sheetName, spreadsheet);
   const examConfig = getRankExamConfigForData(spreadsheet, data);
+  validateSubmitPayload(data, examConfig);
   const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
 
@@ -2330,8 +2331,8 @@ function buildNotFoundDebug(sheet, data, rows) {
   };
 }
 
-function validateSubmitPayload(data) {
-  ["examId", "examName", "sheetName", "mode", "rollNumber", "mobileNumber", "dob", "category", "state", "examDate"].forEach(function (key) {
+function validateSubmitPayload(data, examConfig) {
+  ["examId", "examName", "sheetName", "mode", "candidateName", "rollNumber", "mobileNumber", "dob", "gender", "category", "horizontalCategory", "state", "examDate"].forEach(function (key) {
     if (!String(data[key] || "").trim()) throw new Error(key + " is required.");
   });
 
@@ -2340,10 +2341,46 @@ function validateSubmitPayload(data) {
   });
 
   if (Number(data.totalQuestions) <= 0) throw new Error("Total questions must be configured.");
+  if (Number(data.totalAttempted) <= 0) throw new Error("Total attempted must be greater than 0.");
   if (Number(data.totalAttempted) > Number(data.totalQuestions)) throw new Error("Total attempted cannot exceed total questions.");
   if (Number(data.rightAnswers) + Number(data.wrongAnswers) > Number(data.totalAttempted)) throw new Error("Right and wrong answers cannot exceed total attempted.");
+  if (Number(data.rightAnswers) + Number(data.wrongAnswers) !== Number(data.totalAttempted)) throw new Error("Right and wrong answers must equal total attempted.");
   if (Number(data.unattempted) < 0) throw new Error("Unattempted cannot be negative.");
   if (!isValidMobile(data.mobileNumber)) throw new Error("Mobile number must be 10 digits.");
+  if (!isValidRankDate(data.dob)) throw new Error("Date of birth must be yyyy-mm-dd.");
+  if (!isValidRankDate(data.examDate)) throw new Error("Exam date must be yyyy-mm-dd.");
+  if (examConfig && examConfig.hasShifts && !String(data.shift || "").trim()) throw new Error("Shift is required.");
+  if (examConfig && examConfig.hasShifts && !/^[1-9]\d*$/.test(String(data.shift || "").trim())) throw new Error("Shift must be a positive number.");
+  validateSubmitSubjectData(data, examConfig);
+}
+
+function validateSubmitSubjectData(data, examConfig) {
+  const subjects = Array.isArray(examConfig && examConfig.subjects) ? examConfig.subjects : [];
+  const subjectData = Array.isArray(data.subjectData) ? data.subjectData : [];
+  if (subjects.length && !subjectData.length) throw new Error("Subject data is required.");
+
+  subjectData.forEach(function (subject, index) {
+    if (!String(subject.name || "").trim()) throw new Error("Subject name is required.");
+    ["attempted", "correct", "wrong"].forEach(function (key) {
+      if (!isFinite(Number(subject[key]))) throw new Error("Subject " + (index + 1) + " " + key + " must be a number.");
+    });
+    if (Number(subject.attempted) < 0 || Number(subject.correct) < 0 || Number(subject.wrong) < 0) throw new Error("Subject attempts cannot be negative.");
+    if (Number(subject.correct) + Number(subject.wrong) !== Number(subject.attempted)) throw new Error("Subject correct and wrong answers must equal subject attempted.");
+    if (isFinite(Number(subject.questions)) && Number(subject.questions) > 0 && Number(subject.attempted) > Number(subject.questions)) throw new Error("Subject attempted cannot exceed subject questions.");
+  });
+
+  if (subjectData.length) {
+    const attempted = subjectData.reduce(function (sum, subject) { return sum + Number(subject.attempted || 0); }, 0);
+    const correct = subjectData.reduce(function (sum, subject) { return sum + Number(subject.correct || 0); }, 0);
+    const wrong = subjectData.reduce(function (sum, subject) { return sum + Number(subject.wrong || 0); }, 0);
+    if (attempted !== Number(data.totalAttempted)) throw new Error("Subject attempted total must match total attempted.");
+    if (correct !== Number(data.rightAnswers)) throw new Error("Subject correct total must match right answers.");
+    if (wrong !== Number(data.wrongAnswers)) throw new Error("Subject wrong total must match wrong answers.");
+  }
+}
+
+function isValidRankDate(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value || "").trim());
 }
 
 function validateCheckPayload(data) {

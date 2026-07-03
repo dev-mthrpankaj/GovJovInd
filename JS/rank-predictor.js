@@ -1427,7 +1427,7 @@
             markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
         }
-        const required = ["candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
+        const required = ["candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "horizontalCategory", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
         if (selectedExam.hasShifts) required.push("shift");
 
         for (const id of required) {
@@ -1444,8 +1444,10 @@
         const subjectValidation = validateSubjectInputs(selectedExam, attempted, right, wrong);
         if (!subjectValidation.ok) return subjectValidation;
         if (total <= 0) return invalidNumber("globalExamSelect", "Total questions must be configured for this exam.");
+        if (attempted <= 0) return invalidNumber("totalAttempted", "Total attempted must be greater than 0.");
         if (attempted > total) return invalidNumber("totalAttempted", "Total attempted cannot be greater than total questions.");
         if (right + wrong > attempted) return invalidNumber("rightAnswers", "Right and wrong answers cannot exceed total attempted.");
+        if (right + wrong !== attempted) return invalidNumber("rightAnswers", "Right and wrong answers must equal total attempted.");
         if (total - attempted < 0) return invalidNumber("totalAttempted", "Unattempted cannot be negative.");
         if (!isValidMobileInput("mobileNumber")) return invalidNumber("mobileNumber", "Please enter a valid 10-digit mobile number.");
         if (!isValidDateInput("dob")) return invalidNumber("dob", "Please enter a valid Date of Birth.");
@@ -1957,8 +1959,9 @@
 
     function validateBackendPayload(payload) {
         const required = payload.action === "submitData"
-            ? ["action", "sheetName", "examId", "examName", "rollNumber", "mobileNumber", "dob", "examDate", "totalQuestions", "marksPerCorrect", "rawMarks"]
+            ? ["action", "sheetName", "examId", "examName", "candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "horizontalCategory", "state", "totalQuestions", "totalAttempted", "rightAnswers", "wrongAnswers", "unattempted", "marksPerCorrect", "negativeMarking", "rawMarks"]
             : ["action", "sheetName", "examId", "examName", "rollNumber", "mobileNumber", "dob"];
+        if (payload.action === "submitData" && getSelectedExam()?.hasShifts) required.push("shift");
         const missing = required.filter((key) => isBlank(payload[key]));
         if (missing.length) {
             return {
