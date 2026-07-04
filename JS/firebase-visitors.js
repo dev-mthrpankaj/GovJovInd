@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
   getDatabase,
   ref,
@@ -26,19 +26,10 @@ import {
   const DAILY_COUNTED_PREFIX = "gju:firebase-daily-counted:";
   const INDIA_TIME_ZONE = "Asia/Kolkata";
 
-  const app = initializeApp(config);
-  const db = getDatabase(app);
-
-  const visitorId = getOrCreateVisitorId();
-  const sessionId = getOrCreateSessionId();
-  const todayKey = getIndiaDateKey();
-
-  const paths = {
-    siteStats: "siteStats",
-    dailyStats: `dailyStats/${todayKey}`,
-    visitorIndex: `visitorIndex/${visitorId}`,
-    presence: `presence/${visitorId}/${sessionId}`
-  };
+  let db = null;
+  let todayKey = "";
+  let paths = null;
+  let visitorSystemStarted = false;
 
   const statsState = {
     liveVisitors: "--",
@@ -49,9 +40,38 @@ import {
     state: "loading"
   };
 
-  startVisitorSystem();
+  scheduleVisitorSystemStart();
+
+  function scheduleWhenIdle(callback) {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(callback, { timeout: 5000 });
+      return;
+    }
+
+    window.setTimeout(callback, 2000);
+  }
+
+  function scheduleVisitorSystemStart() {
+    scheduleWhenIdle(startVisitorSystem);
+  }
 
   function startVisitorSystem() {
+    if (visitorSystemStarted) return;
+    visitorSystemStarted = true;
+
+    const app = getApps().length ? getApps()[0] : initializeApp(config);
+    db = getDatabase(app);
+
+    const visitorId = getOrCreateVisitorId();
+    const sessionId = getOrCreateSessionId();
+    todayKey = getIndiaDateKey();
+    paths = {
+      siteStats: "siteStats",
+      dailyStats: `dailyStats/${todayKey}`,
+      visitorIndex: `visitorIndex/${visitorId}`,
+      presence: `presence/${visitorId}/${sessionId}`
+    };
+
     ensureVisitorWidget();
     trackPageView();
     trackUniqueVisitor();

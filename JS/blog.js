@@ -16,6 +16,9 @@
 
   if (!grid || !searchInput || !filters || !count || !empty || !loadMore) return;
 
+  let searchDebounceTimer = 0;
+  let renderFrame = 0;
+
   const formatDate = (dateValue) => {
     const date = new Date(`${dateValue}T00:00:00`);
     if (Number.isNaN(date.getTime())) return dateValue;
@@ -66,6 +69,7 @@
   };
 
   const render = () => {
+    renderFrame = 0;
     const filtered = getFilteredBlogs();
     const visibleBlogs = filtered.slice(0, state.visible);
 
@@ -79,27 +83,47 @@
       : "No articles match your filters";
   };
 
+  const scheduleRender = () => {
+    if (renderFrame) return;
+
+    if ("requestAnimationFrame" in window) {
+      renderFrame = window.requestAnimationFrame(render);
+      return;
+    }
+
+    renderFrame = window.setTimeout(render, 0);
+  };
+
   searchInput.addEventListener("input", () => {
-    state.query = searchInput.value;
-    state.visible = PAGE_SIZE;
-    render();
+    window.clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = window.setTimeout(() => {
+      const nextQuery = searchInput.value;
+      if (state.query === nextQuery && state.visible === PAGE_SIZE) return;
+
+      state.query = nextQuery;
+      state.visible = PAGE_SIZE;
+      scheduleRender();
+    }, 200);
   });
 
   filters.addEventListener("click", (event) => {
     const button = event.target.closest("[data-category]");
     if (!button) return;
 
-    state.category = button.dataset.category || "All";
+    const nextCategory = button.dataset.category || "All";
+    if (state.category === nextCategory && state.visible === PAGE_SIZE) return;
+
+    state.category = nextCategory;
     state.visible = PAGE_SIZE;
     filters.querySelectorAll("[data-category]").forEach((filter) => {
       filter.classList.toggle("is-active", filter === button);
     });
-    render();
+    scheduleRender();
   });
 
   loadMore.addEventListener("click", () => {
     state.visible += PAGE_SIZE;
-    render();
+    scheduleRender();
   });
 
   grid.addEventListener("click", (event) => {
