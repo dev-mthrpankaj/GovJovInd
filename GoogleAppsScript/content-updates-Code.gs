@@ -6,6 +6,8 @@ const TELEGRAM_SAFE_FIELDS = [
   ["Telegram Ready", "telegramReady"]
 ];
 
+const CONTENT_AUTO_MANAGED_FIELDS = ["id", "order", "status", "updatedAt"];
+
 function withTelegramSafeFields(fields) {
   return (Array.isArray(fields) ? fields : []).concat(TELEGRAM_SAFE_FIELDS);
 }
@@ -185,6 +187,7 @@ function listContentAdminItems(params) {
     type: type,
     updatedAt: new Date().toISOString(),
     meta: result.meta,
+    formMeta: getContentAdminFormMeta(CONTENT_SHEETS[type]),
     items: result.items
   };
 }
@@ -517,6 +520,23 @@ function buildContentAdminRowFromItem(item, config, columnCount) {
   const row = [item.published, item.order].concat(values);
   while (row.length < columnCount) row.push("");
   return row;
+}
+
+function getContentAdminFormMeta(config) {
+  return {
+    autoManagedFields: CONTENT_AUTO_MANAGED_FIELDS.slice(),
+    editableFields: config.fields
+      .filter(function (fieldConfig) {
+        return CONTENT_AUTO_MANAGED_FIELDS.indexOf(fieldConfig[1]) === -1;
+      })
+      .map(function (fieldConfig) {
+        return {
+          label: fieldConfig[0],
+          field: fieldConfig[1],
+          type: fieldConfig[2] || "text"
+        };
+      })
+  };
 }
 
 function setupContentStatusFormulas() {
