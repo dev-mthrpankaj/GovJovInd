@@ -52,6 +52,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "answerkey-sheet-0027-20260703073808",
+        "title": "UPSSSC BCG Technician Answer Key 2026 for 255 Post",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-06-30",
+        "examEndDate": "",
+        "releaseDate": "2026-07-02",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://drive.google.com/file/d/1Y62tk0VEv-S3sSOa4I6TRt4NFRIscpmf/view?usp=drivesdk",
+        "objectionLink": "https://bcg-technician-main-exam-30062026.answer-objections.com/",
+        "detailPage": "../AnswerKey_Details/HTML/127-UPSSSC-BCG-Technician-Answer-Key-2026.html",
+        "updatedAt": "2026-07-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "4015",
         "title": "UP Police Home Guard Final Answer Key 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
