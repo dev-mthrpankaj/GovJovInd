@@ -267,27 +267,41 @@
 
     function convertQuestion(question, meta, subject, preferredLanguage, index) {
         const number = toPositiveInt(question.number || question.questionNumber || question.question_number, index + 1);
-        const optionTexts = OPTION_KEYS.map((key) => pickText(question.options?.[key] || question[`option_${key.toLowerCase()}`], preferredLanguage));
+        const optionSources = OPTION_KEYS.map((key) => question.options?.[key] || question[`option_${key.toLowerCase()}`]);
+        const optionTexts = optionSources.map((value) => pickText(value, preferredLanguage));
+        const optionTextMaps = optionSources.map(normalizeTextMap);
         const optionImages = OPTION_KEYS.map((key) => normalizeMedia(question.options?.[key]?.image || question[`option_${key.toLowerCase()}_image`], `Option ${key} image`));
         const correctAnswer = optionLetterToIndex(question.correctOption || question.correct_option || question.answer || question.correctAnswer);
+        const questionSource = question.question || question.text || question.questionText;
+        const explanationSource = question.explanation || question.solution;
 
         return {
             id: `${meta.id}-q${String(number).padStart(2, "0")}`,
             subject,
             topic: String(question.topic || subject || "General"),
             difficulty: normalizeDifficulty(question.difficulty || question.difficultyLevel || question.difficulty_level || meta.difficulty),
-            question: pickText(question.question || question.text || question.questionText, preferredLanguage),
+            question: pickText(questionSource, preferredLanguage),
+            questionTextMap: normalizeTextMap(questionSource),
             image: normalizeMedia(question.question?.image || question.image || question.questionImage || question.question_image, `Question ${number} image`),
             imageAlt: question.question?.alt || question.imageAlt || question.questionImageAlt || `Question ${number} image`,
             options: optionTexts,
+            optionTextMaps,
             optionImages,
             correctAnswer,
-            explanation: pickText(question.explanation || question.solution, preferredLanguage) || "Explanation is not available.",
+            explanation: pickText(explanationSource, preferredLanguage) || "Explanation is not available.",
+            explanationTextMap: normalizeTextMap(explanationSource),
             explanationImage: normalizeMedia(question.explanation?.image || question.explanationImage || question.explanation_image || question.solutionImage, `Question ${number} explanation image`),
             explanationImageAlt: question.explanation?.alt || question.explanationImageAlt || `Question ${number} explanation image`,
             marks: Number(question.marks || meta.marksPerQuestion) || 1,
             negativeMarks: Number(question.negativeMarks || question.negative_marks || meta.negativeMarks) || 0.25
         };
+    }
+
+    function normalizeTextMap(value) {
+        if (!value || typeof value !== "object") return null;
+        const hi = String(value.hi || value.hindi || "").trim();
+        const en = String(value.en || value.english || "").trim();
+        return hi || en ? { hi, en } : null;
     }
 
     function pickText(value, preferredLanguage) {

@@ -1259,6 +1259,33 @@ body.quiz-exam-active .exam-topbar {
     padding: 8px 14px;
 }
 
+.quiz-language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e5e7eb;
+    font-size: 0.76rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.quiz-language-toggle select {
+    min-height: 28px;
+    padding: 2px 24px 2px 8px;
+    border: 0;
+    border-radius: 999px;
+    background: #f8fafc;
+    color: #111827;
+    font: inherit;
+    cursor: pointer;
+}
+
 body.quiz-exam-active .exam-title-block {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
@@ -1892,6 +1919,16 @@ body.quiz-exam-active .modal-card h2 {
 @media (max-width: 639px) {
     body.quiz-exam-active .quiz-page {
         font-size: 16px;
+    }
+
+    .quiz-language-toggle {
+        gap: 4px;
+        padding: 3px 6px;
+        font-size: 0.7rem;
+    }
+
+    .quiz-language-toggle span {
+        display: none;
     }
 
     body.quiz-exam-active .question-card {

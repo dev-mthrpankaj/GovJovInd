@@ -19,6 +19,7 @@
 
     const PERSIST_DELAY_MS = 900;
     const SEARCH_DEBOUNCE_MS = 100;
+    const QUIZ_LANGUAGE_KEY = "quizLanguage";
     const subjectIcons = {
         Mathematics: "fa-calculator",
         English: "fa-language",
@@ -48,6 +49,7 @@
         isLoading: false,
         loadingQuizId: "",
         pendingResume: null,
+        language: getStoredQuizLanguage(),
         paletteDirty: true,
         statusCounts: null,
         lastPaletteCurrent: -1,
@@ -91,6 +93,7 @@
 
         elements.examSubject = document.getElementById("examSubject");
         elements.examTitle = document.getElementById("examTitle");
+        elements.examAppbar = document.querySelector(".exam-appbar");
         elements.currentQuestionNo = document.getElementById("currentQuestionNo");
         elements.totalQuestionNo = document.getElementById("totalQuestionNo");
         elements.timerPill = document.getElementById("timerPill");
@@ -120,6 +123,7 @@
         elements.pauseModal = document.getElementById("pauseModal");
         elements.resumeModal = document.getElementById("resumeModal");
         elements.resumeSummary = document.getElementById("resumeSummary");
+        ensureExamLanguageToggle();
     }
 
     function bindEvents() {
@@ -132,6 +136,9 @@
         });
         elements.subjectSelect?.addEventListener("change", function (event) {
             setSubject(event.target.value);
+        });
+        elements.languageSelect?.addEventListener("change", function (event) {
+            setQuizLanguage(event.target.value);
         });
         window.addEventListener("beforeunload", function () { persistUnfinished(true); });
         window.addEventListener("pagehide", function () { persistUnfinished(true); });
@@ -548,6 +555,7 @@
     }
 
     function resumeAttempt(quizSet, saved) {
+        state.language = normalizeQuizLanguage(saved.language || state.language);
         const questions = getQuestionsForSet(quizSet);
         if (!questions.length) {
             storage.remove("unfinished");
@@ -582,17 +590,23 @@
         const questions = Array.isArray(quizSet.questions) ? quizSet.questions : [];
         return questions.slice(0, Number(quizSet.totalQuestions) || questions.length).map(function (question, index) {
             const normalizedOptions = normalizeOptions(question.options);
+            const questionTextMap = normalizeTextMap(question.questionTextMap || question.questionI18n || question.question);
+            const explanationTextMap = normalizeTextMap(question.explanationTextMap || question.explanationI18n || question.explanation);
+            const optionTextMaps = normalizeOptionTextMaps(question.optionTextMaps, question.options, normalizedOptions);
             return {
                 id: question.id || `${quizSet.id}-${index + 1}`,
                 subject: question.subject || quizSet.subject,
                 topic: question.topic || "General",
                 difficulty: question.difficulty || quizSet.difficulty || "Mixed",
-                question: question.question || "",
+                question: getLocalizedText(questionTextMap, state.language, question.question || ""),
+                questionTextMap,
                 questionImage: normalizeMedia(question.image || question.questionImage, question.imageAlt || question.questionImageAlt || `Question ${index + 1} image`),
                 options: normalizedOptions.map(function (option) { return option.text; }),
+                optionTextMaps,
                 optionImages: normalizeOptionImages(question.optionImages, normalizedOptions),
                 correctAnswer: Number(question.correctAnswer),
-                explanation: question.explanation || "Explanation is not available.",
+                explanation: getLocalizedText(explanationTextMap, state.language, question.explanation || "Explanation is not available."),
+                explanationTextMap,
                 explanationImage: normalizeMedia(question.explanationImage || question.solutionImage, question.explanationImageAlt || question.solutionImageAlt || `Question ${index + 1} explanation image`),
                 marks: Number(question.marks) || Number(quizSet.marksPerQuestion) || 1,
                 negativeMarks: Number(question.negativeMarks) || Number(quizSet.negativeMarks) || 0
@@ -600,7 +614,48 @@
         });
     }
 
+    function ensureExamLanguageToggle() {
+        if (!elements.examAppbar || elements.languageSelect) return;
+        const wrapper = document.createElement("label");
+        wrapper.className = "quiz-language-toggle";
+        wrapper.innerHTML = `
+            <span>Language</span>
+            <select aria-label="Change question language during quiz">
+                <option value="hi">Hindi</option>
+                <option value="en">English</option>
+            </select>
+        `;
+        const menuButton = elements.examAppbar.querySelector("[data-action='toggle-palette']");
+        elements.examAppbar.insertBefore(wrapper, menuButton || null);
+        elements.languageToggle = wrapper;
+        elements.languageSelect = wrapper.querySelector("select");
+        elements.languageSelect.value = state.language;
+    }
+
+    function syncLanguageToggle() {
+        if (!elements.languageToggle || !elements.languageSelect) return;
+        const hasBilingualText = state.questions.some(hasBilingualQuestionText);
+        elements.languageToggle.classList.toggle("hidden", !hasBilingualText);
+        elements.languageSelect.value = state.language;
+    }
+
+    function setQuizLanguage(value) {
+        const nextLanguage = normalizeQuizLanguage(value);
+        if (state.language === nextLanguage) return;
+        state.language = nextLanguage;
+        storage.write(QUIZ_LANGUAGE_KEY, nextLanguage);
+        if (!state.questions.length) return;
+        if (isViewVisible("exam")) {
+            renderQuestion();
+            renderPalette({ force: true });
+            persistUnfinished(true);
+        } else if (isViewVisible("review")) {
+            renderReview();
+        }
+    }
+
     function renderExam() {
+        syncLanguageToggle();
         renderQuestion();
         renderPalette({ force: true });
         updateTimerDisplay();
@@ -615,7 +670,7 @@
         setText(elements.currentQuestionNo, String(state.current + 1));
         setText(elements.totalQuestionNo, String(state.questions.length));
         setText(elements.questionNumberLabel, String(state.current + 1));
-        setRichText(elements.questionText, question.question);
+        setRichText(elements.questionText, getQuestionText(question));
         renderQuestionMedia(question);
         setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
@@ -654,7 +709,7 @@
 
     function renderOptionContent(node, question, index) {
         if (!node) return;
-        const optionText = question.options[index] || "";
+        const optionText = getOptionText(question, index);
         const optionImage = question.optionImages?.[index];
         node.innerHTML = `
             ${optionText ? `<span class="option-label">${formatRichText(optionText)}</span>` : ""}
@@ -1220,12 +1275,12 @@
                     <span class="meta-pill">${escapeHtml(titleCase(answerState))}</span>
                     ${marked ? '<span class="meta-pill">Marked</span>' : ""}
                 </div>
-                <h3 class="review-question-title">${formatRichText(question.question)}</h3>
+                <h3 class="review-question-title">${formatRichText(getQuestionText(question))}</h3>
                 ${renderMedia(question.questionImage, "review-question-image", "Question image")}
                 <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}">Your answer: ${selected === null ? "Not attempted" : renderReviewOptionAnswer(question, selected)}</div>
                 <div class="review-answer correct">Correct answer: ${renderReviewOptionAnswer(question, question.correctAnswer)}</div>
                 <div class="review-explanation">
-                    <p><strong>Explanation:</strong> ${formatRichText(question.explanation)}</p>
+                    <p><strong>Explanation:</strong> ${formatRichText(getExplanationText(question))}</p>
                     ${renderMedia(question.explanationImage, "explanation-image", "Explanation image")}
                 </div>
             </article>
@@ -1234,7 +1289,7 @@
 
     function renderReviewOptionAnswer(question, index) {
         if (!Number.isInteger(index) || index < 0 || index >= question.options.length) return "Not available";
-        const optionText = question.options[index] || "";
+        const optionText = getOptionText(question, index);
         const optionImage = question.optionImages?.[index];
         return `
             ${optionText ? `<span>${formatRichText(optionText)}</span>` : ""}
@@ -1266,6 +1321,7 @@
             answers: state.answers,
             statuses: state.statuses,
             current: state.current,
+            language: state.language,
             startedAt: state.startedAt,
             endsAt: state.endsAt
         });
@@ -1495,8 +1551,10 @@
         const source = Array.isArray(value) ? value.slice(0, 4) : [];
         return source.map(function (option, index) {
             if (option && typeof option === "object") {
+                const textMap = normalizeTextMap(option.text ?? option.label ?? option.value ?? option);
                 return {
-                    text: String(option.text ?? option.label ?? option.value ?? "").trim(),
+                    text: getLocalizedText(textMap, state.language, option.text ?? option.label ?? option.value ?? ""),
+                    textMap,
                     image: normalizeMedia(option.image || option.src || option.url, option.imageAlt || option.alt || `Option ${index + 1} image`)
                 };
             }
@@ -1506,6 +1564,65 @@
                 image: null
             };
         });
+    }
+
+    function normalizeOptionTextMaps(optionTextMaps, options, normalizedOptions) {
+        const mapSource = Array.isArray(optionTextMaps) ? optionTextMaps : [];
+        const optionSource = Array.isArray(options) ? options : [];
+        return [0, 1, 2, 3].map(function (index) {
+            return normalizeTextMap(mapSource[index]) ||
+                normalizeTextMap(optionSource[index]?.text ?? optionSource[index]?.label ?? optionSource[index]?.value ?? optionSource[index]) ||
+                normalizedOptions[index]?.textMap ||
+                null;
+        });
+    }
+
+    function normalizeTextMap(value) {
+        if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+        const hi = String(value.hi || value.hindi || "").trim();
+        const en = String(value.en || value.english || "").trim();
+        if (!hi && !en && (value.src || value.url || value.path || value.image)) return null;
+        return hi || en ? { hi, en } : null;
+    }
+
+    function getLocalizedText(textMap, language, fallback) {
+        const safeLanguage = normalizeQuizLanguage(language);
+        const map = normalizeTextMap(textMap);
+        if (!map) return typeof fallback === "object" ? "" : String(fallback || "").trim();
+        const preferred = String(map[safeLanguage] || "").trim();
+        if (preferred) return preferred;
+        return safeLanguage === "en" ? (map.en || map.hi || "") : (map.hi || map.en || "");
+    }
+
+    function hasBilingualQuestionText(question) {
+        return hasBothLanguages(question.questionTextMap) ||
+            hasBothLanguages(question.explanationTextMap) ||
+            (Array.isArray(question.optionTextMaps) && question.optionTextMaps.some(hasBothLanguages));
+    }
+
+    function hasBothLanguages(textMap) {
+        const map = normalizeTextMap(textMap);
+        return Boolean(map && map.hi && map.en);
+    }
+
+    function getQuestionText(question) {
+        return getLocalizedText(question.questionTextMap, state.language, question.question);
+    }
+
+    function getOptionText(question, index) {
+        return getLocalizedText(question.optionTextMaps?.[index], state.language, question.options?.[index]);
+    }
+
+    function getExplanationText(question) {
+        return getLocalizedText(question.explanationTextMap, state.language, question.explanation || "Explanation is not available.");
+    }
+
+    function normalizeQuizLanguage(value) {
+        return String(value || "").toLowerCase() === "en" ? "en" : "hi";
+    }
+
+    function getStoredQuizLanguage() {
+        return normalizeQuizLanguage(storage.read(QUIZ_LANGUAGE_KEY, "hi"));
     }
 
     function normalizeOptionImages(optionImages, normalizedOptions) {
