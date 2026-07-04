@@ -7,7 +7,7 @@
       title: "Top 5 Laptops and Best Tablets for Students 2026: ₹80,000 ke under smart study devices",
       category: "Technology",
       date: "2026-07-04",
-      image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783167566686.webp",
       url: "student-hub/top-laptops-tablets-for-students-2026.html",
       excerpt: "Students ke liye 2026 me best laptops under ₹80,000 aur 4 useful tablets ka practical buying guide, including Lenovo Idea Tab Smartchoice with Pen."
     },
