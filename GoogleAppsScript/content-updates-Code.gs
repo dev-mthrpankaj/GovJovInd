@@ -203,10 +203,13 @@ function upsertContentAdminItem(params) {
     const idIndex = getHeaderIndex(headerMap, "ID");
     if (idIndex === undefined) throw new Error("ID column not found in " + config.sheetName + ".");
 
-    const rowNumber = findContentRowById(sheet, idIndex, normalizedItem.id) || sheet.getLastRow() + 1;
+    const existingRowNumber = findContentRowById(sheet, idIndex, normalizedItem.id);
+    const rowNumber = existingRowNumber || sheet.getLastRow() + 1;
     const action = rowNumber > sheet.getLastRow() ? "created" : "updated";
     if (action === "updated") {
       preserveContentAdminRowState(sheet, headerMap, rowNumber, item, normalizedItem);
+    } else {
+      assignContentCreateIdentity(sheet, headerMap, config, normalizedItem);
     }
     assertNoDuplicateContentAdminItem(sheet, headerMap, config, normalizedItem, rowNumber);
     const row = buildContentAdminRowFromItem(normalizedItem, config, sheet.getLastColumn());
@@ -330,10 +333,45 @@ function normalizeContentAdminItem(type, item) {
   return output;
 }
 
-function buildContentAdminId(config) {
+function buildContentAdminId(config, order) {
   const stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyyMMddHHmmss");
   const suffix = Utilities.getUuid().slice(0, 8);
-  return config.idPrefix + "-" + stamp + "-" + suffix;
+  const orderPart = Number.isFinite(Number(order)) && Number(order) > 0
+    ? "-" + padContentOrderNumber(order)
+    : "";
+  return config.idPrefix + orderPart + "-" + stamp + "-" + suffix;
+}
+
+function assignContentCreateIdentity(sheet, headerMap, config, item) {
+  const nextOrder = getNextContentOrder(sheet, headerMap);
+  item.order = nextOrder;
+  item.id = buildUniqueContentAdminId(sheet, headerMap, config, nextOrder);
+}
+
+function buildUniqueContentAdminId(sheet, headerMap, config, order) {
+  const idIndex = getHeaderIndex(headerMap, "ID");
+  let id = "";
+  do {
+    id = buildContentAdminId(config, order);
+  } while (idIndex !== undefined && findContentRowById(sheet, idIndex, id));
+  return id;
+}
+
+function getNextContentOrder(sheet, headerMap) {
+  const orderIndex = getHeaderIndex(headerMap, "Order");
+  if (orderIndex === undefined || sheet.getLastRow() < 2) return 1;
+
+  const values = sheet.getRange(2, orderIndex + 1, sheet.getLastRow() - 1, 1).getValues();
+  const maxOrder = values.reduce(function (highest, row) {
+    const value = Number(row[0]);
+    return Number.isFinite(value) && value > highest ? value : highest;
+  }, 0);
+  return maxOrder + 1;
+}
+
+function padContentOrderNumber(order) {
+  const number = Math.max(Number(order) || 0, 0);
+  return ("0000" + number).slice(-4);
 }
 
 function normalizeContentPublishedValue(value) {
