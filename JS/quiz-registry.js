@@ -38,6 +38,7 @@
     const manifest = [
         //Mathematics_Registry
         ...createQuizSeries("math-percentage-abhinay-set", 2, "Mathematics", (n) => `Percentage Practice Set ${n}`, () => "50 hard percentage questions.", "Hard", (n, id) => `quiz-data/mathematics/${id}.js`),
+        quizMeta("math-bilingual-latex-set-1", "Mathematics", "Maths Bilingual LaTeX Practice Set 1", "25 Hindi-English bilingual maths questions with LaTeX formatting across percentage, algebra, geometry, mensuration and arithmetic topics.", "Mixed", "quiz-data/mathematics/math-bilingual-latex-set-1.js", 25),
         quizMeta("math-circle-image-set-1", "Mathematics", "Mathematics Circle Image Based Practice Set 1", "50 unique diagram-based Circle questions covering arcs, sectors, chords, tangents and circular applications.", "Moderate", "quiz-data/mathematics/math-circle-image-set-1.js"),
         quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
         quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
@@ -107,14 +108,14 @@
         quizMeta("computer-set-2", "Computer", "Computer Awareness Practice Set 2", "50 networking, security, office tools and memory questions.", "Moderate", "quiz-data/computer/computer-set-2.js")
     ];
 
-    function quizMeta(id, subject, title, description, difficulty, path) {
+    function quizMeta(id, subject, title, description, difficulty, path, totalQuestions) {
         return {
             id,
             subject,
             title,
             description,
             durationMinutes: 30,
-            totalQuestions: DEFAULT_QUESTION_COUNT,
+            totalQuestions: Number(totalQuestions) || DEFAULT_QUESTION_COUNT,
             marksPerQuestion: 1,
             negativeMarks: 0.25,
             difficulty,
