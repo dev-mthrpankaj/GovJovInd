@@ -156,6 +156,14 @@ function handleContentAdminAction(action, params) {
   if (action === "dispatchContentSync") return sendContentJson(dispatchContentAdminSync(params));
   if (action === "addTestRows") return sendContentJson(addContentLiveTestRows());
   if (action === "removeTestRows") return sendContentJson(removeContentLiveTestRows());
+  if (action === "setupStatusFormulas") {
+    return sendContentJson({
+      success: true,
+      action: "setupStatusFormulas",
+      summary: setupContentStatusFormulas(),
+      updatedAt: new Date().toISOString()
+    });
+  }
   if (action === "setupSheets") {
     setupContentSheets();
     return sendContentJson({ success: true, action: "setupSheets", updatedAt: new Date().toISOString() });
@@ -203,6 +211,7 @@ function upsertContentAdminItem(params) {
     assertNoDuplicateContentAdminItem(sheet, headerMap, config, normalizedItem, rowNumber);
     const row = buildContentAdminRowFromItem(normalizedItem, config, sheet.getLastColumn());
     sheet.getRange(rowNumber, 1, 1, row.length).setValues([row]);
+    applyContentStatusFormula(sheet, headerMap, type, rowNumber);
     applyContentSheetFormatting(sheet, Math.max(sheet.getLastColumn(), row.length));
     SpreadsheetApp.flush();
 
@@ -472,6 +481,128 @@ function buildContentAdminRowFromItem(item, config, columnCount) {
   return row;
 }
 
+function setupContentStatusFormulas() {
+  const spreadsheet = SpreadsheetApp.openById(CONTENT_SPREADSHEET_ID);
+  const summary = {};
+  Object.keys(CONTENT_SHEETS).forEach(function (type) {
+    const config = CONTENT_SHEETS[type];
+    const sheet = getOrCreateContentSheet(spreadsheet, config);
+    ensureContentHeaders(sheet, config);
+    summary[type] = {
+      sheetName: config.sheetName,
+      updatedRows: applyContentStatusFormulas(sheet, config, type)
+    };
+  });
+  SpreadsheetApp.flush();
+  return summary;
+}
+
+function applyContentStatusFormulas(sheet, config, type) {
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+  if (lastRow < 2 || lastColumn < 1) return 0;
+
+  const headerMap = buildContentHeaderMap(sheet.getRange(1, 1, 1, lastColumn).getValues()[0]);
+  const idIndex = getHeaderIndex(headerMap, "ID");
+  const titleIndex = getHeaderIndex(headerMap, "Title");
+  const values = sheet.getRange(2, 1, lastRow - 1, lastColumn).getValues();
+  let updatedRows = 0;
+
+  values.forEach(function (row, index) {
+    const hasId = idIndex !== undefined && String(row[idIndex] || "").trim();
+    const hasTitle = titleIndex !== undefined && String(row[titleIndex] || "").trim();
+    if (!hasId && !hasTitle) return;
+    if (applyContentStatusFormula(sheet, headerMap, type, index + 2)) updatedRows += 1;
+  });
+
+  return updatedRows;
+}
+
+function applyContentStatusFormula(sheet, headerMap, type, rowNumber) {
+  const statusIndex = getHeaderIndex(headerMap, "Status");
+  if (statusIndex === undefined) return false;
+
+  const formula = buildContentStatusFormula(type, headerMap, rowNumber);
+  if (!formula) return false;
+
+  sheet.getRange(rowNumber, statusIndex + 1).setFormula(formula);
+  return true;
+}
+
+function buildContentStatusFormula(type, headerMap, rowNumber) {
+  const cell = function (header) {
+    const index = getHeaderIndex(headerMap, header);
+    return index === undefined ? "" : columnToLetter(index + 1) + rowNumber;
+  };
+  const startDate = cell("Start Date");
+  const lastDate = cell("Last Date");
+  const releaseDate = cell("Release Date");
+  const examDate = cell("Exam Date");
+  const examEndDate = cell("Exam Day Over");
+  const objectionLastDate = cell("Objection Last Date");
+  const resultDate = cell("Result Date");
+  const downloadLink = cell("Download Link");
+  const resultLink = cell("Result Link");
+
+  if (type === "jobs" && startDate && lastDate) {
+    return "=IF(AND(" + lastDate + "<>\"\",TODAY()>" + contentFormulaDate(lastDate) + "),\"closed\",IF(AND(" + startDate + "<>\"\",TODAY()<" + contentFormulaDate(startDate) + "),\"upcoming\",\"active\"))";
+  }
+
+  if (type === "admitCards" && releaseDate && downloadLink) {
+    const hasExamEnd = examEndDate || examDate;
+    const examEndGuard = buildContentFormulaAnyFilled([examEndDate, examDate]);
+    const examEndValue = buildContentFormulaFirstDate([examEndDate, examDate]);
+    const examOverRule = hasExamEnd ? "IF(AND(" + examEndGuard + ",TODAY()>" + examEndValue + "),\"exam-over\"," : "";
+    const examOverClose = hasExamEnd ? ")" : "";
+    return "=" + examOverRule + "IF(AND(" + releaseDate + "<>\"\",TODAY()<" + contentFormulaDate(releaseDate) + "),\"upcoming\",IF(AND(" + downloadLink + "<>\"\"," + releaseDate + "<>\"\",TODAY()>=" + contentFormulaDate(releaseDate) + "),\"available\",\"upcoming\"))" + examOverClose;
+  }
+
+  if (type === "answerKeys" && releaseDate && downloadLink) {
+    const objectionRule = objectionLastDate
+      ? "IF(AND(" + objectionLastDate + "<>\"\",TODAY()>" + contentFormulaDate(objectionLastDate) + "),\"objection-closed\","
+      : "";
+    const objectionClose = objectionLastDate ? ")" : "";
+    return "=" + objectionRule + "IF(AND(" + releaseDate + "<>\"\",TODAY()<" + contentFormulaDate(releaseDate) + "),\"upcoming\",IF(AND(" + downloadLink + "<>\"\"," + releaseDate + "<>\"\",TODAY()>=" + contentFormulaDate(releaseDate) + "),\"available\",\"upcoming\"))" + objectionClose;
+  }
+
+  if (type === "results" && resultDate && resultLink) {
+    return "=IF(AND(" + resultDate + "<>\"\",TODAY()<" + contentFormulaDate(resultDate) + "),\"upcoming\",IF(AND(" + resultLink + "<>\"\"," + resultDate + "<>\"\",TODAY()>=" + contentFormulaDate(resultDate) + "),\"released\",\"upcoming\"))";
+  }
+
+  return "";
+}
+
+function contentFormulaDate(cellRef) {
+  return "IFERROR(DATEVALUE(" + cellRef + ")," + cellRef + ")";
+}
+
+function buildContentFormulaAnyFilled(cellRefs) {
+  const refs = cellRefs.filter(Boolean);
+  if (!refs.length) return "FALSE";
+  return "OR(" + refs.map(function (ref) {
+    return ref + "<>\"\"";
+  }).join(",") + ")";
+}
+
+function buildContentFormulaFirstDate(cellRefs) {
+  const refs = cellRefs.filter(Boolean);
+  if (!refs.length) return "0";
+  return refs.reduceRight(function (fallback, ref) {
+    return "IF(" + ref + "<>\"\"," + contentFormulaDate(ref) + "," + fallback + ")";
+  }, "0");
+}
+
+function columnToLetter(columnNumber) {
+  let number = Number(columnNumber) || 0;
+  let letter = "";
+  while (number > 0) {
+    const remainder = (number - 1) % 26;
+    letter = String.fromCharCode(65 + remainder) + letter;
+    number = Math.floor((number - 1) / 26);
+  }
+  return letter;
+}
+
 function findContentRowById(sheet, idIndex, id) {
   if (sheet.getLastRow() < 2) return 0;
   const rowCount = sheet.getLastRow() - 1;
@@ -545,6 +676,7 @@ function setupContentSheets() {
     const config = CONTENT_SHEETS[type];
     const sheet = getOrCreateContentSheet(spreadsheet, config);
     ensureContentHeaders(sheet, config);
+    applyContentStatusFormulas(sheet, config, type);
   });
 }
 
@@ -639,8 +771,10 @@ function addContentLiveTestRows() {
     const sheet = getOrCreateContentSheet(spreadsheet, config);
     ensureContentHeaders(sheet, config);
     removeContentRowsById(sheet, "gju-live-test-" + type);
-    sheet.getRange(sheet.getLastRow() + 1, 1, 1, getContentHeaders(config).length)
+    const rowNumber = sheet.getLastRow() + 1;
+    sheet.getRange(rowNumber, 1, 1, getContentHeaders(config).length)
       .setValues([buildContentRowFromItem(testItems[type], config, 1)]);
+    applyContentStatusFormula(sheet, buildContentHeaderMap(sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]), type, rowNumber);
     applyContentSheetFormatting(sheet, getContentHeaders(config).length);
 
     summary[type] = {
