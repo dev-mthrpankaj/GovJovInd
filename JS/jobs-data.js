@@ -814,8 +814,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://upsconline.nic.in/login",
+        "officialNotification": "https://www.upsc.gov.in/sites/default/files/WindowCAF-CSM-26-Engl-190626_0.pdf",
         "detailPage": "../Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
@@ -845,7 +845,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://hppsconline.hp.gov.in/HPPSC/ApplicantRegistration/Home/Login",
-        "officialNotification": "",
+        "officialNotification": "https://hppsc.hp.gov.in/CommonControls/ViewContinuousLinkPage?qs=mhlKjiXMMItGo46f60VBXX8%2B1SQ83OzVLj9MfDScpvboDSdMygkK4iLV47Bu%2FJzMpJLanI%2BihrK9p8W6JsSQUgHTy39NyiuO%2BFtbEmiPQyc%3D",
         "detailPage": "../Job_Details/HTML/1016-HPPSC-Assistant-Professor-College-Cadre-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
@@ -966,8 +966,8 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://sewayojan.up.nic.in/IEP/Login.aspx",
+        "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/06/UPSRLM-Comprehensive-Recruitment-Advertisement-2026-SewayojanGJobDoc221613_compressed.pdf",
         "detailPage": "../Job_Details/HTML/221613-UPSRLM-District-Block-Recruitment-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
