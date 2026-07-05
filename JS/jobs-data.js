@@ -425,7 +425,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/96897/Registration.html",
-        "officialNotification": "",
+        "officialNotification": "https://g03.tcsion.com//per/g03/pub/726/EForms/image/ImageDocUpload/71161/5/8001770779.pdf",
         "detailPage": "../Job_Details/HTML/1010-ISRO-ISTRAC-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-06-28",
         "telegramStatus": "ready",
@@ -544,7 +544,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://apply-bpssc.com/bpssc_cor_8_2026/applicationIndex",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1009-CGPSC-Subedar-SI-Platoon-Commander-Prelims-Exam-Date-2026.html",
         "updatedAt": "2026-06-26",
