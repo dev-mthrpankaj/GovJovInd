@@ -221,8 +221,8 @@ window.GovJobUpdatesAnswerKeys = [
             "Constable",
             "Answer Key"
         ],
-        "downloadLink": "",
-        "objectionLink": "",
+        "downloadLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
+        "objectionLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
         "detailPage": "../AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
@@ -274,7 +274,7 @@ window.GovJobUpdatesAnswerKeys = [
             "GIC Lecturer",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html",
         "updatedAt": "2026-06-18",
