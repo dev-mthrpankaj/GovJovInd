@@ -844,7 +844,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://hppsconline.hp.gov.in/HPPSC/ApplicantRegistration/Home/Login",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1016-HPPSC-Assistant-Professor-College-Cadre-2026.html",
         "updatedAt": "2026-06-20",
@@ -874,8 +874,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ibpsreg.ibps.in/crsarsimay26/",
+        "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/06/cersai-notification-2026.pdf",
         "detailPage": "../Job_Details/HTML/1014-CERSAI-Regular-Employees-Recruitment-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
