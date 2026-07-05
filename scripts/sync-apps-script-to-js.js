@@ -22,6 +22,10 @@ const HTML_CACHE_TARGETS = [
   {
     file: "HTML/results.html",
     scripts: ["results-data", "results"]
+  },
+  {
+    file: "HTML/rank-predictor.html",
+    scripts: ["rank-predictor-exams-data", "rank-predictor-config", "rank-predictor"]
   }
 ];
 
@@ -804,7 +808,7 @@ function removeLiveSheetScripts(html) {
 }
 
 function updateScriptVersion(html, scriptName, version) {
-  const pattern = new RegExp(`(<script\\s+src=["']\\.\\.\\/JS\\/${scriptName}\\.js)(?:\\?v=[^"']*)?(["']><\\/script>)`, "gi");
+  const pattern = new RegExp(`(<script\\s+src=["']\\.\\.\\/JS\\/${scriptName}\\.js)(?:\\?v=[^"']*)?(["'][^>]*><\\/script>)`, "gi");
   return html.replace(pattern, `$1?v=${version}$2`);
 }
 
@@ -834,10 +838,13 @@ function updatePublicHtmlCacheVersions(version) {
 
 async function fetchNormalizedRecords(apiUrl, source) {
   console.log(`Fetching ${source.label}...`);
-  const rawItems = await fetchItems(apiUrl, source.apiType, source.payloadKey);
-  const records = rawItems
-    .map((record) => normalizeRecord(record, source.fields))
-    .map(normalizeTelegramFields);
+  const sourceApiUrl = normalizeText(source.apiUrl) || apiUrl;
+  const rawItems = await fetchItems(sourceApiUrl, source.apiType, source.payloadKey);
+  const records = source.preserveFields
+    ? rawItems.map((record) => (record && typeof record === "object" ? record : {}))
+    : rawItems
+      .map((record) => normalizeRecord(record, source.fields))
+      .map(normalizeTelegramFields);
 
   return { source, records };
 }
@@ -846,6 +853,20 @@ function prepareSyncOutput(source, records) {
   if (!records.length) {
     console.warn(`${source.label}: No valid records found. Existing file was not overwritten.`);
     return { source, content: "", qualificationReport: null, detailPageRows: [] };
+  }
+
+  if (source.preserveFields) {
+    records = records.filter((record) => normalizeText(record.examId) && normalizeText(record.examName));
+    if (!records.length) {
+      console.warn(`${source.label}: No valid exam records found. Existing file was not overwritten.`);
+      return { source, content: "", qualificationReport: null, detailPageRows: [] };
+    }
+    return {
+      source,
+      content: buildJs(source.globalVariable, records, source.label),
+      qualificationReport: null,
+      detailPageRows: []
+    };
   }
 
   records = records.filter((record) => record.id && record.title);

@@ -32,6 +32,15 @@
       "outputFile": "JS/results-data.js",
       "globalVariable": "GovJobUpdatesResults",
       "fields": ["id", "title", "organization", "department", "category", "year", "resultDate", "status", "tags", "resultLink", "detailPage", "updatedAt", "telegramStatus", "telegramReady"]
+    },
+    {
+      "label": "Rank Predictor Exams",
+      "apiType": "exams",
+      "payloadKey": "exams",
+      "apiUrl": "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec",
+      "outputFile": "JS/rank-predictor-exams-data.js",
+      "globalVariable": "GovJobUpdatesRankPredictorExams",
+      "preserveFields": true
     }
   ]
 }

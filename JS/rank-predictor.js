@@ -94,7 +94,8 @@
 
         cacheStaticDom();
         state.mobileMarksMode = detectMobileMarksMode();
-        await loadSheetExamConfig();
+        const hasStaticExamConfig = loadStaticExamConfig();
+        if (!hasStaticExamConfig) await loadSheetExamConfig();
         setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
@@ -114,6 +115,17 @@
             state.mobileMarksMode = detectMobileMarksMode();
             applyAccordionDefaults();
         }, 160), { passive: true });
+    }
+
+    function loadStaticExamConfig() {
+        const staticExams = Array.isArray(window.GovJobUpdatesRankPredictorExams)
+            ? normalizeSheetExams(window.GovJobUpdatesRankPredictorExams).filter((exam) => !exam.disabled)
+            : [];
+        if (!staticExams.length) return false;
+
+        config.exams = staticExams;
+        window.RANK_PREDICTOR_CONFIG = config;
+        return true;
     }
 
     async function loadSheetExamConfig() {

@@ -41,8 +41,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add JS/jobs-data.js JS/admitcard-data.js JS/answerkey-data.js JS/results-data.js
-          git add HTML/latest-jobs.html HTML/admitcard.html HTML/answer-key.html HTML/results.html
+          git add JS/jobs-data.js JS/admitcard-data.js JS/answerkey-data.js JS/results-data.js JS/rank-predictor-exams-data.js
+          git add HTML/latest-jobs.html HTML/admitcard.html HTML/answer-key.html HTML/results.html HTML/rank-predictor.html
 
           if git diff --cached --quiet; then
             echo "No listing data changes to commit."
