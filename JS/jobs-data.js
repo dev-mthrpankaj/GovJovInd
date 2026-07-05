@@ -694,8 +694,8 @@ window.GovJobUpdatesJobs = [
             "Banking Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://nats.education.gov.in/student_type.php",
+        "officialNotification": "https://centralbank.bank.in/sites/default/files/Notification%20for%20the%20Engagement%20of%20Apprentices%20under%20the%20Apprentices%20%20Act%2C%201961%20for%20F.Y.%202026-27%20.pdf",
         "detailPage": "../Job_Details/HTML/1011-Central-Bank-Apprentice-Recruitment-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
