@@ -2429,6 +2429,34 @@
       "title": "UP TGT Answer Key",
       "lastPostedAt": "2026-07-05T09:25:42.468Z",
       "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0010": {
+      "updatedAt": "2026-06-06",
+      "hash": "6721797cc432daabb51f97d5f33f58552d6efe6f3f7967fc0207ea0ae456e593",
+      "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
+      "lastPostedAt": "2026-07-05T09:35:18.887Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0016": {
+      "updatedAt": "2026-06-04",
+      "hash": "138e73925c2050b5f9e823a4b3931d0ba026f987d6722537fa06e08e23038934",
+      "title": "UPPSC Assistant Professor GDC Answer Key 2026 for 1253 Post",
+      "lastPostedAt": "2026-07-05T09:35:19.545Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0009": {
+      "updatedAt": "2026-05-29",
+      "hash": "70e8449ac7ecd4079c204024a9c2bcf1fbe7b2501d8fdc495bc75a7758b26732",
+      "title": "UPSC Civil Services IAS IFS Answer Key 2026",
+      "lastPostedAt": "2026-07-05T09:35:19.943Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0008": {
+      "updatedAt": "2026-05-27",
+      "hash": "72d9e5af7db65f013a1b387600e39eca6936c1902541f1b64583296853c8b087",
+      "title": "UPSSSC Lekhpal Answer Key 2026",
+      "lastPostedAt": "2026-07-05T09:35:20.505Z",
+      "stateReason": "new"
     }
   },
   "results": {
@@ -2913,6 +2941,48 @@
       "hash": "9ec90f09d39bd0fa1b0a72dfe573b168adab770bdcbac3199fb30108602d3eb2",
       "title": "MPESB Pre Agriculture Test PAT Result 2026",
       "lastPostedAt": "2026-07-03T11:06:04.048Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0024": {
+      "updatedAt": "2026-07-24",
+      "hash": "d3c58de5be5f344d20e4fff368e623a4dacf075594d5acf517570267f717fc23",
+      "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
+      "lastPostedAt": "2026-07-05T09:35:21.103Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0018": {
+      "updatedAt": "2026-07-05",
+      "hash": "4710a8efc6c848f52013e7a526d8532ce9bf482d2561d6a17d8393ff7e868dac",
+      "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
+      "lastPostedAt": "2026-07-05T09:35:24.705Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0042": {
+      "updatedAt": "2026-07-05",
+      "hash": "85ee87169a8a414c99873e33dce86d2f45d75fe90b474b6fd8f0cac78d983b4e",
+      "title": "HPSC PGT Computer Science Result 2026 for 1672 Post",
+      "lastPostedAt": "2026-07-05T09:35:25.292Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0043": {
+      "updatedAt": "2026-07-05",
+      "hash": "f5eb292f39739e621e8cdf112934db3c64adb3b5ac2d14d24739137401e5602e",
+      "title": "LIC HFL Junior Assistant Result 2026 for 180 Post",
+      "lastPostedAt": "2026-07-05T09:35:25.878Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0041": {
+      "updatedAt": "2026-07-03",
+      "hash": "786f95bf2ac4bedd3852ad6459e0c6e81451e72283154fc8b0d11c99be7284aa",
+      "title": "JPSC Jharkhand PCS Pre Result 2026",
+      "lastPostedAt": "2026-07-05T09:35:26.481Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0038": {
+      "updatedAt": "2026-07-02",
+      "hash": "9a1af593778de3cebe24f231b18e302c40ee01cfef8528bc524bc6d5c0ed2763",
+      "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
+      "lastPostedAt": "2026-07-05T09:35:27.035Z",
       "stateReason": "new"
     }
   }
