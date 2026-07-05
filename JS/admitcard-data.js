@@ -503,7 +503,7 @@ window.GovJobUpdatesAdmitCards = [
             "Bihar Police",
             "ASI"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://bpssc.bihar.gov.in/Notices/Notice%20E-Admit%20Card%20on%20website%203.pdf",
         "detailPage": "../AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -642,7 +642,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPESSC",
             "Teacher"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://admitcards.upessc.org/",
         "detailPage": "../AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
