@@ -1026,8 +1026,8 @@ window.GovJobUpdatesJobs = [
             "State Police Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://online.ecgpsconline.in/",
+        "officialNotification": "https://psc.cg.gov.in/PDFs/advertisement/SAHAYAK_JILA_LOK_ABHIYOJAN_ADHIKARI-2026_ADVERTISEMENT%20(17-06-2026).pdf",
         "detailPage": "../Job_Details/HTML/CGPSC-ADPO-Recruitment-2026.html",
         "updatedAt": "2026-06-17",
         "telegramStatus": "ready",
@@ -1086,8 +1086,8 @@ window.GovJobUpdatesJobs = [
             "Banking Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://bankappsweb.bankofbaroda.bank.in/BOBRECRUITMENT_JUN_CIC2507621/",
+        "officialNotification": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2026/26-06/Advertisement-16-22.pdf",
         "detailPage": "../Job_Details/HTML/BOB-Credit-Officers-Recruitment-2026.html",
         "updatedAt": "2026-06-17",
         "telegramStatus": "ready",
