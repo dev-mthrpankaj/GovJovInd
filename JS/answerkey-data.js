@@ -429,8 +429,8 @@ window.GovJobUpdatesAnswerKeys = [
             "INCET",
             "Civilian"
         ],
-        "downloadLink": "",
-        "objectionLink": "",
+        "downloadLink": "https://akc.cbt-exam.in/",
+        "objectionLink": "https://akc.cbt-exam.in/",
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-06-06",
         "telegramStatus": "ready",
@@ -483,7 +483,7 @@ window.GovJobUpdatesAnswerKeys = [
             "IAS",
             "IFS"
         ],
-        "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKey%E2%80%93GS-I-CSP-Exam-2026-270526.pdf",
+        "downloadLink": "https://sarkariresult.com.im/wp-content/uploads/2026/05/UPSC-Civil-Services-Answer-GS-Paper-1.pdf",
         "objectionLink": "#",
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-05-29",
@@ -509,7 +509,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Lekhpal",
             "Revenue"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upsssc.gov.in/ViewPdf.aspx?0q6A8m+HIAlvBl/v8Jv0tfm512CaNg8bLFb6CBH9Rvw=",
         "objectionLink": "#",
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-27",
