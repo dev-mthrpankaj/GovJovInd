@@ -2226,7 +2226,7 @@ window.GovJobUpdatesJobs = [
             "Health Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1010-MPESB-Hospital-Assistant-2026.html",
         "updatedAt": "2026-05-01",
@@ -2286,7 +2286,7 @@ window.GovJobUpdatesJobs = [
             "State PSC Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1016-BPSC-33rd-Bihar-Judicial-Service-2026.html",
         "updatedAt": "2026-05-01",
