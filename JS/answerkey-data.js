@@ -4,7 +4,7 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
-        "id": "answerkey-sheet-0025-20260703072901",
+        "id": "answerkey-sheet-0025",
         "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -26,7 +26,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0026-20260703073322",
+        "id": "answerkey-sheet-0026",
         "title": "UPSSSC Various Post UP Pollution Answer Key 2026 for 115 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -48,7 +48,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0027-20260703073808",
+        "id": "answerkey-sheet-0027",
         "title": "UPSSSC BCG Technician Answer Key 2026 for 255 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -70,7 +70,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4015",
+        "id": "answerkey-sheet-0023",
         "title": "UP Police Home Guard Final Answer Key 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
         "department": "UPPRPB",
@@ -87,7 +87,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Home Guard",
             "Answer Key"
         ],
-        "downloadLink": "https://www.hgupexam2025.com/hg2025finalkey/Login.aspx",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
         "updatedAt": "2026-06-28",
@@ -97,7 +97,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4016",
+        "id": "answerkey-sheet-0024",
         "title": "Railway RRB NTPC 10+2 Level UG Answer Key 2026",
         "organization": "Railway Recruittment Board",
         "department": "RRB",
@@ -114,8 +114,8 @@ window.GovJobUpdatesAnswerKeys = [
             "Undergraduate",
             "Answer Key"
         ],
-        "downloadLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
-        "objectionLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
+        "downloadLink": "",
+        "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html",
         "updatedAt": "2026-06-28",
         "telegramStatus": "ready",
@@ -124,7 +124,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4014",
+        "id": "answerkey-sheet-0022",
         "title": "UPSC ISS Answer Key 2026 for 44 Post",
         "organization": "Union Public Service Commission",
         "department": "IES ISS",
@@ -150,7 +150,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4012",
+        "id": "answerkey-sheet-0020",
         "title": "SSC Delhi Police Head Constable Ministerial Result 2026 | Marks | Final Answer Key",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -167,7 +167,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Head Constable Ministerial",
             "Answer Key"
         ],
-        "downloadLink": "https://sscexams.cbexams.com/DPCMpost2025FInalKeyndlandingpage/loginnew.aspx",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
@@ -177,7 +177,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4013",
+        "id": "answerkey-sheet-0021",
         "title": "MPESB Van Rakshak, Jail Prahari Answer Key 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
         "department": "MPESB",
@@ -194,8 +194,8 @@ window.GovJobUpdatesAnswerKeys = [
             "Jail Prahari",
             "Answer Key"
         ],
-        "downloadLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
-        "objectionLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
+        "downloadLink": "",
+        "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
@@ -204,7 +204,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4011",
+        "id": "answerkey-sheet-0019",
         "title": "UP Police Constable Answer Key 2026 for 32679 Post",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
         "department": "UPPRPB",
@@ -221,8 +221,8 @@ window.GovJobUpdatesAnswerKeys = [
             "Constable",
             "Answer Key"
         ],
-        "downloadLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
-        "objectionLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
+        "downloadLink": "",
+        "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
@@ -231,7 +231,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4009",
+        "id": "answerkey-sheet-0017",
         "title": "SSC CGL 2025 Graduate Level Tier II Marks 2026 & Answer Key",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -248,7 +248,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Tier II",
             "Answer Key"
         ],
-        "downloadLink": "https://ssc.digialm.com/EForms/configuredHtml/32874/97464/login.html",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/13059-SSC-CGL-Tier-2-Final-Answer-Key-2025.html",
         "updatedAt": "2026-06-18",
@@ -258,7 +258,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4010",
+        "id": "answerkey-sheet-0018",
         "title": "UPPSC GIC Lecturer Government Inter College Answer Key 2026",
         "organization": "Uttar Pradesh Public Service Commission",
         "department": "UPPSC",
@@ -274,7 +274,7 @@ window.GovJobUpdatesAnswerKeys = [
             "GIC Lecturer",
             "Answer Key"
         ],
-        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html",
         "updatedAt": "2026-06-18",
@@ -284,7 +284,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4005",
+        "id": "answerkey-sheet-0013",
         "title": "SSC Delhi Police Head Constable AWO / TPO Final Answer Key with Marks 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -301,7 +301,7 @@ window.GovJobUpdatesAnswerKeys = [
             "AWO TPO",
             "Answer Key"
         ],
-        "downloadLink": "https://sscexams.cbexams.com/DPCawoPost2025finalsheetskmdlandingpage/loginnew.aspx",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
         "updatedAt": "2026-06-16",
@@ -311,7 +311,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4006",
+        "id": "answerkey-sheet-0014",
         "title": "Rajasthan RSSB Lab Assistant Answer Key 2026",
         "organization": "Rajasthan Staff Selection Board",
         "department": "RSSB",
@@ -327,7 +327,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Lab Assistant",
             "Answer Key"
         ],
-        "downloadLink": "https://rssb.rajasthan.gov.in/storage/answerkey_item/1781521971.pdf",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html",
         "updatedAt": "2026-06-16",
@@ -337,7 +337,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4004",
+        "id": "answerkey-sheet-0012",
         "title": "SSC GD Constable Answer Key 2026 for 25487 Post",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -353,8 +353,8 @@ window.GovJobUpdatesAnswerKeys = [
             "GD Constable",
             "Answer Key"
         ],
-        "downloadLink": "https://ssc.gov.in/",
-        "objectionLink": "https://ssc.gov.in/",
+        "downloadLink": "",
+        "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-15",
         "telegramStatus": "ready",
@@ -363,7 +363,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4007",
+        "id": "answerkey-sheet-0015",
         "title": "UPSSSC Junior Assistant Revised Answer Key 2026 | Advt No 12-Exam/2024",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -379,7 +379,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Junior Assistant",
             "Revised Answer Key"
         ],
-        "downloadLink": "https://rojgarresult.com/wp-content/uploads/2026/06/UPSSSC-Revised-Answer-Key-26.pdf",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/UPSSSC-Junior-Assistant-Revised-Answer-Key-2026.html",
         "updatedAt": "2026-06-15",
@@ -389,7 +389,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4003",
+        "id": "answerkey-sheet-0011",
         "title": "UP TGT Answer Key",
         "organization": "UP Secondary Education Service Selection Board",
         "department": "Education",
@@ -413,7 +413,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4002",
+        "id": "answerkey-sheet-0010",
         "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
         "organization": "Join Indian Navy",
         "department": "Defence",
@@ -429,8 +429,8 @@ window.GovJobUpdatesAnswerKeys = [
             "INCET",
             "Civilian"
         ],
-        "downloadLink": "https://akc.cbt-exam.in/",
-        "objectionLink": "https://akc.cbt-exam.in/",
+        "downloadLink": "",
+        "objectionLink": "",
         "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
         "updatedAt": "2026-06-06",
         "telegramStatus": "ready",
@@ -439,7 +439,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4008",
+        "id": "answerkey-sheet-0016",
         "title": "UPPSC Assistant Professor GDC Answer Key 2026 for 1253 Post",
         "organization": "Uttar Pradesh Public Service Commission",
         "department": "UPPSC",
@@ -456,7 +456,7 @@ window.GovJobUpdatesAnswerKeys = [
             "GDC",
             "Answer Key"
         ],
-        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
+        "downloadLink": "",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html",
         "updatedAt": "2026-06-04",
@@ -466,7 +466,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4001",
+        "id": "answerkey-sheet-0009",
         "title": "UPSC Civil Services IAS IFS Answer Key 2026",
         "organization": "Union Public Service Commission",
         "department": "Civil Services",
@@ -493,7 +493,7 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "4000",
+        "id": "answerkey-sheet-0008",
         "title": "UPSSSC Lekhpal Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Revenue",
@@ -509,194 +509,12 @@ window.GovJobUpdatesAnswerKeys = [
             "Lekhpal",
             "Revenue"
         ],
-        "downloadLink": "https://drive.google.com/file/d/13w6WvB7OLcx1l0Clntsv3DPqIfXGwnyR/view",
+        "downloadLink": "",
         "objectionLink": "#",
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "answerkey-4032",
-        "title": "Madhya Pradesh MP Police Subedar Stenographer & ASI Ministerial Answer Key 2025",
-        "organization": "Madhya Pradesh Employees Selection Board",
-        "department": "Police",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-04-30",
-        "objectionLastDate": "2026-05-03",
-        "status": "objection-closed",
-        "tags": [
-            "MPESB",
-            "Police",
-            "Steno",
-            "ASI"
-        ],
-        "downloadLink": "https://subsi2025mains.cbtexam.in/Home/ListofExam.aspx",
-        "objectionLink": "https://subsi2025mains.cbtexam.in/Home/ListofExam.aspx",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-07",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "answerkey-4031",
-        "title": "UPSSSC Junior Engineer Civi Answer Key 2026",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Public Works",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-03-05",
-        "examEndDate": "",
-        "releaseDate": "2026-05-04",
-        "objectionLastDate": "2026-05-10",
-        "status": "objection-closed",
-        "tags": [
-            "UPSSC",
-            "JE"
-        ],
-        "downloadLink": "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2026/05/04191714/UPSSSC-Junior-Engineer-Answer-Key-2026-PDF.pdf",
-        "objectionLink": "https://examqp.com/upssscLekhv02n/",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-07",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "2425",
-        "title": "UPSSSC Technical Assistant Group C Answer Key 2026",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "Agriculture",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2025-07-14",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "UPSSSC",
-            "Technical Assistant",
-            "Group C"
-        ],
-        "downloadLink": "#",
-        "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "answerkey-4027",
-        "title": "Rajasthan RSMSSB CHO Answer Key 2026",
-        "organization": "Rajasthan Staff Selection Board",
-        "department": "Health",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "RSMSSB",
-            "CHO",
-            "Health"
-        ],
-        "downloadLink": "#",
-        "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "answerkey-4028",
-        "title": "Rajasthan HC Clerk Answer Key 2026",
-        "organization": "Rajasthan High Court",
-        "department": "Court",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "Rajasthan High Court",
-            "Clerk",
-            "Answer Key"
-        ],
-        "downloadLink": "#",
-        "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "answerkey-4029",
-        "title": "SSC Junior Hindi Translator JHT Answer Key 2026",
-        "organization": "Staff Selection Commission",
-        "department": "Staff Selection Commission",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "SSC",
-            "JHT",
-            "Translator"
-        ],
-        "downloadLink": "#",
-        "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "answerkey-4030",
-        "title": "Rajasthan RPSC FSO Answer Key 2026",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "Food Safety",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "objectionLastDate": "",
-        "status": "available",
-        "tags": [
-            "RPSC",
-            "FSO",
-            "Food Safety"
-        ],
-        "downloadLink": "#",
-        "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     }

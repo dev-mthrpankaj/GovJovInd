@@ -4,7 +4,43 @@
 
 window.GovJobUpdatesResults = [
     {
-        "id": "result-sheet-0040-20260703071804",
+        "id": "result-sheet-0042",
+        "title": "HPSC PGT Computer Science Result 2026 for 1672 Post",
+        "organization": "Haryana Public Service Commission",
+        "department": "HPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-04",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://hpsc.gov.in/Portals/0/SKT_Result_PGT_CS_04_07_2026.pdf",
+        "detailPage": "../Result_Details/HTML/HPSC-PGT-Computer-Science-Result-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0043",
+        "title": "LIC HFL Junior Assistant Result 2026 for 180 Post",
+        "organization": "Life Insurance Corporation of India",
+        "department": "LIC",
+        "category": "Public Sector",
+        "year": "2026",
+        "resultDate": "2026-07-03",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rojgarresult.com/wp-content/uploads/2026/07/LIC-HFL-Result-2026.pdf",
+        "detailPage": "../Result_Details/HTML/LIC-HFL-Junior-Assistant-Result-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0041",
         "title": "JPSC Jharkhand PCS Pre Result 2026",
         "organization": "Jharkhand Public Service Commission",
         "department": "JPSC",
@@ -22,7 +58,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0037-20260702164822",
+        "id": "result-sheet-0038",
         "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
         "organization": "Reserve  Bank  of India",
         "department": "RBI",
@@ -40,7 +76,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0038-20260702164814",
+        "id": "result-sheet-0039",
         "title": "SBI CBO Circle Based Officers Result 2026 for 2050 Post",
         "organization": "State Bank of India",
         "department": "SBI",
@@ -58,7 +94,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0039-20260702165112",
+        "id": "result-sheet-0040",
         "title": "UPSSSC Technical Assistant Group C Eligibility Result 2026 for 2759 Post",
         "organization": "Uttar pradesh subordinate services selection  commission",
         "department": "UPSSSC",
@@ -76,7 +112,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0029-20260701093849",
+        "id": "result-sheet-0029",
         "title": "RRB Group D Result Ranchi 2025",
         "organization": "Railway Recruitment  Board",
         "department": "RRB",
@@ -94,7 +130,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0029-20260701093832",
+        "id": "result-sheet-0030",
         "title": "RRB Group D Result Bilaspur 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -112,7 +148,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0030-20260701094250",
+        "id": "result-sheet-0031",
         "title": "RRB Group D Result Ahmedabad 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -130,7 +166,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0031-20260701094940",
+        "id": "result-sheet-0032",
         "title": "RRB Group D Result Bhopal 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -148,7 +184,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0032-20260701094920",
+        "id": "result-sheet-0033",
         "title": "RRB Group D Result Bhubneshwar 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -166,7 +202,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0033-20260701095309",
+        "id": "result-sheet-0034",
         "title": "RRB Group D Result Chennai 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -184,7 +220,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0034-20260701095454",
+        "id": "result-sheet-0035",
         "title": "RRB Group D Result Prayagraj 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -202,7 +238,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0035-20260701102001",
+        "id": "result-sheet-0036",
         "title": "RRB Group D Score Card Result 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -220,7 +256,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0036-20260701125130",
+        "id": "result-sheet-0037",
         "title": "RRB Group D Result for All RRB,s 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -238,7 +274,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1026",
+        "id": "result-sheet-0028",
         "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
         "organization": "MHA Intelligence Bureau IB",
         "department": "MHA IB",
@@ -253,7 +289,7 @@ window.GovJobUpdatesResults = [
             "Junior Intelligence Officer",
             "Final Result"
         ],
-        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2024/11/mhaibjio2025_finalresult.pdf",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
         "updatedAt": "2026-06-30",
         "telegramStatus": "ready",
@@ -262,7 +298,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1025",
+        "id": "result-sheet-0027",
         "title": "UP POLICE Home Guard Result of Written Exam 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
         "department": "UPPRPB",
@@ -276,7 +312,7 @@ window.GovJobUpdatesResults = [
             "Home Guard",
             "Result"
         ],
-        "resultLink": "https://www.hgupexam2025.com/hg2025writtentestresults/loginpage.aspx",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html",
         "updatedAt": "2026-06-28",
         "telegramStatus": "ready",
@@ -285,7 +321,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1024",
+        "id": "result-sheet-0026",
         "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
         "organization": "UPSSSC Assistant",
         "department": "UPSSSC",
@@ -308,7 +344,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1023",
+        "id": "result-sheet-0025",
         "title": "BPSSC Bihar Police Havildar Clerk Result 2026",
         "organization": "Bihar Police Subordinate Services Commission (BPSSC)",
         "department": "BPSSC",
@@ -323,7 +359,7 @@ window.GovJobUpdatesResults = [
             "Clerk",
             "Result"
         ],
-        "resultLink": "https://bpssc.bihar.gov.in/Notices/Result_Written_24062026_Publish.pdf",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3006-BPSSC-Bihar-Home-Guard-Havildar-Clerk-Result-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -332,7 +368,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1020",
+        "id": "result-sheet-0022",
         "title": "SSC Delhi Police Constable Driver Additional Result 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -346,7 +382,7 @@ window.GovJobUpdatesResults = [
             "Constable",
             "Driver"
         ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html",
         "updatedAt": "2026-06-25",
         "telegramStatus": "ready",
@@ -355,7 +391,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1021",
+        "id": "result-sheet-0023",
         "title": "SSC Delhi Police Head Constable Ministerial Additional Result 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -369,7 +405,7 @@ window.GovJobUpdatesResults = [
             "Head Constable",
             "Ministerial"
         ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html",
         "updatedAt": "2026-06-25",
         "telegramStatus": "ready",
@@ -378,7 +414,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1022",
+        "id": "result-sheet-0024",
         "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -393,7 +429,7 @@ window.GovJobUpdatesResults = [
             "AWO",
             "TPO"
         ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
         "updatedAt": "2026-06-25",
         "telegramStatus": "ready",
@@ -402,7 +438,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1019",
+        "id": "result-sheet-0021",
         "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
         "organization": "Rajasthan RSSB Agriculture Supervisor",
         "department": "RSSB",
@@ -424,7 +460,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1017",
+        "id": "result-sheet-0019",
         "title": "UPPSC Staff Nurse Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",
         "department": "Staff Nurse",
@@ -446,7 +482,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1018",
+        "id": "result-sheet-0020",
         "title": "PNB LBO Local Bank Officer Final Result 2026 for 750 Post",
         "organization": "Punjab National Bank",
         "department": "Banking",
@@ -460,7 +496,7 @@ window.GovJobUpdatesResults = [
             "Local Bank Officer",
             "Final Result"
         ],
-        "resultLink": "https://rojgarresult.com/wp-content/uploads/2026/06/pnb-lbo-final-result-26.pdf",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
@@ -469,7 +505,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1015",
+        "id": "result-sheet-0017",
         "title": "RBI Office Attendant Result 2026 for 572 Post",
         "organization": "Reserve Bank of India",
         "department": "Bank",
@@ -491,7 +527,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1016",
+        "id": "result-sheet-0018",
         "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
         "organization": "Rajasthan Rajya Vidyut Utpadan Nigam Ltd. (RVUN)",
         "department": "RVUN",
@@ -504,7 +540,7 @@ window.GovJobUpdatesResults = [
             "Technician",
             "Final Result"
         ],
-        "resultLink": "https://energy.rajasthan.gov.in/rrvun/#/pages/sm/department-page/373376/2700",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
@@ -513,7 +549,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1014",
+        "id": "result-sheet-0016",
         "title": "BPSC 70th Final Result 2026",
         "organization": "Bihar Public Service Commission",
         "department": "BPSC",
@@ -535,7 +571,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1013",
+        "id": "result-sheet-0015",
         "title": "SSC Delhi Police Constable Executive Result 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -559,7 +595,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1011",
+        "id": "result-sheet-0013",
         "title": "SSC Stenographer 2025 Final Result 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -572,7 +608,7 @@ window.GovJobUpdatesResults = [
             "Stenographer",
             "Final Result"
         ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
@@ -581,7 +617,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1012",
+        "id": "result-sheet-0014",
         "title": "MPESB Pre Agriculture Test PAT Result 2026",
         "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
         "department": "MPESB",
@@ -604,7 +640,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1010",
+        "id": "result-sheet-0012",
         "title": "UPSC Civil Services IAS IFS Result 2026",
         "organization": "Union Public Service Commission",
         "department": "IAS&IFS",
@@ -628,7 +664,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1009",
+        "id": "result-sheet-0011",
         "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
         "organization": "Border Security force",
         "department": "BSF",
@@ -639,7 +675,7 @@ window.GovJobUpdatesResults = [
         "tags": [
             "BSF"
         ],
-        "resultLink": "https://d3t79nicn48uzj.cloudfront.net/bsf/custom/1781085489.pdf",
+        "resultLink": "",
         "detailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
         "updatedAt": "2026-06-10",
         "telegramStatus": "ready",
@@ -648,7 +684,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1008",
+        "id": "result-sheet-0010",
         "title": "SSC Delhi Police Head Constable (Ministerial) Result",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -670,7 +706,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1006",
+        "id": "result-sheet-0008",
         "title": "SSC JHT Paper-II Result 2026 – Out",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -684,7 +720,7 @@ window.GovJobUpdatesResults = [
             "Paper-II",
             "Result"
         ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "resultLink": "",
         "detailPage": "../Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
@@ -693,7 +729,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1007",
+        "id": "result-sheet-0009",
         "title": "Rajasthan REET Upper Primary Teacher Result 2026",
         "organization": "Rajasthan Staff Selection Board (RSSB)",
         "department": "RSSB",
@@ -715,7 +751,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "yes"
     },
     {
-        "id": "1005",
+        "id": "result-sheet-0007",
         "title": "IB ACIO Gr-II Executive Final Result 2026 – Out",
         "organization": "Intelligence Bureau",
         "department": "Intelligence",
@@ -729,7 +765,7 @@ window.GovJobUpdatesResults = [
             "Executive",
             "Final Result"
         ],
-        "resultLink": "https://g03.tcsion.com//per/g03/pub/726/EForms/image/ImageDocUpload/71161/5/5401281513.pdf",
+        "resultLink": "",
         "detailPage": "../Job_Details/HTML/1005-IB-ACIO-Executive-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
@@ -738,7 +774,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1002",
+        "id": "result-sheet-0004",
         "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
         "organization": "Railway Recuitment Board",
         "department": "RRB",
@@ -754,7 +790,7 @@ window.GovJobUpdatesResults = [
             "CEN 02/2025",
             "Result"
         ],
-        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98138/login.html",
+        "resultLink": "",
         "detailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
@@ -763,7 +799,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1003",
+        "id": "result-sheet-0005",
         "title": "UP PGT 2026 Exam Result",
         "organization": "UP Secondary Education Service Selection Board",
         "department": "UPESSB",
@@ -776,7 +812,7 @@ window.GovJobUpdatesResults = [
             "UP PGT",
             "Exam Result"
         ],
-        "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
+        "resultLink": "",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "draft",
@@ -785,7 +821,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "yes"
     },
     {
-        "id": "1004",
+        "id": "result-sheet-0006",
         "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -807,7 +843,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1000",
+        "id": "result-sheet-0002",
         "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -831,7 +867,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "1001",
+        "id": "result-sheet-0003",
         "title": "Railway RRB Paramedical Result 2026 | CEN 03/2025",
         "organization": "Railway Recuitment Board",
         "department": "RRB",
@@ -846,7 +882,7 @@ window.GovJobUpdatesResults = [
             "CEN 03/2025",
             "Result"
         ],
-        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98076/login.html",
+        "resultLink": "",
         "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
@@ -855,7 +891,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "999",
+        "id": "result-sheet-0001",
         "title": "RPSC RAS 2024 Final Result",
         "organization": "Rajasthan Public Service Commission",
         "department": "State PSC",
@@ -868,7 +904,7 @@ window.GovJobUpdatesResults = [
             "RAS",
             "Final Result"
         ],
-        "resultLink": "https://rpsc.rajasthan.gov.in/",
+        "resultLink": "https://rpsc.rajasthan.gov.in",
         "detailPage": "../Result_Details/HTML/3007-RPSC-RAS-Final-Result-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "draft",

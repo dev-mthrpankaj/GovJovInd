@@ -4,7 +4,107 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
-        "id": "admit-sheet-0029-20260702035922",
+        "id": "admit-sheet-0046",
+        "title": "UP Police Home Guard DV Admit Card 2026",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-13",
+        "examEndDate": "2026-08-07",
+        "releaseDate": "2026-07-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://uppbpb.gov.in/",
+        "detailPage": "../AdmitCard_Details/HTML/UP-Police-Homeguard-DV-PST-Notice-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0047",
+        "title": "RPSC Rajasthan Police SI, Platoon Commander Interview Letter 2026",
+        "organization": "Rajasthan  Public Service Commision",
+        "department": "RPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-08",
+        "examEndDate": "2026-07-17",
+        "releaseDate": "2026-07-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rssbasonline.com/Interview/Index",
+        "detailPage": "../AdmitCard_Details/HTML/RSSB-Rajasthan-Platoon-Commander-Interview-Letter-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0048",
+        "title": "SSB Head Constable Admit Card 2026",
+        "organization": "Sashastra Seema Bal",
+        "department": "SSB",
+        "category": "Defence",
+        "year": "2026",
+        "examDate": "2026-07-07",
+        "examEndDate": "",
+        "releaseDate": "2026-07-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
+        "detailPage": "../AdmitCard_Details/HTML/SSB-Head-Constable-Ministerial-Exam-Date-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0049",
+        "title": "MPESB ADDET Animal Husbandry Admit Card 2026",
+        "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-10",
+        "examEndDate": "",
+        "releaseDate": "2026-07-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/ADDET_TAC26/default_tac.htm",
+        "detailPage": "../AdmitCard_Details/HTML/MPESB-ADDET-Animal-Husbandry-Admit-Card-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0050",
+        "title": "MPESB PNST Pre Nursing Admit Card 2026",
+        "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-10",
+        "examEndDate": "",
+        "releaseDate": "2026-07-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/PNST_TAC26/default_tac.htm",
+        "detailPage": "../AdmitCard_Details/HTML/MPESB-PNST-Pre-Nursing-Admit-Card-2026.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0029",
         "title": "UPPSC Assistant Town Planner Admit Card 2026",
         "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
         "department": "UPPSC",
@@ -24,7 +124,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0030-20260702040149",
+        "id": "admit-sheet-0030",
         "title": "UPHESC Assistant Professor Interview Letter 2026 for 981 Post",
         "organization": "UP Higher Education Services Commission",
         "department": "UPHESC",
@@ -44,7 +144,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0031-20260702043148",
+        "id": "admit-sheet-0031",
         "title": "SBI Apprentice Admit Card 2026 for 7150 Post",
         "organization": "State Bank of India",
         "department": "SBI",
@@ -64,7 +164,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0032-20260702071451",
+        "id": "admit-sheet-0032",
         "title": "Railway RRB NTPC Graduate Level CBT II Exam City Details 2026 | CEN 06/2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -84,7 +184,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0033-20260702071830",
+        "id": "admit-sheet-0033",
         "title": "UPCISB UP Cooperative Bank Various Post Exam Date 2026 for 116 Post",
         "organization": "UP Cooperative Bank",
         "department": "UPCISB",
@@ -104,7 +204,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0034-20260702072120",
+        "id": "admit-sheet-0034",
         "title": "CBSE Group A B C Skill Test Exam City 2026 for 124 Post",
         "organization": "Central Board Of Secondary Education",
         "department": "CBSE",
@@ -124,7 +224,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0035-20260702072822",
+        "id": "admit-sheet-0035",
         "title": "Rajasthan RSSB LDC, Jr Assistant Admit Card 2026",
         "organization": "RSSB",
         "department": "RSSB",
@@ -144,7 +244,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0036-20260702072919",
+        "id": "admit-sheet-0036",
         "title": "Bihar BPSC Auditor Admit Card 2026 for 102 Post",
         "organization": "Bihar Public Service Commission",
         "department": "BPSC",
@@ -164,7 +264,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0037-20260702073406",
+        "id": "admit-sheet-0037",
         "title": "NTA ICAR AIEEA PG & Phd Admit Card 2026",
         "organization": "National Testing Agency",
         "department": "NTA",
@@ -173,7 +273,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-04",
         "examEndDate": "",
         "releaseDate": "2026-07-01",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=y4cMoXShddrjVCWgrykM85f7JaXFXY4HVEJI6IyyUic=",
         "detailPage": "../AdmitCard_Details/HTML/NTA-ICAR-AIEEA-PG-Admit-Card-2026.html",
@@ -184,7 +284,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0038-20260702073426",
+        "id": "admit-sheet-0038",
         "title": "BSNL Senior Executive Trainee SET Admit Card 2026 for 120 Post",
         "organization": "Bhartiya Sanchar Nigam limited",
         "department": "BSNL",
@@ -204,7 +304,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0039-20260702073736",
+        "id": "admit-sheet-0039",
         "title": "HTET Admit Card 2026 | Syllabus | Haryana Teacher Eligibility Test",
         "organization": "Haryana Teacher Eligibility Test",
         "department": "HTET",
@@ -224,7 +324,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0040-20260702073822",
+        "id": "admit-sheet-0040",
         "title": "RPSC Senior Teacher Grade II TGT Exam City 2026 for 6500 Post",
         "organization": "Rajasthan Public Service Commission",
         "department": "RPSC",
@@ -244,7 +344,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0101-20260702074111",
+        "id": "admit-sheet-0041",
         "title": "RRB Railway ALP Assistant Loco Pilot CBT II Exam Date 2026 | CEN 01/2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -264,7 +364,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0102-20260702165706",
+        "id": "admit-sheet-0042",
         "title": "CBI Apprentice Exam Date 2026 for 4500 Post",
         "organization": "Central Bank  of India",
         "department": "CBI",
@@ -284,7 +384,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0103-20260702170522",
+        "id": "admit-sheet-0043",
         "title": "Rajasthan RIICO Various Post Admit Card 2026",
         "organization": "RIICO",
         "department": "RIICO",
@@ -304,7 +404,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0104-20260702170700",
+        "id": "admit-sheet-0044",
         "title": "UPSSSC Assistant Boring Technician Exam City 2026 for 402 Post",
         "organization": "Uttar Pradesh subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -324,7 +424,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0105-20260702171219",
+        "id": "admit-sheet-0045",
         "title": "BPSC Prosecution Officer Exam Schedule 2026 for 300 Post",
         "organization": "Bihar Public Service Commission",
         "department": "BPSC",
@@ -344,7 +444,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2409",
+        "id": "admit-sheet-0028",
         "title": "RRB JE Junior Engineer CBT II Admit Card 2026 for 2569 Post CEN 05/2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -364,7 +464,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2408",
+        "id": "admit-sheet-0027",
         "title": "CG Police SI 2024 Admit Card for 341 Post",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
         "department": "CGPSC",
@@ -388,7 +488,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2403",
+        "id": "admit-sheet-0022",
         "title": "Bihar Police BPSSC ASI Operation AdmitCard / Exam Date 2026 for 462 Post",
         "organization": "Bihar Police Subordinate Services Commission (BPSSC)",
         "department": "BPSSC",
@@ -403,7 +503,7 @@ window.GovJobUpdatesAdmitCards = [
             "Bihar Police",
             "ASI"
         ],
-        "downloadLink": "https://bpssc.bihar.gov.in/",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -412,7 +512,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2404",
+        "id": "admit-sheet-0023",
         "title": "UPSSSC Various Post UP Pollution Admit Card 2026 for 115 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -426,7 +526,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPSSSC",
             "UP Pollution"
         ],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -435,7 +535,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2405",
+        "id": "admit-sheet-0024",
         "title": "UPSSSC Pharmacist Admit Card 2026 for 560 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -449,7 +549,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPSSSC",
             "Pharmacist"
         ],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -458,7 +558,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2406",
+        "id": "admit-sheet-0025",
         "title": "UPSSSC BCG Technician Admit Card 2026 for 255 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -472,7 +572,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPSSSC",
             "BCG Technician"
         ],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -481,7 +581,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2407",
+        "id": "admit-sheet-0026",
         "title": "PGCIL Non Executive Admit Card 2026 for 670 Post",
         "organization": "Power Grid Corporation of India Limited",
         "department": "PGCIL",
@@ -495,7 +595,7 @@ window.GovJobUpdatesAdmitCards = [
             "PGCIL",
             "Non Executive"
         ],
-        "downloadLink": "https://online.ecgpsconline.in/",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -504,7 +604,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2402",
+        "id": "admit-sheet-0021",
         "title": "ICFRE Various Post Admit Card 2026 for 91 Post",
         "organization": "ICFRE – Forest Research Institute",
         "department": "ICFRE",
@@ -527,7 +627,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2401",
+        "id": "admit-sheet-0020",
         "title": "UPTET Exam City 2026 | UP TET Teacher Eligibility Test",
         "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
         "department": "UPESSB",
@@ -536,13 +636,13 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-02",
         "examEndDate": "2026-07-04",
         "releaseDate": "2026-05-22",
-        "status": "available",
+        "status": "exam-over",
         "tags": [
             "UPTET",
             "UPESSC",
             "Teacher"
         ],
-        "downloadLink": "https://admitcards.upessc.org/",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
@@ -551,7 +651,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2398",
+        "id": "admit-sheet-0017",
         "title": "UPPSC APO Mains Admit Card 2026 for 182 Post",
         "organization": "UPPSC Assistant Prosecution Officer",
         "department": "uppsc",
@@ -566,7 +666,7 @@ window.GovJobUpdatesAdmitCards = [
             "APO",
             "Mains"
         ],
-        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q==",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
@@ -575,7 +675,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2399",
+        "id": "admit-sheet-0018",
         "title": "Bank of Baroda Apprentice Admit Card 2026 for 5000 Post",
         "organization": "Bank of Baroda",
         "department": "bob",
@@ -589,7 +689,7 @@ window.GovJobUpdatesAdmitCards = [
             "Bank of Baroda",
             "Apprentice"
         ],
-        "downloadLink": "https://bankofbaroda.bank.in/",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
@@ -598,7 +698,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2400",
+        "id": "admit-sheet-0019",
         "title": "RSSB Forester Admit Card/Exam City Details 2026 for 259 Post",
         "organization": "RSSB",
         "department": "RSSB",
@@ -621,7 +721,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2397",
+        "id": "admit-sheet-0016",
         "title": "CSBC Bihar Police Constable GD Special Branch Admit Card 2026",
         "organization": "Central Selection Board of Constable CSBC",
         "department": "State Police",
@@ -637,7 +737,7 @@ window.GovJobUpdatesAdmitCards = [
             "Constable",
             "Special Branch"
         ],
-        "downloadLink": "https://apply-csbc.com/csbc_12026_weadmitcard/searchApplication",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Admit-Card-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
@@ -646,7 +746,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2396",
+        "id": "admit-sheet-0015",
         "title": "CSBC Bihar Police Constable Operator Exam City / Admit Card 2026 | 993 Post",
         "organization": "Central Selection Board of Constable CSBC",
         "department": "State Police",
@@ -662,7 +762,7 @@ window.GovJobUpdatesAdmitCards = [
             "Constable",
             "Operator"
         ],
-        "downloadLink": "https://apply-csbc.com/csbc_2_2026_weadmitcards/applicationIndex",
+        "downloadLink": "",
         "detailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
         "updatedAt": "2026-06-15",
         "telegramStatus": "ready",
@@ -671,7 +771,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2042",
+        "id": "admit-sheet-0007",
         "title": "UP Police Constable Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
         "department": "State Police",
@@ -686,7 +786,7 @@ window.GovJobUpdatesAdmitCards = [
             "Police",
             "Constable"
         ],
-        "downloadLink": "https://upcons2025.com/upcondiad2025/index.aspx",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
@@ -695,7 +795,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2395",
+        "id": "admit-sheet-0014",
         "title": "BSNL Senior Executive Trainee",
         "organization": "Bharat Sanchar Nigam Limited",
         "department": "Telecom",
@@ -710,7 +810,7 @@ window.GovJobUpdatesAdmitCards = [
             "Senior Executive Trainee",
             "Telecom"
         ],
-        "downloadLink": "https://www.externalexam.bsnl.co.in/",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
@@ -719,7 +819,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2048",
+        "id": "admit-sheet-0013",
         "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
         "organization": "Join Indian Army",
         "department": "Defence",
@@ -734,7 +834,7 @@ window.GovJobUpdatesAdmitCards = [
             "Defence",
             "Agniveer"
         ],
-        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
@@ -743,7 +843,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2047",
+        "id": "admit-sheet-0012",
         "title": "UKSSSC Group C Driver Admit Card 2026",
         "organization": "Uttarakhand Subordinate Service Selection Commission",
         "department": "UKSSSC",
@@ -758,7 +858,7 @@ window.GovJobUpdatesAdmitCards = [
             "Uttarakhad",
             "UKSSSC"
         ],
-        "downloadLink": "https://ukssscrecruitment.in/UKSSSC_PAGES/AdmitCard_Advt74.aspx",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
         "updatedAt": "2026-05-26",
         "telegramStatus": "ready",
@@ -767,7 +867,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2045",
+        "id": "admit-sheet-0010",
         "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board",
         "department": "Forest Department",
@@ -781,7 +881,7 @@ window.GovJobUpdatesAdmitCards = [
             "Police",
             "MPESB"
         ],
-        "downloadLink": "https://esb.mp.gov.in/e_default.html",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
@@ -790,7 +890,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2046",
+        "id": "admit-sheet-0011",
         "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
         "organization": "Bihar Police Subordinate Services Commission",
         "department": "State Police",
@@ -812,30 +912,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2044",
-        "title": "UP B.Ed Admit Card 2026",
-        "organization": "Uttar Pradesh B.Ed. Joint Entrance Examination",
-        "department": "Education",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-05-31",
-        "examEndDate": "",
-        "releaseDate": "2026-05-22",
-        "status": "exam-over",
-        "tags": [
-            "Edcation",
-            "B.ed"
-        ],
-        "downloadLink": "https://cdn3.digialm.com/EForms/configuredHtml/1936/97469/login.html",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-05-22",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "admit-2001",
+        "id": "admit-sheet-0001",
         "title": "SSC GD Constable Admit Card 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -850,7 +927,7 @@ window.GovJobUpdatesAdmitCards = [
             "GD Constable",
             "Admit Card"
         ],
-        "downloadLink": "https://ssc.gov.in/",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "draft",
@@ -859,31 +936,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "2043",
-        "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
-        "organization": "Madhya Pradesh Employee Selection Board",
-        "department": "State Police",
-        "category": "Admit Card",
-        "year": "2025",
-        "examDate": "2026-05-21",
-        "examEndDate": "",
-        "releaseDate": "2026-05-19",
-        "status": "exam-over",
-        "tags": [
-            "MPESB",
-            "Police SI",
-            "Subedar"
-        ],
-        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2025/ASI_Subedar_Steno_TAC25/Second_Phase/default_tac.htm",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-05-19",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "2041",
+        "id": "admit-sheet-0006",
         "title": "UPSC Civil Services IAS IFS Admit Card 2026",
         "organization": "Union Public Service Commision",
         "department": "UPSC",
@@ -909,7 +962,7 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-2031",
+        "id": "admit-sheet-0005",
         "title": "Uttar Pradesh Lekhpal Admit Card 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -924,84 +977,12 @@ window.GovJobUpdatesAdmitCards = [
             "lekhpal",
             "uttar pradesh"
         ],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
+        "downloadLink": "",
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-16",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-2028",
-        "title": "HSSC Constable PMT Admit Card 2026",
-        "organization": "Haryana Staff Selection Commission",
-        "department": "Police",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "HSSC",
-            "Constable",
-            "PMT"
-        ],
-        "downloadLink": "https://adv012026.hryssc.com/",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "admit-2029",
-        "title": "BPSC 71th Mains Admit Card 2026",
-        "organization": "Bihar Public Service Commission",
-        "department": "State PSC",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "BPSC",
-            "71th Mains",
-            "Admit Card"
-        ],
-        "downloadLink": "https://bpsconline.bihar.gov.in/candidate/login",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "admit-2030",
-        "title": "NCL Assistant Foreman Admit Card 2026",
-        "organization": "Northern Coalfields Limited",
-        "department": "Public Sector",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "",
-        "examEndDate": "",
-        "releaseDate": "2026-05-01",
-        "status": "available",
-        "tags": [
-            "NCL",
-            "Assistant Foreman",
-            "PSU"
-        ],
-        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/97756/login.html",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     }
 ];

@@ -166,10 +166,21 @@ function normalizeTags(value) {
   return normalizeText(value).split(",").map((tag) => tag.trim()).filter(Boolean);
 }
 
+function sanitizeOfficialLinkValue(value) {
+  const text = normalizeText(value);
+  return getDangerousLinkReason(text) ? "" : text;
+}
+
 function normalizeRecord(record, fields) {
   const output = {};
   fields.forEach((field) => {
-    output[field] = field === "tags" ? normalizeTags(record[field]) : normalizeText(record[field]);
+    if (field === "tags") {
+      output[field] = normalizeTags(record[field]);
+    } else if (OFFICIAL_LINK_FIELDS.has(field)) {
+      output[field] = sanitizeOfficialLinkValue(record[field]);
+    } else {
+      output[field] = normalizeText(record[field]);
+    }
   });
   return output;
 }

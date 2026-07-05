@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-05T08:17:47.100Z",
+  "generatedAt": "2026-07-05T08:04:03.824Z",
   "source": "Latest Jobs",
-  "totalJobs": 56,
-  "validQualifications": 1,
-  "fallbackQualifications": 55,
-  "invalidPlaceholdersBlocked": 54,
-  "needsReview": 55,
+  "totalJobs": 98,
+  "validQualifications": 33,
+  "fallbackQualifications": 65,
+  "invalidPlaceholdersBlocked": 57,
+  "needsReview": 65,
   "rows": [
     {
-      "id": "2441",
-      "title": "UKSSSC AAO Online Form 2026 for 90 Post",
+      "id": "job-sheet-0021",
+      "title": "UP Anganwadi Worker Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
       "needsReview": "yes",
@@ -17,106 +17,97 @@
       "source": "fallback"
     },
     {
-      "id": "2442",
-      "title": "DRDO RAC Scientist Online Form 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
+      "id": "job-sheet-0098",
+      "title": "Rajasthan RSSB CET Graduate Level Online Form 2026",
+      "originalQualification": "Bachelor Degree in Any Stream from Any Recognized University , For More Details see notification",
+      "publishedQualification": "Bachelor Degree in Any Stream from Any Recognized University , For More Details see notification",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     },
     {
-      "id": "2438",
-      "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
-      "originalQualification": "View Details For Educational Qualification",
+      "id": "job-sheet-0071",
+      "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
+      "originalQualification": "Class 10th Matric Exam Passed from Any Recognized Board in India and for more detail view notification or click on view detail button",
+      "publishedQualification": "Class 10th Matric Exam Passed from Any Recognized Board in India and for more detail view notification or click on view detail button",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0096",
+      "title": "MPESB Agriculture Extension Officer Online Form 2026 for 2784 Post",
+      "originalQualification": "Bachelor Degree in Agriculture in Any Recognized University in India. For more read Detailed Notifications",
+      "publishedQualification": "Bachelor Degree in Agriculture in Any Recognized University in India. For more read Detailed Notifications",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0097",
+      "title": "ICSIL DEO, MTS, Driver Online Form 2026",
+      "originalQualification": "High School to Graduation According to Post, Read Detailed Notification for more Details",
+      "publishedQualification": "High School to Graduation According to Post, Read Detailed Notification for more Details",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0065",
+      "title": "NIACL Apprentice Online Form 2026 for 550 Post",
+      "originalQualification": "Bachelor Degree in Any Stream in Any Recognized University in India. To Know more Click on View Detail Page",
+      "publishedQualification": "Bachelor Degree in Any Stream in Any Recognized University in India. To Know more Click on View Detail Page",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0093",
+      "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 6715 Post",
+      "originalQualification": "Bachelor Degree in Any Stream in Any Recognized Board in India For more details Read Notification",
+      "publishedQualification": "Bachelor Degree in Any Stream in Any Recognized Board in India For more details Read Notification",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0094",
+      "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 745 Post",
+      "originalQualification": "Bachelor Degree with B Level Certificate OREngineering Degree Computer  Science/  Computer Applications/     Information Technology /     Electronics / Electronics & Telecommunications/Electronics    & Communication/ Electronics & Instrumentation. OR Master Degree.",
+      "publishedQualification": "Bachelor Degree with B Level Certificate OREngineering Degree Computer  Science/  Computer Applications/     Information Technology /     Electronics / Electronics & Telecommunications/Electronics    & Communication/ Electronics & Instrumentation. OR Master Degree.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0095",
+      "title": "Delhi High Court HJS Online Form 2026",
+      "originalQualification": "Bachelor Degree in Law Passed form any Recognized University in India for more details Check Notification or click on view detail Page",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
       "needsReview": "yes",
       "reason": "placeholder qualification",
       "source": "fallback"
     },
     {
-      "id": "2440",
-      "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
+      "id": "job-sheet-0091",
+      "title": "IOCL Mathura Refinery Apprentices Online Form 2026",
+      "originalQualification": "3 Years Graduation Degree or Diploma for Postwise ELigibility Check Detailed Notification",
+      "publishedQualification": "3 Years Graduation Degree or Diploma for Postwise ELigibility Check Detailed Notification",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0092",
+      "title": "JNU Non Teaching Post Online Form 2026 for 267 Post",
+      "originalQualification": "Post Wise Qualification Read the Notification & Experience",
+      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
       "needsReview": "yes",
-      "reason": "placeholder qualification",
+      "reason": "qualification has no clear education signal",
       "source": "fallback"
     },
     {
-      "id": "2437",
-      "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2439",
-      "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2435",
-      "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2436",
-      "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2395",
-      "title": "BSNL Senior Executive Trainee Online Form 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2434",
-      "title": "UPSSSC Lower PCS Recruitment 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2432",
-      "title": "RPSC RAS Pre Recruitment 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2433",
-      "title": "RPSC APO Recruitment 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2430",
+      "id": "job-sheet-0045",
       "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
@@ -125,88 +116,88 @@
       "source": "fallback"
     },
     {
-      "id": "2426",
-      "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
-      "originalQualification": "Graduate and Masters (View Details for More Information)",
-      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
+      "id": "job-sheet-0089",
+      "title": "UPSSSC Vidhan Bhavan Rakshak Guard Online Form 2026 for 170 Post",
+      "originalQualification": "10+2 Intermediate Exam Passed from any Recognized Board in India and PET is compulary for more details view notification",
+      "publishedQualification": "10+2 Intermediate Exam Passed from any Recognized Board in India and PET is compulary for more details view notification",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     },
     {
-      "id": "2428",
-      "title": "NALCO Non Executive Online Form 2026 for 268 Post",
-      "originalQualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2429",
-      "title": "EDCIL Various Post Online Form 2026 for 879 Post",
-      "originalQualification": "10+2 (View Details for more Information)",
-      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2424",
-      "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
-      "originalQualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
+      "id": "job-sheet-0090",
+      "title": "NTPC Assistant Chemist Trainee ACT Online Form 2026",
+      "originalQualification": "M.Sc in Chemistry Passed form any Recognized University / Institute in India with 60% Marks.More Details Read the Notification.",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
       "needsReview": "yes",
       "reason": "qualification has no clear education signal",
       "source": "fallback"
     },
     {
-      "id": "2425",
-      "title": "State Government",
-      "originalQualification": "UPSSSC PET 2025 Score Card. Graduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
-      "publishedQualification": "UPSSSC PET 2025 Score Card. Graduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
+      "id": "job-sheet-0087",
+      "title": "ISRO ISTRAC Various Post Online Form 2026",
+      "originalQualification": "SSLC/SSC/Matriculation + ITI/NTC/NAC in Electronics Mechanic / Technician Power Electronic Systems / Mechanic Consumer Electronic Appliances / Mechanic Industrial Electronics trade from NCVT for more details read notification",
+      "publishedQualification": "SSLC/SSC/Matriculation + ITI/NTC/NAC in Electronics Mechanic / Technician Power Electronic Systems / Mechanic Consumer Electronic Appliances / Mechanic Industrial Electronics trade from NCVT for more details read notification",
       "needsReview": "no",
       "reason": "valid qualification",
       "source": "qualification"
     },
     {
-      "id": "2422",
-      "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
-      "originalQualification": "Graduation (View Details for more Information)",
-      "publishedQualification": "ITI, diploma, graduation or trade-wise qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
+      "id": "job-sheet-0088",
+      "title": "Naini Aerospace Limited Various Post Online Form 2026",
+      "originalQualification": "02 Year Regular/ Full time ITI (NTC) after 10th Standard and read the notification for more details",
+      "publishedQualification": "02 Year Regular/ Full time ITI (NTC) after 10th Standard and read the notification for more details",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     },
     {
-      "id": "2423",
-      "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
-      "originalQualification": "Post Graduation (View Details for more Information)",
-      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
+      "id": "job-sheet-0084",
+      "title": "BPSSC Bihar Police Company Commander Online Form 2026",
+      "originalQualification": "Bachelor Degree in Any Stream from Any Recognized University in India. Read Full Notification for Details",
+      "publishedQualification": "Bachelor Degree in Any Stream from Any Recognized University in India. Read Full Notification for Details",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     },
     {
-      "id": "2427",
-      "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
-      "originalQualification": "Graduation (View Details for more Information)",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
+      "id": "job-sheet-0085",
+      "title": "AAICLAS Assistant Security Online Form 2026",
+      "originalQualification": "12th from any recognized Board /University/ Institution, with minimum 60% marks for General and 55% for SC/ST candidate",
+      "publishedQualification": "12th from any recognized Board /University/ Institution, with minimum 60% marks for General and 55% for SC/ST candidate",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     },
     {
-      "id": "2418",
-      "title": "AFCAT 02/2026 Online Form",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
+      "id": "job-sheet-0086",
+      "title": "BPSSC Bihar Police Company Commander Online Form 2026",
+      "originalQualification": "Bachelor Degree in Any Stream from Any Recognized University in India, Read Notification for More Details",
+      "publishedQualification": "Bachelor Degree in Any Stream from Any Recognized University in India, Read Notification for More Details",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     },
     {
-      "id": "2421",
+      "id": "job-sheet-0082",
+      "title": "Indian Navy SSC Officers Various Post Online Form 2026",
+      "originalQualification": "BE/ B.Tech in any discipline with minimum 60% marks.\nRead the detailed notification for the Postwise Qualification",
+      "publishedQualification": "BE/ B.Tech in any discipline with minimum 60% marks.\nRead the detailed notification for the Postwise Qualification",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0083",
+      "title": "UPPSC Pre Online Form 2026 for 500 Post",
+      "originalQualification": "Bachelor Degree Passed in Any Stream a Recognized University in India.\nMore Details Read the Notification.",
+      "publishedQualification": "Bachelor Degree Passed in Any Stream a Recognized University in India.\nMore Details Read the Notification.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0036",
       "title": "SSC CGL 2026",
       "originalQualification": "Graduation (View Details for more Information)",
       "publishedQualification": "Graduate degree from a recognized university as per official notification.",
@@ -215,7 +206,394 @@
       "source": "fallback"
     },
     {
-      "id": "2417",
+      "id": "job-sheet-0078",
+      "title": "CGPSC ADPPO Online Form 2026",
+      "originalQualification": "Bachelor Degree in Law Passed from any Recognized University in India\nMore Details Read the Notification.",
+      "publishedQualification": "Bachelor Degree in Law Passed from any Recognized University in India\nMore Details Read the Notification.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0079",
+      "title": "CBI Apprentice Online Form 2026 for 4500 Post",
+      "originalQualification": "Graduation Degree in Any Stream in Any Recognized University.\nMore Details Read the Notification.",
+      "publishedQualification": "Graduation Degree in Any Stream in Any Recognized University.\nMore Details Read the Notification.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0080",
+      "title": "BEML Non Executive Operator Online Form 2026 for 362 Post",
+      "originalQualification": "First-class (60%) in respective Trade and have National Trade Certificate (NTC) issued by National Council for Vocational Training (NCVT).\nShould have completed Apprenticeship and have a National Apprenticeship Certificate (NAC) under the respective trade issued by Directorate General of Training (DGT).",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "qualification has no clear education signal",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0081",
+      "title": "NEEPCO Executive Online Form 2026",
+      "originalQualification": "Engineering Degree | Diploma | Graduation | Post Graduation\nPost Wise Qualification Read the Notification & Experience.",
+      "publishedQualification": "Engineering Degree | Diploma | Graduation | Post Graduation\nPost Wise Qualification Read the Notification & Experience.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0048",
+      "title": "UPSSSC Lower PCS Recruitment 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0073",
+      "title": "UPSC IAS Mains Online Form 2026",
+      "originalQualification": "Only Pre Exam Qualified Candidates are Eligible.",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "qualification has no clear education signal",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0074",
+      "title": "HPPSC Assistant Professor Online Form 2026 for 373 Post",
+      "originalQualification": "Master’s Degree with at least 55% marks (or equivalent grade) in a relevant subject.\nMore Details Read the Notification & Experience.",
+      "publishedQualification": "Master’s Degree with at least 55% marks (or equivalent grade) in a relevant subject.\nMore Details Read the Notification & Experience.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0075",
+      "title": "CERSAI Manager Online Form 2026",
+      "originalQualification": "Post Wise Qualification Details Read the Notification & Experience.",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "qualification has no clear education signal",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0076",
+      "title": "NBEMS Group A, B, C Various Post Online Form 2026",
+      "originalQualification": "Post Wise Qulaification, Check Detailed Notification or click on View Detail Page",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "qualification has no clear education signal",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0077",
+      "title": "UPSRTC UP Bus Conductor Online Form 2026",
+      "originalQualification": "Intermediate Passed from Any Recognized Board in India.\nCCC Exam Qualified",
+      "publishedQualification": "Intermediate Passed from Any Recognized Board in India.\nCCC Exam Qualified",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0072",
+      "title": "UPSRLM Various Post Online Form 2026 for 3447 Post",
+      "originalQualification": "Bahchelor Degree or Higher education more details check official notification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0070",
+      "title": "SBI PO Recruitment 2026",
+      "originalQualification": "Candidates must have passed or be appearing in the final year of a Bachelor’s Degree in any stream from a recognized university in India.",
+      "publishedQualification": "Candidates must have passed or be appearing in the final year of a Bachelor’s Degree in any stream from a recognized university in India.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0066",
+      "title": "CGPSC Assistant District Prosecution Officer ADPO Online Form 2026",
+      "originalQualification": "Bachelor Degree in Law Passed from any Recognized University in India , For more View Notification or Detail Page",
+      "publishedQualification": "Bachelor Degree in Law Passed from any Recognized University in India , For more View Notification or Detail Page",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0067",
+      "title": "Indian Air Force Airmen Group Y Medical Assistant Online Form 2026 | Intake 02/2027",
+      "originalQualification": "Passed 10+2 / Intermediate / Equivalent with Physics, Chemistry, Biology, and English with a minimum of 50% marks in aggregate and 50% in English. For more Detail View Notification",
+      "publishedQualification": "Passed 10+2 / Intermediate / Equivalent with Physics, Chemistry, Biology, and English with a minimum of 50% marks in aggregate and 50% in English. For more Detail View Notification",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0068",
+      "title": "BOB Corporate and Institutional Credit Online Form 2026",
+      "originalQualification": "Bachelor Degree in Any Stream in Any Recognized University.\nPost Graduate Degree/ Diploma with specialization in Finance or equivalent to Finance.\nRead Notification for more Details or click on View Detail Page",
+      "publishedQualification": "Bachelor Degree in Any Stream in Any Recognized University.\nPost Graduate Degree/ Diploma with specialization in Finance or equivalent to Finance.\nRead Notification for more Details or click on View Detail Page",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0063",
+      "title": "BPSSC ASI Technical Online Form 2026",
+      "originalQualification": "Candidates must possess a Diploma in Electronics & Communication Engineering / Electronics & Telecommunication Engineering / Electrical & Electronics Engineering / Information Technology from a recognized University/Institute in India, with a minimum of 50% marks",
+      "publishedQualification": "Candidates must possess a Diploma in Electronics & Communication Engineering / Electronics & Telecommunication Engineering / Electrical & Electronics Engineering / Information Technology from a recognized University/Institute in India, with a minimum of 50% marks",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0062",
+      "title": "AIIMS CRE 5th Group B & C Various Post Online Form 2026 for 1484 Post",
+      "originalQualification": "Post Wise Qualification Read the Notification & Experience.",
+      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "qualification has no clear education signal",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0060",
+      "title": "Karnataka Police Constable Online Form 2026 for 596 Post (KK)",
+      "originalQualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+      "publishedQualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0061",
+      "title": "Karnataka Police Constable Online Form 2026 for 3395 Post (RPC)",
+      "originalQualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+      "publishedQualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0057",
+      "title": "CISF Recruitment 2026 Apply Online for ASI Paramedical Staff",
+      "originalQualification": "he candidate should have passed 10+2 from a recognized Board or University and Related Diploma or Degree for more click on view details button",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0058",
+      "title": "HCL Recruitment 2026",
+      "originalQualification": "Bachelor’s Degree in Mining Engineering.\nMore Details Read the Notification.",
+      "publishedQualification": "Bachelor’s Degree in Mining Engineering.\nMore Details Read the Notification.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0059",
+      "title": "CIL Management Trainee Mining Online Form 2026 for 276 Post",
+      "originalQualification": "Degree in Mining Engineering with a minimum of 60% Marks from any Recognized University in India.\nMore Details Read the Notification.",
+      "publishedQualification": "Degree in Mining Engineering with a minimum of 60% Marks from any Recognized University in India.\nMore Details Read the Notification.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0055",
+      "title": "UKSSSC AAO Online Form 2026 for 90 Post",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0056",
+      "title": "DRDO RAC Scientist Online Form 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0069",
+      "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
+      "originalQualification": "Class 10 High School / Matric with 50% Marks\nITI Certificate in Related Trade.\nfor Trade Wise Eligibility Details Read the Notification.",
+      "publishedQualification": "Class 10 High School / Matric with 50% Marks\nITI Certificate in Related Trade.\nfor Trade Wise Eligibility Details Read the Notification.",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0052",
+      "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0054",
+      "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0051",
+      "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0053",
+      "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0049",
+      "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0050",
+      "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0010",
+      "title": "BSNL Senior Executive Trainee Online Form 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0046",
+      "title": "RPSC RAS Pre Recruitment 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0047",
+      "title": "RPSC APO Recruitment 2026",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0041",
+      "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
+      "originalQualification": "Graduate and Masters (View Details for More Information)",
+      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0043",
+      "title": "NALCO Non Executive Online Form 2026 for 268 Post",
+      "originalQualification": "ITI / Diploma / Graduation Passed form any Recognized University/Institute in India (View Details for more Information)",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0044",
+      "title": "EDCIL Various Post Online Form 2026 for 879 Post",
+      "originalQualification": "10+2 (View Details for more Information)",
+      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0039",
+      "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
+      "originalQualification": "Passed Senior Secondary Examination (10+2 Pattern) or its Equivalent Examination from any Recognized Board with at least 70% aggregate marks in Physics, Chemistry and Mathematics (PCM) and at least 50% marks in English (either in Class X or Class XII)",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "qualification has no clear education signal",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0040",
+      "title": "UPSSSC Agriculture Technical Assistant Group-C Recruitment 2026",
+      "originalQualification": "UPSSSC PET 2025 Score Card. Graduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
+      "publishedQualification": "UPSSSC PET 2025 Score Card. Graduation Degree In Agriculture B.Sc Agriculture / Horticulture /Home Science / Forestery OR B.E / B.Tech Engineering Degree In Agriculture",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
+    },
+    {
+      "id": "job-sheet-0037",
+      "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
+      "originalQualification": "Graduation (View Details for more Information)",
+      "publishedQualification": "ITI, diploma, graduation or trade-wise qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0038",
+      "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
+      "originalQualification": "Post Graduation (View Details for more Information)",
+      "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0042",
+      "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
+      "originalQualification": "Graduation (View Details for more Information)",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0033",
+      "title": "AFCAT 02/2026 Online Form",
+      "originalQualification": "View Details For Educational Qualification",
+      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
+      "needsReview": "yes",
+      "reason": "placeholder qualification",
+      "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0032",
       "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
@@ -224,7 +602,7 @@
       "source": "fallback"
     },
     {
-      "id": "2419",
+      "id": "job-sheet-0034",
       "title": "UPSC NDA II Online Form 2026 for 394 Post",
       "originalQualification": "10+2 (View Details for more Information)",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -233,7 +611,7 @@
       "source": "fallback"
     },
     {
-      "id": "2420",
+      "id": "job-sheet-0035",
       "title": "UPSC CDS II Online Form 2026 for 451 Post",
       "originalQualification": "Graduation (View Details for more Information)",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -242,7 +620,7 @@
       "source": "fallback"
     },
     {
-      "id": "2415",
+      "id": "job-sheet-0030",
       "title": "BTSC Laboratory Assistant Online Form 2026 for 1090 Post",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
@@ -251,7 +629,7 @@
       "source": "fallback"
     },
     {
-      "id": "2416",
+      "id": "job-sheet-0031",
       "title": "NTPC Assistant Executive Online Form 2026 for 250 Post",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -260,7 +638,7 @@
       "source": "fallback"
     },
     {
-      "id": "2386",
+      "id": "job-sheet-0001",
       "title": "Rajasthan RSSB Teaching Associate Online Form 2026 (3540 Posts)",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
@@ -269,7 +647,7 @@
       "source": "fallback"
     },
     {
-      "id": "2387",
+      "id": "job-sheet-0002",
       "title": "CRPF Constable Tradesman Online Form 2026 (9195 Posts)",
       "originalQualification": "High School (View Details for More Information)",
       "publishedQualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
@@ -278,7 +656,7 @@
       "source": "fallback"
     },
     {
-      "id": "2388",
+      "id": "job-sheet-0003",
       "title": "Railway RRB ALP Online Form 2026 (11127 Posts)",
       "originalQualification": "High School (View Details for More Information)",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -287,7 +665,7 @@
       "source": "fallback"
     },
     {
-      "id": "2389",
+      "id": "job-sheet-0004",
       "title": "MPESB Nursing Officer / Sister Tutor Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -296,7 +674,7 @@
       "source": "fallback"
     },
     {
-      "id": "2390",
+      "id": "job-sheet-0005",
       "title": "MPESB Hospital Assistant Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -305,7 +683,7 @@
       "source": "fallback"
     },
     {
-      "id": "2391",
+      "id": "job-sheet-0006",
       "title": "MPESB Van Rakshak / Jail Prahari Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -314,7 +692,7 @@
       "source": "fallback"
     },
     {
-      "id": "2392",
+      "id": "job-sheet-0007",
       "title": "Bihar BPSC 33rd Judicial Services Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -323,7 +701,7 @@
       "source": "fallback"
     },
     {
-      "id": "2393",
+      "id": "job-sheet-0008",
       "title": "Patna High Court Technical Assistant Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
@@ -332,7 +710,7 @@
       "source": "fallback"
     },
     {
-      "id": "2394",
+      "id": "job-sheet-0009",
       "title": "NPCIL Executive Trainee Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -341,7 +719,7 @@
       "source": "fallback"
     },
     {
-      "id": "2396",
+      "id": "job-sheet-0011",
       "title": "Bihar BCECE Senior Resident / Tutor Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
@@ -350,7 +728,7 @@
       "source": "fallback"
     },
     {
-      "id": "2397",
+      "id": "job-sheet-0012",
       "title": "LIC HFL Junior Assistant Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Graduate degree or post-wise banking qualification as per official notification.",
@@ -359,7 +737,7 @@
       "source": "fallback"
     },
     {
-      "id": "2398",
+      "id": "job-sheet-0013",
       "title": "BPSSC Bihar Police Havildar Instructor Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
@@ -368,7 +746,7 @@
       "source": "fallback"
     },
     {
-      "id": "2399",
+      "id": "job-sheet-0014",
       "title": "Union Bank of India Apprentice Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "ITI, diploma, graduation or trade-wise qualification as per official notification.",
@@ -377,7 +755,7 @@
       "source": "fallback"
     },
     {
-      "id": "2400",
+      "id": "job-sheet-0015",
       "title": "UPTET Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
@@ -386,7 +764,7 @@
       "source": "fallback"
     },
     {
-      "id": "2401",
+      "id": "job-sheet-0016",
       "title": "Bihar CET B.Ed Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
@@ -395,7 +773,7 @@
       "source": "fallback"
     },
     {
-      "id": "2402",
+      "id": "job-sheet-0017",
       "title": "RBI Officer Grade-B Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Graduate degree or post-wise banking qualification as per official notification.",
@@ -404,7 +782,7 @@
       "source": "fallback"
     },
     {
-      "id": "2403",
+      "id": "job-sheet-0018",
       "title": "UPESSC Assistant Professor B.Ed Online Form 2025",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
@@ -413,7 +791,7 @@
       "source": "fallback"
     },
     {
-      "id": "2404",
+      "id": "job-sheet-0019",
       "title": "MPPSC ADPO Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -422,7 +800,7 @@
       "source": "fallback"
     },
     {
-      "id": "2405",
+      "id": "job-sheet-0020",
       "title": "UPSSSC Havildar Instructor Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -431,16 +809,7 @@
       "source": "fallback"
     },
     {
-      "id": "2406",
-      "title": "UP Anganwadi Bharti Online Form 2026",
-      "originalQualification": "View Details For Educational Qualification",
-      "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
-      "needsReview": "yes",
-      "reason": "placeholder qualification",
-      "source": "fallback"
-    },
-    {
-      "id": "2407",
+      "id": "job-sheet-0022",
       "title": "UP Cooperative Bank Various Post Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Graduate degree or post-wise banking qualification as per official notification.",
@@ -449,7 +818,7 @@
       "source": "fallback"
     },
     {
-      "id": "2408",
+      "id": "job-sheet-0023",
       "title": "SSC Stenographer Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -458,7 +827,7 @@
       "source": "fallback"
     },
     {
-      "id": "2409",
+      "id": "job-sheet-0024",
       "title": "SSC Selection Phase 14 Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -467,7 +836,7 @@
       "source": "fallback"
     },
     {
-      "id": "2410",
+      "id": "job-sheet-0025",
       "title": "SSC JHT Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -476,7 +845,7 @@
       "source": "fallback"
     },
     {
-      "id": "2411",
+      "id": "job-sheet-0026",
       "title": "SSB Constable Tradesman Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Class 10/12 or equivalent eligibility with physical standards as per official notification.",
@@ -485,7 +854,7 @@
       "source": "fallback"
     },
     {
-      "id": "2412",
+      "id": "job-sheet-0027",
       "title": "UPSSSC Assistant Statistical Officer ASO Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
@@ -494,7 +863,7 @@
       "source": "fallback"
     },
     {
-      "id": "2413",
+      "id": "job-sheet-0028",
       "title": "Punjab PSPCL JE Electrical Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Relevant diploma, engineering degree, science degree or technical qualification as per official notification.",
@@ -503,13 +872,22 @@
       "source": "fallback"
     },
     {
-      "id": "2414",
+      "id": "job-sheet-0029",
       "title": "UPSSSC Forest Guard / Wildlife Guard Online Form 2026",
       "originalQualification": "View Details For Educational Qualification",
       "publishedQualification": "Post-wise educational qualification as specified in the official notification.",
       "needsReview": "yes",
       "reason": "placeholder qualification",
       "source": "fallback"
+    },
+    {
+      "id": "job-sheet-0064",
+      "title": "SSC Delhi Police Head Constable (Ministerial) 2025",
+      "originalQualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+      "publishedQualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
+      "needsReview": "no",
+      "reason": "valid qualification",
+      "source": "qualification"
     }
   ]
 }

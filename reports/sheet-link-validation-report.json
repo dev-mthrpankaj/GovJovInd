@@ -1,94 +1,247 @@
 {
-  "generatedAt": "2026-06-05T08:18:00.375Z",
-  "totalRecords": 158,
-  "validDetailPages": 58,
-  "fallbackDetailPages": 100,
-  "brokenLinksBlocked": 100,
+  "generatedAt": "2026-07-05T08:04:03.834Z",
+  "totalRecords": 206,
+  "validDetailPages": 188,
+  "fallbackDetailPages": 18,
+  "brokenLinksBlocked": 18,
   "rows": [
     {
       "type": "jobs",
-      "id": "2441",
-      "title": "UKSSSC AAO Online Form 2026 for 90 Post",
-      "originalDetailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
+      "id": "job-sheet-0021",
+      "title": "UP Anganwadi Worker Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/UP-Anganwadi-Worker-Helper-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/UP-Anganwadi-Worker-Helper-Recruitment-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2442",
-      "title": "DRDO RAC Scientist Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
+      "id": "job-sheet-0098",
+      "title": "Rajasthan RSSB CET Graduate Level Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/RSSB-CET-Graduate-Level-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/RSSB-CET-Graduate-Level-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2438",
-      "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
-      "originalDetailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html",
+      "id": "job-sheet-0071",
+      "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-HSSC-CET-Group-D-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-HSSC-CET-Group-D-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2440",
-      "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
-      "originalDetailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
+      "id": "job-sheet-0096",
+      "title": "MPESB Agriculture Extension Officer Online Form 2026 for 2784 Post",
+      "originalDetailPage": "../Job_Details/HTML/1009-MPESB-Agriculture-Extension-Officer-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-MPESB-Agriculture-Extension-Officer-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2437",
-      "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
-      "originalDetailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
-      "publishedDetailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
+      "id": "job-sheet-0097",
+      "title": "ICSIL DEO, MTS, Driver Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1010-ICSIL-Various-Posts-Panel-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-ICSIL-Various-Posts-Panel-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2439",
-      "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
-      "originalDetailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
+      "id": "job-sheet-0065",
+      "title": "NIACL Apprentice Online Form 2026 for 550 Post",
+      "originalDetailPage": "../Job_Details/HTML/1013-NIACL-Apprentice-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1013-NIACL-Apprentice-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2435",
-      "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
-      "originalDetailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
-      "publishedDetailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
+      "id": "job-sheet-0093",
+      "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 6715 Post",
+      "originalDetailPage": "../Job_Details/HTML/1009-IBPS-PO-MT-XVI-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-IBPS-PO-MT-XVI-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2436",
-      "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
-      "originalDetailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
+      "id": "job-sheet-0094",
+      "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 745 Post",
+      "originalDetailPage": "../Job_Details/HTML/1010-IBPS-Specialist-Officer-XVI-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-IBPS-Specialist-Officer-XVI-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2395",
-      "title": "BSNL Senior Executive Trainee Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
+      "id": "job-sheet-0095",
+      "title": "Delhi High Court HJS Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1011-Delhi-Higher-Judicial-Service-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1011-Delhi-Higher-Judicial-Service-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2434",
+      "id": "job-sheet-0091",
+      "title": "IOCL Mathura Refinery Apprentices Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1020-IOCL-Mathura-Refinery-Apprentice-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1020-IOCL-Mathura-Refinery-Apprentice-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0092",
+      "title": "JNU Non Teaching Post Online Form 2026 for 267 Post",
+      "originalDetailPage": "../Job_Details/HTML/1012-JNU-Non-Teaching-Posts-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1012-JNU-Non-Teaching-Posts-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0045",
+      "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
+      "originalDetailPage": "../Job_Details/HTML/1021-RRB-Technician-CEN-02-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1021-RRB-Technician-CEN-02-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0089",
+      "title": "UPSSSC Vidhan Bhavan Rakshak Guard Online Form 2026 for 170 Post",
+      "originalDetailPage": "../Job_Details/HTML/1009-UPSSSC-Vidhan-Bhawan-Rakshak-Fire-Guard-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-UPSSSC-Vidhan-Bhawan-Rakshak-Fire-Guard-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0090",
+      "title": "NTPC Assistant Chemist Trainee ACT Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0087",
+      "title": "ISRO ISTRAC Various Post Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1010-ISRO-ISTRAC-Various-Posts-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-ISRO-ISTRAC-Various-Posts-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0088",
+      "title": "Naini Aerospace Limited Various Post Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-NAeL-Various-Posts-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-NAeL-Various-Posts-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0084",
+      "title": "BPSSC Bihar Police Company Commander Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-BPSSC-Bihar-Home-Guard-Company-Commander-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-BPSSC-Bihar-Home-Guard-Company-Commander-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0085",
+      "title": "AAICLAS Assistant Security Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1010-AAICLAS-Assistant-Security-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-AAICLAS-Assistant-Security-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0086",
+      "title": "BPSSC Bihar Police Company Commander Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-CGPSC-Subedar-SI-Platoon-Commander-Prelims-Exam-Date-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-CGPSC-Subedar-SI-Platoon-Commander-Prelims-Exam-Date-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0082",
+      "title": "Indian Navy SSC Officers Various Post Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1010-Indian-Navy-SSC-Officer-Jun-2027.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-Indian-Navy-SSC-Officer-Jun-2027.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0083",
+      "title": "UPPSC Pre Online Form 2026 for 500 Post",
+      "originalDetailPage": "../Job_Details/HTML/1009-UPPSC-PCS-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-UPPSC-PCS-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0036",
+      "title": "SSC CGL 2026",
+      "originalDetailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0036",
+      "reason": "missing local detailPage target",
+      "detailPageNeedsReview": "yes"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0078",
+      "title": "CGPSC ADPPO Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-CGPSC-ADLPO-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-CGPSC-ADLPO-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0079",
+      "title": "CBI Apprentice Online Form 2026 for 4500 Post",
+      "originalDetailPage": "../Job_Details/HTML/1011-Central-Bank-Apprentice-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1011-Central-Bank-Apprentice-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0080",
+      "title": "BEML Non Executive Operator Online Form 2026 for 362 Post",
+      "originalDetailPage": "../Job_Details/HTML/1010-BEML-Operator-Tenure-Basis-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-BEML-Operator-Tenure-Basis-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0081",
+      "title": "NEEPCO Executive Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-NEEPCO-Executive-FTB-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-NEEPCO-Executive-FTB-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0048",
       "title": "UPSSSC Lower PCS Recruitment 2026",
       "originalDetailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
@@ -97,7 +250,250 @@
     },
     {
       "type": "jobs",
-      "id": "2432",
+      "id": "job-sheet-0073",
+      "title": "UPSC IAS Mains Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0074",
+      "title": "HPPSC Assistant Professor Online Form 2026 for 373 Post",
+      "originalDetailPage": "../Job_Details/HTML/1016-HPPSC-Assistant-Professor-College-Cadre-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1016-HPPSC-Assistant-Professor-College-Cadre-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0075",
+      "title": "CERSAI Manager Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1014-CERSAI-Regular-Employees-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1014-CERSAI-Regular-Employees-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0076",
+      "title": "NBEMS Group A, B, C Various Post Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1013-NBEMS-Various-Posts-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1013-NBEMS-Various-Posts-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0077",
+      "title": "UPSRTC UP Bus Conductor Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/1010-UP-Parivahan-Outsourcing-Driver-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-UP-Parivahan-Outsourcing-Driver-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0072",
+      "title": "UPSRLM Various Post Online Form 2026 for 3447 Post",
+      "originalDetailPage": "../Job_Details/HTML/221613-UPSRLM-District-Block-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/221613-UPSRLM-District-Block-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0070",
+      "title": "SBI PO Recruitment 2026",
+      "originalDetailPage": "../Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0066",
+      "title": "CGPSC Assistant District Prosecution Officer ADPO Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/CGPSC-ADPO-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/CGPSC-ADPO-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0067",
+      "title": "Indian Air Force Airmen Group Y Medical Assistant Online Form 2026 | Intake 02/2027",
+      "originalDetailPage": "../Job_Details/HTML/1009-IAF-Airmen-Medical-Assistant-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-IAF-Airmen-Medical-Assistant-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0068",
+      "title": "BOB Corporate and Institutional Credit Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/BOB-Credit-Officers-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/BOB-Credit-Officers-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0063",
+      "title": "BPSSC ASI Technical Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/2449-BPSSC-Bihar-Police-ASI-Technical-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2449-BPSSC-Bihar-Police-ASI-Technical-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0062",
+      "title": "AIIMS CRE 5th Group B & C Various Post Online Form 2026 for 1484 Post",
+      "originalDetailPage": "../Job_Details/HTML/2448-AIIMS-CRE-5-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2448-AIIMS-CRE-5-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0060",
+      "title": "Karnataka Police Constable Online Form 2026 for 596 Post (KK)",
+      "originalDetailPage": "../Job_Details/HTML/2446-Karnataka-Police-Civil-Constable-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2446-Karnataka-Police-Civil-Constable-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0061",
+      "title": "Karnataka Police Constable Online Form 2026 for 3395 Post (RPC)",
+      "originalDetailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0057",
+      "title": "CISF Recruitment 2026 Apply Online for ASI Paramedical Staff",
+      "originalDetailPage": "../Job_Details/HTML/2443-CISF-Para-Medical-Staff-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2443-CISF-Para-Medical-Staff-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0058",
+      "title": "HCL Recruitment 2026",
+      "originalDetailPage": "../Job_Details/HTML/2444-Hindustan-Copper-Executive-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2444-Hindustan-Copper-Executive-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0059",
+      "title": "CIL Management Trainee Mining Online Form 2026 for 276 Post",
+      "originalDetailPage": "../Job_Details/HTML/2445-Coal-India-MT-Mining-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2445-Coal-India-MT-Mining-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0055",
+      "title": "UKSSSC AAO Online Form 2026 for 90 Post",
+      "originalDetailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0056",
+      "title": "DRDO RAC Scientist Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0069",
+      "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
+      "originalDetailPage": "../Job_Details/HTML/1009-SECR-Nagpur-Railway-Apprentice-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-SECR-Nagpur-Railway-Apprentice-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0052",
+      "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
+      "originalDetailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0054",
+      "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
+      "originalDetailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0051",
+      "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
+      "originalDetailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
+      "publishedDetailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0053",
+      "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
+      "originalDetailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0049",
+      "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
+      "originalDetailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
+      "publishedDetailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0050",
+      "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
+      "originalDetailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0010",
+      "title": "BSNL Senior Executive Trainee Online Form 2026",
+      "originalDetailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0046",
       "title": "RPSC RAS Pre Recruitment 2026",
       "originalDetailPage": "../Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html",
@@ -106,7 +502,7 @@
     },
     {
       "type": "jobs",
-      "id": "2433",
+      "id": "job-sheet-0047",
       "title": "RPSC APO Recruitment 2026",
       "originalDetailPage": "../Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html",
@@ -115,151 +511,133 @@
     },
     {
       "type": "jobs",
-      "id": "2430",
-      "title": "Railway RRB Technician Online Form 2026 (6565 Posts)",
-      "originalDetailPage": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html",
-      "reason": "valid detailPage",
-      "detailPageNeedsReview": "no"
-    },
-    {
-      "type": "jobs",
-      "id": "2426",
+      "id": "job-sheet-0041",
       "title": "RSSB Computer Instructor Online Form 2026 for 3951 Post",
       "originalDetailPage": "./Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2426",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0041",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2428",
+      "id": "job-sheet-0043",
       "title": "NALCO Non Executive Online Form 2026 for 268 Post",
       "originalDetailPage": "./Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2428",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0043",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2429",
+      "id": "job-sheet-0044",
       "title": "EDCIL Various Post Online Form 2026 for 879 Post",
       "originalDetailPage": "./Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2429",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0044",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2424",
+      "id": "job-sheet-0039",
       "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
       "originalDetailPage": "./Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2424",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0039",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2425",
-      "title": "State Government",
+      "id": "job-sheet-0040",
+      "title": "UPSSSC Agriculture Technical Assistant Group-C Recruitment 2026",
       "originalDetailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2425",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0040",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2422",
+      "id": "job-sheet-0037",
       "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
-      "originalDetailPage": "./Job_Details/HTML/2422-P&S-Apprentice-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2422",
+      "originalDetailPage": "../Job_Details/HTML/2422-P&S-Apprentice-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0037",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2423",
+      "id": "job-sheet-0038",
       "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
       "originalDetailPage": "./Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2423",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0038",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2427",
+      "id": "job-sheet-0042",
       "title": "Punjab and Haryana High Court Clerk Online Form 2026 for 1265 Post",
-      "originalDetailPage": "./Job_Details/HTML/job-details.html?id=2427",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2427",
+      "originalDetailPage": "./Job_Details/HTML/2427-SSSC-Haryana-Court-Clerk-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0042",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2418",
+      "id": "job-sheet-0033",
       "title": "AFCAT 02/2026 Online Form",
       "originalDetailPage": "./Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2418",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0033",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2421",
-      "title": "SSC CGL 2026",
-      "originalDetailPage": "./Job_Details/HTML/2421-SSC-CGL-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2421",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "jobs",
-      "id": "2417",
+      "id": "job-sheet-0032",
       "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
       "originalDetailPage": "./Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2417",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0032",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2419",
+      "id": "job-sheet-0034",
       "title": "UPSC NDA II Online Form 2026 for 394 Post",
       "originalDetailPage": "./Job_Details/HTML/2419-UPSC-NDA-II-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2419",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0034",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2420",
+      "id": "job-sheet-0035",
       "title": "UPSC CDS II Online Form 2026 for 451 Post",
       "originalDetailPage": "./Job_Details/HTML/2420-UPSC-CDS-II-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2420",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0035",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2415",
+      "id": "job-sheet-0030",
       "title": "BTSC Laboratory Assistant Online Form 2026 for 1090 Post",
       "originalDetailPage": "./Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2415",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0030",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2416",
+      "id": "job-sheet-0031",
       "title": "NTPC Assistant Executive Online Form 2026 for 250 Post",
       "originalDetailPage": "./Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2416",
+      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=sheet-0031",
       "reason": "missing local detailPage target",
       "detailPageNeedsReview": "yes"
     },
     {
       "type": "jobs",
-      "id": "2386",
+      "id": "job-sheet-0001",
       "title": "Rajasthan RSSB Teaching Associate Online Form 2026 (3540 Posts)",
       "originalDetailPage": "../Job_Details/HTML/2386-Rajasthan RSSB Teaching Associate Online Form 2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2386-Rajasthan RSSB Teaching Associate Online Form 2026.html",
@@ -268,250 +646,574 @@
     },
     {
       "type": "jobs",
-      "id": "2387",
+      "id": "job-sheet-0002",
       "title": "CRPF Constable Tradesman Online Form 2026 (9195 Posts)",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2387",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2387",
+      "originalDetailPage": "../Job_Details/HTML/1013-CRPF-Constable-Tradesman-Pioneer-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1013-CRPF-Constable-Tradesman-Pioneer-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2388",
+      "id": "job-sheet-0003",
       "title": "Railway RRB ALP Online Form 2026 (11127 Posts)",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2388",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2388",
+      "originalDetailPage": "../Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2389",
+      "id": "job-sheet-0004",
       "title": "MPESB Nursing Officer / Sister Tutor Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2389",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2389",
+      "originalDetailPage": "../Job_Details/HTML/1011-MPESB-Nursing-Officer-Sister-Tutor-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1011-MPESB-Nursing-Officer-Sister-Tutor-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2390",
+      "id": "job-sheet-0005",
       "title": "MPESB Hospital Assistant Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2390",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2390",
+      "originalDetailPage": "../Job_Details/HTML/1010-MPESB-Hospital-Assistant-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1010-MPESB-Hospital-Assistant-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2391",
+      "id": "job-sheet-0006",
       "title": "MPESB Van Rakshak / Jail Prahari Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2391",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2391",
+      "originalDetailPage": "../Job_Details/HTML/1009-MPESB-Forest-Guard-Jail-Prahari-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-MPESB-Forest-Guard-Jail-Prahari-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2392",
+      "id": "job-sheet-0007",
       "title": "Bihar BPSC 33rd Judicial Services Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2392",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2392",
+      "originalDetailPage": "../Job_Details/HTML/1016-BPSC-33rd-Bihar-Judicial-Service-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1016-BPSC-33rd-Bihar-Judicial-Service-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2393",
+      "id": "job-sheet-0008",
       "title": "Patna High Court Technical Assistant Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2393",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2393",
+      "originalDetailPage": "../Job_Details/HTML/1015-Patna-High-Court-Technical-Assistant-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1015-Patna-High-Court-Technical-Assistant-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2394",
+      "id": "job-sheet-0009",
       "title": "NPCIL Executive Trainee Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2394",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2394",
+      "originalDetailPage": "../Job_Details/HTML/1014-NPCIL-Executive-Trainee-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1014-NPCIL-Executive-Trainee-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2396",
+      "id": "job-sheet-0011",
       "title": "Bihar BCECE Senior Resident / Tutor Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2396",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2396",
+      "originalDetailPage": "../Job_Details/HTML/1206-BCECEB-Senior-Resident-Tutor-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1206-BCECEB-Senior-Resident-Tutor-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2397",
+      "id": "job-sheet-0012",
       "title": "LIC HFL Junior Assistant Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2397",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2397",
+      "originalDetailPage": "../Job_Details/HTML/1205-LIC-HFL-Junior-Assistant-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1205-LIC-HFL-Junior-Assistant-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2398",
+      "id": "job-sheet-0013",
       "title": "BPSSC Bihar Police Havildar Instructor Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2398",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2398",
+      "originalDetailPage": "../Job_Details/HTML/1204-BPSSC-Adhinayak-Anudeshak-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1204-BPSSC-Adhinayak-Anudeshak-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2399",
+      "id": "job-sheet-0014",
       "title": "Union Bank of India Apprentice Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2399",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2399",
+      "originalDetailPage": "../Job_Details/HTML/1203-Union-Bank-Apprentice-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1203-Union-Bank-Apprentice-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2400",
+      "id": "job-sheet-0015",
       "title": "UPTET Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2400",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2400",
+      "originalDetailPage": "../Job_Details/HTML/1202-UPTET-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1202-UPTET-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2401",
+      "id": "job-sheet-0016",
       "title": "Bihar CET B.Ed Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2401",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2401",
+      "originalDetailPage": "../Job_Details/HTML/1201-Bihar-BEd-CET-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1201-Bihar-BEd-CET-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2402",
+      "id": "job-sheet-0017",
       "title": "RBI Officer Grade-B Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2402",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2402",
+      "originalDetailPage": "../Job_Details/HTML/1211-RBI-Officer-Grade-B-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1211-RBI-Officer-Grade-B-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2403",
+      "id": "job-sheet-0018",
       "title": "UPESSC Assistant Professor B.Ed Online Form 2025",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2403",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2403",
+      "originalDetailPage": "../Job_Details/HTML/1210-UPESSC-Aided-School-Teacher-2025.html",
+      "publishedDetailPage": "../Job_Details/HTML/1210-UPESSC-Aided-School-Teacher-2025.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2404",
+      "id": "job-sheet-0019",
       "title": "MPPSC ADPO Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2404",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2404",
+      "originalDetailPage": "../Job_Details/HTML/1209-MPPSC-ADPO-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1209-MPPSC-ADPO-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2405",
+      "id": "job-sheet-0020",
       "title": "UPSSSC Havildar Instructor Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2405",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2405",
+      "originalDetailPage": "../Job_Details/HTML/1208-UPSSSC-PET-Based-Main-Exam-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1208-UPSSSC-PET-Based-Main-Exam-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2406",
-      "title": "UP Anganwadi Bharti Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2406",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2406",
-      "reason": "valid detailPage",
-      "detailPageNeedsReview": "no"
-    },
-    {
-      "type": "jobs",
-      "id": "2407",
+      "id": "job-sheet-0022",
       "title": "UP Cooperative Bank Various Post Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2407",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2407",
+      "originalDetailPage": "../Job_Details/HTML/1207-UP-Cooperative-Banking-Technical-Services-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1207-UP-Cooperative-Banking-Technical-Services-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2408",
+      "id": "job-sheet-0023",
       "title": "SSC Stenographer Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2408",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2408",
+      "originalDetailPage": "../Job_Details/HTML/1009-SSC-Stenographer-Grade-C-and-D-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-SSC-Stenographer-Grade-C-and-D-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2409",
+      "id": "job-sheet-0024",
       "title": "SSC Selection Phase 14 Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2409",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2409",
+      "originalDetailPage": "../Job_Details/HTML/1009-SSC-Phase-XIV-Selection-Posts-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-SSC-Phase-XIV-Selection-Posts-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2410",
+      "id": "job-sheet-0025",
       "title": "SSC JHT Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2410",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2410",
+      "originalDetailPage": "../Job_Details/HTML/1009-SSC-Combined-Hindi-Translators-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1009-SSC-Combined-Hindi-Translators-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2411",
+      "id": "job-sheet-0026",
       "title": "SSB Constable Tradesman Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2411",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2411",
+      "originalDetailPage": "../Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2412",
+      "id": "job-sheet-0027",
       "title": "UPSSSC Assistant Statistical Officer ASO Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2412",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2412",
+      "originalDetailPage": "../Job_Details/HTML/2412-UPSSSC-ASO-ARO-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2412-UPSSSC-ASO-ARO-Recruitment-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2413",
+      "id": "job-sheet-0028",
       "title": "Punjab PSPCL JE Electrical Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details.html?id=2413",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2413",
+      "originalDetailPage": "../Job_Details/HTML/PSPCL-JE-Electrical-Recruitment-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/PSPCL-JE-Electrical-Recruitment-2026.html",
       "reason": "valid detailPage",
       "detailPageNeedsReview": "no"
     },
     {
       "type": "jobs",
-      "id": "2414",
+      "id": "job-sheet-0029",
       "title": "UPSSSC Forest Guard / Wildlife Guard Online Form 2026",
-      "originalDetailPage": "../Job_Details/HTML/job-details-job-1030.html",
-      "publishedDetailPage": "../Job_Details/HTML/job-details.html?id=2414",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
+      "originalDetailPage": "../Job_Details/HTML/2414-UPSSSC-Forest-Guard-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/2414-UPSSSC-Forest-Guard-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "jobs",
+      "id": "job-sheet-0064",
+      "title": "SSC Delhi Police Head Constable (Ministerial) 2025",
+      "originalDetailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
+      "publishedDetailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
     },
     {
       "type": "admitCards",
-      "id": "2042",
+      "id": "admit-sheet-0046",
+      "title": "UP Police Home Guard DV Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/UP-Police-Homeguard-DV-PST-Notice-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/UP-Police-Homeguard-DV-PST-Notice-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0047",
+      "title": "RPSC Rajasthan Police SI, Platoon Commander Interview Letter 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/RSSB-Rajasthan-Platoon-Commander-Interview-Letter-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/RSSB-Rajasthan-Platoon-Commander-Interview-Letter-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0048",
+      "title": "SSB Head Constable Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/SSB-Head-Constable-Ministerial-Exam-Date-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/SSB-Head-Constable-Ministerial-Exam-Date-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0049",
+      "title": "MPESB ADDET Animal Husbandry Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/MPESB-ADDET-Animal-Husbandry-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/MPESB-ADDET-Animal-Husbandry-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0050",
+      "title": "MPESB PNST Pre Nursing Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/MPESB-PNST-Pre-Nursing-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/MPESB-PNST-Pre-Nursing-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0029",
+      "title": "UPPSC Assistant Town Planner Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/06-UPPSC-Assistant-Town-Planner-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/06-UPPSC-Assistant-Town-Planner-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0030",
+      "title": "UPHESC Assistant Professor Interview Letter 2026 for 981 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/51-UPESSC-Assistant-Professor-Interview-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/51-UPESSC-Assistant-Professor-Interview-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0031",
+      "title": "SBI Apprentice Admit Card 2026 for 7150 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/04-SBI-Apprentice-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/04-SBI-Apprentice-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0032",
+      "title": "Railway RRB NTPC Graduate Level CBT II Exam City Details 2026 | CEN 06/2025",
+      "originalDetailPage": "../AdmitCard_Details/HTML/06-2025-RRB-NTPC-Graduate-CBT-2-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/06-2025-RRB-NTPC-Graduate-CBT-2-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0033",
+      "title": "UPCISB UP Cooperative Bank Various Post Exam Date 2026 for 116 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/UPCISB-Co-operative-Banking-Exam-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/UPCISB-Co-operative-Banking-Exam-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0034",
+      "title": "CBSE Group A B C Skill Test Exam City 2026 for 124 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/CBSE-DRQ-Skill-Test-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/CBSE-DRQ-Skill-Test-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0035",
+      "title": "Rajasthan RSSB LDC, Jr Assistant Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/RSMSSB-Clerk-Grade-II-Junior-Assistant-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/RSMSSB-Clerk-Grade-II-Junior-Assistant-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0036",
+      "title": "Bihar BPSC Auditor Admit Card 2026 for 102 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/BPSC-Auditor-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/BPSC-Auditor-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0037",
+      "title": "NTA ICAR AIEEA PG & Phd Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/NTA-ICAR-AIEEA-PG-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/NTA-ICAR-AIEEA-PG-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0038",
+      "title": "BSNL Senior Executive Trainee SET Admit Card 2026 for 120 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/03-BSNL-Senior-Executive-Trainee-SET-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/03-BSNL-Senior-Executive-Trainee-SET-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0039",
+      "title": "HTET Admit Card 2026 | Syllabus | Haryana Teacher Eligibility Test",
+      "originalDetailPage": "../AdmitCard_Details/HTML/BSEH-HTET-Haryana-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/BSEH-HTET-Haryana-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0040",
+      "title": "RPSC Senior Teacher Grade II TGT Exam City 2026 for 6500 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/RPSC-Senior-Teacher-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/RPSC-Senior-Teacher-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0041",
+      "title": "RRB Railway ALP Assistant Loco Pilot CBT II Exam Date 2026 | CEN 01/2025",
+      "originalDetailPage": "../AdmitCard_Details/HTML/01-RRB-ALP-CBT-2-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/01-RRB-ALP-CBT-2-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0042",
+      "title": "CBI Apprentice Exam Date 2026 for 4500 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/03-Central-Bank-Apprentice-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/03-Central-Bank-Apprentice-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0043",
+      "title": "Rajasthan RIICO Various Post Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/04-RIICO-Various-Posts-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/04-RIICO-Various-Posts-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0044",
+      "title": "UPSSSC Assistant Boring Technician Exam City 2026 for 402 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/05-UPSSSC-Main-Exam-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/05-UPSSSC-Main-Exam-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0045",
+      "title": "BPSC Prosecution Officer Exam Schedule 2026 for 300 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/06-BPSC-Prosecution-Officer-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/06-BPSC-Prosecution-Officer-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0028",
+      "title": "RRB JE Junior Engineer CBT II Admit Card 2026 for 2569 Post CEN 05/2025",
+      "originalDetailPage": "../AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0027",
+      "title": "CG Police SI 2024 Admit Card for 341 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/01-CGPSC-Subedar-SI-Platoon-Commander-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/01-CGPSC-Subedar-SI-Platoon-Commander-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0022",
+      "title": "Bihar Police BPSSC ASI Operation AdmitCard / Exam Date 2026 for 462 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0023",
+      "title": "UPSSSC Various Post UP Pollution Admit Card 2026 for 115 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0024",
+      "title": "UPSSSC Pharmacist Admit Card 2026 for 560 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0025",
+      "title": "UPSSSC BCG Technician Admit Card 2026 for 255 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0026",
+      "title": "PGCIL Non Executive Admit Card 2026 for 670 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0021",
+      "title": "ICFRE Various Post Admit Card 2026 for 91 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/03-ICFRE-FRI-Various-Post-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/03-ICFRE-FRI-Various-Post-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0020",
+      "title": "UPTET Exam City 2026 | UP TET Teacher Eligibility Test",
+      "originalDetailPage": "../AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0017",
+      "title": "UPPSC APO Mains Admit Card 2026 for 182 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0018",
+      "title": "Bank of Baroda Apprentice Admit Card 2026 for 5000 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0019",
+      "title": "RSSB Forester Admit Card/Exam City Details 2026 for 259 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/1105-RSSB-Vanpal-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/1105-RSSB-Vanpal-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0016",
+      "title": "CSBC Bihar Police Constable GD Special Branch Admit Card 2026",
+      "originalDetailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0015",
+      "title": "CSBC Bihar Police Constable Operator Exam City / Admit Card 2026 | 993 Post",
+      "originalDetailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
+      "publishedDetailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "admitCards",
+      "id": "admit-sheet-0007",
       "title": "UP Police Constable Admit Card 2026",
       "originalDetailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
@@ -520,7 +1222,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2395",
+      "id": "admit-sheet-0014",
       "title": "BSNL Senior Executive Trainee",
       "originalDetailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
@@ -529,7 +1231,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2048",
+      "id": "admit-sheet-0013",
       "title": "Indian Army Agniveer CEE Admit Card 2026 – Out",
       "originalDetailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
@@ -538,7 +1240,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2047",
+      "id": "admit-sheet-0012",
       "title": "UKSSSC Group C Driver Admit Card 2026",
       "originalDetailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
@@ -547,7 +1249,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2045",
+      "id": "admit-sheet-0010",
       "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
       "originalDetailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
@@ -556,7 +1258,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2046",
+      "id": "admit-sheet-0011",
       "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
       "originalDetailPage": "../Job_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html",
@@ -565,16 +1267,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2044",
-      "title": "UP B.Ed Admit Card 2026",
-      "originalDetailPage": "",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "empty detailPage",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2001",
+      "id": "admit-sheet-0001",
       "title": "SSC GD Constable Admit Card 2026",
       "originalDetailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
@@ -583,16 +1276,7 @@
     },
     {
       "type": "admitCards",
-      "id": "2043",
-      "title": "MPESB MP Police Subedar & Sub Inspector SI Skill Test Admit Card",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "2041",
+      "id": "admit-sheet-0006",
       "title": "UPSC Civil Services IAS IFS Admit Card 2026",
       "originalDetailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
       "publishedDetailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
@@ -601,7 +1285,7 @@
     },
     {
       "type": "admitCards",
-      "id": "admit-2031",
+      "id": "admit-sheet-0005",
       "title": "Uttar Pradesh Lekhpal Admit Card 2026",
       "originalDetailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
       "publishedDetailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
@@ -609,170 +1293,170 @@
       "detailPageNeedsReview": "no"
     },
     {
-      "type": "admitCards",
-      "id": "admit-2002",
-      "title": "RRB NTPC 10+2 UG Exam City Details 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2002.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2006",
-      "title": "UP PGT Exam City Details 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2006.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2007",
-      "title": "NTA CUET UG Exam City Details 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2007.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2010",
-      "title": "Bihar Vidhan Parishad PA, Stenographer Phase-II Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2010.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2011",
-      "title": "NTA NEET UG Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2011.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2012",
-      "title": "UPSSSC Junior Engineer Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2012.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2013",
-      "title": "AIIMS NORCET 10th Nursing Officer CBT-II Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2013.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2014",
-      "title": "Bihar BPSSC Home Guard Havildar Clerk Exam Date 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2014.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2015",
-      "title": "MPESB Police SI and Subedar Phase-II Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2015.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2016",
-      "title": "NTA NTET Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2016.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2017",
-      "title": "Jharkhand High Court DV & Interview Letter 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2017.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2019",
-      "title": "JPSC JET Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2019.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2020",
-      "title": "NTA NCHM JEE Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2020.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2021",
-      "title": "NTA NIFTEE Stage-II Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2021.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2025",
-      "title": "UP LT Grade Assistant Teacher Mains Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2025.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2028",
-      "title": "HSSC Constable PMT Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2028.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2029",
-      "title": "BPSC 71th Mains Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2029.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "admitCards",
-      "id": "admit-2030",
-      "title": "NCL Assistant Foreman Admit Card 2026",
-      "originalDetailPage": "../AdmitCard_Details/HTML/admitcard-details-admit-2030.html",
-      "publishedDetailPage": "../HTML/admitcard.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0025",
+      "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/125-UPSSSC-Pharmacist-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/125-UPSSSC-Pharmacist-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
     },
     {
       "type": "answerKeys",
-      "id": "2041",
+      "id": "answerkey-sheet-0026",
+      "title": "UPSSSC Various Post UP Pollution Answer Key 2026 for 115 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/126-UPSSSC-Various-Post-UP-Pollution-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/126-UPSSSC-Various-Post-UP-Pollution-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0027",
+      "title": "UPSSSC BCG Technician Answer Key 2026 for 255 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/127-UPSSSC-BCG-Technician-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/127-UPSSSC-BCG-Technician-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0023",
+      "title": "UP Police Home Guard Final Answer Key 2026",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0024",
+      "title": "Railway RRB NTPC 10+2 Level UG Answer Key 2026",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0022",
+      "title": "UPSC ISS Answer Key 2026 for 44 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1105-UPSC-ISS-Statistics-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1105-UPSC-ISS-Statistics-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0020",
+      "title": "SSC Delhi Police Head Constable Ministerial Result 2026 | Marks | Final Answer Key",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0021",
+      "title": "MPESB Van Rakshak, Jail Prahari Answer Key 2026 for 1679 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0019",
+      "title": "UP Police Constable Answer Key 2026 for 32679 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0017",
+      "title": "SSC CGL 2025 Graduate Level Tier II Marks 2026 & Answer Key",
+      "originalDetailPage": "../AnswerKey_Details/HTML/13059-SSC-CGL-Tier-2-Final-Answer-Key-2025.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/13059-SSC-CGL-Tier-2-Final-Answer-Key-2025.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0018",
+      "title": "UPPSC GIC Lecturer Government Inter College Answer Key 2026",
+      "originalDetailPage": "../AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0013",
+      "title": "SSC Delhi Police Head Constable AWO / TPO Final Answer Key with Marks 2026",
+      "originalDetailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
+      "publishedDetailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0014",
+      "title": "Rajasthan RSSB Lab Assistant Answer Key 2026",
+      "originalDetailPage": "../AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0012",
+      "title": "SSC GD Constable Answer Key 2026 for 25487 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0015",
+      "title": "UPSSSC Junior Assistant Revised Answer Key 2026 | Advt No 12-Exam/2024",
+      "originalDetailPage": "../AnswerKey_Details/HTML/UPSSSC-Junior-Assistant-Revised-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/UPSSSC-Junior-Assistant-Revised-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0011",
+      "title": "UP TGT Answer Key",
+      "originalDetailPage": "../AnswerKey_Details/HTML/UP-TGT-2022-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/UP-TGT-2022-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0010",
+      "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
+      "originalDetailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+      "publishedDetailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0016",
+      "title": "UPPSC Assistant Professor GDC Answer Key 2026 for 1253 Post",
+      "originalDetailPage": "../AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html",
+      "publishedDetailPage": "../AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "answerKeys",
+      "id": "answerkey-sheet-0009",
       "title": "UPSC Civil Services IAS IFS Answer Key 2026",
       "originalDetailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
       "publishedDetailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
@@ -781,7 +1465,7 @@
     },
     {
       "type": "answerKeys",
-      "id": "2031",
+      "id": "answerkey-sheet-0008",
       "title": "UPSSSC Lekhpal Answer Key 2026",
       "originalDetailPage": "./Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
       "publishedDetailPage": "../HTML/answer-key.html",
@@ -789,296 +1473,314 @@
       "detailPageNeedsReview": "yes"
     },
     {
-      "type": "answerKeys",
-      "id": "answerkey-4032",
-      "title": "Madhya Pradesh MP Police Subedar Stenographer & ASI Ministerial Answer Key 2025",
-      "originalDetailPage": "",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "empty detailPage",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4031",
-      "title": "UPSSSC Junior Engineer Civi Answer Key 2026",
-      "originalDetailPage": "",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "empty detailPage",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4001",
-      "title": "UPSC CAPF AC Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4001.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4002",
-      "title": "RSMSSB Hostel Superintendent Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4002.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "2425",
-      "title": "UPSSSC Technical Assistant Group C Answer Key 2026",
-      "originalDetailPage": "./Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4004",
-      "title": "UPPSC RO / ARO Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4004.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4005",
-      "title": "UKPSC Lab Assistant Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4005.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4006",
-      "title": "UPSC EPFO Personal Assistant PA Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4006.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4007",
-      "title": "Bihar Sakshamta Pariksha III Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4007.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4008",
-      "title": "Rajasthan RSMSSB CET 12th Level Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4008.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4009",
-      "title": "Rajasthan RSMSSB CET Graduate Level Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4009.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4010",
-      "title": "UPPSC Staff Nurse Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4010.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4011",
-      "title": "UPPSC Staff Nurse 2026 Answer Key",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4011.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4012",
-      "title": "BPSC Lecturer Mining Engineering Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4012.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4013",
-      "title": "BPSC Lecturer (Doctor's Choice) Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4013.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4014",
-      "title": "Jharkhand JPSC Civil Services Pre Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4014.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4015",
-      "title": "UPSSSC Junior Assistant Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4015.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4016",
-      "title": "BPSC Assistant Architect Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4016.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4017",
-      "title": "BPSC Assistant Engineer AE Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4017.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4018",
-      "title": "UPSC IES / ISS Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4018.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4019",
-      "title": "UPSC NDA I Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4019.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4020",
-      "title": "UPSC CDS I Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4020.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4021",
-      "title": "BPSC HOD (Automobile) Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4021.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4022",
-      "title": "BPSC Assistant Professor IT Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4022.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4023",
-      "title": "BPSC Assistant Professor CSE Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4023.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4024",
-      "title": "BPSC Assistant Professor Chemistry Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4024.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4025",
-      "title": "BPSC Drug Inspector Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4025.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4026",
-      "title": "BPSC Assistant Curator Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4026.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4027",
-      "title": "Rajasthan RSMSSB CHO Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4027.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4028",
-      "title": "Rajasthan HC Clerk Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4028.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4029",
-      "title": "SSC Junior Hindi Translator JHT Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4029.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "answerKeys",
-      "id": "answerkey-4030",
-      "title": "Rajasthan RPSC FSO Answer Key 2026",
-      "originalDetailPage": "../AnswerKey_Details/HTML/answerkey-details-answerkey-4030.html",
-      "publishedDetailPage": "../HTML/answer-key.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
+      "type": "results",
+      "id": "result-sheet-0042",
+      "title": "HPSC PGT Computer Science Result 2026 for 1672 Post",
+      "originalDetailPage": "../Result_Details/HTML/HPSC-PGT-Computer-Science-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/HPSC-PGT-Computer-Science-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
     },
     {
       "type": "results",
-      "id": "1006",
+      "id": "result-sheet-0043",
+      "title": "LIC HFL Junior Assistant Result 2026 for 180 Post",
+      "originalDetailPage": "../Result_Details/HTML/LIC-HFL-Junior-Assistant-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/LIC-HFL-Junior-Assistant-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0041",
+      "title": "JPSC Jharkhand PCS Pre Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/2156-JPSC-Combined-Civil-Services-Prelims-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/2156-JPSC-Combined-Civil-Services-Prelims-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0038",
+      "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
+      "originalDetailPage": "../Result_Details/HTML/3006-RBI-Grade-B-DEPR-Phase-I-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-RBI-Grade-B-DEPR-Phase-I-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0039",
+      "title": "SBI CBO Circle Based Officers Result 2026 for 2050 Post",
+      "originalDetailPage": "../Result_Details/HTML/1802-SBI-Circle-Based-Officer-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/1802-SBI-Circle-Based-Officer-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0040",
+      "title": "UPSSSC Technical Assistant Group C Eligibility Result 2026 for 2759 Post",
+      "originalDetailPage": "../Result_Details/HTML/3010-UPSSSC-Technical-Assistant-Group-C-Eligibility-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3010-UPSSSC-Technical-Assistant-Group-C-Eligibility-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0029",
+      "title": "RRB Group D Result Ranchi 2025",
+      "originalDetailPage": "../Result_Details/HTML/3010-RRB-Ranchi-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3010-RRB-Ranchi-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0030",
+      "title": "RRB Group D Result Bilaspur 2025",
+      "originalDetailPage": "../Result_Details/HTML/3011-RRB-Bilaspur-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3011-RRB-Bilaspur-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0031",
+      "title": "RRB Group D Result Ahmedabad 2025",
+      "originalDetailPage": "../Result_Details/HTML/3009-RRB-Ahmedabad-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3009-RRB-Ahmedabad-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0032",
+      "title": "RRB Group D Result Bhopal 2025",
+      "originalDetailPage": "../Result_Details/HTML/3008-RRB-Bhopal-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3008-RRB-Bhopal-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0033",
+      "title": "RRB Group D Result Bhubneshwar 2025",
+      "originalDetailPage": "../Result_Details/HTML/3007-RRB-Bhubaneswar-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-RRB-Bhubaneswar-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0034",
+      "title": "RRB Group D Result Chennai 2025",
+      "originalDetailPage": "../Result_Details/HTML/3006-RRB-Chennai-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-RRB-Chennai-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0035",
+      "title": "RRB Group D Result Prayagraj 2025",
+      "originalDetailPage": "../Result_Details/HTML/3006-RRB-Prayagraj-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-RRB-Prayagraj-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0036",
+      "title": "RRB Group D Score Card Result 2025",
+      "originalDetailPage": "../Result_Details/HTML/3011-RRB-Group-D-Score-Card-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3011-RRB-Group-D-Score-Card-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0037",
+      "title": "RRB Group D Result for All RRB,s 2025",
+      "originalDetailPage": "../Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0028",
+      "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0027",
+      "title": "UP POLICE Home Guard Result of Written Exam 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0026",
+      "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
+      "originalDetailPage": "../Result_Details/HTML/3007-UPSSSC-ASO-ARO-Mains-Shortlisted-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-UPSSSC-ASO-ARO-Mains-Shortlisted-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0025",
+      "title": "BPSSC Bihar Police Havildar Clerk Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-BPSSC-Bihar-Home-Guard-Havildar-Clerk-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-BPSSC-Bihar-Home-Guard-Havildar-Clerk-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0022",
+      "title": "SSC Delhi Police Constable Driver Additional Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0023",
+      "title": "SSC Delhi Police Head Constable Ministerial Additional Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0024",
+      "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0021",
+      "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-Rajasthan-RSSB-Agriculture-Supervisor-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-Rajasthan-RSSB-Agriculture-Supervisor-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0019",
+      "title": "UPPSC Staff Nurse Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-UPPSC-Staff-Nurse-Allopathy-Supplementary-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-UPPSC-Staff-Nurse-Allopathy-Supplementary-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0020",
+      "title": "PNB LBO Local Bank Officer Final Result 2026 for 750 Post",
+      "originalDetailPage": "../Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0017",
+      "title": "RBI Office Attendant Result 2026 for 572 Post",
+      "originalDetailPage": "../Result_Details/HTML/3006-RBI-Office-Attendant-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-RBI-Office-Attendant-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0018",
+      "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
+      "originalDetailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0016",
+      "title": "BPSC 70th Final Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-BPSC-70th-Combined-Competitive-Exam-Final-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-BPSC-70th-Combined-Competitive-Exam-Final-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0015",
+      "title": "SSC Delhi Police Constable Executive Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0013",
+      "title": "SSC Stenographer 2025 Final Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0014",
+      "title": "MPESB Pre Agriculture Test PAT Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3007-MPESB-Pre-Agriculture-Test-PAT-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-MPESB-Pre-Agriculture-Test-PAT-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0012",
+      "title": "UPSC Civil Services IAS IFS Result 2026",
+      "originalDetailPage": "../Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0011",
+      "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
+      "originalDetailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0010",
+      "title": "SSC Delhi Police Head Constable (Ministerial) Result",
+      "originalDetailPage": "../Result_Details/HTML/3005-SSC-Delhi-Police-Head-Constable-Ministerial-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3005-SSC-Delhi-Police-Head-Constable-Ministerial-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
+    },
+    {
+      "type": "results",
+      "id": "result-sheet-0008",
       "title": "SSC JHT Paper-II Result 2026 – Out",
       "originalDetailPage": "../Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html",
@@ -1087,25 +1789,16 @@
     },
     {
       "type": "results",
-      "id": "1007",
+      "id": "result-sheet-0009",
       "title": "Rajasthan REET Upper Primary Teacher Result 2026",
-      "originalDetailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
-      "reason": "valid detailPage",
-      "detailPageNeedsReview": "no"
+      "originalDetailPage": "../Result_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
+      "publishedDetailPage": "../HTML/results.html",
+      "reason": "missing local detailPage target",
+      "detailPageNeedsReview": "yes"
     },
     {
       "type": "results",
-      "id": "999",
-      "title": "SSC Delhi Police Constable Executive Exam Result 2025",
-      "originalDetailPage": "../Job_Details/HTML/999-DPC-execuitive-2026.html",
-      "publishedDetailPage": "../Job_Details/HTML/999-DPC-execuitive-2026.html",
-      "reason": "valid detailPage",
-      "detailPageNeedsReview": "no"
-    },
-    {
-      "type": "results",
-      "id": "1005",
+      "id": "result-sheet-0007",
       "title": "IB ACIO Gr-II Executive Final Result 2026 – Out",
       "originalDetailPage": "../Job_Details/HTML/1005-IB-ACIO-Executive-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/1005-IB-ACIO-Executive-2026.html",
@@ -1114,7 +1807,7 @@
     },
     {
       "type": "results",
-      "id": "1002",
+      "id": "result-sheet-0004",
       "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
       "originalDetailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
@@ -1123,7 +1816,7 @@
     },
     {
       "type": "results",
-      "id": "1003",
+      "id": "result-sheet-0005",
       "title": "UP PGT 2026 Exam Result",
       "originalDetailPage": "../Job_Details/HTML/1003-UP-PGT-2026.html",
       "publishedDetailPage": "../HTML/results.html",
@@ -1132,7 +1825,7 @@
     },
     {
       "type": "results",
-      "id": "1004",
+      "id": "result-sheet-0006",
       "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
       "originalDetailPage": "../Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html",
@@ -1141,7 +1834,7 @@
     },
     {
       "type": "results",
-      "id": "1000",
+      "id": "result-sheet-0002",
       "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
       "originalDetailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
       "publishedDetailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
@@ -1150,7 +1843,7 @@
     },
     {
       "type": "results",
-      "id": "1001",
+      "id": "result-sheet-0003",
       "title": "Railway RRB Paramedical Result 2026 | CEN 03/2025",
       "originalDetailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
       "publishedDetailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
@@ -1159,273 +1852,12 @@
     },
     {
       "type": "results",
-      "id": "result-3001",
-      "title": "UPSSSC Sachiv Grade-II Final Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3001.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3002",
-      "title": "UPSSSC Forest Guard / Wildlife Guard PET Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3002.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3003",
-      "title": "UPSSSC Enforcement Constable PET Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3003.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3004",
-      "title": "CISCE Board Class 10th, 12th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3004.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3005",
-      "title": "RPSC Agriculture Officer Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3005.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3006",
-      "title": "RPSC Junior Chemist Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3006.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "998",
-      "title": "SSC Delhi Police Driver Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3007.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3008",
-      "title": "Chhattisgarh Board Class 10th, 12th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3008.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3009",
-      "title": "Bihar Vidhan Parishad Driver Pre Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3009.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3010",
-      "title": "NVS Class 9 Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3010.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3011",
-      "title": "UPPSC Assistant Registrar Final Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3011.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3012",
-      "title": "CSBC Bihar Police Driver PET Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3012.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3013",
-      "title": "Assam HS Class 12th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3013.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3014",
-      "title": "Bihar JEEVIKA Result / Cutoff 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3014.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3016",
-      "title": "UP Board Class 10th, 12th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3016.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3017",
-      "title": "Uttarakhand Board 10th / 12th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3017.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3018",
-      "title": "NTA CUET PG Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3018.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3019",
-      "title": "Delhi High Court JJA Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3019.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3020",
-      "title": "PNB Bank LBO Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3020.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3021",
-      "title": "Patna High Court Stenographer Final Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3021.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3022",
-      "title": "Jharkhand JAC 10th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3022.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3023",
-      "title": "Karnataka Board 10th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3023.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3024",
-      "title": "NTA UGC NET December E-Certificate 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3024.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3025",
-      "title": "Yantra India Limited Apprentice Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3025.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3026",
-      "title": "SSC CPO SI Paper-I Marks 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3026.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3027",
-      "title": "JPSC Civil Services Pre Answer Key 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3027.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3028",
-      "title": "JKBOSE Class 10th Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3028.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3029",
-      "title": "NTA JEE Mains Session II Result 2026",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3029.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "result-3030",
+      "id": "result-sheet-0001",
       "title": "RPSC RAS 2024 Final Result",
-      "originalDetailPage": "../Result_Details/HTML/result-details-result-3030.html",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "missing local detailPage target",
-      "detailPageNeedsReview": "yes"
-    },
-    {
-      "type": "results",
-      "id": "1008",
-      "title": "SSC Delhi Police Head Constable (Ministerial) Result",
-      "originalDetailPage": "",
-      "publishedDetailPage": "../HTML/results.html",
-      "reason": "empty detailPage",
-      "detailPageNeedsReview": "yes"
+      "originalDetailPage": "../Result_Details/HTML/3007-RPSC-RAS-Final-Result-2026.html",
+      "publishedDetailPage": "../Result_Details/HTML/3007-RPSC-RAS-Final-Result-2026.html",
+      "reason": "valid detailPage",
+      "detailPageNeedsReview": "no"
     }
   ]
 }
