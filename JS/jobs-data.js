@@ -1746,7 +1746,7 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://tsgrecruitment.edcil.co.in/login",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0044",
         "updatedAt": "2026-05-25",
