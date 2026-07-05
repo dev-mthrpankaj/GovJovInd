@@ -784,7 +784,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2434-upsssc-lower-pcs-2026.html",
         "updatedAt": "2026-06-21",
