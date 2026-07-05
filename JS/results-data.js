@@ -53,6 +53,28 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "yes"
     },
     {
+        "id": "result-sheet-0005",
+        "title": "UP PGT 2026 Exam Result",
+        "organization": "UP Secondary Education Service Selection Board",
+        "department": "UPESSB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-02",
+        "status": "released",
+        "tags": [
+            "UPESSB",
+            "UP PGT",
+            "Exam Result"
+        ],
+        "resultLink": "https://upessc.up.gov.in/Notice/8e4d-55eb-4d63-0c61-355f.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-07-05",
+        "telegramStatus": "draft",
+        "telegramReady": "no",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0007",
         "title": "IB ACIO Gr-II Executive Final Result 2026 – Out",
         "organization": "Intelligence Bureau",
@@ -819,28 +841,6 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "result-sheet-0005",
-        "title": "UP PGT 2026 Exam Result",
-        "organization": "UP Secondary Education Service Selection Board",
-        "department": "UPESSB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-02",
-        "status": "released",
-        "tags": [
-            "UPESSB",
-            "UP PGT",
-            "Exam Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-02",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
