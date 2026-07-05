@@ -365,7 +365,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
-        "officialNotification": "",
+        "officialNotification": "https://www.sarkariresult.com/upload/sarkariresult.com_UPSSSC_09Exam_2026_Notification.pdf",
         "detailPage": "../Job_Details/HTML/1009-UPSSSC-Vidhan-Bhawan-Rakshak-Fire-Guard-2026.html",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",
@@ -454,7 +454,7 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://nael.reg.org.in/index",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1009-NAeL-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-06-28",
