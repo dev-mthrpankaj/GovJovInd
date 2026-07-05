@@ -1477,7 +1477,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "",
-        "officialNotification": "",
+        "officialNotification": "https://cdnbbsr.s3waas.gov.in/s388a839f2f6f1427879fc33ee4acf4f66/uploads/2026/06/202606011285584131.pdf",
         "detailPage": "../Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
@@ -1536,7 +1536,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://bpsconline.bihar.gov.in/candidate/login",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html",
         "updatedAt": "2026-05-31",
@@ -1566,8 +1566,8 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "http://externalexam.bsnl.co.in/",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/05/Examination-notification-DR-JTOT.pdf",
         "detailPage": "../Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
