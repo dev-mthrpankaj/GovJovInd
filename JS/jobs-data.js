@@ -2406,8 +2406,8 @@ window.GovJobUpdatesJobs = [
             "Banking Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ibpsreg.ibps.in/licjamar26/",
+        "officialNotification": "https://cdn.lichousing.com/2026/04/Detailed-Advertisement-Recruitment-of-Junior-Assistants-2026.pdf",
         "detailPage": "../Job_Details/HTML/1205-LIC-HFL-Junior-Assistant-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2436,8 +2436,8 @@ window.GovJobUpdatesJobs = [
             "Police Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://apply-bpssc.com/bpssc_havr_clerk_5_26_v1/applicationIndex",
+        "officialNotification": "https://bpssc.bihar.gov.in/Notices/Advt.%20no.-05-2026.pdf",
         "detailPage": "../Job_Details/HTML/1204-BPSSC-Adhinayak-Anudeshak-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
