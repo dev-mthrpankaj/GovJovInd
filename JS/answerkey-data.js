@@ -107,7 +107,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-06-21",
         "releaseDate": "2026-06-27",
         "objectionLastDate": "2026-07-05",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [
             "RRB",
             "NTPC",
