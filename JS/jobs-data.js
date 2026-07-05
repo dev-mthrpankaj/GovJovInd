@@ -724,8 +724,8 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://beml.registrationform.in/secuRegister_10Of2o26VEr23/",
+        "officialNotification": "https://bemlindia.in/wp-content/plugins/career/WCP/DATA//Writereaddata/Career/KP_S_10_2026Tenurebased.pdf",
         "detailPage": "../Job_Details/HTML/1010-BEML-Operator-Tenure-Basis-Recruitment-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
@@ -754,8 +754,8 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://recruitment.neepco-spark.co.in/",
+        "officialNotification": "https://neepco.co.in/neepco/sites/default/files/2026-06/detailed_advertisement_english_ftb_as_on_22-06-2026.pdf",
         "detailPage": "../Job_Details/HTML/1009-NEEPCO-Executive-FTB-Recruitment-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
