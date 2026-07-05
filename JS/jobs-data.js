@@ -1116,8 +1116,8 @@ window.GovJobUpdatesJobs = [
             "Police Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://apply-bpssc.com/bpssc_asi_tech_7_26_v1/applicationIndex",
+        "officialNotification": "https://bpssc.bihar.gov.in/Notices/Final%20Advt.-%2007-2026.pdf",
         "detailPage": "../Job_Details/HTML/2449-BPSSC-Bihar-Police-ASI-Technical-2026.html",
         "updatedAt": "2026-06-15",
         "telegramStatus": "ready",
@@ -1146,7 +1146,7 @@ window.GovJobUpdatesJobs = [
             "Medical Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://www.aiimsexams.ac.in/advertisement/6a2cdd89be81945a8330d450",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2448-AIIMS-CRE-5-Recruitment-2026.html",
         "updatedAt": "2026-06-14",
