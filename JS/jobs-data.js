@@ -1776,8 +1776,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
+        "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0039",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
@@ -1867,7 +1867,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://sso.rajasthan.gov.in/",
-        "officialNotification": "",
+        "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0038",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
