@@ -1507,7 +1507,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "http://jssc.nic.in/",
-        "officialNotification": "",
+        "officialNotification": "https://jssc.jharkhand.gov.in/sites/default/files/JTGLCCE-2026%20Brochure%20(Regular%20Vacancy).pdf",
         "detailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
@@ -2107,7 +2107,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://sso.rajasthan.gov.in/",
-        "officialNotification": "",
+        "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1777546753.pdf",
         "detailPage": "../Job_Details/HTML/2386-Rajasthan RSSB Teaching Associate Online Form 2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
