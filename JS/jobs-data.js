@@ -635,7 +635,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://ssc.gov.in/",
-        "officialNotification": "",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0036",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
@@ -1986,7 +1986,7 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://www.upsc.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0034",
         "updatedAt": "2026-05-20",
@@ -2016,8 +2016,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://upsconline.nic.in/",
+        "officialNotification": "https://www.upsc.gov.in/",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0035",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
