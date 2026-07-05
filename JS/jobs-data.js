@@ -275,7 +275,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://nats.education.gov.in/student_type.php",
-        "officialNotification": "",
+        "officialNotification": "https://iocl.com/admin/img/Apprenticeships/Files/f309a3042f3b4986a3352c4dfd7d8d4d.pdf",
         "detailPage": "../Job_Details/HTML/1020-IOCL-Mathura-Refinery-Apprentice-2026.html",
         "updatedAt": "2026-06-30",
         "telegramStatus": "ready",
