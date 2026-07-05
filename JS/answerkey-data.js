@@ -87,7 +87,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Home Guard",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://www-hgupexam2025-com.translate.goog/hg2025questionobjections/Login.aspx?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=hi&_x_tr_pto=tc",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
         "updatedAt": "2026-06-28",
@@ -114,8 +114,8 @@ window.GovJobUpdatesAnswerKeys = [
             "Undergraduate",
             "Answer Key"
         ],
-        "downloadLink": "",
-        "objectionLink": "",
+        "downloadLink": "https://digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
+        "objectionLink": "https://digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
         "detailPage": "../AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html",
         "updatedAt": "2026-06-28",
         "telegramStatus": "ready",
