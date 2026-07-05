@@ -762,7 +762,7 @@ window.GovJobUpdatesAdmitCards = [
             "Constable",
             "Operator"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://apply-csbc.com/csbc_2_2026_weadmitcards/applicationIndex",
         "detailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
         "updatedAt": "2026-06-15",
         "telegramStatus": "ready",
@@ -810,7 +810,7 @@ window.GovJobUpdatesAdmitCards = [
             "Senior Executive Trainee",
             "Telecom"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://ibtexamination.com/secuAdmitcard/bsnlAdmitcard03/",
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
@@ -834,7 +834,7 @@ window.GovJobUpdatesAdmitCards = [
             "Defence",
             "Agniveer"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
         "detailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
