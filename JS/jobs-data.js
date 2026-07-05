@@ -2196,8 +2196,8 @@ window.GovJobUpdatesJobs = [
             "Health Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
+        "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Health_Nursing_2026RuleBook02_04_2026.pdf",
         "detailPage": "../Job_Details/HTML/1011-MPESB-Nursing-Officer-Sister-Tutor-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
