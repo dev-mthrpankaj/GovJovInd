@@ -936,8 +936,8 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://sewayojan.up.nic.in/IEP/Login.aspx",
+        "officialNotification": "https://uat.onlineupsrtc.co.in/#/home",
         "detailPage": "../Job_Details/HTML/1010-UP-Parivahan-Outsourcing-Driver-Recruitment-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
