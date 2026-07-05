@@ -334,8 +334,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://www.rrbapply.gov.in/#/auth/landing",
+        "officialNotification": "https://www.rrbthiruvananthapuram.gov.in/assets/pdf/Detailed_CEN_02_20262.pdf",
         "detailPage": "../Job_Details/HTML/1021-RRB-Technician-CEN-02-2026.html",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",

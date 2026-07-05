@@ -927,7 +927,7 @@ window.GovJobUpdatesAdmitCards = [
             "GD Constable",
             "Admit Card"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://ssc.gov.in/login",
         "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "draft",
@@ -977,7 +977,7 @@ window.GovJobUpdatesAdmitCards = [
             "lekhpal",
             "uttar pradesh"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html",
         "updatedAt": "2026-05-16",
         "telegramStatus": "ready",
