@@ -743,12 +743,12 @@ window.GovJobUpdatesResults = [
             "Upper Primary Teacher"
         ],
         "resultLink": "https://rssb.rajasthan.gov.in/results",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0006",
@@ -812,12 +812,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98076/login.html",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
         "updatedAt": "2026-05-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0004",
