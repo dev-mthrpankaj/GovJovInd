@@ -2137,7 +2137,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://recruitment.crpf.gov.in/login",
-        "officialNotification": "",
+        "officialNotification": "https://rect.crpf.gov.in/Upload/Recruitment/Recruitment%20Notice%20103042026-720.pdf",
         "detailPage": "../Job_Details/HTML/1013-CRPF-Constable-Tradesman-Pioneer-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2166,8 +2166,8 @@ window.GovJobUpdatesJobs = [
             "Railway Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
+        "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
         "detailPage": "../Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
