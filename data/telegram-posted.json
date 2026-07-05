@@ -1895,6 +1895,34 @@
       "title": "UKSSSC Group C Driver Admit Card 2026",
       "lastPostedAt": "2026-07-05T09:17:34.861Z",
       "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0010": {
+      "updatedAt": "2026-05-25",
+      "hash": "2081f34c6fd732043f8f51196adf8bdfe356fbf2f5e9ab23713b8538f223a525",
+      "title": "MPESB Van Rakshak, Jail Prahari Admit Card 2026 for 1679 Post",
+      "lastPostedAt": "2026-07-05T09:19:23.775Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0011": {
+      "updatedAt": "2026-05-25",
+      "hash": "e83c50a4d35f75e94989c1de6d734e8139986992e3ea060ca01090ed119f591d",
+      "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
+      "lastPostedAt": "2026-07-05T09:19:24.559Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0006": {
+      "updatedAt": "2026-05-18",
+      "hash": "43a6b699d549c7bf3f80994851d81fefb8399461a53bdc78eae591d3e06de962",
+      "title": "UPSC Civil Services IAS IFS Admit Card 2026",
+      "lastPostedAt": "2026-07-05T09:19:25.125Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0005": {
+      "updatedAt": "2026-05-16",
+      "hash": "138f7f3b2ed458cd364fa71fb131edb6a567101d52e6dda5def863e7740b6826",
+      "title": "Uttar Pradesh Lekhpal Admit Card 2026",
+      "lastPostedAt": "2026-07-05T09:19:25.793Z",
+      "stateReason": "new"
     }
   },
   "answerKeys": {
@@ -2288,6 +2316,48 @@
       "hash": "c61a515fd2c0f86f8317aaa6a0af1fa5b2fd59cb6ee439f25cfaa71793f4301f",
       "title": "UPSSSC Various Post UP Pollution Answer Key 2026 for 115 Post",
       "lastPostedAt": "2026-07-04T09:52:16.425Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0025": {
+      "updatedAt": "2026-07-03",
+      "hash": "c8d3b58ebb6ac734a9d0a99942cd3d64698ed5456ba3ddfee1c1c61c713f0a6c",
+      "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
+      "lastPostedAt": "2026-07-05T09:19:26.378Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0026": {
+      "updatedAt": "2026-07-03",
+      "hash": "cf701a1129b4172df69d7c9258fe7acf133f344a02057a9eaa672c16df832902",
+      "title": "UPSSSC Various Post UP Pollution Answer Key 2026 for 115 Post",
+      "lastPostedAt": "2026-07-05T09:19:29.970Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0027": {
+      "updatedAt": "2026-07-03",
+      "hash": "cde9d08dfa3c7e391ba81d30b46874d81850fae8aba103263d9c0c4f49e1b5fc",
+      "title": "UPSSSC BCG Technician Answer Key 2026 for 255 Post",
+      "lastPostedAt": "2026-07-05T09:19:30.387Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0023": {
+      "updatedAt": "2026-06-28",
+      "hash": "ff92f6f607fc29bcc154c7d947c0aa7148cf644430b07603523a29932448deb3",
+      "title": "UP Police Home Guard Final Answer Key 2026",
+      "lastPostedAt": "2026-07-05T09:19:30.806Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0024": {
+      "updatedAt": "2026-06-28",
+      "hash": "5b6809eaf8fd445fdcd8543e85bcadca2228a61730472452ec7ae4eb2731d83f",
+      "title": "Railway RRB NTPC 10+2 Level UG Answer Key 2026",
+      "lastPostedAt": "2026-07-05T09:19:31.190Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0022": {
+      "updatedAt": "2026-06-24",
+      "hash": "e1843bbb4fbc6b6ac007fbc3219413e3322194f17455a7331e2f4fb50c61a09f",
+      "title": "UPSC ISS Answer Key 2026 for 44 Post",
+      "lastPostedAt": "2026-07-05T09:19:31.625Z",
       "stateReason": "new"
     }
   },
