@@ -4,28 +4,6 @@
 
 window.GovJobUpdatesResults = [
     {
-        "id": "result-sheet-0018",
-        "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
-        "organization": "Rajasthan Rajya Vidyut Utpadan Nigam Ltd. (RVUN)",
-        "department": "RVUN",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-22",
-        "status": "released",
-        "tags": [
-            "RVUNL",
-            "Technician",
-            "Final Result"
-        ],
-        "resultLink": "https://energy.rajasthan.gov.in/rrvun/#/pages/sm/department-page/373376/2700",
-        "detailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
-        "updatedAt": "2026-07-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0042",
         "title": "HPSC PGT Computer Science Result 2026 for 1672 Post",
         "organization": "Haryana Public Service Commission",
@@ -542,6 +520,28 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/03DisplaySheet_22062026.pdf",
         "detailPage": "../Result_Details/HTML/3006-RBI-Office-Attendant-Result-2026.html",
+        "updatedAt": "2026-06-22",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0018",
+        "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
+        "organization": "Rajasthan Rajya Vidyut Utpadan Nigam Ltd. (RVUN)",
+        "department": "RVUN",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-22",
+        "status": "released",
+        "tags": [
+            "RVUNL",
+            "Technician",
+            "Final Result"
+        ],
+        "resultLink": "https://energy.rajasthan.gov.in/rrvun/#/pages/sm/department-page/373376/2700",
+        "detailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
