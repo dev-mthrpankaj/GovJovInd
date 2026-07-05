@@ -1626,7 +1626,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
@@ -1656,7 +1656,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html",
         "updatedAt": "2026-05-28",
@@ -1686,7 +1686,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0041",
         "updatedAt": "2026-05-25",
@@ -1866,7 +1866,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0038",
         "updatedAt": "2026-05-23",
@@ -2706,7 +2706,7 @@ window.GovJobUpdatesJobs = [
             "Staff Selection Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://ssc.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1009-SSC-Stenographer-Grade-C-and-D-2026.html",
         "updatedAt": "2026-05-01",
@@ -2736,7 +2736,7 @@ window.GovJobUpdatesJobs = [
             "Staff Selection Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://ssc.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1009-SSC-Phase-XIV-Selection-Posts-2026.html",
         "updatedAt": "2026-05-01",
@@ -2766,7 +2766,7 @@ window.GovJobUpdatesJobs = [
             "Staff Selection Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://ssc.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1009-SSC-Combined-Hindi-Translators-2026.html",
         "updatedAt": "2026-05-01",
