@@ -248,7 +248,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Tier II",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://ssc.gov.in/login",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/13059-SSC-CGL-Tier-2-Final-Answer-Key-2025.html",
         "updatedAt": "2026-06-18",
@@ -456,7 +456,7 @@ window.GovJobUpdatesAnswerKeys = [
             "GDC",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Status/ViewAnswerKey.aspx?ID=5",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html",
         "updatedAt": "2026-06-04",
