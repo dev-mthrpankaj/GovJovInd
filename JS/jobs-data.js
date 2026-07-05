@@ -1716,7 +1716,7 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://ibpsreg.ibps.in/nalconeapr26/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0043",
         "updatedAt": "2026-05-25",
@@ -1896,8 +1896,8 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://cdn3.digialm.com/EForms/configuredHtml/32046/96555/Registration.html",
+        "officialNotification": "https://sarkariresult.com.im/wp-content/uploads/2026/05/Haryana-High-Court-Clerk-Official-Notification.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0042",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
