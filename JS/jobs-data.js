@@ -2826,7 +2826,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2412-UPSSSC-ASO-ARO-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
@@ -2886,7 +2886,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?ss2XKF/cntZMY/QS8H1aTFqt7TVl91dOlzlMwUgIiWk=",
         "detailPage": "../Job_Details/HTML/2414-UPSSSC-Forest-Guard-2026.html",
         "updatedAt": "2026-05-01",
