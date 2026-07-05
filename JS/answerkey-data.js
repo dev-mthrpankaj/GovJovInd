@@ -167,7 +167,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Head Constable Ministerial",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://ssc.gov.in/home/answer-key",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
@@ -194,8 +194,8 @@ window.GovJobUpdatesAnswerKeys = [
             "Jail Prahari",
             "Answer Key"
         ],
-        "downloadLink": "",
-        "objectionLink": "",
+        "downloadLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
+        "objectionLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
         "detailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
