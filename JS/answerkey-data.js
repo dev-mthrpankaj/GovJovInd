@@ -509,7 +509,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Lekhpal",
             "Revenue"
         ],
-        "downloadLink": "https://upsssc.gov.in/ViewPdf.aspx?0q6A8m+HIAlvBl/v8Jv0tfm512CaNg8bLFb6CBH9Rvw=",
+        "downloadLink": "https://drive.google.com/file/d/13w6WvB7OLcx1l0Clntsv3DPqIfXGwnyR/view",
         "objectionLink": "#",
         "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-27",

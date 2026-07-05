@@ -595,7 +595,7 @@ window.GovJobUpdatesAdmitCards = [
             "PGCIL",
             "Non Executive"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101292/login.html",
         "detailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
