@@ -574,8 +574,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
+        "officialNotification": "https://www.joinindiannavy.gov.in/files/SSC_Notification_for_ADV_Jun_27.pdf",
         "detailPage": "../Job_Details/HTML/1010-Indian-Navy-SSC-Officer-Jun-2027.html",
         "updatedAt": "2026-06-25",
         "telegramStatus": "ready",
