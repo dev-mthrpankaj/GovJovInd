@@ -2467,7 +2467,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
-        "officialNotification": "",
+        "officialNotification": "https://www.unionbankofindia.bank.in/pdf/notification-final-1865-april26.pdf",
         "detailPage": "../Job_Details/HTML/1203-Union-Bank-Apprentice-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2496,7 +2496,7 @@ window.GovJobUpdatesJobs = [
             "Teaching Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://uptet.upessc.org/otr/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1202-UPTET-2026.html",
         "updatedAt": "2026-05-01",
