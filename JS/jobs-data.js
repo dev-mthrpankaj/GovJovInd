@@ -1417,7 +1417,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://dsssbonline.nic.in/",
-        "officialNotification": "",
+        "officialNotification": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/final_advt-03-2026_1.pdf",
         "detailPage": "../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
@@ -1446,7 +1446,7 @@ window.GovJobUpdatesJobs = [
             "StateGovernment Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "http://upsssc.gov.in//ViewPdf.aspx?YZU401HhdRlnlrDYvh3AOvDVEFsrgFoVeB0byWs3ePs=",
         "detailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
         "updatedAt": "2026-06-02",
