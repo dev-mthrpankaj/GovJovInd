@@ -2526,8 +2526,8 @@ window.GovJobUpdatesJobs = [
             "Education Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://cetbed-ucanapply-com.translate.goog/univer/public/secure?app_id=UElZMDAwMDEwMA%3D%3D&_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=hi&_x_tr_pto=tc",
+        "officialNotification": "https://d1fij890xi0cmd.cloudfront.net/ums/cetbed-brabu/2026/notices/1777289328_prospectus-cet-bed2026.pdf",
         "detailPage": "../Job_Details/HTML/1201-Bihar-BEd-CET-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2556,8 +2556,8 @@ window.GovJobUpdatesJobs = [
             "Banking Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ibpsreg.ibps.in/rbisbmar26/",
+        "officialNotification": "https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DEPR29042026BE94DEA85E3C4753A82B191EB6A795ED.PDF",
         "detailPage": "../Job_Details/HTML/1211-RBI-Officer-Grade-B-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
