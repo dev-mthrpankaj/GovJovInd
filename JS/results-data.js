@@ -742,7 +742,7 @@ window.GovJobUpdatesResults = [
             "REET",
             "Upper Primary Teacher"
         ],
-        "resultLink": "https://esb.mp.gov.in/results/RESULT_26/PAT_RES26/default_Results.htm",
+        "resultLink": "https://rssb.rajasthan.gov.in/results",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",

@@ -605,7 +605,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://uppsc.up.nic.in/CandidatePages/Notifications.aspx",
-        "officialNotification": "",
+        "officialNotification": "https://uppsc.up.nic.in/OuterPages/View_Enclosure.aspx?ID=114&flag=E&FID=929",
         "detailPage": "../Job_Details/HTML/1009-UPPSC-PCS-Recruitment-2026.html",
         "updatedAt": "2026-06-25",
         "telegramStatus": "ready",
