@@ -2586,7 +2586,7 @@ window.GovJobUpdatesJobs = [
             "Teaching Jobs",
             "Govt Jobs 2025"
         ],
-        "applyLink": "",
+        "applyLink": "https://bed.upessc.org/otr/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1210-UPESSC-Aided-School-Teacher-2025.html",
         "updatedAt": "2026-05-01",
@@ -2616,8 +2616,8 @@ window.GovJobUpdatesJobs = [
             "State PSC Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/PO26/Declaration.aspx",
+        "officialNotification": "https://mppsc.mp.gov.in/uploads/advertisement/Advt_ADPO_Exam_2026_Dated_10_03_2026.pdf",
         "detailPage": "../Job_Details/HTML/1209-MPPSC-ADPO-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2646,7 +2646,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1208-UPSSSC-PET-Based-Main-Exam-2026.html",
         "updatedAt": "2026-05-01",
