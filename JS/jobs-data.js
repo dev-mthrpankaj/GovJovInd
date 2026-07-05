@@ -455,7 +455,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://nael.reg.org.in/index",
-        "officialNotification": "",
+        "officialNotification": "https://www.nael.co.in/sites/default/files/Detailed%20Notification%20for%20Advertisement.pdf",
         "detailPage": "../Job_Details/HTML/1009-NAeL-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-06-28",
         "telegramStatus": "ready",
