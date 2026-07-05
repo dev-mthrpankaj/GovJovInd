@@ -2316,7 +2316,7 @@ window.GovJobUpdatesJobs = [
             "Judiciary Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://phc-recruitment.com/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1015-Patna-High-Court-Technical-Assistant-2026.html",
         "updatedAt": "2026-05-01",
@@ -2346,8 +2346,8 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://www.npcilcareers.co.in/ETHQ10042026/candidate/default.aspx",
+        "officialNotification": "https://www.npcilcareers.co.in/ETHQ10042026/documents/advt.pdf",
         "detailPage": "../Job_Details/HTML/1014-NPCIL-Executive-Trainee-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
