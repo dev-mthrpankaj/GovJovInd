@@ -788,12 +788,12 @@ window.GovJobUpdatesResults = [
             "Final Result"
         ],
         "resultLink": "https://doc.sarkariresults.org.in/IBACIO2025_FinalResult_SarkariResult_Com.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/IB-ACIO-II-Exe-Final-Result-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0003",
@@ -837,12 +837,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98138/login.html",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
         "updatedAt": "2026-05-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0005",
