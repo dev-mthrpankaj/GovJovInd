@@ -514,8 +514,8 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://aaiclas.aero/career",
+        "officialNotification": "https://www.aaiclas.aero/uploads/career/AAICLAS8231778658325.pdf",
         "detailPage": "../Job_Details/HTML/1010-AAICLAS-Assistant-Security-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -545,7 +545,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://apply-bpssc.com/bpssc_cor_8_2026/applicationIndex",
-        "officialNotification": "",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/06/BPSSC-Bihar-Home-Guard-Company-Commander-Recruitment-2026-Notification.pdf",
         "detailPage": "../Job_Details/HTML/1009-CGPSC-Subedar-SI-Platoon-Commander-Prelims-Exam-Date-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
