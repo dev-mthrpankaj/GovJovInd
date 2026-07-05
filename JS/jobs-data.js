@@ -394,7 +394,7 @@ window.GovJobUpdatesJobs = [
             "NTPC Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://careers.ntpc.co.in/recruitment/login.php",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html",
         "updatedAt": "2026-06-29",
