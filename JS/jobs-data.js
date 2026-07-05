@@ -1326,8 +1326,8 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "http://ukssscrecruitment.in",
+        "officialNotification": "http://ukssscrecruitment.in/PDF_Documents/Adv_77.pdf",
         "detailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
@@ -1447,7 +1447,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "",
-        "officialNotification": "",
+        "officialNotification": "http://upsssc.gov.in//ViewPdf.aspx?YZU401HhdRlnlrDYvh3AOvDVEFsrgFoVeB0byWs3ePs=",
         "detailPage": "../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html",
         "updatedAt": "2026-06-02",
         "telegramStatus": "ready",
@@ -1506,7 +1506,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "http://jssc.nic.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html",
         "updatedAt": "2026-06-01",
