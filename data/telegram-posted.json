@@ -1172,6 +1172,13 @@
       "title": "UPSRTC UP Bus Conductor Online Form 2026",
       "lastPostedAt": "2026-07-05T12:07:28.975Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0075": {
+      "updatedAt": "2026-06-20",
+      "hash": "7fca08a55fe012101017007494042bdcb447dee8e9422fe42e80d816600996b0",
+      "title": "CERSAI Manager Online Form 2026",
+      "lastPostedAt": "2026-07-05T12:09:37.310Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
