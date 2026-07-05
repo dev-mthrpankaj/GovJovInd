@@ -526,7 +526,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPSSSC",
             "UP Pollution"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -549,7 +549,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPSSSC",
             "Pharmacist"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
@@ -572,7 +572,7 @@ window.GovJobUpdatesAdmitCards = [
             "UPSSSC",
             "BCG Technician"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
         "detailPage": "../AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
