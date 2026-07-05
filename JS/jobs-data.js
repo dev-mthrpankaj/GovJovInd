@@ -1596,8 +1596,8 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://bsnlregistration.ibtexamination.com/",
+        "officialNotification": "https://bsnl.co.in/documents/jobs/SET_Notification_29012026.pdf",
         "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
         "updatedAt": "2026-05-30",
         "telegramStatus": "ready",
@@ -2376,7 +2376,7 @@ window.GovJobUpdatesJobs = [
             "Health Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://admissions.nic.in/Bihar/Applicant/Root/OTHome.aspx?enc=k5U5Gp8NR6abhZ8Lld4oWvvSsCkKcG+Kcizck0pVdCvJE10jNAB9fCwdCq9SngLzv5wfQK8DbPTS5JsnelmH5g==",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1206-BCECEB-Senior-Resident-Tutor-2026.html",
         "updatedAt": "2026-05-01",
