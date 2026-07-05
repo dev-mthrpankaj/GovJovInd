@@ -301,7 +301,7 @@ window.GovJobUpdatesAnswerKeys = [
             "AWO TPO",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://ssc.gov.in/home/answer-key",
         "objectionLink": "",
         "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
         "updatedAt": "2026-06-16",
@@ -327,7 +327,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Lab Assistant",
             "Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://rssb.rajasthan.gov.in/answerkeys",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html",
         "updatedAt": "2026-06-16",
@@ -379,7 +379,7 @@ window.GovJobUpdatesAnswerKeys = [
             "Junior Assistant",
             "Revised Answer Key"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upsssc.gov.in//ViewPdf.aspx?Th5pjtpsOqjEsS8JwaHQwIv7OWMDoSsFY1/GMj346y4=",
         "objectionLink": "",
         "detailPage": "../AnswerKey_Details/HTML/UPSSSC-Junior-Assistant-Revised-Answer-Key-2026.html",
         "updatedAt": "2026-06-15",
