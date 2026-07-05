@@ -1687,7 +1687,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://sso.rajasthan.gov.in/",
-        "officialNotification": "",
+        "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0041",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
@@ -1806,8 +1806,8 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/03/ViewPdf-2.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0040",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
