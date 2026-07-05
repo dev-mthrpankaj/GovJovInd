@@ -364,7 +364,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1009-UPSSSC-Vidhan-Bhawan-Rakshak-Fire-Guard-2026.html",
         "updatedAt": "2026-06-29",
@@ -395,7 +395,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/login.php",
-        "officialNotification": "",
+        "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=Yy9lZEVxaENxT2ZINzROdmRUUkJlTzRRMlZkaFhtOVcyWXpLdXJYVW9WZXJNSVJibFVzaURGaFdSNlRvV2I4Z1hGTW5uUFcwM3BNM1c5bUlyWkM1blByclJLdGowbHYyeHpaSzFlK0xlejQ9OjpVL1BjTTF6R21hRXNCV0I1NnhBSit3PT0%3D",
         "detailPage": "../Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",
