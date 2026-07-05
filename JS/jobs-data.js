@@ -424,7 +424,7 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/96897/Registration.html",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1010-ISRO-ISTRAC-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-06-28",
@@ -634,7 +634,7 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://ssc.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0036",
         "updatedAt": "2026-06-23",
@@ -2916,7 +2916,7 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2025"
         ],
-        "applyLink": "",
+        "applyLink": "https://ssc.gov.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
         "updatedAt": "2025-09-29",
