@@ -996,8 +996,8 @@ window.GovJobUpdatesJobs = [
             "Banking Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ibpsreg.ibps.in/sbipojun26/",
+        "officialNotification": "https://sbi.bank.in/csfile/18062026_1_Detailed_Adv.2026.pdf?t=1781759726353",
         "detailPage": "../Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
