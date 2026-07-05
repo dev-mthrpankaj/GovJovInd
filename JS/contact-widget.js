@@ -2,9 +2,9 @@
   "use strict";
 
   const CONTACT_EMAIL = "dmagstudio2023@outlook.com";
-  const CONTACT_CALL_NUMBERS = [
-    { label: "8859525665", href: "tel:+918859525665" },
-    { label: "7300627752", href: "tel:+917300627752" }
+  const CONTACT_WHATSAPP_LINKS = [
+    { label: "Contact us on WhatsApp", href: "https://wa.me/918859525665" },
+    { label: "Alternate WhatsApp support", href: "https://wa.me/917300627752" }
   ];
   const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
   const CONTACT_MESSAGES = {
@@ -44,7 +44,7 @@
       @keyframes gjuContactSheetIn{from{transform:translateY(18px);opacity:.72}to{transform:translateY(0);opacity:1}}
     `;
     style.textContent += `
-      .gju-contact-call-pills{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 0;background:#fff}.gju-contact-call-pills a{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 11px;border:1px solid #bfdbfe;border-radius:999px;background:#eff6ff;color:#1d4ed8;text-decoration:none;font-size:.82rem;font-weight:900;line-height:1;box-shadow:0 8px 18px rgba(37,99,235,.08)}.gju-contact-call-pills a:hover{background:#dbeafe;border-color:#93c5fd}.gju-contact-call-pills i{font-size:.78rem}@media(max-width:640px){.gju-contact-call-pills{padding:10px 16px 0}.gju-contact-call-pills a{min-height:32px;font-size:.78rem;padding:0 10px}}
+      .gju-contact-whatsapp-pills{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 0;background:#fff}.gju-contact-whatsapp-pills a{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 12px;border:1px solid #bbf7d0;border-radius:999px;background:#f0fdf4;color:#15803d;text-decoration:none;font-size:.82rem;font-weight:900;line-height:1;box-shadow:0 8px 18px rgba(22,163,74,.08)}.gju-contact-whatsapp-pills a:hover{background:#dcfce7;border-color:#86efac}.gju-contact-whatsapp-pills i{font-size:.82rem}@media(max-width:640px){.gju-contact-whatsapp-pills{padding:10px 16px 0}.gju-contact-whatsapp-pills a{min-height:32px;font-size:.78rem;padding:0 10px}}
     `;
     document.head.appendChild(style);
   }
@@ -109,7 +109,7 @@
       <div class="gju-contact-panel" id="gjuContactPanel" role="dialog" aria-modal="true" aria-labelledby="gjuContactTitle">
         <article class="gju-contact-card">
           <div class="gju-contact-head"><div><span class="gju-contact-kicker">Help & Support</span><h2 id="gjuContactTitle">Contact GovJobUpdates</h2><p>Send your issue, correction, or request directly to support.</p></div><button class="gju-contact-close" type="button" id="gjuContactClose" aria-label="Close contact form"><i class="fas fa-times" aria-hidden="true"></i></button></div>
-          <div class="gju-contact-call-pills" aria-label="Call support">${CONTACT_CALL_NUMBERS.map((number) => `<a href="${number.href}" aria-label="Call ${number.label}"><i class="fas fa-phone" aria-hidden="true"></i>${number.label}</a>`).join("")}</div>
+          <div class="gju-contact-whatsapp-pills" aria-label="WhatsApp support">${CONTACT_WHATSAPP_LINKS.map((item) => `<a href="${item.href}" target="_blank" rel="noopener" aria-label="${item.label}"><i class="fab fa-whatsapp" aria-hidden="true"></i>${item.label}</a>`).join("")}</div>
           <form class="gju-contact-form" id="gjuContactForm">
             <input type="text" name="_honey" class="gju-contact-honeypot" tabindex="-1" autocomplete="off">
             <input type="hidden" name="Website Page" id="gjuContactPage" value="${escapeHtml(getPageLabel())}">
