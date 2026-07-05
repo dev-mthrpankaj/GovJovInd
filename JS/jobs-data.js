@@ -1926,8 +1926,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
+        "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0033",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
@@ -1987,7 +1987,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://www.upsc.gov.in/",
-        "officialNotification": "",
+        "officialNotification": "https://www.upsc.gov.in/",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0034",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
@@ -2076,7 +2076,7 @@ window.GovJobUpdatesJobs = [
             "Public Sector Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://careers.ntpc.co.in/recruitment/login.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
         "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0031",
         "updatedAt": "2026-05-07",
