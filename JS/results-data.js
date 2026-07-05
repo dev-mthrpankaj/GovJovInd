@@ -302,30 +302,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0028",
-        "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
-        "organization": "MHA Intelligence Bureau IB",
-        "department": "MHA IB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-29",
-        "status": "released",
-        "tags": [
-            "MHA",
-            "IB",
-            "JIO",
-            "Junior Intelligence Officer",
-            "Final Result"
-        ],
-        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2024/11/mhaibjio2025_finalresult.pdf",
-        "detailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
-        "updatedAt": "2026-07-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0042",
         "title": "HPSC PGT Computer Science Result 2026 for 1672 Post",
         "organization": "Haryana Public Service Commission",
@@ -428,6 +404,30 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://upsssc.gov.in/ResultsDire.aspx",
         "detailPage": "../Result_Details/HTML/3010-UPSSSC-Technical-Assistant-Group-C-Eligibility-Result-2026.html",
         "updatedAt": "2026-07-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0028",
+        "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
+        "organization": "MHA Intelligence Bureau IB",
+        "department": "MHA IB",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-29",
+        "status": "released",
+        "tags": [
+            "MHA",
+            "IB",
+            "JIO",
+            "Junior Intelligence Officer",
+            "Final Result"
+        ],
+        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2024/11/mhaibjio2025_finalresult.pdf",
+        "detailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
+        "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
