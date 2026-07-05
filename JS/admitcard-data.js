@@ -666,7 +666,7 @@ window.GovJobUpdatesAdmitCards = [
             "APO",
             "Mains"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q==",
         "detailPage": "../AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
@@ -689,7 +689,7 @@ window.GovJobUpdatesAdmitCards = [
             "Bank of Baroda",
             "Apprentice"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://bankofbaroda.bank.in/",
         "detailPage": "../AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
@@ -737,7 +737,7 @@ window.GovJobUpdatesAdmitCards = [
             "Constable",
             "Special Branch"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://apply-csbc.com/csbc_12026_weadmitcard/searchApplication",
         "detailPage": "../AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Admit-Card-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
