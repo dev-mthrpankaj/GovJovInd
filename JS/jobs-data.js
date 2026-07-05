@@ -1147,7 +1147,7 @@ window.GovJobUpdatesJobs = [
             "Govt Jobs 2026"
         ],
         "applyLink": "https://www.aiimsexams.ac.in/advertisement/6a2cdd89be81945a8330d450",
-        "officialNotification": "",
+        "officialNotification": "https://rrpdocuments.aiimsexams.ac.in/1781360803517-426450330.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVRUVRLXWMSLVSAP7%2F20260615%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260615T081036Z&X-Amz-Expires=18000&X-Amz-Signature=5cf2e0b5a0cb1322b7e18674e1ab70230bfad807cb62499bed76a74a83a80ad0&X-Amz-SignedHeaders=host&response-content-type=application%2Fpdf",
         "detailPage": "../Job_Details/HTML/2448-AIIMS-CRE-5-Recruitment-2026.html",
         "updatedAt": "2026-06-14",
         "telegramStatus": "ready",
@@ -1176,7 +1176,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://cetonline.karnataka.gov.in/kea/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2446-Karnataka-Police-Civil-Constable-2026.html",
         "updatedAt": "2026-06-11",
@@ -1206,7 +1206,7 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://cetonline.karnataka.gov.in/kea/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026.html",
         "updatedAt": "2026-06-11",
