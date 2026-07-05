@@ -941,6 +941,76 @@
       "title": "Indian Air Force Airmen Group Y Medical Assistant Online Form 2026 | Intake 02/2027",
       "lastPostedAt": "2026-07-03T16:49:11.734Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0021": {
+      "updatedAt": "2026-07-05",
+      "hash": "d6a18756a107ec71e4b92cb1850daf56e1001aa420fd5e4d2b47932839f30b46",
+      "title": "UP Anganwadi Worker Online Form 2026",
+      "lastPostedAt": "2026-07-05T08:18:02.236Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0098": {
+      "updatedAt": "2026-07-05",
+      "hash": "9eb38a46593de5cdc9e470d518a0f563ee236ceb1f015c4323ecef687c6625e7",
+      "title": "Rajasthan RSSB CET Graduate Level Online Form 2026",
+      "lastPostedAt": "2026-07-05T08:18:02.843Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0071": {
+      "updatedAt": "2026-07-04",
+      "hash": "d2b07bba3e9f0b71119c99bea8cae98a6f2abad3f04fd4427584d1ab7c6970a4",
+      "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
+      "lastPostedAt": "2026-07-05T08:18:03.252Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0096": {
+      "updatedAt": "2026-07-03",
+      "hash": "77e9ff6e62f3522fccf8fdb1b039c9d9f23a581303fccf04ebf19f6706f6190c",
+      "title": "MPESB Agriculture Extension Officer Online Form 2026 for 2784 Post",
+      "lastPostedAt": "2026-07-05T08:18:03.649Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0097": {
+      "updatedAt": "2026-07-03",
+      "hash": "759bc1c82a3a1b09fc36cd44b1cd2bb60bafd03591352a0651ee52b087e787f8",
+      "title": "ICSIL DEO, MTS, Driver Online Form 2026",
+      "lastPostedAt": "2026-07-05T08:18:04.045Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0065": {
+      "updatedAt": "2026-07-01",
+      "hash": "fa6cfc9f2afe5ff0736dd047dbfdf87ee2fcb2271c3503acef2c6a8d35e4ff2b",
+      "title": "NIACL Apprentice Online Form 2026 for 550 Post",
+      "lastPostedAt": "2026-07-05T08:18:07.627Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0093": {
+      "updatedAt": "2026-07-01",
+      "hash": "d3c598c10f13596b2627ae770f186c15687c4fb26a15186e9f781f87e04a12f4",
+      "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 6715 Post",
+      "lastPostedAt": "2026-07-05T08:18:08.047Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0094": {
+      "updatedAt": "2026-07-01",
+      "hash": "86e6a40003d80bd01836bf43df6dada4cbc46353e534ae9bac71e8e1bb62ddd7",
+      "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 745 Post",
+      "lastPostedAt": "2026-07-05T08:18:08.435Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0095": {
+      "updatedAt": "2026-07-01",
+      "hash": "ccbc12d42a081c9676a4b7ae097a026f2502fb353ed326003d7e2994ccd30f52",
+      "title": "Delhi High Court HJS Online Form 2026",
+      "lastPostedAt": "2026-07-05T08:18:08.860Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0092": {
+      "updatedAt": "2026-06-30",
+      "hash": "cb292975a8c7959e0e25dde26362bbcf290501703c014d578a7c85bd4d168caf",
+      "title": "JNU Non Teaching Post Online Form 2026 for 267 Post",
+      "lastPostedAt": "2026-07-05T08:18:09.339Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
