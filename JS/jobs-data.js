@@ -664,8 +664,8 @@ window.GovJobUpdatesJobs = [
             "State Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://online.ecgpsconline.in/",
+        "officialNotification": "https://psc.cg.gov.in/PDFs/advertisement/SAHAYAK_JILA_LOK_ABHIYOJAN_ADHIKARI-2026_ADVERTISEMENT%20(17-06-2026).pdf",
         "detailPage": "../Job_Details/HTML/1009-CGPSC-ADLPO-Recruitment-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
