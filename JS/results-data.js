@@ -4,30 +4,6 @@
 
 window.GovJobUpdatesResults = [
     {
-        "id": "result-sheet-0024",
-        "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-25",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Head Constable",
-            "AWO",
-            "TPO"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
-        "updatedAt": "2026-07-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0018",
         "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
         "organization": "Rajasthan Rajya Vidyut Utpadan Nigam Ltd. (RVUN)",
@@ -367,53 +343,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0028",
-        "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
-        "organization": "MHA Intelligence Bureau IB",
-        "department": "MHA IB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-29",
-        "status": "released",
-        "tags": [
-            "MHA",
-            "IB",
-            "JIO",
-            "Junior Intelligence Officer",
-            "Final Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html",
-        "updatedAt": "2026-06-30",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0027",
-        "title": "UP POLICE Home Guard Result of Written Exam 2026",
-        "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
-        "department": "UPPRPB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-28",
-        "status": "released",
-        "tags": [
-            "UPPRPB",
-            "UP Police",
-            "Home Guard",
-            "Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html",
-        "updatedAt": "2026-06-28",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0026",
         "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
         "organization": "UPSSSC Assistant",
@@ -461,52 +390,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0022",
-        "title": "SSC Delhi Police Constable Driver Additional Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-25",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Constable",
-            "Driver"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html",
-        "updatedAt": "2026-06-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0023",
-        "title": "SSC Delhi Police Head Constable Ministerial Additional Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-25",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Head Constable",
-            "Ministerial"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html",
-        "updatedAt": "2026-06-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0020",
         "title": "PNB LBO Local Bank Officer Final Result 2026 for 750 Post",
         "organization": "Punjab National Bank",
@@ -524,7 +407,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rojgarresult.com/wp-content/uploads/2026/06/pnb-lbo-final-result-26.pdf",
         "detailPage": "../Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html",
         "updatedAt": "2026-06-24",
-
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
@@ -599,6 +481,30 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0024",
+        "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-25",
+        "status": "released",
+        "tags": [
+            "SSC",
+            "Delhi Police",
+            "Head Constable",
+            "AWO",
+            "TPO"
+        ],
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
+        "detailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
+        "updatedAt": "2026-06-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0019",
         "title": "UPPSC Staff Nurse Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",
@@ -621,29 +527,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0020",
-        "title": "PNB LBO Local Bank Officer Final Result 2026 for 750 Post",
-        "organization": "Punjab National Bank",
-        "department": "Banking",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-23",
-        "status": "released",
-        "tags": [
-            "PNB",
-            "LBO",
-            "Local Bank Officer",
-            "Final Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html",
-        "updatedAt": "2026-06-23",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0017",
         "title": "RBI Office Attendant Result 2026 for 572 Post",
         "organization": "Reserve Bank of India",
@@ -659,28 +542,6 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/03DisplaySheet_22062026.pdf",
         "detailPage": "../Result_Details/HTML/3006-RBI-Office-Attendant-Result-2026.html",
-        "updatedAt": "2026-06-22",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0018",
-        "title": "Rajasthan RVUNL Technician Final Result 2026 for 2163 Post",
-        "organization": "Rajasthan Rajya Vidyut Utpadan Nigam Ltd. (RVUN)",
-        "department": "RVUN",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-22",
-        "status": "released",
-        "tags": [
-            "RVUNL",
-            "Technician",
-            "Final Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
@@ -728,28 +589,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://ssc.gov.in/home/candidate-result",
         "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html",
         "updatedAt": "2026-06-19",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0013",
-        "title": "SSC Stenographer 2025 Final Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-18",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Stenographer",
-            "Final Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html",
-        "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
@@ -825,26 +664,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0011",
-        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
-        "organization": "Border Security force",
-        "department": "BSF",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-09",
-        "status": "released",
-        "tags": [
-            "BSF"
-        ],
-        "resultLink": "",
-        "detailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
-        "updatedAt": "2026-06-10",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0010",
         "title": "SSC Delhi Police Head Constable (Ministerial) Result",
         "organization": "Staff Selection Commission",
@@ -901,7 +720,7 @@ window.GovJobUpdatesResults = [
             "Paper-II",
             "Result"
         ],
-        "resultLink": "",
+        "resultLink": "https://ssc.gov.in/home/candidate-result",
         "detailPage": "../Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html",
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
@@ -928,76 +747,6 @@ window.GovJobUpdatesResults = [
         "updatedAt": "2026-06-04",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "result-sheet-0007",
-        "title": "IB ACIO Gr-II Executive Final Result 2026 – Out",
-        "organization": "Intelligence Bureau",
-        "department": "Intelligence",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-03",
-        "status": "released",
-        "tags": [
-            "IB",
-            "ACIO",
-            "Executive",
-            "Final Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Job_Details/HTML/1005-IB-ACIO-Executive-2026.html",
-        "updatedAt": "2026-06-03",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0004",
-        "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
-        "organization": "Railway Recuitment Board",
-        "department": "RRB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-05-30",
-        "status": "released",
-        "tags": [
-            "Railway",
-            "RRB",
-            "Technician",
-            "Grade III",
-            "CEN 02/2025",
-            "Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
-        "updatedAt": "2026-06-02",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0005",
-        "title": "UP PGT 2026 Exam Result",
-        "organization": "UP Secondary Education Service Selection Board",
-        "department": "UPESSB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-02",
-        "status": "released",
-        "tags": [
-            "UPESSB",
-            "UP PGT",
-            "Exam Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-02",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
     },
@@ -1135,30 +884,6 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
         "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
-        "updatedAt": "2026-05-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0003",
-        "title": "Railway RRB Paramedical Result 2026 | CEN 03/2025",
-        "organization": "Railway Recuitment Board",
-        "department": "RRB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-05-29",
-        "status": "released",
-        "tags": [
-            "Railway",
-            "RRB",
-            "Paramedical",
-            "CEN 03/2025",
-            "Result"
-        ],
-        "resultLink": "",
-        "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
