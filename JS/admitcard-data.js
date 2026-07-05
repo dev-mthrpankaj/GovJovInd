@@ -786,7 +786,7 @@ window.GovJobUpdatesAdmitCards = [
             "Police",
             "Constable"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://upcons2025-com.translate.goog/upcondiad2025/loginpage.aspx?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=hi&_x_tr_pto=tc",
         "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
@@ -858,7 +858,7 @@ window.GovJobUpdatesAdmitCards = [
             "Uttarakhad",
             "UKSSSC"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://test2.safedotesolution.com/",
         "detailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
         "updatedAt": "2026-05-26",
         "telegramStatus": "ready",
@@ -881,7 +881,7 @@ window.GovJobUpdatesAdmitCards = [
             "Police",
             "MPESB"
         ],
-        "downloadLink": "",
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/JAIL_VAN_TAC26/default_tac.htm",
         "detailPage": "../Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
