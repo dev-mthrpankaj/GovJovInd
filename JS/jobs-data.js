@@ -1236,8 +1236,8 @@ window.GovJobUpdatesJobs = [
             "Central Government Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://cisfrectt.cisf.gov.in/index.php",
+        "officialNotification": "https://cisfrectt.cisf.gov.in/file_open.php?fnm=OPhQsPabpsc1xTM151agQzCAWp1DsCYwjfz8ya5RCYk3SxylHV9AkIOtT-lPET5h6t34Xr7Eky3fV3-n4mJ5H6hMOvV3YVfmfWvN_eI5wro",
         "detailPage": "../Job_Details/HTML/2443-CISF-Para-Medical-Staff-2026.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
@@ -1356,8 +1356,8 @@ window.GovJobUpdatesJobs = [
             "Research Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://rac.gov.in/drdo/public/register",
+        "officialNotification": "https://rac.gov.in/download/advt_157.pdf",
         "detailPage": "../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html",
         "updatedAt": "2026-06-03",
         "telegramStatus": "ready",
