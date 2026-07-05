@@ -4,26 +4,6 @@
 
 window.GovJobUpdatesResults = [
     {
-        "id": "result-sheet-0011",
-        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
-        "organization": "Border Security force",
-        "department": "BSF",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-09",
-        "status": "released",
-        "tags": [
-            "BSF"
-        ],
-        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2026/06/SarkariResult.Com_BSF_Constable_Tradesman_Result.pdf",
-        "detailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
-        "updatedAt": "2026-07-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0013",
         "title": "SSC Stenographer 2025 Final Result 2026",
         "organization": "Staff Selection Commission",
@@ -699,6 +679,26 @@ window.GovJobUpdatesResults = [
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
         "detailPage": "../Result_Details/HTML/3005-SSC-Delhi-Police-Head-Constable-Ministerial-Result-2026.html",
+        "updatedAt": "2026-06-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0011",
+        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
+        "organization": "Border Security force",
+        "department": "BSF",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-09",
+        "status": "released",
+        "tags": [
+            "BSF"
+        ],
+        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2026/06/SarkariResult.Com_BSF_Constable_Tradesman_Result.pdf",
+        "detailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
         "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
