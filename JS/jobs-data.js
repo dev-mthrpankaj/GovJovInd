@@ -2676,8 +2676,8 @@ window.GovJobUpdatesJobs = [
             "Banking Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://ibpsreg.ibps.in/upcisbapr26/",
+        "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/04/Advertisement_English.pdf",
         "detailPage": "../Job_Details/HTML/1207-UP-Cooperative-Banking-Technical-Services-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2796,8 +2796,8 @@ window.GovJobUpdatesJobs = [
             "Defence Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
-        "officialNotification": "",
+        "applyLink": "https://applyssb.com/SSB_CT_25/applicationIndex",
+        "officialNotification": "https://sarkariresult.com.im/wp-content/uploads/2026/03/SSB-Constable-Tradesman-Short-Notification.pdf",
         "detailPage": "../Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
@@ -2856,7 +2856,7 @@ window.GovJobUpdatesJobs = [
             "Engineering Jobs",
             "Govt Jobs 2026"
         ],
-        "applyLink": "",
+        "applyLink": "https://recruitment.pspcl.in/",
         "officialNotification": "",
         "detailPage": "../Job_Details/HTML/PSPCL-JE-Electrical-Recruitment-2026.html",
         "updatedAt": "2026-05-01",
