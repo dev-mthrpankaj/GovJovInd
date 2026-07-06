@@ -68,7 +68,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not Mentioned",
         "startDate": "2026-06-19",
         "lastDate": "2026-07-05",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Haryana Staff Selection Commission Recruitment 2026",
             "Haryana HSSC Group D Common Eligibility Test CET",
@@ -1048,7 +1048,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not Mentioned",
         "startDate": "2026-07-06",
         "lastDate": "2026-07-26",
-        "status": "upcoming",
+        "status": "active",
         "tags": [
             "Join Indian Army Recruitment 2026",
             "Indian Air Force Airmen Group Y Medical Assistant",
