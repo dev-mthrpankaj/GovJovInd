@@ -7,7 +7,7 @@
   title: "Monsoon in India: Mechanism, Crop Seasons, and Socio-Economic Impact",
   category: "Current Affairs",
   date: "2026-07-06",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783332597483.webp",
   url: "student-hub/monsoon-in-india-mechanism-crops-economic-impact.html",
   excerpt: "An in-depth guide on the Indian Monsoon system for competitive exams. Explore its meteorological mechanism, Southwest vs Northeast monsoons, agricultural crop cycles, and macroeconomic effects."
 },
