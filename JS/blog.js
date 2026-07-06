@@ -1,5 +1,5 @@
 (function () {
-  const PAGE_SIZE = 20;
+  const PAGE_SIZE = 18;
   const blogs = Array.isArray(window.GOVJOB_BLOGS) ? window.GOVJOB_BLOGS : [];
   const state = {
     category: "All",
