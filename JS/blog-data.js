@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "fifa-world-cup-2026-complete-guide",
+  title: "FIFA World Cup 2026: History, Expanded Format, and Key Facts for Competitive Exams",
+  category: "Current Affairs",
+  date: "2026-07-06",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783329419439.webp",
+  url: "student-hub/fifa-world-cup-2026-complete-guide.html",
+  excerpt: "A comprehensive current affairs study breakdown of the FIFA World Cup 2026. Learn about the new 48-team tournament structure, historical milestones, and successful football nations for UPSC, SSC, and Banking exams."
+},
+    {
       id: "top-laptops-tablets-for-students-2026",
       title: "Top 5 Laptops and Best Tablets for Students 2026: ₹80,000 ke under smart study devices",
       category: "Technology",
