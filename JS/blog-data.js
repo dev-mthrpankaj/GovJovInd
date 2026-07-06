@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "monsoon-in-india-mechanism-crops-economic-impact",
+  title: "Monsoon in India: Mechanism, Crop Seasons, and Socio-Economic Impact",
+  category: "Current Affairs",
+  date: "2026-07-06",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/monsoon-in-india-mechanism-crops-economic-impact.html",
+  excerpt: "An in-depth guide on the Indian Monsoon system for competitive exams. Explore its meteorological mechanism, Southwest vs Northeast monsoons, agricultural crop cycles, and macroeconomic effects."
+},
+    {
   id: "fifa-world-cup-2026-complete-guide",
   title: "FIFA World Cup 2026: History, Expanded Format, and Key Facts for Competitive Exams",
   category: "Current Affairs",
