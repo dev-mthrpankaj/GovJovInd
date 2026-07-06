@@ -14,7 +14,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "3289",
         "startDate": "2026-06-15",
         "lastDate": "2026-07-06",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://recruitment.pspcl.in/",
         "officialNotification": "https://www.pspcl.in/media/CRA_317_OF_2026_ALM_Based_on_NAC_Lineman_trade.pdf",
@@ -1150,7 +1150,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "86",
         "startDate": "2026-06-16",
         "lastDate": "2026-07-06",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Bank of Baroda Recruitment 2026",
             "BOB Corporate and Institutional Credit",
