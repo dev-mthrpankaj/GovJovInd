@@ -4738,3 +4738,11 @@ body.gju-android-app.my-desk-page .my-desk-shell {
     }
 
 }
+
+.native-ad{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:24px auto;
+    width:100%;
+}
