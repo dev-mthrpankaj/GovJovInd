@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0028-20260707195337-b16bc566",
+        "title": "SSC Delhi Police Constable Executive Final Answer Key with Marks 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2025-12-18",
+        "examEndDate": "2026-01-06",
+        "releaseDate": "2026-07-07",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://sscexams.cbexams.com/DPCExecutivep2025EFinalkeydjfdlandingpage/loginnew.aspx",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/Delhi-Police-Constable-Final-Answer-Key-2025.html",
+        "updatedAt": "2026-07-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0025",
         "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
