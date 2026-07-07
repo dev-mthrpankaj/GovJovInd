@@ -218,7 +218,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "550",
         "startDate": "2026-06-23",
         "lastDate": "2026-07-07",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "The New India Assurance Co. Ltd. (NIACL) Recruitment 2026",
             "NIACL Apprentice",
@@ -1300,7 +1300,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "24",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Central Industrial Security Force (CISF) Recruitment 2026",
             "CISF ASI Paramedical Staff",
@@ -1360,7 +1360,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "276",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Coal India Limited (CIL) Recruitment 2026",
             "CIL Management Trainee Mining",
@@ -1720,7 +1720,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "371",
         "startDate": "2026-06-08",
         "lastDate": "2026-07-07",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Rajasthan Public Service Commision Recruitment 2026",
             "RPSC APO",
