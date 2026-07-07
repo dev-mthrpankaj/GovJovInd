@@ -4708,3 +4708,33 @@ html:has(body.my-desk-page) {
 body.gju-android-app.my-desk-page .my-desk-shell {
   padding-bottom: calc(92px + env(safe-area-inset-bottom));
 }
+
+/* Responsive Ad */
+
+.desktop-ad{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:25px auto;
+    width:100%;
+}
+
+.mobile-ad{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    margin:25px auto;
+    width:100%;
+}
+
+@media (max-width:991px){
+
+    .desktop-ad{
+        display:none;
+    }
+
+    .mobile-ad{
+        display:flex;
+    }
+
+}
