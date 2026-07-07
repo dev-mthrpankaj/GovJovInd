@@ -26,6 +26,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "answerkey-sheet-0029-20260707223716-0578a187",
+        "title": "BPSC AES Assistant Environmental Scientist Answer Key 2026 Adv No 88/2025",
+        "organization": "Bihar Public Service Commision",
+        "department": "BPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-06-11",
+        "examEndDate": "",
+        "releaseDate": "2026-07-07",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://govjobupdates.com/AnswerKey_Details/HTML/BPSC-Assistant-Environmental-Scientist-Answer-Key-2026.html",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/BPSC-Assistant-Environmental-Scientist-Answer-Key-2026.html",
+        "updatedAt": "2026-07-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0025",
         "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
