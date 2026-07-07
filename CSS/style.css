@@ -4739,10 +4739,26 @@ body.gju-android-app.my-desk-page .my-desk-shell {
 
 }
 
-.native-ad{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:24px auto;
-    width:100%;
+.native-ad {
+    display: flex;
+    flex-direction: row;     /* Force karega ki ads ek hi line mein rahein */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;               /* Dono ads ke beech mein gap dene ke liye */
+    margin: 24px auto;
+    width: 100%;
+}
+
+/* In dono lines ko zaroor add karein taaki ads bade hokar neeche na bhaagein */
+.native-ad > div {
+    flex: 1;                 /* Dono ads barabar space lenge */
+    max-width: 450px;        /* Ek ad ki zyada se zyada width (apne hisab se change kar sakte hain) */
+    width: 100%;
+}
+
+/* Mobile par responsive rakhne ke liye taaki layout kharab na ho */
+@media (max-width: 768px) {
+    .native-ad {
+        flex-direction: column; /* Mobile mein ek ke neeche ek dikhega */
+    }
 }
