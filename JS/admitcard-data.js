@@ -5,7 +5,7 @@
 window.GovJobUpdatesAdmitCards = [
     {
         "id": "admit-sheet-0052-20260707221234-e88453dd",
-        "title": "UPPSC Assistant Teacher LT Grade Mains Admit Card 2026 Music, Hindi Subject",
+        "title": "UPPSC Assistant Teacher LT Grade Mains Admit Card 2026 Music, Hindi, Social Science, Physical Education Subject",
         "organization": "Uttar Pradesh Public Service Commission",
         "department": "UPPSC",
         "category": "State Government",
@@ -17,7 +17,7 @@ window.GovJobUpdatesAdmitCards = [
         "tags": [],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
         "detailPage": "../AdmitCard_Details/HTML/UPPSC-LT-Grade-Biology-Main-Exam-Admit-Card-2026.html",
-        "updatedAt": "2026-07-07",
+        "updatedAt": "2026-07-08",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
