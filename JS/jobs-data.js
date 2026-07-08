@@ -1060,7 +1060,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1500",
         "startDate": "2026-06-18",
         "lastDate": "2026-07-08",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "State Bank of India Recruitment 2026",
             "SBI PO",
