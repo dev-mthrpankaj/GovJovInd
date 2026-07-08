@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0030-20260708182144-deaf1cd5",
+        "title": "Bihar BPSC Stenographer Answer Key 2026",
+        "organization": "BPSC Bihar Stenographer",
+        "department": "BBPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-06-11",
+        "examEndDate": "",
+        "releaseDate": "2026-07-08",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Advt.-No.01-2026-Stenographer-BPSC-Provisional-Answer-Key-General-Knowledge_BPSC-20260707-erf9pc.pdf",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/BPSC-Stenographer-Answer-Key-2026.html",
+        "updatedAt": "2026-07-08",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0028-20260707195337-b16bc566",
         "title": "SSC Delhi Police Constable Executive Final Answer Key with Marks 2026",
         "organization": "Staff Selection Commission",
