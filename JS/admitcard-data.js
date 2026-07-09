@@ -413,7 +413,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-08",
         "examEndDate": "2026-07-09",
         "releaseDate": "2026-07-02",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/riicosep25/oecla_jun26/login.php?appid=2599483d1ccf65d6f7f814ab9ce00705",
         "detailPage": "../AdmitCard_Details/HTML/04-RIICO-Various-Posts-Admit-Card-2026.html",

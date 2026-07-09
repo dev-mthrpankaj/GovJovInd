@@ -86,7 +86,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "107",
         "startDate": "2026-07-10",
         "lastDate": "2026-07-23",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/Attestation/Home/Home.aspx",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/07/mppsc-adpo-re-open-notice.pdf",
@@ -2806,7 +2806,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "209",
         "startDate": "2026-06-19",
         "lastDate": "2026-07-09",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Havildar Instructor",
