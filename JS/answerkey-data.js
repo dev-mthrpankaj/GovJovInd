@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0031-20260709122054-03f48df4",
+        "title": "SSB Head Constable Answer Key 2026",
+        "organization": "Sashastra Seema Bal",
+        "department": "SSB",
+        "category": "Defence",
+        "year": "2026",
+        "examDate": "2026-07-07",
+        "examEndDate": "",
+        "releaseDate": "2026-07-09",
+        "objectionLastDate": "2026-07-12",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
+        "objectionLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
+        "detailPage": "../AnswerKey_Details/HTML/SSB-Head-Constable-Ministerial-Answer-Key-2026.html",
+        "updatedAt": "2026-07-09",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0030-20260708182144-deaf1cd5",
         "title": "Bihar BPSC Stenographer Answer Key 2026",
         "organization": "BPSC Bihar Stenographer",

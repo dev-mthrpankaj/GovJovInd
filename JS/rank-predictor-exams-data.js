@@ -4,6 +4,87 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "ssb-hcm-2026",
+        "examName": "SSB Head Constable (Min) 2026",
+        "board": "SSB",
+        "examType": "online",
+        "sheetName": "SSB Head Constable (Min) 2026",
+        "totalQuestions": 150,
+        "marksPerCorrect": 1,
+        "negativeMarking": 0,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "online"
+        ],
+        "subjects": [
+            {
+                "name": "Part 1",
+                "questions": 50
+            },
+            {
+                "name": "Part 2",
+                "questions": 100
+            }
+        ],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [
+            "UR",
+            "OBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Jammu and Kashmir",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry"
+        ],
+        "disabled": false
+    },
+    {
         "examId": "upsssc-bcg-technician-2026",
         "examName": "UPSSSC BCG Technician 2026",
         "board": "UPSSSC",
