@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "uppsc-assistant-town-planner-2026-rank-predictor",
+  title: "UPPSC Assistant Town Planner (ATP) 2026 Rank Predictor: अपनी अपेक्षित रैंक और चयन संभावना जानें",
+  category: "UPPSC",
+  date: "2026-07-09",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783617454950.webp",
+  url: "student-hub/uppsc-assistant-town-planner-2026-rank-predictor.html",
+  excerpt: "UPPSC ATP 2026 प्रारंभिक परीक्षा (7 जुलाई 2026) के बाद जानिए अपनी संभावित रैंक कैसे पता करें। पूरा एग्जाम पैटर्न, मार्किंग स्कीम, सिलेक्शन प्रोसेस और फ्री रैंक प्रेडिक्टर टूल यहां देखें।"
+},
+    {
   id: "ssb-hc-ministerial-rank-predictor",
   title: "SSB Head Constable Ministerial 2026 Rank Predictor: सुरक्षित स्कोर और सटीक रैंक विश्लेषण",
   category: "Rank Prediction",
