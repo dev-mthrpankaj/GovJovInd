@@ -26,6 +26,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "answerkey-sheet-0032-20260709213741-935bf6a9",
+        "title": "UPPSC Assistant Town Planner Answer Key 2026",
+        "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
+        "department": "UPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-07",
+        "examEndDate": "",
+        "releaseDate": "2026-07-09",
+        "objectionLastDate": "2026-07-15",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://uppsc.up.nic.in/Open_PDF_DB.aspx?I4PnQ0tBagmjG3pVtCZxxLIYwjGNF6yI",
+        "objectionLink": "https://uppsc.up.nic.in/",
+        "detailPage": "../AnswerKey_Details/HTML/UPPSC-Assistant-Town-Planner-Answer-Key-2026.html",
+        "updatedAt": "2026-07-09",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0030-20260708182144-deaf1cd5",
         "title": "Bihar BPSC Stenographer Answer Key 2026",
         "organization": "BPSC Bihar Stenographer",
