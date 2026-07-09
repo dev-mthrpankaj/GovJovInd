@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "ssb-hc-ministerial-rank-predictor",
+  title: "SSB Head Constable Ministerial 2026 Rank Predictor: सुरक्षित स्कोर और सटीक रैंक विश्लेषण",
+  category: "Rank Prediction",
+  date: "2026-07-09",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783588180608.webp",
+  url: "student-hub/ssb-hc-ministerial-rank-predictor.html",
+  excerpt: "SSB Head Constable (Ministerial) 2026 की कंप्यूटर आधारित लिखित परीक्षा (CBT) समाप्त होने के बाद अपनी संभावित रैंक, शिफ्ट विश्लेषण और सटीक सुरक्षित स्कोर जानने के लिए हमारे विशेष लाइव रैंक प्रेडिक्टर का उपयोग करें।"
+},
+    {
   id: "data-science-and-its-future",
   title: "Data Science and Its Future: A Complete Guide for Government Exam Aspirants",
   category: "Technology",
