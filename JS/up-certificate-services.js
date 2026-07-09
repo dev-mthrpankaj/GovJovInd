@@ -17,7 +17,7 @@
     if(card && card.dataset.qrReady !== "1"){
       card.dataset.qrReady = "1";
       card.classList.add("payment-first-panel");
-      card.innerHTML = '<span class="payment-step-badge">Step 1: Pay first</span><h2><i class="fas fa-qrcode"></i> Scan & Pay ₹80</h2><div class="payment-upi-card payment-qr-card"><p><strong>हिंदी:</strong> फॉर्म जमा करने से पहले क्यूआर कोड स्कैन करके ₹80 का भुगतान करें। भुगतान के बाद फॉर्म में यूटीआर / ट्रांजैक्शन आईडी भरना आवश्यक है।</p><p><strong>English:</strong> Please scan the QR code and pay ₹80 before submitting the form. After payment, enter the UTR / Transaction ID in the form.</p><div class="payment-qr-wrap"><img id="paymentQrImage" src="'+QR_PATH+'" alt="Scan QR to pay ₹80" loading="lazy" decoding="async"></div><div class="payment-qr-meta"><div class="payment-qr-fee"><span>Amount</span><strong>₹80</strong></div><div class="payment-qr-fee"><span>Purpose</span><strong>UP Certificate Service</strong></div></div><p class="cert-note payment-bilingual-note"><span class="note-line"><span class="note-lang">हिंदी:</span>पहले भुगतान करें, फिर नीचे दिए गए फॉर्म में भुगतान यूटीआर / ट्रांजैक्शन आईडी और भुगतान का स्क्रीनशॉट जमा करें।</span><span class="note-line"><span class="note-lang">English:</span>First complete the payment, then submit the Payment UTR / Transaction ID and payment screenshot in the form below.</span></p></div>';
+      card.innerHTML = '<span class="payment-step-badge">Step 1: Pay first</span><h2><i class="fas fa-qrcode"></i> Scan & Pay ₹100</h2><div class="payment-upi-card payment-qr-card"><p><strong>हिंदी:</strong> फॉर्म जमा करने से पहले क्यूआर कोड स्कैन करके ₹100 का भुगतान करें। भुगतान के बाद फॉर्म में यूटीआर / ट्रांजैक्शन आईडी भरना आवश्यक है।</p><p><strong>English:</strong> Please scan the QR code and pay ₹80 before submitting the form. After payment, enter the UTR / Transaction ID in the form.</p><div class="payment-qr-wrap"><img id="paymentQrImage" src="'+QR_PATH+'" alt="Scan QR to pay ₹100" loading="lazy" decoding="async"></div><div class="payment-qr-meta"><div class="payment-qr-fee"><span>Amount</span><strong>₹100</strong></div><div class="payment-qr-fee"><span>Purpose</span><strong>UP Certificate Service</strong></div></div><p class="cert-note payment-bilingual-note"><span class="note-line"><span class="note-lang">हिंदी:</span>पहले भुगतान करें, फिर नीचे दिए गए फॉर्म में भुगतान यूटीआर / ट्रांजैक्शन आईडी और भुगतान का स्क्रीनशॉट जमा करें।</span><span class="note-line"><span class="note-lang">English:</span>First complete the payment, then submit the Payment UTR / Transaction ID and payment screenshot in the form below.</span></p></div>';
     }
     var grid = document.querySelector(".cert-grid");
     if(grid) grid.classList.add("payment-first-layout");
@@ -38,7 +38,7 @@
 
   const UPI_ID = "";
   const PAYEE_NAME = "GovJobUpdates CSC";
-  const FEE_AMOUNT = 80;
+  const FEE_AMOUNT = 100;
   const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
   const MAX_FILE_SIZE_BYTES = 1.5 * 1024 * 1024;
 
