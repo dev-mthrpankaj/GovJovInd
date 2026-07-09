@@ -778,7 +778,7 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": true
+        "disabled": false
     },
     {
         "examId": "upsssc-jec-4612",
