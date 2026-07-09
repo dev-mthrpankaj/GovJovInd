@@ -1536,6 +1536,13 @@
       "title": "Cotton Corporation CCI Various Post Online Form 2026 for 148 Post",
       "lastPostedAt": "2026-07-09T11:31:29.083Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0105-20260709212736-2e669f58": {
+      "updatedAt": "2026-07-09",
+      "hash": "b21410d224f28e23c64ee46382356a17946c292b0ba8296ae1d9bec6fd49e1ac",
+      "title": "MPPSC MP ADPO Online Form 2026 Re-Open",
+      "lastPostedAt": "2026-07-09T16:17:58.008Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -2946,6 +2953,13 @@
       "hash": "ee0ddaeceb2444b80650977e12a631fe4858caeeeb8a01fd87df99f0749339ec",
       "title": "SSB Head Constable Answer Key 2026",
       "lastPostedAt": "2026-07-09T08:43:04.153Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0032-20260709213741-935bf6a9": {
+      "updatedAt": "2026-07-09",
+      "hash": "b6b3dd815bdd6d7163341d20595a28d396a8f382664067bf94a610502a018a78",
+      "title": "UPPSC Assistant Town Planner Answer Key 2026",
+      "lastPostedAt": "2026-07-09T16:17:58.596Z",
       "stateReason": "new"
     }
   },
