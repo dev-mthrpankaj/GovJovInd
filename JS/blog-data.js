@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "mpesb-hospital-assistant-rank-predictor",
+  title: "MPESB Hospital Assistant Rank Predictor 2026: सुरक्षित स्कोर और सटीक रैंक विश्लेषण",
+  category: "Rank Prediction",
+  date: "2026-07-10",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783701728305.webp",
+  url: "student-hub/mpesb-hospital-assistant-rank-predictor.html",
+  excerpt: "MPESB Hospital Assistant CBT परीक्षा समाप्त होने के बाद अपनी सटीक रैंक, संभावित कटऑफ और मार्क्स-वर्सेज-रैंक विश्लेषण जानने के लिए हमारे Rank Predictor टूल का उपयोग करें।"
+},
+    {
   id: "uppsc-assistant-town-planner-2026-rank-predictor",
   title: "UPPSC Assistant Town Planner (ATP) 2026 Rank Predictor: अपनी अपेक्षित रैंक और चयन संभावना जानें",
   category: "UPPSC",
