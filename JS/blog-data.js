@@ -14,7 +14,7 @@
     {
   id: "uppsc-assistant-town-planner-2026-rank-predictor",
   title: "UPPSC Assistant Town Planner (ATP) 2026 Rank Predictor: अपनी अपेक्षित रैंक और चयन संभावना जानें",
-  category: "UPPSC",
+  category: "Rank Prediction",
   date: "2026-07-09",
   image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783617454950.webp",
   url: "student-hub/uppsc-assistant-town-planner-2026-rank-predictor.html",
