@@ -338,7 +338,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not Mentioned",
         "startDate": "2026-07-04",
         "lastDate": "2026-07-11",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://icsil.in/requirement-careers",
         "officialNotification": "https://icsil.in/app/uploads/advertisement/Advt__ICSIL_panel_for_various_posts_01_07_20263.pdf",

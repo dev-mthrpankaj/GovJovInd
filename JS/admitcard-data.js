@@ -413,7 +413,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-11",
         "examEndDate": "",
         "releaseDate": "2026-06-30",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/sbiaapr26/oecla_jun26/login.php?appid=42f888ad90671cdf0f66feefc29b82ec",
         "detailPage": "../AdmitCard_Details/HTML/04-SBI-Apprentice-Admit-Card-2026.html",
