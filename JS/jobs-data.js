@@ -554,7 +554,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "40",
         "startDate": "2026-06-26",
         "lastDate": "2026-07-10",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "NTPC Limited Recruitment 2026",
             "NTPC Assistant Chemist Trainee ACT",
@@ -884,7 +884,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "362",
         "startDate": "2026-06-20",
         "lastDate": "2026-07-10",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Bharat Earth Movers Limited (BEML) Recruitment 2026",
             "BEML Non Executive Operator",
