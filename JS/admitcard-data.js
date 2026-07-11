@@ -196,12 +196,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://rojgarresult.com/wp-content/uploads/2026/07/pspcl-je-exam-2026.pdf",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/PSPCL-JE-Electrical-Exam-Date-2026.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0062-20260710220641-b1fd3d9a",
