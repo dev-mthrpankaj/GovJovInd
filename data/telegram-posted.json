@@ -1543,6 +1543,13 @@
       "title": "MPPSC MP ADPO Online Form 2026 Re-Open",
       "lastPostedAt": "2026-07-09T16:17:58.008Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0106-20260710143013-2c5e35ed": {
+      "updatedAt": "2026-07-11",
+      "hash": "6c549e4507615bb5998740bd8ed29b67a13b8113b16968cae8210b155f773455",
+      "title": "HP Police Constable Online Form 2026 for 734 Post",
+      "lastPostedAt": "2026-07-11T08:12:20.347Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -2447,6 +2454,34 @@
       "hash": "9a047e5dcb207a47f4d46e72ac1c17a59945519c2ea1e719e506af0ca66f412d",
       "title": "Railway RRB Isolated Categories Admit Card 2026 for 312 Post",
       "lastPostedAt": "2026-07-11T07:23:11.644Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0053-20260710213644-f5d2a9af": {
+      "updatedAt": "2026-07-11",
+      "hash": "7b05f5ec66b1c8c1252f283ca1ebf8363d8bd327325ae0bc6a1cef878dcd5592",
+      "title": "BPSSC Havildar Instructor Exam Date 2026 for 122 Post",
+      "lastPostedAt": "2026-07-11T08:12:21.180Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0056-20260710214742-b91296e7": {
+      "updatedAt": "2026-07-11",
+      "hash": "a37c7ecabf65d29a7e3168563e7684f5695fb95bd7017b82248446ebb5e4d605",
+      "title": "NTA CSIR UGC NET June 2026 Exam City Details",
+      "lastPostedAt": "2026-07-11T08:12:21.588Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0061-20260710220419-47ebc07d": {
+      "updatedAt": "2026-07-11",
+      "hash": "42e45f073980104f8b674a5704f375dfa822fcc892d5f0c2a16411ae9dc44980",
+      "title": "PSPCL Junior Engineer Electrical Exam Date 2026 for 622 Post",
+      "lastPostedAt": "2026-07-11T08:12:22.209Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0062-20260710220641-b1fd3d9a": {
+      "updatedAt": "2026-07-11",
+      "hash": "923497c523708868ee450627e7eaeba91bbee168df48421305c01f0c5ef2c39a",
+      "title": "UPSC CAPF CPF Assistant Commandant Admit Card 2026",
+      "lastPostedAt": "2026-07-11T08:12:22.620Z",
       "stateReason": "new"
     }
   },
