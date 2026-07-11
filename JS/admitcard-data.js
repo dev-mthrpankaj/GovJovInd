@@ -116,12 +116,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/recsys2025/downloadadmitcard/LoginDOB.aspx?enc=Ei4cajBkK1gZSfgr53ImFSuabJtfdyH7GsL2cij2dPKFqA5XsHH8yMmK+6SEPU/E",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/CBSE-Group-A-B-C-Skill-Test-Admit-Card-2026.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0060-20260710220117-fcaa98ac",
@@ -136,12 +136,32 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101323/login.html",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/DSSSB-MTS-Admit-Card-2026.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0064-20260710221107-87111ad3",
+        "title": "Railway RRB Isolated Categories Admit Card 2026 for 312 Post",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-07-14",
+        "examEndDate": "2026-07-15",
+        "releaseDate": "2026-07-10",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101492/login.html",
+        "detailPage": "../AdmitCard_Details/HTML/RRB-Isolated-Categories-Admit-Card-2026.html",
+        "updatedAt": "2026-07-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0052-20260707221234-e88453dd",
