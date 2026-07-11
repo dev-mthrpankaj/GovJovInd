@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0106-20260710143013-2c5e35ed",
+        "title": "HP Police Constable Online Form 2026 for 734 Post",
+        "organization": "Himachal Pradesh Public Service Commission",
+        "department": "HPSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Intermediate Passed from any Institution/School/ Board situated within Himachal Pradesh",
+        "totalPosts": "734",
+        "startDate": "2026-07-10",
+        "lastDate": "2026-08-06",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://hppsconline.hp.gov.in/HPPSC/ApplicantRegistration/Home/Login",
+        "officialNotification": "https://hppsc.hp.gov.in/CommonControls/ViewCMSFile?qs=KI3gZ53zz1wSGo29lXLTBfw1DHezN8KfEg%2BrikZhi%2FLLqiZME0%2BQReThfPJPy%2BjgrmLJ%2B48MSfenisMCQ3fHXMZ0%2BajrVuV3AylOo9mGWYM%3D",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0106-20260710143013-2c5e35ed",
+        "updatedAt": "2026-07-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0102-20260708203724-453f7cc5",
         "title": "Railway NCR RRC Prayagraj Apprentice Online Form 2026",
         "organization": "Railway Recruitment Cell",
