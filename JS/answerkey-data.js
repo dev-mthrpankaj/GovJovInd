@@ -80,7 +80,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-07-09",
         "objectionLastDate": "2026-07-12",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
         "objectionLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
