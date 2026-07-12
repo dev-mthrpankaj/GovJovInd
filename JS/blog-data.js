@@ -7,7 +7,7 @@
   title: "G7 Summit 2026 Evian, France: भारत की भागीदारी और परीक्षा के लिए पूरी करंट अफेयर्स जानकारी",
   category: "Current Affairs",
   date: "2026-07-12",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783874994694.webp",
   url: "student-hub/g7-summit-2026-evian-france-current-affairs.html",
   excerpt: "फ्रांस के Evian शहर में हुए 52वें G7 Summit 2026 की तारीख, स्थान, नौ बड़ी घोषणाएं और भारत सहित पांच अतिथि देशों की भागीदारी—प्रतियोगी परीक्षाओं के लिए जरूरी हर Static और Current GK तथ्य एक ही जगह।"
 },
