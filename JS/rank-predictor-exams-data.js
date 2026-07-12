@@ -4,6 +4,99 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "rrb-je-cbt-2-2026",
+        "examName": "RRB Junior Engineer JE CBT-2",
+        "board": "RRB",
+        "examType": "online",
+        "sheetName": "RRB Junior Engineer JE CBT-2",
+        "totalQuestions": 150,
+        "marksPerCorrect": 1,
+        "negativeMarking": 0.33,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "online"
+        ],
+        "subjects": [
+            {
+                "name": "General Awareness",
+                "questions": 15
+            },
+            {
+                "name": "Physics and Chemistry",
+                "questions": 15
+            },
+            {
+                "name": "Basics of computer and Applications",
+                "questions": 10
+            },
+            {
+                "name": "Basics of Environment and Pollution Control",
+                "questions": 10
+            },
+            {
+                "name": "Technical Abilities",
+                "questions": 100
+            }
+        ],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [
+            "UR",
+            "OBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Jammu and Kashmir",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry"
+        ],
+        "disabled": false
+    },
+    {
         "examId": "mpesb-HospitalAssistant-2026",
         "examName": "MPESB Hospital Assistant 2026",
         "board": "MPESB",
