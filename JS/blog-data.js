@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "g7-summit-2026-evian-france-current-affairs",
+  title: "G7 Summit 2026 Evian, France: भारत की भागीदारी और परीक्षा के लिए पूरी करंट अफेयर्स जानकारी",
+  category: "Current Affairs",
+  date: "2026-07-12",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/g7-summit-2026-evian-france-current-affairs.html",
+  excerpt: "फ्रांस के Evian शहर में हुए 52वें G7 Summit 2026 की तारीख, स्थान, नौ बड़ी घोषणाएं और भारत सहित पांच अतिथि देशों की भागीदारी—प्रतियोगी परीक्षाओं के लिए जरूरी हर Static और Current GK तथ्य एक ही जगह।"
+},
+    {
   id: "rrb-je-cbt2-2026-rank-predictor",
   title: "RRB JE CBT-2 2026 Rank Predictor: अपनी अपेक्षित रैंक और कटऑफ चांस जानें",
   category: "Rank Prediction",
