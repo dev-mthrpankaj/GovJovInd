@@ -7,7 +7,7 @@
   title: "RRB JE CBT-2 2026 Rank Predictor: अपनी अपेक्षित रैंक और कटऑफ चांस जानें",
   category: "Rank Prediction",
   date: "2026-07-12",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783833448743.webp",
   url: "student-hub/rrb-je-cbt2-2026-rank-predictor.html",
   excerpt: "RRB JE CBT-2 2026 परीक्षा 2 जुलाई को हो चुकी है। जानिए अपनी संभावित रैंक कैसे निकालें, पूरा एग्जाम पैटर्न, नॉर्मलाइजेशन, कटऑफ को प्रभावित करने वाले कारक और फ्री रैंक प्रेडिक्टर टूल यहां देखें।"
 },
