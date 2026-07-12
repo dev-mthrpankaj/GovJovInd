@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0053-20260712081354-c3ff655c",
+        "title": "Join Indian Army Agniveer Result 2026",
+        "organization": "Join Indian Army",
+        "department": "JIA",
+        "category": "Defence",
+        "year": "2026",
+        "resultDate": "2026-07-12",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://govjobupdates.com/Result_Details/HTML/Indian-Army-Agniveer-Result-2026.html",
+        "detailPage": "../Result_Details/HTML/Indian-Army-Agniveer-Result-2026.html",
+        "updatedAt": "2026-07-12",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0044-20260709161746-0be55f1a",
         "title": "UPESSB PGT Final Result 2026 | Advt No. 02/2022",
         "organization": "UP Secondary Education Service Selection Board",
