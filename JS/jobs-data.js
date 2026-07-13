@@ -962,7 +962,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "38",
         "startDate": "2026-06-23",
         "lastDate": "2026-07-13",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "North Eastern Electric Power Corporation Limited (NEEPCO) Recruitment 2026",
             "NEEPCO Executive",
