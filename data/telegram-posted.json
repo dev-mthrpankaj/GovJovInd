@@ -1557,6 +1557,20 @@
       "title": "BPSSC Bihar Forest Range Officer FRO Online Form 2026",
       "lastPostedAt": "2026-07-11T17:14:20.179Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0108-20260712143200-e83ea93c": {
+      "updatedAt": "2026-07-14",
+      "hash": "f75d0e02dccf2458ae93073460043d94538b3e9bfd03c1ecbaa691a899c41a08",
+      "title": "NCL Mining Sirdar, Surveyor Mining Online Form 2026 for 259 Post",
+      "lastPostedAt": "2026-07-14T08:46:45.800Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0109-20260713223007-bdcd4c08": {
+      "updatedAt": "2026-07-14",
+      "hash": "f4bf595bd61d461507c4f475f21420afe0823445c3288609bbfdccb2cdaea83c",
+      "title": "UPSSSC Auditor and Assistant Accountant Online Form 2026 for 1829 Post",
+      "lastPostedAt": "2026-07-14T08:46:46.516Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3080,6 +3094,20 @@
       "title": "RRB Junior Engineer JE CBT-2 Answer Key 2026",
       "lastPostedAt": "2026-07-12T03:47:24.095Z",
       "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0035-20260711163654-cb7fc711": {
+      "updatedAt": "2026-07-14",
+      "hash": "5e517525bdf1e2d396c87c8063d870f96c4b0ff6e93441504c707c73a8512fe1",
+      "title": "AIBE All India Bar Exam XXI Final Answer Key 2026",
+      "lastPostedAt": "2026-07-14T08:46:46.934Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0036-20260711164120-0c11b30f": {
+      "updatedAt": "2026-07-14",
+      "hash": "fe774ca3f0191a2a0fbc05cbe01b3eb065c9377cfb045afa37bf66473e38ef10",
+      "title": "NCL Various Post Answer Key 2026 for 577 Post",
+      "lastPostedAt": "2026-07-14T08:46:47.337Z",
+      "stateReason": "new"
     }
   },
   "results": {
@@ -3921,6 +3949,13 @@
       "hash": "9a36078e5b49f6e802bb1c617f165503fb5e00afd8df9e1df308657a2bd47ea5",
       "title": "Join Indian Army Agniveer Result 2026",
       "lastPostedAt": "2026-07-12T02:53:20.041Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0054-20260713222253-ed824780": {
+      "updatedAt": "2026-07-14",
+      "hash": "4d3906ca56b3e88aa0a662f0467fec987ba445f7710e3845113f825c65e695f9",
+      "title": "RBI Officer Grade B General Result Marks 2026 for 60 Post",
+      "lastPostedAt": "2026-07-14T08:46:47.906Z",
       "stateReason": "new"
     }
   }
