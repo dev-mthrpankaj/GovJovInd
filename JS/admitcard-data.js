@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0053-20260710213644-f5d2a9af",
+        "title": "BPSSC Havildar Instructor Admit Card/Exam Date 2026 for 122 Post",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "BPSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-29",
+        "examEndDate": "",
+        "releaseDate": "2026-07-08",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://bpssc.bihar.gov.in/Notices/Notice%20E-Admit%20Card%20on%20website%204.pdf",
+        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-2026.html",
+        "updatedAt": "2026-07-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0051-20260707220538-5591608c",
         "title": "Bihar Police BPSSC ASI Operation Admit Card 2026 for 462 Post",
         "organization": "Bihar Police Subordinate Services Commission (BPSSC)",
@@ -22,26 +42,6 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0053-20260710213644-f5d2a9af",
-        "title": "BPSSC Havildar Instructor Exam Date 2026 for 122 Post",
-        "organization": "Bihar Police Subordinate Services Commission",
-        "department": "BPSSC",
-        "category": "State Government",
-        "year": "2026",
-        "examDate": "2026-07-29",
-        "examEndDate": "",
-        "releaseDate": "2026-07-08",
-        "status": "available",
-        "tags": [],
-        "downloadLink": "https://bpssc.bihar.gov.in/Notices/Notice%20E-Admit%20Card%20on%20website%204.pdf",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-07-11",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0054-20260710213953-37a5195f",
