@@ -36,7 +36,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-07-10",
         "objectionLastDate": "2026-07-13",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://hospassist2026.cbtexam.in/Home/ListofExam.aspx",
         "objectionLink": "https://hospassist2026.cbtexam.in/Home/ListofExam.aspx",
