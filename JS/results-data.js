@@ -22,6 +22,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0055-20260714224128-0b3df1f3",
+        "title": "UP Police Sub Inspector SI Final Result 2026 – OUT",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-14",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.siupexam25.com/sifinalresults/homepage_new.aspx",
+        "detailPage": "../Result_Details/HTML/UP-Police-Sub-Inspector-SI-Final-Result-2026.html",
+        "updatedAt": "2026-07-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0053-20260712081354-c3ff655c",
         "title": "Join Indian Army Agniveer Result 2026",
         "organization": "Join Indian Army",
