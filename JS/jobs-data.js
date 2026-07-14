@@ -1100,7 +1100,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "373",
         "startDate": "2026-06-17",
         "lastDate": "2026-07-14",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Himachal Pradesh Public Service Commission Recruitment 2026",
             "HPPSC Assistant Professor",
