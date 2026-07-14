@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0054-20260713222253-ed824780",
+        "title": "RBI Officer Grade B General Result Marks 2026 for 60 Post",
+        "organization": "Reserve Bank of India",
+        "department": "RBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-07-13",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://m.rbi.org.in//scripts/Result_Officers_Grade_B_General_DR_PY_2026.aspx",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-07-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0053-20260712081354-c3ff655c",
         "title": "Join Indian Army Agniveer Result 2026",
         "organization": "Join Indian Army",
