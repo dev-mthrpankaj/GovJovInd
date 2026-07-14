@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "top-5-side-hustles-college-students-india-2026",
+  title: "Top 5 Side Hustles for College Students in India 2026: Padhai ke Saath Best Kamaee ke Tareeke",
+  category: "Career Guidance",
+  date: "2026-07-14",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/top-5-side-hustles-college-students-india-2026.html",
+  excerpt: "College students ke liye 2026 ke top 5 side hustles: freelancing, online tutoring, content creation aur zyada. Jaaniye kaise padhai ke saath extra income banayein aur scams se bachein."
+},
+    {
   id: "g7-summit-2026-evian-france-current-affairs",
   title: "G7 Summit 2026 Evian, France: भारत की भागीदारी और परीक्षा के लिए पूरी करंट अफेयर्स जानकारी",
   category: "Current Affairs",
