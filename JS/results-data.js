@@ -14,12 +14,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://m.rbi.org.in//scripts/Result_Officers_Grade_B_General_DR_PY_2026.aspx",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/RBI-Grade-B-Officer-Result-Marks-2026.html",
         "updatedAt": "2026-07-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0053-20260712081354-c3ff655c",
