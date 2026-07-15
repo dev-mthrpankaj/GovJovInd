@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0056-20260714224208-f9f93d82",
+        "title": "UPSSSC X Ray Technician 2023 Final Result",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-14",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/ViewPdf.aspx?LxyA2xeZXtTFokNSfRuWSvpu5Q028rgSMVn7J80B6ng=",
+        "detailPage": "../Result_Details/HTML/UPSSSC-X-Ray-Technician-Final-Result-2026.html",
+        "updatedAt": "2026-07-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0057-20260714224436-fecd8e34",
+        "title": "RBI Junior Engineer JE Result 2026",
+        "organization": "Reserve Bank of India",
+        "department": "RBI",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-07-14",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/06JuniorEngineerElec_14072026.pdf",
+        "detailPage": "../Result_Details/HTML/RBI-Junior-Engineer-JE-Result-2026.html",
+        "updatedAt": "2026-07-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0054-20260713222253-ed824780",
         "title": "RBI Officer Grade B General Result Marks 2026 for 60 Post",
         "organization": "Reserve Bank of India",
