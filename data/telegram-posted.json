@@ -1571,6 +1571,20 @@
       "title": "UPSSSC Auditor and Assistant Accountant Online Form 2026 for 1829 Post",
       "lastPostedAt": "2026-07-14T08:46:46.516Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0113-20260715121404-fbd1781e": {
+      "updatedAt": "2026-07-15",
+      "hash": "ff7587bc35ca826f82dd83db2c04ffd1fcd3de8a780b484194bb0c057c60353b",
+      "title": "Railway NFR Apprentice Online Form 2026 for 6777 Post",
+      "lastPostedAt": "2026-07-15T08:06:15.675Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0114-20260715121706-03368247": {
+      "updatedAt": "2026-07-15",
+      "hash": "16c1fc4038b29ef5ddb32a92e8da351ddc2c71eab317c9959302d2fbf86dea07",
+      "title": "Delhi Cantonment Board DCB AE and JE Online Form 2026",
+      "lastPostedAt": "2026-07-15T08:06:16.309Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3963,6 +3977,20 @@
       "hash": "fa1bbb2474db576a57686cfb216836c4c8718e3819d98b429c6ab404f49be960",
       "title": "UP Police Sub Inspector SI Final Result 2026 – OUT",
       "lastPostedAt": "2026-07-14T18:01:26.240Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0056-20260714224208-f9f93d82": {
+      "updatedAt": "2026-07-15",
+      "hash": "32790cf5964b9abbf3333b374fb7296083c8f9270ad07c081a46d40f199af997",
+      "title": "UPSSSC X Ray Technician 2023 Final Result",
+      "lastPostedAt": "2026-07-15T08:06:16.788Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0057-20260714224436-fecd8e34": {
+      "updatedAt": "2026-07-15",
+      "hash": "ce1fbf0cf3ede9effc5d501446be418f61752a514bd0ce12b87c0132d9162c59",
+      "title": "RBI Junior Engineer JE Result 2026",
+      "lastPostedAt": "2026-07-15T08:06:17.197Z",
       "stateReason": "new"
     }
   }
