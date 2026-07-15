@@ -40,6 +40,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0058-20260715213614-8571564c",
+        "title": "RSSB Librarian 2024 Final Result",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "RSSB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rssb.rajasthan.gov.in/results",
+        "detailPage": "../Result_Details/HTML/RSSB-Librarian-Final-Result-2026.html",
+        "updatedAt": "2026-07-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0054-20260713222253-ed824780",
         "title": "RBI Officer Grade B General Result Marks 2026 for 60 Post",
         "organization": "Reserve Bank of India",
