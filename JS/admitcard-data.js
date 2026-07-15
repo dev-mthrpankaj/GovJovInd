@@ -84,6 +84,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0069-20260715215716-ac7b2a9d",
+        "title": "NALCO Non Executive Admit Card 2026 for 268 Post",
+        "organization": "National Aluminium Company Limited (NALCO)",
+        "department": "NALCO",
+        "category": "Public Sector",
+        "year": "2026",
+        "examDate": "2026-07-27",
+        "examEndDate": "",
+        "releaseDate": "2026-07-15",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/nalconeapr26/oecla_jun26/login.php?appid=d62cbe9f5cf5d21fa629fdfe17070028",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-07-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "admit-sheet-0053-20260710213644-f5d2a9af",
         "title": "BPSSC Havildar Instructor Admit Card/Exam Date 2026 for 122 Post",
         "organization": "Bihar Police Subordinate Services Commission",
