@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0038-20260715150627-75aba12e",
+        "title": "Railway RRB NTPC Graduate Level CBT II Answer Key 2026 – OUT | CEN 06/2025",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-07-10",
+        "examEndDate": "",
+        "releaseDate": "2026-07-15",
+        "objectionLastDate": "2026-07-22",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
+        "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
+        "detailPage": "../AnswerKey_Details/HTML/Railway-RRB-NTPC-Graduate-Level-CBT-II-Answer-Key-2026.html",
+        "updatedAt": "2026-07-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0035-20260711163654-cb7fc711",
         "title": "AIBE All India Bar Exam XXI Final Answer Key 2026",
         "organization": "All India Bar Examination",
