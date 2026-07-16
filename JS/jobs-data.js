@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0118-20260716211450-0ef9bcd2",
+        "title": "JSSC JILCCE Inter Level Online Form 2026 for 326 Post",
+        "organization": "Jharkhand Staff Selection Comission",
+        "department": "JSSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
+        "totalPosts": "326",
+        "startDate": "2026-07-20",
+        "lastDate": "2026-08-19",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://jssc.jharkhand.gov.in/application-forms-apply",
+        "officialNotification": "https://jssc.jharkhand.gov.in/sites/default/files/Brochure%20JILCCE-2026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0118-20260716211450-0ef9bcd2",
+        "updatedAt": "2026-07-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0110-20260714160300-bf5521ce",
         "title": "UP Dairy Development DEO Data Entry Operator Online Form 2026",
         "organization": "Uttar Pradesh Rojgar Sangam Sewayojan Portal",
