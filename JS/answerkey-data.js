@@ -168,7 +168,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-07-09",
         "objectionLastDate": "2026-07-15",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://uppsc.up.nic.in/Open_PDF_DB.aspx?I4PnQ0tBagmjG3pVtCZxxLIYwjGNF6yI",
         "objectionLink": "https://uppsc.up.nic.in/",
