@@ -53,7 +53,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-22",
         "examEndDate": "",
         "releaseDate": "2026-07-17",
-        "status": "upcoming",
+        "status": "available",
         "tags": [],
         "downloadLink": "https://beml.registrationform.in/",
         "detailPage": "../AdmitCard_Details/HTML/BEML-Non-Executive-Operator-Admit-Card-2026.html",
