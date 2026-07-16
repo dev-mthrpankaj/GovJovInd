@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0070-20260716211123-25f78d13",
+        "title": "RBI Officer Grade B Phase II Admit Card 2026 for 60 Post",
+        "organization": "Reserve Bank of India",
+        "department": "RBI",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-07-25",
+        "examEndDate": "2026-07-26",
+        "releaseDate": "2026-07-15",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/RBI-Grade-B-Phase-II-Admit-Card-2026.html",
+        "detailPage": "../AdmitCard_Details/HTML/RBI-Grade-B-Phase-II-Admit-Card-2026.html",
+        "updatedAt": "2026-07-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0065-20260715122652-aa82c679",
         "title": "NTA CSIR UGC NET June 2026 Admit Card",
         "organization": "National Testing Agency",
