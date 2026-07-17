@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0059-20260717124124-cac5f6a3",
+        "title": "NTA SWAYAM Result 2026 : Score Card – Out",
+        "organization": "Natinal Testing Agency",
+        "department": "NTA",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-07-16",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cnr.nic.in/Results26/SWAYAM/Login?apprefno=101562612",
+        "detailPage": "../Result_Details/HTML/NTA-SWAYAM-Scorecard-2026.html",
+        "updatedAt": "2026-07-17",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0060-20260717124145-20432e7e",
+        "title": "UPSSSC Lower PCS Eligibility Result 2026 – OUT",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-16",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=154&Result_Type=P&Exam_Code=7&Advt_Code=730&Dept_Code=578&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../Result_Details/HTML/UPSSSC-Lower-PCS-Eligibility-Result-2026.html",
+        "updatedAt": "2026-07-17",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0056-20260714224208-f9f93d82",
         "title": "UPSSSC X Ray Technician 2023 Final Result",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
