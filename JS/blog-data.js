@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "sonam-wangchuk-hunger-strike-current-affairs-analysis",
+  title: "Sonam Wangchuk Hunger Strike: लद्दाख से जंतर-मंतर तक के अनशन का पूरा घटनाक्रम और प्रतियोगी परीक्षाओं के लिए महत्वपूर्ण संवैधानिक तथ्य",
+  category: "Current Affairs",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784284445605.webp",
+  url: "student-hub/sonam-wangchuk-hunger-strike-current-affairs-analysis.html",
+  excerpt: "सोनम वांगचुक की भूख हड़ताल, छठी अनुसूची (Sixth Schedule), अनुच्छेद 371 के तहत प्रस्तावित विशेष प्रशासनिक ढांचे और हालिया राष्ट्रीय परीक्षा विसंगतियों के खिलाफ जारी आंदोलन का एक विस्तृत परीक्षा-केंद्रित विश्लेषण।"
+},
+    {
   id: "what-is-share-market-guide-top-world-indices-india-system",
   title: "What Is Share Market? Complete Guide to World's Top Stock Indices and How India's Trading System Works",
   category: "Career Guidance",
