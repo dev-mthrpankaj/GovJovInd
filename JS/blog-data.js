@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "neet-ug-2026-result-complete-guide-next-steps",
+  title: "NEET UG 2026 Result Declared: Complete Guide to Scorecard, Cutoff and Counselling Process",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784279329400.webp",
+  url: "student-hub/neet-ug-2026-result-complete-guide-next-steps.html",
+  excerpt: "NTA has declared the NEET UG 2026 result. Here is a complete, practical guide on downloading your scorecard, understanding your rank and cutoff, and preparing for MCC counselling — step by step."
+},
+    {
   id: "top-5-side-hustles-college-students-india-2026",
   title: "Top 5 Side Hustles for College Students in India 2026: Padhai ke Saath Best Kamaee ke Tareeke",
   category: "Career Guidance",
