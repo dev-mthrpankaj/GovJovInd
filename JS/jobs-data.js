@@ -110,7 +110,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "114",
         "startDate": "2026-07-08",
         "lastDate": "2026-07-16",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://govjobupdates.com/Job_Details/HTML/UP-Dairy-Development-DEO-MIS-Manager-2026.html",
         "officialNotification": "https://govjobupdates.com/Job_Details/HTML/UP-Dairy-Development-DEO-MIS-Manager-2026.html",
