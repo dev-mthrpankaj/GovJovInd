@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "what-is-share-market-guide-top-world-indices-india-system",
+  title: "What Is Share Market? Complete Guide to World's Top Stock Indices and How India's Trading System Works",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/what-is-share-market-guide-top-world-indices-india-system.html",
+  excerpt: "A story-driven, beginner-friendly guide to the share market — the world's top indices like S&P 500, Dow Jones and Nikkei, and exactly how India's own BSE-NSE-SEBI system works, step by step."
+},
+    {
   id: "neet-ug-2026-result-complete-guide-next-steps",
   title: "NEET UG 2026 Result Declared: Complete Guide to Scorecard, Cutoff and Counselling Process",
   category: "Career Guidance",
