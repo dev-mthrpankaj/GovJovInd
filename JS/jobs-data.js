@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0119-20260717123528-dca081ef",
+        "title": "IOCL Panipat Refinery Apprentices Online Form 2026 for 1450 Post",
+        "organization": "Indian Oil Corporation Limited",
+        "department": "IOCL",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Class 12th Passed from any Recognized Board in India. More Details Read the Notification. For Post wise qualification see details notification",
+        "totalPosts": "1450",
+        "startDate": "2026-07-14",
+        "lastDate": "2026-08-12",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://www.apprenticeshipindia.gov.in/",
+        "officialNotification": "https://iocl.com/admin/img/Apprenticeships/Files/90a26aa24f4347d79b3616275c5d8f07.pdf",
+        "detailPage": "../Job_Details/HTML/IOCL-Panipat-Refinery-Apprentices-2026.html",
+        "updatedAt": "2026-07-17",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0115-20260716205802-97ca1c2a",
         "title": "ICERT Scientist B Online Form 2026 for 133 Post",
         "organization": "Indian Computer Emergency Response Team",
