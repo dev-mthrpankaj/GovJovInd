@@ -7,7 +7,7 @@
   title: "What Is Share Market? Complete Guide to World's Top Stock Indices and How India's Trading System Works",
   category: "Career Guidance",
   date: "2026-07-17",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784280197531.webp",
   url: "student-hub/what-is-share-market-guide-top-world-indices-india-system.html",
   excerpt: "A story-driven, beginner-friendly guide to the share market — the world's top indices like S&P 500, Dow Jones and Nikkei, and exactly how India's own BSE-NSE-SEBI system works, step by step."
 },
