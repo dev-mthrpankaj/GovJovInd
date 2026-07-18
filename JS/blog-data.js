@@ -7,7 +7,7 @@
   title: "How Cutoffs and Merit Lists Are Decided in Government Exams: Complete Guide",
   category: "Career Guidance",
   date: "2026-07-17",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784362040719.webp",
   url: "student-hub/how-cutoffs-merit-lists-decided-in-government-exams.html",
   excerpt: "How is a government exam cutoff actually decided? A clear explanation of merit lists, normalization, category-wise cutoffs, and why the number changes every year."
 },
@@ -25,7 +25,7 @@
   title: "How to Read a Government Job Notification (PDF) Correctly: Step-by-Step Guide",
   category: "Career Guidance",
   date: "2026-07-17",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784363540216.webp",
   url: "student-hub/how-to-read-government-job-notification-pdf-correctly.html",
   excerpt: "A complete, section-by-section guide to reading a government job notification PDF correctly — eligibility, dates, fees, and selection process — so you never miss a critical detail."
 },
