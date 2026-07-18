@@ -16,7 +16,7 @@
   title: "Documents Required for Government Job Applications in India: Complete Checklist",
   category: "Career Guidance",
   date: "2026-07-17",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784363897702.webp",
   url: "student-hub/documents-required-for-government-job-applications-checklist.html",
   excerpt: "Every document you may need for a government job application and verification in India — identity, education, category certificates, and more — with practical tips on preparing each one in advance."
 },
