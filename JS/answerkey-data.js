@@ -124,7 +124,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-07-10",
         "objectionLastDate": "2026-07-17",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://bsnl.examresponse.in/",
         "objectionLink": "https://bsnl.examresponse.in/",
