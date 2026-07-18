@@ -3,6 +3,51 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "how-cutoffs-merit-lists-decided-in-government-exams",
+  title: "How Cutoffs and Merit Lists Are Decided in Government Exams: Complete Guide",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/how-cutoffs-merit-lists-decided-in-government-exams.html",
+  excerpt: "How is a government exam cutoff actually decided? A clear explanation of merit lists, normalization, category-wise cutoffs, and why the number changes every year."
+},
+    {
+  id: "documents-required-for-government-job-applications-checklist",
+  title: "Documents Required for Government Job Applications in India: Complete Checklist",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/documents-required-for-government-job-applications-checklist.html",
+  excerpt: "Every document you may need for a government job application and verification in India — identity, education, category certificates, and more — with practical tips on preparing each one in advance."
+},
+    {
+  id: "how-to-read-government-job-notification-pdf-correctly",
+  title: "How to Read a Government Job Notification (PDF) Correctly: Step-by-Step Guide",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/how-to-read-government-job-notification-pdf-correctly.html",
+  excerpt: "A complete, section-by-section guide to reading a government job notification PDF correctly — eligibility, dates, fees, and selection process — so you never miss a critical detail."
+},
+    {
+  id: "government-job-categories-group-a-b-c-d-explained",
+  title: "Government Job Categories in India Explained: Group A, B, C and D — Complete Guide",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/government-job-categories-group-a-b-c-d-explained.html",
+  excerpt: "What do Group A, B, C and D government jobs actually mean in India? A complete, easy-to-understand guide to the classification system, gazetted status, pay levels, and how to choose the right category for your goals."
+},
+    {
+  id: "how-to-prepare-government-exams-while-working-full-time-job",
+  title: "How to Prepare for Government Exams While Working a Full-Time Job: Complete Time Management Guide",
+  category: "Career Guidance",
+  date: "2026-07-17",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/how-to-prepare-government-exams-while-working-full-time-job.html",
+  excerpt: "A realistic, sustainable time-management framework for working professionals preparing for competitive government exams — without burning out or falling behind."
+},
+    {
   id: "sonam-wangchuk-hunger-strike-current-affairs-analysis",
   title: "Sonam Wangchuk Hunger Strike: लद्दाख से जंतर-मंतर तक के अनशन का पूरा घटनाक्रम और प्रतियोगी परीक्षाओं के लिए महत्वपूर्ण संवैधानिक तथ्य",
   category: "Current Affairs",
