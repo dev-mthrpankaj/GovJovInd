@@ -34,7 +34,7 @@
   title: "Government Job Categories in India Explained: Group A, B, C and D — Complete Guide",
   category: "Career Guidance",
   date: "2026-07-17",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784364173257.webp",
   url: "student-hub/government-job-categories-group-a-b-c-d-explained.html",
   excerpt: "What do Group A, B, C and D government jobs actually mean in India? A complete, easy-to-understand guide to the classification system, gazetted status, pay levels, and how to choose the right category for your goals."
 },
