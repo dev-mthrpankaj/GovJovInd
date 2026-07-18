@@ -14,12 +14,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rssb.rajasthan.gov.in/results",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/Rajasthan-RSSB-Platoon-Commander-Final-Result-2026.html",
         "updatedAt": "2026-07-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0062-20260718211516-244ab6cd",
@@ -32,12 +32,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://esb.mp.gov.in/results/RESULT_25/Subedar_Steno_ASI_RES25/FINAL_RESULT/default_Results.htm",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/MPESB-MP-Police-Subedar-ASI-Final-Result-2026.html",
         "updatedAt": "2026-07-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0063-20260718211647-f2f96bde",
@@ -50,12 +50,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://aibe.digivarsity.online/WebApp/Forms/UserAuthentication.aspx",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/AIBE-All-India-Bar-Exam-XXI-Result-2026.html",
         "updatedAt": "2026-07-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0059-20260717124124-cac5f6a3",
