@@ -43,7 +43,7 @@
   title: "How to Prepare for Government Exams While Working a Full-Time Job: Complete Time Management Guide",
   category: "Career Guidance",
   date: "2026-07-17",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784364554495.webp",
   url: "student-hub/how-to-prepare-government-exams-while-working-full-time-job.html",
   excerpt: "A realistic, sustainable time-management framework for working professionals preparing for competitive government exams — without burning out or falling behind."
 },
