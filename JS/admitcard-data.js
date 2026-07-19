@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0075-20260719124327-84175ef9",
+        "title": "BSUSC Bihar Assistant Professor Admit Card 2026 for 3687 Post",
+        "organization": "Bihar State University Service Commission (BSUSC)",
+        "department": "BSUSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-20",
+        "examEndDate": "2026-07-27",
+        "releaseDate": "2026-07-19",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://hedbiharrec.samarth.edu.in/index.php/site/index",
+        "detailPage": "../AdmitCard_Details/HTML/BSUSC-Bihar-Assistant-Professor-Admit-Card-2026.html",
+        "updatedAt": "2026-07-19",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0071-20260718090539-a4a9d149",
         "title": "UPSSSC ASO Assistant Statistical Officer Exam City 2026 | 1565 Post",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission (UPSSSC)",

@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0064-20260719124531-a6e0f3d4",
+        "title": "Bank of Baroda Apprentice Result 2026 for 5000 Post",
+        "organization": "Bank of Baroda",
+        "department": "BOB",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-07-19",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2026/26-07/Provisionally-selected-candidates-18-03.pdf",
+        "detailPage": "../Result_Details/HTML/Bank-of-Baroda-Apprentice-Result-2026.html",
+        "updatedAt": "2026-07-19",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0061-20260718211123-3832dcef",
         "title": "Rajasthan RSSB Platoon Commander Final Result 2026",
         "organization": "Rajasthan Staff Selection Board (RSSB)",
