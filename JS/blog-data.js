@@ -3,6 +3,16 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "rrb-ntpc-graduate-cbt2-rank-predictor",
+  title: "RRB NTPC Graduate Level CBT-2 Rank Predictor 2026: सटीक रैंक और सेफ स्कोर विश्लेषण",
+  category: "Rank Prediction",
+  date: "2026-07-19",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1783588180608.webp",
+  url: "student-hub/rrb-ntpc-graduate-cbt2-rank-predictor.html",
+  excerpt: "RRB NTPC Graduate Level CBT-2 परीक्षा के बाद अपनी सटीक रैंक और संभावित कटऑफ जानने के लिए हमारे Rank Predictor टूल का उपयोग करें। जानिए सेफ स्कोर, रैंकिंग पैटर्न और चयन की संभावनाएं।"
+},
+    
+    {
   id: "how-cutoffs-merit-lists-decided-in-government-exams",
   title: "How Cutoffs and Merit Lists Are Decided in Government Exams: Complete Guide",
   category: "Career Guidance",
