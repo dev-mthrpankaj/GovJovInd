@@ -4,6 +4,91 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "rrb-ntpc-gl-cbt-2-2026",
+        "examName": "RRB NTPC GRADUATE LEVEL CBT-2",
+        "board": "RRB",
+        "examType": "online",
+        "sheetName": "RRB NTPC GRADUATE LEVEL CBT-2",
+        "totalQuestions": 120,
+        "marksPerCorrect": 1,
+        "negativeMarking": 0.33,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "online"
+        ],
+        "subjects": [
+            {
+                "name": "General Awareness",
+                "questions": 50
+            },
+            {
+                "name": "Mathematics",
+                "questions": 35
+            },
+            {
+                "name": "General Intelligence and Reasoning",
+                "questions": 35
+            }
+        ],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [
+            "UR",
+            "OBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Jammu and Kashmir",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry"
+        ],
+        "disabled": false
+    },
+    {
         "examId": "rrb-je-cbt-2-2026",
         "examName": "RRB Junior Engineer JE CBT-2",
         "board": "RRB",
