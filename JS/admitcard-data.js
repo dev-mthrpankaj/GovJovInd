@@ -433,7 +433,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-19",
         "examEndDate": "",
         "releaseDate": "2026-07-10",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsconline.nic.in/",
         "detailPage": "../AdmitCard_Details/HTML/UPSC-CAPF-Admit-Card-2026.html",
