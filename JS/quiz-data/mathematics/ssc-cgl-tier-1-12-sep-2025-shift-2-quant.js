@@ -389,21 +389,7 @@
             explanation: "Sum of angles in a quadrilateral \\(= 360\\deg\\). Ratio \\(1:2:3:4\\), sum of parts \\(= 10\\). Smallest angle \\(= \\frac{1}{10} \\times 360 = 36\\deg\\).",
             explanationTextMap: text("चतुर्भुज के कोणों का योग \\(= 360\\deg\\)। अनुपात \\(1:2:3:4\\), भागों का योग \\(= 10\\)। सबसे छोटा कोण \\(= \\frac{1}{10} \\times 360 = 36\\deg\\)।", "Sum of angles in a quadrilateral \\(= 360\\deg\\). Ratio \\(1:2:3:4\\), sum of parts \\(= 10\\). Smallest angle \\(= \\frac{1}{10} \\times 360 = 36\\deg\\).")
         },
-        {
-            topic: "Trigonometry",
-            difficulty: "Easy",
-            question: "If \\(\\sec A = \\frac{13}{5}\\) and \\(A\\) is acute, find \\(\\sin A\\).",
-            questionTextMap: text("\\(\\sec A = \\frac{13}{5}\\) और \\(A\\) न्यूनकोण है, तो \\(\\sin A\\) ज्ञात कीजिए।", "If \\(\\sec A = \\frac{13}{5}\\) and \\(A\\) is acute, find \\(\\sin A\\)."),
-            options: [
-                option("\\(\\frac{5}{13}\\)", "\\(\\frac{5}{13}\\)"),
-                option("\\(\\frac{12}{13}\\)", "\\(\\frac{12}{13}\\)"),
-                option("\\(\\frac{1}{2}\\)", "\\(\\frac{1}{2}\\)"),
-                option("\\(\\frac{\\sqrt{3}}{2}\\)", "\\(\\frac{\\sqrt{3}}{2}\\)")
-            ],
-            correctAnswer: 0,
-            explanation: "\\(\\sec A = \\frac{13}{5} \\Rightarrow \\cos A = \\frac{5}{13}\\). \\(\\sin A = \\sqrt{1 - \\cos^2 A} = \\sqrt{1 - \\frac{25}{169}} = \\sqrt{\\frac{144}{169}} = \\frac{12}{13}\\).",
-            explanationTextMap: text("\\(\\sec A = \\frac{13}{5} \\Rightarrow \\cos A = \\frac{5}{13}\\)। \\(\\sin A = \\sqrt{1 - \\cos^2 A} = \\sqrt{1 - \\frac{25}{169}} = \\sqrt{\\frac{144}{169}} = \\frac{12}{13}\\)।", "\\(\\sec A = \\frac{13}{5} \\Rightarrow \\cos A = \\frac{5}{13}\\). \\(\\sin A = \\sqrt{1 - \\cos^2 A} = \\sqrt{1 - \\frac{25}{169}} = \\sqrt{\\frac{144}{169}} = \\frac{12}{13}\\).")
-        }
+
     ].map((question, index) => ({
         id: `${quizId}-q${String(index + 1).padStart(2, "0")}`,
         subject: "Quantitative Aptitude",
