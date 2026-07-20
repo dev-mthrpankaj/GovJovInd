@@ -16,12 +16,32 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://sso.rajasthan.gov.in/",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/RPSC-Junior-Legal-Officer-JLO-Admit-Card-2026.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "admit-sheet-0077-20260720174525-53a73726",
+        "title": "MPESB PSTST MP Primary School Teacher Counseling 2026",
+        "organization": "MPESB",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-19",
+        "examEndDate": "2026-07-21",
+        "releaseDate": "2026-07-17",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://trc.mponline.gov.in/Portal/Services/TRC26/DPI/PS/index.aspx",
+        "detailPage": "../AdmitCard_Details/HTML/MPESB-Primary-School-Teacher-PSTST-Admit-Card-2025.html",
+        "updatedAt": "2026-07-20",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0078-20260720210607-78d457f1",
@@ -36,12 +56,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=97789&orgId=33128",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/RRB-Railway-ALP-CBT-2-Admit-Card-2026.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0079-20260720210814-8cccc768",
@@ -56,12 +76,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_5_2026_weadmitcards_v1/applicationIndex",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-05-2026.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0080-20260720211003-d183f79a",
@@ -76,12 +96,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "upcoming",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_6_2026_weadmitcards_v2/applicationIndex",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-May-2026.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0075-20260719124327-84175ef9",
