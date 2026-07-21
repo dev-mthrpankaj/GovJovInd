@@ -4,6 +4,109 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "rssb-forester-2026",
+        "examName": "RSSB FORESTER 2026",
+        "board": "RSSB",
+        "examType": "online",
+        "sheetName": "RSSB FORESTER 2026",
+        "totalQuestions": 100,
+        "marksPerCorrect": 1,
+        "negativeMarking": 0.33,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "offline"
+        ],
+        "subjects": [
+            {
+                "name": "General Knowledge and Social Studies",
+                "questions": 50
+            },
+            {
+                "name": "Everyday Science",
+                "questions": 20
+            },
+            {
+                "name": "Mathematics",
+                "questions": 15
+            },
+            {
+                "name": "National-level and the State of Rajasthan Current Affairs",
+                "questions": 15
+            }
+        ],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [
+            "UR",
+            "OBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Ajmer",
+            "Alwar",
+            "Anupgarh",
+            "Balotra",
+            "Banswara",
+            "Baran",
+            "Barmer",
+            "Beawar",
+            "Bharatpur",
+            "Bhilwara",
+            "Bikaner",
+            "Bundi",
+            "Chittorgarh",
+            "Churu",
+            "Dausa",
+            "Deeg",
+            "Didwana-Kuchaman",
+            "Dholpur",
+            "Dudu",
+            "Dungarpur",
+            "Gangapur City",
+            "Hanumangarh",
+            "Jaipur",
+            "Jaipur Rural",
+            "Jaisalmer",
+            "Jalore",
+            "Jhalawar",
+            "Jhunjhunu",
+            "Jodhpur",
+            "Jodhpur Rural",
+            "Karauli",
+            "Kekri",
+            "Khairthal-Tijara",
+            "Kota",
+            "Kotputli-Behror",
+            "Nagaur",
+            "Neem Ka Thana",
+            "Pali",
+            "Phalodi",
+            "Pratapgarh",
+            "Rajsamand",
+            "Salumbar",
+            "Sanchore",
+            "Sawai Madhopur",
+            "Shahpura",
+            "Sikar",
+            "Sirohi",
+            "Sri Ganganagar",
+            "Tonk",
+            "Udaipur"
+        ],
+        "disabled": false
+    },
+    {
         "examId": "rrb-ntpc-gl-cbt-2-2026",
         "examName": "RRB NTPC GRADUATE LEVEL CBT-2",
         "board": "RRB",
