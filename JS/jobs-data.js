@@ -800,7 +800,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6715",
         "startDate": "2026-07-01",
         "lastDate": "2026-07-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Institute of Banking Personal Selection Recruitment 2026",
             "IBPS PO Probationary Officer XVI",
@@ -830,7 +830,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "745",
         "startDate": "2026-07-01",
         "lastDate": "2026-07-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Institute of Banking Personal Selection Recruitment 2026",
             "IBPS SO Specialist Officers XVI",
@@ -1040,7 +1040,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "26",
         "startDate": "2026-06-27",
         "lastDate": "2026-07-20",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Indian Space Research Organisation Recruitment 2026",
             "ISRO ISTRAC Various Post",
@@ -1280,7 +1280,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "15",
         "startDate": "2026-06-22",
         "lastDate": "2026-07-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Chhattisgarh Public Service Commission (CGPSC) Recruitment 2026",
             "CGPSC ADPPO",
@@ -1490,7 +1490,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "16",
         "startDate": "2026-06-21",
         "lastDate": "2026-07-20",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Central Registry of Securitisation Asset Reconstruction and Security Recruitment 2026",
             "CERSAI Manager",
@@ -1520,7 +1520,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "53",
         "startDate": "2026-06-29",
         "lastDate": "2026-07-20",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "National Board of Examination (NBE) Recruitment 2026",
             "NBEMS Group A",
@@ -1642,7 +1642,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "15",
         "startDate": "2026-06-22",
         "lastDate": "2026-07-21",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Chhattisgarh Public Service Commission (CGPSC) Recruitment 2026",
             "CGPSC Assistant District Prosecution Officer ADPO",
@@ -3502,7 +3502,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "708",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-20",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Forest Guard / Wildlife Guard",
