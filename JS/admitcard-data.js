@@ -53,7 +53,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-05",
         "examEndDate": "",
         "releaseDate": "2026-07-24",
-        "status": "upcoming",
+        "status": "available",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_7_2026_weadmitcards_v3/applicationIndex",
         "detailPage": "../AdmitCard_Details/HTML/BPSSC-ASI-Technical-Admit-Card-2026.html",
