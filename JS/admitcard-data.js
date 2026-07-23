@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0085-20260723192448-b73bf49c",
+        "title": "BPSSC ASI Technical Admit Card 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "BPSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-05",
+        "examEndDate": "",
+        "releaseDate": "2026-07-24",
+        "status": "upcoming",
+        "tags": [],
+        "downloadLink": "https://apply-bpssc.com/bpssc_7_2026_weadmitcards_v3/applicationIndex",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-07-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "admit-sheet-0076-20260720174151-11fe2c5d",
         "title": "RPSC Junior Legal Officer JLO Admit Card 2026",
         "organization": "Rajasthan Public Service Commission (RPSC)",
