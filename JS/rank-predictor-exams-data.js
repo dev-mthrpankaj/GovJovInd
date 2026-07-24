@@ -95,7 +95,8 @@ window.GovJobUpdatesRankPredictorExams = [
             "Sirohi",
             "Sri Ganganagar",
             "Tonk",
-            "Udaipur"
+            "Udaipur",
+            "Other State"
         ],
         "disabled": false
     },
