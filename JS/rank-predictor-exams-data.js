@@ -4,10 +4,106 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "rssb-ldc-jra-bb6-2026",
+        "examName": "RSSB LDC Grade II / Junior Assistant 2026",
+        "board": "RSSB",
+        "examType": "offline",
+        "sheetName": "RSSB LDC Grade II / Junior Assistant 2026",
+        "totalQuestions": 300,
+        "marksPerCorrect": 0.6666666666666666,
+        "negativeMarking": 0.33,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "offline"
+        ],
+        "subjects": [
+            {
+                "name": "Paper 1",
+                "questions": 150
+            },
+            {
+                "name": "Paper 2",
+                "questions": 150
+            }
+        ],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [
+            "UR",
+            "OBC",
+            "MBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Ajmer",
+            "Alwar",
+            "Anupgarh",
+            "Balotra",
+            "Banswara",
+            "Baran",
+            "Barmer",
+            "Beawar",
+            "Bharatpur",
+            "Bhilwara",
+            "Bikaner",
+            "Bundi",
+            "Chittorgarh",
+            "Churu",
+            "Dausa",
+            "Deeg",
+            "Didwana-Kuchaman",
+            "Dholpur",
+            "Dudu",
+            "Dungarpur",
+            "Gangapur City",
+            "Hanumangarh",
+            "Jaipur",
+            "Jaipur Rural",
+            "Jaisalmer",
+            "Jalore",
+            "Jhalawar",
+            "Jhunjhunu",
+            "Jodhpur",
+            "Jodhpur Rural",
+            "Karauli",
+            "Kekri",
+            "Khairthal-Tijara",
+            "Kota",
+            "Kotputli-Behror",
+            "Nagaur",
+            "Neem Ka Thana",
+            "Pali",
+            "Phalodi",
+            "Pratapgarh",
+            "Rajsamand",
+            "Salumbar",
+            "Sanchore",
+            "Sawai Madhopur",
+            "Shahpura",
+            "Sikar",
+            "Sirohi",
+            "Sri Ganganagar",
+            "Tonk",
+            "Udaipur"
+        ],
+        "disabled": false
+    },
+    {
         "examId": "rssb-forester-2026",
         "examName": "RSSB FORESTER 2026",
         "board": "RSSB",
-        "examType": "online",
+        "examType": "offline",
         "sheetName": "RSSB FORESTER 2026",
         "totalQuestions": 100,
         "marksPerCorrect": 1,
@@ -40,6 +136,7 @@ window.GovJobUpdatesRankPredictorExams = [
         "categories": [
             "UR",
             "OBC",
+            "MBC",
             "EWS",
             "SC",
             "ST"
@@ -139,6 +236,7 @@ window.GovJobUpdatesRankPredictorExams = [
         "categories": [
             "UR",
             "OBC",
+            "MBC",
             "EWS",
             "SC",
             "ST"
