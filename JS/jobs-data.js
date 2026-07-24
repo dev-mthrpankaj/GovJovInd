@@ -614,7 +614,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "148",
         "startDate": "2026-07-09",
         "lastDate": "2026-07-24",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100936/login.html",
         "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/07/cotcorp_notification_SarkariResult_Com.pdf",
@@ -1648,7 +1648,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "99",
         "startDate": "2026-06-16",
         "lastDate": "2026-07-24",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "UPSRTC Recruitment 2026",
             "UPSRTC UP Bus Conductor",

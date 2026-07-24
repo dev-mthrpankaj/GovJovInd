@@ -273,7 +273,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-24",
         "examEndDate": "",
         "releaseDate": "2026-07-17",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/Rajasthan-RSSB-Women-Supervisor-City-Intimation-2026.html",
         "detailPage": "../AdmitCard_Details/HTML/Rajasthan-RSSB-Women-Supervisor-City-Intimation-2026.html",
