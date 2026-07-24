@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0066-20260724113550-ded6c6ac",
+        "title": "UPSC Geo Scientist Mains Exam Result 2026 – Out",
+        "organization": "Union Public Service Commision",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-07-20",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.upsc.gov.in/sites/default/files/WR-RollList-CGeoSntstMain-2026-Engl-200726.pdf",
+        "detailPage": "../Result_Details/HTML/UPSC-Geo-Scientist-Mains-Result-2026.html",
+        "updatedAt": "2026-07-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0064-20260719124531-a6e0f3d4",
         "title": "Bank of Baroda Apprentice Result 2026 for 5000 Post",
         "organization": "Bank of Baroda",
