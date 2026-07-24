@@ -1676,6 +1676,13 @@
       "title": "IGCAR Apprentices Online Form 2026 for 200 Post",
       "lastPostedAt": "2026-07-18T16:41:22.420Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0125-20260724130107-31d49b2b": {
+      "updatedAt": "2026-07-24",
+      "hash": "8e82897ccc98d40da262a252aea5ebb1d2825935ea470c31dcb029130d9206dd",
+      "title": "RITES Assistant Manager Online Form 2026",
+      "lastPostedAt": "2026-07-24T08:44:01.594Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -4320,6 +4327,20 @@
       "hash": "1e64c6a36eb65805d9fd32d283f4585da0eb3df68a71f41ea538829009dae91f",
       "title": "UPSC Geo Scientist Mains Exam Result 2026 – Out",
       "lastPostedAt": "2026-07-24T06:14:32.492Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0065-20260724113356-2dece984": {
+      "updatedAt": "2026-07-24",
+      "hash": "3366ccdb9e282aa2dfcc9eeafa5b6e1248a54b79e726efe834db633227edeeae",
+      "title": "BPSC 70th Result 2026 Marks – OUT",
+      "lastPostedAt": "2026-07-24T08:44:02.348Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0067-20260724122633-ddcd9031": {
+      "updatedAt": "2026-07-24",
+      "hash": "9488b0a75ee9236a23ce4e8a58c4a8b3843737cc20ab9c4dbbc87951805eb417",
+      "title": "MP Police ASI and Head Constable Computer PPT Result 2026",
+      "lastPostedAt": "2026-07-24T08:44:02.822Z",
       "stateReason": "new"
     }
   }

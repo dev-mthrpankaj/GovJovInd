@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0125-20260724130107-31d49b2b",
+        "title": "RITES Assistant Manager Online Form 2026",
+        "organization": "RITES Limited",
+        "department": "RITES Limited",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "Bachelor Degree in Mechanical Engineering/Technology in Mechanical/ Production/ Production & Industrial/ Manufacturing/ Mechanical/Railways/Mechatronics & Automobile Passed from any Recognized University in India.",
+        "totalPosts": "24",
+        "startDate": "2026-07-17",
+        "lastDate": "2026-08-17",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://recruit.rites.com/frmRegistration.aspx",
+        "officialNotification": "https://www.rites.com/Upload/Career/RG-11-26-AM-Mech_adv_pdf-2026-Jul-17-14-25-24.pdf",
+        "detailPage": "../Job_Details/HTML/RITES-Assistant-Manager-Mechanical-2026.html",
+        "updatedAt": "2026-07-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0120-20260718085654-dd3028e7",
         "title": "ONGC Engineer Graduate Trainee Online Form 2026 for 52 Post",
         "organization": "ONGC",
