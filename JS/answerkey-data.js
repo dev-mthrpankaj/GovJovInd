@@ -48,6 +48,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "answerkey-sheet-0043-20260724184552-ec3c7686",
+        "title": "Rajasthan RSSB LDC, Jr Assistant Answer Key 2026",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "RSSB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-05",
+        "examEndDate": "",
+        "releaseDate": "2026-07-24",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://rssb.rajasthan.gov.in/answerkeys",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/Rajasthan-RSSB-LDC-Jr-Assistant-Answer-Key-2026.html",
+        "updatedAt": "2026-07-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0039-20260720173744-1370f07e",
         "title": "RSSB Forester Answer Key 2026 – OUT",
         "organization": "Rajasthan Staff Selection Board (RSSB)",
