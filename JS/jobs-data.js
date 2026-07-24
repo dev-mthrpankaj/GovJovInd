@@ -542,7 +542,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "107",
         "startDate": "2026-07-10",
         "lastDate": "2026-07-23",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/Attestation/Home/Home.aspx",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/07/mppsc-adpo-re-open-notice.pdf",
