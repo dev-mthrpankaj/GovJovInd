@@ -985,18 +985,18 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0093": {
-      "updatedAt": "2026-07-01",
-      "hash": "d3c598c10f13596b2627ae770f186c15687c4fb26a15186e9f781f87e04a12f4",
-      "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 6715 Post",
-      "lastPostedAt": "2026-07-05T08:18:08.047Z",
-      "stateReason": "new"
+      "updatedAt": "2026-07-25",
+      "hash": "5bc98656dfedde04271abd23dfba03bd4453f00c8c385663b578354681dad5aa",
+      "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 7365 Post",
+      "lastPostedAt": "2026-07-25T14:14:07.321Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0094": {
-      "updatedAt": "2026-07-01",
-      "hash": "86e6a40003d80bd01836bf43df6dada4cbc46353e534ae9bac71e8e1bb62ddd7",
-      "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 745 Post",
-      "lastPostedAt": "2026-07-05T08:18:08.435Z",
-      "stateReason": "new"
+      "updatedAt": "2026-07-25",
+      "hash": "e9da8254aef8ba41db55fbcdd3bb6e11e4f66ddbd1623c9e10c5d84d7b15d0dc",
+      "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 1035 Post",
+      "lastPostedAt": "2026-07-25T14:14:08.049Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0095": {
       "updatedAt": "2026-07-01",
@@ -1566,11 +1566,11 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0109-20260713223007-bdcd4c08": {
-      "updatedAt": "2026-07-14",
-      "hash": "f4bf595bd61d461507c4f475f21420afe0823445c3288609bbfdccb2cdaea83c",
+      "updatedAt": "2026-07-25",
+      "hash": "79c17c28bf3c7723a78d24faa3044de6769d4f08c779a81e8af8ead681b6fa70",
       "title": "UPSSSC Auditor and Assistant Accountant Online Form 2026 for 1829 Post",
-      "lastPostedAt": "2026-07-14T08:46:46.516Z",
-      "stateReason": "new"
+      "lastPostedAt": "2026-07-25T14:14:08.439Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0113-20260715121404-fbd1781e": {
       "updatedAt": "2026-07-15",
@@ -1703,6 +1703,13 @@
       "hash": "3114ff9f80a8da6ad7964031ff3a5d913b767093c0033685f2653dd165be3ecf",
       "title": "Union Bank SO Specialist Officer Online Form 2026 for 395 Post",
       "lastPostedAt": "2026-07-24T11:55:47.509Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0136-20260724141947-8edace65": {
+      "updatedAt": "2026-07-25",
+      "hash": "4ae59ccebc8f73cd34a8d87267d02a42d2145e10fb19ff1e30cf8a92daf5ab24",
+      "title": "UPESSC Principal Online Form 2026 for 111 Post",
+      "lastPostedAt": "2026-07-25T14:14:08.836Z",
       "stateReason": "new"
     }
   },
