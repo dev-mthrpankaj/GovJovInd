@@ -80,7 +80,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-07-25",
         "objectionLastDate": "",
-        "status": "upcoming",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://rssb.rajasthan.gov.in/storage/answerkey_item/1784526744.pdf",
         "objectionLink": "",
