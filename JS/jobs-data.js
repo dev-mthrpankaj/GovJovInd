@@ -170,7 +170,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "379",
         "startDate": "2026-07-26",
         "lastDate": "2026-08-15",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://sssc.uk.gov.in/",
         "officialNotification": "https://cdnbbsr.s3waas.gov.in/s34ffd0e19d2069412274bd3025b0e176c/uploads/2026/07/202607212116240563.pdf",
