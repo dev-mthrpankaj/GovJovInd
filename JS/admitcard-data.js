@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0086-20260726072317-c8743ec6",
+        "title": "RRB Railway Group D Exam City Details 2026 for 22195",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-08-03",
+        "examEndDate": "2026-08-21",
+        "releaseDate": "2026-07-24",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101714/login.html",
+        "detailPage": "../AdmitCard_Details/HTML/RRB-Railway-Group-D-City-Intimation-2026.html",
+        "updatedAt": "2026-07-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0081-20260723164911-6440bc4d",
         "title": "Delhi High Court HJS Admit Card 2026 – Released",
         "organization": "Delhi High Court",
