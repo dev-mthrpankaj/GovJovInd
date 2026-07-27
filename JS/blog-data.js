@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  {
+  id: "cjp-jantar-mantar-protest-dharmendra-pradhan-resignation",
+  title: "CJP जंतर मंतर प्रदर्शन 2026: NEET पेपर लीक से धर्मेंद्र प्रधान के इस्तीफे तक की पूरी कहानी",
+  category: "Current Affairs",
+  date: "2026-07-27",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp",
+  url: "student-hub/cjp-jantar-mantar-protest-dharmendra-pradhan-resignation.html",
+  excerpt: "कॉकरोच जनता पार्टी (CJP) के जंतर मंतर आंदोलन की पूरी टाइमलाइन: NEET-UG पेपर लीक, सोनम वांगचुक की भूख हड़ताल, संसद मार्च पर पुलिस कार्रवाई और शिक्षा मंत्री धर्मेंद्र प्रधान के इस्तीफे तक की पूरी जानकारी।"
+},    
   id: "rrb-ntpc-graduate-cbt2-rank-predictor",
   title: "RRB NTPC Graduate Level CBT-2 Rank Predictor 2026: सटीक रैंक और सेफ स्कोर विश्लेषण",
   category: "Rank Prediction",
