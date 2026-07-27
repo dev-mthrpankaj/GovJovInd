@@ -1,5 +1,5 @@
 (function () {
-  const thumbnail = "../Assets/Home%20Page/Government%20Job%20Banner.webp";
+  const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
     {
