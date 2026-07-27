@@ -434,7 +434,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "750",
         "startDate": "2026-07-07",
         "lastDate": "2026-07-27",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://beep.bfsissc.com/candidate_register/mkt",
         "officialNotification": "https://www.iob.bank.in/documents/d/guest/web-ad-750-vac-2026-27",
@@ -1304,7 +1304,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "267",
         "startDate": "2026-06-29",
         "lastDate": "2026-07-27",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Jawaharlal Nehru University Recruitment 2026",
             "JNU Non Teaching Post",
@@ -1604,7 +1604,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "500",
         "startDate": "2026-06-25",
         "lastDate": "2026-07-27",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Union Public Service Commission Recruitment 2026",
             "UPSC IAS Mains",
