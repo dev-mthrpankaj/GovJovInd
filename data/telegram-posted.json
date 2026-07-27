@@ -1774,6 +1774,20 @@
       "title": "RPSC Physiotherapist Online Form 2026",
       "lastPostedAt": "2026-07-25T15:58:38.034Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0144-20260726101052-bac2bf03": {
+      "updatedAt": "2026-07-26",
+      "hash": "9a216150772d6220ee56f973462dea9c82637b8c91da85c9c437c87d55ddc521",
+      "title": "UPSSSC Forensic Science Laboratory Online Form 2026 for 208 Post",
+      "lastPostedAt": "2026-07-26T06:33:01.540Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0145-20260726101406-1c5c0c99": {
+      "updatedAt": "2026-07-26",
+      "hash": "963c127033233a24af4720270b181db4b5b857fe4b3fa70b748946233d03e59b",
+      "title": "SPMCIL Assistant Manager Online Form 2026",
+      "lastPostedAt": "2026-07-26T06:33:02.479Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -4446,6 +4460,34 @@
       "hash": "9488b0a75ee9236a23ce4e8a58c4a8b3843737cc20ab9c4dbbc87951805eb417",
       "title": "MP Police ASI and Head Constable Computer PPT Result 2026",
       "lastPostedAt": "2026-07-24T08:44:02.822Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0068-20260726103503-6cdc9f35": {
+      "updatedAt": "2026-07-26",
+      "hash": "4814c70fdb8649875e393ab98acd8d22c41bb5f152ac0fd09e4117334695bbe3",
+      "title": "UPPSC GIC Lecturer Government Inter College Result 2026",
+      "lastPostedAt": "2026-07-26T06:33:02.951Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0069-20260726103831-57506623": {
+      "updatedAt": "2026-07-26",
+      "hash": "f4c8384172cc027e61fd4e4449b51127498f2fafdd65f6be55fb252461676e75",
+      "title": "SBI CBO Circle Based Officers Final Result 2026",
+      "lastPostedAt": "2026-07-26T06:33:03.371Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0070-20260726104037-eb941eec": {
+      "updatedAt": "2026-07-26",
+      "hash": "3d23bdd9a4adbd5024a76b521a98cd9ea65dbc883a18926789d461643a8be437",
+      "title": "UPSC Engineering Services Mains Result 2026",
+      "lastPostedAt": "2026-07-26T06:33:03.980Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0071-20260726104324-850c4a7b": {
+      "updatedAt": "2026-07-26",
+      "hash": "c4f62a87da6410ad4849fca0dd3035500143a14d489cb23149b777f47195a2a3",
+      "title": "Union Bank UBI Apprentices Result 2026 for 1865 Post",
+      "lastPostedAt": "2026-07-26T06:33:07.842Z",
       "stateReason": "new"
     }
   }
