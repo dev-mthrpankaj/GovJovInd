@@ -1788,6 +1788,20 @@
       "title": "SPMCIL Assistant Manager Online Form 2026",
       "lastPostedAt": "2026-07-26T06:33:02.479Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0147-20260728121829-67d922aa": {
+      "updatedAt": "2026-07-28",
+      "hash": "b575b49c44caa7c0f5980b25981ba1c837ba8054d990376f7f1964007b9b64c3",
+      "title": "UPSSSC Cane Supervisor Online Form 2026 for 1182 Post",
+      "lastPostedAt": "2026-07-28T17:00:35.816Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0148-20260728122210-2c1c4400": {
+      "updatedAt": "2026-07-28",
+      "hash": "45fe1b2ef81c544f90dea8396f0aecd67d39e286fb7ecbe45d24df8c986c6061",
+      "title": "ISRO ICRB Various Post Online Form 2026 for 244 Post",
+      "lastPostedAt": "2026-07-28T17:00:36.500Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3521,6 +3535,13 @@
       "title": "Rajasthan RSSB LDC, Jr Assistant Answer Key 2026",
       "lastPostedAt": "2026-07-24T13:58:53.247Z",
       "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0044-20260728122803-2bf9f0a2": {
+      "updatedAt": "2026-07-28",
+      "hash": "512da58bb0ad15eae7ba03962d5208d01bc2fe14ce9a9ece070014455b78cc9f",
+      "title": "UPSSSC ASO Assistant Statistical Officer Answer Key 2026 | 1565 Post",
+      "lastPostedAt": "2026-07-28T17:00:36.939Z",
+      "stateReason": "new"
     }
   },
   "results": {
@@ -4488,6 +4509,34 @@
       "hash": "c4f62a87da6410ad4849fca0dd3035500143a14d489cb23149b777f47195a2a3",
       "title": "Union Bank UBI Apprentices Result 2026 for 1865 Post",
       "lastPostedAt": "2026-07-26T06:33:07.842Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0072-20260728122411-91a0455d": {
+      "updatedAt": "2026-07-28",
+      "hash": "fcf6d0f4dcffb46db10a7fbe32a97adf4ca5b0f99b0df4d733b3692698dee839",
+      "title": "CBI Apprentice Result 2026 for 4500 Post",
+      "lastPostedAt": "2026-07-28T17:00:37.390Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0073-20260728220857-1ce35d05": {
+      "updatedAt": "2026-07-28",
+      "hash": "c77a6026fe47faa5e5c213c47f4d871349dcdab11ea8b4e07e3c8655c5718f17",
+      "title": "UP TGT 2022 Final Result 2026",
+      "lastPostedAt": "2026-07-28T17:00:37.847Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0074-20260728221945-854c1922": {
+      "updatedAt": "2026-07-28",
+      "hash": "a932b256aae5307aa25baeb01e7f789df02e08ffce57b44ce8852565c0d51ab5",
+      "title": "Bank of Baroda BOB Office Assistant Peon Final Result 2026",
+      "lastPostedAt": "2026-07-28T17:00:41.456Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0075-20260728222554-adb1dcac": {
+      "updatedAt": "2026-07-28",
+      "hash": "9a9cc873f781cc82a9e735c56009dafd7c71fbd33578c1290b02af99e639602c",
+      "title": "JSSC Excise Constable Result 2026",
+      "lastPostedAt": "2026-07-28T17:00:41.878Z",
       "stateReason": "new"
     }
   }
