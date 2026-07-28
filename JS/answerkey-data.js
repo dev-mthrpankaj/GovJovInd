@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0044-20260728122803-2bf9f0a2",
+        "title": "UPSSSC ASO Assistant Statistical Officer Answer Key 2026 | 1565 Post",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-26",
+        "examEndDate": "",
+        "releaseDate": "2026-07-27",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://drive.google.com/file/d/1r4OS6kWGEV3aTCpbfZF5PUT_R5EhBh4S/view?usp=drivesdk",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-Answer-Key-2026.html",
+        "updatedAt": "2026-07-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0041-20260724093053-462eb394",
         "title": "UPSC CAPF CPF Assistant Commandant Answer Key 2026",
         "organization": "Union Public Service Commission",
