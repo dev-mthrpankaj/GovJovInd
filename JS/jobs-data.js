@@ -14,7 +14,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1182",
         "startDate": "2026-07-07",
         "lastDate": "2026-07-28",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://doc.sarkariresults.org.in/UPSSSC_13_Exam_2026_SarkariResult_Com.pdf",
@@ -1130,7 +1130,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "61601",
         "startDate": "2026-05-01",
         "lastDate": "2026-07-28",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Anganwadi Recruitment 2026",
             "UP Anganwadi",
@@ -1322,7 +1322,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "151",
         "startDate": "2026-06-29",
         "lastDate": "2026-07-28",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Indian Oil Corporation Limited Recruitment 2026",
             "IOCL Mathura Refinery Apprentices",
