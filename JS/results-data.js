@@ -58,6 +58,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0075-20260728222554-adb1dcac",
+        "title": "JSSC Excise Constable Result 2026",
+        "organization": "Jharkhand Staff Selection Commission",
+        "department": "JSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-28",
+        "status": "released",
+        "tags": [],
+        "resultLink": "http://jssc.nic.in/whats-new",
+        "detailPage": "../Result_Details/HTML/JSSC-Excise-Constable-Result-2026.html",
+        "updatedAt": "2026-07-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0068-20260726103503-6cdc9f35",
         "title": "UPPSC GIC Lecturer Government Inter College Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",
