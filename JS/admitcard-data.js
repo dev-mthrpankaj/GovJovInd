@@ -1630,8 +1630,8 @@ window.GovJobUpdatesAdmitCards = [
         "downloadLink": "https://ssc.gov.in/login",
         "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
         "updatedAt": "2026-05-20",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
