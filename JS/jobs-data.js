@@ -242,7 +242,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "Not Mentioned",
         "startDate": "2026-07-22",
         "lastDate": "2026-07-29",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://recruit.southindianbank.bank.in/RDC/#",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/07/sib-po-ca-2026.pdf",
@@ -1430,7 +1430,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6565",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-29",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Railway Recruitment Board Recruitment 2026",
             "Railway RRB Technician",
@@ -1460,7 +1460,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "170",
         "startDate": "2026-06-09",
         "lastDate": "2026-07-29",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Uttar Pradesh Subordinate Services Selection Commission Recruitment 2026",
             "UPSSSC Vidhan Bhavan Rakshak Guard",
