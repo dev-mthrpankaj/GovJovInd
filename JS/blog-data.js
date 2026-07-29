@@ -2,6 +2,15 @@
   const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
+    {
+  id: "public-examinations-amendment-bill-2026",
+  title: "Public Examinations Amendment Bill 2026: New Anti-Paper Leak Law Explained",
+  category: "Current Affairs",
+  date: "2026-07-29",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785330404858.webp",
+  url: "student-hub/public-examinations-amendment-bill-2026.html",
+  excerpt: "Lok Sabha passes stricter anti-paper leak bill with 10-year jail, ₹50 lakh fine, and Fast Track Courts. Know all key provisions of the Public Examinations Amendment Bill 2026 for aspirants."
+},
   {
   id: "cjp-jantar-mantar-protest-dharmendra-pradhan-resignation",
   title: "CJP जंतर मंतर प्रदर्शन 2026: NEET पेपर लीक से धर्मेंद्र प्रधान के इस्तीफे तक की पूरी कहानी",
