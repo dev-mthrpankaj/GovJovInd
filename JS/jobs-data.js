@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1149/101044/Index.html",
         "officialNotification": "https://g03.tcsion.com//per/g03/pub/726/EForms/image/ImageDocUpload/71161/6/4003485314.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0149-20260729091158-fdd84b4c",
+        "detailPage": "../Job_Details/HTML/Patna-High-Court-Group-C-Assistant-2026.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0150-20260729091917-92216911",
@@ -42,14 +42,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://apps.ursc.gov.in/CentralBE-2026/advt.jsp",
         "officialNotification": "https://www.isro.gov.in/media_isro/pdf/recruitmentNotice/2026/July/GATE_Bilingual_Advertisement_2026_28072026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0150-20260729091917-92216911",
+        "detailPage": "../Job_Details/HTML/ISRO-ICRB-Scientist-Engineer-2026.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0147-20260728121829-67d922aa",

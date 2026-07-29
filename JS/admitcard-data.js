@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0087-20260729101614-1e6c0634",
+        "title": "PSPCL Junior Engineer Electrical Admit Card 2026 for 622 Post",
+        "organization": "Punjab State Power Corporation Limited (PSPCL)",
+        "department": "PSPCL",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-31",
+        "examEndDate": "",
+        "releaseDate": "2026-07-28",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101642/login.html",
+        "detailPage": "../AdmitCard_Details/HTML/PSPCL-Junior-Engineer-Electrical-Admit-Card-2026.html",
+        "updatedAt": "2026-07-29",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0086-20260726072317-c8743ec6",
         "title": "RRB Railway Group D Exam City Details 2026 for 22195",
         "organization": "Railway Recruitment Board",
