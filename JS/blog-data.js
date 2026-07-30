@@ -9,7 +9,7 @@
   title: "SIR (Special Intensive Revision) of Electoral Rolls: Full Explainer for Exam Aspirants",
   category: "Current Affairs",
   date: "2026-07-29",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785382102883.webp",
   url: "student-hub/sir-electoral-rolls-revision-current-affairs.html",
   excerpt: "What is the Special Intensive Revision of electoral rolls, why is it controversial, and what should govt exam aspirants know? A clear explainer with static GK on Article 324 and the ECI."
 },
@@ -18,7 +18,7 @@
   title: "Caste Census in India: Why It's Controversial and What You Should Know",
   category: "Current Affairs",
   date: "2026-07-29",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785381736321.webp",
   url: "student-hub/caste-census-india-current-affairs.html",
   excerpt: "History, latest state-level surveys, and the key arguments around India's caste census debate, explained simply for government exam aspirants."
 },
