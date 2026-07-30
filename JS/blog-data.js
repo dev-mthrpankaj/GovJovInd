@@ -2,6 +2,44 @@
   const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
+
+
+{
+  id: "sir-electoral-rolls-revision-current-affairs",
+  title: "SIR (Special Intensive Revision) of Electoral Rolls: Full Explainer for Exam Aspirants",
+  category: "Current Affairs",
+  date: "2026-07-29",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/sir-electoral-rolls-revision-current-affairs.html",
+  excerpt: "What is the Special Intensive Revision of electoral rolls, why is it controversial, and what should govt exam aspirants know? A clear explainer with static GK on Article 324 and the ECI."
+},
+{
+  id: "caste-census-india-current-affairs",
+  title: "Caste Census in India: Why It's Controversial and What You Should Know",
+  category: "Current Affairs",
+  date: "2026-07-29",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/caste-census-india-current-affairs.html",
+  excerpt: "History, latest state-level surveys, and the key arguments around India's caste census debate, explained simply for government exam aspirants."
+},
+{
+  id: "india-china-policy-debate-current-affairs",
+  title: "India-China Policy Debate: Should India Recalibrate Ties With Beijing?",
+  category: "Current Affairs",
+  date: "2026-07-29",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/india-china-policy-debate-current-affairs.html",
+  excerpt: "Why India's China policy is being debated again, what strategic autonomy means, and the static GK points examiners love to test."
+},
+{
+  id: "india-iran-us-conflict-stance-current-affairs",
+  title: "India's Stance on the US-Iran Conflict: Strategic Autonomy Under Pressure",
+  category: "Current Affairs",
+  date: "2026-07-29",
+  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  url: "student-hub/india-iran-us-conflict-stance-current-affairs.html",
+  excerpt: "Why India stayed neutral during the 2026 US-Iran conflict, and what it reveals about strategic autonomy, energy security, and the Chabahar port."
+},
     {
   id: "public-examinations-amendment-bill-2026",
   title: "Public Examinations Amendment Bill 2026: New Anti-Paper Leak Law Explained",
