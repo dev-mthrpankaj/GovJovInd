@@ -36,7 +36,7 @@
   title: "India's Stance on the US-Iran Conflict: Strategic Autonomy Under Pressure",
   category: "Current Affairs",
   date: "2026-07-29",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785380853655.webp",
   url: "student-hub/india-iran-us-conflict-stance-current-affairs.html",
   excerpt: "Why India stayed neutral during the 2026 US-Iran conflict, and what it reveals about strategic autonomy, energy security, and the Chabahar port."
 },
