@@ -27,7 +27,7 @@
   title: "India-China Policy Debate: Should India Recalibrate Ties With Beijing?",
   category: "Current Affairs",
   date: "2026-07-29",
-  image: "../Assets/Home%20Page/Government%20Job%20Banner.webp",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785381199817.webp",
   url: "student-hub/india-china-policy-debate-current-affairs.html",
   excerpt: "Why India's China policy is being debated again, what strategic autonomy means, and the static GK points examiners love to test."
 },
