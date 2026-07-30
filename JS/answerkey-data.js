@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0047-20260730134452-d72ed530",
+        "title": "Patna High Court Computer Operator cum Typist Answer Key 2026",
+        "organization": "Patna High Court",
+        "department": "PHC",
+        "category": "Judiciary",
+        "year": "2026",
+        "examDate": "2026-07-22",
+        "examEndDate": "",
+        "releaseDate": "2026-07-30",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1149/100145/login.html",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/Patna-High-Court-Computer-Operator-Answer-Key-2026.html",
+        "updatedAt": "2026-07-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0045-20260729102908-074b970c",
         "title": "RPSC Senior Teacher Grade II TGT Answer Key 2026 for 6500 Post",
         "organization": "Rajasthan Public Service Commission",
