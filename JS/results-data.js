@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0076-20260731181718-c05cc710",
+        "title": "UP Police Constable Result 2026 for 32679 Post",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-07-31",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upcons2025.com/conwrittentest2025/Loginpage.aspx",
+        "detailPage": "../Result_Details/HTML/UP-Police-Constable-Result-2026.html",
+        "updatedAt": "2026-07-31",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0072-20260728122411-91a0455d",
         "title": "CBI Apprentice Result 2026 for 4500 Post",
         "organization": "Central Bank of India",
