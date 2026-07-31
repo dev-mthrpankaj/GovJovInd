@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "ssc-cgl-2026-exam-date",
+  title: "SSC CGL 2026 Exam Date: Tier 1 Schedule, New Exam Pattern Changes & How to Prepare",
+  category: "SSC",
+  date: "2026-07-31",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785475861534.webp",
+  url: "student-hub/ssc-cgl-2026-exam-date.html",
+  excerpt: "SSC CGL 2026 Tier 1 exam is expected in August-September, but the exact date is still awaited. Here's what's changed in the exam pattern — sectional timing, new AAO paper — and how to prepare."
+},
+    {
   id: "rssb-ldc-rank-predictor",
   title: "RSSB LDC Rank Predictor 2026: अपनी संभावित रैंक और सिलेक्शन की संभावना जानें",
   category: "Rank Predictor",
