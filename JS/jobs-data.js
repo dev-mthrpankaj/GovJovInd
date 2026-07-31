@@ -1628,7 +1628,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "65",
         "startDate": "2026-06-26",
         "lastDate": "2026-07-30",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Bihar Police Subordinate Services Commission Recruitment 2026",
             "BPSSC Bihar Police Company Commander",
@@ -1688,7 +1688,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "65",
         "startDate": "2026-06-30",
         "lastDate": "2026-07-30",
-        "status": "active",
+        "status": "closed",
         "tags": [
             "Bihar Police Subordinate Services Commission Recruitment 2026",
             "BPSSC Bihar Police Company Commander",
