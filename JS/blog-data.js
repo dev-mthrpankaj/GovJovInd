@@ -2,6 +2,15 @@
   const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
+    {
+  id: "rssb-ldc-rank-predictor",
+  title: "RSSB LDC Rank Predictor 2026: अपनी संभावित रैंक और सिलेक्शन की संभावना जानें",
+  category: "Rank Predictor",
+  date: "2026-07-30",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785474954540.webp",
+  url: "student-hub/rssb-ldc-rank-predictor.html",
+  excerpt: "RSSB LDC (Clerk Grade-II) और Junior Assistant परीक्षा 2026 की प्रोविजनल आंसर की जारी होने के बाद अपनी संभावित रैंक और चयन की संभावना जानने के लिए Rank Predictor टूल का पूरा उपयोग तरीका।"
+},
 
 
 {
