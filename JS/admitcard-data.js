@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0093-20260801160824-43c20b02",
+        "title": "CGPSC State Engineering Service Admit Card 2026",
+        "organization": "Chhattisgarh Public Service Commission (CGPSC)",
+        "department": "CGPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-16",
+        "examEndDate": "",
+        "releaseDate": "2026-07-31",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://psc.cg.gov.in/",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-08-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "admit-sheet-0087-20260729101614-1e6c0634",
         "title": "PSPCL Junior Engineer Electrical Admit Card 2026 for 622 Post",
         "organization": "Punjab State Power Corporation Limited (PSPCL)",
