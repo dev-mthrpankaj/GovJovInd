@@ -1837,6 +1837,20 @@
       "title": "IBPS Clerk XVI Online Form 2026 for 11403 Post",
       "lastPostedAt": "2026-08-01T03:49:32.970Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0154-20260801160219-354cf2d3": {
+      "updatedAt": "2026-08-01",
+      "hash": "85f450029a00e12560c5840fff93043d3ce0ef7043a4d2081598bf0ba0c2f18e",
+      "title": "HARTRON Junior Programmer Online Form 2026 for 530 Post",
+      "lastPostedAt": "2026-08-01T11:54:55.393Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0155-20260801164309-b8d0ea98": {
+      "updatedAt": "2026-08-01",
+      "hash": "5cfe8498f26a024b446aa116cb74bed20c217c9005db3ec60d7556556ad26274",
+      "title": "JKSSB PWD Online Form 2026 for 357 Post",
+      "lastPostedAt": "2026-08-01T11:54:55.991Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -2965,6 +2979,13 @@
       "hash": "54c1c932c2566ec2149ac8d1c9d6be232c9b1a329028865965a54d06f64a6dd4",
       "title": "SSB Constable Tradesman PET / PST Exam Date 2026 for 827 Post",
       "lastPostedAt": "2026-07-29T16:03:27.094Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0093-20260801160824-43c20b02": {
+      "updatedAt": "2026-08-01",
+      "hash": "c12da366caf28eac2818b88cba181ef41d3d2ad49341dfe07188e44020f9e9ac",
+      "title": "CGPSC State Engineering Service Admit Card 2026",
+      "lastPostedAt": "2026-08-01T11:54:56.436Z",
       "stateReason": "new"
     }
   },
