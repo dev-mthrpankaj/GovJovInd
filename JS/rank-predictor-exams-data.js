@@ -796,7 +796,7 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": false
+        "disabled": true
     },
     {
         "examId": "up-constable-2026",
@@ -924,7 +924,7 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": false
+        "disabled": true
     },
     {
         "examId": "test-exam",
@@ -1341,7 +1341,7 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": false
+        "disabled": true
     },
     {
         "examId": "up-homeguard-2026",
