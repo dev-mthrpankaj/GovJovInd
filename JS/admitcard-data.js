@@ -433,7 +433,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-24",
         "examEndDate": "2026-08-01",
         "releaseDate": "2026-07-18",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/HPSC-Haryana-PGT-Computer-Science-Interview-Letter-2026.html",
         "detailPage": "../AdmitCard_Details/HTML/HPSC-Haryana-PGT-Computer-Science-Interview-Letter-2026.html",
