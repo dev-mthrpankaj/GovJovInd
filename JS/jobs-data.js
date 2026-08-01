@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0153-20260801090933-6c5ee497",
+        "title": "IBPS Clerk XVI Online Form 2026 for 11403 Post",
+        "organization": "Institute of Banking Personal Selection",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Bachelor Degree in Any Stream in Any Recognized Board in India. For more details see notification",
+        "totalPosts": "11403",
+        "startDate": "2026-08-01",
+        "lastDate": "2026-08-21",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ibpsreg.ibps.in/csaxvijul26/",
+        "officialNotification": "https://www.ibps.in/wp-content/uploads/Notification_CRP_CSA_XVI-Final.pdf",
+        "detailPage": "../Job_Details/HTML/IBPS-Clerk-XVI-2026.html",
+        "updatedAt": "2026-08-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0151-20260730134356-872e7f41",
         "title": "SKAU Non Teaching Post Online Form 2026",
         "organization": "Shri Krishna Ayush University Kurukshetra Haryana",
