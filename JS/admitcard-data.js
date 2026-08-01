@@ -16,12 +16,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://psc.cg.gov.in/",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/CGPSC-State-Engineering-Service-Admit-Card-2026.html",
         "updatedAt": "2026-08-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0087-20260729101614-1e6c0634",

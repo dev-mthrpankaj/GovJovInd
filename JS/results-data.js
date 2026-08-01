@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0077-20260801162859-5604706e",
+        "title": "Punjab & Sind Bank Apprentice Result 2026 for 635 Post",
+        "organization": "Punjab & Sind Bank",
+        "department": "PSB",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-08-01",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026073122183478476.pdf",
+        "detailPage": "../Result_Details/HTML/Punjab-Sind-Bank-Apprentice-Result-2026.html",
+        "updatedAt": "2026-08-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0078-20260801163016-9be191d4",
+        "title": "SSC Stenographer 2025 Revied FRTA Result 2026",
+        "organization": "Staff Selection Commision",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-08-31",
+        "status": "upcoming",
+        "tags": [],
+        "resultLink": "https://ssc.gov.in/api/attachment/uploads/masterData/Results/roll_31072026.pdf",
+        "detailPage": "../Result_Details/HTML/SSC-Stenographer-2025-Revised-FRTA-Result-2026.html",
+        "updatedAt": "2026-08-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0076-20260731181718-c05cc710",
         "title": "UP Police Constable Result 2026 for 32679 Post",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",

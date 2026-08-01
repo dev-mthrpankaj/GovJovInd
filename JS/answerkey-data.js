@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0048-20260801162745-64bd7685",
+        "title": "Railway RRB Isolated Categories Answer Key 2026 for 312 Post",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-07-14",
+        "examEndDate": "2026-07-15",
+        "releaseDate": "2026-07-31",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101492/login.html",
+        "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101492/login.html",
+        "detailPage": "../AnswerKey_Details/HTML/Railway-RRB-Isolated-Categories-Answer-Key-2026.html",
+        "updatedAt": "2026-08-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0047-20260730134452-d72ed530",
         "title": "Patna High Court Computer Operator cum Typist Answer Key 2026",
         "organization": "Patna High Court",
