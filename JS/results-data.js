@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0080-20260803194845-4c5d90cb",
+        "title": "SSC MTS Multi Tasking Staff Result 2026",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-08-03",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://govjobupdates.com/Result_Details/HTML/SSC-MTS-Multi-Tasking-Staff-Result-2026.html",
+        "detailPage": "../Result_Details/HTML/SSC-MTS-Multi-Tasking-Staff-Result-2026.html",
+        "updatedAt": "2026-08-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0081-20260803195227-c88602a4",
+        "title": "MPESB Group 1 Sub Group 2 Result 2026",
+        "organization": "MP Employees Selection Board",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-03",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://esb.mp.gov.in/results/RESULT_25/Group1_SG2_Res25/default_Results.htm",
+        "detailPage": "../Result_Details/HTML/MPESB-Group-1-Sub-Group-2-Result-2026.html",
+        "updatedAt": "2026-08-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0077-20260801162859-5604706e",
         "title": "Punjab & Sind Bank Apprentice Result 2026 for 635 Post",
         "organization": "Punjab & Sind Bank",
