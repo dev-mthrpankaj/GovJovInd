@@ -482,7 +482,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1937",
         "startDate": "2026-07-14",
         "lastDate": "2026-08-03",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://upsssc.gov.in//AllNotifications.aspx",
         "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/06/UPSSSC_14_Exam_2026_Notification.pdf",
