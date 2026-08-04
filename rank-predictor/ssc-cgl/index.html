@@ -14,8 +14,8 @@
     <meta property="og:url" content="https://govjobupdates.com/rank-predictor/ssc-cgl/">
     <meta property="og:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.webp">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SSC CGL Rank Predictor 2026 | GovJobUpdates">
-    <meta name="twitter:description" content="Check SSC CGL expected rank guidance and open the GovJobUpdates Rank Predictor tool.">
+    <meta id="twitterTitle" name="twitter:title" content="SSC CGL Rank Predictor 2026 | GovJobUpdates">
+    <meta id="twitterDescription" name="twitter:description" content="Check SSC CGL expected rank guidance and open the GovJobUpdates Rank Predictor tool.">
     <meta name="twitter:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.webp">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"SSC CGL Rank Predictor","url":"https://govjobupdates.com/rank-predictor/ssc-cgl/","description":"SSC CGL rank predictor guide for expected marks, normalized marks, overall rank and category rank after answer key review.","publisher":{"@type":"Organization","name":"GovJobUpdates","url":"https://govjobupdates.com/"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"Rank Predictor","item":"https://govjobupdates.com/HTML/rank-predictor.html"},{"@type":"ListItem","position":3,"name":"SSC CGL Rank Predictor","item":"https://govjobupdates.com/rank-predictor/ssc-cgl/"}]}</script>
@@ -29,15 +29,19 @@
     <main class="container">
         <section class="page-guide">
             <p class="guide-kicker">SSC CGL Rank Predictor</p>
-            <h1>SSC CGL Rank Predictor for Expected Marks and Category Rank</h1>
-            <p>Use this SSC CGL rank predictor guide after reviewing the official answer key or response sheet. Enter your subject-wise correct and wrong answers in the main GovJobUpdates Rank Predictor to estimate raw marks, normalized marks, overall rank and category rank.</p>
-            <p class="official-note"><strong>Important:</strong> This page is not an official SSC result page. Final marks, normalization, cutoff and merit list are decided only by the Staff Selection Commission.</p>
+            <h1 id="pageH1">SSC CGL Rank Predictor for Expected Marks and Category Rank</h1>
+            <p id="pageIntro">Use this SSC CGL rank predictor guide after reviewing the official answer key or response sheet. Enter your subject-wise correct and wrong answers in the main GovJobUpdates Rank Predictor to estimate raw marks, normalized marks, overall rank and category rank.</p>
             <div class="related-links" aria-label="SSC CGL rank predictor actions">
-                <a href="../../HTML/rank-predictor.html">Open Rank Predictor</a>
+                <a href="../../HTML/rank-predictor.html?exam=ssc-cgl-2025-tier-1">Open Rank Predictor</a>
+                <a href="../../HTML/rank-predictor.html?exam=ssc-cgl-2025-tier-1">Open SSC CGL Rank Predictor</a>
                 <a href="../../HTML/answer-key.html">SSC Answer Keys</a>
                 <a href="../../HTML/results.html">SSC Results</a>
                 <a href="../../HTML/student-hub/best-ssc-cgl-books-2026.html">SSC CGL Preparation</a>
             </div>
+            <div class="tool-embed-shell" style="margin: 1.5rem 0;">
+                <iframe src="../../HTML/rank-predictor.html?exam=ssc-cgl-2025-tier-1" title="SSC CGL Rank Predictor tool" loading="lazy" style="width:100%; min-height: 1400px; border:0; border-radius:12px; background:#fff;"></iframe>
+            </div>
+            <p class="official-note"><strong>Important:</strong> This page is not an official SSC result page. Final marks, normalization, cutoff and merit list are decided only by the Staff Selection Commission.</p>
         </section>
         <section class="page-guide">
             <h2>How to Estimate SSC CGL Rank</h2>
@@ -45,6 +49,14 @@
                 <article class="guide-card"><h3>Check answer key</h3><p>Match every response with the official or final answer key before entering marks.</p></article>
                 <article class="guide-card"><h3>Enter subject attempts</h3><p>Add Maths, Reasoning, English and General Awareness correct and wrong answers carefully.</p></article>
                 <article class="guide-card"><h3>Review normalization</h3><p>Multi-shift exams can change rank estimates after official normalization rules are applied.</p></article>
+            </div>
+        </section>
+        <section class="page-guide">
+            <h2>Related Rank Predictor Pages</h2>
+            <div class="guide-grid">
+                <article class="guide-card"><h3>SSC CPO</h3><p>Compare SSC CPO paper 1 rank estimates and physical-test guidance.</p><a href="../ssc-cpo/">Open SSC CPO Rank Predictor</a></article>
+                <article class="guide-card"><h3>UPSC</h3><p>Explore the UPSC rank predictor for prelims-based estimate guidance.</p><a href="../upsc/">Open UPSC Rank Predictor</a></article>
+                <article class="guide-card"><h3>Railway</h3><p>Check Railway RRB CBT rank estimation for NTPC, Group D and other exams.</p><a href="../railway/">Open Railway Rank Predictor</a></article>
             </div>
         </section>
         <section class="seo-faq">
@@ -57,5 +69,23 @@
     </main>
     <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>Government exam updates, answer keys, results, quiz practice and rank prediction tools for Indian aspirants.</p></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="../../HTML/rank-predictor.html">Rank Predictor</a></li><li><a href="../../HTML/answer-key.html">Answer Key</a></li><li><a href="../../HTML/results.html">Results</a></li><li><a href="../../HTML/disclaimer.html">Disclaimer</a></li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved.</div></footer>
     <script src="../../JS/script.js"></script>
+    <script src="../../JS/rank-predictor-route-config.js"></script>
+    <script>
+        (function () {
+            const meta = window.RANK_PREDICTOR_ROUTE_META?.["ssc-cgl"];
+            if (!meta) return;
+            document.getElementById("pageTitle").textContent = meta.title;
+            const descriptionTag = document.getElementById("pageDescription");
+            descriptionTag.setAttribute("content", meta.description);
+            document.getElementById("pageCanonical").setAttribute("href", meta.canonical);
+            document.getElementById("ogTitle").setAttribute("content", meta.ogTitle);
+            document.getElementById("ogDescription").setAttribute("content", meta.ogDescription);
+            document.getElementById("ogUrl").setAttribute("content", meta.canonical);
+            document.getElementById("twitterTitle").setAttribute("content", meta.twitterTitle);
+            document.getElementById("twitterDescription").setAttribute("content", meta.twitterDescription);
+            document.getElementById("pageH1").textContent = meta.h1;
+            document.getElementById("pageIntro").textContent = meta.intro;
+        })();
+    </script>
 </body>
 </html>

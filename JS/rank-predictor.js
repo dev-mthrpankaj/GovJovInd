@@ -96,7 +96,8 @@
         state.mobileMarksMode = detectMobileMarksMode();
         const hasStaticExamConfig = loadStaticExamConfig();
         if (!hasStaticExamConfig) await loadSheetExamConfig();
-        setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
+        const initialExam = resolveInitialExamFromUrl();
+        setSelectedExam(initialExam || (config.exams || []).find((exam) => !exam.disabled) || null);
         bindTabs();
         bindExamSelector();
         bindCategoryOptions();
@@ -126,6 +127,35 @@
         config.exams = staticExams;
         window.RANK_PREDICTOR_CONFIG = config;
         return true;
+    }
+
+    function resolveInitialExamFromUrl() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const candidates = [params.get("exam"), params.get("examId"), params.get("examSlug")]
+                .filter(Boolean)
+                .map((value) => String(value).trim().toLowerCase());
+
+            if (!candidates.length) return null;
+
+            const exams = Array.isArray(config.exams) ? config.exams : [];
+            return exams.find((exam) => {
+                const examId = String(exam?.examId || "").trim().toLowerCase();
+                const examName = String(exam?.examName || "").trim().toLowerCase();
+                const normalizedExamId = examId.replace(/[^a-z0-9]+/g, "-");
+                const normalizedExamName = examName.replace(/[^a-z0-9]+/g, "-");
+
+                return candidates.some((candidate) => {
+                    const normalizedCandidate = candidate.replace(/[^a-z0-9]+/g, "-");
+                    return examId === candidate
+                        || examName === candidate
+                        || normalizedExamId === normalizedCandidate
+                        || normalizedExamName === normalizedCandidate;
+                });
+            }) || null;
+        } catch {
+            return null;
+        }
     }
 
     async function loadSheetExamConfig() {

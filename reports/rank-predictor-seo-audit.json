@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T05:50:06.177Z",
+  "generatedAt": "2026-08-04T17:16:57.955Z",
   "success": true,
   "summary": {
     "checks": 98,
@@ -18,25 +18,25 @@
       "ok": true,
       "scope": "HTML/rank-predictor.html",
       "check": "title present",
-      "detail": "SSC UPSC Railway Police Rank Predictor | GovJobUpdates"
+      "detail": "Rank Predictor 2026 – SSC, UPSC, Railway, Police & State Exams | GovJobUpdates"
     },
     {
       "ok": true,
       "scope": "HTML/rank-predictor.html",
       "check": "title includes Rank Predictor",
-      "detail": "SSC UPSC Railway Police Rank Predictor | GovJobUpdates"
+      "detail": "Rank Predictor 2026 – SSC, UPSC, Railway, Police & State Exams | GovJobUpdates"
     },
     {
       "ok": true,
       "scope": "HTML/rank-predictor.html",
       "check": "meta description present",
-      "detail": "Use GovJobUpdates Rank Predictor to estimate expected marks, overall rank, category rank and state/district rank for SSC, UPSC, Railway, Police and state exams."
+      "detail": "Check your expected rank and marks instantly for SSC, UPSC, Railway, Police, UPSSSC and state exams. Free, private, and updated with the latest answer key."
     },
     {
       "ok": true,
       "scope": "HTML/rank-predictor.html",
       "check": "meta description length",
-      "detail": "160 chars"
+      "detail": "155 chars"
     },
     {
       "ok": true,

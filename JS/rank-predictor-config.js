@@ -96,6 +96,69 @@ const RANK_PREDICTOR_CONFIG = {
             states: ["Uttar Pradesh", "Other"]
         },
         {
+            examId: "rrb-ntpc-graduate-cbt2",
+            examName: "RRB NTPC Graduate CBT 2",
+            board: "Railway Recruitment Board",
+            examType: "online",
+            sheetName: "RRB NTPC Graduate CBT 2",
+            totalQuestions: 120,
+            marksPerCorrect: 1,
+            negativeMarking: 0.33,
+            hasShifts: true,
+            normalization: true,
+            supportedModes: ["online"],
+            subjects: [
+                { name: "General Intelligence & Reasoning", questions: 30 },
+                { name: "General Awareness", questions: 40 },
+                { name: "Mathematics", questions: 25 },
+                { name: "General Science", questions: 25 }
+            ],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None", "PwD", "Ex-Serviceman"],
+            states: ["All India", "Other"]
+        },
+        {
+            examId: "upsc-civil-services-prelims",
+            examName: "UPSC Civil Services Prelims",
+            board: "Union Public Service Commission",
+            examType: "offline",
+            sheetName: "UPSC Civil Services Prelims",
+            totalQuestions: 100,
+            marksPerCorrect: 2.5,
+            negativeMarking: 0.83,
+            hasShifts: false,
+            normalization: false,
+            supportedModes: ["offline"],
+            subjects: [
+                { name: "General Studies Paper I", questions: 100 }
+            ],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None", "PwD"],
+            states: ["All India", "Other"]
+        },
+        {
+            examId: "uppsc",
+            examName: "UPSSSC",
+            board: "Uttar Pradesh Subordinate Services Selection Commission",
+            examType: "offline",
+            sheetName: "UPSSSC",
+            totalQuestions: 100,
+            marksPerCorrect: 1,
+            negativeMarking: 0,
+            hasShifts: false,
+            normalization: false,
+            supportedModes: ["offline"],
+            subjects: [
+                { name: "General Studies", questions: 100 }
+            ],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None", "PwD", "Ex-Serviceman"],
+            states: ["Uttar Pradesh", "Other"]
+        },
+        {
             examId: "coming-soon",
             examName: "Add Exam Coming Soon",
             board: "GovJobUpdates",
