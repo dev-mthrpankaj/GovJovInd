@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0095-20260804180418-aaea01b4",
+        "title": "MPPSC State Service Exam SSE Mains Admit Card 2026",
+        "organization": "Madhya Pradesh Public Service Commission",
+        "department": "MPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-08",
+        "examEndDate": "2026-08-13",
+        "releaseDate": "2026-08-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/Admitcard/SM25Login.aspx",
+        "detailPage": "../AdmitCard_Details/HTML/MPPSC-SSE-Mains-Admit-Card-2026.html",
+        "updatedAt": "2026-08-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0094-20260803194118-882cbbfe",
         "title": "Karnataka Police Constable Admit Card 2026 for 3991 Post",
         "organization": "Karnataka Examination Authority (KEA)",

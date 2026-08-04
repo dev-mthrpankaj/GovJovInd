@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0164-20260804180130-785f5a37",
+        "title": "MPESB Group 2 Sub Group 4 Online Form 2026 for 2106 Post",
+        "organization": "Madhya Pradesh Employees Selection Board",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Degree Passed from Any Recognized University (Post Wise)",
+        "totalPosts": "2106",
+        "startDate": "2026-08-04",
+        "lastDate": "2026-08-18",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
+        "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Group2_SG4_Patwari_rect_test_2026_Rulebook_04082026.pdf",
+        "detailPage": "../Job_Details/HTML/MPESB-Group-2-Sub-Group-4-2026.html",
+        "updatedAt": "2026-08-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0157-20260803162638-5313958f",
         "title": "JKSSB Disaster Management Relief Online Form 2026",
         "organization": "The Jammu & Kashmir Services Selection Board (JKSSB)",
