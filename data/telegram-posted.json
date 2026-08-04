@@ -1858,6 +1858,41 @@
       "title": "UPSSSC PET Online Form 2026 | Preliminary Eligibility Test",
       "lastPostedAt": "2026-08-01T13:44:04.998Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0157-20260803162638-5313958f": {
+      "updatedAt": "2026-08-03",
+      "hash": "8b4c6f9947c4608cc9f9bfef1ea5f84a361e7284605288d04c972acdf239cae4",
+      "title": "JKSSB Disaster Management Relief Online Form 2026",
+      "lastPostedAt": "2026-08-03T15:57:20.063Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0158-20260803184556-d8300973": {
+      "updatedAt": "2026-08-03",
+      "hash": "8d32ff937e5a5e239c10459c2263e2c12f7696c6af41efc3fa4a9742f99c3a81",
+      "title": "UPSC Principal & Vice Principal Online Form 2026 for 828 Post",
+      "lastPostedAt": "2026-08-03T15:57:20.778Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0161-20260803190615-cc8d52fb": {
+      "updatedAt": "2026-08-03",
+      "hash": "59d41199b9a675b760517fb0a703539cbff6eec11db3902992276810b26102fc",
+      "title": "UPPSC Computer Operator, Programmer Online Form 2026",
+      "lastPostedAt": "2026-08-03T15:57:21.308Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0162-20260803191309-4f9f1d52": {
+      "updatedAt": "2026-08-03",
+      "hash": "203979684237fd5e72faed0b0d2071abcb738f6b35c97910e44074be2d371506",
+      "title": "UPPSC Architectural Assistant and Other Post Online Form 2026",
+      "lastPostedAt": "2026-08-03T15:57:21.933Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0163-20260803191540-7958e627": {
+      "updatedAt": "2026-08-03",
+      "hash": "87555be8cdae0116d14e9146b08fbd5245cb1e2dcf28d3ae834db672cc68e8bd",
+      "title": "SJVN Ltd Various Post Online Form 2026",
+      "lastPostedAt": "2026-08-03T15:57:22.415Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -2993,6 +3028,13 @@
       "hash": "c12da366caf28eac2818b88cba181ef41d3d2ad49341dfe07188e44020f9e9ac",
       "title": "CGPSC State Engineering Service Admit Card 2026",
       "lastPostedAt": "2026-08-01T11:54:56.436Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0094-20260803194118-882cbbfe": {
+      "updatedAt": "2026-08-03",
+      "hash": "7c08cfa808d9f29a23a2a43d863dba8c46f5de955293a5323c1c635bc35c52c8",
+      "title": "Karnataka Police Constable Admit Card 2026 for 3991 Post",
+      "lastPostedAt": "2026-08-03T15:57:26.045Z",
       "stateReason": "new"
     }
   },
@@ -4691,6 +4733,20 @@
       "hash": "31dbfa5b457ab8c473d28e1d0fe611a83f0ab633494ab10cde6a7b0e6fd8523b",
       "title": "SSC Stenographer 2025 Revied FRTA Result 2026",
       "lastPostedAt": "2026-08-01T12:43:56.472Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0080-20260803194845-4c5d90cb": {
+      "updatedAt": "2026-08-03",
+      "hash": "381a917f8bf55f43b51c1cbc78338135de526b82aa15cede742ffe9b4ecdb13d",
+      "title": "SSC MTS Multi Tasking Staff Result 2026",
+      "lastPostedAt": "2026-08-03T15:57:26.698Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0081-20260803195227-c88602a4": {
+      "updatedAt": "2026-08-03",
+      "hash": "0a495e4be87c36e6670dea3f4110a975fda32d600a1952265ee7a84d8c5410d3",
+      "title": "MPESB Group 1 Sub Group 2 Result 2026",
+      "lastPostedAt": "2026-08-03T15:57:27.494Z",
       "stateReason": "new"
     }
   }

@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0094-20260803194118-882cbbfe",
+        "title": "Karnataka Police Constable Admit Card 2026 for 3991 Post",
+        "organization": "Karnataka Examination Authority (KEA)",
+        "department": "KEA",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-02",
+        "examEndDate": "",
+        "releaseDate": "2026-08-02",
+        "status": "exam-over",
+        "tags": [],
+        "downloadLink": "https://cetonline.karnataka.gov.in/kea/",
+        "detailPage": "../AdmitCard_Details/HTML/Karnataka-Police-Constable-Admit-Card-2026.html",
+        "updatedAt": "2026-08-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0093-20260801160824-43c20b02",
         "title": "CGPSC State Engineering Service Admit Card 2026",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
