@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "independence-day-2026-history-significance-gk-guide",
+  title: "Independence Day 2026: Complete History, Significance and GK Guide for Govt Exam Aspirants",
+  category: "Current Affairs",
+  date: "2026-08-04",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1785813590212.webp",
+  url: "student-hub/independence-day-2026-history-significance-gk-guide.html",
+  excerpt: "India celebrates Independence Day on 15 August 2026 — 79 years since freedom. Get the full freedom struggle timeline, Red Fort ceremony details, Flag Code rules, and exam-ready GK facts for SSC, UPSC and State PCS aspirants."
+},
+    {
   id: "ssc-cgl-2026-exam-date",
   title: "SSC CGL 2026 Exam Date: Tier 1 Schedule, New Exam Pattern Changes & How to Prepare",
   category: "SSC",
