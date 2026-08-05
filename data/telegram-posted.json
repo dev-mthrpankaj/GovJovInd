@@ -3050,6 +3050,13 @@
       "title": "MPPSC State Service Exam SSE Mains Admit Card 2026",
       "lastPostedAt": "2026-08-04T13:21:56.645Z",
       "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0096-20260805113336-42b15a60": {
+      "updatedAt": "2026-08-05",
+      "hash": "992dd6755a420773064c898ef745682cdfaa03ae6eee7ba4bc8fcdec59c2cc8e",
+      "title": "AFCAT 02/2026 Admit Card",
+      "lastPostedAt": "2026-08-05T06:27:44.365Z",
+      "stateReason": "new"
     }
   },
   "answerKeys": {
@@ -4761,6 +4768,13 @@
       "hash": "0a495e4be87c36e6670dea3f4110a975fda32d600a1952265ee7a84d8c5410d3",
       "title": "MPESB Group 1 Sub Group 2 Result 2026",
       "lastPostedAt": "2026-08-03T15:57:27.494Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0082-20260805115346-75a861df": {
+      "updatedAt": "2026-08-05",
+      "hash": "6d0c1b2760cbc4f8981d3e2f063975e406464e2423ad30033692b2809f436150",
+      "title": "UPSC ISS, IES Result 2026 for 44 Post",
+      "lastPostedAt": "2026-08-05T06:27:45.291Z",
       "stateReason": "new"
     }
   }
