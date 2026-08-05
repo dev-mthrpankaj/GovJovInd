@@ -9,7 +9,7 @@ window.GovJobUpdatesRankPredictorExams = [
         "board": "RRB",
         "examType": "online",
         "sheetName": "RRB Railway ALP Assistant Loco Pilot CBT II",
-        "totalQuestions": 175,
+        "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
         "hasShifts": false,
