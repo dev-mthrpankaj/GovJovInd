@@ -1,0 +1,471 @@
+/* ==========================================================================
+   job-detail-v3.css
+   Reusable "Official Ledger" design system for GovJobUpdates job-detail pages.
+   Signature device: a mono-font ledger timeline + a rotated "seal" status
+   stamp, echoing the register/gazette-notice feel of a government notice.
+   ========================================================================== */
+
+.jd3 {
+  --ink: #12172b;
+  --ink-soft: #4a5372;
+  --muted: #6b7280;
+  --line: #e1e4ea;
+  --paper: #f6f4ee;
+  --panel: #ffffff;
+  --primary: #1c3fae;
+  --primary-dark: #142e86;
+  --primary-soft: #eaefff;
+  --gold: #b8860b;
+  --gold-soft: #f8ecd2;
+  --open: #146c43;
+  --open-soft: #e6f4ec;
+  --closed: #b3261e;
+  --closed-soft: #fbe9e7;
+  --radius: 10px;
+  --shadow: 0 14px 36px rgba(18, 23, 43, 0.08);
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  width: 100%;
+  margin: 0;
+}
+
+.jd3 *, .jd3 *::before, .jd3 *::after { box-sizing: border-box; }
+
+.jd3 h1, .jd3 h2, .jd3 h3 {
+  font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+  color: var(--ink);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+.jd3 h1 { font-size: clamp(1.9rem, 3.2vw, 3rem); }
+.jd3 h2 { font-size: clamp(1.3rem, 2.1vw, 1.85rem); margin-bottom: 16px; }
+.jd3 h3 { font-size: 1.05rem; margin-bottom: 10px; }
+.jd3 p { margin: 0 0 14px; color: var(--ink-soft); }
+.jd3 a { color: var(--primary); text-underline-offset: 3px; }
+
+.jd3 .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
+
+.jd3 .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+/* ---------- Breadcrumb ---------- */
+.jd3 .jd3-breadcrumb {
+  padding: 14px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.jd3 .jd3-breadcrumb a { color: var(--muted); text-decoration: none; }
+.jd3 .jd3-breadcrumb a:hover { color: var(--primary); }
+.jd3 .jd3-breadcrumb .sep { margin: 0 6px; color: #b7bccb; }
+.jd3 .jd3-breadcrumb [aria-current="page"] { color: var(--ink); font-weight: 700; }
+
+/* ---------- Hero ---------- */
+.jd3-hero { padding: 18px 0 8px; }
+
+.jd3-hero-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: 24px;
+  align-items: start;
+  padding: clamp(20px, 3vw, 34px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.jd3-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  margin-bottom: 12px;
+  border: 1px solid #c6d0f5;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.jd3-lead { max-width: 720px; font-size: 1.02rem; }
+
+.jd3-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
+.jd3-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.jd3-chip .mono { color: var(--ink); }
+
+.jd3-action-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.jd3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.jd3-btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.jd3-btn.primary:hover { background: var(--primary-dark); }
+.jd3-btn:focus-visible { outline: 3px solid rgba(28, 63, 174, 0.25); outline-offset: 2px; }
+
+/* ---------- Seal / status stamp ---------- */
+.jd3-side { display: grid; gap: 14px; }
+
+.jd3-seal-panel {
+  position: relative;
+  padding: 18px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: #eef1fb;
+  overflow: hidden;
+}
+
+.jd3-stamp {
+  position: absolute;
+  top: 14px;
+  right: -10px;
+  transform: rotate(-8deg);
+  padding: 6px 14px;
+  border: 2px dashed rgba(255,255,255,0.55);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.jd3-stamp.open { border-color: #6fe3a0; color: #6fe3a0; }
+.jd3-stamp.closed { border-color: #ff9a90; color: #ff9a90; }
+
+.jd3-seal-panel .big { display: block; margin-top: 4px; font-size: 1.55rem; font-weight: 800; }
+.jd3-seal-panel .label { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #b8c0dc; }
+.jd3-countdown { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.14); font-size: 0.9rem; color: #dfe4f6; }
+.jd3-countdown .mono { color: #fff; font-weight: 700; }
+
+/* Ledger timeline — signature element, reused in hero + Important Dates */
+.jd3-ledger { display: grid; gap: 0; }
+.jd3-ledger-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  padding: 9px 0;
+}
+.jd3-ledger-item::before {
+  content: "";
+  width: 9px; height: 9px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.jd3-ledger-item::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 20px; bottom: -9px;
+  width: 1px;
+  background: var(--line);
+}
+.jd3-ledger-item:last-child::after { display: none; }
+.jd3-ledger-item .lbl { display: block; font-size: 0.78rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+.jd3-ledger-item .val { display: block; font-weight: 700; }
+.jd3-ledger.on-dark .jd3-ledger-item::after { background: rgba(255,255,255,0.16); }
+.jd3-ledger.on-dark .lbl { color: #b8c0dc; }
+.jd3-ledger.on-dark .val { color: #fff; }
+
+/* ---------- Sticky in-page nav (TOC) ---------- */
+.jd3-toc-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(246, 244, 238, 0.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+.jd3-toc-scroll {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scrollbar-width: thin;
+}
+.jd3-toc-scroll a {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.jd3-toc-scroll a.active,
+.jd3-toc-scroll a:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ---------- Quick facts strip ---------- */
+.jd3-quickfacts {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px auto;
+}
+.jd3-quickfacts article {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.jd3-quickfacts span { display: block; font-size: 0.74rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+.jd3-quickfacts strong { display: block; margin-top: 2px; }
+
+/* ---------- Trust note ---------- */
+.jd3-trust {
+  margin: 16px auto 26px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  background: var(--gold-soft);
+  color: #6b4e05;
+  font-size: 0.92rem;
+}
+.jd3-trust strong { color: #4a3600; }
+
+/* ---------- Content sections ---------- */
+.jd3-content { display: grid; gap: 22px; padding-bottom: 46px; }
+
+.jd3-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 22px;
+  align-items: start;
+}
+
+.jd3-rail { position: sticky; top: 56px; display: grid; gap: 14px; }
+.jd3-rail-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.jd3-rail-nav { display: grid; gap: 4px; }
+.jd3-rail-nav a {
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  font-size: 0.87rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.jd3-rail-nav a.active { background: var(--primary-soft); color: var(--primary-dark); font-weight: 800; }
+
+.jd3-card {
+  padding: clamp(18px, 2.6vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 64px;
+}
+
+.jd3-updated { font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
+
+.jd3-snapshot {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.jd3-snapshot article {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+.jd3-snapshot span { display: block; font-size: 0.74rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+.jd3-snapshot strong { display: block; margin-top: 2px; }
+
+.jd3-two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+.jd3-panel { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+.jd3-panel h3 { margin: 0; padding: 12px 16px; background: var(--primary-soft); color: var(--primary-dark); border-bottom: 1px solid var(--line); }
+.jd3-panel .jd3-facts { list-style: none; margin: 0; padding: 0; }
+.jd3-panel .jd3-facts li { display: grid; grid-template-columns: minmax(130px, 0.9fr) 1.1fr; gap: 10px; padding: 11px 16px; border-bottom: 1px solid var(--line); }
+.jd3-panel .jd3-facts li:last-child { border-bottom: 0; }
+.jd3-panel .jd3-facts span { font-weight: 700; color: var(--muted); }
+
+.jd3-table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+.jd3 table { width: 100%; min-width: 560px; border-collapse: collapse; background: #fff; }
+.jd3 caption { padding: 12px 14px; text-align: left; color: var(--muted); font-weight: 700; }
+.jd3 th, .jd3 td { padding: 11px 14px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.jd3 th { background: var(--primary-soft); color: var(--primary-dark); }
+.jd3 .note { margin-top: 10px; font-size: 0.9rem; color: var(--muted); }
+
+/* Stepper for a real ordered process (selection stages) */
+.jd3-stepper { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.jd3-stepper li {
+  position: relative;
+  padding: 4px 0 20px 40px;
+}
+.jd3-stepper li::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0; top: 0;
+  width: 28px; height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.jd3-stepper li::after {
+  content: "";
+  position: absolute;
+  left: 13px; top: 28px; bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.jd3-stepper li:last-child::after { display: none; }
+.jd3-stepper strong { display: block; margin-bottom: 2px; }
+
+.jd3-clean-list, .jd3-step-list { margin: 0; padding-left: 1.2rem; }
+.jd3-clean-list li, .jd3-step-list li { margin: 8px 0; color: var(--ink-soft); }
+
+/* ---------- Links / tools / related ---------- */
+.jd3-links-table td:first-child { width: 34%; font-weight: 800; }
+
+.jd3-tool-grid, .jd3-related-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.jd3-tool-link {
+  flex: 1 1 160px;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-weight: 800;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.jd3-related-open-jobs-mount { width: 100%; }
+.jd3-related-open-jobs-mount:empty { display: none; }
+.jd3-related-open-jobs-list { display: grid; gap: 10px; }
+.jd3-related-open-job-link {
+  display: grid; gap: 3px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  text-decoration: none;
+  color: var(--ink);
+}
+.jd3-related-open-job-name { color: var(--primary); font-weight: 800; }
+.jd3-related-open-job-meta { color: var(--muted); font-size: 0.83rem; font-weight: 700; }
+
+/* ---------- FAQ accordion (native details/summary: crawlable + no-JS safe) ---------- */
+.jd3-faq { display: grid; gap: 10px; }
+.jd3-faq details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 4px 4px;
+}
+.jd3-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.jd3-faq summary::-webkit-details-marker { display: none; }
+.jd3-faq summary::after {
+  content: "+";
+  font-size: 1.2rem;
+  color: var(--primary);
+  flex: 0 0 auto;
+}
+.jd3-faq details[open] summary::after { content: "\2212"; }
+.jd3-faq .jd3-faq-body { padding: 0 14px 14px; color: var(--ink-soft); }
+
+/* ---------- Share row ---------- */
+.jd3-share-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.jd3-share-row a, .jd3-share-row button {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit; font-weight: 700; font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ---------- Sticky mobile apply bar ---------- */
+.jd3-sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 30;
+  display: none;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -10px 26px rgba(18,23,43,0.1);
+}
+.jd3-sticky-cta .jd3-btn { flex: 1; }
+
+.jd3-disclaimer { border-color: #efd4a7; background: #fffaf0; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .jd3-layout { grid-template-columns: 1fr; }
+  .jd3-rail { position: static; grid-auto-flow: column; overflow-x: auto; }
+}
+@media (max-width: 1024px) {
+  .jd3-hero-card, .jd3-two-col { grid-template-columns: 1fr; }
+  .jd3-quickfacts, .jd3-snapshot { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 700px) {
+  .jd3-quickfacts, .jd3-snapshot { grid-template-columns: 1fr 1fr; }
+  .jd3-card, .jd3-hero-card { padding: 16px; }
+  .jd3-panel .jd3-facts li { grid-template-columns: 1fr; gap: 3px; }
+  .jd3-sticky-cta { display: flex; }
+  .jd3-content { padding-bottom: 90px; }
+}
+
+@media print {
+  .jd3-toc-bar, .jd3-sticky-cta, .jd3-action-row, .jd3-share-row { display: none !important; }
+}
