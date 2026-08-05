@@ -300,7 +300,15 @@
   scroll-margin-top: 64px;
 }
 
-.jd3-updated { font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
+.jd3-updated { font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.jd3-updated .jd3-updated-item { display: inline-flex; gap: 6px; align-items: center; }
+.jd3-updated .updated-value { font-weight: 800; color: var(--ink); }
+.jd3-updated .separator { color: #b7bccb; margin: 0 6px; }
+
+@media (max-width: 600px) {
+  .jd3-updated { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .jd3-updated .separator { display: none; }
+}
 
 .jd3-snapshot {
   display: grid;
