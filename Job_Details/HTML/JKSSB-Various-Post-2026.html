@@ -283,11 +283,31 @@
         <section class="jd3-card">
           <h2>Share This Job</h2>
           <div class="jd3-share-row">
-            <button type="button" data-jd3-share="whatsapp">WhatsApp</button>
-            <button type="button" data-jd3-share="telegram">Telegram</button>
-            <button type="button" data-jd3-share="twitter">X / Twitter</button>
-            <button type="button" data-jd3-share="facebook">Facebook</button>
+            <a class="jd3-btn" href="#" data-jd3-share="whatsapp" aria-label="Share on WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="jd3-btn" href="#" data-jd3-share="telegram" aria-label="Share on Telegram" target="_blank" rel="noopener">Telegram</a>
+            <a class="jd3-btn" href="#" data-jd3-share="twitter" aria-label="Share on X (Twitter)" target="_blank" rel="noopener">X / Twitter</a>
+            <a class="jd3-btn" href="#" data-jd3-share="facebook" aria-label="Share on Facebook" target="_blank" rel="noopener">Facebook</a>
           </div>
+          <script>
+            (function () {
+              try {
+                var root = document.querySelector('.jd3');
+                var shareText = (root && root.getAttribute('data-jd3-share-text')) || document.title || '';
+                var url = encodeURIComponent(window.location.href);
+                var text = encodeURIComponent(shareText);
+                var map = {
+                  whatsapp: 'https://wa.me/?text=' + text + '%20' + url,
+                  telegram: 'https://t.me/share/url?url=' + url + '&text=' + text,
+                  twitter: 'https://twitter.com/intent/tweet?url=' + url + '&text=' + text,
+                  facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + url
+                };
+                document.querySelectorAll('[data-jd3-share]').forEach(function (el) {
+                  var network = el.getAttribute('data-jd3-share');
+                  if (map[network]) el.setAttribute('href', map[network]);
+                });
+              } catch (e) { /* silently fail */ }
+            }());
+          </script>
         </section>
 
         <section class="jd3-card">
