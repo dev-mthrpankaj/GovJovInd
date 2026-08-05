@@ -2011,7 +2011,7 @@ main {
 }
 
 .home-page .platform-hero h1::first-letter {
-  color: var(--home-saffron);
+  color: var(--primary);
 }
 
 .home-page .platform-hero p {
