@@ -53,11 +53,18 @@
 
 /* ---------- Breadcrumb ---------- */
 .jd3 .jd3-breadcrumb {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
   padding: 14px 0 0;
   font-size: 0.85rem;
   color: var(--muted);
+  white-space: nowrap;
+  overflow-x: auto;
 }
-.jd3 .jd3-breadcrumb a { color: var(--muted); text-decoration: none; }
+.jd3 .jd3-breadcrumb::-webkit-scrollbar { display: none; }
+.jd3 .jd3-breadcrumb a { color: var(--muted); text-decoration: none; white-space: nowrap; }
 .jd3 .jd3-breadcrumb a:hover { color: var(--primary); }
 .jd3 .jd3-breadcrumb .sep { margin: 0 6px; color: #b7bccb; }
 .jd3 .jd3-breadcrumb [aria-current="page"] { color: var(--ink); font-weight: 700; }
@@ -376,10 +383,14 @@
   align-items: center;
 }
 
-.jd3-related-open-jobs-mount { width: 100%; }
-.jd3-related-open-jobs-mount:empty { display: none; }
-.jd3-related-open-jobs-list { display: grid; gap: 10px; }
-.jd3-related-open-job-link {
+.jd3-related-open-jobs-mount,
+.related-open-jobs-mount { width: 100%; }
+.jd3-related-open-jobs-mount:empty,
+.related-open-jobs-mount:empty { display: none; }
+.jd3-related-open-jobs-list,
+.related-open-jobs-list { display: grid; gap: 10px; }
+.jd3-related-open-job-link,
+.related-open-job-link {
   display: grid; gap: 3px;
   padding: 12px 14px;
   border: 1px solid var(--line);
@@ -388,8 +399,16 @@
   text-decoration: none;
   color: var(--ink);
 }
-.jd3-related-open-job-name { color: var(--primary); font-weight: 800; }
-.jd3-related-open-job-meta { color: var(--muted); font-size: 0.83rem; font-weight: 700; }
+.jd3-related-open-job-link:hover,
+.related-open-job-link:hover,
+.jd3-related-open-job-link:focus-visible,
+.related-open-job-link:focus-visible {
+  background: #f1f4ff;
+}
+.jd3-related-open-job-name,
+.related-open-job-name { color: var(--primary); font-weight: 800; }
+.jd3-related-open-job-meta,
+.related-open-job-meta { color: var(--muted); font-size: 0.83rem; font-weight: 700; }
 
 /* ---------- FAQ accordion (native details/summary: crawlable + no-JS safe) ---------- */
 .jd3-faq { display: grid; gap: 10px; }
