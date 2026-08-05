@@ -134,7 +134,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "21",
         "startDate": "2026-08-05",
         "lastDate": "2026-08-26",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://sjvn.nic.in/en/current-job",
         "officialNotification": "https://sjvn.nic.in/sites/default/files/2026-07/Detailed%20Advt%20127.pdf",
