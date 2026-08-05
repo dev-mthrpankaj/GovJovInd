@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0165-20260805135028-ae46ba5f",
+        "title": "JKSSB Various Post Online Form 2026 for 518 Post",
+        "organization": "The Jammu & Kashmir Services Selection Board (JKSSB)",
+        "department": "JKSSB",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
+        "totalPosts": "518",
+        "startDate": "2026-09-10",
+        "lastDate": "2026-10-09",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://jkssb.nic.in/dynamic-jkssb-test/pages/login.aspx",
+        "officialNotification": "https://jkssb.nic.in/Pdf/Advertisement_08OF2026_04082026.pdf",
+        "detailPage": "../Job_Details/HTML/JKSSB-Various-Post-2026.html",
+        "updatedAt": "2026-08-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0164-20260804180130-785f5a37",
         "title": "MPESB Group 2 Sub Group 4 Online Form 2026 for 2106 Post",
         "organization": "Madhya Pradesh Employees Selection Board",
