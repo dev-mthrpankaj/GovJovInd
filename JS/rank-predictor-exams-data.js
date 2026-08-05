@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "rrb-alp-cbt-2",
+        "examName": "RRB Railway ALP Assistant Loco Pilot CBT II",
+        "board": "RRB",
+        "examType": "online",
+        "sheetName": "RRB Railway ALP Assistant Loco Pilot CBT II",
+        "totalQuestions": 175,
+        "marksPerCorrect": 1,
+        "negativeMarking": 0.33,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "online"
+        ],
+        "subjects": [],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [],
+        "horizontalCategories": [],
+        "states": [],
+        "disabled": false
+    },
+    {
         "examId": "rssb-ldc-jra-bb6-2026",
         "examName": "RSSB LDC Grade II / Junior Assistant 2026",
         "board": "RSSB",
