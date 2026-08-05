@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0096-20260805113336-42b15a60",
+        "title": "AFCAT 02/2026 Admit Card",
+        "organization": "India Air Force",
+        "department": "IAF",
+        "category": "Defence",
+        "year": "2026",
+        "examDate": "2026-08-08",
+        "examEndDate": "",
+        "releaseDate": "2026-08-04",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
+        "detailPage": "../AdmitCard_Details/HTML/AFCAT-02-2026-Admit-Card-2026.html",
+        "updatedAt": "2026-08-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0095-20260804180418-aaea01b4",
         "title": "MPPSC State Service Exam SSE Mains Admit Card 2026",
         "organization": "Madhya Pradesh Public Service Commission",

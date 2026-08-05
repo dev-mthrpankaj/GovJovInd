@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0082-20260805115346-75a861df",
+        "title": "UPSC ISS, IES Result 2026 for 44 Post",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-08-04",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://govjobupdates.com/Result_Details/HTML/UPSC-IES-ISS-Result-2026.html",
+        "detailPage": "../Result_Details/HTML/UPSC-IES-ISS-Result-2026.html",
+        "updatedAt": "2026-08-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0080-20260803194845-4c5d90cb",
         "title": "SSC MTS Multi Tasking Staff Result 2026",
         "organization": "Staff Selection Commission",
