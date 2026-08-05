@@ -17,12 +17,79 @@ window.GovJobUpdatesRankPredictorExams = [
         "supportedModes": [
             "online"
         ],
-        "subjects": [],
+        "subjects": [
+            {
+                "name": "Mathematics",
+                "questions": 25
+            },
+            {
+                "name": "Reasoning",
+                "questions": 25
+            },
+            {
+                "name": "Basic Science and Engineering",
+                "questions": 40
+            },
+            {
+                "name": "General Awareness and Current",
+                "questions": 10
+            }
+        ],
         "subjectPassingCriteria": [],
         "overallPassingCriteria": null,
-        "categories": [],
-        "horizontalCategories": [],
-        "states": [],
+        "categories": [
+            "UR",
+            "OBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Jammu and Kashmir",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry"
+        ],
         "disabled": false
     },
     {

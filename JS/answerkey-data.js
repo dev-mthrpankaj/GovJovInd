@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0049-20260805171639-46d4cfe1",
+        "title": "RRB Railway ALP Assistant Loco Pilot CBT II Answer Key 2026",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-07-28",
+        "examEndDate": "",
+        "releaseDate": "2026-08-05",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/97789/login.html",
+        "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/97789/login.html",
+        "detailPage": "../AnswerKey_Details/HTML/RRB-ALP-CBT-2-Answer-Key-2026.html",
+        "updatedAt": "2026-08-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0048-20260801162745-64bd7685",
         "title": "Railway RRB Isolated Categories Answer Key 2026 for 312 Post",
         "organization": "Railway Recruitment Board",
