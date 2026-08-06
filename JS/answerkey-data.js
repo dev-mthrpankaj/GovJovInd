@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0050-20260806202258-001bca4a",
+        "title": "UPSC CMS Answer Key 2026 | Combined Medical Services",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-08-02",
+        "examEndDate": "",
+        "releaseDate": "2026-08-05",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://govjobupdates.com/AnswerKey_Details/HTML/UPSC-CMS-Answer-Key-2026.html",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/UPSC-CMS-Answer-Key-2026.html",
+        "updatedAt": "2026-08-06",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0049-20260805171639-46d4cfe1",
         "title": "RRB Railway ALP Assistant Loco Pilot CBT II Answer Key 2026",
         "organization": "Railway Recruitment Board",

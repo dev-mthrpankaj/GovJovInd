@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0083-20260806203002-4ecc2986",
+        "title": "RSSB Conductor Result 2026 – Final Result Declared",
+        "organization": "Rajasthan Staff Selection Board",
+        "department": "RSSB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-05",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rssb.rajasthan.gov.in/results",
+        "detailPage": "../Result_Details/HTML/RSSB-Rajasthan-Conductor-Final-Result-2026.html",
+        "updatedAt": "2026-08-06",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0082-20260805115346-75a861df",
         "title": "UPSC ISS, IES Result 2026 for 44 Post",
         "organization": "Union Public Service Commission",
