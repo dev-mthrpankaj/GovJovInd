@@ -388,6 +388,12 @@ const ensureSharedFooter = () => {
         <a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram">
           <i class="fab fa-telegram" aria-hidden="true"></i>
         </a>
+        <a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        </a>
+        <a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN">
+          <span aria-hidden="true">X</span>
+        </a>
         <a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>

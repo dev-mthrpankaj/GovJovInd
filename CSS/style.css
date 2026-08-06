@@ -2718,6 +2718,12 @@ footer .social-icons a {
   transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
 }
 
+footer .social-icons .social-x span {
+  font-size: .98rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
 footer .social-icons a:hover,
 footer .social-icons a:focus-visible {
   transform: translateY(-2px);
@@ -2742,6 +2748,16 @@ footer .social-icons .social-youtube:focus-visible {
 footer .social-icons .social-telegram:hover,
 footer .social-icons .social-telegram:focus-visible {
   background: #229ed9;
+}
+
+footer .social-icons .social-whatsapp:hover,
+footer .social-icons .social-whatsapp:focus-visible {
+  background: #25d366;
+}
+
+footer .social-icons .social-x:hover,
+footer .social-icons .social-x:focus-visible {
+  background: #000000;
 }
 
 footer .social-icons .social-linkedin:hover,
