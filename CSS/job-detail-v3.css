@@ -29,10 +29,21 @@
   font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   line-height: 1.65;
   width: 100%;
+  max-width: 100%;
   margin: 0;
+  overflow-x: hidden; /* prevents any stray child from opening a horizontal scrollbar on mobile */
 }
 
-.jd3 *, .jd3 *::before, .jd3 *::after { box-sizing: border-box; }
+.jd3 *, .jd3 *::before, .jd3 *::after { box-sizing: border-box; min-width: 0; }
+
+/* Safety net: nothing inside .jd3 should ever exceed its own column width,
+   even if content (long URLs, unbroken codes, embedded media) doesn't wrap on its own. */
+.jd3 img, .jd3 svg, .jd3 iframe, .jd3 video { max-width: 100%; height: auto; }
+.jd3 pre, .jd3 code { white-space: pre-wrap; word-break: break-word; }
+.jd3 a, .jd3 p, .jd3 li, .jd3 span, .jd3 strong, .jd3 td, .jd3 th {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
 .jd3 h1, .jd3 h2, .jd3 h3 {
   font-family: "Space Grotesk", Inter, system-ui, sans-serif;
