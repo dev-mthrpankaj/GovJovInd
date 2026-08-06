@@ -47,6 +47,74 @@
     sections.forEach(function (s) { observer.observe(s); });
   }
 
+  /* ---------- Desktop side rail: JS fallback for browsers/ancestors that break CSS sticky ---------- */
+  var layout = root.querySelector(".jd3-layout");
+  var rail = root.querySelector(".jd3-rail");
+  var desktopRail = window.matchMedia ? window.matchMedia("(min-width: 1101px)") : null;
+  if (layout && rail && desktopRail) {
+    var railTicking = false;
+
+    var resetRail = function () {
+      rail.classList.remove("jd3-rail-fixed", "jd3-rail-bottom");
+      rail.style.removeProperty("--jd3-rail-top");
+      rail.style.removeProperty("--jd3-rail-left");
+      rail.style.removeProperty("--jd3-rail-width");
+    };
+
+    var getRailOffset = function () {
+      var header = document.querySelector("body > header");
+      var headerHeight = header ? Math.ceil(header.getBoundingClientRect().height) : 88;
+      return headerHeight + 20;
+    };
+
+    var updateRail = function () {
+      railTicking = false;
+      if (!desktopRail.matches) {
+        resetRail();
+        return;
+      }
+
+      rail.classList.remove("jd3-rail-fixed", "jd3-rail-bottom");
+
+      var offset = getRailOffset();
+      var layoutRect = layout.getBoundingClientRect();
+      var layoutTop = window.scrollY + layoutRect.top;
+      var railWidth = rail.getBoundingClientRect().width || 260;
+      var railHeight = rail.getBoundingClientRect().height;
+      var start = layoutTop - offset;
+      var stop = layoutTop + layout.offsetHeight - railHeight - offset;
+      var scrollY = window.scrollY;
+
+      rail.style.setProperty("--jd3-rail-top", offset + "px");
+      rail.style.setProperty("--jd3-rail-left", Math.round(layoutRect.right - railWidth) + "px");
+      rail.style.setProperty("--jd3-rail-width", Math.round(railWidth) + "px");
+
+      if (scrollY < start) {
+        resetRail();
+      } else if (scrollY >= stop) {
+        rail.classList.add("jd3-rail-bottom");
+      } else {
+        rail.classList.add("jd3-rail-fixed");
+      }
+    };
+
+    var requestRailUpdate = function () {
+      if (railTicking) return;
+      railTicking = true;
+      window.requestAnimationFrame(updateRail);
+    };
+
+    window.addEventListener("scroll", requestRailUpdate, { passive: true });
+    window.addEventListener("resize", requestRailUpdate);
+    window.addEventListener("load", requestRailUpdate);
+    if (desktopRail.addEventListener) {
+      desktopRail.addEventListener("change", requestRailUpdate);
+    } else if (desktopRail.addListener) {
+      desktopRail.addListener(requestRailUpdate);
+    }
+    requestRailUpdate();
+  }
+
   /* ---------- Copy link ---------- */
   root.querySelectorAll("[data-jd3-copy-link]").forEach(function (btn) {
     btn.addEventListener("click", function () {
