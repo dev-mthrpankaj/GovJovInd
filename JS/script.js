@@ -334,6 +334,7 @@ const ensureSharedHeader = () => {
   logoContainer.innerHTML = `
     <img src="${logo96}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async" onerror="this.onerror=null;this.src='${logo32}'">
     <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>
+    <span class="header-tiranga" aria-hidden="true"></span>
   `;
 
   let menuToggle = container.querySelector('.menu-toggle');
