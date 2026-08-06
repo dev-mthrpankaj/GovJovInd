@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0166-20260806144724-dc4ffe26",
+        "title": "Bank of Baroda SO Various Post Online Form 2026 for 206 Post",
+        "organization": "Bank of Baroda",
+        "department": "BOB",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "B. E. / B. Tech (Information Technology / Computer Science/ Electronics and Communication Engineering), Preferred Qualification: Post graduation in Management/ Certification in PMP, See Detailed notification for more details",
+        "totalPosts": "206",
+        "startDate": "2026-08-06",
+        "lastDate": "2026-08-26",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://bankofbaroda.bank.in/career/current-opportunities/recruitment-of-professionals-on-regular-basis-for-digital-banking-department-26-08",
+        "officialNotification": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2026/26-08/Advertisement-Regular-06-08-2026-05-34.pdf",
+        "detailPage": "../Job_Details/HTML/BOB-SO-Various-Post-2026.html",
+        "updatedAt": "2026-08-06",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0165-20260805135028-ae46ba5f",
         "title": "JKSSB Various Post Online Form 2026 for 518 Post",
         "organization": "The Jammu & Kashmir Services Selection Board (JKSSB)",
