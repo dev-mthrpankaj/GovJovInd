@@ -43,6 +43,12 @@
   <link rel="stylesheet" href="../../CSS/job-detail-v3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8757376209468788" crossorigin="anonymous"></script>
+  <style>
+    @media (max-width: 700px) {
+      .jd3-rail { display: none !important; }
+      .jd3-sticky-cta.is-footer-visible { display: none !important; }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -393,5 +399,22 @@
   <script src="../../JS/job-details-v3.js"></script>
   <script src="../../JS/firebase-config.js"></script>
   <script type="module" src="../../JS/firebase-visitors.js"></script>
+  <script>
+    (function () {
+      var stickyCta = document.querySelector('.jd3-sticky-cta');
+      var footer = document.querySelector('footer');
+      if (!stickyCta || !footer || typeof IntersectionObserver === 'undefined') {
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          stickyCta.classList.toggle('is-footer-visible', entry.isIntersecting);
+        });
+      }, { root: null, threshold: 0 });
+
+      observer.observe(footer);
+    })();
+  </script>
 </body>
 </html>
