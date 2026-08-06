@@ -3071,6 +3071,13 @@
       "title": "AFCAT 02/2026 Admit Card",
       "lastPostedAt": "2026-08-05T06:27:44.365Z",
       "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0097-20260806202458-96898a98": {
+      "updatedAt": "2026-08-06",
+      "hash": "220895247d1e0fc9708d941095b300e1d5fbe91ad7007067a3557c82a0ac0749",
+      "title": "Bank of India Credit Officers Admit Card 2026 for 779 Post",
+      "lastPostedAt": "2026-08-06T15:36:57.166Z",
+      "stateReason": "new"
     }
   },
   "answerKeys": {
@@ -3758,6 +3765,13 @@
       "hash": "4d4215d4b0fab839ef7e4f12edb33889f1a8a81b5e3c5966cf9e330674587f8e",
       "title": "RRB Railway ALP Assistant Loco Pilot CBT II Answer Key 2026",
       "lastPostedAt": "2026-08-05T12:02:52.016Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0050-20260806202258-001bca4a": {
+      "updatedAt": "2026-08-06",
+      "hash": "25b85ce96527fb22663d1813fe3d44ff1327e59306b8a3e7ba20f0b2550dacdd",
+      "title": "UPSC CMS Answer Key 2026 | Combined Medical Services",
+      "lastPostedAt": "2026-08-06T15:36:58.127Z",
       "stateReason": "new"
     }
   },
@@ -4796,6 +4810,13 @@
       "hash": "6d0c1b2760cbc4f8981d3e2f063975e406464e2423ad30033692b2809f436150",
       "title": "UPSC ISS, IES Result 2026 for 44 Post",
       "lastPostedAt": "2026-08-05T06:27:45.291Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0083-20260806203002-4ecc2986": {
+      "updatedAt": "2026-08-06",
+      "hash": "c0624e17763c071e3c1a1b86ab5defcae9414e6fa505234cddf4cda6265e2647",
+      "title": "RSSB Conductor Result 2026 – Final Result Declared",
+      "lastPostedAt": "2026-08-06T15:36:58.768Z",
       "stateReason": "new"
     }
   }

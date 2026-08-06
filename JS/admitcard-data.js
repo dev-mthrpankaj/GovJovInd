@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0097-20260806202458-96898a98",
+        "title": "Bank of India Credit Officers Admit Card 2026 for 779 Post",
+        "organization": "Bank of India Credit",
+        "department": "BOI",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-08-16",
+        "examEndDate": "",
+        "releaseDate": "2026-08-06",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/boicojun26/oecla_aug26/login.php?appid=beb71e80ca57b23bf5fce4728732e5fa",
+        "detailPage": "../AdmitCard_Details/HTML/BOI-Credit-Officers-Admit-Card-2026.html",
+        "updatedAt": "2026-08-06",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0096-20260805113336-42b15a60",
         "title": "AFCAT 02/2026 Admit Card",
         "organization": "India Air Force",
