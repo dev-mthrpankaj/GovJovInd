@@ -650,11 +650,19 @@
   min-width: 0;
 }
 
+.article-sidebar .article-toc-card {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .article-sidebar {
     position: sticky;
     top: var(--article-sidebar-sticky-top, 5.5rem);
     transition: opacity .18s ease, transform .18s ease;
+  }
+
+  .article-sidebar .article-toc-card {
+    display: block;
   }
 
   .article-sidebar.is-near-related {
