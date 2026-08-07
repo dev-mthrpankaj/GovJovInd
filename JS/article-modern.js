@@ -78,25 +78,30 @@
   /* ---------- Table of contents (auto scroll-spy) ---------- */
   const tocList = document.getElementById("articleTocList");
   if (tocList && content) {
-    const headings = Array.from(content.querySelectorAll(":scope > section > h2[id]"));
     const links = Array.from(tocList.querySelectorAll("a[href^='#']"));
+    const sectionIds = links.map((a) => a.getAttribute("href").slice(1));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
 
-    if (headings.length && links.length && "IntersectionObserver" in window) {
+    if (sections.length && links.length && "IntersectionObserver" in window) {
       const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+      const setActiveLink = (id) => {
+        links.forEach((a) => a.classList.remove("is-active"));
+        const link = byId.get(id);
+        if (link) link.classList.add("is-active");
+      };
       const observer = new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
-            const link = byId.get(entry.target.id);
-            if (!link) return;
-            if (entry.isIntersecting) {
-              links.forEach((a) => a.classList.remove("is-active"));
-              link.classList.add("is-active");
-            }
-          });
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible[0]) setActiveLink(visible[0].target.id);
         },
-        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+        { rootMargin: "-22% 0px -62% 0px", threshold: 0 }
       );
-      headings.forEach((h) => observer.observe(h));
+      sections.forEach((section) => observer.observe(section));
+      setActiveLink(sections[0].id);
     }
   }
 
