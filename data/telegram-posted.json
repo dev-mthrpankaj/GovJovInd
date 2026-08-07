@@ -1935,6 +1935,20 @@
       "title": "UP Van Nigam Online Form 2026",
       "lastPostedAt": "2026-08-07T09:19:18.774Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0170-20260807204325-1e87f203": {
+      "updatedAt": "2026-08-07",
+      "hash": "d8ea0a08b67c2d9a0d40bc645d865cd851f3c93778311baf1eaf260a5240097e",
+      "title": "SBI Junior Associates Clerk Online Form 2026 for 1538 Post",
+      "lastPostedAt": "2026-08-07T16:04:46.843Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0171-20260807204706-3ffba20b": {
+      "updatedAt": "2026-08-07",
+      "hash": "30f1e115df8f5d67771becf29a3dca94f1d2185dac853c45df948b4443ff6029",
+      "title": "BSIP Lucknow Scientist B Online Form 2026",
+      "lastPostedAt": "2026-08-07T16:04:47.678Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -4838,6 +4852,41 @@
       "hash": "c0624e17763c071e3c1a1b86ab5defcae9414e6fa505234cddf4cda6265e2647",
       "title": "RSSB Conductor Result 2026 – Final Result Declared",
       "lastPostedAt": "2026-08-06T15:36:58.768Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0084-20260807205022-8108a00a": {
+      "updatedAt": "2026-08-07",
+      "hash": "87c7cb0d4ce3144d67a478f884986cea2331860b9214dacde1fceefe9369a121",
+      "title": "RPSC School Lecturer PGT Teacher Hindi Result 2025 for 3225 Post",
+      "lastPostedAt": "2026-08-07T16:04:48.190Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0085-20260807205237-a841e37d": {
+      "updatedAt": "2026-08-07",
+      "hash": "a3575fb1e3a3862d6db61c4c159301293ccaa8c94a55cfc915acb3e755c6f52c",
+      "title": "MPESB PNST Pre Nursing Result 2026 – Out",
+      "lastPostedAt": "2026-08-07T16:04:49.082Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0086-20260807205430-591a9ea4": {
+      "updatedAt": "2026-08-07",
+      "hash": "bd38d1a5605a9bb03a83c4df59b1ad90fbd48db20fb81829e8d3cbaced3a71bc",
+      "title": "MPESB ADDET Animal Husbandry Result 2026",
+      "lastPostedAt": "2026-08-07T16:04:49.810Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0087-20260807205703-068084ef": {
+      "updatedAt": "2026-08-07",
+      "hash": "ae4891e091d4ce2108181519dd7d8b8675689589acadd5d9b50c6c9573424ac4",
+      "title": "UPSC CDS II 2025 Final Result OTA",
+      "lastPostedAt": "2026-08-07T16:04:53.687Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0088-20260807205829-b488f4c4": {
+      "updatedAt": "2026-08-07",
+      "hash": "50b6f69c0c4c82da4d160c13df0e99b1da6e07fe6180a3f46e2473541b48bf46",
+      "title": "UPSC CPF Assistant Commandant CAPF 2025 Final Result",
+      "lastPostedAt": "2026-08-07T16:04:54.381Z",
       "stateReason": "new"
     }
   }
