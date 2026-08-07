@@ -913,7 +913,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-07-13",
         "examEndDate": "2026-08-07",
         "releaseDate": "2026-07-04",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://uppbpb.gov.in/",
         "detailPage": "../AdmitCard_Details/HTML/UP-Police-Homeguard-DV-PST-Notice-2026.html",
