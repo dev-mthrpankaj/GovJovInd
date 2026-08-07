@@ -1322,7 +1322,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "734",
         "startDate": "2026-07-10",
         "lastDate": "2026-08-06",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://hppsconline.hp.gov.in/HPPSC/ApplicantRegistration/Home/Login",
         "officialNotification": "https://hppsc.hp.gov.in/CommonControls/ViewCMSFile?qs=KI3gZ53zz1wSGo29lXLTBfw1DHezN8KfEg%2BrikZhi%2FLLqiZME0%2BQReThfPJPy%2BjgrmLJ%2B48MSfenisMCQ3fHXMZ0%2BajrVuV3AylOo9mGWYM%3D",
