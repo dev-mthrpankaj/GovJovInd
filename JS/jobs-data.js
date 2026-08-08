@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0172-20260808173949-d0522e5d",
+        "title": "IOB Local Bank Officer LBO Online Form 2026 for 250 Post",
+        "organization": "Indian Overseas Bank (IOB)",
+        "department": "IOB",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Bachelor Degree Passed from any Recognized University in India. Mandatory Local Languagae",
+        "totalPosts": "250",
+        "startDate": "2026-08-08",
+        "lastDate": "2026-08-24",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ibpsreg.ibps.in/iobjul26/",
+        "officialNotification": "https://www.iob.bank.in/documents/d/guest/lbo-final-ad-2026-27",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0172-20260808173949-d0522e5d",
+        "updatedAt": "2026-08-08",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0167-20260807141121-f8be4f92",
         "title": "UPEIDA Computer Operator, Driver Online Form 2026",
         "organization": "Uttar Pradesh Expressway Industrial Development Authority UPEID",
