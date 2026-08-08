@@ -46,15 +46,10 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="//www.gstatic.com">
     <link rel="stylesheet" href="CSS/style.css?v=live-test-info-20260608">
-    <!-- Only the icon styles actually used on this site (solid + brands) are loaded, not the full "all" bundle (which also ships an unused "regular" set). Loaded non-render-blocking via preload+swap, with a <noscript> fallback. -->
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/brands.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/brands.min.css">
-    </noscript>
+    <!-- Only the icon styles actually used on this site (solid + brands), not the full "all" bundle (which also ships an unused "regular" set). Loaded as a normal blocking stylesheet on purpose: async-swapping this caused icons to pop in after first paint and pushed CLS from 0.005 to 0.32. Blocking keeps icons present at first paint with zero layout shift, which matters far more for the Lighthouse score (CLS is weighted 25%) than the small FCP delay this adds. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/brands.min.css">
   
 </head>
 <body class="home-page">
