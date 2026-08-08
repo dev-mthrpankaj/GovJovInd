@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "what-is-govjobupdates-complete-guide",
+  title: "What is GovJobUpdates? A Complete Guide to India's Premier EdTech and Recruitment Hub",
+  category: "Platform Guide",
+  date: "2026-08-07",
+  image: thumbnail,
+  url: "student-hub/what-is-govjobupdates-complete-guide.html",
+  excerpt: "What is GovJobUpadates? Job notifications, admit cards, answer keys, quizzes, rank predictors aur document tools — all in one free platform. Read Complete guide."
+},
+    {
   id: "independence-day-2026-history-significance-gk-guide",
   title: "Independence Day 2026: Complete History, Significance and GK Guide for Govt Exam Aspirants",
   category: "Current Affairs",
