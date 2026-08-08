@@ -86,7 +86,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "6",
         "startDate": "2026-07-31",
         "lastDate": "2026-08-08",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://sewayojan.up.nic.in/IEP/Login.aspx",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/08/UP-Van-Nigam-Recruitment-2026.pdf",
