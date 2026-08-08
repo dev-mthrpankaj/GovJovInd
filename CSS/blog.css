@@ -654,7 +654,7 @@
 @media (min-width: 1024px) {
   .article-sidebar {
     position: sticky;
-    top: 1.25rem;
+    top: 5.5rem;
   }
 }
 
