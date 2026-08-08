@@ -7,7 +7,7 @@
   title: "What is GovJobUpdates? A Complete Guide to India's Premier EdTech and Recruitment Hub",
   category: "Platform Guide",
   date: "2026-08-07",
-  image: thumbnail,
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786153866720.webp",
   url: "student-hub/what-is-govjobupdates-complete-guide.html",
   excerpt: "What is GovJobUpadates? Job notifications, admit cards, answer keys, quizzes, rank predictors aur document tools — all in one free platform. Read Complete guide."
 },
