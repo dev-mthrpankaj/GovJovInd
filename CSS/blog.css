@@ -190,7 +190,8 @@
    Header/footer/head are untouched by design.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap');
+/* Baloo 2 font is loaded via <link rel="preload"/stylesheet> in <head>, NOT @import here —
+   @import inside CSS is render-blocking and delays LCP. See <head> of article pages. */
 
 .blog-article-page {
   --art-amber: #f59e0b;
@@ -650,25 +651,10 @@
   min-width: 0;
 }
 
-.article-sidebar .article-toc-card {
-  display: none;
-}
-
 @media (min-width: 1024px) {
   .article-sidebar {
     position: sticky;
-    top: var(--article-sidebar-sticky-top, 5.5rem);
-    transition: opacity .18s ease, transform .18s ease;
-  }
-
-  .article-sidebar .article-toc-card {
-    display: block;
-  }
-
-  .article-sidebar.is-near-related {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-8px);
+    top: 1.25rem;
   }
 }
 
@@ -792,7 +778,6 @@
 .article-share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
 .article-share-btn.telegram:hover { border-color: #229ED9; color: #229ED9; }
 .article-share-btn.twitter:hover { border-color: #0f1419; color: #0f1419; }
-.article-share-btn.linkedin:hover { border-color: #0A66C2; color: #0A66C2; }
 
 .article-share-btn[data-copy] {
   position: relative;
