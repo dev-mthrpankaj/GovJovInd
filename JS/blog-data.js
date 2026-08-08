@@ -3,8 +3,17 @@
 
   window.GOVJOB_BLOGS = [
     {
+      id: "neet-pg-seats-2026-state-wise-list-fee-structure",
+      title: "NEET PG Seats 2026: India Has 86,360 Medical Seats, Karnataka Leads With 10,092",
+      category: "NEET",
+      date: "2026-08-08",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786188055134.webp",
+      url: "student-hub/neet-pg-seats-2026-state-wise-list-fee-structure.html",
+      excerpt: "India has 86,360 postgraduate medical seats for 2026-27 with Karnataka recording the highest at 10,092. Health Minister JP Nadda outlined Lok Sabha updates on 5,000 new seat expansions and fee rules."
+},
+    {
   id: "what-is-govjobupdates-complete-guide",
-  title: "What is GovJobUpdates? A Complete Guide to India's Premier EdTech and Recruitment Hub",
+  title: "What is GovJobUpd,tes? A Complete Guide to India's Premier EdTech and Recruitment Hub",
   category: "Platform Guide",
   date: "2026-08-07",
   image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786153866720.webp",
