@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "delhi-school-fee-regulation-order-2026",
+  title: "Delhi School Fees 2026-27: Govt Introduces New Fee Regulation Order & SLFRC Rules",
+  category: "Education News",
+  date: "2026-08-08",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786204710186.webp",
+  url: "student-hub/delhi-school-fee-regulation-order-2026.html",
+  excerpt: "Delhi government introduced a new fee regulation order in 2026 for setting up SLFRC and DFAC fee committees ahead of the 2026-27 academic session. Read complete fee cap rules and timelines."
+},
+    {
       id: "upi-how-it-works-and-why-businesses-use-it",
       title: "UPI Explained: How Unified Payments Interface Works & Why Businesses Use It",
       category: "Technology",
