@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/iobjul26/",
         "officialNotification": "https://www.iob.bank.in/documents/d/guest/lbo-final-ad-2026-27",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0172-20260808173949-d0522e5d",
+        "detailPage": "../Job_Details/HTML/IOB-Local-Bank-Officer-2026.html",
         "updatedAt": "2026-08-08",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0167-20260807141121-f8be4f92",
