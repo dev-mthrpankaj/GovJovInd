@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0098-20260808180613-20cd4d47",
+        "title": "SSB Constable Tradesman PET / PST Admit Card 2026 for 827 Post",
+        "organization": "Sashastra Seema Bal",
+        "department": "SSB",
+        "category": "Defense",
+        "year": "2026",
+        "examDate": "2026-08-16",
+        "examEndDate": "",
+        "releaseDate": "2026-08-08",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://applyssb.com/ssb_ct_si_pet_admitcards_26_v2/applicationAfterIndex",
+        "detailPage": "../AdmitCard_Details/HTML/SSB-Constable-Tradesman-Admit-Card-2026.html",
+        "updatedAt": "2026-08-08",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0097-20260806202458-96898a98",
         "title": "Bank of India Credit Officers Admit Card 2026 for 779 Post",
         "organization": "Bank of India Credit",
