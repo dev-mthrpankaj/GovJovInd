@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "how-to-read-government-job-notification-pdf-correctly",
+  title: "How to Read a Government Job Notification (PDF) Correctly: Step-by-Step Guide",
+  category: "Career Guidance",
+  date: "2026-06-29",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786237319287.webp",
+  url: "student-hub/how-to-read-government-job-notification-pdf-correctly.html",
+  excerpt: "A complete, section-by-section guide to reading a government job notification PDF correctly — eligibility, dates, fees, and selection process — so you never miss a critical detail."
+}
+    {
   id: "delhi-school-fee-regulation-order-2026",
   title: "Delhi School Fees 2026-27: Govt Introduces New Fee Regulation Order & SLFRC Rules",
   category: "Education News",
@@ -149,15 +158,7 @@
   url: "student-hub/documents-required-for-government-job-applications-checklist.html",
   excerpt: "Every document you may need for a government job application and verification in India — identity, education, category certificates, and more — with practical tips on preparing each one in advance."
 },
-    {
-  id: "how-to-read-government-job-notification-pdf-correctly",
-  title: "How to Read a Government Job Notification (PDF) Correctly: Step-by-Step Guide",
-  category: "Career Guidance",
-  date: "2026-07-17",
-  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1784363540216.webp",
-  url: "student-hub/how-to-read-government-job-notification-pdf-correctly.html",
-  excerpt: "A complete, section-by-section guide to reading a government job notification PDF correctly — eligibility, dates, fees, and selection process — so you never miss a critical detail."
-},
+
     {
   id: "government-job-categories-group-a-b-c-d-explained",
   title: "Government Job Categories in India Explained: Group A, B, C and D — Complete Guide",
