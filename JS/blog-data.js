@@ -10,7 +10,7 @@
       image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786244145189.webp",
       url: "student-hub/government-job-vs-private-job-in-india-2026-comparison.html",
       excerpt: "A complete 2026 level-by-level comparison between government and private sector careers in India — 7th CPC salary, private pay distribution, NPS, total benefits, job security, and 8th Pay Commission predictions."
-    }
+},
     {
   id: "rakhi-2026-date-muhurat-timings-guide",
   title: "When is Rakhi 2026? Date, Shubh Muhurat, Timings & Complete Guide",
