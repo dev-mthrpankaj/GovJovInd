@@ -2,6 +2,15 @@
   const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
+    {
+      id: "eci-sir-voter-form-online-guide",
+      title: "ECI SIR Voter Form Online Guide 2026: Step-by-Step",
+      category: "Current Affairs",
+      date: "2026-08-09",
+      image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786293644398.webp",
+      url: "student-hub/eci-sir-voter-form-online-guide.html",
+      excerpt: "Complete guide to ECI Special Summary Revision (SIR) Voter Forms 6, 6B, 7, and 8. Learn online application, document upload, and status tracking step-by-step."
+},
 {
       id: "government-job-vs-private-job-in-india-2026-comparison",
       title: "Government Job vs Private Job in India: Complete 2026 Comparison",
