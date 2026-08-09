@@ -10,7 +10,7 @@
   image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786237319287.webp",
   url: "student-hub/how-to-read-government-job-notification-pdf-correctly.html",
   excerpt: "A complete, section-by-section guide to reading a government job notification PDF correctly — eligibility, dates, fees, and selection process — so you never miss a critical detail."
-}
+},
     {
   id: "delhi-school-fee-regulation-order-2026",
   title: "Delhi School Fees 2026-27: Govt Introduces New Fee Regulation Order & SLFRC Rules",
