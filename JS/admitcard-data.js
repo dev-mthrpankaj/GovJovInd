@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0099-20260809192117-d603bcbf",
+        "title": "SSC Delhi Police Constable (Exe) Physical Admit Card Out",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-08-19",
+        "examEndDate": "2026-09-01",
+        "releaseDate": "2026-08-09",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://sscnr.nic.in/newlook/ADMIT_CARD_CONSTABLE_EXE_2025/CheckRoll.aspx",
+        "detailPage": "../AdmitCard_Details/HTML/Delhi-Police-Constable-Physical-Admit-Card-2026.html",
+        "updatedAt": "2026-08-09",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0098-20260808180613-20cd4d47",
         "title": "SSB Constable Tradesman PET / PST Admit Card 2026 for 827 Post",
         "organization": "Sashastra Seema Bal",
