@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "rakhi-2026-date-muhurat-timings-guide",
+  title: "When is Rakhi 2026? Date, Shubh Muhurat, Timings & Complete Guide",
+  category: "Current Affairs",
+  date: "2026-06-19",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786240015227.webp",
+  url: "student-hub/rakhi-2026-date-muhurat-timings-guide.html",
+  excerpt: "Raksha Bandhan 2026 is on Friday, 28 August 2026. Get complete Shubh Muhurat timings (5:57 AM to 9:48 AM IST), Bhadra Kaal status, international time zones, and shipping deadlines."
+},
+    {
   id: "how-to-read-government-job-notification-pdf-correctly",
   title: "How to Read a Government Job Notification (PDF) Correctly: Step-by-Step Guide",
   category: "Career Guidance",
