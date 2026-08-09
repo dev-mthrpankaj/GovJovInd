@@ -2,7 +2,7 @@
   const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
-    {
+{
       id: "government-job-vs-private-job-in-india-2026-comparison",
       title: "Government Job vs Private Job in India: Complete 2026 Comparison",
       category: "Career Guidance",
