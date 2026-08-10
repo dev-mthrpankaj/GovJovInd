@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "ssc-cgl-typing-test-rules-explained",
+  title: "SSC CGL Typing Test Rules Explained: Speed, Accuracy, Errors, and Submission Process",
+  category: "SSC",
+  date: "2026-08-10",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786337686935.webp",
+  url: "student-hub/ssc-cgl-typing-test-rules-explained.html",
+  excerpt: "A complete guide to SSC CGL Data Entry Speed Test (DEST) 2026 rules: typing speed requirements, category-wise error limits (UR 20%, OBC/EWS 25%, SC/ST 30%), full vs half mistakes, and auto-submission rules."
+},
+    {
       id: "eci-sir-voter-form-online-guide",
       title: "ECI SIR Voter Form Online Guide 2026: Step-by-Step",
       category: "Current Affairs",
