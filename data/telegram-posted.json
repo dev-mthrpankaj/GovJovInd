@@ -1984,6 +1984,27 @@
       "title": "AIIMS NORCET Nursing Officer 11th Online Form 2026",
       "lastPostedAt": "2026-08-10T07:51:56.015Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0176-20260810133412-f02f2be6": {
+      "updatedAt": "2026-08-10",
+      "hash": "b397b4f40b3e51a2d52d09e16be051a0e20c9603084484be4800ca378d5eb6d5",
+      "title": "GIMS Staff Nurse Online Form 2026 for 100 Post",
+      "lastPostedAt": "2026-08-10T08:30:12.321Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0160-20260803190006-c82e87fe": {
+      "updatedAt": "2026-08-03",
+      "hash": "2015c3cfab1de9afdd82354f69e41581f77984003fa3d6411e037d8ae7efe86e",
+      "title": "RCFL Management Trainee Online Form 2026",
+      "lastPostedAt": "2026-08-10T08:30:13.152Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0140-20260724142210-3438906a": {
+      "updatedAt": "2026-07-24",
+      "hash": "bfb9a226d8f3a2bc964ffec41b3b2b5617a1c1abd06e2d70bf3ad4fac5096a57",
+      "title": "RRB JE Junior Engineer Online Form 2026 for 4098 Post",
+      "lastPostedAt": "2026-08-10T08:30:13.629Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3161,6 +3182,13 @@
       "hash": "92ddabe9b48094ba06f2ca92cb2c96cd3dbe4fdbeeae71bf52c7f451d81cc419",
       "title": "SSC Delhi Police Constable (Exe) Physical Admit Card Out",
       "lastPostedAt": "2026-08-09T13:57:37.060Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0100-20260810134150-7db9c43a": {
+      "updatedAt": "2026-08-10",
+      "hash": "d749acfad016dfb989509fde4a429fe3377405f88a8567725561312d3762e6c0",
+      "title": "CSBC Bihar Police Driver DET Admit Card 2026",
+      "lastPostedAt": "2026-08-10T08:30:14.163Z",
       "stateReason": "new"
     }
   },

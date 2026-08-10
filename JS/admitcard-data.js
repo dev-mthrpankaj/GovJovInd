@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0100-20260810134150-7db9c43a",
+        "title": "CSBC Bihar Police Driver DET Admit Card 2026",
+        "organization": "Central Selection Board of Constable",
+        "department": "CSBC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-24",
+        "examEndDate": "",
+        "releaseDate": "2026-08-10",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://apply-csbc.com/csbc_det_admitcards/searchApplication",
+        "detailPage": "../AdmitCard_Details/HTML/CSBC-Bihar-Police-Constable-Driver-DET-Admit-Card-2026.html",
+        "updatedAt": "2026-08-10",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0099-20260809192117-d603bcbf",
         "title": "SSC Delhi Police Constable (Exe) Physical Admit Card Out",
         "organization": "Staff Selection Commission",
