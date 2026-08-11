@@ -36,7 +36,11 @@
     const debouncedSubjectCalculation = debounce(runMarksCalculation, 120);
     const debouncedMobileCalculation = debounce(runMobileMarksCalculation, 120);
 
-    document.addEventListener("DOMContentLoaded", initRankPredictor);
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initRankPredictor, { once: true });
+    } else {
+        initRankPredictor();
+    }
 
     function debounce(fn, delay = 300) {
         let timer;

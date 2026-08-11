@@ -7,5 +7,6 @@ live-test/includes/app-token-config.local.php
 live-test/includes/*secrets*.php
 
 # Generated/local app workspaces
+.edge-phase1-*/
 live-test/
 android-webview-app/

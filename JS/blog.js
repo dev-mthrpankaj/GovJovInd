@@ -1,4 +1,5 @@
 (function () {
+  function initBlogPage() {
   const PAGE_SIZE = 18;
   const blogs = Array.isArray(window.GOVJOB_BLOGS) ? window.GOVJOB_BLOGS : [];
   const state = {
@@ -133,4 +134,11 @@
   });
 
   render();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlogPage, { once: true });
+  } else {
+    initBlogPage();
+  }
 })();

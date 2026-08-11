@@ -2,6 +2,7 @@
     "use strict";
 
     const DEFAULT_BASE_URL = "https://test.govjobupdates.com/live-test/";
+    const DEFAULT_INDEX_PATH = "quiz-data/quiz-index.js?v=202606231524";
     const DEFAULT_INDEX_GLOBALS = ["GJU_QUIZ_INDEX", "GJU_ADMIN_QUIZ_INDEX", "GJU_PUBLISHED_QUIZ_INDEX"];
     const OPTION_KEYS = ["A", "B", "C", "D"];
     const remoteQuizCache = new Map();
@@ -11,6 +12,7 @@
     const config = Object.assign({
         baseUrl: DEFAULT_BASE_URL,
         preferredLanguage: "hi",
+        indexUrl: DEFAULT_INDEX_PATH,
         indexGlobals: DEFAULT_INDEX_GLOBALS,
         idPrefix: "admin",
         cacheBust: true
@@ -22,37 +24,89 @@
         return;
     }
 
+    window.GJU_ADMIN_REMOTE_QUIZZES = {
+        ready: false,
+        count: 0,
+        metas: [],
+        message: "Remote admin quizzes load after the local quiz library."
+    };
+
     const sourceIndex = findIndexPayload();
     const indexItems = normalizeIndexPayload(sourceIndex);
 
     if (!indexItems.length) {
+        scheduleRemoteIndexLoad();
+        return;
+    }
+
+    processIndexItems(indexItems);
+
+    function processIndexItems(items) {
+        const addedMetas = items
+            .map(createRemoteMeta)
+            .filter(Boolean)
+            .filter(registerRemoteMeta);
+
+        patchRegistryLoadQuiz();
+
+        window.GJU_ADMIN_REMOTE_QUIZ_FORCE_HTTPS = forceHttpsUrl;
+        window.GJU_ADMIN_REMOTE_QUIZZES = {
+            ready: true,
+            count: addedMetas.length,
+            metas: addedMetas.slice(),
+            baseUrl: normalizeBaseUrl(config.baseUrl)
+        };
+
+        document.dispatchEvent(new CustomEvent("gju:admin-quiz-index-ready", {
+            detail: window.GJU_ADMIN_REMOTE_QUIZZES
+        }));
+    }
+
+    function scheduleRemoteIndexLoad() {
+        const indexUrl = resolveRemoteUrl(config.indexUrl || config.indexPath || DEFAULT_INDEX_PATH);
+        if (!indexUrl) {
+            setEmptyRemoteState("No remote admin quizzes found.");
+            return;
+        }
+
+        const loadIndex = function () {
+            loadScript(indexUrl)
+                .then(function () {
+                    const remoteItems = normalizeIndexPayload(findIndexPayload());
+                    if (remoteItems.length) {
+                        processIndexItems(remoteItems);
+                        return;
+                    }
+                    setEmptyRemoteState("No remote admin quizzes found.");
+                })
+                .catch(function () {
+                    setEmptyRemoteState("Remote admin quizzes are unavailable right now.");
+                });
+        };
+
+        const schedule = function () {
+            if ("requestIdleCallback" in window) {
+                window.requestIdleCallback(loadIndex, { timeout: 2500 });
+                return;
+            }
+            window.setTimeout(loadIndex, 1200);
+        };
+
+        if (document.readyState === "complete") schedule();
+        else window.addEventListener("load", schedule, { once: true });
+    }
+
+    function setEmptyRemoteState(message) {
         window.GJU_ADMIN_REMOTE_QUIZZES = {
             ready: true,
             count: 0,
             metas: [],
-            message: "No remote admin quizzes found."
+            message
         };
-        return;
+        document.dispatchEvent(new CustomEvent("gju:admin-quiz-index-ready", {
+            detail: window.GJU_ADMIN_REMOTE_QUIZZES
+        }));
     }
-
-    const addedMetas = indexItems
-        .map(createRemoteMeta)
-        .filter(Boolean)
-        .filter(registerRemoteMeta);
-
-    patchRegistryLoadQuiz();
-
-    window.GJU_ADMIN_REMOTE_QUIZ_FORCE_HTTPS = forceHttpsUrl;
-    window.GJU_ADMIN_REMOTE_QUIZZES = {
-        ready: true,
-        count: addedMetas.length,
-        metas: addedMetas.slice(),
-        baseUrl: normalizeBaseUrl(config.baseUrl)
-    };
-
-    document.dispatchEvent(new CustomEvent("gju:admin-quiz-index-ready", {
-        detail: window.GJU_ADMIN_REMOTE_QUIZZES
-    }));
 
     function findIndexPayload() {
         for (const key of config.indexGlobals || DEFAULT_INDEX_GLOBALS) {

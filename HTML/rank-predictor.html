@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSC UPSC Railway Rank Predictor 2026 – Free & Live | GovJobUpdates</title>
-    <meta name="description" content="Check your expected rank & marks instantly for SSC, UPSC, Railway, Police, UPSSSC and state exams. Free, private, and updated with the latest answer key — try it now.">
+    <title>SSC UPSC Railway Rank Predictor 2026 | GovJobUpdates</title>
+    <meta name="description" content="Check expected rank and marks for SSC, UPSC, Railway, Police, UPSSSC and state exams with free, private rank prediction.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://govjobupdates.com/HTML/rank-predictor.html">
     <meta property="og:site_name" content="GovJobUpdates">
@@ -401,18 +401,25 @@
 <script>
 function copyEmbedCodeRank() {
     var copyText = document.getElementById("embedCodeRank");
+    var btn = document.getElementById("copyBtnRank");
+    if (!copyText || !btn) return;
     copyText.select();
     copyText.setSelectionRange(0, 99999); /* For mobile devices */
-    navigator.clipboard.writeText(copyText.value);
-    
-    var btn = document.getElementById("copyBtnRank");
-    btn.innerText = "Copied!";
-    btn.style.backgroundColor = "#28a745";
-    
-    setTimeout(function(){
-        btn.innerText = "Copy Code";
-        btn.style.backgroundColor = "#0056b3";
-    }, 3000);
+    var copied = function () {
+        btn.innerText = "Copied!";
+        btn.style.backgroundColor = "#28a745";
+        setTimeout(function(){
+            btn.innerText = "Copy Code";
+            btn.style.backgroundColor = "#0056b3";
+        }, 3000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(copyText.value).then(copied).catch(function () {
+            if (document.execCommand("copy")) copied();
+        });
+        return;
+    }
+    if (document.execCommand("copy")) copied();
 }
 </script>
 

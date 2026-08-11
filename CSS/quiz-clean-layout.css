@@ -21,8 +21,6 @@
    `.quiz-page` prefix so they win on specificity, not just load order.
    ========================================================================= */
 
-@import url("../Assets/vendor/fonts/google/quiz-fonts.css");
-
 /* -------------------------------------------------------------------------
    0. Theme tokens (re-themes the whole quiz app via the vars quizzes.css
       already consumes)

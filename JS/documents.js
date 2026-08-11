@@ -312,7 +312,7 @@ function getPdfLibraryStatus() {
 function showPdfLibraryWarnings() {
     const missing = getPdfLibraryStatus();
     if (!missing.length) return;
-    const message = `${missing.join(' and ')} library failed to load. PDF tools need internet/CDN access; image resize can still work. Please refresh after internet is stable.`;
+    const message = `${missing.join(' and ')} library is still loading or unavailable. PDF tools need internet/CDN access; image resize can still work. Please retry the PDF action after the page settles.`;
     ['#pdf-message', '#resize-pdf-message', '#pdf-manager-message'].forEach((selector) => showMessage($(selector), 'error', message));
 }
 
@@ -1990,12 +1990,18 @@ function initPdfManager() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initDocumentToolsPage() {
     initMobileMenu();
     initToolTabs();
     initImageResizer();
     initImageToPdf();
     initPdfResizer();
     initPdfManager();
-    showPdfLibraryWarnings();
-});
+    window.setTimeout(showPdfLibraryWarnings, 2500);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDocumentToolsPage, { once: true });
+} else {
+    initDocumentToolsPage();
+}

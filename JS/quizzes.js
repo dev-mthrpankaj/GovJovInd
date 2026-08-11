@@ -19,6 +19,8 @@
 
     const PERSIST_DELAY_MS = 900;
     const SEARCH_DEBOUNCE_MS = 100;
+    const AUTH_CHECK_TIMEOUT_MS = 2500;
+    const CANDIDATE_SESSION_KEY = "gju:candidate-session";
     const QUIZ_LANGUAGE_KEY = "quizLanguage";
     const subjectIcons = {
         Mathematics: "fa-calculator",
@@ -59,10 +61,15 @@
     let pendingMathRoot = null;
     let mathRetryTimer = 0;
     let mathRetryCount = 0;
+    let mathJaxLoader = null;
 
     const debouncedRenderQuizList = debounce(renderQuizList, SEARCH_DEBOUNCE_MS);
 
-    document.addEventListener("DOMContentLoaded", initQuizPage);
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initQuizPage, { once: true });
+    } else {
+        initQuizPage();
+    }
 
     function initQuizPage() {
         cacheDom();
@@ -127,7 +134,7 @@
     }
 
     function bindEvents() {
-        document.body.addEventListener("click", handleClick);
+        document.body.addEventListener("click", handleClick, { capture: true });
         document.addEventListener("keydown", handleKeyboard);
         elements.quizSearch?.addEventListener("input", function (event) {
             state.search = event.target.value;
@@ -146,6 +153,9 @@
             if (document.hidden) persistUnfinished(true);
         });
         window.addEventListener("resize", syncPaletteState);
+        document.addEventListener("gju:admin-quiz-index-ready", function () {
+            if (isViewVisible("home")) renderHome();
+        });
     }
 
     function handleClick(event) {
@@ -455,7 +465,9 @@
     }
 
     async function requireFirebaseAuth() {
+        if (hasCandidateSession()) return true;
         if (!window.GJU_FIREBASE_CONFIG || typeof window.GJU_FIREBASE_CONFIG !== "object") {
+            redirectToLogin();
             return false;
         }
 
@@ -466,20 +478,40 @@
             ]);
             const app = getApps().length ? getApps()[0] : initializeApp(window.GJU_FIREBASE_CONFIG);
             const auth = getAuth(app);
-            const user = await new Promise((resolve) => {
+            const user = await withTimeout(new Promise((resolve) => {
                 const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
                     unsubscribe();
                     resolve(firebaseUser);
                 });
-            });
+            }), AUTH_CHECK_TIMEOUT_MS);
             if (user) return true;
         } catch (error) {
             console.warn("[GJU Quizzes] Auth check failed:", error);
         }
 
+        redirectToLogin();
+        return false;
+    }
+
+    function hasCandidateSession() {
+        try {
+            const saved = JSON.parse(localStorage.getItem(CANDIDATE_SESSION_KEY) || sessionStorage.getItem(CANDIDATE_SESSION_KEY) || "null");
+            return Boolean(saved && saved.userId);
+        } catch (_error) {
+            return false;
+        }
+    }
+
+    function withTimeout(promise, timeoutMs) {
+        return Promise.race([
+            promise,
+            new Promise((resolve) => window.setTimeout(function () { resolve(null); }, timeoutMs))
+        ]);
+    }
+
+    function redirectToLogin() {
         window.alert("Quiz attempt karne ke liye kripya pehle Login karein.");
         window.location.href = "login.html";
-        return false;
     }
 
     async function startQuiz(quizId, forceNew = false) {
@@ -1697,6 +1729,7 @@
         if (!root) return;
         pendingMathRoot = root;
         if (!window.MathJax || !window.MathJax.typesetPromise) {
+            ensureMathJax(root);
             scheduleMathRetry();
             return;
         }
@@ -1707,6 +1740,25 @@
             window.MathJax.typesetClear([root]);
         }
         window.MathJax.typesetPromise([root]).catch(function () {});
+    }
+
+    function ensureMathJax(root) {
+        if (mathJaxLoader || !rootHasMath(root)) return;
+        mathJaxLoader = new Promise(function (resolve, reject) {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        }).catch(function () {
+            mathRetryCount = 20;
+        });
+    }
+
+    function rootHasMath(root) {
+        const html = root.innerHTML || "";
+        return /\\\(|\\\[|\\begin\{|\\frac\{|\\sqrt\{|\\times|\\div/.test(html);
     }
 
     function scheduleMathRetry() {
