@@ -3927,6 +3927,27 @@
       "title": "UPSC CMS Answer Key 2026 | Combined Medical Services",
       "lastPostedAt": "2026-08-06T15:36:58.127Z",
       "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0051-20260811185838-62bacc84": {
+      "updatedAt": "2026-08-11",
+      "hash": "8d21015b878a07d3e2291b90aaecef6594e07e57141bd9f898136b3ca86223b0",
+      "title": "UGC NET June 2026 Answer Key",
+      "lastPostedAt": "2026-08-11T15:10:48.140Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0052-20260811200342-5029c0c4": {
+      "updatedAt": "2026-08-11",
+      "hash": "7d96ab740963b5561b4c2d875edd3d55d9b31683ee754df6fb0eef943e82fbe2",
+      "title": "AFCAT 02/2026 Answer Key",
+      "lastPostedAt": "2026-08-11T15:10:49.044Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0053-20260811200623-908bb46c": {
+      "updatedAt": "2026-08-11",
+      "hash": "6d18a0c0490ad0f1507fe8fb33b3d1ecba671f1c1ba526f8fe636dbcc57a40e5",
+      "title": "UPSSSC Technical Assistant Group C AGTA Answer Key 2026",
+      "lastPostedAt": "2026-08-11T15:10:49.666Z",
+      "stateReason": "new"
     }
   },
   "results": {
@@ -5006,6 +5027,20 @@
       "hash": "50b6f69c0c4c82da4d160c13df0e99b1da6e07fe6180a3f46e2473541b48bf46",
       "title": "UPSC CPF Assistant Commandant CAPF 2025 Final Result",
       "lastPostedAt": "2026-08-07T16:04:54.381Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0089-20260811202354-a8693d63": {
+      "updatedAt": "2026-08-11",
+      "hash": "3abb62e765bfa57b5d6cdaa9ae0c1138c5624dfba288c5eae4ca4fd08189d144",
+      "title": "RPSC School Lecturer PGT Teacher Result 2025 English and Commerce",
+      "lastPostedAt": "2026-08-11T15:10:50.287Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0090-20260811202603-fb62b101": {
+      "updatedAt": "2026-08-11",
+      "hash": "2ad52937c3c3a97b98b31339776ffb0af7c093cb12b0e2229bb857dd59588549",
+      "title": "BPSC DSO Mains Result 2026",
+      "lastPostedAt": "2026-08-11T15:10:51.033Z",
       "stateReason": "new"
     }
   }
