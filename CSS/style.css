@@ -3077,12 +3077,12 @@ footer .footer-section:first-child {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-end;
-    gap: clamp(.05rem, .25vw, .3rem);
+    gap: .18rem;
   }
 
   nav a {
-    padding: .62rem clamp(.38rem, .45vw, .65rem);
-    font-size: clamp(.84rem, .76vw, .98rem);
+    padding: .62rem .54rem;
+    font-size: .92rem;
   }
 
   .header-auth-actions {

@@ -892,8 +892,7 @@ if (homeSearchForm && homeSearchInput) {
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
 const pageOwnsMenu = Boolean(
-  menuToggle?.id === 'menuToggle' ||
-  document.querySelector('script[src*="about-us.js"], script[src*="documents.js"]')
+  menuToggle?.id === 'menuToggle'
 );
 if (menuToggle && nav && !pageOwnsMenu) {
   const setMenuIcon = (isOpen) => {

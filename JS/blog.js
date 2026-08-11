@@ -19,6 +19,16 @@
 
   let searchDebounceTimer = 0;
   let renderFrame = 0;
+  const preferredCategories = [
+    "SSC",
+    "State Exams",
+    "Current Affairs",
+    "Career Guidance",
+    "Education News",
+    "Technology",
+    "Rank Predictor",
+    "Student Safety"
+  ];
 
   const formatDate = (dateValue) => {
     const date = new Date(`${dateValue}T00:00:00`);
@@ -69,6 +79,22 @@
     return article;
   };
 
+  const renderCategoryFilters = () => {
+    const categories = Array.from(new Set(blogs.map((blog) => blog.category).filter(Boolean)));
+    const ordered = preferredCategories
+      .filter((category) => categories.includes(category))
+      .concat(categories.filter((category) => !preferredCategories.includes(category)).sort());
+
+    filters.replaceChildren(...["All", ...ordered].map((category) => {
+      const button = document.createElement("button");
+      button.className = `blog-filter-btn${category === state.category ? " is-active" : ""}`;
+      button.type = "button";
+      button.dataset.category = category;
+      button.textContent = category;
+      return button;
+    }));
+  };
+
   const render = () => {
     renderFrame = 0;
     const filtered = getFilteredBlogs();
@@ -106,6 +132,8 @@
       scheduleRender();
     }, 200);
   });
+
+  renderCategoryFilters();
 
   filters.addEventListener("click", (event) => {
     const button = event.target.closest("[data-category]");

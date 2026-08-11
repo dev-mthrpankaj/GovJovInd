@@ -1,73 +1,3 @@
-function initMobileHeaderFix() {
-    if (document.getElementById('gjuMobileHeaderFix')) return;
-    const style = document.createElement('style');
-    style.id = 'gjuMobileHeaderFix';
-    style.textContent = `
-        @media (max-width: 767px) {
-            body.page-loaded { transform: none !important; }
-            body { padding-top: 68px !important; }
-            header {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                width: 100% !important;
-                z-index: 100000 !important;
-                background: rgba(255,255,255,.98) !important;
-                transform: translateZ(0) !important;
-            }
-            header .header-container {
-                background: rgba(255,255,255,.98) !important;
-            }
-            header nav {
-                position: fixed !important;
-                top: 68px !important;
-                left: 0 !important;
-                right: 0 !important;
-                z-index: 99999 !important;
-                max-height: calc(100dvh - 68px) !important;
-                overflow-y: auto !important;
-                overscroll-behavior: contain !important;
-                -webkit-overflow-scrolling: touch !important;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-function initMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelectorAll('nav ul li a');
-
-    if (!menuToggle || !nav) return;
-
-    function setMenu(open) {
-        nav.classList.toggle('active', open);
-        menuToggle.setAttribute('aria-expanded', String(open));
-        menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-        const icon = menuToggle.querySelector('i');
-        if (icon) {
-            icon.classList.toggle('fa-bars', !open);
-            icon.classList.toggle('fa-times', open);
-        }
-    }
-
-    menuToggle.addEventListener('click', () => {
-        setMenu(!nav.classList.contains('active'));
-    });
-
-    menuToggle.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            setMenu(false);
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => setMenu(false));
-    });
-}
-
 function animateStats() {
     const statNumbers = document.querySelectorAll('.stat-number');
 
@@ -152,9 +82,7 @@ function initTeamCarousel() {
     updateState();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    initMobileHeaderFix();
-    initMobileMenu();
+function initAboutPage() {
     initTeamCarousel();
 
     const stats = document.querySelector('.trust-stats');
@@ -173,4 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.35 });
 
     observer.observe(stats);
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutPage, { once: true });
+} else {
+    initAboutPage();
+}

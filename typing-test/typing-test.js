@@ -42,7 +42,7 @@
     setStatus("ready");
     render();
     syncAttemptFontSize();
-    dom.typingInput?.focus();
+    focusTypingInput(false);
   }
 
   function cacheDom() {
@@ -287,7 +287,7 @@
       return;
     }
     startClock();
-    dom.typingInput?.focus();
+    focusTypingInput(true);
   }
 
   function startClock() {
@@ -317,14 +317,14 @@
     if (dom.typingInput) dom.typingInput.disabled = false;
     setStatus("running");
     render();
-    dom.typingInput?.focus();
+    focusTypingInput(true);
   }
 
   function restartTest() {
     prepareTest();
     setStatus("ready");
     render();
-    dom.typingInput?.focus();
+    focusTypingInput(true);
   }
 
   function cancelAttempt() {
@@ -340,7 +340,7 @@
     const typedValue = dom.typingInput?.value || state.typed || "";
     if (!typedValue.trim()) {
       showStatus("Type at least one character before submitting.");
-      dom.typingInput?.focus();
+      focusTypingInput(true);
       return;
     }
     finishTest();
@@ -403,7 +403,7 @@
     const reference = state.passage || "";
     const typedUnits = splitTextUnits(typed);
     const referenceUnits = splitTextUnits(reference);
-    const elapsedMinutes = Math.min(state.durationMinutes, getElapsedMinutes());
+    const elapsedMinutes = Math.min(state.durationMinutes, Math.max(getElapsedMinutes(), typed ? 1 / 60 : 1 / 60000));
     const typedChars = typedUnits.length;
     let correctChars = 0;
     let incorrectChars = 0;
@@ -437,7 +437,7 @@
       language: state.language,
       difficulty: state.difficulty,
       durationMinutes: state.durationMinutes,
-      timeTakenSeconds: Math.round(elapsedMinutes * 60),
+      timeTakenSeconds: typedChars ? Math.max(1, Math.round(elapsedMinutes * 60)) : 0,
       grossWPM: round(grossWPM),
       netWPM: round(netWPM),
       accuracy: round(accuracy),
@@ -531,12 +531,29 @@
 
   function toggleFullscreen() {
     if (!document.fullscreenElement) {
-      app.requestFullscreen?.();
+      const request = app.requestFullscreen?.();
+      if (request && typeof request.catch === "function") {
+        request.catch(() => {
+          if (dom.fullscreenSwitch) dom.fullscreenSwitch.checked = false;
+        });
+      }
       if (dom.fullscreenSwitch) dom.fullscreenSwitch.checked = true;
       return;
     }
-    document.exitFullscreen?.();
+    const exit = document.exitFullscreen?.();
+    if (exit && typeof exit.catch === "function") {
+      exit.catch(() => {
+        if (dom.fullscreenSwitch) dom.fullscreenSwitch.checked = Boolean(document.fullscreenElement);
+      });
+    }
     if (dom.fullscreenSwitch) dom.fullscreenSwitch.checked = false;
+  }
+
+  function focusTypingInput(force) {
+    if (!dom.typingInput) return;
+    const coarsePointer = window.matchMedia?.("(pointer: coarse)")?.matches;
+    if (!force && coarsePointer) return;
+    dom.typingInput.focus({ preventScroll: true });
   }
 
   function renderResult() {
