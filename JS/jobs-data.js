@@ -1106,7 +1106,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "102",
         "startDate": "2026-07-22",
         "lastDate": "2026-08-11",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://nmdcetr.formflix.org/",
         "officialNotification": "https://www.nsltd.in/admin/Upload/Career_Documents/8e68eab64699448ca745ff9b689e8aaa_20260722045602416.pdf",
