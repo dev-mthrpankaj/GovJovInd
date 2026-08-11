@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Test App | GovJobUpdates</title>
+  <meta name="description" content="Reusable GovJobUpdates typing test app for exam-specific Hindi and English typing practice pages.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://govjobupdates.com/typing-test/app.html">
+  <meta property="og:site_name" content="GovJobUpdates">
+  <meta property="og:title" content="GovJobUpdates Typing Test Practice">
+  <meta property="og:description" content="Free browser-based Hindi and English typing practice for government exam aspirants.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://govjobupdates.com/typing-test/">
+  <meta property="og:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home%20Page/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
+  <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
+  <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
+  <link rel="stylesheet" href="typing-test.css">  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GovJobUpdates Typing Test","url":"https://govjobupdates.com/typing-test/","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+</head>
+<body>
+  <main class="typing-test-page gju-typing-attempt-page" id="typingTestApp" data-preset-id="general-english">
+    <header class="gju-typing-attempt-topbar" aria-label="Typing attempt header">
+      <a class="gju-typing-attempt-brand" href="index.html" aria-label="Back to typing exams">
+        <img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates" width="96" height="96">
+        <span>GovJob<span>Updates</span></span>
+      </a>
+      <div class="gju-typing-attempt-timer">
+        <span>Time Left</span>
+        <strong id="timerText">10 mins : 00 sec</strong>
+      </div>
+      <a class="gju-typing-icon-link" href="index.html" aria-label="Back to typing exams"><i class="fas fa-home" aria-hidden="true"></i></a>
+    </header>
+
+    <section class="gju-typing-attempt-layout" aria-label="Typing attempt workspace">
+      <section class="gju-typing-attempt-main">
+        <div class="gju-typing-attempt-block">
+          <h1>Passage</h1>
+          <p class="gju-typing-passage" id="passageText" aria-label="Typing passage"></p>
+        </div>
+
+        <div class="gju-typing-attempt-block">
+          <h2>Typing area</h2>
+          <label class="gju-typing-sr-only" for="typingInput">Typing input</label>
+          <textarea class="gju-typing-input" id="typingInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Write here"></textarea>
+        </div>
+
+        <div class="gju-typing-progress" aria-label="Typing progress">
+          <div class="gju-typing-progress-track"><span id="progressBar"></span></div>
+          <p id="progressText">0% complete</p>
+        </div>
+
+        <div class="gju-typing-attempt-actions" aria-label="Typing controls">
+          <button class="gju-typing-button gju-typing-button-cancel" id="cancelButton" type="button">Cancel</button>
+          <button class="gju-typing-button gju-typing-button-primary" id="submitButton" type="button">Submit</button>
+          <button class="gju-typing-button" id="pauseButton" type="button" hidden>Pause</button>
+          <button class="gju-typing-button" id="restartButton" type="button" hidden>Restart</button>
+        </div>
+      </section>
+
+      <aside class="gju-typing-attempt-sidebar" aria-label="Typing attempt information">
+        <section class="gju-typing-attempt-card">
+          <dl class="gju-typing-attempt-info" id="attemptInfo">
+            <div><dt>Test:</dt><dd id="examLabel">Typing Test</dd></div>
+            <div><dt>Language:</dt><dd id="languageLabel">English</dd></div>
+            <div><dt>Status:</dt><dd id="statusText">Ready</dd></div>
+          </dl>
+
+          <div class="gju-typing-font-control">
+            <strong>Font Size:</strong>
+            <button id="fontDecrease" type="button" aria-label="Decrease font size"><i class="fas fa-minus" aria-hidden="true"></i></button>
+            <span id="fontSizeValue">22</span>
+            <button id="fontIncrease" type="button" aria-label="Increase font size"><i class="fas fa-plus" aria-hidden="true"></i></button>
+          </div>
+
+          <label class="gju-typing-toggle-row">Full Screen:<input id="fullscreenSwitch" type="checkbox" role="switch"><span></span></label>
+        </section>
+
+        <section class="gju-typing-attempt-card gju-typing-live-card" aria-label="Live metrics">
+          <article><span>Net WPM</span><strong id="liveWPM">0.0</strong></article>
+          <article><span>Accuracy</span><strong id="liveAccuracy">0.0%</strong></article>
+          <article><span>Typed Words</span><strong id="liveWords">0</strong></article>
+          <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
+          <article><span>Target Accuracy</span><strong id="targetAccuracyText">95%</strong></article>
+        </section>
+      </aside>
+    </section>
+
+    <section class="gju-typing-results" id="resultPanel" aria-labelledby="resultTitle" hidden>
+      <h2 id="resultTitle">Typing Test Result</h2>
+      <div id="resultStatus" class="gju-typing-result-status"></div>
+      <div class="gju-typing-result-grid" id="resultGrid"></div>
+    </section>
+
+    <p class="gju-typing-sr-only" id="modeLabel">Practice</p>
+    <p class="gju-typing-sr-only" id="disclaimerText"></p>
+    <p class="gju-typing-sr-only" id="keyboardNote"></p>
+    <p class="gju-typing-sr-only" id="storageText"></p>
+  </main>
+  <script src="typing-config.js" defer></script>
+  <script src="passages.js" defer></script>
+  <script src="typing-storage.js" defer></script>
+  <script src="typing-test.js" defer></script>
+</body>
+</html>
