@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0101-20260810141052-6a020fe8",
+        "title": "UP Police Constable DV / PST Admit Card 2026 for 32679 Post",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-17",
+        "examEndDate": "",
+        "releaseDate": "2026-08-10",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://upcons2025.com/upcon2025dvpstadmitcard/loginpage.aspx",
+        "detailPage": "../AdmitCard_Details/HTML/UP-Police-Constable-DV-PST-Admit-Card-2026.html",
+        "updatedAt": "2026-08-10",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0099-20260809192117-d603bcbf",
         "title": "SSC Delhi Police Constable (Exe) Physical Admit Card Out",
         "organization": "Staff Selection Commission",
