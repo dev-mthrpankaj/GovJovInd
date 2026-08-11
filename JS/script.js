@@ -205,11 +205,25 @@ const getCandidatePageHref = (pageName) => {
 
 const ensureHeaderAuthEntry = () => {
   const header = document.querySelector('header .header-container');
-  if (!header || header.querySelector('.header-auth-actions')) return;
+  if (!header) return;
 
   const loginHref = getCandidatePageHref('login.html');
   const dashboardHref = getCandidatePageHref('dashboard.html');
   const session = getCandidateHeaderSession();
+  const existingActions = header.querySelector('.header-auth-actions');
+  const existingLink = existingActions?.querySelector('[data-auth-entry], .header-login-btn');
+  if (existingActions && existingLink) {
+    existingLink.classList.toggle('is-active', Boolean(session));
+    existingLink.href = session ? dashboardHref : loginHref;
+    existingLink.setAttribute('aria-label', session ? 'Open candidate dashboard' : 'Login to candidate dashboard');
+    existingLink.dataset.authEntry = '';
+    existingLink.dataset.loginHref = loginHref;
+    existingLink.dataset.dashboardHref = dashboardHref;
+    const label = existingLink.querySelector('span');
+    if (label) label.textContent = session ? 'Dashboard' : 'Login';
+    window.CandidateAuth?.syncHeaderEntry?.(header);
+    return;
+  }
   const authActions = document.createElement('div');
   const authLink = document.createElement('a');
   const authIcon = document.createElement('i');
@@ -308,6 +322,14 @@ const getSharedNavMarkup = () => {
   return items.map(([page, label]) => `<li><a href="${getSharedPageHref(page)}"${getActivePageClass(page)}>${label}</a></li>`).join('');
 };
 
+const ensureLogoImageDimensions = (root = document) => {
+  root.querySelectorAll('img.logo-img').forEach((img) => {
+    if (!img.hasAttribute('width')) img.setAttribute('width', '46');
+    if (!img.hasAttribute('height')) img.setAttribute('height', '46');
+    if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+  });
+};
+
 const ensureSharedHeader = () => {
   let header = document.querySelector('header');
   if (!header) {
@@ -331,11 +353,17 @@ const ensureSharedHeader = () => {
 
   const logo96 = getRootRelativeHref('Assets/Home%20Page/favicon-96x96.png');
   const logo32 = getRootRelativeHref('Assets/Home%20Page/favicon-32x32.png');
-  logoContainer.innerHTML = `
-    <img src="${logo96}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async" onerror="this.onerror=null;this.src='${logo32}'">
-    <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>
-    <span class="header-tiranga" aria-hidden="true"></span>
-  `;
+  if (!logoContainer.querySelector('.logo-img, .logo')) {
+    logoContainer.innerHTML = `
+      <img src="${logo96}" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async" onerror="this.onerror=null;this.src='${logo32}'">
+      <a href="${getHomeHref()}" class="logo">GovJob<span>Updates</span></a>
+      <span class="header-tiranga" aria-hidden="true"></span>
+    `;
+  } else {
+    ensureLogoImageDimensions(logoContainer);
+    const logoLink = logoContainer.querySelector('a.logo');
+    if (logoLink && !logoLink.getAttribute('href')) logoLink.setAttribute('href', getHomeHref());
+  }
 
   let menuToggle = container.querySelector('.menu-toggle');
   if (!menuToggle) {
@@ -346,14 +374,18 @@ const ensureSharedHeader = () => {
   menuToggle.type = 'button';
   menuToggle.setAttribute('aria-label', 'Open navigation menu');
   menuToggle.setAttribute('aria-expanded', 'false');
-  menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+  if (!menuToggle.querySelector('i, svg, span')) {
+    menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+  }
 
   let nav = container.querySelector('nav');
   if (!nav) {
     nav = document.createElement('nav');
     container.appendChild(nav);
   }
-  nav.innerHTML = `<ul>${getSharedNavMarkup()}</ul>`;
+  if (!nav.querySelector('a[href]')) {
+    nav.innerHTML = `<ul>${getSharedNavMarkup()}</ul>`;
+  }
   normalizeHeaderActiveLinks(nav);
 
   container.querySelectorAll('.header-auth-actions').forEach((node) => {
@@ -375,64 +407,66 @@ const ensureSharedFooter = () => {
     footer.prepend(content);
   }
 
-  content.innerHTML = `
-    <div class="footer-section">
-      <h3>GovJobUpdates</h3>
-      <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p>
-      <div class="social-icons footer-social" aria-label="GovJobUpdates social links">
-        <a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram">
-          <i class="fab fa-instagram" aria-hidden="true"></i>
-        </a>
-        <a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube">
-          <i class="fab fa-youtube" aria-hidden="true"></i>
-        </a>
-        <a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram">
-          <i class="fab fa-telegram" aria-hidden="true"></i>
-        </a>
-        <a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        </a>
-        <a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN">
-          <span aria-hidden="true">X</span>
-        </a>
-        <a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn">
-          <i class="fab fa-linkedin" aria-hidden="true"></i>
-        </a>
+  if (!content.querySelector('.footer-section')) {
+    content.innerHTML = `
+      <div class="footer-section">
+        <h3>GovJobUpdates</h3>
+        <p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p>
+        <div class="social-icons footer-social" aria-label="GovJobUpdates social links">
+          <a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube">
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+          </a>
+          <a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram">
+            <i class="fab fa-telegram" aria-hidden="true"></i>
+          </a>
+          <a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          </a>
+          <a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN">
+            <span aria-hidden="true">X</span>
+          </a>
+          <a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="${getSharedPageHref('index.html')}">Home</a></li>
-        <li><a href="${getSharedPageHref('latest-jobs.html')}">Jobs</a></li>
-        <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
-        <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
-        <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Resources</h3>
-      <ul>
-        <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
-        <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
-        <li><a href="${getSharedPageHref('student-hub.html')}">Student Hub</a></li>
-        <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
-        <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
-        <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
-        <li><a href="${getSharedPageHref('contact.html')}">Contact</a></li>
-        <li><a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a></li>
-        <li><a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Contact Us</h3>
-      <ul>
-        <li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li>
-        <li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li>
-        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li>
-      </ul>
-    </div>
-  `;
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="${getSharedPageHref('index.html')}">Home</a></li>
+          <li><a href="${getSharedPageHref('latest-jobs.html')}">Jobs</a></li>
+          <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
+          <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
+          <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
+          <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
+          <li><a href="${getSharedPageHref('student-hub.html')}">Student Hub</a></li>
+          <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
+          <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
+          <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
+          <li><a href="${getSharedPageHref('contact.html')}">Contact</a></li>
+          <li><a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a></li>
+          <li><a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li>
+          <li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li>
+          <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li>
+        </ul>
+      </div>
+    `;
+  }
 
   let copyright = footer.querySelector('.copyright');
   if (!copyright) {
@@ -440,7 +474,9 @@ const ensureSharedFooter = () => {
     copyright.className = 'copyright';
     footer.appendChild(copyright);
   }
-  copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a> | <a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a> | <a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a>`;
+  if (!copyright.textContent.trim()) {
+    copyright.innerHTML = `&copy; 2026 GovJobUpdates. All rights reserved. | <a href="${getSharedPageHref('privacy-policy.html')}">Privacy Policy</a> | <a href="${getSharedPageHref('terms.html')}">Terms of Use</a> | <a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a> | <a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a>`;
+  }
 };
 
 const ensureSharedSiteChrome = () => {
@@ -508,11 +544,6 @@ const ensureMobileNavScrollLock = () => {
 };
 
 const ensureCandidateBottomNav = () => {
-  if (document.querySelector('.candidate-bottom-nav')) return;
-
-  const nav = document.createElement('nav');
-  nav.className = 'candidate-bottom-nav';
-  nav.setAttribute('aria-label', 'Primary mobile navigation');
   const items = [
     { label: 'Home', icon: 'fa-home', href: getHomeHref(), match: /index\.html$/i },
     { label: 'Rank', icon: 'fa-chart-line', href: getCandidatePageHref('rank-predictor.html'), match: /rank-predictor\.html$/i },
@@ -521,10 +552,21 @@ const ensureCandidateBottomNav = () => {
     { label: 'Jobs', icon: 'fa-briefcase', href: getCandidatePageHref('latest-jobs.html'), match: /latest-jobs\.html$/i }
   ];
   const currentPage = getCurrentPageName();
-  nav.innerHTML = items.map((item) => {
+  const markup = items.map((item) => {
     const active = !isNotFoundPage() && (item.match.test(currentPage) || (item.label === 'Dashboard' && currentPage === 'dashboard.html'));
     return `<a href="${item.href}" class="${active ? 'is-active' : ''}" aria-label="${item.label}"><i class="fas ${item.icon}" aria-hidden="true"></i><span>${item.label}</span></a>`;
   }).join('');
+  const existing = document.querySelector('.candidate-bottom-nav');
+  if (existing) {
+    existing.innerHTML = markup;
+    document.body.classList.add('has-candidate-bottom-nav');
+    return;
+  }
+
+  const nav = document.createElement('nav');
+  nav.className = 'candidate-bottom-nav';
+  nav.setAttribute('aria-label', 'Primary mobile navigation');
+  nav.innerHTML = markup;
   document.body.appendChild(nav);
   document.body.classList.add('has-candidate-bottom-nav');
 };

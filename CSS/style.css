@@ -47,7 +47,6 @@ body {
   text-rendering: optimizeLegibility;
   opacity: 1;
   transform: none;
-  transition: opacity .25s ease, transform .25s ease;
 }
 
 body.page-loaded {
@@ -56,8 +55,8 @@ body.page-loaded {
 }
 
 body.page-leaving {
-  opacity: 0;
-  transform: translateY(8px);
+  opacity: 1;
+  transform: none;
 }
 
 a {

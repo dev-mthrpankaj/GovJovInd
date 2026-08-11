@@ -45,7 +45,7 @@
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img">
+                <img src="../Assets/Home Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async">
                 <a href="../index.html" class="logo">GovJob<span>Updates</span></a>
             </div>
             <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
@@ -61,7 +61,7 @@
                     <li><a href="documents.html">Document</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                 </ul>
-            </nav>
+            </nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div>
         </div>
     </header>
 
@@ -221,7 +221,8 @@ function copyEmbedCodeQuiz() {
     <div class="quiz-modal hidden" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle"><article class="modal-card"><h2 id="submitModalTitle">Submit Test?</h2><p id="submitSummary">Review your attempt before final submission.</p><div class="modal-actions submit-modal-actions"><button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-submit"><i class="fas fa-arrow-left" aria-hidden="true"></i> Continue Test</button><button class="quiz-btn quiz-btn-primary" type="button" data-action="submit-now"><i class="fas fa-check" aria-hidden="true"></i> Submit Now</button></div></article></div>
     <div class="quiz-modal hidden" id="pauseModal" role="dialog" aria-modal="true" aria-labelledby="pauseModalTitle"><article class="modal-card"><h2 id="pauseModalTitle">Are you sure you want to pause the test?</h2><div class="modal-actions pause-modal-actions"><button class="quiz-btn quiz-btn-primary" type="button" data-action="pause-test"><i class="fas fa-pause" aria-hidden="true"></i> Pause Test</button><button class="quiz-btn quiz-btn-ghost" type="button" data-action="cancel-pause"><i class="fas fa-play" aria-hidden="true"></i> Continue Test</button></div></article></div>
     <div class="quiz-modal hidden" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle"><article class="modal-card"><h2 id="resumeModalTitle">Resume Saved Attempt?</h2><p id="resumeSummary">An unfinished quiz is available on this device.</p><div class="modal-actions resume-modal-actions"><button class="quiz-btn quiz-btn-outline" type="button" data-action="cancel-resume"><i class="fas fa-xmark" aria-hidden="true"></i> Cancel</button><button class="quiz-btn quiz-btn-ghost" type="button" data-action="start-fresh"><i class="fas fa-rotate-right" aria-hidden="true"></i> Start Fresh</button><button class="quiz-btn quiz-btn-primary" type="button" data-action="resume-saved"><i class="fas fa-play" aria-hidden="true"></i> Resume</button></div></article></div>
-    <footer>
+    <nav class="candidate-bottom-nav" aria-label="Primary mobile navigation"><a href="../index.html" class="" aria-label="Home"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a><a href="rank-predictor.html" class="" aria-label="Rank"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Rank</span></a><a href="quiz.html" class="is-active" aria-label="Quiz"><i class="fas fa-stopwatch" aria-hidden="true"></i><span>Quiz</span></a><a href="up-certificate-services.html" class="" aria-label="UP Doc"><i class="fas fa-certificate" aria-hidden="true"></i><span>UP Doc</span></a><a href="latest-jobs.html" class="" aria-label="Jobs"><i class="fas fa-briefcase" aria-hidden="true"></i><span>Jobs</span></a></nav>
+<footer>
         <div class="footer-content">
             <div class="footer-section"><h3>GovJobUpdates</h3><p>Government exam updates, practice tools and guidance. Always verify official notices before applying or appearing in an exam.</p></div>
             <div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li></ul></div>
