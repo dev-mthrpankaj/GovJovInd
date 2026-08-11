@@ -364,6 +364,9 @@ const ensureSharedHeader = () => {
     const logoLink = logoContainer.querySelector('a.logo');
     if (logoLink && !logoLink.getAttribute('href')) logoLink.setAttribute('href', getHomeHref());
   }
+  if (!logoContainer.querySelector('.header-tiranga')) {
+    logoContainer.insertAdjacentHTML('beforeend', '<span class="header-tiranga" aria-hidden="true"></span>');
+  }
 
   let menuToggle = container.querySelector('.menu-toggle');
   if (!menuToggle) {
@@ -383,7 +386,7 @@ const ensureSharedHeader = () => {
     nav = document.createElement('nav');
     container.appendChild(nav);
   }
-  if (!nav.querySelector('a[href]')) {
+  if (!nav.querySelector('a[href]') || !Array.from(nav.querySelectorAll('a')).some((link) => link.textContent.trim() === 'Student Hub')) {
     nav.innerHTML = `<ul>${getSharedNavMarkup()}</ul>`;
   }
   normalizeHeaderActiveLinks(nav);
@@ -407,7 +410,7 @@ const ensureSharedFooter = () => {
     footer.prepend(content);
   }
 
-  if (!content.querySelector('.footer-section')) {
+  if (content.querySelectorAll('.footer-section').length < 4 || !content.querySelector('.footer-social')) {
     content.innerHTML = `
       <div class="footer-section">
         <h3>GovJobUpdates</h3>

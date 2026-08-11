@@ -1361,6 +1361,13 @@ main {
   --tool-wash: rgba(202, 138, 4, .11);
 }
 
+.smart-tool-card--typing {
+  --tool-start: #0ea5e9;
+  --tool-end: #2563eb;
+  --tool-glow: rgba(14, 165, 233, .24);
+  --tool-wash: rgba(14, 165, 233, .1);
+}
+
 .smart-tool-card--documents {
   --tool-start: #2563eb;
   --tool-end: #1d4ed8;
