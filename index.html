@@ -16,9 +16,6 @@
     <link rel="canonical" href="https://govjobupdates.com/">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Optimized AdSense Script Execution -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8757376209468788" crossorigin="anonymous"></script>
-    
     <!-- Open Graph (OG) Professional Link Preview Tags -->
     <meta property="og:site_name" content="GovJobUpdates">
     <meta property="og:title" content="GovJobUpdates - Sarkari Jobs, Results, Typing Test & Quiz">
@@ -187,11 +184,14 @@
     "use strict";
 
     var scriptsLoaded = false;
+    var adsLoaded = false;
     var loadScript = function (src, options) {
       return new Promise(function (resolve, reject) {
         var script = document.createElement("script");
         script.src = src;
         script.defer = true;
+        if (options && options.async) script.async = true;
+        if (options && options.crossOrigin) script.crossOrigin = options.crossOrigin;
         if (options && options.type) script.type = options.type;
         script.onload = resolve;
         script.onerror = reject;
@@ -205,6 +205,39 @@
           return loadScript(item.src, item);
         });
       }, Promise.resolve());
+    };
+
+    var loadAdsScript = function () {
+      if (adsLoaded) return;
+      adsLoaded = true;
+      loadScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8757376209468788", {
+        async: true,
+        crossOrigin: "anonymous"
+      }).catch(function (error) {
+        console.warn("AdSense script failed to load", error);
+      });
+    };
+
+    var scheduleAdsScript = function () {
+      var events = ["pointerdown", "keydown", "scroll", "touchstart"];
+      var cleanup = function () {
+        events.forEach(function (eventName) {
+          window.removeEventListener(eventName, onInteraction, passiveOptions);
+        });
+      };
+      var onInteraction = function () {
+        cleanup();
+        loadAdsScript();
+      };
+      var passiveOptions = { once: true, passive: true };
+
+      events.forEach(function (eventName) {
+        window.addEventListener(eventName, onInteraction, passiveOptions);
+      });
+      window.setTimeout(function () {
+        cleanup();
+        loadAdsScript();
+      }, 15000);
     };
 
     var loadHomeEnhancements = function () {
@@ -241,6 +274,8 @@
 
     if (document.readyState === "complete") schedule();
     else window.addEventListener("load", schedule, { once: true });
+    if (document.readyState === "complete") scheduleAdsScript();
+    else window.addEventListener("load", scheduleAdsScript, { once: true });
   }());
 </script>
 </body>
