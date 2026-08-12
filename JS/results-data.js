@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0089-20260811202354-a8693d63",
+        "title": "RPSC School Lecturer PGT Teacher Result 2025 English and Commerce",
+        "organization": "Rajasthan Public Service Commission",
+        "department": "RPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-10",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://govjobupdates.com/Result_Details/HTML/RPSC-School-Lecturer-PGT-Result-2026.html",
+        "detailPage": "../Result_Details/HTML/RPSC-School-Lecturer-PGT-Result-2026.html",
+        "updatedAt": "2026-08-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0090-20260811202603-fb62b101",
+        "title": "BPSC DSO Mains Result 2026",
+        "organization": "Bihar Public Service Commission",
+        "department": "BPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-10",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Results-Written-382025-Dist.-Statistical-Officer_BPSC-20260810-bfsp83.pdf",
+        "detailPage": "../Result_Details/HTML/BPSC-DSO-Mains-Result-2026.html",
+        "updatedAt": "2026-08-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0084-20260807205022-8108a00a",
         "title": "RPSC School Lecturer PGT Teacher Hindi Result 2025 for 3225 Post",
         "organization": "Rajasthan Public Service Commission",
