@@ -18,6 +18,14 @@
       languages: ["english"],
       description: "Practice data-entry speed and accuracy for SSC CGL DEST preparation. This typing test is free forever with no charge."
     },
+    "delhi-police-hc-ministerial": {
+      title: "Delhi Police Head Constable Ministerial",
+      category: "SSC",
+      icon: "fas fa-shield-halved",
+      logoClass: "gju-typing-logo-ssc",
+      languages: ["english", "hindi"],
+      description: "Practice Delhi Police Head Constable Ministerial typing with English 30 WPM and Hindi 25 WPM targets. This typing test is free forever with no charge."
+    },
     "ssc-stenographer": {
       title: "SSC Stenographer Practice",
       category: "SSC",
@@ -138,6 +146,15 @@
     { id: "hard", label: "Hard Level", count: 6 }
   ];
 
+  const durationByPreset = {
+    "ssc-cgl-dest": 15,
+    "delhi-police-hc-ministerial": 10,
+    "upsssc-junior-assistant": 5,
+    "up-police-computer-operator": 15,
+    "up-clerical": 5,
+    "ssc-stenographer": 40
+  };
+
   function init() {
     const main = document.querySelector("main.typing-test-page");
     const iframe = main?.querySelector('iframe[src*="app.html?preset="]');
@@ -254,7 +271,7 @@
           <p>Start this passage in the attempt screen. Timer begins with the first typed letter.</p>
           <div class="gju-typing-set-meta">
             <span class="gju-typing-meta-pill">${label(language)}</span>
-            <span class="gju-typing-meta-pill">10 min</span>
+            <span class="gju-typing-meta-pill" data-typing-duration-pill>${durationLabel(presetId)}</span>
             <span class="gju-typing-meta-pill">Passage ${number}</span>
           </div>
         </div>
@@ -270,6 +287,7 @@
     const labelNode = main.querySelector("#typingSelectedLanguage");
     const panel = main.querySelector(".gju-typing-passage-panel");
     const presetId = panel?.dataset.presetId || "";
+    syncPassageMeta(main, presetId);
 
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -288,9 +306,26 @@
               grid.innerHTML = Array.from({ length: difficulty.count }, (_, index) => buildPassageCard(presetId, language, difficulty.id, index + 1)).join("");
             }
           });
+          syncPassageMeta(main, presetId);
         }
       });
     });
+  }
+
+  function syncPassageMeta(main, presetId) {
+    main.querySelectorAll(".gju-typing-passage-card .gju-typing-set-meta").forEach((meta) => {
+      const pills = Array.from(meta.querySelectorAll(".gju-typing-meta-pill"));
+      const durationPill = meta.querySelector("[data-typing-duration-pill]") || pills[1];
+      if (durationPill) {
+        durationPill.textContent = durationLabel(presetId);
+        durationPill.setAttribute("data-typing-duration-pill", "");
+      }
+    });
+  }
+
+  function durationLabel(presetId) {
+    const duration = durationByPreset[presetId] || 10;
+    return `${duration} min`;
   }
 
   function label(value) {

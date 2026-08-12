@@ -2,6 +2,11 @@
   "use strict";
 
   const disclaimer = "Exam typing/skill-test requirements may vary according to the latest official recruitment notification. Always verify the latest official notification before relying on these settings.";
+  const sscTypingDisclaimer = "SSC clerical typing standards commonly use 35 WPM in English or 30 WPM in Hindi for a 10-minute qualifying typing test. Always verify the latest SSC notification, admit card, and regional instructions for the exact post.";
+  const railwayTypingDisclaimer = "Railway CBTST/TST standards for typist posts commonly use 30 WPM in English or 25 WPM in Hindi. The typing test is qualifying in nature; verify the latest RRB CEN and CBTST instructions for the exact post.";
+  const upssscTypingDisclaimer = "UPSSSC Junior Assistant typing practice is based on 30 WPM in English and 25 WPM in Hindi with short qualifying sessions. Verify the latest UPSSSC notification, admit card, font, keyboard, and correction rules.";
+  const upPoliceTypingDisclaimer = "UP Police Computer Operator typing practice is based on 30 WPM in English and 25 WPM in Hindi with 85% accuracy in 15-minute sessions. Verify the latest UPPRPB notification and test instructions.";
+  const bankingPracticeDisclaimer = "Banking clerk and assistant recruitments usually include a local language proficiency test rather than a fixed official typing-speed test. Treat this as typing and language practice, and verify the latest official bank/IBPS/RBI notification.";
 
   const difficulties = ["easy", "medium", "hard"];
   const durations = [1, 2, 5, 10, 15, 30];
@@ -50,11 +55,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 35,
+      targetWPMByLanguage: {
+        english: 35,
+        hindi: 30
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "ssc",
       passageExam: "chsl",
-      disclaimer
+      disclaimer: sscTypingDisclaimer
     },
     {
       id: "ssc-cgl-dest",
@@ -65,12 +74,32 @@
       languages: ["english"],
       defaultLanguage: "english",
       duration: 15,
-      targetWPM: 35,
+      targetWPM: 27,
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "ssc",
       passageExam: "cgl-dest",
-      disclaimer
+      disclaimer: "SSC CGL DEST practice is based on the official format of about 2000 key depressions in 15 minutes. DEST is qualifying in nature; final evaluation standards and instructions should be verified from the latest SSC notice, admit card, and regional office instructions."
+    },
+    {
+      id: "delhi-police-hc-ministerial",
+      category: "ssc",
+      name: "Delhi Police Head Constable Ministerial Typing Test",
+      shortName: "Delhi Police HC Ministerial",
+      mode: "exam",
+      languages: ["english", "hindi"],
+      defaultLanguage: "english",
+      duration: 10,
+      targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
+      targetAccuracy: 95,
+      difficulty: "medium",
+      passageCategory: "ssc",
+      passageExam: "delhi-police-hc-ministerial",
+      disclaimer: "Delhi Police Head Constable (Ministerial) typing practice is based on the notified speed standard of 30 WPM in English or 25 WPM in Hindi. Verify the latest SSC/Delhi Police notification, admit card, and skill-test instructions before relying on these settings."
     },
     {
       id: "ssc-stenographer",
@@ -80,13 +109,13 @@
       mode: "exam",
       languages: ["english", "hindi"],
       defaultLanguage: "english",
-      duration: 10,
+      duration: 40,
       targetWPM: 40,
       targetAccuracy: 95,
       difficulty: "hard",
       passageCategory: "ssc",
       passageExam: "stenographer",
-      disclaimer: "This is paragraph typing practice for SSC Stenographer preparation. Official stenography skill-test standards and transcription rules must be verified from the latest SSC notification."
+      disclaimer: "SSC Stenographer is a stenography dictation and transcription skill test, not a normal WPM typing test. Grade C uses 100 WPM dictation and Grade D uses 80 WPM dictation for 10 minutes, with transcription time depending on grade and language. This preset is only transcription typing practice; verify the latest SSC notification for exact skill-test rules."
     },
     {
       id: "ssc-selection-post",
@@ -97,12 +126,16 @@
       languages: ["english", "hindi"],
       defaultLanguage: "english",
       duration: 10,
-      targetWPM: 30,
+      targetWPM: 35,
+      targetWPMByLanguage: {
+        english: 35,
+        hindi: 30
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "ssc",
       passageExam: "selection-post",
-      disclaimer
+      disclaimer: "SSC Selection Post skill tests are post-specific and qualifying wherever prescribed. For clerical typing practice this preset uses 35 WPM in English or 30 WPM in Hindi for 10 minutes; verify the selected post's latest SSC notice and user-department requirement."
     },
     {
       id: "rrb-ntpc",
@@ -114,11 +147,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "railway",
       passageExam: "rrb-ntpc",
-      disclaimer
+      disclaimer: railwayTypingDisclaimer
     },
     {
       id: "railway-junior-clerk",
@@ -130,11 +167,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "railway",
       passageExam: "junior-clerk",
-      disclaimer
+      disclaimer: railwayTypingDisclaimer
     },
     {
       id: "railway-accounts-clerk",
@@ -146,11 +187,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "railway",
       passageExam: "accounts-clerk",
-      disclaimer
+      disclaimer: railwayTypingDisclaimer
     },
     {
       id: "upsssc-junior-assistant",
@@ -160,13 +205,17 @@
       mode: "exam",
       languages: ["hindi", "english"],
       defaultLanguage: "hindi",
-      duration: 10,
+      duration: 5,
       targetWPM: 25,
-      targetAccuracy: 95,
+      targetWPMByLanguage: {
+        hindi: 25,
+        english: 30
+      },
+      targetAccuracy: 85,
       difficulty: "medium",
       passageCategory: "up-government",
       passageExam: "upsssc-junior-assistant",
-      disclaimer
+      disclaimer: upssscTypingDisclaimer
     },
     {
       id: "up-police-computer-operator",
@@ -176,13 +225,17 @@
       mode: "exam",
       languages: ["hindi", "english"],
       defaultLanguage: "hindi",
-      duration: 10,
+      duration: 15,
       targetWPM: 25,
-      targetAccuracy: 95,
+      targetWPMByLanguage: {
+        hindi: 25,
+        english: 30
+      },
+      targetAccuracy: 85,
       difficulty: "medium",
       passageCategory: "up-government",
       passageExam: "up-police-computer-operator",
-      disclaimer
+      disclaimer: upPoliceTypingDisclaimer
     },
     {
       id: "up-clerical",
@@ -192,13 +245,17 @@
       mode: "exam",
       languages: ["hindi", "english"],
       defaultLanguage: "hindi",
-      duration: 10,
+      duration: 5,
       targetWPM: 25,
-      targetAccuracy: 95,
+      targetWPMByLanguage: {
+        hindi: 25,
+        english: 30
+      },
+      targetAccuracy: 85,
       difficulty: "medium",
       passageCategory: "up-government",
       passageExam: "up-clerical",
-      disclaimer
+      disclaimer: "UP government clerical typing rules vary by recruiting body and post. This preset follows a common clerical practice standard of 30 WPM English or 25 WPM Hindi with 85% accuracy; verify the latest notification for the exact exam."
     },
     {
       id: "banking-language-practice",
@@ -210,11 +267,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "banking",
       passageExam: "language-practice",
-      disclaimer: "Banking recruitment often includes language proficiency checks rather than an official typing test. Treat this as typing and language practice unless the latest official notification says otherwise."
+      disclaimer: bankingPracticeDisclaimer
     },
     {
       id: "ibps-clerk-csa-practice",
@@ -226,11 +287,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "banking",
       passageExam: "ibps-clerk",
-      disclaimer: "Use this as typing and language practice. Verify the latest IBPS notification for the actual selection process."
+      disclaimer: "IBPS Clerk/CSA has a local language proficiency stage, not a fixed official typing-speed test in the current pattern. Use this page for typing and language practice, and verify the latest IBPS CRP notice."
     },
     {
       id: "sbi-clerk-practice",
@@ -242,11 +307,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "banking",
       passageExam: "sbi-clerk",
-      disclaimer: "Use this as typing and local-language practice. Verify the latest SBI notification for the actual selection process."
+      disclaimer: "SBI Junior Associate selection includes a local language test where applicable, not a fixed official typing-speed test. Use this page for typing and local-language practice, and verify the latest SBI careers notification."
     },
     {
       id: "rbi-assistant-language-practice",
@@ -258,11 +327,15 @@
       defaultLanguage: "english",
       duration: 10,
       targetWPM: 30,
+      targetWPMByLanguage: {
+        english: 30,
+        hindi: 25
+      },
       targetAccuracy: 95,
       difficulty: "medium",
       passageCategory: "banking",
       passageExam: "rbi-assistant",
-      disclaimer: "RBI Assistant selection has a Language Proficiency Test. This page is practice support, not an official typing-test simulator."
+      disclaimer: "RBI Assistant selection has a Language Proficiency Test in the local/official language, not a fixed typing-speed test. This page is practice support, not an official typing-test simulator."
     }
   ];
 

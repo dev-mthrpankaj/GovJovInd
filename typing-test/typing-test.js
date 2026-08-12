@@ -98,6 +98,8 @@
     dom.presetSelect?.addEventListener("change", () => selectPreset(dom.presetSelect.value));
     dom.languageSelect?.addEventListener("change", () => {
       state.language = dom.languageSelect.value;
+      state.targetWPM = getTargetWPMForLanguage(state.preset, state.language);
+      if (dom.targetWPM) dom.targetWPM.value = state.targetWPM;
       prepareTest();
       render();
     });
@@ -174,7 +176,7 @@
     }
     state.passageIndex = Number.isFinite(routePassage) ? routePassage : null;
     state.durationMinutes = Number(preset.duration) || 10;
-    state.targetWPM = Number(preset.targetWPM) || 30;
+    state.targetWPM = getTargetWPMForLanguage(preset, state.language);
     state.targetAccuracy = Number(preset.targetAccuracy) || 95;
     state.typed = "";
     state.lastResult = null;
@@ -216,6 +218,11 @@
     if (dom.targetWPM) dom.targetWPM.value = state.targetWPM;
     if (dom.targetAccuracy) dom.targetAccuracy.value = state.targetAccuracy;
     updateCustomDurationVisibility();
+  }
+
+  function getTargetWPMForLanguage(preset, language) {
+    const languageTarget = preset?.targetWPMByLanguage?.[language];
+    return Number(languageTarget || preset?.targetWPM) || 30;
   }
 
   function syncDurationFromControls() {
