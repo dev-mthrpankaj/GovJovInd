@@ -241,6 +241,8 @@
           <a href="HTML/results.html"><i class="fas fa-square-poll-vertical" aria-hidden="true"></i> Results</a>
           <a href="HTML/quiz.html"><i class="fas fa-circle-question" aria-hidden="true"></i> Quiz Practice</a>
           <a href="HTML/rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Rank Predictor</a>
+          <a href="typing-test/index.html"><i class="fas fa-keyboard" aria-hidden="true"></i> Typing Test</a>
+          <a href="HTML/documents.html"><i class="fas fa-file-lines" aria-hidden="true"></i> Documents</a>
         </aside>
       </div>
     `;
