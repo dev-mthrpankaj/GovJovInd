@@ -259,4 +259,6 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", polishHome);
   else polishHome();
+
+  window.addEventListener("gju:home-data-ready", setupLatestUpdatesDashboard, { once: true });
 }());
