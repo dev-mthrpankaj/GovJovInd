@@ -6,6 +6,8 @@
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
     const loadedScripts = new Map();
     const validatedQuizzes = new Map();
+    const manifest = [];
+    const subjects = [];
 
     function createQuizSeries(prefix, count, subject, titleFactory, descriptionFactory, difficulty, pathFactory) {
         return Array.from({ length: count }, (_, index) => {
@@ -28,90 +30,11 @@
             count,
             "Hindi",
             (setNo) => `${topic} अभ्यास सेट ${setNo}`,
-            () => `UP पुलिस कांस्टेबल, UPSI, UPPCS, SSC, Railway और अन्य प्रतियोगी परीक्षाओं के लिए 50 महत्वपूर्ण ${topic} प्रश्न, मजबूत विकल्पों और विस्तृत व्याख्या के साथ।`,
+            () => `UP पुलिस कांस्टेबल, UPSI, UPPCS, SSC, Railway और अन्य प्रतियोगी परीक्षाओं के लिए महत्वपूर्ण ${topic} प्रश्न, मजबूत विकल्पों और विस्तृत व्याख्या के साथ।`,
             difficulty,
             (setNo, id) => `quiz-data/hindi/${id}.js`
         );
     }
-
-    const manifest = [
-        //Mathematics_Registry
-        ...createQuizSeries("math-percentage-abhinay-set", 2, "Mathematics", (n) => `Percentage Practice Set ${n}`, () => "50 hard percentage questions.", "Hard", (n, id) => `quiz-data/mathematics/${id}.js`),
-         quizMeta("rrb-groupd-math-set-1", "Mathematics", "RRB Group D Mathematics Practice Set 1 (Bilingual)", "25 Hindi-English bilingual mathematics questions for RRB Group D from previous year question papers.", "Mixed", "quiz-data/mathematics/rrb-groupd-math-set-1.js", 25),
-        quizMeta("math-bilingual-latex-set-1", "Mathematics", "Maths Bilingual LaTeX Practice Set 1", "25 Hindi-English bilingual maths questions with LaTeX formatting across percentage, algebra, geometry, mensuration and arithmetic topics.", "Mixed", "quiz-data/mathematics/math-bilingual-latex-set-1.js", 25),
-        quizMeta("math-circle-image-set-1", "Mathematics", "Mathematics Circle Image Based Practice Set 1", "50 unique diagram-based Circle questions covering arcs, sectors, chords, tangents and circular applications.", "Moderate", "quiz-data/mathematics/math-circle-image-set-1.js"),
-        quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
-        quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
-        quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
-        quizMeta("ssc-cgl-quant-set-2", "Mathematics", "SSC CGL Tier 1 Quantitative Aptitude Practice Set 2 (Bilingual)", "25 Hindi-English bilingual quantitative aptitude questions with LaTeX formatting.", "Previous Year", "quiz-data/mathematics/ssc-cgl-quant-set-2.js", 25),
-        quizMeta("ssc-cgl-tier-1-12-sep-2025-shift-2-quant", "Mathematics", "SSC CGL Tier 1 - 12 Sep 2025 Shift 2 Quant (Bilingual)", "25 Hindi-English bilingual SSC CGL Tier 1 quantitative aptitude questions from 12 Sep 2025 Shift 2.", "Previous Year", "quiz-data/mathematics/ssc-cgl-tier-1-12-sep-2025-shift-2-quant.js", 25),
-
-        //English_Registry
-        quizMeta("english-active-passive-set-1", "English", "English Active Passive Practice Set 1", "50 SSC CGL, CHSL and CPO active-passive voice questions.", "Hard", "quiz-data/english/english-active-passive-set-1.js"),
-        quizMeta("english-grammar-set-1", "English", "English Grammar Practice Set 1", "50 grammar questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/english/english-grammar-set-1.js"),
-        quizMeta("english-vocabulary-set-1", "English", "English Vocabulary Practice Set 1", "50 vocabulary, antonym, synonym, spelling and usage questions.", "Moderate", "quiz-data/english/english-vocabulary-set-1.js"),
-        quizMeta("english-mixed-set-1", "English", "English Mixed Practice Set 1", "50 mixed English grammar and vocabulary questions.", "Mixed", "quiz-data/english/english-mixed-set-1.js"),
-        quizMeta("english-narration-set-1", "English", "English Narration Practice Set 1", "50 SSC CGL, CHSL and CPO direct-indirect speech narration questions.", "Previous Year", "quiz-data/english/english-narration-set-1.js"),
-        ...createQuizSeries("english-one-word-substitution-set", 24, "English", (n) => `English One Word Substitution Practice Set ${n}`, () => "50 tough-level One Word Substitution MCQs for SSC CGL, SSC CPO, UPSI, UPPCS and other competitive exams with professional explanations.", "Hard", (n, id) => `quiz-data/english/${id}.js`),
-        ...createQuizSeries("english-detecting-errors-set", 31, "English", (n) => `English Detecting Errors Practice Set ${n}`, () => "50 previous-year detecting error questions from the uploaded PDF for SSC, Railway, Police and other government exams.", "Hard", (n, id) => `quiz-data/english/${id}.js`),
-
-        //Hindi_Registry
-        ...createHindiSeries("hindi-mixed-grammar-gk-set", 4, "मिश्रित हिंदी व्याकरण व सामान्य ज्ञान"),
-        ...createHindiSeries("hindi-varnmala-practice-set", 3, "हिंदी वर्णमाला"),
-        ...createHindiSeries("hindi-muhavare-upsi-pcs-set", 1, "मुहावरे"),
-        ...createHindiSeries("hindi-alankar-upsi-set", 1, "अलंकार"),
-        ...createHindiSeries("hindi-vyakaran-set", 1, "हिंदी व्याकरण", "Mixed"),
-        ...createHindiSeries("hindi-mixed-set", 1, "मिश्रित हिंदी अभ्यास", "Mixed"),
-        ...createHindiSeries("hindi-bharatiya-bhashayen-up-police-set", 2, "हिंदी और अन्य भारतीय भाषाएं"),
-        ...createHindiSeries("hindi-varnmala-up-police-set", 3, "हिंदी वर्णमाला"),
-        ...createHindiSeries("hindi-tadbhav-up-police-set", 3, "तद्भव शब्द"),
-        ...createHindiSeries("hindi-tatsam-up-police-set", 3, "तत्सम शब्द"),
-        ...createHindiSeries("hindi-paryayvachi-up-police-set", 4, "पर्यायवाची शब्द"),
-        ...createHindiSeries("hindi-vilom-up-police-set", 4, "विलोम शब्द"),
-        ...createHindiSeries("hindi-anekarthak-up-police-set", 2, "अनेकार्थक शब्द"),
-        ...createHindiSeries("hindi-one-word-up-police-set", 3, "वाक्यांश के लिए एक शब्द"),
-        ...createHindiSeries("hindi-samroopi-bhinnarthak-up-police-set", 2, "समरूपी भिन्नार्थक शब्द"),
-        ...createHindiSeries("hindi-vakya-shuddhi-up-police-set", 4, "वाक्य शुद्धि"),
-        ...createHindiSeries("hindi-ling-up-police-set", 2, "लिंग"),
-        ...createHindiSeries("hindi-vachan-up-police-set", 2, "वचन"),
-        ...createHindiSeries("hindi-karak-up-police-set", 2, "कारक"),
-        ...createHindiSeries("hindi-sarvanam-up-police-set", 2, "सर्वनाम"),
-        ...createHindiSeries("hindi-visheshan-up-police-set", 2, "विशेषण"),
-        ...createHindiSeries("hindi-kriya-kaal-up-police-set", 3, "क्रिया काल"),
-        ...createHindiSeries("hindi-vachya-up-police-set", 2, "वाच्य"),
-        ...createHindiSeries("hindi-avyay-up-police-set", 2, "अव्यय"),
-        ...createHindiSeries("hindi-upsarg-up-police-set", 3, "उपसर्ग"),
-        ...createHindiSeries("hindi-pratyay-up-police-set", 3, "प्रत्यय"),
-        ...createHindiSeries("hindi-sandhi-up-police-set", 4, "संधि"),
-        ...createHindiSeries("hindi-samas-up-police-set", 4, "समास"),
-        ...createHindiSeries("hindi-viram-chinh-up-police-set", 2, "विराम चिह्न"),
-        ...createHindiSeries("hindi-muhavare-lokoktiyan-up-police-set", 4, "मुहावरे एवं लोकोक्तियां"),
-        ...createHindiSeries("hindi-ras-up-police-set", 2, "रस"),
-        ...createHindiSeries("hindi-chhand-up-police-set", 2, "छंद"),
-        ...createHindiSeries("hindi-alankar-up-police-set", 3, "अलंकार"),
-        ...createHindiSeries("hindi-apathit-bodh-up-police-set", 3, "अपठित बोध"),
-        ...createHindiSeries("hindi-prasiddh-kavi-up-police-set", 2, "प्रसिद्ध कवि"),
-        ...createHindiSeries("hindi-lekhak-rachnaye-up-police-set", 3, "लेखक एवं प्रमुख रचनाएं"),
-        ...createHindiSeries("hindi-bhasha-puraskar-up-police-set", 2, "हिंदी भाषा में पुरस्कार"),
-        ...createHindiSeries("hindi-vividh-up-police-set", 2, "विविध हिंदी प्रश्न"),
-
-        //Reasoning_Registry
-        ...createQuizSeries("reasoning-mirror-image-very-hard-set", 2, "Reasoning", (n) => `Reasoning Mirror Image Very Hard Practice Set ${n}`, () => "50 very hard Mirror Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
-        ...createQuizSeries("reasoning-water-image-very-hard-set", 2, "Reasoning", (n) => `Reasoning Water Image Very Hard Practice Set ${n}`, () => "50 very hard Water Image reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
-        ...createQuizSeries("reasoning-clock-very-hard-set", 2, "Reasoning", (n) => `Reasoning Clock Very Hard Practice Set ${n}`, () => "50 very hard Clock reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
-        ...createQuizSeries("reasoning-calendar-very-hard-set", 2, "Reasoning", (n) => `Reasoning Calendar Very Hard Practice Set ${n}`, () => "50 very hard Calendar reasoning MCQs for SSC, Police, UPSI, Railway and other competitive exams with close options and professional explanations.", "Very Hard", (n, id) => `quiz-data/reasoning/${id}.js`),
-
-        //General_Awareness_Registry
-       
-        quizMeta("gkgs-current-static-26-50-set-1", "General Awareness", "GK/GS Current Static Practice Set 1 (17-06-2026)", "25 GK/GS questions covering polity, history, geography, science and current affairs.", "Mixed", "quiz-data/general-awareness/gkgs-current-static-26-50-set-1.js", 25),
-
-        //General_Science_Registry
-        quizMeta("general-science-set-1", "General Science", "General Science Practice Set 1", "Physics, chemistry, biology, environment and everyday science questions for government exam practice.", "Mixed", "quiz-data/general-science/general-science-set-1.js"),
-
-        //Computer_Registry
-        quizMeta("computer-set-1", "Computer", "Computer Basics Practice Set 1", "50 computer basics, hardware, software and internet questions.", "Mixed", "quiz-data/computer/computer-set-1.js"),
-        quizMeta("computer-set-2", "Computer", "Computer Awareness Practice Set 2", "50 networking, security, office tools and memory questions.", "Moderate", "quiz-data/computer/computer-set-2.js")
-    ];
 
     function quizMeta(id, subject, title, description, difficulty, path, totalQuestions) {
         return {
@@ -135,6 +58,36 @@
                 duplicateSubjectQuestionTexts: []
             }
         };
+    }
+
+    function refreshSubjects() {
+        const nextSubjects = subjectOrder.filter((subject) => manifest.some((quiz) => quiz.subject === subject));
+        manifest.forEach((quiz) => {
+            if (quiz.subject && !nextSubjects.includes(quiz.subject)) nextSubjects.push(quiz.subject);
+        });
+        subjects.length = 0;
+        subjects.push(...nextSubjects);
+    }
+
+    function registerQuizMeta(meta) {
+        if (!meta || !meta.id || !meta.subject || !meta.title || !meta.path) {
+            console.warn("[GJU Quiz Registry] Ignored invalid quiz meta:", meta);
+            return false;
+        }
+
+        const existingIndex = manifest.findIndex((quiz) => quiz.id === meta.id);
+        if (existingIndex >= 0) manifest[existingIndex] = meta;
+        else manifest.push(meta);
+        validatedQuizzes.delete(meta.id);
+        refreshSubjects();
+        return true;
+    }
+
+    function registerSubjectQuizzes(quizzes) {
+        if (!Array.isArray(quizzes)) return false;
+        quizzes.forEach(registerQuizMeta);
+        refreshSubjects();
+        return true;
     }
 
     function sanitizeQuestionText(value) {
@@ -328,8 +281,6 @@
         return validateQuiz(rawQuiz);
     }
 
-    const subjects = subjectOrder.filter((subject) => manifest.some((quiz) => quiz.subject === subject));
-
     window.GJU_SANITIZE_QUESTION_TEXT = sanitizeQuestionText;
 
     window.GJU_QUIZZES = {
@@ -343,4 +294,14 @@
         },
         loadQuizById
     };
+
+    window.GJU_QUIZ_REGISTRY_HELPERS = {
+        quizMeta,
+        createQuizSeries,
+        createHindiSeries,
+        registerQuizMeta,
+        registerSubjectQuizzes
+    };
+
+    window.GJU_REGISTER_STATIC_QUIZ_META = registerQuizMeta;
 }());

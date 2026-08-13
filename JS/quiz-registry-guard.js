@@ -7,9 +7,8 @@
         return;
     }
 
-    const SUBJECT_ORDER = ["Mathematics", "English", "Hindi", "General Awareness", "Reasoning", "Computer"];
+    const SUBJECT_ORDER = ["Mathematics", "English", "Hindi", "General Awareness", "General Science", "Reasoning", "Computer"];
     const DEFAULT_DURATION_MINUTES = 30;
-    const DEFAULT_QUESTION_COUNT = 50;
     const DEFAULT_MARKS = 1;
     const DEFAULT_NEGATIVE_MARKS = 0.25;
 
@@ -39,7 +38,7 @@
             title,
             description,
             durationMinutes: number(quiz.durationMinutes, DEFAULT_DURATION_MINUTES),
-            totalQuestions: number(quiz.totalQuestions, DEFAULT_QUESTION_COUNT),
+            totalQuestions: number(quiz.totalQuestions, null),
             marksPerQuestion: number(quiz.marksPerQuestion, DEFAULT_MARKS),
             negativeMarks: Number.isFinite(Number(quiz.negativeMarks)) ? Number(quiz.negativeMarks) : DEFAULT_NEGATIVE_MARKS,
             difficulty,
