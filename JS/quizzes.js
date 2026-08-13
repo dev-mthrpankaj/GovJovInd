@@ -27,6 +27,7 @@
         English: "fa-language",
         Hindi: "fa-book",
         "General Awareness": "fa-globe-asia",
+        "General Science": "fa-flask",
         Reasoning: "fa-brain",
         Computer: "fa-laptop-code"
     };
@@ -369,7 +370,7 @@
                     <p>${escapeHtml(quiz.description || "Practice set for government exam preparation.")}</p>
                     <div class="quiz-set-meta">
                         <span class="meta-pill">${escapeHtml(quiz.difficulty || "Mixed")}</span>
-                        <span class="meta-pill">${formatNumber(quiz.totalQuestions)} Questions</span>
+                        <span class="meta-pill">${getQuizQuestionCountLabel(quiz)}</span>
                         <span class="meta-pill">${formatNumber(quiz.durationMinutes)} Minutes</span>
                         <span class="meta-pill">+${formatMarks(quiz.marksPerQuestion)}</span>
                         <span class="meta-pill">-${formatMarks(quiz.negativeMarks)}</span>
@@ -1428,9 +1429,9 @@
             quiz.subject,
             quiz.description,
             quiz.difficulty,
-            quiz.totalQuestions,
+            getQuizQuestionCount(quiz),
             quiz.durationMinutes,
-            `${quiz.totalQuestions} questions`,
+            getQuizQuestionCount(quiz) ? `${getQuizQuestionCount(quiz)} questions` : "",
             `${quiz.durationMinutes} minutes`,
             "quiz test practice mock question",
             setNumber ? `set ${setNumber}` : "",
@@ -1804,6 +1805,17 @@
     function formatNumber(value) {
         const number = Number(value);
         return Number.isFinite(number) ? String(Math.round(number)) : "0";
+    }
+
+    function getQuizQuestionCount(quiz) {
+        if (Array.isArray(quiz?.questions) && quiz.questions.length) return quiz.questions.length;
+        const totalQuestions = Number(quiz?.totalQuestions);
+        return Number.isFinite(totalQuestions) && totalQuestions > 0 ? Math.round(totalQuestions) : 0;
+    }
+
+    function getQuizQuestionCountLabel(quiz) {
+        const questionCount = getQuizQuestionCount(quiz);
+        return questionCount ? `${formatNumber(questionCount)} Questions` : "Questions";
     }
 
     function debounce(fn, delay) {

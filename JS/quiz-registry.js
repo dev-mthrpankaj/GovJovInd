@@ -1,9 +1,8 @@
 (function () {
     "use strict";
 
-    const DEFAULT_QUESTION_COUNT = 50;
     const SCRIPT_TIMEOUT_MS = 15000;
-    const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "Reasoning", "Computer"];
+    const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "General Science", "Reasoning", "Computer"];
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
     const loadedScripts = new Map();
     const validatedQuizzes = new Map();
@@ -38,14 +37,14 @@
     const manifest = [
         //Mathematics_Registry
         ...createQuizSeries("math-percentage-abhinay-set", 2, "Mathematics", (n) => `Percentage Practice Set ${n}`, () => "50 hard percentage questions.", "Hard", (n, id) => `quiz-data/mathematics/${id}.js`),
-         quizMeta("rrb-groupd-math-set-1", "Mathematics", "RRB GROUP D MATHEMATICS SET 1", "25 Question of Mathematics for RRB Group D from Previous Year Question Papers", "Mixed", "quiz-data/mathematics/rrb-groupd-math-set-1.js", 25),
+         quizMeta("rrb-groupd-math-set-1", "Mathematics", "RRB Group D Mathematics Practice Set 1 (Bilingual)", "25 Hindi-English bilingual mathematics questions for RRB Group D from previous year question papers.", "Mixed", "quiz-data/mathematics/rrb-groupd-math-set-1.js", 25),
         quizMeta("math-bilingual-latex-set-1", "Mathematics", "Maths Bilingual LaTeX Practice Set 1", "25 Hindi-English bilingual maths questions with LaTeX formatting across percentage, algebra, geometry, mensuration and arithmetic topics.", "Mixed", "quiz-data/mathematics/math-bilingual-latex-set-1.js", 25),
         quizMeta("math-circle-image-set-1", "Mathematics", "Mathematics Circle Image Based Practice Set 1", "50 unique diagram-based Circle questions covering arcs, sectors, chords, tangents and circular applications.", "Moderate", "quiz-data/mathematics/math-circle-image-set-1.js"),
         quizMeta("math-set-1", "Mathematics", "Mathematics Practice Set 1", "50 arithmetic and quantitative aptitude questions for SSC, Railway and Police exams.", "Mixed", "quiz-data/mathematics/math-set-1.js"),
         quizMeta("math-set-2", "Mathematics", "Mathematics Practice Set 2", "50 calculation speed, number system, work, average and applied maths questions.", "Moderate", "quiz-data/mathematics/math-set-2.js"),
         quizMeta("math-pyq-set-1", "Mathematics", "Mathematics PYQ Practice Set 1", "50 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/math-pyq-set-1.js"),
-        quizMeta("ssc-cgl-quant-set-2", "Mathematics", "SSC CGL QUANT (19-07-2026)", "25 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/ssc-cgl-quant-set-2.js"),
-        quizMeta("ssc-cgl-tier-1-12-sep-2025-shift-2-quant", "Mathematics", "SSC CGL QUANT (19-07-2026)", "25 previous-year style quantitative aptitude questions.", "Previous Year", "quiz-data/mathematics/ssc-cgl-tier-1-12-sep-2025-shift-2-quant.js"),
+        quizMeta("ssc-cgl-quant-set-2", "Mathematics", "SSC CGL Tier 1 Quantitative Aptitude Practice Set 2 (Bilingual)", "25 Hindi-English bilingual quantitative aptitude questions with LaTeX formatting.", "Previous Year", "quiz-data/mathematics/ssc-cgl-quant-set-2.js", 25),
+        quizMeta("ssc-cgl-tier-1-12-sep-2025-shift-2-quant", "Mathematics", "SSC CGL Tier 1 - 12 Sep 2025 Shift 2 Quant (Bilingual)", "25 Hindi-English bilingual SSC CGL Tier 1 quantitative aptitude questions from 12 Sep 2025 Shift 2.", "Previous Year", "quiz-data/mathematics/ssc-cgl-tier-1-12-sep-2025-shift-2-quant.js", 25),
 
         //English_Registry
         quizMeta("english-active-passive-set-1", "English", "English Active Passive Practice Set 1", "50 SSC CGL, CHSL and CPO active-passive voice questions.", "Hard", "quiz-data/english/english-active-passive-set-1.js"),
@@ -106,6 +105,9 @@
        
         quizMeta("gkgs-current-static-26-50-set-1", "General Awareness", "GK/GS Current Static Practice Set 1 (17-06-2026)", "25 GK/GS questions covering polity, history, geography, science and current affairs.", "Mixed", "quiz-data/general-awareness/gkgs-current-static-26-50-set-1.js", 25),
 
+        //General_Science_Registry
+        quizMeta("general-science-set-1", "General Science", "General Science Practice Set 1", "Physics, chemistry, biology, environment and everyday science questions for government exam practice.", "Mixed", "quiz-data/general-science/general-science-set-1.js"),
+
         //Computer_Registry
         quizMeta("computer-set-1", "Computer", "Computer Basics Practice Set 1", "50 computer basics, hardware, software and internet questions.", "Mixed", "quiz-data/computer/computer-set-1.js"),
         quizMeta("computer-set-2", "Computer", "Computer Awareness Practice Set 2", "50 networking, security, office tools and memory questions.", "Moderate", "quiz-data/computer/computer-set-2.js")
@@ -118,7 +120,7 @@
             title,
             description,
             durationMinutes: 30,
-            totalQuestions: Number(totalQuestions) || DEFAULT_QUESTION_COUNT,
+            totalQuestions: Number(totalQuestions) || null,
             marksPerQuestion: 1,
             negativeMarks: 0.25,
             difficulty,
@@ -208,7 +210,7 @@
             durationMinutes: Number(rawQuiz.durationMinutes) || 30,
             totalQuestions: Array.isArray(rawQuiz.questions) && rawQuiz.questions.length
                 ? rawQuiz.questions.length
-                : Number(rawQuiz.totalQuestions) || DEFAULT_QUESTION_COUNT,
+                : Number(rawQuiz.totalQuestions) || 0,
             marksPerQuestion: Number(rawQuiz.marksPerQuestion) || 1,
             negativeMarks: Number(rawQuiz.negativeMarks) || 0,
             difficulty: rawQuiz.difficulty || "Mixed",
