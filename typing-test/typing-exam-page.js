@@ -178,20 +178,35 @@
     const defaultLanguage = exam.languages[0] || "english";
     return `
       <section class="gju-typing-exam-detail-card">
-        <div class="gju-typing-exam-logo ${exam.logoClass}"><i class="${exam.icon}" aria-hidden="true"></i></div>
-        <p class="gju-typing-exam-category">${escapeHtml(exam.category)}</p>
-        <h1>${escapeHtml(exam.title)}</h1>
-        <p>${escapeHtml(exam.description)}</p>
-        <div class="gju-typing-free-note"><i class="fas fa-gift" aria-hidden="true"></i> Free forever for students. No charge, no hidden fee.</div>
-        <div class="gju-typing-rules-box">
-          <strong><i class="fas fa-circle-info" aria-hidden="true"></i> Typing Rules</strong>
-          <span>Exam typing/skill-test requirements may vary according to the latest official recruitment notification. Always verify the official notification before relying on these settings.</span>
+        <div class="gju-typing-hero-copy">
+          <div class="gju-typing-hero-topline">
+            <div class="gju-typing-exam-logo ${exam.logoClass}"><i class="${exam.icon}" aria-hidden="true"></i></div>
+            <p class="gju-typing-exam-category">${escapeHtml(exam.category)} Typing Practice</p>
+          </div>
+          <h1>${escapeHtml(exam.title)}</h1>
+          <p>${escapeHtml(exam.description)}</p>
+          <div class="gju-typing-hero-actions">
+            <a class="gju-typing-hero-start" href="#typingPassagesTitle"><i class="fas fa-keyboard" aria-hidden="true"></i> Choose Passage</a>
+            <span class="gju-typing-free-note"><i class="fas fa-gift" aria-hidden="true"></i> Free forever. No charge.</span>
+          </div>
+        </div>
+        <div class="gju-typing-hero-summary" aria-label="Typing test highlights">
+          <article><span>Timer</span><strong>${getDurationLabel(exam)}</strong></article>
+          <article><span>Mode</span><strong>Exam Style</strong></article>
+          <article><span>Result</span><strong>WPM + Accuracy</strong></article>
+          <article><span>Passages</span><strong>18 Sets</strong></article>
         </div>
       </section>
 
-      ${buildDescriptionSection(exam)}
+      <section class="gju-typing-rules-box">
+        <strong><i class="fas fa-circle-info" aria-hidden="true"></i> Typing Rules</strong>
+        <span>Exam typing/skill-test requirements may vary according to the latest official recruitment notification. Always verify the official notification before relying on these settings.</span>
+      </section>
 
-      ${buildHowItWorksSection()}
+      <div class="gju-typing-exam-info-grid">
+        ${buildDescriptionSection(exam)}
+        ${buildHowItWorksSection()}
+      </div>
 
       <section class="gju-typing-language-panel" aria-labelledby="typingLanguageTitle">
         <h2 id="typingLanguageTitle">Select Language</h2>
@@ -202,7 +217,11 @@
       </section>
 
       <section class="gju-typing-passage-panel" aria-labelledby="typingPassagesTitle" data-preset-id="${escapeHtml(presetId)}" data-language="${escapeHtml(defaultLanguage)}">
-        <h2 id="typingPassagesTitle">Passages</h2>
+        <div class="gju-typing-passage-heading">
+          <span class="gju-typing-section-label">Practice Sets</span>
+          <h2 id="typingPassagesTitle">Choose a Passage</h2>
+          <p>Start with Easy, move to Medium, and finish with Hard for a complete typing routine.</p>
+        </div>
         ${difficulties.map((difficulty) => buildDifficultyTable(presetId, defaultLanguage, difficulty)).join("")}
       </section>
 
@@ -218,6 +237,12 @@
         <p>${escapeHtml(exam.description)} It is designed for students who want simple, focused typing practice with passage-wise attempts, live accuracy, WPM, typed words and final result tracking.</p>
       </section>
     `;
+  }
+
+  function getDurationLabel(exam) {
+    const presetId = Object.keys(EXAMS).find((key) => EXAMS[key] === exam);
+    const minutes = durationByPreset[presetId] || 10;
+    return `${minutes} min`;
   }
 
   function buildHowItWorksSection() {
