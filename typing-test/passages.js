@@ -1,27 +1,59 @@
 (function () {
   "use strict";
 
+  const paragraph = (lines) => lines.join("\n");
+
   const englishGeneral = {
     easy: [
-      "Public service preparation needs steady focus and a calm routine. A student can improve speed by reading the passage once, typing with care, and reviewing mistakes after every attempt.",
-      "Every form, admit card, result, and answer key should be checked from the official website. Good typing practice helps students complete online work with confidence and fewer mistakes."
+      paragraph([
+        "Public service preparation needs steady focus and a calm routine.",
+        "A student can improve speed by reading the passage once, typing with care, and reviewing mistakes after every attempt."
+      ]),
+      paragraph([
+        "Every form, admit card, result, and answer key should be checked from the official website.",
+        "Good typing practice helps students complete online work with confidence and fewer mistakes."
+      ]),
+      paragraph([
+        "Candidates should type the passage exactly as it appears on the screen.",
+        "When a new paragraph is shown, press Enter once and continue typing from the next line."
+      ])
     ],
     medium: [
-      "A competitive exam aspirant must balance speed with accuracy. Typing too quickly without control creates errors, while typing too slowly can reduce the final score. A practical target is built through regular timed practice.",
-      "Government recruitment work often includes application forms, document uploads, response sheets, and official notices. Clear language skills and accurate computer typing can support many clerical and assistant-level roles."
+      paragraph([
+        "A competitive exam aspirant must balance speed with accuracy. Typing too quickly without control creates errors, while typing too slowly can reduce the final score.",
+        "A practical target is built through regular timed practice and careful review after every attempt."
+      ]),
+      paragraph([
+        "Government recruitment work often includes application forms, document uploads, response sheets, and official notices.",
+        "Clear language skills and accurate computer typing can support many clerical and assistant-level roles."
+      ]),
+      paragraph([
+        "Official work requires clean spacing, correct punctuation, and steady typing rhythm.",
+        "Students should avoid adding extra blank lines unless the passage clearly shows a paragraph break."
+      ])
     ],
     hard: [
-      "Reliable exam preparation depends on disciplined revision, verified information, and consistent practice. Candidates should compare their performance across multiple attempts instead of judging progress from one unusually good or bad session.",
-      "Typing performance improves when the student maintains posture, reads in meaningful groups, avoids repeated backtracking, and corrects patterns of mistakes after the test rather than interrupting flow during every sentence."
+      paragraph([
+        "Reliable exam preparation depends on disciplined revision, verified information, and consistent practice.",
+        "Candidates should compare their performance across multiple attempts instead of judging progress from one unusually good or bad session."
+      ]),
+      paragraph([
+        "Typing performance improves when the student maintains posture, reads in meaningful groups, and avoids repeated backtracking.",
+        "Students should correct patterns of mistakes after the test rather than interrupting flow during every sentence."
+      ]),
+      paragraph([
+        "A good typing attempt looks simple, but it requires attention to every character shown in the passage.",
+        "The student must follow paragraph breaks, punctuation marks, capital letters, and spaces without guessing."
+      ])
     ]
   };
 
-  const sscCglDestPassage1 = [
+  const sscCglDestPassage1 = paragraph([
     "Success is rarely the result of a single great decision. In most cases, it is the result of small actions repeated consistently over a long period of time. People often wait for motivation before they begin working toward their goals, but motivation can change from day to day. Discipline, on the other hand, helps a person continue working even when the task feels difficult, boring, or uncomfortable. This is why discipline and consistency are considered two of the most important qualities for achieving meaningful progress in life.",
     "Every person has goals. A student may want to pass a competitive examination, an employee may want to improve professional skills, and a business owner may want to increase the number of customers. Having a goal gives direction, but a goal alone cannot produce results. A person must create a practical plan and follow it regularly. For example, a student who studies for two focused hours every day may achieve better results than someone who studies for ten hours only once a week. Regular practice allows the mind to understand information, identify mistakes, and improve gradually.",
     "Time management also plays an important role in building discipline. Everyone receives the same twenty-four hours in a day, but people use those hours differently. Some people plan their important activities in advance, while others spend a large amount of time on activities that provide little value. Good time management does not mean working every minute of the day. Rest, entertainment, exercise, and conversations with family and friends are also important. The real objective is to create a healthy balance between responsibilities and personal life.",
     "Technology has made modern life easier in many ways. Students can access educational material online, communicate with teachers, attempt mock tests, and learn new skills without leaving their homes. At the same time, technology can become a major source of distraction."
-  ].join(" ");
+  ]);
 
   const hindiGeneral = {
     easy: [

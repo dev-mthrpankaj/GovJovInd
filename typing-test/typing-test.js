@@ -30,6 +30,8 @@
 
   const dom = {};
   let attemptFontSize = 22;
+  let passageScrollFrame = 0;
+  let lastPassageLineTop = 0;
   const routeParams = new URLSearchParams(window.location.search);
   const routePresetId = routeParams.get("preset") || app.dataset.presetId || config.defaultPresetId;
 
@@ -263,6 +265,7 @@
     state.pausedMs = 0;
     state.finishedAt = 0;
     state.lastResult = null;
+    lastPassageLineTop = 0;
     if (dom.typingInput) {
       dom.typingInput.value = "";
       dom.typingInput.disabled = false;
@@ -497,9 +500,56 @@
       let className = "gju-typing-char";
       if (index < typed.length) className += typed[index] === char ? " is-correct" : " is-incorrect";
       else if (index === typed.length) className += " is-current";
+      if (char.includes("\n")) {
+        html += `<span class="${className} gju-typing-line-break"><span class="gju-typing-enter-marker">Enter</span></span><br>`;
+        continue;
+      }
       html += `<span class="${className}">${escapeHtml(char)}</span>`;
     }
     dom.passageText.innerHTML = html;
+    keepCurrentPassageLineVisible();
+  }
+
+  function keepCurrentPassageLineVisible() {
+    if (!dom.passageText || state.status === "finished") return;
+    if (passageScrollFrame) window.cancelAnimationFrame(passageScrollFrame);
+    passageScrollFrame = window.requestAnimationFrame(() => {
+      passageScrollFrame = 0;
+      const current = dom.passageText.querySelector(".gju-typing-char.is-current");
+      if (!current) return;
+
+      const panel = dom.passageText;
+      const currentTop = current.offsetTop;
+      const currentBottom = currentTop + current.offsetHeight;
+      const visibleTop = panel.scrollTop;
+      const visibleBottom = visibleTop + panel.clientHeight;
+      const lineHeight = parseFloat(window.getComputedStyle(panel).lineHeight) || current.offsetHeight || 28;
+      const hasChangedLine = currentTop > lastPassageLineTop + lineHeight * 0.45;
+      const nearBottom = currentBottom > visibleBottom - lineHeight * 1.2;
+
+      if (!lastPassageLineTop) {
+        lastPassageLineTop = currentTop;
+      }
+
+      if (hasChangedLine) {
+        lastPassageLineTop = currentTop;
+      }
+
+      if (hasChangedLine && nearBottom) {
+        panel.scrollTo({
+          top: Math.min(panel.scrollHeight - panel.clientHeight, visibleTop + lineHeight),
+          behavior: "auto"
+        });
+        return;
+      }
+
+      if (currentTop < visibleTop + lineHeight && visibleTop > 0) {
+        panel.scrollTo({
+          top: Math.max(0, currentTop - lineHeight * 1.5),
+          behavior: "auto"
+        });
+      }
+    });
   }
 
   function renderMeta() {

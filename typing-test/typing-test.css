@@ -272,6 +272,48 @@ body:has(.gju-typing-attempt-page) {
   box-shadow: 0 0 0 1px rgba(161, 98, 7, .25);
 }
 
+.typing-test-page .gju-typing-line-break {
+  display: inline-flex;
+  align-items: center;
+  min-width: 58px;
+  min-height: 1.35em;
+  margin: 0 .16rem .16rem;
+  vertical-align: middle;
+}
+
+.typing-test-page .gju-typing-enter-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
+  padding: .12rem .42rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: .7em;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.typing-test-page .gju-typing-line-break.is-current .gju-typing-enter-marker {
+  border-color: #f59e0b;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.typing-test-page .gju-typing-line-break.is-correct .gju-typing-enter-marker {
+  border-color: #99f6e4;
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.typing-test-page .gju-typing-line-break.is-incorrect .gju-typing-enter-marker {
+  border-color: #fecaca;
+  background: #fee2e2;
+  color: #b42318;
+}
+
 .typing-test-page .gju-typing-input {
   min-height: 170px;
   resize: vertical;

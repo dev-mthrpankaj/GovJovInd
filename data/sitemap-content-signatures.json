@@ -1,0 +1,2001 @@
+{
+  "version": 1,
+  "pages": {
+    "index.html": {
+      "signature": "b9be0a19fe09f337dcb2001c4f499ded54f6b57d64b19dd102ac3818bb0ab767",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/01-CGPSC-Subedar-SI-Platoon-Commander-Admit-Card-2026.html": {
+      "signature": "42cdb694b69ad1a35effb95d2e0a1ff9ea4a30254c0e7311178c6bf0d8463aa0",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/01-CSBC-Bihar-Police-Constable-Admit-Card-2026.html": {
+      "signature": "ae920d4aa0d568b5857b08011895d53366312adfa160781464d8537decee03c8",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/01-RRB-ALP-CBT-2-Admit-Card-2026.html": {
+      "signature": "e13c8b1ac3e81bfabf15af74ce5e10c14e28980c78bff259b012dee0e8cda5c0",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html": {
+      "signature": "1e66172ecfaaf0906824c5f8e6a64fbd1fcf1c5ceaeb3c9415f1eec19c9ba576",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html": {
+      "signature": "d7ee8b40615ae6432276d43717e7ec6c6a2ce158fb9fa7b40f83e9ff33b586db",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/03-BSNL-Senior-Executive-Trainee-SET-Admit-Card-2026.html": {
+      "signature": "9d3197eb413b007bb72df0f56dc3a136cc674016e6da46d78fe6f8943f93ba91",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/03-Central-Bank-Apprentice-Admit-Card-2026.html": {
+      "signature": "c4944a3105acf41a8ac6dbc97ac4b18dcd3db74cfe51890fae0fde00d63ec437",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/03-ICFRE-FRI-Various-Post-Admit-Card-2026.html": {
+      "signature": "363064e782741f3513a103d7a4b1ad7cc3d20e6c94e3677c5cc70c439c5dc1e6",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html": {
+      "signature": "e83ad0593e64278519b22aeb93e442dd43400aaf034a789c2514855c5c987828",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/04-RIICO-Various-Posts-Admit-Card-2026.html": {
+      "signature": "37b1236697fca118274984a4dc64d7ee19e65272d91ad4ea56e1c326b4c5bc48",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/04-SBI-Apprentice-Admit-Card-2026.html": {
+      "signature": "5325945c8c57cc517ce2a212876d05670ec75d5e1ff2bd1a4e1d969aed1efd55",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html": {
+      "signature": "1f86e2e44a91652d330869f90d66f538e89fd8d2a7bcf9976674dedd451b42c1",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html": {
+      "signature": "b06d10fc185a1bcf9112e37022fe47c53207f509d5eb4f01c23fe967dd4511b8",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html": {
+      "signature": "4fe6d9f6925109c29cd08c83741c92b7775f9056a704f984d304f6d5483151d2",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/05-UPSSSC-Main-Exam-Admit-Card-2026.html": {
+      "signature": "13843d660bcb7f3191d556e318a4876f2310abe5573b60e4bd9d3ebce81819f3",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/06-2025-RRB-NTPC-Graduate-CBT-2-Admit-Card-2026.html": {
+      "signature": "dac09c63f158573492fb82b15d947115051b71a2afd092b870c4742ed1e3af3a",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/06-BPSC-Prosecution-Officer-Admit-Card-2026.html": {
+      "signature": "0ae08246725799d41975c82ce1e392d314df8cc561117faa8cba53b0ec92e61f",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html": {
+      "signature": "3a61e7d4b7c1b221f81547e7fc6a615503ea8f5a638180441ea7d9f8a4e885f4",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/06-UPPSC-Assistant-Town-Planner-Admit-Card-2026.html": {
+      "signature": "06eb2489fb0e535867fdf2fa3462c6dcd04791705c58c822c6c0e5a321b04cc1",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html": {
+      "signature": "893d2d4874663926adcccd3a8a82454e09cf1c0ff4cce14e90ae198f36070714",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/1105-RSSB-Vanpal-Admit-Card-2026.html": {
+      "signature": "6b2306f01cee138083ee4e81f736f04b39a1e09b36379fffa2b6b2650ba85a65",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html": {
+      "signature": "123d41c07c28e614f598d2ce98664d4f1b1cd9f581065afda51ca41f30daed6e",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html": {
+      "signature": "19f77ca01d4be82028f871fff9c086bb3d34cb3d20073a9086beefaaa9c560de",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html": {
+      "signature": "222c51dfc8f0e6764fa856d940cd619b9c95d38b432978f3199c78e35e4d3f6f",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/51-UPESSC-Assistant-Professor-Interview-Admit-Card-2026.html": {
+      "signature": "1ffe4ee6b6ef7433749cc61bf6425e5fae86c6d4816b47b0584066a8be7a981c",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/AFCAT-02-2026-Admit-Card-2026.html": {
+      "signature": "c1c625cde042466e61052ac638807137d9b1f77ee5d671561479c35fbc9df160",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/AFCAT-02-2026-Exam-City-2026.html": {
+      "signature": "b9becc5d977ef0c96c5acf566638bf3c3ad750023cc92f88d225d02c94f460f8",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/AIIMS-CRE-5th-Admit-Card-2026.html": {
+      "signature": "6d909e8f41fc08b1f38e78b65caf15169d7bdb54d4b6fdf1e096662313d51b5b",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BEML-Non-Executive-Operator-Admit-Card-2026.html": {
+      "signature": "7914b46b70e7e326333fc0bda35de116f53362541546e839eec6d958b04b9f03",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BOI-Credit-Officers-Admit-Card-2026.html": {
+      "signature": "a7bc4df51d9196c98e20bcf84e2e0e544591de7c34af048f960ca6b25459c246",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSC-72nd-Pre-Exam-Date-2026.html": {
+      "signature": "c4793777c7eef889fcd7e77972d544ecd8f9c882461862196a471970d2a1cabb",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSC-Auditor-Admit-Card-2026.html": {
+      "signature": "37e27e874c1f5e0c618cdc14d5f1302515fb49f5fe425cdf666b6bd927619d79",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSC-Prosecution-Officer-Admit-Card-2026.html": {
+      "signature": "250b332e0c4094118703c59656c7255666e79a8507dc31f87c7a2888c6ce3b70",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSSC-ASI-Technical-Admit-Card-2026.html": {
+      "signature": "1454c55f3ea60e832a5fc2d430420c6cbb5da37f8f0ff7e8cfd228d750dac6c3",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSSC-Bihar-Police-ASI-Operation-Admit-Card-2026.html": {
+      "signature": "560bbc0e5fb945666089001cccf0219b369a9fd82a15415a718b020444cc5d62",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html": {
+      "signature": "d69407905c04e139bb1879049c1ffcaf3b17342f10a6b54fa8c1296be45054fd",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-05-2026.html": {
+      "signature": "69a4b6834d9d327b7d3ae4ff10266caaeeadae23b7ba1cb0789d9eaf4a71208e",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-2026.html": {
+      "signature": "2759d85c02063a6ae69765edad41b65ed9cbc11491da353b2a31b3b49200f899",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-May-2026.html": {
+      "signature": "04a40bdc366b346ebd69be3ebbc8a71cea545026049ea5096414e9b545634122",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BSEH-HTET-Haryana-Admit-Card-2026.html": {
+      "signature": "8857d3be14d82ef92295f509a42d447accab39059751e5a572406740e791ca3a",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BSNL-JTO-Junior-Telecom-Officer-Exam-City-Details-2026.html": {
+      "signature": "1652949d008baebed40a3263c1ef7dfd28d3f562b219a323dcbf7fd8db370b91",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/BSUSC-Bihar-Assistant-Professor-Admit-Card-2026.html": {
+      "signature": "bbfaed4ae5b8465c09596e1f6a5c54cf9aa41b51e273523e736c554df4dbbaa8",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/CGPSC-State-Engineering-Service-Admit-Card-2026.html": {
+      "signature": "576710faaa11d929bed7836b19f2250ea25e0e44851a88526492249bf9816070",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/CSBC-Bihar-Police-Constable-Driver-DET-Admit-Card-2026.html": {
+      "signature": "5911438ab7c8097207c4fd69dc7bb33b32360e69c1c506a99c665cc7d8abd600",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/Delhi-High-Court-HJS-Admit-Card-2026.html": {
+      "signature": "0670c5340e75388dcc8df21970875c02db728d3f5215a66a09d6073fca8d5870",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/Delhi-Police-Constable-Physical-Admit-Card-2026.html": {
+      "signature": "f5008eae597eb5ba48d63a30b77c2d2a973949e3b984edd9cdc820141d8359ca",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/DSSSB-MTS-Admit-Card-2026.html": {
+      "signature": "215758f8df04bd44e5a95cd0ed870a09ae7e4f2a6e97d10a4baacf5c75a0e102",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/HPSC-Haryana-PGT-Computer-Science-Interview-Letter-2026.html": {
+      "signature": "acbd3edd35db13b88c89d8ffb0411958d730ebae27ca2687d406795ee487601b",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/Karnataka-Police-Constable-Admit-Card-2026.html": {
+      "signature": "5976baabebebdef22c55365b9bf3e3a6cf735c1cdfd7c534e27f7e91a09fee3c",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/MPESB-ADDET-Animal-Husbandry-Admit-Card-2026.html": {
+      "signature": "7e0e85eaea668f76723f73b0c3a88d259b339fdd8ec407a802f2922f63104991",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/MPESB-PNST-Pre-Nursing-Admit-Card-2026.html": {
+      "signature": "ada16df9907c92fb98305f53e3f2c2994f0ece1204e7953682affa42ba02e8d2",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/MPESB-Primary-School-Teacher-PSTST-Admit-Card-2025.html": {
+      "signature": "b27a69148b3dece89167624502e0271927bffa395b7338d2d4a20b813f2f943a",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/MPPSC-Assistant-Professor-Admit-Card-2026.html": {
+      "signature": "f56a8c0542ab2d65e4c544ba243eb2f2bdcdc9881add74fe41265973e8338217",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/MPPSC-SSE-Mains-Admit-Card-2026.html": {
+      "signature": "15c46cc4dcf00ee2a4fbf69e4ba664aa32bcbdfc87029db35967b6d5c2433748",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/NTA-CSIR-UGC-NET-June-2026-Exam-City-Details.html": {
+      "signature": "513fc7502f671b4b047860cef6a0fccae1141dfed7e865e4268fffc33999f7c0",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/NTA-CSIR-UGC-NET-June-Admit-Card-2026.html": {
+      "signature": "865b105e40d7dfacd235714f03b302538502d15336c73d1e62b0a8b675c66248",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/NTA-ICAR-AIEEA-PG-Admit-Card-2026.html": {
+      "signature": "c41e21e363ef8d63b98d8d44d99445ef4c61a0c85f48baadeb4954081e7916a0",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/Patna-High-Court-Computer-Operator-Admit-Card-2026.html": {
+      "signature": "fd285e90143816e35a98e7131ccf97d9b1f159636b9c54a06ef2f5e4e6522e96",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/PSPCL-JE-Electrical-Exam-Date-2026.html": {
+      "signature": "69b048196aac9c47b622b37b283bf5d41ecf61154fe1b03043c101f72c925be9",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/PSPCL-Junior-Engineer-Electrical-Admit-Card-2026.html": {
+      "signature": "f3203b305f562c6800fda2459d660028ce6f995cb33746f0550757ef11b2ea36",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/Rajasthan-RSSB-Women-Supervisor-City-Intimation-2026.html": {
+      "signature": "2cc5ef4ec663de45381fb05bec6f77d195ea0442ef73dc03c7b3d8ff6bec9ac2",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RBI-Grade-B-Phase-II-Admit-Card-2026.html": {
+      "signature": "56835183ffda022e7537a01fab43ca431dbcd2f53bb8728ce25cfdcd1c553622",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RPSC-Junior-Legal-Officer-JLO-Admit-Card-2026.html": {
+      "signature": "7009c828afb5658671ff3a7e5dbe4925e948a0e1acafe67a2e86508f0aa6f8d9",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RPSC-Senior-Teacher-Admit-Card-2026.html": {
+      "signature": "f7a93483e9d446ebafe4d0f5fc3beb4982a0f580e6d117410bf8cd43d8c9955e",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RPSC-Senior-Teacher-Grade-II-TGT-Admit-Card-2026.html": {
+      "signature": "ed607aa5e240efb2e4846efdd79658246dc635b58a1b83dcd6351a5d158ab5e7",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RPSC-Sub-Inspector-SI-PET-Admit-Card-2026.html": {
+      "signature": "fc2b57601ffd132c396a3aa4abbf2076a2d33bbe2cd2184f8fe7c65878d22de7",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RRB-Isolated-Categories-Admit-Card-2026.html": {
+      "signature": "5123875d47b74070b1058adf0c0d9dc110266465de17a45f11fc4d0c471a09cf",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RRB-Railway-ALP-CBT-2-Admit-Card-2026.html": {
+      "signature": "88d2f222f07b36a92e169029f9f09dc9688de3161ba6ea02414b9ca64c8c1d94",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RRB-Railway-Group-D-City-Intimation-2026.html": {
+      "signature": "dd80517c1eee6c30a77ef9057c1c6d212f404000cb7b1823788107270fe30fc9",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RSMSSB-Clerk-Grade-II-Junior-Assistant-Admit-Card-2026.html": {
+      "signature": "1c6f6a0f193e6711324e14d6923db4a4e98564fe9d96196eaf0bda52485f150e",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RSSB-Computer-Instructor-Admit-Card-2026.html": {
+      "signature": "c96d8f80c4c0593d1f1ff169eaea5d4cc52700d801078a63f4749ee63a3c26f7",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/RSSB-Rajasthan-Platoon-Commander-Interview-Letter-2026.html": {
+      "signature": "ea6254817240c606980f777931a3e3643d8d4c37f90c7bf780c8ff42b98d431d",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/SBI-PO-Admit-Card-2026.html": {
+      "signature": "59eafe422219d83966f81ba62cd33111a9a0902ae19dbf66c7b773fb8ea1ff2b",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/SBIN-PO-Admit-Card-2026.html": {
+      "signature": "6f3237efeebdde3c8f00ea7b01e88abeb35cebcf6d065bbff409acede678b47b",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/SSB-Constable-Tradesman-Admit-Card-2026.html": {
+      "signature": "e6faf2e6279f58bd36268174fd3c42c60efc42776daf2ef339fc7dd474907a1e",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/SSB-Constable-Tradesman-PET-PST-Admit-Card-2026.html": {
+      "signature": "6c73a07a1e81c02a00588f7615c806e1640440bcdaefde6154ef21eea7b75a17",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/SSB-Head-Constable-Ministerial-Exam-Date-2026.html": {
+      "signature": "1b4e48fad0312a4680795f8cc15c4a6ce84185e13ce27e287db197269f8a3681",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/SSC-Delhi-Police-Head-Constable-Ministerial-Admit-Card-2025.html": {
+      "signature": "abdac54bf4defd5e6cee1c268e56638b33e246a4cdd48598d28d13ea55ff2e3c",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UKSSSC-Group-C-Driver-Admit-Card-2026.html": {
+      "signature": "deea42babf8a6c10cbbac0e600aef763027525067afb41a0bc62e348bace7286",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UP-Police-Constable-DV-PST-Admit-Card-2026.html": {
+      "signature": "af6eec12b28c531efb35b9275f90238aae1eb6f1d37aca68d603c4e56dde98c2",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UP-Police-Homeguard-DV-PST-Notice-2026.html": {
+      "signature": "22c2e3ea06d3b9766782fc9f11c3c75b67d89d4e7782ea5c506c8345d50b4e21",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPCISB-Co-operative-Banking-Exam-Admit-Card-2026.html": {
+      "signature": "1e0a295aa9500d1001c3fe06e04e13b627618394f05c92d512535610d34d9ef8",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPPSC-LT-Grade-Biology-Main-Exam-Admit-Card-2026.html": {
+      "signature": "aca796d1810c3310dab7348e126c0c1b2a7c22aa1b4f375a1f3d0b739de2b282",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPSC-CAPF-Admit-Card-2026.html": {
+      "signature": "833ee00e0ea706cfbffa47aa32f09b2b9dbf129abb1a0fbe303afd7a9a751a56",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-City-Intimation-2026.html": {
+      "signature": "190cf0d6c1775e0f3c9ea45928665c2ec41f468d18961b2cc727b137199d0c90",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPSSSC-Assistant-Boring-Technician-Mains-Admit-Card-2026.html": {
+      "signature": "da3644f27084899cbc4b81f6f068aa42bb0f5b85b6bd9b5e7c587fa0a7607224",
+      "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPSSSC-Teacher-Cadre-Mains-Exam-Admit-Card-2026.html": {
+      "signature": "fbc1c5700c81526862261a41f1f17d6579f61b93dfdd7b0c703e890b8eea6625",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html": {
+      "signature": "1d19905f90f4c665ddee293521afa089249caf0ffe0f493cf34fb6f0aa454c92",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html": {
+      "signature": "80c4c643f6c51b93872306a739481bb93d513d20b9b82c33ef00e6ab3a47ceab",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html": {
+      "signature": "d06947d176087eb6de267d87134bc2708a8f5eb7d5e5d3b6af34aa43f654eadb",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html": {
+      "signature": "7eae95d401df8f902fa24f167d984abcfd2e12a3e958ce43d9339b1a749bb89d",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1105-UPSC-ISS-Statistics-Answer-Key-2026.html": {
+      "signature": "93569ad3390daca83fca8fb24dcd27b1cfd886cd7124601485aec0652945f188",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html": {
+      "signature": "2702906fe6fb3c3f986eb42a902b58d7df498bfe24e367d6694b827a44ded131",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html": {
+      "signature": "55561d089394e9fb44d46cdb8c6cc76687589db4acc2bffc11ba540ee42d558b",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/125-UPSSSC-Pharmacist-Answer-Key-2026.html": {
+      "signature": "1025f9e167944f223488c4f9a5a0be5d1aa2f4576db99f611070e685c8a56757",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/126-UPSSSC-Various-Post-UP-Pollution-Answer-Key-2026.html": {
+      "signature": "63bbb558580f85d12450a46d5956c88141522efe76649314d8c5753be4e78170",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/127-UPSSSC-BCG-Technician-Answer-Key-2026.html": {
+      "signature": "5a76db4222b7d9afaeb6365f66a7e34cf9d800d7c2aaad68b24a75de27623680",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/13059-SSC-CGL-Tier-2-Final-Answer-Key-2025.html": {
+      "signature": "c030f9546d2938bb667ae50eb09e2fd03d6a0901e1ad1ef05c84f3a7e78a23b2",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html": {
+      "signature": "93822fb28b91c9b61951b756d14dfb72de310db32127cf5441796e0b0fddf13b",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/AFCAT-02-2026-Answer-Key.html": {
+      "signature": "6d978e3e071db24df660020b48562bf5df28a1075239f1f17e60dc93adac129a",
+      "lastmod": "2026-08-11"
+    },
+    "AnswerKey_Details/HTML/AIBE-XXI-Final-Answer-Key-2026.html": {
+      "signature": "fa0ab78cc210e748eebd908a269a685f2b86b93c392c42d77556695b11a7b4cc",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Bihar-BPSC-Stenographer-Final-Answer-Key-2026.html": {
+      "signature": "d6bbc0889017c0fd0bbf7648cb558c1f749c0c447128c467f78c282bf7c3fc32",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/BPSC-Assistant-Environmental-Scientist-Answer-Key-2026.html": {
+      "signature": "c3439d62e3bd7694a555081e8d7afccd33c9d558cbb654d656461c4946a790ec",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/BPSC-Stenographer-Answer-Key-2026.html": {
+      "signature": "496ec54bce16aed88f32237df65f23b540cf106faea6e46390e8fdd374626242",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/BSNL-Senior-Executive-Trainee-SET-Answer-Key-2026.html": {
+      "signature": "52829f4f5871956164f0d77c30aef545258a4d566a4bae0aeaf799d66397261e",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Delhi-High-Court-HJS-Answer-Key-2026.html": {
+      "signature": "033bd15e01e1d8c3bed34ca6e7d7e2f421d6fdc82b482fb3644fd4b47942ce47",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Delhi-Police-Constable-Final-Answer-Key-2025.html": {
+      "signature": "571763baa43d27a88f3e4955c605b3994a9887678d567ff0cbeb022c95f14676",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/MPESB-Hospital-Assistant-Answer-Key-2026.html": {
+      "signature": "bf8102ca54bf131d11be96fcbf71aa4bb30efb1959b244f03d196e6158b620e8",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/NCL-Various-Post-Answer-Key-2026.html": {
+      "signature": "bb829489772ba426ca0bdce0b43fe25c66bffaff6c7513fd90e1b5143a83100d",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Patna-High-Court-Computer-Operator-Answer-Key-2026.html": {
+      "signature": "ba659e5732f80fe2a57744bb9a39628904e72599d086abc7187cd57a14eb049c",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Railway-RRB-Isolated-Categories-Answer-Key-2026.html": {
+      "signature": "9fe506b03540711118491382732eb78c7b507101ab05f08a7bba801fcd2f2556",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Railway-RRB-NTPC-Graduate-Level-CBT-II-Answer-Key-2026.html": {
+      "signature": "55e3065f01b488a3e73e765ce2aa0346b8ff40b525022100a6084e63e3f1bcbc",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/Rajasthan-RSSB-LDC-Jr-Assistant-Answer-Key-2026.html": {
+      "signature": "e42bac818f0ca7f0ee03b5aaf4abe21587ddf785790967cb71eb516561cc785c",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/RPSC-Senior-Teacher-Grade-II-Answer-Key-2026.html": {
+      "signature": "45f8866f2212203739f911ad11efa63d64dbbfa405177502cbde8136839b6a43",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/RRB-ALP-CBT-2-Answer-Key-2026.html": {
+      "signature": "170172953f1029f2996698871b30cb1e7c56587ec41078ec9f04d9782fcc672a",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/RRB-JE-CBT-2-Answer-Key-2026.html": {
+      "signature": "2041196ff807fb2d3bba4d6895b7a7ff2370738f37746578acc7fb73ae4fd4af",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/RSSB-Forester-Answer-Key-2026.html": {
+      "signature": "7032e55b0dbcdf7ee502656a154c16c3284ad216f0d5a51587042ae55e3678b1",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html": {
+      "signature": "0ad775a366b1f51c67ee3cf5bce940ad9d8d71caf12b4bf18a29ffd0fb26aabc",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/SSB-Head-Constable-Ministerial-Answer-Key-2026.html": {
+      "signature": "3f591514a743b8678a80250f46857c5ccc373e6c98fc262992d3627dfc9b4b76",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UGC-NET-June-Answer-Key-2026.html": {
+      "signature": "414a2da9c16ee4771f9f484e0cdbffd685117ea63bd1968342041388caa17cc9",
+      "lastmod": "2026-08-11"
+    },
+    "AnswerKey_Details/HTML/UP-TGT-2022-Answer-Key-2026.html": {
+      "signature": "fddf7e4f800457cbf4b205215482cf6e1b54fef272ba53d5040cee1c0717e633",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html": {
+      "signature": "d0a799ca0663d6d6403190dc6a07cc5788591cd870db5092eacc2f8e3521bb45",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPPSC-Assistant-Town-Planner-Answer-Key-2026.html": {
+      "signature": "2661ec332878a7fba06bf7e58f3386704d8fb66c062992f03b66afd90a769a23",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPSC-CAPF-CPF-Assistant-Commandant-Answer-Key-2026.html": {
+      "signature": "c5d51b550a4b931745548dcfd2ad3fd45ca2b9315a86cb10ac4aa02ed959008f",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPSC-CMS-Answer-Key-2026.html": {
+      "signature": "7e8260fb61dd426d523641b55ace587766aef24262305901a88f77eecb9aa62b",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-Answer-Key-2026.html": {
+      "signature": "ac00139ed98a3ca4220a383b67ccda91b2e6fbe5a3093a93fa04c5ccdbe1fc0d",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPSSSC-Junior-Assistant-Revised-Answer-Key-2026.html": {
+      "signature": "f742c1448fa49031b18673dba22687f27df13347312ae931b420989fcb3291a4",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPSSSC-Junior-Engineer-Civil-Final-Answer-Key-2026.html": {
+      "signature": "509ba87ff71d5222b040cf56b5ee2516814de4762e4bef22a5eafc80f7ba8626",
+      "lastmod": "2026-08-12"
+    },
+    "AnswerKey_Details/HTML/UPSSSC-Technical-Assistant-Answer-Key-2026.html": {
+      "signature": "a2e7d719e6f23edb5a7193fdaa2bc30bcbc872c98ca452345b16763c749c8d8a",
+      "lastmod": "2026-08-11"
+    },
+    "HTML/about-us.html": {
+      "signature": "1fc17036bd3dab92bdd9da48dff7822b5c51024e10aace3d202336a6c5f14482",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/admitcard.html": {
+      "signature": "66927a1c77bde690fd60524a2de77f25e11898537d965328f562642eec39783c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/answer-key.html": {
+      "signature": "c634639115bbbbae6e0c999a5c5a9cb22f78d036ca63eb7b10d9253ee429fab2",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/contact.html": {
+      "signature": "c98e40a5af381799ecac20064bd05b1e0a5c37ad0b5a982a0a7c99f8d486ca85",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/disclaimer.html": {
+      "signature": "6f20e24e4009932ea9aa1f9d50171badcb1cece97716f7b58c492938b1e3e6a1",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/documents.html": {
+      "signature": "b521ad3212470446e8ad995e9efda74293981ef82ffb7830f8cd3767114ed685",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/download-app.html": {
+      "signature": "ce275d658c7a42f2b1d7a2c6703260511957a23536a27ef440d9a5329856e6f9",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/latest-jobs.html": {
+      "signature": "1c8c0219317f4468ab49972e4faf2d64662b6f41afaaca8798a5faa60742fc41",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/privacy-policy.html": {
+      "signature": "2c42c11c9d0602c9692ab396c565c6fb0dc64e41cc182344e2f4cebe96a22f30",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/quiz.html": {
+      "signature": "88f61b4124d36200044073c92f3b2fe99814a92331b8ea86ebd3a09d1f10b7e6",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/rank-predictor.html": {
+      "signature": "bd6042e522c1330f5d93b39b84c7dfa62754733afb557bbbb66a336dfb5d7d2c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/refund-policy.html": {
+      "signature": "19a0612d3b8b0703ff0d936d52a68bcd889232b2d347356aaf37702ed7301be9",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/results.html": {
+      "signature": "0985a27971b9764f451293ab7882b9c279575e255fcf31e2263d2e021b832b00",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub.html": {
+      "signature": "00a87ca9594b9270f6ee6976c10c32e0a7fad875d14b26d5c1217498fcd525f9",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ai-vs-human-usefulness-drawbacks-future-life-students.html": {
+      "signature": "9587380e2d0619ce3645df34614285806ab7714e12967e85a086202eb3f8b9aa",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/best-ssc-cgl-books-2026.html": {
+      "signature": "e56708aed4a0ddcdf0e8051cdabb03875c8edfafaea6847520963c57a1e591b7",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/caste-census-india-current-affairs.html": {
+      "signature": "1a74da3d650cacf05694c2565d9459de44085db020e056d251ea6231909e52c6",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/cjp-jantar-mantar-protest-dharmendra-pradhan-resignation.html": {
+      "signature": "870e738753f76d42fd028f0cfefa32526e43ee3cf6b4afe0765d094cd1ba985c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/coaching-sealed-exampur-up-student-protest-report.html": {
+      "signature": "6baa92cfb3279cc35ff1159523cb81fe0ddfb94f9d74bd171bd03b19653113f0",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/data-science-and-its-future.html": {
+      "signature": "88baaa26606f959d13174181882422dcc2063d87db43adbfc8f62193a1f068b5",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/delhi-police-result-delay-and-exam-malpractice.html": {
+      "signature": "8ee0f499ee2053d40b85043de665c0e7972e95593b5dff0f4d5af25aba97d727",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/delhi-school-fee-regulation-order-2026.html": {
+      "signature": "ef2ebf09a51ce98494c3894a4160e7b638a33571f1915bca4bf3b474e73627b3",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/documents-required-for-government-job-applications-checklist.html": {
+      "signature": "4c638286853a7ceaf9dde2d00a6c23f20d13f58c37b768b7bb08a256fcfc1a88",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/eci-sir-voter-form-online-guide.html": {
+      "signature": "a4a028c969d59f9d0d4d11955a1b0c55ccbbcaa4fc37707233ab6418b5d8d348",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ethanol-blending-e20-fuel-india-vehicle-impact-price-debate.html": {
+      "signature": "531447025c83d5e42f0a88ebfe16685a1ec62c107488643fd89fa73843f4a22e",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/exam-paper-leak-crisis-india-students-trust-reforms.html": {
+      "signature": "f077c7e64dc8b3db679c0aa136433e13434fbba99dc5d1c16df84af674715bfb",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/fifa-world-cup-2026-complete-guide.html": {
+      "signature": "c929bfdee9a367f5d44e47bd3ff5463548c3af9378d45865c936ab28966c379f",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/g7-summit-2026-evian-france-current-affairs.html": {
+      "signature": "e302de36098a8ed377cad60ca2678effd4e9fbb9fffa281ede553c2542a3c98b",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/global-warming-2026-heatwaves-floods-india-students-economy.html": {
+      "signature": "150ee36ed4c21c959330043bf04c92df653fe7f379234dc8027f8df8691db3d2",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/government-exams-2026-complete-calendar-vacancy-eligibility-guide.html": {
+      "signature": "6ff4d374b2401f8f8786b208f19e722d782dbfcb36ea2c0dc15a631c1f703dfc",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/government-job-categories-group-a-b-c-d-explained.html": {
+      "signature": "bfb21f55ff7ef4d2e33cba19504e5ed6195ce5e1d3b6a86e35240fca3de8ec0d",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/government-job-vs-private-job-in-india-2026-comparison.html": {
+      "signature": "34c5cb3507f20b753adfd2151df3ae029f591117bc634f9f06f5d1a6516d9627",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/how-cutoffs-merit-lists-decided-in-government-exams.html": {
+      "signature": "1cc7debf406858f1c71b78692141e6bb684c5f2c0c6d49f82bdd8e5f5571a99d",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/how-to-prepare-government-exams-while-working-full-time-job.html": {
+      "signature": "a2959e788c6b5a3208bd47e89bd44649584b98bea31e8981ce33b8b5573d17bc",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/how-to-read-government-job-notification-pdf-correctly.html": {
+      "signature": "10ce507b485768a5c3e355069cb9b2ac9776d67449f81924b1190c420be6b97e",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/hssc-cet-group-d-2026-form-safe-preparation-plan.html": {
+      "signature": "2a348596fc3049713ed36842bf49a617f8fcd63d3ac9078a164a259a8c049889",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/independence-day-2026-history-significance-gk-guide.html": {
+      "signature": "f3f05e4970a49bd4282b36d2eaa2796db726ad8cc76ac1ae9faf3122757d271f",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/india-china-policy-debate-current-affairs.html": {
+      "signature": "2ee203566b37d5d71c5c2c97dc689d93a3d5c82aff555a1ac9cf4c3187864cdc",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/india-iran-us-conflict-stance-current-affairs.html": {
+      "signature": "2aea5027f33f2458eb467d3c92e2ec350ad3a3278445183d0dfb42f60456ff7d",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/indus-water-treaty-history-india-pakistan-terrorism-operation-sindoor.html": {
+      "signature": "a2828bb01146c48ca82eb00c88b7224c099b3f89da4860335e45bae5f42b6c43",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/israel-iran-war-impact-on-india-students-trade-study.html": {
+      "signature": "766dbe094738d83545a9a4a00975ab1fa0870d83212eeef5e127fd50d1b642f5",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/kanpur-bed-exam-center-mismanagement-report.html": {
+      "signature": "edd57d53ef3826bacbbdce484f0263f8be56e1f1523e08b9ababc0ad1169e37e",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ketan-agarwal-case-student-safety-relationship-red-flags.html": {
+      "signature": "27ea16d798a6bbe2bf38aacaf7053b827ca6b723943d688451fa2a4bda24a0b3",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/khan-sir-faisal-khan-controversy-analysis.html": {
+      "signature": "27a58969f431468554c4bea19ab4e0c4ae07acfc2929cbb3ed5f9cf80459b214",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/kyu-nahi-ho-rahi-padhai-distraction-control.html": {
+      "signature": "0d56a18f54271b6c8e3045d474a070fb0ed3aa2b3e61ada9d29dfeec794b64a4",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/lucknow-coaching-centre-fire-student-safety.html": {
+      "signature": "0c2d897d473a597a87dd32f8f222aae867e8e93cc10c4d19ed3a758b5f1e4638",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/lucknow-eco-garden-student-protest-12-june.html": {
+      "signature": "ecae5fc47933885a40082304e0368a78daa96c835a46a864bb633bf2f758f10e",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/monsoon-in-india-mechanism-crops-economic-impact.html": {
+      "signature": "d543559bab850f013f06c67385f3a5fefbb32b8ddb67d181f90600cff34a5966",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/mpesb-hospital-assistant-rank-predictor.html": {
+      "signature": "956edbc81bb20a1617ca8ec73e52968bd2f0ccf9ed396a2a904757b9a8ca34fd",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ncert-emergency-syllabus-1975-democracy-political-analysis.html": {
+      "signature": "c73680430916ffe90357a4b9c4ca0fd46ecd69ea1bb42232b6d185e9cfa39559",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/neet-pg-seats-2026-state-wise-list-fee-structure.html": {
+      "signature": "cf5dd927d2c6c50701214c9eaaf0aa072240dfd7c1aeef66187cda3fa8ed708c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/neet-ug-2026-result-complete-guide-next-steps.html": {
+      "signature": "fbc7ee1a0c850582618ffdd7930ebbc01e82f55263938cde880cdb115ce7d221",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/neet-ug-re-exam-2026-june-21-answer-key-mismanagement.html": {
+      "signature": "b287ace22a2d71fb20084d621f519e020edfd41ce67210a62c54efc2172c3c98",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/public-examinations-amendment-bill-2026.html": {
+      "signature": "e3af014b76858f0a6cc68ae567be1cf5036194355590526fd374455f9173ed3c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/rakhi-2026-date-muhurat-timings-guide.html": {
+      "signature": "8d56dca998daee17cb6b30a86828ef0aefcf870571eb5dc132d28a009e0231ba",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ram-mandir-donation-fraud-row-fir-sit-transparency-explained.html": {
+      "signature": "c30adaec7d57c436a0b9fd5bed11b1a04340b4f41b5b0f2400e4f41cac4235b5",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/rrb-je-cbt2-2026-rank-predictor.html": {
+      "signature": "65322eac89e226535d66c705902fc7e102e6781f1e4bebe64a63abfc0e5d4eb0",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/rrb-ntpc-graduate-cbt2-rank-predictor.html": {
+      "signature": "951412107e8efdb97b305eade5f93626340540822837a333904b5ac827cc8334",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/rssb-ldc-rank-predictor.html": {
+      "signature": "d67bbe4739fb9ef566a2040d47e8a72e5b25170f8c637b70f19dd4c449b618b2",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/sir-electoral-rolls-revision-current-affairs.html": {
+      "signature": "2dd83f86cf01f3a42fd6e42f0ec15c6b6796647cc04bd6c440447f9288421a5f",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/sonam-wangchuk-hunger-strike-current-affairs-analysis.html": {
+      "signature": "9d7e0818e09eba262a76e683dfdcbc03a89b09fcf5558919dc42d41bdc45c4b1",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ssb-hc-ministerial-rank-predictor.html": {
+      "signature": "b280432b577e90d5cae5b597909ddf9ac7f74910df94fb8aa80cd5efc8cbf7e1",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ssc-cgl-2026-15-minute-section-timing-strategy.html": {
+      "signature": "695919210d21f38e6bf9d987da1feb55389e1a0555a79e8d019693053e8e27bc",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ssc-cgl-2026-exam-date.html": {
+      "signature": "eeb73ec0efec796b77486aa5eae1cd1ec76eeb5c7bae1b9b1518da3905d69ecc",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ssc-chsl-2025-option-cum-preference-choice-filling-guide.html": {
+      "signature": "bf10170c8e8d33e9e8e0fb15305c980d42906db21d767319710910b601b0dfdb",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/ssc-gd-exam-malpractice-ground-report.html": {
+      "signature": "df37abd4f1e99a8e5f7fcba86323a15ae39d8d61735f7df1e23f9c5e46ecc54d",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/telegram-ban-in-india-paper-leak-social-media-truth.html": {
+      "signature": "b3d15a52b1b8ef8dfa573bf365aa77af58a6d3f29005b1afd462f005dc31ed3b",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/top-5-side-hustles-college-students-india-2026.html": {
+      "signature": "aa2313a87f963bcdb861dca5ea0436ddff14517c8ef252cd938c98d96d21a40e",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/top-laptops-tablets-for-students-2026.html": {
+      "signature": "28d1715a0da954be785bbb1ed5360f4be9b00896309230ea3174b0cff4812bdb",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/up-home-guard-2026-marks-rank-physical-document-guide.html": {
+      "signature": "bab465dd9dfbde9fbb213df0926848d5e9f47dbf87170a83d72f8c1c93411d67",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/up-lekhpal-exam-leak-systemic-negligence.html": {
+      "signature": "1e4681014ab240455f860e47031d2a74cd16988db82c199f006435038d8c199a",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/up-police-constable-answer-key-2026-marks-vs-selection-chance.html": {
+      "signature": "fb926691d95114149ec2ed9ded9900dacb393bcd807e56aecaaf4c6abcdd644c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/up-police-constable-last-10-days-exam-strategy.html": {
+      "signature": "a28243b3de9ba28c5614c5d9defd70b2cd839e0f4e95227cbf31c466c70d0937",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/upi-how-it-works-and-why-businesses-use-it.html": {
+      "signature": "f433e0813238f90be7c4080e563808cef3480f20a77be51cf838d0501acd6de5",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/uppsc-assistant-town-planner-2026-rank-predictor.html": {
+      "signature": "df0571c0725d9225b9b454ea076df6a98836698d89a03d55c9d10b92b4069b3e",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/uptet-2026-city-slip-admit-card-travel-checklist.html": {
+      "signature": "035cc684f894c47c8e0d1214724e95ca1fdc49013dce37f0508f1808d12f5f1a",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/what-is-govjobupdates-complete-guide.html": {
+      "signature": "4a2c0e630f5f5acda3331161688dcb9bff56d77ea34de7e0e26e93765c3faf06",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/what-is-share-market-guide-top-world-indices-india-system.html": {
+      "signature": "8662d488146a543805232d34a9a957279c1f64d3ade015141c14f0e3a26a82b0",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/student-hub/youtube-revolutionised-study-students-teachers-jio-internet-india.html": {
+      "signature": "369a4f5c1d6949b3ce89e675661d812b7c2f32f299e5f1c0a033aa4fea7ef42c",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/terms.html": {
+      "signature": "186e048c42fb19efb6bd5b8e8cbaa9235f928fea1a5290d88dd328dd2cb0cfdc",
+      "lastmod": "2026-08-12"
+    },
+    "HTML/up-certificate-services.html": {
+      "signature": "ae4eb66d389d1aa935389d8661e1c69c3c9d756b279a9d43ef1df51b855c1f01",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html": {
+      "signature": "8b537b3c5b1d496842d4dd9fd3e6a1ba7be4f02603f491ecf833d72aa33e6ee6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html": {
+      "signature": "1b5e047ecec10880eecd5c629bac54266ad23eca8e405448e52de481d215e0ec",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1002-Railway-RRB-Technician-2026.html": {
+      "signature": "d3d0edcedf8ff2ebade7a8c05e413f4b2577e047c0a1908468d6e8091c392943",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html": {
+      "signature": "9e6acbc1356c8e5f8d74500f1a6c190af9a9acd797d6215f780daf94312cf3e5",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html": {
+      "signature": "6cb5a8ecd073a150da4a5c62cf4d360c43f6cd3fda3d7466d31c9367f6fbfec7",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1005-IB-ACIO-Executive-2026.html": {
+      "signature": "832ba42ac15a106d55bfaedc85b807eb2ad56081a632997d5f617dc4d880b976",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1006-SSC-JHT-Paper-II-2026.html": {
+      "signature": "934efda695dd009fd5ce49a3b836ddfe25d34f4ec2026205da2c742eb841dce9",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/1007-Rajasthan-REET-Upper-Primary-Teacher-2026.html": {
+      "signature": "3598365138d0636cb08dbedb01ac225bf07ab0da75929456354106f3b55df818",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html": {
+      "signature": "9294dce43ae0d77594364a60548231061071f22fce6dbf71477d7a1b0cd01287",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-BPSSC-Bihar-Home-Guard-Company-Commander-2026.html": {
+      "signature": "0a9ee1a085e5edd9deba174b5a591818e83e7bbe94ea3b2df4eb50d563a6677a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-CGPSC-ADLPO-Recruitment-2026.html": {
+      "signature": "7c8083afba6d4d743a7e1f86e6a53f96995fbf7bbef08b5433f3a5dc3dc25e24",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-CGPSC-Subedar-SI-Platoon-Commander-Prelims-Exam-Date-2026.html": {
+      "signature": "8ee46557b3c9fe1733b054b0ccc33e84a43c56221a6090ee3535f11265c360c9",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-HSSC-CET-Group-D-2026.html": {
+      "signature": "85ae22d282cbdbdcd801eeb4ce1c68e9378c67c564dcbb4701969e53f089f56c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-IAF-Airmen-Medical-Assistant-2026.html": {
+      "signature": "c6d6ff2524da4b2f4eb5d838b58ec2844c0c0d8d0de4ed3b639fb82562ec4899",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-MPESB-Agriculture-Extension-Officer-2026.html": {
+      "signature": "d1b79240ed643dd0a867fe1015d8dad39da6729caaae4fe2d9b7c49f6bfc9183",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-MPESB-Forest-Guard-Jail-Prahari-2026.html": {
+      "signature": "8f315d7fa0c72ad41142e5c63b235df3cd74b791b105bb81406245082fa407e7",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-NAeL-Various-Posts-Recruitment-2026.html": {
+      "signature": "bad6fd5424906972f12c7ab038192fe7c013249acd06e8e79e7ae78525d61850",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-NEEPCO-Executive-FTB-Recruitment-2026.html": {
+      "signature": "d36c6cced62be33ee7fe811e86677fae79c51f3bea8f0292cca914c23e1025b1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html": {
+      "signature": "9527ceeee0f8a0675f38a16f8a529ac2a0b166e7071ffc59c2f2363d63a75e74",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-SECR-Nagpur-Railway-Apprentice-2026.html": {
+      "signature": "ace218fdb784dc8ffe628a28045e2b6376b58a2888edae5e885552692b1290a0",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-SSC-Combined-Hindi-Translators-2026.html": {
+      "signature": "0d4e6319c5914c69982cdaa7a93e2748d18c8c93c89a5f11bcfaaeb535106fce",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-SSC-Phase-XIV-Selection-Posts-2026.html": {
+      "signature": "04ea316cdd2fa520522d843136f5abe133ca64766aab2bad26c38e5e3ca3f46a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-SSC-Stenographer-Grade-C-and-D-2026.html": {
+      "signature": "1f5f34323e465d30e8293072916b98b7be475669705e5c7a6313a501c66f0dd6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-UPPSC-PCS-Recruitment-2026.html": {
+      "signature": "87a18aae9e1e4085b662aa4c15495727ab9ef4ee85c6ece7f801a66298577123",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1009-UPSSSC-Vidhan-Bhawan-Rakshak-Fire-Guard-2026.html": {
+      "signature": "7d25058e42a5c1cb1b54c166cde62a5162ba28e89f6539464b398107ef0d7c32",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-AAICLAS-Assistant-Security-2026.html": {
+      "signature": "cccd84ebb6a3bc10cc55ec09183fcd95114e7d4dea1628085db77ca3e1172c16",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-BEML-Operator-Tenure-Basis-Recruitment-2026.html": {
+      "signature": "189d9eb1b257c56df37908cd4de80508dcebb81d584dccd5c7f0d3e81ab1e886",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-ICSIL-Various-Posts-Panel-2026.html": {
+      "signature": "68f6eec6d01e01f86e69ab361d4307a5baf9ccd534a573851e2afe63c051e306",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-Indian-Navy-SSC-Officer-Jun-2027.html": {
+      "signature": "3905d7e5c08a850e320822724d85a36905865098b0206f30ca3808a30b7c805d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-ISRO-ISTRAC-Various-Posts-Recruitment-2026.html": {
+      "signature": "4afc0c8dd6db27914c0419a0467e7211c94e8af3765fc2d29760707e946ee893",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-MPESB-Hospital-Assistant-2026.html": {
+      "signature": "cdd7b88832626eab434e2c6f343f0d87518d9fa598fdaf22dd0c4949db057db8",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html": {
+      "signature": "86e067a391913eb7a36a622dc013350fb9433032b51633efc2e6b5cf3cca2e1d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1010-UP-Parivahan-Outsourcing-Driver-Recruitment-2026.html": {
+      "signature": "6756f07fcd1888a13e709af6961af68a8fa295299ec4b4b8c49b08cf8a99e679",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1011-Central-Bank-Apprentice-Recruitment-2026.html": {
+      "signature": "bfdf357629ce6585dacd05ac65179e247f64d2e96a3b592a3e0eddb2be52a734",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1011-Delhi-Higher-Judicial-Service-2026.html": {
+      "signature": "34ff21c82a4b37a943965378914514cb74b381b29559a329666f4f9ad4f4bd97",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1011-MPESB-Nursing-Officer-Sister-Tutor-2026.html": {
+      "signature": "8c7b656b660c6f600fbc27e68501e63a031bb2fad4e30f4009cc1e3e3b56f560",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1012-JNU-Non-Teaching-Posts-2026.html": {
+      "signature": "d759fffa86eb69578027149d3738b12e401f40d00f75abbb5bfebd7dedf908a8",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html": {
+      "signature": "543de1bf5e681628761a02b672c988b5c5c86c816b01d511d72a484eca0cd9df",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1013-CRPF-Constable-Tradesman-Pioneer-2026.html": {
+      "signature": "0cbeccc5876178d63f66e74be9eafda94825b10558a70c5d0b4d6f0248c67ba5",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1013-NBEMS-Various-Posts-Recruitment-2026.html": {
+      "signature": "879ad09ee4a52f769752996e29d991ac78aef92572fc73953292a62b8f4d0e3f",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1013-NIACL-Apprentice-2026.html": {
+      "signature": "b23729baa1a4087efad0b71ad0553a12ef56c5e0a2d0d1a4cefee70adf10f591",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1014-CERSAI-Regular-Employees-Recruitment-2026.html": {
+      "signature": "3633ee42e7a70c5179f9d692bc9b78a42a9e4e27cdba2577be4cb461b2349e0b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1014-NPCIL-Executive-Trainee-2026.html": {
+      "signature": "538c15725c03e9c39a10fa54e8f01ccddfe27629c491de05776974cef472ea18",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1015-Patna-High-Court-Technical-Assistant-2026.html": {
+      "signature": "0074cf0c1bd8d3430dc1b77dbbd7282064b7024670fb3d41a5fbbc4925f4b7ea",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html": {
+      "signature": "04340e8f4a767d68b9c16d8b3bdf1ebff914bf5934c8fd24e5d8603f0b6f883b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1016-BPSC-33rd-Bihar-Judicial-Service-2026.html": {
+      "signature": "3d5b4a81da8c7059a8f06a03dbf619acaea569d97cec3ef38436ead6222bb8d2",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1016-HPPSC-Assistant-Professor-College-Cadre-2026.html": {
+      "signature": "70dd5899df50e9c7b96d2f48fe664ea5d85e352d248ea2e93d1f46ded6cf4a26",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1020-IOCL-Mathura-Refinery-Apprentice-2026.html": {
+      "signature": "cb4b0f7c53c1c30cf805ef749940c63c7fb49003552908bd3cf1a4b31103f8d1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1021-RRB-Technician-CEN-02-2026.html": {
+      "signature": "8a7e2572d92c70ccbc7a09f11662be98c50aed2f34cbc489663a23596b7ce5a5",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html": {
+      "signature": "a83026a6c650261bc1cb67b41068d9e35322c3e9c83957d8437a63ddeb4e888f",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1104-SSC-GD-Constable-2026.html": {
+      "signature": "f92e57f87de4caf8680f07936a6fae5c1f45c44c9d44af6cfb9ba2a9c081dcbb",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1201-Bihar-BEd-CET-2026.html": {
+      "signature": "cd30303040820307052762752e2b500afd379b2c88862946b7a7412be56ab584",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1202-UPTET-2026.html": {
+      "signature": "86e3cd5b77dfdf6041bc499bf70a07bd3fc7690fd3a4c7afb88841127f6c77c1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1203-Union-Bank-Apprentice-2026.html": {
+      "signature": "5867d1ec665ca759a5edcd5a0c8289d6c94facd2ba9fd6f42d51a34dda0920d1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1204-BPSSC-Adhinayak-Anudeshak-2026.html": {
+      "signature": "e192d53a32dbd8546500caf9ffc2efcc87ae98f782cf761ab0bec9683ea5ce43",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1205-LIC-HFL-Junior-Assistant-2026.html": {
+      "signature": "57e296f789720983d9ad499fb19c56a203cf2d40de8fa6c19865ec93f8c1aefc",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1206-BCECEB-Senior-Resident-Tutor-2026.html": {
+      "signature": "e3cafadb69b4d07f63cc6544818fab3bc2b59291a9711a439c7b77590580f648",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1207-UP-Cooperative-Banking-Technical-Services-2026.html": {
+      "signature": "f316ef4f245002f10941dbbf941876e45d304a6f5db2d65d7cde445cc8e378d0",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1208-UPSSSC-PET-Based-Main-Exam-2026.html": {
+      "signature": "de35822203d5279bebcf4724b632ae19e8cb77e3d973e59d10f4b2d80d96bd2e",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1209-MPPSC-ADPO-2026.html": {
+      "signature": "780e4ea3d99c8c2897c12454044891fb3e20b8c85d6cc8ffbc49cec20111fec6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1210-UPESSC-Aided-School-Teacher-2025.html": {
+      "signature": "c567c2d50d5831cc0ee66521e874d6eaf56a24fd1bd0650d67af6da98ce786eb",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/1211-RBI-Officer-Grade-B-2026.html": {
+      "signature": "69b1dc4111700ed509d7c77ba9a8f02daa74987e645001b24f01c3bc3073889f",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2032-UPSC-IAS-IFS.html": {
+      "signature": "4cdfabce743df1a264b2c24ca36205494ec32fb9b233dfd34da0a30be301c12c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2033-UP-Police_Constable-2026.html": {
+      "signature": "d6710c2603cb6cc834deb5bdf4bd1e2c950bc5a0dacc0904548f60a66ee2e7a8",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html": {
+      "signature": "cc509ff6dc0c0825296e66c9ee508185a8ae4591360efb66a9e809c5d47dbd6b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html": {
+      "signature": "3d91b8472ecc90c9fb4786beb08fdb11fce770faf13a2310868d3488c5e2d15a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html": {
+      "signature": "829e439a1ba450507443fe87960c61456a43bc6d5a4f477b8b502931916a0be7",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html": {
+      "signature": "81dd14656eca3d34f1e98207460e4aa983f5c97e81d8e2d08dee2ef593abf9c9",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/221613-UPSRLM-District-Block-Recruitment-2026.html": {
+      "signature": "5d44f117b4d7aee406cdb46d3574d8610d1da5c2ec3a0ebfb1e0c949d8fd28ca",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2386-Rajasthan RSSB Teaching Associate Online Form 2026.html": {
+      "signature": "8cc4691ad2ea824c3ca416b05e14d8e93867a56689671f031e77a098156f539d",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/2388-Railway-RRB-ALP-Online-Form-2026.html": {
+      "signature": "578131b8ffb4c45f4cbc077fa7a5310c8a73db18e40f44b4a38ede7e423679d6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html": {
+      "signature": "5c2c4baa9ce935a3a3f56c97d377c18057299bc8903049e55157209b5e3759e2",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2411-SSB-Constable-Recruitment-2026.html": {
+      "signature": "f21b2914408055a0fcc6888effe821f255cce8999c6b68f800e4b7ad0cbe1b7b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2412-UPSSSC-ASO-ARO-Recruitment-2026.html": {
+      "signature": "cdbbc9ec8d294c2adb34862bf56c1aecb9a20c570576c09ab6d96658c4d32595",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2414-UPSSSC-Forest-Guard-2026.html": {
+      "signature": "963b690098714357357e920311836bebd11b2db30b4fed076be7032aeda19f78",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html": {
+      "signature": "32da2899f25abd2c36ab323cc2835efcec458353b99bb8eef8d84da3857bd76c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html": {
+      "signature": "bfbd6eeb6dd695767912755bc0a5d8ef69c9f788553fe85cf02d570581a45b6d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html": {
+      "signature": "2a142a5341a56c258fc520ec929045f557fd46f410ccc7faa6ad9ebe53d14d17",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026.html": {
+      "signature": "a695386f6e56387ed794ae7ca2ae18ce4ddaf854d0723c51ac806a7f71ea95ef",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2419-UPSC-NDA-II-2026.html": {
+      "signature": "19274109c15738e907eefc2714b9adb7141ad24b8cbe739a28f9e58aae950ad7",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2420-UPSC-CDS-II-2026.html": {
+      "signature": "08513a41075eca510fa1b21437f02dbedf2f4097c323c5463e59a14c8de42252",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2421-SSC-CGL-2026.html": {
+      "signature": "97d7088bcdb94e3b5c83dae5922ff8c359469f072c5cecf83d8466f58dd3cb06",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2422-Punjab-and-Sind-Bank-Apprentice-2026.html": {
+      "signature": "9922ade24d1a83e95e8cfdd900a5e8d74a53c00fa21b6bf50b3f3417189f5b4a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2423-RPSC-School-Lecturer-Special-Education-2026.html": {
+      "signature": "537dd4c57911027d8dfd5576f9e0a7df2932438d8c300e199199d86e31db0a53",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html": {
+      "signature": "aaa10b0f47df1ad5b1c36cd8a89ab333d38ec0cf0399beeacab8317caad7e913",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html": {
+      "signature": "008eccb10b8907fe6b101bbc0c0b217b1f2935a12d84233c20b2bffac84b7b8c",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html": {
+      "signature": "03cc0086558dfc2f2a5cc903fddfce0fbf4c0adecd56443a683be6db5f4302ec",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2427-Punjab-Haryana-High-Court-Clerk-2026.html": {
+      "signature": "0e81439220a899c1c8e5f58570ea6388e9261dbc5aabeb59c53ef03dc9636496",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2427-SSSC-Haryana-Court-Clerk-2026.html": {
+      "signature": "d8cdb9b9e9f5afe86de08d4fb792ebc947bf399f28495897ceb7b5ffc34828bb",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html": {
+      "signature": "a237b0467238985597b3e0bd6ce5e90d4d2d1f4c5fbbecc657ac4952b57910c8",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html": {
+      "signature": "9ded9463b092cdd7e1376ffb0ab14f96ee9483f8282705f9b281f17c1ed2704b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html": {
+      "signature": "99e1e9e0720c223b225fccbe10aa34eb595c788c94000b1e6120c835f44c47fe",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html": {
+      "signature": "e251c8fac0d0e7c132dc02931170bd9cee4d8e67f3402c5ac7ea47e14d14a73c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html": {
+      "signature": "af9ad5ac0bb7bbe0ec6b93ee3c00a46f88eb5c0ea68a5e1e9a95b29663cba97f",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2434-upsssc-lower-pcs-2026.html": {
+      "signature": "1c0fe26cef3fee1e2e3adab1b6447185b50b15884b05af7a96b55dfc124f70f7",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2435-BPSC-72nd-Pre-2026-1189.html": {
+      "signature": "3a50c9455779df630849eff9797683e877110c359869b879dcb9bff6f0ac4d00",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2436-BSNL-Junior-Telecom-Officer-JTO-Recruitment-2026.html": {
+      "signature": "490b0321e5360e1c3cc4c6fd11c6825071bf135eed64c61a6a907da6d39988a7",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2436-JSSC-CGL-Technician-2026.html": {
+      "signature": "84484db70101823f9a3cd2e4d6e3ac57fcec7231633577c1af475bd1127561cf",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2437-Allahabad-High-Court-Research-Associate-2026.html": {
+      "signature": "c9f8d57a709a80d0147fab57cd536227a1a8386a839d88909d2f746a673fa233",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html": {
+      "signature": "e1d167860f12bc963dea96fa7d01263882af00099559690b85e4b60a44fbb453",
+      "lastmod": "2026-08-13"
+    },
+    "Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html": {
+      "signature": "bc85e91e6818a37ffc2e2bc79199375cba11e1d9c6b55b870bd4a0777af02af2",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2441-UKSSSC-AAO-2026.html": {
+      "signature": "b8aedb2186b0afccdf420171c8e912d054f4999fdd44710587cd7662e730d562",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html": {
+      "signature": "3cf3fbdd0f4184a7e1111e48e270be9d0efd5a770e12fc82d4636642f70b9b70",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2443-CISF-Para-Medical-Staff-2026.html": {
+      "signature": "14cf9a80db93498958df5993048a22e02ba0d0585f423a8f1ccb366edd28828a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2443-SSC-JSA-LDC-2026.html": {
+      "signature": "0267b9aafd66113f8bfcb93abfd5cfbccb3ac3c526dc9880ffc20e60c43ed3bd",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2444-Hindustan-Copper-Executive-2026.html": {
+      "signature": "c191bc5ba68d533ff038df8c5f58e7ec49983109ace8c7bbc3afb8c077ff565f",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2445-Coal-India-MT-Mining-2026.html": {
+      "signature": "ddf35f7dcc3979da957f5275d881f321268e364c6cb59eb39d9124c6c0c3d878",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2446-Karnataka-Police-Civil-Constable-2026.html": {
+      "signature": "def5c5282cb60994d94cefd9243712dbd48a05345a4dfab65ab068bea5aeebcc",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2447-KSP-Civil-Police-Constable-2026.html": {
+      "signature": "6085a4d747efebea97bf048e55cdb02a88ea78ec2c533a3f2732509a125e56ea",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2448-AIIMS-CRE-5-Recruitment-2026.html": {
+      "signature": "814ca7301adec200c71f942faa90ff6a3a6bd1ed15253c3439450a7b01087301",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/2449-BPSSC-Bihar-Police-ASI-Technical-2026.html": {
+      "signature": "b12df86e8bd71ba66470acf18994f887de64773a46a4d7b6b56e4cc9d33b4a56",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/999-DPC-execuitive-2026.html": {
+      "signature": "360770d86b16c1e5139279474be3c2b4372a615b35487a242fd3df29dac3bbbf",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/AAI-Manager-Junior-Executive-2026.html": {
+      "signature": "4081caddd6945f0daaf71a457f6cb9320bcabf4aa0071239f68949822256990d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/AIIMS-NORCET-11th-Nursing-Officer-2026.html": {
+      "signature": "7103b5aa976aeeb61666a10ccd12dd6199ace750038c60ea9dc47061abfb21ca",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/BOB-Credit-Officers-Recruitment-2026.html": {
+      "signature": "7a9cb7c5f38a01e820d107f9a162e21762c03109eb54ef14ceb3116dfacd807c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/BOB-SO-Various-Post-2026.html": {
+      "signature": "3ff0f1922a2e50e37697346629ec9fdfedf4517b1e3f46187b3c771873f92519",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/BPSSC-Bihar-Forest-Range-Officer-FRO-2026.html": {
+      "signature": "9de2b61e67375e99d22e129fc3686f4f4535ef8c6483049f99450260a67beb8c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/BPSSC-Bihar-Police-SI-2026.html": {
+      "signature": "ad4effc5a7f5c26f1ae1cba1f9fafe12b356cde57f930abdec7303aeda6618ab",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/BSIP-Scientist-B-2026.html": {
+      "signature": "544295fc712a9c3824459ca9b3a0a9281b171438ddf77cedc4b926296dc75c1c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/BSUSC-Bihar-Contractual-Faculty-Recruitment-2026.html": {
+      "signature": "4d4094b7d48246b514ce8530fc37307fcfd1f33f5db3380909395c7bbf2dba2b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/CCI-Various-Posts-Recruitment-2026.html": {
+      "signature": "3fd47a502a11ba181b99ebd188c999af9841c8bf64fb1fc5bed9b77ba20dd7c4",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/CGPSC-ADPO-Recruitment-2026.html": {
+      "signature": "4bd028df2ed1435c29f711a39a581eb2be8c0db7f15e4180dc484f551c68ca8a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/CHC-Various-Post-Recruitment-2026.html": {
+      "signature": "5b2ef5b346650623a88990c5f0648574f3190247bfa2af8318a4596cac0d8bf4",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/DCB-AE-and-JE-Recruitment-2026.html": {
+      "signature": "593ab9e4250b501b759c17ae504abeba841b60bcd6611f6c6fb7a5d96f781edc",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/GIMS-Staff-Nurse-2026.html": {
+      "signature": "440b3c93ffbab710092ffaf4ad65fea1272a5d63c04f5231fa4c50c2884211bb",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/HARTRON-Junior-Programmer-2026.html": {
+      "signature": "ab54102f213ba255ebc787148dce737ca1be3930c2fce2ade4c39e2ef9520c73",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/HP-Police-Constable-2026.html": {
+      "signature": "b1ae70cf82d04741141b4544c57593303e7bb91e13fdfba24963dc6b738d1da2",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/HPCL-Graduate-Apprentice-2026.html": {
+      "signature": "b5445ee958413ea93c12cf83dc3df9f8689670cf7dadd44deecbaf9e4d62dd5d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IAF-Agniveer-Vayu-Musician-2026.html": {
+      "signature": "825a2bf4b5974f49a832a932f99813cb85b8a273d6f90015054ae9ad767c5ebe",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IAF-Agniveervayu-02-2027.html": {
+      "signature": "2be140e56cfa6839fb80c9eb7a8750d4d76e4ae0965888b0cc8b229f0159631b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IBPS-Clerk-XVI-2026.html": {
+      "signature": "759cd60818aee87f1187a1e1d5d662346ebbaba8eff08c41c5357182a531b682",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IBPS-PO-MT-XVI-Recruitment-2026.html": {
+      "signature": "e710a2162261492e9abb8287262325f88492aa9235ce4d86031ec8a8b0d688ef",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IBPS-SO-Specialist-Officers-XVI-2026.html": {
+      "signature": "f98538b0ee15e5f5d70a164f9578b197da38866d59485366d829180188561ff3",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/ICERT-Scientist-B-2026.html": {
+      "signature": "9548c85ad9a59f64b73521290a812d0615631e6011e154cd1d632ae58a3985ec",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/ICF-Apprentices-Recruitment-2026.html": {
+      "signature": "fe0b93e661d864b47caac8e2d76661108ad4de4788b484814b9534f7a3f90a94",
+      "lastmod": "2026-08-11"
+    },
+    "Job_Details/HTML/ICSI-Executive-Assistant-2026.html": {
+      "signature": "67f54d829a267cb6882117ecce8251383a1e9e4e35ff5b710f5ed5a4104ad15f",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IGCAR-Apprentice-Recruitment-2026.html": {
+      "signature": "61eca790adce6b722ce0c0e61539a77b7f10015758df31d68c5acb121102af07",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/Income-Tax-Canteen-Attendant-2026.html": {
+      "signature": "f04ea79953a8722d8b1787cfa22b3bf688b100172c8472e2513841b5eed67f77",
+      "lastmod": "2026-08-11"
+    },
+    "Job_Details/HTML/IOB-Apprentice-Recruitment-2026.html": {
+      "signature": "f8795a49a3dbf3f91ece04e0e5c5aefb38200bc2245a9aad50f5a9536dfcbc50",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IOB-Local-Bank-Officer-2026.html": {
+      "signature": "a6a44a2fa0da67dd547171039d85b41ca2ca96b725fbf3472cab0a0bfe2b450b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IOCL-Marketing-NR-Apprentices-2026.html": {
+      "signature": "253822d6d44ba966bfe204bd14e33ae46694b91ae24085bf350978c8ba727bce",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/IOCL-Panipat-Refinery-Apprentices-2026.html": {
+      "signature": "e6fa41271e23a5f7815a9eaeb14aee108c673f2d54f667d68a90d51df445e4f1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/ISRO-ICRB-Scientist-Engineer-2026.html": {
+      "signature": "e08a74e07522c2319fd5bd9ad553c057a5334f2090da39562f790078d33e9e90",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/ISRO-ICRB-Various-Post-Recruitment-2026.html": {
+      "signature": "f77dc953bf4a29f7ed246944e7f989932e9265a82da915e1c8e4df41179f2046",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/JKSSB-Disaster-Management-Relief-2026.html": {
+      "signature": "20bd4c8b3f303c2d8a506322e753024d22872c48587d22ca1244831f718715ae",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/JKSSB-PWD-Recruitment-2026.html": {
+      "signature": "6d77f1983a01cf8efc6463fd96f4458c26099af3e394b1f76e2bd1364c656233",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/JKSSB-Various-Post-2026.html": {
+      "signature": "0f7328b7c91876b6d2aded397ae9c27764619615804520dd33df739ad82fedfc",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/JSSC-JILCCE-Inter-Level-2026.html": {
+      "signature": "00560f0bc9b8379e969941c6471b0e8e28665b834b792b47f01c3533cd592333",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/MPESB-Group-2-Sub-Group-4-2026.html": {
+      "signature": "150339eb87c217bb5a1412793512dc979cdd2668498ee7840b9022aa20d36a9d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/MPHC-Senior-Computer-Programmer-Assistant-2026.html": {
+      "signature": "a0c5f9777b02d0c3b8d6a191d3e3107716fd13f1e375da6a169cebb7213cc533",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/MPPSC-ADPO-2026.html": {
+      "signature": "c886c223acd72d3897e7d30af185a942f34019ce69166bcdb77a69e683c7a065",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/NCL-Mining-Sirdar-Surveyor-2026.html": {
+      "signature": "a0ff097041ce0dcf8fdc163bb44cce503a5bb041cefbaef3fe0b7a4448b43ec6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/NICL-Assistant-2026.html": {
+      "signature": "8db648e76fb2b69e0e31e2567d127005954f94a24ba04531cdd7597c2365ac90",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/NMDC-Steel-Executive-Trainee-2026.html": {
+      "signature": "5501cb14a807de6db926200f26d2dd894d83e2b3f103385348d3aaad0cf520d1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/ONGC-Graduate-Trainee-Recruitment-2026.html": {
+      "signature": "6aa9e54a50b15c87bb0ad78cdd3b802382b4b2c251f630947974dd688affceee",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/Patna-High-Court-Group-C-Assistant-2026.html": {
+      "signature": "ff993a0cbca32329b9ba5d8c83462fb65f4e11ae2a2eb0c80e49f61cb9dafb45",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/PNB-Local-Bank-Officer-LBO-2026.html": {
+      "signature": "95892f1962385dd202f52a151aba48d0a377018f8348618e8f779daa3a4de5ba",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/PSPCL-Assistant-Lineman-ALM-2026.html": {
+      "signature": "3b4c88620cdb0f8edeeb0f16660626cdbfff0058b49d372270e434f198929786",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/PSPCL-JE-Electrical-Recruitment-2026.html": {
+      "signature": "5c4dcd9b0a08e215e24b9bbb2b165cd271c5a0aac4636ce192c250429859a00a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/Railway-NFR-Apprentice-2026.html": {
+      "signature": "0354bb6790037ea1c7c249115c6e43ce746025c29804ae2ae03216c07e3bf82b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/Rajasthan-High-Court-Stenographer-2026.html": {
+      "signature": "e9b6589322e067cab57c07b05acd188f2d2589e16e67cd35072000458e3153c1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RCF-Kapurthala-Apprentices-2026.html": {
+      "signature": "7ffd6cfdad5e0e7401da9f5f5f4aaf3c576e8d40927a996908aa879be0636ed8",
+      "lastmod": "2026-08-11"
+    },
+    "Job_Details/HTML/RCFL-Management-Trainee-2026.html": {
+      "signature": "e770f35d4e97cc3ba98aef61acb7dcd9cf8e0dab884d2da5cf71dfbb6d68dbce",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RITES-Assistant-Manager-Mechanical-2026.html": {
+      "signature": "9577d58c6aaa94ac24ade9efb12c83fa78b1e44de50af2f2ec4605822dfc4338",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RPSC-Physiotherapist-2026.html": {
+      "signature": "3f5b3625cde4201708a5a2af7e1609700e7794d04883c25e30d38ffa2ecb28bf",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RRB-JE-Junior-Engineer-2026.html": {
+      "signature": "43ffce48c12847e0fefd7f9d8ea59a1bd53e3bb35d2e21f042d260530f9cc80d",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RRB-Railway-Section-Controller-2026.html": {
+      "signature": "38dc58b0add7edaba23364a16b2120ced5e6544802704348563f3a8f11ab2aca",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RRC-Prayagraj-Apprentices-2026.html": {
+      "signature": "e1e3ff8fb60b2ff5fb88bbb04e648e62f5e23f215ca7a383d696bb1cd557330c",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/RSSB-CET-Graduate-Level-2026.html": {
+      "signature": "de8438cfdaf3fc2df0f6cb0295dbb0cb8f928a21eb4154875ba16cd0e2e27534",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/SAIL-Rourkela-Apprentice-2026.html": {
+      "signature": "9c520a6a304ae89b79bc37b3486742b437ee9c2b2ad5a5b814d20d7a5722e8d2",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/SBI-Clerk-Recruitment-2026.html": {
+      "signature": "e5403887762be7031f299583322bd224dfb755e05555752273b708a4727adad3",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/SBI-Junior-Associates-Clerk-2026.html": {
+      "signature": "f6c5e998b5cf68ac39a2fcb0bf7b8b5cd3d04dc4f23af871aa4c36524af00bfb",
+      "lastmod": "2026-08-11"
+    },
+    "Job_Details/HTML/SIB-Probationary-Officer-CA-2026.html": {
+      "signature": "76907f4867627de6888c935e4a9ad0ced2bd32531e1ecd214f9083ece4b8cb9e",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/SJVN-Various-Post-Recruitment-2026.html": {
+      "signature": "03e8139e1a1581777934d572a12229e738de70a3e8a6638fb6bee49653e778fc",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/SKAU-Non-Teaching-2026.html": {
+      "signature": "914dee145dd33d3486f1e418daa58d815e3c96fac673195ab1c32102f618a91b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/SPMCIL-Assistant-Manager-2026.html": {
+      "signature": "87636bceb58c36740c9fdc229a6660b43602f7f1a37e4e94181bc4c2151c483a",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UKSSSC-Assistant-Accountant-2026.html": {
+      "signature": "3462e80f8140ca1bd8ffd92c07e2d387d34865a405c7f63eeea36604ac242464",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/Union-Bank-SO-Recruitment-2026.html": {
+      "signature": "df15f4cc565e64e9d1ce4847e208bd86f3f73152e8174869d9f08e2d5af1ac14",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UP-Anganwadi-Worker-Helper-Recruitment-2026.html": {
+      "signature": "65c9e3588c81f20a18c6b08972bdefd4f0910208fb0ab9c4ceca36f683b20890",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UP-Dairy-Development-DEO-MIS-Manager-2026.html": {
+      "signature": "2c8dd78ec724b0c657c96d7771a4acb0123266e152f55e9b046962087409fe51",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UP-Election-Commission-Computer-Assistant-2026.html": {
+      "signature": "20a876165987afcbd936b549c396c63b9b928f90b7b9e6563227640e36cae169",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UP-Ground-Water-Department-MTS-2026.html": {
+      "signature": "b4c394895b1aa3d43a225402331bcb0269133676033d1fe76e4424f7fdaba2b6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UP-Rojgar-Sangam-PHP-Developer-2026.html": {
+      "signature": "98c53d0d0c7d277aac915d39421408a0ece28f36996709f44e12448c3da6fd8b",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UP-Van-Nigam-Recruitment-2026.html": {
+      "signature": "4e4b239606b99de81522b7ba84a608dcf611c2d2d6a53f48d1b2e3adeb530701",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPEIDA-Computer-Operator-Driver-2026.html": {
+      "signature": "392d1e4fe125bafdb7f0900d52a928d941f5274782d9e15b299db9bd61e19323",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPESSC-Principal-Recruitment-2026.html": {
+      "signature": "ba6832bc5777135f072ee81625eb873078915e92ad34683f5a0baa123ba077a9",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPIDA-Lucknow-Driver-Recruitment-2026.html": {
+      "signature": "2f31f4b425b42ffee6226593d4d4bbe47ffffde03b44323f612a2435982d9f90",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPPSC-Architectural-Assistant-2026.html": {
+      "signature": "8018711b9f9f23812881f7684cd8e11765e9f090f9376c393810f0e676b2ea63",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPPSC-Computer-Operator-Programmer-2026.html": {
+      "signature": "0eab2e782991ebbd322bd0a25b0397e18e575c9819cbba2dfb64d3640279de8e",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPSC-Principal-Vice-Principal-2026.html": {
+      "signature": "edd09a81dce77325821a9d7624eb74aba0f34c43de6be39430b7b3dd7ad162e1",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPSCIDC-Junior-Engineer-2026.html": {
+      "signature": "f5851826a3758a50f1823d95bcf5191144b16bec7ca4974ea8533dcab2def1b6",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPSSSC-Auditor-Assistant-Accountant-2026.html": {
+      "signature": "2d4ec05638ca3b60337a651237f50393b5cc1724c84d315f388fb3b4bc984ef3",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPSSSC-Cane-Supervisor-2026.html": {
+      "signature": "f7d7864978b473b1b2e48e37a3c27b1b19331f1fea765834a480906e2f84a259",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPSSSC-Forensic-Science-Laboratory-2026.html": {
+      "signature": "8dd5d88e14abada7ac2510ea9fed1c241bbd30b2923c5d209c738be0eb7e5351",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/UPSSSC-Livestock-Extension-Officer-2026.html": {
+      "signature": "6cdc33e7c007f78cf600b6ba4d33c1f5f6ef0b24fb57efad5091a986f2b54e3d",
+      "lastmod": "2026-08-11"
+    },
+    "Job_Details/HTML/UPSSSC-PET-2026.html": {
+      "signature": "5892e73f236765208c9307406029537b2cec07b98148113c9e73ed913dd5c2ab",
+      "lastmod": "2026-08-12"
+    },
+    "Job_Details/HTML/WCL-Mining-Sirdar-Assistant-Foreman-2026.html": {
+      "signature": "ed0753e595d280e0e2336448097096d7abda60052b05eb619cd29c30f5e2a823",
+      "lastmod": "2026-08-12"
+    },
+    "rank-predictor/railway/index.html": {
+      "signature": "db660d5dfc2c9fbe0967b3895266b5a06d988ed992d0909812a5d1fa1e3a4c0d",
+      "lastmod": "2026-08-12"
+    },
+    "rank-predictor/ssc-cgl/index.html": {
+      "signature": "390fb51c07112a9741b46a27fcb0379796a29056d8c407dce4558901a34d990d",
+      "lastmod": "2026-08-12"
+    },
+    "rank-predictor/ssc-cpo/index.html": {
+      "signature": "9ce29d9d2cca59b060c9623f9f29496183c066f620219327d7a3695cc47bcfe4",
+      "lastmod": "2026-08-12"
+    },
+    "rank-predictor/up-home-guard/index.html": {
+      "signature": "683c3e01f6a9779b3ddbe3f5812ba4416065ca789a207ef0510760e632823fe4",
+      "lastmod": "2026-08-12"
+    },
+    "rank-predictor/up-police/index.html": {
+      "signature": "00807f51208ed0bf155dbc62c486130c9ccecfb1aee5c93a57f60031e66bd417",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/1802-SBI-Circle-Based-Officer-Result-2026.html": {
+      "signature": "d2e84d86a673c6529b3c88344446a9f0e719c0bc2e0c57ac57291f32815d0a03",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/2156-JPSC-Combined-Civil-Services-Prelims-Result-2026.html": {
+      "signature": "bc51394874ece4d5d5edaf977df13a387b45aede566d45bd1b14a3a57199556c",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3005-SSC-Delhi-Police-Head-Constable-Ministerial-Result-2026.html": {
+      "signature": "caf05e0c997066c49b9205c390d70d94eca0bb647a8a8f41738aa0261f483be9",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-BPSC-70th-Combined-Competitive-Exam-Final-Result-2026.html": {
+      "signature": "d189cb135cdd05aaf056c6a4c5c826b72fd924c0f3cb91bd4276173309f2bf5b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-BPSSC-Bihar-Home-Guard-Havildar-Clerk-Result-2026.html": {
+      "signature": "bce4dfdd303293cbb86844a2af500c89004cc3d05169e7063e071a66919b0b88",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html": {
+      "signature": "8a8ba8331fb34c8e8525eb5d07e796101e6d62a2432555d21242bba9db83fb2a",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-IB-JIO-II-Tech-Final-Result-2026.html": {
+      "signature": "d9af194b3c16175c8661166f8123c1aa9dab68c7ab33c5c2d447c5ff75ee0023",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-Rajasthan-RSSB-Agriculture-Supervisor-Result-2026.html": {
+      "signature": "3411ccd3791e1046340f5fe828bfc46fddb9d9aad399ddeabfa8e3ae04e6ef24",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-RBI-Grade-B-DEPR-Phase-I-Result-2026.html": {
+      "signature": "57bbddebf1ce76611ed368421e4e4cb1435c46445e1a1b9aedb9926f062aa632",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-RBI-Office-Attendant-Result-2026.html": {
+      "signature": "b826ea054a5551255146a7e4aa149c6af598f04361835049429ae2926a7daa92",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-RRB-Chennai-Group-D-Level-1-Result-2026.html": {
+      "signature": "31a8914e10a9762fd8e46ae1cdf88a49d54d9bedd3cd95824e17ad5445672961",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html": {
+      "signature": "e1b5b61f80d6d6c8858ba38aa08b425ef7df2aad021f76c4482d7e85237d099d",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-RRB-Prayagraj-Group-D-Level-1-Result-2026.html": {
+      "signature": "ca9913289995d020bbfb8f5d636dda24be33ab332cc4559d84893efabe791a08",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html": {
+      "signature": "5350abf4fc7d3bdcecc7533a44877d45f76e436c6aba22aa2cb02c1d59de2851",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html": {
+      "signature": "9c88a8d597e94097b9dc966c158c5797aa5db514c82e3f32c53710177d500864",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html": {
+      "signature": "15df71500b905ca3bca66728da38c3f8bf6ed45987ef97e342df7dabe04d0931",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html": {
+      "signature": "7092b77f9ab376a680b8224a1214d20664f9b89a2634ed64549280b6f95370e3",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-UPPSC-Staff-Nurse-Allopathy-Supplementary-Result-2026.html": {
+      "signature": "6fa5d1c839a08497c2726059c1dd79bceea619f4f5b4f36f7548189c6fa0cc9d",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html": {
+      "signature": "3945c9d140505042e5d5460f6cfcdc2233c2dada8f7fa8cfcfd0d26ed7bec531",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3007-PNB-Local-Bank-Officer-Final-Result-2026.html": {
+      "signature": "0fa800a38bd4bbd27ff6d4eb5380305d9a22d13c0ee4a299442efa28f7f9828c",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3007-Rajasthan-RVUNL-Technician-Final-Result-2026.html": {
+      "signature": "426312e23c02407d15dc4b1c1a832c208e51bd2c08c651e7e94ee30c23b8d60e",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3007-RPSC-RAS-Final-Result-2026.html": {
+      "signature": "634603aa163342269e03b94d8e38e9a7fdc7ee5eb16514bc0355bd5cc8333aa6",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3007-RRB-Bhubaneswar-Group-D-Level-1-Result-2026.html": {
+      "signature": "b57970790ec4e1674a1435e090dee1c04c579df05672c533c2ccb61a5ee3908e",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html": {
+      "signature": "a4eea77509ac3ecca4bb1da7f6460d59c534cba3795a64bf89aa73daa0db6dbd",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3007-UPSSSC-ASO-ARO-Mains-Shortlisted-Result-2026.html": {
+      "signature": "5aa6b60d75c1cedd71e2d6bee1b9a74874ccbdb7e753dd1a3d39de61a828dc98",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3008-RRB-Bhopal-Group-D-Level-1-Result-2026.html": {
+      "signature": "b84c854a35f16d14bd3914fd8c61b497b68d40e6373b0552e119cc8e2f7c2ea2",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html": {
+      "signature": "141c484292f77fe3f9bbd93e506caf60e74eddc00164a341bf8693a0b2a23f81",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3009-RRB-Ahmedabad-Group-D-Level-1-Result-2026.html": {
+      "signature": "46ce000398260876dd5b894aafe331ecb91c39f2f2d0ea004c8827660592535b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3010-RRB-Ranchi-Group-D-Level-1-Result-2026.html": {
+      "signature": "b8f1d165cae1fde563df352520578231d064246ecdb8918935717af5ea0ee5bf",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3010-UPSSSC-Technical-Assistant-Group-C-Eligibility-Result-2026.html": {
+      "signature": "fcb035779f29d2814bbb6fd772eeb26fc9a27a6337c8224b66abdda22aceb3cf",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3011-RRB-Bilaspur-Group-D-Level-1-Result-2026.html": {
+      "signature": "6067c30fa447842e7763bc6c6181aaf62312bdcb788b694aa14cf47c4985a33e",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/3011-RRB-Group-D-Score-Card-Result-2026.html": {
+      "signature": "0bd826e7adb8f381289a59ac68744b1174286abdd7a96292e9c9c3a75d08ad3e",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/AIBE-All-India-Bar-Exam-XXI-Result-2026.html": {
+      "signature": "35cd71fcd6384a9a51d9ffd9ae0873e2a3d7c699c04a6caa811dfe7e32ce73c6",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/AIIMS-CRE-5th-Group-B-C-Result-2026.html": {
+      "signature": "de3c54fb648a20fb2df6bf425ebd22e8481c2f08e32aabcc352aa3aaad3d2acd",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Bank-of-Baroda-Apprentice-Result-2026.html": {
+      "signature": "0a14433cb0a7372438d54f627783079be1595c3d29ab7d525b068f4125c17683",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Bank-of-Baroda-Office-Assistant-Final-Result-2026.html": {
+      "signature": "f6acb534c798135afc24fe10c30db0795102d55cbd9bbbc474ccbb19d06d63f3",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/BPSC-70th-Scorecard-2026.html": {
+      "signature": "5b1830b047fd47a75ef55569586fbe0bbd8b888c3d6c100fc106757cac9871c2",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/BPSC-DSO-Mains-Result-2026.html": {
+      "signature": "14b1a3d70cabc959c109e32e5e815374898fc82aa84a412ea23b606da843453c",
+      "lastmod": "2026-08-11"
+    },
+    "Result_Details/HTML/BPSSC-ASI-Operation-Result-2026.html": {
+      "signature": "95e459e450ea9ebcbd54a4cfc7d8061bed3be0acc663d9c6937723fa59f2ddd0",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/BPSSC-Havildar-Instructor-Result-2026.html": {
+      "signature": "8e89acb69c9b1776b06f621b5b5688be502b7980972d4cfd61705ef136207e69",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/CBI-Apprentice-Result-2026.html": {
+      "signature": "6d56a596040f340be4b3809e858593cd8321fe6c089114159d7710cbff7196e0",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/HPSC-PGT-Computer-Science-Result-2026.html": {
+      "signature": "f49af18bfefa6de9db6ccf04fedb67ce63c3eb84c958e59254ce707d7cfa18d0",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/IB-ACIO-II-Exe-Final-Result-2026.html": {
+      "signature": "156f61b99ca6b312883f06dfea948ff9b6fb7e931d80dcb40826f04a6560e589",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/IERT-Prayagraj-Entrance-Result-2026.html": {
+      "signature": "4b2bd5d843e361c1edba584a44ce3eaf864b39efaacfba0618de21a571abe8f0",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Indian-Army-Agniveer-Result-2026.html": {
+      "signature": "74e90f8444742ee6c173a03f38b728082465e054fa21032b24f6de13c1eedde2",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/JSSC-Excise-Constable-Result-2026.html": {
+      "signature": "a81f9090bcc926b5e53eca59a8fef56444e37550a151f593b88ef7b1d1b1805c",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/LIC-HFL-Junior-Assistant-Result-2026.html": {
+      "signature": "e32c1930c99859f4acbc3131bb888e94f0d5fd632371f9b40c6eb092ccffb96b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MP-Police-ASI-Head-Constable-Computer-PPT-Result-2026.html": {
+      "signature": "419d86fe1c7f2e398d8eea8da5f12dc94699633e53fff1c783e3beb7d54d3731",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MP-Police-SI-Final-Result-2026.html": {
+      "signature": "efc0b53033336dd37ebcf8fb24cd95651593ae520983dcdbe753f5aacec340d3",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MPESB-ADDET-Animal-Husbandry-Result-2026.html": {
+      "signature": "3466c7fd17814600bfcdb6d014bb556f0bc22f2113586f7e14e739097b0b20a6",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MPESB-Group-1-Sub-Group-2-Result-2026.html": {
+      "signature": "d0fe23f7a9cd45c139b351e171050c788b16d52912f233e978623ad809b78917",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MPESB-MP-Police-Subedar-ASI-Final-Result-2026.html": {
+      "signature": "1b3e219e4cd3b2adb9d4859e16fce654f289b19b688707961cf0c99e66dc8cec",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MPESB-PNST-Pre-Nursing-Result-2026.html": {
+      "signature": "8dedf0b155fa691a6928eb5842b87864e10ac04e97653cf812c1078b91373c57",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MPPSC-Mining-Inspector-Final-Result-2025.html": {
+      "signature": "1dc9b14d59632376a791c27f36a975428f90598ae9eb62831b0672890ab921bc",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/NALCO-Non-Executive-Result-2026.html": {
+      "signature": "b9ae990757e934797679ea74bd52791a421b482ce30e18009cf28582685949e8",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/NTA-SWAYAM-Scorecard-2026.html": {
+      "signature": "7c5ccc761bbbce31b12d249add7d6e835a47e4d61753a0a6e6f8e13c0e6e53ca",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Oriental-Insurance-OICL-AO-Final-Result-2025.html": {
+      "signature": "b13ab9ecbe77ce6a21d21c8b6e5fe68359748af7beb10d1a78df88149990203b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Punjab-Sind-Bank-Apprentice-Result-2026.html": {
+      "signature": "177ec32759a9240cfe7c1011d9465b9df702164a8ec945b18c567471446f7e13",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Railway-RRB-NTPC-Graduate-CBTST-Result-2026.html": {
+      "signature": "c2989716a7a56cb1d9e9daf46d11bc47ff3d8f36550d15b5824e116f79c8cdef",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Rajasthan-Patwari-Final-Result-2025.html": {
+      "signature": "6c8de5bc8c51680618b0d75d847646df24be4d4ada2b6a0e86ab015dfc7b48d1",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/Rajasthan-RSSB-Platoon-Commander-Final-Result-2026.html": {
+      "signature": "cf90a512d812af1c40ba55f4e627e9f058312beca2f1b729190a2cb8390da0d9",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/RBI-Grade-B-Officer-Result-Marks-2026.html": {
+      "signature": "d41c38be8519c026374ada860e43eb6a0fb4027a16375e5cacde90cd4aefa655",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/RBI-Junior-Engineer-JE-Result-2026.html": {
+      "signature": "0119b0d632dfdbe38ba6d03488893192fedb14e3a6572d593d3953be406dd869",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/RPSC-School-Lecturer-PGT-Hindi-Result-2026.html": {
+      "signature": "fecdf1aba0eee754a28d654bd4fd027f603a0a72d7c98c7aae47926d8317592b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/RPSC-School-Lecturer-PGT-Result-2026.html": {
+      "signature": "cd4c1da025e94ee914fccd3314f0f79bc65addfde5e7555cbc0d000141a67b85",
+      "lastmod": "2026-08-11"
+    },
+    "Result_Details/HTML/RSSB-Librarian-Final-Result-2026.html": {
+      "signature": "5849e1be4f39ff6577c8ebbb5814d4b53df05c16d9dcc9dd6c19a6ed94ab410f",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/RSSB-NHM-RajMES-Final-Result-2026.html": {
+      "signature": "65bf17528781e282e31bf39d033b267809f900c7bf1d016a7ada9336d12798f4",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/RSSB-Rajasthan-Conductor-Final-Result-2026.html": {
+      "signature": "2085bea4cb86ca9ef56876d1a25f33f636a32b8c5640af406dd4ae667dbe5b2b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/SBI-CBO-Final-Result-2026.html": {
+      "signature": "1b88e73eaee49f28b1b1a7b51931c7eafbc7cd364d307e2410836243e82c3cdf",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/SSC-JE-Final-Result-2026.html": {
+      "signature": "aa5e6899168043594cff7324a172ece627b589a1dfc0f3162eaad1fe68b7eb4b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/SSC-MTS-Multi-Tasking-Staff-Result-2026.html": {
+      "signature": "3f59be49472896c561695a9d52183a56423bdb686f6a704211fb8e71470a51a5",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/SSC-Stenographer-2025-Revised-FRTA-Result-2026.html": {
+      "signature": "a55346f4a8f39e98be09a3f4faa895dcc37a1ee308810291c6f4372316c71b53",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UBI-Apprentices-Result-2026.html": {
+      "signature": "c41747e9ea20bf7f5d90dfe8bb3a3e61ff6c737e5e3cd5474b963ee88eaa3c34",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UP-Police-Constable-Result-2026.html": {
+      "signature": "4ac053680571268feb6f69dfde098ebbccaa7c2cec91cefcf643a93b20ef93b7",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UP-Police-Sub-Inspector-SI-Final-Result-2026.html": {
+      "signature": "bf732e45b180fddbb6848e68d56375c248dd8c4cf8cfc88351ecf3518228c8e7",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPESSB-PGT-Final-Result-2026.html": {
+      "signature": "f2a7b5fda18e08836b1d4212f6086c6c155cd588fa2842e9983808d48f9b6f61",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPESSC-UP-TGT-Final-Result-2026.html": {
+      "signature": "0319794ee0abf65fd26537c1d6524e6306b56d9ebeb76d11e881ba85be68ecb0",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPPSC-Assistant-Professor-Result-2026.html": {
+      "signature": "000ec06b5c6f9af1780d0d401ae6209c4a0d47fab81f48622ac4855886afb83e",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPPSC-GIC-Lecturer-Result-2026.html": {
+      "signature": "dd2de8582288fd06041cab27ad544601bbb33ce422245cfba59de634d276535b",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSC-CAPF-Assistant-Commandant-Final-Result-2025.html": {
+      "signature": "d27d5688344088cf95f24e75fe3627338e59fc8ad9127d05a6daea83919186c9",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSC-CDS-2-Final-Result-OTA-2025.html": {
+      "signature": "ea138140d8aeaff3e99ef1e1c801f15e033b7195ee3cf2291a9a57e3541f6813",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSC-Engineering-Services-Mains-Result-2026.html": {
+      "signature": "99e009c979d85335556692568181470ab0dcc55acfffdbc026490690762af548",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSC-Geo-Scientist-Mains-Result-2026.html": {
+      "signature": "7f86ba645cc2895e3d57b91dedb60f748ae45b9978c701d9249bbca9d563c979",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSC-IES-ISS-Result-2026.html": {
+      "signature": "02d5c4431a169348ffda40f86cf1ae86eff8976d0aaa815df9d43484c1cdddf1",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSSSC-Lower-PCS-Eligibility-Result-2026.html": {
+      "signature": "06c1333728b3dcd746feec8dfe49d13ed529c0ca23b450a75ecc15e3fa233cbf",
+      "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSSSC-X-Ray-Technician-Final-Result-2026.html": {
+      "signature": "b00a6a846bb0fe793e0d8002139e09288100e04c086f2a9505bfa31504277fae",
+      "lastmod": "2026-08-12"
+    }
+  }
+}
