@@ -868,6 +868,61 @@ body:has(.gju-typing-attempt-page) {
   box-shadow: none;
 }
 
+.gju-typing-attempt-footer {
+  display: grid;
+  place-items: center;
+  padding: .7rem 1rem max(.7rem, env(safe-area-inset-bottom));
+  border-top: 1px solid #d6ebfa;
+  background: #eef7ff;
+}
+
+.gju-typing-attempt-footer:empty {
+  display: none;
+}
+
+.gju-typing-attempt-footer .footer-live-visitors {
+  width: min(520px, 100%);
+  margin: 0;
+}
+
+.gju-typing-attempt-footer .footer-live-pill-expanded {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+  padding: .65rem;
+  border: 1px solid #cfe0f3;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
+}
+
+.gju-typing-attempt-footer .footer-visitor-metric {
+  display: grid;
+  justify-items: center;
+  gap: .12rem;
+  color: #102033;
+  font-size: .78rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+.gju-typing-attempt-footer .footer-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #10b981;
+}
+
+.gju-typing-attempt-footer .footer-live-label,
+.gju-typing-attempt-footer .footer-live-caption {
+  color: #64748b;
+}
+
+.gju-typing-attempt-footer strong {
+  color: #102033;
+  font-size: 1rem;
+}
+
 @media (max-width: 980px) {
   .typing-test-page .gju-typing-hero,
   .typing-test-page .gju-typing-layout {
