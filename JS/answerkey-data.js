@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0054-20260813213638-80ed0c6d",
+        "title": "BPSC Prosecution Officer Answer Key 2026 for 300 Post",
+        "organization": "Bihar Public Service Commission (BPSC)",
+        "department": "BPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-15",
+        "examEndDate": "",
+        "releaseDate": "2026-08-12",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://govjobupdates.com/AnswerKey_Details/HTML/BPSC-APO-Answer-Key-2026.html",
+        "objectionLink": "",
+        "detailPage": "../AnswerKey_Details/HTML/BPSC-APO-Answer-Key-2026.html",
+        "updatedAt": "2026-08-13",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0051-20260811185838-62bacc84",
         "title": "UGC NET June 2026 Answer Key",
         "organization": "The University Grants Commission (UGC)",
