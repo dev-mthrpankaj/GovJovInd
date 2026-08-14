@@ -116,8 +116,8 @@
         elements.questionText = document.getElementById("questionText");
         elements.questionMedia = document.getElementById("questionMedia");
         elements.optionList = document.getElementById("optionList");
-        elements.optionButtons = Array.from(document.querySelectorAll("#optionList [data-option-index]"));
-        elements.optionTexts = elements.optionButtons.map((button) => button.querySelector(".option-text"));
+        elements.optionButtons = [];
+        elements.optionTexts = [];
         elements.questionMarks = document.getElementById("questionMarks");
         elements.questionNegative = document.getElementById("questionNegative");
         elements.prevQuestionButton = document.querySelector("[data-action='prev-question']");
@@ -251,7 +251,7 @@
         }
         if (!isViewVisible("exam") || isModalOpen() || isTypingTarget(event.target)) return;
 
-        if (["1", "2", "3", "4"].includes(key)) {
+        if (/^[1-9]$/.test(key)) {
             event.preventDefault();
             selectOption(Number(key) - 1);
         } else if (key === "n") {
@@ -723,6 +723,19 @@
             ? "Mark For Review"
             : "Mark For Review";
 
+        renderQuestionOptions(question);
+        syncQuestionState();
+        typesetQuizMath(elements.questionCard);
+    }
+
+    function renderQuestionOptions(question) {
+        if (!elements.optionList) return;
+        const options = Array.isArray(question.options) ? question.options : [];
+        elements.optionList.innerHTML = options.map(function (_option, index) {
+            return `<button class="answer-option" type="button" data-option-index="${index}" aria-pressed="false"><span class="option-key">${index + 1}.</span><span class="option-text"></span></button>`;
+        }).join("");
+        elements.optionButtons = Array.from(elements.optionList.querySelectorAll("[data-option-index]"));
+        elements.optionTexts = elements.optionButtons.map((button) => button.querySelector(".option-text"));
         elements.optionButtons.forEach(function (button, index) {
             const hasImage = Boolean(question.optionImages?.[index]?.src);
             button.classList.toggle("has-option-image", hasImage);
@@ -730,8 +743,6 @@
         elements.optionTexts.forEach(function (node, index) {
             renderOptionContent(node, question, index);
         });
-        syncQuestionState();
-        typesetQuizMath(elements.questionCard);
     }
 
     function renderQuestionMedia(question) {
@@ -823,7 +834,8 @@
     }
 
     function selectOption(index) {
-        if (!state.questions[state.current] || index < 0 || index > 3) return;
+        const question = state.questions[state.current];
+        if (!question || index < 0 || index >= question.options.length) return;
         const currentStatus = state.statuses[state.current];
         state.answers[state.current] = index;
         setQuestionStatus(state.current, currentStatus === "marked" || currentStatus === "answered-marked"
@@ -1581,7 +1593,7 @@
     }
 
     function normalizeOptions(value) {
-        const source = Array.isArray(value) ? value.slice(0, 4) : [];
+        const source = Array.isArray(value) ? value.filter((option) => option !== undefined && option !== null) : [];
         return source.map(function (option, index) {
             if (option && typeof option === "object") {
                 const textMap = normalizeTextMap(option.text ?? option.label ?? option.value ?? option);
@@ -1602,7 +1614,8 @@
     function normalizeOptionTextMaps(optionTextMaps, options, normalizedOptions) {
         const mapSource = Array.isArray(optionTextMaps) ? optionTextMaps : [];
         const optionSource = Array.isArray(options) ? options : [];
-        return [0, 1, 2, 3].map(function (index) {
+        const length = Math.max(mapSource.length, optionSource.length, normalizedOptions.length);
+        return Array.from({ length }, function (_item, index) {
             return normalizeTextMap(mapSource[index]) ||
                 normalizeTextMap(optionSource[index]?.text ?? optionSource[index]?.label ?? optionSource[index]?.value ?? optionSource[index]) ||
                 normalizedOptions[index]?.textMap ||
@@ -1659,8 +1672,9 @@
     }
 
     function normalizeOptionImages(optionImages, normalizedOptions) {
-        const source = Array.isArray(optionImages) ? optionImages.slice(0, 4) : [];
-        return [0, 1, 2, 3].map(function (index) {
+        const source = Array.isArray(optionImages) ? optionImages : [];
+        const length = Math.max(source.length, normalizedOptions.length);
+        return Array.from({ length }, function (_item, index) {
             return normalizeMedia(source[index], `Option ${index + 1} image`) || normalizedOptions[index]?.image || null;
         });
     }

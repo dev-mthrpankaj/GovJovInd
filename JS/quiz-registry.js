@@ -145,11 +145,11 @@
             question.difficulty &&
             question.question &&
             Array.isArray(question.options) &&
-            question.options.length === 4 &&
+            question.options.length >= 2 &&
             question.options.every(hasOptionContent) &&
             Number.isInteger(question.correctAnswer) &&
             question.correctAnswer >= 0 &&
-            question.correctAnswer <= 3 &&
+            question.correctAnswer < question.options.length &&
             question.explanation
         );
     }
