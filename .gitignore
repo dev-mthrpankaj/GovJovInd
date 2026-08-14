@@ -7,6 +7,9 @@ live-test/includes/app-token-config.local.php
 live-test/includes/*secrets*.php
 
 # Generated/local app workspaces
-.edge-phase1-*/
+.edge-*/
+.chrome-*/
+IBPS.pdf
+reports/ibps-*/
 live-test/
 android-webview-app/
