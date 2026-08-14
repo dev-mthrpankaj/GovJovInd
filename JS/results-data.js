@@ -112,6 +112,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "yes"
     },
     {
+        "id": "result-sheet-0101-20260814211742-fafcb44f",
+        "title": "MPESB Van Rakshak, Jail Prahari Result 2026 for 1679 Post",
+        "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-14",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://esb.mp.gov.in/results/RESULT_26/JAIL_VAN_RES26/default_Results.htm",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0091-20260812184351-96f8b0a1",
         "title": "AIIMS CRE 5th Group B & C Result 2026 for 1484 Post",
         "organization": "All India Institute of Medical Sciences (AIIMS)",
