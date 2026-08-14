@@ -2,6 +2,7 @@
     "use strict";
 
     const SCRIPT_TIMEOUT_MS = 15000;
+    const QUIZ_ASSET_VERSION = "20260814-compliant-only";
     const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "General Science", "Reasoning", "Computer"];
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
     const loadedScripts = new Map();
@@ -233,7 +234,9 @@
     }
 
     function loadScript(path) {
-        const src = new URL(path, scriptBaseUrl).href;
+        const url = new URL(path, scriptBaseUrl);
+        url.searchParams.set("v", QUIZ_ASSET_VERSION);
+        const src = url.href;
         if (loadedScripts.has(src)) return loadedScripts.get(src);
 
         const promise = new Promise((resolve, reject) => {
