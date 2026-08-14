@@ -86,12 +86,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://delhihighcourt.nic.in/files/2026-08/upload_complete_notice.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/Delhi-High-Court-Assistant-Editor-Result-2026.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0100-20260814211614-1e8f2a27",
@@ -104,12 +104,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/94478/Index.html",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/IB-Security-Assistant-Final-Result-2026.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0101-20260814211742-fafcb44f",
@@ -122,12 +122,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://esb.mp.gov.in/results/RESULT_26/JAIL_VAN_RES26/default_Results.htm",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/MPESB-Van-Rakshak-Jail-Prahari-Result-2026.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0091-20260812184351-96f8b0a1",
