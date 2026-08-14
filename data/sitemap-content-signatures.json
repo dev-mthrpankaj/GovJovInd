@@ -209,6 +209,10 @@
       "signature": "acbd3edd35db13b88c89d8ffb0411958d730ebae27ca2687d406795ee487601b",
       "lastmod": "2026-08-12"
     },
+    "AdmitCard_Details/HTML/IBPS-PO-Admit-Card-2026.html": {
+      "signature": "a3afe7c6651da68d77fa7fb83f6b8ef841cf0c302640c49a743d5f4cfd53bb2c",
+      "lastmod": "2026-08-14"
+    },
     "AdmitCard_Details/HTML/Karnataka-Police-Constable-Admit-Card-2026.html": {
       "signature": "5976baabebebdef22c55365b9bf3e3a6cf735c1cdfd7c534e27f7e91a09fee3c",
       "lastmod": "2026-08-12"
@@ -356,6 +360,10 @@
     "AdmitCard_Details/HTML/UPSC-CAPF-Admit-Card-2026.html": {
       "signature": "833ee00e0ea706cfbffa47aa32f09b2b9dbf129abb1a0fbe303afd7a9a751a56",
       "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPSC-Civil-Services-Mains-Admit-Card-2026.html": {
+      "signature": "c245d5c879d3b3e39cd87587d053a7efdaab55704809a2d9ebcc96ea4eb5fc1c",
+      "lastmod": "2026-08-14"
     },
     "AdmitCard_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-City-Intimation-2026.html": {
       "signature": "190cf0d6c1775e0f3c9ea45928665c2ec41f468d18961b2cc727b137199d0c90",
@@ -1849,6 +1857,10 @@
       "signature": "6d56a596040f340be4b3809e858593cd8321fe6c089114159d7710cbff7196e0",
       "lastmod": "2026-08-12"
     },
+    "Result_Details/HTML/Delhi-High-Court-Assistant-Editor-Result-2026.html": {
+      "signature": "ed8f61ec7c913e9a68714dbf6431731fff7d29cb5b17580da85dc318ddd6db60",
+      "lastmod": "2026-08-14"
+    },
     "Result_Details/HTML/HPSC-PGT-Computer-Science-Result-2026.html": {
       "signature": "f49af18bfefa6de9db6ccf04fedb67ce63c3eb84c958e59254ce707d7cfa18d0",
       "lastmod": "2026-08-12"
@@ -1856,6 +1868,10 @@
     "Result_Details/HTML/IB-ACIO-II-Exe-Final-Result-2026.html": {
       "signature": "156f61b99ca6b312883f06dfea948ff9b6fb7e931d80dcb40826f04a6560e589",
       "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/IB-Security-Assistant-Final-Result-2026.html": {
+      "signature": "4f6bd24389fa011c3795a06479a8e4bb36d72c377c6356898f0b43e575c77c03",
+      "lastmod": "2026-08-14"
     },
     "Result_Details/HTML/IERT-Prayagraj-Entrance-Result-2026.html": {
       "signature": "733db9fda221daacfcbe85be386811e29c57768e5bef934e236f25322541f5db",
@@ -1896,6 +1912,10 @@
     "Result_Details/HTML/MPESB-PNST-Pre-Nursing-Result-2026.html": {
       "signature": "8dedf0b155fa691a6928eb5842b87864e10ac04e97653cf812c1078b91373c57",
       "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/MPESB-Van-Rakshak-Jail-Prahari-Result-2026.html": {
+      "signature": "49d66bea5d03fc40527c0d9d9833e6c77b5b7e7e02dcfab088793932e82746c6",
+      "lastmod": "2026-08-14"
     },
     "Result_Details/HTML/MPPSC-Mining-Inspector-Final-Result-2025.html": {
       "signature": "58232da59f3ee721422c9b5d1e125301377ffffc52d5dd440db5846360337d31",
