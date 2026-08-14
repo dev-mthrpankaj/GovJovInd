@@ -17,8 +17,8 @@
         {
             topic: "Mensuration",
             difficulty: "Easy",
-            question: "The area of a square is \\(15.21\\,cm^2\\). Find the perimeter of this square (in \\(cm\\)).",
-            questionTextMap: text("एक वर्ग का क्षेत्रफल \\(15.21\\,cm^2\\) है। इस वर्ग का परिमाप (\\(cm\\) में) ज्ञात कीजिए।", "The area of a square is \\(15.21\\,cm^2\\). Find the perimeter of this square (in \\(cm\\))."),
+            question: "The area of a square is \\(15.21\\,\\mathrm{cm}^2\\). Find the perimeter of this square (in \\(\\mathrm{cm}\\)).",
+            questionTextMap: text("एक वर्ग का क्षेत्रफल \\(15.21\\,\\mathrm{cm}^2\\) है। इस वर्ग का परिमाप (\\(\\mathrm{cm}\\) में) ज्ञात कीजिए।", "The area of a square is \\(15.21\\,\\mathrm{cm}^2\\). Find the perimeter of this square (in \\(\\mathrm{cm}\\))."),
             options: [
                 option("\\(13.8\\)", "\\(13.8\\)"),
                 option("\\(15.6\\)", "\\(15.6\\)"),
@@ -26,8 +26,8 @@
                 option("\\(16.5\\)", "\\(16.5\\)")
             ],
             correctAnswer: 1,
-            explanation: "Side \\(=\\sqrt{15.21}=3.9\\,cm\\). Perimeter \\(=4\\times3.9=15.6\\,cm\\).",
-            explanationTextMap: text("भुजा \\(=\\sqrt{15.21}=3.9\\,cm\\)। परिमाप \\(=4\\times3.9=15.6\\,cm\\)।", "Side \\(=\\sqrt{15.21}=3.9\\,cm\\). Perimeter \\(=4\\times3.9=15.6\\,cm\\).")
+            explanation: "Side \\(=\\sqrt{15.21}=3.9\\,\\mathrm{cm}\\). Perimeter \\(=4\\times3.9=15.6\\,\\mathrm{cm}\\).",
+            explanationTextMap: text("भुजा \\(=\\sqrt{15.21}=3.9\\,\\mathrm{cm}\\)। परिमाप \\(=4\\times3.9=15.6\\,\\mathrm{cm}\\)।", "Side \\(=\\sqrt{15.21}=3.9\\,\\mathrm{cm}\\). Perimeter \\(=4\\times3.9=15.6\\,\\mathrm{cm}\\).")
         },
         {
             topic: "Percentage",
@@ -56,8 +56,8 @@
                 option("\\(15\\)", "\\(15\\)")
             ],
             correctAnswer: 1,
-            explanation: "Subtract remainders: \\(1005-5=1000\\), \\(244-4=240\\), \\(1343-3=1340\\). Required number \\(=HCF(1000,240,1340)=20\\).",
-            explanationTextMap: text("शेषफल घटाने पर: \\(1005-5=1000\\), \\(244-4=240\\), \\(1343-3=1340\\)। अभीष्ट संख्या \\(=HCF(1000,240,1340)=20\\)।", "Subtract remainders: \\(1005-5=1000\\), \\(244-4=240\\), \\(1343-3=1340\\). Required number \\(=HCF(1000,240,1340)=20\\).")
+            explanation: "Subtract remainders: \\(1005-5=1000\\), \\(244-4=240\\), \\(1343-3=1340\\). Required number \\(=\\operatorname{HCF}(1000,240,1340)=20\\).",
+            explanationTextMap: text("शेषफल घटाने पर: \\(1005-5=1000\\), \\(244-4=240\\), \\(1343-3=1340\\)। अभीष्ट संख्या \\(=\\operatorname{HCF}(1000,240,1340)=20\\)।", "Subtract remainders: \\(1005-5=1000\\), \\(244-4=240\\), \\(1343-3=1340\\). Required number \\(=\\operatorname{HCF}(1000,240,1340)=20\\).")
         },
         {
             topic: "Percentage - Discount",
@@ -107,8 +107,8 @@
         {
             topic: "Compound Interest",
             difficulty: "Moderate",
-            question: "Find the amount received on a principal of \\(₹1{,}800\\) at \\(10\\%\\) per annum compound interest (compounded annually) for \\(2\\) years.",
-            questionTextMap: text("₹1,800 के मूलधन पर \\(10\\%\\) की वार्षिक चक्रवृद्धि ब्याज की दर (वार्षिक रूप से संयोजित होने पर) से \\(2\\) वर्षों में प्राप्त मिश्रधन ज्ञात कीजिए।", "Find the amount received on a principal of \\(₹1{,}800\\) at \\(10\\%\\) per annum compound interest (compounded annually) for \\(2\\) years."),
+            question: "Find the amount received on a principal of ₹\\(1{,}800\\) at \\(10\\%\\) per annum compound interest (compounded annually) for \\(2\\) years.",
+            questionTextMap: text("₹\\(1{,}800\\) के मूलधन पर \\(10\\%\\) की वार्षिक चक्रवृद्धि ब्याज की दर (वार्षिक रूप से संयोजित होने पर) से \\(2\\) वर्षों में प्राप्त मिश्रधन ज्ञात कीजिए।", "Find the amount received on a principal of ₹\\(1{,}800\\) at \\(10\\%\\) per annum compound interest (compounded annually) for \\(2\\) years."),
             options: [
                 option("₹2,506", "₹2,506"),
                 option("₹2,178", "₹2,178"),
@@ -116,8 +116,8 @@
                 option("₹3,118", "₹3,118")
             ],
             correctAnswer: 1,
-            explanation: "Amount \\(=1800\\left(1+\\frac{10}{100}\\right)^2=1800\\times1.21=₹2{,}178\\).",
-            explanationTextMap: text("मिश्रधन \\(=1800\\left(1+\\frac{10}{100}\\right)^2=1800\\times1.21=₹2{,}178\\)।", "Amount \\(=1800\\left(1+\\frac{10}{100}\\right)^2=1800\\times1.21=₹2{,}178\\).")
+            explanation: "Amount \\(=1800\\left(1+\\frac{10}{100}\\right)^2=1800\\times1.21=2{,}178\\). Hence, amount = ₹\\(2{,}178\\).",
+            explanationTextMap: text("मिश्रधन \\(=1800\\left(1+\\frac{10}{100}\\right)^2=1800\\times1.21=2{,}178\\)। अतः मिश्रधन = ₹\\(2{,}178\\)।", "Amount \\(=1800\\left(1+\\frac{10}{100}\\right)^2=1800\\times1.21=2{,}178\\). Hence, amount = ₹\\(2{,}178\\).")
         },
         {
             topic: "Simplification",
@@ -197,8 +197,8 @@
         {
             topic: "Percentage",
             difficulty: "Easy",
-            question: "A person saves \\(50\\%\\) of his income. If his expenditure is \\(₹360\\), find his income (in ₹).",
-            questionTextMap: text("एक व्यक्ति अपनी आय का \\(50\\%\\) बचत करता है। यदि उसका व्यय ₹360 है, तो उसकी आय (₹ में) कितनी है?", "A person saves \\(50\\%\\) of his income. If his expenditure is \\(₹360\\), find his income (in ₹)."),
+            question: "A person saves \\(50\\%\\) of his income. If his expenditure is ₹\\(360\\), find his income (in ₹).",
+            questionTextMap: text("एक व्यक्ति अपनी आय का \\(50\\%\\) बचत करता है। यदि उसका व्यय ₹\\(360\\) है, तो उसकी आय (₹ में) कितनी है?", "A person saves \\(50\\%\\) of his income. If his expenditure is ₹\\(360\\), find his income (in ₹)."),
             options: [
                 option("₹800", "₹800"),
                 option("₹180", "₹180"),
@@ -206,29 +206,29 @@
                 option("₹720", "₹720")
             ],
             correctAnswer: 3,
-            explanation: "Since savings and expenditure are each \\(50\\%\\) of the income, expenditure \\(=\\frac{1}{2}\\times\\)income, so income \\(=360\\times2=₹720\\).",
-            explanationTextMap: text("चूँकि बचत और व्यय दोनों आय का \\(50\\%\\) हैं, इसलिए व्यय \\(=\\frac{1}{2}\\times\\)आय, अतः आय \\(=360\\times2=₹720\\)।", "Since savings and expenditure are each \\(50\\%\\) of the income, expenditure \\(=\\frac{1}{2}\\times\\)income, so income \\(=360\\times2=₹720\\).")
+            explanation: "Since savings and expenditure are each \\(50\\%\\) of the income, expenditure \\(=\\frac{1}{2}\\times\\) income, so income \\(=360\\times2=720\\). Hence, income = ₹\\(720\\).",
+            explanationTextMap: text("चूँकि बचत और व्यय दोनों आय का \\(50\\%\\) हैं, इसलिए व्यय \\(=\\frac{1}{2}\\times\\) आय, अतः आय \\(=360\\times2=720\\)। इसलिए आय = ₹\\(720\\)।", "Since savings and expenditure are each \\(50\\%\\) of the income, expenditure \\(=\\frac{1}{2}\\times\\) income, so income \\(=360\\times2=720\\). Hence, income = ₹\\(720\\).")
         },
         {
             topic: "Speed, Time and Distance",
             difficulty: "Easy",
-            question: "A person covers half of his journey's distance at \\(60\\,km/h\\) and the other half at \\(30\\,km/h\\). Find his average speed for the whole journey.",
-            questionTextMap: text("एक व्यक्ति अपनी यात्रा की आधी दूरी को \\(60\\,km/h\\) की चाल से और आधी दूरी को \\(30\\,km/h\\) की चाल से तय करता है। पूरी यात्रा के दौरान उसकी औसत चाल कितनी है?", "A person covers half of his journey's distance at \\(60\\,km/h\\) and the other half at \\(30\\,km/h\\). Find his average speed for the whole journey."),
+            question: "A person covers half of his journey's distance at \\(60\\,\\mathrm{km/h}\\) and the other half at \\(30\\,\\mathrm{km/h}\\). Find his average speed for the whole journey.",
+            questionTextMap: text("एक व्यक्ति अपनी यात्रा की आधी दूरी को \\(60\\,\\mathrm{km/h}\\) की चाल से और आधी दूरी को \\(30\\,\\mathrm{km/h}\\) की चाल से तय करता है। पूरी यात्रा के दौरान उसकी औसत चाल कितनी है?", "A person covers half of his journey's distance at \\(60\\,\\mathrm{km/h}\\) and the other half at \\(30\\,\\mathrm{km/h}\\). Find his average speed for the whole journey."),
             options: [
-                option("\\(45\\,km/h\\)", "\\(45\\,km/h\\)"),
-                option("\\(55\\,km/h\\)", "\\(55\\,km/h\\)"),
-                option("\\(50\\,km/h\\)", "\\(50\\,km/h\\)"),
-                option("\\(40\\,km/h\\)", "\\(40\\,km/h\\)")
+                option("\\(45\\,\\mathrm{km/h}\\)", "\\(45\\,\\mathrm{km/h}\\)"),
+                option("\\(55\\,\\mathrm{km/h}\\)", "\\(55\\,\\mathrm{km/h}\\)"),
+                option("\\(50\\,\\mathrm{km/h}\\)", "\\(50\\,\\mathrm{km/h}\\)"),
+                option("\\(40\\,\\mathrm{km/h}\\)", "\\(40\\,\\mathrm{km/h}\\)")
             ],
             correctAnswer: 3,
-            explanation: "For equal distances at speeds \\(a\\) and \\(b\\), average speed \\(=\\frac{2ab}{a+b}=\\frac{2\\times60\\times30}{90}=40\\,km/h\\).",
-            explanationTextMap: text("बराबर दूरी को चाल \\(a\\) और \\(b\\) से तय करने पर, औसत चाल \\(=\\frac{2ab}{a+b}=\\frac{2\\times60\\times30}{90}=40\\,km/h\\)।", "For equal distances at speeds \\(a\\) and \\(b\\), average speed \\(=\\frac{2ab}{a+b}=\\frac{2\\times60\\times30}{90}=40\\,km/h\\).")
+            explanation: "For equal distances at speeds \\(a\\) and \\(b\\), average speed \\(=\\frac{2ab}{a+b}=\\frac{2\\times60\\times30}{90}=40\\,\\mathrm{km/h}\\).",
+            explanationTextMap: text("बराबर दूरी को चाल \\(a\\) और \\(b\\) से तय करने पर, औसत चाल \\(=\\frac{2ab}{a+b}=\\frac{2\\times60\\times30}{90}=40\\,\\mathrm{km/h}\\)।", "For equal distances at speeds \\(a\\) and \\(b\\), average speed \\(=\\frac{2ab}{a+b}=\\frac{2\\times60\\times30}{90}=40\\,\\mathrm{km/h}\\).")
         },
         {
             topic: "Speed, Time and Distance",
             difficulty: "Moderate",
-            question: "A car travelling at \\(70\\,km/hr\\) for \\(1\\) hour and at \\('p'\\,km/hr\\) for \\(1\\frac{1}{2}\\) hours has an average speed of \\(58\\,km/hr\\). Find the value of \\(p\\).",
-            questionTextMap: text("1 घंटे तक \\(70\\,km/hr\\) और \\(1\\frac{1}{2}\\) घंटे तक \\('p'\\,km/hr\\) की चाल से चलने वाली एक कार की औसत चाल \\(58\\,km/hr\\) है। \\(p\\) का मान ज्ञात कीजिए।", "A car travelling at \\(70\\,km/hr\\) for \\(1\\) hour and at \\('p'\\,km/hr\\) for \\(1\\frac{1}{2}\\) hours has an average speed of \\(58\\,km/hr\\). Find the value of \\(p\\)."),
+            question: "A car travelling at \\(70\\,\\mathrm{km/hr}\\) for \\(1\\) hour and at \\(p\\,\\mathrm{km/hr}\\) for \\(1\\frac{1}{2}\\) hours has an average speed of \\(58\\,\\mathrm{km/hr}\\). Find the value of \\(p\\).",
+            questionTextMap: text("1 घंटे तक \\(70\\,\\mathrm{km/hr}\\) और \\(1\\frac{1}{2}\\) घंटे तक \\(p\\,\\mathrm{km/hr}\\) की चाल से चलने वाली एक कार की औसत चाल \\(58\\,\\mathrm{km/hr}\\) है। \\(p\\) का मान ज्ञात कीजिए।", "A car travelling at \\(70\\,\\mathrm{km/hr}\\) for \\(1\\) hour and at \\(p\\,\\mathrm{km/hr}\\) for \\(1\\frac{1}{2}\\) hours has an average speed of \\(58\\,\\mathrm{km/hr}\\). Find the value of \\(p\\)."),
             options: [
                 option("\\(67.5\\)", "\\(67.5\\)"),
                 option("\\(70\\)", "\\(70\\)"),
@@ -273,7 +273,7 @@
             topic: "Trigonometry",
             difficulty: "Easy",
             question: "Find the value of \\(\\sec^2 50^\\circ-\\tan^2 50^\\circ\\).",
-            questionTextMap: text("\\(\\sec^250°-\\tan^250°\\) का मान ज्ञात कीजिए।", "Find the value of \\(\\sec^2 50^\\circ-\\tan^2 50^\\circ\\)."),
+            questionTextMap: text("\\(\\sec^2 50^\\circ-\\tan^2 50^\\circ\\) का मान ज्ञात कीजिए।", "Find the value of \\(\\sec^2 50^\\circ-\\tan^2 50^\\circ\\)."),
             options: [
                 option("\\(2\\)", "\\(2\\)"),
                 option("\\(0\\)", "\\(0\\)"),
@@ -348,22 +348,22 @@
             topic: "Geometry - Triangles",
             difficulty: "Hard",
             question: "In \\(\\triangle ABC\\), \\(BD\\perp AC\\) at point D and \\(\\angle DBC=65^\\circ\\). A point E lies on BC such that \\(\\angle CAE=30^\\circ\\). Find the measure of \\(\\angle AEB\\).",
-            questionTextMap: text("\\(\\triangle ABC\\) में, बिंदु D पर \\(BD\\perp AC\\) है और \\(\\angle DBC=65°\\) है। BC पर एक बिंदु E इस प्रकार है कि \\(\\angle CAE=30°\\) है। \\(\\angle AEB\\) की माप कितनी है?", "In \\(\\triangle ABC\\), \\(BD\\perp AC\\) at point D and \\(\\angle DBC=65^\\circ\\). A point E lies on BC such that \\(\\angle CAE=30^\\circ\\). Find the measure of \\(\\angle AEB\\)."),
+            questionTextMap: text("\\(\\triangle ABC\\) में, बिंदु D पर \\(BD\\perp AC\\) है और \\(\\angle DBC=65^\\circ\\) है। BC पर एक बिंदु E इस प्रकार है कि \\(\\angle CAE=30^\\circ\\) है। \\(\\angle AEB\\) की माप कितनी है?", "In \\(\\triangle ABC\\), \\(BD\\perp AC\\) at point D and \\(\\angle DBC=65^\\circ\\). A point E lies on BC such that \\(\\angle CAE=30^\\circ\\). Find the measure of \\(\\angle AEB\\)."),
             options: [
-                option("\\(53°\\)", "\\(53^\\circ\\)"),
-                option("\\(56°\\)", "\\(56^\\circ\\)"),
-                option("\\(50°\\)", "\\(50^\\circ\\)"),
-                option("\\(55°\\)", "\\(55^\\circ\\)")
+                option("\\(53^\\circ\\)", "\\(53^\\circ\\)"),
+                option("\\(56^\\circ\\)", "\\(56^\\circ\\)"),
+                option("\\(50^\\circ\\)", "\\(50^\\circ\\)"),
+                option("\\(55^\\circ\\)", "\\(55^\\circ\\)")
             ],
             correctAnswer: 3,
             explanation: "In \\(\\triangle BDC\\), \\(\\angle DCB=180-90-65=25^\\circ\\), i.e. \\(\\angle ACB=25^\\circ\\). In \\(\\triangle AEC\\), \\(\\angle AEC=180-25-30=125^\\circ\\). Since B, E, C are collinear, \\(\\angle AEB=180-125=55^\\circ\\).",
-            explanationTextMap: text("\\(\\triangle BDC\\) में, \\(\\angle DCB=180-90-65=25°\\), अर्थात \\(\\angle ACB=25°\\)। \\(\\triangle AEC\\) में, \\(\\angle AEC=180-25-30=125°\\)। चूँकि B, E, C एक सरल रेखा में हैं, इसलिए \\(\\angle AEB=180-125=55°\\)।", "In \\(\\triangle BDC\\), \\(\\angle DCB=180-90-65=25^\\circ\\), i.e. \\(\\angle ACB=25^\\circ\\). In \\(\\triangle AEC\\), \\(\\angle AEC=180-25-30=125^\\circ\\). Since B, E, C are collinear, \\(\\angle AEB=180-125=55^\\circ\\).")
+            explanationTextMap: text("\\(\\triangle BDC\\) में, \\(\\angle DCB=180-90-65=25^\\circ\\), अर्थात \\(\\angle ACB=25^\\circ\\)। \\(\\triangle AEC\\) में, \\(\\angle AEC=180-25-30=125^\\circ\\)। चूँकि B, E, C एक सरल रेखा में हैं, इसलिए \\(\\angle AEB=180-125=55^\\circ\\)।", "In \\(\\triangle BDC\\), \\(\\angle DCB=180-90-65=25^\\circ\\), i.e. \\(\\angle ACB=25^\\circ\\). In \\(\\triangle AEC\\), \\(\\angle AEC=180-25-30=125^\\circ\\). Since B, E, C are collinear, \\(\\angle AEB=180-125=55^\\circ\\).")
         },
         {
             topic: "Profit and Loss",
             difficulty: "Hard",
-            question: "Poonam sold a book to Mohini at a \\(5\\%\\) loss, and Mohini sold it to Roopashi at an \\(8\\%\\) profit. If Roopashi bought the book for \\(₹1{,}539\\), find Poonam's cost price for the book (in ₹).",
-            questionTextMap: text("पूनम ने मोहिनी को एक किताब \\(5\\%\\) की हानि पर बेची और मोहिनी ने उसे रूपाशी को \\(8\\%\\) के लाभ पर बेचा। यदि रूपाशी ने किताब ₹1,539 में खरीदी, तो पूनम के लिए किताब का क्रय मूल्य (₹ में) कितना था?", "Poonam sold a book to Mohini at a \\(5\\%\\) loss, and Mohini sold it to Roopashi at an \\(8\\%\\) profit. If Roopashi bought the book for \\(₹1{,}539\\), find Poonam's cost price for the book (in ₹)."),
+            question: "Poonam sold a book to Mohini at a \\(5\\%\\) loss, and Mohini sold it to Roopashi at an \\(8\\%\\) profit. If Roopashi bought the book for ₹\\(1{,}539\\), find Poonam's cost price for the book (in ₹).",
+            questionTextMap: text("पूनम ने मोहिनी को एक किताब \\(5\\%\\) की हानि पर बेची और मोहिनी ने उसे रूपाशी को \\(8\\%\\) के लाभ पर बेचा। यदि रूपाशी ने किताब ₹\\(1{,}539\\) में खरीदी, तो पूनम के लिए किताब का क्रय मूल्य (₹ में) कितना था?", "Poonam sold a book to Mohini at a \\(5\\%\\) loss, and Mohini sold it to Roopashi at an \\(8\\%\\) profit. If Roopashi bought the book for ₹\\(1{,}539\\), find Poonam's cost price for the book (in ₹)."),
             options: [
                 option("₹1,600", "₹1,600"),
                 option("₹1,650", "₹1,650"),
@@ -371,8 +371,8 @@
                 option("₹1,550", "₹1,550")
             ],
             correctAnswer: 2,
-            explanation: "Let Poonam's CP \\(=x\\). \\(x\\times0.95\\times1.08=1539\\Rightarrow1.026x=1539\\Rightarrow x=₹1{,}500\\).",
-            explanationTextMap: text("मान लीजिए पूनम का क्रय मूल्य \\(=x\\)। \\(x\\times0.95\\times1.08=1539\\Rightarrow1.026x=1539\\Rightarrow x=₹1{,}500\\)।", "Let Poonam's CP \\(=x\\). \\(x\\times0.95\\times1.08=1539\\Rightarrow1.026x=1539\\Rightarrow x=₹1{,}500\\).")
+            explanation: "Let Poonam's CP \\(=x\\). \\(x\\times0.95\\times1.08=1539\\Rightarrow1.026x=1539\\Rightarrow x=1{,}500\\). Hence, CP = ₹\\(1{,}500\\).",
+            explanationTextMap: text("मान लीजिए पूनम का क्रय मूल्य \\(=x\\)। \\(x\\times0.95\\times1.08=1539\\Rightarrow1.026x=1539\\Rightarrow x=1{,}500\\)। अतः क्रय मूल्य = ₹\\(1{,}500\\)।", "Let Poonam's CP \\(=x\\). \\(x\\times0.95\\times1.08=1539\\Rightarrow1.026x=1539\\Rightarrow x=1{,}500\\). Hence, CP = ₹\\(1{,}500\\).")
         },
         {
             topic: "Ratio",
