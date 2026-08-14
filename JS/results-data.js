@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0097-20260813215628-c4b57124",
+        "title": "UPSC CPF Assistant Commandant CAPF 2025 Final Result Marks",
+        "organization": "UPSC Central Armed Police Force",
+        "department": "UPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-12",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.upsc.gov.in/sites/default/files/Mks_RecoCandi_CAPF_AC_Exam_2025_Eng_12082026.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "result-sheet-0098-20260813220048-9f1f6b97",
+        "title": "UP ECCE Educator Result 2026 Pratapgarh",
+        "organization": "UP Basic Shiksha Vibhag",
+        "department": "UBSV",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-13",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://doc.sarkariresults.org.in/ECCE_Educator_Pratapgarh_Result-merged.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0091-20260812184351-96f8b0a1",
         "title": "AIIMS CRE 5th Group B & C Result 2026 for 1484 Post",
         "organization": "All India Institute of Medical Sciences (AIIMS)",
