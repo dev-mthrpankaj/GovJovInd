@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0095-20260813215044-7c2393a7",
+        "title": "Bihar Police SI Sub Inspector Prohibition Result 2026",
+        "organization": "Bihar Police Subordinate Services Commission",
+        "department": "BPSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-12",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://bpssc.bihar.gov.in/Notices/Advt_032026_Prelims_Result_Publish-12082026.pdf",
+        "detailPage": "../Result_Details/HTML/Bihar-Police-Constable-Final-Result-2026.html",
+        "updatedAt": "2026-08-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0096-20260813215354-17307cec",
+        "title": "Bihar Vidhan Parishad LDC, DEO Result 2026",
+        "organization": "Bihar Legislative Council Secretariat",
+        "department": "BLCS",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-12",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://vidhanparishad.bihar.gov.in/document/Recruitment/2026/ldc_pre.pdf",
+        "detailPage": "../Result_Details/HTML/Bihar-Vidhan-Parishad-LDC-Final-Result-2026.html",
+        "updatedAt": "2026-08-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0097-20260813215628-c4b57124",
         "title": "UPSC CPF Assistant Commandant CAPF 2025 Final Result Marks",
         "organization": "UPSC Central Armed Police Force",
@@ -14,12 +50,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://www.upsc.gov.in/sites/default/files/Mks_RecoCandi_CAPF_AC_Exam_2025_Eng_12082026.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/UPSC-CAPF-AC-Written-Result-2026.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0098-20260813220048-9f1f6b97",
@@ -32,12 +68,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/ECCE_Educator_Pratapgarh_Result-merged.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/UP-Pratapgarh-ECCE-Educator-Result-2026.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0091-20260812184351-96f8b0a1",
