@@ -2,7 +2,7 @@
     "use strict";
 
     const SCRIPT_TIMEOUT_MS = 15000;
-    const QUIZ_ASSET_VERSION = "20260814-english-latex-1";
+    const QUIZ_ASSET_VERSION = "20260814-all-subjects-latex-1";
     const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "General Science", "Reasoning", "Computer"];
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
     const loadedScripts = new Map();
