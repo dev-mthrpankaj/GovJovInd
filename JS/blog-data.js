@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "free-typing-test-online-ssc-rrb-government-exams",
+  title: "Free Typing Test Online for SSC, RRB & Government Exams",
+  category: "Career Guidance",
+  date: "2026-08-14",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1786684403398.webp",
+  url: "student-hub/free-typing-test-online-ssc-rrb-government-exams.html",
+  excerpt: "Free typing test online for SSC CGL, CHSL, RRB NTPC, Delhi Police and other government exams. Practise English typing, track WPM and accuracy, and improve typing speed for free."
+},
+    {
   id: "ssc-cgl-typing-test-rules-explained",
   title: "SSC CGL Typing Test Rules Explained: Speed, Accuracy, Errors, and Submission Process",
   category: "SSC",
