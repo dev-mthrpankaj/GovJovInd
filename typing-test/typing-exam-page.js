@@ -140,10 +140,15 @@
     }
   };
 
+  const difficultyCountsByLanguage = {
+    english: { easy: 18, medium: 12, hard: 12 },
+    hindi: { easy: 6, medium: 6, hard: 6 }
+  };
+
   const difficulties = [
-    { id: "easy", label: "Easy Level", count: 12 },
-    { id: "medium", label: "Medium Level", count: 12 },
-    { id: "hard", label: "Hard Level", count: 12 }
+    { id: "easy", label: "Easy Level" },
+    { id: "medium", label: "Medium Level" },
+    { id: "hard", label: "Hard Level" }
   ];
 
   const durationByPreset = {
@@ -166,10 +171,6 @@
     if (!exam) return;
 
     main.classList.add("gju-typing-exam-detail-page");
-    if (main.querySelector(".gju-typing-passage-panel")) {
-      bindLanguage(main);
-      return;
-    }
     main.innerHTML = buildPage(presetId, exam);
     bindLanguage(main);
   }
@@ -194,7 +195,7 @@
           <article><span>Timer</span><strong>${getDurationLabel(exam)}</strong></article>
           <article><span>Mode</span><strong>Exam Style</strong></article>
           <article><span>Result</span><strong>WPM + Accuracy</strong></article>
-          <article><span>Passages</span><strong>${getTotalSetCount()} Sets</strong></article>
+          <article><span>Passages</span><strong data-typing-total-sets>${getTotalSetCount(defaultLanguage)} Sets</strong></article>
         </div>
       </section>
 
@@ -222,7 +223,7 @@
           <h2 id="typingPassagesTitle">Choose a Passage</h2>
           <p>Start with Easy, move to Medium, and finish with Hard for a complete typing routine.</p>
         </div>
-        ${difficulties.map((difficulty) => buildDifficultyTable(presetId, defaultLanguage, difficulty)).join("")}
+        ${getDifficulties(defaultLanguage).map((difficulty) => buildDifficultyTable(presetId, defaultLanguage, difficulty)).join("")}
       </section>
 
       ${buildFaqSection(exam.title)}
@@ -245,8 +246,16 @@
     return `${minutes} min`;
   }
 
-  function getTotalSetCount() {
-    return difficulties.reduce((total, difficulty) => total + difficulty.count, 0);
+  function getDifficulties(language) {
+    const counts = difficultyCountsByLanguage[language] || difficultyCountsByLanguage.english;
+    return difficulties.map((difficulty) => ({
+      ...difficulty,
+      count: counts[difficulty.id] || 0
+    }));
+  }
+
+  function getTotalSetCount(language) {
+    return getDifficulties(language).reduce((total, difficulty) => total + difficulty.count, 0);
   }
 
   function buildHowItWorksSection() {
@@ -314,6 +323,7 @@
   function bindLanguage(main) {
     const buttons = Array.from(main.querySelectorAll(".gju-typing-language-btn"));
     const labelNode = main.querySelector("#typingSelectedLanguage");
+    const totalSetsNode = main.querySelector("[data-typing-total-sets]");
     const panel = main.querySelector(".gju-typing-passage-panel");
     const presetId = panel?.dataset.presetId || "";
     syncPassageMeta(main, presetId);
@@ -327,13 +337,12 @@
           item.setAttribute("aria-pressed", String(selected));
         });
         if (labelNode) labelNode.textContent = label(language);
+        if (totalSetsNode) totalSetsNode.textContent = `${getTotalSetCount(language)} Sets`;
         if (panel) {
           panel.dataset.language = language;
-          difficulties.forEach((difficulty) => {
-            const grid = panel.querySelector(`[data-difficulty="${difficulty.id}"] .gju-typing-passage-card-grid`);
-            if (grid) {
-              grid.innerHTML = Array.from({ length: difficulty.count }, (_, index) => buildPassageCard(presetId, language, difficulty.id, index + 1)).join("");
-            }
+          panel.querySelectorAll(".gju-typing-passage-level").forEach((level) => level.remove());
+          getDifficulties(language).forEach((difficulty) => {
+            panel.insertAdjacentHTML("beforeend", buildDifficultyTable(presetId, language, difficulty));
           });
           syncPassageMeta(main, presetId);
         }
