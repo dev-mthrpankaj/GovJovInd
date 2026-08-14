@@ -698,6 +698,10 @@ body:has(.gju-typing-attempt-page) {
   font-family: var(--gju-hindi-font);
 }
 
+.typing-test-page[data-language="hindi"][data-hindi-input-mode="krutidev"] .gju-typing-input {
+  font-family: "Kruti Dev 010", "KrutiDev010", "DevLys 010", "Kundli", monospace;
+}
+
 .typing-test-page .gju-typing-attempt-actions {
   display: flex;
   align-items: center;
@@ -834,6 +838,36 @@ body:has(.gju-typing-attempt-page) {
   min-width: 28px;
   text-align: center;
   font-weight: 950;
+}
+
+.typing-test-page .gju-typing-mode-control {
+  display: grid;
+  gap: .45rem;
+  margin: 0 0 1.35rem;
+  color: #000;
+  font-size: .98rem;
+  font-weight: 950;
+}
+
+.typing-test-page .gju-typing-mode-control[hidden] {
+  display: none;
+}
+
+.typing-test-page .gju-typing-mode-control select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #cfe0f3;
+  border-radius: 8px;
+  background: #fff;
+  color: #102033;
+  font: inherit;
+  padding: .55rem .65rem;
+}
+
+.typing-test-page .gju-typing-mode-control select:focus {
+  outline: 0;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .14);
 }
 
 .typing-test-page .gju-typing-keyboard-note {

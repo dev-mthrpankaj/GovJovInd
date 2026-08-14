@@ -19,6 +19,7 @@
     targetAccuracy: 95,
     passage: "",
     passageIndex: null,
+    hindiInputMode: "mangal",
     startedAt: 0,
     pausedAt: 0,
     pausedMs: 0,
@@ -101,6 +102,8 @@
       "fontIncrease",
       "fontSizeValue",
       "fullscreenSwitch",
+      "hindiModeField",
+      "hindiInputMode",
       "attemptInfo"
     ].forEach((id) => {
       dom[id] = document.getElementById(id);
@@ -113,6 +116,7 @@
       state.language = dom.languageSelect.value;
       state.targetWPM = getTargetWPMForLanguage(state.preset, state.language);
       if (dom.targetWPM) dom.targetWPM.value = state.targetWPM;
+      updateHindiInputModeVisibility();
       prepareTest();
       render();
     });
@@ -133,6 +137,15 @@
     dom.fontDecrease?.addEventListener("click", () => updateAttemptFontSize(-1));
     dom.fontIncrease?.addEventListener("click", () => updateAttemptFontSize(1));
     dom.fullscreenSwitch?.addEventListener("change", toggleFullscreen);
+    dom.hindiInputMode?.addEventListener("change", () => {
+      state.hindiInputMode = dom.hindiInputMode.value === "krutidev" ? "krutidev" : "mangal";
+      try {
+        window.localStorage?.setItem("gjuTypingHindiInputMode", state.hindiInputMode);
+      } catch (error) {
+        // Ignore private-mode storage failures; the selector still works for this session.
+      }
+      prepareForChangedSetting(false);
+    });
     dom.typingInput?.addEventListener("paste", (event) => {
       event.preventDefault();
       showStatus("Pasting is disabled for clean typing metrics.");
@@ -181,12 +194,14 @@
     const routeLanguage = routeParams.get("language");
     const routeDifficulty = routeParams.get("difficulty");
     const routePassage = Number(routeParams.get("passage"));
+    const routeHindiMode = routeParams.get("hindiMode");
     if (routeLanguage && preset.languages.includes(routeLanguage)) {
       state.language = routeLanguage;
     }
     if (routeDifficulty && config.difficulties.includes(routeDifficulty)) {
       state.difficulty = routeDifficulty;
     }
+    state.hindiInputMode = getPreferredHindiInputMode(routeHindiMode);
     state.passageIndex = Number.isFinite(routePassage) ? routePassage : null;
     state.durationMinutes = Number(preset.duration) || 10;
     state.targetWPM = getTargetWPMForLanguage(preset, state.language);
@@ -230,7 +245,20 @@
     if (dom.customDuration) dom.customDuration.value = state.durationMinutes;
     if (dom.targetWPM) dom.targetWPM.value = state.targetWPM;
     if (dom.targetAccuracy) dom.targetAccuracy.value = state.targetAccuracy;
+    if (dom.hindiInputMode) dom.hindiInputMode.value = state.hindiInputMode;
     updateCustomDurationVisibility();
+    updateHindiInputModeVisibility();
+  }
+
+  function getPreferredHindiInputMode(routeHindiMode) {
+    if (routeHindiMode === "krutidev" || routeHindiMode === "mangal") return routeHindiMode;
+    try {
+      const saved = window.localStorage?.getItem("gjuTypingHindiInputMode");
+      if (saved === "krutidev" || saved === "mangal") return saved;
+    } catch (error) {
+      return "mangal";
+    }
+    return "mangal";
   }
 
   function getTargetWPMForLanguage(preset, language) {
@@ -261,6 +289,11 @@
     dom.customDurationField.hidden = dom.durationSelect.value !== "custom";
   }
 
+  function updateHindiInputModeVisibility() {
+    if (!dom.hindiModeField) return;
+    dom.hindiModeField.hidden = state.language !== "hindi";
+  }
+
   function prepareForChangedSetting(renewPassage = true) {
     if (state.status === "running" || state.status === "paused") return;
     if (renewPassage) prepareTest();
@@ -280,6 +313,7 @@
     if (dom.typingInput) {
       dom.typingInput.value = "";
       dom.typingInput.disabled = false;
+      dom.typingInput.placeholder = getTypingPlaceholder();
     }
   }
 
@@ -378,7 +412,7 @@
     if (state.status === "finished" || state.status === "paused") return;
     if (state.status === "ready" && dom.typingInput?.value) startClock();
     state.typed = dom.typingInput?.value || "";
-    if (splitTextUnits(state.typed).length >= splitTextUnits(state.passage).length) finishTest();
+    if (splitTextUnits(getScoredTypedText()).length >= splitTextUnits(state.passage).length) finishTest();
     render();
   }
 
@@ -436,7 +470,7 @@
   }
 
   function calculateResult() {
-    const typed = state.typed || "";
+    const typed = getScoredTypedText();
     const reference = state.passage || "";
     const typedUnits = splitTextUnits(typed);
     const referenceUnits = splitTextUnits(reference);
@@ -508,8 +542,9 @@
     setText(dom.liveAccuracy, `${preview.accuracy.toFixed(1)}%`);
     setText(dom.targetWPMText, String(state.targetWPM));
     setText(dom.targetAccuracyText, `${state.targetAccuracy}%`);
-    const typedLength = splitTextUnits(state.typed || "").length;
-    const typedWords = state.typed.trim().split(/\s+/).filter(Boolean).length;
+    const scoredTyped = getScoredTypedText();
+    const typedLength = splitTextUnits(scoredTyped).length;
+    const typedWords = scoredTyped.trim().split(/\s+/).filter(Boolean).length;
     const passageLength = splitTextUnits(state.passage || "").length;
     const progress = passageLength ? Math.min(100, (typedLength / passageLength) * 100) : 0;
     if (dom.progressBar) dom.progressBar.style.width = `${progress}%`;
@@ -519,7 +554,7 @@
 
   function renderPassage() {
     if (!dom.passageText) return;
-    const typed = splitTextUnits(state.typed || "");
+    const typed = splitTextUnits(getScoredTypedText());
     const reference = splitTextUnits(state.passage || "");
     let html = "";
     for (let index = 0; index < reference.length; index += 1) {
@@ -582,9 +617,13 @@
   function renderMeta() {
     const preset = state.preset;
     if (app) app.dataset.language = state.language || "english";
+    if (app) app.dataset.hindiInputMode = state.hindiInputMode || "mangal";
+    updateHindiInputModeVisibility();
+    if (dom.hindiInputMode) dom.hindiInputMode.value = state.hindiInputMode;
+    if (dom.typingInput) dom.typingInput.placeholder = getTypingPlaceholder();
     setText(dom.modeLabel, label(preset?.mode || "practice"));
     setText(dom.examLabel, preset?.name || "Typing Test");
-    setText(dom.languageLabel, label(state.language));
+    setText(dom.languageLabel, state.language === "hindi" ? `Hindi (${getHindiInputModeLabel()})` : label(state.language));
     setText(dom.disclaimerText, preset?.disclaimer || "Practice settings are configurable. For exam-specific preparation, verify the latest official notification.");
     setText(dom.keyboardNote, getKeyboardNote(preset, state.language));
     setText(dom.storageText, storage?.isPersistent ? "Progress is saved on this device." : "Local storage is unavailable; progress will remain for this session only.");
@@ -592,11 +631,33 @@
   }
 
   function getKeyboardNote(preset, language) {
-    if (preset?.keyboardNote) return preset.keyboardNote;
     if (language === "hindi") {
-      return "Hindi mode uses Mangal Unicode display. Type with your system Hindi keyboard/IME (InScript or Phonetic) and verify the latest official exam font/layout before the real test.";
+      if (state.hindiInputMode === "krutidev") {
+        return "KrutiDev 010 mode is for legacy Remington-style practice. If KrutiDev 010 is not installed, typed keys may look like English letters, but scoring is normalized to Unicode for comparison.";
+      }
+      if (preset?.keyboardNote) return preset.keyboardNote;
+      return "Hindi mode uses Mangal Unicode display. For serious exam practice, select the official Hindi keyboard layout in your system/IME; use phonetic only for casual practice.";
     }
+    if (preset?.keyboardNote) return preset.keyboardNote;
     return "English mode uses your standard keyboard layout.";
+  }
+
+  function getScoredTypedText(value = state.typed) {
+    const typed = String(value || "");
+    if (state.language === "hindi" && state.hindiInputMode === "krutidev") {
+      return window.GJUHindiFontModes?.krutidevToUnicode?.(typed) || typed;
+    }
+    return typed.normalize ? typed.normalize("NFC") : typed;
+  }
+
+  function getHindiInputModeLabel() {
+    return state.hindiInputMode === "krutidev" ? "KrutiDev 010" : "Mangal Unicode";
+  }
+
+  function getTypingPlaceholder() {
+    if (state.language === "hindi" && state.hindiInputMode === "krutidev") return "KrutiDev keys type here";
+    if (state.language === "hindi") return "यहां टाइप करें";
+    return "Write here";
   }
 
   function renderButtonState() {

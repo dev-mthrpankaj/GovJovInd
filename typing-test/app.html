@@ -76,6 +76,14 @@
             <button id="fontIncrease" type="button" aria-label="Increase font size"><i class="fas fa-plus" aria-hidden="true"></i></button>
           </div>
 
+          <label class="gju-typing-mode-control" id="hindiModeField" hidden>
+            <span>Hindi Mode:</span>
+            <select id="hindiInputMode">
+              <option value="mangal">Mangal Unicode</option>
+              <option value="krutidev">KrutiDev 010</option>
+            </select>
+          </label>
+
           <p class="gju-typing-keyboard-note" id="keyboardNote">English mode uses your standard keyboard layout.</p>
 
           <label class="gju-typing-toggle-row">Full Screen:<input id="fullscreenSwitch" type="checkbox" role="switch"><span></span></label>
@@ -113,6 +121,7 @@
   <script src="passage-data/hindi/hard.js?v=typing-hindi42-20260814" defer></script>
   <script src="passages.js?v=typing-hindi42-20260814" defer></script>
   <script src="typing-storage.js" defer></script>
+  <script src="hindi-font-modes.js?v=typing-hindi42-20260814" defer></script>
   <script src="typing-test.js" defer></script>
 </body>
 </html>

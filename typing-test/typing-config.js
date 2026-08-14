@@ -7,7 +7,7 @@
   const upssscTypingDisclaimer = "UPSSSC Junior Assistant typing practice is based on 30 WPM in English and 25 WPM in Hindi with short qualifying sessions. Verify the latest UPSSSC notification, admit card, font, keyboard, and correction rules.";
   const upPoliceTypingDisclaimer = "UP Police Computer Operator typing practice is based on 30 WPM in English and 25 WPM in Hindi with 85% accuracy in 15-minute sessions. Verify the latest UPPRPB notification and test instructions.";
   const bankingPracticeDisclaimer = "Banking clerk and assistant recruitments usually include a local language proficiency test rather than a fixed official typing-speed test. Treat this as typing and language practice, and verify the latest official bank/IBPS/RBI notification.";
-  const hindiUnicodeKeyboardNote = "Hindi mode uses Mangal Unicode display. Type with your system Hindi keyboard/IME (InScript or Phonetic). For the real exam, always verify the latest official font and keyboard-layout instructions.";
+  const hindiUnicodeKeyboardNote = "Hindi mode uses Mangal Unicode display. For serious exam practice, select the official Hindi keyboard layout in your system/IME; use phonetic only for casual practice. Always verify the latest official font and keyboard-layout instructions.";
 
   const difficulties = ["easy", "medium", "hard"];
   const durations = [1, 2, 5, 10, 15, 30];
