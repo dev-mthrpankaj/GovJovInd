@@ -141,9 +141,9 @@
   };
 
   const difficulties = [
-    { id: "easy", label: "Easy Level", count: 6 },
-    { id: "medium", label: "Medium Level", count: 6 },
-    { id: "hard", label: "Hard Level", count: 6 }
+    { id: "easy", label: "Easy Level", count: 12 },
+    { id: "medium", label: "Medium Level", count: 12 },
+    { id: "hard", label: "Hard Level", count: 12 }
   ];
 
   const durationByPreset = {
@@ -194,7 +194,7 @@
           <article><span>Timer</span><strong>${getDurationLabel(exam)}</strong></article>
           <article><span>Mode</span><strong>Exam Style</strong></article>
           <article><span>Result</span><strong>WPM + Accuracy</strong></article>
-          <article><span>Passages</span><strong>18 Sets</strong></article>
+          <article><span>Passages</span><strong>${getTotalSetCount()} Sets</strong></article>
         </div>
       </section>
 
@@ -243,6 +243,10 @@
     const presetId = Object.keys(EXAMS).find((key) => EXAMS[key] === exam);
     const minutes = durationByPreset[presetId] || 10;
     return `${minutes} min`;
+  }
+
+  function getTotalSetCount() {
+    return difficulties.reduce((total, difficulty) => total + difficulty.count, 0);
   }
 
   function buildHowItWorksSection() {
