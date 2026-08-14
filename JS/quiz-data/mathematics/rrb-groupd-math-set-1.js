@@ -62,8 +62,8 @@
         {
             topic: "Percentage - Discount",
             difficulty: "Hard",
-            question: "A retailer offers discount schemes to shoppers on an item. Which of the following schemes will be least beneficial for the customer?\\n\\ni. A discount of \\(34\\%\\)\\nii. A discount of \\(37\\%\\) followed by a further \\(8\\%\\) discount\\niii. Successive discounts of \\(7\\%\\) and \\(27\\%\\)",
-            questionTextMap: text("एक खुदरा विक्रेता खरीदारों को एक वस्तु पर दी गई छूट स्कीमें प्रदान करता है। निम्नलिखित में से कौन-सी स्कीम ग्राहक के लिए सबसे कम लाभदायक होगी?\\n\\ni. \\(34\\%\\) की छूट\\nii. \\(37\\%\\) की छूट के बाद \\(8\\%\\) की छूट\\niii. \\(7\\%\\) और \\(27\\%\\) की क्रमिक छूटें", "A retailer offers discount schemes to shoppers on an item. Which of the following schemes will be least beneficial for the customer?\\n\\ni. A discount of \\(34\\%\\)\\nii. A discount of \\(37\\%\\) followed by a further \\(8\\%\\) discount\\niii. Successive discounts of \\(7\\%\\) and \\(27\\%\\)"),
+            question: "A retailer offers discount schemes to shoppers on an item. Which of the following schemes will be least beneficial for the customer?\n\ni. A discount of \\(34\\%\\)\nii. A discount of \\(37\\%\\) followed by a further \\(8\\%\\) discount\niii. Successive discounts of \\(7\\%\\) and \\(27\\%\\)",
+            questionTextMap: text("एक खुदरा विक्रेता खरीदारों को एक वस्तु पर दी गई छूट स्कीमें प्रदान करता है। निम्नलिखित में से कौन-सी स्कीम ग्राहक के लिए सबसे कम लाभदायक होगी?\n\ni. \\(34\\%\\) की छूट\nii. \\(37\\%\\) की छूट के बाद \\(8\\%\\) की छूट\niii. \\(7\\%\\) और \\(27\\%\\) की क्रमिक छूटें", "A retailer offers discount schemes to shoppers on an item. Which of the following schemes will be least beneficial for the customer?\n\ni. A discount of \\(34\\%\\)\nii. A discount of \\(37\\%\\) followed by a further \\(8\\%\\) discount\niii. Successive discounts of \\(7\\%\\) and \\(27\\%\\)"),
             options: [
                 option("स्कीम ii", "Scheme ii"),
                 option("स्कीम ii और स्कीम iii दोनों", "Both scheme ii and scheme iii"),
@@ -167,8 +167,8 @@
         {
             topic: "Statistics",
             difficulty: "Easy",
-            question: "What is the mode of the following data?\\n\\n\\(55, 45, 44, 48, 42, 45, 52, 53, 42, 50, 54, 49, 52, 45, 47, 43, 45, 48\\)",
-            questionTextMap: text("निम्नलिखित डेटा का बहुलक कितना है?\\n\\n\\(55, 45, 44, 48, 42, 45, 52, 53, 42, 50, 54, 49, 52, 45, 47, 43, 45, 48\\)", "What is the mode of the following data?\\n\\n\\(55, 45, 44, 48, 42, 45, 52, 53, 42, 50, 54, 49, 52, 45, 47, 43, 45, 48\\)"),
+            question: "What is the mode of the following data?\n\n\\(55, 45, 44, 48, 42, 45, 52, 53, 42, 50, 54, 49, 52, 45, 47, 43, 45, 48\\)",
+            questionTextMap: text("निम्नलिखित डेटा का बहुलक कितना है?\n\n\\(55, 45, 44, 48, 42, 45, 52, 53, 42, 50, 54, 49, 52, 45, 47, 43, 45, 48\\)", "What is the mode of the following data?\n\n\\(55, 45, 44, 48, 42, 45, 52, 53, 42, 50, 54, 49, 52, 45, 47, 43, 45, 48\\)"),
             options: [
                 option("\\(45\\)", "\\(45\\)"),
                 option("\\(44\\)", "\\(44\\)"),
