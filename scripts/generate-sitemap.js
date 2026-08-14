@@ -10,7 +10,8 @@ const baseUrl = "https://govjobupdates.com/";
 const sitemapPath = path.join(root, "sitemap.xml");
 const signatureCachePath = path.join(root, "data", "sitemap-content-signatures.json");
 const excludedDirectoryNames = new Set([".git", ".github", "node_modules", "android-webview-app"]);
-const excludedNameToken = /(?:^|[ ._-])(draft|drafts|test|tests|backup|backups|bak|old|copy)(?:[ ._-]|$)/i;
+const excludedNameToken = /(?:^|[ ._-])(draft|drafts|tests|backup|backups|bak|old|copy)(?:[ ._-]|$)/i;
+const excludedExactNames = new Set(["test", "test-page", "test-pages"]);
 
 function toRelativePath(filePath) {
   return path.relative(root, filePath).split(path.sep).join("/");
@@ -19,6 +20,7 @@ function toRelativePath(filePath) {
 function shouldSkipDirectory(name) {
   const lowerName = name.toLowerCase();
   return excludedDirectoryNames.has(lowerName)
+    || excludedExactNames.has(lowerName)
     || lowerName.startsWith(".edge-")
     || excludedNameToken.test(lowerName);
 }
@@ -61,9 +63,18 @@ function isMetaRefreshRedirectPage(filePath) {
   ));
 }
 
+function isIndexableHtmlDocument(filePath) {
+  const html = fs.readFileSync(filePath, "utf8");
+  return /<html\b/i.test(html) && /<body\b/i.test(html) && /<title\b[\s\S]*?<\/title>/i.test(html);
+}
+
 function shouldExcludeFile(relativePath, filePath) {
   if (relativePath.toLowerCase() === "404.html") return true;
-  if (relativePath.split("/").some((segment) => excludedNameToken.test(segment))) return true;
+  if (relativePath.split("/").some((segment) => {
+    const lowerSegment = segment.toLowerCase().replace(/\.html$/i, "");
+    return excludedExactNames.has(lowerSegment) || excludedNameToken.test(segment);
+  })) return true;
+  if (!isIndexableHtmlDocument(filePath)) return true;
   if (isMetaRefreshRedirectPage(filePath)) return true;
   return isNoIndexPage(filePath);
 }

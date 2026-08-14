@@ -57,6 +57,13 @@ function setBusy(button, busy, text) {
     button.disabled = false;
 }
 
+function trackDocumentEvent(name, params = {}) {
+    window.GJU_ANALYTICS?.track(name, {
+        tool_type: 'document_tool',
+        ...params
+    });
+}
+
 function sanitizeFilename(filename, fallback = 'GovJobUpdates_Document') {
     const cleaned = String(filename || '')
         .replace(/[\\/:*?"<>|]+/g, '-')
@@ -585,6 +592,11 @@ function initImageResizer() {
         }
         const extension = getImageExtension(resizedFormat);
         downloadBlob(resizedBlob, withExtension(`GovJobUpdates_Resized_${Date.now()}`, extension));
+        trackDocumentEvent('document_downloaded', {
+            document_tool: 'image_resize',
+            output_format: resizedFormat,
+            output_size_bytes: resizedBlob.size
+        });
     });
 
     updateImageQualityLabel();
@@ -842,6 +854,16 @@ function initImageResizer() {
                 ? ` ${getImageFormatLabel(formatSelect.value)} is not supported in this browser, so ${getImageFormatLabel(outputFormat)} was used.`
                 : '';
             showMessage(messageBox, 'success', `Image resized successfully.${targetNote}${fallbackNote}`);
+            trackDocumentEvent('document_resized', {
+                document_tool: 'image_resize',
+                input_format: getFileExtension(originalFile.name),
+                output_format: outputFormat,
+                input_size_bytes: originalFile.size,
+                output_size_bytes: resizedBlob.size,
+                width_px: canvas.width,
+                height_px: canvas.height,
+                target_bytes: targetBytes || 0
+            });
         } catch (error) {
             showMessage(messageBox, 'error', error.message || 'Processing failed. Please try a smaller image.');
         } finally {
@@ -1013,6 +1035,12 @@ function initImageToPdf() {
             return;
         }
         downloadBlob(pdfBlob, withExtension(`GovJobUpdates_Image_To_PDF_${Date.now()}`, 'pdf'));
+        trackDocumentEvent('document_downloaded', {
+            document_tool: 'image_to_pdf',
+            output_format: 'pdf',
+            output_size_bytes: pdfBlob.size,
+            file_count: imageItems.length
+        });
     });
 
     updatePdfQualityLabel();
@@ -1152,6 +1180,13 @@ function initImageToPdf() {
             } else {
                 showMessage(messageBox, 'success', 'PDF created successfully. Download button is ready.');
             }
+            trackDocumentEvent('document_converted', {
+                document_tool: 'image_to_pdf',
+                file_count: imageItems.length,
+                input_size_bytes: imageItems.reduce((sum, item) => sum + item.file.size, 0),
+                output_size_bytes: pdfBlob.size,
+                target_bytes: targetBytes || 0
+            });
         } catch (error) {
             showMessage(messageBox, 'error', error.message || 'Processing failed. Please try another image.');
         } finally {
@@ -1349,6 +1384,11 @@ function initPdfResizer() {
             return;
         }
         downloadBlob(resizedPdf, withExtension(`GovJobUpdates_Compressed_PDF_${Date.now()}`, 'pdf'));
+        trackDocumentEvent('document_downloaded', {
+            document_tool: 'pdf_compress',
+            output_format: 'pdf',
+            output_size_bytes: resizedPdf.size
+        });
     });
 
     updateQualityLabel();
@@ -1500,6 +1540,16 @@ function initPdfResizer() {
                 } else {
                     showMessage(messageBox, 'success', 'PDF compressed successfully. Download button is ready.');
                 }
+                trackDocumentEvent('document_resized', {
+                    document_tool: 'pdf_compress',
+                    compression_method: bestResult.method,
+                    compression_level: getCompressionSettings().level,
+                    input_size_bytes: originalPdf.size,
+                    output_size_bytes: bestResult.blob.size,
+                    reduction_percent: Number(reduction.toFixed(1)),
+                    target_bytes: targetBytes || 0,
+                    pages: bestResult.pages || 0
+                });
             } else {
                 resizedPdf = null;
                 downloadBtn.disabled = true;
@@ -1740,6 +1790,12 @@ function initPdfManager() {
             return;
         }
         downloadBlob(mergedPdfBlob, withExtension(`GovJobUpdates_Merged_PDF_${Date.now()}`, 'pdf'));
+        trackDocumentEvent('document_downloaded', {
+            document_tool: 'pdf_merge',
+            output_format: 'pdf',
+            output_size_bytes: mergedPdfBlob.size,
+            file_count: mergeItems.length
+        });
     });
     organizeDownloadBtn.addEventListener('click', () => {
         if (!organizedPdfBlob) {
@@ -1747,6 +1803,12 @@ function initPdfManager() {
             return;
         }
         downloadBlob(organizedPdfBlob, withExtension(organizedFilename || `GovJobUpdates_Organized_PDF_${Date.now()}`, 'pdf'));
+        trackDocumentEvent('document_downloaded', {
+            document_tool: 'pdf_organize',
+            output_format: 'pdf',
+            output_size_bytes: organizedPdfBlob.size,
+            output_pages: pageOrder.length
+        });
     });
 
     async function handleMergeFiles(files) {
@@ -1838,6 +1900,13 @@ function initPdfManager() {
             $('#merge-pdf-pages').textContent = String(totalPages);
             mergeDownloadArea.classList.remove('hidden');
             showMessage(messageBox, 'success', 'PDFs merged successfully. Download button is ready.');
+            trackDocumentEvent('document_merged', {
+                document_tool: 'pdf_merge',
+                file_count: mergeItems.length,
+                total_pages: totalPages,
+                input_size_bytes: mergeItems.reduce((sum, item) => sum + item.file.size, 0),
+                output_size_bytes: mergedPdfBlob.size
+            });
         } catch (error) {
             showMessage(messageBox, 'error', getPdfErrorMessage(error));
         } finally {
@@ -1927,6 +1996,12 @@ function initPdfManager() {
             const selectedPages = parsePageRange($('#split-page-range').value, organizePageCount);
             await buildOrganizedPdf(selectedPages, $('#split-output-name').value || 'GovJobUpdates_Extracted_Pages.pdf', extractBtn, 'Extracting...');
             showMessage(messageBox, 'success', 'Selected page range extracted. Download button is ready.');
+            trackDocumentEvent('document_extracted', {
+                document_tool: 'pdf_extract',
+                input_pages: organizePageCount,
+                output_pages: selectedPages.length,
+                output_size_bytes: organizedPdfBlob?.size || 0
+            });
         } catch (error) {
             showMessage(messageBox, 'error', getPdfErrorMessage(error));
         }
@@ -1945,6 +2020,12 @@ function initPdfManager() {
         try {
             await buildOrganizedPdf(pageOrder, 'GovJobUpdates_Reordered_PDF.pdf', saveOrganizedBtn, 'Saving...');
             showMessage(messageBox, 'success', 'Reordered PDF created. Download button is ready.');
+            trackDocumentEvent('document_organized', {
+                document_tool: 'pdf_organize',
+                input_pages: organizePageCount,
+                output_pages: pageOrder.length,
+                output_size_bytes: organizedPdfBlob?.size || 0
+            });
         } catch (error) {
             showMessage(messageBox, 'error', getPdfErrorMessage(error));
         }

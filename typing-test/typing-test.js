@@ -35,6 +35,17 @@
   const routeParams = new URLSearchParams(window.location.search);
   const routePresetId = routeParams.get("preset") || app.dataset.presetId || config.defaultPresetId;
 
+  function trackTypingEvent(name, params = {}) {
+    window.GJU_ANALYTICS?.track(name, {
+      tool_type: "typing_test",
+      preset_id: state.preset?.id || routePresetId || "general",
+      exam_name: state.preset?.name || "Typing Test",
+      language: state.language,
+      difficulty: state.difficulty,
+      ...params
+    });
+  }
+
   function init() {
     cacheDom();
     buildPresetOptions();
@@ -307,6 +318,12 @@
     state.pausedMs = 0;
     state.finishedAt = 0;
     setStatus("running");
+    trackTypingEvent("typing_test_started", {
+      duration_minutes: state.durationMinutes,
+      target_wpm: state.targetWPM,
+      target_accuracy: state.targetAccuracy,
+      passage_index: Number.isFinite(state.passageIndex) ? state.passageIndex : -1
+    });
     render();
   }
 
@@ -381,6 +398,16 @@
     const result = calculateResult();
     state.lastResult = result;
     storage?.saveResult(result);
+    trackTypingEvent("typing_test_completed", {
+      duration_minutes: result.durationMinutes,
+      time_taken_seconds: result.timeTakenSeconds,
+      net_wpm: result.netWPM,
+      gross_wpm: result.grossWPM,
+      accuracy: result.accuracy,
+      errors: result.errors,
+      total_typed_characters: result.totalTypedCharacters,
+      target_achieved: result.targetAchieved
+    });
     if (dom.typingInput) dom.typingInput.disabled = true;
     setStatus("finished");
     render();
