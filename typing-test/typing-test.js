@@ -581,13 +581,22 @@
 
   function renderMeta() {
     const preset = state.preset;
+    if (app) app.dataset.language = state.language || "english";
     setText(dom.modeLabel, label(preset?.mode || "practice"));
     setText(dom.examLabel, preset?.name || "Typing Test");
     setText(dom.languageLabel, label(state.language));
     setText(dom.disclaimerText, preset?.disclaimer || "Practice settings are configurable. For exam-specific preparation, verify the latest official notification.");
-    setText(dom.keyboardNote, preset?.keyboardNote || "Future keyboard layout support can be added for Remington/GAIL and InScript without changing the core engine.");
+    setText(dom.keyboardNote, getKeyboardNote(preset, state.language));
     setText(dom.storageText, storage?.isPersistent ? "Progress is saved on this device." : "Local storage is unavailable; progress will remain for this session only.");
     setText(dom.statusText, label(state.status));
+  }
+
+  function getKeyboardNote(preset, language) {
+    if (preset?.keyboardNote) return preset.keyboardNote;
+    if (language === "hindi") {
+      return "Hindi mode uses Mangal Unicode display. Type with your system Hindi keyboard/IME (InScript or Phonetic) and verify the latest official exam font/layout before the real test.";
+    }
+    return "English mode uses your standard keyboard layout.";
   }
 
   function renderButtonState() {

@@ -142,7 +142,7 @@
 
   const difficultyCountsByLanguage = {
     english: { easy: 18, medium: 12, hard: 12 },
-    hindi: { easy: 6, medium: 6, hard: 6 }
+    hindi: { easy: 18, medium: 12, hard: 12 }
   };
 
   const difficulties = [
