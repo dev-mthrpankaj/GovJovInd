@@ -4,6 +4,34 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
+        "examId": "rssb-computer-instructor-2026",
+        "examName": "RSSB Computer Instructor 2026",
+        "board": "RSSB",
+        "examType": "offline",
+        "sheetName": "RSSB Computer Instructor 2026",
+        "status": "upcoming",
+        "activeDate": "",
+        "archiveAfterDays": 30,
+        "effectiveStatus": "upcoming",
+        "canSubmit": false,
+        "canCheckRank": false,
+        "totalQuestions": 200,
+        "marksPerCorrect": 1,
+        "negativeMarking": 0.33,
+        "hasShifts": false,
+        "normalization": false,
+        "supportedModes": [
+            "offline"
+        ],
+        "subjects": [],
+        "subjectPassingCriteria": [],
+        "overallPassingCriteria": null,
+        "categories": [],
+        "horizontalCategories": [],
+        "states": [],
+        "disabled": false
+    },
+    {
         "examId": "rrb-alp-cbt-2",
         "examName": "RRB Railway ALP Assistant Loco Pilot CBT II",
         "board": "RRB",
