@@ -98,9 +98,11 @@
 
         cacheStaticDom();
         state.mobileMarksMode = detectMobileMarksMode();
+        const requestedExamId = getRequestedExamId();
         const hasStaticExamConfig = loadStaticExamConfig();
-        if (!hasStaticExamConfig) await loadSheetExamConfig();
-        setSelectedExam((config.exams || []).find((exam) => !exam.disabled) || null);
+        if (!hasStaticExamConfig || (requestedExamId && !findExamById(requestedExamId))) await loadSheetExamConfig();
+        if (requestedExamId) app.classList.add("is-fixed-exam");
+        setSelectedExam(findExamById(requestedExamId) || (config.exams || []).find((exam) => !exam.disabled) || null, { syncSearch: Boolean(requestedExamId) });
         bindTabs();
         bindExamSelector();
         bindCategoryOptions();
@@ -142,6 +144,22 @@
         } catch {
             // Fallback exams in rank-predictor-config.js keep the form usable.
         }
+    }
+
+    function getRequestedExamId() {
+        const fromPage = String(window.RANK_PREDICTOR_PAGE_EXAM_ID || "").trim();
+        if (fromPage) return fromPage;
+        try {
+            return String(new URLSearchParams(window.location.search).get("exam") || "").trim();
+        } catch {
+            return "";
+        }
+    }
+
+    function findExamById(examId) {
+        const requested = String(examId || "").trim();
+        if (!requested) return null;
+        return (config.exams || []).find((exam) => exam.examId === requested && !exam.disabled) || null;
     }
 
     async function fetchSheetExamConfig() {
@@ -1939,7 +1957,24 @@
     }
 
     function getCandidateSession() {
+        const session = readFirebaseCandidateSession();
+        if (session) return session;
         return window.CandidateAuth?.getSession?.() || null;
+    }
+
+    function readFirebaseCandidateSession() {
+        try {
+            const saved = JSON.parse(localStorage.getItem("gju:candidate-session") || sessionStorage.getItem("gju:candidate-session") || "null");
+            if (!saved || !saved.userId || /^GJU-/i.test(String(saved.userId))) return null;
+            return {
+                userId: String(saved.userId || "").trim(),
+                name: String(saved.name || "").trim(),
+                mobile: normalizeMobile(saved.mobile || ""),
+                email: String(saved.email || "").trim().toLowerCase()
+            };
+        } catch {
+            return null;
+        }
     }
 
     function hydrateCandidateSession() {

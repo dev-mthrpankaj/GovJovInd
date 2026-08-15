@@ -119,10 +119,17 @@ import { getDatabase, ref, update, serverTimestamp } from "https://www.gstatic.c
 
   function bindLogin(){
     const loginForm = $("#loginForm"), signupForm = $("#signupForm"), googleBtn = $("#googleLoginBtn");
-    document.querySelectorAll("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>{
-      const target=btn.dataset.authTab; document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active", b===btn));
-      loginForm.classList.toggle("hidden", target!=="login"); signupForm.classList.toggle("hidden", target!=="signup"); show("",false); $("#authMessage")?.classList.add("hidden");
-    }));
+    const activateTab = (target)=>{
+      document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active", b.dataset.authTab===target));
+      loginForm?.classList.toggle("hidden", target!=="login");
+      signupForm?.classList.toggle("hidden", target!=="signup");
+      show("",false);
+      $("#authMessage")?.classList.add("hidden");
+    };
+    document.querySelectorAll("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>activateTab(btn.dataset.authTab || "login")));
+    try {
+      if (new URLSearchParams(window.location.search).get("mode") === "signup") activateTab("signup");
+    } catch {}
     loginForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(loginForm,true); try{ await authPersistenceReady; const email=$("#loginEmail").value.trim(); const pass=$("#loginPassword").value; const res=await signInWithEmailAndPassword(auth,email,pass); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user); go(redirectTarget("dashboard.html")); }catch(err){ show(readableError(err),true); }finally{ busy(loginForm,false); } });
     signupForm?.addEventListener("submit", async(e)=>{ e.preventDefault(); busy(signupForm,true); try{ await authPersistenceReady; const name=$("#signupName").value.trim(); const mobile=cleanMobile($("#signupMobile")?.value); if(mobile.length!==10){ show("Please enter valid 10 digit mobile number.", true); return; } const email=$("#signupEmail").value.trim(); const pass=$("#signupPassword").value; const res=await createUserWithEmailAndPassword(auth,email,pass); if(name) await updateProfile(res.user,{displayName:name}); rememberSession(res.user); syncHeader(res.user); markAuthReady(); await saveUserSoft(res.user,{name,mobile,createdAt:serverTimestamp(),role:"user"}); go(redirectTarget("dashboard.html")); }catch(err){ show(readableError(err),true); }finally{ busy(signupForm,false); } });
     if(!prepareGoogleButton(googleBtn)) googleBtn?.addEventListener("click", ()=>startGoogleLogin(googleBtn, show, true));

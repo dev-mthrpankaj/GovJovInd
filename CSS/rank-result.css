@@ -151,6 +151,11 @@ body {
     gap: 10px;
 }
 
+.share-actions {
+    display: grid;
+    gap: 10px;
+}
+
 .rank-result-page .btn {
     display: inline-flex;
     align-items: center;
@@ -426,8 +431,13 @@ body {
     }
 
     .result-hero-actions,
-    .share-panel {
+    .share-actions {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+    }
+
+    .share-panel {
+        grid-template-columns: minmax(0, 1fr);
         align-items: center;
     }
 }
@@ -440,6 +450,14 @@ body {
 
     .result-hero-actions {
         min-width: 320px;
+    }
+
+    .share-panel {
+        grid-template-columns: minmax(0, 1fr) minmax(440px, 0.85fr);
+    }
+
+    .share-actions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .primary-rank-grid {
