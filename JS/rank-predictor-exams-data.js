@@ -101,7 +101,7 @@ window.GovJobUpdatesRankPredictorExams = [
         "totalQuestions": 300,
         "marksPerCorrect": 0.6666666666666666,
         "negativeMarking": 0.33,
-        "hasShifts": true,
+        "hasShifts": false,
         "normalization": false,
         "supportedModes": [
             "offline"
