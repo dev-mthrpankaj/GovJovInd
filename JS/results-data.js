@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0102-20260815185055-8a5c14f2",
+        "title": "RSSB Forester Result 2026 – OUT",
+        "organization": "Rajasthan Staff Selection Board (RSSB)",
+        "department": "RSSB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rssb.rajasthan.gov.in/results",
+        "detailPage": "../Result_Details/HTML/RSSB-Forester-Result-2026.html",
+        "updatedAt": "2026-08-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0095-20260813215044-7c2393a7",
         "title": "Bihar Police SI Sub Inspector Prohibition Result 2026",
         "organization": "Bihar Police Subordinate Services Commission",
