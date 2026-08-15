@@ -12,7 +12,7 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "upcoming",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "upcoming",
+        "effectiveStatus": "disabled",
         "canSubmit": false,
         "canCheckRank": false,
         "totalQuestions": 200,
@@ -104,7 +104,7 @@ window.GovJobUpdatesRankPredictorExams = [
             "Udaipur",
             "Other State"
         ],
-        "disabled": false
+        "disabled": true
     },
     {
         "examId": "rrb-alp-cbt-2",
