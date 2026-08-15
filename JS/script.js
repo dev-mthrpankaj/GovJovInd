@@ -41,6 +41,12 @@ const getCurrentPageName = () => {
   return decodeURIComponent(pageName || 'index.html').toLowerCase();
 };
 
+const getCurrentSectionPageName = () => {
+  const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
+  if (/\/rank-predictor(?:\/|$)/i.test(path)) return 'rank-predictor.html';
+  return getCurrentPageName();
+};
+
 const isNotFoundPage = () => document.body?.classList.contains('not-found-page');
 
 const getHtmlDepthFromRoot = () => {
@@ -62,7 +68,7 @@ const getRootRelativeHref = (pathFromRoot) => {
 };
 
 const isAdsBlockedPage = () => {
-  return !ADS_CONFIG.enabled || ADS_CONFIG.blockedPages.includes(getCurrentPageName());
+  return !ADS_CONFIG.enabled || ADS_CONFIG.blockedPages.includes(getCurrentSectionPageName());
 };
 
 const createAdSlot = (variant, autoLocation) => {
@@ -270,7 +276,7 @@ const getSharedPageHref = (pageName) => {
 const getActivePageClass = (pageName) => {
   if (isNotFoundPage()) return '';
 
-  const currentPage = getCurrentPageName();
+  const currentPage = getCurrentSectionPageName();
   const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
   if (pageName === 'student-hub.html' && /\/html\/student-hub\/[^/]+\.html$/i.test(path)) return ' class="active"';
 
@@ -288,7 +294,7 @@ const getHrefPageName = (href) => {
 
 const normalizeHeaderActiveLinks = (navRoot = document.querySelector('header nav')) => {
   if (!navRoot) return;
-  const currentPage = getCurrentPageName() || 'index.html';
+  const currentPage = getCurrentSectionPageName() || 'index.html';
   const links = Array.from(navRoot.querySelectorAll('a[href]'));
   if (isNotFoundPage()) {
     links.forEach((link) => link.classList.remove('active'));
@@ -554,7 +560,7 @@ const ensureCandidateBottomNav = () => {
     { label: 'UP Doc', icon: 'fa-certificate', href: getCandidatePageHref('up-certificate-services.html'), match: /up-certificate-services\.html$/i },
     { label: 'Jobs', icon: 'fa-briefcase', href: getCandidatePageHref('latest-jobs.html'), match: /latest-jobs\.html$/i }
   ];
-  const currentPage = getCurrentPageName();
+  const currentPage = getCurrentSectionPageName();
   const markup = items.map((item) => {
     const active = !isNotFoundPage() && (item.match.test(currentPage) || (item.label === 'Dashboard' && currentPage === 'dashboard.html'));
     return `<a href="${item.href}" class="${active ? 'is-active' : ''}" aria-label="${item.label}"><i class="fas ${item.icon}" aria-hidden="true"></i><span>${item.label}</span></a>`;
