@@ -2040,6 +2040,20 @@
       "title": "Income Tax Canteen Attendant Online Form 2026",
       "lastPostedAt": "2026-08-11T13:55:01.515Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0182-20260815183906-655e4b1d": {
+      "updatedAt": "2026-08-15",
+      "hash": "816b3d0ddd1bfed83381287b09d1c1d4b3a58b63a5ff5907e41d00984f0d6cd6",
+      "title": "RSSB Junior Engineer Online Form 2026 for 874 Post",
+      "lastPostedAt": "2026-08-15T13:56:36.769Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0183-20260815184357-cd5221bb": {
+      "updatedAt": "2026-08-15",
+      "hash": "8dc4de99a3cba31b59a9ebf41fe22e8da7401d572ef165c5b591e073c558bf34",
+      "title": "Income Tax MTS , Tax Assistant, Stenographer Online Form 2026",
+      "lastPostedAt": "2026-08-15T13:56:37.715Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -5174,6 +5188,13 @@
       "hash": "839c9ffea68adec0cc3f8e45135fefc8818387d7b27434522df03b09d9887391",
       "title": "MPESB Van Rakshak, Jail Prahari Result 2026 for 1679 Post",
       "lastPostedAt": "2026-08-14T16:23:11.747Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0102-20260815185055-8a5c14f2": {
+      "updatedAt": "2026-08-15",
+      "hash": "72601e479569ff85dedfc2ba703f00f843755fca00f037746a85bdb0acb45ff0",
+      "title": "RSSB Forester Result 2026 – OUT",
+      "lastPostedAt": "2026-08-15T13:37:42.698Z",
       "stateReason": "new"
     }
   }
