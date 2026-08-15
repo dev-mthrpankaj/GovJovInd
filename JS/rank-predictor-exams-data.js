@@ -4,11 +4,11 @@
 
 window.GovJobUpdatesRankPredictorExams = [
     {
-        "examId": "rssb-computer-instructor-2026",
-        "examName": "RSSB Computer Instructor 2026",
+        "examId": "rssb-computer-instructor-BCI-2026",
+        "examName": "RSSB Computer Instructor Basic Computer Instructor 2026",
         "board": "RSSB",
         "examType": "offline",
-        "sheetName": "RSSB Computer Instructor 2026",
+        "sheetName": "RSSB Computer Instructor BCI 2026",
         "status": "upcoming",
         "activeDate": "",
         "archiveAfterDays": 30,
@@ -23,12 +23,87 @@ window.GovJobUpdatesRankPredictorExams = [
         "supportedModes": [
             "offline"
         ],
-        "subjects": [],
+        "subjects": [
+            {
+                "name": "Paper 1",
+                "questions": 100
+            },
+            {
+                "name": "Paper 2",
+                "questions": 100
+            }
+        ],
         "subjectPassingCriteria": [],
         "overallPassingCriteria": null,
-        "categories": [],
-        "horizontalCategories": [],
-        "states": [],
+        "categories": [
+            "UR",
+            "OBC",
+            "MBC",
+            "EWS",
+            "SC",
+            "ST"
+        ],
+        "horizontalCategories": [
+            "None",
+            "EX SM",
+            "OH",
+            "VH",
+            "HH",
+            "Other PWD"
+        ],
+        "states": [
+            "Ajmer",
+            "Alwar",
+            "Anupgarh",
+            "Balotra",
+            "Banswara",
+            "Baran",
+            "Barmer",
+            "Beawar",
+            "Bharatpur",
+            "Bhilwara",
+            "Bikaner",
+            "Bundi",
+            "Chittorgarh",
+            "Churu",
+            "Dausa",
+            "Deeg",
+            "Didwana-Kuchaman",
+            "Dholpur",
+            "Dudu",
+            "Dungarpur",
+            "Gangapur City",
+            "Hanumangarh",
+            "Jaipur",
+            "Jaipur Rural",
+            "Jaisalmer",
+            "Jalore",
+            "Jhalawar",
+            "Jhunjhunu",
+            "Jodhpur",
+            "Jodhpur Rural",
+            "Karauli",
+            "Kekri",
+            "Khairthal-Tijara",
+            "Kota",
+            "Kotputli-Behror",
+            "Nagaur",
+            "Neem Ka Thana",
+            "Pali",
+            "Phalodi",
+            "Pratapgarh",
+            "Rajsamand",
+            "Salumbar",
+            "Sanchore",
+            "Sawai Madhopur",
+            "Shahpura",
+            "Sikar",
+            "Sirohi",
+            "Sri Ganganagar",
+            "Tonk",
+            "Udaipur",
+            "Other State"
+        ],
         "disabled": false
     },
     {
