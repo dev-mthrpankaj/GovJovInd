@@ -497,6 +497,20 @@ let mobileNavScrollY = 0;
 
 const isMobileNavViewport = () => window.matchMedia('(max-width: 1279px)').matches;
 
+const restoreScrollInstantly = (top) => {
+  const root = document.documentElement;
+  const previousRootBehavior = root.style.scrollBehavior;
+  const previousBodyBehavior = document.body?.style.scrollBehavior || '';
+
+  root.style.scrollBehavior = 'auto';
+  if (document.body) document.body.style.scrollBehavior = 'auto';
+  window.scrollTo(0, Math.max(0, Number(top) || 0));
+  window.requestAnimationFrame(() => {
+    root.style.scrollBehavior = previousRootBehavior;
+    if (document.body) document.body.style.scrollBehavior = previousBodyBehavior;
+  });
+};
+
 const setMobileNavScrollLock = (locked) => {
   const body = document.body;
   const root = document.documentElement;
@@ -511,10 +525,11 @@ const setMobileNavScrollLock = (locked) => {
   }
 
   if (!locked && body.classList.contains('gju-mobile-nav-open')) {
+    const restoreY = mobileNavScrollY;
     root.classList.remove('gju-mobile-nav-open');
     body.classList.remove('gju-mobile-nav-open');
     body.style.top = '';
-    window.scrollTo({ top: mobileNavScrollY, behavior: 'auto' });
+    restoreScrollInstantly(restoreY);
   }
 };
 
@@ -914,6 +929,7 @@ if (menuToggle && nav && !pageOwnsMenu) {
     menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     setMenuIcon(isOpen);
+    syncMobileNavScrollLock();
   };
 
   menuToggle.setAttribute('aria-label', 'Open navigation menu');

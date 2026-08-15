@@ -23,6 +23,31 @@
         });
     }
 
+    function restoreScrollWithoutAnimation(top) {
+        const root = document.documentElement;
+        const body = document.body;
+        const previousRootBehavior = root.style.scrollBehavior;
+        const previousBodyBehavior = body?.style.scrollBehavior || "";
+
+        root.style.scrollBehavior = "auto";
+        if (body) body.style.scrollBehavior = "auto";
+        window.scrollTo(0, Math.max(0, Number(top) || 0));
+        window.requestAnimationFrame(() => {
+            root.style.scrollBehavior = previousRootBehavior;
+            if (body) body.style.scrollBehavior = previousBodyBehavior;
+        });
+    }
+
+    function keepSummaryAnchored(section, summaryTopBefore, scrollBefore) {
+        if (!section || !Number.isFinite(summaryTopBefore)) return;
+        window.requestAnimationFrame(() => {
+            const summary = section.querySelector("summary");
+            const summaryTopAfter = summary ? summary.getBoundingClientRect().top : summaryTopBefore;
+            const targetTop = scrollBefore + (summaryTopAfter - summaryTopBefore);
+            restoreScrollWithoutAnimation(targetTop);
+        });
+    }
+
     function setStepperActive(sectionId) {
         document.querySelectorAll(".form-stepper [data-step-for]").forEach((item) => {
             const active = item.getAttribute("data-step-for") === sectionId;
@@ -48,6 +73,9 @@
             return;
         }
         const willOpen = !section.open;
+        const summary = section.querySelector("summary");
+        const summaryTopBefore = summary ? summary.getBoundingClientRect().top : section.getBoundingClientRect().top;
+        const scrollBefore = window.scrollY || document.documentElement.scrollTop || 0;
 
         if (isMobileLayout() && willOpen) {
             document.querySelectorAll(ACCORDION_SELECTOR).forEach((other) => {
@@ -60,7 +88,13 @@
 
         if (willOpen) {
             setStepperActive(section.id);
-            safeScrollToSection(section);
+            if (summaryTopBefore < getHeaderOffset() || summaryTopBefore > window.innerHeight * 0.72) {
+                safeScrollToSection(section);
+            } else {
+                keepSummaryAnchored(section, summaryTopBefore, scrollBefore);
+            }
+        } else {
+            keepSummaryAnchored(section, summaryTopBefore, scrollBefore);
         }
     }
 
