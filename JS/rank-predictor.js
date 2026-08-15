@@ -1957,7 +1957,24 @@
     }
 
     function getCandidateSession() {
+        const session = readFirebaseCandidateSession();
+        if (session) return session;
         return window.CandidateAuth?.getSession?.() || null;
+    }
+
+    function readFirebaseCandidateSession() {
+        try {
+            const saved = JSON.parse(localStorage.getItem("gju:candidate-session") || sessionStorage.getItem("gju:candidate-session") || "null");
+            if (!saved || !saved.userId || /^GJU-/i.test(String(saved.userId))) return null;
+            return {
+                userId: String(saved.userId || "").trim(),
+                name: String(saved.name || "").trim(),
+                mobile: normalizeMobile(saved.mobile || ""),
+                email: String(saved.email || "").trim().toLowerCase()
+            };
+        } catch {
+            return null;
+        }
     }
 
     function hydrateCandidateSession() {

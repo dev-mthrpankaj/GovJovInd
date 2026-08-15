@@ -132,12 +132,10 @@ function doPost(e) {
     if (!data) return sendJSON({ success: false, message: "No data received" });
 
     if (!data.action) return sendJSON({ success: false, message: "Missing action" });
-    if (data.action === "registerCandidate") return registerCandidate(data);
-    if (data.action === "loginCandidate") return loginCandidate(data);
-    if (data.action === "resetCandidatePassword") return resetCandidatePassword(data);
-    if (data.action === "changeCandidatePassword") return changeCandidatePassword(data);
-    if (data.action === "getCandidateDashboard") return getCandidateDashboard(data);
-    if (data.action === "getCandidateAttempts") return getCandidateAttempts(data);
+    if (isLegacyCandidateAuthAction(data.action)) return sendJSON({
+      success: false,
+      message: "Candidate authentication is handled by Firebase."
+    });
     if (data.action === "sendContactRequest") return sendContactRequest(data);
     if (data.action === "trackVisitor") return trackVisitor(data);
     if (data.action === "submitData") return submitData(data);
@@ -151,6 +149,17 @@ function doPost(e) {
       message: "Server error: " + error.message
     });
   }
+}
+
+function isLegacyCandidateAuthAction(action) {
+  return [
+    "registerCandidate",
+    "loginCandidate",
+    "resetCandidatePassword",
+    "changeCandidatePassword",
+    "getCandidateDashboard",
+    "getCandidateAttempts"
+  ].indexOf(String(action || "").trim()) >= 0;
 }
 
 function registerCandidate(data) {

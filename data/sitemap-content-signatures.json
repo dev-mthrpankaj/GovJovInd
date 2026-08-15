@@ -594,8 +594,8 @@
       "lastmod": "2026-08-12"
     },
     "HTML/rank-predictor.html": {
-      "signature": "bd6042e522c1330f5d93b39b84c7dfa62754733afb557bbbb66a336dfb5d7d2c",
-      "lastmod": "2026-08-12"
+      "signature": "b01b0af9485c231d5bf93df69f2537fc8c6c0caf9e02e2d4a8f31cb5a4eabc69",
+      "lastmod": "2026-08-15"
     },
     "HTML/refund-policy.html": {
       "signature": "19a0612d3b8b0703ff0d936d52a68bcd889232b2d347356aaf37702ed7301be9",
@@ -1680,6 +1680,38 @@
     "Job_Details/HTML/WCL-Mining-Sirdar-Assistant-Foreman-2026.html": {
       "signature": "ed0753e595d280e0e2336448097096d7abda60052b05eb619cd29c30f5e2a823",
       "lastmod": "2026-08-12"
+    },
+    "rank-predictor/mpesb-hospitalassistant-2026/index.html": {
+      "signature": "d19de904fc8d31de230a794ffbd6ce5c406d5d5d592c3550e7c18c2c209ebc0d",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/rrb-alp-cbt-2/index.html": {
+      "signature": "37613342a724e0794370d855546a39af0170da9a0f20576f57faa21464af2d09",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/rrb-je/index.html": {
+      "signature": "cd1bdd523fd21c4e9c3605e41c93ea149bd72f11faccedf4a3954a5a269182e9",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/rrb-ntpc-gl-cbt-2-2026/index.html": {
+      "signature": "7da05cd0c9acd9344f7c77af257141d012443ff318c15eb4cf40b2d9ef6cd218",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/rssb-forester-2026/index.html": {
+      "signature": "a3fde09f2fb6bbbbb17b53b2ea93e1cf20d8057b06b12f7e19c25d946cdcabb6",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/rssb-ldc/index.html": {
+      "signature": "848b67b8abf7037b910efd826cacd87ed95ad9729969d13d062f0266de941843",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/ssb-hcm-2026/index.html": {
+      "signature": "2ac873c42647245e527d08b27a9640e8e5219462aa433c08b53dc644498043ac",
+      "lastmod": "2026-08-15"
+    },
+    "rank-predictor/uppsc-atp-2026/index.html": {
+      "signature": "6e947b1f0cc0412f2f931d1ea3ce78eb16e8072b824a3d3100f779778a371313",
+      "lastmod": "2026-08-15"
     },
     "Result_Details/HTML/1802-SBI-Circle-Based-Officer-Result-2026.html": {
       "signature": "d2e84d86a673c6529b3c88344446a9f0e719c0bc2e0c57ac57291f32815d0a03",
