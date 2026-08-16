@@ -9,12 +9,12 @@ window.GovJobUpdatesRankPredictorExams = [
         "board": "RSSB",
         "examType": "offline",
         "sheetName": "RSSB Computer Instructor BCI 2026",
-        "status": "upcoming",
+        "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true,
         "totalQuestions": 200,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
@@ -104,7 +104,7 @@ window.GovJobUpdatesRankPredictorExams = [
             "Udaipur",
             "Other State"
         ],
-        "disabled": true
+        "disabled": false
     },
     {
         "examId": "rrb-alp-cbt-2",
