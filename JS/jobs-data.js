@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0186-20260817201854-06efe503",
+        "title": "Navy Technician Apprentice Online Form 2026",
+        "organization": "Naval Ship Repair Yard (NAVY)",
+        "department": "NAVY",
+        "category": "Defence",
+        "year": "2026",
+        "qualification": "Matriculation with ITI Related Trade from Any Recognized Institute in India.",
+        "totalPosts": "50",
+        "startDate": "2026-08-17",
+        "lastDate": "2026-09-10",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://apprenticeship.recttindia.in/",
+        "officialNotification": "https://apprenticeship.recttindia.in/Design/IT%2003%20batch%20full%20advertisement.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0186-20260817201854-06efe503",
+        "updatedAt": "2026-08-17",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0182-20260815183906-655e4b1d",
         "title": "RSSB Junior Engineer Online Form 2026 for 874 Post",
         "organization": "Rajasthan Staff Selection Board",
