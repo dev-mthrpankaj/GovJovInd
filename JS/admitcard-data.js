@@ -153,7 +153,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-17",
         "examEndDate": "",
         "releaseDate": "2026-08-10",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upcons2025.com/upcon2025dvpstadmitcard/loginpage.aspx",
         "detailPage": "../AdmitCard_Details/HTML/UP-Police-Constable-DV-PST-Admit-Card-2026.html",
