@@ -2061,6 +2061,13 @@
       "title": "MP High Court Assistant Grade III Online Form 2026 for 1174 Post",
       "lastPostedAt": "2026-08-15T14:09:14.243Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0186-20260817201854-06efe503": {
+      "updatedAt": "2026-08-17",
+      "hash": "6f8064588f5b4a73a203d0f550dcaf58fb77fb74a51f20d6089b0c244d81bd91",
+      "title": "Navy Technician Apprentice Online Form 2026",
+      "lastPostedAt": "2026-08-17T15:35:34.906Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -5209,6 +5216,27 @@
       "hash": "72601e479569ff85dedfc2ba703f00f843755fca00f037746a85bdb0acb45ff0",
       "title": "RSSB Forester Result 2026 – OUT",
       "lastPostedAt": "2026-08-15T13:37:42.698Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0103-20260817202210-d59cc58b": {
+      "updatedAt": "2026-08-17",
+      "hash": "940f8554a0e417103eb41776f04afbaf970beb53581699263bc34763d12f79d9",
+      "title": "SSC CHSL Result 2026 | First Round of Tentative Allocation (FRTA) for the post of DEO/LDC/JSA/JHAA",
+      "lastPostedAt": "2026-08-17T15:35:35.520Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0104-20260817202435-e90cbc52": {
+      "updatedAt": "2026-08-17",
+      "hash": "2fe37f73dd9fc404eb8bfc2b30c77665bebb9935adac52e4606cb2420a56a76e",
+      "title": "RPSC School Lecturer PGT Teacher Result 2025 Political Science",
+      "lastPostedAt": "2026-08-17T15:35:36.004Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0105-20260817203208-66a272e4": {
+      "updatedAt": "2026-08-17",
+      "hash": "2bbdde08909e617afc575f3ff67edbd8adb1c0fdb38c4627eaf69bcb3adc73b1",
+      "title": "UPSSSC Gram Panchayat Adhikari VDO 2023 Final Result 2026",
+      "lastPostedAt": "2026-08-17T15:35:36.494Z",
       "stateReason": "new"
     }
   }
