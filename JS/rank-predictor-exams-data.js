@@ -9,7 +9,7 @@ window.GovJobUpdatesRankPredictorExams = [
         "board": "RSSB",
         "examType": "offline",
         "sheetName": "RSSB Computer Instructor BCI 2026",
-        "status": "upcoming",
+        "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
         "effectiveStatus": "disabled",

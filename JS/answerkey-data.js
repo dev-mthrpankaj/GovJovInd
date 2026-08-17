@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0055-20260816125442-f5f7ae18",
+        "title": "NTA CSIR UGC NET June 2026 Answer Key",
+        "organization": "National Testing Agency",
+        "department": "NTA",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-07-17",
+        "examEndDate": "2026-07-18",
+        "releaseDate": "2026-08-16",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://examinationservices.nic.in/ExamSys26Part2/Root/CandidateLogin.aspx?enc=Ei4cajBkK1gZSfgr53ImFTqGsyg38PlGNCGSuvSzsiVbovgbG6pVEHea7DNFe38E",
+        "objectionLink": "https://examinationservices.nic.in/ExamSys26Part2/Root/CandidateLogin.aspx?enc=Ei4cajBkK1gZSfgr53ImFTqGsyg38PlGNCGSuvSzsiVbovgbG6pVEHea7DNFe38E",
+        "detailPage": "../HTML/answer-key.html",
+        "updatedAt": "2026-08-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "answerkey-sheet-0054-20260813213638-80ed0c6d",
         "title": "BPSC Prosecution Officer Answer Key 2026 for 300 Post",
         "organization": "Bihar Public Service Commission (BPSC)",
