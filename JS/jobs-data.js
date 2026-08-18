@@ -638,7 +638,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "2106",
         "startDate": "2026-08-04",
         "lastDate": "2026-08-18",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Group2_SG4_Patwari_rect_test_2026_Rulebook_04082026.pdf",
