@@ -316,3 +316,58 @@
   .cert-note{font-size:.88rem}
   .cert-service,.safety-card{padding:.85rem}
 }
+
+
+/* Submitted application state */
+#certificateForm.certificate-submitted .cert-form{display:none}
+#certificateForm.certificate-submitted > h2{display:none}
+#certificateForm.certificate-submitted{align-content:start}
+
+.cert-success-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.65rem;
+  margin-top:.9rem
+}
+
+.cert-success-actions .btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  min-height:44px;
+  text-decoration:none
+}
+
+.cert-success .success-meta{
+  display:grid;
+  gap:.55rem;
+  margin-top:.75rem
+}
+
+.cert-success .success-meta-row{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.65rem .75rem;
+  border:1px solid #bbf7d0;
+  border-radius:11px;
+  background:#fff
+}
+
+.cert-success .success-meta-row span{color:#64748b}
+.cert-success .success-meta-row strong{color:#14532d;text-align:right}
+
+.copy-success{
+  background:#fff;
+  color:#166534;
+  border:1px solid #86efac
+}
+
+@media(max-width:759px){
+  .cert-tabs{grid-template-columns:1fr}
+  .cert-success-actions{display:grid}
+  .cert-success-actions .btn{width:100%}
+  .cert-success .success-meta-row{display:grid;gap:.2rem}
+  .cert-success .success-meta-row strong{text-align:left}
+}

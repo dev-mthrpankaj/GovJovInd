@@ -60,19 +60,52 @@
 
   function setSuccess(requestId) {
     const success = $("#certSuccess");
+    const card = $("#certificateForm");
     if (!success) return;
 
+    const trackUrl =
+      `up-certificate-status.html?request_id=${encodeURIComponent(requestId)}`;
+
+    success.dataset.requestId = requestId;
     success.innerHTML = `
       <div class="success-title">
         <i class="fas fa-circle-check" aria-hidden="true"></i>
         Application submitted successfully
       </div>
       <div>Your ₹110 payment has been verified and the selected documents have been uploaded successfully.</div>
-      <div>Your Request ID is:</div>
-      <div class="request-id">${escapeHtml(requestId)}</div>
-      <div>Please save this Request ID for future reference.</div>
+
+      <div class="success-meta">
+        <div class="success-meta-row">
+          <span>Request ID</span>
+          <strong>${escapeHtml(requestId)}</strong>
+        </div>
+        <div class="success-meta-row">
+          <span>Payment</span>
+          <strong>₹110 Paid</strong>
+        </div>
+        <div class="success-meta-row">
+          <span>Documents</span>
+          <strong>Uploaded</strong>
+        </div>
+      </div>
+
+      <p>Please save your Request ID. You will need it with your registered mobile number to track the application.</p>
+
+      <div class="cert-success-actions">
+        <button class="btn copy-success" type="button" data-cert-action="copy-request">
+          <i class="fas fa-copy" aria-hidden="true"></i> Copy Request ID
+        </button>
+        <a class="btn btn-primary" href="${trackUrl}">
+          <i class="fas fa-route" aria-hidden="true"></i> Track Application
+        </a>
+        <button class="btn btn-light" type="button" data-cert-action="new-application">
+          <i class="fas fa-plus" aria-hidden="true"></i> Start New Application
+        </button>
+      </div>
     `;
     success.classList.add("show");
+    card?.classList.add("certificate-submitted");
+    success.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   function escapeHtml(value) {
@@ -502,8 +535,71 @@
     }
   }
 
+  async function copyRequestId() {
+    const success = $("#certSuccess");
+    const requestId = clean(success?.dataset.requestId);
+    if (!requestId) return;
+
+    try {
+      await navigator.clipboard.writeText(requestId);
+      const button = success?.querySelector('[data-cert-action="copy-request"]');
+      if (button) {
+        const oldHtml = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Copied';
+        window.setTimeout(() => {
+          button.innerHTML = oldHtml;
+        }, 1600);
+      }
+    } catch {
+      window.prompt("Copy your Request ID:", requestId);
+    }
+  }
+
+  function startNewApplication() {
+    verifiedPayment = null;
+    uploadInProgress = false;
+
+    const card = $("#certificateForm");
+    const form = $("#upCertificateForm");
+    const success = $("#certSuccess");
+
+    card?.classList.remove("certificate-submitted");
+
+    if (success) {
+      success.classList.remove("show");
+      success.innerHTML = "";
+      delete success.dataset.requestId;
+    }
+
+    if (form && typeof form.reset === "function") {
+      form.reset();
+    }
+
+    setProgress("", false);
+    setError("");
+    setSubmitState("ready");
+    card?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function handleSuccessActions(event) {
+    const target = event.target.closest("[data-cert-action]");
+    if (!target) return;
+
+    const action = target.getAttribute("data-cert-action");
+
+    if (action === "copy-request") {
+      copyRequestId();
+      return;
+    }
+
+    if (action === "new-application") {
+      startNewApplication();
+    }
+  }
+
   function init() {
     $("#upCertificateForm")?.addEventListener("submit", handleSubmit);
+    $("#certSuccess")?.addEventListener("click", handleSuccessActions);
   }
 
   if (document.readyState === "loading") {
