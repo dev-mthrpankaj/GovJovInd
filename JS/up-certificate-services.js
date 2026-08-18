@@ -1,60 +1,26 @@
 (function () {
   "use strict";
 
-  const UPI_ID = "";
-  const PAYEE_NAME = "GovJobUpdates CSC";
-  const FEE_AMOUNT = 100;
-  const CERTIFICATE_API_URL = "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
+  const CERTIFICATE_API_BASE =
+    "https://test.govjobupdates.com/live-test/certificate-api";
+
+  const CERTIFICATE_DRIVE_API_URL =
+    "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
+
+  const FEE_AMOUNT_PAISE = 11000;
   const MAX_FILE_SIZE_BYTES = 1.5 * 1024 * 1024;
+
+  const ALLOWED_DOCUMENT_TYPES = new Set([
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "application/pdf"
+  ]);
 
   const $ = (selector) => document.querySelector(selector);
 
-  function hasConfiguredUpiId() {
-    return Boolean(UPI_ID && !UPI_ID.includes("YOUR_UPI_ID"));
-  }
-
-  function polishPageShell() {
-    document.body.classList.add("up-certificate-page");
-
-    const style = document.createElement("style");
-    style.id = "upCertificatePageShellStyle";
-    style.textContent = `
-      body.up-certificate-page{background:#f4f7fb;overflow-x:hidden}.up-certificate-page main.cert-page{width:min(1180px,calc(100% - 28px));margin:1.2rem auto 2rem;padding:0 0 1.5rem}.up-certificate-page header{position:sticky;top:0;z-index:1000}.up-certificate-page .cert-hero{margin-top:.25rem}.up-service-link-card{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem;border:1px solid #bfdbfe;border-radius:18px;background:linear-gradient(135deg,#eff6ff,#fff);text-decoration:none;color:#0f172a}.up-service-link-card strong{display:block;color:#0f172a}.up-service-link-card span{display:block;color:#64748b;font-size:.9rem}.up-service-link-card i{color:#2563eb}.up-certificate-page nav.active{max-height:calc(100dvh - 88px);overflow-y:auto;-webkit-overflow-scrolling:touch}.up-certificate-page nav.active ul{padding-bottom:1rem}.up-certificate-page .candidate-bottom-nav a[href*="up-certificate-services"]{color:#2563eb}
-      @media(max-width:640px){.up-certificate-page main.cert-page{width:min(100% - 18px,680px);margin:.75rem auto 5.6rem}.up-certificate-page .cert-hero{margin-top:.15rem}.up-service-link-card{padding:.85rem;border-radius:15px}.up-certificate-page .cert-card,.up-certificate-page .cert-hero{box-shadow:0 10px 30px rgba(15,23,42,.06)}}
-    `;
-    if (!document.getElementById(style.id)) document.head.appendChild(style);
-  }
-
-  function setPaymentUi() {
-    const upiText = $("#upiIdText");
-    const upiBtn = $("#upiPayBtn");
-    const canUseUpiDeepLink = hasConfiguredUpiId();
-    if (upiText) {
-      if (canUseUpiDeepLink) upiText.textContent = UPI_ID;
-      else upiText.closest(".payment-upi-id")?.remove();
-    }
-    if (upiBtn) {
-      if (!canUseUpiDeepLink) {
-        upiBtn.remove();
-        return;
-      }
-      const params = new URLSearchParams({
-        pa: UPI_ID,
-        pn: PAYEE_NAME,
-        am: String(FEE_AMOUNT),
-        cu: "INR",
-        tn: "UP Certificate CSC Assistance"
-      });
-      upiBtn.href = `upi://pay?${params.toString()}`;
-    }
-  }
-
-  function makeRequestId() {
-    const now = new Date();
-    const date = now.toISOString().slice(2, 10).replace(/-/g, "");
-    const random = Math.random().toString(36).slice(2, 6).toUpperCase();
-    return `UPDOC-${date}-${random}`;
-  }
+  let verifiedPayment = null;
+  let uploadInProgress = false;
 
   function clean(value) {
     return String(value || "").replace(/\s+/g, " ").trim();
@@ -64,17 +30,231 @@
     return /^[6-9]\d{9}$/.test(value);
   }
 
+  function validateEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function setProgress(message, show = true) {
+    const box = $("#certProgress");
+    if (!box) return;
+    box.textContent = message || "";
+    box.classList.toggle("show", Boolean(show && message));
+  }
+
+  function setError(message) {
+    const box = $("#certError");
+    if (!box) return;
+    box.textContent = message || "";
+    box.classList.toggle("show", Boolean(message));
+  }
+
+  function clearMessages() {
+    setProgress("", false);
+    setError("");
+    const success = $("#certSuccess");
+    if (success) {
+      success.classList.remove("show");
+      success.innerHTML = "";
+    }
+  }
+
+  function setSuccess(requestId) {
+    const success = $("#certSuccess");
+    if (!success) return;
+
+    success.innerHTML = `
+      <div class="success-title">
+        <i class="fas fa-circle-check" aria-hidden="true"></i>
+        Application submitted successfully
+      </div>
+      <div>Your ₹110 payment has been verified and the selected documents have been uploaded successfully.</div>
+      <div>Your Request ID is:</div>
+      <div class="request-id">${escapeHtml(requestId)}</div>
+      <div>Please save this Request ID for future reference.</div>
+    `;
+    success.classList.add("show");
+  }
+
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[char]));
+  }
+
+  function setSubmitState(mode) {
+    const btn = $("#certSubmitBtn");
+    if (!btn) return;
+
+    if (mode === "creating") {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Preparing Secure Payment...';
+      return;
+    }
+
+    if (mode === "verifying") {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Verifying Payment...';
+      return;
+    }
+
+    if (mode === "uploading") {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Uploading Documents...';
+      return;
+    }
+
+    if (mode === "retry") {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-rotate-right" aria-hidden="true"></i> Retry Document Upload';
+      return;
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-lock" aria-hidden="true"></i> Pay ₹110 &amp; Submit Application';
+  }
+
+  function collectApplicationData() {
+    return {
+      service_type: clean($("#serviceType")?.value),
+      applicant_name: clean($("#applicantName")?.value),
+      father_husband_name: clean($("#fatherName")?.value),
+      mobile: clean($("#mobileNumber")?.value),
+      email: clean($("#emailId")?.value),
+      district: clean($("#district")?.value),
+      tehsil: clean($("#tehsil")?.value),
+      address: clean($("#address")?.value),
+      aadhaar_last4: clean($("#aadhaarLast4")?.value),
+      extra_note: clean($("#extraNote")?.value)
+    };
+  }
+
+  function selectedFiles() {
+    return {
+      aadhaar: $("#aadhaarFile")?.files?.[0] || null,
+      letter: $("#letterFile")?.files?.[0] || null,
+      photo: $("#photoFile")?.files?.[0] || null,
+      extra: $("#extraFile")?.files?.[0] || null
+    };
+  }
+
+  function validateApplication(data, files) {
+    if (
+      !data.service_type ||
+      !data.applicant_name ||
+      !data.father_husband_name ||
+      !data.mobile ||
+      !data.email ||
+      !data.district ||
+      !data.tehsil ||
+      !data.address
+    ) {
+      throw new Error("Please fill all required applicant details.");
+    }
+
+    if (!validateMobile(data.mobile)) {
+      throw new Error("Please enter a valid 10 digit Indian mobile number.");
+    }
+
+    if (!validateEmail(data.email)) {
+      throw new Error("Please enter a valid email address.");
+    }
+
+    if (data.aadhaar_last4 && !/^\d{4}$/.test(data.aadhaar_last4)) {
+      throw new Error("Aadhaar last 4 digits must contain exactly 4 numbers.");
+    }
+
+    if (!files.aadhaar || !files.letter || !files.photo) {
+      throw new Error("Please select Aadhaar Card, Sabhasad/Pradhan Letter Pad and Passport Size Photo.");
+    }
+
+    validateFile(files.aadhaar, "Aadhaar Card", false);
+    validateFile(files.letter, "Letter Pad", false);
+    validateFile(files.photo, "Passport Size Photo", true);
+
+    if (files.extra) {
+      validateFile(files.extra, "Extra Document", false);
+    }
+  }
+
+  function validateFile(file, label, imageOnly) {
+    if (!file) {
+      throw new Error(`${label} is required.`);
+    }
+
+    if (file.size <= 0 || file.size > MAX_FILE_SIZE_BYTES) {
+      throw new Error(`${label} must be under 1.5 MB.`);
+    }
+
+    if (imageOnly) {
+      if (!String(file.type || "").startsWith("image/")) {
+        throw new Error(`${label} must be an image file.`);
+      }
+      return;
+    }
+
+    if (!ALLOWED_DOCUMENT_TYPES.has(String(file.type || "").toLowerCase())) {
+      throw new Error(`${label} must be JPG, PNG, WEBP or PDF.`);
+    }
+  }
+
+  async function postJson(url, payload) {
+    const response = await fetch(url, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-store",
+      credentials: "omit",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    let result = null;
+    try {
+      result = await response.json();
+    } catch {
+      throw new Error("The certificate server returned an invalid response.");
+    }
+
+    if (!response.ok || !result || !result.success) {
+      throw new Error(result?.message || "The request could not be completed.");
+    }
+
+    return result;
+  }
+
+  async function createOrder(data) {
+    return postJson(`${CERTIFICATE_API_BASE}/create-order.php`, data);
+  }
+
+  async function verifyPayment(requestId, paymentResponse) {
+    return postJson(`${CERTIFICATE_API_BASE}/verify-payment.php`, {
+      request_id: requestId,
+      razorpay_order_id: paymentResponse.razorpay_order_id,
+      razorpay_payment_id: paymentResponse.razorpay_payment_id,
+      razorpay_signature: paymentResponse.razorpay_signature
+    });
+  }
+
   function fileToBase64(file) {
     return new Promise((resolve, reject) => {
       if (!file) {
         resolve(null);
         return;
       }
+
       if (file.size > MAX_FILE_SIZE_BYTES) {
-        reject(new Error(`${file.name} is too large. Keep every file under 1.5 MB.`));
+        reject(new Error(`${file.name} must be under 1.5 MB.`));
         return;
       }
+
       const reader = new FileReader();
+
       reader.onload = () => {
         const result = String(reader.result || "");
         resolve({
@@ -84,147 +264,251 @@
           data: result.includes(",") ? result.split(",")[1] : result
         });
       };
-      reader.onerror = () => reject(new Error(`Could not read ${file.name}`));
+
+      reader.onerror = () => reject(new Error(`Could not read ${file.name}.`));
       reader.readAsDataURL(file);
     });
   }
 
-  async function getFilesPayload() {
+  async function buildFilesPayload(files) {
     return {
-      paymentScreenshot: await fileToBase64($("#paymentScreenshotFile")?.files?.[0]),
-      aadhaar: await fileToBase64($("#aadhaarFile")?.files?.[0]),
-      letter: await fileToBase64($("#letterFile")?.files?.[0]),
-      photo: await fileToBase64($("#photoFile")?.files?.[0]),
-      extra: await fileToBase64($("#extraFile")?.files?.[0])
+      aadhaar: await fileToBase64(files.aadhaar),
+      letter: await fileToBase64(files.letter),
+      photo: await fileToBase64(files.photo),
+      extra: await fileToBase64(files.extra)
     };
   }
 
-  function saveLocalRequest(data) {
-    try {
-      const key = "gju:up-certificate-requests";
-      const previous = JSON.parse(localStorage.getItem(key) || "[]");
-      previous.unshift({ ...data, createdAt: new Date().toISOString() });
-      localStorage.setItem(key, JSON.stringify(previous.slice(0, 20)));
-    } catch {
-      // Ignore storage errors.
-    }
-  }
+  async function uploadDocuments(requestId, uploadToken, files) {
+    const filesPayload = await buildFilesPayload(files);
 
-  function setProgress(message, show = true) {
-    const progress = $("#certProgress");
-    if (!progress) return;
-    progress.textContent = message || "";
-    progress.classList.toggle("show", show);
-  }
-
-  function setSuccess(message) {
-    const success = $("#certSuccess");
-    if (!success) return;
-    success.classList.add("show");
-    success.innerHTML = message;
-  }
-
-  function setSubmitState(isLoading) {
-    const btn = $("#certSubmitBtn");
-    if (!btn) return;
-    btn.disabled = isLoading;
-    btn.innerHTML = isLoading ? '<i class="fas fa-spinner fa-spin"></i> Uploading Documents...' : '<i class="fas fa-cloud-arrow-up"></i> Submit Request with Documents';
-  }
-
-  async function submitToAppsScript(payload) {
-    const response = await fetch(CERTIFICATE_API_URL, {
+    const response = await fetch(CERTIFICATE_DRIVE_API_URL, {
       method: "POST",
       redirect: "follow",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
+      cache: "no-store",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "uploadCertificateDocuments",
+        data: {
+          requestId,
+          uploadToken
+        },
+        files: filesPayload
+      })
     });
+
     const text = await response.text();
-    const result = JSON.parse(text);
-    if (!result.success) throw new Error(result.message || "Request upload failed.");
+    let result;
+
+    try {
+      result = JSON.parse(text);
+    } catch {
+      throw new Error("Google Drive upload service returned an invalid response.");
+    }
+
+    if (!result || !result.success) {
+      throw new Error(result?.message || "Document upload failed.");
+    }
+
     return result;
+  }
+
+  function openRazorpay(order, files) {
+    return new Promise((resolve, reject) => {
+      if (typeof window.Razorpay !== "function") {
+        reject(new Error("Secure payment service could not be loaded. Please refresh the page and try again."));
+        return;
+      }
+
+      let completed = false;
+
+      const options = {
+        key: order.razorpay_key_id,
+        amount: order.amount,
+        currency: order.currency,
+        name: order.name || "GovJobUpdates",
+        description: order.description || "UP Certificate Assistance",
+        order_id: order.razorpay_order_id,
+        prefill: order.prefill || {},
+        theme: {},
+        modal: {
+          ondismiss: function () {
+            if (!completed) {
+              setProgress("", false);
+              setSubmitState("ready");
+            }
+          }
+        },
+        handler: async function (paymentResponse) {
+          completed = true;
+
+          try {
+            setSubmitState("verifying");
+            setProgress("Payment received. Verifying it securely with the server...");
+
+            const verified = await verifyPayment(order.request_id, paymentResponse);
+
+            verifiedPayment = {
+              requestId: verified.request_id,
+              uploadToken: verified.upload_token,
+              files
+            };
+
+            setSubmitState("uploading");
+            setProgress("Payment verified. Uploading your selected documents securely...");
+
+            const uploaded = await uploadDocuments(
+              verifiedPayment.requestId,
+              verifiedPayment.uploadToken,
+              verifiedPayment.files
+            );
+
+            verifiedPayment = null;
+            setProgress("", false);
+            setError("");
+            setSuccess(uploaded.request_id || order.request_id);
+
+            const form = $("#upCertificateForm");
+            if (form && typeof form.reset === "function") {
+              form.reset();
+            }
+
+            setSubmitState("ready");
+            resolve(uploaded);
+          } catch (error) {
+            setProgress("", false);
+
+            if (verifiedPayment) {
+              setError(
+                "Your payment is already verified, but the document upload could not finish. Do not pay again. Check your selected files and click “Retry Document Upload”. " +
+                (error.message || "")
+              );
+              setSubmitState("retry");
+            } else {
+              setError(error.message || "Payment verification failed. Please contact support if the amount was debited.");
+              setSubmitState("ready");
+            }
+
+            reject(error);
+          }
+        }
+      };
+
+      const razorpay = new window.Razorpay(options);
+
+      razorpay.on("payment.failed", function (response) {
+        completed = true;
+        setProgress("", false);
+        setSubmitState("ready");
+
+        const message =
+          response?.error?.description ||
+          response?.error?.reason ||
+          "Payment failed or was not completed.";
+
+        setError(message);
+        reject(new Error(message));
+      });
+
+      razorpay.open();
+    });
+  }
+
+  async function retryVerifiedUpload() {
+    if (!verifiedPayment || uploadInProgress) return;
+
+    uploadInProgress = true;
+    clearMessages();
+    setSubmitState("uploading");
+    setProgress("Retrying document upload. No additional payment will be taken...");
+
+    try {
+      const currentFiles = selectedFiles();
+      validateApplication(collectApplicationData(), currentFiles);
+
+      const uploaded = await uploadDocuments(
+        verifiedPayment.requestId,
+        verifiedPayment.uploadToken,
+        currentFiles
+      );
+
+      const requestId = uploaded.request_id || verifiedPayment.requestId;
+      verifiedPayment = null;
+
+      setProgress("", false);
+      setSuccess(requestId);
+
+      const form = $("#upCertificateForm");
+      if (form && typeof form.reset === "function") {
+        form.reset();
+      }
+
+      setSubmitState("ready");
+    } catch (error) {
+      setProgress("", false);
+      setError(
+        "Your payment remains verified. Document upload is still incomplete. Do not pay again. " +
+        (error.message || "Please try again.")
+      );
+      setSubmitState("retry");
+    } finally {
+      uploadInProgress = false;
+    }
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const form = event.currentTarget || $("#upCertificateForm");
-    const data = {
-      requestId: makeRequestId(),
-      serviceType: clean($("#serviceType")?.value),
-      applicantName: clean($("#applicantName")?.value),
-      fatherName: clean($("#fatherName")?.value),
-      mobileNumber: clean($("#mobileNumber")?.value),
-      emailId: clean($("#emailId")?.value),
-      district: clean($("#district")?.value),
-      tehsil: clean($("#tehsil")?.value),
-      address: clean($("#address")?.value),
-      aadhaarLast4: clean($("#aadhaarLast4")?.value),
-      paymentUtr: clean($("#paymentUtr")?.value),
-      extraNote: clean($("#extraNote")?.value),
-      feeAmount: FEE_AMOUNT,
-      submittedAt: new Date().toISOString(),
-      pageUrl: window.location.href
-    };
 
-    if (!data.serviceType || !data.applicantName || !data.fatherName || !data.mobileNumber || !data.emailId || !data.district || !data.tehsil || !data.address || !data.paymentUtr) {
-      alert("Please fill all required fields including payment UTR.");
-      return;
-    }
-    if (!validateMobile(data.mobileNumber)) {
-      alert("Please enter a valid 10 digit Indian mobile number.");
-      return;
-    }
-    if (data.aadhaarLast4 && !/^\d{4}$/.test(data.aadhaarLast4)) {
-      alert("Aadhaar last 4 digits should be exactly 4 numbers.");
-      return;
-    }
-    if (!$("#paymentScreenshotFile")?.files?.[0]) {
-      alert("Please upload payment screenshot for verification.");
-      return;
-    }
-    if (!$("#aadhaarFile")?.files?.[0] || !$("#letterFile")?.files?.[0] || !$("#photoFile")?.files?.[0]) {
-      alert("Please upload Aadhaar, Sabhasad/Pradhan letter pad, and photo.");
+    if (verifiedPayment) {
+      await retryVerifiedUpload();
       return;
     }
 
-    setSubmitState(true);
-    setProgress("Reading selected documents...");
+    clearMessages();
+
+    const data = collectApplicationData();
+    const files = selectedFiles();
+
     try {
-      const files = await getFilesPayload();
-      setProgress("Uploading request to secure Drive folder...");
-      const payload = {
-        action: "submitCertificateRequest",
-        data,
-        files
-      };
-      const result = await submitToAppsScript(payload);
-      saveLocalRequest({ ...data, folderUrl: result.folderUrl || "" });
-      setSuccess(`<strong>Request submitted successfully.</strong><br>Request ID: <strong>${data.requestId}</strong><br>Your documents and payment screenshot have been uploaded. Payment UTR will be manually verified. Keep this Request ID for future reference.`);
-      setProgress("Upload complete.", false);
-      if (form && typeof form.reset === "function") form.reset();
+      validateApplication(data, files);
     } catch (error) {
-      setProgress("Upload failed.", false);
-      alert(error.message || "Could not submit request. Please try again.");
-    } finally {
-      setSubmitState(false);
+      setError(error.message);
+      return;
+    }
+
+    setSubmitState("creating");
+    setProgress("Creating your secure ₹110 payment order...");
+
+    try {
+      const order = await createOrder(data);
+
+      if (
+        Number(order.amount) !== FEE_AMOUNT_PAISE ||
+        String(order.currency || "").toUpperCase() !== "INR"
+      ) {
+        throw new Error("The payment amount returned by the server is invalid.");
+      }
+
+      setProgress("Secure payment window is opening...");
+      await openRazorpay(order, files);
+    } catch (error) {
+      if (!verifiedPayment) {
+        setProgress("", false);
+        setError(error.message || "Could not start the payment. Please try again.");
+        setSubmitState("ready");
+      }
     }
   }
 
   function init() {
-    polishPageShell();
-    window.setTimeout(polishPageShell, 250);
-    setPaymentUi();
-    $("#copyUpiBtn")?.addEventListener("click", async () => {
-      if (!hasConfiguredUpiId()) return;
-      try {
-        await navigator.clipboard.writeText(UPI_ID);
-        alert("UPI ID copied");
-      } catch {
-        alert(`UPI ID: ${UPI_ID}`);
-      }
-    });
     $("#upCertificateForm")?.addEventListener("submit", handleSubmit);
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 }());
