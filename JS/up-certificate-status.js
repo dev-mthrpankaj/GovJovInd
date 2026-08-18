@@ -165,6 +165,8 @@
     $("#trackApplicant").textContent = application.applicant_name || "-";
     $("#trackRequest").textContent = application.request_id || "-";
     $("#trackService").textContent = application.service_type || "-";
+    $("#trackGovernmentApplication").textContent = application.government_application_number || "Not issued yet";
+    $("#trackCertificateNumber").textContent = application.certificate_number || "Not issued yet";
     $("#trackPayment").textContent =
       application.payment_status === "paid"
         ? formatRupees(application.amount)
