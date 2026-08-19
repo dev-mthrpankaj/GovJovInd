@@ -396,3 +396,18 @@
 @media(max-width:560px){
   .cert-choice-grid-compact{grid-template-columns:1fr}
 }
+
+
+/* Live certificate pricing */
+.cert-choice .service-live-price{
+  display:block;
+  width:max-content;
+  margin-top:.28rem;
+  padding:.18rem .45rem;
+  border-radius:999px;
+  background:#ecfdf5;
+  color:#166534;
+  font-size:.75rem;
+  font-weight:900;
+  line-height:1.2;
+}

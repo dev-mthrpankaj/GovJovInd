@@ -3,8 +3,8 @@
 
   const CERTIFICATE_API_BASE = "https://test.govjobupdates.com/live-test/certificate-api";
   const CERTIFICATE_DRIVE_API_URL = "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
-  const SERVICE_FEE_PAISE = 11000;
-  const DELIVERY_FEE_PAISE = 5000;
+  const DEFAULT_SERVICE_FEE_PAISE = 11000;
+  const DEFAULT_DELIVERY_FEE_PAISE = 5000;
   const MAX_FILE_SIZE_BYTES = 1.5 * 1024 * 1024;
   const ALLOWED_DOCUMENT_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "application/pdf"]);
   const $ = (selector) => document.querySelector(selector);
@@ -12,6 +12,11 @@
 
   let verifiedPayment = null;
   let uploadInProgress = false;
+  let pricingReady = false;
+  let pricing = {
+    services: {},
+    delivery_fee_paise: DEFAULT_DELIVERY_FEE_PAISE
+  };
 
   function clean(value) { return String(value || "").replace(/\s+/g, " ").trim(); }
   function validateMobile(value) { return /^[6-9]\d{9}$/.test(value); }
@@ -54,8 +59,69 @@
     }[char]));
   }
 
+  function servicePrice(service) {
+    const value = Number(pricing.services?.[service]);
+    return Number.isFinite(value) && value >= 0 ? value : DEFAULT_SERVICE_FEE_PAISE;
+  }
+
+  function currentServiceFeePaise() {
+    return selectedServices().reduce((sum, service) => sum + servicePrice(service), 0);
+  }
+
   function currentTotalPaise() {
-    return selectedServices().length * SERVICE_FEE_PAISE + (homeDelivery() ? DELIVERY_FEE_PAISE : 0);
+    return currentServiceFeePaise() + (homeDelivery() ? Number(pricing.delivery_fee_paise || 0) : 0);
+  }
+
+  function pricingRangeText() {
+    const values = Object.values(pricing.services || {}).map(Number).filter((v) => Number.isFinite(v) && v >= 0);
+    if (!values.length) return "Loading...";
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    return min === max ? `${money(min)} each` : `${money(min)}–${money(max)}`;
+  }
+
+  function renderPricingLabels() {
+    const hero = $("#heroServiceFee");
+    if (hero) hero.textContent = pricingRangeText();
+
+    const safety = $("#safetyFeeTitle");
+    if (safety) safety.textContent = `${pricingRangeText()} Assistance Fee`;
+
+    const deliveryCopy = $("#deliveryFeeCopy");
+    if (deliveryCopy) deliveryCopy.textContent = `Digital copy is included. Add ${money(pricing.delivery_fee_paise)} once for laminated physical certificate(s) sent together.`;
+
+    $$('#serviceChoices input[name="services"]').forEach((input) => {
+      const labelText = input.closest("label")?.querySelector("span");
+      if (!labelText) return;
+      let badge = labelText.querySelector(".service-live-price");
+      if (!badge) {
+        badge = document.createElement("small");
+        badge.className = "service-live-price";
+        labelText.appendChild(badge);
+      }
+      badge.textContent = money(servicePrice(input.value));
+    });
+  }
+
+  async function loadPricing() {
+    const response = await fetch(`${CERTIFICATE_API_BASE}/pricing.php`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-store",
+      credentials: "omit",
+      headers: {"X-Requested-With": "XMLHttpRequest"}
+    });
+    const result = await response.json().catch(() => null);
+    if (!response.ok || !result?.success || !result.services) {
+      throw new Error("Live certificate pricing could not be loaded. Please refresh the page.");
+    }
+    pricing = {
+      services: result.services,
+      delivery_fee_paise: Number(result.delivery_fee_paise || 0)
+    };
+    pricingReady = true;
+    renderPricingLabels();
+    refreshUI();
   }
 
   function setRequired(id, required) {
@@ -70,8 +136,8 @@
     const online = onlineDocuments();
     const delivery = homeDelivery();
 
-    const serviceFee = services.length * SERVICE_FEE_PAISE;
-    const deliveryFee = delivery ? DELIVERY_FEE_PAISE : 0;
+    const serviceFee = currentServiceFeePaise();
+    const deliveryFee = delivery ? Number(pricing.delivery_fee_paise || 0) : 0;
     if ($("#serviceFeeDisplay")) $("#serviceFeeDisplay").textContent = money(serviceFee);
     if ($("#deliveryFeeDisplay")) $("#deliveryFeeDisplay").textContent = money(deliveryFee);
     if ($("#totalFeeDisplay")) $("#totalFeeDisplay").textContent = money(serviceFee + deliveryFee);
@@ -130,8 +196,10 @@
       button.innerHTML = '<i class="fas fa-rotate-right"></i> Retry Document Upload';
       return;
     }
-    button.disabled = false;
-    button.innerHTML = `<i class="fas fa-lock"></i> Pay ${money(currentTotalPaise())} &amp; Submit Application`;
+    button.disabled = !pricingReady;
+    button.innerHTML = pricingReady
+      ? `<i class="fas fa-lock"></i> Pay ${money(currentTotalPaise())} &amp; Submit Application`
+      : '<i class="fas fa-spinner fa-spin"></i> Loading Live Pricing...';
   }
 
   function collectApplicationData() {
@@ -431,6 +499,9 @@
     catch (error) { setError(error.message); return; }
 
     setSubmitState("creating");
+    if (!pricingReady) {
+      throw new Error("Live pricing is still loading. Please wait a moment and try again.");
+    }
     setProgress(`Creating your secure ${money(currentTotalPaise())} payment order...`);
 
     try {
@@ -479,6 +550,11 @@
   }
 
   function init() {
+    loadPricing().catch((error) => {
+      pricingReady = false;
+      setError(error.message || "Live certificate pricing could not be loaded.");
+      setSubmitState("ready");
+    });
     $("#upCertificateForm")?.addEventListener("submit", handleSubmit);
     $("#certSuccess")?.addEventListener("click", handleSuccessActions);
     $$('#serviceChoices input, input[name="incomeFor"], #onlineDocumentsToggle, #homeDeliveryToggle')

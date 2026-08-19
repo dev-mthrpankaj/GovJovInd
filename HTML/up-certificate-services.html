@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UP Certificate Services Assistance | GovJobUpdates</title>
-  <meta name="description" content="Apply for UP caste, domicile and income certificate assistance with document guidance, secure online payment and Rs. 110 service fee.">
+  <meta name="description" content="Apply for UP caste, domicile and income certificate assistance with document guidance, secure online payment and live certificate-wise service pricing.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://govjobupdates.com/HTML/up-certificate-services.html">
     <meta name="twitter:image" content="https://govjobupdates.com/Assets/Home%20Page/Government%20Job%20Banner.webp">
@@ -22,11 +22,11 @@
   <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
   <link rel="stylesheet" href="../CSS/style.css">
-  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20260819-v22">
+  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20260819-pricing1">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"offers":{"@type":"Offer","price":"110","priceCurrency":"INR"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate and Income Certificate Assistance"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate and Income Certificate Assistance"}</script>
   <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"UP Certificate Services","item":"https://govjobupdates.com/HTML/up-certificate-services.html"}]}</script>
-  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The service assistance fee shown on this page is Rs. 110 per selected certificate. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"For caste and domicile requests, one common document set is used. Income Certificate requires a separate Aadhaar front-and-back PDF, separate Sabhasad or Pradhan letter pad and separate passport-size photo. Additional information or documents may be requested by phone if required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
+  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The live service assistance fee is shown separately for each selected certificate. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"For caste and domicile requests, one common document set is used. Income Certificate requires a separate Aadhaar front-and-back PDF, separate Sabhasad or Pradhan letter pad and separate passport-size photo. Additional information or documents may be requested by phone if required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
 </head>
 <body>
   <header><div class="header-container"><div class="logo-container"><img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="../index.html" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html" class="active">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
@@ -44,7 +44,7 @@
       </div>
       <div class="cert-card">
         <h2>Service Fee</h2>
-        <div class="cert-fee"><span>Assistance charge per certificate request</span><strong>₹110</strong></div>
+        <div class="cert-fee"><span>Live assistance pricing</span><strong id="heroServiceFee">Loading...</strong></div>
         <p class="cert-note safe-note"><span class="note-line"><span class="note-lang">English:</span>Payment is collected securely through Razorpay. No UTR or payment screenshot is required. Final certificate approval is handled only by the concerned government authority.</span></p>
       </div>
     </section>
@@ -53,7 +53,7 @@
       <h2 id="serviceSafetyTitle">Important UP Services Safety Information</h2>
       <div class="safety-grid">
         <article class="safety-card warning"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><strong>Not a Government Website</strong><span>GovJobUpdates only provides application assistance. Official approval/rejection is handled by the concerned government department.</span></article>
-        <article class="safety-card"><i class="fas fa-receipt" aria-hidden="true"></i><strong>₹110 Assistance Fee</strong><span>The fee is for form filling, document checking and request handling. It is not a government guarantee or approval fee.</span></article>
+        <article class="safety-card"><i class="fas fa-receipt" aria-hidden="true"></i><strong id="safetyFeeTitle">Live Assistance Fee</strong><span>The fee is for form filling, document checking and request handling. It is not a government guarantee or approval fee.</span></article>
         <article class="safety-card success"><i class="fas fa-shield-halved" aria-hidden="true"></i><strong>Document Privacy</strong><span>Uploaded documents are used only for CSC/eDistrict application assistance and verification related to your request.</span></article>
         <article class="safety-card"><i class="fas fa-lock" aria-hidden="true"></i><strong>Secure Online Payment</strong><span>Pay through Razorpay. Payment is verified automatically by the secure Serverbyt backend before documents are uploaded.</span></article>
       </div>
@@ -73,7 +73,7 @@
       <h2 id="processTitle">How the Service Works</h2>
       <ol class="process-list">
         <li><div><strong>Fill the request form</strong><span>Enter applicant details, district, tehsil, Aadhaar-linked mobile number and certificate type, then select the required documents.</span></div></li>
-        <li><div><strong>Pay securely</strong><span>₹110 per selected certificate is calculated automatically. Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required.</span></div></li>
+        <li><div><strong>Pay securely</strong><span>The current fee for each selected certificate is calculated automatically from live server pricing. Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required.</span></div></li>
         <li><div><strong>Automatic payment verification</strong><span>The Serverbyt backend verifies the Razorpay payment before document upload is allowed.</span></div></li>
         <li><div><strong>Documents upload & request creation</strong><span>After successful payment verification, online documents are uploaded to the protected Google Drive workflow. If offline submission is selected, your Request ID is created and you can submit the documents physically.</span></div></li>
       </ol>
@@ -150,7 +150,7 @@
           </div>
 
           <div class="cert-toggle-card">
-            <div><strong>Do you want Home Delivery?</strong><span>Digital copy is included. Add ₹50 once for laminated physical certificate(s) sent together.</span></div>
+            <div><strong>Do you want Home Delivery?</strong><span id="deliveryFeeCopy">Digital copy is included. The live delivery charge is added once for all certificates sent together.</span></div>
             <label class="cert-switch"><input id="homeDeliveryToggle" type="checkbox"><span></span></label>
           </div>
 
@@ -163,7 +163,7 @@
           <div class="cert-field"><label for="extraNote">Extra Note</label><textarea id="extraNote" placeholder="Any additional information"></textarea></div>
           <div class="cert-progress" id="certProgress" role="status" aria-live="polite"></div>
           <div class="cert-error" id="certError" role="alert" aria-live="assertive"></div>
-          <button class="btn btn-primary cert-pay-btn" type="submit" id="certSubmitBtn"><i class="fas fa-lock" aria-hidden="true"></i> Pay ₹110 &amp; Submit Application</button>
+          <button class="btn btn-primary cert-pay-btn" type="submit" id="certSubmitBtn" disabled><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading Live Pricing...</button>
           <p class="cert-submit-note"><i class="fas fa-shield-halved" aria-hidden="true"></i> Secure payment via Razorpay. By continuing, you agree to our <a href="terms.html">Terms</a>, <a href="privacy-policy.html">Privacy Policy</a> and <a href="refund-policy.html">Refund Policy</a>.</p>
         </form>
         <div class="cert-success" id="certSuccess" role="status" aria-live="polite"></div>
@@ -173,9 +173,9 @@
         <div class="cert-card" id="paymentCard">
           <h2>Secure Payment</h2>
           <div class="payment-summary">
-            <div class="payment-summary-row"><span>Certificate assistance</span><strong id="serviceFeeDisplay">₹110</strong></div>
+            <div class="payment-summary-row"><span>Certificate assistance</span><strong id="serviceFeeDisplay">₹0</strong></div>
             <div class="payment-summary-row"><span>Home delivery</span><strong id="deliveryFeeDisplay">₹0</strong></div>
-            <div class="payment-summary-row payment-total"><span>Total payable</span><strong id="totalFeeDisplay">₹110</strong></div>
+            <div class="payment-summary-row payment-total"><span>Total payable</span><strong id="totalFeeDisplay">₹0</strong></div>
           </div>
           <ul class="payment-feature-list">
             <li><i class="fas fa-shield-halved" aria-hidden="true"></i><span>Payment handled securely through Razorpay Checkout.</span></li>
@@ -207,7 +207,7 @@
       <h2 id="upServicesFaqTitle">UP Certificate Services FAQs</h2>
       <div class="seo-faq-list">
         <details><summary>Is GovJobUpdates a government certificate portal?</summary><p>No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department.</p></details>
-        <details><summary>What is the UP certificate assistance fee?</summary><p>The assistance fee shown on this page is Rs. 110 per selected certificate. Payment is collected securely online; the fee covers form filling, document checking and request handling and does not guarantee approval.</p></details>
+        <details><summary>What is the UP certificate assistance fee?</summary><p>The current assistance fee is loaded live for each certificate and shown before payment. Payment is collected securely online; the fee covers form filling, document checking and request handling and does not guarantee approval.</p></details>
         <details><summary>Which documents are usually needed?</summary><p>Aadhaar card, Sabhasad or Pradhan letter pad, passport size photo, Aadhaar-linked active mobile number and email ID are requested on this page. No payment screenshot or UTR entry is required.</p></details>
         <details><summary>Where should I check certificate status?</summary><p>Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel.</p></details>
       </div>
@@ -217,7 +217,7 @@
 <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p><div class="social-icons footer-social" aria-label="GovJobUpdates social links"><a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a><a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a><a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a><a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel"><i class="fab fa-whatsapp" aria-hidden="true"></i></a><a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN"><span aria-hidden="true">X</span></a><a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="../typing-test/index.html">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="refund-policy.html">Refund Policy</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li><li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="refund-policy.html">Refund Policy</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
   <script src="../JS/script.js?v=20260519-up-services-layout-fix" defer></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="../JS/up-certificate-services.js?v=20260819-v22" defer></script>
+  <script src="../JS/up-certificate-services.js?v=20260819-pricing1" defer></script>
   <script src="../JS/firebase-config.js?v=20260513-up5" defer></script>
   <script type="module" src="../JS/firebase-analytics.js"></script>
   <script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>
