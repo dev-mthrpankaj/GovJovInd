@@ -376,3 +376,23 @@
 .cert-choice-group{border:0;padding:0;margin:0;display:grid;gap:.65rem}.cert-choice-group legend{font-weight:900;color:#0f172a;margin-bottom:.2rem}.cert-choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:.65rem}.cert-choice{display:flex;align-items:center;gap:.6rem;padding:.8rem;border:1px solid #dbeafe;border-radius:12px;background:#f8fbff;cursor:pointer;font-weight:800}.cert-choice input{width:18px;height:18px;accent-color:#2563eb}.cert-toggle-card{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem;border:1px solid #dbeafe;border-radius:14px;background:#f8fbff}.cert-toggle-card>div{display:grid;gap:.2rem}.cert-toggle-card strong{color:#0f172a}.cert-toggle-card span{color:#64748b;font-size:.88rem;line-height:1.4}.cert-switch{position:relative;flex:0 0 auto}.cert-switch input{position:absolute;opacity:0;pointer-events:none}.cert-switch>span{display:block;width:50px;height:28px;border-radius:999px;background:#cbd5e1;position:relative;transition:.2s}.cert-switch>span:after{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(15,23,42,.25);transition:.2s}.cert-switch input:checked+span{background:#2563eb}.cert-switch input:checked+span:after{transform:translateX(22px)}
 
 .cert-field-help{display:block;margin-top:.28rem;color:#64748b;font-size:.8rem;line-height:1.4}
+
+
+/* Certificate V2.2: separate Income Certificate document workflow */
+.cert-doc-section{
+  display:grid;
+  gap:.75rem;
+  padding:1rem;
+  margin:.25rem 0;
+  border:1px solid #dbeafe;
+  border-radius:16px;
+  background:#f8fbff;
+}
+.cert-doc-section h3{margin:0;color:var(--secondary)}
+.income-doc-section{border-color:#c7d2fe;background:#f8faff}
+.income-for-section{border-color:#c7d2fe;background:#f8faff}
+.cert-choice-grid-compact{grid-template-columns:repeat(2,minmax(0,1fr));max-width:520px}
+.cert-field-help{display:block;color:#64748b;font-size:.82rem;line-height:1.45}
+@media(max-width:560px){
+  .cert-choice-grid-compact{grid-template-columns:1fr}
+}

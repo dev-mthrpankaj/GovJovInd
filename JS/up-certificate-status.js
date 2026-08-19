@@ -195,7 +195,7 @@
     if (services.length && servicesCard && servicesBox) {
       servicesBox.innerHTML = services.map((service) => `
         <div class="track-details" style="grid-template-columns:1fr; margin:.55rem 0">
-          <div><span>${service.service_type || "Certificate"}</span><strong>${String(service.service_status || "pending").replace(/_/g," ")}</strong></div>
+          <div><span>${service.service_type || "Certificate"}${service.service_type === "Income Certificate" && service.beneficiary_type ? ` (${service.beneficiary_type === "father" ? "Father" : "Self"})` : ""}</span><strong>${String(service.service_status || "pending").replace(/_/g," ")}</strong></div>
         </div>`).join("");
       servicesCard.hidden = false;
     } else if (servicesCard) { servicesCard.hidden = true; }

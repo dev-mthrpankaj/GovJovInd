@@ -22,11 +22,11 @@
   <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
   <link rel="stylesheet" href="../CSS/style.css">
-  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20260818-rzp110">
+  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20260819-v22">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"offers":{"@type":"Offer","price":"110","priceCurrency":"INR"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate and Income Certificate Assistance"}</script>
   <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"UP Certificate Services","item":"https://govjobupdates.com/HTML/up-certificate-services.html"}]}</script>
-  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The service assistance fee shown on this page is Rs. 110 per selected certificate. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"For caste and domicile requests, common documents are uploaded only once. If Income Certificate is selected, Aadhaar front and back must be provided together in one PDF and the passport-size photo is reused for the income request. Additional information may be requested by phone if required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
+  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The service assistance fee shown on this page is Rs. 110 per selected certificate. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"For caste and domicile requests, one common document set is used. Income Certificate requires a separate Aadhaar front-and-back PDF, separate Sabhasad or Pradhan letter pad and separate passport-size photo. Additional information or documents may be requested by phone if required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
 </head>
 <body>
   <header><div class="header-container"><div class="logo-container"><img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="../index.html" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html" class="active">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
@@ -73,7 +73,7 @@
       <h2 id="processTitle">How the Service Works</h2>
       <ol class="process-list">
         <li><div><strong>Fill the request form</strong><span>Enter applicant details, district, tehsil, Aadhaar-linked mobile number and certificate type, then select the required documents.</span></div></li>
-        <li><div><strong>Pay ₹110 securely</strong><span>Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required.</span></div></li>
+        <li><div><strong>Pay securely</strong><span>₹110 per selected certificate is calculated automatically. Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required.</span></div></li>
         <li><div><strong>Automatic payment verification</strong><span>The Serverbyt backend verifies the Razorpay payment before document upload is allowed.</span></div></li>
         <li><div><strong>Documents upload & request creation</strong><span>After successful payment verification, online documents are uploaded to the protected Google Drive workflow. If offline submission is selected, your Request ID is created and you can submit the documents physically.</span></div></li>
       </ol>
@@ -93,7 +93,16 @@
               <label class="cert-choice"><input type="checkbox" name="services" value="Domicile Certificate"><span>Domicile Certificate</span></label>
               <label class="cert-choice"><input type="checkbox" name="services" value="Income Certificate"><span>Income Certificate</span></label>
             </div>
-            <p class="cert-submit-note">You can select more than one certificate. Common documents are uploaded only once.</p>
+            <p class="cert-submit-note">You can select more than one certificate. Caste and Domicile share one common document set; Income Certificate uses its own separate document set.</p>
+          </fieldset>
+
+          <fieldset class="cert-choice-group income-for-section" id="incomeForSection" hidden>
+            <legend>Income Certificate For</legend>
+            <div class="cert-choice-grid cert-choice-grid-compact">
+              <label class="cert-choice"><input type="radio" name="incomeFor" value="self"><span>Self</span></label>
+              <label class="cert-choice"><input type="radio" name="incomeFor" value="father"><span>Father</span></label>
+            </div>
+            <p class="cert-submit-note">Select whose name the Income Certificate will be prepared in. The Income Certificate documents below must belong to that person.</p>
           </fieldset>
 
           <div class="cert-row"><div class="cert-field"><label for="applicantName">Applicant Name</label><input id="applicantName" type="text" required placeholder="Full name"></div><div class="cert-field"><label for="fatherName">Father / Husband Name</label><input id="fatherName" type="text" required placeholder="Father or husband name"></div></div>
@@ -108,16 +117,31 @@
           </div>
 
           <div id="onlineDocumentsArea">
-            <div class="cert-row">
-              <div class="cert-field"><label for="aadhaarFile" id="aadhaarFileLabel">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" required accept="image/*,.pdf"><small class="cert-field-help" id="aadhaarFileHelp">A clear Aadhaar image or PDF can be uploaded.</small></div>
-              <div class="cert-field" id="letterFileField"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" required accept="image/*,.pdf"></div>
-            </div>
-            <div class="cert-row"><div class="cert-field"><label for="photoFile" id="photoFileLabel">Upload Passport Size Photo</label><input id="photoFile" type="file" required accept="image/*"><small class="cert-field-help" id="photoFileHelp">The same photo is reused for all selected certificate requests.</small></div><div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div></div>
-            <div class="cert-note safe-note" id="incomeDocumentNote" hidden>
-              <span class="note-line"><span class="note-lang">Income Certificate:</span>Aadhaar front and back must be combined into <strong>one PDF</strong>. The uploaded passport-size photo will be used as the photo to be pasted on the Income Certificate.</span>
-              <span class="note-line">Additional information or documents may be requested on your registered mobile number if required during processing.</span>
-            </div>
-            <p class="cert-note" id="onlineDocumentSummary">Upload clear files. Each file must be under 1.5 MB. Common documents are uploaded only once even when multiple certificates are selected.</p>
+            <section class="cert-doc-section" id="commonDocumentsSection">
+              <h3>Caste / Domicile Documents</h3>
+              <p class="cert-field-help">These three documents are shared only between selected Caste and Domicile services.</p>
+              <div class="cert-row">
+                <div class="cert-field"><label for="aadhaarFile">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" accept="image/*,.pdf"><small class="cert-field-help">A clear Aadhaar image or PDF.</small></div>
+                <div class="cert-field"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" accept="image/*,.pdf"></div>
+              </div>
+              <div class="cert-field"><label for="photoFile">Upload Passport Size Photo</label><input id="photoFile" type="file" accept="image/*"></div>
+            </section>
+
+            <section class="cert-doc-section income-doc-section" id="incomeDocumentsSection" hidden>
+              <h3>Income Certificate Documents</h3>
+              <p class="cert-field-help">These documents are separate from Caste/Domicile documents and must belong to the person selected under “Income Certificate For”.</p>
+              <div class="cert-row">
+                <div class="cert-field"><label for="incomeAadhaarFile">Income Aadhaar — Front + Back (Single PDF)</label><input id="incomeAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
+                <div class="cert-field"><label for="incomeLetterFile">Income Sabhasad / Pradhan Letter Pad</label><input id="incomeLetterFile" type="file" accept="image/*,.pdf"></div>
+              </div>
+              <div class="cert-field"><label for="incomePhotoFile">Income Passport Size Photo</label><input id="incomePhotoFile" type="file" accept="image/*"><small class="cert-field-help">This photo will be used for the Income Certificate.</small></div>
+              <div class="cert-note safe-note" id="incomeDocumentNote">
+                <span class="note-line">Additional information or documents may be requested on your registered mobile number if required during Income Certificate processing.</span>
+              </div>
+            </section>
+
+            <div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div>
+            <p class="cert-note" id="onlineDocumentSummary">Upload clear files. Each file must be under 1.5 MB.</p>
           </div>
           <div class="cert-note safe-note" id="offlineDocumentsNote" hidden>
             <span class="note-line">After payment, your Request ID will be created immediately. Submit the required documents physically/offline.</span>
@@ -165,7 +189,7 @@
           <h2>Required Documents</h2>
           <ul class="doc-list">
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Caste / Domicile:</strong> Aadhaar Card, Sabhasad / Pradhan Letter Pad and Passport Size Photo — common documents are submitted only once.</span></li>
-            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Income Certificate:</strong> Aadhaar front + back combined in one PDF and Passport Size Photo (photo to be pasted on Income Certificate).</span></li>
+            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Income Certificate (separate set):</strong> Aadhaar front + back combined in one PDF, Sabhasad / Pradhan Letter Pad and Passport Size Photo.</span></li>
             <li><i class="fas fa-phone" aria-hidden="true"></i><span>For Income Certificate, additional information or documents may be requested on the registered mobile number if required.</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Aadhaar-linked active mobile number for OTP/authentication</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Email ID</span></li>
@@ -193,7 +217,7 @@
 <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p><div class="social-icons footer-social" aria-label="GovJobUpdates social links"><a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a><a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a><a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a><a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel"><i class="fab fa-whatsapp" aria-hidden="true"></i></a><a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN"><span aria-hidden="true">X</span></a><a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="../typing-test/index.html">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="refund-policy.html">Refund Policy</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li><li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="refund-policy.html">Refund Policy</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
   <script src="../JS/script.js?v=20260519-up-services-layout-fix" defer></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="../JS/up-certificate-services.js?v=20260818-rzp110" defer></script>
+  <script src="../JS/up-certificate-services.js?v=20260819-v22" defer></script>
   <script src="../JS/firebase-config.js?v=20260513-up5" defer></script>
   <script type="module" src="../JS/firebase-analytics.js"></script>
   <script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>
