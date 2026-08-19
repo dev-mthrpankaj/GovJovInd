@@ -21,6 +21,13 @@
       step: 0,
       className: ""
     },
+    awaiting_offline_documents: {
+      title: "Awaiting Offline Documents",
+      pill: "Submit Documents Offline",
+      note: "Your payment is verified. Please submit the required documents offline. Keep your Request ID for tracking.",
+      step: 0,
+      className: "is-processing"
+    },
     documents_uploaded: {
       title: "Application Received",
       pill: "Received",
@@ -61,7 +68,7 @@
   const STEPS = [
     {
       title: "Payment Verified",
-      text: "₹110 payment successfully verified."
+      text: "Payment successfully verified."
     },
     {
       title: "Application Received",
@@ -181,6 +188,17 @@
     const note = $("#trackStatusNote");
     note.textContent = state.note;
     note.className = `track-note ${state.className}`.trim();
+
+    const services = Array.isArray(application.services) ? application.services : [];
+    const servicesCard = $("#trackServicesCard");
+    const servicesBox = $("#trackServices");
+    if (services.length && servicesCard && servicesBox) {
+      servicesBox.innerHTML = services.map((service) => `
+        <div class="track-details" style="grid-template-columns:1fr; margin:.55rem 0">
+          <div><span>${service.service_type || "Certificate"}</span><strong>${String(service.service_status || "pending").replace(/_/g," ")}</strong></div>
+        </div>`).join("");
+      servicesCard.hidden = false;
+    } else if (servicesCard) { servicesCard.hidden = true; }
 
     renderTimeline(statusKey);
   }

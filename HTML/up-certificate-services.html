@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"offers":{"@type":"Offer","price":"110","priceCurrency":"INR"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate and Income Certificate Assistance"}</script>
   <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"UP Certificate Services","item":"https://govjobupdates.com/HTML/up-certificate-services.html"}]}</script>
-  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The service assistance fee shown on this page is Rs. 110 per certificate request. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"The page asks for Aadhaar card, Sabhasad or Pradhan letter pad, passport size photo, Aadhaar-linked active mobile number and email ID. No payment screenshot or UTR entry is required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
+  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The service assistance fee shown on this page is Rs. 110 per selected certificate. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"For caste and domicile requests, common documents are uploaded only once. If Income Certificate is selected, Aadhaar front and back must be provided together in one PDF and the passport-size photo is reused for the income request. Additional information may be requested by phone if required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
 </head>
 <body>
   <header><div class="header-container"><div class="logo-container"><img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="../index.html" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html" class="active">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
@@ -75,7 +75,7 @@
         <li><div><strong>Fill the request form</strong><span>Enter applicant details, district, tehsil, Aadhaar-linked mobile number and certificate type, then select the required documents.</span></div></li>
         <li><div><strong>Pay ₹110 securely</strong><span>Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required.</span></div></li>
         <li><div><strong>Automatic payment verification</strong><span>The Serverbyt backend verifies the Razorpay payment before document upload is allowed.</span></div></li>
-        <li><div><strong>Documents upload & request creation</strong><span>After successful payment verification, your selected documents are uploaded to the protected Google Drive workflow and your Request ID is shown.</span></div></li>
+        <li><div><strong>Documents upload & request creation</strong><span>After successful payment verification, online documents are uploaded to the protected Google Drive workflow. If offline submission is selected, your Request ID is created and you can submit the documents physically.</span></div></li>
       </ol>
     </section>
 
@@ -83,16 +83,59 @@
       <div class="cert-card" id="certificateForm">
         <h2>Certificate Request Form</h2>
         <form class="cert-form" id="upCertificateForm">
-          <div class="cert-field"><label for="serviceType">Service Type</label><select id="serviceType" required><option value="">Select service</option><option>SC Caste Certificate</option><option>ST Caste Certificate</option><option>OBC State Caste Certificate</option><option>OBC Central Caste Certificate</option><option>Domicile Certificate</option><option>Income Certificate</option></select></div>
+          <fieldset class="cert-choice-group">
+            <legend>Select Certificate Service(s)</legend>
+            <div class="cert-choice-grid" id="serviceChoices">
+              <label class="cert-choice"><input type="checkbox" name="services" value="SC Caste Certificate"><span>SC Caste Certificate</span></label>
+              <label class="cert-choice"><input type="checkbox" name="services" value="ST Caste Certificate"><span>ST Caste Certificate</span></label>
+              <label class="cert-choice"><input type="checkbox" name="services" value="OBC State Caste Certificate"><span>OBC State Caste Certificate</span></label>
+              <label class="cert-choice"><input type="checkbox" name="services" value="OBC Central Caste Certificate"><span>OBC Central Caste Certificate</span></label>
+              <label class="cert-choice"><input type="checkbox" name="services" value="Domicile Certificate"><span>Domicile Certificate</span></label>
+              <label class="cert-choice"><input type="checkbox" name="services" value="Income Certificate"><span>Income Certificate</span></label>
+            </div>
+            <p class="cert-submit-note">You can select more than one certificate. Common documents are uploaded only once.</p>
+          </fieldset>
+
           <div class="cert-row"><div class="cert-field"><label for="applicantName">Applicant Name</label><input id="applicantName" type="text" required placeholder="Full name"></div><div class="cert-field"><label for="fatherName">Father / Husband Name</label><input id="fatherName" type="text" required placeholder="Father or husband name"></div></div>
           <div class="cert-row"><div class="cert-field"><label for="mobileNumber">Aadhaar-linked Active Mobile Number for OTP</label><input id="mobileNumber" type="tel" required maxlength="10" inputmode="numeric" placeholder="Aadhaar se linked 10 digit mobile number"></div><div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" type="email" required placeholder="Email address"></div></div>
-          <p class="cert-note safe-note"><span class="note-line"><span class="note-lang">English:</span>For Aadhaar authentication, the OTP will be sent to the applicant's Aadhaar-linked active mobile number. Please enter that mobile number only.</span></p>
+          <p class="cert-note safe-note"><span class="note-line"><span class="note-lang">English:</span>For Aadhaar authentication, enter the applicant's Aadhaar-linked active mobile number.</span></p>
           <div class="cert-row"><div class="cert-field"><label for="district">District</label><input id="district" type="text" required placeholder="District in UP"></div><div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" type="text" required placeholder="Tehsil"></div></div>
-          <div class="cert-field"><label for="address">Full Address</label><textarea id="address" required placeholder="Village/Ward/Mohalla, post, district, PIN"></textarea></div>
           <div class="cert-field"><label for="aadhaarLast4">Aadhaar Last 4 Digits</label><input id="aadhaarLast4" inputmode="numeric" maxlength="4" placeholder="Only last 4 digits"></div>
-          <div class="cert-row"><div class="cert-field"><label for="aadhaarFile">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" required accept="image/*,.pdf"></div><div class="cert-field"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" required accept="image/*,.pdf"></div></div>
-          <div class="cert-row"><div class="cert-field"><label for="photoFile">Upload Passport Size Photo</label><input id="photoFile" type="file" required accept="image/*"></div><div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div></div>
-          <p class="cert-note"><span class="note-line"><span class="note-lang">English:</span>Upload clear JPG/PNG/PDF files. Each file must be under 1.5 MB. Documents are uploaded only after the ₹110 payment is successfully verified.</span></p>
+
+          <div class="cert-toggle-card">
+            <div><strong>Upload documents online?</strong><span>Turn this off if you will submit documents physically/offline.</span></div>
+            <label class="cert-switch"><input id="onlineDocumentsToggle" type="checkbox" checked><span></span></label>
+          </div>
+
+          <div id="onlineDocumentsArea">
+            <div class="cert-row">
+              <div class="cert-field"><label for="aadhaarFile" id="aadhaarFileLabel">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" required accept="image/*,.pdf"><small class="cert-field-help" id="aadhaarFileHelp">A clear Aadhaar image or PDF can be uploaded.</small></div>
+              <div class="cert-field" id="letterFileField"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" required accept="image/*,.pdf"></div>
+            </div>
+            <div class="cert-row"><div class="cert-field"><label for="photoFile" id="photoFileLabel">Upload Passport Size Photo</label><input id="photoFile" type="file" required accept="image/*"><small class="cert-field-help" id="photoFileHelp">The same photo is reused for all selected certificate requests.</small></div><div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div></div>
+            <div class="cert-note safe-note" id="incomeDocumentNote" hidden>
+              <span class="note-line"><span class="note-lang">Income Certificate:</span>Aadhaar front and back must be combined into <strong>one PDF</strong>. The uploaded passport-size photo will be used as the photo to be pasted on the Income Certificate.</span>
+              <span class="note-line">Additional information or documents may be requested on your registered mobile number if required during processing.</span>
+            </div>
+            <p class="cert-note" id="onlineDocumentSummary">Upload clear files. Each file must be under 1.5 MB. Common documents are uploaded only once even when multiple certificates are selected.</p>
+          </div>
+          <div class="cert-note safe-note" id="offlineDocumentsNote" hidden>
+            <span class="note-line">After payment, your Request ID will be created immediately. Submit the required documents physically/offline.</span>
+            <span class="note-line" id="offlineRequiredDocuments"></span>
+            <span class="note-line" id="offlineIncomePhoneNote" hidden>For Income Certificate, additional information or documents may be requested on your registered mobile number if required during processing.</span>
+          </div>
+
+          <div class="cert-toggle-card">
+            <div><strong>Do you want Home Delivery?</strong><span>Digital copy is included. Add ₹50 once for laminated physical certificate(s) sent together.</span></div>
+            <label class="cert-switch"><input id="homeDeliveryToggle" type="checkbox"><span></span></label>
+          </div>
+
+          <div id="deliveryAddressArea" hidden>
+            <div class="cert-row"><div class="cert-field"><label for="deliveryName">Delivery Recipient Name</label><input id="deliveryName" type="text" placeholder="Name on parcel"></div><div class="cert-field"><label for="deliveryMobile">Delivery Mobile Number</label><input id="deliveryMobile" type="tel" maxlength="10" inputmode="numeric" placeholder="10 digit mobile"></div></div>
+            <div class="cert-field"><label for="deliveryAddress">Delivery Address</label><textarea id="deliveryAddress" placeholder="House/Village/Mohalla, Post Office, District, State"></textarea></div>
+            <div class="cert-field"><label for="deliveryPincode">PIN Code</label><input id="deliveryPincode" inputmode="numeric" maxlength="6" placeholder="6 digit PIN code"></div>
+          </div>
+
           <div class="cert-field"><label for="extraNote">Extra Note</label><textarea id="extraNote" placeholder="Any additional information"></textarea></div>
           <div class="cert-progress" id="certProgress" role="status" aria-live="polite"></div>
           <div class="cert-error" id="certError" role="alert" aria-live="assertive"></div>
@@ -106,8 +149,9 @@
         <div class="cert-card" id="paymentCard">
           <h2>Secure Payment</h2>
           <div class="payment-summary">
-            <div class="payment-summary-row"><span>Certificate assistance</span><strong>₹110</strong></div>
-            <div class="payment-summary-row payment-total"><span>Total payable</span><strong>₹110</strong></div>
+            <div class="payment-summary-row"><span>Certificate assistance</span><strong id="serviceFeeDisplay">₹110</strong></div>
+            <div class="payment-summary-row"><span>Home delivery</span><strong id="deliveryFeeDisplay">₹0</strong></div>
+            <div class="payment-summary-row payment-total"><span>Total payable</span><strong id="totalFeeDisplay">₹110</strong></div>
           </div>
           <ul class="payment-feature-list">
             <li><i class="fas fa-shield-halved" aria-hidden="true"></i><span>Payment handled securely through Razorpay Checkout.</span></li>
@@ -120,9 +164,9 @@
         <div class="cert-card" id="requiredDocs">
           <h2>Required Documents</h2>
           <ul class="doc-list">
-            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Aadhaar Card</span></li>
-            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Letter Pad of Sabhasad / Pradhan</span></li>
-            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Passport size photo</span></li>
+            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Caste / Domicile:</strong> Aadhaar Card, Sabhasad / Pradhan Letter Pad and Passport Size Photo — common documents are submitted only once.</span></li>
+            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Income Certificate:</strong> Aadhaar front + back combined in one PDF and Passport Size Photo (photo to be pasted on Income Certificate).</span></li>
+            <li><i class="fas fa-phone" aria-hidden="true"></i><span>For Income Certificate, additional information or documents may be requested on the registered mobile number if required.</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Aadhaar-linked active mobile number for OTP/authentication</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Email ID</span></li>
           </ul>
@@ -139,7 +183,7 @@
       <h2 id="upServicesFaqTitle">UP Certificate Services FAQs</h2>
       <div class="seo-faq-list">
         <details><summary>Is GovJobUpdates a government certificate portal?</summary><p>No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department.</p></details>
-        <details><summary>What is the UP certificate assistance fee?</summary><p>The assistance fee shown on this page is Rs. 110 per certificate request. Payment is collected securely online; the fee covers form filling, document checking and request handling and does not guarantee approval.</p></details>
+        <details><summary>What is the UP certificate assistance fee?</summary><p>The assistance fee shown on this page is Rs. 110 per selected certificate. Payment is collected securely online; the fee covers form filling, document checking and request handling and does not guarantee approval.</p></details>
         <details><summary>Which documents are usually needed?</summary><p>Aadhaar card, Sabhasad or Pradhan letter pad, passport size photo, Aadhaar-linked active mobile number and email ID are requested on this page. No payment screenshot or UTR entry is required.</p></details>
         <details><summary>Where should I check certificate status?</summary><p>Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel.</p></details>
       </div>
