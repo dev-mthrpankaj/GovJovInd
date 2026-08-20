@@ -9,12 +9,9 @@ window.GovJobUpdatesRankPredictorExams = [
         "board": "RSSB",
         "examType": "offline",
         "sheetName": "RSSB Computer Instructor BCI 2026",
-        "status": "active",
+        "status": "upcoming",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 200,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
@@ -104,7 +101,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Udaipur",
             "Other State"
         ],
-        "disabled": true
+        "disabled": false,
+        "effectiveStatus": "upcoming",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "rrb-alp-cbt-2",
@@ -115,9 +115,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
@@ -199,7 +196,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "rssb-ldc-jra-bb6-2026",
@@ -210,9 +210,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 300,
         "marksPerCorrect": 0.6666666666666666,
         "negativeMarking": 0.33,
@@ -302,7 +299,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Udaipur",
             "Other State"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "rssb-forester-2026",
@@ -313,9 +313,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
@@ -412,7 +409,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Tonk",
             "Udaipur"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "rrb-ntpc-gl-cbt-2-2026",
@@ -423,9 +423,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 120,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
@@ -504,7 +501,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "rrb-je-cbt-2-2026",
@@ -515,9 +515,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 150,
         "marksPerCorrect": 1,
         "negativeMarking": 0.33,
@@ -603,7 +600,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "mpesb-HospitalAssistant-2026",
@@ -614,9 +614,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.25,
@@ -706,7 +703,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Pandhurna",
             "Others"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "uppsc-atp-2026",
@@ -717,9 +717,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 150,
         "marksPerCorrect": 2,
         "negativeMarking": 0.33,
@@ -833,7 +830,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Varanasi",
             "Others"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "ssb-hcm-2026",
@@ -844,9 +844,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "active",
-        "canSubmit": true,
-        "canCheckRank": true,
         "totalQuestions": 150,
         "marksPerCorrect": 1,
         "negativeMarking": 0,
@@ -920,7 +917,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": false
+        "disabled": false,
+        "effectiveStatus": "active",
+        "canSubmit": true,
+        "canCheckRank": true
     },
     {
         "examId": "upsssc-bcg-technician-2026",
@@ -931,9 +931,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.25,
@@ -1042,7 +1039,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "up-constable-2026",
@@ -1053,9 +1053,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 150,
         "marksPerCorrect": 2,
         "negativeMarking": 0,
@@ -1176,7 +1173,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "test-exam",
@@ -1187,9 +1187,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 100,
         "marksPerCorrect": 2,
         "negativeMarking": 0.25,
@@ -1288,7 +1285,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "upse-cse-pre-2026",
@@ -1299,9 +1299,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 180,
         "marksPerCorrect": 2,
         "negativeMarking": 0.33,
@@ -1392,7 +1389,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "up-lekpal-2026",
@@ -1403,9 +1403,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.25,
@@ -1522,7 +1519,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "ssc-gd-2026",
@@ -1533,9 +1533,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 80,
         "marksPerCorrect": 2,
         "negativeMarking": 0.25,
@@ -1617,7 +1614,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Lakshadweep",
             "Puducherry"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "up-homeguard-2026",
@@ -1628,9 +1628,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0,
@@ -1739,7 +1736,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Unnao",
             "Varanasi"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "upsssc-jec-4612",
@@ -1750,9 +1750,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 100,
         "marksPerCorrect": 1,
         "negativeMarking": 0.25,
@@ -1796,7 +1793,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Uttar Pradesh",
             "Other"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "ssc-cpo-2025-paper-1",
@@ -1807,9 +1807,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 200,
         "marksPerCorrect": 1,
         "negativeMarking": 0.25,
@@ -1861,7 +1858,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Madhya Pradesh",
             "Other"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "ssc-cgl-2025-tier-1",
@@ -1872,9 +1872,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 100,
         "marksPerCorrect": 2,
         "negativeMarking": 0.5,
@@ -1926,7 +1923,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Madhya Pradesh",
             "Other"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "up-police-si-2025",
@@ -1937,9 +1937,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 160,
         "marksPerCorrect": 1,
         "negativeMarking": 0,
@@ -1987,7 +1984,10 @@ window.GovJobUpdatesRankPredictorExams = [
             "Uttar Pradesh",
             "Other"
         ],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     },
     {
         "examId": "coming-soon",
@@ -1998,9 +1998,6 @@ window.GovJobUpdatesRankPredictorExams = [
         "status": "active",
         "activeDate": "",
         "archiveAfterDays": 30,
-        "effectiveStatus": "disabled",
-        "canSubmit": false,
-        "canCheckRank": false,
         "totalQuestions": 0,
         "marksPerCorrect": 0,
         "negativeMarking": 0,
@@ -2020,6 +2017,9 @@ window.GovJobUpdatesRankPredictorExams = [
             "Other PWD"
         ],
         "states": [],
-        "disabled": true
+        "disabled": true,
+        "effectiveStatus": "disabled",
+        "canSubmit": false,
+        "canCheckRank": false
     }
 ];
