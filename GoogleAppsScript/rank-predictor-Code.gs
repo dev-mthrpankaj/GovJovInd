@@ -3,6 +3,7 @@ const RANK_EXAMS_SHEET_NAME = "Rank Predictor Exams";
 const USERS_SHEET_NAME = "Users";
 const VISITOR_SESSIONS_SHEET_NAME = "Visitor Sessions";
 const VISITOR_ACTIVE_WINDOW_MS = 3 * 60 * 1000;
+const RANK_PREDICTOR_ARCHIVE_AFTER_DAYS = 30;
 
 const USER_HEADERS = [
   "User ID",
@@ -65,6 +66,8 @@ const HEADERS = [
 const RANK_EXAM_HEADERS = [
   "Published",
   "Order",
+  "Status",
+  "Active Date",
   "Exam ID",
   "Exam Name",
   "Board",
@@ -351,8 +354,17 @@ function submitData(data) {
   validateSubmitPayload(data);
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  const sheet = getSheetByExam(data.sheetName, spreadsheet);
   const examConfig = getRankExamConfigForData(spreadsheet, data);
+  const availability = getRankExamAvailability(examConfig);
+  if (!availability.canSubmit) {
+    return sendJSON({
+      success: false,
+      blocked: true,
+      status: availability.effectiveStatus,
+      message: availability.message
+    });
+  }
+  const sheet = getSheetByExam(data.sheetName, spreadsheet);
   validateSubmitPayload(data, examConfig);
   const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
@@ -1120,6 +1132,9 @@ function buildRankExamConfig(row, headerMap, rowNumber) {
     if (exam[field]) exam.__hasRowData = true;
   });
 
+  exam.status = normalizeRankExamStatus(getHeaderValue(row, headerMap, "Status"));
+  exam.activeDate = normalizeRankExamDate(getHeaderValue(row, headerMap, "Active Date"));
+  exam.archiveAfterDays = RANK_PREDICTOR_ARCHIVE_AFTER_DAYS;
   exam.totalQuestions = toRankExamNumber(getHeaderValue(row, headerMap, "Total Questions"));
   exam.marksPerCorrect = toRankExamNumber(getHeaderValue(row, headerMap, "Marks Per Correct"));
   exam.negativeMarking = toRankExamNumber(getHeaderValue(row, headerMap, "Negative Marking"));
@@ -1139,6 +1154,7 @@ function buildRankExamConfig(row, headerMap, rowNumber) {
   exam.states = parseRankExamList(getHeaderValue(row, headerMap, "States"));
   exam.disabled = toRankExamBoolean(getHeaderValue(row, headerMap, "Disabled"));
 
+  if (exam.status || exam.activeDate) exam.__hasRowData = true;
   if (hasEnteredRankExamValue(exam.totalQuestions)) exam.__hasRowData = true;
   if (hasEnteredRankExamValue(exam.marksPerCorrect)) exam.__hasRowData = true;
   if (hasEnteredRankExamValue(exam.negativeMarking)) exam.__hasRowData = true;
@@ -1150,6 +1166,9 @@ function buildRankExamConfig(row, headerMap, rowNumber) {
   if (!exam.board) exam.board = "GovJobUpdates";
   if (!exam.examType) exam.examType = "offline";
   if (!Number.isFinite(exam.negativeMarking)) exam.negativeMarking = 0;
+  exam.effectiveStatus = getRankExamEffectiveStatus(exam);
+  exam.canSubmit = exam.effectiveStatus === "active";
+  exam.canCheckRank = exam.effectiveStatus === "active" || exam.effectiveStatus === "archived";
 
   return exam;
 }
@@ -1157,6 +1176,7 @@ function buildRankExamConfig(row, headerMap, rowNumber) {
 function isValidRankExamConfig(exam) {
   if (!exam.examId || !exam.examName) return false;
   if (exam.disabled) return true;
+  if (exam.effectiveStatus === "upcoming") return Boolean(exam.sheetName);
   return Boolean(exam.sheetName)
     && Number(exam.totalQuestions) > 0
     && Number(exam.marksPerCorrect) > 0
@@ -1446,6 +1466,73 @@ function sortRankExamConfigs(first, second) {
 function isRankExamPublished(value) {
   const normalized = normalizeKey(value);
   return !["no", "false", "0", "hidden", "draft"].includes(normalized);
+}
+
+function normalizeRankExamStatus(value) {
+  const normalized = normalizeKey(value);
+  if (["upcoming", "coming soon", "coming-soon", "future"].includes(normalized)) return "upcoming";
+  if (["archived", "archive", "closed", "close"].includes(normalized)) return "archived";
+  return "active";
+}
+
+function normalizeRankExamDate(value) {
+  if (!value) return "";
+  if (Object.prototype.toString.call(value) === "[object Date]") {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), "yyyy-MM-dd");
+  }
+  const text = normalizeText(value);
+  const date = new Date(text);
+  if (!Number.isNaN(date.getTime())) {
+    return Utilities.formatDate(date, Session.getScriptTimeZone(), "yyyy-MM-dd");
+  }
+  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : "";
+}
+
+function getRankExamEffectiveStatus(exam) {
+  if (!exam || exam.disabled) return "disabled";
+  const status = normalizeRankExamStatus(exam.status);
+  if (status === "archived") return "archived";
+
+  const activeMs = getRankExamDateStartMs(exam.activeDate);
+  const todayMs = getRankExamTodayStartMs();
+  if (status === "upcoming" && (!activeMs || todayMs < activeMs)) return "upcoming";
+  if (activeMs && todayMs > activeMs + (RANK_PREDICTOR_ARCHIVE_AFTER_DAYS * 24 * 60 * 60 * 1000)) return "archived";
+  return "active";
+}
+
+function getRankExamAvailability(exam) {
+  const effectiveStatus = getRankExamEffectiveStatus(exam);
+  if (effectiveStatus === "active") {
+    return {
+      effectiveStatus: effectiveStatus,
+      canSubmit: true,
+      message: "Rank predictor is active."
+    };
+  }
+  if (effectiveStatus === "upcoming") {
+    return {
+      effectiveStatus: effectiveStatus,
+      canSubmit: false,
+      message: "Rank predictor is not active yet. Data entry will open on the active date."
+    };
+  }
+  return {
+    effectiveStatus: effectiveStatus,
+    canSubmit: false,
+    message: "This rank predictor is archived. New data entry is closed, but submitted ranks can still be checked."
+  };
+}
+
+function getRankExamDateStartMs(value) {
+  const dateText = normalizeRankExamDate(value);
+  if (!dateText) return 0;
+  const date = new Date(dateText + "T00:00:00");
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+}
+
+function getRankExamTodayStartMs() {
+  const today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyy-MM-dd");
+  return getRankExamDateStartMs(today);
 }
 
 function toRankExamBoolean(value) {

@@ -10,6 +10,7 @@
     const RESULT_STORAGE_KEY = "gju_rank_predictor_latest_result";
     const RESULT_PAGE_URL = "rank-result.html";
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
+    const RANK_PREDICTOR_ARCHIVE_AFTER_DAYS = 30;
     const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
     const DEFAULT_CATEGORY_OPTIONS = ["UR", "OBC", "EWS", "SC", "ST", "PwD", "Ex-Serviceman"];
     const DEFAULT_HORIZONTAL_CATEGORY_OPTIONS = ["None", "PwD", "Ex-Serviceman", "Female", "Freedom Fighter Dependent", "Departmental Candidate", "Other"];
@@ -211,8 +212,14 @@
             categories: normalizeStringList(exam.categories),
             horizontalCategories: normalizeStringList(exam.horizontalCategories),
             states: normalizeStringList(exam.states),
-            disabled: Boolean(exam.disabled)
+            disabled: Boolean(exam.disabled),
+            status: normalizeRankExamStatus(exam.status),
+            activeDate: normalizeRankExamDate(exam.activeDate),
+            archiveAfterDays: RANK_PREDICTOR_ARCHIVE_AFTER_DAYS
         };
+        normalized.effectiveStatus = getRankExamEffectiveStatus(normalized);
+        normalized.canSubmit = normalized.effectiveStatus === "active";
+        normalized.canCheckRank = normalized.effectiveStatus === "active" || normalized.effectiveStatus === "archived";
         normalized.subjects = normalizeSheetSubjects(exam.subjects, normalized.subjectPassingCriteria);
         if (!normalized.supportedModes.length && !normalized.disabled) {
             normalized.supportedModes = [normalized.examType === "online" ? "online" : "offline"];
@@ -340,11 +347,91 @@
         return Number.isFinite(number) ? number : null;
     }
 
+    function normalizeRankExamStatus(value) {
+        const normalized = normalizeKey(value);
+        if (["upcoming", "coming soon", "coming-soon", "future"].includes(normalized)) return "upcoming";
+        if (["archived", "archive", "closed", "close"].includes(normalized)) return "archived";
+        return "active";
+    }
+
+    function normalizeRankExamDate(value) {
+        const text = getString(value);
+        if (!text) return "";
+        const match = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (match) return `${match[1]}-${match[2]}-${match[3]}`;
+        const date = new Date(text);
+        return Number.isNaN(date.getTime()) ? "" : getLocalDateString(date);
+    }
+
+    function getRankExamEffectiveStatus(exam) {
+        if (!exam || exam.disabled) return "disabled";
+        const status = normalizeRankExamStatus(exam.status);
+        if (status === "archived") return "archived";
+
+        const activeMs = getRankExamDateStartMs(exam.activeDate);
+        const todayMs = getRankExamDateStartMs(getLocalDateString(new Date()));
+        if (status === "upcoming" && (!activeMs || todayMs < activeMs)) return "upcoming";
+        if (activeMs && todayMs > activeMs + (RANK_PREDICTOR_ARCHIVE_AFTER_DAYS * 24 * 60 * 60 * 1000)) return "archived";
+        return "active";
+    }
+
+    function getExamStatus(exam) {
+        return getString(exam?.effectiveStatus || getRankExamEffectiveStatus(exam)).toLowerCase();
+    }
+
+    function canSubmitExam(exam) {
+        return Boolean(exam && !exam.disabled && (exam.canSubmit === true || getExamStatus(exam) === "active"));
+    }
+
+    function canCheckRankExam(exam) {
+        const status = getExamStatus(exam);
+        return Boolean(exam && !exam.disabled && (exam.canCheckRank === true || status === "active" || status === "archived"));
+    }
+
+    function getExamAvailabilityMessage(exam, action) {
+        const status = getExamStatus(exam);
+        const activeDate = formatDisplayDate(exam?.activeDate);
+        if (status === "upcoming") {
+            return activeDate
+                ? `This rank predictor opens on ${activeDate}. The page is ready, but candidate data entry is disabled until activation.`
+                : "This rank predictor page is ready for indexing. Candidate data entry will open after the answer key is released.";
+        }
+        if (status === "archived") {
+            return action === "check"
+                ? "New entries are closed for this exam. You can still check rank for already submitted records."
+                : "New entries are closed for this exam. Please use Check My Rank for already submitted records.";
+        }
+        if (status === "disabled") return "This rank predictor is not available right now.";
+        return "";
+    }
+
+    function formatDisplayDate(value) {
+        const dateText = normalizeRankExamDate(value);
+        if (!dateText) return "";
+        const parts = dateText.split("-");
+        if (parts.length !== 3) return dateText;
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+
+    function getRankExamDateStartMs(value) {
+        const dateText = normalizeRankExamDate(value);
+        if (!dateText) return 0;
+        const date = new Date(`${dateText}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+    }
+
+    function getLocalDateString(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
     function bindTabs() {
         dom.tabButtons.forEach((button) => {
-            button.addEventListener("click", () => setTab(button.dataset.tab));
+            button.addEventListener("click", () => setAvailableTab(button.dataset.tab));
         });
-        setTab(state.activeTab);
+        setAvailableTab(state.activeTab);
     }
 
     function setTab(tab) {
@@ -359,6 +446,20 @@
             panel.classList.toggle("is-active", active);
             panel.toggleAttribute("hidden", !active);
         });
+    }
+
+    function setAvailableTab(tab) {
+        const exam = getSelectedExam();
+        const targetTab = tab === "check" ? "check" : "submit";
+        if (targetTab === "submit" && !canSubmitExam(exam) && canCheckRankExam(exam)) {
+            setTab("check");
+            return;
+        }
+        if (targetTab === "check" && !canCheckRankExam(exam)) {
+            setTab("submit");
+            return;
+        }
+        setTab(targetTab);
     }
 
     function bindExamSelector() {
@@ -534,6 +635,64 @@
         setMode((exam.supportedModes || [])[0] || "offline");
         calculateMarks();
         applyAccordionDefaults();
+        syncExamAvailabilityUI(exam);
+    }
+
+    function syncExamAvailabilityUI(exam = getSelectedExam()) {
+        const app = getById("rankPredictorApp");
+        const status = getExamStatus(exam);
+        const canSubmit = canSubmitExam(exam);
+        const canCheck = canCheckRankExam(exam);
+
+        if (app) {
+            app.dataset.examStatus = status || "disabled";
+            app.classList.toggle("is-submit-closed", !canSubmit);
+            app.classList.toggle("is-check-closed", !canCheck);
+        }
+
+        const submitTab = dom.tabButtons.find((button) => button.dataset.tab === "submit");
+        const checkTab = dom.tabButtons.find((button) => button.dataset.tab === "check");
+        if (submitTab) {
+            submitTab.disabled = status === "archived" || status === "disabled";
+            submitTab.setAttribute("aria-disabled", String(submitTab.disabled));
+        }
+        if (checkTab) {
+            checkTab.disabled = !canCheck;
+            checkTab.setAttribute("aria-disabled", String(!canCheck));
+        }
+
+        setFormControlsDisabled("rankSubmitForm", !canSubmit, ["resetPredictorBtn"]);
+        setFormControlsDisabled("rankCheckForm", !canCheck);
+        if (canSubmit) setMode(state.mode || (exam?.supportedModes || [])[0] || "offline");
+        setButtonDisabled("submitDataBtn", !canSubmit);
+        setButtonDisabled("checkRankBtn", !canCheck);
+
+        const submitMessage = getExamAvailabilityMessage(exam, "submit");
+        const checkMessage = getExamAvailabilityMessage(exam, "check");
+        showMessage("submitMessage", submitMessage, status === "upcoming" ? "warning" : "info");
+        showMessage("checkMessage", canCheck && status === "archived" ? checkMessage : (!canCheck ? checkMessage : ""), canCheck ? "info" : "warning");
+
+        if (!canSubmit && canCheck && state.activeTab !== "check") {
+            setTab("check");
+        } else if (!canCheck && state.activeTab === "check") {
+            setTab("submit");
+        }
+    }
+
+    function setFormControlsDisabled(formId, disabled, exceptIds = []) {
+        const form = getById(formId);
+        if (!form) return;
+        const except = new Set(exceptIds);
+        form.querySelectorAll("input, select, textarea, button").forEach((control) => {
+            if (except.has(control.id)) return;
+            control.disabled = Boolean(disabled);
+        });
+        form.setAttribute("aria-disabled", String(Boolean(disabled)));
+    }
+
+    function setButtonDisabled(id, disabled) {
+        const button = getById(id);
+        if (button) button.disabled = Boolean(disabled);
     }
 
     function populateSelect(select, values, placeholder = "Select") {
@@ -770,7 +929,8 @@
             applyExamDefaults();
             hydrateCandidateSession();
             clearErrors(form);
-            showMessage("submitMessage", "");
+            if (canSubmitExam(getSelectedExam())) showMessage("submitMessage", "");
+            syncExamAvailabilityUI();
             renderPendingResult();
         });
     }
@@ -1224,6 +1384,11 @@
         calculateMarks();
         const form = event.currentTarget;
         if (form.dataset.busy === "true") return;
+        if (!canSubmitExam(getSelectedExam())) {
+            clearResultCard();
+            showMessage("submitMessage", getExamAvailabilityMessage(getSelectedExam(), "submit") || "Data entry is closed for this exam.", "warning");
+            return;
+        }
         const validation = validateSubmitForm(form);
         if (!validation.ok) {
             showMessage("submitMessage", validation.message, "error");
@@ -1248,7 +1413,7 @@
                 }
                 if (!data.success) {
                     clearResultCard();
-                    showMessage("submitMessage", API_NETWORK_ERROR_MESSAGE, "error");
+                    showMessage("submitMessage", data.message || API_NETWORK_ERROR_MESSAGE, "error");
                     return;
                 }
                 const resultData = getResponseData(data);
@@ -1265,6 +1430,11 @@
         event.preventDefault();
         const form = event.currentTarget;
         if (form.dataset.busy === "true") return;
+        if (!canCheckRankExam(getSelectedExam())) {
+            clearResultCard();
+            showMessage("checkMessage", getExamAvailabilityMessage(getSelectedExam(), "check") || "Rank check is not available for this exam yet.", "warning");
+            return;
+        }
         const validation = validateCheckForm(form);
         if (!validation.ok) {
             clearResultCard();
@@ -1290,7 +1460,7 @@
                 }
                 if (!data.success) {
                     clearResultCard();
-                    showMessage("checkMessage", API_NETWORK_ERROR_MESSAGE, "error");
+                    showMessage("checkMessage", data.message || API_NETWORK_ERROR_MESSAGE, "error");
                     return;
                 }
                 const resultData = getResponseData(data);
@@ -1461,6 +1631,13 @@
             markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
         }
+        if (!canSubmitExam(selectedExam)) {
+            return {
+                ok: false,
+                field: getById("globalExamSelect"),
+                message: getExamAvailabilityMessage(selectedExam, "submit") || "Data entry is closed for this exam."
+            };
+        }
         const required = ["candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "horizontalCategory", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
         if (selectedExam.hasShifts) required.push("shift");
 
@@ -1503,6 +1680,13 @@
             const field = getById("globalExamSelect");
             markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
+        }
+        if (!canCheckRankExam(selectedExam)) {
+            return {
+                ok: false,
+                field: getById("globalExamSelect"),
+                message: getExamAvailabilityMessage(selectedExam, "check") || "Rank check is not available for this exam yet."
+            };
         }
         for (const id of ["checkRollNumber", "checkMobileNumber", "checkDob"]) {
             const field = getById(id);

@@ -160,6 +160,8 @@ function buildRankExamSeedRow(exam, order) {
   return [
     "yes",
     order,
+    exam.status || "Active",
+    exam.activeDate || "",
     exam.examId,
     exam.examName,
     exam.board,
