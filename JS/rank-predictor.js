@@ -100,8 +100,8 @@
         cacheStaticDom();
         state.mobileMarksMode = detectMobileMarksMode();
         const requestedExamId = getRequestedExamId();
-        const hasStaticExamConfig = loadStaticExamConfig();
-        if (!hasStaticExamConfig || (requestedExamId && !findExamById(requestedExamId))) await loadSheetExamConfig();
+        const hasBackendExamConfig = await loadSheetExamConfig();
+        if (!hasBackendExamConfig || (requestedExamId && !findExamById(requestedExamId))) loadStaticExamConfig();
         if (requestedExamId) app.classList.add("is-fixed-exam");
         setSelectedExam(findExamById(requestedExamId) || (config.exams || []).find((exam) => !exam.disabled) || null, { syncSearch: Boolean(requestedExamId) });
         bindTabs();
@@ -141,10 +141,12 @@
             if (sheetExams.length) {
                 config.exams = sheetExams;
                 window.RANK_PREDICTOR_CONFIG = config;
+                return true;
             }
         } catch {
             // Fallback exams in rank-predictor-config.js keep the form usable.
         }
+        return false;
     }
 
     function getRequestedExamId() {
@@ -164,21 +166,30 @@
     }
 
     async function fetchSheetExamConfig() {
-        const apiUrl = String(config.apiUrl || "").trim();
-        if (!apiUrl || !apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) return [];
+        const phpUrl = getRankApiEndpoint("exams");
+        if (phpUrl) {
+            const exams = await fetchExamConfigFromUrl(phpUrl);
+            if (exams.length) return exams;
+        }
+
+        const apiUrl = getAppsScriptApiUrl();
+        if (!apiUrl) return [];
 
         const url = new URL(apiUrl, window.location.href);
         url.searchParams.set("type", "exams");
         url.searchParams.set("_ts", String(Date.now()));
+        return fetchExamConfigFromUrl(url.toString(), { redirect: "follow" });
+    }
 
+    async function fetchExamConfigFromUrl(url, options = {}) {
         const controller = new AbortController();
         const timeoutId = window.setTimeout(() => controller.abort(), EXAM_LOAD_TIMEOUT_MS);
         try {
-            const response = await fetch(url.toString(), {
+            const response = await fetch(url, {
                 method: "GET",
                 cache: "no-store",
-                redirect: "follow",
-                signal: controller.signal
+                signal: controller.signal,
+                ...options
             });
             if (!response.ok) return [];
             const payload = await response.json();
@@ -1599,13 +1610,13 @@
     }
 
     async function callRankApi(payload) {
-        const apiUrl = RANK_PREDICTOR_CONFIG.apiUrl;
+        const endpoint = getRankApiEndpoint(payload?.action === "checkRank" ? "check" : "submit");
+        if (endpoint) return postPhpRankApi(endpoint, payload);
 
-        if (!apiUrl || !apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) {
-            throw new Error(API_INVALID_URL_MESSAGE);
-        }
+        const appsScriptUrl = getAppsScriptApiUrl();
+        if (!appsScriptUrl) throw new Error(API_INVALID_URL_MESSAGE);
 
-        const res = await fetch(apiUrl, {
+        const res = await fetch(appsScriptUrl, {
             method: "POST",
             redirect: "follow",
             headers: {
@@ -1621,6 +1632,44 @@
         } catch {
             throw new Error(API_INVALID_RESPONSE_MESSAGE);
         }
+    }
+
+    async function postPhpRankApi(endpoint, payload) {
+        const res = await fetch(endpoint, {
+            method: "POST",
+            cache: "no-store",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: JSON.stringify(payload)
+        });
+        const text = await res.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch {
+            throw new Error(API_INVALID_RESPONSE_MESSAGE);
+        }
+        if (!res.ok && data && typeof data === "object") return data;
+        return data;
+    }
+
+    function getRankApiEndpoint(name) {
+        const baseUrl = String(RANK_PREDICTOR_CONFIG.apiBaseUrl || "").trim().replace(/\/+$/, "");
+        const endpoints = {
+            exams: "exams.php",
+            submit: "submit.php",
+            check: "check.php"
+        };
+        if (!baseUrl || !/^https:\/\/[^?#]+\/rank-api$/i.test(baseUrl) || !endpoints[name]) return "";
+        return `${baseUrl}/${endpoints[name]}`;
+    }
+
+    function getAppsScriptApiUrl() {
+        const apiUrl = String(RANK_PREDICTOR_CONFIG.apiUrl || "").trim();
+        if (!apiUrl || !apiUrl.startsWith("https://") || !apiUrl.endsWith("/exec") || apiUrl.includes("/dev")) return "";
+        return apiUrl;
     }
 
     function validateSubmitForm(form) {

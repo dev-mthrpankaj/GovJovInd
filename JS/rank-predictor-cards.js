@@ -54,26 +54,36 @@
     }
 
     async function loadActiveExams() {
+        const backendExams = await fetchBackendExams();
+        if (backendExams.length) return backendExams;
+
         const staticExams = normalizeExams(window.GovJobUpdatesRankPredictorExams || []);
         if (staticExams.length) return staticExams;
-
-        const sheetExams = await fetchSheetExams();
-        if (sheetExams.length) return sheetExams;
 
         return normalizeExams(config.exams || []);
     }
 
-    async function fetchSheetExams() {
+    async function fetchBackendExams() {
+        const phpBase = String(config.apiBaseUrl || "").trim().replace(/\/+$/, "");
+        if (/^https:\/\/[^?#]+\/rank-api$/i.test(phpBase)) {
+            const exams = await fetchExamUrl(`${phpBase}/exams.php`);
+            if (exams.length) return exams;
+        }
+
         const apiUrl = String(config.apiUrl || "").trim();
         if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/i.test(apiUrl)) return [];
 
+        const url = new URL(apiUrl);
+        url.searchParams.set("type", "exams");
+        url.searchParams.set("_ts", String(Date.now()));
+        return fetchExamUrl(url.toString());
+    }
+
+    async function fetchExamUrl(url) {
         const controller = new AbortController();
         const timer = window.setTimeout(() => controller.abort(), EXAM_LOAD_TIMEOUT_MS);
         try {
-            const url = new URL(apiUrl);
-            url.searchParams.set("type", "exams");
-            url.searchParams.set("_ts", String(Date.now()));
-            const response = await fetch(url.toString(), {
+            const response = await fetch(url, {
                 method: "GET",
                 cache: "no-store",
                 signal: controller.signal
