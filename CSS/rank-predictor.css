@@ -494,6 +494,21 @@ body {
     box-shadow: 0 8px 18px rgba(11, 94, 215, 0.22);
 }
 
+.tab-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.rank-predictor-page.is-submit-closed #rankSubmitForm {
+    border-color: #fed7aa;
+    background: linear-gradient(180deg, #fffaf2 0%, #ffffff 44%);
+}
+
+.rank-predictor-page.is-check-closed #rankCheckForm {
+    border-color: #dbeafe;
+    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 44%);
+}
+
 .rank-predictor-page .btn {
     display: inline-flex;
     align-items: center;

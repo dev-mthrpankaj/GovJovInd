@@ -375,6 +375,44 @@
         return "active";
     }
 
+    function getExamStatus(exam) {
+        return getString(exam?.effectiveStatus || getRankExamEffectiveStatus(exam)).toLowerCase();
+    }
+
+    function canSubmitExam(exam) {
+        return Boolean(exam && !exam.disabled && (exam.canSubmit === true || getExamStatus(exam) === "active"));
+    }
+
+    function canCheckRankExam(exam) {
+        const status = getExamStatus(exam);
+        return Boolean(exam && !exam.disabled && (exam.canCheckRank === true || status === "active" || status === "archived"));
+    }
+
+    function getExamAvailabilityMessage(exam, action) {
+        const status = getExamStatus(exam);
+        const activeDate = formatDisplayDate(exam?.activeDate);
+        if (status === "upcoming") {
+            return activeDate
+                ? `This rank predictor opens on ${activeDate}. The page is ready, but candidate data entry is disabled until activation.`
+                : "This rank predictor page is ready for indexing. Candidate data entry will open after the answer key is released.";
+        }
+        if (status === "archived") {
+            return action === "check"
+                ? "New entries are closed for this exam. You can still check rank for already submitted records."
+                : "New entries are closed for this exam. Please use Check My Rank for already submitted records.";
+        }
+        if (status === "disabled") return "This rank predictor is not available right now.";
+        return "";
+    }
+
+    function formatDisplayDate(value) {
+        const dateText = normalizeRankExamDate(value);
+        if (!dateText) return "";
+        const parts = dateText.split("-");
+        if (parts.length !== 3) return dateText;
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+
     function getRankExamDateStartMs(value) {
         const dateText = normalizeRankExamDate(value);
         if (!dateText) return 0;
@@ -391,9 +429,9 @@
 
     function bindTabs() {
         dom.tabButtons.forEach((button) => {
-            button.addEventListener("click", () => setTab(button.dataset.tab));
+            button.addEventListener("click", () => setAvailableTab(button.dataset.tab));
         });
-        setTab(state.activeTab);
+        setAvailableTab(state.activeTab);
     }
 
     function setTab(tab) {
@@ -408,6 +446,20 @@
             panel.classList.toggle("is-active", active);
             panel.toggleAttribute("hidden", !active);
         });
+    }
+
+    function setAvailableTab(tab) {
+        const exam = getSelectedExam();
+        const targetTab = tab === "check" ? "check" : "submit";
+        if (targetTab === "submit" && !canSubmitExam(exam) && canCheckRankExam(exam)) {
+            setTab("check");
+            return;
+        }
+        if (targetTab === "check" && !canCheckRankExam(exam)) {
+            setTab("submit");
+            return;
+        }
+        setTab(targetTab);
     }
 
     function bindExamSelector() {
@@ -583,6 +635,64 @@
         setMode((exam.supportedModes || [])[0] || "offline");
         calculateMarks();
         applyAccordionDefaults();
+        syncExamAvailabilityUI(exam);
+    }
+
+    function syncExamAvailabilityUI(exam = getSelectedExam()) {
+        const app = getById("rankPredictorApp");
+        const status = getExamStatus(exam);
+        const canSubmit = canSubmitExam(exam);
+        const canCheck = canCheckRankExam(exam);
+
+        if (app) {
+            app.dataset.examStatus = status || "disabled";
+            app.classList.toggle("is-submit-closed", !canSubmit);
+            app.classList.toggle("is-check-closed", !canCheck);
+        }
+
+        const submitTab = dom.tabButtons.find((button) => button.dataset.tab === "submit");
+        const checkTab = dom.tabButtons.find((button) => button.dataset.tab === "check");
+        if (submitTab) {
+            submitTab.disabled = status === "archived" || status === "disabled";
+            submitTab.setAttribute("aria-disabled", String(submitTab.disabled));
+        }
+        if (checkTab) {
+            checkTab.disabled = !canCheck;
+            checkTab.setAttribute("aria-disabled", String(!canCheck));
+        }
+
+        setFormControlsDisabled("rankSubmitForm", !canSubmit, ["resetPredictorBtn"]);
+        setFormControlsDisabled("rankCheckForm", !canCheck);
+        if (canSubmit) setMode(state.mode || (exam?.supportedModes || [])[0] || "offline");
+        setButtonDisabled("submitDataBtn", !canSubmit);
+        setButtonDisabled("checkRankBtn", !canCheck);
+
+        const submitMessage = getExamAvailabilityMessage(exam, "submit");
+        const checkMessage = getExamAvailabilityMessage(exam, "check");
+        showMessage("submitMessage", submitMessage, status === "upcoming" ? "warning" : "info");
+        showMessage("checkMessage", canCheck && status === "archived" ? checkMessage : (!canCheck ? checkMessage : ""), canCheck ? "info" : "warning");
+
+        if (!canSubmit && canCheck && state.activeTab !== "check") {
+            setTab("check");
+        } else if (!canCheck && state.activeTab === "check") {
+            setTab("submit");
+        }
+    }
+
+    function setFormControlsDisabled(formId, disabled, exceptIds = []) {
+        const form = getById(formId);
+        if (!form) return;
+        const except = new Set(exceptIds);
+        form.querySelectorAll("input, select, textarea, button").forEach((control) => {
+            if (except.has(control.id)) return;
+            control.disabled = Boolean(disabled);
+        });
+        form.setAttribute("aria-disabled", String(Boolean(disabled)));
+    }
+
+    function setButtonDisabled(id, disabled) {
+        const button = getById(id);
+        if (button) button.disabled = Boolean(disabled);
     }
 
     function populateSelect(select, values, placeholder = "Select") {
@@ -819,7 +929,8 @@
             applyExamDefaults();
             hydrateCandidateSession();
             clearErrors(form);
-            showMessage("submitMessage", "");
+            if (canSubmitExam(getSelectedExam())) showMessage("submitMessage", "");
+            syncExamAvailabilityUI();
             renderPendingResult();
         });
     }
@@ -1273,6 +1384,11 @@
         calculateMarks();
         const form = event.currentTarget;
         if (form.dataset.busy === "true") return;
+        if (!canSubmitExam(getSelectedExam())) {
+            clearResultCard();
+            showMessage("submitMessage", getExamAvailabilityMessage(getSelectedExam(), "submit") || "Data entry is closed for this exam.", "warning");
+            return;
+        }
         const validation = validateSubmitForm(form);
         if (!validation.ok) {
             showMessage("submitMessage", validation.message, "error");
@@ -1314,6 +1430,11 @@
         event.preventDefault();
         const form = event.currentTarget;
         if (form.dataset.busy === "true") return;
+        if (!canCheckRankExam(getSelectedExam())) {
+            clearResultCard();
+            showMessage("checkMessage", getExamAvailabilityMessage(getSelectedExam(), "check") || "Rank check is not available for this exam yet.", "warning");
+            return;
+        }
         const validation = validateCheckForm(form);
         if (!validation.ok) {
             clearResultCard();
@@ -1339,7 +1460,7 @@
                 }
                 if (!data.success) {
                     clearResultCard();
-                    showMessage("checkMessage", API_NETWORK_ERROR_MESSAGE, "error");
+                    showMessage("checkMessage", data.message || API_NETWORK_ERROR_MESSAGE, "error");
                     return;
                 }
                 const resultData = getResponseData(data);
@@ -1510,6 +1631,13 @@
             markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
         }
+        if (!canSubmitExam(selectedExam)) {
+            return {
+                ok: false,
+                field: getById("globalExamSelect"),
+                message: getExamAvailabilityMessage(selectedExam, "submit") || "Data entry is closed for this exam."
+            };
+        }
         const required = ["candidateName", "rollNumber", "mobileNumber", "dob", "examDate", "gender", "category", "horizontalCategory", "state", "totalAttempted", "rightAnswers", "wrongAnswers"];
         if (selectedExam.hasShifts) required.push("shift");
 
@@ -1552,6 +1680,13 @@
             const field = getById("globalExamSelect");
             markInvalid(field, "Please select a valid exam.");
             return { ok: false, field, message: "Please select a valid exam." };
+        }
+        if (!canCheckRankExam(selectedExam)) {
+            return {
+                ok: false,
+                field: getById("globalExamSelect"),
+                message: getExamAvailabilityMessage(selectedExam, "check") || "Rank check is not available for this exam yet."
+            };
         }
         for (const id of ["checkRollNumber", "checkMobileNumber", "checkDob"]) {
             const field = getById(id);
