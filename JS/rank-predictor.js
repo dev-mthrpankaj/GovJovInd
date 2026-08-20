@@ -10,6 +10,7 @@
     const RESULT_STORAGE_KEY = "gju_rank_predictor_latest_result";
     const RESULT_PAGE_URL = "rank-result.html";
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
+    const RANK_PREDICTOR_ARCHIVE_AFTER_DAYS = 30;
     const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
     const DEFAULT_CATEGORY_OPTIONS = ["UR", "OBC", "EWS", "SC", "ST", "PwD", "Ex-Serviceman"];
     const DEFAULT_HORIZONTAL_CATEGORY_OPTIONS = ["None", "PwD", "Ex-Serviceman", "Female", "Freedom Fighter Dependent", "Departmental Candidate", "Other"];
@@ -211,8 +212,14 @@
             categories: normalizeStringList(exam.categories),
             horizontalCategories: normalizeStringList(exam.horizontalCategories),
             states: normalizeStringList(exam.states),
-            disabled: Boolean(exam.disabled)
+            disabled: Boolean(exam.disabled),
+            status: normalizeRankExamStatus(exam.status),
+            activeDate: normalizeRankExamDate(exam.activeDate),
+            archiveAfterDays: RANK_PREDICTOR_ARCHIVE_AFTER_DAYS
         };
+        normalized.effectiveStatus = getRankExamEffectiveStatus(normalized);
+        normalized.canSubmit = normalized.effectiveStatus === "active";
+        normalized.canCheckRank = normalized.effectiveStatus === "active" || normalized.effectiveStatus === "archived";
         normalized.subjects = normalizeSheetSubjects(exam.subjects, normalized.subjectPassingCriteria);
         if (!normalized.supportedModes.length && !normalized.disabled) {
             normalized.supportedModes = [normalized.examType === "online" ? "online" : "offline"];
@@ -338,6 +345,48 @@
         if (value === undefined || value === null || value === "") return null;
         const number = Number(String(value).replace(/%$/, "").trim());
         return Number.isFinite(number) ? number : null;
+    }
+
+    function normalizeRankExamStatus(value) {
+        const normalized = normalizeKey(value);
+        if (["upcoming", "coming soon", "coming-soon", "future"].includes(normalized)) return "upcoming";
+        if (["archived", "archive", "closed", "close"].includes(normalized)) return "archived";
+        return "active";
+    }
+
+    function normalizeRankExamDate(value) {
+        const text = getString(value);
+        if (!text) return "";
+        const match = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (match) return `${match[1]}-${match[2]}-${match[3]}`;
+        const date = new Date(text);
+        return Number.isNaN(date.getTime()) ? "" : getLocalDateString(date);
+    }
+
+    function getRankExamEffectiveStatus(exam) {
+        if (!exam || exam.disabled) return "disabled";
+        const status = normalizeRankExamStatus(exam.status);
+        if (status === "archived") return "archived";
+
+        const activeMs = getRankExamDateStartMs(exam.activeDate);
+        const todayMs = getRankExamDateStartMs(getLocalDateString(new Date()));
+        if (status === "upcoming" && (!activeMs || todayMs < activeMs)) return "upcoming";
+        if (activeMs && todayMs > activeMs + (RANK_PREDICTOR_ARCHIVE_AFTER_DAYS * 24 * 60 * 60 * 1000)) return "archived";
+        return "active";
+    }
+
+    function getRankExamDateStartMs(value) {
+        const dateText = normalizeRankExamDate(value);
+        if (!dateText) return 0;
+        const date = new Date(`${dateText}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+    }
+
+    function getLocalDateString(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
     }
 
     function bindTabs() {
@@ -1248,7 +1297,7 @@
                 }
                 if (!data.success) {
                     clearResultCard();
-                    showMessage("submitMessage", API_NETWORK_ERROR_MESSAGE, "error");
+                    showMessage("submitMessage", data.message || API_NETWORK_ERROR_MESSAGE, "error");
                     return;
                 }
                 const resultData = getResponseData(data);

@@ -41,7 +41,11 @@
                 <h1 id="rankCardsTitle">Active Exam Rank Predictors</h1>
                 <span id="rankCardsSubtitle">Active exams loading...</span>
             </div>
-            <a class="rank-cards-all-btn" href="#rankExamSearch"><i class="fas fa-search" aria-hidden="true"></i> Search Exams</a>
+            <div class="rank-status-tabs" role="tablist" aria-label="Rank predictor exam status">
+                <button class="rank-status-tab is-active" type="button" role="tab" aria-selected="true" data-rank-status="active">Active <span id="rankStatusCountActive">0</span></button>
+                <button class="rank-status-tab" type="button" role="tab" aria-selected="false" data-rank-status="upcoming">Upcoming <span id="rankStatusCountUpcoming">0</span></button>
+                <button class="rank-status-tab" type="button" role="tab" aria-selected="false" data-rank-status="archived">Archived <span id="rankStatusCountArchived">0</span></button>
+            </div>
         </section>
 
         <section class="rank-search-panel" aria-label="Search rank predictor exams">

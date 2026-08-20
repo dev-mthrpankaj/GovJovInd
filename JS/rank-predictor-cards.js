@@ -3,6 +3,7 @@
 
     const config = window.RANK_PREDICTOR_CONFIG || { exams: [] };
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
+    const RANK_PREDICTOR_ARCHIVE_AFTER_DAYS = 30;
     const PAGE_BY_EXAM_ID = {
         "rssb-ldc-jra-bb6-2026": "../rank-predictor/rssb-ldc/index.html",
         "rrb-je-cbt-2-2026": "../rank-predictor/rrb-je/index.html"
@@ -28,7 +29,8 @@
     };
     const state = {
         exams: [],
-        query: ""
+        query: "",
+        status: "active"
     };
 
     if (document.readyState === "loading") {
@@ -43,9 +45,11 @@
         const exams = await loadActiveExams();
         state.exams = exams;
         state.query = getInitialSearchQuery();
+        state.status = getInitialStatusFilter();
         bindSearch();
-        bindSearchShortcut();
+        bindStatusTabs();
         syncSearchInput();
+        syncStatusTabs();
         renderCards();
     }
 
@@ -99,8 +103,19 @@
                 categories: normalizeList(exam.categories),
                 horizontalCategories: normalizeList(exam.horizontalCategories),
                 states: normalizeList(exam.states),
-                disabled: Boolean(exam.disabled)
+                disabled: Boolean(exam.disabled),
+                status: normalizeRankExamStatus(exam.status),
+                activeDate: normalizeRankExamDate(exam.activeDate),
+                archiveAfterDays: RANK_PREDICTOR_ARCHIVE_AFTER_DAYS
             }))
+            .map((exam) => {
+                const effectiveStatus = getRankExamEffectiveStatus(exam);
+                return Object.assign(exam, {
+                    effectiveStatus: effectiveStatus,
+                    canSubmit: effectiveStatus === "active",
+                    canCheckRank: effectiveStatus === "active" || effectiveStatus === "archived"
+                });
+            })
             .filter((exam) => exam.examId && exam.examName && !exam.disabled);
     }
 
@@ -127,15 +142,14 @@
         }
     }
 
-    function bindSearchShortcut() {
-        const link = document.querySelector(".rank-cards-all-btn");
-        const input = document.getElementById("rankExamSearch");
-        if (!link || !input) return;
-
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            input.scrollIntoView({ behavior: "smooth", block: "center" });
-            input.focus({ preventScroll: true });
+    function bindStatusTabs() {
+        document.querySelectorAll("[data-rank-status]").forEach((button) => {
+            button.addEventListener("click", () => {
+                state.status = normalizeStatusFilter(button.dataset.rankStatus);
+                updateSearchUrl(state.query, state.status);
+                syncStatusTabs();
+                renderCards();
+            });
         });
     }
 
@@ -152,20 +166,26 @@
         if (!grid) return;
 
         const query = normalizeSearchText(state.query);
-        const active = getFilteredExams(query);
+        const status = normalizeStatusFilter(state.status);
+        const counts = getStatusCounts();
+        const active = getFilteredExams(query, status);
+        updateStatusCounts(counts);
+        updateHeading(status);
         const total = state.exams.length;
+        const statusTotal = counts[status] || 0;
+        const statusLabel = getStatusLabel(status).toLowerCase();
         const activeText = active.length === 1 ? "exam" : "exams";
         if (subtitle) {
             subtitle.textContent = query
-                ? `${active.length} of ${total} active ${activeText} matched`
-                : `${total} active exam${total === 1 ? "" : "s"} available for rank check`;
+                ? `${active.length} of ${statusTotal} ${statusLabel} ${activeText} matched`
+                : `${statusTotal} ${statusLabel} exam${statusTotal === 1 ? "" : "s"} available`;
         }
         if (meta) {
             meta.textContent = query
                 ? active.length
                     ? `Showing ${active.length} matching rank predictor ${activeText}.`
                     : "No matching rank predictor found. Try exam name, board, short form, paper, category, or district."
-                : "Search active rank predictor exams by name, board, mode, subject, category, or district.";
+                : `Search ${statusLabel} rank predictor exams by name, board, mode, subject, category, or district.`;
         }
         if (clear) clear.hidden = !query;
         if (!active.length) {
@@ -178,6 +198,7 @@
 
     function renderCard(exam) {
         const href = getPageUrl(exam);
+        const status = getStatusMeta(exam);
         const rankType = exam.normalization ? "Normalized" : "Raw Rank";
         const shiftLabel = exam.hasShifts ? "Shift-wise" : "Single shift";
         return `
@@ -185,11 +206,11 @@
                 <div class="rank-card-accent" aria-hidden="true"></div>
                 <div class="rank-card-top">
                     <span class="rank-board-chip">${escapeHtml(getBoardLabel(exam.board))}</span>
-                    <span class="rank-live-chip"><i class="fas fa-circle" aria-hidden="true"></i> Active</span>
+                    <span class="rank-live-chip ${escapeAttribute(status.className)}"><i class="${escapeAttribute(status.icon)}" aria-hidden="true"></i> ${escapeHtml(status.label)}</span>
                 </div>
                 <div class="rank-card-title">
                     <h2>${escapeHtml(exam.examName)}</h2>
-                    <p>Check your expected rank using answer key details.</p>
+                    <p>${escapeHtml(getCardDescription(exam))}</p>
                 </div>
                 <div class="rank-card-details">
                     <span><i class="fas fa-file-lines" aria-hidden="true"></i>${escapeHtml(exam.sheetName || "Exam sheet")}</span>
@@ -199,19 +220,20 @@
                 <div class="rank-card-footer">
                     <div>
                         <span>Dedicated Page</span>
-                        <strong>Exam form connected</strong>
+                        <strong>${escapeHtml(getCardFooterText(exam))}</strong>
                     </div>
-                    <a href="${escapeAttribute(href)}">Check Your Rank <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="${escapeAttribute(href)}">${escapeHtml(getCardCta(exam))} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </article>
         `;
     }
 
-    function getFilteredExams(query) {
-        if (!query) return state.exams;
+    function getFilteredExams(query, status = state.status) {
+        const statusFiltered = state.exams.filter((exam) => normalizeStatusFilter(exam.effectiveStatus) === normalizeStatusFilter(status));
+        if (!query) return statusFiltered;
         const tokens = getSearchTokens(query);
-        if (!tokens.length) return state.exams;
-        return state.exams.filter((exam) => {
+        if (!tokens.length) return statusFiltered;
+        return statusFiltered.filter((exam) => {
             const searchable = buildSearchText(exam);
             return tokens.every((token) => searchable.includes(token));
         });
@@ -287,16 +309,30 @@
         }
     }
 
-    function updateSearchUrl(query) {
+    function getInitialStatusFilter() {
+        try {
+            return normalizeStatusFilter(new URLSearchParams(window.location.search).get("status"));
+        } catch {
+            return "active";
+        }
+    }
+
+    function updateSearchUrl(query, status = state.status) {
         try {
             const url = new URL(window.location.href);
             const value = text(query);
+            const statusValue = normalizeStatusFilter(status);
             if (value) {
                 url.searchParams.set("q", value);
                 url.searchParams.delete("search");
             } else {
                 url.searchParams.delete("q");
                 url.searchParams.delete("search");
+            }
+            if (statusValue === "active") {
+                url.searchParams.delete("status");
+            } else {
+                url.searchParams.set("status", statusValue);
             }
             window.history.replaceState({}, "", url.toString());
         } catch {}
@@ -322,6 +358,121 @@
     function normalizeSubjectNames(value) {
         if (!Array.isArray(value)) return normalizeList(value);
         return value.map((subject) => text(subject && typeof subject === "object" ? subject.name : subject)).filter(Boolean);
+    }
+
+    function normalizeRankExamStatus(value) {
+        const normalized = text(value).toLowerCase().replace(/\s+/g, " ");
+        if (["upcoming", "coming soon", "coming-soon", "future"].includes(normalized)) return "upcoming";
+        if (["archived", "archive", "closed", "close"].includes(normalized)) return "archived";
+        return "active";
+    }
+
+    function normalizeRankExamDate(value) {
+        const source = text(value);
+        if (!source) return "";
+        const match = source.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (match) return `${match[1]}-${match[2]}-${match[3]}`;
+        const date = new Date(source);
+        return Number.isNaN(date.getTime()) ? "" : getLocalDateString(date);
+    }
+
+    function getRankExamEffectiveStatus(exam) {
+        if (!exam || exam.disabled) return "disabled";
+        const status = normalizeRankExamStatus(exam.status);
+        if (status === "archived") return "archived";
+
+        const activeMs = getRankExamDateStartMs(exam.activeDate);
+        const todayMs = getRankExamDateStartMs(getLocalDateString(new Date()));
+        if (status === "upcoming" && (!activeMs || todayMs < activeMs)) return "upcoming";
+        if (activeMs && todayMs > activeMs + (RANK_PREDICTOR_ARCHIVE_AFTER_DAYS * 24 * 60 * 60 * 1000)) return "archived";
+        return "active";
+    }
+
+    function getRankExamDateStartMs(value) {
+        const dateText = normalizeRankExamDate(value);
+        if (!dateText) return 0;
+        const date = new Date(`${dateText}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+    }
+
+    function getLocalDateString(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    function getStatusMeta(exam) {
+        const status = exam.effectiveStatus || getRankExamEffectiveStatus(exam);
+        if (status === "upcoming") return { label: "Upcoming", icon: "fas fa-clock", className: "is-upcoming" };
+        if (status === "archived") return { label: "Archived", icon: "fas fa-box-archive", className: "is-archived" };
+        return { label: "Active", icon: "fas fa-circle", className: "is-active-status" };
+    }
+
+    function syncStatusTabs() {
+        const selected = normalizeStatusFilter(state.status);
+        document.querySelectorAll("[data-rank-status]").forEach((button) => {
+            const active = normalizeStatusFilter(button.dataset.rankStatus) === selected;
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-selected", String(active));
+        });
+    }
+
+    function updateStatusCounts(counts) {
+        setText("rankStatusCountActive", counts.active || 0);
+        setText("rankStatusCountUpcoming", counts.upcoming || 0);
+        setText("rankStatusCountArchived", counts.archived || 0);
+    }
+
+    function updateHeading(status) {
+        const title = document.getElementById("rankCardsTitle");
+        if (!title) return;
+        title.textContent = `${getStatusLabel(status)} Exam Rank Predictors`;
+    }
+
+    function getStatusCounts() {
+        return state.exams.reduce((counts, exam) => {
+            const status = normalizeStatusFilter(exam.effectiveStatus);
+            counts[status] = (counts[status] || 0) + 1;
+            return counts;
+        }, { active: 0, upcoming: 0, archived: 0 });
+    }
+
+    function normalizeStatusFilter(value) {
+        const status = text(value).toLowerCase();
+        return ["upcoming", "archived"].includes(status) ? status : "active";
+    }
+
+    function getStatusLabel(status) {
+        if (status === "upcoming") return "Upcoming";
+        if (status === "archived") return "Archived";
+        return "Active";
+    }
+
+    function getCardDescription(exam) {
+        const status = normalizeStatusFilter(exam.effectiveStatus);
+        if (status === "upcoming") return "Rank predictor page is ready. Data entry opens when this exam becomes active.";
+        if (status === "archived") return "New entries are closed. Previously submitted candidates can still check rank.";
+        return "Check your expected rank using answer key details.";
+    }
+
+    function getCardFooterText(exam) {
+        const status = normalizeStatusFilter(exam.effectiveStatus);
+        if (status === "upcoming") return exam.activeDate ? `Opens ${exam.activeDate}` : "Waiting for active date";
+        if (status === "archived") return "Only rank lookup";
+        return "Exam form connected";
+    }
+
+    function getCardCta(exam) {
+        const status = normalizeStatusFilter(exam.effectiveStatus);
+        if (status === "upcoming") return "View Page";
+        if (status === "archived") return "Check Rank";
+        return "Check Your Rank";
+    }
+
+    function setText(id, value) {
+        const node = document.getElementById(id);
+        if (node) node.textContent = String(value);
     }
 
     function normalizeSearchText(value) {
