@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0189-20260820130656-76e70ea1",
+        "title": "NTPC NGEL Engineer Executive Online Form 2026 for 147 Post",
+        "organization": "NTPC Green Energy Limited (NGEL)",
+        "department": "NTPC",
+        "category": "Private Sector",
+        "year": "2026",
+        "qualification": "Full Time BE/B.Tech/B. Sc. (Engg.) Degree in Civil Engineering with at least 65% marks from a recognized For Post wise Vacancy see detail page",
+        "totalPosts": "147",
+        "startDate": "2026-08-18",
+        "lastDate": "2026-09-07",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/101871/Index.html",
+        "officialNotification": "https://ngel.in/public/career/1/9bef2e6c3c/9bef2e6c3c.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0189-20260820130656-76e70ea1",
+        "updatedAt": "2026-08-20",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0193-20260820132026-ba8f0f5d",
         "title": "Nainital Bank Specialist Officer SO Online Form 2026",
         "organization": "Nainital Bank",
@@ -18,14 +42,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/nbljul26/",
         "officialNotification": "https://www.nainitalbank.bank.in/pdf/Notification%202026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0193-20260820132026-ba8f0f5d",
+        "detailPage": "../Job_Details/HTML/Nainital-Bank-Specialist-Officer-2026.html",
         "updatedAt": "2026-08-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0185-20260817155541-a17af09e",
