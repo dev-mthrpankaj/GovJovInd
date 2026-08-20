@@ -90,14 +90,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://uppsc.up.nic.in/CandidatePages/Notifications.aspx",
         "officialNotification": "https://uppsc.up.nic.in/OuterPages/View_Enclosure.aspx?ID=559&flag=E&FID=937",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0192-20260820131702-383b542c",
+        "detailPage": "../Job_Details/HTML/UPPSC-Assistant-Professor-Allopathy-2026.html",
         "updatedAt": "2026-08-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0193-20260820132026-ba8f0f5d",
