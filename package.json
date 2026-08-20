@@ -9,6 +9,8 @@
     "validate:sheet-data": "node scripts/sync-apps-script-to-js.js --validate-sheet-data",
     "validate:sheet-links": "node scripts/sync-apps-script-to-js.js --validate-sheet-links",
     "audit:rank-seo": "node scripts/audit-rank-predictor-seo.js",
+    "generate:rank-pages": "node scripts/generate-rank-predictor-pages.js",
+    "generate:rank-pages:local": "node scripts/generate-rank-predictor-pages.js --local",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "submit:indexnow": "node scripts/indexnow-submit.js"
   }

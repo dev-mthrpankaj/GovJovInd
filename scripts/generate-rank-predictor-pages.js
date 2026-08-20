@@ -1,11 +1,15 @@
 const fs = require("fs");
+const https = require("https");
 const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const dataPath = path.join(root, "JS", "rank-predictor-exams-data.js");
+const configPath = path.join(root, "JS", "rank-predictor-config.js");
 const templatePath = path.join(root, "rank-predictor", "rrb-je", "index.html");
 const baseUrl = "https://govjobupdates.com";
+const defaultApiBaseUrl = "https://test.govjobupdates.com/live-test/rank-api";
+const requestTimeoutMs = 10000;
 
 const pageOverrides = {
   "rssb-ldc-jra-bb6-2026": "rssb-ldc",
@@ -22,12 +26,113 @@ const displayNameOverrides = {
 };
 
 const template = fs.readFileSync(templatePath, "utf8");
-const context = { window: {} };
-vm.createContext(context);
-vm.runInContext(fs.readFileSync(dataPath, "utf8"), context);
 
-const exams = (context.window.GovJobUpdatesRankPredictorExams || [])
-  .filter((exam) => exam && !exam.disabled && exam.examId && exam.examName);
+function getArgValue(name) {
+  const prefix = `--${name}=`;
+  const arg = process.argv.find((item) => item.startsWith(prefix));
+  return arg ? arg.slice(prefix.length).trim() : "";
+}
+
+function getConfiguredApiBaseUrl() {
+  const cliValue = getArgValue("api-base");
+  if (cliValue) return cliValue;
+  const envValue = String(process.env.RANK_PREDICTOR_API_BASE || "").trim();
+  if (envValue) return envValue;
+
+  try {
+    const configSource = fs.readFileSync(configPath, "utf8");
+    const match = configSource.match(/apiBaseUrl\s*:\s*["']([^"']+)["']/);
+    return match ? match[1].trim() : defaultApiBaseUrl;
+  } catch (error) {
+    return defaultApiBaseUrl;
+  }
+}
+
+function isValidApiBaseUrl(value) {
+  return /^https:\/\/[^?#]+\/rank-api\/?$/i.test(String(value || "").trim());
+}
+
+function fetchJson(url) {
+  return new Promise((resolve, reject) => {
+    const request = https.get(url, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "GovJobUpdates rank page generator"
+      },
+      timeout: requestTimeoutMs
+    }, (response) => {
+      let body = "";
+      response.setEncoding("utf8");
+      response.on("data", (chunk) => {
+        body += chunk;
+      });
+      response.on("end", () => {
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          reject(new Error(`HTTP ${response.statusCode}`));
+          return;
+        }
+        try {
+          resolve(JSON.parse(body));
+        } catch (error) {
+          reject(new Error("Invalid JSON response"));
+        }
+      });
+    });
+
+    request.on("timeout", () => {
+      request.destroy(new Error(`Request timed out after ${requestTimeoutMs}ms`));
+    });
+    request.on("error", reject);
+  });
+}
+
+async function loadBackendExams() {
+  const apiBaseUrl = getConfiguredApiBaseUrl().replace(/\/+$/, "");
+  if (!isValidApiBaseUrl(apiBaseUrl)) {
+    throw new Error(`Invalid rank API base URL: ${apiBaseUrl || "(empty)"}`);
+  }
+
+  const payload = await fetchJson(`${apiBaseUrl}/exams.php?_ts=${Date.now()}`);
+  if (!payload || payload.success !== true || !Array.isArray(payload.exams)) {
+    throw new Error("Rank API did not return an exams array");
+  }
+  return payload.exams;
+}
+
+function loadLocalExams() {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync(dataPath, "utf8"), context);
+  return context.window.GovJobUpdatesRankPredictorExams || [];
+}
+
+function normalizeGeneratorExams(exams) {
+  const seen = new Set();
+  return (Array.isArray(exams) ? exams : [])
+    .filter((exam) => exam && !exam.disabled && exam.examId && exam.examName)
+    .filter((exam) => {
+      const id = text(exam.examId);
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+}
+
+async function loadExams() {
+  if (process.argv.includes("--local")) {
+    return { source: "local", exams: normalizeGeneratorExams(loadLocalExams()) };
+  }
+
+  try {
+    const exams = normalizeGeneratorExams(await loadBackendExams());
+    if (exams.length) return { source: "backend", exams };
+    throw new Error("Rank API returned no usable exams");
+  } catch (error) {
+    console.warn(`Backend exam load failed: ${error.message}`);
+    console.warn("Falling back to JS/rank-predictor-exams-data.js");
+    return { source: "local", exams: normalizeGeneratorExams(loadLocalExams()) };
+  }
+}
 
 function text(value) {
   return String(value || "").trim();
@@ -208,15 +313,15 @@ function buildGuide(exam) {
             </div>
             <nav class="related-links" aria-label="Rank predictor internal links">
                 <h3>Useful pages for rank predictor candidates</h3>
-                <a href="../rank-predictor/${escapeHtml(getDir(exam))}/index.html">${shortName} Rank Predictor</a>
-                <a href="rank-predictor.html">All Rank Predictors</a>
-                <a href="answer-key.html">Check Answer Keys</a>
-                <a href="results.html">Check Official Results</a>
-                <a href="quiz.html">Practice Free Quiz</a>
-                <a href="latest-jobs.html">Latest Government Jobs</a>
-                <a href="student-hub.html">Student Hub Guidance</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="disclaimer.html">Disclaimer</a>
+                <a href="${baseUrl}/rank-predictor/${escapeHtml(getDir(exam))}/">${shortName} Rank Predictor</a>
+                <a href="${baseUrl}/HTML/rank-predictor.html">All Rank Predictors</a>
+                <a href="${baseUrl}/HTML/answer-key.html">Check Answer Keys</a>
+                <a href="${baseUrl}/HTML/results.html">Check Official Results</a>
+                <a href="${baseUrl}/HTML/quiz.html">Practice Free Quiz</a>
+                <a href="${baseUrl}/HTML/latest-jobs.html">Latest Government Jobs</a>
+                <a href="${baseUrl}/HTML/student-hub.html">Student Hub Guidance</a>
+                <a href="${baseUrl}/HTML/privacy-policy.html">Privacy Policy</a>
+                <a href="${baseUrl}/HTML/disclaimer.html">Disclaimer</a>
             </nav>
             <p class="official-note"><strong>Important:</strong> This is a rank estimate for ${name}, not an official result. For final marks, cutoff, normalization, merit lists, and selection notices, check the official board website or notice.</p>
         </section>`;
@@ -310,15 +415,25 @@ function buildPage(exam) {
   return html;
 }
 
-const written = [];
-for (const exam of exams) {
-  if (pageOverrides[exam.examId]) continue;
-  const dir = path.join(root, "rank-predictor", getDir(exam));
-  const file = path.join(dir, "index.html");
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(file, buildPage(exam));
-  written.push(path.relative(root, file).replace(/\\/g, "/"));
+async function main() {
+  const { source, exams } = await loadExams();
+  const written = [];
+
+  for (const exam of exams) {
+    if (pageOverrides[exam.examId]) continue;
+    const dir = path.join(root, "rank-predictor", getDir(exam));
+    const file = path.join(dir, "index.html");
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, buildPage(exam));
+    written.push(path.relative(root, file).replace(/\\/g, "/"));
+  }
+
+  console.log(`Loaded ${exams.length} rank predictor exams from ${source}.`);
+  console.log(`Generated ${written.length} rank predictor pages.`);
+  written.forEach((file) => console.log(file));
 }
 
-console.log(`Generated ${written.length} rank predictor pages.`);
-written.forEach((file) => console.log(file));
+main().catch((error) => {
+  console.error(error && error.stack ? error.stack : error);
+  process.exitCode = 1;
+});
