@@ -106,6 +106,7 @@
                 board: text(exam.board || "GJU"),
                 examType: text(exam.examType),
                 sheetName: text(exam.sheetName),
+                submittedCandidates: getCount(exam.submittedCandidates ?? exam.totalSubmissions ?? exam.submissions),
                 hasShifts: Boolean(exam.hasShifts),
                 normalization: Boolean(exam.normalization),
                 supportedModes: normalizeList(exam.supportedModes),
@@ -223,7 +224,7 @@
                     <p>${escapeHtml(getCardDescription(exam))}</p>
                 </div>
                 <div class="rank-card-details">
-                    <span><i class="fas fa-file-lines" aria-hidden="true"></i>${escapeHtml(exam.sheetName || "Exam sheet")}</span>
+                    <span><i class="fas fa-users" aria-hidden="true"></i>${escapeHtml(formatSubmittedCandidates(exam.submittedCandidates))}</span>
                     <span><i class="fas fa-layer-group" aria-hidden="true"></i>${escapeHtml(shiftLabel)}</span>
                     <span><i class="fas fa-chart-simple" aria-hidden="true"></i>${escapeHtml(rankType)}</span>
                 </div>
@@ -363,6 +364,16 @@
     function normalizeList(value) {
         if (Array.isArray(value)) return value.map(text).filter(Boolean);
         return text(value).split(/[,|;]/).map(text).filter(Boolean);
+    }
+
+    function getCount(value) {
+        const count = Number(value);
+        return Number.isFinite(count) && count > 0 ? Math.floor(count) : 0;
+    }
+
+    function formatSubmittedCandidates(count) {
+        const total = getCount(count);
+        return `${total.toLocaleString("en-IN")} candidate${total === 1 ? "" : "s"} submitted`;
     }
 
     function normalizeSubjectNames(value) {
