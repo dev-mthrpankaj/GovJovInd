@@ -393,6 +393,19 @@
         return `${firstValue(subject.name, "Subject")}: ${score}${percentage}. Required: ${criteria}${message}`;
     }
 
+    function formatScorecardFailureTitle(subject) {
+        const name = firstValue(subject?.name, "Qualifying subject");
+        return `Failed qualifying subject: ${name}`;
+    }
+
+    function formatScorecardFailureDetail(subject) {
+        const score = formatMarks(firstValue(subject?.score, subject?.marks, null));
+        const percentage = isMissing(subject?.obtainedPercentage) ? "" : ` (${formatPercentile(subject.obtainedPercentage)})`;
+        const criteria = formatPassingCriteria(subject?.passingCriteria);
+        const message = subject?.passingMessage ? ` - ${subject.passingMessage}` : "";
+        return `Score ${score}${percentage}. Required: ${criteria}${message}`;
+    }
+
     function formatSubjectRank(rank, total) {
         if (isMissing(rank)) return "Not available";
         const rankText = formatRank(rank);
@@ -498,8 +511,8 @@
     async function buildScorecardCanvas(snapshot) {
         const model = buildScorecardModel(snapshot);
         const width = 1200;
-        const subjectRowHeight = 74;
-        const qualificationHeight = model.isNotQualified ? 134 : 0;
+        const subjectRowHeight = 82;
+        const qualificationHeight = model.isNotQualified ? 154 : 0;
         const subjectsHeight = model.subjects.length ? 92 + (model.subjects.length * subjectRowHeight) : 0;
         const height = 1180 + qualificationHeight + subjectsHeight;
         const canvas = document.createElement("canvas");
@@ -513,10 +526,10 @@
         fillRoundRect(ctx, 64, 64, width - 128, 224, 34, "#0b5ed7");
         fillRoundRect(ctx, 64, 222, width - 128, 66, 0, "#0b5ed7");
 
-        await drawScorecardLogo(ctx, 108, 98, 56);
-        drawText(ctx, "GovJobUpdates", 180, 132, 34, 900, "#ffffff");
-        drawText(ctx, "Rank Predictor Scorecard", 108, 180, 52, 900, "#ffffff");
-        drawWrappedText(ctx, model.examName, 108, 244, 980, 31, 1.25, 800, "#eaf2ff");
+        await drawScorecardLogo(ctx, 108, 94, 64);
+        drawText(ctx, "GovJobUpdates", 190, 132, 34, 900, "#ffffff");
+        drawText(ctx, "Rank Predictor Scorecard", 108, 186, 52, 900, "#ffffff");
+        drawWrappedText(ctx, model.examName, 108, 250, 980, 31, 1.25, 800, "#eaf2ff");
 
         if (model.isNotQualified) {
             drawQualificationWarning(ctx, model, 108, 318);
@@ -588,7 +601,8 @@
             isNotQualified,
             qualificationStatus: isNotQualified ? "Not eligible for merit rank" : firstValue(data.qualificationStatus, "Qualified"),
             qualificationMessage: firstValue(data.qualificationMessage, isNotQualified ? "Qualifying criteria was not met." : "Qualifying criteria met."),
-            failedSummary: failedSubjects.length ? formatFailedSubject(failedSubjects[0]) : "",
+            failedTitle: failedSubjects.length ? formatScorecardFailureTitle(failedSubjects[0]) : "",
+            failedDetail: failedSubjects.length ? formatScorecardFailureDetail(failedSubjects[0]) : "",
             subjects
         };
     }
@@ -617,32 +631,30 @@
 
     function drawSubjectScorecardRow(ctx, subject, x, y) {
         const failed = String(subject.passingStatus || "").toLowerCase() === "fail";
-        fillRoundRect(ctx, x, y, 984, 58, 8, failed ? "#fff1f2" : "#f8fafc");
-        drawFittedText(ctx, subject.name, x + 24, y + 37, 270, 23, 17, 900, failed ? "#b91c1c" : "#0f172a");
+        fillRoundRect(ctx, x, y, 984, 66, 8, failed ? "#fff1f2" : "#f8fafc");
+        drawFittedText(ctx, subject.name, x + 24, y + 30, 310, 23, 17, 900, failed ? "#b91c1c" : "#0f172a");
 
         if (subject.qualifyingOnly) {
-            fillRoundRect(ctx, x + 314, y + 14, 134, 30, 8, failed ? "#fee2e2" : "#e0f2fe");
-            drawFittedText(ctx, "Qualifying", x + 328, y + 35, 106, 17, 13, 900, failed ? "#b91c1c" : "#0369a1");
-            drawFittedText(ctx, `Score ${subject.score}`, x + 470, y + 36, 138, 22, 15, 900, failed ? "#dc2626" : "#0b5ed7");
-        } else {
-            drawFittedText(ctx, `Score ${subject.score}`, x + 314, y + 37, 260, 23, 16, 900, "#0b5ed7");
+            fillRoundRect(ctx, x + 24, y + 38, 128, 22, 7, failed ? "#fee2e2" : "#e0f2fe");
+            drawFittedText(ctx, "Qualifying only", x + 36, y + 54, 104, 13, 11, 900, failed ? "#b91c1c" : "#0369a1");
         }
 
+        drawFittedText(ctx, `Score ${subject.score}`, x + 390, y + 40, 190, 23, 16, 900, failed ? "#dc2626" : "#0b5ed7");
+        drawFittedText(ctx, `Accuracy ${subject.accuracy}`, x + 640, y + 40, 210, 23, 16, 900, failed ? "#b91c1c" : "#0f766e");
         if (subject.passingStatus) {
-            drawStatusBadge(ctx, subject.passingStatus, x + 628, y + 14);
+            drawStatusBadge(ctx, subject.passingStatus, x + 892, y + 18);
         }
-        drawFittedText(ctx, `Accuracy ${subject.accuracy}`, x + 760, y + 37, 210, 23, 16, 900, failed ? "#b91c1c" : "#0f766e");
     }
 
     function drawQualificationWarning(ctx, model, x, y) {
-        fillRoundRect(ctx, x, y, 984, 104, 16, "#fff1f2");
+        fillRoundRect(ctx, x, y, 984, 122, 16, "#fff1f2");
         ctx.strokeStyle = "#fecaca";
         ctx.lineWidth = 2;
-        strokeRoundRect(ctx, x, y, 984, 104, 16);
-        drawText(ctx, model.qualificationStatus, x + 24, y + 34, 20, 900, "#b91c1c");
-        drawFittedText(ctx, model.qualificationMessage, x + 24, y + 66, 900, 28, 18, 900, "#991b1b");
-        if (model.failedSummary) {
-            drawFittedText(ctx, model.failedSummary, x + 24, y + 92, 900, 18, 13, 800, "#b91c1c");
+        strokeRoundRect(ctx, x, y, 984, 122, 16);
+        drawText(ctx, model.qualificationStatus, x + 24, y + 34, 19, 900, "#b91c1c");
+        drawFittedText(ctx, model.failedTitle || model.qualificationMessage, x + 24, y + 72, 900, 29, 19, 900, "#991b1b");
+        if (model.failedDetail) {
+            drawFittedText(ctx, model.failedDetail, x + 24, y + 102, 900, 19, 14, 800, "#b91c1c");
         }
     }
 
