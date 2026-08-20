@@ -245,11 +245,18 @@
             const criteria = normalizeSubjectPassingCriteria(subject.passingCriteria || subject.criteria) || getPassingCriteriaForSubject(name, criteriaList);
             const normalizedSubject = {
                 name,
-                questions: getFiniteNumber(subject.questions, 0)
+                questions: getFiniteNumber(subject.questions, 0),
+                qualifyingOnly: isSubjectQualifyingOnly(subject)
             };
             if (criteria) normalizedSubject.passingCriteria = criteria;
             return normalizedSubject;
         }).filter((subject) => subject.name && subject.questions > 0);
+    }
+
+    function isSubjectQualifyingOnly(subject) {
+        const value = subject?.qualifyingOnly ?? subject?.qualifying_only ?? subject?.qualifying;
+        if (value === true || value === 1) return true;
+        return ["1", "yes", "true", "qualifying", "qualifying-only", "q"].includes(String(value || "").trim().toLowerCase());
     }
 
     function normalizeSubjectPassingCriteriaList(criteriaList) {
@@ -1313,7 +1320,10 @@
         const right = subjectData.length ? sumBy(subjectData, "correct") : readNumber("rightAnswers");
         const wrong = subjectData.length ? sumBy(subjectData, "wrong") : readNumber("wrongAnswers");
         const unattempted = Math.max(total - attempted, 0);
-        const expected = (right * perCorrect) - (wrong * negative);
+        const scoringSubjects = getScoringSubjectData(subjectData);
+        const expected = subjectData.length
+            ? sumBy(scoringSubjects, "marks")
+            : (right * perCorrect) - (wrong * negative);
 
         state.expectedMarks = round2(expected);
         setValue("unattempted", unattempted);
@@ -1770,7 +1780,10 @@
         const rightAnswers = subjectData.length ? sumBy(subjectData, "correct") : readNumber("rightAnswers");
         const wrongAnswers = subjectData.length ? sumBy(subjectData, "wrong") : readNumber("wrongAnswers");
         const unattempted = Math.max(totalQuestions - totalAttempted, 0);
-        const rawMarks = round2((rightAnswers * marksPerCorrect) - (wrongAnswers * negativeMarking));
+        const scoringSubjects = getScoringSubjectData(subjectData);
+        const rawMarks = subjectData.length
+            ? round2(sumBy(scoringSubjects, "marks"))
+            : round2((rightAnswers * marksPerCorrect) - (wrongAnswers * negativeMarking));
         return {
             action: "submitData",
             userId: candidateSession?.userId || "",
@@ -1841,6 +1854,7 @@
             const name = String(subject.name || `Subject ${index + 1}`);
             const questions = Number(subject.questions) || 0;
             const criteriaText = formatPassingCriteria(subject.passingCriteria);
+            const subjectMeta = [`${questions} questions`, criteriaText, subject.qualifyingOnly ? "Qualifying only" : ""].filter(Boolean).join(" | ");
             const maxLength = Math.max(String(questions).length, 1);
             const correctId = `subject-${index}-correct`;
             const wrongId = `subject-${index}-wrong`;
@@ -1850,7 +1864,7 @@
                     <summary class="subject-card-heading">
                         <span class="subject-title">
                             <strong>${escapeHtml(name)}</strong>
-                            <small>${escapeHtml([`${questions} questions`, criteriaText].filter(Boolean).join(" | "))}</small>
+                            <small>${escapeHtml(subjectMeta)}</small>
                         </span>
                         <span class="subject-card-total"><small>Attempted</small><strong data-subject-summary="attempted">0/${questions}</strong></span>
                         <i class="fas fa-chevron-down" aria-hidden="true"></i>
@@ -1947,9 +1961,14 @@
                 wrong,
                 marks: round2((correct * marksPerCorrect) - (wrong * negativeMarking)),
                 maxMarks,
-                passingCriteria: subject.passingCriteria || null
+                passingCriteria: subject.passingCriteria || null,
+                qualifyingOnly: Boolean(subject.qualifyingOnly)
             };
         });
+    }
+
+    function getScoringSubjectData(subjectData = collectSubjectData(getSelectedExam())) {
+        return subjectData.filter((subject) => !subject.qualifyingOnly);
     }
 
     function formatPassingCriteria(criteria) {
@@ -2132,9 +2151,18 @@
             ? allShiftAverage - candidateShiftAverage
             : 0;
         const normalized = rawMarks + shiftAdjustment;
-        const maxMarks = getExamNumber(exam, "totalQuestions") * getExamNumber(exam, "marksPerCorrect");
+        const maxMarks = getScoringTotalQuestions(exam) * getExamNumber(exam, "marksPerCorrect");
         if (maxMarks > 0) return round2(Math.min(Math.max(normalized, 0), maxMarks));
         return round2(Math.max(normalized, 0));
+    }
+
+    function getScoringTotalQuestions(exam) {
+        const subjects = Array.isArray(exam?.subjects) ? exam.subjects : [];
+        if (!subjects.length) return getExamNumber(exam, "totalQuestions");
+        const scoringTotal = subjects.reduce((sum, subject) => {
+            return subject?.qualifyingOnly ? sum : sum + (Number(subject.questions) || 0);
+        }, 0);
+        return scoringTotal > 0 ? scoringTotal : getExamNumber(exam, "totalQuestions");
     }
 
     function getAccuracyIndicator(totalSubmissions) {

@@ -239,9 +239,24 @@
             ? allShiftAverage - candidateShiftAverage
             : 0;
         const normalized = rawMarks + shiftAdjustment;
-        const maxMarks = toNumber(exam.totalQuestions) * toNumber(exam.marksPerCorrect);
+        const maxMarks = getScoringTotalQuestions(exam) * toNumber(exam.marksPerCorrect);
         if (maxMarks > 0) return round2(Math.min(Math.max(normalized, 0), maxMarks));
         return round2(Math.max(normalized, 0));
+    }
+
+    function getScoringTotalQuestions(exam) {
+        const subjects = Array.isArray(exam?.subjects) ? exam.subjects : [];
+        if (!subjects.length) return toNumber(exam.totalQuestions) || 0;
+        const total = subjects.reduce((sum, subject) => {
+            return isQualifyingOnlySubject(subject) ? sum : sum + (toNumber(subject.questions) || 0);
+        }, 0);
+        return total > 0 ? total : toNumber(exam.totalQuestions) || 0;
+    }
+
+    function isQualifyingOnlySubject(subject) {
+        const value = subject?.qualifyingOnly ?? subject?.qualifying_only ?? subject?.qualifying;
+        if (value === true || value === 1) return true;
+        return ["1", "yes", "true", "q", "qualifying", "qualifying-only"].includes(String(value || "").trim().toLowerCase());
     }
 
     function renderSubjectScorecard(subjectAnalysis, payloadSubjectData, resultSubjectData) {
@@ -327,7 +342,7 @@
             : "";
         return `
             <tr class="${passingStatus === "Fail" ? "is-failed-subject" : ""}">
-                <td>${escapeHtml(firstValue(subject.name, "Subject"))}</td>
+                <td>${escapeHtml(firstValue(subject.name, "Subject"))}${subject.qualifyingOnly ? '<span class="muted block">Qualifying only</span>' : ""}</td>
                 <td>${escapeHtml(formatMarks(firstValue(subject.score, subject.marks, null)))}</td>
                 ${subjectRankCell}
                 ${attemptCells}
@@ -351,7 +366,8 @@
             passingCriteria: firstValue(subject.passingCriteria, match.passingCriteria, null),
             passingStatus: firstValue(subject.passingStatus, match.passingStatus, null),
             avgScore: firstValue(subject.avgScore, subject.averageScore, null),
-            accuracy: firstValue(subject.accuracy, getSubjectAccuracy(match), null)
+            accuracy: firstValue(subject.accuracy, getSubjectAccuracy(match), null),
+            qualifyingOnly: isQualifyingOnlySubject(subject) || isQualifyingOnlySubject(match)
         };
     }
 
@@ -572,11 +588,12 @@
             : payloadRows.map((subject) => ({
                 name: subject.name,
                 score: subject.marks,
-                accuracy: getSubjectAccuracy(subject)
+                accuracy: getSubjectAccuracy(subject),
+                qualifyingOnly: isQualifyingOnlySubject(subject)
             }));
         return rows.map((subject) => ({
             name: firstValue(subject.name, "Subject"),
-            score: `Score ${formatMarks(firstValue(subject.score, subject.marks, null))}`,
+            score: `${subject.qualifyingOnly ? "Qualifying | " : ""}Score ${formatMarks(firstValue(subject.score, subject.marks, null))}`,
             accuracy: `Accuracy ${formatPercentile(subject.accuracy)}`
         }));
     }

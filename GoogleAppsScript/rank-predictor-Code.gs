@@ -365,6 +365,8 @@ function submitData(data) {
     });
   }
   const sheet = getSheetByExam(data.sheetName, spreadsheet);
+  data.subjectData = applyRankExamSubjectConfig(data.subjectData, examConfig);
+  data.rawMarks = calculateRawMarks(data);
   validateSubmitPayload(data, examConfig);
   const columnMap = ensureSheetSchema(sheet);
   const rows = getRowsByHeaders(sheet, columnMap);
@@ -1193,10 +1195,12 @@ function parseRankExamSubjects(value) {
     if (Array.isArray(parsed)) {
       return parsed.map(function (subject) {
         const criteria = normalizeSubjectPassingCriteria(subject.passingCriteria || subject.criteria || subject);
+        const qualifyingOnly = isRankExamQualifyingOnlySubject(subject);
         return {
           name: normalizeText(subject.name),
           questions: toRankExamNumber(subject.questions),
-          passingCriteria: criteria && hasSubjectPassingCriteria(criteria) ? criteria : null
+          passingCriteria: criteria && hasSubjectPassingCriteria(criteria) ? criteria : null,
+          qualifyingOnly: qualifyingOnly
         };
       }).filter(function (subject) {
         return subject.name && Number(subject.questions) > 0;
@@ -1208,15 +1212,22 @@ function parseRankExamSubjects(value) {
 
   return text.split(/[,|;]/).map(function (part) {
     const piece = normalizeText(part);
-    const match = piece.match(/^(.+?)(?:\s*[:=-]\s*)(\d+(?:\.\d+)?)$/);
+    const match = piece.match(/^(.+?)(?:\s*[:=-]\s*)(\d+(?:\.\d+)?)(?:\s*[:=-]\s*(q|qualifying|qualifying-only|qualifying only))?$/i);
     if (!match) return null;
     return {
       name: normalizeText(match[1]),
-      questions: toRankExamNumber(match[2])
+      questions: toRankExamNumber(match[2]),
+      qualifyingOnly: Boolean(match[3])
     };
   }).filter(function (subject) {
     return subject && subject.name && Number(subject.questions) > 0;
   });
+}
+
+function isRankExamQualifyingOnlySubject(subject) {
+  const value = subject && (subject.qualifyingOnly !== undefined ? subject.qualifyingOnly : subject.qualifying_only !== undefined ? subject.qualifying_only : subject.qualifying);
+  if (value === true || value === 1) return true;
+  return ["1", "yes", "true", "q", "qualifying", "qualifying-only", "qualifying only"].indexOf(String(value || "").trim().toLowerCase()) >= 0;
 }
 
 function parseSubjectPassingCriteria(value) {
@@ -2084,9 +2095,18 @@ function interpolateMarksAtPercentile(distribution, percentile) {
 function clampMarks(value, examConfig) {
   const normalized = Number(value);
   if (!Number.isFinite(normalized)) return 0;
-  const maxMarks = Number(examConfig && examConfig.totalQuestions) * Number(examConfig && examConfig.marksPerCorrect);
+  const maxMarks = getRankExamScoringTotalQuestions(examConfig) * Number(examConfig && examConfig.marksPerCorrect);
   if (Number.isFinite(maxMarks) && maxMarks > 0) return round2(Math.min(Math.max(normalized, 0), maxMarks));
   return round2(Math.max(normalized, 0));
+}
+
+function getRankExamScoringTotalQuestions(examConfig) {
+  const subjects = Array.isArray(examConfig && examConfig.subjects) ? examConfig.subjects : [];
+  if (!subjects.length) return Number(examConfig && examConfig.totalQuestions) || 0;
+  const total = subjects.reduce(function (sum, subject) {
+    return isRankExamQualifyingOnlySubject(subject) ? sum : sum + (Number(subject.questions) || 0);
+  }, 0);
+  return total > 0 ? total : Number(examConfig && examConfig.totalQuestions) || 0;
 }
 
 function calculateTieAwareRank(rows, targetRow, scoreField) {
@@ -2487,6 +2507,13 @@ function validateCheckPayload(data) {
 }
 
 function calculateRawMarks(data) {
+  if (Array.isArray(data.subjectData) && data.subjectData.length) {
+    return round2(data.subjectData.reduce(function (sum, subject) {
+      if (isRankExamQualifyingOnlySubject(subject)) return sum;
+      return sum + (Number(subject.marks) || 0);
+    }, 0));
+  }
+
   return round2(
     (Number(data.rightAnswers) || 0) * (Number(data.marksPerCorrect) || 0) -
     (Number(data.wrongAnswers) || 0) * (Number(data.negativeMarking) || 0)
@@ -2521,10 +2548,27 @@ function normalizeSubjectData(subjectData, data) {
       marks: round2(marks),
       maxMarks: maxMarks === "" ? "" : round2(maxMarks),
       passingCriteria: passingCriteria && hasSubjectPassingCriteria(passingCriteria) ? passingCriteria : null,
+      qualifyingOnly: isRankExamQualifyingOnlySubject(subject),
       accuracy: round2(accuracy)
     };
   }).filter(function (subject) {
     return subject.name;
+  });
+}
+
+function applyRankExamSubjectConfig(subjectData, examConfig) {
+  if (!Array.isArray(subjectData) || !Array.isArray(examConfig && examConfig.subjects)) return subjectData || [];
+  return subjectData.map(function (subject) {
+    const match = examConfig.subjects.find(function (configuredSubject) {
+      return normalizeKey(configuredSubject.name) === normalizeKey(subject.name);
+    });
+    if (match) {
+      subject.qualifyingOnly = isRankExamQualifyingOnlySubject(match);
+      if (match.passingCriteria && hasSubjectPassingCriteria(match.passingCriteria)) {
+        subject.passingCriteria = match.passingCriteria;
+      }
+    }
+    return subject;
   });
 }
 

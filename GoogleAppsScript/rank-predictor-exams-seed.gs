@@ -185,7 +185,7 @@ function buildRankExamSeedRow(exam, order) {
 
 function serializeRankExamSeedSubjects(subjects) {
   return subjects.map(function (subject) {
-    return subject.name + ":" + subject.questions;
+    return subject.name + ":" + subject.questions + (subject.qualifyingOnly ? ":qualifying" : "");
   }).join(", ");
 }
 
