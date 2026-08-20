@@ -342,7 +342,10 @@
             : "";
         return `
             <tr class="${passingStatus === "Fail" ? "is-failed-subject" : ""}">
-                <td>${escapeHtml(firstValue(subject.name, "Subject"))}${subject.qualifyingOnly ? '<span class="muted block">Qualifying only</span>' : ""}</td>
+                <td>
+                    <span class="subject-name-text">${escapeHtml(firstValue(subject.name, "Subject"))}</span>
+                    ${subject.qualifyingOnly ? '<span class="subject-qualifying-badge">Qualifying only</span>' : ""}
+                </td>
                 <td>${escapeHtml(formatMarks(firstValue(subject.score, subject.marks, null)))}</td>
                 ${subjectRankCell}
                 ${attemptCells}
@@ -494,7 +497,8 @@
     function buildScorecardCanvas(snapshot) {
         const model = buildScorecardModel(snapshot);
         const width = 1200;
-        const subjectsHeight = model.subjects.length ? 92 + (model.subjects.length * 74) : 0;
+        const subjectRowHeight = 74;
+        const subjectsHeight = model.subjects.length ? 92 + (model.subjects.length * subjectRowHeight) : 0;
         const height = 1180 + subjectsHeight;
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
@@ -530,11 +534,8 @@
         y += 36;
         if (model.subjects.length) {
             model.subjects.forEach((subject) => {
-                fillRoundRect(ctx, 108, y, 984, 58, 8, "#f8fafc");
-                drawText(ctx, subject.name, 132, y + 37, 24, 900, "#0f172a");
-                drawText(ctx, subject.score, 560, y + 37, 24, 900, "#0b5ed7");
-                drawText(ctx, subject.accuracy, 818, y + 37, 24, 900, "#0f766e");
-                y += 74;
+                drawSubjectScorecardRow(ctx, subject, 108, y);
+                y += subjectRowHeight;
             });
         } else {
             drawText(ctx, "Subject data not available", 108, y + 42, 28, 800, "#5b6575");
@@ -593,9 +594,25 @@
             }));
         return rows.map((subject) => ({
             name: firstValue(subject.name, "Subject"),
-            score: `${subject.qualifyingOnly ? "Qualifying | " : ""}Score ${formatMarks(firstValue(subject.score, subject.marks, null))}`,
-            accuracy: `Accuracy ${formatPercentile(subject.accuracy)}`
+            score: formatMarks(firstValue(subject.score, subject.marks, null)),
+            accuracy: formatPercentile(subject.accuracy),
+            qualifyingOnly: Boolean(subject.qualifyingOnly)
         }));
+    }
+
+    function drawSubjectScorecardRow(ctx, subject, x, y) {
+        fillRoundRect(ctx, x, y, 984, 58, 8, "#f8fafc");
+        drawFittedText(ctx, subject.name, x + 24, y + 37, 380, 23, 17, 900, "#0f172a");
+
+        if (subject.qualifyingOnly) {
+            fillRoundRect(ctx, x + 456, y + 14, 128, 30, 8, "#e0f2fe");
+            drawFittedText(ctx, "Qualifying", x + 470, y + 35, 100, 17, 13, 900, "#0369a1");
+            drawFittedText(ctx, `Score ${subject.score}`, x + 604, y + 36, 150, 22, 15, 900, "#0b5ed7");
+        } else {
+            drawFittedText(ctx, `Score ${subject.score}`, x + 456, y + 37, 260, 23, 16, 900, "#0b5ed7");
+        }
+
+        drawFittedText(ctx, `Accuracy ${subject.accuracy}`, x + 760, y + 37, 210, 23, 16, 900, "#0f766e");
     }
 
     function drawMetricPill(ctx, x, y, label, value) {
