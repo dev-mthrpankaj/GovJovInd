@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0193-20260820132026-ba8f0f5d",
+        "title": "Nainital Bank Specialist Officer SO Online Form 2026",
+        "organization": "Nainital Bank",
+        "department": "Nainital Bank",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Regular Full Time Post Graduate degree in MBA (Finance)/ Master Degree in (Mathematics/ Statistics Econometrics) with min. 60% marks. Preference will be given to candidates having Certification in ‘Risk in Financial Services’ from IIBF/ ‘Integrated Risk Management’ from NIBM/ GARP- FRM-I or II/ Chartered Financial Analyst, For More Details View Notification",
+        "totalPosts": "41",
+        "startDate": "2026-08-15",
+        "lastDate": "2026-09-07",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ibpsreg.ibps.in/nbljul26/",
+        "officialNotification": "https://www.nainitalbank.bank.in/pdf/Notification%202026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0193-20260820132026-ba8f0f5d",
+        "updatedAt": "2026-08-20",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0185-20260817155541-a17af09e",
         "title": "CPCL Junior Engineer Online Form 2026 for 60 Post",
         "organization": "Chennai Petroleum Corporation Ltd (CPCL)",
