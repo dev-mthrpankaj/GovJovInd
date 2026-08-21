@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0108-20260820234013-f44809c3",
+        "title": "IBPS SO Specialist Officers XVI Admit Card 2026 for 1035 Post",
+        "organization": "Institute of Banking Personal Selection",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-08-29",
+        "examEndDate": "",
+        "releaseDate": "2026-08-20",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/crpspxvimy26/oecla_aug26/login.php?appid=b4efe9284e9d84a16019c7ca6ca9547b",
+        "detailPage": "../AdmitCard_Details/HTML/IBPS-SO-Specialist-Officers-XVI-Admit-Card-2026.html",
+        "updatedAt": "2026-08-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0106-20260814210147-d738be15",
         "title": "IBPS PO Probationary Officer XVI Admit Card 2026 for 7365 Post",
         "organization": "Institute of Banking Personal Selection",
