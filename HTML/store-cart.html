@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | GovJobUpdates Store</title>
+  <meta name="description" content="Review your GovJobUpdates Store cart, verify live stock and prices, check PIN-code delivery and continue to secure checkout.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://govjobupdates.com/HTML/store-cart.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+  <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+  <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+  <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href="../CSS/store-cart.css?v=20260821-v1">
+  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+</head>
+<body>
+<header><div class="header-container"><div class="logo-container"><img alt="GovJobUpdates Logo" class="logo-img" decoding="async" height="46" src="../Assets/Home%20Page/favicon-96x96.png" width="46"/><a class="logo" href="../index.html">GovJob<span>Updates</span></a><span aria-hidden="true" class="header-tiranga"></span></div><button aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" type="button"><i aria-hidden="true" class="fas fa-bars"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a class="active" href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a aria-label="Login to candidate dashboard" class="header-login-btn" data-auth-entry="" data-dashboard-href="dashboard.html" data-login-href="login.html" href="login.html"><i aria-hidden="true" class="fas fa-user-circle"></i><span>Login</span></a></div></div></header>
+<main class="store-cart-page" id="storeCartPage">
+  <div class="cart-shell">
+    <nav class="store-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <a href="store.html">Store</a><i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <span>Cart</span>
+    </nav>
+
+    <section class="cart-heading">
+      <div>
+        <span class="cart-eyebrow"><i class="fas fa-cart-shopping" aria-hidden="true"></i> Your Shopping Cart</span>
+        <h1>Review Your Cart</h1>
+        <p>Prices, stock and delivery are verified live before checkout.</p>
+      </div>
+      <a class="continue-shopping" href="store.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Continue Shopping</a>
+    </section>
+
+    <div class="cart-alert" id="cartAlert" role="alert" aria-live="assertive" hidden></div>
+
+    <section class="cart-loading" id="cartLoading" aria-live="polite">
+      <div class="cart-loading-card"></div><div class="cart-loading-card"></div>
+    </section>
+
+    <section class="cart-empty" id="cartEmpty" hidden>
+      <div class="cart-empty-icon"><i class="fas fa-cart-arrow-down" aria-hidden="true"></i></div>
+      <h2>Your cart is empty</h2>
+      <p>Explore running gear, books and other aspirant essentials in GovJobUpdates Store.</p>
+      <a class="btn btn-primary" href="store.html"><i class="fas fa-bag-shopping" aria-hidden="true"></i> Explore Store</a>
+    </section>
+
+    <section class="cart-layout" id="cartLayout" hidden>
+      <div class="cart-items-column">
+        <div class="cart-section-head">
+          <div><h2>Cart Items <span id="cartItemCount">0</span></h2><p id="cartValidationText">Checking current stock and prices…</p></div>
+          <button class="cart-text-button" id="clearCartBtn" type="button"><i class="fas fa-trash-can" aria-hidden="true"></i> Clear Cart</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+
+        <article class="cart-assurance-card">
+          <div><i class="fas fa-shield-halved" aria-hidden="true"></i><span><strong>Backend Verified</strong>Final prices and inventory are never trusted from the browser.</span></div>
+          <div><i class="fas fa-location-dot" aria-hidden="true"></i><span><strong>Local Delivery</strong>Orders are accepted only for enabled PIN codes.</span></div>
+          <div><i class="fas fa-money-bill-wave" aria-hidden="true"></i><span><strong>Cash on Delivery</strong>Available only where enabled for your area.</span></div>
+        </article>
+      </div>
+
+      <aside class="cart-summary-column">
+        <div class="cart-summary-card">
+          <h2>Order Summary</h2>
+          <div class="summary-row"><span>Subtotal</span><strong id="summarySubtotal">—</strong></div>
+          <div class="summary-row"><span>Delivery</span><strong id="summaryDelivery">Check PIN</strong></div>
+          <div class="summary-row summary-discount" id="freeDeliveryRow" hidden><span><i class="fas fa-circle-check"></i> Delivery benefit</span><strong id="freeDeliveryText">Free</strong></div>
+          <div class="summary-divider"></div>
+          <div class="summary-row summary-total"><span>Total</span><strong id="summaryTotal">—</strong></div>
+          <p class="summary-note">Final amount is recalculated by the server at checkout.</p>
+
+          <div class="cart-pin-box">
+            <div class="pin-title"><i class="fas fa-location-crosshairs" aria-hidden="true"></i><div><strong>Check Delivery</strong><span>Enter your 6-digit delivery PIN.</span></div></div>
+            <form id="cartPinForm" class="cart-pin-form">
+              <input id="cartPin" type="text" maxlength="6" inputmode="numeric" autocomplete="postal-code" placeholder="6 digit PIN" aria-label="Delivery PIN code" required>
+              <button id="cartPinButton" type="submit">Check</button>
+            </form>
+            <div class="pin-result" id="cartPinResult" aria-live="polite"></div>
+          </div>
+
+          <a class="cart-checkout-btn is-disabled" id="checkoutBtn" href="store-checkout.html" aria-disabled="true">
+            <span><i class="fas fa-lock" aria-hidden="true"></i> Proceed to Checkout</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+          <p class="checkout-help" id="checkoutHelp">Validate your cart and delivery PIN to continue.</p>
+        </div>
+
+        <div class="cart-support-card">
+          <i class="fas fa-headset" aria-hidden="true"></i>
+          <div><strong>Need help before ordering?</strong><span>Check size, availability or delivery details before checkout.</span></div>
+        </div>
+      </aside>
+    </section>
+  </div>
+</main>
+<nav aria-label="Primary mobile navigation" class="candidate-bottom-nav"><a aria-label="Home" class="" href="../index.html"><i aria-hidden="true" class="fas fa-home"></i><span>Home</span></a><a aria-label="Rank" class="" href="rank-predictor.html"><i aria-hidden="true" class="fas fa-chart-line"></i><span>Rank</span></a><a aria-label="Quiz" class="" href="quiz.html"><i aria-hidden="true" class="fas fa-stopwatch"></i><span>Quiz</span></a><a aria-label="UP Doc" class="is-active" href="up-certificate-services.html"><i aria-hidden="true" class="fas fa-certificate"></i><span>UP Doc</span></a><a aria-label="Jobs" class="" href="latest-jobs.html"><i aria-hidden="true" class="fas fa-briefcase"></i><span>Jobs</span></a></nav>
+<footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p><div aria-label="GovJobUpdates social links" class="social-icons footer-social"><a aria-label="Follow GovJobUpdates on Instagram" class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fab fa-instagram"></i></a><a aria-label="Subscribe to GovJobUpdates on YouTube" class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fab fa-youtube"></i></a><a aria-label="Join GovJobUpdates on Telegram" class="social-telegram" href="https://t.me/GovJobUpdates_official" rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fab fa-telegram"></i></a><a aria-label="Follow GovJobUpdates WhatsApp channel" class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fab fa-whatsapp"></i></a><a aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN" class="social-x" href="https://x.com/GovJobUpdatesIN" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">X</span></a><a aria-label="Follow GovJobUpdates on LinkedIn" class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fab fa-linkedin"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="../typing-test/index.html">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="refund-policy.html">Refund Policy</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i aria-hidden="true" class="fas fa-envelope"></i> dmagstudio2023@outlook.com</li><li><i aria-hidden="true" class="fas fa-phone"></i> +91 7300627752</li><li><i aria-hidden="true" class="fas fa-map-marker-alt"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">© 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="refund-policy.html">Refund Policy</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
+
+  <script src="../JS/script.js?v=20260519-up-services-layout-fix" defer></script>
+  <script src="../JS/store-cart.js?v=20260821-v1" defer></script>
+  <script src="../JS/firebase-config.js?v=20260513-up5" defer></script>
+  <script type="module" src="../JS/firebase-analytics.js"></script>
+  <script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>
+</body>
+</html>
