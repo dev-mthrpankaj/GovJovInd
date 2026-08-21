@@ -7,8 +7,9 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
 
   const config = window.GJU_FIREBASE_CONFIG;
   const rankConfig = window.RANK_PREDICTOR_CONFIG || {};
-  const apiUrl = String(rankConfig.apiUrl || "").trim();
-  if (!config || !config.apiKey || !apiUrl) return;
+  const apiBaseUrl = String(rankConfig.apiBaseUrl || "").replace(/\/+$/, "");
+  const legacyApiUrl = String(rankConfig.apiUrl || "").trim();
+  if (!config || !config.apiKey || (!apiBaseUrl && !legacyApiUrl)) return;
 
   const app = getApps().length ? getApps()[0] : initializeApp(config);
   const auth = getAuth(app);
@@ -82,7 +83,6 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
 
   async function fetchRankHistory(user, profile) {
     const payload = {
-      action: "getFirebaseRankDashboard",
       firebaseUid: user.uid,
       userId: user.uid,
       name: profile.name,
@@ -90,11 +90,31 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
       mobile: profile.mobile
     };
 
-    const response = await fetch(apiUrl, {
+    if (apiBaseUrl) {
+      try {
+        const response = await fetch(`${apiBaseUrl}/dashboard.php`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (response.ok || data?.success !== false) return data;
+        throw new Error(data?.message || `Dashboard API failed (${response.status})`);
+      } catch (error) {
+        if (!legacyApiUrl) throw error;
+        console.warn("[GovJobUpdates] MySQL rank dashboard failed, trying legacy bridge:", error.message);
+      }
+    }
+
+    const legacyPayload = {
+      ...payload,
+      action: "getFirebaseRankDashboard"
+    };
+    const response = await fetch(legacyApiUrl, {
       method: "POST",
       redirect: "follow",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(legacyPayload)
     });
     const text = await response.text();
     return JSON.parse(text);
@@ -266,7 +286,7 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     setText("#rankPredictionCount", String(summary.totalRankPredictorAttempts ?? attempts.length ?? 0));
     setText("#bestEstimatedRank", formatRank(summary.bestRank));
     setText("#bestRankExam", summary.bestRankExam ? `Best in ${summary.bestRankExam}` : "Will show after prediction");
-    setText("#rankHistoryStatus", attempts.length ? "Latest rank predictor records loaded from Google Sheet." : "No rank predictor records found yet.");
+    setText("#rankHistoryStatus", attempts.length ? "Latest rank predictor records loaded." : "No rank predictor records found yet.");
 
     renderRankGraphs(attempts);
 
@@ -289,7 +309,7 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   }
 
   async function load(user) {
-    setText("#rankHistoryStatus", "Loading rank predictor history from Google Sheet...");
+    setText("#rankHistoryStatus", "Loading rank predictor history...");
     currentUser = user;
     const profile = await getProfile(user);
     currentProfile = profile;
@@ -306,7 +326,7 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
       renderDashboard(data);
     } catch (error) {
       console.warn("[GovJobUpdates] Rank dashboard fetch failed:", error.message);
-      renderEmpty("Rank history API is not deployed yet. Deploy the Apps Script bridge patch.");
+      renderEmpty("Rank history API is not available right now.");
     }
   }
 
