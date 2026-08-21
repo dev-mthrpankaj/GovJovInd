@@ -10,6 +10,7 @@
   const clean=v=>String(v??"").replace(/\s+/g," ").trim();
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
   const money=p=>`₹${(Number(p||0)/100).toLocaleString("en-IN",{minimumFractionDigits:Number(p||0)%100?2:0,maximumFractionDigits:2})}`;
+  const etaLabel=v=>{v=clean(v);if(!v)return"To be confirmed";return /^\d+$/.test(v)?`${v} day${v==="1"?"":"s"}`:v};
   const state={cart:[],validated:null,delivery:null,pin:"",submitting:false};
 
   function readCart(){try{let raw=localStorage.getItem(CART_KEY);if(!raw){raw=localStorage.getItem(LEGACY_CART_KEY);if(raw)localStorage.setItem(CART_KEY,raw)}const c=JSON.parse(raw||"[]");return Array.isArray(c)?c.filter(i=>Number(i.variant_id)>0&&Number(i.quantity)>0):[]}catch{return[]}}
@@ -102,7 +103,8 @@
     localStorage.removeItem(CART_KEY);localStorage.removeItem(LEGACY_CART_KEY);localStorage.removeItem(PIN_KEY);resetCheckoutKey();
     try{localStorage.setItem(LAST_ORDER_KEY,JSON.stringify({order_number:order.order_number||"",mobile:clean($("#customerMobile").value),email:clean($("#customerEmail").value),created_at:new Date().toISOString()}))}catch{}
     $("#checkoutLayout").hidden=true;$("#checkoutEmpty").hidden=true;$("#checkoutLoading").hidden=true;$("#checkoutSuccess").hidden=false;
-    $("#successOrderNumber").textContent=order.order_number||"—";$("#successAmount").textContent=money(order.grand_total_paise||0);$("#successStatus").textContent=String(order.order_status||"placed").replace(/_/g," ").replace(/^./,c=>c.toUpperCase());$("#successEta").textContent=order.eta||"To be confirmed";
+    $("#successOrderNumber").textContent=order.order_number||"—";$("#successAmount").textContent=money(order.grand_total_paise||0);$("#successStatus").textContent=String(order.order_status||"placed").replace(/_/g," ").replace(/^./,c=>c.toUpperCase());$("#successEta").textContent=etaLabel(order.eta);
+    const trackLink=$("#successTrackOrder");if(trackLink&&order.order_number)trackLink.href=`store-track-order.html?order=${encodeURIComponent(order.order_number)}`;
     window.scrollTo({top:0,behavior:"smooth"})
   }
 
