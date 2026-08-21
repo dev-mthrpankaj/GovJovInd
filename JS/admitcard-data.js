@@ -633,7 +633,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-03",
         "examEndDate": "2026-08-21",
         "releaseDate": "2026-07-24",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101714/login.html",
         "detailPage": "../AdmitCard_Details/HTML/RRB-Railway-Group-D-City-Intimation-2026.html",
