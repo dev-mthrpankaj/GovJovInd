@@ -1,3 +1,5 @@
+import { getStoreUser, storeAuthHeaders } from "./store-account-auth.js";
+
 (function(){
   "use strict";
   const API_BASE="https://test.govjobupdates.com/live-test/store-api";
@@ -92,7 +94,8 @@
     state.submitting=true;updatePlaceButton();const btn=$("#placeOrderBtn");btn.innerHTML='<span><i class="fas fa-spinner fa-spin"></i> Placing Order…</span>';
     const data=collectOrder();
     try{
-      const r=await fetch(`${API_BASE}/create-order.php`,{method:"POST",mode:"cors",cache:"no-store",credentials:"omit",headers:{"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest","X-Checkout-Idempotency-Key":data.idempotency_key},body:JSON.stringify(data)});
+      const accountHeaders=await storeAuthHeaders(false);
+      const r=await fetch(`${API_BASE}/create-order.php`,{method:"POST",mode:"cors",cache:"no-store",credentials:"omit",headers:{"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest","X-Checkout-Idempotency-Key":data.idempotency_key,...accountHeaders},body:JSON.stringify(data)});
       const j=await r.json().catch(()=>null);
       if(!r.ok||!j?.success)throw new Error(j?.message||"Your order could not be created.");
       showSuccess(j.order||{});
@@ -116,6 +119,13 @@
 
   async function init(){
     state.cart=readCart();state.pin=clean(localStorage.getItem(PIN_KEY)||"");bindInputs();
+    try{
+      const user=await getStoreUser();
+      if(user){
+        if($("#customerName")&&!clean($("#customerName").value)&&user.displayName)$("#customerName").value=user.displayName;
+        if($("#customerEmail")&&!clean($("#customerEmail").value)&&user.email)$("#customerEmail").value=user.email;
+      }
+    }catch{}
     if(!state.cart.length){showEmpty();return}
     if(state.pin)$("#checkoutPin").value=state.pin;
     try{await validateCheckout(state.pin);showLayout();if(state.pin&&state.delivery)renderPinResult(state.delivery)}catch(e){showLayout();setAlert(e.message||"Your cart could not be verified. Please return to cart and review it.");$("#placeOrderBtn").disabled=true;$("#placeOrderHelp").textContent="Return to cart and resolve availability before checkout."}
