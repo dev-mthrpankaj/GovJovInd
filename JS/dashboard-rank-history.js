@@ -9,6 +9,9 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   const rankConfig = window.RANK_PREDICTOR_CONFIG || {};
   const apiBaseUrl = String(rankConfig.apiBaseUrl || "").replace(/\/+$/, "");
   const legacyApiUrl = String(rankConfig.apiUrl || "").trim();
+  const RESULT_STORAGE_KEY = "gju_rank_predictor_latest_result";
+  const RESULT_PAGE_URL = "rank-result.html";
+  const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
   if (!config || !config.apiKey || (!apiBaseUrl && !legacyApiUrl)) return;
 
   const app = getApps().length ? getApps()[0] : initializeApp(config);
@@ -62,9 +65,297 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short" });
   }
 
+  function formatDateTime(value) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return formatValue(value, "Recent");
+    return date.toLocaleString("en-IN", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+  }
+
   function getAttemptTime(attempt) {
     const date = new Date(attempt?.completedAt || attempt?.timestamp || attempt?.examDate || "");
     return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+  }
+
+  function filterLastYearAttempts(attempts) {
+    const cutoff = Date.now() - ONE_YEAR_MS;
+    return attempts.filter((attempt) => {
+      const time = getAttemptTime(attempt);
+      return !time || time >= cutoff;
+    });
+  }
+
+  function getRankSet(attempt, type) {
+    if (!attempt) return {};
+    if (type === "raw") return attempt.rawRanks || {};
+    return attempt.normalizedRanks || attempt.normalisedRanks || {};
+  }
+
+  function formatMarks(value) {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return "--";
+    return parsed.toFixed(2);
+  }
+
+  function getAttemptRank(attempt, type, field, fallback) {
+    const rankSet = getRankSet(attempt, type);
+    return rankSet[field] ?? fallback ?? "";
+  }
+
+  function buildExamRecords(attempts) {
+    const buckets = {};
+    attempts.forEach((attempt) => {
+      const key = attempt.examId || attempt.examName || "exam";
+      const time = getAttemptTime(attempt);
+      const rank = number(attempt.overallRank);
+      const rawRank = number(getAttemptRank(attempt, "raw", "overallRank", attempt.overallRank));
+      const normalizedRank = number(getAttemptRank(attempt, "normalized", "overallRank", attempt.overallRank));
+      if (!buckets[key]) {
+        buckets[key] = {
+          key,
+          latest: attempt,
+          latestTime: time,
+          count: 0,
+          bestRank: Infinity,
+          bestRawRank: Infinity,
+          bestNormalizedRank: Infinity,
+          bestPercentile: 0
+        };
+      }
+      const bucket = buckets[key];
+      bucket.count += 1;
+      if (time >= bucket.latestTime) {
+        bucket.latest = attempt;
+        bucket.latestTime = time;
+      }
+      if (rank > 0) bucket.bestRank = Math.min(bucket.bestRank, rank);
+      if (rawRank > 0) bucket.bestRawRank = Math.min(bucket.bestRawRank, rawRank);
+      if (normalizedRank > 0) bucket.bestNormalizedRank = Math.min(bucket.bestNormalizedRank, normalizedRank);
+      bucket.bestPercentile = Math.max(bucket.bestPercentile, number(attempt.percentile));
+    });
+    return Object.values(buckets).map((item) => ({
+      ...item,
+      bestRank: Number.isFinite(item.bestRank) ? item.bestRank : 0,
+      bestRawRank: Number.isFinite(item.bestRawRank) ? item.bestRawRank : 0,
+      bestNormalizedRank: Number.isFinite(item.bestNormalizedRank) ? item.bestNormalizedRank : 0
+    })).sort((a, b) => b.latestTime - a.latestTime);
+  }
+
+  function getQualificationLabel(attempt) {
+    if (!attempt || typeof attempt.isQualified !== "boolean") return { text: "Merit status not available", className: "neutral" };
+    return attempt.isQualified
+      ? { text: "Eligible for merit rank", className: "good" }
+      : { text: "Not eligible for merit rank", className: "bad" };
+  }
+
+  function ensureRankDashboardSections() {
+    const graphSection = $("#rankPercentileChart")?.closest(".dashboard-section-grid");
+    if (graphSection && !$("#latestRankSnapshot")) {
+      graphSection.insertAdjacentHTML("beforebegin", `
+        <section class="dashboard-section-grid rank-dashboard-primary-grid">
+          <div class="dash-section-card rank-latest-card">
+            <div class="dash-section-head">
+              <div>
+                <h2>Latest Rank Result</h2>
+                <p>Your latest rank predictor snapshot from the last 1 year.</p>
+              </div>
+              <a class="auth-btn auth-btn-primary" href="rank-predictor.html">Check New Rank</a>
+            </div>
+            <div id="latestRankSnapshot"></div>
+          </div>
+          <div class="dash-section-card rank-health-card">
+            <div class="dash-section-head">
+              <div>
+                <h2>Rank Health</h2>
+                <p>One-year summary matched with your saved mobile number.</p>
+              </div>
+            </div>
+            <div id="rankHealthBox"></div>
+          </div>
+        </section>
+      `);
+    }
+
+    const historySection = $("#rankHistoryList")?.closest(".dashboard-section-grid");
+    if (historySection && !$("#rankExamRecords")) {
+      historySection.insertAdjacentHTML("beforebegin", `
+        <section class="dashboard-section-grid rank-records-section">
+          <div class="dash-section-card rank-records-card">
+            <div class="dash-section-head">
+              <div>
+                <h2>Exam-wise Rank Records</h2>
+                <p>Latest result per exam, so candidates can scan current rank without opening every exam again.</p>
+              </div>
+            </div>
+            <div id="rankExamRecords"></div>
+          </div>
+        </section>
+      `);
+    }
+  }
+
+  function renderLatestRankSnapshot(attempts) {
+    const host = $("#latestRankSnapshot");
+    if (!host) return;
+    if (!attempts.length) {
+      host.innerHTML = `<div class="user-mini-card"><strong>No latest result yet</strong><span>Use Rank Predictor once with your saved mobile number.</span></div>`;
+      return;
+    }
+
+    const latest = attempts.slice().sort((a, b) => getAttemptTime(b) - getAttemptTime(a))[0];
+    const status = getQualificationLabel(latest);
+    const normalizedMarks = latest.normalizedMarks ?? latest.normalisedMarks;
+    const failedSubjects = Array.isArray(latest.failedSubjects) ? latest.failedSubjects : [];
+    host.innerHTML = `
+      <div class="rank-latest-snapshot">
+        <div class="rank-latest-head">
+          <div>
+            <span class="rank-mini-label">Latest check</span>
+            <h3>${escapeHtml(formatValue(latest.examName, "Rank Predictor Exam"))}</h3>
+            <p>Roll ${escapeHtml(formatValue(latest.rollNumber))} · Submitted ${escapeHtml(formatDateTime(latest.completedAt || latest.timestamp || latest.examDate))}</p>
+          </div>
+          <span class="rank-status-badge ${status.className}">${escapeHtml(status.text)}</span>
+        </div>
+        ${status.className === "bad" ? `
+          <div class="rank-qualification-note">
+            <strong>${escapeHtml(latest.qualificationMessage || "Qualifying criteria not cleared.")}</strong>
+            ${failedSubjects.length ? `<span>${failedSubjects.map((subject) => escapeHtml(subject.name || subject.subject || "Subject")).join(", ")} needs attention.</span>` : ""}
+          </div>
+        ` : ""}
+        <div class="rank-metric-grid">
+          <div class="rank-metric-card highlight"><span>Current Rank</span><strong>#${formatRank(latest.overallRank)}</strong></div>
+          <div class="rank-metric-card"><span>Normalised Marks</span><strong>${formatMarks(normalizedMarks)}</strong></div>
+          <div class="rank-metric-card"><span>Normalised Rank</span><strong>#${formatRank(getAttemptRank(latest, "normalized", "overallRank", latest.overallRank))}</strong></div>
+          <div class="rank-metric-card"><span>Shift Rank</span><strong>#${formatRank(latest.shiftRank)}</strong></div>
+          <div class="rank-metric-card"><span>Raw Marks</span><strong>${formatMarks(latest.rawMarks)}</strong></div>
+          <div class="rank-metric-card"><span>Raw Rank</span><strong>#${formatRank(getAttemptRank(latest, "raw", "overallRank", latest.overallRank))}</strong></div>
+          <div class="rank-metric-card"><span>Category Rank</span><strong>#${formatRank(latest.categoryRank)}</strong></div>
+          <div class="rank-metric-card"><span>Percentile</span><strong>${formatMarks(latest.percentile)}%</strong></div>
+        </div>
+        <button class="auth-btn auth-btn-secondary rank-open-result" type="button" data-rank-result-id="${escapeHtml(String(latest.id || latest.rowNumber || ""))}">Open Full Result</button>
+      </div>
+    `;
+  }
+
+  function renderRankHealth(records, attempts) {
+    const host = $("#rankHealthBox");
+    if (!host) return;
+    if (!attempts.length) {
+      host.innerHTML = `<div class="user-mini-card"><strong>No analysis yet</strong><span>Rank health appears after your first matched record.</span></div>`;
+      return;
+    }
+    const qualified = attempts.filter((attempt) => attempt.isQualified === true).length;
+    const avgPercentile = attempts.reduce((sum, attempt) => sum + number(attempt.percentile), 0) / attempts.length;
+    const best = attempts.filter((attempt) => number(attempt.overallRank) > 0).sort((a, b) => number(a.overallRank) - number(b.overallRank))[0];
+    const latestTime = Math.max(...attempts.map(getAttemptTime));
+    host.innerHTML = `
+      <div class="rank-health-grid">
+        <div class="rank-health-item"><span>Exams Checked</span><strong>${records.length}</strong></div>
+        <div class="rank-health-item"><span>Records</span><strong>${attempts.length}</strong></div>
+        <div class="rank-health-item"><span>Average Percentile</span><strong>${Math.round(avgPercentile)}%</strong></div>
+        <div class="rank-health-item"><span>Qualified Records</span><strong>${qualified}</strong></div>
+        <div class="rank-health-item wide"><span>Best Rank</span><strong>#${formatRank(best?.overallRank)}</strong><small>${escapeHtml(best?.examName || "Will update after more records")}</small></div>
+        <div class="rank-health-item wide"><span>Last Updated</span><strong>${escapeHtml(latestTime ? formatDateTime(latestTime) : "Recent")}</strong></div>
+      </div>
+    `;
+  }
+
+  function renderExamRecords(attempts) {
+    const host = $("#rankExamRecords");
+    if (!host) return;
+    const records = buildExamRecords(attempts);
+    if (!records.length) {
+      host.innerHTML = `<div class="user-mini-card"><strong>No exam-wise records yet</strong><span>Matched rank records from the last 1 year will appear here.</span></div>`;
+      return;
+    }
+    host.innerHTML = `
+      <div class="rank-exam-record-grid">
+        ${records.map((record) => {
+          const attempt = record.latest || {};
+          const status = getQualificationLabel(attempt);
+          const normalizedMarks = attempt.normalizedMarks ?? attempt.normalisedMarks;
+          return `
+            <article class="rank-record-card">
+              <div class="rank-record-card-head">
+                <div>
+                  <span class="rank-mini-label">${escapeHtml(formatValue(attempt.board, "Exam"))}</span>
+                  <h3>${escapeHtml(formatValue(attempt.examName, "Rank Predictor Exam"))}</h3>
+                  <p>${record.count} record${record.count > 1 ? "s" : ""} · Latest ${escapeHtml(formatDate(attempt.completedAt || attempt.timestamp || attempt.examDate))}</p>
+                </div>
+                <span class="rank-status-badge ${status.className}">${escapeHtml(status.text)}</span>
+              </div>
+              <div class="rank-record-meta-grid">
+                <div><span>Current Rank</span><strong>#${formatRank(attempt.overallRank)}</strong></div>
+                <div><span>Norm Marks</span><strong>${formatMarks(normalizedMarks)}</strong></div>
+                <div><span>Norm Rank</span><strong>#${formatRank(getAttemptRank(attempt, "normalized", "overallRank", attempt.overallRank))}</strong></div>
+                <div><span>Raw Marks</span><strong>${formatMarks(attempt.rawMarks)}</strong></div>
+                <div><span>Raw Rank</span><strong>#${formatRank(getAttemptRank(attempt, "raw", "overallRank", attempt.overallRank))}</strong></div>
+                <div><span>Shift Rank</span><strong>#${formatRank(attempt.shiftRank)}</strong></div>
+                <div><span>Category Rank</span><strong>#${formatRank(attempt.categoryRank)}</strong></div>
+                <div><span>State Rank</span><strong>#${formatRank(attempt.stateRank)}</strong></div>
+                <div><span>Percentile</span><strong>${formatMarks(attempt.percentile)}%</strong></div>
+              </div>
+              <div class="rank-record-actions">
+                <button class="auth-btn auth-btn-secondary rank-open-result" type="button" data-rank-result-id="${escapeHtml(String(attempt.id || attempt.rowNumber || ""))}">Open Result</button>
+                <a class="auth-btn auth-btn-outline" href="rank-predictor.html">Check Again</a>
+              </div>
+            </article>
+          `;
+        }).join("")}
+      </div>
+    `;
+  }
+
+  function buildResultSnapshot(attempt) {
+    const normalizedMarks = attempt?.normalizedMarks ?? attempt?.normalisedMarks ?? attempt?.rawMarks;
+    return {
+      resultData: attempt || {},
+      payload: {
+        examId: attempt?.examId || "",
+        examName: attempt?.examName || "",
+        sheetName: attempt?.sheetName || "",
+        mode: attempt?.mode || "",
+        rollNumber: attempt?.rollNumber || "",
+        gender: attempt?.gender || "",
+        category: attempt?.category || "",
+        horizontalCategory: attempt?.horizontalCategory || "",
+        state: attempt?.state || "",
+        examDate: attempt?.examDate || "",
+        shift: attempt?.shift || "",
+        totalQuestions: attempt?.totalQuestions,
+        totalAttempted: attempt?.totalAttempted,
+        rightAnswers: attempt?.rightAnswers,
+        wrongAnswers: attempt?.wrongAnswers,
+        unattempted: attempt?.unattempted,
+        rawMarks: attempt?.rawMarks,
+        normalizedMarks,
+        subjectData: attempt?.subjectData || attempt?.subjectAnalysis || []
+      },
+      examName: attempt?.examName || "",
+      exam: {
+        examId: attempt?.examId || "",
+        examName: attempt?.examName || "",
+        board: attempt?.board || "",
+        hasShifts: Boolean(attempt?.hasShifts),
+        normalization: Boolean(attempt?.normalization)
+      },
+      derived: { normalizedMarks },
+      savedAt: new Date().toISOString()
+    };
+  }
+
+  function bindOpenResultButtons(attempts) {
+    document.querySelectorAll(".rank-open-result").forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.getAttribute("data-rank-result-id") || "";
+        const attempt = attempts.find((item) => String(item.id || item.rowNumber || "") === id) || attempts[0];
+        try {
+          sessionStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(buildResultSnapshot(attempt)));
+          window.location.href = RESULT_PAGE_URL;
+        } catch (error) {
+          setText("#rankHistoryStatus", "Result could not be opened because browser storage is blocked.");
+        }
+      });
+    });
   }
 
   async function getProfile(user) {
@@ -172,11 +463,15 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   }
 
   function renderEmpty(message) {
+    ensureRankDashboardSections();
     setText("#rankPredictionCount", "0");
     setText("#bestEstimatedRank", "--");
     setText("#rankHistoryStatus", message || "No rank predictor record found for your login mobile/email.");
     const list = $("#rankHistoryList");
     if (list) list.innerHTML = `<div class="user-mini-card"><strong>No rank history yet</strong><span>${message || "Use Rank Predictor with the same mobile number used in signup."}</span></div>`;
+    renderLatestRankSnapshot([]);
+    renderRankHealth([], []);
+    renderExamRecords([]);
     renderRankGraphs([]);
   }
 
@@ -328,13 +623,20 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
       renderEmpty(data?.message || "Rank history could not be loaded.");
       return;
     }
-    const attempts = Array.isArray(data.rankAttempts || data.attempts) ? (data.rankAttempts || data.attempts) : [];
+    ensureRankDashboardSections();
+    const allAttempts = Array.isArray(data.rankAttempts || data.attempts) ? (data.rankAttempts || data.attempts) : [];
+    const attempts = filterLastYearAttempts(allAttempts);
+    const records = buildExamRecords(attempts);
+    const bestRankAttempt = attempts.filter((attempt) => number(attempt.overallRank) > 0).sort((a, b) => number(a.overallRank) - number(b.overallRank))[0];
     const summary = data.summary || {};
-    setText("#rankPredictionCount", String(summary.totalRankPredictorAttempts ?? attempts.length ?? 0));
-    setText("#bestEstimatedRank", formatRank(summary.bestRank));
-    setText("#bestRankExam", summary.bestRankExam ? `Best in ${summary.bestRankExam}` : "Will show after prediction");
-    setText("#rankHistoryStatus", attempts.length ? "Latest rank predictor records loaded." : "No rank predictor records found yet.");
+    setText("#rankPredictionCount", String(attempts.length || summary.totalRankPredictorAttempts || 0));
+    setText("#bestEstimatedRank", formatRank(bestRankAttempt?.overallRank ?? summary.bestRank));
+    setText("#bestRankExam", bestRankAttempt?.examName ? `Best in ${bestRankAttempt.examName}` : "Will show after prediction");
+    setText("#rankHistoryStatus", attempts.length ? "Last 1 year rank predictor records loaded." : "No rank predictor records found in the last 1 year.");
 
+    renderLatestRankSnapshot(attempts);
+    renderRankHealth(records, attempts);
+    renderExamRecords(attempts);
     renderRankGraphs(attempts);
 
     const list = $("#rankHistoryList");
@@ -344,15 +646,35 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
       return;
     }
 
-    list.innerHTML = attempts.slice(0, 5).map((attempt) => `
-      <article class="rank-history-item">
-        <div>
-          <strong>${formatValue(attempt.examName, "Exam")}</strong>
-          <span>Marks: ${formatValue(attempt.rawMarks)} | Percentile: ${formatValue(attempt.percentile)} | Rank: ${formatRank(attempt.overallRank)}</span>
-        </div>
-        <small>Submitted ${formatDate(attempt.completedAt || attempt.timestamp || attempt.examDate)}</small>
-      </article>
-    `).join("");
+    list.innerHTML = `
+      <div class="rank-history-table-wrap">
+        <table class="rank-history-table">
+          <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Raw</th>
+              <th>Normalised</th>
+              <th>Ranks</th>
+              <th>Category</th>
+              <th>Submitted</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${attempts.slice(0, 12).map((attempt) => `
+              <tr>
+                <td><strong>${escapeHtml(formatValue(attempt.examName, "Exam"))}</strong><span>Roll ${escapeHtml(formatValue(attempt.rollNumber))}</span></td>
+                <td>${formatMarks(attempt.rawMarks)}</td>
+                <td>${formatMarks(attempt.normalizedMarks ?? attempt.normalisedMarks)}</td>
+                <td><strong>#${formatRank(attempt.overallRank)}</strong><span>Raw #${formatRank(getAttemptRank(attempt, "raw", "overallRank", attempt.overallRank))} · Shift #${formatRank(attempt.shiftRank)}</span></td>
+                <td><strong>#${formatRank(attempt.categoryRank)}</strong><span>${escapeHtml(formatValue(attempt.category))} · ${escapeHtml(formatValue(attempt.state))}</span></td>
+                <td>${escapeHtml(formatDateTime(attempt.completedAt || attempt.timestamp || attempt.examDate))}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+    bindOpenResultButtons(attempts);
   }
 
   async function load(user) {
