@@ -169,6 +169,14 @@
       "signature": "8857d3be14d82ef92295f509a42d447accab39059751e5a572406740e791ca3a",
       "lastmod": "2026-08-12"
     },
+    "AdmitCard_Details/HTML/BSF-HC-Ministerial-ASI-Steno-Admit-Card-2026.html": {
+      "signature": "2690cb54054145e7a51ffbb9dee07292959d92148c9d29570f173a5cd6de6208",
+      "lastmod": "2026-08-21"
+    },
+    "AdmitCard_Details/HTML/BSNL-JTO-Admit-Card-2026.html": {
+      "signature": "042700e80370693e76ae6a17df5baacbd624df1b8fce3f297796298588a0944a",
+      "lastmod": "2026-08-21"
+    },
     "AdmitCard_Details/HTML/BSNL-JTO-Junior-Telecom-Officer-Exam-City-Details-2026.html": {
       "signature": "1652949d008baebed40a3263c1ef7dfd28d3f562b219a323dcbf7fd8db370b91",
       "lastmod": "2026-08-12"
@@ -188,6 +196,14 @@
     "AdmitCard_Details/HTML/CGPSC-State-Engineering-Service-Admit-Card-2026.html": {
       "signature": "576710faaa11d929bed7836b19f2250ea25e0e44851a88526492249bf9816070",
       "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/Coal-India-CIL-MT-Admit-Card-2026.html": {
+      "signature": "c4677976320ae0e56eae0b9e72bfff278d4bfaac4435a59dc156ce080e0150cf",
+      "lastmod": "2026-08-21"
+    },
+    "AdmitCard_Details/HTML/Cotton-Corporation-CCI-Various-Post-Admit-Card-2026.html": {
+      "signature": "de74ab57e9fc3fae0682c86485fe55da7a519823d788115eed10e8934757d89e",
+      "lastmod": "2026-08-21"
     },
     "AdmitCard_Details/HTML/CSBC-Bihar-Police-Constable-Driver-DET-Admit-Card-2026.html": {
       "signature": "5911438ab7c8097207c4fd69dc7bb33b32360e69c1c506a99c665cc7d8abd600",
@@ -244,6 +260,14 @@
     "AdmitCard_Details/HTML/MPPSC-SSE-Mains-Admit-Card-2026.html": {
       "signature": "f0570342722d57d06cabfb1c798069ba99ad80b16d05793b49b74efc92db9f93",
       "lastmod": "2026-08-14"
+    },
+    "AdmitCard_Details/HTML/NEET-PG-Admit-Card-2026.html": {
+      "signature": "41bc9097024e2de46f7b7fa9b66f2874996fdd229377ab553ac77238453dd925",
+      "lastmod": "2026-08-21"
+    },
+    "AdmitCard_Details/HTML/NICL-Assistant-Admit-Card-2026.html": {
+      "signature": "0ffbd656de089f26ea14e20f3c4512bee2d8df8c073022e6f0a9c0e272c84899",
+      "lastmod": "2026-08-21"
     },
     "AdmitCard_Details/HTML/NTA-AIAPGET-Admit-Card-2026.html": {
       "signature": "755360a6802a85ecc659a811db787f1a4025cacd06dfb4d725c4c821733fcd5a",
@@ -318,8 +342,8 @@
       "lastmod": "2026-08-14"
     },
     "AdmitCard_Details/HTML/RSSB-Computer-Instructor-Admit-Card-2026.html": {
-      "signature": "347f3e7944808253695c4b8ae0712c73068dd9e2da7688e66cec62dab3fcab13",
-      "lastmod": "2026-08-14"
+      "signature": "23554e8956b0341026d108f2953c2ae41548e99661f54aceff0bcf035018cf6a",
+      "lastmod": "2026-08-21"
     },
     "AdmitCard_Details/HTML/RSSB-Rajasthan-Platoon-Commander-Interview-Letter-2026.html": {
       "signature": "7f7a7658d55d5acdcd00dba7bdbae10505dd8c8b93443e4cf52fe8d3258e9847",
@@ -388,6 +412,10 @@
     "AdmitCard_Details/HTML/UPSSSC-Assistant-Boring-Technician-Mains-Admit-Card-2026.html": {
       "signature": "da3644f27084899cbc4b81f6f068aa42bb0f5b85b6bd9b5e7c587fa0a7607224",
       "lastmod": "2026-08-12"
+    },
+    "AdmitCard_Details/HTML/UPSSSC-Lower-PCS-Mains-Admit-Card-2026.html": {
+      "signature": "8d3648b408aded71312b039d8cf4af63f28753ead9d1c710f5c63d4eed36d9d5",
+      "lastmod": "2026-08-21"
     },
     "AdmitCard_Details/HTML/UPSSSC-Teacher-Cadre-Mains-Exam-Admit-Card-2026.html": {
       "signature": "16810a081f3f1c63a38521be339109e794dca60617092859dfdb6b55f03c2417",
@@ -2200,6 +2228,10 @@
     "Result_Details/HTML/UPSC-IES-ISS-Result-2026.html": {
       "signature": "02d5c4431a169348ffda40f86cf1ae86eff8976d0aaa815df9d43484c1cdddf1",
       "lastmod": "2026-08-12"
+    },
+    "Result_Details/HTML/UPSSSC-Junior-Assistant-Final-Result-2026.html": {
+      "signature": "c49196eab3c15c54b26d86a714bf04ab2bf9d3ff5b8951b1a5c6564fb2902a10",
+      "lastmod": "2026-08-21"
     },
     "Result_Details/HTML/UPSSSC-Lower-PCS-Eligibility-Result-2026.html": {
       "signature": "06c1333728b3dcd746feec8dfe49d13ed529c0ca23b450a75ecc15e3fa233cbf",
