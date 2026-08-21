@@ -62,6 +62,11 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short" });
   }
 
+  function getAttemptTime(attempt) {
+    const date = new Date(attempt?.completedAt || attempt?.timestamp || attempt?.examDate || "");
+    return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+  }
+
   async function getProfile(user) {
     let profile = { name: user.displayName || "", email: user.email || "", mobile: "" };
     try {
@@ -193,6 +198,44 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     })).sort((a, b) => b.averagePercentile - a.averagePercentile).slice(0, 6);
   }
 
+  function buildExamTrendStats(attempts) {
+    const buckets = {};
+    attempts.forEach((attempt) => {
+      const key = attempt.examId || attempt.examName || "exam";
+      const exam = attempt.examName || "Exam";
+      const rank = number(attempt.overallRank);
+      const percentile = number(attempt.percentile);
+      const time = getAttemptTime(attempt);
+      if (!buckets[key]) {
+        buckets[key] = {
+          name: exam,
+          count: 0,
+          latestTime: 0,
+          latestRank: 0,
+          bestRank: Infinity,
+          bestPercentile: 0
+        };
+      }
+      const bucket = buckets[key];
+      bucket.count += 1;
+      bucket.bestPercentile = Math.max(bucket.bestPercentile, percentile);
+      if (rank > 0) bucket.bestRank = Math.min(bucket.bestRank, rank);
+      if (time >= bucket.latestTime) {
+        bucket.latestTime = time;
+        bucket.latestRank = rank;
+      }
+    });
+    return Object.values(buckets).map((item) => ({
+      ...item,
+      bestRank: Number.isFinite(item.bestRank) ? item.bestRank : 0
+    })).sort((a, b) => {
+      const rankA = a.bestRank || Infinity;
+      const rankB = b.bestRank || Infinity;
+      if (rankA !== rankB) return rankA - rankB;
+      return b.bestPercentile - a.bestPercentile;
+    }).slice(0, 6);
+  }
+
   function renderRankGraphs(attempts) {
     const percentileChart = $("#rankPercentileChart");
     const rankChart = $("#rankTrendChart");
@@ -227,16 +270,20 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     }
 
     if (rankChart) {
-      const ranks = recent.map((attempt) => number(attempt.overallRank)).filter((rank) => rank > 0);
+      const trendStats = buildExamTrendStats(attempts);
+      const ranks = trendStats.map((item) => number(item.bestRank)).filter((rank) => rank > 0);
       const worstRank = Math.max(...ranks, 1);
       rankChart.innerHTML = `
         <div class="dash-horizontal-bars">
-          ${recent.map((attempt) => {
-            const rank = number(attempt.overallRank);
+          ${trendStats.map((item) => {
+            const rank = number(item.bestRank);
             const better = rank > 0 ? Math.max(8, 100 - ((rank - 1) / Math.max(worstRank, 1)) * 92) : 0;
             return `
               <div class="dash-hbar-row">
-                <label><span>${escapeHtml(attempt.examName || "Exam")}</span><strong>Rank ${formatRank(rank)}</strong></label>
+                <label>
+                  <span>${escapeHtml(item.name)}</span>
+                  <strong>Best Rank ${formatRank(rank)}${item.count > 1 ? ` (${item.count} attempts)` : ""}</strong>
+                </label>
                 <div class="dash-hbar-track"><i style="width:${better}%"></i></div>
               </div>
             `;
@@ -303,7 +350,7 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
           <strong>${formatValue(attempt.examName, "Exam")}</strong>
           <span>Marks: ${formatValue(attempt.rawMarks)} | Percentile: ${formatValue(attempt.percentile)} | Rank: ${formatRank(attempt.overallRank)}</span>
         </div>
-        <small>${formatDate(attempt.examDate || attempt.completedAt || attempt.timestamp)}</small>
+        <small>Submitted ${formatDate(attempt.completedAt || attempt.timestamp || attempt.examDate)}</small>
       </article>
     `).join("");
   }
