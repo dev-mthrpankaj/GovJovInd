@@ -84,6 +84,12 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     });
   }
 
+  function filterProfileAttempts(attempts) {
+    const profileMobile = cleanMobile(currentProfile?.mobile);
+    if (!profileMobile) return attempts;
+    return attempts.filter((attempt) => cleanMobile(attempt?.mobileNumber || attempt?.mobile || "") === profileMobile);
+  }
+
   function getRankSet(attempt, type) {
     if (!attempt) return {};
     if (type === "raw") return attempt.rawRanks || {};
@@ -625,7 +631,7 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
     }
     ensureRankDashboardSections();
     const allAttempts = Array.isArray(data.rankAttempts || data.attempts) ? (data.rankAttempts || data.attempts) : [];
-    const attempts = filterLastYearAttempts(allAttempts);
+    const attempts = filterLastYearAttempts(filterProfileAttempts(allAttempts));
     const records = buildExamRecords(attempts);
     const bestRankAttempt = attempts.filter((attempt) => number(attempt.overallRank) > 0).sort((a, b) => number(a.overallRank) - number(b.overallRank))[0];
     const summary = data.summary || {};
