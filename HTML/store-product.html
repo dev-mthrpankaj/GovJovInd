@@ -1,13 +1,136 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Product | GovJobUpdates Store</title><meta name="description" content="Shop products for aspirants on GovJobUpdates Store. Check variants, live stock, pricing and local delivery availability."><meta name="robots" content="index, follow, max-image-preview:large"><link rel="canonical" href="https://govjobupdates.com/HTML/store-product.html"><link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png"><link rel="stylesheet" href="../CSS/style.css"><link rel="stylesheet" href="../CSS/store-product.css?v=20260821-v2"><link rel="stylesheet" href="../CSS/store-shell.css?v=20260822-v1"><link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css"></head><body class="store-v2-body">
-<main class="store-product-page" id="productPage"><div class="store-product-shell"><nav class="store-breadcrumb" aria-label="Breadcrumb"><a href="store.html">Store</a><i class="fas fa-chevron-right"></i><span id="productBreadcrumb">Product</span></nav>
-<section class="product-loading" id="productLoading" aria-live="polite"><div class="product-loading-gallery"></div><div class="product-loading-info"><span></span><span></span><span></span><span></span><span></span></div></section>
-<section class="product-error" id="productError" hidden><i class="fas fa-triangle-exclamation"></i><div><strong>Product could not be loaded.</strong><p id="productErrorMessage">Please try again.</p></div><a class="btn btn-primary" href="store.html">Back to Store</a></section>
-<section class="product-main" id="productMain" hidden><div class="product-gallery-card"><div class="product-main-image-wrap" id="mainImageWrap"><img id="productMainImage" class="product-main-image" alt="" hidden><div class="product-image-placeholder" id="productImagePlaceholder"><i class="fas fa-box-open"></i><span>Product image</span></div><span class="product-stock-badge" id="productStockBadge"></span></div><div class="product-thumbnails" id="productThumbnails" aria-label="Product images"></div></div>
-<div class="product-info-card"><div class="product-topline"><span id="productBrand">GovJobUpdates Store</span><span id="productCategory"></span></div><h1 id="productTitle">Product</h1><p class="product-short-desc" id="productShortDescription"></p><div class="product-price-box"><div class="product-price-line"><strong id="productSellingPrice">Select a variant</strong><del id="productMrp" hidden></del><span class="product-discount" id="productDiscount" hidden></span></div><p id="productPriceNote">Price and availability update when you select a variant.</p></div>
-<div class="product-option-block" id="sizeBlock" hidden><div class="product-option-head"><strong>Choose Size</strong><button type="button" class="text-action" id="sizeGuideBtn" hidden>Size Guide</button></div><div class="variant-options" id="sizeOptions"></div></div><div class="product-option-block" id="colorBlock" hidden><div class="product-option-head"><strong>Choose Colour</strong></div><div class="variant-options" id="colorOptions"></div></div><div class="selected-variant-line" id="selectedVariantLine" hidden><span>Selected:</span><strong id="selectedVariantText"></strong><span class="selected-stock" id="selectedStock"></span></div>
-<div class="quantity-cart-row"><div class="quantity-control" aria-label="Quantity"><button type="button" id="quantityMinus" aria-label="Decrease quantity"><i class="fas fa-minus"></i></button><input id="productQuantity" value="1" inputmode="numeric" aria-label="Quantity" readonly><button type="button" id="quantityPlus" aria-label="Increase quantity"><i class="fas fa-plus"></i></button></div><button class="product-add-cart" id="addToCartBtn" type="button" disabled><i class="fas fa-cart-plus"></i><span>Select a Variant</span></button></div><div class="cart-feedback" id="cartFeedback" role="status" aria-live="polite"></div>
-<div class="delivery-check-card"><div class="delivery-check-title"><i class="fas fa-location-dot"></i><div><strong>Check Delivery</strong><span>Enter your PIN code for availability, COD and charges.</span></div></div><form class="delivery-check-form" id="deliveryCheckForm"><input id="deliveryPin" type="text" maxlength="6" inputmode="numeric" placeholder="Enter 6 digit PIN" aria-label="PIN code" required><button type="submit" id="deliveryCheckBtn">Check</button></form><div class="delivery-result" id="deliveryResult" aria-live="polite"></div></div><div class="store-trust-row"><div><i class="fas fa-box"></i><span><strong>Local Delivery</strong>PIN-code based service</span></div><div><i class="fas fa-indian-rupee-sign"></i><span><strong>COD Available</strong>Where enabled locally</span></div><div><i class="fas fa-shield-halved"></i><span><strong>Live Inventory</strong>Backend verified stock</span></div></div></div></section>
-<section class="product-details-grid" id="productDetails" hidden><article class="product-detail-card"><h2>Product Details</h2><div class="product-rich-text" id="productDescription"></div></article><aside class="product-detail-side"><article class="product-detail-card" id="careCard" hidden><h2>Care Instructions</h2><div class="product-rich-text" id="careInstructions"></div></article><article class="product-detail-card store-help-card"><i class="fas fa-headset"></i><div><h2>Need Help?</h2><p>Questions about size, stock or local delivery? Contact GovJobUpdates Store support before ordering.</p></div></article></aside></section></div></main>
-<div class="size-guide-modal" id="sizeGuideModal" hidden><div class="size-guide-backdrop" data-close-size-guide></div><div class="size-guide-dialog" role="dialog" aria-modal="true" aria-labelledby="sizeGuideTitle"><button class="size-guide-close" type="button" data-close-size-guide aria-label="Close size guide"><i class="fas fa-xmark"></i></button><h2 id="sizeGuideTitle">Size Guide</h2><div id="sizeGuideContent"></div></div></div><a class="floating-cart" href="store-cart.html" aria-label="Open shopping cart"><i class="fas fa-cart-shopping"></i><span>Cart</span><b id="storeCartCount">0</b></a>
-<script src="../JS/store-shell-auto.js?v=20260822-v1" defer></script><script src="../JS/store-product.js?v=20260821-v2" defer></script><script src="../JS/firebase-config.js?v=20260513-up5" defer></script><script type="module" src="../JS/firebase-analytics.js"></script><script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product | GovJobUpdates Store</title>
+  <meta name="description" content="Shop products for aspirants on GovJobUpdates Store. Check variants, live stock, pricing and local delivery availability.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://govjobupdates.com/HTML/store-product.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+  <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+  <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+  <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href="../CSS/store-product.css?v=20260821-v2">
+  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+</head>
+<body>
+<header><div class="header-container"><div class="logo-container"><img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="../index.html" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html" class="active">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
+<main class="store-product-page" id="productPage">
+  <div class="store-product-shell">
+    <nav class="store-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <a href="store.html">Store</a><i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <span id="productBreadcrumb">Product</span>
+    </nav>
+
+    <section class="product-loading" id="productLoading" aria-live="polite">
+      <div class="product-loading-gallery"></div>
+      <div class="product-loading-info">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <section class="product-error" id="productError" hidden>
+      <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+      <div><strong>Product could not be loaded.</strong><p id="productErrorMessage">Please try again.</p></div>
+      <a class="btn btn-primary" href="store.html">Back to Store</a>
+    </section>
+
+    <section class="product-main" id="productMain" hidden>
+      <div class="product-gallery-card">
+        <div class="product-main-image-wrap" id="mainImageWrap">
+          <img id="productMainImage" class="product-main-image" alt="" hidden>
+          <div class="product-image-placeholder" id="productImagePlaceholder"><i class="fas fa-box-open" aria-hidden="true"></i><span>Product image</span></div>
+          <span class="product-stock-badge" id="productStockBadge"></span>
+        </div>
+        <div class="product-thumbnails" id="productThumbnails" aria-label="Product images"></div>
+      </div>
+
+      <div class="product-info-card">
+        <div class="product-topline"><span id="productBrand">GovJobUpdates Store</span><span id="productCategory"></span></div>
+        <h1 id="productTitle">Product</h1>
+        <p class="product-short-desc" id="productShortDescription"></p>
+
+        <div class="product-price-box">
+          <div class="product-price-line"><strong id="productSellingPrice">Select a variant</strong><del id="productMrp" hidden></del><span class="product-discount" id="productDiscount" hidden></span></div>
+          <p id="productPriceNote">Price and availability update when you select a variant.</p>
+        </div>
+
+        <div class="product-option-block" id="sizeBlock" hidden>
+          <div class="product-option-head"><strong>Choose Size</strong><button type="button" class="text-action" id="sizeGuideBtn" hidden>Size Guide</button></div>
+          <div class="variant-options" id="sizeOptions"></div>
+        </div>
+
+        <div class="product-option-block" id="colorBlock" hidden>
+          <div class="product-option-head"><strong>Choose Colour</strong></div>
+          <div class="variant-options" id="colorOptions"></div>
+        </div>
+
+        <div class="selected-variant-line" id="selectedVariantLine" hidden>
+          <span>Selected:</span><strong id="selectedVariantText"></strong><span class="selected-stock" id="selectedStock"></span>
+        </div>
+
+        <div class="quantity-cart-row">
+          <div class="quantity-control" aria-label="Quantity">
+            <button type="button" id="quantityMinus" aria-label="Decrease quantity"><i class="fas fa-minus"></i></button>
+            <input id="productQuantity" value="1" inputmode="numeric" aria-label="Quantity" readonly>
+            <button type="button" id="quantityPlus" aria-label="Increase quantity"><i class="fas fa-plus"></i></button>
+          </div>
+          <button class="product-add-cart" id="addToCartBtn" type="button" disabled><i class="fas fa-cart-plus" aria-hidden="true"></i><span>Select a Variant</span></button>
+        </div>
+
+        <div class="cart-feedback" id="cartFeedback" role="status" aria-live="polite"></div>
+
+        <div class="delivery-check-card">
+          <div class="delivery-check-title"><i class="fas fa-location-dot" aria-hidden="true"></i><div><strong>Check Delivery</strong><span>Enter your PIN code for availability, COD and charges.</span></div></div>
+          <form class="delivery-check-form" id="deliveryCheckForm">
+            <input id="deliveryPin" type="text" maxlength="6" inputmode="numeric" placeholder="Enter 6 digit PIN" aria-label="PIN code" required>
+            <button type="submit" id="deliveryCheckBtn">Check</button>
+          </form>
+          <div class="delivery-result" id="deliveryResult" aria-live="polite"></div>
+        </div>
+
+        <div class="store-trust-row">
+          <div><i class="fas fa-box" aria-hidden="true"></i><span><strong>Local Delivery</strong>PIN-code based service</span></div>
+          <div><i class="fas fa-indian-rupee-sign" aria-hidden="true"></i><span><strong>COD Available</strong>Where enabled locally</span></div>
+          <div><i class="fas fa-shield-halved" aria-hidden="true"></i><span><strong>Live Inventory</strong>Backend verified stock</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-details-grid" id="productDetails" hidden>
+      <article class="product-detail-card">
+        <h2>Product Details</h2>
+        <div class="product-rich-text" id="productDescription"></div>
+      </article>
+      <aside class="product-detail-side">
+        <article class="product-detail-card" id="careCard" hidden><h2>Care Instructions</h2><div class="product-rich-text" id="careInstructions"></div></article>
+        <article class="product-detail-card store-help-card"><i class="fas fa-headset" aria-hidden="true"></i><div><h2>Need Help?</h2><p>Questions about size, stock or local delivery? Contact GovJobUpdates Store support before ordering.</p></div></article>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<div class="size-guide-modal" id="sizeGuideModal" hidden>
+  <div class="size-guide-backdrop" data-close-size-guide></div>
+  <div class="size-guide-dialog" role="dialog" aria-modal="true" aria-labelledby="sizeGuideTitle">
+    <button class="size-guide-close" type="button" data-close-size-guide aria-label="Close size guide"><i class="fas fa-xmark"></i></button>
+    <h2 id="sizeGuideTitle">Size Guide</h2>
+    <div id="sizeGuideContent"></div>
+  </div>
+</div>
+
+<a class="floating-cart" href="store-cart.html" aria-label="Open shopping cart"><i class="fas fa-cart-shopping"></i><span>Cart</span><b id="storeCartCount">0</b></a>
+
+
+<nav class="candidate-bottom-nav" aria-label="Primary mobile navigation"><a href="../index.html" class="" aria-label="Home"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a><a href="rank-predictor.html" class="" aria-label="Rank"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Rank</span></a><a href="quiz.html" class="" aria-label="Quiz"><i class="fas fa-stopwatch" aria-hidden="true"></i><span>Quiz</span></a><a href="up-certificate-services.html" class="is-active" aria-label="UP Doc"><i class="fas fa-certificate" aria-hidden="true"></i><span>UP Doc</span></a><a href="latest-jobs.html" class="" aria-label="Jobs"><i class="fas fa-briefcase" aria-hidden="true"></i><span>Jobs</span></a></nav>
+<footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p><div class="social-icons footer-social" aria-label="GovJobUpdates social links"><a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a><a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a><a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a><a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel"><i class="fab fa-whatsapp" aria-hidden="true"></i></a><a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN"><span aria-hidden="true">X</span></a><a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="../typing-test/index.html">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="refund-policy.html">Refund Policy</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li><li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="refund-policy.html">Refund Policy</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
+<script src="../JS/script.js?v=20260519-up-services-layout-fix" defer></script>
+<script src="../JS/store-product.js?v=20260821-v2" defer></script>
+<script src="../JS/firebase-config.js?v=20260513-up5" defer></script>
+<script type="module" src="../JS/firebase-analytics.js"></script>
+<script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>
+</body>
+</html>

@@ -1,1 +1,110 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Your Orders | GovJobUpdates Store</title><meta name="description" content="View your GovJobUpdates Store order history, current status, shipment details and previously linked orders."><meta name="robots" content="noindex, follow"><link rel="canonical" href="https://govjobupdates.com/HTML/store-my-orders.html"><link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png"><link rel="stylesheet" href="../CSS/style.css"><link rel="stylesheet" href="../CSS/store-my-orders.css?v=20260822-v2"><link rel="stylesheet" href="../CSS/store-shell.css?v=20260822-v1"><link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css"></head><body class="store-v2-body"><main class="my-orders-page" id="myOrdersPage"><div class="my-orders-shell"><nav class="my-orders-breadcrumb" aria-label="Breadcrumb"><a href="store.html">Store</a><i class="fas fa-chevron-right"></i><span>Your Orders</span></nav><section class="my-orders-hero"><div><span class="my-orders-eyebrow"><i class="fas fa-boxes-stacked"></i> Your Store Account</span><h1>Your Orders</h1><p>See orders linked to your GovJobUpdates account, follow their delivery journey and reopen shipment tracking whenever you need it.</p></div><div class="my-orders-hero-actions"><a href="store.html" class="my-orders-action"><i class="fas fa-bag-shopping"></i> Continue Shopping</a><a href="store-track-order.html" class="my-orders-action is-light"><i class="fas fa-location-crosshairs"></i> Track Guest Order</a></div></section><section class="my-orders-loading" id="myOrdersLoading" aria-live="polite"><span class="my-orders-spinner"><i class="fas fa-spinner fa-spin"></i></span><div><strong>Loading your orders…</strong><p>Securely verifying your GovJobUpdates account.</p></div></section><section class="my-orders-login" id="myOrdersLogin" hidden><div class="my-orders-login-icon"><i class="fas fa-user-lock"></i></div><h2>Login to see Your Orders</h2><p>Orders placed while you are signed in are linked securely to your account. Guest checkout still works without login.</p><a class="btn btn-primary" href="login.html?redirect=store-my-orders.html"><i class="fas fa-right-to-bracket"></i> Login / Sign Up</a><a class="my-orders-text-link" href="store-track-order.html">Track a guest order instead</a></section><div class="my-orders-alert" id="myOrdersAlert" role="alert" aria-live="assertive" hidden></div><section class="my-orders-content" id="myOrdersContent" hidden><div class="my-orders-account-bar"><div class="my-orders-account-icon"><i class="fas fa-user-check"></i></div><div><span>Signed in as</span><strong id="myOrdersAccountName">GovJobUpdates User</strong><small id="myOrdersAccountEmail"></small></div><button id="refreshMyOrders" type="button"><i class="fas fa-rotate"></i> Refresh</button></div><section class="my-orders-empty" id="myOrdersEmpty" hidden><div class="my-orders-empty-icon"><i class="fas fa-box-open"></i></div><h2>No linked store orders yet</h2><p>New orders placed while you are logged in will appear here automatically. If you already placed a guest order, you can link it below.</p><a href="store.html" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Shop Store</a></section><section class="my-orders-list-section" aria-labelledby="orderHistoryTitle"><div class="my-orders-section-head"><div><span class="my-orders-eyebrow">Order history</span><h2 id="orderHistoryTitle">Your Store Orders <span id="myOrdersCount">0</span></h2></div><select id="myOrdersFilter" aria-label="Filter orders by status"><option value="all">All orders</option><option value="active">Active orders</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled / Returned</option></select></div><div class="my-orders-list" id="myOrdersList"></div></section><section class="claim-order-card" aria-labelledby="claimOrderTitle"><div class="claim-order-copy"><span class="my-orders-eyebrow"><i class="fas fa-link"></i> Older guest order</span><h2 id="claimOrderTitle">Add a Previous Order to Your Account</h2><p>If an older order was placed before account linking was available, enter its Order Number and registered mobile. For security, its checkout email must also match your logged-in account email.</p></div><form id="claimOrderForm" class="claim-order-form" novalidate><label for="claimOrderNumber">Order Number</label><input id="claimOrderNumber" type="text" maxlength="40" autocomplete="off" placeholder="GJU-PS-260821-XXXXXX" required><label for="claimOrderMobile">Registered Mobile</label><input id="claimOrderMobile" type="tel" maxlength="10" inputmode="numeric" autocomplete="tel" placeholder="10 digit mobile number" required><button id="claimOrderBtn" type="submit"><i class="fas fa-link"></i> Add to Your Orders</button></form><div class="claim-order-message" id="claimOrderMessage" role="status" aria-live="polite"></div></section></section></div></main><script src="../JS/store-shell-auto.js?v=20260822-v1" defer></script><script src="../JS/firebase-config.js?v=20260513-up5"></script><script type="module" src="../JS/store-my-orders.js?v=20260822-v2"></script><script type="module" src="../JS/firebase-analytics.js"></script><script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Orders | GovJobUpdates Store</title>
+  <meta name="description" content="View your GovJobUpdates Store order history, current status, shipment details and previously linked orders.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://govjobupdates.com/HTML/store-my-orders.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Assets/Home Page/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home Page/favicon-16x16.png">
+  <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
+  <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
+  <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href="../CSS/store-my-orders.css?v=20260822-v2">
+  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+</head>
+<body>
+<header><div class="header-container"><div class="logo-container"><img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="../index.html" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html" class="active">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
+
+<main class="my-orders-page" id="myOrdersPage">
+  <div class="my-orders-shell">
+    <nav class="my-orders-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <a href="store.html">Store</a><i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <span>Your Orders</span>
+    </nav>
+
+    <section class="my-orders-hero">
+      <div>
+        <span class="my-orders-eyebrow"><i class="fas fa-boxes-stacked" aria-hidden="true"></i> Your Store Account</span>
+        <h1>Your Orders</h1>
+        <p>See orders linked to your GovJobUpdates account, follow their delivery journey and reopen shipment tracking whenever you need it.</p>
+      </div>
+      <div class="my-orders-hero-actions">
+        <a href="store.html" class="my-orders-action"><i class="fas fa-bag-shopping" aria-hidden="true"></i> Continue Shopping</a>
+        <a href="store-track-order.html" class="my-orders-action is-light"><i class="fas fa-location-crosshairs" aria-hidden="true"></i> Track Guest Order</a>
+      </div>
+    </section>
+
+    <section class="my-orders-loading" id="myOrdersLoading" aria-live="polite">
+      <span class="my-orders-spinner"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i></span>
+      <div><strong>Loading your orders…</strong><p>Securely verifying your GovJobUpdates account.</p></div>
+    </section>
+
+    <section class="my-orders-login" id="myOrdersLogin" hidden>
+      <div class="my-orders-login-icon"><i class="fas fa-user-lock" aria-hidden="true"></i></div>
+      <h2>Login to see Your Orders</h2>
+      <p>Orders placed while you are signed in are linked securely to your account. Guest checkout still works without login.</p>
+      <a class="btn btn-primary" href="login.html?redirect=store-my-orders.html"><i class="fas fa-right-to-bracket" aria-hidden="true"></i> Login / Sign Up</a>
+      <a class="my-orders-text-link" href="store-track-order.html">Track a guest order instead</a>
+    </section>
+
+    <div class="my-orders-alert" id="myOrdersAlert" role="alert" aria-live="assertive" hidden></div>
+
+    <section class="my-orders-content" id="myOrdersContent" hidden>
+      <div class="my-orders-account-bar">
+        <div class="my-orders-account-icon"><i class="fas fa-user-check" aria-hidden="true"></i></div>
+        <div><span>Signed in as</span><strong id="myOrdersAccountName">GovJobUpdates User</strong><small id="myOrdersAccountEmail"></small></div>
+        <button id="refreshMyOrders" type="button"><i class="fas fa-rotate" aria-hidden="true"></i> Refresh</button>
+      </div>
+
+      <section class="my-orders-empty" id="myOrdersEmpty" hidden>
+        <div class="my-orders-empty-icon"><i class="fas fa-box-open" aria-hidden="true"></i></div>
+        <h2>No linked store orders yet</h2>
+        <p>New orders placed while you are logged in will appear here automatically. If you already placed a guest order, you can link it below.</p>
+        <a href="store.html" class="btn btn-primary"><i class="fas fa-bag-shopping" aria-hidden="true"></i> Shop Store</a>
+      </section>
+
+      <section class="my-orders-list-section" aria-labelledby="orderHistoryTitle">
+        <div class="my-orders-section-head">
+          <div><span class="my-orders-eyebrow">Order history</span><h2 id="orderHistoryTitle">Your Store Orders <span id="myOrdersCount">0</span></h2></div>
+          <select id="myOrdersFilter" aria-label="Filter orders by status">
+            <option value="all">All orders</option>
+            <option value="active">Active orders</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled / Returned</option>
+          </select>
+        </div>
+        <div class="my-orders-list" id="myOrdersList"></div>
+      </section>
+
+      <section class="claim-order-card" aria-labelledby="claimOrderTitle">
+        <div class="claim-order-copy">
+          <span class="my-orders-eyebrow"><i class="fas fa-link" aria-hidden="true"></i> Older guest order</span>
+          <h2 id="claimOrderTitle">Add a Previous Order to Your Account</h2>
+          <p>If an older order was placed before account linking was available, enter its Order Number and registered mobile. For security, its checkout email must also match your logged-in account email.</p>
+        </div>
+        <form id="claimOrderForm" class="claim-order-form" novalidate>
+          <label for="claimOrderNumber">Order Number</label>
+          <input id="claimOrderNumber" type="text" maxlength="40" autocomplete="off" placeholder="GJU-PS-260821-XXXXXX" required>
+          <label for="claimOrderMobile">Registered Mobile</label>
+          <input id="claimOrderMobile" type="tel" maxlength="10" inputmode="numeric" autocomplete="tel" placeholder="10 digit mobile number" required>
+          <button id="claimOrderBtn" type="submit"><i class="fas fa-link" aria-hidden="true"></i> Add to Your Orders</button>
+        </form>
+        <div class="claim-order-message" id="claimOrderMessage" role="status" aria-live="polite"></div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<nav class="candidate-bottom-nav" aria-label="Primary mobile navigation"><a href="../index.html" class="" aria-label="Home"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a><a href="rank-predictor.html" class="" aria-label="Rank"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Rank</span></a><a href="quiz.html" class="" aria-label="Quiz"><i class="fas fa-stopwatch" aria-hidden="true"></i><span>Quiz</span></a><a href="up-certificate-services.html" class="is-active" aria-label="UP Doc"><i class="fas fa-certificate" aria-hidden="true"></i><span>UP Doc</span></a><a href="latest-jobs.html" class="" aria-label="Jobs"><i class="fas fa-briefcase" aria-hidden="true"></i><span>Jobs</span></a></nav>
+<footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p><div class="social-icons footer-social" aria-label="GovJobUpdates social links"><a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a><a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a><a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a><a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel"><i class="fab fa-whatsapp" aria-hidden="true"></i></a><a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN"><span aria-hidden="true">X</span></a><a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="../typing-test/index.html">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="refund-policy.html">Refund Policy</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li><li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="refund-policy.html">Refund Policy</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
+<script src="../JS/script.js?v=20260519-up-services-layout-fix" defer></script>
+<script src="../JS/firebase-config.js?v=20260513-up5"></script>
+<script type="module" src="../JS/store-my-orders.js?v=20260822-v2"></script>
+<script type="module" src="../JS/firebase-analytics.js"></script>
+<script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>
+</body>
+</html>
