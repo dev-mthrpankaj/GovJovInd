@@ -72,6 +72,47 @@ function renderTimeline(history) {
   return rows.map(row => `<div class="order-timeline-row"><div class="order-timeline-dot"><i class="fas fa-check" aria-hidden="true"></i></div><div><strong>${esc(statusLabel(row.status))}</strong><span>${esc(formatDate(row.created_at))}${row.note ? ` · ${esc(row.note)}` : ""}</span></div></div>`).join("");
 }
 
+function pendingRequest(order, type){return (Array.isArray(order.requests)?order.requests:[]).find(r=>r.type===type&&r.status==='pending')||null}
+function latestRequest(order,type){return (Array.isArray(order.requests)?order.requests:[]).find(r=>r.type===type)||null}
+function requestButton(order,index){
+  const st=clean(order.order_status).toLowerCase();
+  const cancel=pendingRequest(order,'cancel'), ret=pendingRequest(order,'return');
+  if(cancel) return `<button class="order-request-btn is-pending" type="button" disabled><i class="fas fa-clock"></i> Cancellation Pending</button>`;
+  if(ret) return `<button class="order-request-btn is-pending" type="button" disabled><i class="fas fa-clock"></i> Return Pending</button>`;
+  if(['placed','confirmed','packed'].includes(st)) return `<button class="order-request-btn" type="button" data-request-number="${esc(order.order_number||'')}" data-request-type="cancel"><i class="fas fa-ban"></i> Request Cancellation</button>`;
+  if(st==='delivered') return `<button class="order-request-btn" type="button" data-request-number="${esc(order.order_number||'')}" data-request-type="return"><i class="fas fa-rotate-left"></i> Request Return</button>`;
+  return '';
+}
+function requestHistory(order){
+  const rows=Array.isArray(order.requests)?order.requests:[];
+  if(!rows.length)return '';
+  return `<div class="order-request-history"><strong>Cancellation / Return Requests</strong>${rows.map(r=>`<div class="order-request-history-row"><span>${esc((r.type==='cancel'?'Cancellation':'Return')+' · '+statusLabel(r.status))}</span><small>${esc(formatDate(r.created_at))}${r.admin_note?` · ${esc(r.admin_note)}`:''}</small></div>`).join('')}</div>`;
+}
+function ensureRequestDialog(){
+  if($('#storeOrderRequestDialog'))return;
+  document.body.insertAdjacentHTML('beforeend',`<div class="order-request-modal" id="storeOrderRequestDialog" hidden><div class="order-request-backdrop" data-close-request></div><section class="order-request-panel" role="dialog" aria-modal="true" aria-labelledby="orderRequestTitle"><button class="order-request-close" type="button" data-close-request aria-label="Close"><i class="fas fa-xmark"></i></button><span class="my-orders-eyebrow">Order Support</span><h2 id="orderRequestTitle">Request</h2><p id="orderRequestCopy"></p><form id="orderRequestForm"><input type="hidden" id="orderRequestNumber"><input type="hidden" id="orderRequestType"><label>Reason<select id="orderRequestReason" required></select></label><label>Additional details <span>(optional)</span><textarea id="orderRequestNote" maxlength="500" rows="4" placeholder="Tell us anything that may help us process the request."></textarea></label><div class="order-request-message" id="orderRequestMessage"></div><div class="order-request-actions"><button type="button" class="order-request-secondary" data-close-request>Keep Order</button><button type="submit" class="order-request-submit" id="orderRequestSubmit">Submit Request</button></div></form><p class="order-request-footnote">Submitting a request does not immediately change inventory or payment. Our team reviews it first.</p></section></div>`);
+  document.querySelectorAll('[data-close-request]').forEach(b=>b.addEventListener('click',closeRequestDialog));
+  $('#orderRequestForm')?.addEventListener('submit',submitOrderRequest);
+}
+function openRequestDialog(order,type){
+  ensureRequestDialog();
+  const dlg=$('#storeOrderRequestDialog'), reason=$('#orderRequestReason');
+  $('#orderRequestNumber').value=order.order_number||''; $('#orderRequestType').value=type; $('#orderRequestNote').value=''; $('#orderRequestMessage').textContent='';
+  const cancelReasons=[['changed_mind','Changed my mind'],['ordered_by_mistake','Ordered by mistake'],['wrong_item','Wrong item selected'],['delivery_too_late','Delivery may be too late'],['other','Other']];
+  const returnReasons=[['wrong_item','Wrong item received'],['size_fit_issue','Size / fit issue'],['damaged_item','Damaged item'],['quality_issue','Quality issue'],['not_as_expected','Not as expected'],['other','Other']];
+  const rows=type==='cancel'?cancelReasons:returnReasons;
+  reason.innerHTML=rows.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+  $('#orderRequestTitle').textContent=type==='cancel'?'Request Order Cancellation':'Request a Return';
+  $('#orderRequestCopy').textContent=type==='cancel'?'Cancellation is available only before dispatch. Your order stays active until our team approves the request.':'Returns can be requested after delivery within the configured return window. Our team will review the request before any stock or refund action.';
+  dlg.hidden=false; document.body.classList.add('order-request-open');
+}
+function closeRequestDialog(){const dlg=$('#storeOrderRequestDialog');if(dlg)dlg.hidden=true;document.body.classList.remove('order-request-open')}
+async function submitOrderRequest(e){
+  e.preventDefault(); const btn=$('#orderRequestSubmit'), msg=$('#orderRequestMessage'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Submitting…'; msg.textContent=''; msg.className='order-request-message';
+  try{const response=await authFetch(`${API_BASE}/order-request.php`,{method:'POST',headers:{'Content-Type':'application/json','X-Requested-With':'XMLHttpRequest'},body:JSON.stringify({order_number:$('#orderRequestNumber').value,request_type:$('#orderRequestType').value,reason_code:$('#orderRequestReason').value,note:clean($('#orderRequestNote').value)})});const data=await response.json().catch(()=>null);if(!response.ok||!data?.success)throw new Error(data?.message||'Could not submit request.');msg.textContent=data.message||'Request submitted.';msg.className='order-request-message success';setTimeout(async()=>{closeRequestDialog();await loadOrders()},700)}catch(err){msg.textContent=err.message||'Could not submit request.';msg.className='order-request-message error'}finally{btn.disabled=false;btn.textContent='Submit Request'}
+}
+function bindRequestButtons(){document.querySelectorAll('[data-request-number]').forEach(btn=>btn.addEventListener('click',()=>{const order=state.orders.find(o=>o.order_number===btn.dataset.requestNumber);if(order)openRequestDialog(order,btn.dataset.requestType)}))}
+
 function renderOrderCard(order, index) {
   const status = clean(order.order_status).toLowerCase();
   const items = Array.isArray(order.items) ? order.items : [];
@@ -90,7 +131,7 @@ function renderOrderCard(order, index) {
       <div class="order-card-side">
         <div class="order-payment"><span>Payment:</span><strong>${esc(statusLabel(order.payment_status || "pending"))} · ${esc(String(order.payment_method || "cod").toUpperCase())}</strong></div>
         ${shipment ? `<div class="order-shipment-mini"><i class="fas fa-truck-fast"></i> ${shipment}</div>` : ""}
-        <div class="order-card-actions">${trackingLink}<button class="order-detail-btn" type="button" data-order-details="${index}"><i class="fas fa-receipt"></i> Details</button></div>
+        <div class="order-card-actions">${trackingLink}${requestButton(order,index)}<button class="order-detail-btn" type="button" data-order-details="${index}"><i class="fas fa-receipt"></i> Details</button></div>
       </div>
     </div>
     <div class="order-details" id="orderDetails${index}" hidden>
@@ -100,7 +141,7 @@ function renderOrderCard(order, index) {
         <div class="order-detail-box"><span>Shipment</span><strong>${shipment || "Not shipped yet"}</strong></div>
       </div>
       ${order.shipment_note ? `<div class="order-detail-box" style="margin-top:.65rem"><span>Shipment Note</span><strong>${esc(order.shipment_note)}</strong></div>` : ""}
-      <div class="order-timeline">${renderTimeline(order.history)}</div>
+      ${requestHistory(order)}<div class="order-timeline">${renderTimeline(order.history)}</div>
     </div>
   </article>`;
 }
@@ -121,6 +162,7 @@ function renderOrders() {
   if(!filtered.length && state.orders.length){ list.innerHTML='<div class="my-orders-filter-empty">No orders match this filter.</div>'; return; }
   list.innerHTML=filtered.map((o,i)=>renderOrderCard(o,i)).join("");
   bindDetails();
+  bindRequestButtons();
 }
 
 async function loadOrders() {
@@ -169,5 +211,5 @@ function bind() {
   $("#claimOrderForm")?.addEventListener("submit", claimOrder);
 }
 
-async function init(){bind();await loadOrders();}
+async function init(){bind();ensureRequestDialog();await loadOrders();}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
