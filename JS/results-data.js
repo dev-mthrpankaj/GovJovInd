@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0109-20260821225522-21464700",
+        "title": "UPSSSC Junior Assistant 2022 Final Result 2026",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-21",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in//ViewPdf.aspx?Gb1YDtA82ZeWZnoEB7djc8HFx9JQexuyrh/9YtBJDOU=",
+        "detailPage": "../Result_Details/HTML/UPSSSC-Junior-Assistant-Final-Result-2026.html",
+        "updatedAt": "2026-08-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0106-20260820132935-2b6170fe",
         "title": "CSBC Bihar Police Prohibition Constable, Jail Warden & Other Post Result 2026 – OUT",
         "organization": "Central Selection Board of Constable",
