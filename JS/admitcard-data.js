@@ -113,7 +113,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-22",
         "examEndDate": "",
         "releaseDate": "2026-08-18",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcardview/Login?enc=EU2nJaTepF908NeNySmtkjs0/iPIvXk12Fg+hTlccys=",
         "detailPage": "../AdmitCard_Details/HTML/NTA-AIAPGET-Admit-Card-2026.html",
