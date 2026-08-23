@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0197-20260823125046-aeaae59c",
+        "title": "NSPCL NTPC Senior Assistant Online Form 2026",
+        "organization": "NTPC Sail Power Company Limited (NSPCL)",
+        "department": "NTPC",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "Graduate with 2-yr full-time PG Degree / Diploma in HR / IR / Personnel Management / MBA (HR) / MSW",
+        "totalPosts": "17",
+        "startDate": "2026-09-07",
+        "lastDate": "2026-09-22",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://www.nspcl.co.in/page/10",
+        "officialNotification": "https://www.nspcl.co.in/storage/app/public/uploads/careers/NSPCL_website.pdf",
+        "detailPage": "../Job_Details/HTML/NSPCL-NTPC-Senior-Assistant-2026.html",
+        "updatedAt": "2026-08-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0198-20260823125405-d64d0589",
         "title": "South Indian Bank Junior Officer Online Form 2026",
         "organization": "South Indian Bank (SIB)",
@@ -18,14 +42,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://recruit.southindianbank.bank.in/RDC/",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/08/sib-jo-notification-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0198-20260823125405-d64d0589",
+        "detailPage": "../Job_Details/HTML/South-Indian-Bank-Junior-Officer-2026.html",
         "updatedAt": "2026-08-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0194-20260822082726-76b086f1",

@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0111-20260823130045-2db8ce3e",
+        "title": "RBI Officer Grade B Phase II Result 2026 for 60 Post",
+        "organization": "Reserve Bank of India RBI",
+        "department": "RBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-08-22",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/DISPLAYPRT22082026.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "result-sheet-0112-20260823130229-e4f2b893",
+        "title": "Bihar BPSC Auditor Result 2026 for 102 Post",
+        "organization": "Bihar Public Service Commission",
+        "department": "BPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-22",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://doc.sarkariresults.org.in/BPSC_Auditor_Pre_Result.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0109-20260821225522-21464700",
         "title": "UPSSSC Junior Assistant 2022 Final Result 2026",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
