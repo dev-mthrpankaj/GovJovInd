@@ -80,7 +80,12 @@ function requestButton(order,index){
   if(cancel) return `<button class="order-request-btn is-pending" type="button" disabled><i class="fas fa-clock"></i> Cancellation Pending</button>`;
   if(ret) return `<button class="order-request-btn is-pending" type="button" disabled><i class="fas fa-clock"></i> Return Pending</button>`;
   if(['placed','confirmed','packed'].includes(st)) return `<button class="order-request-btn" type="button" data-request-number="${esc(order.order_number||'')}" data-request-type="cancel"><i class="fas fa-ban"></i> Request Cancellation</button>`;
-  if(st==='delivered') return `<button class="order-request-btn" type="button" data-request-number="${esc(order.order_number||'')}" data-request-type="return"><i class="fas fa-rotate-left"></i> Request Return</button>`;
+  if(st==='delivered') {
+    if(order.return_allowed === false || clean(order.open_box_status).toLowerCase()==='accepted') {
+      return `<button class="order-request-btn is-pending" type="button" disabled title="${esc(order.return_block_reason || 'Return is not available after accepting an Open Box delivery.')}\"><i class="fas fa-shield-halved"></i> Return Not Available</button>`;
+    }
+    return `<button class="order-request-btn" type="button" data-request-number="${esc(order.order_number||'')}" data-request-type="return"><i class="fas fa-rotate-left"></i> Request Return</button>`;
+  }
   return '';
 }
 function requestHistory(order){
@@ -118,7 +123,7 @@ function renderOrderCard(order, index) {
   const items = Array.isArray(order.items) ? order.items : [];
   const courierBits = [];
   if (order.courier_partner) courierBits.push(esc(order.courier_partner));
-  if (order.tracking_number) courierBits.push(`AWB ${esc(order.tracking_number)}`);
+  if (order.tracking_number) courierBits.push(`Tracking ID ${esc(order.tracking_number)}`);
   const shipment = courierBits.length ? courierBits.join(" · ") : (status === "shipped" || status === "out_for_delivery" ? "Shipment details being updated" : "");
   const trackingLink = /^https:\/\//i.test(clean(order.tracking_url)) ? `<a class="order-track-btn" href="${esc(order.tracking_url)}" target="_blank" rel="noopener">Courier Tracking <i class="fas fa-arrow-up-right-from-square"></i></a>` : `<a class="order-track-btn" href="store-track-order.html?order=${encodeURIComponent(order.order_number || "")}">Track Order <i class="fas fa-location-crosshairs"></i></a>`;
   return `<article class="order-card" data-status="${esc(status)}">
