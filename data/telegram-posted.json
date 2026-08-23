@@ -2152,6 +2152,13 @@
       "title": "South Indian Bank Junior Officer Online Form 2026",
       "lastPostedAt": "2026-08-23T07:43:39.793Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0197-20260823125046-aeaae59c": {
+      "updatedAt": "2026-08-23",
+      "hash": "4abe10bd81c74ad44489b7e709d60f1b9912528a2d4495b3b9f1a6c830098d9b",
+      "title": "NSPCL NTPC Senior Assistant Online Form 2026",
+      "lastPostedAt": "2026-08-23T08:02:00.604Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -5419,6 +5426,20 @@
       "hash": "b2d767b9b6b2e6f1c00a57bf86764a86b5449150364ff4489831915bf19f876d",
       "title": "UPSSSC Junior Assistant 2022 Final Result 2026",
       "lastPostedAt": "2026-08-21T17:43:14.314Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0111-20260823130045-2db8ce3e": {
+      "updatedAt": "2026-08-23",
+      "hash": "4a14f6dee146ca0e0f2c7e10bd546d48485820be4b0960664dd0d95fde807aab",
+      "title": "RBI Officer Grade B Phase II Result 2026 for 60 Post",
+      "lastPostedAt": "2026-08-23T08:02:01.516Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0112-20260823130229-e4f2b893": {
+      "updatedAt": "2026-08-23",
+      "hash": "0bfab42a58e625cda5ad5ee24b50365e7525babf8f7e4f75d9efed27365c465e",
+      "title": "Bihar BPSC Auditor Result 2026 for 102 Post",
+      "lastPostedAt": "2026-08-23T08:02:02.074Z",
       "stateReason": "new"
     }
   }
