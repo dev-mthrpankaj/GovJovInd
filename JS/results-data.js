@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0110-20260823125920-d5227cc1",
+        "title": "HTET Score Card 2026 | Teacher Eligibility Test",
+        "organization": "Haryana Teacher Eligibility Test",
+        "department": "HTET",
+        "category": "Education",
+        "year": "2026",
+        "resultDate": "2026-08-22",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://htet.eapplynow.com/HTETApp25/Pages/CertiLogin01.aspx",
+        "detailPage": "../Result_Details/HTML/HTET-Scorecard-2026.html",
+        "updatedAt": "2026-08-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0111-20260823130045-2db8ce3e",
         "title": "RBI Officer Grade B Phase II Result 2026 for 60 Post",
         "organization": "Reserve Bank of India RBI",
@@ -14,12 +32,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/DISPLAYPRT22082026.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/RBI-Officer-Grade-B-Phase-II-Result-2026.html",
         "updatedAt": "2026-08-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0112-20260823130229-e4f2b893",
@@ -32,12 +50,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/BPSC_Auditor_Pre_Result.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/Bihar-BPSC-Auditor-Result-2026.html",
         "updatedAt": "2026-08-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0109-20260821225522-21464700",
