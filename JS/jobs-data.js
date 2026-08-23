@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0198-20260823125405-d64d0589",
+        "title": "South Indian Bank Junior Officer Online Form 2026",
+        "organization": "South Indian Bank (SIB)",
+        "department": "SIB",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Graduation Degree in Any Stream in Any Recognized University in India. For More Details read notification",
+        "totalPosts": "NA",
+        "startDate": "2026-08-19",
+        "lastDate": "2026-08-31",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://recruit.southindianbank.bank.in/RDC/",
+        "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/08/sib-jo-notification-2026.pdf",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0198-20260823125405-d64d0589",
+        "updatedAt": "2026-08-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0194-20260822082726-76b086f1",
         "title": "UP Revenue and Disaster Department Online Form 2026",
         "organization": "उत्तर प्रदेश राजस्व एवं आपदा विभाग",
