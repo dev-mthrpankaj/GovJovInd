@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Replace third-party notification PDF links
+      - name: Replace third-party notification links only
         shell: bash
         run: |
           python3 - <<'PY'
@@ -25,7 +25,6 @@ jobs:
 
           mappings = {
               'Job_Details/HTML/CHC-Various-Post-Recruitment-2026.html': 'https://files.govjobupdates.com/notifications/2026/CHC-Various-Post-Recruitment-2026.pdf',
-              'Job_Details/HTML/NTPC-NGEL-Engineer-Executive-2026.html': 'https://files.govjobupdates.com/notifications/2026/NTPC-NGEL-Engineer-Executive-2026.pdf',
               'Job_Details/HTML/PNB-Local-Bank-Officer-LBO-2026.html': 'https://files.govjobupdates.com/notifications/2026/PNB-Local-Bank-Officer-LBO-2026.pdf',
               'Job_Details/HTML/RRB-Railway-Section-Controller-2026.html': 'https://files.govjobupdates.com/notifications/2026/RRB-Railway-Section-Controller-2026.pdf',
               'Job_Details/HTML/Social-Media-Content-Creator-Recruitment-2026.html': 'https://files.govjobupdates.com/notifications/2026/Social-Media-Content-Creator-Recruitment-2026.pdf',
@@ -34,39 +33,31 @@ jobs:
               'Job_Details/HTML/UPIDA-Lucknow-Driver-Recruitment-2026.html': 'https://files.govjobupdates.com/notifications/2026/UPIDA-Lucknow-Driver-Recruitment-2026.pdf',
           }
 
-          anchor_re = re.compile(r'(<a\b[^>]*\bhref=")https://rojgarresult\.com/[^\"]+("[^>]*>.*?</a>)', re.I | re.S)
-
+          anchor_re = re.compile(r'(<a\b[^>]*\bhref=")[^"]+("[^>]*>\s*Download Notification\s*</a>)', re.I | re.S)
           changed = []
           for file_name, new_url in mappings.items():
               path = Path(file_name)
               text = path.read_text(encoding='utf-8-sig')
-
-              def repl(match):
-                  anchor_tail = match.group(2)
-                  if 'notification' not in anchor_tail.lower():
-                      return match.group(0)
-                  return match.group(1) + new_url + anchor_tail
-
-              new_text, count = anchor_re.subn(repl, text)
-              if count and new_text != text:
+              new_text, count = anchor_re.subn(lambda m: m.group(1) + new_url + m.group(2), text, count=1)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one Download Notification link in {file_name}, found {count}')
+              if new_text != text:
                   path.write_text(new_text, encoding='utf-8')
-                  changed.append((file_name, count))
+                  changed.append(file_name)
 
           if len(changed) != len(mappings):
-              print('Changed:', changed)
-              missing = sorted(set(mappings) - {x[0] for x in changed})
-              raise SystemExit('Expected notification link replacement missing for: ' + ', '.join(missing))
+              missing = sorted(set(mappings) - set(changed))
+              raise SystemExit('No replacement made for: ' + ', '.join(missing))
 
-          for item in changed:
-              print('Updated', item[0], 'matches:', item[1])
+          print('\n'.join('Updated ' + x for x in changed))
           PY
 
-      - name: Remove one-time workflow and commit changes
+      - name: Commit replacements and remove one-time workflow
         shell: bash
         run: |
           git rm .github/workflows/replace-notification-mirrors.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Job_Details/HTML
-          git commit -m "Replace third-party notification PDF links"
+          git commit -m "Replace third-party notification links with GovJobUpdates mirrors"
           git push
