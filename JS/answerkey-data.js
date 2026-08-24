@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0058-20260824213722-1ff68a17",
+        "title": "UPSSSC Lower PCS Mains 2026 Answer Key",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission (UPSSSC)",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-23",
+        "examEndDate": "",
+        "releaseDate": "2026-08-24",
+        "objectionLastDate": "2026-08-30",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://drive.google.com/file/d/1LKnAXU7pmFRvGthWF1R4xDCZD9PSJEN6/view?usp=drivesdk",
+        "objectionLink": "https://upsssc.gov.in/Default.aspx",
+        "detailPage": "../AnswerKey_Details/HTML/UPSSSC-Lower-PCS-Mains-Answer-Key-2026.html",
+        "updatedAt": "2026-08-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0055-20260816125442-f5f7ae18",
         "title": "NTA CSIR UGC NET June 2026 Answer Key",
         "organization": "National Testing Agency",
