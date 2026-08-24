@@ -8,7 +8,7 @@
   var root = document.querySelector(".jd3");
   if (!root) return;
 
-  /* ---------- Countdown to last date ---------- */
+  /* ---------- Countdown to last date + recruitment status ---------- */
   var countdownEls = root.querySelectorAll("[data-countdown-to]");
   countdownEls.forEach(function (el) {
     var target = new Date(el.getAttribute("data-countdown-to"));
@@ -20,6 +20,16 @@
       el.textContent = "Last day to apply";
     } else {
       el.textContent = "Application window closed";
+
+      /* Keep the application portal link available, but make the visible
+         recruitment status accurate after the deadline has passed. */
+      var sealPanel = el.closest(".jd3-seal-panel");
+      var statusStamp = sealPanel ? sealPanel.querySelector(".jd3-stamp") : root.querySelector(".jd3-stamp");
+      if (statusStamp) {
+        statusStamp.textContent = "Applications Closed";
+        statusStamp.classList.remove("open");
+        statusStamp.classList.add("closed");
+      }
     }
   });
 
