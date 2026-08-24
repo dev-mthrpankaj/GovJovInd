@@ -41,7 +41,21 @@
       .home-search-panel .search-box:focus-within{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
       .platform-stats .stat-item{position:relative;overflow:hidden;text-align:left}.platform-stats .stat-item:before{content:"";position:absolute;inset:auto -30px -55px auto;width:110px;height:110px;border-radius:999px;background:rgba(37,99,235,.08)}.platform-stats .stat-number{font-size:1.7rem}.platform-stats .stat-label{font-weight:800;color:#334155}.platform-stats .stat-note{display:block;margin-top:.2rem;color:#64748b;font-size:.78rem}
       .hero-actions .btn{border-radius:14px;box-shadow:0 14px 30px rgba(37,99,235,.16)}.hero-actions .btn-outline{box-shadow:none}
-      @media(max-width:640px){.home-search-panel{margin:.75rem 0 .6rem;padding:.35rem;border-radius:14px}.home-search-panel .search-box{padding:.32rem .35rem}.home-search-panel .btn-search{min-height:38px;padding:.48rem .68rem}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.platform-stats .stat-item{padding:.85rem}.platform-stats .stat-number{font-size:1.28rem}}
+      .home-coming-soon{display:grid;gap:.85rem;padding:clamp(.9rem,2vw,1.15rem);border:1px solid #d9e5f2;border-radius:8px;background:rgba(255,255,255,.94);box-shadow:0 10px 28px rgba(15,23,42,.055)}
+      .home-coming-soon__head{display:flex;align-items:end;justify-content:space-between;gap:1rem;padding-bottom:.8rem;border-bottom:1px solid #edf3fb;flex-wrap:wrap}
+      .home-coming-soon__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+      .home-coming-card{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9rem;align-items:center;min-height:150px;padding:1rem;border:1px solid #dbeafe;border-radius:10px;background:linear-gradient(135deg,#fff 0%,#f7fbff 100%);box-shadow:0 8px 20px rgba(15,23,42,.05)}
+      .home-coming-card::after{content:"";position:absolute;right:-36px;bottom:-50px;width:120px;height:120px;border-radius:999px;background:rgba(37,99,235,.06)}
+      .home-coming-card--academy{border-color:#d1fae5;background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%)}
+      .home-coming-card--academy::after{background:rgba(15,118,110,.07)}
+      .home-coming-icon{position:relative;z-index:1;display:grid;place-items:center;width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#0b4ea2,#2563eb);color:#fff;font-size:1.3rem;box-shadow:0 12px 24px rgba(37,99,235,.2)}
+      .home-coming-card--academy .home-coming-icon{background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:0 12px 24px rgba(15,118,110,.18)}
+      .home-coming-copy{position:relative;z-index:1;min-width:0}
+      .home-coming-copy h3{margin:0;color:#06213f;font-size:1.15rem;line-height:1.2}
+      .home-coming-copy p{margin:.35rem 0 .65rem;color:#526174;font-size:.9rem;line-height:1.5}
+      .home-coming-badge{display:inline-flex;align-items:center;gap:.35rem;min-height:30px;padding:.35rem .65rem;border:1px solid #bfdbfe;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:.74rem;font-weight:900;text-transform:uppercase}
+      .home-coming-card--academy .home-coming-badge{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
+      @media(max-width:640px){.home-search-panel{margin:.75rem 0 .6rem;padding:.35rem;border-radius:14px}.home-search-panel .search-box{padding:.32rem .35rem}.home-search-panel .btn-search{min-height:38px;padding:.48rem .68rem}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.platform-stats .stat-item{padding:.85rem}.platform-stats .stat-number{font-size:1.28rem}.home-coming-soon__grid{grid-template-columns:1fr}.home-coming-card{min-height:132px;padding:.9rem}.home-coming-icon{width:48px;height:48px;font-size:1.15rem}.home-coming-copy h3{font-size:1.05rem}.home-coming-copy p{font-size:.84rem}}
     `;
     document.head.appendChild(style);
   }
@@ -134,6 +148,45 @@
         ? '<span>See more</span><i class="fas fa-chevron-down" aria-hidden="true"></i>'
         : '<span>Show less</span><i class="fas fa-chevron-up" aria-hidden="true"></i>';
     });
+  }
+
+  function setupComingSoonSection() {
+    if (document.querySelector(".home-coming-soon")) return;
+    const typingCta = $(".live-test-cta");
+    if (!typingCta) return;
+
+    const section = document.createElement("section");
+    section.className = "home-coming-soon platform-section";
+    section.setAttribute("aria-labelledby", "homeComingSoonTitle");
+    section.innerHTML = `
+      <div class="home-coming-soon__head">
+        <div>
+          <p class="section-kicker">Coming soon</p>
+          <h2 class="section-title" id="homeComingSoonTitle">More for Aspirants</h2>
+          <p class="section-subtitle">Two new GovJobUpdates experiences are being prepared for students and physical aspirants.</p>
+        </div>
+      </div>
+      <div class="home-coming-soon__grid">
+        <article class="home-coming-card home-coming-card--store">
+          <span class="home-coming-icon" aria-hidden="true"><i class="fas fa-bag-shopping"></i></span>
+          <div class="home-coming-copy">
+            <h3>Aspirant Store</h3>
+            <p>Books, running shoes, physical preparation clothing, study essentials and more for aspirants.</p>
+            <span class="home-coming-badge"><i class="fas fa-clock" aria-hidden="true"></i> Coming Soon</span>
+          </div>
+        </article>
+        <article class="home-coming-card home-coming-card--academy">
+          <span class="home-coming-icon" aria-hidden="true"><i class="fas fa-person-running"></i></span>
+          <div class="home-coming-copy">
+            <h3>Physical Academy</h3>
+            <p>Running guidance, physical test preparation, training resources and aspirant-focused support.</p>
+            <span class="home-coming-badge"><i class="fas fa-clock" aria-hidden="true"></i> Coming Soon</span>
+          </div>
+        </article>
+      </div>
+    `;
+
+    typingCta.insertAdjacentElement("afterend", section);
   }
 
   function getHomeUpdateSources() {
@@ -255,6 +308,7 @@
     enhanceHeroSearch();
     upgradeStatsCounters();
     setupHeroToolsToggle();
+    setupComingSoonSection();
     setupLatestUpdatesDashboard();
     document.body.classList.add("home-polished");
   }
