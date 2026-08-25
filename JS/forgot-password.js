@@ -1,10 +1,7 @@
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-
 (function () {
     "use strict";
 
-    const config = window.GJU_FIREBASE_CONFIG;
+    const RESET_API = "https://test.govjobupdates.com/live-test/account-api/password-reset-request.php";
     const form = document.getElementById("forgotPasswordForm");
     const message = document.getElementById("forgotPasswordMessage");
     const button = document.getElementById("forgotPasswordSubmit");
@@ -21,19 +18,21 @@ import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebas
         button.textContent = isBusy ? "Sending..." : "Send Reset Link";
     }
 
-    function readableError(error) {
-        const code = String(error?.code || "");
-        if (code.includes("invalid-email")) return "Please enter a valid email address.";
-        if (code.includes("user-not-found")) return "No account was found with this email address.";
-        if (code.includes("unauthorized-domain")) return "This domain is not authorized in Firebase Auth settings.";
-        return "Could not send reset email. Please try again.";
+    async function readJsonSafe(response) {
+        try {
+            return await response.json();
+        } catch {
+            return null;
+        }
     }
 
     if (!form) return;
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
+
         const email = String(form.email?.value || "").trim().toLowerCase();
+        const honeypot = String(form.website?.value || "").trim();
 
         if (!email) {
             showMessage("Please enter your registered email address.", "error");
@@ -45,22 +44,41 @@ import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebas
             return;
         }
 
-        if (!config || !config.apiKey) {
-            showMessage("Firebase Auth is not configured on this page.", "error");
-            return;
-        }
-
         setBusy(true);
         showMessage("");
 
         try {
-            const app = getApps().length ? getApps()[0] : initializeApp(config);
-            const auth = getAuth(app);
-            await sendPasswordResetEmail(auth, email);
+            const response = await fetch(RESET_API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({ email, website: honeypot }),
+                credentials: "omit",
+                cache: "no-store"
+            });
+
+            const payload = await readJsonSafe(response);
+
+            if (!response.ok || !payload?.success) {
+                const errorCode = String(payload?.error || "");
+                if (errorCode === "invalid_email") {
+                    showMessage("Please enter a valid email address.", "error");
+                    return;
+                }
+
+                throw new Error(payload?.message || `Password reset request failed (${response.status}).`);
+            }
+
             form.reset();
-            showMessage("Password reset link sent. Please check your inbox. If you do not receive it, check Spam or Promotions folder.", "success");
+            showMessage(
+                payload.message || "If a GovJobUpdates account exists for this email, a password reset link will be sent shortly. Please also check Spam or Promotions.",
+                "success"
+            );
         } catch (error) {
-            showMessage(readableError(error), "error");
+            console.warn("[GovJobUpdates] Password reset request failed:", error?.message || error);
+            showMessage("Password reset email could not be sent right now. Please try again shortly.", "error");
         } finally {
             setBusy(false);
         }
