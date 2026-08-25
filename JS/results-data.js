@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0113-20260825101328-aca3f9a9",
+        "title": "Oriental Insurance OICL AO 2026 Marks | Administrative Officer",
+        "organization": "Oriental Insurance Company Limited",
+        "department": "OICL",
+        "category": "Public Sector",
+        "year": "2026",
+        "resultDate": "2026-08-24",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://orientalinsurance.org.in/careers",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "result-sheet-0115-20260825101733-93bc18da",
+        "title": "Railway RRB NTPC 10+2 Level UG Result 2026 – Declared",
+        "organization": "Railway Recruitment Board (RRB)",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-08-24",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rrb.indianrailways.gov.in/",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-08-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0110-20260823125920-d5227cc1",
         "title": "HTET Score Card 2026 | Teacher Eligibility Test",
         "organization": "Haryana Teacher Eligibility Test",
