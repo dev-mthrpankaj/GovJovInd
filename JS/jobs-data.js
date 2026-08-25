@@ -14,7 +14,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1599",
         "startDate": "2026-08-26",
         "lastDate": "2026-09-15",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://www.rrcbbs.org.in/",
         "officialNotification": "https://www.rrcbbs.org.in/Act-apprenticeship.pdf",
