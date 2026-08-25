@@ -1,35 +1,16 @@
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  set,
-  update,
-  onValue,
-  onDisconnect,
-  serverTimestamp,
-  increment
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
-
 (function () {
   "use strict";
 
-  const config = window.GJU_FIREBASE_CONFIG;
-
-  if (!config || !config.apiKey || !config.databaseURL) {
-    console.warn("[GovJobUpdates] Firebase visitor config is missing.");
-    return;
-  }
-
+  const API_BASE = "https://test.govjobupdates.com/live-test/visitor-api";
+  // Keep the legacy key so existing browsers retain the same anonymous visitor ID.
   const VISITOR_ID_KEY = "gju:firebase-visitor-id";
-  const UNIQUE_COUNTED_KEY = "gju:firebase-unique-counted-v1";
-  const SESSION_ID_KEY = "gju:firebase-session-id";
-  const DAILY_COUNTED_PREFIX = "gju:firebase-daily-counted:";
-  const INDIA_TIME_ZONE = "Asia/Kolkata";
+  const HEARTBEAT_MS = 60000;
+  const STATS_REFRESH_MS = 60000;
 
-  let db = null;
-  let todayKey = "";
-  let paths = null;
-  let visitorSystemStarted = false;
+  let visitorId = "";
+  let heartbeatTimer = null;
+  let statsTimer = null;
+  let started = false;
 
   const statsState = {
     liveVisitors: "--",
@@ -40,77 +21,49 @@ import {
     state: "loading"
   };
 
-  scheduleVisitorSystemStart();
+  scheduleWhenIdle(start);
 
   function scheduleWhenIdle(callback) {
     if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(callback, { timeout: 5000 });
-      return;
+      window.requestIdleCallback(callback, { timeout: 4000 });
+    } else {
+      window.setTimeout(callback, 1500);
     }
-
-    window.setTimeout(callback, 2000);
   }
 
-  function scheduleVisitorSystemStart() {
-    scheduleWhenIdle(startVisitorSystem);
-  }
-
-  function startVisitorSystem() {
-    if (visitorSystemStarted) return;
-    visitorSystemStarted = true;
-
-    const app = getApps().length ? getApps()[0] : initializeApp(config);
-    db = getDatabase(app);
-
-    const visitorId = getOrCreateVisitorId();
-    const sessionId = getOrCreateSessionId();
-    todayKey = getIndiaDateKey();
-    paths = {
-      siteStats: "siteStats",
-      dailyStats: `dailyStats/${todayKey}`,
-      visitorIndex: `visitorIndex/${visitorId}`,
-      presence: `presence/${visitorId}/${sessionId}`
-    };
-
+  function start() {
+    if (started) return;
+    started = true;
+    visitorId = getOrCreateVisitorId();
     ensureVisitorWidget();
     trackPageView();
-    trackUniqueVisitor();
-    trackDailyUniqueVisitor();
-    startPresence();
-    listenForStats();
-    listenForLiveVisitors();
+    refreshStats();
+    startHeartbeat();
+    startStatsRefresh();
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        sendHeartbeat();
+        refreshStats();
+      }
+    });
   }
 
   function getOrCreateVisitorId() {
     try {
       const saved = localStorage.getItem(VISITOR_ID_KEY);
-      if (saved) return saved;
-
-      const nextId = createSafeId("v");
-      localStorage.setItem(VISITOR_ID_KEY, nextId);
-      return nextId;
+      if (saved && /^[A-Za-z0-9_-]{16,80}$/.test(saved)) return saved;
+      const next = createSafeId("v");
+      localStorage.setItem(VISITOR_ID_KEY, next);
+      return next;
     } catch {
       return createSafeId("v");
-    }
-  }
-
-  function getOrCreateSessionId() {
-    try {
-      const saved = sessionStorage.getItem(SESSION_ID_KEY);
-      if (saved) return saved;
-
-      const nextId = createSafeId("s");
-      sessionStorage.setItem(SESSION_ID_KEY, nextId);
-      return nextId;
-    } catch {
-      return createSafeId("s");
     }
   }
 
   function createSafeId(prefix) {
     const timePart = Date.now().toString(36);
     let randomPart = "";
-
     try {
       const bytes = new Uint32Array(2);
       crypto.getRandomValues(bytes);
@@ -118,228 +71,97 @@ import {
     } catch {
       randomPart = Math.random().toString(36).slice(2, 14);
     }
-
     return `${prefix}_${timePart}_${randomPart}`.replace(/[^a-zA-Z0-9_-]/g, "");
   }
 
-  function getIndiaDateKey() {
-    try {
-      const formatter = new Intl.DateTimeFormat("en-CA", {
-        timeZone: INDIA_TIME_ZONE,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit"
-      });
-
-      return formatter.format(new Date());
-    } catch {
-      return new Date().toISOString().slice(0, 10);
-    }
+  function currentPage() {
+    return `${window.location.pathname || "/"}${window.location.search || ""}`.slice(0, 500);
   }
 
-  function getCurrentPagePath() {
-    return `${window.location.pathname || "/"}${window.location.search || ""}`.slice(0, 240);
-  }
-
-  function getSafeReferrer() {
-    return String(document.referrer || "").slice(0, 240);
-  }
-
-  function getSafeUserAgent() {
-    return String(navigator.userAgent || "").slice(0, 360);
-  }
-
-  function trackPageView() {
-    const updates = {};
-
-    updates[`${paths.siteStats}/totalPageViews`] = increment(1);
-    updates[`${paths.siteStats}/lastUpdated`] = serverTimestamp();
-
-    updates[`${paths.dailyStats}/totalPageViews`] = increment(1);
-    updates[`${paths.dailyStats}/lastUpdated`] = serverTimestamp();
-
-    update(ref(db), updates).catch((error) => {
-      console.warn("[GovJobUpdates] Page view update failed:", error.message);
-    });
-  }
-
-  function trackUniqueVisitor() {
-    let alreadyCounted = false;
-
-    try {
-      alreadyCounted = localStorage.getItem(UNIQUE_COUNTED_KEY) === "1";
-    } catch {
-      alreadyCounted = false;
-    }
-
-    if (alreadyCounted) {
-      updateExistingVisitorLastSeen();
-      return;
-    }
-
-    const visitorData = {
-      firstSeen: serverTimestamp(),
-      lastSeen: serverTimestamp(),
-      firstPage: getCurrentPagePath(),
-      referrer: getSafeReferrer(),
-      userAgent: getSafeUserAgent()
-    };
-
-    set(ref(db, paths.visitorIndex), visitorData)
-      .then(() => {
-        const updates = {};
-
-        updates[`${paths.siteStats}/totalUniqueVisitors`] = increment(1);
-        updates[`${paths.siteStats}/lastUpdated`] = serverTimestamp();
-
-        try {
-          localStorage.setItem(UNIQUE_COUNTED_KEY, "1");
-        } catch {
-          // Ignore localStorage issues.
-        }
-
-        return update(ref(db), updates);
-      })
-      .catch((error) => {
-        console.warn("[GovJobUpdates] Unique visitor already counted or blocked:", error.message);
-        updateExistingVisitorLastSeen();
-      });
-  }
-
-  function updateExistingVisitorLastSeen() {
-    const updates = {};
-
-    updates[`${paths.visitorIndex}/lastSeen`] = serverTimestamp();
-    updates[`${paths.visitorIndex}/lastPage`] = getCurrentPagePath();
-
-    update(ref(db), updates).catch(() => {
-      // Ignore visitor index update failure.
-    });
-  }
-
-  function trackDailyUniqueVisitor() {
-    const dailyKey = `${DAILY_COUNTED_PREFIX}${todayKey}`;
-
-    let alreadyCountedToday = false;
-
-    try {
-      alreadyCountedToday = localStorage.getItem(dailyKey) === "1";
-    } catch {
-      alreadyCountedToday = false;
-    }
-
-    if (alreadyCountedToday) return;
-
-    const updates = {};
-
-    updates[`${paths.dailyStats}/uniqueVisitors`] = increment(1);
-    updates[`${paths.dailyStats}/lastUpdated`] = serverTimestamp();
-
-    update(ref(db), updates)
-      .then(() => {
-        try {
-          localStorage.setItem(dailyKey, "1");
-        } catch {
-          // Ignore localStorage issues.
-        }
-      })
-      .catch((error) => {
-        console.warn("[GovJobUpdates] Daily unique visitor update failed:", error.message);
-      });
-  }
-
-  function startPresence() {
-    const connectedRef = ref(db, ".info/connected");
-
-    onValue(connectedRef, (snapshot) => {
-      if (snapshot.val() !== true) return;
-
-      const myPresenceRef = ref(db, paths.presence);
-
-      onDisconnect(myPresenceRef).remove();
-
-      set(myPresenceRef, {
-        online: true,
-        connectedAt: serverTimestamp(),
-        page: getCurrentPagePath()
-      }).catch((error) => {
-        console.warn("[GovJobUpdates] Presence write failed:", error.message);
-      });
-    });
-  }
-
-  function listenForStats() {
-    onValue(
-      ref(db, paths.siteStats),
-      (snapshot) => {
-        const stats = snapshot.val() || {};
-
-        updateStatsUi({
-          totalUniqueVisitors: Number(stats.totalUniqueVisitors || 0),
-          totalPageViews: Number(stats.totalPageViews || 0),
-          state: "ready"
-        });
-      },
-      (error) => {
-        console.warn("[GovJobUpdates] Site stats listener failed:", error.message);
+  async function api(path, options = {}) {
+    const response = await fetch(`${API_BASE}/${path}`, {
+      mode: "cors",
+      credentials: "omit",
+      cache: "no-store",
+      ...options,
+      headers: {
+        Accept: "application/json",
+        ...(options.body ? { "Content-Type": "application/json" } : {}),
+        ...(options.headers || {})
       }
-    );
-
-    onValue(
-      ref(db, paths.dailyStats),
-      (snapshot) => {
-        const stats = snapshot.val() || {};
-
-        updateStatsUi({
-          todayUniqueVisitors: Number(stats.uniqueVisitors || 0),
-          todayPageViews: Number(stats.totalPageViews || 0),
-          state: "ready"
-        });
-      },
-      (error) => {
-        console.warn("[GovJobUpdates] Daily stats listener failed:", error.message);
-      }
-    );
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
   }
 
-  function listenForLiveVisitors() {
-    onValue(
-      ref(db, "presence"),
-      (snapshot) => {
-        const presence = snapshot.val() || {};
+  async function trackPageView() {
+    try {
+      await api("track.php", {
+        method: "POST",
+        body: JSON.stringify({
+          visitorId,
+          page: currentPage(),
+          title: String(document.title || "").slice(0, 255),
+          referrer: String(document.referrer || "").slice(0, 500)
+        })
+      });
+      refreshStats();
+    } catch (error) {
+      console.warn("[GovJobUpdates] Visitor tracking unavailable:", error.message);
+    }
+  }
 
-        const liveVisitorCount = Object.keys(presence).filter((visitorKey) => {
-          const sessions = presence[visitorKey];
-          return sessions && typeof sessions === "object" && Object.keys(sessions).length > 0;
-        }).length;
+  function startHeartbeat() {
+    sendHeartbeat();
+    heartbeatTimer = window.setInterval(() => {
+      if (document.visibilityState === "visible") sendHeartbeat();
+    }, HEARTBEAT_MS);
+  }
 
-        updateStatsUi({
-          liveVisitors: liveVisitorCount,
-          state: "ready"
-        });
-      },
-      (error) => {
-        console.warn("[GovJobUpdates] Live visitor listener failed:", error.message);
+  async function sendHeartbeat() {
+    if (!visitorId || document.visibilityState !== "visible") return;
+    try {
+      await api("heartbeat.php", {
+        method: "POST",
+        body: JSON.stringify({ visitorId, page: currentPage() })
+      });
+    } catch {
+      // Presence is best-effort and must never interfere with page use.
+    }
+  }
 
-        updateStatsUi({
-          liveVisitors: "--",
-          state: "offline"
-        });
-      }
-    );
+  function startStatsRefresh() {
+    statsTimer = window.setInterval(() => {
+      if (document.visibilityState === "visible") refreshStats();
+    }, STATS_REFRESH_MS);
+  }
+
+  async function refreshStats() {
+    try {
+      const data = await api("stats.php");
+      if (!data || data.success !== true) throw new Error("Invalid stats response");
+      updateStatsUi({
+        liveVisitors: Number(data.liveVisitors || 0),
+        totalUniqueVisitors: Number(data.totalVisitors || 0),
+        totalPageViews: Number(data.totalPageViews || 0),
+        todayUniqueVisitors: Number(data.todayVisitors || 0),
+        todayPageViews: Number(data.todayPageViews || 0),
+        state: "ready"
+      });
+    } catch (error) {
+      console.warn("[GovJobUpdates] Visitor stats unavailable:", error.message);
+      updateStatsUi({ state: "offline" });
+    }
   }
 
   function ensureVisitorWidget() {
     const footer = document.querySelector("footer");
     if (!footer) return null;
-
     let widget = footer.querySelector(".footer-live-visitors");
-
     if (!widget) {
       widget = document.createElement("div");
       widget.className = "footer-live-visitors";
       widget.setAttribute("aria-live", "polite");
-
       widget.innerHTML = `
         <div class="footer-live-pill footer-live-pill-expanded">
           <div class="footer-visitor-metric footer-visitor-live">
@@ -348,44 +170,31 @@ import {
             <strong data-firebase-live-visitors>--</strong>
             <span class="footer-live-caption">online now</span>
           </div>
-
           <div class="footer-visitor-metric">
             <span class="footer-live-label">Visitors</span>
             <strong data-firebase-total-visitors>--</strong>
           </div>
-
           <div class="footer-visitor-metric">
             <span class="footer-live-label">Visits</span>
             <strong data-firebase-total-visits>--</strong>
           </div>
-
           <div class="footer-visitor-metric footer-visitor-today">
             <span class="footer-live-label">Today</span>
             <strong data-firebase-today-visitors>--</strong>
           </div>
-        </div>
-      `;
-
+        </div>`;
       const copyright = footer.querySelector(".copyright");
-
-      if (copyright) {
-        footer.insertBefore(widget, copyright);
-      } else {
-        footer.appendChild(widget);
-      }
+      if (copyright) footer.insertBefore(widget, copyright);
+      else footer.appendChild(widget);
     }
-
     return widget;
   }
 
   function updateStatsUi(nextStats) {
     Object.assign(statsState, nextStats || {});
-
     const widget = ensureVisitorWidget();
     if (!widget) return;
-
     widget.dataset.visitorState = statsState.state || "ready";
-
     setMetric("[data-firebase-live-visitors]", statsState.liveVisitors);
     setMetric("[data-firebase-total-visitors]", statsState.totalUniqueVisitors);
     setMetric("[data-firebase-total-visits]", statsState.totalPageViews);
@@ -394,25 +203,19 @@ import {
 
   function setMetric(selector, value) {
     if (value === undefined || value === null) return;
-
     const node = document.querySelector(selector);
     if (!node) return;
-
-    if (value === "--") {
-      node.textContent = "--";
-      return;
-    }
-
-    node.textContent = formatNumber(value);
+    node.textContent = value === "--" ? "--" : formatNumber(value);
   }
 
   function formatNumber(value) {
     const number = Number(value || 0);
-
-    try {
-      return new Intl.NumberFormat("en-IN").format(number);
-    } catch {
-      return String(number);
-    }
+    try { return new Intl.NumberFormat("en-IN").format(number); }
+    catch { return String(number); }
   }
+
+  window.addEventListener("pagehide", () => {
+    if (heartbeatTimer) window.clearInterval(heartbeatTimer);
+    if (statsTimer) window.clearInterval(statsTimer);
+  });
 }());
