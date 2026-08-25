@@ -14,12 +14,30 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://orientalinsurance.org.in/careers",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/Oriental-Insurance-OICL-AO-Result-2026.html",
         "updatedAt": "2026-08-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0114-20260825101516-c59c9fa4",
+        "title": "UPSSSC Health Worker Female Result 2026 | Advt No 11-Exam/2024",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-24",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in//ResultsDire.aspx",
+        "detailPage": "../Result_Details/HTML/UPSSSC-Health-Worker-Female-Result-2026.html",
+        "updatedAt": "2026-08-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0115-20260825101733-93bc18da",
@@ -32,12 +50,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rrb.indianrailways.gov.in/",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/Railway-RRB-NTPC-10+2-Level-UG-Result-2026.html",
         "updatedAt": "2026-08-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0110-20260823125920-d5227cc1",
