@@ -4,7 +4,7 @@
     const DEFAULT_BASE_URL = "https://test.govjobupdates.com/live-test/";
     const DEFAULT_INDEX_PATH = "quiz-data/quiz-index.js?v=202606231524";
     const DEFAULT_INDEX_GLOBALS = ["GJU_QUIZ_INDEX", "GJU_ADMIN_QUIZ_INDEX", "GJU_PUBLISHED_QUIZ_INDEX"];
-    const OPTION_KEYS = ["A", "B", "C", "D"];
+    const OPTION_KEYS = ["A", "B", "C", "D", "E"];
     const remoteQuizCache = new Map();
     const remoteMetaById = new Map();
     const loadedScripts = new Map();
@@ -380,7 +380,7 @@
     }
 
     function optionLetterToIndex(value) {
-        if (Number.isInteger(value)) return Math.max(0, Math.min(3, value));
+        if (Number.isInteger(value)) return Math.max(0, Math.min(4, value));
         const normalized = String(value || "A").trim().toUpperCase();
         const index = OPTION_KEYS.indexOf(normalized);
         return index >= 0 ? index : 0;
@@ -415,7 +415,6 @@
         };
         return map[slug] || raw || "General Awareness";
     }
-
 
     function normalizeRemoteQuizFilePath(path, subjectSlug, quizSlug) {
         let value = String(path || "").trim();
