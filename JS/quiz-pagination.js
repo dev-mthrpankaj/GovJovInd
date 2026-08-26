@@ -12,11 +12,12 @@
     const PAGE_SIZE = 9;
 
     /*
-       Responsive quiz-media sizing + authoritative multiline rendering.
-       The multiline rules intentionally use !important because this file is
-       loaded last and must protect author-entered line breaks from later
-       theme/layout overrides. This keeps Admin Preview and the live attempt
-       screen visually consistent for Assertion/Reason, passages and lists.
+       Responsive quiz-media sizing.
+       Kept additive so existing image rendering/data stays untouched.
+       - Desktop/laptop: question figures stay readable without dominating the test.
+       - Tablet/mobile: use the available width and preserve aspect ratio.
+       - Tall images: bounded by viewport height on larger screens.
+       - Option images remain compact and are not affected by the question-image cap.
     */
     function installResponsiveMediaStyles() {
         if (document.getElementById("gju-quiz-media-responsive-styles")) return;
@@ -24,18 +25,6 @@
         const style = document.createElement("style");
         style.id = "gju-quiz-media-responsive-styles";
         style.textContent = `
-            /* Preserve question/explanation/option line breaks exactly as authored. */
-            #questionText,
-            .quiz-page .question-title,
-            .quiz-page .option-label,
-            .quiz-page .review-question-title,
-            .quiz-page .review-answer,
-            .quiz-page .review-explanation p {
-                white-space: pre-wrap !important;
-                overflow-wrap: anywhere;
-                word-break: normal;
-            }
-
             .quiz-media-question-image .quiz-media-frame,
             .quiz-media-review-question-image .quiz-media-frame,
             .quiz-media-explanation-image .quiz-media-frame {
@@ -133,6 +122,7 @@
         }
 
         function pageNumbers(total, current) {
+            // Always show first, last, current, and one neighbour on each side.
             const pages = [];
             for (let i = 1; i <= total; i++) {
                 if (i === 1 || i === total || Math.abs(i - current) <= 1) {
