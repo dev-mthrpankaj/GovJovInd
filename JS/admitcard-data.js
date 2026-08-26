@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0123-20260826153734-cab1dee9",
+        "title": "RPSC Rajasthan APO Admit Card 2026 for 371 Post",
+        "organization": "Rajasthan Public Service Commission",
+        "department": "RPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-02",
+        "examEndDate": "",
+        "releaseDate": "2026-08-26",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
+        "detailPage": "../HTML/admitcard.html",
+        "updatedAt": "2026-08-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "admit-sheet-0120-20260824103320-458d1e88",
         "title": "ONGC Engineer Graduate Trainee Admit Card 2026 for 52 Post",
         "organization": "Oil and Natural Gas Corporation Limited",
