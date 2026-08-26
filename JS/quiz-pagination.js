@@ -11,7 +11,88 @@
 
     const PAGE_SIZE = 9;
 
+    /*
+       Responsive quiz-media sizing.
+       Kept additive so existing image rendering/data stays untouched.
+       - Desktop/laptop: question figures stay readable without dominating the test.
+       - Tablet/mobile: use the available width and preserve aspect ratio.
+       - Tall images: bounded by viewport height on larger screens.
+       - Option images remain compact and are not affected by the question-image cap.
+    */
+    function installResponsiveMediaStyles() {
+        if (document.getElementById("gju-quiz-media-responsive-styles")) return;
+
+        const style = document.createElement("style");
+        style.id = "gju-quiz-media-responsive-styles";
+        style.textContent = `
+            .quiz-media-question-image .quiz-media-frame,
+            .quiz-media-review-question-image .quiz-media-frame,
+            .quiz-media-explanation-image .quiz-media-frame {
+                width: min(100%, 680px);
+                max-width: 680px;
+                margin-inline: auto;
+            }
+
+            .quiz-media-question-image img,
+            .quiz-media-review-question-image img,
+            .quiz-media-explanation-image img {
+                width: auto;
+                max-width: 100%;
+                height: auto;
+                max-height: min(56vh, 560px);
+                margin-inline: auto;
+                object-fit: contain;
+            }
+
+            @media (min-width: 1120px) {
+                .quiz-media-question-image .quiz-media-frame,
+                .quiz-media-review-question-image .quiz-media-frame,
+                .quiz-media-explanation-image .quiz-media-frame {
+                    width: min(100%, 640px);
+                    max-width: 640px;
+                }
+
+                .quiz-media-question-image img,
+                .quiz-media-review-question-image img,
+                .quiz-media-explanation-image img {
+                    max-height: min(54vh, 520px);
+                }
+            }
+
+            @media (max-width: 767px) {
+                .quiz-media-question-image .quiz-media-frame,
+                .quiz-media-review-question-image .quiz-media-frame,
+                .quiz-media-explanation-image .quiz-media-frame {
+                    width: 100%;
+                    max-width: 100%;
+                    margin-inline: 0;
+                    padding: 5px;
+                }
+
+                .quiz-media-question-image img,
+                .quiz-media-review-question-image img,
+                .quiz-media-explanation-image img {
+                    width: 100%;
+                    max-width: 100%;
+                    max-height: none;
+                }
+            }
+
+            @media (max-width: 425px) {
+                .quiz-media-question-image .quiz-media-frame,
+                .quiz-media-review-question-image .quiz-media-frame,
+                .quiz-media-explanation-image .quiz-media-frame {
+                    padding: 4px;
+                    border-radius: 7px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
     function init() {
+        installResponsiveMediaStyles();
+
         const list = document.getElementById("quizSetList");
         if (!list) return;
 
