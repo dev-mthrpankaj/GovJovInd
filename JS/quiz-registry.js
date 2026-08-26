@@ -2,7 +2,7 @@
     "use strict";
 
     const SCRIPT_TIMEOUT_MS = 15000;
-    const QUIZ_ASSET_VERSION = "20260826-multiline-question-fix-1";
+    const QUIZ_ASSET_VERSION = "20260814-rrb-math-q4-q11-fix-1";
     const subjectOrder = ["Mathematics", "English", "Hindi", "General Awareness", "General Science", "Reasoning", "Computer"];
     const scriptBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
     const loadedScripts = new Map();
@@ -92,35 +92,23 @@
     }
 
     function sanitizeQuestionText(value) {
-        let text = String(value || "").replace(/\r\n?/g, "\n");
+        let text = String(value || "");
 
-        // Preserve author-entered line breaks. Only normalize horizontal whitespace
-        // inside each line so assertion/reason, passages and statement questions
-        // render on the public quiz exactly as they are formatted in Admin Preview.
         text = text
             .replace(/\{label\}/gi, " ")
-            .replace(/\bIn\s+[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s+Round\s+\d+\s*,?[^\S\r\n]*/gi, " ")
-            .replace(/\b[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s+Round\s+\d+\s*,?[^\S\r\n]*/gi, " ")
-            .replace(/^\s*(?:In\s+)?[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s*[,;:.-]?[^\S\r\n]*/i, "")
-            .replace(/\bRound\s+\d+\b\s*[,;:.-]?[^\S\r\n]*/gi, " ")
-            .replace(/^\s*Q\s*\d+\s*[,;:.-]?[^\S\r\n]*/i, "")
-            .split("\n")
-            .map(function (line) {
-                return line
-                    .replace(/[^\S\r\n]+/g, " ")
-                    .replace(/\s+([?.!,;:])/g, "$1")
-                    .trim();
-            })
-            .join("\n")
-            .replace(/\n{3,}/g, "\n\n")
+            .replace(/\bIn\s+[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s+Round\s+\d+\s*,?\s*/gi, " ")
+            .replace(/\b[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s+Round\s+\d+\s*,?\s*/gi, " ")
+            .replace(/^\s*(?:In\s+)?[a-z0-9]+(?:-[a-z0-9]+)*\s+Q\s*\d+\s*[,;:.-]?\s*/i, "")
+            .replace(/\bRound\s+\d+\b\s*[,;:.-]?\s*/gi, " ")
+            .replace(/^\s*Q\s*\d+\s*[,;:.-]?\s*/i, "")
+            .replace(/\s+/g, " ")
+            .replace(/\s+([?.!,;:])/g, "$1")
             .trim()
             .replace(/^[,;:.-]\s*/, "");
 
         if (!text) return "";
 
-        text = text.replace(/^([^\S\r\n]*)(\S)/, function (_match, spacing, firstChar) {
-            return spacing + firstChar.toUpperCase();
-        });
+        text = text.charAt(0).toUpperCase() + text.slice(1);
 
         if (!/[?.!:')\]]$/.test(text)) {
             text += ".";
