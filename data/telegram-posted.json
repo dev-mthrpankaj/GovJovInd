@@ -3519,6 +3519,13 @@
       "title": "CTET September 2026 Exam City | Admit Card",
       "lastPostedAt": "2026-08-25T04:12:23.478Z",
       "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0123-20260826153734-cab1dee9": {
+      "updatedAt": "2026-08-26",
+      "hash": "3975725604f70a41fa4c4aa4ced004eac16a22a07aaf89a6114283dde6bed91d",
+      "title": "RPSC Rajasthan APO Admit Card 2026 for 371 Post",
+      "lastPostedAt": "2026-08-26T11:20:59.307Z",
+      "stateReason": "new"
     }
   },
   "answerKeys": {
@@ -5524,6 +5531,34 @@
       "hash": "1fdd7310184a00cc9936332b2b90793ff532e84485164cd2cd38c947fefc7764",
       "title": "UPSSSC Health Worker Female Result 2026 | Advt No 11-Exam/2024",
       "lastPostedAt": "2026-08-25T06:03:32.447Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0116-20260826145906-c8826848": {
+      "updatedAt": "2026-08-26",
+      "hash": "195487152612e7c3af6cf1bd79a9e56fc3da52a3feb4e4f9da725b9852edb73b",
+      "title": "PSSSB Line Superintendent Result 2026",
+      "lastPostedAt": "2026-08-26T11:20:59.966Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0117-20260826153503-2ad6ab2b": {
+      "updatedAt": "2026-08-26",
+      "hash": "001518977893a32b22e576358b5a2ae33dad2f82ea2163a11bbdc48dea24be32",
+      "title": "UPTET Result 2026 | UP TET Teacher Eligibility Test",
+      "lastPostedAt": "2026-08-26T11:21:00.380Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0118-20260826153523-40885532": {
+      "updatedAt": "2026-08-26",
+      "hash": "5ce5c7d5d3595b6c672e7442b663c504f7179439048a2cae599db476f374af75",
+      "title": "SBI Apprentice Result 2026 for 7150 Post",
+      "lastPostedAt": "2026-08-26T11:21:01.040Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0119-20260826161609-8b6f711d": {
+      "updatedAt": "2026-08-26",
+      "hash": "a28855f5d997cd97e19f698c56404d34a2b06c6bc84ece5f338225d696d1bfbc",
+      "title": "UPSC CAPF CPF Assistant Commandant Result 2026",
+      "lastPostedAt": "2026-08-26T11:21:01.703Z",
       "stateReason": "new"
     }
   }
