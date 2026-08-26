@@ -16,12 +16,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/RPSC-Rajasthan-APO-Admit-Card-2026.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0124-20260826154026-ef32c12d",
@@ -36,12 +36,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=INTRIM",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-Stenographer-Skill-Test-Admit-Card-2026.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0125-20260826154603-654f82dc",
@@ -56,12 +56,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=INTRIM",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-Stenographer-Skill-Test-Admit-Card-2024.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0126-20260826154849-b07941e5",
@@ -76,12 +76,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../AdmitCard_Details/HTML/UPPSC-Lecturer-Technical-Education-Admit-Card-2026.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0120-20260824103320-458d1e88",
