@@ -321,6 +321,10 @@
       "signature": "7009c828afb5658671ff3a7e5dbe4925e948a0e1acafe67a2e86508f0aa6f8d9",
       "lastmod": "2026-08-12"
     },
+    "AdmitCard_Details/HTML/RPSC-Rajasthan-APO-Admit-Card-2026.html": {
+      "signature": "f5f6b5feb90024d535668611cd3153c21e1f64e1a246d94eaabf7b10b2576c0e",
+      "lastmod": "2026-08-26"
+    },
     "AdmitCard_Details/HTML/RPSC-Senior-Teacher-Admit-Card-2026.html": {
       "signature": "8cb857f6c67064d2495ed44227b9758ede3e735d89de381ad06f15ca9688c811",
       "lastmod": "2026-08-14"
@@ -405,6 +409,10 @@
       "signature": "916b1b6097d0124b3e3d4ed2dd5d63df48f5f4728430c2ded3b67c4b86bc8f24",
       "lastmod": "2026-08-14"
     },
+    "AdmitCard_Details/HTML/UPPSC-Lecturer-Technical-Education-Admit-Card-2026.html": {
+      "signature": "4da5202e12ab4f5e71c7895aea882274c61cd72d01e630ba592aec3a507e9071",
+      "lastmod": "2026-08-26"
+    },
     "AdmitCard_Details/HTML/UPPSC-LT-Grade-Biology-Main-Exam-Admit-Card-2026.html": {
       "signature": "42d5c76716e018f6cb55aacc28ec7a7fe034e2bf815b2eb131a9ec7a4d32f579",
       "lastmod": "2026-08-14"
@@ -428,6 +436,14 @@
     "AdmitCard_Details/HTML/UPSSSC-Lower-PCS-Mains-Admit-Card-2026.html": {
       "signature": "8d3648b408aded71312b039d8cf4af63f28753ead9d1c710f5c63d4eed36d9d5",
       "lastmod": "2026-08-21"
+    },
+    "AdmitCard_Details/HTML/UPSSSC-Stenographer-Skill-Test-Admit-Card-2024.html": {
+      "signature": "b3d643dec357f43e7ac7767ae3204c23f3a8f1cf3b971d6219f83fd1103fbc4c",
+      "lastmod": "2026-08-26"
+    },
+    "AdmitCard_Details/HTML/UPSSSC-Stenographer-Skill-Test-Admit-Card-2026.html": {
+      "signature": "fb38b601020fe0ef5cdf52fc5450d4a9f4bdb0fa4fd1c1ce6681d3f85140dab3",
+      "lastmod": "2026-08-26"
     },
     "AdmitCard_Details/HTML/UPSSSC-Teacher-Cadre-Mains-Exam-Admit-Card-2026.html": {
       "signature": "16810a081f3f1c63a38521be339109e794dca60617092859dfdb6b55f03c2417",
