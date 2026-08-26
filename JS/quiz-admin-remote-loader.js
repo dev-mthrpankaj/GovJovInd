@@ -1,6 +1,18 @@
 (function () {
     "use strict";
 
+    // Make MathJax render Unicode text (especially Devanagari inside \text{...})
+    // with the page/UI font instead of the math font. This must run before
+    // quizzes.js lazy-loads MathJax.
+    window.MathJax = window.MathJax || {};
+    window.MathJax.svg = Object.assign({}, window.MathJax.svg || {}, {
+        fontCache: (window.MathJax.svg && window.MathJax.svg.fontCache) || "global",
+        mtextInheritFont: true
+    });
+    window.MathJax.chtml = Object.assign({}, window.MathJax.chtml || {}, {
+        mtextInheritFont: true
+    });
+
     const DEFAULT_BASE_URL = "https://test.govjobupdates.com/live-test/";
     const DEFAULT_INDEX_PATH = "quiz-data/quiz-index.js?v=202606231524";
     const DEFAULT_INDEX_GLOBALS = ["GJU_QUIZ_INDEX", "GJU_ADMIN_QUIZ_INDEX", "GJU_PUBLISHED_QUIZ_INDEX"];
@@ -430,8 +442,6 @@
     function normalizeRemoteQuizFilePath(path, subjectSlug, quizSlug) {
         let value = String(path || "").trim();
 
-        // Some generated indexes may accidentally store a trailing hyphen before .js
-        // e.g. quiz-data/hindi/hindi-best-.js. The public file is hindi-best.js.
         value = value.replace(/-\.(js)([?#].*)?$/i, ".$1$2");
 
         if (!value || /\/$/.test(value)) {
