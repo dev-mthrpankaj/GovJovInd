@@ -321,10 +321,13 @@
 
     function convertQuestion(question, meta, subject, preferredLanguage, index) {
         const number = toPositiveInt(question.number || question.questionNumber || question.question_number, index + 1);
-        const optionSources = OPTION_KEYS.map((key) => question.options?.[key] || question[`option_${key.toLowerCase()}`]);
+        const allOptionSources = OPTION_KEYS.map((key) => question.options?.[key] || question[`option_${key.toLowerCase()}`]);
+        const allOptionImages = OPTION_KEYS.map((key) => normalizeMedia(question.options?.[key]?.image || question[`option_${key.toLowerCase()}_image`], `Option ${key} image`));
+        const optionCount = hasOptionContent(allOptionSources[4], allOptionImages[4]) ? 5 : 4;
+        const optionSources = allOptionSources.slice(0, optionCount);
+        const optionImages = allOptionImages.slice(0, optionCount);
         const optionTexts = optionSources.map((value) => pickText(value, preferredLanguage));
         const optionTextMaps = optionSources.map(normalizeTextMap);
-        const optionImages = OPTION_KEYS.map((key) => normalizeMedia(question.options?.[key]?.image || question[`option_${key.toLowerCase()}_image`], `Option ${key} image`));
         const correctAnswer = optionLetterToIndex(question.correctOption || question.correct_option || question.answer || question.correctAnswer);
         const questionSource = question.question || question.text || question.questionText;
         const explanationSource = question.explanation || question.solution;
@@ -349,6 +352,14 @@
             marks: Number(question.marks || meta.marksPerQuestion) || 1,
             negativeMarks: Number(question.negativeMarks || question.negative_marks || meta.negativeMarks) || 0.25
         };
+    }
+
+    function hasOptionContent(value, image) {
+        if (image && image.src) return true;
+        if (value == null) return false;
+        if (typeof value === "string" || typeof value === "number") return Boolean(String(value).trim());
+        if (typeof value !== "object") return false;
+        return Boolean(String(value.hi || value.hindi || value.en || value.english || value.text || value.value || "").trim());
     }
 
     function normalizeTextMap(value) {
