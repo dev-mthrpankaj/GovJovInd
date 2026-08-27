@@ -17,6 +17,8 @@
     const state = {
         exam: null,
         mode: "offline",
+        entryMode: "link",
+        parseStatus: "idle",
         activeTab: "submit",
         expectedMarks: 0,
         marksFrame: 0,
@@ -109,6 +111,7 @@
         bindCategoryOptions();
         bindHorizontalCategoryOptions();
         bindModeToggle(app);
+        bindEntryModeToggle(app);
         bindSubmitForm();
         bindCheckForm();
         bindFormAccordions();
@@ -651,6 +654,8 @@
         setValue("rightAnswers", 0);
         setValue("wrongAnswers", 0);
         setMode((exam.supportedModes || [])[0] || "offline");
+        clearParsedResponseState();
+        setEntryMode(state.entryMode || "link");
         calculateMarks();
         applyAccordionDefaults();
         syncExamAvailabilityUI(exam);
@@ -917,7 +922,44 @@
             button.setAttribute("aria-pressed", String(active));
         });
         const answerSheetLink = getById("answerSheetLink");
-        if (answerSheetLink) answerSheetLink.required = false;
+        if (state.mode !== "online" && state.entryMode === "link") {
+            setEntryMode("manual", app);
+        } else {
+            setEntryMode(state.entryMode || (state.mode === "online" ? "link" : "manual"), app);
+        }
+        if (answerSheetLink) answerSheetLink.required = state.mode === "online" && state.entryMode === "link";
+    }
+
+    function bindEntryModeToggle(app = getById("rankPredictorApp")) {
+        const buttons = Array.from(document.querySelectorAll("[data-entry-mode]"));
+        if (!buttons.length) {
+            state.entryMode = "manual";
+            return;
+        }
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => setEntryMode(button.dataset.entryMode, app));
+        });
+        setEntryMode(state.entryMode || "link", app);
+    }
+
+    function setEntryMode(mode, app = getById("rankPredictorApp")) {
+        const canUseLink = state.mode === "online";
+        state.entryMode = mode === "link" && canUseLink ? "link" : "manual";
+        if (app) app.dataset.entryMode = state.entryMode;
+        document.querySelectorAll("[data-entry-mode]").forEach((button) => {
+            const active = button.dataset.entryMode === state.entryMode;
+            const disabled = button.dataset.entryMode === "link" && !canUseLink;
+            button.disabled = disabled;
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-pressed", String(active));
+            button.setAttribute("aria-disabled", String(disabled));
+        });
+        const answerSheetLink = getById("answerSheetLink");
+        if (answerSheetLink) answerSheetLink.required = canUseLink && state.entryMode === "link";
+        const status = canUseLink
+            ? (state.entryMode === "link" ? getDefaultParseStatusText() : "Manual entry selected. Type your details and marks below.")
+            : "Offline exam selected. Response sheet auto-fill is not available; enter details manually.";
+        setParseStatus(status);
     }
 
     function bindSubmitForm() {
@@ -941,12 +983,14 @@
             clearFieldError(event);
             updateStepIndicators(getActiveStepTarget());
         });
+        getById("parseResponseBtn")?.addEventListener("click", handleParseResponseSheet);
         form.addEventListener("submit", handleSubmit);
         getById("resetPredictorBtn")?.addEventListener("click", () => {
             form.reset();
             applyExamDefaults();
             hydrateCandidateSession();
             clearErrors(form);
+            clearParsedResponseState();
             if (canSubmitExam(getSelectedExam())) showMessage("submitMessage", "");
             syncExamAvailabilityUI();
             renderPendingResult();
@@ -1303,6 +1347,181 @@
     function runMobileMarksCalculation() {
         if (!state.marksDirty) return;
         runMarksCalculation();
+    }
+
+    async function handleParseResponseSheet() {
+        const selectedExam = getSelectedExam();
+        const linkField = getById("answerSheetLink");
+        const parseButton = getById("parseResponseBtn");
+        const answerSheetLink = String(linkField?.value || "").trim();
+
+        if (!selectedExam || selectedExam.disabled) {
+            setParseStatus("Please select a valid exam before parsing.", "error");
+            return;
+        }
+        if (!answerSheetLink) {
+            markInvalid(linkField, "Paste the response sheet link first.");
+            setParseStatus("Paste the response sheet link first.", "error");
+            return;
+        }
+        if (!/^https?:\/\/\S+/i.test(answerSheetLink)) {
+            markInvalid(linkField, "Please paste a valid response sheet URL.");
+            setParseStatus("Please paste a valid response sheet URL.", "error");
+            return;
+        }
+
+        const endpoint = getRankApiEndpoint("parse");
+        if (!endpoint) {
+            setParseStatus("Parser endpoint is not configured. Please fill details manually.", "error");
+            return;
+        }
+
+        setEntryMode("link");
+        clearErrors(getById("rankSubmitForm"));
+        setParseBusy(true, parseButton);
+        setParseStatus("Reading response sheet...");
+
+        try {
+            const parsed = await postPhpRankApi(endpoint, {
+                action: "parseResponseSheet",
+                examId: selectedExam.examId,
+                examName: selectedExam.examName,
+                answerSheetLink
+            });
+
+            if (!parsed?.success) {
+                throw new Error(parsed?.message || "Response sheet could not be parsed.");
+            }
+
+            applyParsedResponse(parsed.data || {});
+            setParseStatus("Available details were auto-filled. Please verify and complete the remaining fields.", "success");
+        } catch (error) {
+            setParseStatus(error?.message || "Response sheet could not be parsed. Fill details manually.", "error");
+        } finally {
+            setParseBusy(false, parseButton);
+        }
+    }
+
+    function setParseBusy(busy, button = getById("parseResponseBtn")) {
+        if (!button) return;
+        button.disabled = Boolean(busy);
+        button.setAttribute("aria-busy", String(Boolean(busy)));
+        button.innerHTML = busy
+            ? `<span class="loading-spinner" aria-hidden="true"></span><span>${PROCESSING_TEXT}</span>`
+            : '<i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Fetch & Auto Fill';
+    }
+
+    function applyParsedResponse(data) {
+        const candidate = data.candidate || {};
+        const totals = data.totals || {};
+        const subjects = Array.isArray(data.subjects) ? data.subjects : [];
+
+        fillIfPresent("candidateName", candidate.name);
+        fillIfPresent("rollNumber", candidate.rollNumber);
+        fillIfPresent("examDate", normalizeParsedDate(candidate.examDate));
+        fillIfPresent("shift", normalizeParsedShift(candidate.shift || candidate.examTime));
+        applyParsedSubjectCounts(subjects, totals);
+        calculateMarks();
+        updateParsedSummary(data);
+        updateStepIndicators(getActiveStepTarget());
+    }
+
+    function applyParsedSubjectCounts(subjects, totals) {
+        const selectedExam = getSelectedExam();
+        const configuredSubjects = Array.isArray(selectedExam?.subjects) ? selectedExam.subjects : [];
+        if (configuredSubjects.length && subjects.length) {
+            const used = new Set();
+            configuredSubjects.forEach((subject, index) => {
+                const parsedIndex = findMatchingParsedSubjectIndex(subject, subjects, used, index);
+                const parsedSubject = parsedIndex >= 0 ? subjects[parsedIndex] : null;
+                if (parsedIndex >= 0) used.add(parsedIndex);
+                setSubjectValue(index, "correct", parsedSubject?.correct ?? 0);
+                setSubjectValue(index, "wrong", parsedSubject?.wrong ?? 0);
+            });
+            syncSubjectTotals();
+            syncSubjectDerivedOutputs();
+            return;
+        }
+
+        fillIfPresent("totalAttempted", totals.attempted);
+        fillIfPresent("rightAnswers", totals.correct);
+        fillIfPresent("wrongAnswers", totals.wrong);
+    }
+
+    function findMatchingParsedSubjectIndex(subject, parsedSubjects, used, fallbackIndex) {
+        const target = normalizeKey(subject?.name);
+        const exactIndex = parsedSubjects.findIndex((entry, index) => !used.has(index) && normalizeKey(entry?.name) === target);
+        if (exactIndex >= 0) return exactIndex;
+        const containsIndex = parsedSubjects.findIndex((entry, index) => {
+            if (used.has(index)) return false;
+            const key = normalizeKey(entry?.name);
+            return key && target && (key.includes(target) || target.includes(key));
+        });
+        if (containsIndex >= 0) return containsIndex;
+        return !used.has(fallbackIndex) && parsedSubjects[fallbackIndex] ? fallbackIndex : -1;
+    }
+
+    function setSubjectValue(index, field, value) {
+        const input = dom.subjectControls[index]?.[field];
+        if (!input) return;
+        input.value = String(Math.max(0, parseWholeNumber(value)));
+    }
+
+    function fillIfPresent(id, value) {
+        const text = String(value ?? "").trim();
+        if (text) setValue(id, text);
+    }
+
+    function normalizeParsedDate(value) {
+        const text = String(value || "").trim();
+        if (!text) return "";
+        const iso = text.match(/\b(\d{4})-(\d{2})-(\d{2})\b/);
+        if (iso) return iso[0];
+        const dmy = text.match(/\b(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})\b/);
+        if (!dmy) return text;
+        const day = dmy[1].padStart(2, "0");
+        const month = dmy[2].padStart(2, "0");
+        const year = dmy[3].length === 2 ? `20${dmy[3]}` : dmy[3];
+        return `${year}-${month}-${day}`;
+    }
+
+    function normalizeParsedShift(value) {
+        const text = String(value || "").trim();
+        const match = text.match(/\b(?:shift\s*)?(\d+)\b/i);
+        return match ? match[1] : "";
+    }
+
+    function updateParsedSummary(data) {
+        const candidate = data.candidate || {};
+        const totals = data.totals || {};
+        setText("parsedCandidateName", candidate.name || "Not found");
+        setText("parsedRollNumber", candidate.rollNumber || "Not found");
+        setText("parsedExamDate", candidate.examDate || "Not found");
+        setText("parsedShift", candidate.shift || candidate.examTime || "Not found");
+        setText("parsedCorrect", String(totals.correct ?? readNumber("rightAnswers")));
+        setText("parsedWrong", String(totals.wrong ?? readNumber("wrongAnswers")));
+        getById("parsedSummary")?.removeAttribute("hidden");
+    }
+
+    function clearParsedResponseState() {
+        ["parsedCandidateName", "parsedRollNumber", "parsedExamDate", "parsedShift"].forEach((id) => setText(id, "Pending"));
+        ["parsedCorrect", "parsedWrong"].forEach((id) => setText(id, "0"));
+        getById("parsedSummary")?.setAttribute("hidden", "");
+        state.parseStatus = "idle";
+        setParseStatus(getDefaultParseStatusText());
+    }
+
+    function getDefaultParseStatusText() {
+        return "Paste a response sheet link to auto-fill available details.";
+    }
+
+    function setParseStatus(message, type = "info") {
+        const status = getById("parseStatus");
+        if (!status) return;
+        state.parseStatus = type;
+        status.textContent = message || "";
+        status.classList.toggle("is-success", type === "success");
+        status.classList.toggle("is-error", type === "error");
     }
 
     function calculateMarks() {
@@ -1670,7 +1889,8 @@
         const endpoints = {
             exams: "exams.php",
             submit: "submit.php",
-            check: "check.php"
+            check: "check.php",
+            parse: "parse-response.php"
         };
         if (!baseUrl || !/^https:\/\/[^?#]+\/rank-api$/i.test(baseUrl) || !endpoints[name]) return "";
         return `${baseUrl}/${endpoints[name]}`;
@@ -1791,6 +2011,8 @@
             examName: selectedExam.examName,
             sheetName: selectedExam.sheetName,
             mode: state.mode,
+            entryMode: state.entryMode,
+            parseStatus: state.parseStatus,
             candidateName: readValue("candidateName"),
             rollNumber,
             mobileNumber,

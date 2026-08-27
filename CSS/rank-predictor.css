@@ -60,6 +60,7 @@ body {
 .result-flow-card,
 .prediction-result,
 .form-section-card,
+.entry-mode-card,
 .live-summary-card,
 .fixed-setting,
 .result-metric {
@@ -265,6 +266,7 @@ body {
 .prediction-result,
 .exam-selector-card,
 .form-section-card,
+.entry-mode-card,
 .live-summary-card {
     padding: 16px;
 }
@@ -547,6 +549,11 @@ body {
 .form-stepper,
 .live-summary-card,
 .fixed-exam-settings,
+.entry-mode-card,
+.entry-mode-toggle,
+.response-link-area,
+.response-parser-panel,
+.parsed-summary,
 .subject-entry-grid,
 .review-submit-grid,
 .result-grid {
@@ -657,6 +664,120 @@ body {
     display: grid;
     gap: 14px;
     box-shadow: none;
+}
+
+.entry-mode-card {
+    box-shadow: none;
+}
+
+.entry-mode-toggle {
+    grid-template-columns: 1fr;
+}
+
+.entry-mode-option {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--rp-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-align: left;
+    cursor: pointer;
+}
+
+.entry-mode-option i {
+    color: var(--rp-blue);
+}
+
+.entry-mode-option.is-active {
+    border-color: var(--rp-blue);
+    background: var(--rp-blue-soft);
+    color: var(--rp-blue-dark);
+    box-shadow: 0 8px 16px rgba(11, 94, 215, 0.12);
+}
+
+.entry-mode-option:disabled {
+    opacity: 0.58;
+    cursor: not-allowed;
+}
+
+.rank-predictor-page[data-entry-mode="manual"] .response-link-area {
+    display: none;
+}
+
+.response-link-area {
+    gap: 12px;
+}
+
+.response-parser-panel {
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: var(--rp-card-soft);
+}
+
+.parser-actions {
+    display: grid;
+    gap: 10px;
+}
+
+.parser-actions .btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.parser-status {
+    color: var(--rp-muted);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.parser-status.is-success {
+    color: var(--rp-green);
+}
+
+.parser-status.is-error {
+    color: var(--rp-red);
+}
+
+.parsed-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.parsed-summary div {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--rp-border);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.parsed-summary span {
+    color: var(--rp-muted);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.parsed-summary strong {
+    color: var(--rp-blue-dark);
+    font-size: 0.95rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
 .attempt-entry-section[hidden] {
@@ -1484,10 +1605,24 @@ body {
 
     .form-grid,
     .fixed-exam-settings,
+    .entry-mode-toggle,
     .subject-entry-grid,
     .live-summary-card,
     .predictor-summary {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .parser-actions {
+        grid-template-columns: minmax(180px, auto) minmax(0, 1fr);
+        align-items: center;
+    }
+
+    .parser-actions .btn {
+        width: auto;
+    }
+
+    .parsed-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .subject-input-grid {

@@ -151,6 +151,50 @@
                         <p class="fixed-exam-note"><i class="fas fa-lock"></i> These values are fixed for this exam and cannot be edited.</p>
                     </div>
 
+                    <section class="entry-mode-card" aria-labelledby="entryModeTitle">
+                        <div class="section-heading">
+                            <span>Marks Entry</span>
+                            <h3 id="entryModeTitle">Choose how to fill your details</h3>
+                        </div>
+                        <div class="entry-mode-toggle" role="radiogroup" aria-label="Marks entry method">
+                            <button class="entry-mode-option is-active" type="button" data-entry-mode="link" aria-pressed="true">
+                                <i class="fas fa-link" aria-hidden="true"></i>
+                                <span>Paste Response Sheet Link</span>
+                            </button>
+                            <button class="entry-mode-option" type="button" data-entry-mode="manual" aria-pressed="false">
+                                <i class="fas fa-keyboard" aria-hidden="true"></i>
+                                <span>Fill Manually</span>
+                            </button>
+                        </div>
+                        <div class="response-link-area online-only" id="responseLinkArea">
+                            <label class="rp-field" for="answerSheetLink">Answer Key / Response Sheet Link
+                                <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" autocomplete="url" placeholder="https://">
+                                <span class="field-helper">Paste the official response sheet link to auto-fill available details.</span>
+                            </label>
+                            <div class="response-parser-panel" id="responseParserPanel">
+                                <div class="parser-actions">
+                                    <button class="btn btn-primary" id="parseResponseBtn" type="button">
+                                        <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
+                                        Fetch & Auto Fill
+                                    </button>
+                                    <span class="parser-status" id="parseStatus" role="status" aria-live="polite">Paste a response sheet link to begin.</span>
+                                </div>
+                                <div class="parsed-summary" id="parsedSummary" hidden>
+                                    <div><span>Name</span><strong id="parsedCandidateName">Pending</strong></div>
+                                    <div><span>Roll No.</span><strong id="parsedRollNumber">Pending</strong></div>
+                                    <div><span>Exam Date</span><strong id="parsedExamDate">Pending</strong></div>
+                                    <div><span>Shift</span><strong id="parsedShift">Pending</strong></div>
+                                    <div><span>Correct</span><strong id="parsedCorrect">0</strong></div>
+                                    <div><span>Wrong</span><strong id="parsedWrong">0</strong></div>
+                                </div>
+                            </div>
+                            <div class="manual-fallback" id="manualFallbackNote">
+                                <strong>Manual entry stays available</strong>
+                                <span>If automatic reading fails or misses a field, type the remaining details manually before submitting.</span>
+                            </div>
+                        </div>
+                    </section>
+
                     <section class="live-summary-card" aria-label="Live marks summary" aria-live="polite">
                         <div>
                             <span>Attempted</span>
@@ -240,14 +284,6 @@
                                 <input id="shift" name="shift" type="number" min="1" step="1" inputmode="numeric">
                                 <span class="field-helper">Required only for exams with multiple shifts.</span>
                             </label>
-                            <label class="rp-field online-only" for="answerSheetLink">Answer Key / Response Sheet Link
-                                <input id="answerSheetLink" name="answerSheetLink" type="url" inputmode="url" autocomplete="url" placeholder="https://">
-                                <span class="field-helper">Optional. Manual right/wrong entries are still required.</span>
-                            </label>
-                        </div>
-                        <div class="manual-fallback online-only">
-                            <strong>Manual marks fallback is required</strong>
-                            <span>Automatic answer key reading is not available for many encrypted or session-based links. Enter attempted, right and wrong answers manually.</span>
                         </div>
                     </details>
 
