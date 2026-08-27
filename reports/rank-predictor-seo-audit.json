@@ -1,85 +1,12 @@
 {
-  "generatedAt": "2026-08-27T14:13:21.467Z",
-  "success": false,
+  "generatedAt": "2026-08-27T14:20:55.076Z",
+  "success": true,
   "summary": {
     "checks": 98,
-    "passed": 26,
-    "failed": 72
+    "passed": 98,
+    "failed": 0
   },
-  "failures": [
-    "HTML/rank-predictor.html: contains text: id=\"examSearchInput\" - id=\"examSearchInput\"",
-    "HTML/rank-predictor.html: contains text: id=\"examQuickPicks\" - id=\"examQuickPicks\"",
-    "rank-predictor/ssc-cgl/index.html: canonical URL - expected https://govjobupdates.com/rank-predictor/ssc-cgl/, found missing",
-    "rank-predictor/ssc-cgl/index.html: title present - ",
-    "rank-predictor/ssc-cgl/index.html: title includes SSC CGL - ",
-    "rank-predictor/ssc-cgl/index.html: title includes Rank Predictor - ",
-    "rank-predictor/ssc-cgl/index.html: meta description present - ",
-    "rank-predictor/ssc-cgl/index.html: meta description length - 0 chars",
-    "rank-predictor/ssc-cgl/index.html: contains text: Open Rank Predictor - Open Rank Predictor",
-    "rank-predictor/ssc-cgl/index.html: contains text: official answer key - official answer key",
-    "rank-predictor/ssc-cgl/index.html: schema parses - 0 blocks",
-    "rank-predictor/ssc-cgl/index.html: schema has WebPage - ",
-    "rank-predictor/ssc-cgl/index.html: schema has FAQPage - ",
-    "rank-predictor/ssc-cgl/index.html: schema has BreadcrumbList - ",
-    "rank-predictor/ssc-cpo/index.html: canonical URL - expected https://govjobupdates.com/rank-predictor/ssc-cpo/, found missing",
-    "rank-predictor/ssc-cpo/index.html: title present - ",
-    "rank-predictor/ssc-cpo/index.html: title includes SSC CPO - ",
-    "rank-predictor/ssc-cpo/index.html: title includes Rank Predictor - ",
-    "rank-predictor/ssc-cpo/index.html: meta description present - ",
-    "rank-predictor/ssc-cpo/index.html: meta description length - 0 chars",
-    "rank-predictor/ssc-cpo/index.html: contains text: Open Rank Predictor - Open Rank Predictor",
-    "rank-predictor/ssc-cpo/index.html: contains text: physical - physical",
-    "rank-predictor/ssc-cpo/index.html: schema parses - 0 blocks",
-    "rank-predictor/ssc-cpo/index.html: schema has WebPage - ",
-    "rank-predictor/ssc-cpo/index.html: schema has FAQPage - ",
-    "rank-predictor/ssc-cpo/index.html: schema has BreadcrumbList - ",
-    "rank-predictor/up-police/index.html: canonical URL - expected https://govjobupdates.com/rank-predictor/up-police/, found missing",
-    "rank-predictor/up-police/index.html: title present - ",
-    "rank-predictor/up-police/index.html: title includes UP Police - ",
-    "rank-predictor/up-police/index.html: title includes Rank Predictor - ",
-    "rank-predictor/up-police/index.html: meta description present - ",
-    "rank-predictor/up-police/index.html: meta description length - 0 chars",
-    "rank-predictor/up-police/index.html: contains text: Open Rank Predictor - Open Rank Predictor",
-    "rank-predictor/up-police/index.html: contains text: official UP Police - official UP Police",
-    "rank-predictor/up-police/index.html: schema parses - 0 blocks",
-    "rank-predictor/up-police/index.html: schema has WebPage - ",
-    "rank-predictor/up-police/index.html: schema has FAQPage - ",
-    "rank-predictor/up-police/index.html: schema has BreadcrumbList - ",
-    "rank-predictor/railway/index.html: canonical URL - expected https://govjobupdates.com/rank-predictor/railway/, found missing",
-    "rank-predictor/railway/index.html: title present - ",
-    "rank-predictor/railway/index.html: title includes Railway - ",
-    "rank-predictor/railway/index.html: title includes Rank Predictor - ",
-    "rank-predictor/railway/index.html: meta description present - ",
-    "rank-predictor/railway/index.html: meta description length - 0 chars",
-    "rank-predictor/railway/index.html: contains text: Open Rank Predictor - Open Rank Predictor",
-    "rank-predictor/railway/index.html: contains text: Railway Recruitment Boards - Railway Recruitment Boards",
-    "rank-predictor/railway/index.html: schema parses - 0 blocks",
-    "rank-predictor/railway/index.html: schema has WebPage - ",
-    "rank-predictor/railway/index.html: schema has FAQPage - ",
-    "rank-predictor/railway/index.html: schema has BreadcrumbList - ",
-    "rank-predictor/up-home-guard/index.html: canonical URL - expected https://govjobupdates.com/rank-predictor/up-home-guard/, found missing",
-    "rank-predictor/up-home-guard/index.html: title present - ",
-    "rank-predictor/up-home-guard/index.html: title includes UP Home Guard - ",
-    "rank-predictor/up-home-guard/index.html: title includes Rank Predictor - ",
-    "rank-predictor/up-home-guard/index.html: meta description present - ",
-    "rank-predictor/up-home-guard/index.html: meta description length - 0 chars",
-    "rank-predictor/up-home-guard/index.html: contains text: Open Rank Predictor - Open Rank Predictor",
-    "rank-predictor/up-home-guard/index.html: contains text: official authority - official authority",
-    "rank-predictor/up-home-guard/index.html: schema parses - 0 blocks",
-    "rank-predictor/up-home-guard/index.html: schema has WebPage - ",
-    "rank-predictor/up-home-guard/index.html: schema has FAQPage - ",
-    "rank-predictor/up-home-guard/index.html: schema has BreadcrumbList - ",
-    "sitemap.xml: includes https://govjobupdates.com/rank-predictor/ssc-cgl/ - https://govjobupdates.com/rank-predictor/ssc-cgl/",
-    "sitemap.xml: includes https://govjobupdates.com/rank-predictor/ssc-cpo/ - https://govjobupdates.com/rank-predictor/ssc-cpo/",
-    "sitemap.xml: includes https://govjobupdates.com/rank-predictor/up-police/ - https://govjobupdates.com/rank-predictor/up-police/",
-    "sitemap.xml: includes https://govjobupdates.com/rank-predictor/railway/ - https://govjobupdates.com/rank-predictor/railway/",
-    "sitemap.xml: includes https://govjobupdates.com/rank-predictor/up-home-guard/ - https://govjobupdates.com/rank-predictor/up-home-guard/",
-    "rank-predictor/ssc-cgl/index.html: links to main predictor - main predictor link",
-    "rank-predictor/ssc-cpo/index.html: links to main predictor - main predictor link",
-    "rank-predictor/up-police/index.html: links to main predictor - main predictor link",
-    "rank-predictor/railway/index.html: links to main predictor - main predictor link",
-    "rank-predictor/up-home-guard/index.html: links to main predictor - main predictor link"
-  ],
+  "failures": [],
   "checks": [
     {
       "ok": true,
@@ -112,16 +39,16 @@
       "detail": "146 chars"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "HTML/rank-predictor.html",
-      "check": "contains text: id=\"examSearchInput\"",
-      "detail": "id=\"examSearchInput\""
+      "check": "contains text: id=\"rankExamSearch\"",
+      "detail": "id=\"rankExamSearch\""
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "HTML/rank-predictor.html",
-      "check": "contains text: id=\"examQuickPicks\"",
-      "detail": "id=\"examQuickPicks\""
+      "check": "contains text: id=\"rankCardGrid\"",
+      "detail": "id=\"rankCardGrid\""
     },
     {
       "ok": true,
@@ -178,364 +105,364 @@
       "detail": "WebPage, CollectionPage, WebApplication, HowTo, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "canonical URL",
-      "detail": "expected https://govjobupdates.com/rank-predictor/ssc-cgl/, found missing"
+      "detail": "expected https://govjobupdates.com/rank-predictor/ssc-cgl/, found https://govjobupdates.com/rank-predictor/ssc-cgl/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "title present",
-      "detail": ""
+      "detail": "SSC CGL Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "title includes SSC CGL",
-      "detail": ""
+      "detail": "SSC CGL Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "title includes Rank Predictor",
-      "detail": ""
+      "detail": "SSC CGL Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "meta description present",
-      "detail": ""
+      "detail": "Use SSC CGL Rank Predictor to estimate expected marks, overall rank, category rank and cutoff chances after checking the official answer key."
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "meta description length",
-      "detail": "0 chars"
+      "detail": "141 chars"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "contains text: Open Rank Predictor",
       "detail": "Open Rank Predictor"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "contains text: official answer key",
       "detail": "official answer key"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "schema parses",
-      "detail": "0 blocks"
+      "detail": "3 blocks"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "schema has WebPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "schema has FAQPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "schema has BreadcrumbList",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "canonical URL",
-      "detail": "expected https://govjobupdates.com/rank-predictor/ssc-cpo/, found missing"
+      "detail": "expected https://govjobupdates.com/rank-predictor/ssc-cpo/, found https://govjobupdates.com/rank-predictor/ssc-cpo/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "title present",
-      "detail": ""
+      "detail": "SSC CPO Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "title includes SSC CPO",
-      "detail": ""
+      "detail": "SSC CPO Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "title includes Rank Predictor",
-      "detail": ""
+      "detail": "SSC CPO Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "meta description present",
-      "detail": ""
+      "detail": "Use SSC CPO Rank Predictor to estimate written exam rank, category rank and physical test cutoff chances with answer key based marks."
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "meta description length",
-      "detail": "0 chars"
+      "detail": "133 chars"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "contains text: Open Rank Predictor",
       "detail": "Open Rank Predictor"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "contains text: physical",
       "detail": "physical"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "schema parses",
-      "detail": "0 blocks"
+      "detail": "3 blocks"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "schema has WebPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "schema has FAQPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "schema has BreadcrumbList",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "canonical URL",
-      "detail": "expected https://govjobupdates.com/rank-predictor/up-police/, found missing"
+      "detail": "expected https://govjobupdates.com/rank-predictor/up-police/, found https://govjobupdates.com/rank-predictor/up-police/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "title present",
-      "detail": ""
+      "detail": "UP Police Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "title includes UP Police",
-      "detail": ""
+      "detail": "UP Police Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "title includes Rank Predictor",
-      "detail": ""
+      "detail": "UP Police Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "meta description present",
-      "detail": ""
+      "detail": "Use UP Police Rank Predictor to estimate expected marks, category rank and selection chances after the official UP Police answer key."
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "meta description length",
-      "detail": "0 chars"
+      "detail": "133 chars"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "contains text: Open Rank Predictor",
       "detail": "Open Rank Predictor"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "contains text: official UP Police",
       "detail": "official UP Police"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "schema parses",
-      "detail": "0 blocks"
+      "detail": "3 blocks"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "schema has WebPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "schema has FAQPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "schema has BreadcrumbList",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "canonical URL",
-      "detail": "expected https://govjobupdates.com/rank-predictor/railway/, found missing"
+      "detail": "expected https://govjobupdates.com/rank-predictor/railway/, found https://govjobupdates.com/rank-predictor/railway/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "title present",
-      "detail": ""
+      "detail": "Railway Rank Predictor 2026 | RRB Exams | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "title includes Railway",
-      "detail": ""
+      "detail": "Railway Rank Predictor 2026 | RRB Exams | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "title includes Rank Predictor",
-      "detail": ""
+      "detail": "Railway Rank Predictor 2026 | RRB Exams | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "meta description present",
-      "detail": ""
+      "detail": "Use Railway Rank Predictor for RRB exams to estimate marks, normalized rank, category rank and cutoff chances after answer key release."
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "meta description length",
-      "detail": "0 chars"
+      "detail": "135 chars"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "contains text: Open Rank Predictor",
       "detail": "Open Rank Predictor"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "contains text: Railway Recruitment Boards",
       "detail": "Railway Recruitment Boards"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "schema parses",
-      "detail": "0 blocks"
+      "detail": "3 blocks"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "schema has WebPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "schema has FAQPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "schema has BreadcrumbList",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "canonical URL",
-      "detail": "expected https://govjobupdates.com/rank-predictor/up-home-guard/, found missing"
+      "detail": "expected https://govjobupdates.com/rank-predictor/up-home-guard/, found https://govjobupdates.com/rank-predictor/up-home-guard/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "title present",
-      "detail": ""
+      "detail": "UP Home Guard Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "title includes UP Home Guard",
-      "detail": ""
+      "detail": "UP Home Guard Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "title includes Rank Predictor",
-      "detail": ""
+      "detail": "UP Home Guard Rank Predictor 2026 | GovJobUpdates"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "meta description present",
-      "detail": ""
+      "detail": "Use UP Home Guard Rank Predictor to estimate expected rank, category rank and cutoff chances from answer key based candidate data."
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "meta description length",
-      "detail": "0 chars"
+      "detail": "130 chars"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "contains text: Open Rank Predictor",
       "detail": "Open Rank Predictor"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "contains text: official authority",
       "detail": "official authority"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "schema parses",
-      "detail": "0 blocks"
+      "detail": "3 blocks"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "schema has WebPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "schema has FAQPage",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "schema has BreadcrumbList",
-      "detail": ""
+      "detail": "WebPage, FAQPage, BreadcrumbList"
     },
     {
       "ok": true,
@@ -544,31 +471,31 @@
       "detail": "https://govjobupdates.com/HTML/rank-predictor.html"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "sitemap.xml",
       "check": "includes https://govjobupdates.com/rank-predictor/ssc-cgl/",
       "detail": "https://govjobupdates.com/rank-predictor/ssc-cgl/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "sitemap.xml",
       "check": "includes https://govjobupdates.com/rank-predictor/ssc-cpo/",
       "detail": "https://govjobupdates.com/rank-predictor/ssc-cpo/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "sitemap.xml",
       "check": "includes https://govjobupdates.com/rank-predictor/up-police/",
       "detail": "https://govjobupdates.com/rank-predictor/up-police/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "sitemap.xml",
       "check": "includes https://govjobupdates.com/rank-predictor/railway/",
       "detail": "https://govjobupdates.com/rank-predictor/railway/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "sitemap.xml",
       "check": "includes https://govjobupdates.com/rank-predictor/up-home-guard/",
       "detail": "https://govjobupdates.com/rank-predictor/up-home-guard/"
@@ -610,7 +537,7 @@
       "detail": "rank-result.js script"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cgl/index.html",
       "check": "links to main predictor",
       "detail": "main predictor link"
@@ -622,7 +549,7 @@
       "detail": "https://govjobupdates.com/rank-predictor/ssc-cgl/ vs https://govjobupdates.com/rank-predictor/ssc-cgl/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/ssc-cpo/index.html",
       "check": "links to main predictor",
       "detail": "main predictor link"
@@ -634,7 +561,7 @@
       "detail": "https://govjobupdates.com/rank-predictor/ssc-cpo/ vs https://govjobupdates.com/rank-predictor/ssc-cpo/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-police/index.html",
       "check": "links to main predictor",
       "detail": "main predictor link"
@@ -646,7 +573,7 @@
       "detail": "https://govjobupdates.com/rank-predictor/up-police/ vs https://govjobupdates.com/rank-predictor/up-police/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/railway/index.html",
       "check": "links to main predictor",
       "detail": "main predictor link"
@@ -658,7 +585,7 @@
       "detail": "https://govjobupdates.com/rank-predictor/railway/ vs https://govjobupdates.com/rank-predictor/railway/"
     },
     {
-      "ok": false,
+      "ok": true,
       "scope": "rank-predictor/up-home-guard/index.html",
       "check": "links to main predictor",
       "detail": "main predictor link"

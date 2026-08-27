@@ -25,6 +25,74 @@ const displayNameOverrides = {
   "ssb-hcm-2026": "SSB Head Constable Ministerial 2026"
 };
 
+const htmlPages = [
+  "latest-jobs",
+  "admitcard",
+  "answer-key",
+  "results",
+  "quiz",
+  "rank-predictor",
+  "student-hub",
+  "documents",
+  "up-certificate-services",
+  "about-us",
+  "login",
+  "dashboard",
+  "privacy-policy",
+  "terms",
+  "refund-policy",
+  "disclaimer",
+  "contact"
+];
+
+const categoryLandingPages = [
+  {
+    dir: "ssc-cgl",
+    name: "SSC CGL",
+    title: "SSC CGL Rank Predictor 2026 | GovJobUpdates",
+    description: "Use SSC CGL Rank Predictor to estimate expected marks, overall rank, category rank and cutoff chances after checking the official answer key.",
+    intro: "Estimate your SSC CGL expected rank after matching attempts with the official answer key or response sheet.",
+    context: "official answer key",
+    links: ["ssc-cgl-2025-tier-1"]
+  },
+  {
+    dir: "ssc-cpo",
+    name: "SSC CPO",
+    title: "SSC CPO Rank Predictor 2026 | GovJobUpdates",
+    description: "Use SSC CPO Rank Predictor to estimate written exam rank, category rank and physical test cutoff chances with answer key based marks.",
+    intro: "Check SSC CPO expected written rank and understand how marks can affect physical stage shortlisting.",
+    context: "physical",
+    links: ["ssc-cpo-2025-paper-1"]
+  },
+  {
+    dir: "up-police",
+    name: "UP Police",
+    title: "UP Police Rank Predictor 2026 | GovJobUpdates",
+    description: "Use UP Police Rank Predictor to estimate expected marks, category rank and selection chances after the official UP Police answer key.",
+    intro: "Estimate UP Police expected rank using answer key based marks and compare with candidate submissions.",
+    context: "official UP Police",
+    links: ["up-police-si-2025", "up-constable-2026"]
+  },
+  {
+    dir: "railway",
+    name: "Railway",
+    title: "Railway Rank Predictor 2026 | RRB Exams | GovJobUpdates",
+    description: "Use Railway Rank Predictor for RRB exams to estimate marks, normalized rank, category rank and cutoff chances after answer key release.",
+    intro: "Open RRB exam rank predictor pages and compare expected marks for Railway Recruitment Boards exams.",
+    context: "Railway Recruitment Boards",
+    links: ["rrb-alp-cbt-2", "rrb-ntpc-gl-cbt-2-2026", "rrb-group-d-2026"]
+  },
+  {
+    dir: "up-home-guard",
+    name: "UP Home Guard",
+    title: "UP Home Guard Rank Predictor 2026 | GovJobUpdates",
+    description: "Use UP Home Guard Rank Predictor to estimate expected rank, category rank and cutoff chances from answer key based candidate data.",
+    intro: "Check UP Home Guard expected rank and compare your marks before the final list from the official authority.",
+    context: "official authority",
+    links: ["up-homeguard-2026"]
+  }
+];
+
 const template = fs.readFileSync(templatePath, "utf8");
 
 function getArgValue(name) {
@@ -412,15 +480,192 @@ function buildPage(exam) {
   html = html.replace(/<h2>RRB JE exam setup loaded<\/h2>\s*<p>[\s\S]*?<\/p>/, `<h2>${escapeHtml(shortName)} exam setup loaded</h2>\n                <p>${escapeHtml(name)} is auto-selected on this page. You can enter your details directly and check your rank.</p>`);
   html = html.replace(/<section class="page-guide"[\s\S]*?<\/section>\s*\n\s*<div class="embed-magnet-container">[\s\S]*?<script>\s*function copyEmbedCodeRank\(\) \{[\s\S]*?\n<\/script>\s*\n\s*<section class="seo-faq"[\s\S]*?<\/section>/, `${buildGuide(exam)}\n\n${buildEmbed(exam)}\n\n        ${buildFaq(exam)}`);
   html = html.replace(/window\.RANK_PREDICTOR_PAGE_EXAM_ID = "[^"]*";/, `window.RANK_PREDICTOR_PAGE_EXAM_ID = "${exam.examId}";`);
-  return html;
+  return normalizeGeneratedLinks(html);
+}
+
+function normalizeGeneratedLinks(html) {
+  let output = html.replace(/<base\b[^>]*>\s*/gi, "");
+  output = output.replace(/(href|src)="\.\.\/Assets\//g, '$1="/Assets/');
+  output = output.replace(/(href|src)="\.\.\/CSS\//g, '$1="/CSS/');
+  output = output.replace(/(href|src)="\.\.\/JS\//g, '$1="/JS/');
+  output = output.replace(/href="\.\.\/index\.html"/g, 'href="/"');
+  output = output.replace(/href="\.\.\/typing-test\/index\.html"/g, 'href="/typing-test/"');
+  output = output.replace(/href="\.\.\/rank-predictor\/([^"\/]+)\/index\.html"/g, 'href="/rank-predictor/$1/"');
+  output = output.replace(/href="\.\.\/rank-predictor\/([^"]+)"/g, 'href="/rank-predictor/$1"');
+
+  htmlPages.forEach((page) => {
+    const pattern = new RegExp(`href="${page}\\.html"`, "g");
+    output = output.replace(pattern, `href="/HTML/${page}.html"`);
+  });
+
+  output = output.replace(/data-login-href="login\.html"/g, 'data-login-href="/HTML/login.html"');
+  output = output.replace(/data-dashboard-href="dashboard\.html"/g, 'data-dashboard-href="/HTML/dashboard.html"');
+  return output;
+}
+
+function normalizeExistingRankPages() {
+  const rankRoot = path.join(root, "rank-predictor");
+  if (!fs.existsSync(rankRoot)) return [];
+
+  return fs.readdirSync(rankRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join(rankRoot, entry.name, "index.html"))
+    .filter((file) => fs.existsSync(file))
+    .map((file) => {
+      fs.writeFileSync(file, normalizeGeneratedLinks(fs.readFileSync(file, "utf8")));
+      return path.relative(root, file).replace(/\\/g, "/");
+    });
+}
+
+function buildCategorySchema(page) {
+  const url = `${baseUrl}/rank-predictor/${page.dir}/`;
+  return {
+    webpage: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: page.title.replace(/\s*\|\s*GovJobUpdates$/, ""),
+      url,
+      description: page.description,
+      publisher: {
+        "@type": "Organization",
+        name: "GovJobUpdates",
+        url: `${baseUrl}/`
+      }
+    },
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: `How does ${page.name} Rank Predictor work?`,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: `It uses answer key based marks and available candidate submissions to estimate ${page.name} rank and cutoff chances.`
+          }
+        },
+        {
+          "@type": "Question",
+          name: "Is the predicted rank official?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. It is only an estimate. Final result, cutoff, normalization and merit list are published by the official authority."
+          }
+        }
+      ]
+    },
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${baseUrl}/` },
+        { "@type": "ListItem", position: 2, name: "Rank Predictor", item: `${baseUrl}/HTML/rank-predictor.html` },
+        { "@type": "ListItem", position: 3, name: `${page.name} Rank Predictor`, item: url }
+      ]
+    }
+  };
+}
+
+function buildCategoryLandingPage(page, examById) {
+  const url = `${baseUrl}/rank-predictor/${page.dir}/`;
+  const schemas = buildCategorySchema(page);
+  const examLinks = page.links
+    .map((examId) => examById.get(examId))
+    .filter(Boolean)
+    .map((exam) => {
+      const title = escapeHtml(getRankTitle(getShortName(exam)));
+      return `<a class="primary-btn" href="/rank-predictor/${escapeHtml(getDir(exam))}/">Open Rank Predictor - ${title}</a>`;
+    })
+    .join("\n                ");
+
+  const fallbackLink = `<a class="primary-btn" href="/HTML/rank-predictor.html">Open Rank Predictor</a>`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(page.title)}</title>
+    <meta name="description" content="${escapeHtml(page.description)}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="${escapeHtml(url)}">
+    <meta property="og:site_name" content="GovJobUpdates">
+    <meta property="og:title" content="${escapeHtml(page.title)}">
+    <meta property="og:description" content="${escapeHtml(page.description)}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${escapeHtml(url)}">
+    <meta property="og:image" content="${baseUrl}/Assets/Home%20Page/Government%20Job%20Banner.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeHtml(page.title)}">
+    <meta name="twitter:description" content="${escapeHtml(page.description)}">
+    <meta name="twitter:image" content="${baseUrl}/Assets/Home%20Page/Government%20Job%20Banner.webp">
+    <script type="application/ld+json">${scriptJson(schemas.webpage)}</script>
+    <script type="application/ld+json">${scriptJson(schemas.faq)}</script>
+    <script type="application/ld+json">${scriptJson(schemas.breadcrumb)}</script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/Assets/Home Page/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Assets/Home Page/favicon-16x16.png">
+    <link rel="shortcut icon" href="/Assets/Home Page/favicon.ico">
+    <link rel="apple-touch-icon" href="/Assets/Home Page/apple-icon.png">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/rank-predictor.css?v=20260820-lifecycle-phase3">
+    <link rel="stylesheet" href="/Assets/vendor/fontawesome/css/all.min.css">
+</head>
+<body>
+    <header><div class="header-container"><div class="logo-container"><img src="/Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="/" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="/">Home</a></li><li><a href="/HTML/latest-jobs.html">Jobs</a></li><li><a href="/HTML/admitcard.html">Admit Card</a></li><li><a href="/HTML/answer-key.html">Answer Key</a></li><li><a href="/HTML/results.html">Results</a></li><li><a href="/HTML/quiz.html">Quiz</a></li><li><a href="/HTML/rank-predictor.html" class="active">Rank Predictor</a></li><li><a href="/HTML/student-hub.html">Student Hub</a></li><li><a href="/HTML/documents.html">Documents</a></li><li><a href="/HTML/up-certificate-services.html">UP Services</a></li><li><a href="/HTML/about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="/HTML/login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="/HTML/login.html" data-dashboard-href="/HTML/dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
+    <main class="rank-cards-page">
+        <section class="rank-cards-heading" aria-labelledby="categoryRankTitle">
+            <div>
+                <p class="rank-cards-kicker">GovJobUpdates Rank Predictor</p>
+                <h1 id="categoryRankTitle">${escapeHtml(page.name)} Rank Predictor</h1>
+                <span>${escapeHtml(page.intro)}</span>
+            </div>
+            <div class="rank-card-actions">
+                ${examLinks || fallbackLink}
+            </div>
+        </section>
+        <section class="page-guide" id="rankPredictorSeoSupport" aria-labelledby="categoryRankGuide">
+            <p class="guide-kicker">${escapeHtml(page.name)} Rank Guide</p>
+            <h2 id="categoryRankGuide">${escapeHtml(page.name)} expected rank, category rank and cutoff analysis</h2>
+            <p>Open Rank Predictor for the active ${escapeHtml(page.name)} exam and enter marks after checking the ${escapeHtml(page.context)} notice, answer key or response sheet. The prediction helps compare expected marks with other candidate submissions.</p>
+            <div class="guide-grid">
+                <article class="guide-card"><h3>Answer key based estimate</h3><p>Use correct, wrong and attempted answers from the official answer key before submitting your expected marks.</p></article>
+                <article class="guide-card"><h3>Category comparison</h3><p>Where enough data is available, the tool can estimate overall rank, category rank, gender rank, state rank or district rank.</p></article>
+                <article class="guide-card"><h3>Official result check</h3><p>Final cutoff, merit list, normalization and selection status must always be verified from the official recruitment authority.</p></article>
+            </div>
+            <nav class="related-links" aria-label="${escapeHtml(page.name)} rank predictor related pages">
+                <h3>Useful pages</h3>
+                ${examLinks || fallbackLink}
+                <a href="/HTML/rank-predictor.html">All Rank Predictors</a>
+                <a href="/HTML/answer-key.html">Answer Keys</a>
+                <a href="/HTML/results.html">Results</a>
+                <a href="/HTML/latest-jobs.html">Latest Jobs</a>
+            </nav>
+            <p class="official-note"><strong>Important:</strong> ${escapeHtml(page.name)} Rank Predictor is an estimate only. Always verify final marks, cutoff and selection status from the official authority.</p>
+        </section>
+        <section class="seo-faq" aria-labelledby="categoryRankFaq">
+            <h2 id="categoryRankFaq">${escapeHtml(page.name)} Rank Predictor FAQs</h2>
+            <div class="seo-faq-list">
+                <details><summary>Is this ${escapeHtml(page.name)} predicted rank official?</summary><p>No. It is only an estimate based on submitted marks and cannot replace the official result or cutoff.</p></details>
+                <details><summary>When should I use this predictor?</summary><p>Use it after checking the official answer key or response sheet so your entered marks are more accurate.</p></details>
+            </div>
+        </section>
+    </main>
+    <nav class="candidate-bottom-nav" aria-label="Primary mobile navigation"><a href="/" aria-label="Home"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a><a href="/HTML/rank-predictor.html" class="is-active" aria-label="Rank"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Rank</span></a><a href="/HTML/quiz.html" aria-label="Quiz"><i class="fas fa-stopwatch" aria-hidden="true"></i><span>Quiz</span></a><a href="/HTML/up-certificate-services.html" aria-label="UP Doc"><i class="fas fa-certificate" aria-hidden="true"></i><span>UP Doc</span></a><a href="/HTML/latest-jobs.html" aria-label="Jobs"><i class="fas fa-briefcase" aria-hidden="true"></i><span>Jobs</span></a></nav>
+    <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="/">Home</a></li><li><a href="/HTML/latest-jobs.html">Jobs</a></li><li><a href="/HTML/admitcard.html">Admit Card</a></li><li><a href="/HTML/answer-key.html">Answer Key</a></li><li><a href="/HTML/results.html">Results</a></li><li><a href="/HTML/rank-predictor.html">Rank Predictor</a></li><li><a href="/typing-test/">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="/HTML/quiz.html">Quiz</a></li><li><a href="/HTML/student-hub.html">Student Hub</a></li><li><a href="/HTML/documents.html">Documents</a></li><li><a href="/HTML/up-certificate-services.html">UP Services</a></li><li><a href="/HTML/about-us.html">About Us</a></li><li><a href="/HTML/contact.html">Contact</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li><li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li><li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="/HTML/privacy-policy.html">Privacy Policy</a> | <a href="/HTML/terms.html">Terms of Use</a> | <a href="/HTML/disclaimer.html">Disclaimer</a></div></footer>
+    <script src="/JS/script.js?v=20260815-scroll-fix" defer></script>
+    <script src="/JS/firebase-config.js" defer></script>
+    <script type="module" src="/JS/firebase-analytics.js"></script>
+    <script type="module" src="/JS/firebase-visitors.js"></script>
+</body>
+</html>`;
 }
 
 async function main() {
   const { source, exams } = await loadExams();
   const written = [];
+  const examById = new Map(exams.map((exam) => [exam.examId, exam]));
 
   for (const exam of exams) {
-    if (pageOverrides[exam.examId]) continue;
     const dir = path.join(root, "rank-predictor", getDir(exam));
     const file = path.join(dir, "index.html");
     fs.mkdirSync(dir, { recursive: true });
@@ -428,9 +673,20 @@ async function main() {
     written.push(path.relative(root, file).replace(/\\/g, "/"));
   }
 
+  for (const page of categoryLandingPages) {
+    const dir = path.join(root, "rank-predictor", page.dir);
+    const file = path.join(dir, "index.html");
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, buildCategoryLandingPage(page, examById));
+    written.push(path.relative(root, file).replace(/\\/g, "/"));
+  }
+
+  const normalized = normalizeExistingRankPages();
+
   console.log(`Loaded ${exams.length} rank predictor exams from ${source}.`);
   console.log(`Generated ${written.length} rank predictor pages.`);
   written.forEach((file) => console.log(file));
+  console.log(`Normalized ${normalized.length} existing rank predictor pages.`);
 }
 
 main().catch((error) => {

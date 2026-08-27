@@ -1885,6 +1885,10 @@
       "signature": "d19de904fc8d31de230a794ffbd6ce5c406d5d5d592c3550e7c18c2c209ebc0d",
       "lastmod": "2026-08-15"
     },
+    "rank-predictor/railway/index.html": {
+      "signature": "e70517ba1e19c59cbffe061a75d09eec0de81e2f108919afd26c83992772162d",
+      "lastmod": "2026-08-27"
+    },
     "rank-predictor/rrb-alp-cbt-2/index.html": {
       "signature": "37613342a724e0794370d855546a39af0170da9a0f20576f57faa21464af2d09",
       "lastmod": "2026-08-15"
@@ -1894,8 +1898,8 @@
       "lastmod": "2026-08-22"
     },
     "rank-predictor/rrb-je/index.html": {
-      "signature": "cd1bdd523fd21c4e9c3605e41c93ea149bd72f11faccedf4a3954a5a269182e9",
-      "lastmod": "2026-08-15"
+      "signature": "20fde6fefdcc982141eea8514516a506ade1174d68bf44f95a11d2212cc5e6e0",
+      "lastmod": "2026-08-27"
     },
     "rank-predictor/rrb-ntpc-gl-cbt-2-2026/index.html": {
       "signature": "7da05cd0c9acd9344f7c77af257141d012443ff318c15eb4cf40b2d9ef6cd218",
@@ -1910,16 +1914,32 @@
       "lastmod": "2026-08-15"
     },
     "rank-predictor/rssb-ldc/index.html": {
-      "signature": "848b67b8abf7037b910efd826cacd87ed95ad9729969d13d062f0266de941843",
-      "lastmod": "2026-08-15"
+      "signature": "d43ff6da64b6920578b80d8740e1be8df6cea890aa00051be467bafd2eb2205e",
+      "lastmod": "2026-08-27"
     },
     "rank-predictor/ssb-hcm-2026/index.html": {
       "signature": "2ac873c42647245e527d08b27a9640e8e5219462aa433c08b53dc644498043ac",
       "lastmod": "2026-08-15"
     },
+    "rank-predictor/ssc-cgl/index.html": {
+      "signature": "c5a2d861236329d0053fe669c8f33a0a9878caa4378a100ac1ac9cfd2e99a27a",
+      "lastmod": "2026-08-27"
+    },
+    "rank-predictor/ssc-cpo/index.html": {
+      "signature": "284b02df14640b209191a7300cc82bcfdc6490e23e9badc5632d1643e2241628",
+      "lastmod": "2026-08-27"
+    },
     "rank-predictor/test-qualifying-2026/index.html": {
       "signature": "d5d23db61e1d3d18cc23c332ae24f37d718067fa15d8f55d609829747d5a4c09",
       "lastmod": "2026-08-21"
+    },
+    "rank-predictor/up-home-guard/index.html": {
+      "signature": "b5f21b5e42fbbf13bdec5fe1a6c1cbc8fd352578015f7b8b2387b03bceddb38b",
+      "lastmod": "2026-08-27"
+    },
+    "rank-predictor/up-police/index.html": {
+      "signature": "16a688edf19d1aac7583d50ed64d78893130684c0a29ca4486005fa5929daca5",
+      "lastmod": "2026-08-27"
     },
     "rank-predictor/uppsc-atp-2026/index.html": {
       "signature": "6e947b1f0cc0412f2f931d1ea3ce78eb16e8072b824a3d3100f779778a371313",

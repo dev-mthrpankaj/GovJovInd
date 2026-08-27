@@ -16,8 +16,8 @@ const requiredPages = [
     url: "https://govjobupdates.com/HTML/rank-predictor.html",
     titleIncludes: ["Rank Predictor"],
     requiredText: [
-      "id=\"examSearchInput\"",
-      "id=\"examQuickPicks\"",
+      "id=\"rankExamSearch\"",
+      "id=\"rankCardGrid\"",
       "id=\"rankPredictorSeoSupport\"",
       "SSC CGL Rank Predictor",
       "UP Police Rank Predictor"
@@ -195,7 +195,12 @@ function auditResultPage() {
 function auditLandingLinks() {
   requiredPages.filter((page) => page.path !== mainPage).forEach((page) => {
     const html = read(page.path);
-    expect(page.path, "links to main predictor", html.includes("../../HTML/rank-predictor.html"), "main predictor link");
+    expect(
+      page.path,
+      "links to main predictor",
+      html.includes("../../HTML/rank-predictor.html") || html.includes("/HTML/rank-predictor.html"),
+      "main predictor link"
+    );
     expect(page.path, "public URL matches path", publicUrlFor(page.path) === page.url, `${publicUrlFor(page.path)} vs ${page.url}`);
   });
 }
