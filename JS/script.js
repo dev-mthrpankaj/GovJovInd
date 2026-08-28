@@ -469,8 +469,7 @@ const ensureSharedFooter = () => {
       <div class="footer-section">
         <h3>Contact Us</h3>
         <ul>
-          <li><i class="fas fa-envelope" aria-hidden="true"></i> dmagstudio2023@outlook.com</li>
-          <li><i class="fas fa-phone" aria-hidden="true"></i> +91 7300627752</li>
+          <li><i class="fas fa-envelope" aria-hidden="true"></i> support@govjobupdates.com</li>
           <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li>
         </ul>
       </div>

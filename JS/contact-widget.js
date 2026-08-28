@@ -1,10 +1,9 @@
-(function () {
+﻿(function () {
   "use strict";
 
-  const CONTACT_EMAIL = "dmagstudio2023@outlook.com";
+  const CONTACT_EMAIL = "support@govjobupdates.com";
   const CONTACT_WHATSAPP_LINKS = [
-    { label: "Contact us on WhatsApp", href: "https://wa.me/918859525665" },
-    { label: "Backup WhatsApp", href: "https://wa.me/917300627752" }
+    { label: "Contact us on WhatsApp", href: "https://wa.me/918859525665" }
   ];
   const CONTACT_API_URL = "https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec";
   const CONTACT_MESSAGES = {

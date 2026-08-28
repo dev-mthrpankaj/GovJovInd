@@ -1,4 +1,4 @@
-# GovJobUpdates
+﻿# GovJobUpdates
 
 GovJobUpdates is a static GitHub Pages website for Indian government job updates, admit cards, results, answer keys, quizzes, rank prediction and browser-based document tools.
 
@@ -114,4 +114,4 @@ Do not print the key in workflow logs. The workflow reads it from GitHub Actions
 
 ## Contact
 
-Email: dmagstudio2023@outlook.com
+Email: support@govjobupdates.com
