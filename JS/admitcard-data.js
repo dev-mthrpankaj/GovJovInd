@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0127-20260828215752-3d13977d",
+        "title": "PNB Local Bank Officer LBO Admit Card 2026",
+        "organization": "Punjab National Bank (PNB)",
+        "department": "PNB",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-09-06",
+        "examEndDate": "",
+        "releaseDate": "2026-08-28",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/pnbjul26/oecla_aug26/login.php?appid=35f6fc5c222701ae165314c834a28fb9",
+        "detailPage": "../AdmitCard_Details/HTML/PNB-Local-Bank-Officer-LBO-Admit-Card-2026.html",
+        "updatedAt": "2026-08-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0123-20260826153734-cab1dee9",
         "title": "RPSC Rajasthan APO Admit Card 2026 for 371 Post",
         "organization": "Rajasthan Public Service Commission",
@@ -833,7 +853,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-08",
         "examEndDate": "",
         "releaseDate": "2026-08-29",
-        "status": "upcoming",
+        "status": "available",
         "tags": [],
         "downloadLink": "https://sscnr.nic.in/newlook/ADMIT_CARD_HC_MIN_2025/CheckRoll.aspx",
         "detailPage": "../AdmitCard_Details/HTML/SSC-Delhi-Police-Head-Constable-Ministerial-Admit-Card-2025.html",

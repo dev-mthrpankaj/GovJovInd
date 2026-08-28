@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0120-20260828213842-5604a466",
+        "title": "SBI Probationary Officers PO Result 2026 for 1500 Post",
+        "organization": "State Bank of India",
+        "department": "SBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-08-28",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://sbi.bank.in/webfiles/uploads/files_2627/08/SBIPO2026-Prelims-WTRESULT-15_columns.pdf",
+        "detailPage": "../Result_Details/HTML/SBI-Probationary-Officers-PO-Result-2026.html",
+        "updatedAt": "2026-08-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0116-20260826145906-c8826848",
         "title": "PSSSB Line Superintendent Result 2026",
         "organization": "Punjab Subordinate Selection Board",
