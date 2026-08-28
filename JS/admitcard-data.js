@@ -193,7 +193,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-27",
         "examEndDate": "",
         "releaseDate": "2026-08-20",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/nicljul26/oecla_aug26/login.php?appid=a926805370094a107b2689a5bce28ba4",
         "detailPage": "../AdmitCard_Details/HTML/NICL-Assistant-Admit-Card-2026.html",
