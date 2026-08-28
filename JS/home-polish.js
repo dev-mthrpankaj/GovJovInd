@@ -55,266 +55,32 @@
       .home-coming-copy p{margin:.35rem 0 .65rem;color:#526174;font-size:.9rem;line-height:1.5}
       .home-coming-badge{display:inline-flex;align-items:center;gap:.35rem;min-height:30px;padding:.35rem .65rem;border:1px solid #bfdbfe;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:.74rem;font-weight:900;text-transform:uppercase}
       .home-coming-card--academy .home-coming-badge{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
-      @media(max-width:640px){.home-search-panel{margin:.75rem 0 .6rem;padding:.35rem;border-radius:14px}.home-search-panel .search-box{padding:.32rem .35rem}.home-search-panel .btn-search{min-height:38px;padding:.48rem .68rem}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.platform-stats .stat-item{padding:.85rem}.platform-stats .stat-number{font-size:1.28rem}.home-coming-soon__grid{grid-template-columns:1fr}.home-coming-card{min-height:132px;padding:.9rem}.home-coming-icon{width:48px;height:48px;font-size:1.15rem}.home-coming-copy h3{font-size:1.05rem}.home-coming-copy p{font-size:.84rem}}
+      .home-careers-route{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;padding:1.1rem 1.2rem;border:1px solid #bfdbfe;border-radius:12px;background:linear-gradient(135deg,#071f3f 0%,#0b4ea2 100%);box-shadow:0 12px 30px rgba(11,78,162,.14);color:#fff;text-decoration:none}
+      .home-careers-route::after{content:"";position:absolute;right:-55px;top:-75px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
+      .home-careers-route__icon{position:relative;z-index:1;display:grid;place-items:center;width:56px;height:56px;border-radius:14px;background:#fff;color:#0b4ea2;font-size:1.3rem}
+      .home-careers-route__copy{position:relative;z-index:1;min-width:0}.home-careers-route__eyebrow{display:block;margin-bottom:.18rem;color:#bfdbfe;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.home-careers-route__copy h2{margin:0;color:#fff;font-size:1.28rem;line-height:1.2}.home-careers-route__copy p{margin:.35rem 0 0;color:#dbeafe;font-size:.86rem;line-height:1.5}
+      .home-careers-route__action{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;padding:.68rem .85rem;border-radius:10px;background:#fff;color:#0b4ea2;font-size:.82rem;font-weight:900}
+      .home-careers-route:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(11,78,162,.18)}
+      @media(max-width:640px){.home-search-panel{margin:.75rem 0 .6rem;padding:.35rem;border-radius:14px}.home-search-panel .search-box{padding:.32rem .35rem}.home-search-panel .btn-search{min-height:38px;padding:.48rem .68rem}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.platform-stats .stat-item{padding:.85rem}.platform-stats .stat-number{font-size:1.28rem}.home-coming-soon__grid{grid-template-columns:1fr}.home-coming-card{min-height:132px;padding:.9rem}.home-coming-icon{width:48px;height:48px;font-size:1.15rem}.home-coming-copy h3{font-size:1.05rem}.home-coming-copy p{font-size:.84rem}.home-careers-route{grid-template-columns:auto minmax(0,1fr);padding:.95rem}.home-careers-route__icon{width:48px;height:48px}.home-careers-route__copy h2{font-size:1.08rem}.home-careers-route__copy p{font-size:.8rem}.home-careers-route__action{grid-column:1/-1;justify-content:center;width:100%}}
     `;
     document.head.appendChild(style);
   }
 
-  function formatCounter(value) {
-    if (value >= 1000) return `${Math.round(value / 100) / 10}K+`;
-    return `${Math.round(value)}+`;
-  }
+  function formatCounter(value) { if (value >= 1000) return `${Math.round(value / 100) / 10}K+`; return `${Math.round(value)}+`; }
+  function animateCounter(node, target, suffix) { const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(reduced){node.textContent=suffix?`${target}${suffix}`:formatCounter(target);return;}let current=0;const steps=42;const step=Math.max(1,target/steps);const timer=window.setInterval(()=>{current+=step;if(current>=target){current=target;window.clearInterval(timer);}node.textContent=suffix?`${Math.round(current)}${suffix}`:formatCounter(current);},24); }
+  function enhanceHeroSearch(){const searchBox=$("#homeSearchForm");if(!searchBox||searchBox.closest(".home-search-panel"))return;const panel=document.createElement("div");panel.className="home-search-panel";searchBox.parentNode.insertBefore(panel,searchBox);panel.appendChild(searchBox);}
+  function upgradeStatsCounters(){const stats=$(".platform-stats");if(!stats||stats.dataset.homePolished==="true")return;stats.dataset.homePolished="true";const items=[["6+","Exam Streams","SSC, Railway, Banking, Police, Teaching, State"],["6+","Useful Tools","Quiz, Rank Predictor, Dashboard, Documents, UP Services, Search"],["10+","Quiz History","Last attempts with analytics and graphs"],["100%","Mobile Focus","Designed for mobile aspirants first"]];stats.innerHTML=items.map(([num,label,note],index)=>`<div class="stat-item"><span class="stat-number" data-final="${num}" data-stat-index="${index}">0</span><span class="stat-label">${label}</span><small class="stat-note">${note}</small></div>`).join("");const targets=[6,6,10,100];stats.querySelectorAll(".stat-number").forEach((node,index)=>animateCounter(node,targets[index],index===3?"%":"+"));}
+  function setupHeroToolsToggle(){const grid=$(".hero-tool-grid");if(!grid||grid.dataset.toolsToggleReady==="true")return;const cards=Array.from(grid.querySelectorAll(".hero-tool-card"));if(cards.length<=6)return;grid.dataset.toolsToggleReady="true";cards.slice(6).forEach(card=>{card.classList.add("is-extra-tool");card.hidden=true;});const toggle=document.createElement("button");toggle.className="hero-tools-toggle";toggle.type="button";toggle.setAttribute("aria-expanded","false");toggle.innerHTML='<span>See more</span><i class="fas fa-chevron-down" aria-hidden="true"></i>';grid.insertAdjacentElement("afterend",toggle);toggle.addEventListener("click",()=>{const expanded=toggle.getAttribute("aria-expanded")==="true";cards.slice(6).forEach(card=>{card.hidden=expanded;});grid.classList.toggle("is-expanded",!expanded);toggle.setAttribute("aria-expanded",String(!expanded));toggle.innerHTML=expanded?'<span>See more</span><i class="fas fa-chevron-down" aria-hidden="true"></i>':'<span>Show less</span><i class="fas fa-chevron-up" aria-hidden="true"></i>';});}
 
-  function animateCounter(node, target, suffix) {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      node.textContent = suffix ? `${target}${suffix}` : formatCounter(target);
-      return;
-    }
-    let current = 0;
-    const steps = 42;
-    const step = Math.max(1, target / steps);
-    const timer = window.setInterval(() => {
-      current += step;
-      if (current >= target) {
-        current = target;
-        window.clearInterval(timer);
-      }
-      node.textContent = suffix ? `${Math.round(current)}${suffix}` : formatCounter(current);
-    }, 24);
-  }
+  function setupComingSoonSection(){if(document.querySelector(".home-coming-soon"))return;const typingCta=$(".live-test-cta");if(!typingCta)return;const section=document.createElement("section");section.className="home-coming-soon platform-section";section.setAttribute("aria-labelledby","homeComingSoonTitle");section.innerHTML=`<div class="home-coming-soon__head"><div><p class="section-kicker">Coming soon</p><h2 class="section-title" id="homeComingSoonTitle">More for Aspirants</h2><p class="section-subtitle">Two new GovJobUpdates experiences are being prepared for students and physical aspirants.</p></div></div><div class="home-coming-soon__grid"><article class="home-coming-card home-coming-card--store"><span class="home-coming-icon" aria-hidden="true"><i class="fas fa-bag-shopping"></i></span><div class="home-coming-copy"><h3>Aspirant Store</h3><p>Books, running shoes, physical preparation clothing, study essentials and more for aspirants.</p><span class="home-coming-badge"><i class="fas fa-clock" aria-hidden="true"></i> Coming Soon</span></div></article><article class="home-coming-card home-coming-card--academy"><span class="home-coming-icon" aria-hidden="true"><i class="fas fa-person-running"></i></span><div class="home-coming-copy"><h3>Physical Academy</h3><p>Running guidance, physical test preparation, training resources and aspirant-focused support.</p><span class="home-coming-badge"><i class="fas fa-clock" aria-hidden="true"></i> Coming Soon</span></div></article></div>`;typingCta.insertAdjacentElement("afterend",section);}
 
-  function enhanceHeroSearch() {
-    const searchBox = $("#homeSearchForm");
-    if (!searchBox || searchBox.closest(".home-search-panel")) return;
-    const panel = document.createElement("div");
-    panel.className = "home-search-panel";
-    searchBox.parentNode.insertBefore(panel, searchBox);
-    panel.appendChild(searchBox);
-  }
+  function setupCareersRoute(){if(document.querySelector(".home-careers-route"))return;const comingSoon=$(".home-coming-soon");if(!comingSoon)return;const route=document.createElement("a");route.className="home-careers-route platform-section";route.href="HTML/recruitment.html";route.setAttribute("aria-label","Explore careers and open recruitment at GovJobUpdates");route.innerHTML=`<span class="home-careers-route__icon" aria-hidden="true"><i class="fas fa-user-tie"></i></span><span class="home-careers-route__copy"><span class="home-careers-route__eyebrow">Careers at GovJobUpdates</span><h2>Want to work with us?</h2><p>Explore current opportunities and join the team building better government job and exam experiences for aspirants.</p></span><span class="home-careers-route__action">Explore Careers <i class="fas fa-arrow-right" aria-hidden="true"></i></span>`;comingSoon.insertAdjacentElement("afterend",route);}
 
-  function upgradeStatsCounters() {
-    const stats = $(".platform-stats");
-    if (!stats || stats.dataset.homePolished === "true") return;
-    stats.dataset.homePolished = "true";
-    const items = [
-      ["6+", "Exam Streams", "SSC, Railway, Banking, Police, Teaching, State"],
-      ["6+", "Useful Tools", "Quiz, Rank Predictor, Dashboard, Documents, UP Services, Search"],
-      ["10+", "Quiz History", "Last attempts with analytics and graphs"],
-      ["100%", "Mobile Focus", "Designed for mobile aspirants first"]
-    ];
-    stats.innerHTML = items.map(([num, label, note], index) => `
-      <div class="stat-item">
-        <span class="stat-number" data-final="${num}" data-stat-index="${index}">0</span>
-        <span class="stat-label">${label}</span>
-        <small class="stat-note">${note}</small>
-      </div>
-    `).join("");
-    const targets = [6, 6, 10, 100];
-    stats.querySelectorAll(".stat-number").forEach((node, index) => {
-      animateCounter(node, targets[index], index === 3 ? "%" : "+");
-    });
-  }
+  function getHomeUpdateSources(){return [{type:"Latest Job",icon:"fa-briefcase",color:"blue",href:"HTML/latest-jobs.html",records:window.GovJobUpdatesJobs||[],dateKey:"updatedAt",meta(record){return[record.department||record.organization,record.totalPosts?`${record.totalPosts} posts`:"",record.lastDate?`Last date ${formatHomeDate(record.lastDate)}`:""].filter(Boolean).join(" | ");}},{type:"Admit Card",icon:"fa-id-card",color:"saffron",href:"HTML/admitcard.html",records:window.GovJobUpdatesAdmitCards||[],dateKey:"releaseDate",meta(record){return[record.department||record.organization,record.examDate?`Exam ${formatHomeDate(record.examDate)}`:"",record.status].filter(Boolean).join(" | ");}},{type:"Result",icon:"fa-square-poll-vertical",color:"green",href:"HTML/results.html",records:window.GovJobUpdatesResults||[],dateKey:"resultDate",meta(record){return[record.department||record.organization,record.resultDate?`Released ${formatHomeDate(record.resultDate)}`:"",record.status].filter(Boolean).join(" | ");}},{type:"Answer Key",icon:"fa-key",color:"navy",href:"HTML/answer-key.html",records:window.GovJobUpdatesAnswerKeys||[],dateKey:"releaseDate",meta(record){return[record.department||record.organization,record.releaseDate?`Released ${formatHomeDate(record.releaseDate)}`:"",record.status].filter(Boolean).join(" | ");}}];}
 
-  function setupHeroToolsToggle() {
-    const grid = $(".hero-tool-grid");
-    if (!grid || grid.dataset.toolsToggleReady === "true") return;
+  function setupLatestUpdatesDashboard(){if(document.querySelector(".home-updates-dashboard"))return;const hero=$(".platform-hero");if(!hero)return;const sources=getHomeUpdateSources();const updates=sources.flatMap(source=>source.records.slice(0,4).map(record=>({source,record,date:record.updatedAt||record[source.dateKey]||record.releaseDate||record.resultDate||record.lastDate||""}))).sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,7);if(!updates.length)return;const section=document.createElement("section");section.className="home-updates-dashboard platform-section";section.setAttribute("aria-labelledby","homeUpdatesTitle");section.innerHTML=`<div class="home-updates-head"><div><p class="section-kicker">Fresh updates</p><h2 class="section-title" id="homeUpdatesTitle">Latest Sarkari Updates</h2><p class="section-subtitle">Jobs, admit cards, results and answer keys in one clean feed.</p></div><a class="section-link" href="HTML/latest-jobs.html">View all <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div><div class="home-update-summary" aria-label="Update categories">${sources.map(source=>`<a class="home-update-summary-card home-update-summary-card--${source.color}" href="${source.href}"><i class="fas ${source.icon}" aria-hidden="true"></i><span>${source.type}</span><strong>${source.records.length||0}</strong></a>`).join("")}</div><div class="home-updates-layout"><div class="home-updates-list">${updates.map(({source,record})=>`<a class="home-update-item home-update-item--${source.color}" href="${normalizeHomeUrl(record.detailPage,source.href)}"><span class="home-update-icon"><i class="fas ${source.icon}" aria-hidden="true"></i></span><span class="home-update-copy"><span class="home-update-type">${source.type}</span><strong>${escapeHtml(record.title)}</strong><small>${escapeHtml(source.meta(record))}</small></span><i class="fas fa-chevron-right" aria-hidden="true"></i></a>`).join("")}</div><aside class="home-quick-panel" aria-label="Quick actions"><strong>Quick access</strong><a href="HTML/latest-jobs.html"><i class="fas fa-briefcase" aria-hidden="true"></i> Latest Jobs</a><a href="HTML/admitcard.html"><i class="fas fa-id-card" aria-hidden="true"></i> Admit Card</a><a href="HTML/results.html"><i class="fas fa-square-poll-vertical" aria-hidden="true"></i> Results</a><a href="HTML/quiz.html"><i class="fas fa-circle-question" aria-hidden="true"></i> Quiz Practice</a><a href="HTML/rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Rank Predictor</a><a href="typing-test/index.html"><i class="fas fa-keyboard" aria-hidden="true"></i> Typing Test</a><a href="HTML/documents.html"><i class="fas fa-file-lines" aria-hidden="true"></i> Documents</a></aside></div>`;hero.insertAdjacentElement("afterend",section);}
 
-    const cards = Array.from(grid.querySelectorAll(".hero-tool-card"));
-    if (cards.length <= 6) return;
-
-    grid.dataset.toolsToggleReady = "true";
-    cards.slice(6).forEach((card) => {
-      card.classList.add("is-extra-tool");
-      card.hidden = true;
-    });
-
-    const toggle = document.createElement("button");
-    toggle.className = "hero-tools-toggle";
-    toggle.type = "button";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.innerHTML = '<span>See more</span><i class="fas fa-chevron-down" aria-hidden="true"></i>';
-
-    grid.insertAdjacentElement("afterend", toggle);
-
-    toggle.addEventListener("click", () => {
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      cards.slice(6).forEach((card) => {
-        card.hidden = expanded;
-      });
-      grid.classList.toggle("is-expanded", !expanded);
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      toggle.innerHTML = expanded
-        ? '<span>See more</span><i class="fas fa-chevron-down" aria-hidden="true"></i>'
-        : '<span>Show less</span><i class="fas fa-chevron-up" aria-hidden="true"></i>';
-    });
-  }
-
-  function setupComingSoonSection() {
-    if (document.querySelector(".home-coming-soon")) return;
-    const typingCta = $(".live-test-cta");
-    if (!typingCta) return;
-
-    const section = document.createElement("section");
-    section.className = "home-coming-soon platform-section";
-    section.setAttribute("aria-labelledby", "homeComingSoonTitle");
-    section.innerHTML = `
-      <div class="home-coming-soon__head">
-        <div>
-          <p class="section-kicker">Coming soon</p>
-          <h2 class="section-title" id="homeComingSoonTitle">More for Aspirants</h2>
-          <p class="section-subtitle">Two new GovJobUpdates experiences are being prepared for students and physical aspirants.</p>
-        </div>
-      </div>
-      <div class="home-coming-soon__grid">
-        <article class="home-coming-card home-coming-card--store">
-          <span class="home-coming-icon" aria-hidden="true"><i class="fas fa-bag-shopping"></i></span>
-          <div class="home-coming-copy">
-            <h3>Aspirant Store</h3>
-            <p>Books, running shoes, physical preparation clothing, study essentials and more for aspirants.</p>
-            <span class="home-coming-badge"><i class="fas fa-clock" aria-hidden="true"></i> Coming Soon</span>
-          </div>
-        </article>
-        <article class="home-coming-card home-coming-card--academy">
-          <span class="home-coming-icon" aria-hidden="true"><i class="fas fa-person-running"></i></span>
-          <div class="home-coming-copy">
-            <h3>Physical Academy</h3>
-            <p>Running guidance, physical test preparation, training resources and aspirant-focused support.</p>
-            <span class="home-coming-badge"><i class="fas fa-clock" aria-hidden="true"></i> Coming Soon</span>
-          </div>
-        </article>
-      </div>
-    `;
-
-    typingCta.insertAdjacentElement("afterend", section);
-  }
-
-  function getHomeUpdateSources() {
-    return [
-      {
-        type: "Latest Job",
-        icon: "fa-briefcase",
-        color: "blue",
-        href: "HTML/latest-jobs.html",
-        records: window.GovJobUpdatesJobs || [],
-        dateKey: "updatedAt",
-        meta(record) {
-          return [record.department || record.organization, record.totalPosts ? `${record.totalPosts} posts` : "", record.lastDate ? `Last date ${formatHomeDate(record.lastDate)}` : ""].filter(Boolean).join(" | ");
-        }
-      },
-      {
-        type: "Admit Card",
-        icon: "fa-id-card",
-        color: "saffron",
-        href: "HTML/admitcard.html",
-        records: window.GovJobUpdatesAdmitCards || [],
-        dateKey: "releaseDate",
-        meta(record) {
-          return [record.department || record.organization, record.examDate ? `Exam ${formatHomeDate(record.examDate)}` : "", record.status].filter(Boolean).join(" | ");
-        }
-      },
-      {
-        type: "Result",
-        icon: "fa-square-poll-vertical",
-        color: "green",
-        href: "HTML/results.html",
-        records: window.GovJobUpdatesResults || [],
-        dateKey: "resultDate",
-        meta(record) {
-          return [record.department || record.organization, record.resultDate ? `Released ${formatHomeDate(record.resultDate)}` : "", record.status].filter(Boolean).join(" | ");
-        }
-      },
-      {
-        type: "Answer Key",
-        icon: "fa-key",
-        color: "navy",
-        href: "HTML/answer-key.html",
-        records: window.GovJobUpdatesAnswerKeys || [],
-        dateKey: "releaseDate",
-        meta(record) {
-          return [record.department || record.organization, record.releaseDate ? `Released ${formatHomeDate(record.releaseDate)}` : "", record.status].filter(Boolean).join(" | ");
-        }
-      }
-    ];
-  }
-
-  function setupLatestUpdatesDashboard() {
-    if (document.querySelector(".home-updates-dashboard")) return;
-    const hero = $(".platform-hero");
-    if (!hero) return;
-
-    const sources = getHomeUpdateSources();
-    const updates = sources.flatMap((source) => source.records.slice(0, 4).map((record) => ({
-      source,
-      record,
-      date: record.updatedAt || record[source.dateKey] || record.releaseDate || record.resultDate || record.lastDate || ""
-    }))).sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 7);
-
-    if (!updates.length) return;
-
-    const section = document.createElement("section");
-    section.className = "home-updates-dashboard platform-section";
-    section.setAttribute("aria-labelledby", "homeUpdatesTitle");
-    section.innerHTML = `
-      <div class="home-updates-head">
-        <div>
-          <p class="section-kicker">Fresh updates</p>
-          <h2 class="section-title" id="homeUpdatesTitle">Latest Sarkari Updates</h2>
-          <p class="section-subtitle">Jobs, admit cards, results and answer keys in one clean feed.</p>
-        </div>
-        <a class="section-link" href="HTML/latest-jobs.html">View all <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      </div>
-      <div class="home-update-summary" aria-label="Update categories">
-        ${sources.map((source) => `
-          <a class="home-update-summary-card home-update-summary-card--${source.color}" href="${source.href}">
-            <i class="fas ${source.icon}" aria-hidden="true"></i>
-            <span>${source.type}</span>
-            <strong>${source.records.length || 0}</strong>
-          </a>
-        `).join("")}
-      </div>
-      <div class="home-updates-layout">
-        <div class="home-updates-list">
-          ${updates.map(({ source, record }) => `
-            <a class="home-update-item home-update-item--${source.color}" href="${normalizeHomeUrl(record.detailPage, source.href)}">
-              <span class="home-update-icon"><i class="fas ${source.icon}" aria-hidden="true"></i></span>
-              <span class="home-update-copy">
-                <span class="home-update-type">${source.type}</span>
-                <strong>${escapeHtml(record.title)}</strong>
-                <small>${escapeHtml(source.meta(record))}</small>
-              </span>
-              <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </a>
-          `).join("")}
-        </div>
-        <aside class="home-quick-panel" aria-label="Quick actions">
-          <strong>Quick access</strong>
-          <a href="HTML/latest-jobs.html"><i class="fas fa-briefcase" aria-hidden="true"></i> Latest Jobs</a>
-          <a href="HTML/admitcard.html"><i class="fas fa-id-card" aria-hidden="true"></i> Admit Card</a>
-          <a href="HTML/results.html"><i class="fas fa-square-poll-vertical" aria-hidden="true"></i> Results</a>
-          <a href="HTML/quiz.html"><i class="fas fa-circle-question" aria-hidden="true"></i> Quiz Practice</a>
-          <a href="HTML/rank-predictor.html"><i class="fas fa-chart-line" aria-hidden="true"></i> Rank Predictor</a>
-          <a href="typing-test/index.html"><i class="fas fa-keyboard" aria-hidden="true"></i> Typing Test</a>
-          <a href="HTML/documents.html"><i class="fas fa-file-lines" aria-hidden="true"></i> Documents</a>
-        </aside>
-      </div>
-    `;
-
-    hero.insertAdjacentElement("afterend", section);
-  }
-
-  function polishHome() {
-    injectHomePolishStyles();
-    enhanceHeroSearch();
-    upgradeStatsCounters();
-    setupHeroToolsToggle();
-    setupComingSoonSection();
-    setupLatestUpdatesDashboard();
-    document.body.classList.add("home-polished");
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", polishHome);
-  else polishHome();
-
-  window.addEventListener("gju:home-data-ready", setupLatestUpdatesDashboard, { once: true });
+  function polishHome(){injectHomePolishStyles();enhanceHeroSearch();upgradeStatsCounters();setupHeroToolsToggle();setupComingSoonSection();setupCareersRoute();setupLatestUpdatesDashboard();document.body.classList.add("home-polished");}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",polishHome);else polishHome();
+  window.addEventListener("gju:home-data-ready",setupLatestUpdatesDashboard,{once:true});
 }());
