@@ -55,34 +55,7 @@
       .home-coming-copy p{margin:.35rem 0 .65rem;color:#526174;font-size:.9rem;line-height:1.5}
       .home-coming-badge{display:inline-flex;align-items:center;gap:.35rem;min-height:30px;padding:.35rem .65rem;border:1px solid #bfdbfe;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:.74rem;font-weight:900;text-transform:uppercase}
       .home-coming-card--academy .home-coming-badge{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
-      .home-careers{position:relative;overflow:hidden;display:grid;gap:1.15rem;padding:clamp(1rem,2.5vw,1.55rem);border:1px solid rgba(37,99,235,.22);border-radius:18px;background:linear-gradient(135deg,#061b36 0%,#0b3570 46%,#0d4fa8 100%);box-shadow:0 22px 50px rgba(2,32,71,.18);color:#fff;isolation:isolate}
-      .home-careers::before{content:"";position:absolute;width:330px;height:330px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,rgba(255,153,51,.36) 0%,rgba(255,153,51,0) 70%);z-index:-1}
-      .home-careers::after{content:"";position:absolute;width:300px;height:300px;left:-145px;bottom:-190px;border-radius:50%;background:radial-gradient(circle,rgba(19,136,8,.32) 0%,rgba(19,136,8,0) 72%);z-index:-1}
-      .home-careers__top{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(240px,.5fr);gap:1.2rem;align-items:center}
-      .home-careers__eyebrow{display:inline-flex;align-items:center;gap:.45rem;width:max-content;margin:0 0 .55rem;padding:.4rem .72rem;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.09);color:#ffe4bd;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px)}
-      .home-careers__title{margin:0;color:#fff;font-size:clamp(1.55rem,3vw,2.45rem);line-height:1.08;letter-spacing:-.025em}
-      .home-careers__intro{max-width:760px;margin:.65rem 0 0;color:#dbeafe;font-size:.96rem;line-height:1.65}
-      .home-careers__meta{display:flex;flex-wrap:wrap;gap:.48rem;margin-top:.85rem}
-      .home-careers__meta span{display:inline-flex;align-items:center;gap:.38rem;padding:.42rem .68rem;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.08);color:#f8fafc;font-size:.78rem;font-weight:800}
-      .home-careers__salary{position:relative;padding:1rem 1.05rem;border:1px solid rgba(255,255,255,.22);border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.07));box-shadow:inset 0 1px 0 rgba(255,255,255,.16);backdrop-filter:blur(10px)}
-      .home-careers__salary small{display:block;margin-bottom:.24rem;color:#cbd5e1;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-      .home-careers__salary strong{display:block;color:#fff;font-size:clamp(1.38rem,2.4vw,1.9rem);line-height:1.15}
-      .home-careers__salary span{display:block;margin-top:.25rem;color:#bfdbfe;font-size:.8rem;font-weight:700}
-      .home-careers__roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
-      .home-career-card{position:relative;display:flex;flex-direction:column;min-height:190px;padding:1rem;border:1px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(255,255,255,.095);box-shadow:inset 0 1px 0 rgba(255,255,255,.11);backdrop-filter:blur(10px);transition:transform .18s ease,border-color .18s ease,background .18s ease}
-      .home-career-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.36);background:rgba(255,255,255,.13)}
-      .home-career-card__icon{display:grid;place-items:center;width:42px;height:42px;margin-bottom:.75rem;border-radius:11px;background:linear-gradient(135deg,#fff,#dbeafe);color:#0b4ea2;font-size:1rem;box-shadow:0 8px 20px rgba(2,18,43,.2)}
-      .home-career-card:nth-child(2) .home-career-card__icon{background:linear-gradient(135deg,#ecfdf5,#bbf7d0);color:#15803d}
-      .home-career-card:nth-child(3) .home-career-card__icon{background:linear-gradient(135deg,#fff7ed,#fed7aa);color:#c2410c}
-      .home-career-card h3{margin:0;color:#fff;font-size:1rem;line-height:1.35}
-      .home-career-card p{margin:.48rem 0 0;color:#cbd5e1;font-size:.82rem;line-height:1.52}
-      .home-career-card__vacancy{margin-top:auto;padding-top:.7rem;color:#dbeafe;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
-      .home-careers__footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:.15rem;flex-wrap:wrap}
-      .home-careers__note{display:flex;align-items:center;gap:.5rem;color:#dbeafe;font-size:.82rem;font-weight:700}
-      .home-careers__cta{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.72rem 1.05rem;border:1px solid #fff;border-radius:12px;background:#fff;color:#0b3d82;font-size:.88rem;font-weight:900;text-decoration:none;box-shadow:0 12px 28px rgba(2,18,43,.22);transition:transform .18s ease,box-shadow .18s ease}
-      .home-careers__cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(2,18,43,.28)}
-      @media(max-width:860px){.home-careers__top{grid-template-columns:1fr}.home-careers__salary{max-width:360px}.home-careers__roles{grid-template-columns:1fr}.home-career-card{min-height:0}.home-careers__footer{align-items:stretch}.home-careers__cta{width:100%}}
-      @media(max-width:640px){.home-search-panel{margin:.75rem 0 .6rem;padding:.35rem;border-radius:14px}.home-search-panel .search-box{padding:.32rem .35rem}.home-search-panel .btn-search{min-height:38px;padding:.48rem .68rem}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.platform-stats .stat-item{padding:.85rem}.platform-stats .stat-number{font-size:1.28rem}.home-coming-soon__grid{grid-template-columns:1fr}.home-coming-card{min-height:132px;padding:.9rem}.home-coming-icon{width:48px;height:48px;font-size:1.15rem}.home-coming-copy h3{font-size:1.05rem}.home-coming-copy p{font-size:.84rem}.home-careers{border-radius:14px;padding:.95rem}.home-careers__title{font-size:1.55rem}.home-careers__intro{font-size:.88rem}.home-careers__meta span{font-size:.72rem}.home-careers__salary{padding:.85rem}.home-career-card{padding:.9rem}.home-careers__note{font-size:.76rem}}
+      @media(max-width:640px){.home-search-panel{margin:.75rem 0 .6rem;padding:.35rem;border-radius:14px}.home-search-panel .search-box{padding:.32rem .35rem}.home-search-panel .btn-search{min-height:38px;padding:.48rem .68rem}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.platform-stats .stat-item{padding:.85rem}.platform-stats .stat-number{font-size:1.28rem}.home-coming-soon__grid{grid-template-columns:1fr}.home-coming-card{min-height:132px;padding:.9rem}.home-coming-icon{width:48px;height:48px;font-size:1.15rem}.home-coming-copy h3{font-size:1.05rem}.home-coming-copy p{font-size:.84rem}}
     `;
     document.head.appendChild(style);
   }
@@ -216,64 +189,6 @@
     typingCta.insertAdjacentElement("afterend", section);
   }
 
-  function setupCareersSection() {
-    if (document.querySelector(".home-careers")) return;
-    const comingSoon = $(".home-coming-soon");
-    if (!comingSoon) return;
-
-    const section = document.createElement("section");
-    section.className = "home-careers platform-section";
-    section.setAttribute("aria-labelledby", "homeCareersTitle");
-    section.innerHTML = `
-      <div class="home-careers__top">
-        <div>
-          <p class="home-careers__eyebrow"><i class="fas fa-sparkles" aria-hidden="true"></i> Careers · We're Hiring</p>
-          <h2 class="home-careers__title" id="homeCareersTitle">Build GovJobUpdates With Us</h2>
-          <p class="home-careers__intro">Join a growing platform focused on reliable government job updates and better exam preparation experiences for aspirants across India.</p>
-          <div class="home-careers__meta" aria-label="Job highlights">
-            <span><i class="fas fa-briefcase" aria-hidden="true"></i> 3 Open Positions</span>
-            <span><i class="fas fa-house-laptop" aria-hidden="true"></i> Remote</span>
-            <span><i class="fas fa-clock" aria-hidden="true"></i> Full Time</span>
-            <span><i class="fas fa-location-dot" aria-hidden="true"></i> India</span>
-          </div>
-        </div>
-        <div class="home-careers__salary" aria-label="Salary range">
-          <small>Salary Range</small>
-          <strong>₹30,000 – ₹35,000</strong>
-          <span>per month · based on role & selection</span>
-        </div>
-      </div>
-
-      <div class="home-careers__roles" aria-label="Open career positions">
-        <article class="home-career-card">
-          <span class="home-career-card__icon" aria-hidden="true"><i class="fas fa-magnifying-glass-chart"></i></span>
-          <h3>Government Job Content & Research Executive</h3>
-          <p>Research official recruitment updates, verify details and prepare accurate publication-ready content.</p>
-          <span class="home-career-card__vacancy">1 Vacancy</span>
-        </article>
-        <article class="home-career-card">
-          <span class="home-career-card__icon" aria-hidden="true"><i class="fas fa-list-check"></i></span>
-          <h3>Competitive Exam Question & Quiz Expert</h3>
-          <p>Create and verify exam-oriented bilingual MCQs, explanations, quizzes and mock-test content.</p>
-          <span class="home-career-card__vacancy">1 Vacancy</span>
-        </article>
-        <article class="home-career-card">
-          <span class="home-career-card__icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></span>
-          <h3>Content Quality & Publishing Executive</h3>
-          <p>Perform final quality checks for job updates and exam content before accurate publication.</p>
-          <span class="home-career-card__vacancy">1 Vacancy</span>
-        </article>
-      </div>
-
-      <div class="home-careers__footer">
-        <span class="home-careers__note"><i class="fas fa-circle-check" aria-hidden="true"></i> Skills and practical performance matter more than years of experience.</span>
-        <a class="home-careers__cta" href="HTML/recruitment.html">View Open Positions <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      </div>
-    `;
-
-    comingSoon.insertAdjacentElement("afterend", section);
-  }
-
   function getHomeUpdateSources() {
     return [
       {
@@ -394,7 +309,6 @@
     upgradeStatsCounters();
     setupHeroToolsToggle();
     setupComingSoonSection();
-    setupCareersSection();
     setupLatestUpdatesDashboard();
     document.body.classList.add("home-polished");
   }
