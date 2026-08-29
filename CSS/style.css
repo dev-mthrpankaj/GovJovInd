@@ -3802,16 +3802,8 @@ body.gju-cookie-consent-visible .gju-contact-widget {
     min-height: 38px;
   }
 
-  body.gju-cookie-consent-visible .gju-telegram-widget {
-    bottom: calc(174px + env(safe-area-inset-bottom));
-  }
-
   body.gju-cookie-consent-visible .gju-contact-widget {
     bottom: calc(216px + env(safe-area-inset-bottom));
-  }
-
-  .phase2-listing-page .gju-telegram-widget {
-    display: none !important;
   }
 
   .phase2-listing-page .gju-cookie-consent {

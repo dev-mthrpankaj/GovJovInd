@@ -1014,10 +1014,7 @@ document.querySelectorAll('.ticker-wrap').forEach((ticker) => {
   }
 
   function shouldCreateTelegram() {
-    const page = getPageName();
-    if (TELEGRAM_BLOCKED.has(page)) return false;
-    if (document.getElementById('gjuTelegramWidget')) return false;
-    return true;
+    return false;
   }
 
   function createTelegramWidget() {
