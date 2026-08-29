@@ -907,3 +907,148 @@
     window.setTimeout(applyProfessionalLayout, 1200);
   }
 }());
+
+
+/* Phase 2G.2 — Final information-architecture cleanup from live dashboard audit. */
+(function () {
+  "use strict";
+
+  function text(node) {
+    return String(node && node.textContent || "").trim();
+  }
+
+  function cardByHeading(pattern) {
+    return Array.from(document.querySelectorAll(".dash-section-card")).find((card) => {
+      const h = card.querySelector(".dash-section-head h2");
+      return h && pattern.test(text(h));
+    }) || null;
+  }
+
+  function removeUpperUtilityRow() {
+    const tools = cardByHeading(/^(Dashboard Tools|Quick Actions)$/i);
+    const account = cardByHeading(/^(Profile Summary|Account)$/i);
+    const section = (tools || account)?.closest(".dashboard-section-grid");
+    if (section && !section.classList.contains("dashboard-practice-zone") && !section.classList.contains("dashboard-rank-zone")) {
+      section.hidden = true;
+      section.classList.add("dashboard-utility-row-retired");
+    }
+  }
+
+  function renameHeroMetrics() {
+    const attempt = document.querySelector("#quizAttemptCount")?.closest(".dash-stat");
+    const best = document.querySelector("#bestQuizScore")?.closest(".dash-stat");
+    if (attempt) {
+      const label = attempt.querySelector("span");
+      if (label) label.textContent = "Total Quiz Attempts";
+    }
+    if (best) {
+      const label = best.querySelector("span");
+      if (label) label.textContent = "Best Quiz Score";
+      best.classList.add("dash-stat-secondary");
+    }
+  }
+
+  function compactLocalHistory() {
+    const chart = document.querySelector("#quizScoreChart");
+    if (!chart || chart.closest("details.quiz-device-history-details")) return;
+    const parent = chart.parentNode;
+    if (!parent) return;
+
+    const details = document.createElement("details");
+    details.className = "quiz-device-history-details";
+    details.innerHTML = `
+      <summary>
+        <span><i class="fas fa-mobile-screen-button" aria-hidden="true"></i><b>Device History</b></span>
+        <small>Local browser attempts</small>
+        <i class="fas fa-chevron-down quiz-device-chevron" aria-hidden="true"></i>
+      </summary>
+    `;
+    parent.insertBefore(details, chart);
+    details.appendChild(chart);
+  }
+
+  function makeSubjectPerformanceFullWidth() {
+    const subject = document.querySelector("#quizSubjectChart")?.closest(".dash-section-card");
+    if (subject) subject.classList.add("dashboard-subject-full");
+  }
+
+  function emphasizeLatestQuiz() {
+    const list = document.querySelector("#quizAccountProgressList");
+    if (!list) return;
+    list.classList.add("dashboard-latest-quiz-focus");
+  }
+
+  function simplifyPracticeOverview() {
+    const overview = document.querySelector("#quizAccountOverview");
+    if (!overview) return;
+    overview.classList.add("dashboard-practice-overview-compact");
+  }
+
+  function cleanRankZone() {
+    const percentile = document.querySelector("#rankPercentileChart")?.closest(".dash-section-card");
+    const trend = document.querySelector("#rankTrendChart")?.closest(".dash-section-card");
+    const exam = document.querySelector("#rankExamChart")?.closest(".dash-section-card");
+    const insights = document.querySelector("#rankAnalysisBox")?.closest(".dash-section-card");
+
+    [percentile, trend, exam, insights].forEach((card) => {
+      if (card) card.classList.add("dashboard-rank-compact-card");
+    });
+
+    const history = document.querySelector("#rankHistoryList")?.closest(".dash-section-card");
+    if (history) {
+      const head = history.querySelector(".dash-section-head");
+      if (head) {
+        const h2 = head.querySelector("h2");
+        const p = head.querySelector("p");
+        if (h2) h2.textContent = "Recent Rank Predictions";
+        if (p) p.textContent = "Your latest submitted predictions and estimated rank outcomes.";
+      }
+    }
+  }
+
+  function applyFinalCleanup() {
+    if (!document.body.matches('[data-auth-page="dashboard"]')) return;
+    document.body.classList.add("dashboard-final-cleanup");
+    removeUpperUtilityRow();
+    renameHeroMetrics();
+    compactLocalHistory();
+    makeSubjectPerformanceFullWidth();
+    emphasizeLatestQuiz();
+    simplifyPracticeOverview();
+    cleanRankZone();
+  }
+
+  function start() {
+    applyFinalCleanup();
+    let queued = false;
+    const root = document.querySelector("#dashboardContent") || document.body;
+    new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        applyFinalCleanup();
+      });
+    }).observe(root, {childList:true, subtree:true});
+    window.setTimeout(applyFinalCleanup, 1400);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, {once:true});
+  } else {
+    start();
+  }
+}());
+
+(function(){
+  "use strict";
+  function load(){
+    if(document.getElementById("gjuDashboardFinalCleanupCss")) return;
+    const l=document.createElement("link");
+    l.id="gjuDashboardFinalCleanupCss";
+    l.rel="stylesheet";
+    l.href="../CSS/dashboard-final-cleanup.css?v=20260829-phase2g2";
+    document.head.appendChild(l);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",load,{once:true}); else load();
+}());
