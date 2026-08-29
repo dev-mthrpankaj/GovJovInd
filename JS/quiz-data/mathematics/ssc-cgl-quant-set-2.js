@@ -3,7 +3,7 @@
 
     window.GJU_QUIZ_BANK = window.GJU_QUIZ_BANK || [];
 
-    const quizId = "ssc-maths-quiz-1-billingual";
+    const quizId = "ssc-maths-quiz-5-billingual";
 
     function text(hi, en) {
         return { hi, en };
@@ -280,7 +280,7 @@
     window.GJU_QUIZ_BANK.push({
         id: quizId,
         subject: "Mathematics",
-        title: "SSC Maths Quiz 1 (Billingual)",
+        title: "SSC Maths Quiz 5 (Billingual)",
         description: "25 bilingual Hindi-English quantitative aptitude questions with LaTeX formatting, based on SSC CGL Tier 1 (12 Sep 2025, Shift 1) style questions.",
         durationMinutes: 20,
         totalQuestions: questions.length,
