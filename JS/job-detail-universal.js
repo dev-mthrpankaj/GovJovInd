@@ -16,6 +16,28 @@
   const num = value => typeof value === 'number' ? new Intl.NumberFormat('en-IN').format(value) : value;
   const setText = (id,value) => { const el=$(id); if(el) el.textContent=value ?? '—'; };
   const setLink = (id,url) => { const el=$(id); if(!el) return; if(url && url !== '#'){el.href=url; el.target='_blank'; el.rel='noopener noreferrer';} else {el.href='#important-links';} };
+  function buildSchemaJobLocation(location){
+    const raw=String(location||'').trim();
+    const parts=raw ? raw.split(/\s*(?:&|,|\/|\band\b)\s*/i).map(x=>x.trim()).filter(Boolean) : ['India'];
+    const toPlace=(name)=>{
+      const address={"@type":"PostalAddress","addressCountry":"IN"};
+      if(!name || /^india$/i.test(name)) return {"@type":"Place","address":address};
+      if(/delhi|chandigarh|prayagraj|mathura|patna|lucknow|shillong|tirupati|trichy|madurai|bhubaneswar|udaipur/i.test(name)) address.addressLocality=name;
+      else address.addressRegion=name;
+      return {"@type":"Place","address":address};
+    };
+    const places=parts.map(toPlace);
+    return places.length===1 ? places[0] : places;
+  }
+  function buildSchemaBaseSalary(salary){
+    const text=String(salary||'');
+    const matches=[...text.matchAll(/\d[\d,]*/g)].map(m=>Number(m[0].replace(/,/g,''))).filter(Number.isFinite);
+    if(!matches.length) return undefined;
+    const value={"@type":"QuantitativeValue","unitText":/year|annual|annum|p\.a\./i.test(text)?"YEAR":"MONTH"};
+    if(matches.length>=2){ value.minValue=Math.min(matches[0],matches[1]); value.maxValue=Math.max(matches[0],matches[1]); }
+    else value.value=matches[0];
+    return {"@type":"MonetaryAmount","currency":"INR","value":value};
+  }
 
   function renderSEO(){
     if(job.seo?.title){document.title=job.seo.title; document.querySelector('meta[property="og:title"]')?.setAttribute('content',job.seo.title);}
@@ -67,7 +89,7 @@
   }
   function renderSchemas(){
     const canonical=job.seo?.canonical||location.href; const end=job.dates?.applicationEnd;
-    const posting={"@context":"https://schema.org","@type":"JobPosting","title":job.title,"description":job.summary,"datePosted":job.dates?.notification,"validThrough":end,"employmentType":"FULL_TIME","hiringOrganization":{"@type":"Organization","name":job.organization,"sameAs":job.links?.official||canonical},"jobLocationType":job.location?.toLowerCase().includes('india')?'TELECOMMUTE':undefined,"applicantLocationRequirements":{"@type":"Country","name":"India"},"url":canonical}; Object.keys(posting).forEach(k=>posting[k]===undefined&&delete posting[k]); $('jobPostingSchema').textContent=JSON.stringify(posting);
+    const posting={"@context":"https://schema.org","@type":"JobPosting","title":job.title,"description":job.summary,"datePosted":job.dates?.notification,"validThrough":end,"employmentType":"FULL_TIME","hiringOrganization":{"@type":"Organization","name":job.organization,"sameAs":job.links?.official||canonical},"jobLocation":buildSchemaJobLocation(job.location),"applicantLocationRequirements":{"@type":"Country","name":"India"},"baseSalary":buildSchemaBaseSalary(job.salary),"url":canonical}; Object.keys(posting).forEach(k=>posting[k]===undefined&&delete posting[k]); $('jobPostingSchema').textContent=JSON.stringify(posting);
     $('breadcrumbSchema').textContent=JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"Latest Jobs","item":"https://govjobupdates.com/HTML/latest-jobs.html"},{"@type":"ListItem","position":3,"name":job.title,"item":canonical}]});
     $('faqSchema').textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":(job.faqs||[]).map(([q,a])=>({"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}}))});
   }
