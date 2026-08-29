@@ -661,3 +661,249 @@
 
   window.addEventListener("gju:quiz-progress-synced", () => loadAccountProgress());
 }());
+
+
+/* Phase 2G.1 — Professional Candidate Dashboard composition.
+   DOM-only presentation layer. Existing IDs, auth, rank and quiz data contracts remain intact. */
+(function () {
+  "use strict";
+
+  const STYLE_ID = "gjuProfessionalDashboardCss";
+  const STYLE_HREF = "../CSS/dashboard-professional.css?v=20260829-phase2g1";
+
+  function loadProfessionalCss() {
+    if (document.getElementById(STYLE_ID)) return;
+    const link = document.createElement("link");
+    link.id = STYLE_ID;
+    link.rel = "stylesheet";
+    link.href = STYLE_HREF;
+    document.head.appendChild(link);
+  }
+
+  function textOf(node) {
+    return String(node && node.textContent || "").trim();
+  }
+
+  function findCardByHeading(pattern) {
+    return Array.from(document.querySelectorAll(".dash-section-card")).find((card) => {
+      const heading = card.querySelector(".dash-section-head h2");
+      return heading && pattern.test(textOf(heading));
+    }) || null;
+  }
+
+  function ensureSectionMarker(section, eyebrow, title, copy, className) {
+    if (!section || section.querySelector(":scope > .dashboard-zone-head")) return;
+    section.classList.add(className);
+    const head = document.createElement("div");
+    head.className = "dashboard-zone-head";
+    head.innerHTML = `
+      <div>
+        <span>${eyebrow}</span>
+        <h2>${title}</h2>
+        <p>${copy}</p>
+      </div>
+    `;
+    section.prepend(head);
+  }
+
+  function buildHeroActions(hero) {
+    if (!hero || hero.querySelector(".dashboard-pro-actions")) return;
+    const main = hero.querySelector(".dashboard-hero-main");
+    const logout = hero.querySelector("#logoutBtn");
+    if (!main || !logout) return;
+
+    const actions = document.createElement("div");
+    actions.className = "dashboard-pro-actions";
+    actions.innerHTML = `
+      <a class="dashboard-primary-action" href="quiz.html">
+        <i class="fas fa-play-circle" aria-hidden="true"></i>
+        <span><small>Continue preparation</small><strong>Practice Quiz</strong></span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    `;
+    actions.appendChild(logout);
+    main.appendChild(actions);
+  }
+
+  function upgradeHero() {
+    const hero = document.querySelector(".dashboard-hero");
+    if (!hero) return;
+    hero.classList.add("dashboard-pro-hero");
+
+    const kicker = hero.querySelector(".auth-kicker");
+    if (kicker) kicker.textContent = "Candidate Command Center";
+
+    const statusRow = hero.querySelector(".dash-status-row");
+    if (statusRow) {
+      const chips = statusRow.querySelectorAll(".dash-chip");
+      if (chips[0]) chips[0].innerHTML = '<i class="fas fa-circle-check"></i> Account Ready';
+      if (chips[1]) chips[1].innerHTML = '<i class="fas fa-cloud"></i> Quiz Sync';
+      if (chips[2]) chips[2].innerHTML = '<i class="fas fa-chart-line"></i> Rank Tracking';
+    }
+
+    const name = hero.querySelector("#userName");
+    if (name) name.dataset.dashboardGreeting = "1";
+
+    buildHeroActions(hero);
+  }
+
+  function upgradeQuickActions() {
+    const tools = findCardByHeading(/^Dashboard Tools$/i);
+    if (tools) {
+      tools.classList.add("dashboard-quick-actions-card");
+      const h2 = tools.querySelector(".dash-section-head h2");
+      const p = tools.querySelector(".dash-section-head p");
+      if (h2) h2.textContent = "Quick Actions";
+      if (p) p.textContent = "Jump straight into the two tools that drive your preparation dashboard.";
+
+      const links = tools.querySelectorAll(".dash-tool");
+      if (links[0]) links[0].classList.add("is-primary-tool");
+    }
+
+    const profile = findCardByHeading(/^Profile Summary$/i);
+    if (profile) {
+      profile.classList.add("dashboard-profile-card");
+      const h2 = profile.querySelector(".dash-section-head h2");
+      const p = profile.querySelector(".dash-section-head p");
+      if (h2) h2.textContent = "Account";
+      if (p) p.textContent = "Your identity used for synced quiz and rank records.";
+    }
+
+    const section = tools && tools.closest(".dashboard-section-grid");
+    if (section) section.classList.add("dashboard-command-grid");
+  }
+
+  function upgradePracticeZone() {
+    const quizCard = document.querySelector("#quizScoreChart")?.closest(".dash-section-card");
+    const subjectCard = document.querySelector("#quizSubjectChart")?.closest(".dash-section-card");
+    if (!quizCard || !subjectCard) return;
+
+    const section = quizCard.closest(".dashboard-section-grid");
+    ensureSectionMarker(
+      section,
+      "PRACTICE PERFORMANCE",
+      "Your quiz progress",
+      "Latest synced results, personal bests and subject-level performance in one place.",
+      "dashboard-practice-zone"
+    );
+
+    quizCard.classList.add("dashboard-feature-card");
+    subjectCard.classList.add("dashboard-secondary-card");
+  }
+
+  function tagRankSections() {
+    const selectors = [
+      "#latestRankSnapshot",
+      "#rankHealthBox",
+      "#rankPercentileChart",
+      "#rankTrendChart",
+      "#rankExamChart",
+      "#rankAnalysisBox",
+      "#rankExamRecords",
+      "#rankHistoryList"
+    ];
+
+    const sections = [];
+    selectors.forEach((selector) => {
+      const node = document.querySelector(selector);
+      const section = node && node.closest(".dashboard-section-grid");
+      if (section && !sections.includes(section)) sections.push(section);
+    });
+
+    sections.forEach((section, index) => {
+      section.classList.add("dashboard-rank-zone");
+      if (index === 0) {
+        ensureSectionMarker(
+          section,
+          "RANK PREDICTOR",
+          "Your rank intelligence",
+          "Review your latest estimate, percentile trend and exam-wise rank records without visual clutter.",
+          "dashboard-rank-zone-first"
+        );
+      }
+    });
+
+    const performance = findCardByHeading(/^Performance Note$/i);
+    if (performance) {
+      performance.hidden = true;
+      performance.classList.add("dashboard-retired-card");
+    }
+
+    const rankHistoryCard = document.querySelector("#rankHistoryList")?.closest(".dash-section-card");
+    if (rankHistoryCard) rankHistoryCard.classList.add("dashboard-rank-history-card");
+  }
+
+  function addOverviewRail() {
+    const hero = document.querySelector(".dashboard-hero");
+    if (!hero || document.querySelector(".dashboard-section-rail")) return;
+
+    const rail = document.createElement("nav");
+    rail.className = "dashboard-section-rail";
+    rail.setAttribute("aria-label", "Dashboard sections");
+    rail.innerHTML = `
+      <a href="#dashboardPracticeZone"><i class="fas fa-bolt" aria-hidden="true"></i><span>Practice</span></a>
+      <a href="#dashboardRankZone"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Rank Predictor</span></a>
+      <a href="quiz.html"><i class="fas fa-play" aria-hidden="true"></i><span>Start Quiz</span></a>
+      <a href="rank-predictor.html"><i class="fas fa-ranking-star" aria-hidden="true"></i><span>Check Rank</span></a>
+    `;
+    hero.after(rail);
+  }
+
+  function assignAnchors() {
+    const practice = document.querySelector(".dashboard-practice-zone");
+    if (practice) practice.id = "dashboardPracticeZone";
+    const rank = document.querySelector(".dashboard-rank-zone-first");
+    if (rank) rank.id = "dashboardRankZone";
+  }
+
+  function syncGreeting() {
+    const name = document.querySelector("#userName[data-dashboard-greeting]");
+    if (!name || name.dataset.greetingApplied === "1") return;
+    const current = textOf(name);
+    if (!current || /loading/i.test(current)) return;
+
+    const hour = new Date().getHours();
+    const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+    name.textContent = `${greeting}, ${current}`;
+    name.dataset.greetingApplied = "1";
+  }
+
+  function applyProfessionalLayout() {
+    if (!document.body.matches('[data-auth-page="dashboard"]')) return;
+    loadProfessionalCss();
+    document.body.classList.add("dashboard-professional");
+    upgradeHero();
+    upgradeQuickActions();
+    upgradePracticeZone();
+    tagRankSections();
+    assignAnchors();
+    addOverviewRail();
+    syncGreeting();
+  }
+
+  function observeDynamicDashboard() {
+    const root = document.querySelector("#dashboardContent") || document.body;
+    let scheduled = false;
+    const observer = new MutationObserver(() => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => {
+        scheduled = false;
+        applyProfessionalLayout();
+      });
+    });
+    observer.observe(root, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      applyProfessionalLayout();
+      observeDynamicDashboard();
+      window.setTimeout(applyProfessionalLayout, 1200);
+    }, { once: true });
+  } else {
+    applyProfessionalLayout();
+    observeDynamicDashboard();
+    window.setTimeout(applyProfessionalLayout, 1200);
+  }
+}());
