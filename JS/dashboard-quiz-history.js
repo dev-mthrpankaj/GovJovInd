@@ -1052,3 +1052,59 @@
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",load,{once:true}); else load();
 }());
+
+
+/* Phase 2G.3 — Final cosmetic polish. */
+(function () {
+  "use strict";
+
+  function apply() {
+    if (!document.body.matches('[data-auth-page="dashboard"]')) return;
+    document.body.classList.add("dashboard-phase2g-complete");
+
+    /* Storage-model explanation is implementation detail, not primary candidate UI. */
+    const historyNote = document.querySelector("#quizHistoryList .quiz-history-note");
+    if (historyNote) historyNote.remove();
+
+    const historyList = document.querySelector("#quizHistoryList");
+    if (historyList && !historyList.textContent.trim()) historyList.hidden = true;
+
+    /* Give subject performance a row-oriented scalable presentation. */
+    const subjectChart = document.querySelector("#quizSubjectChart");
+    if (subjectChart) subjectChart.classList.add("quiz-subject-row-layout");
+  }
+
+  function start() {
+    apply();
+    let queued = false;
+    const root = document.querySelector("#dashboardContent") || document.body;
+    new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        apply();
+      });
+    }).observe(root, {childList:true, subtree:true});
+    window.setTimeout(apply, 1500);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, {once:true});
+  } else {
+    start();
+  }
+}());
+
+(function(){
+  "use strict";
+  function load(){
+    if(document.getElementById("gjuDashboardPhase2gCompleteCss")) return;
+    const l=document.createElement("link");
+    l.id="gjuDashboardPhase2gCompleteCss";
+    l.rel="stylesheet";
+    l.href="../CSS/dashboard-phase2g-complete.css?v=20260829-phase2g3";
+    document.head.appendChild(l);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",load,{once:true}); else load();
+}());

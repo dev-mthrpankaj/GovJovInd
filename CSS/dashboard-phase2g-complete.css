@@ -1,0 +1,51 @@
+/* Phase 2G.3 — final cosmetic polish */
+
+/* Remove empty history holder after the explanatory implementation note is removed. */
+body[data-auth-page="dashboard"].dashboard-phase2g-complete #quizHistoryList[hidden]{
+  display:none!important;
+}
+
+/* Subject Performance: use available width instead of leaving a small card in a large panel. */
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .dashboard-subject-full .quiz-subject-performance{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:.5rem!important;
+}
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .quiz-subject-row-layout .quiz-subject-row{
+  display:grid;
+  grid-template-columns:minmax(190px,.7fr) minmax(320px,1.3fr);
+  align-items:center;
+  gap:1rem;
+  min-height:74px;
+  padding:.72rem .85rem;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  background:#fbfdff;
+}
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .quiz-subject-row-layout .quiz-subject-row-head{
+  min-width:0;
+}
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .quiz-subject-row-layout .quiz-subject-bars{
+  min-width:0;
+}
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .quiz-subject-row-layout .quiz-subject-bars>div{
+  grid-template-columns:48px minmax(0,1fr) 38px;
+}
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .quiz-subject-row-layout .quiz-subject-bars i{
+  height:8px;
+}
+
+/* Keep the section compact when only one subject exists. */
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .dashboard-subject-full{
+  padding-bottom:1rem;
+}
+body[data-auth-page="dashboard"].dashboard-phase2g-complete .dashboard-subject-full .dash-section-head{
+  margin-bottom:0;
+}
+
+@media(max-width:760px){
+  body[data-auth-page="dashboard"].dashboard-phase2g-complete .quiz-subject-row-layout .quiz-subject-row{
+    grid-template-columns:1fr;
+    gap:.65rem;
+  }
+}
