@@ -3,7 +3,7 @@
 
     window.GJU_QUIZ_BANK = window.GJU_QUIZ_BANK || [];
 
-    const quizId = "ssc-cgl-tier-1-12-sep-2025-shift-2-quant";
+    const quizId = "ssc-maths-quiz-2-billingual";
 
     function text(hi, en) {
         return { hi, en };
@@ -401,7 +401,7 @@
     window.GJU_QUIZ_BANK.push({
         id: quizId,
         subject: "Quantitative Aptitude",
-        title: "SSC CGL Tier 1 - 12 Sep 2025 Shift 2 (Quantitative Aptitude)",
+        title: "SSC Maths Quiz 2 (Billingual)",
         description: "Bilingual official exam questions with detailed explanations and full LaTeX math rendering layout.",
         durationMinutes: 20,
         totalQuestions: questions.length,
