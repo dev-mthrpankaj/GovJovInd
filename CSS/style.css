@@ -2710,8 +2710,10 @@ footer {
   position: relative;
   overflow: hidden;
   margin-top: var(--section-gap);
-  background: #0f172a;
-  color: #e5e7eb;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(96, 165, 250, .22), transparent 32%),
+    linear-gradient(135deg, #082f66 0%, #0b4ea2 48%, #0f172a 100%);
+  color: #eaf2ff;
 }
 
 footer::after {
@@ -2754,14 +2756,14 @@ footer > * {
 }
 
 .footer-section h3 {
-  color: #fff;
+  color: #ffffff;
   margin-bottom: .5rem;
 }
 
 .footer-section p,
 .footer-section li,
 .footer-section a {
-  color: #c7d2fe;
+  color: #dbeafe;
   font-size: .95rem;
   text-decoration: none;
 }
@@ -2811,9 +2813,9 @@ footer .social-icons a {
   height: 40px;
   display: inline-grid;
   place-items: center;
-  border: 1px solid rgba(199, 210, 254, 0.28);
+  border: 1px solid rgba(219, 234, 254, 0.32);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   font-size: 1.08rem;
   transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
@@ -2871,11 +2873,11 @@ footer .footer-section:first-child {
 }
 
 .copyright {
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid rgba(219, 234, 254, .16);
   padding: .9rem 1rem;
   text-align: center;
   font-size: .85rem;
-  color: #cbd5e1;
+  color: #dbeafe;
 }
 
 .footer-bottom-links {
@@ -5864,6 +5866,105 @@ body.gju-android-app.my-desk-page .my-desk-shell {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* Fixed header scroll stability + compact sizing */
+:root {
+  --gju-header-height: 64px;
+}
+
+body {
+  padding-top: var(--gju-header-height) !important;
+}
+
+header,
+body > header,
+.site-header {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: var(--gju-header-height) !important;
+  min-height: 0 !important;
+  max-height: var(--gju-header-height) !important;
+  overflow: visible !important;
+  transform: none !important;
+  will-change: auto !important;
+  z-index: 10000 !important;
+  background: rgba(219, 234, 254, .86) !important;
+  border-bottom: 1px solid rgba(147, 197, 253, .78) !important;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, .13), inset 0 -1px 0 rgba(37, 99, 235, .18) !important;
+  backdrop-filter: blur(16px) saturate(1.22);
+  -webkit-backdrop-filter: blur(16px) saturate(1.22);
+}
+
+header .header-container {
+  min-height: 100% !important;
+  height: 100% !important;
+  padding: .46rem clamp(.7rem, 1.4vw, 1.35rem) !important;
+  gap: clamp(.38rem, .8vw, .75rem);
+  background: transparent !important;
+}
+
+header .logo-container {
+  gap: .45rem;
+}
+
+header .logo-img {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+header .logo {
+  font-size: clamp(1.04rem, 1.28vw, 1.28rem);
+  line-height: 1;
+}
+
+header nav {
+  top: var(--gju-header-height) !important;
+}
+
+@media (min-width: 1280px) {
+  header nav a {
+    min-height: 36px;
+    padding: .5rem clamp(.38rem, .58vw, .62rem);
+    border-radius: 8px;
+    font-size: clamp(.78rem, .78vw, .9rem);
+    line-height: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --gju-header-height: 60px;
+  }
+
+  header .header-container {
+    padding: .42rem .62rem !important;
+  }
+
+  header .logo-img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  header .logo {
+    max-width: min(45vw, 170px);
+    font-size: 1.02rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .header-login-btn,
+  .menu-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    flex-basis: 38px !important;
+  }
 }
 
 /* Responsive Ad */
