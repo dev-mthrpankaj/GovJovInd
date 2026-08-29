@@ -1238,11 +1238,7 @@
         `;
     }
 
-    function renderResultTile(label, value) {
-        return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
-    }
-
-    function buildResultInsights(result) {
+       function buildResultInsights(result) {
         const topics = {};
         result.questions.forEach(function (question, index) {
             const topicName = question.topic || "General";
@@ -1255,28 +1251,64 @@
             }
         });
 
-        const ranked = Object.keys(topics).map(function (name) {
+        const attemptedTopics = Object.keys(topics).map(function (name) {
             const topic = topics[name];
             return {
                 name,
                 accuracy: topic.attempted ? (topic.correct / topic.attempted) * 100 : 0,
-                attempted: topic.attempted
+                attempted: topic.attempted,
+                correct: topic.correct
             };
         }).filter(function (topic) {
             return topic.attempted > 0;
-        }).sort(function (first, second) {
-            return second.accuracy - first.accuracy;
         });
+
+        /*
+         * Strong and weak topics must be mutually exclusive.
+         *
+         * Strong:
+         * - at least 60% accuracy
+         * - higher accuracy first
+         * - ties prefer more attempted questions
+         *
+         * Weak:
+         * - below 50% accuracy
+         * - lower accuracy first
+         * - ties prefer more attempted questions
+         *
+         * 50%-59.99% is intentionally neutral. This prevents a topic from
+         * being labelled strong merely because it was the "best of a bad set".
+         */
+        const strongTopics = attemptedTopics.filter(function (topic) {
+            return topic.accuracy >= 60;
+        }).sort(function (first, second) {
+            if (second.accuracy !== first.accuracy) return second.accuracy - first.accuracy;
+            if (second.attempted !== first.attempted) return second.attempted - first.attempted;
+            return first.name.localeCompare(second.name);
+        }).slice(0, 3);
+
+        const weakTopics = attemptedTopics.filter(function (topic) {
+            return topic.accuracy < 50;
+        }).sort(function (first, second) {
+            if (first.accuracy !== second.accuracy) return first.accuracy - second.accuracy;
+            if (second.attempted !== first.attempted) return second.attempted - first.attempted;
+            return first.name.localeCompare(second.name);
+        }).slice(0, 3);
 
         const perQuestion = result.total ? Math.round(result.timeTaken / result.total) : 0;
         const timeAnalysis = `${formatTime(result.timeTaken)} total, about ${perQuestion}s/question`;
 
         return {
-            strongTopics: ranked.slice(0, 3).map(function (topic) { return topic.name; }).join(", ") || "Not enough attempted questions",
-            weakTopics: ranked.slice(-3).reverse().map(function (topic) { return topic.name; }).join(", ") || "Not enough attempted questions",
+            strongTopics: strongTopics.map(function (topic) {
+                return `${topic.name} (${formatNumber(topic.accuracy)}%)`;
+            }).join(", ") || "No strong topic yet",
+            weakTopics: weakTopics.map(function (topic) {
+                return `${topic.name} (${formatNumber(topic.accuracy)}%)`;
+            }).join(", ") || "No weak topic identified",
             timeAnalysis
         };
     }
+
 
     function renderReview() {
         const result = state.result;
