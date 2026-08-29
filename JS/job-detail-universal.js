@@ -109,25 +109,52 @@
     const footer=document.querySelector('body > footer');
     if(!bar || !footer) return;
 
-    const setState=(visible)=>{
-      bar.classList.toggle('is-footer-visible',visible);
-      bar.setAttribute('aria-hidden',visible ? 'true' : 'false');
+    let footerVisible=false;
+    let raf=0;
+    const isTopButtonVisible=()=>Boolean(document.querySelector('.go-top-btn.is-visible'));
+    const setState=()=>{
+      const shouldHide=footerVisible || isTopButtonVisible();
+      bar.classList.toggle('is-footer-visible',shouldHide);
+      bar.setAttribute('aria-hidden',shouldHide ? 'true' : 'false');
+    };
+    const schedule=()=>{
+      if(raf) return;
+      raf=requestAnimationFrame(()=>{raf=0;setState();});
+    };
+    const watchTopButton=()=>{
+      const button=document.querySelector('.go-top-btn');
+      if(!button || button.dataset.gjdApplyWatcher) return;
+      button.dataset.gjdApplyWatcher='true';
+      if('MutationObserver' in window){
+        new MutationObserver(schedule).observe(button,{attributes:true,attributeFilter:['class']});
+      }
+      schedule();
     };
 
     if('IntersectionObserver' in window){
       const footerObserver=new IntersectionObserver(entries=>{
-        entries.forEach(entry=>setState(entry.isIntersecting));
+        footerVisible=entries.some(entry=>entry.isIntersecting);
+        schedule();
       },{threshold:0,rootMargin:'0px 0px 0px 0px'});
       footerObserver.observe(footer);
     }else{
       const check=()=>{
         const r=footer.getBoundingClientRect();
-        setState(r.top < window.innerHeight && r.bottom > 0);
+        footerVisible=r.top < window.innerHeight && r.bottom > 0;
+        schedule();
       };
       check();
       window.addEventListener('scroll',check,{passive:true});
       window.addEventListener('resize',check,{passive:true});
     }
+
+    watchTopButton();
+    if('MutationObserver' in window){
+      new MutationObserver(watchTopButton).observe(document.body,{childList:true,subtree:true});
+    }
+    window.addEventListener('scroll',schedule,{passive:true});
+    window.addEventListener('resize',schedule,{passive:true});
+    setState();
   }
   function initInteractions(){
     $('printBtn')?.addEventListener('click',()=>window.print());
