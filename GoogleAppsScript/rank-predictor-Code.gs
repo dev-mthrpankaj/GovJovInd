@@ -2803,7 +2803,7 @@ function sendContactRequest(data) {
     });
   }
 
-  const to = "dmagstudio2023@outlook.com";
+  const to = "support@govjobupdates.com";
   const mailSubject = "GovJobUpdates Contact: " + subject;
 
   const body =
@@ -2861,7 +2861,7 @@ function testSendContactRequest() {
 
 function authorizeContactEmail() {
   MailApp.sendEmail({
-    to: "dmagstudio2023@outlook.com",
+    to: "support@govjobupdates.com",
     subject: "GovJobUpdates Contact Mail Authorization Test",
     body: "MailApp authorization is working for GovJobUpdates contact feedback.",
     name: "GovJobUpdates Contact"
