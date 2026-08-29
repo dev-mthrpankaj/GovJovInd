@@ -5925,6 +5925,54 @@ header nav {
   top: var(--gju-header-height) !important;
 }
 
+header nav a {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  left: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  opacity: 0;
+  transform: scaleX(.35);
+  transform-origin: center;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+header nav a:hover,
+header nav a:focus-visible {
+  color: #1d4ed8;
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(239, 246, 255, .7));
+  border-color: rgba(96, 165, 250, .64);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, .14), inset 0 1px 0 rgba(255, 255, 255, .86);
+  transform: translateY(-1px);
+}
+
+header nav a:hover::after,
+header nav a:focus-visible::after,
+header nav a.active::after,
+header nav a[aria-current="page"]::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+header nav a.active,
+header nav a[aria-current="page"] {
+  color: #1d4ed8;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(219, 234, 254, .74));
+  border-color: rgba(37, 99, 235, .46);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, .16), inset 0 1px 0 rgba(255, 255, 255, .94);
+}
+
 @media (min-width: 1280px) {
   header nav a {
     min-height: 36px;
