@@ -1238,77 +1238,73 @@
         `;
     }
 
-       function buildResultInsights(result) {
-        const topics = {};
-        result.questions.forEach(function (question, index) {
-            const topicName = question.topic || "General";
-            const selected = result.answers[index];
-            if (!topics[topicName]) topics[topicName] = { total: 0, attempted: 0, correct: 0 };
-            topics[topicName].total += 1;
-            if (selected !== null) {
-                topics[topicName].attempted += 1;
-                if (selected === question.correctAnswer) topics[topicName].correct += 1;
-            }
-        });
+   function buildResultInsights(result) {
+    const topics = {};
+    result.questions.forEach(function (question, index) {
+        const topicName = question.topic || "General";
+        const selected = result.answers[index];
 
-        const attemptedTopics = Object.keys(topics).map(function (name) {
-            const topic = topics[name];
-            return {
-                name,
-                accuracy: topic.attempted ? (topic.correct / topic.attempted) * 100 : 0,
-                attempted: topic.attempted,
-                correct: topic.correct
+        if (!topics[topicName]) {
+            topics[topicName] = {
+                total: 0,
+                attempted: 0,
+                correct: 0
             };
-        }).filter(function (topic) {
-            return topic.attempted > 0;
-        });
+        }
 
-        /*
-         * Strong and weak topics must be mutually exclusive.
-         *
-         * Strong:
-         * - at least 60% accuracy
-         * - higher accuracy first
-         * - ties prefer more attempted questions
-         *
-         * Weak:
-         * - below 50% accuracy
-         * - lower accuracy first
-         * - ties prefer more attempted questions
-         *
-         * 50%-59.99% is intentionally neutral. This prevents a topic from
-         * being labelled strong merely because it was the "best of a bad set".
-         */
-        const strongTopics = attemptedTopics.filter(function (topic) {
-            return topic.accuracy >= 60;
-        }).sort(function (first, second) {
-            if (second.accuracy !== first.accuracy) return second.accuracy - first.accuracy;
-            if (second.attempted !== first.attempted) return second.attempted - first.attempted;
-            return first.name.localeCompare(second.name);
-        }).slice(0, 3);
+        topics[topicName].total += 1;
 
-        const weakTopics = attemptedTopics.filter(function (topic) {
-            return topic.accuracy < 50;
-        }).sort(function (first, second) {
-            if (first.accuracy !== second.accuracy) return first.accuracy - second.accuracy;
-            if (second.attempted !== first.attempted) return second.attempted - first.attempted;
-            return first.name.localeCompare(second.name);
-        }).slice(0, 3);
+        if (selected !== null) {
+            topics[topicName].attempted += 1;
 
-        const perQuestion = result.total ? Math.round(result.timeTaken / result.total) : 0;
-        const timeAnalysis = `${formatTime(result.timeTaken)} total, about ${perQuestion}s/question`;
+            if (selected === question.correctAnswer) {
+                topics[topicName].correct += 1;
+            }
+        }
+    });
+
+    const ranked = Object.keys(topics).map(function (name) {
+        const topic = topics[name];
 
         return {
-            strongTopics: strongTopics.map(function (topic) {
-                return `${topic.name} (${formatNumber(topic.accuracy)}%)`;
-            }).join(", ") || "No strong topic yet",
-            weakTopics: weakTopics.map(function (topic) {
-                return `${topic.name} (${formatNumber(topic.accuracy)}%)`;
-            }).join(", ") || "No weak topic identified",
-            timeAnalysis
+            name,
+            accuracy: topic.attempted
+                ? (topic.correct / topic.attempted) * 100
+                : 0,
+            attempted: topic.attempted
         };
-    }
+    }).filter(function (topic) {
+        return topic.attempted > 0;
+    }).sort(function (first, second) {
+        return second.accuracy - first.accuracy;
+    });
 
+    const perQuestion = result.total
+        ? Math.round(result.timeTaken / result.total)
+        : 0;
+
+    const timeAnalysis =
+        `${formatTime(result.timeTaken)} total, about ${perQuestion}s/question`;
+
+    return {
+        strongTopics: ranked
+            .slice(0, 3)
+            .map(function (topic) {
+                return topic.name;
+            })
+            .join(", ") || "Not enough attempted questions",
+
+        weakTopics: ranked
+            .slice(-3)
+            .reverse()
+            .map(function (topic) {
+                return topic.name;
+            })
+            .join(", ") || "Not enough attempted questions",
+
+        timeAnalysis
+    };
+}
 
     function renderReview() {
         const result = state.result;
