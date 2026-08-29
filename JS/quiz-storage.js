@@ -1,8 +1,20 @@
 (function () {
+    "use strict";
+
+    const prefix = "GovJobUpdatesQuiz.";
+    const PROGRESS_API = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
+    const memory = {};
+    let firebaseImportPromise = null;
+    let lastSyncedAttemptKey = "";
+    let lastUnfinished = null;
+    let activeQuizKey = "";
+    const runtimeAnswers = {};
+    const runtimeStatuses = {};
+
     function initQuizMobileHeaderFix() {
-        if (document.getElementById('gjuQuizMobileHeaderFix')) return;
-        const style = document.createElement('style');
-        style.id = 'gjuQuizMobileHeaderFix';
+        if (document.getElementById("gjuQuizMobileHeaderFix")) return;
+        const style = document.createElement("style");
+        style.id = "gjuQuizMobileHeaderFix";
         style.textContent = `
             @media (max-width: 767px) {
                 body.page-loaded { transform: none !important; }
@@ -25,46 +37,31 @@
     }
 
     function syncQuizExamMode() {
-        const examView = document.getElementById('examView');
-        const isExamVisible = Boolean(examView && !examView.classList.contains('hidden'));
-        document.body.classList.toggle('gju-quiz-exam-mode', isExamVisible);
+        const examView = document.getElementById("examView");
+        const isExamVisible = Boolean(examView && !examView.classList.contains("hidden"));
+        document.body.classList.toggle("gju-quiz-exam-mode", isExamVisible);
     }
 
     function initQuizExamModeWatcher() {
         syncQuizExamMode();
-        const examView = document.getElementById('examView');
-        const homeView = document.getElementById('homeView');
-        const target = document.getElementById('quizApp') || document.body;
+        const examView = document.getElementById("examView");
+        const homeView = document.getElementById("homeView");
+        const target = document.getElementById("quizApp") || document.body;
         const observer = new MutationObserver(syncQuizExamMode);
-        if (examView) observer.observe(examView, { attributes: true, attributeFilter: ['class', 'hidden'] });
-        if (homeView) observer.observe(homeView, { attributes: true, attributeFilter: ['class', 'hidden'] });
-        observer.observe(target, { attributes: true, attributeFilter: ['class'] });
-        window.addEventListener('pageshow', syncQuizExamMode, { passive: true });
-        window.addEventListener('resize', syncQuizExamMode, { passive: true });
+        if (examView) observer.observe(examView, { attributes: true, attributeFilter: ["class", "hidden"] });
+        if (homeView) observer.observe(homeView, { attributes: true, attributeFilter: ["class", "hidden"] });
+        observer.observe(target, { attributes: true, attributeFilter: ["class"] });
+        window.addEventListener("pageshow", syncQuizExamMode, { passive: true });
+        window.addEventListener("resize", syncQuizExamMode, { passive: true });
     }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            initQuizMobileHeaderFix();
-            initQuizExamModeWatcher();
-        });
-    } else {
-        initQuizMobileHeaderFix();
-        initQuizExamModeWatcher();
-    }
-
-    const memory = {};
-    const prefix = 'GovJobUpdatesQuiz.';
-    let firebaseImportPromise = null;
-    let lastSyncedAttemptKey = '';
 
     function available() {
         try {
             const key = `${prefix}test`;
-            localStorage.setItem(key, '1');
+            localStorage.setItem(key, "1");
             localStorage.removeItem(key);
             return true;
-        } catch (error) {
+        } catch {
             return false;
         }
     }
@@ -75,133 +72,288 @@
         try {
             const raw = canUseLocalStorage ? localStorage.getItem(prefix + key) : memory[key];
             return raw ? JSON.parse(raw) : fallback;
-        } catch (error) {
+        } catch {
             return fallback;
         }
     }
 
     function scheduleIdle(task) {
-        if ('requestIdleCallback' in window) {
+        if ("requestIdleCallback" in window) {
             window.requestIdleCallback(task, { timeout: 2500 });
             return;
         }
-        window.setTimeout(task, 900);
+        window.setTimeout(task, 700);
     }
 
-    function getAttemptDocId(attempt) {
-        const raw = [
-            attempt?.id,
-            attempt?.quizId,
-            attempt?.completedAt,
-            attempt?.timestamp,
-            attempt?.score,
-            attempt?.percentage
-        ].filter(Boolean).join('-') || String(Date.now());
-        return raw.replace(/[^a-zA-Z0-9_-]/g, '-').slice(0, 120);
+    function write(key, value) {
+        try {
+            const raw = JSON.stringify(value);
+            if (canUseLocalStorage) localStorage.setItem(prefix + key, raw);
+            else memory[key] = raw;
+        } catch {
+            memory[key] = JSON.stringify(value);
+        }
+
+        if (key === "unfinished" && value && typeof value === "object") {
+            lastUnfinished = JSON.parse(JSON.stringify(value));
+            activeQuizKey = String(value.quizId || activeQuizKey || "");
+        }
+
+        if (key === "attempts" && Array.isArray(value) && value.length) {
+            maybeSyncLatestAttempt(value[0]);
+        }
+        return true;
     }
 
-    function toSafeAttempt(attempt) {
-        const score = Number(attempt?.score) || 0;
-        const maxScore = Number(attempt?.maxScore) || 0;
-        const percentage = Number(attempt?.percentage) || 0;
-        return {
-            id: getAttemptDocId(attempt),
-            quizId: String(attempt?.quizId || ''),
-            quizTitle: String(attempt?.quizTitle || attempt?.title || 'Quiz Attempt'),
-            subject: String(attempt?.subject || attempt?.quizSubject || attempt?.category || 'Quiz'),
-            score,
-            maxScore,
-            percentage,
-            correct: Number(attempt?.correct) || 0,
-            wrong: Number(attempt?.wrong) || 0,
-            unanswered: Number(attempt?.unanswered) || Number(attempt?.skipped) || 0,
-            totalQuestions: Number(attempt?.totalQuestions) || Number(attempt?.questionCount) || 0,
-            durationMinutes: Number(attempt?.durationMinutes) || 0,
-            timeTakenSeconds: Number(attempt?.timeTakenSeconds) || 0,
-            completedAt: String(attempt?.completedAt || attempt?.timestamp || new Date().toISOString()),
-            syncedFrom: 'web-localStorage'
-        };
+    function remove(key) {
+        try {
+            if (canUseLocalStorage) localStorage.removeItem(prefix + key);
+            delete memory[key];
+        } catch {
+            delete memory[key];
+        }
+        // Keep the last unfinished snapshot in memory until the just-completed
+        // attempt has had a chance to sync its latest answers.
+    }
+
+    function clearHistory() {
+        write("attempts", []);
+        write("recentAttempts", []);
+        write("bestScores", {});
+    }
+
+    async function waitForFirebaseConfig(timeoutMs = 6000) {
+        const started = Date.now();
+        while (Date.now() - started < timeoutMs) {
+            if (window.GJU_FIREBASE_CONFIG && window.GJU_FIREBASE_CONFIG.apiKey) return window.GJU_FIREBASE_CONFIG;
+            await new Promise((resolve) => window.setTimeout(resolve, 120));
+        }
+        return null;
     }
 
     async function getFirebaseModules() {
         if (firebaseImportPromise) return firebaseImportPromise;
         firebaseImportPromise = Promise.all([
-            import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),
-            import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js'),
-            import('https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js')
-        ]).then(([appMod, authMod, databaseMod]) => ({ appMod, authMod, databaseMod }));
+            import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+            import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js")
+        ]).then(([appMod, authMod]) => ({ appMod, authMod }));
         return firebaseImportPromise;
     }
 
-    async function syncAttemptToRealtimeDb(attempt) {
-        const config = window.GJU_FIREBASE_CONFIG;
-        if (!config || !config.apiKey || !attempt) return;
+    async function getIdToken() {
+        const config = await waitForFirebaseConfig();
+        if (!config) return "";
         try {
-            const { appMod, authMod, databaseMod } = await getFirebaseModules();
+            const { appMod, authMod } = await getFirebaseModules();
             const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(config);
             const auth = authMod.getAuth(app);
-            const user = auth.currentUser;
-            if (!user) return;
-            const db = databaseMod.getDatabase(app);
-            const safeAttempt = toSafeAttempt(attempt);
-            const quizKey = String(safeAttempt.quizId || '').replace(/[.#$\[\]\/]/g, '-');
-            const attemptRef = databaseMod.ref(db, `user_quiz_attempts/${user.uid}/${quizKey}`);
-            await databaseMod.update(attemptRef, {
-                quizTitle: safeAttempt.quizTitle,
-                subject: safeAttempt.subject,
-                score: safeAttempt.score,
-                totalQuestions: safeAttempt.totalQuestions,
-                correct: safeAttempt.correct,
-                wrong: safeAttempt.wrong,
-                lastAttemptedAt: databaseMod.serverTimestamp()
-            });
-            window.dispatchEvent(new CustomEvent('gju:quiz-attempt-synced', { detail: { attemptId: safeAttempt.id, quizId: safeAttempt.quizId } }));
+            let user = auth.currentUser;
+            if (!user) {
+                user = await new Promise((resolve) => {
+                    let done = false;
+                    let unsubscribe = function () {};
+                    const timer = window.setTimeout(() => {
+                        if (done) return;
+                        done = true;
+                        unsubscribe();
+                        resolve(auth.currentUser || null);
+                    }, 3500);
+                    unsubscribe = authMod.onAuthStateChanged(auth, (nextUser) => {
+                        if (done) return;
+                        done = true;
+                        window.clearTimeout(timer);
+                        unsubscribe();
+                        resolve(nextUser || null);
+                    });
+                });
+            }
+            return user ? await user.getIdToken() : "";
         } catch (error) {
-            console.warn('[GovJobUpdates] Quiz Firebase sync skipped:', error.message);
+            console.warn("[GovJobUpdates] Quiz account token unavailable:", error.message);
+            return "";
         }
     }
 
-    function maybeSyncAttempts(key, value) {
-        if (key !== 'attempts' || !Array.isArray(value) || !value.length) return;
-        const latest = value[0];
-        const syncKey = getAttemptDocId(latest);
+    function currentQuestionNumber() {
+        const node = document.getElementById("currentQuestionNo");
+        const value = Number(node && node.textContent);
+        return Number.isInteger(value) && value > 0 ? value : 0;
+    }
+
+    function captureCurrentQuestionState() {
+        const number = currentQuestionNumber();
+        if (!number) return;
+        const selected = document.querySelector(".answer-option[aria-pressed='true'][data-option-index]");
+        runtimeAnswers[number] = selected ? Number(selected.dataset.optionIndex) : null;
+        const statusNode = document.getElementById("questionStatusLabel");
+        const statusClass = statusNode ? Array.from(statusNode.classList).find((name) =>
+            ["not-visited","not-answered","answered","marked","answered-marked"].includes(name)
+        ) : "";
+        runtimeStatuses[number] = statusClass || (runtimeAnswers[number] === null ? "not-answered" : "answered");
+    }
+
+    function initRuntimeAnswerCapture() {
+        document.addEventListener("click", (event) => {
+            const start = event.target.closest && event.target.closest("[data-start-quiz]");
+            if (start) {
+                activeQuizKey = String(start.dataset.startQuiz || "");
+                Object.keys(runtimeAnswers).forEach((key) => delete runtimeAnswers[key]);
+                Object.keys(runtimeStatuses).forEach((key) => delete runtimeStatuses[key]);
+            }
+
+            if (event.target.closest && event.target.closest("[data-option-index], [data-action='clear-response'], [data-action='mark-review'], [data-action='mark-next'], [data-action='save-next'], [data-question-index]")) {
+                window.setTimeout(captureCurrentQuestionState, 0);
+            }
+            if (event.target.closest && event.target.closest("[data-action='submit-now']")) {
+                captureCurrentQuestionState();
+                window.setTimeout(captureCurrentQuestionState, 0);
+            }
+        }, true);
+
+        document.addEventListener("keydown", (event) => {
+            if (/^[1-9]$/.test(event.key) || ["n","m","p"].includes(String(event.key).toLowerCase())) {
+                window.setTimeout(captureCurrentQuestionState, 0);
+            }
+        }, true);
+    }
+
+    function getAttemptId(attempt) {
+        return String(attempt && attempt.id || [
+            attempt && attempt.quizId,
+            attempt && attempt.completedAt,
+            attempt && attempt.score
+        ].filter(Boolean).join("-") || Date.now()).slice(0, 120);
+    }
+
+    function buildAnswerPayload(attempt) {
+        const total = Math.max(0, Number(attempt.total || attempt.totalQuestions || lastUnfinished?.answers?.length || 0));
+        const savedAnswers = Array.isArray(lastUnfinished?.answers) ? lastUnfinished.answers : [];
+        const savedStatuses = Array.isArray(lastUnfinished?.statuses) ? lastUnfinished.statuses : [];
+        const answers = [];
+
+        for (let index = 0; index < total; index += 1) {
+            const number = index + 1;
+            const hasRuntime = Object.prototype.hasOwnProperty.call(runtimeAnswers, number);
+            const selected = hasRuntime ? runtimeAnswers[number] : (index < savedAnswers.length ? savedAnswers[index] : null);
+            const status = runtimeStatuses[number] || savedStatuses[index] || (selected === null ? "not-answered" : "answered");
+            answers.push({
+                questionNumber: number,
+                selectedOption: Number.isInteger(selected) ? selected : null,
+                status
+            });
+        }
+        return answers;
+    }
+
+    function toProgressPayload(attempt) {
+        const total = Number(attempt.total || attempt.totalQuestions || 0) || 0;
+        const timeTaken = Number(attempt.timeTakenSeconds || attempt.timeTaken || 0) || 0;
+        return {
+            attemptId: getAttemptId(attempt),
+            quizKey: String(attempt.quizId || activeQuizKey || ""),
+            quizTitle: String(attempt.quizTitle || attempt.title || "Practice Quiz"),
+            subject: String(attempt.subject || "Quiz"),
+            language: String(lastUnfinished?.language || ""),
+            completionReason: String(attempt.reason || "manual"),
+            score: Number(attempt.score) || 0,
+            maxScore: Number(attempt.maxScore) || 0,
+            percentage: Number(attempt.percentage) || 0,
+            accuracy: Number(attempt.accuracy) || 0,
+            totalQuestions: total,
+            attempted: Number(attempt.attempted) || 0,
+            correct: Number(attempt.correct) || 0,
+            wrong: Number(attempt.wrong) || 0,
+            unattempted: Math.max(0, total - (Number(attempt.attempted) || 0)),
+            timeTakenSeconds: timeTaken,
+            answers: buildAnswerPayload(attempt)
+        };
+    }
+
+    function normalizeProgressMap(rows) {
+        const map = {};
+        (Array.isArray(rows) ? rows : []).forEach((row) => {
+            if (row && row.quizKey) map[String(row.quizKey)] = row;
+        });
+        return map;
+    }
+
+    async function apiRequest(method, payload) {
+        const token = await getIdToken();
+        if (!token) return null;
+        const options = {
+            method,
+            mode: "cors",
+            cache: "no-store",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        };
+        if (payload) {
+            options.headers["Content-Type"] = "application/json";
+            options.body = JSON.stringify(payload);
+        }
+        const response = await fetch(PROGRESS_API, options);
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !data || data.success !== true) {
+            throw new Error(data && data.message || `Quiz progress request failed (${response.status}).`);
+        }
+        return data;
+    }
+
+    async function loadServerProgress() {
+        try {
+            const data = await apiRequest("GET");
+            if (!data) return;
+            const map = normalizeProgressMap(data.progress);
+            write("serverProgress", map);
+            window.dispatchEvent(new CustomEvent("gju:quiz-progress-loaded", { detail: { progress: map } }));
+        } catch (error) {
+            console.warn("[GovJobUpdates] Quiz progress load skipped:", error.message);
+        }
+    }
+
+    async function syncAttempt(attempt) {
+        try {
+            const payload = toProgressPayload(attempt);
+            if (!payload.quizKey) return;
+            const data = await apiRequest("POST", payload);
+            if (!data || !data.progress) return;
+
+            const map = read("serverProgress", {});
+            map[data.progress.quizKey] = data.progress;
+            write("serverProgress", map);
+            lastUnfinished = null;
+            Object.keys(runtimeAnswers).forEach((key) => delete runtimeAnswers[key]);
+            Object.keys(runtimeStatuses).forEach((key) => delete runtimeStatuses[key]);
+
+            window.dispatchEvent(new CustomEvent("gju:quiz-progress-synced", {
+                detail: { progress: data.progress, serverVerified: Boolean(data.serverVerified) }
+            }));
+        } catch (error) {
+            console.warn("[GovJobUpdates] Quiz MySQL sync skipped:", error.message);
+        }
+    }
+
+    function maybeSyncLatestAttempt(attempt) {
+        if (!attempt || !attempt.quizId) return;
+        const syncKey = getAttemptId(attempt);
         if (!syncKey || syncKey === lastSyncedAttemptKey) return;
         lastSyncedAttemptKey = syncKey;
-        scheduleIdle(() => syncAttemptToRealtimeDb(latest));
+        scheduleIdle(() => syncAttempt(attempt));
     }
 
-    function write(key, value) {
-        let saved = false;
-        try {
-            const raw = JSON.stringify(value);
-            if (canUseLocalStorage) {
-                localStorage.setItem(prefix + key, raw);
-            } else {
-                memory[key] = raw;
-            }
-            saved = true;
-        } catch (error) {
-            memory[key] = JSON.stringify(value);
-            saved = false;
-        }
-        maybeSyncAttempts(key, value);
-        return saved;
+    function init() {
+        initQuizMobileHeaderFix();
+        initQuizExamModeWatcher();
+        initRuntimeAnswerCapture();
+        scheduleIdle(loadServerProgress);
     }
 
-    function remove(key) {
-        try {
-            if (canUseLocalStorage) {
-                localStorage.removeItem(prefix + key);
-            }
-            delete memory[key];
-        } catch (error) {
-            delete memory[key];
-        }
-    }
-
-    function clearHistory() {
-        write('attempts', []);
-        write('performance', {});
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+        init();
     }
 
     window.QuizStorage = {
@@ -210,5 +362,11 @@
         remove,
         clearHistory,
         isPersistent: canUseLocalStorage
+    };
+
+    window.GJUQuizProgress = {
+        endpoint: PROGRESS_API,
+        load: loadServerProgress,
+        syncAttempt
     };
 })();

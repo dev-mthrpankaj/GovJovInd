@@ -2,6 +2,7 @@
   "use strict";
 
   const STORAGE_KEY = "GovJobUpdatesQuiz.attempts";
+  const PROGRESS_API = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
   const $ = (selector) => document.querySelector(selector);
   const setText = (selector, value) => {
     const node = $(selector);
@@ -9,6 +10,8 @@
   };
 
   let activeAttempts = [];
+  let serverRows = [];
+  let serverAttemptTotal = 0;
   let firebaseImportPromise = null;
 
   function readLocalAttempts() {
@@ -36,11 +39,7 @@
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"']/g, (character) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      "\"": "&quot;",
-      "'": "&#039;"
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;"
     }[character]));
   }
 
@@ -51,13 +50,39 @@
   }
 
   function sortAttempts(attempts) {
-    return attempts.slice().sort((a, b) => new Date(b.completedAt || b.timestamp || 0) - new Date(a.completedAt || a.timestamp || 0));
+    return attempts.slice().sort((a, b) =>
+      new Date(b.completedAt || b.timestamp || 0) - new Date(a.completedAt || a.timestamp || 0)
+    );
   }
 
-  function mergeAttempts(primary, fallback) {
+  function normalizeServerRows(rows) {
+    return (Array.isArray(rows) ? rows : []).map((row) => ({
+      id: row.latestAttemptId || `server-${row.quizKey}`,
+      quizId: row.quizKey,
+      quizTitle: row.quizTitle || "Quiz Attempt",
+      subject: row.subject || "Quiz",
+      score: number(row.score),
+      maxScore: number(row.maxScore),
+      percentage: number(row.percentage),
+      accuracy: number(row.accuracy),
+      total: number(row.totalQuestions),
+      totalQuestions: number(row.totalQuestions),
+      attempted: number(row.attempted),
+      correct: number(row.correct),
+      wrong: number(row.wrong),
+      unattempted: number(row.unattempted),
+      timeTaken: number(row.timeTakenSeconds),
+      completedAt: row.completedAt,
+      attemptCount: Math.max(1, number(row.attemptCount, 1)),
+      bestPercentage: number(row.bestPercentage, row.percentage),
+      source: "account"
+    }));
+  }
+
+  function mergeAttempts(serverAttempts, localAttempts) {
     const map = new Map();
-    [...primary, ...fallback].forEach((attempt) => {
-      const key = attempt.id || [attempt.quizId, attempt.completedAt || attempt.timestamp, attempt.score, attempt.percentage].join("-");
+    [...serverAttempts, ...localAttempts].forEach((attempt) => {
+      const key = attempt.id || [attempt.quizId, attempt.completedAt || attempt.timestamp, attempt.score].join("-");
       if (!map.has(key)) map.set(key, attempt);
     });
     return sortAttempts(Array.from(map.values()));
@@ -87,21 +112,22 @@
     const subjects = $("#quizSubjectChart");
     if (subjects) subjects.innerHTML = `<div class="user-mini-card"><strong>Subject performance</strong><span>No subject data available yet.</span></div>`;
     const list = $("#quizHistoryList");
-    if (list) list.innerHTML = `<div class="user-mini-card"><strong>Start your first quiz</strong><span>Your recent quiz attempts will be shown in this dashboard.</span></div>`;
+    if (list) list.innerHTML = `<div class="user-mini-card"><strong>Start your first quiz</strong><span>Your latest quiz progress will be shown here.</span></div>`;
   }
 
   function renderScoreChart(attempts, sourceLabel) {
     const chart = $("#quizScoreChart");
     if (!chart) return;
-    const recent = attempts.slice(0, 10).reverse();
-    const hiddenCount = Math.max(0, attempts.length - recent.length);
+    const local = sortAttempts(readLocalAttempts());
+    const source = local.length ? local : attempts;
+    const recent = source.slice(0, 10).reverse();
     chart.innerHTML = `
       <div class="dash-chart-summary">
-        <strong>Last ${recent.length} quiz attempts</strong>
-        <span>${escapeHtml(sourceLabel || (hiddenCount ? `${hiddenCount} older attempts saved` : "Swipe horizontally if needed"))}</span>
+        <strong>${local.length ? `Last ${recent.length} attempts on this device` : `Latest result from ${recent.length} quiz set${recent.length === 1 ? "" : "s"}`}</strong>
+        <span>${escapeHtml(sourceLabel || "Account progress synced")}</span>
       </div>
-      <div class="dash-scroll-hint">← Swipe / scroll to see all last 10 quizzes →</div>
-      <div class="dash-bar-scroll" aria-label="Last 10 quiz score chart">
+      <div class="dash-scroll-hint">← Swipe / scroll to see scores →</div>
+      <div class="dash-bar-scroll" aria-label="Quiz score chart">
         <div class="dash-bar-chart scrollable">
           ${recent.map((attempt, index) => {
             const value = percent(attempt.percentage);
@@ -147,25 +173,24 @@
     if (!list) return;
     const limit = compactLimit(5, 4);
     const visible = attempts.slice(0, limit);
-    const hiddenCount = Math.max(0, attempts.length - visible.length);
     list.innerHTML = `
       <div class="dash-compact-list">
         ${visible.map((attempt) => {
           const title = attempt.quizTitle || attempt.title || "Quiz Attempt";
           const score = number(attempt.score);
           const maxScore = number(attempt.maxScore);
-          const percentage = percent(attempt.percentage);
+          const accuracy = percent(attempt.accuracy ?? attempt.percentage);
+          const attemptsText = attempt.attemptCount && attempt.attemptCount > 1 ? ` · ${attempt.attemptCount} total attempts` : "";
           return `
             <article class="rank-history-item compact">
               <div>
                 <strong>${escapeHtml(title)}</strong>
-                <span>Score: ${score}/${maxScore || "--"} | Accuracy: ${percentage}%</span>
+                <span>Score: ${score}/${maxScore || "--"} | Accuracy: ${accuracy}%${escapeHtml(attemptsText)}</span>
               </div>
               <small>${formatDate(attempt.completedAt || attempt.timestamp)}</small>
             </article>
           `;
         }).join("")}
-        ${hiddenCount ? `<div class="user-mini-card"><strong>${hiddenCount}+ older attempts</strong><span>Graph shows last 10; list shows latest ${visible.length} to keep layout clean.</span></div>` : ""}
       </div>
     `;
   }
@@ -176,95 +201,107 @@
       renderEmpty();
       return;
     }
-    const best = activeAttempts.reduce((highest, attempt) => Math.max(highest, number(attempt.percentage)), 0);
-    setText("#quizAttemptCount", String(activeAttempts.length));
-    setText("#bestQuizScore", `${Math.round(best)}%`);
+
+    const localCount = readLocalAttempts().length;
+    const displayedTotal = Math.max(localCount, serverAttemptTotal, activeAttempts.length);
+    const localBest = activeAttempts.reduce((highest, attempt) => Math.max(highest, number(attempt.percentage)), 0);
+    const serverBest = serverRows.reduce((highest, row) => Math.max(highest, number(row.bestPercentage)), 0);
+
+    setText("#quizAttemptCount", String(displayedTotal));
+    setText("#bestQuizScore", `${Math.round(Math.max(localBest, serverBest))}%`);
     renderScoreChart(activeAttempts, sourceLabel);
     renderSubjectChart(activeAttempts);
     renderHistory(activeAttempts);
+  }
+
+  async function waitForFirebaseConfig(timeoutMs = 6000) {
+    const started = Date.now();
+    while (Date.now() - started < timeoutMs) {
+      if (window.GJU_FIREBASE_CONFIG && window.GJU_FIREBASE_CONFIG.apiKey) return window.GJU_FIREBASE_CONFIG;
+      await new Promise((resolve) => window.setTimeout(resolve, 120));
+    }
+    return null;
   }
 
   async function getFirebaseModules() {
     if (firebaseImportPromise) return firebaseImportPromise;
     firebaseImportPromise = Promise.all([
       import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js")
-    ]).then(([appMod, authMod, databaseMod]) => ({ appMod, authMod, databaseMod }));
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js")
+    ]).then(([appMod, authMod]) => ({ appMod, authMod }));
     return firebaseImportPromise;
   }
 
-  function waitForAuthUser(authMod, auth, timeoutMs = 5000) {
-    if (auth.currentUser) return Promise.resolve(auth.currentUser);
-    return new Promise((resolve) => {
-      let done = false;
-      const unsubscribe = authMod.onAuthStateChanged(auth, (user) => {
-        if (done) return;
-        done = true;
-        window.clearTimeout(timer);
-        unsubscribe();
-        resolve(user || null);
+  async function getIdToken() {
+    const config = await waitForFirebaseConfig();
+    if (!config) return "";
+    const { appMod, authMod } = await getFirebaseModules();
+    const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(config);
+    const auth = authMod.getAuth(app);
+    let user = auth.currentUser;
+    if (!user) {
+      user = await new Promise((resolve) => {
+        let done = false;
+        let unsubscribe = function () {};
+        const timer = window.setTimeout(() => {
+          if (done) return;
+          done = true;
+          unsubscribe();
+          resolve(auth.currentUser || null);
+        }, 4000);
+        unsubscribe = authMod.onAuthStateChanged(auth, (nextUser) => {
+          if (done) return;
+          done = true;
+          window.clearTimeout(timer);
+          unsubscribe();
+          resolve(nextUser || null);
+        });
       });
-      const timer = window.setTimeout(() => {
-        if (done) return;
-        done = true;
-        unsubscribe();
-        resolve(auth.currentUser || null);
-      }, timeoutMs);
-    });
+    }
+    return user ? user.getIdToken() : "";
   }
 
-  function buildRealtimeAttempts(snapshotValue) {
-    if (!snapshotValue || typeof snapshotValue !== "object") return [];
-    return Object.keys(snapshotValue).map((quizId) => {
-      const attempt = snapshotValue[quizId] || {};
-      return {
-        id: quizId,
-        quizId: quizId,
-        quizTitle: attempt.quizTitle || attempt.title || `Quiz ${quizId}`,
-        subject: attempt.subject || attempt.category || "Quiz",
-        score: number(attempt.score),
-        totalQuestions: number(attempt.totalQuestions),
-        correct: number(attempt.correct),
-        wrong: number(attempt.wrong),
-        percentage: percent(attempt.percentage || attempt.score),
-        lastAttemptedAt: Number(attempt.lastAttemptedAt) || 0
-      };
-    });
-  }
-
-  async function loadRealtimeAttempts() {
-    const config = window.GJU_FIREBASE_CONFIG;
-    if (!config || !config.apiKey) return;
+  async function loadAccountProgress() {
     try {
-      const { appMod, authMod, databaseMod } = await getFirebaseModules();
-      const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(config);
-      const auth = authMod.getAuth(app);
-      const user = await waitForAuthUser(authMod, auth);
-      if (!user) return;
-      const db = databaseMod.getDatabase(app);
-      const attemptsRef = databaseMod.ref(db, `user_quiz_attempts/${user.uid}`);
-      const snapshot = await databaseMod.get(attemptsRef);
-      const remoteAttempts = buildRealtimeAttempts(snapshot.val());
-      const localAttempts = readLocalAttempts();
-      const merged = mergeAttempts(remoteAttempts, localAttempts);
-      renderAttempts(merged, remoteAttempts.length ? "Realtime DB sync complete" : "No quiz attempts found in your account yet");
+      const token = await getIdToken();
+      if (!token) {
+        renderAttempts(readLocalAttempts(), "This device only — login to sync quiz progress");
+        return;
+      }
+
+      const response = await fetch(PROGRESS_API, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-store",
+        headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data || data.success !== true) throw new Error(data?.message || "Unable to load account quiz progress.");
+
+      serverRows = Array.isArray(data.progress) ? data.progress : [];
+      serverAttemptTotal = serverRows.reduce((sum, row) => sum + Math.max(1, number(row.attemptCount, 1)), 0);
+      const serverAttempts = normalizeServerRows(serverRows);
+      const merged = mergeAttempts(serverAttempts, readLocalAttempts());
+      renderAttempts(merged, serverRows.length ? "MySQL account sync complete" : "No account quiz progress saved yet");
     } catch (error) {
-      console.warn("[GovJobUpdates] Realtime DB quiz history load failed:", error.message);
+      console.warn("[GovJobUpdates] MySQL quiz history load failed:", error.message);
+      renderAttempts(readLocalAttempts(), "Account sync unavailable; showing this device");
     }
   }
 
   function render() {
-    const localAttempts = sortAttempts(readLocalAttempts());
-    if (localAttempts.length) renderAttempts(localAttempts, "Local history loading; Firebase sync checking...");
-    else renderEmpty("Checking Realtime Database quiz history...");
-    loadRealtimeAttempts();
+    const local = sortAttempts(readLocalAttempts());
+    if (local.length) renderAttempts(local, "This device; checking account sync...");
+    else renderEmpty("Checking your account quiz progress...");
+    loadAccountProgress();
   }
 
   document.addEventListener("DOMContentLoaded", render);
-  window.addEventListener("resize", () => window.requestAnimationFrame(() => renderAttempts(activeAttempts.length ? activeAttempts : readLocalAttempts())));
+  window.addEventListener("resize", () => window.requestAnimationFrame(() => {
+    if (activeAttempts.length) renderAttempts(activeAttempts, serverRows.length ? "MySQL account sync complete" : "This device");
+  }));
   window.addEventListener("storage", (event) => {
     if (event.key === STORAGE_KEY) render();
   });
-  window.addEventListener("gju:quiz-attempt-synced", render);
+  window.addEventListener("gju:quiz-progress-synced", render);
 }());
