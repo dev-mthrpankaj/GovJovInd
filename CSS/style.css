@@ -5805,6 +5805,67 @@ body.gju-android-app.my-desk-page .my-desk-shell {
   padding-bottom: calc(92px + env(safe-area-inset-bottom));
 }
 
+/* Header auth status circle */
+.header-auth-actions {
+  flex: 0 0 auto;
+}
+
+.header-login-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  flex: 0 0 42px;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  gap: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  border-color: rgba(185, 28, 28, .34);
+  color: #fff;
+  box-shadow: 0 9px 20px rgba(185, 28, 28, .22);
+}
+
+.header-login-btn:hover,
+.header-login-btn:focus-visible {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, .17), 0 11px 22px rgba(185, 28, 28, .24);
+}
+
+.header-login-btn.is-active {
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  border-color: rgba(21, 128, 61, .34);
+  color: #fff;
+  box-shadow: 0 9px 20px rgba(21, 128, 61, .22);
+}
+
+.header-login-btn.is-active:hover,
+.header-login-btn.is-active:focus-visible {
+  background: linear-gradient(135deg, #16a34a, #166534);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, .18), 0 11px 22px rgba(21, 128, 61, .24);
+}
+
+.header-login-btn i {
+  display: inline-grid;
+  place-items: center;
+  width: 1em;
+  height: 1em;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: currentColor;
+}
+
+.header-login-btn span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* Responsive Ad */
 
 .desktop-ad{
