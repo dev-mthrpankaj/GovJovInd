@@ -1240,46 +1240,73 @@
 function renderResultTile(label, value) {
     return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
 }
-   function buildResultInsights(result) {
+function buildResultInsights(result) {
     const topics = {};
+
     result.questions.forEach(function (question, index) {
         const topicName = question.topic || "General";
         const selected = result.answers[index];
 
         if (!topics[topicName]) {
             topics[topicName] = {
-                total: 0,
                 attempted: 0,
                 correct: 0
             };
         }
 
-        topics[topicName].total += 1;
+        // Unattempted questions analytics me count nahi honge.
+        if (selected === null) return;
 
-        if (selected !== null) {
-            topics[topicName].attempted += 1;
+        topics[topicName].attempted += 1;
 
-            if (selected === question.correctAnswer) {
-                topics[topicName].correct += 1;
-            }
+        if (selected === question.correctAnswer) {
+            topics[topicName].correct += 1;
         }
     });
 
-    const ranked = Object.keys(topics).map(function (name) {
-        const topic = topics[name];
+    const attemptedTopics = Object.keys(topics)
+        .map(function (name) {
+            const topic = topics[name];
 
-        return {
-            name,
-            accuracy: topic.attempted
-                ? (topic.correct / topic.attempted) * 100
-                : 0,
-            attempted: topic.attempted
-        };
-    }).filter(function (topic) {
-        return topic.attempted > 0;
-    }).sort(function (first, second) {
-        return second.accuracy - first.accuracy;
-    });
+            return {
+                name: name,
+                attempted: topic.attempted,
+                accuracy: topic.attempted
+                    ? (topic.correct / topic.attempted) * 100
+                    : 0
+            };
+        })
+        .filter(function (topic) {
+            return topic.attempted > 0;
+        });
+
+    // Strong = genuinely good performance: 60%+
+    const strongTopics = attemptedTopics
+        .filter(function (topic) {
+            return topic.accuracy >= 60;
+        })
+        .sort(function (a, b) {
+            if (b.accuracy !== a.accuracy) {
+                return b.accuracy - a.accuracy;
+            }
+
+            return b.attempted - a.attempted;
+        })
+        .slice(0, 3);
+
+    // Weak = genuinely weak performance: below 50%
+    const weakTopics = attemptedTopics
+        .filter(function (topic) {
+            return topic.accuracy < 50;
+        })
+        .sort(function (a, b) {
+            if (a.accuracy !== b.accuracy) {
+                return a.accuracy - b.accuracy;
+            }
+
+            return b.attempted - a.attempted;
+        })
+        .slice(0, 3);
 
     const perQuestion = result.total
         ? Math.round(result.timeTaken / result.total)
@@ -1289,22 +1316,19 @@ function renderResultTile(label, value) {
         `${formatTime(result.timeTaken)} total, about ${perQuestion}s/question`;
 
     return {
-        strongTopics: ranked
-            .slice(0, 3)
-            .map(function (topic) {
+        strongTopics: strongTopics.length
+            ? strongTopics.map(function (topic) {
                 return topic.name;
-            })
-            .join(", ") || "Not enough attempted questions",
+            }).join(", ")
+            : "No strong topic yet",
 
-        weakTopics: ranked
-            .slice(-3)
-            .reverse()
-            .map(function (topic) {
+        weakTopics: weakTopics.length
+            ? weakTopics.map(function (topic) {
                 return topic.name;
-            })
-            .join(", ") || "Not enough attempted questions",
+            }).join(", ")
+            : "No weak topic identified",
 
-        timeAnalysis
+        timeAnalysis: timeAnalysis
     };
 }
 
