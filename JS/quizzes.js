@@ -1237,7 +1237,9 @@
             </div>
         `;
     }
-
+function renderResultTile(label, value) {
+    return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+}
    function buildResultInsights(result) {
     const topics = {};
     result.questions.forEach(function (question, index) {
