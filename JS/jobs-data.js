@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0207-20260829170149-1d778c45",
+        "title": "Punjab and Haryana High Court Frash Online Form 2026",
+        "organization": "Punjab and Haryana High Court PHHC",
+        "department": "PHHC",
+        "category": "Judiciary",
+        "year": "2026",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
+        "totalPosts": "31",
+        "startDate": "2026-08-28",
+        "lastDate": "2026-09-18",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://phconapp.formflix.org/faraash/",
+        "officialNotification": "https://highcourtchd.gov.in/sub_pages/left_menu/recruitments/staff/openings_pdf/frash_advt_28082026_96766.pdf",
+        "detailPage": "../Job_Details/HTML/PHHC-Frash-2026.html",
+        "updatedAt": "2026-08-29",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0203-20260826155237-4756a35d",
         "title": "IIT BHU Non Teaching Post Online Form 2026",
         "organization": "Indian Institute of Technology IIT BHU",
