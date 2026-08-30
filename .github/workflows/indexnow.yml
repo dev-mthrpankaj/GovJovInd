@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       submit_all:
-        description: "Submit every URL in sitemap.xml"
+        description: "Submit every URL across generated sitemaps"
         required: false
         default: "false"
         type: choice
@@ -16,6 +16,7 @@ on:
       - main
     paths:
       - sitemap.xml
+      - sitemap-*.xml
   schedule:
     - cron: "30 20 * * *"
 
