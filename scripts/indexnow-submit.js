@@ -5,7 +5,8 @@ const path = require("path");
 
 const SITE_ORIGIN = "https://govjobupdates.com";
 const HOST = "govjobupdates.com";
-const SITEMAP_PATH = path.resolve(__dirname, "..", "sitemap.xml");
+const ROOT = path.resolve(__dirname, "..");
+const SITEMAP_PATH = path.join(ROOT, "sitemap.xml");
 const DEFAULT_LOOKBACK_HOURS = 48;
 const MAX_BATCH_SIZE = 500;
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
@@ -17,14 +18,6 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function readSitemap() {
-  if (!fs.existsSync(SITEMAP_PATH)) {
-    throw new Error(`sitemap.xml not found at ${SITEMAP_PATH}`);
-  }
-
-  return fs.readFileSync(SITEMAP_PATH, "utf8");
-}
-
 function decodeXml(value) {
   return value
     .replace(/&amp;/g, "&")
@@ -34,7 +27,14 @@ function decodeXml(value) {
     .replace(/&apos;/g, "'");
 }
 
-function parseSitemap(xml) {
+function readXml(filePath) {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Sitemap not found at ${filePath}`);
+  }
+  return fs.readFileSync(filePath, "utf8");
+}
+
+function parseUrlSet(xml) {
   const entries = [];
   const urlBlockPattern = /<url>\s*([\s\S]*?)\s*<\/url>/gi;
   let match;
@@ -43,21 +43,57 @@ function parseSitemap(xml) {
     const block = match[1];
     const locMatch = block.match(/<loc>\s*([\s\S]*?)\s*<\/loc>/i);
     if (!locMatch) continue;
-
     const lastmodMatch = block.match(/<lastmod>\s*([\s\S]*?)\s*<\/lastmod>/i);
     entries.push({
       url: decodeXml(locMatch[1].trim()),
       lastmod: lastmodMatch ? decodeXml(lastmodMatch[1].trim()) : ""
     });
   }
+  return entries;
+}
 
+function parseSitemapIndex(xml) {
+  const locations = [];
+  const sitemapBlockPattern = /<sitemap>\s*([\s\S]*?)\s*<\/sitemap>/gi;
+  let match;
+
+  while ((match = sitemapBlockPattern.exec(xml)) !== null) {
+    const locMatch = match[1].match(/<loc>\s*([\s\S]*?)\s*<\/loc>/i);
+    if (locMatch) locations.push(decodeXml(locMatch[1].trim()));
+  }
+  return locations;
+}
+
+function localPathForSitemapUrl(url) {
+  const parsed = new URL(url);
+  if (parsed.origin !== SITE_ORIGIN) {
+    throw new Error(`Refusing non-site sitemap URL: ${url}`);
+  }
+  const fileName = path.basename(parsed.pathname);
+  if (!/^sitemap(?:-[a-z0-9-]+)?\.xml$/i.test(fileName)) {
+    throw new Error(`Unexpected sitemap filename: ${fileName}`);
+  }
+  return path.join(ROOT, fileName);
+}
+
+function readAllSitemapEntries() {
+  const rootXml = readXml(SITEMAP_PATH);
+  if (!/<sitemapindex\b/i.test(rootXml)) {
+    return parseUrlSet(rootXml);
+  }
+
+  const childUrls = parseSitemapIndex(rootXml);
+  const entries = [];
+  for (const childUrl of childUrls) {
+    const childPath = localPathForSitemapUrl(childUrl);
+    entries.push(...parseUrlSet(readXml(childPath)));
+  }
   return entries;
 }
 
 function isGovJobUpdatesUrl(url) {
   try {
-    const parsed = new URL(url);
-    return parsed.origin === SITE_ORIGIN;
+    return new URL(url).origin === SITE_ORIGIN;
   } catch (_) {
     return false;
   }
@@ -67,7 +103,6 @@ function isBlockedUrl(url) {
   try {
     const parsed = new URL(url);
     const pathname = parsed.pathname.toLowerCase();
-
     return parsed.hostname !== HOST
       || pathname.startsWith("/live-test/")
       || pathname.includes("/live-test/admin/")
@@ -95,60 +130,31 @@ function isBlockedUrl(url) {
 function parseLastmod(lastmod) {
   const value = String(lastmod || "").trim();
   if (!value) return null;
-
-  const normalized = /^\d{4}-\d{2}-\d{2}$/.test(value)
-    ? `${value}T23:59:59Z`
-    : value;
+  const normalized = /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T23:59:59Z` : value;
   const timestamp = Date.parse(normalized);
-
   return Number.isNaN(timestamp) ? null : timestamp;
 }
 
 function isRecentlyModified(entry) {
   if (forceAll) return true;
-
   const timestamp = parseLastmod(entry.lastmod);
   if (!timestamp) return false;
-
-  const cutoff = Date.now() - (DEFAULT_LOOKBACK_HOURS * 60 * 60 * 1000);
-  return timestamp >= cutoff;
+  return timestamp >= Date.now() - (DEFAULT_LOOKBACK_HOURS * 60 * 60 * 1000);
 }
 
 function getEligibleEntries(entries) {
-  const stats = {
-    nonGovDomain: 0,
-    blocked: 0,
-    oldLastmod: 0,
-    duplicate: 0
-  };
+  const stats = { nonGovDomain: 0, blocked: 0, oldLastmod: 0, duplicate: 0 };
   const seen = new Set();
   const eligible = [];
 
   for (const entry of entries) {
-    if (!isGovJobUpdatesUrl(entry.url)) {
-      stats.nonGovDomain += 1;
-      continue;
-    }
-
-    if (isBlockedUrl(entry.url)) {
-      stats.blocked += 1;
-      continue;
-    }
-
-    if (!isRecentlyModified(entry)) {
-      stats.oldLastmod += 1;
-      continue;
-    }
-
-    if (seen.has(entry.url)) {
-      stats.duplicate += 1;
-      continue;
-    }
-
+    if (!isGovJobUpdatesUrl(entry.url)) { stats.nonGovDomain += 1; continue; }
+    if (isBlockedUrl(entry.url)) { stats.blocked += 1; continue; }
+    if (!isRecentlyModified(entry)) { stats.oldLastmod += 1; continue; }
+    if (seen.has(entry.url)) { stats.duplicate += 1; continue; }
     seen.add(entry.url);
     eligible.push(entry);
   }
-
   return { eligible, stats };
 }
 
@@ -162,21 +168,15 @@ function chunkUrls(urls) {
 
 function getIndexNowKey() {
   const key = String(process.env.INDEXNOW_KEY || "").trim();
-  if (!key) {
-    throw new Error("INDEXNOW_KEY environment variable is missing.");
-  }
-  if (!/^[A-Za-z0-9_-]{8,128}$/.test(key)) {
-    throw new Error("INDEXNOW_KEY format looks invalid. Use a plain alphanumeric key.");
-  }
+  if (!key) throw new Error("INDEXNOW_KEY environment variable is missing.");
+  if (!/^[A-Za-z0-9_-]{8,128}$/.test(key)) throw new Error("INDEXNOW_KEY format looks invalid. Use a plain alphanumeric key.");
   return key;
 }
 
 async function submitBatch(key, urlList, batchNumber, totalBatches) {
   const response = await fetch(INDEXNOW_ENDPOINT, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8"
-    },
+    headers: { "Content-Type": "application/json; charset=utf-8" },
     body: JSON.stringify({
       host: HOST,
       key,
@@ -187,22 +187,19 @@ async function submitBatch(key, urlList, batchNumber, totalBatches) {
 
   const responseText = await response.text();
   const safeText = responseText.replace(new RegExp(escapeRegExp(key), "g"), "[redacted]");
-
   if (!response.ok) {
     throw new Error(`Batch ${batchNumber}/${totalBatches} failed with HTTP ${response.status}: ${safeText || response.statusText}`);
   }
-
   console.log(`Batch ${batchNumber}/${totalBatches} accepted with HTTP ${response.status}. URLs: ${urlList.length}`);
 }
 
 async function main() {
-  const xml = readSitemap();
-  const entries = parseSitemap(xml);
+  const entries = readAllSitemapEntries();
   const { eligible, stats } = getEligibleEntries(entries);
   const urls = eligible.map((entry) => entry.url);
 
   console.log(`IndexNow mode: ${forceAll ? "full sitemap (--all)" : `last ${DEFAULT_LOOKBACK_HOURS} hours`}`);
-  console.log(`Found URLs in sitemap: ${entries.length}`);
+  console.log(`Found URLs across sitemaps: ${entries.length}`);
   console.log(`Eligible URLs: ${urls.length}`);
   console.log(`Skipped URLs: ${entries.length - urls.length}`);
   console.log(`Skipped breakdown: non-govjobupdates=${stats.nonGovDomain}, blocked=${stats.blocked}, old-lastmod=${stats.oldLastmod}, duplicates=${stats.duplicate}`);
@@ -231,10 +228,7 @@ async function main() {
 
   console.log(`Submitted URLs: ${submitted}`);
   console.log(`Failed URLs: ${failed}`);
-
-  if (failed > 0) {
-    process.exitCode = 1;
-  }
+  if (failed > 0) process.exitCode = 1;
 }
 
 main().catch((error) => {
