@@ -173,7 +173,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-29",
         "examEndDate": "",
         "releaseDate": "2026-08-20",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/crpspxvimy26/oecla_aug26/login.php?appid=b4efe9284e9d84a16019c7ca6ca9547b",
         "detailPage": "../AdmitCard_Details/HTML/IBPS-SO-Specialist-Officers-XVI-Admit-Card-2026.html",
