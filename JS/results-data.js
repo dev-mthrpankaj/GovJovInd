@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0127-20260830094918-2d6cdf2c",
+        "title": "NTA ICAR AIEEA PG & Phd Result 2026 Score Card",
+        "organization": "Indian Council of Agricultural Research",
+        "department": "ICAR",
+        "category": "Research",
+        "year": "2026",
+        "resultDate": "2026-08-29",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=AmYZ8zzsbgyZ9MKSaC6VRPSwyrLg9951cO4jIYNOo4Y=",
+        "detailPage": "../Result_Details/HTML/NTA-ICAR-AIEEA-PG-PhD-Result-2026.html",
+        "updatedAt": "2026-08-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0128-20260830095433-4c4c3f71",
+        "title": "NTA CSIR UGC NET June 2026 Result",
+        "organization": "Council of Scientific & Industrial Research",
+        "department": "CSIR",
+        "category": "Research",
+        "year": "2026",
+        "resultDate": "2026-08-19",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=FzCM1cz3k8ohC+69JQLEE0a8bYjxrP5YMYMZP4fujh8=",
+        "detailPage": "../Result_Details/HTML/NTA-CSIR-UGC-NET-Result-2026.html",
+        "updatedAt": "2026-08-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0121-20260828214157-52c0ebcf",
         "title": "Bihar BTSC Staff Final Nurse Result 2025",
         "organization": "Bihar Technical Service Commission",
