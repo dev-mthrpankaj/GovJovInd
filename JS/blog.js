@@ -57,9 +57,10 @@
     });
   };
 
-  const createBlogCard = (blog) => {
+  const createBlogCard = (blog, index) => {
     const article = document.createElement("article");
-    article.className = "blog-card";
+    const isFeatured = index === 0 && state.category === "All" && !state.query.trim();
+    article.className = `blog-card${isFeatured ? " blog-card-featured" : ""}`;
     const readMore = blog.url
       ? `<a class="btn btn-outline" href="${escapeHtml(blog.url)}">Read More</a>`
       : `<button class="btn btn-outline" type="button" data-blog-id="${escapeHtml(blog.id)}">Read More</button>`;
