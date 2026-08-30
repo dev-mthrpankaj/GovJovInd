@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "ssc-cgl-vs-ibps-po-2026-comparison",
+  title: "SSC CGL vs IBPS PO 2026: Salary, Exam Pattern, Job Profile & Career Growth Compared",
+  category: "Career Guidance",
+  date: "2026-08-30",
+  image: "../Assets/Home%20Page/ssc-cgl-vs-ibps-po-2026-comparison.webp",
+  url: "student-hub/ssc-cgl-vs-ibps-po-2026-comparison.html",
+  excerpt: "SSC CGL vs IBPS PO 2026 complete comparison covering eligibility, exam pattern, salary, job profile, work pressure, transfers, promotions and career growth to help aspirants choose the right exam."
+},
+    {
   id: "free-typing-test-online-ssc-rrb-government-exams",
   title: "Free Typing Test Online for SSC, RRB & Government Exams",
   category: "Career Guidance",
