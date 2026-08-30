@@ -20,6 +20,8 @@ concurrency:
 jobs:
   generate-sitemap:
     runs-on: ubuntu-latest
+    env:
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
 
     steps:
       - name: Checkout repository history
@@ -49,3 +51,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Update sitemaps"
           git push
+
+      - name: Install IndexNow dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Submit recent sitemap URLs to IndexNow
+        run: npm run submit:indexnow
