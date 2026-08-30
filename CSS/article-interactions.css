@@ -1,17 +1,17 @@
 /* Article Interactions Section */
 .article-interactions {
-  margin-top: 3rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  margin: clamp(1.5rem, 4vw, 2.4rem) 0;
+  padding: clamp(1rem, 2.6vw, 1.35rem);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
 }
 
 .interactions-divider {
   height: 1px;
-  background: #e2e8f0;
-  margin: 0 0 2rem 0;
+  background: linear-gradient(90deg, transparent, #dbeafe, transparent);
+  margin: 0 0 1.2rem 0;
 }
 
 /* Like/Dislike Section */
@@ -19,7 +19,7 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -107,9 +107,9 @@
 
 /* Comments Section */
 .interactions-comments {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   border-top: 1px solid #e2e8f0;
-  padding-top: 2rem;
+  padding-top: 1.25rem;
 }
 
 .comments-title {
@@ -218,22 +218,28 @@
 
 /* Auth Prompt Overlay */
 .comment-auth-prompt {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: center;
-  min-height: 210px;
-  padding: 2rem;
-  background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
-  border: 1.5px dashed #3b82f6;
+  gap: 1rem;
+  min-height: 0;
+  padding: 1.1rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+  border: 1px solid #bfdbfe;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .comment-auth-prompt-icon {
-  font-size: 2.5rem;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: #dbeafe;
+  font-size: 1.7rem;
   color: #3b82f6;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .comment-auth-prompt-title {
@@ -246,7 +252,7 @@
 .comment-auth-prompt-text {
   font-size: 0.95rem;
   color: #64748b;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
 .comment-auth-prompt-btn {
@@ -612,7 +618,10 @@
   }
 
   .comment-auth-prompt {
-    min-height: 190px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 1.25rem;
   }
 
   .interactions-votes {

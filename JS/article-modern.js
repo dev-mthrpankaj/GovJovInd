@@ -41,8 +41,12 @@
 
   /* ---------- Back to top ---------- */
   const backToTop = document.getElementById("articleBackToTop");
+  if (backToTop && document.querySelector(".go-top-btn")) {
+    backToTop.hidden = true;
+  }
   const toggleBackToTop = () => {
     if (!backToTop) return;
+    if (backToTop.hidden) return;
     backToTop.classList.toggle("is-visible", window.scrollY > 500);
   };
   if (backToTop) {
@@ -72,24 +76,33 @@
   if (readTimeEl && content) {
     const words = content.textContent.trim().split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.round(words / 200));
-    readTimeEl.textContent = minutes + " मिनट रीड";
+    readTimeEl.textContent = minutes + " min read";
   }
 
   /* ---------- Table of contents (auto scroll-spy) ---------- */
   const tocList = document.getElementById("articleTocList");
-  if (tocList && content) {
-    const links = Array.from(tocList.querySelectorAll("a[href^='#']"));
+  const mobileJump = document.querySelector(".article-mobile-jump");
+  const navLinks = [tocList, mobileJump]
+    .filter(Boolean)
+    .flatMap((nav) => Array.from(nav.querySelectorAll("a[href^='#']")));
+  if (navLinks.length && content) {
+    const links = navLinks;
     const sectionIds = links.map((a) => a.getAttribute("href").slice(1));
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
     if (sections.length && links.length && "IntersectionObserver" in window) {
-      const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+      const byId = links.reduce((map, a) => {
+        const id = a.getAttribute("href").slice(1);
+        if (!map.has(id)) map.set(id, []);
+        map.get(id).push(a);
+        return map;
+      }, new Map());
       const setActiveLink = (id) => {
         links.forEach((a) => a.classList.remove("is-active"));
-        const link = byId.get(id);
-        if (link) link.classList.add("is-active");
+        const activeLinks = byId.get(id) || [];
+        activeLinks.forEach((link) => link.classList.add("is-active"));
       };
       const observer = new IntersectionObserver(
         (entries) => {
@@ -121,6 +134,17 @@
     if (el) el.setAttribute("href", shareTargets[id]);
   });
 
+  const shareByName = {
+    whatsapp: shareTargets.whatsappShare,
+    telegram: shareTargets.telegramShare,
+    twitter: shareTargets.twitterShare,
+    linkedin: shareTargets.linkedinShare
+  };
+  document.querySelectorAll("[data-share]").forEach((el) => {
+    const target = shareByName[el.dataset.share];
+    if (target) el.setAttribute("href", target);
+  });
+
   const copyBtn = document.getElementById("copyShareLink");
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
@@ -133,6 +157,18 @@
       }
     });
   }
+
+  document.querySelectorAll("[data-copy]:not(#copyShareLink)").forEach((button) => {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        button.classList.add("is-copied");
+        window.setTimeout(() => button.classList.remove("is-copied"), 1500);
+      } catch (err) {
+        /* Clipboard may be unavailable on local file previews. */
+      }
+    });
+  });
 
   /* ---------- Related articles (reads window.GOVJOB_BLOGS) ---------- */
   const relatedGrid = document.getElementById("articleRelatedGrid");
