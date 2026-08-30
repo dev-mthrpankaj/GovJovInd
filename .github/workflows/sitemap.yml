@@ -6,6 +6,8 @@ on:
       - main
     paths-ignore:
       - sitemap.xml
+      - sitemap-*.xml
+      - data/sitemap-content-signatures.json
   workflow_dispatch:
 
 permissions:
@@ -31,12 +33,12 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Generate sitemap.xml
+      - name: Generate sitemap index and category sitemaps
         run: node scripts/generate-sitemap.js
 
-      - name: Commit sitemap when changed
+      - name: Commit sitemaps when changed
         run: |
-          git add sitemap.xml data/sitemap-content-signatures.json
+          git add sitemap.xml sitemap-*.xml data/sitemap-content-signatures.json
 
           if git diff --cached --quiet; then
             echo "No sitemap changes to commit."
@@ -45,5 +47,5 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Update sitemap.xml"
+          git commit -m "Update sitemaps"
           git push
