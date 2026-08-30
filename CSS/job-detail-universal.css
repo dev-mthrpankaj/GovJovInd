@@ -53,6 +53,12 @@
     overflow:hidden;
   }
 
+  .gjd-sticky-card{
+    overflow:auto;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(37,99,235,.45) transparent;
+  }
+
   .gjd-side-eyebrow{
     color:#2563eb;
   }
