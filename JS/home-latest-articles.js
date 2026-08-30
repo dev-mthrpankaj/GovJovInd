@@ -32,7 +32,6 @@
   };
 
   const createCard = (article) => {
-    console.log('Original Image Path:', article.image);
     const card = document.createElement('article');
     card.className = 'home-article-card';
 
@@ -41,7 +40,6 @@
 
     if (article.image) {
       const cleanPath = normalizeImagePath(article.image);
-      console.log('Normalized Image Path:', cleanPath);
       const img = document.createElement('img');
       img.className = 'article-card-img';
       img.src = cleanPath;
