@@ -2229,6 +2229,20 @@
       "title": "Punjab and Haryana High Court Driver Online Form 2026",
       "lastPostedAt": "2026-08-29T12:55:07.079Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0209-20260830093816-3dbc6e70": {
+      "updatedAt": "2026-08-30",
+      "hash": "e9e3caf9825d63a867f72bf9e9d931cf58d9a5c8074c7822cad9312a0334671a",
+      "title": "District Court Rewari Stenographer Recruitment 2026",
+      "lastPostedAt": "2026-08-30T06:15:11.409Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0210-20260830094040-1f6d65bd": {
+      "updatedAt": "2026-08-30",
+      "hash": "2cea43d0331a4043bf22d4bebe2d5fb08681fb75871976cf059a69f2bc19cbf7",
+      "title": "BBMB Hindi Translator Online Form 2026",
+      "lastPostedAt": "2026-08-30T06:15:12.056Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -4333,6 +4347,27 @@
       "title": "UPSSSC Lower PCS Mains 2026 Answer Key",
       "lastPostedAt": "2026-08-24T17:20:41.222Z",
       "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0056-20260820113832-5ca8e978": {
+      "updatedAt": "2026-08-30",
+      "hash": "bd3ecc28da00d07fc641a92563713d1c8613eefeb0951c1beee1ae8662592874",
+      "title": "DSSSB Answer Key 2026 for Various Post July Exam",
+      "lastPostedAt": "2026-08-30T06:15:12.501Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0057-20260821230332-549dba4c": {
+      "updatedAt": "2026-08-30",
+      "hash": "58dbb2f39be2015fec1933855d9a174e8d6104795888c9b29c776fc0f29e5ca7",
+      "title": "UPSSSC BCG Technician Final Answer Key 2026 for 255 Post",
+      "lastPostedAt": "2026-08-30T06:15:13.173Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0059-20260830094444-14ad3250": {
+      "updatedAt": "2026-08-30",
+      "hash": "749bfd9734fed802e595c1c19805c9d506df28b9cead8ee0a4ad383a80b57edf",
+      "title": "BSNL JTO Junior Telecom Officer Answer Key 2026 for 100 Post",
+      "lastPostedAt": "2026-08-30T06:15:13.810Z",
+      "stateReason": "new"
     }
   },
   "results": {
@@ -5678,6 +5713,20 @@
       "hash": "d64ba184fb4342857ed84df805b4176cfb0c887d45776d4abbf5a89110d0eaad",
       "title": "NTA UGC NET June 2026 Result – Declared",
       "lastPostedAt": "2026-08-29T12:55:13.994Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0127-20260830094918-2d6cdf2c": {
+      "updatedAt": "2026-08-30",
+      "hash": "55cbb3c87d81a3b9b88df0c5f39563fc2220e1a57a5bc32a1f01e37732225a88",
+      "title": "NTA ICAR AIEEA PG & Phd Result 2026 Score Card",
+      "lastPostedAt": "2026-08-30T06:15:17.647Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0128-20260830095433-4c4c3f71": {
+      "updatedAt": "2026-08-30",
+      "hash": "cccba0803ec61fccd22b52843291cff106c6d8d404d4abd00db3cf1032176646",
+      "title": "NTA CSIR UGC NET June 2026 Result",
+      "lastPostedAt": "2026-08-30T06:15:18.278Z",
       "stateReason": "new"
     }
   }
