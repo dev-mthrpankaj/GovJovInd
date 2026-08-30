@@ -911,7 +911,7 @@ window.GovJobUpdatesResults = [
         "category": "Central Government",
         "year": "2026",
         "resultDate": "2026-08-31",
-        "status": "upcoming",
+        "status": "released",
         "tags": [],
         "resultLink": "https://ssc.gov.in/api/attachment/uploads/masterData/Results/roll_31072026.pdf",
         "detailPage": "../Result_Details/HTML/SSC-Stenographer-2025-Revised-FRTA-Result-2026.html",

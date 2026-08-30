@@ -80,7 +80,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-08-24",
         "objectionLastDate": "2026-08-30",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://drive.google.com/file/d/1LKnAXU7pmFRvGthWF1R4xDCZD9PSJEN6/view?usp=drivesdk",
         "objectionLink": "https://upsssc.gov.in/Default.aspx",
