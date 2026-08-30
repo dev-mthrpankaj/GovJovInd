@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "voter-id-download-online-e-epic-guide-2026",
+  title: "Voter ID Download Online 2026: How to Download e-EPIC Step by Step",
+  category: "Citizen Services",
+  date: "2026-08-30",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1788114644291.webp",
+  url: "student-hub/voter-id-download-online-e-epic-guide-2026.html",
+  excerpt: "Voter ID download online 2026 guide: learn how to download e-EPIC from the official ECI Voters’ Services Portal using your EPIC or form reference number."
+},
+    {
   id: "ssc-cgl-vs-ibps-po-2026-comparison",
   title: "SSC CGL vs IBPS PO 2026: Salary, Exam Pattern, Job Profile & Career Growth Compared",
   category: "Career Guidance",
