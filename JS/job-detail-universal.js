@@ -49,7 +49,7 @@
     setText('jobOrganization',job.organization); setText('jobTitle',job.title); setText('breadcrumbCurrent',job.title); setText('jobSummary',job.summary);
     $('jobTags').innerHTML=(job.tags||[]).map(x=>`<span>${esc(x)}</span>`).join('');
     setText('metricVacancies',num(job.vacancies)); setText('metricLastDate',fmtDate(job.dates?.applicationEnd)); setText('metricQualification',job.qualificationShort); setText('metricLocation',job.location);
-    setText('latestUpdate',job.latestUpdate); setText('updatedAt',job.updated ? `Updated ${fmtDate(job.updated)}` : 'Updated recently');
+    setText('latestUpdate',job.latestUpdate); setText('updatedAt',job.updated ? `Updated ${fmtDate(job.updated)}` : 'Updated recently'); setText('updatedBy',`Updated by ${job.updatedBy || 'GovJobUpdates'}`);
     setLink('heroApplyBtn',job.links?.apply); setLink('sideApplyBtn',job.links?.apply); setLink('mobileApplyBtn',job.links?.apply); setLink('heroNotificationBtn',job.links?.notification);
   }
   function renderOverview(){ $('overviewGrid').innerHTML=(job.overview||[]).map(([a,b])=>`<div class="gjd-info-item"><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join(''); }
