@@ -34,7 +34,7 @@
         <section class="jobs-hero" aria-labelledby="latestJobsHeading">
             <p class="eyebrow">GovJobUpdates Jobs Desk</p>
             <h1 id="latestJobsHeading">Latest Government Jobs</h1>
-            <p class="jobs-intro">Search current vacancies by department, qualification, year, and status. Each listing includes eligibility, important dates, vacancy count, and direct action links.</p>
+            <p class="jobs-intro">Search current vacancies by department, year, and status. Open a listing to review full eligibility, fees, official notification, and apply links on the detail page.</p>
         </section>
 
         <section class="filter-section" aria-label="Filter latest government jobs">
@@ -42,16 +42,15 @@
                 <label for="jobSearch">Search jobs</label>
                 <input type="search" id="jobSearch" placeholder="Search by title, organization, or tag" autocomplete="off">
             </div>
+            <button id="mobileFilterToggle" class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="advancedJobFilters">
+                <span><i class="fas fa-sliders-h" aria-hidden="true"></i> Filters</span>
+                <span id="activeFilterCount" class="filter-count" hidden>0</span>
+            </button>
+            <div id="advancedJobFilters" class="advanced-job-filters">
             <div class="filter-group">
                 <label for="departmentFilter">Department</label>
                 <select id="departmentFilter">
                     <option value="all">All Departments</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="qualificationFilter">Qualification</label>
-                <select id="qualificationFilter">
-                    <option value="all">All Qualifications</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -82,6 +81,7 @@
             <div class="filter-actions">
                 <button id="resetFilters" class="btn btn-outline" type="button">Reset Filters</button>
             </div>
+            </div>
         </section>
         
         <section class="jobs-results" aria-labelledby="jobsResultHeading">
@@ -92,7 +92,7 @@
             <div class="job-listings" id="jobListings">
                 <article class="content-fallback">
                     <h2>Latest SSC Jobs</h2>
-                    <p>GovJobUpdates tracks latest government jobs for candidates preparing for SSC jobs, railway jobs, UPSC exams, state government recruitment, banking jobs and defence vacancies. This page is updated through the GovJobUpdates jobs desk so applicants can quickly review job title, recruiting organization, qualification summary, last date and the official detail page before applying. Candidates should use this page as a starting point for current Sarkari Naukri alerts, then verify the final eligibility, age limit, vacancy distribution, fee and reservation rules from the official notification. SSC aspirants can follow central government vacancies such as clerk, assistant, constable, translator and graduate level posts. Railway candidates can track technician, apprentice, ALP, paramedical and other RRB updates. State government job seekers can review commission-based recruitments from UPSSSC, DSSSB, BPSC, RPSC, JSSC and other authorities. Banking and defence candidates can also find opportunities from public sector banks, PSUs, armed forces and research organizations. Use the internal links below for admit card, answer key, result, rank predictor and student guidance updates.</p>
+                    <p>GovJobUpdates tracks latest government jobs for candidates preparing for SSC jobs, railway jobs, UPSC exams, state government recruitment, banking jobs and defence vacancies. This page is updated through the GovJobUpdates jobs desk so applicants can quickly review job title, recruiting organization, last date and the official detail page before applying. Candidates should use this page as a starting point for current Sarkari Naukri alerts, then verify the final eligibility, age limit, vacancy distribution, fee and reservation rules from the official notification. SSC aspirants can follow central government vacancies such as clerk, assistant, constable, translator and graduate level posts. Railway candidates can track technician, apprentice, ALP, paramedical and other RRB updates. State government job seekers can review commission-based recruitments from UPSSSC, DSSSB, BPSC, RPSC, JSSC and other authorities. Banking and defence candidates can also find opportunities from public sector banks, PSUs, armed forces and research organizations. Use the internal links below for admit card, answer key, result, rank predictor and student guidance updates.</p>
                     <nav class="related-links" aria-label="Latest jobs fallback links">
                         <a href="latest-jobs.html">Latest Jobs</a>
                         <a href="admitcard.html">Admit Card</a>
@@ -109,35 +109,30 @@
                         <li class="job-card">
                             <h3>Junior Secretariat Assistant / Lower Division Clerk Grade LDCE 2026</h3>
                             <p><strong>Organization:</strong> Staff Selection Commission</p>
-                            <p><strong>Qualification:</strong> 12th standard with additional qualification as per department requirements.</p>
                             <p><strong>Last Date:</strong> 26 June 2026</p>
                             <a class="btn btn-outline" href="../Job_Details/HTML/job-details.html?id=2443">View Details</a>
                         </li>
                         <li class="job-card">
                             <h3>UKSSSC AAO Online Form 2026 for 90 Posts</h3>
                             <p><strong>Organization:</strong> Uttarakhand Subordinate Service Selection Commission</p>
-                            <p><strong>Qualification:</strong> Post-wise educational qualification as specified in the official notification.</p>
                             <p><strong>Last Date:</strong> 21 June 2026</p>
                             <a class="btn btn-outline" href="../Job_Details/HTML/2441-UKSSSC-AAO-2026.html">View Details</a>
                         </li>
                         <li class="job-card">
                             <h3>DRDO RAC Scientist Online Form 2026</h3>
                             <p><strong>Organization:</strong> Defence Research &amp; Development Organization</p>
-                            <p><strong>Qualification:</strong> Relevant diploma, engineering degree, science degree or technical qualification as per official notification.</p>
                             <p><strong>Last Date:</strong> 19 June 2026</p>
                             <a class="btn btn-outline" href="../Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html">View Details</a>
                         </li>
                         <li class="job-card">
                             <h3>DSSSB Various Post Online Form 2026 for 1979 Posts</h3>
                             <p><strong>Organization:</strong> Delhi Subordinate Services Selection Board</p>
-                            <p><strong>Qualification:</strong> Post-wise educational qualification as specified in the official notification.</p>
                             <p><strong>Last Date:</strong> 15 July 2026</p>
                             <a class="btn btn-outline" href="../Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html">View Details</a>
                         </li>
                         <li class="job-card">
                             <h3>UPSSSC Excise Constable Online Form 2026</h3>
                             <p><strong>Organization:</strong> Uttar Pradesh Subordinate Services Selection Commission</p>
-                            <p><strong>Qualification:</strong> Class 10/12 or equivalent eligibility with physical standards as per official notification.</p>
                             <p><strong>Last Date:</strong> 24 June 2026</p>
                             <a class="btn btn-outline" href="../Job_Details/HTML/2440-UPSSSC-EXCISE-CONSTABLE-2026.html">View Details</a>
                         </li>

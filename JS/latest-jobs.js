@@ -47,11 +47,13 @@
     const elements = {
         search: document.getElementById("jobSearch"),
         department: document.getElementById("departmentFilter"),
-        qualification: document.getElementById("qualificationFilter"),
         year: document.getElementById("yearFilter"),
         status: document.getElementById("statusFilter"),
         sort: document.getElementById("sortFilter"),
         reset: document.getElementById("resetFilters"),
+        filterSection: document.querySelector(".filter-section"),
+        mobileFilterToggle: document.getElementById("mobileFilterToggle"),
+        activeFilterCount: document.getElementById("activeFilterCount"),
         loadMore: document.getElementById("loadMoreJobs"),
         jobCount: document.getElementById("jobCount"),
         listings: document.getElementById("jobListings"),
@@ -102,14 +104,6 @@
     function getText(value, fallback = "Not specified") {
         if (value === undefined || value === null || String(value).trim() === "") return fallback;
         return String(value).trim();
-    }
-
-    function normalizeActionUrl(value) {
-        const url = getText(value, "");
-        if (!url || url === "#") return "";
-        if (/^(https?:|mailto:|tel:)/i.test(url) || /^(\/|\.\/|\.\.\/)/.test(url)) return url;
-        if (/^[a-z0-9.-]+\.[a-z]{2,}(?:[/:?#].*)?$/i.test(url)) return `https://${url}`;
-        return "";
     }
 
     function normalizeSearchText(value) {
@@ -234,7 +228,6 @@
 
     function hydrateFilters() {
         populateSelect(elements.department, [...new Set(jobs.map((job) => job.department || job.category))]);
-        populateSelect(elements.qualification, [...new Set(jobs.map((job) => job.qualification))]);
         populateSelect(elements.year, [...new Set(jobs.map((job) => job.year))].sort((a, b) => String(b).localeCompare(String(a))));
     }
 
@@ -262,10 +255,25 @@
         } catch {}
     }
 
+    function getActiveAdvancedFilterCount() {
+        let count = 0;
+        if (elements.department && elements.department.value !== "all") count += 1;
+        if (elements.year && elements.year.value !== "all") count += 1;
+        if (elements.status && elements.status.value !== "all") count += 1;
+        if (elements.sort && elements.sort.value !== "latest") count += 1;
+        return count;
+    }
+
+    function updateMobileFilterState() {
+        if (!elements.activeFilterCount) return;
+        const count = getActiveAdvancedFilterCount();
+        elements.activeFilterCount.textContent = String(count);
+        elements.activeFilterCount.hidden = count === 0;
+    }
+
     function filterJobs() {
         const query = normalizeSearchText(elements.search && elements.search.value);
         const department = elements.department ? elements.department.value : "all";
-        const qualification = elements.qualification ? elements.qualification.value : "all";
         const year = elements.year ? elements.year.value : "all";
         const status = elements.status ? elements.status.value : "all";
 
@@ -275,7 +283,6 @@
                 job.organization,
                 job.department,
                 job.category,
-                job.qualification,
                 job.year,
                 getJobStatus(job),
                 isNewJob(job) ? "new" : "",
@@ -286,14 +293,13 @@
 
             const searchMatch = matchesSearchText(searchableText, query);
             const departmentMatch = department === "all" || job.department === department || job.category === department;
-            const qualificationMatch = qualification === "all" || job.qualification === qualification;
             const yearMatch = year === "all" || job.year === year;
             const statusMatch = status === "all"
                 || computedStatus === status
                 || (status === "new" && isNewJob(job))
                 || (status === "soon" && isLastDateSoon(job));
 
-            return searchMatch && departmentMatch && qualificationMatch && yearMatch && statusMatch;
+            return searchMatch && departmentMatch && yearMatch && statusMatch;
         });
     }
 
@@ -328,29 +334,33 @@
     }
 
     function renderJobCard(job) {
-        const applyLink = normalizeActionUrl(job.applyLink);
-        const applyAction = applyLink
-            ? `<a href="${escapeHtml(applyLink)}" target="_blank" rel="noopener" class="btn btn-primary">Apply Now</a>`
-            : "";
         const detailPage = getDetailPage(job);
         const detailAction = detailPage
-            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
+            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-primary job-detail-btn">View Details <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`
             : "";
+        const status = getJobStatus(job);
+        const statusText = status.charAt(0).toUpperCase() + status.slice(1);
 
         return `
             <article class="job-card">
+                <div class="job-card-accent" aria-hidden="true"></div>
                 <div class="job-card-header">
-                    <div><p class="job-organization">${escapeHtml(job.organization)}</p><h3>${escapeHtml(job.title)}</h3></div>
+                    <div class="job-title-block">
+                        <p class="job-organization">${escapeHtml(job.organization)}</p>
+                        <h3>${escapeHtml(job.title)}</h3>
+                    </div>
                     <div class="job-badges">${renderBadges(job)}</div>
                 </div>
                 <dl class="job-meta">
-                    <div><dt>Qualification</dt><dd>${escapeHtml(job.qualification)}</dd></div>
-                    <div><dt>Total Posts</dt><dd>${escapeHtml(job.totalPosts)}</dd></div>
-                    <div><dt>Start Date</dt><dd>${formatDate(job.startDate)}</dd></div>
-                    <div><dt>Last Date</dt><dd>${formatDate(job.lastDate)}</dd></div>
-                    <div><dt>Updated</dt><dd>${formatDate(job.updatedAt)}</dd></div>
+                    <div class="job-meta-item job-meta-posts"><dt>Total Posts</dt><dd>${escapeHtml(job.totalPosts)}</dd></div>
+                    <div class="job-meta-item"><dt>Start Date</dt><dd>${formatDate(job.startDate)}</dd></div>
+                    <div class="job-meta-item job-meta-deadline"><dt>Last Date</dt><dd>${formatDate(job.lastDate)}</dd></div>
+                    <div class="job-meta-item"><dt>Updated</dt><dd>${formatDate(job.updatedAt)}</dd></div>
                 </dl>
-                <div class="job-actions">${applyAction}${detailAction}</div>
+                <div class="job-card-footer">
+                    <span class="job-footnote"><i class="fas fa-circle-info" aria-hidden="true"></i> ${escapeHtml(statusText)} listing. Apply link is available on the detail page.</span>
+                    <div class="job-actions">${detailAction}</div>
+                </div>
             </article>
         `;
     }
@@ -380,6 +390,7 @@
             elements.emptyState.hidden = true;
             elements.emptyState.innerHTML = "";
         }
+        updateMobileFilterState();
 
         if (!currentJobs.length) renderEmptyState("No matching job updates");
         else elements.listings.innerHTML = renderCardsWithAds(visibleJobs, renderJobCard);
@@ -390,7 +401,6 @@
     function resetFilters() {
         if (elements.search) elements.search.value = "";
         if (elements.department) elements.department.value = "all";
-        if (elements.qualification) elements.qualification.value = "all";
         if (elements.year) elements.year.value = "all";
         if (elements.status) elements.status.value = "all";
         if (elements.sort) elements.sort.value = "latest";
@@ -400,11 +410,17 @@
     }
 
     function bindEvents() {
-        [elements.search, elements.department, elements.qualification, elements.year, elements.status, elements.sort].forEach((element) => {
+        [elements.search, elements.department, elements.year, elements.status, elements.sort].forEach((element) => {
             if (!element) return;
             element.addEventListener("input", () => { visibleCount = pageSize; renderJobs(); });
             element.addEventListener("change", () => { visibleCount = pageSize; renderJobs(); });
         });
+        if (elements.mobileFilterToggle && elements.filterSection) {
+            elements.mobileFilterToggle.addEventListener("click", () => {
+                const isOpen = elements.filterSection.classList.toggle("is-filter-open");
+                elements.mobileFilterToggle.setAttribute("aria-expanded", String(isOpen));
+            });
+        }
         if (elements.reset) elements.reset.addEventListener("click", resetFilters);
         if (elements.loadMore) elements.loadMore.addEventListener("click", () => { visibleCount += pageSize; renderJobs(); });
     }

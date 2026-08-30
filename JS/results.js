@@ -65,6 +65,9 @@
         status: document.getElementById("resultStatus"),
         sort: document.getElementById("resultSort"),
         reset: document.getElementById("resultResetFilters"),
+        filterSection: document.querySelector(".filter-section"),
+        mobileFilterToggle: document.getElementById("resultMobileFilterToggle"),
+        activeFilterCount: document.getElementById("resultActiveFilterCount"),
         loadMoreButton: document.getElementById("resultLoadMore"),
         count: document.getElementById("resultCount"),
         listings: document.getElementById("resultListings"),
@@ -230,6 +233,22 @@
         }
     }
 
+    function getActiveAdvancedFilterCount() {
+        let count = 0;
+        if (elements.department && elements.department.value !== "all") count += 1;
+        if (elements.year && elements.year.value !== "all") count += 1;
+        if (elements.status && elements.status.value !== "all") count += 1;
+        if (elements.sort && elements.sort.value !== "latest") count += 1;
+        return count;
+    }
+
+    function updateMobileFilterState() {
+        if (!elements.activeFilterCount) return;
+        const count = getActiveAdvancedFilterCount();
+        elements.activeFilterCount.textContent = String(count);
+        elements.activeFilterCount.hidden = count === 0;
+    }
+
     function filterItems() {
         const query = normalizeSearchText(elements.search && elements.search.value);
         const department = elements.department ? elements.department.value : "all";
@@ -284,31 +303,29 @@
     }
 
     function renderCard(item) {
-        const resultLink = normalizeActionUrl(item.resultLink);
-        const resultAction = resultLink
-            ? `<a href="${escapeHtml(resultLink)}" target="_blank" rel="noopener" class="btn btn-primary">Check Result</a>`
-            : "";
         const detailPage = getDetailPage(item);
         const detailAction = detailPage
-            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-outline">View Details</a>`
+            ? `<a href="${escapeHtml(detailPage)}" class="btn btn-primary record-detail-btn">View Details <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`
             : "";
+        const statusText = statusLabel(getStatus(item));
 
         return `
             <article class="record-card">
+                <div class="record-card-accent" aria-hidden="true"></div>
                 <div class="record-card-header">
-                    <div>
+                    <div class="record-title-block">
                         <p class="record-organization">${escapeHtml(item.organization)}</p>
                         <h3>${escapeHtml(item.title)}</h3>
                     </div>
                     <div class="record-badges">${renderBadges(item)}</div>
                 </div>
                 <dl class="record-meta">
-                    <div><dt>Result Date</dt><dd>${formatDate(item.resultDate)}</dd></div>
-                    <div><dt>Updated</dt><dd>${formatDate(item.updatedAt)}</dd></div>
+                    <div class="record-meta-item record-meta-release"><dt>Result Date</dt><dd>${formatDate(item.resultDate)}</dd></div>
+                    <div class="record-meta-item"><dt>Updated</dt><dd>${formatDate(item.updatedAt)}</dd></div>
                 </dl>
-                <div class="record-actions">
-                    ${resultAction}
-                    ${detailAction}
+                <div class="record-card-footer">
+                    <span class="record-footnote"><i class="fas fa-circle-info" aria-hidden="true"></i> ${escapeHtml(statusText)} update. Official result and cutoff links are on the detail page.</span>
+                    <div class="record-actions">${detailAction}</div>
                 </div>
             </article>
         `;
@@ -348,6 +365,7 @@
             elements.emptyState.hidden = true;
             elements.emptyState.innerHTML = "";
         }
+        updateMobileFilterState();
 
         if (!currentItems.length) {
             renderEmptyState("No matching result updates");
@@ -388,6 +406,12 @@
                 renderItems();
             });
         });
+        if (elements.mobileFilterToggle && elements.filterSection) {
+            elements.mobileFilterToggle.addEventListener("click", () => {
+                const isOpen = elements.filterSection.classList.toggle("is-filter-open");
+                elements.mobileFilterToggle.setAttribute("aria-expanded", String(isOpen));
+            });
+        }
         if (elements.reset) elements.reset.addEventListener("click", resetFilters);
         if (elements.loadMoreButton) elements.loadMoreButton.addEventListener("click", loadMore);
     }

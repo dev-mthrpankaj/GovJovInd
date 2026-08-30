@@ -38,7 +38,7 @@
         <section class="listing-hero" aria-labelledby="resultsHeading">
             <p class="eyebrow">GovJobUpdates Results Desk</p>
             <h1 id="resultsHeading">Latest Government Results</h1>
-            <p class="listing-intro">Check released and upcoming results for major central and state government exams with official result links and detail pages.</p>
+            <p class="listing-intro">Check released and upcoming results for major central and state government exams. Open a detail page to verify scorecard, merit list, cutoff, and official result links.</p>
         </section>
 
         <section class="filter-section" aria-label="Filter results">
@@ -46,6 +46,11 @@
                 <label for="resultSearch">Search results</label>
                 <input type="search" id="resultSearch" placeholder="Search by title, organization, department, or tag" autocomplete="off">
             </div>
+            <button id="resultMobileFilterToggle" class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="advancedResultFilters">
+                <span><i class="fas fa-sliders-h" aria-hidden="true"></i> Filters</span>
+                <span id="resultActiveFilterCount" class="filter-count" hidden>0</span>
+            </button>
+            <div id="advancedResultFilters" class="advanced-listing-filters">
             <div class="filter-group">
                 <label for="resultDepartment">Department</label>
                 <select id="resultDepartment">
@@ -78,6 +83,7 @@
             <div class="filter-actions">
                 <button id="resultResetFilters" class="btn btn-outline" type="button">Reset Filters</button>
             </div>
+            </div>
         </section>
         
         <section class="listing-results" aria-labelledby="resultRecordsHeading">
@@ -88,7 +94,7 @@
             <div class="listing-cards result-listings" id="resultListings">
                 <article class="record-card content-fallback">
                     <h2>Latest Government Exam Results</h2>
-                    <p>GovJobUpdates provides crawlable result information before the live JavaScript result cards render. Candidates can follow SSC results, railway recruitment results, UPSC merit lists, state government exam results, banking scorecards and defence recruitment selection updates from one page. Result updates may include scorecard links, merit lists, cutoff notices, PET or skill test shortlists, final selection lists and document verification schedules. Before relying on any result, candidates should confirm the roll number, registration number, category, cutoff, marks, qualifying status and next-stage instructions from the official result notice or login portal. Some recruitments release written results first and then call candidates for physical tests, interviews, medical examination or document verification. This static fallback gives crawlers and users meaningful result content if JavaScript fails, while the live GovJobUpdates listing replaces it automatically after dynamic result cards load successfully.</p>
+                    <p>GovJobUpdates provides crawlable result information before the live JavaScript result cards render. Candidates can follow SSC results, railway recruitment results, UPSC merit lists, state government exam results, banking scorecards and defence recruitment selection updates from one page. Result updates may include scorecard links, merit lists, cutoff notices, PET or skill test shortlists, final selection lists and document verification schedules. Before relying on any result, candidates should confirm the roll number, registration number, category, cutoff, marks, qualifying status and next-stage instructions from the detail page and official result notice or login portal. Some recruitments release written results first and then call candidates for physical tests, interviews, medical examination or document verification. This static fallback gives crawlers and users meaningful result content if JavaScript fails, while the live GovJobUpdates listing replaces it automatically after dynamic result cards load successfully.</p>
                     <nav class="related-links" aria-label="Result fallback links">
                         <a href="latest-jobs.html">Latest Jobs</a>
                         <a href="admitcard.html">Admit Card</a>

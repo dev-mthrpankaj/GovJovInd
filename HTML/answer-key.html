@@ -38,7 +38,7 @@
         <section class="listing-hero" aria-labelledby="answerKeyHeading">
             <p class="eyebrow">GovJobUpdates Answer Key Desk</p>
             <h1 id="answerKeyHeading">Latest Answer Keys</h1>
-            <p class="listing-intro">Track released and upcoming answer keys, objection deadlines, exam date ranges, and official download links for government exams.</p>
+            <p class="listing-intro">Track released and upcoming answer keys, objection deadlines, and exam date ranges. Open a detail page to verify official download, objection, and rank-check options.</p>
         </section>
 
         <section class="filter-section" aria-label="Filter answer keys">
@@ -46,6 +46,11 @@
                 <label for="answerKeySearch">Search answer keys</label>
                 <input type="search" id="answerKeySearch" placeholder="Search by title, organization, department, or tag" autocomplete="off">
             </div>
+            <button id="answerKeyMobileFilterToggle" class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="advancedAnswerKeyFilters">
+                <span><i class="fas fa-sliders-h" aria-hidden="true"></i> Filters</span>
+                <span id="answerKeyActiveFilterCount" class="filter-count" hidden>0</span>
+            </button>
+            <div id="advancedAnswerKeyFilters" class="advanced-listing-filters">
             <div class="filter-group">
                 <label for="answerKeyDepartment">Department</label>
                 <select id="answerKeyDepartment">
@@ -79,6 +84,7 @@
             <div class="filter-actions">
                 <button id="answerKeyResetFilters" class="btn btn-outline" type="button">Reset Filters</button>
             </div>
+            </div>
         </section>
         
         <section class="listing-results" aria-labelledby="answerKeyRecordsHeading">
@@ -89,7 +95,7 @@
             <div class="listing-cards answer-key-listings" id="answerKeyListings">
                 <article class="record-card content-fallback">
                     <h2>Latest Government Exam Answer Keys</h2>
-                    <p>GovJobUpdates keeps answer key information available in crawlable HTML before the live JavaScript listing renders. Candidates can follow provisional answer keys, final answer keys, objection windows, exam response sheets and score-estimate updates for SSC exams, railway recruitments, UPSC examinations, state government tests, banking exams and defence recruitment papers. An answer key helps candidates compare attempted responses with the official key, estimate marks using the notified marking scheme and decide whether an objection is required. Provisional answer keys may change after objections, while final keys are generally used for result preparation. Applicants should always verify answer key PDFs, login portals, objection fees, supporting evidence rules and deadlines from the official examination authority. This fallback stays visible if JavaScript fails and is replaced automatically when GovJobUpdates successfully renders the latest live answer key cards.</p>
+                    <p>GovJobUpdates keeps answer key information available in crawlable HTML before the live JavaScript listing renders. Candidates can follow provisional answer keys, final answer keys, objection windows, exam response sheets and score-estimate updates for SSC exams, railway recruitments, UPSC examinations, state government tests, banking exams and defence recruitment papers. An answer key helps candidates compare attempted responses with the official key, estimate marks using the notified marking scheme and decide whether an objection is required. Provisional answer keys may change after objections, while final keys are generally used for result preparation. Applicants should always verify answer key PDFs, login portals, objection fees, supporting evidence rules and deadlines from the detail page and official examination authority. This fallback stays visible if JavaScript fails and is replaced automatically when GovJobUpdates successfully renders the latest live answer key cards.</p>
                     <nav class="related-links" aria-label="Answer key fallback links">
                         <a href="latest-jobs.html">Latest Jobs</a>
                         <a href="admitcard.html">Admit Card</a>
@@ -124,7 +130,7 @@
                             <p><strong>Organization:</strong> Madhya Pradesh Employees Selection Board</p>
                             <p><strong>Objection Last Date:</strong> 03 May 2026</p>
                             <p><strong>Status:</strong> Objection closed</p>
-                            <a href="rank-predictor.html" class="btn rank-check-btn is-active">Check Your Rank</a>
+                            <a href="../AnswerKey_Details/HTML/DSSSB-Various-Post-Answer-Key-2026.html" class="btn btn-outline">View Details</a>
                         </li>
                         <li class="record-card">
                             <h3>UPSSSC Technical Assistant Group C Answer Key Updates</h3>

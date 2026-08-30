@@ -37,7 +37,7 @@
         <section class="listing-hero" aria-labelledby="admitCardHeading">
             <p class="eyebrow">GovJobUpdates Exam Desk</p>
             <h1 id="admitCardHeading">Latest Admit Cards</h1>
-            <p class="listing-intro">Find released and upcoming government exam admit cards with exam date ranges, release dates, and direct official download links.</p>
+            <p class="listing-intro">Find released and upcoming government exam admit cards with exam date ranges and release dates. Open a detail page to verify instructions and official download links.</p>
         </section>
 
         <section class="filter-section" aria-label="Filter admit cards">
@@ -45,6 +45,11 @@
                 <label for="admitSearch">Search admit cards</label>
                 <input type="search" id="admitSearch" placeholder="Search by title, organization, department, or tag" autocomplete="off">
             </div>
+            <button id="admitMobileFilterToggle" class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="advancedAdmitFilters">
+                <span><i class="fas fa-sliders-h" aria-hidden="true"></i> Filters</span>
+                <span id="admitActiveFilterCount" class="filter-count" hidden>0</span>
+            </button>
+            <div id="advancedAdmitFilters" class="advanced-listing-filters">
             <div class="filter-group">
                 <label for="admitDepartment">Department</label>
                 <select id="admitDepartment">
@@ -78,6 +83,7 @@
             <div class="filter-actions">
                 <button id="admitResetFilters" class="btn btn-outline" type="button">Reset Filters</button>
             </div>
+            </div>
         </section>
         
         <section class="listing-results" aria-labelledby="admitResultsHeading">
@@ -88,7 +94,7 @@
             <div class="listing-cards admitcard-listings" id="admitcardListings">
                 <article class="record-card content-fallback">
                     <h2>Latest Government Exam Admit Cards</h2>
-                    <p>GovJobUpdates provides crawler-visible admit card information for government exams before the live JavaScript listing loads. Candidates can use this page to track SSC admit cards, railway exam hall tickets, UPSC e-admit cards, state government admit card releases, banking exam call letters and defence recruitment exam entry cards. Admit card updates usually include the exam name, recruiting organization, exam date, release date, download link and official verification note. Before visiting an exam centre, candidates should confirm the reporting time, shift, centre address, roll number, photograph, signature, permitted photo ID and instructions printed on the official admit card. Many recruitment boards release admit cards in phases, so applicants should check the official portal using registration number, roll number, date of birth or password as required. This static fallback remains available if JavaScript fails, while the live listing replaces it once GovJobUpdates successfully renders current admit card cards.</p>
+                    <p>GovJobUpdates provides crawler-visible admit card information for government exams before the live JavaScript listing loads. Candidates can use this page to track SSC admit cards, railway exam hall tickets, UPSC e-admit cards, state government admit card releases, banking exam call letters and defence recruitment exam entry cards. Admit card updates usually include the exam name, recruiting organization, exam date, release date, detail page and official verification note. Before visiting an exam centre, candidates should confirm the reporting time, shift, centre address, roll number, photograph, signature, permitted photo ID and instructions printed on the official admit card. Many recruitment boards release admit cards in phases, so applicants should check the official portal using registration number, roll number, date of birth or password as required. This static fallback remains available if JavaScript fails, while the live listing replaces it once GovJobUpdates successfully renders current admit card cards.</p>
                     <nav class="related-links" aria-label="Admit card fallback links">
                         <a href="latest-jobs.html">Latest Jobs</a>
                         <a href="admitcard.html">Admit Card</a>
@@ -109,7 +115,7 @@
                             <p><strong>Organization:</strong> Join Indian Army</p>
                             <p><strong>Exam Date:</strong> 01 June 2026 - 15 June 2026</p>
                             <p><strong>Release Date:</strong> 15 May 2026</p>
-                            <a href="https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html" target="_blank" rel="noopener" class="btn btn-primary">Download Admit Card</a>
+                            <a href="../HTML/admitcard.html" class="btn btn-outline">View Details</a>
                         </li>
                         <li class="record-card">
                             <h3>UKSSSC Group C Driver Admit Card 2026</h3>

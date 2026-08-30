@@ -1,1 +1,5 @@
 /* Results page additions. Shared listing styles are loaded directly in HTML. */
+
+.results-page .record-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}

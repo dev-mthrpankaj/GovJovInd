@@ -1,5 +1,9 @@
 /* Answer Key page additions. Shared listing styles are loaded directly in HTML. */
 
+.answer-key-page .record-meta {
+    grid-template-columns: 1.25fr 1fr 1fr 1fr;
+}
+
 .answer-key-page .rank-check-btn.is-active {
     border-color: #15803d;
     background: #15803d;
@@ -19,4 +23,10 @@
     background: #dc2626;
     color: #ffffff;
     cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+    .answer-key-page .record-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
