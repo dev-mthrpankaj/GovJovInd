@@ -11,17 +11,8 @@
 
     const PAGE_SIZE = 9;
 
-    /*
-       Responsive quiz-media sizing.
-       Kept additive so existing image rendering/data stays untouched.
-       - Desktop/laptop: question figures stay readable without dominating the test.
-       - Tablet/mobile: use the available width and preserve aspect ratio.
-       - Tall images: bounded by viewport height on larger screens.
-       - Option images remain compact and are not affected by the question-image cap.
-    */
     function installResponsiveMediaStyles() {
         if (document.getElementById("gju-quiz-media-responsive-styles")) return;
-
         const style = document.createElement("style");
         style.id = "gju-quiz-media-responsive-styles";
         style.textContent = `
@@ -32,7 +23,6 @@
                 max-width: 680px;
                 margin-inline: auto;
             }
-
             .quiz-media-question-image img,
             .quiz-media-review-question-image img,
             .quiz-media-explanation-image img {
@@ -43,7 +33,6 @@
                 margin-inline: auto;
                 object-fit: contain;
             }
-
             @media (min-width: 1120px) {
                 .quiz-media-question-image .quiz-media-frame,
                 .quiz-media-review-question-image .quiz-media-frame,
@@ -51,14 +40,12 @@
                     width: min(100%, 640px);
                     max-width: 640px;
                 }
-
                 .quiz-media-question-image img,
                 .quiz-media-review-question-image img,
                 .quiz-media-explanation-image img {
                     max-height: min(54vh, 520px);
                 }
             }
-
             @media (max-width: 767px) {
                 .quiz-media-question-image .quiz-media-frame,
                 .quiz-media-review-question-image .quiz-media-frame,
@@ -68,7 +55,6 @@
                     margin-inline: 0;
                     padding: 5px;
                 }
-
                 .quiz-media-question-image img,
                 .quiz-media-review-question-image img,
                 .quiz-media-explanation-image img {
@@ -77,7 +63,6 @@
                     max-height: none;
                 }
             }
-
             @media (max-width: 425px) {
                 .quiz-media-question-image .quiz-media-frame,
                 .quiz-media-review-question-image .quiz-media-frame,
@@ -90,8 +75,48 @@
         document.head.appendChild(style);
     }
 
+    function installDeferredDirectQuizStart() {
+        const params = new URLSearchParams(window.location.search);
+        const requestedQuizId = String(params.get("quiz") || "").trim();
+        if (!requestedQuizId || !requestedQuizId.startsWith("admin-")) return;
+
+        let started = false;
+
+        function tryStartRequestedQuiz() {
+            if (started) return;
+            const registry = window.GJU_QUIZZES;
+            if (!registry || typeof registry.getQuizById !== "function") return;
+            const quiz = registry.getQuizById(requestedQuizId);
+            if (!quiz) return;
+
+            const subjectSelect = document.getElementById("subjectSelect");
+            if (subjectSelect && quiz.subject && subjectSelect.value !== quiz.subject) {
+                subjectSelect.value = quiz.subject;
+                subjectSelect.dispatchEvent(new Event("change", { bubbles: true }));
+            }
+
+            window.setTimeout(function () {
+                if (started) return;
+                const selectorId = window.CSS && typeof window.CSS.escape === "function"
+                    ? window.CSS.escape(requestedQuizId)
+                    : requestedQuizId.replace(/(["\\])/g, "\\$1");
+                const button = document.querySelector('[data-start-quiz="' + selectorId + '"]');
+                if (!button || button.disabled) return;
+                started = true;
+                button.click();
+            }, 0);
+        }
+
+        document.addEventListener("gju:admin-quiz-index-ready", function () {
+            window.setTimeout(tryStartRequestedQuiz, 0);
+        });
+
+        window.setTimeout(tryStartRequestedQuiz, 0);
+    }
+
     function init() {
         installResponsiveMediaStyles();
+        installDeferredDirectQuizStart();
 
         const list = document.getElementById("quizSetList");
         if (!list) return;
@@ -122,7 +147,6 @@
         }
 
         function pageNumbers(total, current) {
-            // Always show first, last, current, and one neighbour on each side.
             const pages = [];
             for (let i = 1; i <= total; i++) {
                 if (i === 1 || i === total || Math.abs(i - current) <= 1) {
@@ -139,12 +163,9 @@
             currentPage = Math.min(Math.max(1, page), totalPages);
             const start = (currentPage - 1) * PAGE_SIZE;
             const end = start + PAGE_SIZE;
-
             cards.forEach(function (card, index) {
-                const visible = index >= start && index < end;
-                card.classList.toggle("quiz-card-page-hidden", !visible);
+                card.classList.toggle("quiz-card-page-hidden", !(index >= start && index < end));
             });
-
             renderPager(cards.length, totalPages);
         }
 
@@ -153,36 +174,27 @@
                 removePager();
                 return;
             }
-
             const nav = ensurePager();
             const start = (currentPage - 1) * PAGE_SIZE + 1;
             const end = Math.min(currentPage * PAGE_SIZE, totalCount);
-
             let html = '<p class="quiz-pager-range">Showing <strong>' + start + '\u2013' + end +
                 '</strong> of <strong>' + totalCount + '</strong> quiz sets</p><div class="quiz-pager-controls">';
-
             html += '<button type="button" class="quiz-pager-btn quiz-pager-arrow" data-page="' +
                 (currentPage - 1) + '"' + (currentPage === 1 ? " disabled" : "") +
                 ' aria-label="Previous page"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>';
-
             pageNumbers(totalPages, currentPage).forEach(function (p) {
                 if (p === "...") {
                     html += '<span class="quiz-pager-ellipsis">\u2026</span>';
                 } else {
                     html += '<button type="button" class="quiz-pager-btn' +
                         (p === currentPage ? " active" : "") + '" data-page="' + p + '"' +
-                        (p === currentPage ? ' aria-current="page"' : "") +
-                        '>' + p + '</button>';
+                        (p === currentPage ? ' aria-current="page"' : "") + '>' + p + '</button>';
                 }
             });
-
             html += '<button type="button" class="quiz-pager-btn quiz-pager-arrow" data-page="' +
                 (currentPage + 1) + '"' + (currentPage === totalPages ? " disabled" : "") +
-                ' aria-label="Next page"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>';
-
-            html += "</div>";
+                ' aria-label="Next page"><i class="fas fa-chevron-right" aria-hidden="true"></i></button></div>';
             nav.innerHTML = html;
-
             nav.querySelectorAll("[data-page]").forEach(function (btn) {
                 btn.addEventListener("click", function () {
                     const target = parseInt(btn.getAttribute("data-page"), 10);
@@ -204,7 +216,6 @@
 
         const observer = new MutationObserver(refresh);
         observer.observe(list, { childList: true });
-
         refresh();
     }
 
