@@ -9,6 +9,7 @@
     let startAttempted = false;
     let pausedResumePending = false;
     let timeoutId = 0;
+    let legacyHomeObserver = null;
 
     function sourcePage() { return familyPages[family] || "quiz.html"; }
     function exitToSource() { window.location.href = sourcePage(); }
@@ -40,6 +41,17 @@
         home.classList.add("hidden");
         home.setAttribute("aria-hidden", "true");
         home.setAttribute("inert", "");
+    }
+    function installLegacyHomeFirewall() {
+        const home = document.getElementById("homeView");
+        if (!home || legacyHomeObserver) return;
+        keepLegacyHomeInert();
+        legacyHomeObserver = new MutationObserver(function () {
+            if (!home.classList.contains("hidden")) home.classList.add("hidden");
+            if (home.getAttribute("aria-hidden") !== "true") home.setAttribute("aria-hidden", "true");
+            if (!home.hasAttribute("inert")) home.setAttribute("inert", "");
+        });
+        legacyHomeObserver.observe(home, { attributes: true, attributeFilter: ["class", "aria-hidden", "inert"] });
     }
     function syncAttemptChrome(resumeVisible) {
         document.body.classList.toggle("quiz-resume-choice-active", Boolean(resumeVisible));
@@ -137,7 +149,7 @@
     }
     function init() {
         document.body.classList.add("quiz-attempt-route");
-        keepLegacyHomeInert();
+        installLegacyHomeFirewall();
         if (!quizId) { window.location.replace("quiz.html"); return; }
         setLoading("Starting your quiz…", "Loading published quiz information.", false);
         watchViews();
