@@ -1,0 +1,22 @@
+--- a/JS/quizzes.js
++++ b/JS/quizzes.js
+@@
+     function formatRichText(value) {
+         let html = escapeHtml(normalizeRichTextSource(value));
+         const replacements = [
+             [/\[b\]([\s\S]*?)\[\/b\]/gi, '<strong class="text-bold">$1</strong>'],
+             [/\[u\]([\s\S]*?)\[\/u\]/gi, '<span class="text-underline">$1</span>'],
+             [/\[mark\]([\s\S]*?)\[\/mark\]/gi, '<mark class="text-mark">$1</mark>'],
+-            [/\[red\]([\s\S]*?)\[\/red\]/gi, '<span class="text-red">$1</span>']
++            [/\[red\]([\s\S]*?)\[\/red\]/gi, '<span class="text-red">$1</span>'],
++            [/\[green\]([\s\S]*?)\[\/green\]/gi, '<span class="text-green">$1</span>'],
++            [/\[blue\]([\s\S]*?)\[\/blue\]/gi, '<span class="text-blue">$1</span>'],
++            [/\[sup\]([\s\S]*?)\[\/sup\]/gi, '<sup class="text-sup">$1</sup>'],
++            [/\[sub\]([\s\S]*?)\[\/sub\]/gi, '<sub class="text-sub">$1</sub>']
+         ];
+ 
+-        for (let pass = 0; pass < 3; pass += 1) {
++        for (let pass = 0; pass < 6; pass += 1) {
+             replacements.forEach(function ([pattern, replacement]) {
+                 html = html.replace(pattern, replacement);
+             });

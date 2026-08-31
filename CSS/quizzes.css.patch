@@ -1,0 +1,25 @@
+--- a/CSS/quizzes.css
++++ b/CSS/quizzes.css
+@@
+ .text-red {
+     color: #dc2626;
+     font-weight: 950;
+ }
++
++.text-green {
++    color: #15803d;
++    font-weight: 950;
++}
++
++.text-blue {
++    color: #1d4ed8;
++    font-weight: 950;
++}
++
++.text-sup,
++.text-sub {
++    font-size: .78em;
++    line-height: 0;
++}
+ 
+ .answer-option {
