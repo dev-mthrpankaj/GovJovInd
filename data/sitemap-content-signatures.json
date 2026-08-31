@@ -657,6 +657,10 @@
       "signature": "935a7374d554abffd2637c9d8792030156925eb03ce9b8f3d10c84d58b576bb1",
       "lastmod": "2026-08-30"
     },
+    "HTML/banking-quizzes.html": {
+      "signature": "3c8affc09f2c7dea0fee6f36aaa6a3e15a6158dbcb5e1603bd6834043da2457b",
+      "lastmod": "2026-08-31"
+    },
     "HTML/contact.html": {
       "signature": "291ae4aa06c72f02326e9dea381be591feb11c2692efabe01e8c61c0ab5bc21c",
       "lastmod": "2026-08-28"
@@ -688,6 +692,10 @@
     "HTML/physical-academy.html": {
       "signature": "5551c09f2a16cb5112eb0eaab9bf4b0f2269a4f9a6baef9187fd52f85caf54ae",
       "lastmod": "2026-08-19"
+    },
+    "HTML/police-quizzes.html": {
+      "signature": "65784e2387eee87ba868b957f725074538c20a5136c2d4e99bb92bba139c72a2",
+      "lastmod": "2026-08-31"
     },
     "HTML/privacy-policy.html": {
       "signature": "662443dcac87e24610cbb4df884fb10032bbe36934ef41d9988d5d95b44d0eb9",
@@ -732,6 +740,14 @@
     "HTML/results.html": {
       "signature": "ed9c5c372aa013d12e7bde101436bde2219b6441671372f98b210b4004bd4d6d",
       "lastmod": "2026-08-30"
+    },
+    "HTML/rrb-quizzes.html": {
+      "signature": "3345fd4205cd194b26e63f827812f2e29e4a68190efbd1ef8ab1360edc11def4",
+      "lastmod": "2026-08-31"
+    },
+    "HTML/ssc-quizzes.html": {
+      "signature": "487e26cb007f6e5f95064e623c0594a7de9524a98d5e0e140275034aec292ba7",
+      "lastmod": "2026-08-31"
     },
     "HTML/store-product.html": {
       "signature": "e0f3c94f3764f83c0cd956223af9dff537c9b8383d6bc1e71c60e546caec5069",
