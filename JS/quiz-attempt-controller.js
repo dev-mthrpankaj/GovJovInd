@@ -5,17 +5,84 @@
     const quizId = String(params.get("quiz") || "").trim();
     const family = String(params.get("family") || "").trim().toLowerCase();
     const familyPages = { banking: "banking-quizzes.html", ssc: "ssc-quizzes.html", police: "police-quizzes.html", rrb: "rrb-quizzes.html" };
+    const THEME_KEY = "gju:quiz-attempt-theme";
     let pausedSeconds = 0;
     let startAttempted = false;
     let pausedResumePending = false;
     let timeoutId = 0;
     let legacyHomeObserver = null;
+    let questionObserver = null;
 
     function sourcePage() { return familyPages[family] || "quiz.html"; }
     function exitToSource() { window.location.href = sourcePage(); }
     function parseTimer(value) {
         const parts = String(value || "").trim().split(":").map(Number);
         return parts.length === 2 && !parts.some(Number.isNaN) ? Math.max(0, parts[0] * 60 + parts[1]) : 0;
+    }
+    function installPremiumStyles() {
+        if (document.querySelector('link[data-quiz-attempt-premium]')) return;
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-final-v1";
+        link.dataset.quizAttemptPremium = "1";
+        document.head.appendChild(link);
+    }
+    function getInitialTheme() {
+        try {
+            const saved = localStorage.getItem(THEME_KEY);
+            if (saved === "light" || saved === "dark") return saved;
+        } catch (_error) {}
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    function applyTheme(theme, persist) {
+        const next = theme === "dark" ? "dark" : "light";
+        document.body.dataset.quizTheme = next;
+        document.documentElement.style.colorScheme = next;
+        if (persist) {
+            try { localStorage.setItem(THEME_KEY, next); } catch (_error) {}
+        }
+        const button = document.querySelector("[data-quiz-theme-toggle]");
+        if (button) {
+            const dark = next === "dark";
+            button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+            button.setAttribute("title", dark ? "Light mode" : "Dark mode");
+            button.innerHTML = `<i class="fas ${dark ? "fa-sun" : "fa-moon"}" aria-hidden="true"></i><span class="quiz-theme-label">${dark ? "Light mode" : "Dark mode"}</span>`;
+        }
+    }
+    function installThemeToggle() {
+        const appbar = document.querySelector(".exam-appbar");
+        if (!appbar || appbar.querySelector("[data-quiz-theme-toggle]")) return;
+        const menu = appbar.querySelector(".exam-menu-btn");
+        let actions = appbar.querySelector(".exam-appbar-actions");
+        if (!actions) {
+            actions = document.createElement("div");
+            actions.className = "exam-appbar-actions";
+            appbar.appendChild(actions);
+        }
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-theme-toggle";
+        button.dataset.quizThemeToggle = "1";
+        actions.appendChild(button);
+        if (menu) actions.appendChild(menu);
+        applyTheme(document.body.dataset.quizTheme || getInitialTheme(), false);
+    }
+    function syncPreviousButton() {
+        const button = document.querySelector("[data-action='prev-question']");
+        if (!button) return;
+        const current = Number(document.getElementById("currentQuestionNo")?.textContent || document.getElementById("questionNumberLabel")?.textContent || 1);
+        const first = !Number.isFinite(current) || current <= 1;
+        button.hidden = first;
+        button.disabled = first;
+        button.setAttribute("aria-hidden", first ? "true" : "false");
+        button.setAttribute("aria-disabled", first ? "true" : "false");
+    }
+    function installQuestionNavigationRules() {
+        if (questionObserver) return;
+        const nodes = [document.getElementById("currentQuestionNo"), document.getElementById("questionNumberLabel")].filter(Boolean);
+        syncPreviousButton();
+        questionObserver = new MutationObserver(function () { window.requestAnimationFrame(syncPreviousButton); });
+        nodes.forEach(function (node) { questionObserver.observe(node, { childList: true, characterData: true, subtree: true }); });
     }
     function setLoading(title, message, isError) {
         const view = document.getElementById("loadingView");
@@ -143,13 +210,22 @@
             const resumeVisible = !document.getElementById("resumeModal")?.classList.contains("hidden");
             syncAttemptChrome(resumeVisible && !pausedResumePending);
             if (examVisible || resultVisible || reviewVisible || resumeVisible) hideLoading();
+            if (examVisible) {
+                installThemeToggle();
+                installQuestionNavigationRules();
+                syncPreviousButton();
+            }
             if (resumeVisible) maybeFinishPausedResume();
         });
         targets.forEach((target) => observer.observe(target, { attributes: true, attributeFilter: ["class"] }));
     }
     function init() {
         document.body.classList.add("quiz-attempt-route");
+        installPremiumStyles();
+        applyTheme(getInitialTheme(), false);
         installLegacyHomeFirewall();
+        installThemeToggle();
+        installQuestionNavigationRules();
         if (!quizId) { window.location.replace("quiz.html"); return; }
         setLoading("Starting your quiz…", "Loading published quiz information.", false);
         watchViews();
@@ -165,8 +241,14 @@
     }
 
     document.addEventListener("click", function (event) {
-        const target = event.target.closest && event.target.closest("[data-action], [data-attempt-resume], [data-attempt-exit], [data-attempt-retry]");
+        const target = event.target.closest && event.target.closest("[data-action], [data-attempt-resume], [data-attempt-exit], [data-attempt-retry], [data-quiz-theme-toggle]");
         if (!target) return;
+        if (target.hasAttribute("data-quiz-theme-toggle")) {
+            event.preventDefault();
+            const current = document.body.dataset.quizTheme === "dark" ? "dark" : "light";
+            applyTheme(current === "dark" ? "light" : "dark", true);
+            return;
+        }
         if (target.matches("[data-action='pause-test']")) { pausedSeconds = parseTimer(document.getElementById("timerText")?.textContent); return; }
         if (target.matches("[data-action='back-home'], [data-action='cancel-resume']")) { event.preventDefault(); event.stopPropagation(); exitToSource(); return; }
         if (target.hasAttribute("data-attempt-resume")) { event.preventDefault(); resumePausedAttempt(); return; }
