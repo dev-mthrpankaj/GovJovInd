@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  const CONTACT_API_URL = 'https://script.google.com/macros/s/AKfycbyM6Xq_fq0axcmTvMTG3Xx0Dwy9h7wSbUDqsO7EvULeGLm0SAVWO0OrkmEEtKh_QBbE/exec';
   const SUPPORT_EMAIL = 'support@govjobupdates.com';
   const form = document.getElementById('contributorProposalForm');
   const status = document.getElementById('proposalFormStatus');
@@ -71,36 +70,6 @@
     return `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${body}`;
   }
 
-  async function sendProposal(payload) {
-    const response = await fetch(CONTACT_API_URL, {
-      method: 'POST',
-      redirect: 'follow',
-      cache: 'no-store',
-      credentials: 'omit',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const text = await response.text();
-    let result;
-    try {
-      result = JSON.parse(text);
-    } catch (error) {
-      throw new Error('Invalid backend response');
-    }
-
-    if (!result || result.ok !== true) {
-      throw new Error(result?.error || result?.message || 'Submission failed');
-    }
-
-    return result;
-  }
-
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     setStatus('');
@@ -118,18 +87,21 @@
       submitButton.disabled = true;
       submitButton.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Submitting...';
     }
-    setStatus('Submitting your proposal securely...');
+    setStatus('Submitting...');
 
     try {
-      await sendProposal(payload);
+      if (!window.GovJobContact?.submitRequest) throw new Error('Contact sender is not loaded.');
+      await window.GovJobContact.submitRequest(payload);
       form.reset();
       setStatus('Proposal submitted successfully. Our editorial team will review it soon.');
     } catch (error) {
       console.error('Contributor proposal submission failed:', error);
-      setStatus(`Automatic submission failed. You can email the prepared proposal to ${SUPPORT_EMAIL}.`, true);
+      setStatus(`Automatic submission failed. You can email your proposal to ${SUPPORT_EMAIL}.`, true);
 
       const fallback = document.createElement('a');
-      fallback.href = buildFallbackMailto(payload);
+      fallback.href = window.GovJobContact?.getMailtoHref
+        ? window.GovJobContact.getMailtoHref(payload.subject, payload.description, payload)
+        : buildFallbackMailto(payload);
       fallback.textContent = ' Open prepared email';
       fallback.style.fontWeight = '800';
       fallback.style.marginLeft = '4px';
