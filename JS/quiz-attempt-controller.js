@@ -4,10 +4,10 @@
     const params = new URLSearchParams(window.location.search);
     const quizId = String(params.get("quiz") || "").trim();
     const family = String(params.get("family") || "").trim().toLowerCase();
-    const autoResume = params.get("autoresume") === "1";
     const familyPages = { banking: "banking-quizzes.html", ssc: "ssc-quizzes.html", police: "police-quizzes.html", rrb: "rrb-quizzes.html" };
     let pausedSeconds = 0;
     let startAttempted = false;
+    let pausedResumePending = false;
     let timeoutId = 0;
 
     function sourcePage() { return familyPages[family] || "quiz.html"; }
@@ -65,34 +65,20 @@
         }
         overlay.classList.remove("hidden");
     }
-    function resumePausedAttempt() {
+    function hidePausedOverlay() {
+        document.getElementById("attemptPausedOverlay")?.classList.add("hidden");
+        document.body.classList.remove("quiz-attempt-paused");
+    }
+    function writePausedTimeBackToSavedAttempt() {
         const storage = window.QuizStorage;
-        if (storage && typeof storage.read === "function" && typeof storage.write === "function") {
-            const saved = storage.read("unfinished", null);
-            if (saved && saved.quizId === quizId && pausedSeconds > 0) {
-                saved.endsAt = Date.now() + pausedSeconds * 1000;
-                saved.remainingSeconds = pausedSeconds;
-                storage.write("unfinished", saved);
-            }
-        }
-        const next = new URL(window.location.href);
-        next.searchParams.set("autoresume", "1");
-        window.location.replace(next.toString());
+        if (!storage || typeof storage.read !== "function" || typeof storage.write !== "function") return;
+        const saved = storage.read("unfinished", null);
+        if (!saved || saved.quizId !== quizId || pausedSeconds <= 0) return;
+        saved.endsAt = Date.now() + pausedSeconds * 1000;
+        saved.remainingSeconds = pausedSeconds;
+        storage.write("unfinished", saved);
     }
-    function maybeAutoResume() {
-        if (!autoResume) return;
-        const modal = document.getElementById("resumeModal");
-        if (!modal || modal.classList.contains("hidden")) return;
-        const button = modal.querySelector("[data-action='resume-saved']");
-        if (!button) return;
-        button.click();
-        const clean = new URL(window.location.href);
-        clean.searchParams.delete("autoresume");
-        window.history.replaceState({}, "", clean.toString());
-    }
-    function dispatchDirectStart() {
-        if (startAttempted) return;
-        startAttempted = true;
+    function fireStartTrigger() {
         const trigger = document.createElement("button");
         trigger.type = "button";
         trigger.hidden = true;
@@ -102,6 +88,30 @@
         document.body.appendChild(trigger);
         trigger.click();
         trigger.remove();
+    }
+    function resumePausedAttempt() {
+        writePausedTimeBackToSavedAttempt();
+        hidePausedOverlay();
+        pausedResumePending = true;
+        fireStartTrigger();
+    }
+    function maybeFinishPausedResume() {
+        if (!pausedResumePending) return;
+        const modal = document.getElementById("resumeModal");
+        if (!modal || modal.classList.contains("hidden")) return;
+        const button = modal.querySelector("[data-action='resume-saved']");
+        if (!button) return;
+        pausedResumePending = false;
+        button.click();
+        window.setTimeout(function () {
+            document.body.classList.remove("quiz-resume-choice-active", "quiz-attempt-paused");
+            keepLegacyHomeInert();
+        }, 0);
+    }
+    function dispatchDirectStart() {
+        if (startAttempted) return;
+        startAttempted = true;
+        fireStartTrigger();
     }
     function resolveAndStart() {
         if (startAttempted || !quizId) return;
@@ -119,9 +129,9 @@
             const resultVisible = !document.getElementById("resultView")?.classList.contains("hidden");
             const reviewVisible = !document.getElementById("reviewView")?.classList.contains("hidden");
             const resumeVisible = !document.getElementById("resumeModal")?.classList.contains("hidden");
-            syncAttemptChrome(resumeVisible);
+            syncAttemptChrome(resumeVisible && !pausedResumePending);
             if (examVisible || resultVisible || reviewVisible || resumeVisible) hideLoading();
-            if (resumeVisible) maybeAutoResume();
+            if (resumeVisible) maybeFinishPausedResume();
         });
         targets.forEach((target) => observer.observe(target, { attributes: true, attributeFilter: ["class"] }));
     }
