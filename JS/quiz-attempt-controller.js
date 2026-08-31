@@ -41,11 +41,19 @@
         home.setAttribute("aria-hidden", "true");
         home.setAttribute("inert", "");
     }
+    function syncAttemptChrome(resumeVisible) {
+        document.body.classList.toggle("quiz-resume-choice-active", Boolean(resumeVisible));
+        if (resumeVisible) {
+            keepLegacyHomeInert();
+            document.getElementById("loadingView")?.classList.add("hidden");
+        }
+    }
     function showPausedOverlay() {
         keepLegacyHomeInert();
         document.getElementById("examView")?.classList.remove("hidden");
         document.getElementById("resultView")?.classList.add("hidden");
         document.getElementById("reviewView")?.classList.add("hidden");
+        document.body.classList.remove("quiz-resume-choice-active");
         document.body.classList.add("quiz-exam-active", "gju-quiz-exam-mode", "quiz-attempt-paused");
         let overlay = document.getElementById("attemptPausedOverlay");
         if (!overlay) {
@@ -99,8 +107,7 @@
         if (startAttempted || !quizId) return;
         const registry = window.GJU_QUIZZES;
         if (!registry || typeof registry.getQuizById !== "function") return;
-        const quiz = registry.getQuizById(quizId);
-        if (!quiz) return;
+        if (!registry.getQuizById(quizId)) return;
         setLoading("Starting your quiz…", "Quiz found. Preparing your attempt.", false);
         dispatchDirectStart();
     }
@@ -112,6 +119,7 @@
             const resultVisible = !document.getElementById("resultView")?.classList.contains("hidden");
             const reviewVisible = !document.getElementById("reviewView")?.classList.contains("hidden");
             const resumeVisible = !document.getElementById("resumeModal")?.classList.contains("hidden");
+            syncAttemptChrome(resumeVisible);
             if (examVisible || resultVisible || reviewVisible || resumeVisible) hideLoading();
             if (resumeVisible) maybeAutoResume();
         });
