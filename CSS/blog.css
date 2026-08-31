@@ -234,16 +234,20 @@
   order: 5;
 }
 
-.student-hub-how {
+.student-hub-contribute {
   order: 4;
 }
 
-.student-hub-topics {
+.student-hub-how {
   order: 6;
 }
 
-.student-hub-page .seo-faq {
+.student-hub-topics {
   order: 7;
+}
+
+.student-hub-page .seo-faq {
+  order: 8;
 }
 
 .student-hub-page .page-guide,
