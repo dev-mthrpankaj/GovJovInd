@@ -23,7 +23,7 @@
         if (document.querySelector('link[data-quiz-attempt-premium]')) return;
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-mobile-v5";
+        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-fullscreen-v1";
         link.dataset.quizAttemptPremium = "1";
         document.head.appendChild(link);
     }
@@ -74,6 +74,34 @@
         chip.classList.add("palette-duration-chip");
         chip.dataset.paletteHome = "1";
         links.appendChild(chip);
+    }
+    function syncFullscreenToggle() {
+        const button = document.querySelector("[data-quiz-fullscreen-toggle]");
+        if (!button) return;
+        const active = Boolean(document.fullscreenElement);
+        button.setAttribute("aria-label", active ? "Exit full screen" : "Enter full screen");
+        button.setAttribute("title", active ? "Exit full screen" : "Full screen");
+        button.innerHTML = `<i class="fas ${active ? "fa-compress" : "fa-expand"}" aria-hidden="true"></i>`;
+    }
+    function installFullscreenToggle() {
+        const head = document.querySelector(".palette-head");
+        if (!head || head.querySelector("[data-quiz-fullscreen-toggle]")) return;
+        const canFullscreen = Boolean(document.documentElement.requestFullscreen && document.exitFullscreen);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-fullscreen-toggle";
+        button.dataset.quizFullscreenToggle = "1";
+        if (!canFullscreen) button.hidden = true;
+        head.appendChild(button);
+        syncFullscreenToggle();
+    }
+    function toggleFullscreen() {
+        if (!(document.documentElement.requestFullscreen && document.exitFullscreen)) return;
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(function () {});
+            return;
+        }
+        document.documentElement.requestFullscreen().catch(function () {});
     }
     function syncPreviousButton() {
         const button = document.querySelector("[data-action='prev-question']");
@@ -221,6 +249,7 @@
             if (examVisible) {
                 installThemeToggle();
                 moveDurationChipToPalette();
+                installFullscreenToggle();
                 installQuestionNavigationRules();
                 syncPreviousButton();
             }
@@ -235,6 +264,7 @@
         installLegacyHomeFirewall();
         installThemeToggle();
         moveDurationChipToPalette();
+        installFullscreenToggle();
         installQuestionNavigationRules();
         if (!quizId) { window.location.replace("quiz.html"); return; }
         setLoading("Starting your quiz…", "Loading published quiz information.", false);
@@ -251,8 +281,13 @@
     }
 
     document.addEventListener("click", function (event) {
-        const target = event.target.closest && event.target.closest("[data-action], [data-attempt-resume], [data-attempt-exit], [data-attempt-retry], [data-quiz-theme-toggle]");
+        const target = event.target.closest && event.target.closest("[data-action], [data-attempt-resume], [data-attempt-exit], [data-attempt-retry], [data-quiz-theme-toggle], [data-quiz-fullscreen-toggle]");
         if (!target) return;
+        if (target.hasAttribute("data-quiz-fullscreen-toggle")) {
+            event.preventDefault();
+            toggleFullscreen();
+            return;
+        }
         if (target.hasAttribute("data-quiz-theme-toggle")) {
             event.preventDefault();
             const current = document.body.dataset.quizTheme === "dark" ? "dark" : "light";
@@ -269,6 +304,7 @@
         if (!event.target.closest || !event.target.closest("[data-action='pause-test']")) return;
         window.setTimeout(showPausedOverlay, 0);
     }, false);
+    document.addEventListener("fullscreenchange", syncFullscreenToggle);
 
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
     else init();
