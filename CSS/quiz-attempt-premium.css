@@ -786,3 +786,48 @@ body.quiz-attempt-route .palette-grid{
     min-height:48px!important;
   }
 }
+
+/* Phase 3.3: remove duplicate legend and compact palette summary. */
+body.quiz-attempt-route .palette-legend{
+  display:none!important;
+}
+body.quiz-attempt-route .palette-summary{
+  gap:6px!important;
+  margin-bottom:4px!important;
+}
+body.quiz-attempt-route .palette-summary-tile,
+body.quiz-attempt-route .palette-summary-tile + .palette-summary-tile{
+  min-height:40px!important;
+  padding:7px 9px!important;
+  grid-template-columns:8px minmax(0,1fr) auto!important;
+  gap:2px 7px!important;
+}
+body.quiz-attempt-route .palette-summary-tile i{
+  width:8px!important;
+  height:8px!important;
+  min-width:8px!important;
+}
+body.quiz-attempt-route .palette-summary-tile span{
+  font-size:10px!important;
+  line-height:1!important;
+}
+body.quiz-attempt-route .palette-summary-tile strong{
+  font-size:16px!important;
+  line-height:1!important;
+}
+body.quiz-attempt-route .palette-grid{
+  gap:8px!important;
+}
+body.quiz-attempt-route .palette-btn{
+  min-height:42px!important;
+}
+body.quiz-attempt-route .palette-actions{
+  padding-top:10px!important;
+}
+@media(max-width:639px){
+  body.quiz-attempt-route .palette-summary-tile,
+  body.quiz-attempt-route .palette-summary-tile + .palette-summary-tile{
+    min-height:38px!important;
+    padding:6px 8px!important;
+  }
+}
