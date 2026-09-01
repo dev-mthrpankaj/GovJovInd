@@ -732,6 +732,7 @@
         setText(elements.totalQuestionNo, String(state.questions.length));
         setText(elements.questionNumberLabel, String(state.current + 1));
         setRichText(elements.questionText, getQuestionText(question));
+        syncQuestionLengthLayout(question);
         renderQuestionMedia(question);
         setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
@@ -754,6 +755,20 @@
         renderQuestionOptions(question);
         syncQuestionState();
         typesetQuizMath(elements.questionCard);
+    }
+
+    function syncQuestionLengthLayout(question) {
+        if (!elements.questionCard) return;
+        elements.questionCard.classList.toggle("long-question-layout", countQuestionWords(getQuestionText(question)) > 100);
+    }
+
+    function countQuestionWords(value) {
+        return String(value || "")
+            .replace(/\[[a-z]+\]|\[\/[a-z]+\]/gi, " ")
+            .replace(/<[^>]*>/g, " ")
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean).length;
     }
 
     function renderQuestionOptions(question) {
