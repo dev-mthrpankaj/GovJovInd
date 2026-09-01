@@ -33,14 +33,20 @@
                 body.gju-quiz-exam-mode .exam-actions .quiz-btn { min-width: 0 !important; width: 100% !important; min-height: 44px !important; padding: 8px 6px !important; font-size: 12px !important; white-space: normal !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode, body.quiz-attempt-route.gju-quiz-exam-mode .quiz-page, body.quiz-attempt-route.gju-quiz-exam-mode .quiz-exam-view, body.quiz-attempt-route.gju-quiz-exam-mode .exam-shell, body.quiz-attempt-route.gju-quiz-exam-mode .exam-main { height: 100dvh !important; min-height: 100dvh !important; overflow: hidden !important; background: var(--qa-bg, #eef3f8) !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-shell { display: grid !important; grid-template-columns: 1fr !important; padding: 0 !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .exam-main { display: grid !important; grid-template-rows: auto minmax(0, 1fr) auto !important; gap: 6px !important; padding: 0 !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .question-card { height: auto !important; min-height: 0 !important; overflow-y: auto !important; padding-bottom: 12px !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-main { display: grid !important; grid-template-rows: 46px minmax(0, 1fr) 64px !important; gap: 5px !important; padding: 0 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-topbar { min-height: 0 !important; padding: 4px 8px !important; border-radius: 0 !important; box-shadow: none !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .question-card { display: block !important; height: auto !important; min-height: 0 !important; overflow-y: auto !important; padding: 8px 8px 10px !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .question-line { margin: 0 0 10px !important; padding: 0 0 7px !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .question-title { margin: 0 0 12px !important; font-size: 14.5px !important; line-height: 1.48 !important; font-weight: 400 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .question-title b, body.quiz-attempt-route.gju-quiz-exam-mode .question-title strong, body.quiz-attempt-route.gju-quiz-exam-mode .question-title .text-bold { font-weight: 850 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .option-list { display: grid !important; gap: 7px !important; margin: 0 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .answer-option { min-height: 44px !important; padding: 7px 8px !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions { position: relative !important; left: auto !important; right: auto !important; bottom: auto !important; z-index: 40 !important; grid-template-columns: minmax(0, .9fr) minmax(0, 1.7fr) !important; gap: 8px !important; padding: 8px 8px max(8px, env(safe-area-inset-bottom)) !important; background: var(--qa-surface, #ffffff) !important; border-top-color: var(--qa-border, #dce5f0) !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="prev-question"] { display: none !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] { grid-column: 1 !important; grid-row: 1 !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] { grid-column: 2 !important; grid-row: 1 !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] i, body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] i { display: none !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .quiz-btn { min-height: 48px !important; padding: 7px 8px !important; font-size: 12.5px !important; line-height: 1.15 !important; white-space: normal !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .quiz-btn { min-height: 48px !important; padding: 7px 8px !important; font-size: 12px !important; line-height: 1.1 !important; white-space: normal !important; }
             }
         `;
         document.head.appendChild(style);
