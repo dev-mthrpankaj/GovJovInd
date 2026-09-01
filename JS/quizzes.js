@@ -793,10 +793,11 @@
     function renderPaletteSummary() {
         const counts = state.statusCounts || getStatusCounts();
         const answered = counts.answered + counts.answeredMarked;
-        const unanswered = Math.max(0, state.questions.length - answered);
         const summaryHtml = [
-            ["answered", "Answered Qs", answered],
-            ["not-answered", "Unanswered Qs", unanswered]
+            ["answered", "Answered", answered],
+            ["not-answered", "Not Answered", counts.notAnswered],
+            ["marked", "Marked", counts.marked],
+            ["not-visited", "Not Visited", counts.notVisited]
         ].map(function ([status, label, count]) {
             return `<div class="palette-summary-tile ${status}"><i aria-hidden="true"></i><span>${label}</span><strong>${count}</strong></div>`;
         }).join("");
@@ -914,9 +915,21 @@
 
     function openSubmitModal() {
         const attempted = state.answers.filter(function (answer) { return answer !== null; }).length;
-        const marked = state.statuses.filter(function (status) { return String(status).includes("marked"); }).length;
+        const counts = state.statusCounts || getStatusCounts();
+        const marked = counts.marked + counts.answeredMarked;
+        const notAnswered = counts.notAnswered;
+        const notVisited = counts.notVisited;
         closePalette();
-        elements.submitSummary.textContent = `Attempted ${attempted} of ${state.questions.length}. Marked for review: ${marked}.`;
+        elements.submitSummary.innerHTML = `
+            <span class="submit-summary-grid">
+                <b><small>Answered</small>${attempted}</b>
+                <b><small>Not Answered</small>${notAnswered}</b>
+                <b><small>Marked</small>${marked}</b>
+                <b><small>Not Visited</small>${notVisited}</b>
+                <b><small>Time Left</small>${formatTime(state.remainingSeconds)}</b>
+            </span>
+            <span class="submit-summary-warning">Submit karne ke baad answers change nahi honge.</span>
+        `;
         elements.submitModal.classList.remove("hidden");
         syncModalState();
     }
@@ -1233,6 +1246,7 @@
             <div class="result-actions">
                 <button class="quiz-btn quiz-btn-outline" type="button" data-action="review-answers">Review Answers</button>
                 <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(result.quizId)}">Retake Test</button>
+                <a class="quiz-btn quiz-btn-outline result-dashboard-link" href="dashboard.html"><i class="fas fa-chart-line" aria-hidden="true"></i> View Dashboard</a>
                 <button class="quiz-btn quiz-btn-ghost" type="button" data-action="back-home">Back to Quizzes</button>
             </div>
         `;
