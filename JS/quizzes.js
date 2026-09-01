@@ -63,6 +63,9 @@
     let mathRetryTimer = 0;
     let mathRetryCount = 0;
     let mathJaxLoader = null;
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    let swipeStartedAt = 0;
 
     const debouncedRenderQuizList = debounce(renderQuizList, SEARCH_DEBOUNCE_MS);
 
@@ -157,6 +160,8 @@
         document.addEventListener("gju:admin-quiz-index-ready", function () {
             if (isViewVisible("home")) renderHome();
         });
+        elements.questionCard?.addEventListener("touchstart", handleQuestionTouchStart, { passive: true });
+        elements.questionCard?.addEventListener("touchend", handleQuestionTouchEnd, { passive: true });
     }
 
     function handleClick(event) {
@@ -264,6 +269,29 @@
             event.preventDefault();
             markAndNext();
         }
+    }
+
+    function handleQuestionTouchStart(event) {
+        if (!isViewVisible("exam") || isModalOpen() || isPaletteOpen()) return;
+        const interactiveTarget = event.target.closest && event.target.closest("button, a, input, select, textarea, [role='button']");
+        if (interactiveTarget && !interactiveTarget.closest(".answer-option")) return;
+        const touch = event.changedTouches && event.changedTouches[0];
+        if (!touch) return;
+        swipeStartX = touch.clientX;
+        swipeStartY = touch.clientY;
+        swipeStartedAt = Date.now();
+    }
+
+    function handleQuestionTouchEnd(event) {
+        if (!swipeStartedAt || !isViewVisible("exam") || isModalOpen() || isPaletteOpen()) return;
+        const touch = event.changedTouches && event.changedTouches[0];
+        if (!touch) return;
+        const deltaX = touch.clientX - swipeStartX;
+        const deltaY = touch.clientY - swipeStartY;
+        const elapsed = Date.now() - swipeStartedAt;
+        swipeStartedAt = 0;
+        if (elapsed > 650 || Math.abs(deltaX) < 70 || Math.abs(deltaX) < Math.abs(deltaY) * 1.4) return;
+        goQuestion(state.current + (deltaX < 0 ? 1 : -1));
     }
 
     function isTypingTarget(target) {
@@ -838,6 +866,10 @@
         const question = state.questions[state.current];
         if (!question || index < 0 || index >= question.options.length) return;
         const currentStatus = state.statuses[state.current];
+        if (state.answers[state.current] === index) {
+            clearResponse();
+            return;
+        }
         state.answers[state.current] = index;
         setQuestionStatus(state.current, currentStatus === "marked" || currentStatus === "answered-marked"
             ? "answered-marked"

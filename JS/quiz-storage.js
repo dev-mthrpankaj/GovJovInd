@@ -41,12 +41,13 @@
                 body.quiz-attempt-route.gju-quiz-exam-mode .question-title b, body.quiz-attempt-route.gju-quiz-exam-mode .question-title strong, body.quiz-attempt-route.gju-quiz-exam-mode .question-title .text-bold { font-weight: 850 !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .option-list { display: grid !important; gap: 7px !important; margin: 0 !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .answer-option { min-height: 44px !important; padding: 7px 8px !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions { position: relative !important; left: auto !important; right: auto !important; bottom: auto !important; z-index: 40 !important; grid-template-columns: minmax(0, .9fr) minmax(0, 1.7fr) !important; gap: 8px !important; padding: 8px 8px max(8px, env(safe-area-inset-bottom)) !important; background: var(--qa-surface, #ffffff) !important; border-top-color: var(--qa-border, #dce5f0) !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions { position: relative !important; left: auto !important; right: auto !important; bottom: auto !important; z-index: 40 !important; grid-template-columns: minmax(62px, .55fr) minmax(108px, .95fr) minmax(0, 1.35fr) !important; gap: 8px !important; padding: 8px 8px max(8px, env(safe-area-inset-bottom)) !important; background: var(--qa-surface, #ffffff) !important; border-top-color: var(--qa-border, #dce5f0) !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="prev-question"] { display: none !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] { grid-column: 1 !important; grid-row: 1 !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] { grid-column: 2 !important; grid-row: 1 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .mobile-clear-action { display: inline-flex !important; grid-column: 1 !important; grid-row: 1 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] { grid-column: 2 !important; grid-row: 1 !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] { grid-column: 3 !important; grid-row: 1 !important; }
                 body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] i, body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] i { display: none !important; }
-                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .quiz-btn { min-height: 48px !important; padding: 7px 8px !important; font-size: 12px !important; line-height: 1.1 !important; white-space: normal !important; }
+                body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .quiz-btn { min-height: 48px !important; padding: 7px 8px !important; font-size: 11.5px !important; line-height: 1.1 !important; white-space: normal !important; }
             }
         `;
         document.head.appendChild(style);
