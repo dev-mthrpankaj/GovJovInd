@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0129-20260901100159-d2c22787",
+        "title": "MPESB Group 2 Sub Group 3 Result 2026",
+        "organization": "Madhya Pradesh Employee Selection Board",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-08-31",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://esb.mp.gov.in/results/RESULT_25/Group2_SG3_RES25/default_Results.htm",
+        "detailPage": "../Result_Details/HTML/MPESB-Group-2-Sub-Group-3-Result-2026.html",
+        "updatedAt": "2026-09-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0127-20260830094918-2d6cdf2c",
         "title": "NTA ICAR AIEEA PG & Phd Result 2026 Score Card",
         "organization": "Indian Council of Agricultural Research",
