@@ -2257,6 +2257,27 @@
       "title": "UKSSSC Group C Various Post Online Form 2026 for 553 Post",
       "lastPostedAt": "2026-09-01T01:50:14.436Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0213-20260901071732-6286fcc0": {
+      "updatedAt": "2026-09-01",
+      "hash": "8d6efc9028499efdf856a62405de61b9de07ce35b29294739667b7e5449420d0",
+      "title": "CONCOR MT Assistant Officer Online Form",
+      "lastPostedAt": "2026-09-01T06:32:52.209Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0214-20260901090859-ae630e8a": {
+      "updatedAt": "2026-09-01",
+      "hash": "e8cc4ea343493e79b999b0a2c62cb0dfbe40bede4b5dbf54b58d1d726798f247",
+      "title": "Southern Railway Apprentices Online Form 2026 for 4471 Post",
+      "lastPostedAt": "2026-09-01T06:32:52.999Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0215-20260901103803-d7e84604": {
+      "updatedAt": "2026-09-01",
+      "hash": "3904c5f2b2514bd416cb00a3d9a85d4b7e90b5c86857021e2c7830fd7d878344",
+      "title": "UPSSSC One Time Registration (OTR)",
+      "lastPostedAt": "2026-09-01T06:32:53.423Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -5741,6 +5762,13 @@
       "hash": "cccba0803ec61fccd22b52843291cff106c6d8d404d4abd00db3cf1032176646",
       "title": "NTA CSIR UGC NET June 2026 Result",
       "lastPostedAt": "2026-08-30T06:15:18.278Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0129-20260901100159-d2c22787": {
+      "updatedAt": "2026-09-01",
+      "hash": "a0629ea21f4ff525bca591f3f5e3d41b49d6e8d0ecf49cd76a088d1542801dc5",
+      "title": "MPESB Group 2 Sub Group 3 Result 2026",
+      "lastPostedAt": "2026-09-01T06:32:53.827Z",
       "stateReason": "new"
     }
   }
