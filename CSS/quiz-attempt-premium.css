@@ -1697,3 +1697,10 @@ body.quiz-attempt-route .question-stem-panel{
     background:#111827!important;
   }
 }
+
+@media(min-width:768px){
+  body.quiz-attempt-route .question-card{
+    padding-bottom:112px!important;
+    scroll-padding-bottom:112px!important;
+  }
+}
