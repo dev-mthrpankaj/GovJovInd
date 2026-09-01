@@ -875,3 +875,20 @@ body.quiz-attempt-route .palette-grid{
     top:82px!important;
   }
 }
+
+/* Phase 3.5: consume unused right gutter on desktop. */
+@media(min-width:1120px){
+  body.quiz-attempt-route #quizApp{
+    padding:8px 0 8px 12px!important;
+  }
+  body.quiz-attempt-route .exam-shell{
+    width:100%!important;
+    grid-template-columns:minmax(0,1fr) minmax(420px,30vw)!important;
+    gap:10px!important;
+  }
+  body.quiz-attempt-route .palette-panel{
+    width:auto!important;
+    margin-right:0!important;
+    border-radius:12px 0 0 12px!important;
+  }
+}
