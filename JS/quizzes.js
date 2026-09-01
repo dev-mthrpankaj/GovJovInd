@@ -157,6 +157,9 @@
             if (document.hidden) persistUnfinished(true);
         });
         window.addEventListener("resize", syncPaletteState);
+        window.addEventListener("resize", debounce(function () {
+            if (isViewVisible("exam")) syncQuestionMarks();
+        }, 150));
         document.addEventListener("gju:admin-quiz-index-ready", function () {
             if (isViewVisible("home")) renderHome();
         });
@@ -734,8 +737,7 @@
         setRichText(elements.questionText, getQuestionText(question));
         syncQuestionLengthLayout(question);
         renderQuestionMedia(question);
-        setText(elements.questionMarks, `+${formatMarks(question.marks)} marks`);
-        setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)} negative`);
+        syncQuestionMarks(question);
         setText(elements.examDurationLabel, `Last ${formatNumber(state.quizSet.durationMinutes || 30)} Mins`);
         elements.quizProgress.style.width = `${((state.current + 1) / state.questions.length) * 100}%`;
         updateAnsweredCount();
@@ -755,6 +757,17 @@
         renderQuestionOptions(question);
         syncQuestionState();
         typesetQuizMath(elements.questionCard);
+    }
+
+    function syncQuestionMarks(question = state.questions[state.current]) {
+        if (!question) return;
+        const compact = isCompactMarksViewport();
+        setText(elements.questionMarks, `+${formatMarks(question.marks)}${compact ? "" : " marks"}`);
+        setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)}${compact ? "" : " negative"}`);
+    }
+
+    function isCompactMarksViewport() {
+        return window.matchMedia && window.matchMedia("(max-width: 767px)").matches;
     }
 
     function syncQuestionLengthLayout(question) {
