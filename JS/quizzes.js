@@ -157,9 +157,6 @@
             if (document.hidden) persistUnfinished(true);
         });
         window.addEventListener("resize", syncPaletteState);
-        window.addEventListener("resize", debounce(function () {
-            if (isViewVisible("exam")) syncQuestionMarks();
-        }, 150));
         document.addEventListener("gju:admin-quiz-index-ready", function () {
             if (isViewVisible("home")) renderHome();
         });
@@ -761,13 +758,8 @@
 
     function syncQuestionMarks(question = state.questions[state.current]) {
         if (!question) return;
-        const compact = isCompactMarksViewport();
-        setText(elements.questionMarks, `+${formatMarks(question.marks)}${compact ? "" : " marks"}`);
-        setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)}${compact ? "" : " negative"}`);
-    }
-
-    function isCompactMarksViewport() {
-        return window.matchMedia && window.matchMedia("(max-width: 767px)").matches;
+        setText(elements.questionMarks, `+${formatMarks(question.marks)}`);
+        setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)}`);
     }
 
     function syncQuestionLengthLayout(question) {
