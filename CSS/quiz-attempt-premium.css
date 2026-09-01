@@ -831,3 +831,47 @@ body.quiz-attempt-route .palette-actions{
     padding:6px 8px!important;
   }
 }
+
+/* Phase 3.4: keep palette controls sticky while question numbers scroll. */
+body.quiz-attempt-route .palette-panel{
+  overflow:auto!important;
+  scrollbar-color:#94a3b8 transparent!important;
+  scrollbar-width:thin!important;
+}
+body.quiz-attempt-route .palette-panel::-webkit-scrollbar{
+  width:8px!important;
+}
+body.quiz-attempt-route .palette-panel::-webkit-scrollbar-thumb{
+  background:#94a3b8!important;
+  border-radius:999px!important;
+}
+body.quiz-attempt-route .palette-head,
+body.quiz-attempt-route #paletteTitle,
+body.quiz-attempt-route .palette-summary{
+  position:sticky!important;
+  z-index:5!important;
+  background:var(--qa-surface)!important;
+}
+body.quiz-attempt-route .palette-head{
+  top:0!important;
+}
+body.quiz-attempt-route #paletteTitle{
+  top:47px!important;
+  padding-top:10px!important;
+}
+body.quiz-attempt-route .palette-summary{
+  top:86px!important;
+  padding:8px 0 10px!important;
+  box-shadow:0 10px 16px rgba(15,23,42,.04)!important;
+}
+body.quiz-attempt-route .palette-grid{
+  padding-top:8px!important;
+}
+@media(max-width:639px){
+  body.quiz-attempt-route #paletteTitle{
+    top:45px!important;
+  }
+  body.quiz-attempt-route .palette-summary{
+    top:82px!important;
+  }
+}
