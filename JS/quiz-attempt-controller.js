@@ -23,7 +23,7 @@
         if (document.querySelector('link[data-quiz-attempt-premium]')) return;
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-final-v2";
+        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-final-v3";
         link.dataset.quizAttemptPremium = "1";
         document.head.appendChild(link);
     }
@@ -66,6 +66,14 @@
         actions.appendChild(button);
         if (menu) actions.appendChild(menu);
         applyTheme(document.body.dataset.quizTheme || getInitialTheme(), false);
+    }
+    function moveDurationChipToPalette() {
+        const chip = document.getElementById("examDurationLabel");
+        const links = document.querySelector(".palette-links");
+        if (!chip || !links || chip.dataset.paletteHome === "1") return;
+        chip.classList.add("palette-duration-chip");
+        chip.dataset.paletteHome = "1";
+        links.appendChild(chip);
     }
     function syncPreviousButton() {
         const button = document.querySelector("[data-action='prev-question']");
@@ -212,6 +220,7 @@
             if (examVisible || resultVisible || reviewVisible || resumeVisible) hideLoading();
             if (examVisible) {
                 installThemeToggle();
+                moveDurationChipToPalette();
                 installQuestionNavigationRules();
                 syncPreviousButton();
             }
@@ -225,6 +234,7 @@
         applyTheme(getInitialTheme(), false);
         installLegacyHomeFirewall();
         installThemeToggle();
+        moveDurationChipToPalette();
         installQuestionNavigationRules();
         if (!quizId) { window.location.replace("quiz.html"); return; }
         setLoading("Starting your quiz…", "Loading published quiz information.", false);
