@@ -680,6 +680,8 @@
         return questions.slice(0, Number(quizSet.totalQuestions) || questions.length).map(function (question, index) {
             const normalizedOptions = normalizeOptions(question.options);
             const questionTextMap = normalizeTextMap(question.questionTextMap || question.questionI18n || question.question);
+            const passageTextMap = normalizeTextMap(question.passageTextMap || question.questionPassageTextMap);
+            const questionStemTextMap = normalizeTextMap(question.questionStemTextMap || question.stemTextMap);
             const explanationTextMap = normalizeTextMap(question.explanationTextMap || question.explanationI18n || question.explanation);
             const optionTextMaps = normalizeOptionTextMaps(question.optionTextMaps, question.options, normalizedOptions);
             return {
@@ -687,8 +689,10 @@
                 subject: question.subject || quizSet.subject,
                 topic: question.topic || "General",
                 difficulty: question.difficulty || quizSet.difficulty || "Mixed",
-                question: getLocalizedText(questionTextMap, state.language, question.question || ""),
+                question: getLocalizedText(passageTextMap || questionTextMap, state.language, question.question || ""),
                 questionTextMap,
+                passageTextMap,
+                questionStemTextMap,
                 questionImage: normalizeMedia(question.image || question.questionImage, question.imageAlt || question.questionImageAlt || `Question ${index + 1} image`),
                 options: normalizedOptions.map(function (option) { return option.text; }),
                 optionTextMaps,
@@ -798,8 +802,12 @@
 
     function renderQuestionText(question) {
         const rawText = getQuestionText(question);
+        const explicitPassage = getLocalizedText(question.passageTextMap, state.language, "");
+        const explicitStem = getLocalizedText(question.questionStemTextMap, state.language, "");
         const wordCount = countQuestionWords(rawText);
-        const split = splitTrailingQuestionStem(rawText);
+        const split = explicitStem
+            ? { passage: explicitPassage || rawText, stem: explicitStem }
+            : splitTrailingQuestionStem(rawText);
         setRichText(elements.questionText, split?.passage || rawText);
         setRichText(elements.questionStem, split?.stem || "");
         elements.questionStem?.classList.toggle("hidden", !split?.stem);

@@ -342,6 +342,8 @@
         const optionTextMaps = optionSources.map(normalizeTextMap);
         const correctAnswer = optionLetterToIndex(question.correctOption || question.correct_option || question.answer || question.correctAnswer);
         const questionSource = question.question || question.text || question.questionText;
+        const questionTextMap = normalizeTextMap(questionSource);
+        const questionStemSplit = splitQuestionStemTextMap(questionTextMap);
         const explanationSource = question.explanation || question.solution;
 
         return {
@@ -349,8 +351,10 @@
             subject,
             topic: String(question.topic || subject || "General"),
             difficulty: normalizeDifficulty(question.difficulty || question.difficultyLevel || question.difficulty_level || meta.difficulty),
-            question: pickText(questionSource, preferredLanguage),
-            questionTextMap: normalizeTextMap(questionSource),
+            question: pickText(questionStemSplit.passageTextMap || questionSource, preferredLanguage),
+            questionTextMap,
+            passageTextMap: questionStemSplit.passageTextMap,
+            questionStemTextMap: questionStemSplit.stemTextMap,
             image: normalizeMedia(question.question?.image || question.image || question.questionImage || question.question_image, `Question ${number} image`),
             imageAlt: question.question?.alt || question.imageAlt || question.questionImageAlt || `Question ${number} image`,
             options: optionTexts,
@@ -379,6 +383,49 @@
         const hi = String(value.hi || value.hindi || "").trim();
         const en = String(value.en || value.english || "").trim();
         return hi || en ? { hi, en } : null;
+    }
+
+    function splitQuestionStemTextMap(textMap) {
+        const map = normalizeTextMap(textMap);
+        if (!map) return {};
+
+        const hi = splitTrailingQuestionStem(map.hi);
+        const en = splitTrailingQuestionStem(map.en);
+        if (!hi && !en) return {};
+
+        return {
+            passageTextMap: {
+                hi: hi ? hi.passage : (map.hi || ""),
+                en: en ? en.passage : (map.en || "")
+            },
+            stemTextMap: {
+                hi: hi ? hi.stem : "",
+                en: en ? en.stem : ""
+            }
+        };
+    }
+
+    function splitTrailingQuestionStem(value) {
+        const source = String(value || "").trim();
+        if (!source) return null;
+
+        const starts = Array.from(source.matchAll(/(?:\[\/?[a-z]+\]\s*)*\b(?:Q|Question)\.?\s*\d+\s*\.?\s*(?:\[\/?[a-z]+\]\s*)*(?=\S)/gi));
+        const start = starts[starts.length - 1];
+        if (!start) return null;
+
+        const passage = source.slice(0, start.index).trim();
+        const stem = source.slice(start.index).trim();
+        if (countQuestionWords(passage) < 35 || !stem || countQuestionWords(stem) > 40) return null;
+        return { passage, stem };
+    }
+
+    function countQuestionWords(value) {
+        return String(value || "")
+            .replace(/\[[a-z]+\]|\[\/[a-z]+\]/gi, " ")
+            .replace(/<[^>]*>/g, " ")
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean).length;
     }
 
     function pickText(value, preferredLanguage) {
