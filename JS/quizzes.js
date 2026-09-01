@@ -814,7 +814,7 @@
 
     function splitTrailingQuestionStem(value) {
         const source = String(value || "").trim();
-        const starts = Array.from(source.matchAll(/(?:\[\/?[a-z]+\]\s*)*\b(?:Q|Question)\.?\s*\d+\.?\s+/gi));
+        const starts = Array.from(source.matchAll(/(?:\[\/?[a-z]+\]\s*)*\b(?:Q|Question)\.?\s*\d+\s*\.?\s*(?:\[\/?[a-z]+\]\s*)*(?=\S)/gi));
         const start = starts[starts.length - 1];
         if (!start) return null;
 
