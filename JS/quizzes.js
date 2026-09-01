@@ -799,17 +799,16 @@
     function renderQuestionText(question) {
         const rawText = getQuestionText(question);
         const wordCount = countQuestionWords(rawText);
-        const split = wordCount > 100 && isWideQuestionSplitViewport() ? splitTrailingQuestionStem(rawText) : null;
+        const split = isWideQuestionSplitViewport() ? splitTrailingQuestionStem(rawText) : null;
         setRichText(elements.questionText, split?.passage || rawText);
         setRichText(elements.questionStem, split?.stem || "");
         elements.questionStem?.classList.toggle("hidden", !split?.stem);
-        return { hasStem: Boolean(split?.stem), wordCount };
+        return { hasStem: Boolean(split?.stem), wordCount, shouldSplit: Boolean(split?.stem) || wordCount > 100 };
     }
 
     function syncQuestionLengthLayout(textMeta) {
         if (!elements.questionCard) return;
-        const isLong = Number(textMeta?.wordCount || 0) > 100;
-        elements.questionCard.classList.toggle("long-question-layout", isLong);
+        elements.questionCard.classList.toggle("long-question-layout", Boolean(textMeta?.shouldSplit));
         elements.questionCard.classList.toggle("has-question-stem", Boolean(textMeta?.hasStem));
     }
 
@@ -819,13 +818,13 @@
 
     function splitTrailingQuestionStem(value) {
         const source = String(value || "").trim();
-        const matches = Array.from(source.matchAll(/(?:^|\n)\s*(Q(?:uestion)?\.?\s*\d+\.?\s+[\s\S]+)$/gi));
-        const match = matches[matches.length - 1];
-        if (!match) return null;
+        const starts = Array.from(source.matchAll(/\b(?:Q|Question)\.?\s*\d+\.?\s+/gi));
+        const start = starts[starts.length - 1];
+        if (!start) return null;
 
-        const stem = String(match[1] || "").trim();
-        const passage = source.slice(0, match.index).trim();
-        if (!passage || !stem || countQuestionWords(stem) > 36) return null;
+        const passage = source.slice(0, start.index).trim();
+        const stem = source.slice(start.index).trim();
+        if (countQuestionWords(passage) < 35 || !stem || countQuestionWords(stem) > 40) return null;
         return { passage, stem };
     }
 
