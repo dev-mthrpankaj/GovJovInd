@@ -1254,7 +1254,7 @@ body.quiz-attempt-route .palette-actions [data-action="submit-confirm"]{
     overscroll-behavior:none!important;
   }
   body.quiz-attempt-route.gju-quiz-exam-mode .exam-main{
-    grid-template-rows:46px minmax(0,1fr) 64px!important;
+    grid-template-rows:46px minmax(0,1fr) 86px!important;
     gap:5px!important;
   }
   body.quiz-attempt-route.gju-quiz-exam-mode .exam-topbar{
@@ -1393,8 +1393,8 @@ body.quiz-attempt-route .palette-actions [data-action="submit-confirm"]{
     display:grid!important;
     grid-template-columns:minmax(62px,.55fr) minmax(108px,.95fr) minmax(0,1.35fr)!important;
     align-items:center!important;
-    min-height:64px!important;
-    padding:8px 8px max(8px,env(safe-area-inset-bottom))!important;
+    min-height:86px!important;
+    padding:8px 8px max(24px,env(safe-area-inset-bottom))!important;
     gap:8px!important;
   }
   body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .mobile-clear-action{
