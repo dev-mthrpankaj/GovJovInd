@@ -121,6 +121,7 @@
         elements.optionList = document.getElementById("optionList");
         elements.optionButtons = [];
         elements.optionTexts = [];
+        elements.questionFootnote = document.querySelector(".question-footnote");
         elements.questionMarks = document.getElementById("questionMarks");
         elements.questionNegative = document.getElementById("questionNegative");
         elements.prevQuestionButton = document.querySelector("[data-action='prev-question']");
@@ -726,6 +727,7 @@
         const question = state.questions[state.current];
         if (!question) return;
 
+        ensureQuestionMarksInTopline();
         setText(elements.examSubject, state.quizSet.subject);
         setText(elements.examTitle, state.quizSet.title);
         setText(elements.currentQuestionNo, String(state.current + 1));
@@ -760,6 +762,12 @@
         if (!question) return;
         setText(elements.questionMarks, `+${formatMarks(question.marks)}`);
         setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)}`);
+    }
+
+    function ensureQuestionMarksInTopline() {
+        const marker = document.querySelector(".question-marker");
+        if (!marker || !elements.questionFootnote || marker.contains(elements.questionFootnote)) return;
+        marker.appendChild(elements.questionFootnote);
     }
 
     function syncQuestionLengthLayout(question) {
