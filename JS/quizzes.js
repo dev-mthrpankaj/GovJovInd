@@ -181,9 +181,12 @@
         document.addEventListener("visibilitychange", function () {
             if (document.hidden) persistUnfinished(true);
         });
-        window.addEventListener("resize", syncPaletteState);
         window.addEventListener("resize", debounce(function () {
-            if (isViewVisible("exam")) renderQuestion();
+            syncPaletteState();
+            if (isViewVisible("exam")) {
+                const question = state.questions[state.current];
+                if (question) syncQuestionLengthLayout(getQuestionTextMeta(question));
+            }
         }, 150));
         document.addEventListener("gju:admin-quiz-index-ready", function () {
             if (isViewVisible("home")) renderHome();
@@ -701,8 +704,8 @@
                 explanation: getLocalizedText(explanationTextMap, state.language, question.explanation || "Explanation is not available."),
                 explanationTextMap,
                 explanationImage: normalizeMedia(question.explanationImage || question.solutionImage, question.explanationImageAlt || question.solutionImageAlt || `Question ${index + 1} explanation image`),
-                marks: Number(question.marks) || Number(quizSet.marksPerQuestion) || 1,
-                negativeMarks: Number(question.negativeMarks) || Number(quizSet.negativeMarks) || 0
+                marks: finiteNumber(question.marks, finiteNumber(quizSet.marksPerQuestion, 1)),
+                negativeMarks: finiteNumber(question.negativeMarks, finiteNumber(quizSet.negativeMarks, 0))
             };
         });
     }
@@ -791,8 +794,8 @@
 
     function syncQuestionMarks(question = state.questions[state.current]) {
         if (!question) return;
-        setText(elements.questionMarks, `+${formatMarks(question.marks)}`);
-        setText(elements.questionNegative, `-${formatMarks(question.negativeMarks)}`);
+        setText(elements.questionMarks, `+${formatMarks(getQuestionPositiveMarks(question))}`);
+        setText(elements.questionNegative, `-${formatMarks(getQuestionNegativeMarks(question))}`);
     }
 
     function ensureQuestionMarksInTopline() {
@@ -802,16 +805,23 @@
 
     function renderQuestionText(question) {
         const rawText = getQuestionText(question);
+        const meta = getQuestionTextMeta(question);
+        const split = meta.split;
+        setRichText(elements.questionText, split?.passage || rawText);
+        setRichText(elements.questionStem, split?.stem || "");
+        elements.questionStem?.classList.toggle("hidden", !split?.stem);
+        return meta;
+    }
+
+    function getQuestionTextMeta(question) {
+        const rawText = getQuestionText(question);
         const explicitPassage = getLocalizedText(question.passageTextMap, state.language, "");
         const explicitStem = getLocalizedText(question.questionStemTextMap, state.language, "");
         const wordCount = countQuestionWords(rawText);
         const split = explicitStem
             ? { passage: explicitPassage || rawText, stem: explicitStem }
             : splitTrailingQuestionStem(rawText);
-        setRichText(elements.questionText, split?.passage || rawText);
-        setRichText(elements.questionStem, split?.stem || "");
-        elements.questionStem?.classList.toggle("hidden", !split?.stem);
-        return { hasStem: Boolean(split?.stem), wordCount, shouldSplit: Boolean(split?.stem) || wordCount > 100 };
+        return { split, hasStem: Boolean(split?.stem), wordCount, shouldSplit: Boolean(split?.stem) || wordCount > 100 };
     }
 
     function syncQuestionLengthLayout(textMeta) {
@@ -1195,19 +1205,29 @@
     function calculateResult(reason) {
         let correct = 0;
         let wrong = 0;
+        let score = 0;
+        let maxScore = 0;
 
         state.questions.forEach(function (question, index) {
             const answer = state.answers[index];
+            const marks = getQuestionPositiveMarks(question);
+            const negativeMarks = getQuestionNegativeMarks(question);
+            maxScore += marks;
             if (answer === null) return;
-            if (answer === question.correctAnswer) correct += 1;
-            else wrong += 1;
+            if (answer === question.correctAnswer) {
+                correct += 1;
+                score += marks;
+            } else {
+                wrong += 1;
+                score -= negativeMarks;
+            }
         });
 
         const total = state.questions.length;
         const attempted = correct + wrong;
         const unattempted = total - attempted;
-        const score = round2(correct * (Number(state.quizSet.marksPerQuestion) || 1) - wrong * (Number(state.quizSet.negativeMarks) || 0));
-        const maxScore = round2(total * (Number(state.quizSet.marksPerQuestion) || 1));
+        score = round2(score);
+        maxScore = round2(maxScore);
         const percentage = maxScore ? Math.max(0, round2((score / maxScore) * 100)) : 0;
         const accuracy = attempted ? round2((correct / attempted) * 100) : 0;
         const timeTaken = Math.max(0, Math.round(((Number(state.quizSet.durationMinutes) || 30) * 60) - state.remainingSeconds));
@@ -1247,7 +1267,7 @@
             const attempted = selected !== null;
             const correct = attempted && selected === question.correctAnswer;
             const wrong = attempted && !correct;
-            const marks = correct ? Number(question.marks) || 0 : wrong ? -(Number(question.negativeMarks) || 0) : 0;
+            const marks = correct ? getQuestionPositiveMarks(question) : wrong ? -getQuestionNegativeMarks(question) : 0;
 
             if (!buckets[name]) {
                 buckets[name] = {
@@ -1262,7 +1282,7 @@
             }
 
             buckets[name].totalQuestions += 1;
-            buckets[name].maxMarks += Number(question.marks) || 1;
+            buckets[name].maxMarks += getQuestionPositiveMarks(question);
             if (attempted) buckets[name].attempted += 1;
             if (correct) buckets[name].correct += 1;
             if (wrong) buckets[name].wrong += 1;
@@ -1981,6 +2001,20 @@ function buildResultInsights(result) {
     function round2(value) {
         const number = Number(value);
         return Number.isFinite(number) ? Math.round((number + Number.EPSILON) * 100) / 100 : 0;
+    }
+
+    function finiteNumber(value, fallback) {
+        if (value === null || value === undefined || value === "") return fallback;
+        const number = Number(value);
+        return Number.isFinite(number) ? number : fallback;
+    }
+
+    function getQuestionPositiveMarks(question) {
+        return finiteNumber(question?.marks, finiteNumber(state.quizSet?.marksPerQuestion, 1));
+    }
+
+    function getQuestionNegativeMarks(question) {
+        return finiteNumber(question?.negativeMarks, finiteNumber(state.quizSet?.negativeMarks, 0));
     }
 
     function formatTime(seconds) {

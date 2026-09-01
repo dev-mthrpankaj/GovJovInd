@@ -23,7 +23,7 @@
         if (document.querySelector('link[data-quiz-attempt-premium]')) return;
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-stem-bbcode-v5";
+        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-attempt-audit-v6";
         link.dataset.quizAttemptPremium = "1";
         document.head.appendChild(link);
     }
