@@ -799,7 +799,7 @@
     function renderQuestionText(question) {
         const rawText = getQuestionText(question);
         const wordCount = countQuestionWords(rawText);
-        const split = isWideQuestionSplitViewport() ? splitTrailingQuestionStem(rawText) : null;
+        const split = splitTrailingQuestionStem(rawText);
         setRichText(elements.questionText, split?.passage || rawText);
         setRichText(elements.questionStem, split?.stem || "");
         elements.questionStem?.classList.toggle("hidden", !split?.stem);
@@ -812,13 +812,9 @@
         elements.questionCard.classList.toggle("has-question-stem", Boolean(textMeta?.hasStem));
     }
 
-    function isWideQuestionSplitViewport() {
-        return window.matchMedia && window.matchMedia("(min-width: 1120px)").matches;
-    }
-
     function splitTrailingQuestionStem(value) {
         const source = String(value || "").trim();
-        const starts = Array.from(source.matchAll(/\b(?:Q|Question)\.?\s*\d+\.?\s+/gi));
+        const starts = Array.from(source.matchAll(/(?:\[\/?[a-z]+\]\s*)*\b(?:Q|Question)\.?\s*\d+\.?\s+/gi));
         const start = starts[starts.length - 1];
         if (!start) return null;
 
