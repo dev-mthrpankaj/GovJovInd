@@ -23,7 +23,7 @@
         if (document.querySelector('link[data-quiz-attempt-premium]')) return;
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-dark-palette-v1";
+        link.href = "../CSS/quiz-attempt-premium.css?v=20260901-marks-top-v2";
         link.dataset.quizAttemptPremium = "1";
         document.head.appendChild(link);
     }
