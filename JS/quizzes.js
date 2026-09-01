@@ -113,12 +113,14 @@
         elements.examDurationLabel = document.getElementById("examDurationLabel");
         elements.quizProgress = document.getElementById("quizProgress");
         elements.questionCard = document.getElementById("questionCard");
+        elements.questionMarker = document.querySelector(".question-marker");
         elements.questionNumberLabel = document.getElementById("questionNumberLabel");
         elements.questionStatusLabel = document.getElementById("questionStatusLabel");
         elements.questionElapsedText = document.getElementById("questionElapsedText");
         elements.questionText = document.getElementById("questionText");
         elements.questionMedia = document.getElementById("questionMedia");
         elements.optionList = document.getElementById("optionList");
+        ensureQuestionChoiceColumn();
         elements.optionButtons = [];
         elements.optionTexts = [];
         elements.questionFootnote = document.querySelector(".question-footnote");
@@ -136,6 +138,28 @@
         elements.resumeModal = document.getElementById("resumeModal");
         elements.resumeSummary = document.getElementById("resumeSummary");
         ensureExamLanguageToggle();
+    }
+
+    function ensureQuestionChoiceColumn() {
+        if (!elements.questionCard || !elements.optionList) return;
+        let column = elements.questionCard.querySelector(".question-choice-column");
+        if (!column) {
+            column = document.createElement("div");
+            column.className = "question-choice-column";
+            elements.questionCard.insertBefore(column, elements.optionList);
+        }
+
+        let stem = column.querySelector(".question-stem-panel");
+        if (!stem) {
+            stem = document.createElement("div");
+            stem.className = "question-stem-panel hidden";
+            stem.id = "questionStemText";
+            column.appendChild(stem);
+        }
+
+        if (!column.contains(elements.optionList)) column.appendChild(elements.optionList);
+        elements.questionChoiceColumn = column;
+        elements.questionStem = stem;
     }
 
     function bindEvents() {
@@ -158,6 +182,9 @@
             if (document.hidden) persistUnfinished(true);
         });
         window.addEventListener("resize", syncPaletteState);
+        window.addEventListener("resize", debounce(function () {
+            if (isViewVisible("exam")) renderQuestion();
+        }, 150));
         document.addEventListener("gju:admin-quiz-index-ready", function () {
             if (isViewVisible("home")) renderHome();
         });
@@ -733,8 +760,8 @@
         setText(elements.currentQuestionNo, String(state.current + 1));
         setText(elements.totalQuestionNo, String(state.questions.length));
         setText(elements.questionNumberLabel, String(state.current + 1));
-        setRichText(elements.questionText, getQuestionText(question));
-        syncQuestionLengthLayout(question);
+        const textMeta = renderQuestionText(question);
+        syncQuestionLengthLayout(textMeta);
         renderQuestionMedia(question);
         syncQuestionMarks(question);
         setText(elements.examDurationLabel, `Last ${formatNumber(state.quizSet.durationMinutes || 30)} Mins`);
@@ -765,14 +792,41 @@
     }
 
     function ensureQuestionMarksInTopline() {
-        const marker = document.querySelector(".question-marker");
-        if (!marker || !elements.questionFootnote || marker.contains(elements.questionFootnote)) return;
-        marker.appendChild(elements.questionFootnote);
+        if (!elements.questionMarker || !elements.questionFootnote || elements.questionMarker.contains(elements.questionFootnote)) return;
+        elements.questionMarker.appendChild(elements.questionFootnote);
     }
 
-    function syncQuestionLengthLayout(question) {
+    function renderQuestionText(question) {
+        const rawText = getQuestionText(question);
+        const wordCount = countQuestionWords(rawText);
+        const split = wordCount > 100 && isWideQuestionSplitViewport() ? splitTrailingQuestionStem(rawText) : null;
+        setRichText(elements.questionText, split?.passage || rawText);
+        setRichText(elements.questionStem, split?.stem || "");
+        elements.questionStem?.classList.toggle("hidden", !split?.stem);
+        return { hasStem: Boolean(split?.stem), wordCount };
+    }
+
+    function syncQuestionLengthLayout(textMeta) {
         if (!elements.questionCard) return;
-        elements.questionCard.classList.toggle("long-question-layout", countQuestionWords(getQuestionText(question)) > 100);
+        const isLong = Number(textMeta?.wordCount || 0) > 100;
+        elements.questionCard.classList.toggle("long-question-layout", isLong);
+        elements.questionCard.classList.toggle("has-question-stem", Boolean(textMeta?.hasStem));
+    }
+
+    function isWideQuestionSplitViewport() {
+        return window.matchMedia && window.matchMedia("(min-width: 1120px)").matches;
+    }
+
+    function splitTrailingQuestionStem(value) {
+        const source = String(value || "").trim();
+        const matches = Array.from(source.matchAll(/(?:^|\n)\s*(Q(?:uestion)?\.?\s*\d+\.?\s+[\s\S]+)$/gi));
+        const match = matches[matches.length - 1];
+        if (!match) return null;
+
+        const stem = String(match[1] || "").trim();
+        const passage = source.slice(0, match.index).trim();
+        if (!passage || !stem || countQuestionWords(stem) > 36) return null;
+        return { passage, stem };
     }
 
     function countQuestionWords(value) {
