@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "up-super-tet-syllabus-2026-exam-pattern",
+  title: "UP Super TET Syllabus 2026: Revised Exam Pattern, Subject-Wise Topics & Marking Scheme",
+  category: "State Exams",
+  date: "2026-09-02",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1788324157591.webp",
+  url: "student-hub/up-super-tet-syllabus-2026-exam-pattern.html",
+  excerpt: "UP Super TET Syllabus 2026 explained with the revised 120-question, 360-mark exam pattern, negative marking, Primary and Upper Primary subject-wise syllabus, and preparation strategy."
+},
+    {
   id: "voter-id-download-online-e-epic-guide-2026",
   title: "Voter ID Download Online 2026: How to Download e-EPIC Step by Step",
   category: "Citizen Services",
