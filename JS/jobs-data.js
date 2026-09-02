@@ -162,14 +162,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://rrb.digialm.com/EForms/configuredHtml/1181/101565/Index.html",
         "officialNotification": "https://cms.concorindia.co.in:8000/uploads/cms/pdf/Asf6Xc3Mnw5BWdp_FinalAdvertisement-18thAug2026(Published).pdf",
-        "detailPage": "../Job_Details/HTML/CONCOR-Management-Trainee-Assistant-Officer-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0213-20260901071732-6286fcc0",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0214-20260901090859-ae630e8a",
