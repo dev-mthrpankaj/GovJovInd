@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/rrboaxvaug26/",
         "officialNotification": "https://doc.sarkariresults.org.in/IBPS_SarkariResult.Com_CRP-RRBs-XV-notification%20(1).pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0211-20260901064838-054726f3",
+        "detailPage": "../jobs/ibps-rrb-xv-2026.html",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0212-20260901070828-b183ce0a",
