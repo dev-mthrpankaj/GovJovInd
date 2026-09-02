@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/SI_Rulebook_2026_01092026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0216-20260902000552-802c565d",
+        "detailPage": "../jobs/mp-police-si-subedar-2026.html",
         "updatedAt": "2026-09-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0217-20260902211419-caf7cd3b",
@@ -3006,14 +3006,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://applycareer.co.in/DHC/HighCourt2026DHJSE/",
         "officialNotification": "https://delhihighcourt.nic.in/files/2026-07/recuritment/adv-eng_dhjs-2026.pdf",
-        "detailPage": "../Job_Details/HTML/1011-Delhi-Higher-Judicial-Service-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0095",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0091",

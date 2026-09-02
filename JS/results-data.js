@@ -590,12 +590,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://delhihighcourt.nic.in/files/2026-08/upload_complete_notice.pdf",
-        "detailPage": "../Result_Details/HTML/Delhi-High-Court-Assistant-Editor-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0100-20260814211614-1e8f2a27",
