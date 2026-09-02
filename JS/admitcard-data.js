@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0128-20260902161604-056cd6e2",
+        "title": "UP Police Home Guard PET Admit Card 2026",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board UPPRPB",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-08",
+        "examEndDate": "2026-09-15",
+        "releaseDate": "2026-09-01",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://www.hgupexam2025.com/hg2025petadmitcard/loginpage.aspx",
+        "detailPage": "../jobs/up-police-home-guard-2025.html",
+        "updatedAt": "2026-09-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0127-20260828215752-3d13977d",
         "title": "PNB Local Bank Officer LBO Admit Card 2026",
         "organization": "Punjab National Bank (PNB)",
