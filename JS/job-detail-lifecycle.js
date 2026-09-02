@@ -42,14 +42,15 @@
       const i = el.querySelector('i');
       if (i) i.className = `fas ${icon}`;
     }
-    el.classList.toggle('is-disabled', !isUrl(url));
-    el.setAttribute('aria-disabled', isUrl(url) ? 'false' : 'true');
-    if (isUrl(url)) {
-      el.href = url;
+    const targetUrl = isUrl(url) ? url : '#important-links';
+    el.classList.remove('is-disabled');
+    el.setAttribute('aria-disabled', 'false');
+    el.href = targetUrl;
+
+    if (/^https?:\/\//i.test(targetUrl)) {
       el.target = '_blank';
       el.rel = 'noopener noreferrer';
     } else {
-      el.href = '#important-links';
       el.removeAttribute('target');
       el.removeAttribute('rel');
     }
@@ -122,17 +123,34 @@
   }
 
   function getPrimaryAction() {
-    if (currentStage?.primaryAction) return currentStage.primaryAction;
-    if (job.primaryAction) return job.primaryAction;
-    if (isUrl(job.links?.apply)) return {label:'Apply Online', url:job.links.apply, icon:'fa-paper-plane'};
-    if (isUrl(job.links?.notification)) return {label:'Official Notification', url:job.links.notification, icon:'fa-file-pdf'};
-    return {label:'Important Links', url:'#important-links', icon:'fa-link'};
+    if (isUrl(currentStage?.primaryAction?.url)) return currentStage.primaryAction;
+    if (isUrl(job.primaryAction?.url)) return job.primaryAction;
+
+    if (isUrl(currentStage?.secondaryAction?.url)) {
+      return {
+        label: currentStage.secondaryAction.label || 'View Latest Notice',
+        url: currentStage.secondaryAction.url,
+        icon: currentStage.secondaryAction.icon || 'fa-file-alt'
+      };
+    }
+
+    if (isUrl(job.links?.official)) {
+      return {label:'Check Latest Updates', url:job.links.official, icon:'fa-external-link-alt'};
+    }
+
+    if (isUrl(job.links?.notification)) {
+      return {label:'View Recruitment Notice', url:job.links.notification, icon:'fa-file-pdf'};
+    }
+
+    return {label:'Check Latest Updates', url:'#important-links', icon:'fa-bell'};
   }
 
   function getSecondaryAction() {
-    if (currentStage?.secondaryAction) return currentStage.secondaryAction;
-    if (job.secondaryAction) return job.secondaryAction;
-    return {label:'Official Notification', url:job.links?.notification, icon:'fa-file-pdf'};
+    if (isUrl(currentStage?.secondaryAction?.url)) return currentStage.secondaryAction;
+    if (isUrl(job.secondaryAction?.url)) return job.secondaryAction;
+    if (isUrl(job.links?.notification)) return {label:'Official Notification', url:job.links.notification, icon:'fa-file-pdf'};
+    if (isUrl(job.links?.official)) return {label:'Official Website', url:job.links.official, icon:'fa-landmark'};
+    return {label:'Important Links', url:'#important-links', icon:'fa-link'};
   }
 
   function renderHero() {
