@@ -234,14 +234,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://rojgarresult.com/wp-content/uploads/2026/08/dcr-form-2026.pdf",
         "officialNotification": "https://cdnbbsr.s3waas.gov.in/s3ec03980a875ff6ef9c2d75e74307cbf5/uploads/2026/08/2026082864.pdf",
-        "detailPage": "../Job_Details/HTML/DCR-Stenographer-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0209-20260830093816-3dbc6e70",
         "updatedAt": "2026-08-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0210-20260830094040-1f6d65bd",
@@ -258,14 +258,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://bbmb.gov.in/job-openings-recruitment-hi.htm",
         "officialNotification": "https://bbmb.gov.in/writereaddata/Portal/JobOpening/124_1_Final_Detailed_Advt._2_of_2026__English.pdf",
-        "detailPage": "../Job_Details/HTML/BBMB-Hindi-Translator-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0210-20260830094040-1f6d65bd",
         "updatedAt": "2026-08-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0207-20260829170149-1d778c45",
