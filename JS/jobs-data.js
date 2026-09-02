@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-09-03",
         "lastDate": "2026-09-19",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://pgimer.edu.in/PGIMER_PORTAL/PGIMERPORTAL/home.jsp",
         "officialNotification": "https://pgimer.edu.in/PGIMER_PORTAL/AbstractFilePath?FileType=E&FileName=Advt.%20guidelines%20group%20C%20pgi%20and%20ABC%20sangrur.%205301Sep2026132817.pdf&PathKey=VACANCY_PATH",
@@ -186,14 +186,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://sronline.etrpindia.com/rrcchennaiapprentice26/recruitmentIndex",
         "officialNotification": "https://sronline.etrpindia.com/rrcchennaiapprentice26/notifications/Act%20Apprentices%20Notification%202026-27%20with%20enclosures.pdf",
-        "detailPage": "../Job_Details/HTML/Southern-Railway-Apprentice-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0214-20260901090859-ae630e8a",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0215-20260901103803-d7e84604",

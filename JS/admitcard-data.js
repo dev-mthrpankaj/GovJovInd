@@ -73,7 +73,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-02",
         "examEndDate": "",
         "releaseDate": "2026-08-26",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
         "detailPage": "../AdmitCard_Details/HTML/RPSC-Rajasthan-APO-Admit-Card-2026.html",
