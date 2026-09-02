@@ -138,14 +138,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://sssc.uk.gov.in/",
         "officialNotification": "https://cdnbbsr.s3waas.gov.in/s34ffd0e19d2069412274bd3025b0e176c/uploads/2026/08/202608311041608906.pdf",
-        "detailPage": "../Job_Details/HTML/UKSSSC-Group-C-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0212-20260901070828-b183ce0a",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0213-20260901071732-6286fcc0",
