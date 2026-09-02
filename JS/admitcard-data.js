@@ -1524,26 +1524,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0046",
-        "title": "UP Police Home Guard DV Admit Card 2026",
-        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
-        "department": "UPPRPB",
-        "category": "State Government",
-        "year": "2026",
-        "examDate": "2026-07-13",
-        "examEndDate": "2026-08-07",
-        "releaseDate": "2026-07-04",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://uppbpb.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/UP-Police-Homeguard-DV-PST-Notice-2026.html",
-        "updatedAt": "2026-07-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0047",
         "title": "RPSC Rajasthan Police SI, Platoon Commander Interview Letter 2026",
         "organization": "Rajasthan  Public Service Commision",

@@ -774,33 +774,6 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0023",
-        "title": "UP Police Home Guard Final Answer Key 2026",
-        "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
-        "department": "UPPRPB",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-04-25",
-        "examEndDate": "2026-04-27",
-        "releaseDate": "2026-06-28",
-        "objectionLastDate": "",
-        "status": "objection-closed",
-        "tags": [
-            "UPPRPB",
-            "UP Police",
-            "Home Guard",
-            "Answer Key"
-        ],
-        "downloadLink": "https://www-hgupexam2025-com.translate.goog/hg2025questionobjections/Login.aspx?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=hi&_x_tr_pto=tc",
-        "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/1105-UP-Home-Guard-Answer-Key-2026.html",
-        "updatedAt": "2026-06-28",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "answerkey-sheet-0024",
         "title": "Railway RRB NTPC 10+2 Level UG Answer Key 2026",
         "organization": "Railway Recruittment Board",

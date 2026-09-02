@@ -1570,7 +1570,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0041",
+        "id": "result-sheet-0040",
         "title": "JPSC Jharkhand PCS Pre Result 2026",
         "organization": "Jharkhand Public Service Commission",
         "department": "JPSC",
@@ -1588,7 +1588,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0038",
+        "id": "result-sheet-0037",
         "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
         "organization": "Reserve  Bank  of India",
         "department": "RBI",
@@ -1606,7 +1606,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0039",
+        "id": "result-sheet-0038",
         "title": "SBI CBO Circle Based Officers Result 2026 for 2050 Post",
         "organization": "State Bank of India",
         "department": "SBI",
@@ -1624,7 +1624,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0040",
+        "id": "result-sheet-0039",
         "title": "UPSSSC Technical Assistant Group C Eligibility Result 2026 for 2759 Post",
         "organization": "Uttar pradesh subordinate services selection  commission",
         "department": "UPSSSC",
@@ -1643,29 +1643,6 @@ window.GovJobUpdatesResults = [
     },
     {
         "id": "result-sheet-0027",
-        "title": "UP POLICE Home Guard Result of Written Exam 2026",
-        "organization": "Uttar Pradesh Police Recruitment and Promotion Board",
-        "department": "UPPRPB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-28",
-        "status": "released",
-        "tags": [
-            "UPPRPB",
-            "UP Police",
-            "Home Guard",
-            "Result"
-        ],
-        "resultLink": "https://www.hgupexam2025.com/hg2025writtentestresults/loginpage.aspx",
-        "detailPage": "../Result_Details/HTML/3006-UP-Home-Guard-DVPST-Shortlisted-Result-2026.html",
-        "updatedAt": "2026-07-01",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0028",
         "title": "MHA IB Junior Intelligence Officer JIO Final Result 2026",
         "organization": "MHA Intelligence Bureau IB",
         "department": "MHA IB",
@@ -1689,7 +1666,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0029",
+        "id": "result-sheet-0028",
         "title": "RRB Group D Result Ranchi 2025",
         "organization": "Railway Recruitment  Board",
         "department": "RRB",
@@ -1707,7 +1684,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0030",
+        "id": "result-sheet-0029",
         "title": "RRB Group D Result Bilaspur 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1725,7 +1702,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0031",
+        "id": "result-sheet-0030",
         "title": "RRB Group D Result Ahmedabad 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1743,7 +1720,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0032",
+        "id": "result-sheet-0031",
         "title": "RRB Group D Result Bhopal 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1761,7 +1738,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0033",
+        "id": "result-sheet-0032",
         "title": "RRB Group D Result Bhubneshwar 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1779,7 +1756,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0034",
+        "id": "result-sheet-0033",
         "title": "RRB Group D Result Chennai 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1797,7 +1774,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0035",
+        "id": "result-sheet-0034",
         "title": "RRB Group D Result Prayagraj 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1815,7 +1792,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0036",
+        "id": "result-sheet-0035",
         "title": "RRB Group D Score Card Result 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
@@ -1833,7 +1810,7 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0037",
+        "id": "result-sheet-0036",
         "title": "RRB Group D Result for All RRB,s 2025",
         "organization": "Railway Recruitment Board",
         "department": "RRB",
