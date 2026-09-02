@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0060-20260902223108-76a1e79b",
+        "title": "HTET OMR Sheet 2026 | Teacher Eligibility Test",
+        "organization": "Haryana Teacher Eligibility",
+        "department": "HTET",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-07-04",
+        "examEndDate": "2026-07-05",
+        "releaseDate": "2026-09-02",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://htet.eapplynow.com/HTETApp25/Pages/OMRViewLogin07.aspx",
+        "objectionLink": "",
+        "detailPage": "../jobs/htet-2025.html",
+        "updatedAt": "2026-09-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0056-20260820113832-5ca8e978",
         "title": "DSSSB Answer Key 2026 for Various Post July Exam",
         "organization": "Delhi Subordinate Services Selection Board",
@@ -326,12 +348,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://delhihighcourt.nic.in/files/2026-07/notice_of_dhjs.pdf",
         "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/Delhi-High-Court-HJS-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0044-20260728122803-2bf9f0a2",

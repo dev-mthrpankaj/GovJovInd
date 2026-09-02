@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0130-20260902225218-01a831d2",
+        "title": "Delhi High Court HJS Mains Exam Date 2026",
+        "organization": "High Court of Delhi",
+        "department": "HCD",
+        "category": "Judiciary",
+        "year": "2026",
+        "examDate": "2026-09-10",
+        "examEndDate": "2026-09-11",
+        "releaseDate": "2026-09-02",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://delhihighcourt.nic.in/files/2026-09/dhjs2026.pdf",
+        "detailPage": "../jobs/delhi-high-court-hjs-2026.html",
+        "updatedAt": "2026-09-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0127-20260828215752-3d13977d",
         "title": "PNB Local Bank Officer LBO Admit Card 2026",
         "organization": "Punjab National Bank (PNB)",
@@ -53,7 +73,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-02",
         "examEndDate": "",
         "releaseDate": "2026-08-26",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
         "detailPage": "../AdmitCard_Details/HTML/RPSC-Rajasthan-APO-Admit-Card-2026.html",
@@ -836,12 +856,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://applycareer.co.in/dhc/highcourt2026dhjse/DHC_DHJSE26AdmitCard.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/Delhi-High-Court-HJS-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0082-20260723175406-a5351408",
@@ -1816,12 +1836,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://htet.eapplynow.com/HTETApp25/Pages/Admit01Login7.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/BSEH-HTET-Haryana-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0040",

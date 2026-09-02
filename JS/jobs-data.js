@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/SI_Rulebook_2026_01092026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0216-20260902000552-802c565d",
+        "detailPage": "../jobs/mp-police-si-subedar-2026.html",
         "updatedAt": "2026-09-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0217-20260902211419-caf7cd3b",
@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-09-03",
         "lastDate": "2026-09-19",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://pgimer.edu.in/PGIMER_PORTAL/PGIMERPORTAL/home.jsp",
         "officialNotification": "https://pgimer.edu.in/PGIMER_PORTAL/AbstractFilePath?FileType=E&FileName=Advt.%20guidelines%20group%20C%20pgi%20and%20ABC%20sangrur.%205301Sep2026132817.pdf&PathKey=VACANCY_PATH",
@@ -138,14 +138,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://sssc.uk.gov.in/",
         "officialNotification": "https://cdnbbsr.s3waas.gov.in/s34ffd0e19d2069412274bd3025b0e176c/uploads/2026/08/202608311041608906.pdf",
-        "detailPage": "../Job_Details/HTML/UKSSSC-Group-C-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0212-20260901070828-b183ce0a",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0213-20260901071732-6286fcc0",
@@ -162,14 +162,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://rrb.digialm.com/EForms/configuredHtml/1181/101565/Index.html",
         "officialNotification": "https://cms.concorindia.co.in:8000/uploads/cms/pdf/Asf6Xc3Mnw5BWdp_FinalAdvertisement-18thAug2026(Published).pdf",
-        "detailPage": "../Job_Details/HTML/CONCOR-Management-Trainee-Assistant-Officer-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0213-20260901071732-6286fcc0",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0214-20260901090859-ae630e8a",
@@ -186,14 +186,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://sronline.etrpindia.com/rrcchennaiapprentice26/recruitmentIndex",
         "officialNotification": "https://sronline.etrpindia.com/rrcchennaiapprentice26/notifications/Act%20Apprentices%20Notification%202026-27%20with%20enclosures.pdf",
-        "detailPage": "../Job_Details/HTML/Southern-Railway-Apprentice-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0214-20260901090859-ae630e8a",
         "updatedAt": "2026-09-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0215-20260901103803-d7e84604",
@@ -234,14 +234,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://rojgarresult.com/wp-content/uploads/2026/08/dcr-form-2026.pdf",
         "officialNotification": "https://cdnbbsr.s3waas.gov.in/s3ec03980a875ff6ef9c2d75e74307cbf5/uploads/2026/08/2026082864.pdf",
-        "detailPage": "../Job_Details/HTML/DCR-Stenographer-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0209-20260830093816-3dbc6e70",
         "updatedAt": "2026-08-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0210-20260830094040-1f6d65bd",
@@ -258,14 +258,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://bbmb.gov.in/job-openings-recruitment-hi.htm",
         "officialNotification": "https://bbmb.gov.in/writereaddata/Portal/JobOpening/124_1_Final_Detailed_Advt._2_of_2026__English.pdf",
-        "detailPage": "../Job_Details/HTML/BBMB-Hindi-Translator-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0210-20260830094040-1f6d65bd",
         "updatedAt": "2026-08-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0207-20260829170149-1d778c45",
@@ -282,14 +282,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://phconapp.formflix.org/faraash/",
         "officialNotification": "https://highcourtchd.gov.in/sub_pages/left_menu/recruitments/staff/openings_pdf/frash_advt_28082026_96766.pdf",
-        "detailPage": "../Job_Details/HTML/PHHC-Frash-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0207-20260829170149-1d778c45",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0208-20260829172855-d5487e0e",
@@ -306,14 +306,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://phconapp.formflix.org/driver/",
         "officialNotification": "https://highcourtchd.gov.in/sub_pages/left_menu/recruitments/staff/openings_pdf/drivr_advt_28082026_b8a83.pdf",
-        "detailPage": "../Job_Details/HTML/PHHC-Driver-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0208-20260829172855-d5487e0e",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0203-20260826155237-4756a35d",
@@ -3006,14 +3006,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://applycareer.co.in/DHC/HighCourt2026DHJSE/",
         "officialNotification": "https://delhihighcourt.nic.in/files/2026-07/recuritment/adv-eng_dhjs-2026.pdf",
-        "detailPage": "../Job_Details/HTML/1011-Delhi-Higher-Judicial-Service-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0095",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0091",
