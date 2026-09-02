@@ -107,8 +107,11 @@
         let url = normalizeActionUrl(value).replace(/\\/g, "/");
         if (!url) return "";
         url = url.replace(/^\.\/(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details)\/HTML\//i, "../$1/HTML/");
+        url = url.replace(/^\.\/jobs\//i, "../jobs/");
         if (/^(?:\.\.\/|\/)(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details)\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        if (/^(?:\.\.\/|\/)jobs\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
         if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/(Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details)\/HTML\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
+        if (/^https?:\/\/(?:www\.)?govjobupdates\.com\/jobs\/[^?#]+\.html(?:[?#].*)?$/i.test(url)) return url;
         return "";
     }
 
