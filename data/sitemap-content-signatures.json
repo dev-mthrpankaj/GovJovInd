@@ -165,10 +165,6 @@
       "signature": "4ed4f39412d8d059ca376345540904dde225b16373aa33c2b3f374fa76e8a427",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/BSEH-HTET-Haryana-Admit-Card-2026.html": {
-      "signature": "8857d3be14d82ef92295f509a42d447accab39059751e5a572406740e791ca3a",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/BSF-HC-Ministerial-ASI-Steno-Admit-Card-2026.html": {
       "signature": "2690cb54054145e7a51ffbb9dee07292959d92148c9d29570f173a5cd6de6208",
       "lastmod": "2026-08-21"
@@ -212,10 +208,6 @@
     "AdmitCard_Details/HTML/CTET-September-Admit-Card-2026.html": {
       "signature": "eec26e1f7a0d1e0f6f330f7c070ad0b900143ba44e3c58cef63efd1f3a53e348",
       "lastmod": "2026-08-25"
-    },
-    "AdmitCard_Details/HTML/Delhi-High-Court-HJS-Admit-Card-2026.html": {
-      "signature": "0670c5340e75388dcc8df21970875c02db728d3f5215a66a09d6073fca8d5870",
-      "lastmod": "2026-08-12"
     },
     "AdmitCard_Details/HTML/Delhi-Police-Constable-Physical-Admit-Card-2026.html": {
       "signature": "f5008eae597eb5ba48d63a30b77c2d2a973949e3b984edd9cdc820141d8359ca",
@@ -523,10 +515,6 @@
     },
     "AnswerKey_Details/HTML/BSNL-Senior-Executive-Trainee-SET-Answer-Key-2026.html": {
       "signature": "52829f4f5871956164f0d77c30aef545258a4d566a4bae0aeaf799d66397261e",
-      "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/Delhi-High-Court-HJS-Answer-Key-2026.html": {
-      "signature": "033bd15e01e1d8c3bed34ca6e7d7e2f421d6fdc82b482fb3644fd4b47942ce47",
       "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/Delhi-Police-Constable-Final-Answer-Key-2025.html": {
@@ -1192,10 +1180,6 @@
     "Job_Details/HTML/1011-Central-Bank-Apprentice-Recruitment-2026.html": {
       "signature": "bfdf357629ce6585dacd05ac65179e247f64d2e96a3b592a3e0eddb2be52a734",
       "lastmod": "2026-08-12"
-    },
-    "Job_Details/HTML/1011-Delhi-Higher-Judicial-Service-2026.html": {
-      "signature": "cd2dd6a817e5c4e8c002f486919e98fdf152fb5b02f4646d8405e67454811dc5",
-      "lastmod": "2026-08-14"
     },
     "Job_Details/HTML/1011-MPESB-Nursing-Officer-Sister-Tutor-2026.html": {
       "signature": "8c7b656b660c6f600fbc27e68501e63a031bb2fad4e30f4009cc1e3e3b56f560",
@@ -1973,6 +1957,10 @@
       "signature": "ed0753e595d280e0e2336448097096d7abda60052b05eb619cd29c30f5e2a823",
       "lastmod": "2026-08-12"
     },
+    "jobs/delhi-high-court-hjs-2026.html": {
+      "signature": "a97a77a85ce0387abf7585c722d95bc5b1c1d6e26187f59c45c338f894550229",
+      "lastmod": "2026-09-02"
+    },
     "jobs/htet-2025.html": {
       "signature": "e39f99419aa766bf5187fcbbad1107c74c549d1d6762088d632f7aff941c6eb8",
       "lastmod": "2026-09-02"
@@ -2264,10 +2252,6 @@
     "Result_Details/HTML/CSBC-Bihar-Police-Jail-Warden-Result-2026.html": {
       "signature": "e232f9de824ed5bf8d501df3184558fb5a10e7e3b590165a8ca708981e7ce6a4",
       "lastmod": "2026-08-20"
-    },
-    "Result_Details/HTML/Delhi-High-Court-Assistant-Editor-Result-2026.html": {
-      "signature": "ed8f61ec7c913e9a68714dbf6431731fff7d29cb5b17580da85dc318ddd6db60",
-      "lastmod": "2026-08-14"
     },
     "Result_Details/HTML/HPSC-PGT-Computer-Science-Result-2026.html": {
       "signature": "f49af18bfefa6de9db6ccf04fedb67ce63c3eb84c958e59254ce707d7cfa18d0",
