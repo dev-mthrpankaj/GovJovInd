@@ -282,14 +282,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://phconapp.formflix.org/faraash/",
         "officialNotification": "https://highcourtchd.gov.in/sub_pages/left_menu/recruitments/staff/openings_pdf/frash_advt_28082026_96766.pdf",
-        "detailPage": "../Job_Details/HTML/PHHC-Frash-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0207-20260829170149-1d778c45",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0208-20260829172855-d5487e0e",
@@ -306,14 +306,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://phconapp.formflix.org/driver/",
         "officialNotification": "https://highcourtchd.gov.in/sub_pages/left_menu/recruitments/staff/openings_pdf/drivr_advt_28082026_b8a83.pdf",
-        "detailPage": "../Job_Details/HTML/PHHC-Driver-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0208-20260829172855-d5487e0e",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0203-20260826155237-4756a35d",
