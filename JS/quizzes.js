@@ -783,13 +783,20 @@
         if (elements.saveNextButton) elements.saveNextButton.innerHTML = state.current >= state.questions.length - 1
             ? "Review &amp; Submit"
             : "Save &amp; Next";
-        if (elements.markNextButton) elements.markNextButton.innerHTML = state.current >= state.questions.length - 1
-            ? "Mark For Review"
-            : "Mark For Review";
+        syncReviewButton();
 
         renderQuestionOptions(question);
         syncQuestionState();
         typesetQuizMath(elements.questionCard);
+    }
+
+    function syncReviewButton() {
+        if (!elements.markNextButton) return;
+        const status = state.statuses[state.current] || "not-visited";
+        const isMarked = status === "marked" || status === "answered-marked";
+        elements.markNextButton.textContent = isMarked ? "Unmark Review" : "Mark For Review";
+        elements.markNextButton.setAttribute("aria-pressed", String(isMarked));
+        elements.markNextButton.classList.toggle("is-marked", isMarked);
     }
 
     function syncQuestionMarks(question = state.questions[state.current]) {
@@ -988,7 +995,12 @@
 
     function markForReview() {
         if (!state.questions[state.current]) return;
-        setQuestionStatus(state.current, state.answers[state.current] === null ? "marked" : "answered-marked");
+        const currentStatus = state.statuses[state.current] || "not-visited";
+        const isMarked = currentStatus === "marked" || currentStatus === "answered-marked";
+        const nextStatus = isMarked
+            ? (state.answers[state.current] === null ? "not-answered" : "answered")
+            : (state.answers[state.current] === null ? "marked" : "answered-marked");
+        setQuestionStatus(state.current, nextStatus);
         persistUnfinished();
         syncQuestionState();
         renderPalette({ changedIndexes: [state.current] });
@@ -996,11 +1008,6 @@
 
     function markAndNext() {
         markForReview();
-        if (state.current >= state.questions.length - 1) {
-            openSubmitModal();
-            return;
-        }
-        goQuestion(state.current + 1);
     }
 
     function syncQuestionState() {
@@ -1016,6 +1023,7 @@
             button.classList.toggle("selected", selected);
             button.setAttribute("aria-pressed", String(selected));
         });
+        syncReviewButton();
     }
 
     function saveAndNext() {
@@ -1405,7 +1413,6 @@ function buildResultInsights(result) {
             };
         }
 
-        // Unattempted questions analytics me count nahi honge.
         if (selected === null) return;
 
         topics[topicName].attempted += 1;
@@ -1431,7 +1438,6 @@ function buildResultInsights(result) {
             return topic.attempted > 0;
         });
 
-    // Strong = genuinely good performance: 60%+
     const strongTopics = attemptedTopics
         .filter(function (topic) {
             return topic.accuracy >= 60;
@@ -1445,7 +1451,6 @@ function buildResultInsights(result) {
         })
         .slice(0, 3);
 
-    // Weak = genuinely weak performance: below 50%
     const weakTopics = attemptedTopics
         .filter(function (topic) {
             return topic.accuracy < 50;
