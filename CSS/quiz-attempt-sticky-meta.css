@@ -9,14 +9,13 @@ body.quiz-attempt-route .question-line {
   height: 42px !important;
   margin: 0 !important;
   padding: 4px 0 !important;
-  background: var(--qa-surface, #fff) !important;
-  border-bottom: 1px solid var(--qa-border, #d7e2ef) !important;
+  background: #fff9df !important;
+  border-bottom: 1px solid #f1df9a !important;
   box-shadow: 0 5px 10px rgba(15, 23, 42, 0.035) !important;
 }
 
 /* Keep only the breathing room actually needed between the sticky exam header
-   and the sticky question meta row. The large desktop question-card top padding
-   was creating the empty strip visible above the question number. */
+   and the sticky question meta row. */
 @media (min-width: 768px) {
   body.quiz-attempt-route .exam-main {
     gap: 6px !important;
@@ -48,9 +47,21 @@ body.quiz-attempt-route .question-marker .question-footnote span {
   white-space: nowrap !important;
 }
 
-/* The existing quiz renderer already changes this button's text to
-   “Unmark Review” and sets aria-pressed=true for marked questions. Give that
-   state a clear but calm visual treatment without changing quiz logic. */
+/* Review action: calm green tint while unmarked; yellow when marked. */
+body.quiz-attempt-route .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
+  border-color: #86c89a !important;
+  background: #edf9f0 !important;
+  color: #166534 !important;
+  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.08) !important;
+}
+
+body.quiz-attempt-route .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]):hover,
+body.quiz-attempt-route .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]):focus-visible {
+  border-color: #65a976 !important;
+  background: #e2f5e7 !important;
+  color: #14532d !important;
+}
+
 body.quiz-attempt-route .exam-actions [data-action="mark-next"][aria-pressed="true"] {
   border-color: #facc15 !important;
   background: #fff7cc !important;
@@ -65,10 +76,27 @@ body.quiz-attempt-route .exam-actions [data-action="mark-next"][aria-pressed="tr
   color: #713f12 !important;
 }
 
-body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"][aria-pressed="true"] {
-  border-color: #facc15 !important;
-  background: rgba(250, 204, 21, 0.16) !important;
-  color: #fde68a !important;
+/* Soft transition zone above the sticky bottom action bar. Content passing
+   underneath fades and blurs instead of ending on a hard line. */
+body.quiz-attempt-route .exam-actions {
+  overflow: visible !important;
+  isolation: isolate !important;
+}
+
+body.quiz-attempt-route .exam-actions::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -28px;
+  height: 29px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.72) 58%, rgba(255,255,255,.96));
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 42%, #000);
+  mask-image: linear-gradient(to bottom, transparent, #000 42%, #000);
 }
 
 /* At this width the page itself can scroll, so keep the meta bar below the
@@ -126,6 +154,23 @@ body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark
 }
 
 body.quiz-attempt-route[data-quiz-theme="dark"] .question-line {
-  background: var(--qa-surface, #101827) !important;
+  background: #2a2617 !important;
+  border-bottom-color: #5b4f1f !important;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16) !important;
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
+  border-color: #3f7d50 !important;
+  background: rgba(34, 197, 94, 0.12) !important;
+  color: #bbf7d0 !important;
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"][aria-pressed="true"] {
+  border-color: #facc15 !important;
+  background: rgba(250, 204, 21, 0.16) !important;
+  color: #fde68a !important;
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions::before {
+  background: linear-gradient(to bottom, rgba(13,24,40,0), rgba(13,24,40,.74) 58%, rgba(13,24,40,.97));
 }
