@@ -361,14 +361,6 @@
       "signature": "71a0a2d024274f0dd3c5272180621f0fff7dbf533477de17c5cf47b913c08773",
       "lastmod": "2026-08-13"
     },
-    "AdmitCard_Details/HTML/SBI-PO-Admit-Card-2026.html": {
-      "signature": "59eafe422219d83966f81ba62cd33111a9a0902ae19dbf66c7b773fb8ea1ff2b",
-      "lastmod": "2026-08-12"
-    },
-    "AdmitCard_Details/HTML/SBIN-PO-Admit-Card-2026.html": {
-      "signature": "6f3237efeebdde3c8f00ea7b01e88abeb35cebcf6d065bbff409acede678b47b",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/SSB-Constable-Tradesman-Admit-Card-2026.html": {
       "signature": "e6faf2e6279f58bd36268174fd3c42c60efc42776daf2ef339fc7dd474907a1e",
       "lastmod": "2026-08-12"
@@ -1117,10 +1109,6 @@
       "signature": "d36c6cced62be33ee7fe811e86677fae79c51f3bea8f0292cca914c23e1025b1",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html": {
-      "signature": "9527ceeee0f8a0675f38a16f8a529ac2a0b166e7071ffc59c2f2363d63a75e74",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/1009-SECR-Nagpur-Railway-Apprentice-2026.html": {
       "signature": "ace218fdb784dc8ffe628a28045e2b6376b58a2888edae5e885552692b1290a0",
       "lastmod": "2026-08-12"
@@ -1167,10 +1155,6 @@
     },
     "Job_Details/HTML/1010-MPESB-Hospital-Assistant-2026.html": {
       "signature": "cdd7b88832626eab434e2c6f343f0d87518d9fa598fdaf22dd0c4949db057db8",
-      "lastmod": "2026-08-12"
-    },
-    "Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html": {
-      "signature": "86e067a391913eb7a36a622dc013350fb9433032b51633efc2e6b5cf3cca2e1d",
       "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/1010-UP-Parivahan-Outsourcing-Driver-Recruitment-2026.html": {
@@ -1492,10 +1476,6 @@
     "Job_Details/HTML/AAI-Manager-Junior-Executive-2026.html": {
       "signature": "ebcf3b7a46b6080b09c823a728d4b890df6f1d9ce847340ca671d9ca345847b5",
       "lastmod": "2026-08-27"
-    },
-    "Job_Details/HTML/AIIMS-NORCET-11th-Nursing-Officer-2026.html": {
-      "signature": "7103b5aa976aeeb61666a10ccd12dd6199ace750038c60ea9dc47061abfb21ca",
-      "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/BEML-Apprentices-2026.html": {
       "signature": "6c22f08d25614bb841d806640178ea3c31bbc42b8fb194b66a939efa071ee8f7",
@@ -1929,6 +1909,10 @@
       "signature": "ed0753e595d280e0e2336448097096d7abda60052b05eb619cd29c30f5e2a823",
       "lastmod": "2026-08-12"
     },
+    "jobs/aiims-norcet-11th-2026.html": {
+      "signature": "5807baea768e9a2f834a850a53bc015f1344fa8e3c431b8d508153baaa0327d2",
+      "lastmod": "2026-09-04"
+    },
     "jobs/bbmb-hindi-translator-2026.html": {
       "signature": "d4d971c1457d2e87b42fcc8bc82161bb550d88a65d0e2dc4010462a5f4619e2e",
       "lastmod": "2026-09-03"
@@ -1956,6 +1940,10 @@
     "jobs/mp-police-si-subedar-2026.html": {
       "signature": "7304208f1432cdfd5e69cefc245bee58715631411a4197e873c43ce8a1e558fa",
       "lastmod": "2026-09-02"
+    },
+    "jobs/ntpc-act-2026.html": {
+      "signature": "3c16f243b0ca5c9f2e02a8380d8460c4dd512b7c913e5879c6e6fd7271fe1468",
+      "lastmod": "2026-09-04"
     },
     "jobs/pgimer-group-c-various-post-2026.html": {
       "signature": "822797961067f98db784b88b61db034b6f0a66bc02bde35c87917be2f855daa6",
@@ -1986,8 +1974,20 @@
       "lastmod": "2026-09-03"
     },
     "jobs/up-police-home-guard-2025.html": {
-      "signature": "008f7e3d71d10e5ca507acf2a8c064421ab4244cf716d777485807af3576b3a3",
-      "lastmod": "2026-09-02"
+      "signature": "2e28325c17db92b840b3108f653313026f3a6f113119f20416f4754067aabc0e",
+      "lastmod": "2026-09-04"
+    },
+    "jobs/upessc-up-special-tet-2026.html": {
+      "signature": "0198e01bca13e86680f61d5f7cfc4bd17d93e3cc3836323201c1ccbe17c3b8e4",
+      "lastmod": "2026-09-04"
+    },
+    "jobs/upsc-cgse-2027.html": {
+      "signature": "a7974f09dfb8a88e333ae1e905aae0e1e621c37e884e2fcf6ff3ae0a03aec373",
+      "lastmod": "2026-09-04"
+    },
+    "jobs/upsc-nda-ii-2026.html": {
+      "signature": "8de7f04dafd731f2a55664f8c6f1be4a59276e942e2662b407316e1200f18678",
+      "lastmod": "2026-09-04"
     },
     "jobs/upsssc-pet-2026.html": {
       "signature": "82c8f5265ec2b7aa48bce25a5757101cd2449ceeb705425b919f681117618b19",
@@ -2424,10 +2424,6 @@
     "Result_Details/HTML/SBI-CBO-Final-Result-2026.html": {
       "signature": "1b88e73eaee49f28b1b1a7b51931c7eafbc7cd364d307e2410836243e82c3cdf",
       "lastmod": "2026-08-12"
-    },
-    "Result_Details/HTML/SBI-Probationary-Officers-PO-Result-2026.html": {
-      "signature": "661e48cbf09c278ec0e43c777d9cf52da076303a128f08a78fbcb5e0842d0879",
-      "lastmod": "2026-08-28"
     },
     "Result_Details/HTML/SSC-CHSL-Tier-1-Result-2024.html": {
       "signature": "d8ccd9b92412277f374ef67ad7e9ea4b8045b42803f0ae996e520c94c8e14994",
