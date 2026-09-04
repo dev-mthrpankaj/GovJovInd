@@ -12,6 +12,10 @@
   const meta = document.getElementById("familyQuizMeta");
   const count = document.getElementById("familyQuizCount");
   const empty = document.getElementById("familyQuizEmpty");
+  const toolbar = root.querySelector(".family-toolbar");
+
+  let subjectChips = null;
+  let resetButton = null;
 
   const PROGRESS_API = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
   const LOCAL_ATTEMPTS_KEY = "GovJobUpdatesQuiz.attempts";
@@ -136,12 +140,53 @@
     render();
   }
 
+  function enhanceFilterUi() {
+    if (!toolbar) return;
+
+    if (!toolbar.querySelector(".family-filter-heading")) {
+      toolbar.insertAdjacentHTML("afterbegin", '<div class="family-filter-heading"><div class="family-filter-copy"><span class="family-filter-eyebrow">Filter Practice Sets</span><strong>Find the right quiz quickly</strong><small>Search by quiz name or choose a subject.</small></div><button class="family-filter-reset" type="button" data-family-filter-reset hidden><i class="fas fa-rotate-left" aria-hidden="true"></i><span>Clear filters</span></button></div>');
+    }
+
+    const search = toolbar.querySelector(".family-search");
+    if (search && !search.querySelector(".family-control-caption")) {
+      search.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Search quizzes</span>');
+    }
+
+    const select = toolbar.querySelector(".family-select");
+    if (select && !select.querySelector(".family-control-caption")) {
+      select.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Choose subject</span>');
+    }
+
+    if (!toolbar.querySelector(".family-subject-chips")) {
+      toolbar.insertAdjacentHTML("beforeend", '<div class="family-subject-chips" role="group" aria-label="Quick subject filters"></div>');
+    }
+
+    subjectChips = toolbar.querySelector(".family-subject-chips");
+    resetButton = toolbar.querySelector("[data-family-filter-reset]");
+  }
+
   function subjects() {
     if (!subjectSelect) return;
     const values = Array.from(new Set(quizzes.map((q) => q.subject))).sort();
     const current = subjectSelect.value;
     subjectSelect.innerHTML = '<option value="">All Subjects</option>' + values.map((s) => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
     if (values.includes(current)) subjectSelect.value = current;
+
+    if (subjectChips) {
+      const chipValues = [{ value: "", label: "All subjects" }].concat(values.map((value) => ({ value, label: value })));
+      subjectChips.innerHTML = chipValues.map((item) => `<button class="family-subject-chip" type="button" data-family-subject="${esc(item.value)}" aria-pressed="false">${esc(item.label)}</button>`).join("");
+    }
+  }
+
+  function syncFilterUi(query, subject) {
+    if (subjectChips) {
+      subjectChips.querySelectorAll("[data-family-subject]").forEach((chip) => {
+        chip.setAttribute("aria-pressed", String((chip.dataset.familySubject || "") === subject));
+      });
+    }
+
+    if (resetButton) resetButton.hidden = !query && !subject;
+    root.classList.toggle("has-active-filters", !!query || !!subject);
   }
 
   function rankText(p) {
@@ -164,7 +209,7 @@
     const reattempt = !!(p && number(p.attemptCount, 0) > 0);
     const label = reattempt ? "Reattempt Quiz" : "Start Quiz";
     const icon = reattempt ? "fas fa-rotate-right" : "fas fa-arrow-right";
-    return `<a class="family-start-btn${reattempt ? " is-reattempt" : ""}" href="quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(familySlug)}">${label} <i class="${icon}"></i></a>`;
+    return `<a class="family-start-btn${reattempt ? " is-reattempt" : ""}" href="quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(familySlug)}" aria-label="${label}: ${esc(q.title)}"><span>${label}</span><i class="${icon}" aria-hidden="true"></i></a>`;
   }
 
   function render() {
@@ -177,11 +222,13 @@
       (!query || `${q.title} ${q.description} ${q.subject}`.toLowerCase().includes(query))
     );
 
+    syncFilterUi(query, subject);
+
     if (count) count.textContent = String(quizzes.length);
     if (meta) {
       meta.textContent = filtered.length === quizzes.length
-        ? `${quizzes.length} published ${familyName} quiz${quizzes.length === 1 ? "" : "zes"}`
-        : `${filtered.length} of ${quizzes.length} quizzes`;
+        ? `Showing all ${quizzes.length} published quiz${quizzes.length === 1 ? "" : "zes"}`
+        : `Showing ${filtered.length} of ${quizzes.length} quizzes`;
     }
 
     if (!filtered.length) {
@@ -192,7 +239,7 @@
 
     if (empty) empty.hidden = true;
     list.innerHTML = filtered.map((q) =>
-      `<article class="family-quiz-card"><div class="family-quiz-card-main"><span class="family-subject-badge">${esc(q.subject)}</span><h2>${esc(q.title)}</h2><p>${esc(q.description)}</p><div class="family-quiz-meta"><span><i class="far fa-circle-question"></i>${q.questions ? q.questions + " Questions" : "Questions"}</span><span><i class="far fa-clock"></i>${q.duration} Minutes</span><span><i class="fas fa-plus"></i>${q.marks}</span><span><i class="fas fa-minus"></i>${q.negative}</span></div>${progressMarkup(q)}</div>${actionMarkup(q)}</article>`
+      `<article class="family-quiz-card"><div class="family-card-top"><span class="family-subject-badge">${esc(q.subject)}</span><span class="family-access-badge"><i class="fas fa-unlock-keyhole" aria-hidden="true"></i> Free</span></div><div class="family-quiz-card-main"><h2>${esc(q.title)}</h2><p>${esc(q.description)}</p><div class="family-quiz-meta" aria-label="Quiz details"><span><i class="far fa-circle-question" aria-hidden="true"></i><small>Questions</small><strong>${q.questions || "—"}</strong></span><span><i class="far fa-clock" aria-hidden="true"></i><small>Duration</small><strong>${q.duration} min</strong></span><span><i class="fas fa-scale-balanced" aria-hidden="true"></i><small>Marking</small><strong>+${q.marks} / -${q.negative}</strong></span></div>${progressMarkup(q)}</div><div class="family-card-actions">${actionMarkup(q)}</div></article>`
     ).join("");
   }
 
@@ -305,6 +352,22 @@
 
   if (subjectSelect) subjectSelect.addEventListener("change", render);
   if (searchInput) searchInput.addEventListener("input", render);
+  enhanceFilterUi();
+  if (subjectChips) {
+    subjectChips.addEventListener("click", (event) => {
+      const chip = event.target.closest("[data-family-subject]");
+      if (!chip || !subjectChips.contains(chip) || !subjectSelect) return;
+      subjectSelect.value = chip.dataset.familySubject || "";
+      render();
+    });
+  }
+  if (resetButton) {
+    resetButton.addEventListener("click", () => {
+      if (searchInput) searchInput.value = "";
+      if (subjectSelect) subjectSelect.value = "";
+      render();
+    });
+  }
   document.addEventListener("gju:admin-quiz-index-ready", load);
 
   load();
