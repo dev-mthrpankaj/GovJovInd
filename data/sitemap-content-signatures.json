@@ -397,10 +397,6 @@
       "signature": "4da5202e12ab4f5e71c7895aea882274c61cd72d01e630ba592aec3a507e9071",
       "lastmod": "2026-08-26"
     },
-    "AdmitCard_Details/HTML/UPPSC-LT-Grade-Biology-Main-Exam-Admit-Card-2026.html": {
-      "signature": "42d5c76716e018f6cb55aacc28ec7a7fe034e2bf815b2eb131a9ec7a4d32f579",
-      "lastmod": "2026-08-14"
-    },
     "AdmitCard_Details/HTML/UPSC-CAPF-Admit-Card-2026.html": {
       "signature": "833ee00e0ea706cfbffa47aa32f09b2b9dbf129abb1a0fbe303afd7a9a751a56",
       "lastmod": "2026-08-12"
@@ -1917,6 +1913,10 @@
       "signature": "d4d971c1457d2e87b42fcc8bc82161bb550d88a65d0e2dc4010462a5f4619e2e",
       "lastmod": "2026-09-03"
     },
+    "jobs/cgpsc-admit-card.html": {
+      "signature": "ab1c9aa874f25056f8007a3af6730d4746c31211192320cc55054178b318c4e4",
+      "lastmod": "2026-09-04"
+    },
     "jobs/concor-mt-assistant-officer-2026.html": {
       "signature": "afcd171d2342a16dcab21c3025e2bcf938b519dbdb2714213180b19969a1eef1",
       "lastmod": "2026-09-03"
@@ -1941,6 +1941,10 @@
       "signature": "7304208f1432cdfd5e69cefc245bee58715631411a4197e873c43ce8a1e558fa",
       "lastmod": "2026-09-02"
     },
+    "jobs/ncert-non-academic-2025.html": {
+      "signature": "d22e070e4b9273eed7c31b0bed661b75a63a2f59b6fc30dcb54827626d522d29",
+      "lastmod": "2026-09-04"
+    },
     "jobs/ntpc-act-2026.html": {
       "signature": "3c16f243b0ca5c9f2e02a8380d8460c4dd512b7c913e5879c6e6fd7271fe1468",
       "lastmod": "2026-09-04"
@@ -1956,6 +1960,10 @@
     "jobs/punjab-and-haryana-high-court-frash-2026.html": {
       "signature": "5fddfb589470172c31ab2c55a2cde33594d6cf775903e8f2136fa03d086a1bf5",
       "lastmod": "2026-09-03"
+    },
+    "jobs/rpsc-school-lecturer-pgt-teacher-aug25.html": {
+      "signature": "37380efb9e347898e474f3a1cc9fb7ab4a2df9ff3f1a526c9cad24c88cab56c1",
+      "lastmod": "2026-09-04"
     },
     "jobs/sbi-po-2026.html": {
       "signature": "0f6a26164868ec23a67ac98640309fc2775b21f32c85fd479c8e2238c0f5ec61",
@@ -1981,12 +1989,24 @@
       "signature": "0198e01bca13e86680f61d5f7cfc4bd17d93e3cc3836323201c1ccbe17c3b8e4",
       "lastmod": "2026-09-04"
     },
+    "jobs/uppsc-assistant-teacher-july-2025.html": {
+      "signature": "f30dad0126ba8da8c215416160cfe123cbed1b3e1da53700e49735a7a0c32860",
+      "lastmod": "2026-09-04"
+    },
+    "jobs/uppsc-computer-assistant-2025.html": {
+      "signature": "67dec81774d4286aeda9e1faacd3034c7b6dd41204d2a4f5863b07baa69c59a1",
+      "lastmod": "2026-09-04"
+    },
     "jobs/upsc-cds-ii-2026.html": {
       "signature": "b31fa3a7f76699ab7539c65138a55cb2995533278165ad82b375b20c8d6d0d4a",
       "lastmod": "2026-09-04"
     },
     "jobs/upsc-cgse-2027.html": {
       "signature": "a7974f09dfb8a88e333ae1e905aae0e1e621c37e884e2fcf6ff3ae0a03aec373",
+      "lastmod": "2026-09-04"
+    },
+    "jobs/upsc-cms-admit-card.html": {
+      "signature": "9f284e4914d37e66b0d737c28188999b964974ec7f473f5a896d14966196d366",
       "lastmod": "2026-09-04"
     },
     "jobs/upsc-nda-ii-2026.html": {
