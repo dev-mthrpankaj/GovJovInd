@@ -1,6 +1,73 @@
-/* Quiz attempt sticky question meta bar.
-   Scoped to quiz-attempt route so other quiz/result surfaces are unaffected. */
+/* GovJobUpdates quiz attempt final guardrails.
+   Loaded after shared quiz styles; owns final hierarchy and geometry. */
 
+body.quiz-attempt-route {
+  --qa-review-bg: #fff9df;
+  --qa-review-border: #efd46b;
+  --qa-skip-bg: #fff1f2;
+  --qa-skip-border: #fda4af;
+  --qa-skip-text: #be123c;
+  --qa-palette-width: 368px;
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] {
+  --qa-review-bg: #2a2617;
+  --qa-review-border: #75651f;
+  --qa-skip-bg: #321a22;
+  --qa-skip-border: #7f3347;
+  --qa-skip-text: #fda4af;
+}
+
+/* Time and auto-save feedback */
+body.quiz-attempt-route #timerText {
+  font-variant-numeric: tabular-nums !important;
+  transition: color 160ms ease !important;
+}
+
+body.quiz-attempt-route #timerText.warning { color: #b45309 !important; }
+body.quiz-attempt-route #timerText.critical { color: #dc2626 !important; }
+body.quiz-attempt-route[data-quiz-theme="dark"] #timerText.warning { color: #fbbf24 !important; }
+body.quiz-attempt-route[data-quiz-theme="dark"] #timerText.critical { color: #fb7185 !important; }
+
+body.quiz-attempt-route .attempt-save-indicator {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  min-width: 30px !important;
+  min-height: 28px !important;
+  padding: 4px 8px !important;
+  border: 1px solid var(--qa-border) !important;
+  border-radius: 999px !important;
+  background: var(--qa-surface-2) !important;
+  color: var(--qa-muted) !important;
+  font-size: 10.5px !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+body.quiz-attempt-route .attempt-save-indicator.is-saving {
+  border-color: rgba(37, 99, 235, 0.28) !important;
+  color: var(--qa-blue-2) !important;
+}
+
+body.quiz-attempt-route .attempt-save-indicator.is-saved {
+  border-color: rgba(16, 185, 129, 0.30) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+  color: #047857 !important;
+}
+
+body.quiz-attempt-route .attempt-save-indicator.is-error {
+  border-color: rgba(220, 38, 38, 0.32) !important;
+  background: rgba(220, 38, 38, 0.08) !important;
+  color: #b91c1c !important;
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] .attempt-save-indicator.is-saved { color: #6ee7b7 !important; }
+body.quiz-attempt-route[data-quiz-theme="dark"] .attempt-save-indicator.is-error { color: #fca5a5 !important; }
+
+/* Sticky question context: neutral normally, yellow only when marked. */
 body.quiz-attempt-route .question-line {
   position: sticky !important;
   top: 0 !important;
@@ -9,186 +76,692 @@ body.quiz-attempt-route .question-line {
   height: 42px !important;
   margin: 0 !important;
   padding: 4px 0 !important;
-  background: #fff9df !important;
-  border-bottom: 1px solid #f1df9a !important;
+  align-items: center !important;
+  background: var(--qa-surface) !important;
+  border-bottom: 1px solid var(--qa-border) !important;
   box-shadow: 0 5px 10px rgba(15, 23, 42, 0.035) !important;
+  transition: background 160ms ease, border-color 160ms ease !important;
 }
 
-/* Keep only the breathing room actually needed between the sticky exam header
-   and the sticky question meta row. */
-@media (min-width: 768px) {
-  body.quiz-attempt-route .exam-main {
-    gap: 6px !important;
-  }
-
-  body.quiz-attempt-route .question-card {
-    padding-top: 6px !important;
-  }
+body.quiz-attempt-route .question-card.is-review-marked .question-line {
+  background: var(--qa-review-bg) !important;
+  border-bottom-color: var(--qa-review-border) !important;
 }
 
-/* Laptop / desktop: reduce the tall top exam header without changing its
-   information or controls. This gives more vertical room to the question. */
-@media (min-width: 1120px) {
-  body.quiz-attempt-route .exam-topbar {
-    top: 6px !important;
-    padding: 7px 10px !important;
-    gap: 5px !important;
-    border-radius: 11px !important;
-  }
-
-  body.quiz-attempt-route .exam-appbar {
-    gap: 9px !important;
-    min-height: 36px !important;
-  }
-
-  body.quiz-attempt-route .exam-title-block {
-    gap: 8px !important;
-  }
-
-  body.quiz-attempt-route .exam-title-block > div {
-    column-gap: 9px !important;
-  }
-
-  body.quiz-attempt-route .exam-topbar .exam-icon-btn,
-  body.quiz-attempt-route .exam-topbar .quiz-theme-toggle {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
-    border-radius: 9px !important;
-  }
-
-  body.quiz-attempt-route #timerText {
-    font-size: 20px !important;
-  }
-
-  body.quiz-attempt-route #examTitle {
-    font-size: 13px !important;
-  }
-
-  body.quiz-attempt-route .progress-track {
-    height: 3px !important;
-  }
+body.quiz-attempt-route[data-quiz-theme="dark"] .question-line {
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16) !important;
 }
 
 body.quiz-attempt-route .question-marker {
   flex: 1 1 auto !important;
   min-width: 0 !important;
   min-height: 34px !important;
+  display: flex !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
   gap: 8px !important;
 }
 
-body.quiz-attempt-route .question-number,
-body.quiz-attempt-route .question-elapsed,
-body.quiz-attempt-route .question-marker .question-footnote,
-body.quiz-attempt-route .question-tools {
-  flex: 0 0 auto !important;
-}
-
-body.quiz-attempt-route .question-elapsed,
-body.quiz-attempt-route .question-marker .question-footnote span {
+body.quiz-attempt-route .question-number {
+  width: auto !important;
+  min-width: 54px !important;
+  height: 30px !important;
+  padding: 0 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-variant-numeric: tabular-nums !important;
   white-space: nowrap !important;
 }
 
-/* Review action: calm green tint while unmarked; yellow when marked. */
+body.quiz-attempt-route .question-number::before {
+  content: "Q";
+  font-size: 9px;
+  font-weight: 850;
+  opacity: 0.82;
+}
+
+body.quiz-attempt-route .question-elapsed,
+body.quiz-attempt-route .question-status,
+body.quiz-attempt-route .question-marker .question-footnote span,
+body.quiz-attempt-route .question-tools { flex: 0 0 auto !important; }
+
+body.quiz-attempt-route .question-elapsed,
+body.quiz-attempt-route .question-marker .question-footnote span { white-space: nowrap !important; }
+
+body.quiz-attempt-route .question-marker .question-footnote {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 0 0 auto !important;
+  padding: 0 !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  align-self: center !important;
+}
+
+body.quiz-attempt-route .question-marker .question-footnote span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  min-height: 20px !important;
+  padding: 3px 7px !important;
+  border: 1px solid currentColor !important;
+  border-radius: 999px !important;
+  background: var(--qa-surface) !important;
+}
+
+body.quiz-attempt-route .question-marker #questionMarks { color: #059669 !important; }
+body.quiz-attempt-route .question-marker #questionNegative { color: #dc2626 !important; }
+body.quiz-attempt-route[data-quiz-theme="dark"] .question-marker .question-footnote span { background: #111827 !important; }
+body.quiz-attempt-route[data-quiz-theme="dark"] .question-marker #questionMarks { color: #34d399 !important; }
+body.quiz-attempt-route[data-quiz-theme="dark"] .question-marker #questionNegative { color: #f87171 !important; }
+
+/* Clear answer-choice hierarchy with restrained interaction feedback. */
+body.quiz-attempt-route .answer-option {
+  position: relative !important;
+  background: var(--qa-surface) !important;
+  border-color: var(--qa-border) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.025) !important;
+  transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease, transform 100ms ease !important;
+}
+
+body.quiz-attempt-route .answer-option:hover {
+  border-color: #93b4ee !important;
+  background: var(--qa-hover) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.055) !important;
+}
+
+body.quiz-attempt-route .answer-option:active { transform: scale(0.997) !important; }
+
+body.quiz-attempt-route .answer-option.selected,
+body.quiz-attempt-route .answer-option[aria-pressed="true"] {
+  border-color: var(--qa-blue) !important;
+  background: rgba(37, 99, 235, 0.085) !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.13) !important;
+}
+
+/* Review is neutral before selection and yellow after selection. */
 body.quiz-attempt-route .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
-  border-color: #86c89a !important;
-  background: #edf9f0 !important;
-  color: #166534 !important;
-  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.08) !important;
+  border-color: #a9b8ca !important;
+  background: var(--qa-surface-2) !important;
+  color: var(--qa-text) !important;
+  box-shadow: none !important;
 }
 
 body.quiz-attempt-route .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]):hover,
 body.quiz-attempt-route .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]):focus-visible {
-  border-color: #65a976 !important;
-  background: #e2f5e7 !important;
-  color: #14532d !important;
+  border-color: #7f98b7 !important;
+  background: var(--qa-hover) !important;
+  color: var(--qa-blue-2) !important;
 }
 
 body.quiz-attempt-route .exam-actions [data-action="mark-next"][aria-pressed="true"] {
-  border-color: #facc15 !important;
+  border-color: #eab308 !important;
   background: #fff7cc !important;
   color: #854d0e !important;
-  box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.18) !important;
+  box-shadow: inset 0 0 0 1px rgba(234, 179, 8, 0.14) !important;
 }
 
 body.quiz-attempt-route .exam-actions [data-action="mark-next"][aria-pressed="true"]:hover,
 body.quiz-attempt-route .exam-actions [data-action="mark-next"][aria-pressed="true"]:focus-visible {
-  border-color: #eab308 !important;
   background: #fef3a6 !important;
-  color: #713f12 !important;
 }
 
-/* At this width the page itself can scroll, so keep the meta bar below the
-   already-sticky exam header instead of allowing the two bars to overlap. */
-@media (min-width: 768px) and (max-width: 1119px) {
-  body.quiz-attempt-route .question-line {
-    top: 54px !important;
+body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
+  border-color: #475569 !important;
+  background: #111827 !important;
+  color: #e2e8f0 !important;
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"][aria-pressed="true"] {
+  border-color: #eab308 !important;
+  background: rgba(234, 179, 8, 0.16) !important;
+  color: #fde68a !important;
+}
+
+/* Hide unfinished affordances until real dialogs exist. */
+body.quiz-attempt-route .palette-links > span:not(.palette-duration-chip) { display: none !important; }
+body.quiz-attempt-route .palette-links { flex: 1 1 auto !important; }
+body.quiz-attempt-route .palette-duration-chip { margin-left: 0 !important; }
+
+/* Palette summary and question states share one visual vocabulary. */
+body.quiz-attempt-route .palette-summary-tile.review i { background: var(--qa-purple) !important; }
+body.quiz-attempt-route .palette-summary-tile.not-answered i { background: #e11d48 !important; }
+body.quiz-attempt-route .palette-summary-tile.not-visited i { background: #94a3b8 !important; }
+
+body.quiz-attempt-route .palette-btn.not-answered {
+  background: var(--qa-skip-bg) !important;
+  border-color: var(--qa-skip-border) !important;
+  color: var(--qa-skip-text) !important;
+}
+
+body.quiz-attempt-route .palette-btn.not-visited {
+  background: transparent !important;
+  border-color: var(--qa-border) !important;
+  color: var(--qa-muted) !important;
+}
+
+body.quiz-attempt-route .palette-btn.answered-marked {
+  background: linear-gradient(135deg, var(--qa-green) 0 49%, var(--qa-purple) 51% 100%) !important;
+  border-color: var(--qa-purple) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.24) !important;
+}
+
+body.quiz-attempt-route .palette-btn.current {
+  outline: 2px solid rgba(37, 99, 235, 0.72) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14) !important;
+}
+
+/* Submission hierarchy: safe return is neutral; final submission is red. */
+body.quiz-attempt-route #submitModal [data-action="cancel-submit"] {
+  background: var(--qa-surface-2) !important;
+  border-color: var(--qa-border) !important;
+  color: var(--qa-text) !important;
+  box-shadow: none !important;
+}
+
+body.quiz-attempt-route #submitModal [data-action="cancel-submit"]:hover,
+body.quiz-attempt-route #submitModal [data-action="cancel-submit"]:focus-visible {
+  background: var(--qa-hover) !important;
+  border-color: #93b4ee !important;
+  color: var(--qa-blue-2) !important;
+}
+
+body.quiz-attempt-route #submitModal [data-action="submit-now"] {
+  background: linear-gradient(135deg, #ef4444, #dc2626 55%, #b91c1c) !important;
+  border-color: #dc2626 !important;
+  color: #ffffff !important;
+  box-shadow: 0 9px 20px rgba(220, 38, 38, 0.22) !important;
+}
+
+body.quiz-attempt-route #submitModal [data-action="submit-now"]:hover,
+body.quiz-attempt-route #submitModal [data-action="submit-now"]:focus-visible {
+  background: linear-gradient(135deg, #f05252, #dc2626 50%, #991b1b) !important;
+}
+
+/* Laptop/desktop: one contained viewport and a fixed compact palette. */
+@media (min-width: 1120px) {
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode {
+    height: 100dvh !important;
+    overflow: hidden !important;
   }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode #quizApp {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    padding: 8px 0 8px 10px !important;
+    overflow: hidden !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .quiz-exam-view,
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-shell,
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-main {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-shell {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) var(--qa-palette-width) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-main {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    gap: 6px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-topbar {
+    position: relative !important;
+    top: auto !important;
+    padding: 6px 10px !important;
+    border-radius: 10px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    padding: 0 22px 16px !important;
+    scroll-padding: 58px 0 16px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-line {
+    margin: 0 -22px 14px !important;
+    padding: 4px 22px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card.long-question-layout {
+    padding-bottom: 16px !important;
+    scroll-padding-bottom: 16px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-height: 58px !important;
+    padding: 7px 10px !important;
+    border-radius: 10px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions .quiz-btn {
+    width: auto !important;
+    min-height: 44px !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions [data-action="prev-question"] {
+    flex: 0 0 130px !important;
+    margin-right: auto !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] { flex: 0 1 190px !important; }
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions [data-action="save-next"] { flex: 0 1 220px !important; }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .palette-panel {
+    position: relative !important;
+    inset: auto !important;
+    width: var(--qa-palette-width) !important;
+    height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+    border-radius: 12px 0 0 12px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .palette-grid {
+    min-height: 0 !important;
+    overflow-y: auto !important;
+  }
+
+  body.quiz-attempt-route .question-tools { display: none !important; }
 }
 
-/* Mobile: use only the useful metadata row. The three duplicate question-tool
-   icons are removed and the mark/negative chips take their place on the right. */
+/* Tablet/compact desktop: one column with a side drawer. */
+@media (min-width: 768px) and (max-width: 1119px) {
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode,
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode #quizApp {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode #quizApp { padding: 8px !important; }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .quiz-exam-view,
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-shell,
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-main {
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-shell {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    gap: 0 !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-main {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    gap: 6px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-topbar {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    padding: 0 16px 14px !important;
+    scroll-padding: 56px 0 14px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-line {
+    margin: 0 -16px 12px !important;
+    padding: 4px 16px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(120px, 0.65fr) minmax(180px, 0.9fr) minmax(220px, 1.2fr) !important;
+    gap: 8px !important;
+    padding: 7px 8px !important;
+    border-radius: 10px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions .quiz-btn {
+    min-height: 44px !important;
+    font-size: 12.5px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .palette-panel {
+    position: fixed !important;
+    inset: 0 0 0 auto !important;
+    width: min(92vw, 390px) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    transform: translateX(105%) !important;
+    border-radius: 16px 0 0 16px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .palette-panel.open { transform: translateX(0) !important; }
+}
+
+/* Mobile: compact header, scrollable question, one clean action row. */
 @media (max-width: 767px) {
-  body.quiz-attempt-route.gju-quiz-exam-mode .question-line,
-  body.quiz-attempt-route .question-line {
+  body.quiz-attempt-route.gju-quiz-exam-mode,
+  body.quiz-attempt-route.gju-quiz-exam-mode #quizApp,
+  body.quiz-attempt-route.gju-quiz-exam-mode .quiz-page,
+  body.quiz-attempt-route.gju-quiz-exam-mode .quiz-exam-view,
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-shell,
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-main {
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode {
+    position: fixed !important;
+    inset: 0 !important;
+    overscroll-behavior: none !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode #quizApp,
+  body.quiz-attempt-route.gju-quiz-exam-mode .quiz-exam-view,
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-shell { padding: 0 !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-shell {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-main {
+    display: grid !important;
+    grid-template-rows: 46px minmax(0, 1fr) auto !important;
+    gap: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-topbar {
+    position: relative !important;
+    top: auto !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    padding: 4px 8px !important;
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) 2px !important;
+    gap: 2px !important;
+    border-width: 0 0 1px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-appbar {
+    min-height: 34px !important;
+    gap: 5px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-title-block { gap: 5px !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode #timerText {
+    min-width: 5ch !important;
+    font-size: 16.5px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode #examTitle {
+    max-width: 42vw !important;
+    font-size: 11px !important;
+    line-height: 1.1 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-icon-btn,
+  body.quiz-attempt-route.gju-quiz-exam-mode .quiz-theme-toggle {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    border-radius: 8px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .attempt-save-indicator {
+    width: 28px !important;
+    min-width: 28px !important;
+    min-height: 26px !important;
+    padding: 0 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .attempt-save-indicator span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .progress-track { height: 2px !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-card {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    padding: 0 8px 10px !important;
+    border-width: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-line {
     top: 0 !important;
     z-index: 60 !important;
     min-height: 36px !important;
     height: 36px !important;
-    padding: 4px 0 !important;
-    align-items: center !important;
+    margin: 0 -8px !important;
+    padding: 4px 8px !important;
   }
 
-  body.quiz-attempt-route .question-tools {
-    display: none !important;
-  }
-
-  body.quiz-attempt-route .question-marker {
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-marker {
     width: 100% !important;
     min-height: 28px !important;
-    gap: 6px !important;
+    gap: 5px !important;
   }
 
-  body.quiz-attempt-route .question-marker .question-footnote {
-    margin: 0 0 0 auto !important;
-    gap: 4px !important;
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-number {
+    min-width: 48px !important;
+    height: 28px !important;
+    padding: 0 6px !important;
+    font-size: 11px !important;
   }
 
-  body.quiz-attempt-route .question-marker .question-footnote span {
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-number::before { font-size: 8px !important; }
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-elapsed { font-size: 10.5px !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-status,
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-tools { display: none !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-marker .question-footnote {
+    gap: 3px !important;
+    margin-left: auto !important;
+    font-size: 9px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-marker .question-footnote span {
     min-width: 32px !important;
     min-height: 18px !important;
     padding: 2px 5px !important;
-    font-size: 9px !important;
-    line-height: 1 !important;
   }
 
-  body.quiz-attempt-route .question-number {
-    min-width: 28px !important;
-    height: 28px !important;
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-title {
+    display: block !important;
+    margin: 10px 0 12px !important;
+    max-width: none !important;
+    font-size: 14.5px !important;
+    line-height: 1.5 !important;
+    font-weight: 450 !important;
   }
 
-  body.quiz-attempt-route .question-elapsed {
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-card.has-question-stem .question-stem-panel {
+    margin-bottom: 9px !important;
+    padding: 9px 10px !important;
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .option-list {
+    display: grid !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .answer-option {
+    min-height: 44px !important;
+    padding: 7px 8px !important;
+    grid-template-columns: 27px minmax(0, 1fr) !important;
+    gap: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .option-key {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12.5px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .option-label,
+  body.quiz-attempt-route.gju-quiz-exam-mode .option-text {
+    font-size: 13.5px !important;
+    line-height: 1.38 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 70 !important;
+    display: grid !important;
+    grid-template-columns: 56px minmax(100px, 0.95fr) minmax(0, 1.28fr) !important;
+    align-items: center !important;
+    gap: 6px !important;
+    min-height: 0 !important;
+    padding: 6px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)) !important;
+    border-width: 1px 0 0 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 -5px 16px rgba(15, 23, 42, 0.09) !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="prev-question"] { display: none !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .mobile-clear-action {
+    display: inline-flex !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .mobile-clear-action i,
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] i,
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] i { display: none !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="mark-next"] {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions [data-action="save-next"] {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .quiz-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+    padding: 6px 5px !important;
+    border-radius: 8px !important;
+    font-size: 11.5px !important;
+    line-height: 1.08 !important;
+    white-space: normal !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .palette-panel {
+    position: fixed !important;
+    inset: auto 0 0 !important;
+    width: 100% !important;
+    height: min(84dvh, 720px) !important;
+    max-height: 92dvh !important;
+    padding: 12px 12px max(8px, env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
+    transform: translateY(105%) !important;
+    border-radius: 18px 18px 0 0 !important;
+    box-shadow: 0 -18px 45px rgba(15, 23, 42, 0.22) !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .palette-panel.open { transform: translateY(0) !important; }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .palette-grid {
+    min-height: 0 !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media (max-width: 374px) {
+  body.quiz-attempt-route.gju-quiz-exam-mode #examTitle {
+    max-width: 36vw !important;
     font-size: 10.5px !important;
   }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions {
+    grid-template-columns: 52px minmax(92px, 0.92fr) minmax(0, 1.18fr) !important;
+    gap: 5px !important;
+  }
+
+  body.quiz-attempt-route.gju-quiz-exam-mode .exam-actions .quiz-btn {
+    padding: 5px 3px !important;
+    font-size: 11px !important;
+  }
 }
 
-body.quiz-attempt-route[data-quiz-theme="dark"] .question-line {
-  background: #2a2617 !important;
-  border-bottom-color: #5b4f1f !important;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16) !important;
-}
-
-body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
-  border-color: #3f7d50 !important;
-  background: rgba(34, 197, 94, 0.12) !important;
-  color: #bbf7d0 !important;
-}
-
-body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"][aria-pressed="true"] {
-  border-color: #facc15 !important;
-  background: rgba(250, 204, 21, 0.16) !important;
-  color: #fde68a !important;
+@media (prefers-reduced-motion: reduce) {
+  body.quiz-attempt-route *,
+  body.quiz-attempt-route *::before,
+  body.quiz-attempt-route *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }

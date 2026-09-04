@@ -67,6 +67,40 @@
         if (menu) actions.appendChild(menu);
         applyTheme(document.body.dataset.quizTheme || getInitialTheme(), false);
     }
+    function syncSaveIndicator(status, persistent) {
+        const indicator = document.querySelector("[data-quiz-save-indicator]");
+        if (!indicator) return;
+        const state = status === "saving" || status === "error" || status === "saved" ? status : "ready";
+        const sessionOnly = state === "saved" && persistent === false;
+        const label = state === "saving"
+            ? "Saving"
+            : state === "error"
+                ? "Not saved"
+                : sessionOnly
+                    ? "Session saved"
+                    : state === "saved"
+                        ? "Saved"
+                        : "Auto-save";
+        const icon = state === "saving"
+            ? "fa-clock"
+            : state === "error"
+                ? "fa-triangle-exclamation"
+                : state === "saved"
+                    ? "fa-circle-check"
+                    : "fa-cloud-arrow-up";
+        indicator.className = `attempt-save-indicator is-${state}${sessionOnly ? " is-session" : ""}`;
+        indicator.setAttribute("aria-label", label);
+        indicator.setAttribute("title", label);
+        indicator.innerHTML = `<i class="fas ${icon}" aria-hidden="true"></i><span>${label}</span>`;
+    }
+    function installSaveIndicator() {
+        const actions = document.querySelector(".exam-appbar-actions");
+        if (!actions || actions.querySelector("[data-quiz-save-indicator]")) return;
+        const indicator = document.createElement("span");
+        indicator.dataset.quizSaveIndicator = "1";
+        actions.insertBefore(indicator, actions.firstChild);
+        syncSaveIndicator("ready", window.QuizStorage?.isPersistent);
+    }
     function moveDurationChipToPalette() {
         const chip = document.getElementById("examDurationLabel");
         const links = document.querySelector(".palette-links");
@@ -106,7 +140,7 @@
     function syncPreviousButton() {
         const button = document.querySelector("[data-action='prev-question']");
         if (!button) return;
-        const current = Number(document.getElementById("currentQuestionNo")?.textContent || document.getElementById("questionNumberLabel")?.textContent || 1);
+        const current = Number.parseInt(document.getElementById("currentQuestionNo")?.textContent || document.getElementById("questionNumberLabel")?.textContent || "1", 10);
         const first = !Number.isFinite(current) || current <= 1;
         button.hidden = first;
         button.disabled = first;
@@ -248,6 +282,7 @@
             if (examVisible || resultVisible || reviewVisible || resumeVisible) hideLoading();
             if (examVisible) {
                 installThemeToggle();
+                installSaveIndicator();
                 moveDurationChipToPalette();
                 installFullscreenToggle();
                 installQuestionNavigationRules();
@@ -263,6 +298,7 @@
         applyTheme(getInitialTheme(), false);
         installLegacyHomeFirewall();
         installThemeToggle();
+        installSaveIndicator();
         moveDurationChipToPalette();
         installFullscreenToggle();
         installQuestionNavigationRules();
@@ -270,6 +306,9 @@
         setLoading("Starting your quiz…", "Loading published quiz information.", false);
         watchViews();
         document.addEventListener("gju:admin-quiz-index-ready", function () { window.setTimeout(resolveAndStart, 0); });
+        document.addEventListener("gju:quiz-save-state", function (event) {
+            syncSaveIndicator(event.detail?.status, event.detail?.persistent);
+        });
         window.setTimeout(resolveAndStart, 0);
         timeoutId = window.setTimeout(function () {
             const visible = ["examView", "resultView", "reviewView", "resumeModal"].some(function (id) {

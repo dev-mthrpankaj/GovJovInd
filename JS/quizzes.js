@@ -766,7 +766,8 @@
         setText(elements.examTitle, state.quizSet.title);
         setText(elements.currentQuestionNo, String(state.current + 1));
         setText(elements.totalQuestionNo, String(state.questions.length));
-        setText(elements.questionNumberLabel, String(state.current + 1));
+        setText(elements.questionNumberLabel, `${state.current + 1}/${state.questions.length}`);
+        elements.questionNumberLabel?.setAttribute("aria-label", `Question ${state.current + 1} of ${state.questions.length}`);
         const textMeta = renderQuestionText(question);
         syncQuestionLengthLayout(textMeta);
         renderQuestionMedia(question);
@@ -923,10 +924,11 @@
     function renderPaletteSummary() {
         const counts = state.statusCounts || getStatusCounts();
         const answered = counts.answered + counts.answeredMarked;
+        const review = counts.marked + counts.answeredMarked;
         const summaryHtml = [
             ["answered", "Answered", answered],
+            ["review", "For Review", review],
             ["not-answered", "Not Answered", counts.notAnswered],
-            ["marked", "Marked", counts.marked],
             ["not-visited", "Not Visited", counts.notVisited]
         ].map(function ([status, label, count]) {
             return `<div class="palette-summary-tile ${status}"><i aria-hidden="true"></i><span>${label}</span><strong>${count}</strong></div>`;
@@ -1012,6 +1014,7 @@
 
     function syncQuestionState() {
         const status = state.statuses[state.current] || "not-visited";
+        elements.questionCard?.classList.toggle("is-review-marked", status === "marked" || status === "answered-marked");
         if (elements.questionStatusLabel) {
             const nextClassName = `question-status ${status}`;
             if (elements.questionStatusLabel.className !== nextClassName) elements.questionStatusLabel.className = nextClassName;
@@ -1182,6 +1185,8 @@
     function updateTimerDisplay() {
         setText(elements.timerText, formatTime(state.remainingSeconds));
         elements.timerPill?.classList.toggle("warning", state.remainingSeconds <= 300);
+        elements.timerText?.classList.toggle("warning", state.remainingSeconds <= 300 && state.remainingSeconds > 60);
+        elements.timerText?.classList.toggle("critical", state.remainingSeconds <= 60);
         updateQuestionTimerDisplay();
     }
 
@@ -1554,6 +1559,7 @@ function buildResultInsights(result) {
 
     function persistUnfinished(immediate = false) {
         if (!state.quizSet || !isViewVisible("exam") || !state.questions.length) return;
+        emitSaveState("saving");
         if (immediate) {
             clearPendingPersist();
             writeUnfinished();
@@ -1571,7 +1577,7 @@ function buildResultInsights(result) {
     function writeUnfinished() {
         state.persistTimerId = 0;
         if (!state.quizSet || !isViewVisible("exam")) return;
-        storage.write("unfinished", {
+        const saved = storage.write("unfinished", {
             quizId: state.quizSet.id,
             answers: state.answers,
             statuses: state.statuses,
@@ -1580,6 +1586,16 @@ function buildResultInsights(result) {
             startedAt: state.startedAt,
             endsAt: state.endsAt
         });
+        emitSaveState(saved === false ? "error" : "saved");
+    }
+
+    function emitSaveState(status) {
+        document.dispatchEvent(new CustomEvent("gju:quiz-save-state", {
+            detail: {
+                status,
+                persistent: storage.isPersistent !== false
+            }
+        }));
     }
 
     function showView(name) {
