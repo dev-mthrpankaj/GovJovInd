@@ -4496,14 +4496,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1779453807.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0041",
+        "detailPage": "../Job_Details/HTML/2426-RSSB-Computer-Instructor-Online-Form-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0043",
@@ -4526,14 +4526,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/nalconeapr26/",
         "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0043",
+        "detailPage": "../Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0044",
@@ -4556,14 +4556,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://tsgrecruitment.edcil.co.in/login",
         "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0044",
+        "detailPage": "../Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html",
         "updatedAt": "2026-05-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0039",
@@ -4586,14 +4586,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.joinindiannavy.gov.in/en/account/account/state",
         "officialNotification": "https://www.joinindiannavy.gov.in/files/Advertisement_10+2_B.Tech_Jan_27.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0039",
+        "detailPage": "../Job_Details/HTML/2424-Indian-Navy-10-2-BTech-Cadet-Entry-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0040",
@@ -4616,14 +4616,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://sarkariresult.com.cm/wp-content/uploads/2026/03/ViewPdf-2.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0040",
+        "detailPage": "../Job_Details/HTML/2425-UPSSSC-Technical-Assistant-Group-C-2026.html",
         "updatedAt": "2026-05-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0037",
@@ -4706,14 +4706,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn3.digialm.com/EForms/configuredHtml/32046/96555/Registration.html",
         "officialNotification": "https://sarkariresult.com.im/wp-content/uploads/2026/05/Haryana-High-Court-Clerk-Official-Notification.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0042",
+        "detailPage": "../Job_Details/HTML/2427-SSSC-Haryana-Court-Clerk-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0033",
