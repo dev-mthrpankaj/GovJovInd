@@ -9,34 +9,9 @@ body.quiz-attempt-route .question-line {
   height: 42px !important;
   margin: 0 !important;
   padding: 4px 0 !important;
-  overflow: visible !important;
   background: #fff9df !important;
   border-bottom: 1px solid #f1df9a !important;
   box-shadow: 0 5px 10px rgba(15, 23, 42, 0.035) !important;
-}
-
-/* Content that scrolls towards the lower edge of the yellow sticky bar should
-   not remain sharply visible. This narrow overlay sits immediately BELOW the
-   bar's bottom border and progressively hides/blurs content passing behind it. */
-body.quiz-attempt-route .question-line::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  height: 20px;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 249, 223, 0.98) 0%,
-    rgba(255, 249, 223, 0.72) 38%,
-    rgba(255, 249, 223, 0.28) 72%,
-    rgba(255, 249, 223, 0) 100%
-  );
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%);
 }
 
 /* Keep only the breathing room actually needed between the sticky exam header
@@ -204,16 +179,6 @@ body.quiz-attempt-route[data-quiz-theme="dark"] .question-line {
   background: #2a2617 !important;
   border-bottom-color: #5b4f1f !important;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16) !important;
-}
-
-body.quiz-attempt-route[data-quiz-theme="dark"] .question-line::after {
-  background: linear-gradient(
-    to bottom,
-    rgba(42, 38, 23, 0.98) 0%,
-    rgba(42, 38, 23, 0.74) 38%,
-    rgba(42, 38, 23, 0.30) 72%,
-    rgba(42, 38, 23, 0) 100%
-  );
 }
 
 body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
