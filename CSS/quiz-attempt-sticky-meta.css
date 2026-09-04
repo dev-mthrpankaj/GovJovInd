@@ -9,9 +9,34 @@ body.quiz-attempt-route .question-line {
   height: 42px !important;
   margin: 0 !important;
   padding: 4px 0 !important;
+  overflow: visible !important;
   background: #fff9df !important;
   border-bottom: 1px solid #f1df9a !important;
   box-shadow: 0 5px 10px rgba(15, 23, 42, 0.035) !important;
+}
+
+/* Content that scrolls towards the lower edge of the yellow sticky bar should
+   not remain sharply visible. This narrow overlay sits immediately BELOW the
+   bar's bottom border and progressively hides/blurs content passing behind it. */
+body.quiz-attempt-route .question-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 20px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 249, 223, 0.98) 0%,
+    rgba(255, 249, 223, 0.72) 38%,
+    rgba(255, 249, 223, 0.28) 72%,
+    rgba(255, 249, 223, 0) 100%
+  );
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%);
 }
 
 /* Keep only the breathing room actually needed between the sticky exam header
@@ -23,6 +48,51 @@ body.quiz-attempt-route .question-line {
 
   body.quiz-attempt-route .question-card {
     padding-top: 6px !important;
+  }
+}
+
+/* Laptop / desktop: reduce the tall top exam header without changing its
+   information or controls. This gives more vertical room to the question. */
+@media (min-width: 1120px) {
+  body.quiz-attempt-route .exam-topbar {
+    top: 6px !important;
+    padding: 7px 10px !important;
+    gap: 5px !important;
+    border-radius: 11px !important;
+  }
+
+  body.quiz-attempt-route .exam-appbar {
+    gap: 9px !important;
+    min-height: 36px !important;
+  }
+
+  body.quiz-attempt-route .exam-title-block {
+    gap: 8px !important;
+  }
+
+  body.quiz-attempt-route .exam-title-block > div {
+    column-gap: 9px !important;
+  }
+
+  body.quiz-attempt-route .exam-topbar .exam-icon-btn,
+  body.quiz-attempt-route .exam-topbar .quiz-theme-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    border-radius: 9px !important;
+  }
+
+  body.quiz-attempt-route #timerText {
+    font-size: 20px !important;
+  }
+
+  body.quiz-attempt-route #examTitle {
+    font-size: 13px !important;
+  }
+
+  body.quiz-attempt-route .progress-track {
+    height: 3px !important;
   }
 }
 
@@ -74,29 +144,6 @@ body.quiz-attempt-route .exam-actions [data-action="mark-next"][aria-pressed="tr
   border-color: #eab308 !important;
   background: #fef3a6 !important;
   color: #713f12 !important;
-}
-
-/* Soft transition zone above the sticky bottom action bar. Content passing
-   underneath fades and blurs instead of ending on a hard line. */
-body.quiz-attempt-route .exam-actions {
-  overflow: visible !important;
-  isolation: isolate !important;
-}
-
-body.quiz-attempt-route .exam-actions::before {
-  content: "";
-  position: absolute;
-  left: -1px;
-  right: -1px;
-  top: -28px;
-  height: 29px;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.72) 58%, rgba(255,255,255,.96));
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 42%, #000);
-  mask-image: linear-gradient(to bottom, transparent, #000 42%, #000);
 }
 
 /* At this width the page itself can scroll, so keep the meta bar below the
@@ -159,6 +206,16 @@ body.quiz-attempt-route[data-quiz-theme="dark"] .question-line {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16) !important;
 }
 
+body.quiz-attempt-route[data-quiz-theme="dark"] .question-line::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(42, 38, 23, 0.98) 0%,
+    rgba(42, 38, 23, 0.74) 38%,
+    rgba(42, 38, 23, 0.30) 72%,
+    rgba(42, 38, 23, 0) 100%
+  );
+}
+
 body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark-next"]:not([aria-pressed="true"]) {
   border-color: #3f7d50 !important;
   background: rgba(34, 197, 94, 0.12) !important;
@@ -169,8 +226,4 @@ body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions [data-action="mark
   border-color: #facc15 !important;
   background: rgba(250, 204, 21, 0.16) !important;
   color: #fde68a !important;
-}
-
-body.quiz-attempt-route[data-quiz-theme="dark"] .exam-actions::before {
-  background: linear-gradient(to bottom, rgba(13,24,40,0), rgba(13,24,40,.74) 58%, rgba(13,24,40,.97));
 }
