@@ -4,6 +4,54 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0220-20260903172005-db77bb9a",
+        "title": "UPSC CGSE Geo Scientist Online Form 2027 for 127 Post",
+        "organization": "Union Public Service Commission  (UPSC)",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "PG Degree For more Details view Notification",
+        "totalPosts": "127",
+        "startDate": "2026-09-02",
+        "lastDate": "2026-09-22",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://upsconline.nic.in/candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fcandidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2F7cfa72f1-c09e-50d5-bfcd-f4978bbfaee6&response_type=code&scope=openid",
+        "officialNotification": "https://www.upsc.gov.in/sites/default/files/Notif-CGSPE-2027-Engl-020926.pdf",
+        "detailPage": "../jobs/upsc-cgse-2027.html",
+        "updatedAt": "2026-09-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "job-sheet-0221-20260904063611-9d971fc8",
+        "title": "UPESSC UP Special TET Online Form 2026",
+        "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
+        "department": "UPESSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "All Teachers working in Primary Level schools shall be eligible to appear for the Special Teacher Eligibility Test (Special TET) for the Primary Level. For more details read notification",
+        "totalPosts": "NA",
+        "startDate": "2026-09-05",
+        "lastDate": "2026-10-04",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://upessc.up.gov.in/",
+        "officialNotification": "https://upessc.up.gov.in/Notice/badc-2f84-4983-44c3-12bf.pdf",
+        "detailPage": "../jobs/upessc-up-special-tet-2026.html",
+        "updatedAt": "2026-09-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0216-20260902000552-802c565d",
         "title": "MP Police SI Sub Inspector Subedar Online Form 2026 for 507 Post",
         "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
@@ -1902,14 +1950,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://www.aiimsexams.ac.in/otr",
         "officialNotification": "https://rrpdocuments.aiimsexams.ac.in/1784895678667-599501489.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVRUVRLXWMSLVSAP7%2F20260724%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260724T123142Z&X-Amz-Expires=18000&X-Amz-Signature=da360d8042b5a681b3bd89781d3afa00ed09f88a92c0d95f96a674acf79fc6c6&X-Amz-SignedHeaders=host&response-content-type=application%2Fpdf",
-        "detailPage": "../Job_Details/HTML/AIIMS-NORCET-11th-Nursing-Officer-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0126-20260724135941-321a4ae1",
         "updatedAt": "2026-07-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0127-20260724140054-e1d22fcf",
@@ -3156,14 +3204,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/login.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=Yy9lZEVxaENxT2ZINzROdmRUUkJlTzRRMlZkaFhtOVcyWXpLdXJYVW9WZXJNSVJibFVzaURGaFdSNlRvV2I4Z1hGTW5uUFcwM3BNM1c5bUlyWkM1blByclJLdGowbHYyeHpaSzFlK0xlejQ9OjpVL1BjTTF6R21hRXNCV0I1NnhBSit3PT0%3D",
-        "detailPage": "../Job_Details/HTML/1010-NTPC-Assistant-Chemist-Trainee-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0090",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0087",
@@ -3758,14 +3806,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/sbipojun26/",
         "officialNotification": "https://sbi.bank.in/csfile/18062026_1_Detailed_Adv.2026.pdf?t=1781759726353",
-        "detailPage": "../Job_Details/HTML/1009-SBI-PO-Recruitment-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0070",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0066",
@@ -4688,14 +4736,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0033",
+        "detailPage": "../Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0032",
@@ -4718,14 +4766,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://devapps.ngri.res.in/CIMFR_group2_2026/index.jsp",
         "officialNotification": "https://cimfr.res.in/upload_files/current_opportunity/1779249926_Tech.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0032",
+        "detailPage": "../Job_Details/HTML/2417-CSIR-CIMFR-Technician-Recruitment-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0034",
@@ -4808,14 +4856,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://btsc.pariksha.nic.in/Agencies.aspx?KZhCrm9B4QPkl0gO2rAMuw==",
         "officialNotification": "https://btsc.pariksha.nic.in/Online_App/Notifications.aspx",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0030",
+        "detailPage": "../Job_Details/HTML/2415-BTSC-Laboratory-Assistant-2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0031",
@@ -4838,14 +4886,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/login.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=VHZtc0k0eU5VMTFNcFNuQ0V1MnNNUDRMLyt0VVhVeHRwK2s5Q1BTRHBxcWdzUlBPaHA1UkJmdjRSaFBxTDM3Wkp3QXMwOXdUajdTMmYvS2pac2ExdWtwcWhtUWxSOUxXZW4weStFQjlKMkE9OjpXWHZWVTBJczk4TDVNaS9tcTRvc3l3PT0%3D",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0031",
+        "detailPage": "../Job_Details/HTML/2416-NTPC-Assistant-Executive Online -2026.html",
         "updatedAt": "2026-05-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0001",

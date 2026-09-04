@@ -176,12 +176,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://sbi.bank.in/webfiles/uploads/files_2627/08/SBIPO2026-Prelims-WTRESULT-15_columns.pdf",
-        "detailPage": "../Result_Details/HTML/SBI-Probationary-Officers-PO-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0116-20260826145906-c8826848",
