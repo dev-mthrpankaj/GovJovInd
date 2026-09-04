@@ -2306,6 +2306,20 @@
       "title": "UPSSSC PET Online Form 2026 | Preliminary Eligibility Test Date Extended",
       "lastPostedAt": "2026-09-02T16:35:20.177Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0220-20260903172005-db77bb9a": {
+      "updatedAt": "2026-09-04",
+      "hash": "ba56a093b89f9aeccf6adc21b6402de91567f1ec6885d576637379b2f075c40d",
+      "title": "UPSC CGSE Geo Scientist Online Form 2027 for 127 Post",
+      "lastPostedAt": "2026-09-04T02:39:12.730Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0221-20260904063611-9d971fc8": {
+      "updatedAt": "2026-09-04",
+      "hash": "e5299b28c395c285ec22504465bd74ecb72ea9ce1f78dd615f00bb5db425bf59",
+      "title": "UPESSC UP Special TET Online Form 2026",
+      "lastPostedAt": "2026-09-04T02:39:13.362Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3675,17 +3689,52 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0128-20260902161604-056cd6e2": {
-      "updatedAt": "2026-09-02",
-      "hash": "e6007e642c4baf1d34959fc99d74dc448c70d8dc8b7cf11ca677fd32fe6d1697",
-      "title": "UP Police Home Guard PET Admit Card 2026",
-      "lastPostedAt": "2026-09-02T10:55:21.061Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-04",
+      "hash": "6f36d2d682f60f8d03f8990208b7002b9278a8c41109fc03d6373ae4472d33f9",
+      "title": "UP Police Home Guard PET Admit Card 2026 | Re-Exam Notice",
+      "lastPostedAt": "2026-09-04T02:39:13.762Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0130-20260902225218-01a831d2": {
       "updatedAt": "2026-09-02",
       "hash": "925d32ad5b76fbfb59b07466fde1c7976515ed1a957a1fe4db75e8fbe48009c1",
       "title": "Delhi High Court HJS Mains Exam Date 2026",
       "lastPostedAt": "2026-09-02T18:04:42.400Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0129-20260902202511-e2271928": {
+      "updatedAt": "2026-09-04",
+      "hash": "42b0f93ea83c47991d67849cd3d4f1ee84e612dafb3ff8388d7bfc47ccd1a95a",
+      "title": "SBI Probationary Officers PO Mains Admit Card 2026 for 1500 Post",
+      "lastPostedAt": "2026-09-04T02:39:14.181Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0131-20260903172342-48cd5dee": {
+      "updatedAt": "2026-09-04",
+      "hash": "b0e2df6705fbe9441509f803a1fa9f2524538e87d28319ecc5855a082675769a",
+      "title": "NTPC Assistant Chemist Trainee ACT Admit Card 2026",
+      "lastPostedAt": "2026-09-04T02:39:14.571Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0132-20260903172610-43818c83": {
+      "updatedAt": "2026-09-04",
+      "hash": "07eb8f9ad45ca2cfe0d1947ccec9a946e5db80481b24e1d77763240bbfc28fd8",
+      "title": "AIIMS NORCET Nursing Officer 11th Exam City 2026 – Out",
+      "lastPostedAt": "2026-09-04T02:39:18.325Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0133-20260904073001-b184d872": {
+      "updatedAt": "2026-09-04",
+      "hash": "7462bfb9e8387f3d825c44c004a7add223e3f99f6cff8fe9f6eac10305a2322d",
+      "title": "UPSC NDA II Admit Card 2026 for 394 Post",
+      "lastPostedAt": "2026-09-04T02:39:18.902Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0134-20260904075526-38fc784c": {
+      "updatedAt": "2026-09-04",
+      "hash": "7a1e59a4da42a68dec07323709f61bc8834a67f0e9c6f7060b6e239e907b0f18",
+      "title": "UPSC CDS II Admit Card 2026 for 451 Post",
+      "lastPostedAt": "2026-09-04T02:39:19.511Z",
       "stateReason": "new"
     }
   },
