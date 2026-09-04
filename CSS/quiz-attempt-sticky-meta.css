@@ -1,0 +1,95 @@
+/* Quiz attempt sticky question meta bar.
+   Scoped to quiz-attempt route so other quiz/result surfaces are unaffected. */
+
+body.quiz-attempt-route .question-line {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 45 !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  margin: 0 !important;
+  padding: 4px 0 !important;
+  background: var(--qa-surface, #fff) !important;
+  border-bottom: 1px solid var(--qa-border, #d7e2ef) !important;
+  box-shadow: 0 5px 10px rgba(15, 23, 42, 0.035) !important;
+}
+
+body.quiz-attempt-route .question-marker {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  min-height: 34px !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+body.quiz-attempt-route .question-number,
+body.quiz-attempt-route .question-elapsed,
+body.quiz-attempt-route .question-marker .question-footnote,
+body.quiz-attempt-route .question-tools {
+  flex: 0 0 auto !important;
+}
+
+body.quiz-attempt-route .question-elapsed,
+body.quiz-attempt-route .question-marker .question-footnote span {
+  white-space: nowrap !important;
+}
+
+/* At this width the page itself can scroll, so keep the meta bar below the
+   already-sticky exam header instead of allowing the two bars to overlap. */
+@media (min-width: 768px) and (max-width: 1119px) {
+  body.quiz-attempt-route .question-line {
+    top: 54px !important;
+  }
+}
+
+/* Mobile: use only the useful metadata row. The three duplicate question-tool
+   icons are removed and the mark/negative chips take their place on the right. */
+@media (max-width: 767px) {
+  body.quiz-attempt-route.gju-quiz-exam-mode .question-line,
+  body.quiz-attempt-route .question-line {
+    top: 0 !important;
+    z-index: 60 !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 4px 0 !important;
+    align-items: center !important;
+  }
+
+  body.quiz-attempt-route .question-tools {
+    display: none !important;
+  }
+
+  body.quiz-attempt-route .question-marker {
+    width: 100% !important;
+    min-height: 28px !important;
+    gap: 6px !important;
+  }
+
+  body.quiz-attempt-route .question-marker .question-footnote {
+    margin: 0 0 0 auto !important;
+    gap: 4px !important;
+  }
+
+  body.quiz-attempt-route .question-marker .question-footnote span {
+    min-width: 32px !important;
+    min-height: 18px !important;
+    padding: 2px 5px !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+  }
+
+  body.quiz-attempt-route .question-number {
+    min-width: 28px !important;
+    height: 28px !important;
+  }
+
+  body.quiz-attempt-route .question-elapsed {
+    font-size: 10.5px !important;
+  }
+}
+
+body.quiz-attempt-route[data-quiz-theme="dark"] .question-line {
+  background: var(--qa-surface, #101827) !important;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16) !important;
+}
