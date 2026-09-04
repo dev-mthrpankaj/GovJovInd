@@ -331,8 +331,18 @@ body.quiz-attempt-route #submitModal [data-action="submit-now"]:focus-visible {
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-topbar {
     position: relative !important;
     top: auto !important;
-    padding: 6px 10px !important;
+    gap: 3px !important;
+    padding: 5px 10px 4px !important;
     border-radius: 10px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-appbar {
+    min-height: 34px !important;
+    padding: 0 !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .progress-track {
+    height: 2px !important;
   }
 
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card {
@@ -347,11 +357,20 @@ body.quiz-attempt-route #submitModal [data-action="submit-now"]:focus-visible {
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-line {
     margin: 0 -22px 14px !important;
     padding: 4px 22px !important;
+    width: calc(100% + 44px) !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
   }
 
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card.long-question-layout {
     padding-bottom: 16px !important;
     scroll-padding-bottom: 16px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card.long-question-layout:not(.has-question-stem) .option-list,
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card.long-question-layout.has-question-stem .question-choice-column {
+    top: 56px !important;
+    z-index: 1 !important;
   }
 
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions {
@@ -435,6 +454,17 @@ body.quiz-attempt-route #submitModal [data-action="submit-now"]:focus-visible {
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-topbar {
     position: relative !important;
     top: auto !important;
+    gap: 3px !important;
+    padding: 5px 10px 4px !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-appbar {
+    min-height: 34px !important;
+    padding: 0 !important;
+  }
+
+  body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .progress-track {
+    height: 2px !important;
   }
 
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-card {
@@ -449,6 +479,9 @@ body.quiz-attempt-route #submitModal [data-action="submit-now"]:focus-visible {
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .question-line {
     margin: 0 -16px 12px !important;
     padding: 4px 16px !important;
+    width: calc(100% + 32px) !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
   }
 
   body.quiz-attempt-route.quiz-exam-active.gju-quiz-exam-mode .exam-actions {
