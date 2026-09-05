@@ -201,6 +201,7 @@
         const optionButton = event.target.closest("[data-option-index]");
         const paletteButton = event.target.closest("[data-question-index]");
         const reviewButton = event.target.closest("[data-review-filter]");
+        const resultLanguageButton = event.target.closest("[data-result-language]");
         const actionButton = event.target.closest("[data-action]");
 
         if (isPaletteOpen() && !event.target.closest("#palettePanel") && !event.target.closest("[data-action='toggle-palette']")) {
@@ -236,6 +237,11 @@
             return;
         }
 
+        if (resultLanguageButton) {
+            setQuizLanguage(resultLanguageButton.dataset.resultLanguage);
+            return;
+        }
+
         if (!actionButton) return;
 
         const actions = {
@@ -257,7 +263,7 @@
             "toggle-palette": togglePalette,
             "close-palette": closePalette,
             "review-answers": function () {
-                state.reviewFilter = "all";
+                state.reviewFilter = "needs-review";
                 renderReview();
                 showView("review");
             },
@@ -745,6 +751,8 @@
             renderQuestion();
             renderPalette({ force: true });
             persistUnfinished(true);
+        } else if (isViewVisible("result")) {
+            renderResult();
         } else if (isViewVisible("review")) {
             renderReview();
         }
@@ -1347,151 +1355,294 @@
         const result = state.result;
         if (!result) return;
         const insights = buildResultInsights(result);
-
-        views.result.innerHTML = `
-            <article class="result-panel score-panel">
-                <span class="result-eyebrow">${escapeHtml(result.subject)}</span>
-                <h2 id="resultTitle">${escapeHtml(result.quizTitle)}</h2>
-                <span class="score-number">${formatNumber(result.percentage)}%</span>
-                <strong>${escapeHtml(result.message)}</strong>
-                <p class="result-subtext">${formatMarks(result.score)}/${formatMarks(result.maxScore)} marks ${result.reason === "time" ? "- auto-submitted when time ended" : "- submitted successfully"}</p>
-            </article>
-            <section class="result-panel">
-                <div class="result-grid">
-                    ${renderResultTile("Total", result.total)}
-                    ${renderResultTile("Attempted", result.attempted)}
-                    ${renderResultTile("Unattempted", result.unattempted)}
-                    ${renderResultTile("Correct", result.correct)}
-                    ${renderResultTile("Wrong", result.wrong)}
-                    ${renderResultTile("Accuracy", `${formatNumber(result.accuracy)}%`)}
-                    ${renderResultTile("Time", formatTime(result.timeTaken))}
-                    ${renderResultTile("Score", formatMarks(result.score))}
+        const hasBilingualResult = result.questions.some(hasBilingualQuestionText);
+        const scoreTone = result.percentage >= 70 ? "strong" : result.percentage >= 50 ? "steady" : "focus";
+        const sectionScorecard = result.subjectData.length > 1 ? `
+            <section class="result-panel result-section-scorecard">
+                <div class="result-section-heading">
+                    <div><span class="result-section-kicker">SECTION VIEW</span><h2>Section Scorecard</h2></div>
                 </div>
-            </section>
-            <section class="result-panel">
-                <h2>Analytics</h2>
-                <div class="result-insight-grid">
-                    <article class="result-insight-card">
-                        <span>Strong Topics</span>
-                        <strong>${escapeHtml(insights.strongTopics)}</strong>
-                    </article>
-                    <article class="result-insight-card">
-                        <span>Weak Topics</span>
-                        <strong>${escapeHtml(insights.weakTopics)}</strong>
-                    </article>
-                    <article class="result-insight-card">
-                        <span>Time Analysis</span>
-                        <strong>${escapeHtml(insights.timeAnalysis)}</strong>
-                    </article>
-                </div>
-            </section>
-            <section class="result-panel">
-                <h2>Subject Scorecard</h2>
-                <div class="result-grid">
+                <div class="result-section-grid">
                     ${result.subjectData.map(function (subject) {
-                        return renderResultTile(subject.name, `${formatMarks(subject.marks)}/${formatMarks(subject.maxMarks)} | ${formatNumber(subject.accuracy)}%`);
+                        return `
+                            <article>
+                                <div><strong>${escapeHtml(subject.name)}</strong><span>${subject.correct}/${subject.totalQuestions} correct</span></div>
+                                <b>${formatMarks(subject.marks)}/${formatMarks(subject.maxMarks)}</b>
+                                <div class="result-progress"><i style="width:${clamp(subject.accuracy, 0, 100)}%"></i></div>
+                                <small>${formatNumber(subject.accuracy)}% accuracy</small>
+                            </article>
+                        `;
                     }).join("")}
                 </div>
             </section>
+        ` : "";
+
+        views.result.innerHTML = `
+            <article class="result-panel score-panel result-report-hero ${scoreTone}">
+                <div class="result-report-topline">
+                    <div>
+                        <span class="result-eyebrow">${escapeHtml(result.subject)} · Performance Report</span>
+                        <h2 id="resultTitle">${escapeHtml(result.quizTitle)}</h2>
+                    </div>
+                    ${hasBilingualResult ? renderResultLanguageSwitch("Result language") : ""}
+                </div>
+                <div class="result-score-layout">
+                    <div class="result-score-ring" style="--result-score:${clamp(result.percentage, 0, 100)}%" aria-label="Score ${formatNumber(result.percentage)} percent">
+                        <div><strong>${formatNumber(result.percentage)}%</strong><span>Overall score</span></div>
+                    </div>
+                    <div class="result-score-summary">
+                        <span class="result-readiness">${escapeHtml(insights.readiness)}</span>
+                        <h3>${escapeHtml(insights.headline)}</h3>
+                        <p>${escapeHtml(insights.verdict)}</p>
+                        <div class="result-score-meta">
+                            <span><i class="fas fa-award" aria-hidden="true"></i> ${formatMarks(result.score)} of ${formatMarks(result.maxScore)} marks</span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> ${formatTime(result.timeTaken)}</span>
+                            <span><i class="fas fa-cloud-arrow-up" aria-hidden="true"></i> ${result.reason === "time" ? "Auto-submitted" : "Attempt saved"}</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <section class="result-panel result-key-metrics">
+                <div class="result-metric-grid">
+                    ${renderResultMetric("Score", formatMarks(result.score), `Out of ${formatMarks(result.maxScore)}`, "fa-trophy", "primary")}
+                    ${renderResultMetric("Accuracy", `${formatNumber(result.accuracy)}%`, `${result.correct} of ${result.attempted} attempted`, "fa-bullseye", result.accuracy >= 70 ? "success" : "warning")}
+                    ${renderResultMetric("Attempt Rate", `${formatNumber(insights.attemptRate)}%`, `${result.unattempted} left unattempted`, "fa-list-check", insights.attemptRate >= 85 ? "success" : "warning")}
+                    ${renderResultMetric("Average Pace", `${insights.secondsPerQuestion}s`, "Per question", "fa-stopwatch", "neutral")}
+                </div>
+            </section>
+            <section class="result-panel result-attempt-panel">
+                <div class="result-section-heading">
+                    <div><span class="result-section-kicker">ATTEMPT QUALITY</span><h2>Where Your Marks Went</h2></div>
+                    <span class="result-trend ${insights.trendClass}">${escapeHtml(insights.trendText)}</span>
+                </div>
+                <div class="result-outcome-grid">
+                    ${renderOutcome("Correct", result.correct, result.total, "correct", `+${formatMarks(insights.positiveMarks)} marks`)}
+                    ${renderOutcome("Incorrect", result.wrong, result.total, "wrong", `−${formatMarks(insights.negativeLoss)} marks`)}
+                    ${renderOutcome("Unattempted", result.unattempted, result.total, "unattempted", `${formatMarks(insights.unattemptedMarks)} marks available`)}
+                </div>
+            </section>
+            <section class="result-panel result-topic-panel">
+                <div class="result-section-heading">
+                    <div><span class="result-section-kicker">TOPIC DIAGNOSIS</span><h2>Topic-by-Topic Performance</h2></div>
+                    <span class="result-section-note">Prioritised by improvement opportunity</span>
+                </div>
+                <div class="result-topic-table" role="table" aria-label="Topic performance">
+                    <div class="result-topic-head" role="row">
+                        <span role="columnheader">Topic</span><span role="columnheader">Result</span><span role="columnheader">Accuracy</span><span role="columnheader">Priority</span>
+                    </div>
+                    ${insights.topics.map(renderTopicRow).join("")}
+                </div>
+            </section>
+            <section class="result-panel result-diagnosis-panel">
+                <div class="result-section-heading">
+                    <div><span class="result-section-kicker">PERFORMANCE DIAGNOSIS</span><h2>What to Do Next</h2></div>
+                </div>
+                <div class="result-diagnosis-grid">
+                    ${renderDiagnosis("Biggest Strength", insights.strengthTitle, insights.strengthDetail, "fa-shield-halved", "success")}
+                    ${renderDiagnosis("Primary Focus", insights.focusTitle, insights.focusDetail, "fa-crosshairs", "warning")}
+                    ${renderDiagnosis("Time Strategy", insights.timeTitle, insights.timeDetail, "fa-clock", "primary")}
+                </div>
+                <div class="result-action-plan">
+                    <div class="result-action-icon"><i class="fas fa-route" aria-hidden="true"></i></div>
+                    <div><span>RECOMMENDED NEXT STEP</span><strong>${escapeHtml(insights.nextStepTitle)}</strong><p>${escapeHtml(insights.nextStepDetail)}</p></div>
+                    <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(result.quizId)}">Retake Quiz</button>
+                </div>
+            </section>
+            ${sectionScorecard}
             <div class="result-actions">
-                <button class="quiz-btn quiz-btn-outline" type="button" data-action="review-answers">Review Answers</button>
-                <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(result.quizId)}">Retake Test</button>
+                <button class="quiz-btn quiz-btn-primary" type="button" data-action="review-answers"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Review Mistakes</button>
                 <a class="quiz-btn quiz-btn-outline result-dashboard-link" href="dashboard.html"><i class="fas fa-chart-line" aria-hidden="true"></i> View Dashboard</a>
-                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="back-home">Back to Quizzes</button>
+                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="back-home"><i class="fas fa-border-all" aria-hidden="true"></i> Explore Quizzes</button>
+            </div>
+        `;
+        typesetQuizMath(views.result);
+    }
+    function renderResultMetric(label, value, detail, icon, tone) {
+        return `
+            <article class="result-metric ${tone}">
+                <i class="fas ${icon}" aria-hidden="true"></i>
+                <div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></div>
+            </article>
+        `;
+    }
+
+    function renderOutcome(label, value, total, tone, detail) {
+        const share = total ? round2((value / total) * 100) : 0;
+        return `
+            <article class="result-outcome ${tone}">
+                <div><span>${escapeHtml(label)}</span><strong>${value}</strong></div>
+                <div class="result-outcome-bar" aria-label="${escapeAttr(label)} ${formatNumber(share)} percent"><i style="width:${clamp(share, 0, 100)}%"></i></div>
+                <small>${escapeHtml(detail)}</small>
+            </article>
+        `;
+    }
+
+    function renderTopicRow(topic) {
+        const tone = topic.accuracy >= 75 ? "strong" : topic.accuracy >= 50 ? "steady" : "focus";
+        const priority = topic.unattempted > 0 && topic.attempted === 0
+            ? "Not tested"
+            : topic.accuracy >= 75 ? "Maintain" : topic.accuracy >= 50 ? "Practise" : "Revise first";
+        return `
+            <article class="result-topic-row ${tone}" role="row">
+                <div role="cell"><strong>${escapeHtml(topic.name)}</strong><small>${topic.total} question${topic.total === 1 ? "" : "s"}</small></div>
+                <div role="cell"><strong>${topic.correct}/${topic.total}</strong><small>${topic.wrong} wrong · ${topic.unattempted} skipped</small></div>
+                <div role="cell" class="result-topic-accuracy"><strong>${formatNumber(topic.accuracy)}%</strong><div><i style="width:${clamp(topic.accuracy, 0, 100)}%"></i></div></div>
+                <div role="cell"><span class="result-priority">${priority}</span></div>
+            </article>
+        `;
+    }
+
+    function renderDiagnosis(label, title, detail, icon, tone) {
+        return `
+            <article class="result-diagnosis ${tone}">
+                <i class="fas ${icon}" aria-hidden="true"></i>
+                <div><span>${escapeHtml(label)}</span><strong>${escapeHtml(title)}</strong><p>${escapeHtml(detail)}</p></div>
+            </article>
+        `;
+    }
+
+    function renderResultLanguageSwitch(label) {
+        return `
+            <div class="result-language-control" role="group" aria-label="${escapeAttr(label)}">
+                <span><i class="fas fa-language" aria-hidden="true"></i> ${escapeHtml(label)}</span>
+                <div>
+                    <button type="button" data-result-language="en" aria-pressed="${state.language === "en"}" class="${state.language === "en" ? "is-active" : ""}">English</button>
+                    <button type="button" data-result-language="hi" aria-pressed="${state.language === "hi"}" class="${state.language === "hi" ? "is-active" : ""}">Hindi</button>
+                </div>
             </div>
         `;
     }
-function renderResultTile(label, value) {
-    return `<div class="result-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
-}
-function buildResultInsights(result) {
-    const topics = {};
 
-    result.questions.forEach(function (question, index) {
-        const topicName = question.topic || "General";
-        const selected = result.answers[index];
+    function buildResultInsights(result) {
+        const topics = {};
+        let positiveMarks = 0;
+        let negativeLoss = 0;
+        let unattemptedMarks = 0;
 
-        if (!topics[topicName]) {
-            topics[topicName] = {
-                attempted: 0,
-                correct: 0
-            };
-        }
-
-        if (selected === null) return;
-
-        topics[topicName].attempted += 1;
-
-        if (selected === question.correctAnswer) {
-            topics[topicName].correct += 1;
-        }
-    });
-
-    const attemptedTopics = Object.keys(topics)
-        .map(function (name) {
-            const topic = topics[name];
-
-            return {
-                name: name,
-                attempted: topic.attempted,
-                accuracy: topic.attempted
-                    ? (topic.correct / topic.attempted) * 100
-                    : 0
-            };
-        })
-        .filter(function (topic) {
-            return topic.attempted > 0;
+        result.questions.forEach(function (question, index) {
+            const topicName = question.topic || "General";
+            const selected = result.answers[index];
+            const marks = getQuestionPositiveMarks(question);
+            const negative = getQuestionNegativeMarks(question);
+            if (!topics[topicName]) {
+                topics[topicName] = { name: topicName, total: 0, attempted: 0, correct: 0, wrong: 0, unattempted: 0 };
+            }
+            const topic = topics[topicName];
+            topic.total += 1;
+            if (selected === null) {
+                topic.unattempted += 1;
+                unattemptedMarks += marks;
+            } else if (selected === question.correctAnswer) {
+                topic.attempted += 1;
+                topic.correct += 1;
+                positiveMarks += marks;
+            } else {
+                topic.attempted += 1;
+                topic.wrong += 1;
+                negativeLoss += negative;
+            }
         });
 
-    const strongTopics = attemptedTopics
-        .filter(function (topic) {
-            return topic.accuracy >= 60;
-        })
-        .sort(function (a, b) {
-            if (b.accuracy !== a.accuracy) {
-                return b.accuracy - a.accuracy;
-            }
+        const topicRows = Object.values(topics).map(function (topic) {
+            return {
+                ...topic,
+                accuracy: topic.attempted ? round2((topic.correct / topic.attempted) * 100) : 0,
+                opportunity: (topic.wrong * 2) + topic.unattempted
+            };
+        }).sort(function (a, b) {
+            if (b.opportunity !== a.opportunity) return b.opportunity - a.opportunity;
+            return a.accuracy - b.accuracy;
+        });
 
-            return b.attempted - a.attempted;
-        })
-        .slice(0, 3);
+        const attemptedTopics = topicRows.filter(function (topic) { return topic.attempted > 0; });
+        const strongest = attemptedTopics.slice().sort(function (a, b) {
+            return b.accuracy - a.accuracy || b.correct - a.correct;
+        })[0];
+        const weakest = topicRows.slice().sort(function (a, b) {
+            if (a.accuracy !== b.accuracy) return a.accuracy - b.accuracy;
+            return b.opportunity - a.opportunity;
+        })[0];
+        const attemptRate = result.total ? round2((result.attempted / result.total) * 100) : 0;
+        const secondsPerQuestion = result.total ? Math.round(result.timeTaken / result.total) : 0;
+        const allottedSeconds = Math.max(1, Number(result.durationMinutes) || 30) * 60;
+        const timeUsed = round2((result.timeTaken / allottedSeconds) * 100);
+        const wrongRate = result.attempted ? round2((result.wrong / result.attempted) * 100) : 0;
+        const previous = getPreviousQuizAttempt(result);
+        const delta = previous ? round2(result.percentage - Number(previous.percentage || 0)) : 0;
 
-    const weakTopics = attemptedTopics
-        .filter(function (topic) {
-            return topic.accuracy < 50;
-        })
-        .sort(function (a, b) {
-            if (a.accuracy !== b.accuracy) {
-                return a.accuracy - b.accuracy;
-            }
+        let headline = "Build a stronger base with focused practice";
+        let verdict = `Accuracy is ${formatNumber(result.accuracy)}% with ${result.unattempted} unattempted question${result.unattempted === 1 ? "" : "s"}. Review the priority topics before your next attempt.`;
+        if (result.accuracy >= 80 && attemptRate >= 85) {
+            headline = "Strong accuracy with confident coverage";
+            verdict = `You combined ${formatNumber(result.accuracy)}% accuracy with a ${formatNumber(attemptRate)}% attempt rate. Focus on the few remaining errors to move closer to an exam-ready score.`;
+        } else if (result.accuracy >= 75 && attemptRate < 80) {
+            headline = "Accuracy is strong; coverage is holding you back";
+            verdict = `Your answers were reliable, but ${result.unattempted} skipped question${result.unattempted === 1 ? "" : "s"} limited the score. Improve pace without sacrificing accuracy.`;
+        } else if (wrongRate >= 35) {
+            headline = "Reduce avoidable errors before increasing attempts";
+            verdict = `${result.wrong} incorrect answer${result.wrong === 1 ? "" : "s"} cost ${formatMarks(negativeLoss)} marks in penalties. Review concepts first, then retake with controlled attempts.`;
+        } else if (result.percentage >= 50) {
+            headline = "A solid base with clear improvement areas";
+            verdict = `You have a workable foundation. Concentrating on ${weakest ? weakest.name : "the lowest-scoring topic"} can produce the quickest score gain.`;
+        }
 
-            return b.attempted - a.attempted;
-        })
-        .slice(0, 3);
+        let timeTitle = "Pace is under control";
+        let timeDetail = `${secondsPerQuestion} seconds per question on average; ${formatNumber(timeUsed)}% of the available time used.`;
+        if (result.unattempted > 0 && timeUsed >= 90) {
+            timeTitle = "Increase question coverage";
+            timeDetail = `${result.unattempted} questions were left while ${formatNumber(timeUsed)}% of the time was used. Set an early skip-and-return limit.`;
+        } else if (timeUsed < 55 && wrongRate >= 25) {
+            timeTitle = "Slow down on uncertain questions";
+            timeDetail = `Only ${formatNumber(timeUsed)}% of the time was used, while ${result.wrong} answers were incorrect. Use the saved time to verify doubtful choices.`;
+        }
 
-    const perQuestion = result.total
-        ? Math.round(result.timeTaken / result.total)
-        : 0;
+        const focusTitle = weakest ? weakest.name : "Complete another quiz";
+        const focusDetail = weakest
+            ? `${weakest.correct}/${weakest.total} correct with ${formatNumber(weakest.accuracy)}% accuracy. This topic offers the largest immediate gain.`
+            : "More answered questions will make topic recommendations more reliable.";
+        const strengthTitle = strongest ? strongest.name : "No clear strength yet";
+        const strengthDetail = strongest
+            ? `${strongest.correct}/${strongest.attempted} attempted answers were correct (${formatNumber(strongest.accuracy)}% accuracy).`
+            : "Attempt more questions to establish a dependable strength area.";
 
-    const timeAnalysis =
-        `${formatTime(result.timeTaken)} total, about ${perQuestion}s/question`;
+        let nextStepTitle = weakest ? `Revise ${weakest.name}, then retake this quiz` : "Review the explanations, then retake this quiz";
+        let nextStepDetail = result.wrong
+            ? `Start with the ${result.wrong} incorrect answer${result.wrong === 1 ? "" : "s"}, then check the ${result.unattempted} skipped question${result.unattempted === 1 ? "" : "s"}.`
+            : `Review the ${result.unattempted} skipped question${result.unattempted === 1 ? "" : "s"} and aim for broader coverage on the next attempt.`;
+        if (result.percentage >= 85) {
+            nextStepTitle = "Protect accuracy and improve consistency";
+            nextStepDetail = "Review the remaining misses, then practise another set from the same subject.";
+        }
 
-    return {
-        strongTopics: strongTopics.length
-            ? strongTopics.map(function (topic) {
-                return topic.name;
-            }).join(", ")
-            : "No strong topic yet",
+        return {
+            topics: topicRows,
+            readiness: result.percentage >= 85 ? "EXAM READY" : result.percentage >= 70 ? "STRONG PROGRESS" : result.percentage >= 50 ? "DEVELOPING" : "FOCUS REQUIRED",
+            headline,
+            verdict,
+            attemptRate,
+            secondsPerQuestion,
+            positiveMarks: round2(positiveMarks),
+            negativeLoss: round2(negativeLoss),
+            unattemptedMarks: round2(unattemptedMarks),
+            strengthTitle,
+            strengthDetail,
+            focusTitle,
+            focusDetail,
+            timeTitle,
+            timeDetail,
+            nextStepTitle,
+            nextStepDetail,
+            trendClass: !previous ? "neutral" : delta > 0 ? "up" : delta < 0 ? "down" : "neutral",
+            trendText: !previous ? "First recorded attempt" : delta > 0 ? `↑ ${formatNumber(Math.abs(delta))}% vs previous` : delta < 0 ? `↓ ${formatNumber(Math.abs(delta))}% vs previous` : "No change vs previous"
+        };
+    }
 
-        weakTopics: weakTopics.length
-            ? weakTopics.map(function (topic) {
-                return topic.name;
-            }).join(", ")
-            : "No weak topic identified",
-
-        timeAnalysis: timeAnalysis
-    };
-}
+    function getPreviousQuizAttempt(result) {
+        const attempts = getAttempts().filter(function (attempt) {
+            return attempt.quizId === result.quizId && attempt.id !== result.id;
+        });
+        return attempts[0] || null;
+    }
 
     function renderReview() {
         const result = state.result;
@@ -1500,20 +1651,26 @@ function buildResultInsights(result) {
         const cards = result.questions.map(function (question, index) {
             return renderReviewCard(question, index, result);
         }).filter(Boolean).join("");
+        const hasBilingualResult = result.questions.some(hasBilingualQuestionText);
+        const filters = ["needs-review", "wrong", "unattempted", "correct", "marked", "all"];
 
         views.review.innerHTML = `
-            <section class="result-panel">
-                <h2 id="reviewTitle">Review Answers</h2>
+            <section class="result-panel review-toolbar">
+                <div class="review-toolbar-head">
+                    <div><span class="result-section-kicker">ANSWER REVIEW</span><h2 id="reviewTitle">Learn From Every Question</h2><p>Start with mistakes and skipped questions, then verify the correct answers.</p></div>
+                    ${hasBilingualResult ? renderResultLanguageSwitch("Review language") : ""}
+                </div>
                 <div class="review-filter-row">
-                    ${["all", "correct", "wrong", "unattempted", "marked"].map(function (filter) {
-                        return `<button class="${state.reviewFilter === filter ? "is-active" : ""}" type="button" data-review-filter="${filter}">${escapeHtml(titleCase(filter))}</button>`;
+                    ${filters.map(function (filter) {
+                        return `<button class="${state.reviewFilter === filter ? "is-active" : ""}" type="button" data-review-filter="${filter}">${escapeHtml(titleCase(filter))}<span>${getReviewFilterCount(filter, result)}</span></button>`;
                     }).join("")}
                 </div>
             </section>
-            ${cards || '<article class="review-card"><p>No answers match this filter.</p></article>'}
+            <div class="review-card-list">${cards || '<article class="review-card review-empty"><p>No answers match this filter.</p></article>'}</div>
             <div class="review-actions">
                 <button class="quiz-btn quiz-btn-outline" type="button" data-action="back-result">Back to Result</button>
-                <button class="quiz-btn quiz-btn-primary" type="button" data-action="back-home">Back to Quizzes</button>
+                <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(result.quizId)}">Retake Quiz</button>
+                <button class="quiz-btn quiz-btn-ghost" type="button" data-action="back-home">Explore Quizzes</button>
             </div>
         `;
         typesetQuizMath(views.review);
@@ -1524,27 +1681,51 @@ function buildResultInsights(result) {
         const marked = String(result.statuses[index] || "").includes("marked");
         const answerState = selected === null ? "unattempted" : selected === question.correctAnswer ? "correct" : "wrong";
 
-        if (state.reviewFilter !== "all" && state.reviewFilter !== answerState && !(state.reviewFilter === "marked" && marked)) {
+        const needsReview = answerState === "wrong" || answerState === "unattempted";
+        if (state.reviewFilter !== "all" &&
+            state.reviewFilter !== answerState &&
+            !(state.reviewFilter === "marked" && marked) &&
+            !(state.reviewFilter === "needs-review" && needsReview)) {
             return "";
         }
 
         return `
-            <article class="review-card">
+            <article class="review-card ${answerState}">
                 <div class="question-meta">
                     <span class="meta-pill">Q${index + 1}</span>
                     <span class="meta-pill">${escapeHtml(titleCase(answerState))}</span>
+                    <span class="meta-pill review-topic-pill">${escapeHtml(question.topic || "General")}</span>
                     ${marked ? '<span class="meta-pill">Marked</span>' : ""}
                 </div>
                 <h3 class="review-question-title">${formatRichText(getQuestionText(question))}</h3>
                 ${renderMedia(question.questionImage, "review-question-image", "Question image")}
-                <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}">Your answer: ${selected === null ? "Not attempted" : renderReviewOptionAnswer(question, selected)}</div>
-                <div class="review-answer correct">Correct answer: ${renderReviewOptionAnswer(question, question.correctAnswer)}</div>
+                <div class="review-answer-grid">
+                    <div class="review-answer ${answerState === "wrong" ? "wrong" : ""}"><span>Your answer</span>${selected === null ? "<strong>Not attempted</strong>" : renderReviewOptionAnswer(question, selected)}</div>
+                    <div class="review-answer correct"><span>Correct answer</span>${renderReviewOptionAnswer(question, question.correctAnswer)}</div>
+                </div>
                 <div class="review-explanation">
-                    <p><strong>Explanation:</strong> ${formatRichText(getExplanationText(question))}</p>
+                    <span><i class="fas fa-lightbulb" aria-hidden="true"></i> Explanation</span>
+                    <p>${formatRichText(getExplanationText(question))}</p>
                     ${renderMedia(question.explanationImage, "explanation-image", "Explanation image")}
+                </div>
+                <div class="review-learning-note ${answerState}">
+                    <i class="fas ${answerState === "correct" ? "fa-circle-check" : answerState === "wrong" ? "fa-rotate-left" : "fa-book-open"}" aria-hidden="true"></i>
+                    <span>${answerState === "correct" ? "Correctly understood — maintain this concept." : answerState === "wrong" ? "Revise the concept and compare why your choice differs." : "Learn this solution before your next attempt."}</span>
                 </div>
             </article>
         `;
+    }
+
+    function getReviewFilterCount(filter, result) {
+        return result.questions.reduce(function (count, question, index) {
+            const selected = result.answers[index];
+            const marked = String(result.statuses[index] || "").includes("marked");
+            const answerState = selected === null ? "unattempted" : selected === question.correctAnswer ? "correct" : "wrong";
+            if (filter === "all") return count + 1;
+            if (filter === "marked") return count + (marked ? 1 : 0);
+            if (filter === "needs-review") return count + (answerState !== "correct" ? 1 : 0);
+            return count + (answerState === filter ? 1 : 0);
+        }, 0);
     }
 
     function renderReviewOptionAnswer(question, index) {

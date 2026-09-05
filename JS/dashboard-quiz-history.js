@@ -489,6 +489,9 @@
     renderDeviceTrend(readLocalAttempts());
     renderHeroStats(sorted);
     renderUnfinished();
+    document.dispatchEvent(new CustomEvent("gju:dashboard-quiz-data", {
+      detail: { rows: sorted, source: "account" }
+    }));
   }
 
   function renderDeviceOnly(message) {
@@ -509,6 +512,9 @@
     renderCompactHistory([]);
     renderHeroStats([]);
     renderUnfinished();
+    document.dispatchEvent(new CustomEvent("gju:dashboard-quiz-data", {
+      detail: { rows: local, source: "device" }
+    }));
   }
 
   async function waitForFirebaseConfig(timeoutMs = 6000) {
