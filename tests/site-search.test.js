@@ -47,3 +47,25 @@ test('empty queries and category filters remain usable; hostile text stays data'
   const rows=prepare([{title:'<img src=x onerror=alert(1)>',url:'HTML/quiz.html',category:'Quizzes'}]);
   assert.equal(search(rows,'img')[0].title,'<img src=x onerror=alert(1)>');
 });
+
+test('fresh Student Hub articles are searchable without rebuilding the bundled index',()=>{
+  const vm=require('node:vm');const context={window:{}};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../JS/blog-data.js'),'utf8'),context);
+  const {articleRecords}=require('../JS/site-search.js');
+  const live=articleRecords(context.window.GOVJOB_BLOGS,base);
+  const gdp=live.find(x=>x.title.includes('GDP Growth 7.8%'));assert.ok(gdp);
+  assert.equal(gdp.url,'HTML/student-hub/india-gdp-growth-7-8-controversy-q1-fy27-explained.html');
+  assert.equal(gdp.live,true);
+  // Deliberately use a stale snapshot that cannot know the new article.
+  const stale=index.filter(x=>!x.url.includes('india-gdp-growth'));
+  assert.ok(search(prepare([...stale,gdp]),'GDP','Articles').some(x=>x.url===gdp.url));
+  assert.ok(search(prepare(live),'MoSPI','All').some(x=>x.url===gdp.url));
+  const future=articleRecords([{title:'Future Economy Update',url:'student-hub/future.html',excerpt:'new economic indicators'}],base);
+  assert.equal(search(prepare([...stale,...future]),'economic indicators','Articles')[0].url,'HTML/student-hub/future.html');
+});
+test('article catalogue rejects invalid/external URLs and supports nested deployment roots',()=>{
+ const {articleRecords}=require('../JS/site-search.js');
+ assert.equal(articleRecords([null,{title:'x',url:'javascript:alert(1)'},{title:'x',url:'https://evil.example/a'}],base).length,0);
+ const rows=articleRecords([{title:'Article',url:'student-hub/a.html'}],base+'project/');
+ assert.equal(rows[0].url,'HTML/student-hub/a.html');
+});

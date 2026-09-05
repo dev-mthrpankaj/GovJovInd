@@ -1127,7 +1127,7 @@ if ('IntersectionObserver' in window) {
   style.dataset.gjuSearchLoader = 'true';
   style.addEventListener('load', () => {
     const script = document.createElement('script');
-    script.src = new URL('JS/site-search.js?v=20260905-1', base).href;
+    script.src = new URL('JS/site-search.js?v=20260905-articles-2', base).href;
     script.async = true;
     document.head.appendChild(script);
   }, { once: true });
