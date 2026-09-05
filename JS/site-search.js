@@ -19,7 +19,15 @@
   function safeUrl(value, base) {
     try {const url=new URL(value,base);return /^https?:$/.test(url.protocol)&&url.origin===new URL(base).origin&&url.pathname.startsWith(new URL(base).pathname)?url.href:null;}catch{return null;}
   }
-  const api={normalize,prepare,search,safeUrl};
+  function articleRecords(rows, base) {
+    return (Array.isArray(rows)?rows:[]).flatMap(row=>{
+      if(!row || typeof row.title!=='string' || !row.title.trim() || typeof row.url!=='string')return [];
+      let href;try{href=new URL(row.url,new URL('HTML/',base)).href;}catch{return [];}
+      const safe=safeUrl(href,base);if(!safe)return [];
+      return [{title:row.title,url:safe.slice(new URL(base).href.length),category:'Articles',description:String(row.excerpt||row.description||'').slice(0,260),keywords:[row.category,...(Array.isArray(row.tags)?row.tags:[])].filter(Boolean).join(' '),live:true}];
+    });
+  }
+  const api={normalize,prepare,search,safeUrl,articleRecords};
   if (typeof module==='object' && module.exports) {module.exports=api;return;}
   if (!root.document || root.GJUSiteSearch) return;
   root.GJUSiteSearch=api;
@@ -78,12 +86,17 @@
       ['jobs-data.js','GovJobUpdatesJobs','Jobs','HTML/latest-jobs.html'],
       ['admitcard-data.js','GovJobUpdatesAdmitCards','Admit Cards','HTML/admitcard.html'],
       ['answerkey-data.js','GovJobUpdatesAnswerKeys','Answer Keys','HTML/answer-key.html'],
-      ['results-data.js','GovJobUpdatesResults','Results','HTML/results.html']
+      ['results-data.js','GovJobUpdatesResults','Results','HTML/results.html'],
+      ['blog-data.js','GOVJOB_BLOGS','Articles','HTML/student-hub.html']
     ];
     for(const [file,globalName,group,fallback] of sources) {
       const apply=()=>{
         const rows=root[globalName];if(!Array.isArray(rows))return;
         const merged=new Map(indexed.map(x=>[x.url+'|'+x.category,x]));
+        if(group==='Articles'){
+          articleRecords(rows,base).forEach(item=>merged.set(item.url+'|'+item.category,item));
+          indexed=prepare([...merged.values()]);render();return;
+        }
         for(const row of rows) {
           if(!row || typeof row.title!=='string')continue;
           let href;
