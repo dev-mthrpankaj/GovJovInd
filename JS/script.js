@@ -1114,3 +1114,22 @@ if ('IntersectionObserver' in window) {
   startCounters();
 }
 })();
+
+// Shared, progressively enhanced search. Resolve assets from this script rather
+// than the page depth, so nested articles and detail pages use the same index.
+(function () {
+  'use strict';
+  if (document.querySelector('[data-gju-search-loader]')) return;
+  const base = new URL('../', document.currentScript.src);
+  const style = document.createElement('link');
+  style.rel = 'stylesheet';
+  style.href = new URL('CSS/site-search.css?v=20260905-1', base).href;
+  style.dataset.gjuSearchLoader = 'true';
+  style.addEventListener('load', () => {
+    const script = document.createElement('script');
+    script.src = new URL('JS/site-search.js?v=20260905-1', base).href;
+    script.async = true;
+    document.head.appendChild(script);
+  }, { once: true });
+  document.head.appendChild(style);
+}());
