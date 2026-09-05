@@ -250,7 +250,7 @@
     const counts = difficultyCountsByLanguage[language] || difficultyCountsByLanguage.english;
     return difficulties.map((difficulty) => ({
       ...difficulty,
-      count: counts[difficulty.id] || 0
+      count: (counts[difficulty.id] || 0) + (window.GJU_TYPING_LONG_CATALOG?.[language]?.[difficulty.id]?.length || 0)
     }));
   }
 
@@ -301,12 +301,17 @@
 
   function buildPassageCard(presetId, language, difficulty, number) {
     const href = `app.html?preset=${encodeURIComponent(presetId)}&language=${encodeURIComponent(language)}&difficulty=${encodeURIComponent(difficulty)}&passage=${number - 1}`;
+    const originalCount = difficultyCountsByLanguage[language]?.[difficulty] || 0;
+    const extra = window.GJU_TYPING_LONG_CATALOG?.[language]?.[difficulty]?.[number - originalCount - 1];
+    const description = extra
+      ? `${escapeHtml(extra.title)} · ${escapeHtml(extra.author)}. ${extra.words.toLocaleString("en-IN")} words. Classic literature practice excerpt.`
+      : "Start this passage in the attempt screen. Timer begins with the first typed letter.";
     return `
       <article class="gju-typing-passage-card">
         <div class="gju-typing-passage-card-head">
           <span class="gju-typing-card-kicker">${label(difficulty)} Passage</span>
           <h4>${labelFromPreset(presetId)} Passage ${number}</h4>
-          <p>Start this passage in the attempt screen. Timer begins with the first typed letter.</p>
+          <p>${description}</p>
           <div class="gju-typing-set-meta">
             <span class="gju-typing-meta-pill">${label(language)}</span>
             <span class="gju-typing-meta-pill" data-typing-duration-pill>${durationLabel(presetId)}</span>

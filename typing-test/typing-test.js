@@ -33,6 +33,12 @@
   let attemptFontSize = 22;
   let passageScrollFrame = 0;
   let lastPassageLineTop = 0;
+  let renderedPassage = null;
+  let renderedUnits = [];
+  let passageNodes = [];
+  const unitCache = new Map();
+  const textSegmenter = window.Intl && typeof Intl.Segmenter === "function"
+    ? new Intl.Segmenter(undefined, { granularity: "grapheme" }) : null;
   const routeParams = new URLSearchParams(window.location.search);
   const routePresetId = routeParams.get("preset") || app.dataset.presetId || config.defaultPresetId;
 
@@ -556,19 +562,29 @@
     if (!dom.passageText) return;
     const typed = splitTextUnits(getScoredTypedText());
     const reference = splitTextUnits(state.passage || "");
-    let html = "";
-    for (let index = 0; index < reference.length; index += 1) {
+    if (renderedPassage !== state.passage) {
+      dom.passageText.innerHTML = reference.map((char) => char.includes("\n")
+        ? '<span class="gju-typing-char gju-typing-line-break"><span class="gju-typing-enter-marker">Enter</span></span><br>'
+        : `<span class="gju-typing-char">${escapeHtml(char)}</span>`).join("");
+      passageNodes = Array.from(dom.passageText.querySelectorAll(".gju-typing-char"));
+      renderedPassage = state.passage;
+      renderedUnits = [];
+    }
+    // Update only the edited suffix, including the previous and new cursor.
+    // Long passages must not rebuild tens of thousands of nodes on every key.
+    let firstChanged = 0;
+    while (firstChanged < typed.length && firstChanged < renderedUnits.length
+      && typed[firstChanged] === renderedUnits[firstChanged]) firstChanged += 1;
+    const lastChanged = Math.min(reference.length - 1, Math.max(typed.length, renderedUnits.length));
+    for (let index = firstChanged; index <= lastChanged; index += 1) {
       const char = reference[index];
       let className = "gju-typing-char";
       if (index < typed.length) className += typed[index] === char ? " is-correct" : " is-incorrect";
       else if (index === typed.length) className += " is-current";
-      if (char.includes("\n")) {
-        html += `<span class="${className} gju-typing-line-break"><span class="gju-typing-enter-marker">Enter</span></span><br>`;
-        continue;
-      }
-      html += `<span class="${className}">${escapeHtml(char)}</span>`;
+      if (char.includes("\n")) className += " gju-typing-line-break";
+      passageNodes[index].className = className;
     }
-    dom.passageText.innerHTML = html;
+    renderedUnits = typed;
     keepCurrentPassageLineVisible();
   }
 
@@ -790,15 +806,21 @@
 
   function splitTextUnits(value) {
     const text = String(value || "");
-    if (window.Intl && typeof Intl.Segmenter === "function") {
-      try {
-        const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
-        return Array.from(segmenter.segment(text), (part) => part.segment);
-      } catch (error) {
-        return Array.from(text);
-      }
+    if (unitCache.has(text)) {
+      const cached = unitCache.get(text);
+      unitCache.delete(text);
+      unitCache.set(text, cached);
+      return cached;
     }
-    return Array.from(text);
+    let units;
+    try {
+      units = textSegmenter ? Array.from(textSegmenter.segment(text), (part) => part.segment) : Array.from(text);
+    } catch (error) {
+      units = Array.from(text);
+    }
+    unitCache.set(text, units);
+    if (unitCache.size > 2) unitCache.delete(unitCache.keys().next().value);
+    return units;
   }
 
   function escapeHtml(value) {

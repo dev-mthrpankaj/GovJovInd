@@ -295,5 +295,19 @@
   }
 
   applyRegisteredPassagePools(data);
+  // Append to every supported pool after legacy registrations have been applied.
+  // Keep existing indices stable for saved links and previous attempts.
+  const additions = window.GJU_TYPING_LONG_PASSAGES || {};
+  Object.entries(data).forEach(([language, categories]) => {
+    Object.values(categories).forEach((exams) => {
+      Object.values(exams).forEach((levels) => {
+        ["easy", "medium", "hard"].forEach((level) => {
+          if (Array.isArray(levels[level])) {
+            levels[level] = levels[level].concat(normalizePassages(additions[language]?.[level]));
+          }
+        });
+      });
+    });
+  });
   window.GJU_TYPING_PASSAGES = data;
 })();
