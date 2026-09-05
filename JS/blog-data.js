@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "india-gdp-growth-7-8-controversy-q1-fy27-explained",
+  title: "India GDP Growth 7.8% Controversy Explained: Q1 FY 2026-27 Data & Exam Facts",
+  category: "Current Affairs",
+  date: "2026-09-05",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1788582225244.webp",
+  url: "student-hub/india-gdp-growth-7-8-controversy-q1-fy27-explained.html",
+  excerpt: "India GDP growth 7.8% controversy explained: Q1 FY27 numbers, base-year revision, MoSPI clarification, growth drivers, GDP vs GVA and exam-ready economy facts."
+},
+    {
   id: "up-super-tet-syllabus-2026-exam-pattern",
   title: "UP Super TET Syllabus 2026: Revised Exam Pattern, Subject-Wise Topics & Marking Scheme",
   category: "State Exams",
