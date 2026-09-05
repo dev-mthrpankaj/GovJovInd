@@ -1022,7 +1022,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "734",
         "startDate": "2026-08-07",
         "lastDate": "2026-09-05",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://pardarsy.railnet.gov.in/apprentice-2026/login",
         "officialNotification": "https://rcf.indianrailways.gov.in/uploads/files/act-app/not-act-app-2026.pdf",
