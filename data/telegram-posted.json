@@ -2320,6 +2320,13 @@
       "title": "UPESSC UP Special TET Online Form 2026",
       "lastPostedAt": "2026-09-04T02:39:13.362Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0222-20260906120656-a7c35c06": {
+      "updatedAt": "2026-09-06",
+      "hash": "d9bcac0e89ed4b63f4e1e43b4f9b1ca1476ecce83682ff57a86f5da63ef25110",
+      "title": "DHC Personal Assistant Online Form 2026 for 150 Post",
+      "lastPostedAt": "2026-09-06T14:46:04.953Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3735,6 +3742,34 @@
       "hash": "7a1e59a4da42a68dec07323709f61bc8834a67f0e9c6f7060b6e239e907b0f18",
       "title": "UPSC CDS II Admit Card 2026 for 451 Post",
       "lastPostedAt": "2026-09-04T02:39:19.511Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0135-20260906114715-0c1c9a6d": {
+      "updatedAt": "2026-09-06",
+      "hash": "fddade47a22892bdbcef1e80ebb5b7f605ce21b07811777f2e8b36a3dcfce41a",
+      "title": "UPCISB UP Cooperative Bank Admit Card 2026",
+      "lastPostedAt": "2026-09-06T14:46:05.830Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0136-20260906114934-9bf9ab45": {
+      "updatedAt": "2026-09-06",
+      "hash": "2c413c6e45aecdd72289c3b6b352746376e68b2369fd2ecb9043f3e7fd095661",
+      "title": "BPCL Non Management Post Admit Card 2026 for 154 Post",
+      "lastPostedAt": "2026-09-06T14:46:06.266Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0137-20260906115435-407c3070": {
+      "updatedAt": "2026-09-06",
+      "hash": "8094512e74f64595595c766ec5ec0cbb0e7adff7874175e043f6870b0c04b964",
+      "title": "CSBC Bihar Police Constable GD Special Branch PET PST Admit Card 2026",
+      "lastPostedAt": "2026-09-06T14:46:06.912Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0138-20260906115804-7d7df1b1": {
+      "updatedAt": "2026-09-06",
+      "hash": "ced32323819206c73bbb2d14ee89cc0093749024e1a43bf386ff2d7ead1d9ae2",
+      "title": "NTA UGC NET June 2026 Re-Exam Admit Card",
+      "lastPostedAt": "2026-09-06T14:46:07.511Z",
       "stateReason": "new"
     }
   },
