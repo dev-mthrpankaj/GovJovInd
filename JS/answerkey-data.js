@@ -172,12 +172,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://ugcnet.nta.nic.in/",
         "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/UGC-NET-June-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-08-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0052-20260811200342-5029c0c4",
