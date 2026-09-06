@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0222-20260906120656-a7c35c06",
+        "title": "DHC Personal Assistant Online Form 2026 for 150 Post",
+        "organization": "High Court of Delhi (DHC)",
+        "department": "DHC",
+        "category": "Judiciary",
+        "year": "2026",
+        "qualification": "Graduate from a recognized University and having speed of not less than 110 w.p.m. in Shorthand (English) and 40 w.p.m. in Typewriting (English) on Computer with good working knowledge of Computer",
+        "totalPosts": "150",
+        "startDate": "2026-09-15",
+        "lastDate": "2026-09-05",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u",
+        "officialNotification": "https://delhihighcourt.nic.in/files/2026-09/recuritment/vacancy_circular_for_spa.pdf",
+        "detailPage": "../jobs/dhc-personal-assistant-2026.html",
+        "updatedAt": "2026-09-06",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0220-20260903172005-db77bb9a",
         "title": "UPSC CGSE Geo Scientist Online Form 2027 for 127 Post",
         "organization": "Union Public Service Commission  (UPSC)",
