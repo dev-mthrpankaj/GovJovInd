@@ -110,7 +110,8 @@
       "fullscreenSwitch",
       "hindiModeField",
       "hindiInputMode",
-      "attemptInfo"
+      "attemptInfo", "practiceHint", "speedGoal", "speedGoalText", "accuracyGoal",
+      "accuracyGoalText", "coachText", "resultAdvice", "retryResult"
     ].forEach((id) => {
       dom[id] = document.getElementById(id);
     });
@@ -140,6 +141,7 @@
     dom.cancelButton?.addEventListener("click", cancelAttempt);
     dom.pauseButton?.addEventListener("click", togglePause);
     dom.restartButton?.addEventListener("click", restartTest);
+    dom.retryResult?.addEventListener("click", restartTest);
     dom.fontDecrease?.addEventListener("click", () => updateAttemptFontSize(-1));
     dom.fontIncrease?.addEventListener("click", () => updateAttemptFontSize(1));
     dom.fullscreenSwitch?.addEventListener("change", toggleFullscreen);
@@ -174,7 +176,7 @@
     });
 
     window.addEventListener("beforeunload", (event) => {
-      if (state.status !== "running") return;
+      if (state.status !== "running" && state.status !== "paused") return;
       event.preventDefault();
       event.returnValue = "";
     });
@@ -388,6 +390,8 @@
   }
 
   function restartTest() {
+    if ((state.status === "running" || state.status === "paused")
+      && !window.confirm("Restart this passage? Your current attempt will be cleared.")) return;
     prepareTest();
     setStatus("ready");
     render();
@@ -395,7 +399,8 @@
   }
 
   function cancelAttempt() {
-    if (state.status === "running" && !window.confirm("Current typing attempt cancel karna hai?")) return;
+    if ((state.status === "running" || state.status === "paused")
+      && !window.confirm("Leave this test? Your current attempt will not be saved.")) return;
     if (window.history.length > 1) {
       window.history.back();
       return;
@@ -433,7 +438,7 @@
 
   function finishTest() {
     if (state.status === "finished") return;
-    state.finishedAt = performance.now();
+    state.finishedAt = state.status === "paused" ? state.pausedAt : performance.now();
     state.typed = dom.typingInput?.value || state.typed;
     const result = calculateResult();
     state.lastResult = result;
@@ -556,6 +561,17 @@
     if (dom.progressBar) dom.progressBar.style.width = `${progress}%`;
     setText(dom.progressText, `${Math.round(progress)}% complete`);
     setText(dom.liveWords, String(typedWords));
+    const speedProgress = Math.min(100, preview.netWPM / state.targetWPM * 100);
+    const accuracyProgress = Math.min(100, preview.accuracy / state.targetAccuracy * 100);
+    if (dom.speedGoal) dom.speedGoal.value = speedProgress;
+    if (dom.accuracyGoal) dom.accuracyGoal.value = accuracyProgress;
+    setText(dom.speedGoalText, `${Math.round(speedProgress)}%`);
+    setText(dom.accuracyGoalText, `${Math.round(accuracyProgress)}%`);
+    app.classList.toggle("is-time-low", state.status === "running" && getRemainingSeconds() <= 60);
+    setText(dom.coachText, !typedLength ? "Build a steady rhythm, one word at a time."
+      : !preview.accuracyPass ? "Slow down slightly. Check the highlighted mismatches before building speed."
+      : !preview.speedPass ? "Your accuracy is on target. Build speed with a steady rhythm."
+      : "Both targets reached so far. Keep your rhythm through the rest of the test.");
   }
 
   function renderPassage() {
@@ -644,6 +660,11 @@
     setText(dom.keyboardNote, getKeyboardNote(preset, state.language));
     setText(dom.storageText, storage?.isPersistent ? "Progress is saved on this device." : "Local storage is unavailable; progress will remain for this session only.");
     setText(dom.statusText, label(state.status));
+    setText(dom.practiceHint, state.status === "paused" ? "Practice paused. Select Resume when you are ready."
+      : state.status === "finished" ? "Attempt complete. Review your feedback below."
+      : state.status === "running" ? "Keep a steady rhythm. The underlined character shows your position."
+      : "Start typing to begin the timer. Aim for accuracy first.");
+    if (dom.passageText) dom.passageText.lang = state.language === "hindi" ? "hi" : "en";
   }
 
   function getKeyboardNote(preset, language) {
@@ -685,6 +706,7 @@
       dom.pauseButton.disabled = !(state.status === "running" || state.status === "paused");
       dom.pauseButton.textContent = state.status === "paused" ? "Resume" : "Pause";
     }
+    if (dom.hindiInputMode) dom.hindiInputMode.disabled = state.status === "running" || state.status === "paused" || state.status === "finished";
     if (dom.restartButton) dom.restartButton.disabled = state.status === "idle";
     if (dom.submitButton) dom.submitButton.disabled = state.status === "finished" || !Boolean((dom.typingInput?.value || state.typed || "").trim());
   }
@@ -701,7 +723,12 @@
 
   function toggleFullscreen() {
     if (!document.fullscreenElement) {
-      const request = app.requestFullscreen?.();
+      if (!app.requestFullscreen) {
+        if (dom.fullscreenSwitch) dom.fullscreenSwitch.checked = false;
+        showStatus("Fullscreen is not supported by this browser.");
+        return;
+      }
+      const request = app.requestFullscreen();
       if (request && typeof request.catch === "function") {
         request.catch(() => {
           if (dom.fullscreenSwitch) dom.fullscreenSwitch.checked = false;
@@ -734,6 +761,11 @@
 
     dom.resultStatus.className = `gju-typing-result-status ${result.targetAchieved ? "is-pass" : "is-fail"}`;
     dom.resultStatus.textContent = result.targetAchieved ? "TARGET ACHIEVED" : "TARGET NOT ACHIEVED";
+    setText(dom.resultAdvice, result.targetAchieved
+      ? "You met both practice targets. Try another passage to build consistency."
+      : !result.accuracyPass
+        ? `Focus on accuracy next: aim for ${result.targetAccuracy}%. Review the red mismatches above, then retry at a comfortable pace.`
+        : `Your accuracy is on target. Build another ${Math.max(0, result.targetWPM - result.netWPM).toFixed(1)} WPM to reach your speed goal.`);
     dom.resultGrid.innerHTML = [
       metric("Speed", `${result.netWPM.toFixed(1)} WPM`),
       metric("Gross Speed", `${result.grossWPM.toFixed(1)} WPM`),

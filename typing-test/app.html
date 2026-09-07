@@ -18,10 +18,11 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Home%20Page/favicon-16x16.png">
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
-  <link rel="stylesheet" href="typing-test.css">  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="typing-test.css">
+  <link rel="stylesheet" href="typing-workspace.css?v=20260907">  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GovJobUpdates Typing Test","url":"https://govjobupdates.com/typing-test/","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
 </head>
-<body>
+<body class="typing-workspace-body">
   <main class="typing-test-page gju-typing-attempt-page" id="typingTestApp" data-preset-id="general-english">
     <header class="gju-typing-attempt-topbar" aria-label="Typing attempt header">
       <a class="gju-typing-attempt-brand" href="index.html" aria-label="Back to typing exams">
@@ -38,14 +39,15 @@
     <section class="gju-typing-attempt-layout" aria-label="Typing attempt workspace">
       <section class="gju-typing-attempt-main">
         <div class="gju-typing-attempt-block">
-          <h1>Passage</h1>
+          <div class="workspace-heading"><h1>Read &amp; type</h1><span class="workspace-badge">Practice workspace</span></div>
+          <p class="workspace-hint" id="practiceHint">Start typing to begin the timer. Aim for accuracy first.</p>
           <p class="gju-typing-passage" id="passageText" aria-label="Typing passage"></p>
         </div>
 
         <div class="gju-typing-attempt-block">
-          <h2>Typing area</h2>
+          <div class="workspace-heading"><h2>Your typing</h2><span class="workspace-legend">Underline = current character · Red = mismatch</span></div>
           <label class="gju-typing-sr-only" for="typingInput">Typing input</label>
-          <textarea class="gju-typing-input" id="typingInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Write here"></textarea>
+          <textarea class="gju-typing-input" id="typingInput" aria-describedby="practiceHint" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Write here"></textarea>
         </div>
 
         <div class="gju-typing-progress" aria-label="Typing progress">
@@ -54,10 +56,10 @@
         </div>
 
         <div class="gju-typing-attempt-actions" aria-label="Typing controls">
-          <button class="gju-typing-button gju-typing-button-cancel" id="cancelButton" type="button">Cancel</button>
-          <button class="gju-typing-button gju-typing-button-primary" id="submitButton" type="button">Submit</button>
-          <button class="gju-typing-button" id="pauseButton" type="button" hidden>Pause</button>
-          <button class="gju-typing-button" id="restartButton" type="button" hidden>Restart</button>
+          <button class="gju-typing-button gju-typing-button-cancel" id="cancelButton" type="button">Exit</button>
+          <button class="gju-typing-button gju-typing-button-primary" id="submitButton" type="button">Finish test</button>
+          <button class="gju-typing-button" id="pauseButton" type="button">Pause</button>
+          <button class="gju-typing-button" id="restartButton" type="button">Restart</button>
         </div>
       </section>
 
@@ -66,7 +68,7 @@
           <dl class="gju-typing-attempt-info" id="attemptInfo">
             <div><dt>Test:</dt><dd id="examLabel">Typing Test</dd></div>
             <div><dt>Language:</dt><dd id="languageLabel">English</dd></div>
-            <div><dt>Status:</dt><dd id="statusText">Ready</dd></div>
+            <div><dt>Status:</dt><dd id="statusText" role="status">Ready</dd></div>
           </dl>
 
           <div class="gju-typing-font-control">
@@ -96,6 +98,14 @@
           <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
           <article><span>Target Accuracy</span><strong id="targetAccuracyText">95%</strong></article>
         </section>
+        <section class="gju-typing-attempt-card workspace-coach" aria-label="Practice goals">
+          <h2>Your practice goals</h2>
+          <label for="speedGoal">Speed target <span id="speedGoalText">0%</span></label>
+          <progress id="speedGoal" max="100" value="0"></progress>
+          <label for="accuracyGoal">Accuracy target <span id="accuracyGoalText">0%</span></label>
+          <progress id="accuracyGoal" max="100" value="0"></progress>
+          <p id="coachText">Build a steady rhythm, one word at a time.</p>
+        </section>
       </aside>
     </section>
 
@@ -107,7 +117,7 @@
 
     <p class="gju-typing-sr-only" id="modeLabel">Practice</p>
     <p class="gju-typing-sr-only" id="disclaimerText"></p>
-    <p class="gju-typing-sr-only" id="storageText"></p>
+    <p class="workspace-storage" id="storageText"></p>
   </main>
   <script src="../JS/firebase-config.js" defer></script>  <script type="module" src="../JS/firebase-analytics.js"></script>
   <script src="typing-config.js" defer></script>
@@ -121,7 +131,7 @@
   <script src="passages.js?v=typing-long36-20260905" defer></script>
   <script src="typing-storage.js" defer></script>
   <script src="hindi-font-modes.js?v=typing-hindi42-20260814" defer></script>
-  <script src="typing-test.js?v=typing-long36-20260905" defer></script>
+  <script src="typing-test.js?v=typing-workspace-20260907" defer></script>
 
   <footer><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved.</div></footer>
   <script type="module" src="../JS/firebase-visitors.js"></script>
