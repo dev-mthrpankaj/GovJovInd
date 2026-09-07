@@ -178,6 +178,7 @@
   function buildPage(presetId, exam) {
     const defaultLanguage = exam.languages[0] || "english";
     return `
+      <nav class="typing-breadcrumb" aria-label="Breadcrumb"><a href="index.html">All typing tests</a><span aria-hidden="true">/</span><span>${escapeHtml(exam.title)}</span></nav>
       <section class="gju-typing-exam-detail-card">
         <div class="gju-typing-hero-copy">
           <div class="gju-typing-hero-topline">
@@ -187,13 +188,13 @@
           <h1>${escapeHtml(exam.title)}</h1>
           <p>${escapeHtml(exam.description)}</p>
           <div class="gju-typing-hero-actions">
-            <a class="gju-typing-hero-start" href="#typingPassagesTitle"><i class="fas fa-keyboard" aria-hidden="true"></i> Choose Passage</a>
+            <a class="gju-typing-hero-start" href="#typingLanguageTitle"><i class="fas fa-keyboard" aria-hidden="true"></i> Choose your practice</a>
             <span class="gju-typing-free-note"><i class="fas fa-gift" aria-hidden="true"></i> Free forever. No charge.</span>
           </div>
         </div>
         <div class="gju-typing-hero-summary" aria-label="Typing test highlights">
           <article><span>Timer</span><strong>${getDurationLabel(exam)}</strong></article>
-          <article><span>Mode</span><strong>Exam Style</strong></article>
+          <article><span>Mode</span><strong>Typing practice</strong></article>
           <article><span>Result</span><strong>WPM + Accuracy</strong></article>
           <article><span>Passages</span><strong data-typing-total-sets>${getTotalSetCount(defaultLanguage)} Sets</strong></article>
         </div>
@@ -204,13 +205,9 @@
         <span>Exam typing/skill-test requirements may vary according to the latest official recruitment notification. Always verify the official notification before relying on these settings.</span>
       </section>
 
-      <div class="gju-typing-exam-info-grid">
-        ${buildDescriptionSection(exam)}
-        ${buildHowItWorksSection()}
-      </div>
 
       <section class="gju-typing-language-panel" aria-labelledby="typingLanguageTitle">
-        <h2 id="typingLanguageTitle">Select Language</h2>
+        <h2 id="typingLanguageTitle">1. Choose language</h2>
         <div class="gju-typing-language-buttons">
           ${exam.languages.map((language, index) => `<button class="gju-typing-language-btn${index === 0 ? " is-selected" : ""}" type="button" data-language="${language}" aria-pressed="${index === 0 ? "true" : "false"}">${label(language)}</button>`).join("")}
         </div>
@@ -220,11 +217,22 @@
       <section class="gju-typing-passage-panel" aria-labelledby="typingPassagesTitle" data-preset-id="${escapeHtml(presetId)}" data-language="${escapeHtml(defaultLanguage)}">
         <div class="gju-typing-passage-heading">
           <span class="gju-typing-section-label">Practice Sets</span>
-          <h2 id="typingPassagesTitle">Choose a Passage</h2>
+          <h2 id="typingPassagesTitle">2. Pick your practice level</h2>
           <p>Start with Easy, move to Medium, and finish with Hard for a complete typing routine.</p>
         </div>
+        <div class="typing-level-filters" aria-label="Passage difficulty">
+          ${difficulties.map((level, index) => `<button type="button" data-level-filter="${level.id}" aria-pressed="${index === 0}">${label(level.id)}</button>`).join("")}
+        </div>
+        <p class="typing-selection-summary" id="typingSelectionSummary" role="status"></p>
+        <div class="typing-quick-start"><p>New here? Start with the first passage at your chosen level.</p><a id="typingQuickStart" href="app.html?preset=${encodeURIComponent(presetId)}&language=${defaultLanguage}&difficulty=easy&passage=0">Start Easy practice</a></div>
         ${getDifficulties(defaultLanguage).map((difficulty) => buildDifficultyTable(presetId, defaultLanguage, difficulty)).join("")}
+        <button class="typing-show-more" id="typingShowMore" type="button" hidden>Show more passages</button>
       </section>
+
+      <div class="gju-typing-exam-info-grid">
+        ${buildDescriptionSection(exam)}
+        ${buildHowItWorksSection()}
+      </div>
 
       ${buildFaqSection(exam.title)}
     `;
@@ -310,7 +318,7 @@
       <article class="gju-typing-passage-card">
         <div class="gju-typing-passage-card-head">
           <span class="gju-typing-card-kicker">${label(difficulty)} Passage</span>
-          <h4>${labelFromPreset(presetId)} Passage ${number}</h4>
+          <h4>${extra ? escapeHtml(extra.title) : `Passage ${String(number).padStart(2, "0")}`}</h4>
           <p>${description}</p>
           <div class="gju-typing-set-meta">
             <span class="gju-typing-meta-pill">${label(language)}</span>
@@ -331,7 +339,38 @@
     const totalSetsNode = main.querySelector("[data-typing-total-sets]");
     const panel = main.querySelector(".gju-typing-passage-panel");
     const presetId = panel?.dataset.presetId || "";
+    let activeLevel = "easy";
+    let visibleLimit = 6;
+    const levelButtons = Array.from(main.querySelectorAll("[data-level-filter]"));
+    const more = main.querySelector("#typingShowMore");
+    function updateSelection() {
+      let total = 0;
+      panel?.querySelectorAll(".gju-typing-passage-level").forEach((section) => {
+        const selected = section.dataset.difficulty === activeLevel;
+        section.hidden = !selected;
+        const cards = Array.from(section.querySelectorAll(".gju-typing-passage-card"));
+        cards.forEach((card, index) => { card.hidden = index >= visibleLimit; });
+        if (selected) total = cards.length;
+      });
+      levelButtons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.levelFilter === activeLevel)));
+      if (more) more.hidden = visibleLimit >= total;
+      const language = panel?.dataset.language || "english";
+      const summary = main.querySelector("#typingSelectionSummary");
+      if (summary) summary.textContent = `${label(language)} · ${label(activeLevel)} · Showing ${Math.min(visibleLimit, total)} of ${total} passages · ${durationLabel(presetId)} per attempt`;
+      const quick = main.querySelector("#typingQuickStart");
+      if (quick) {
+        quick.href = `app.html?preset=${encodeURIComponent(presetId)}&language=${language}&difficulty=${activeLevel}&passage=0`;
+        quick.textContent = `Start ${label(activeLevel)} practice`;
+      }
+    }
+    levelButtons.forEach(button => button.addEventListener("click", () => {
+      activeLevel = button.dataset.levelFilter;
+      visibleLimit = 6;
+      updateSelection();
+    }));
+    more?.addEventListener("click", () => { visibleLimit += 6; updateSelection(); });
     syncPassageMeta(main, presetId);
+    updateSelection();
 
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -347,9 +386,12 @@
           panel.dataset.language = language;
           panel.querySelectorAll(".gju-typing-passage-level").forEach((level) => level.remove());
           getDifficulties(language).forEach((difficulty) => {
-            panel.insertAdjacentHTML("beforeend", buildDifficultyTable(presetId, language, difficulty));
+            if (more) more.insertAdjacentHTML("beforebegin", buildDifficultyTable(presetId, language, difficulty));
+            else panel.insertAdjacentHTML("beforeend", buildDifficultyTable(presetId, language, difficulty));
           });
+          visibleLimit = 6;
           syncPassageMeta(main, presetId);
+          updateSelection();
         }
       });
     });

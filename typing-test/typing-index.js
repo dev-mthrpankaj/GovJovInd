@@ -78,13 +78,17 @@
       const category = card.dataset.typingCategory || "";
       const name = card.dataset.typingName || "";
       const matchesCategory = activeFilter === "all" || category === activeFilter;
-      const matchesQuery = !query || name.includes(query);
+      const matchesQuery = !query || normalize(`${name} ${card.textContent}`).includes(query);
       const visible = matchesCategory && matchesQuery;
       card.hidden = !visible;
       if (visible) visibleCount += 1;
     });
 
     if (empty) empty.hidden = visibleCount > 0;
+    const count = document.getElementById("typingExamCount");
+    if (count) count.textContent = `${visibleCount} practice options${activeFilter === "all" ? "" : ` in ${categoryLabels[activeFilter] || activeFilter}`}`;
+    const reset = document.getElementById("typingResetFilters");
+    if (reset) reset.hidden = !query && activeFilter === "all";
   }
 
   filters.forEach((button) => {
@@ -100,6 +104,17 @@
     button.setAttribute("aria-pressed", String(button.classList.contains("is-selected")));
   });
 
+  document.getElementById("typingResetFilters")?.addEventListener("click", () => {
+    activeFilter = "all";
+    if (searchInput) searchInput.value = "";
+    filters.forEach(button => {
+      const selected = button.dataset.typingFilter === "all";
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+    syncCards();
+    searchInput?.focus();
+  });
   searchInput?.addEventListener("input", syncCards);
   enhanceCards();
   syncCards();
