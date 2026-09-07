@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0137-20260907222407-3ae83bec",
+        "title": "UPSSSC Manchitrak Cartographer Mains Result 2026 Advt No 11-Exam/2023",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-07",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=162&Result_Type=M&Exam_Code=7&Advt_Code=725&Dept_Code=526&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../jobs/upsssc-cartographer-advt-no-11-exam-2023.html",
+        "updatedAt": "2026-09-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0138-20260907222553-009d784c",
+        "title": "DDA Result 2026 for Various Post",
+        "organization": "Delhi Development Authority",
+        "department": "DDA",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-07",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://dda.gov.in/latest-jobs",
+        "detailPage": "../jobs/dda-result.html",
+        "updatedAt": "2026-09-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0130-20260903170417-35cbb5bc",
         "title": "UPSC CMS Result 2026 | Combined Medical Services",
         "organization": "Union Public Service Commission",

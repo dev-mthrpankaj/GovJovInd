@@ -256,12 +256,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
-        "detailPage": "../AdmitCard_Details/HTML/RPSC-Rajasthan-APO-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0124-20260826154026-ef32c12d",
@@ -1016,12 +1016,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101714/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/RRB-Railway-Group-D-City-Intimation-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0081-20260723164911-6440bc4d",
