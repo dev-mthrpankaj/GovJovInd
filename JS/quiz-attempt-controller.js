@@ -4,7 +4,9 @@
     const params = new URLSearchParams(window.location.search);
     const quizId = String(params.get("quiz") || "").trim();
     const family = String(params.get("family") || "").trim().toLowerCase();
+    const subject = String(params.get("subject") || "").trim().toLowerCase();
     const familyPages = { banking: "banking-quizzes.html", ssc: "ssc-quizzes.html", police: "police-quizzes.html", rrb: "rrb-quizzes.html" };
+    const subjectPages = { maths: "maths-quizzes.html", reasoning: "reasoning-quizzes.html", english: "english-quizzes.html", hindi: "hindi-quizzes.html", "gk-gs": "general-awareness-quizzes.html", "general-awareness": "general-awareness-quizzes.html", "general-science": "general-science-quizzes.html", computer: "computer-quizzes.html", "current-affairs": "current-affairs-quizzes.html" };
     const THEME_KEY = "gju:quiz-attempt-theme";
     let pausedSeconds = 0;
     let startAttempted = false;
@@ -13,7 +15,7 @@
     let legacyHomeObserver = null;
     let questionObserver = null;
 
-    function sourcePage() { return familyPages[family] || "quiz.html"; }
+    function sourcePage() { return family === "topic-wise" ? (subjectPages[subject] || "quiz.html") : (familyPages[family] || "quiz.html"); }
     function exitToSource() { window.location.href = sourcePage(); }
     function parseTimer(value) {
         const parts = String(value || "").trim().split(":").map(Number);
