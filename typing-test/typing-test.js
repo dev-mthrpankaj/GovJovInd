@@ -395,6 +395,7 @@
     prepareTest();
     setStatus("ready");
     render();
+    app.scrollIntoView?.({ block: "start", behavior: "auto" });
     focusTypingInput(true);
   }
 
