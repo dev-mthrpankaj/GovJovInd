@@ -317,10 +317,6 @@
       "signature": "7009c828afb5658671ff3a7e5dbe4925e948a0e1acafe67a2e86508f0aa6f8d9",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/RPSC-Rajasthan-APO-Admit-Card-2026.html": {
-      "signature": "f5f6b5feb90024d535668611cd3153c21e1f64e1a246d94eaabf7b10b2576c0e",
-      "lastmod": "2026-08-26"
-    },
     "AdmitCard_Details/HTML/RPSC-Senior-Teacher-Admit-Card-2026.html": {
       "signature": "8cb857f6c67064d2495ed44227b9758ede3e735d89de381ad06f15ca9688c811",
       "lastmod": "2026-08-14"
@@ -339,10 +335,6 @@
     },
     "AdmitCard_Details/HTML/RRB-Railway-ALP-CBT-2-Admit-Card-2026.html": {
       "signature": "88d2f222f07b36a92e169029f9f09dc9688de3161ba6ea02414b9ca64c8c1d94",
-      "lastmod": "2026-08-12"
-    },
-    "AdmitCard_Details/HTML/RRB-Railway-Group-D-City-Intimation-2026.html": {
-      "signature": "dd80517c1eee6c30a77ef9057c1c6d212f404000cb7b1823788107270fe30fc9",
       "lastmod": "2026-08-12"
     },
     "AdmitCard_Details/HTML/RSMSSB-Clerk-Grade-II-Junior-Assistant-Admit-Card-2026.html": {
@@ -1425,10 +1417,6 @@
       "signature": "e251c8fac0d0e7c132dc02931170bd9cee4d8e67f3402c5ac7ea47e14d14a73c",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/2433-RPSC-APO-Recruitment-2026.html": {
-      "signature": "af9ad5ac0bb7bbe0ec6b93ee3c00a46f88eb5c0ea68a5e1e9a95b29663cba97f",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/2434-upsssc-lower-pcs-2026.html": {
       "signature": "1c0fe26cef3fee1e2e3adab1b6447185b50b15884b05af7a96b55dfc124f70f7",
       "lastmod": "2026-08-12"
@@ -1949,6 +1937,10 @@
       "signature": "ceaeec9a9233c4acf1f9d92221c1cc8149f9e4f92f95cf0ee9efa96acb0154a9",
       "lastmod": "2026-09-06"
     },
+    "jobs/bpssc-police-company-commander-2026.html": {
+      "signature": "a28efd1417c481724e7f8da7e8b0c47780bf06a95864068a81e9daa86c6df1ac",
+      "lastmod": "2026-09-07"
+    },
     "jobs/cgpsc-admit-card.html": {
       "signature": "ab1c9aa874f25056f8007a3af6730d4746c31211192320cc55054178b318c4e4",
       "lastmod": "2026-09-04"
@@ -1960,6 +1952,10 @@
     "jobs/csbc-bihar-police-constable-gd-2026.html": {
       "signature": "f50cb814bca8a388d510d3c3235adc07ccccaff08f94ec590ae3d5381701118b",
       "lastmod": "2026-09-06"
+    },
+    "jobs/csc-aadhar-supervisor-operator-2026.html": {
+      "signature": "c5ca21400fb0d61f46943918b8e3999362c9a0d2f77e0e7ca439a2a1ba4a1777",
+      "lastmod": "2026-09-07"
     },
     "jobs/delhi-high-court-hjs-2026.html": {
       "signature": "a97a77a85ce0387abf7585c722d95bc5b1c1d6e26187f59c45c338f894550229",
@@ -2076,6 +2072,10 @@
     "jobs/upsc-nda-ii-2026.html": {
       "signature": "8de7f04dafd731f2a55664f8c6f1be4a59276e942e2662b407316e1200f18678",
       "lastmod": "2026-09-04"
+    },
+    "jobs/upsssc-computer-cadre-2026.html": {
+      "signature": "503d10783c56082ef201a39279df9731eee7fb42606179f10914a719714b860d",
+      "lastmod": "2026-09-07"
     },
     "jobs/upsssc-pet-2026.html": {
       "signature": "82c8f5265ec2b7aa48bce25a5757101cd2449ceeb705425b919f681117618b19",
