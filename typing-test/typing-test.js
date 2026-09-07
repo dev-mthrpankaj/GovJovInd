@@ -62,6 +62,12 @@
     setStatus("ready");
     render();
     syncAttemptFontSize();
+    const syncViewport = () => {
+      app.style.setProperty("--typing-viewport", `${window.visualViewport?.height || window.innerHeight}px`);
+    };
+    syncViewport();
+    window.visualViewport?.addEventListener("resize", syncViewport);
+    window.addEventListener("resize", syncViewport);
     focusTypingInput(false);
   }
 
@@ -614,35 +620,14 @@
       if (!current) return;
 
       const panel = dom.passageText;
-      const currentTop = current.offsetTop;
-      const currentBottom = currentTop + current.offsetHeight;
-      const visibleTop = panel.scrollTop;
-      const visibleBottom = visibleTop + panel.clientHeight;
-      const lineHeight = parseFloat(window.getComputedStyle(panel).lineHeight) || current.offsetHeight || 28;
-      const hasChangedLine = currentTop > lastPassageLineTop + lineHeight * 0.45;
-      const nearBottom = currentBottom > visibleBottom - lineHeight * 1.2;
-
-      if (!lastPassageLineTop) {
-        lastPassageLineTop = currentTop;
-      }
-
-      if (hasChangedLine) {
-        lastPassageLineTop = currentTop;
-      }
-
-      if (hasChangedLine && nearBottom) {
-        panel.scrollTo({
-          top: Math.min(panel.scrollHeight - panel.clientHeight, visibleTop + lineHeight),
-          behavior: "auto"
-        });
-        return;
-      }
-
-      if (currentTop < visibleTop + lineHeight && visibleTop > 0) {
-        panel.scrollTo({
-          top: Math.max(0, currentTop - lineHeight * 1.5),
-          behavior: "auto"
-        });
+      const bounds = panel.getBoundingClientRect();
+      const cursor = current.getBoundingClientRect();
+      const top = bounds.top + panel.clientTop + 8;
+      const bottom = bounds.top + panel.clientTop + panel.clientHeight - 8;
+      if (cursor.top < top) {
+        panel.scrollTop = Math.max(0, panel.scrollTop + cursor.top - top);
+      } else if (cursor.bottom > bottom) {
+        panel.scrollTop += cursor.bottom - bottom;
       }
     });
   }
@@ -659,7 +644,7 @@
     setText(dom.languageLabel, state.language === "hindi" ? `Hindi (${getHindiInputModeLabel()})` : label(state.language));
     setText(dom.disclaimerText, preset?.disclaimer || "Practice settings are configurable. For exam-specific preparation, verify the latest official notification.");
     setText(dom.keyboardNote, getKeyboardNote(preset, state.language));
-    setText(dom.storageText, storage?.isPersistent ? "Progress is saved on this device." : "Local storage is unavailable; progress will remain for this session only.");
+    setText(dom.storageText, storage?.isPersistent ? "Completed results are saved on this device. Unfinished attempts are not saved." : "Results cannot be saved on this device. Keep this tab open to review your result.");
     setText(dom.statusText, label(state.status));
     setText(dom.practiceHint, state.status === "paused" ? "Practice paused. Select Resume when you are ready."
       : state.status === "finished" ? "Attempt complete. Review your feedback below."

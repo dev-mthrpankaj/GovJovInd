@@ -19,7 +19,7 @@
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
   <link rel="stylesheet" href="typing-test.css">
-  <link rel="stylesheet" href="typing-workspace.css?v=20260907">  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="typing-workspace.css?v=compact-20260907">  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GovJobUpdates Typing Test","url":"https://govjobupdates.com/typing-test/","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
 </head>
 <body class="typing-workspace-body">
@@ -35,6 +35,14 @@
       </div>
       <a class="gju-typing-icon-link" href="index.html" aria-label="Back to typing exams"><i class="fas fa-home" aria-hidden="true"></i></a>
     </header>
+
+        <section class="gju-typing-attempt-card gju-typing-live-card" aria-label="Live metrics">
+          <article><span>Net WPM</span><strong id="liveWPM">0.0</strong></article>
+          <article><span>Accuracy</span><strong id="liveAccuracy">0.0%</strong></article>
+          <article><span>Typed Words</span><strong id="liveWords">0</strong></article>
+          <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
+          <article><span>Target Accuracy</span><strong id="targetAccuracyText">95%</strong></article>
+        </section>
 
     <section class="gju-typing-attempt-layout" aria-label="Typing attempt workspace">
       <section class="gju-typing-attempt-main">
@@ -71,6 +79,7 @@
             <div><dt>Status:</dt><dd id="statusText" role="status">Ready</dd></div>
           </dl>
 
+          <details class="workspace-settings"><summary>Display &amp; keyboard settings</summary>
           <div class="gju-typing-font-control">
             <strong>Font Size:</strong>
             <button id="fontDecrease" type="button" aria-label="Decrease font size"><i class="fas fa-minus" aria-hidden="true"></i></button>
@@ -89,21 +98,11 @@
           <p class="gju-typing-keyboard-note" id="keyboardNote">English mode uses your standard keyboard layout.</p>
 
           <label class="gju-typing-toggle-row">Full Screen:<input id="fullscreenSwitch" type="checkbox" role="switch"><span></span></label>
+          </details>
         </section>
 
-        <section class="gju-typing-attempt-card gju-typing-live-card" aria-label="Live metrics">
-          <article><span>Net WPM</span><strong id="liveWPM">0.0</strong></article>
-          <article><span>Accuracy</span><strong id="liveAccuracy">0.0%</strong></article>
-          <article><span>Typed Words</span><strong id="liveWords">0</strong></article>
-          <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
-          <article><span>Target Accuracy</span><strong id="targetAccuracyText">95%</strong></article>
-        </section>
         <section class="gju-typing-attempt-card workspace-coach" aria-label="Practice goals">
-          <h2>Your practice goals</h2>
-          <label for="speedGoal">Speed target <span id="speedGoalText">0%</span></label>
-          <progress id="speedGoal" max="100" value="0"></progress>
-          <label for="accuracyGoal">Accuracy target <span id="accuracyGoalText">0%</span></label>
-          <progress id="accuracyGoal" max="100" value="0"></progress>
+          <h2>Practice feedback</h2>
           <p id="coachText">Build a steady rhythm, one word at a time.</p>
         </section>
       </aside>
@@ -134,9 +133,9 @@
   <script src="passages.js?v=typing-long36-20260905" defer></script>
   <script src="typing-storage.js" defer></script>
   <script src="hindi-font-modes.js?v=typing-hindi42-20260814" defer></script>
-  <script src="typing-test.js?v=typing-workspace-20260907" defer></script>
+  <script src="typing-test.js?v=compact-20260907" defer></script>
 
   <footer><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved.</div></footer>
-  <script type="module" src="../JS/firebase-visitors.js"></script>
+
 </body>
 </html>
