@@ -19,7 +19,9 @@
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
   <link rel="stylesheet" href="typing-test.css">
-  <link rel="stylesheet" href="typing-workspace.css?v=compact-20260907">  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="typing-workspace.css?v=compact-20260907">
+  <link rel="stylesheet" href="typing-header-actions.css?v=header-fullscreen-20260908">
+  <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GovJobUpdates Typing Test","url":"https://govjobupdates.com/typing-test/","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
 </head>
 <body class="typing-workspace-body">
@@ -33,16 +35,23 @@
         <span>Time Left</span>
         <strong id="timerText">10 mins : 00 sec</strong>
       </div>
-      <a class="gju-typing-icon-link" href="index.html" aria-label="Back to typing exams"><i class="fas fa-home" aria-hidden="true"></i></a>
+      <div class="gju-typing-header-actions" aria-label="Workspace actions">
+        <label class="gju-typing-header-fullscreen" title="Full screen">
+          <input id="fullscreenSwitch" type="checkbox" role="switch" aria-label="Full screen">
+          <i class="fas fa-expand" aria-hidden="true"></i>
+          <span class="gju-typing-header-fullscreen-text">Full Screen</span>
+        </label>
+        <a class="gju-typing-icon-link" href="index.html" aria-label="Back to typing exams"><i class="fas fa-home" aria-hidden="true"></i></a>
+      </div>
     </header>
 
-        <section class="gju-typing-attempt-card gju-typing-live-card" aria-label="Live metrics">
-          <article><span>Net WPM</span><strong id="liveWPM">0.0</strong></article>
-          <article><span>Accuracy</span><strong id="liveAccuracy">0.0%</strong></article>
-          <article><span>Typed Words</span><strong id="liveWords">0</strong></article>
-          <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
-          <article><span>Target Accuracy</span><strong id="targetAccuracyText">95%</strong></article>
-        </section>
+    <section class="gju-typing-attempt-card gju-typing-live-card" aria-label="Live metrics">
+      <article><span>Net WPM</span><strong id="liveWPM">0.0</strong></article>
+      <article><span>Accuracy</span><strong id="liveAccuracy">0.0%</strong></article>
+      <article><span>Typed Words</span><strong id="liveWords">0</strong></article>
+      <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
+      <article><span>Target Accuracy</span><strong id="targetAccuracyText">95%</strong></article>
+    </section>
 
     <section class="gju-typing-attempt-layout" aria-label="Typing attempt workspace">
       <section class="gju-typing-attempt-main">
@@ -96,8 +105,6 @@
           </label>
 
           <p class="gju-typing-keyboard-note" id="keyboardNote">English mode uses your standard keyboard layout.</p>
-
-          <label class="gju-typing-toggle-row">Full Screen:<input id="fullscreenSwitch" type="checkbox" role="switch"><span></span></label>
           </details>
         </section>
 
