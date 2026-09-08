@@ -1,0 +1,77 @@
+/* Header-level attempt actions: keep fullscreen immediately accessible without crowding the settings panel. */
+.gju-typing-attempt-page .gju-typing-header-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 18px;
+}
+
+.gju-typing-attempt-page .gju-typing-header-actions .gju-typing-icon-link {
+  margin-right: 0;
+}
+
+.gju-typing-attempt-page .gju-typing-header-fullscreen {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid #dce3ef;
+  border-radius: 12px;
+  background: #fff;
+  color: #315bd6;
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.gju-typing-attempt-page .gju-typing-header-fullscreen:hover {
+  background: #f5f8ff;
+  border-color: #c6d4f5;
+}
+
+.gju-typing-attempt-page .gju-typing-header-fullscreen > i {
+  font-size: 1rem;
+}
+
+.gju-typing-attempt-page .gju-typing-header-fullscreen input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.gju-typing-attempt-page .gju-typing-header-fullscreen:has(input:focus-visible) {
+  outline: 3px solid #315bd6;
+  outline-offset: 3px;
+}
+
+.gju-typing-attempt-page .gju-typing-header-fullscreen:has(input:checked) {
+  background: #edf2ff;
+  border-color: #b9caf5;
+}
+
+@media (max-width: 600px) {
+  .gju-typing-attempt-page .gju-typing-header-actions {
+    gap: 5px;
+    margin-right: 8px;
+  }
+
+  .gju-typing-attempt-page .gju-typing-header-fullscreen {
+    width: 40px;
+    min-height: 40px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .gju-typing-attempt-page .gju-typing-header-fullscreen-text {
+    display: none;
+  }
+}
