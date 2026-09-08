@@ -104,4 +104,10 @@
     saveResult,
     updateResult
   };
+
+  // Keep the competition/auth integration isolated from the proven typing engine.
+  const competitionScript = document.createElement("script");
+  competitionScript.src = "typing-competition.js?v=competition-20260908";
+  competitionScript.async = false;
+  document.head.appendChild(competitionScript);
 })();
