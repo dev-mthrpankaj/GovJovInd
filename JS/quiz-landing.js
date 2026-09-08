@@ -1,7 +1,7 @@
 (function(){
 "use strict";
 
-const styleHref="../CSS/quiz-selection-ui.css?v=20260908-focused";
+const styleHref="../CSS/quiz-selection-ui.css?v=20260908-exclusive";
 if(!document.querySelector(`link[href^="${styleHref.split("?")[0]}"]`)){
   const link=document.createElement("link");
   link.rel="stylesheet";
@@ -31,6 +31,7 @@ const subjectConfig={
 let loaded=false;
 let allItems=[];
 let currentSelection=null;
+let currentMode="exam";
 
 function esc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
 function slugify(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"quiz"}
@@ -43,6 +44,33 @@ function row(q){const href=`quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&f
 
 function renderLegacyFamilies(items){Object.entries(familyLists).forEach(([slug,list])=>{if(!list)return;const rows=items.filter(q=>q.family===slug).sort((a,b)=>b.order-a.order).slice(0,5);list.innerHTML=rows.length?rows.map(row).join(""):'<div class="quiz-family-no-quizzes"><span>No published quizzes available in this category yet.</span></div>'})}
 
+function setMode(mode,focus){
+  currentMode=mode==="subject"?"subject":"exam";
+  const layout=document.querySelector(".quiz-discovery-layout");
+  if(layout)layout.dataset.mode=currentMode;
+  const heroLinks=document.querySelectorAll(".quiz-practice-paths a");
+  heroLinks.forEach(link=>link.classList.remove("is-active-path"));
+  const activeLink=currentMode==="subject"?heroLinks[0]:heroLinks[1];
+  activeLink?.classList.add("is-active-path");
+  clearSelection();
+  currentSelection=null;
+  showPlaceholder(currentMode);
+  if(focus){
+    layout?.scrollIntoView({behavior:"smooth",block:"start"});
+    window.setTimeout(()=>{
+      if(currentMode==="subject")document.querySelector(".quiz-discovery-subjects .quiz-subject-card")?.focus();
+      else document.querySelector(".quiz-exam-selector")?.focus();
+    },250);
+  }
+}
+
+function showPlaceholder(mode){
+  const root=document.querySelector("#selectedQuizResults .quiz-family-feed");
+  if(!root)return;
+  const text=mode==="subject"?"Choose a subject above to view matching quizzes.":"Choose an exam above to view matching quizzes.";
+  root.innerHTML=`<div class="quiz-results-placeholder"><span><i class="fas fa-hand-pointer" aria-hidden="true"></i>${text}</span></div>`;
+}
+
 function buildFocusedUI(){
   const landing=document.getElementById("quizLandingPage");
   const subjectSection=document.getElementById("subjectQuizDirectory");
@@ -53,6 +81,7 @@ function buildFocusedUI(){
   const layout=document.createElement("section");
   layout.className="quiz-discovery-layout";
   layout.id="quizPracticeSelector";
+  layout.dataset.mode="exam";
   layout.setAttribute("aria-label","Choose exam or subject practice");
 
   const examPanel=document.createElement("section");
@@ -90,17 +119,16 @@ function buildFocusedUI(){
   results.className="quiz-dynamic-results";
   results.id="selectedQuizResults";
   results.setAttribute("aria-live","polite");
-  results.innerHTML='<div class="quiz-family-feed"><div class="quiz-results-placeholder"><span><i class="fas fa-hand-pointer" aria-hidden="true"></i>Choose an exam or subject above to view matching quizzes.</span></div></div>';
+  results.innerHTML='<div class="quiz-family-feed"></div>';
   layout.after(results);
 
   const heroLinks=document.querySelectorAll(".quiz-practice-paths a");
-  if(heroLinks[0])heroLinks[0].addEventListener("click",event=>{event.preventDefault();layout.scrollIntoView({behavior:"smooth",block:"start"});subjectPanel.querySelector(".quiz-subject-card")?.focus()});
-  if(heroLinks[1])heroLinks[1].addEventListener("click",event=>{event.preventDefault();layout.scrollIntoView({behavior:"smooth",block:"start"});examList.querySelector(".quiz-exam-selector")?.focus()});
+  if(heroLinks[0])heroLinks[0].addEventListener("click",event=>{event.preventDefault();setMode("subject",true)});
+  if(heroLinks[1])heroLinks[1].addEventListener("click",event=>{event.preventDefault();setMode("exam",true)});
+  setMode("exam",false);
 }
 
-function clearSelection(){
-  document.querySelectorAll(".quiz-exam-selector.is-selected,.quiz-subject-card.is-selected").forEach(el=>el.classList.remove("is-selected"));
-}
+function clearSelection(){document.querySelectorAll(".quiz-exam-selector.is-selected,.quiz-subject-card.is-selected").forEach(el=>el.classList.remove("is-selected"))}
 
 function renderFocusedResults(items,meta){
   const root=document.querySelector("#selectedQuizResults .quiz-family-feed");
@@ -113,6 +141,7 @@ function renderFocusedResults(items,meta){
 function selectExam(slug,scroll){
   const cfg=familyConfig[slug];
   if(!cfg)return;
+  if(currentMode!=="exam")setMode("exam",false);
   clearSelection();
   document.querySelector(`[data-exam-selector="${slug}"]`)?.classList.add("is-selected");
   currentSelection={type:"exam",slug};
@@ -123,6 +152,7 @@ function selectExam(slug,scroll){
 function selectSubject(slug,scroll){
   const cfg=subjectConfig[slug];
   if(!cfg)return;
+  if(currentMode!=="subject")setMode("subject",false);
   clearSelection();
   document.querySelector(`[data-subject-selector="${slug}"]`)?.classList.add("is-selected");
   currentSelection={type:"subject",slug};
@@ -130,11 +160,7 @@ function selectSubject(slug,scroll){
   if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-function refreshSelection(){
-  if(!currentSelection)return;
-  if(currentSelection.type==="exam")selectExam(currentSelection.slug,false);
-  else selectSubject(currentSelection.slug,false);
-}
+function refreshSelection(){if(!currentSelection)return;if(currentSelection.type==="exam")selectExam(currentSelection.slug,false);else selectSubject(currentSelection.slug,false)}
 
 function load(){
   const raw=sourceItems();
