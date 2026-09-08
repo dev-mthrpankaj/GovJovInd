@@ -618,16 +618,16 @@
       "lastmod": "2026-09-04"
     },
     "HTML/computer-quizzes.html": {
-      "signature": "708ff2bce2072cec9910f18ee3f0555e4341612b2700e399f07228ba8025cd9a",
-      "lastmod": "2026-09-07"
+      "signature": "54b700ea82de0d04fa387933ea3acb7ba97867f861fef373b15fac947daad7e4",
+      "lastmod": "2026-09-08"
     },
     "HTML/contact.html": {
       "signature": "291ae4aa06c72f02326e9dea381be591feb11c2692efabe01e8c61c0ab5bc21c",
       "lastmod": "2026-08-28"
     },
     "HTML/current-affairs-quizzes.html": {
-      "signature": "f85fae4aa28ec64d3ce2036789a4ba35f3df32622e5801ab88aefcef171aecde",
-      "lastmod": "2026-09-07"
+      "signature": "ce278c79dc5c11de2ba7afe22d6f4bfc8886f73a000181d77a6cd4c6c4128b35",
+      "lastmod": "2026-09-08"
     },
     "HTML/disclaimer.html": {
       "signature": "9de76a7103467faeb25fdd3c51b4cf1f1a70905642c8c083425a8389df892aff",
@@ -642,20 +642,20 @@
       "lastmod": "2026-08-12"
     },
     "HTML/english-quizzes.html": {
-      "signature": "65d2536b71ceaacb64dcd6c9c3709e5b0e73ca436c9fb10af083a0b7c8f7587f",
-      "lastmod": "2026-09-07"
+      "signature": "8ea735072ce4c3a5bc2c360751ff760f43d986f65e9a9c0c97f9ae489fb4e0df",
+      "lastmod": "2026-09-08"
     },
     "HTML/general-awareness-quizzes.html": {
-      "signature": "2ed5062ccb3be3c3b34f07bcec38a2d2517754f6221f1d75673fca3400922f53",
-      "lastmod": "2026-09-07"
+      "signature": "d9174353caea80cbdcb41038d5d62345ae99e5f0c2ca24a63ed6e118974526f7",
+      "lastmod": "2026-09-08"
     },
     "HTML/general-science-quizzes.html": {
-      "signature": "54e7395793a51a7eccd1b4a5d03912da2a249dfb0597413a0f6a0b2f6e470863",
-      "lastmod": "2026-09-07"
+      "signature": "d86a62553efb586b6f6882c81010a6f661144064de9680f785b09cb2a1ccf433",
+      "lastmod": "2026-09-08"
     },
     "HTML/hindi-quizzes.html": {
-      "signature": "39339fbe403cc87f0ff020bf9c9fb585b897ec597e97d0bbadabb4388996570a",
-      "lastmod": "2026-09-07"
+      "signature": "9d7114d40d0760637a6d353c892f6e2312b51ae03425ad842be675f4aef55b49",
+      "lastmod": "2026-09-08"
     },
     "HTML/latest-jobs.html": {
       "signature": "5446ed88fe1a9cb1997eba7b1e5af4b40c812120dd47c22c1a3802975a50ae94",
@@ -666,8 +666,8 @@
       "lastmod": "2026-08-12"
     },
     "HTML/maths-quizzes.html": {
-      "signature": "57add79de1e481f843e6a3500c3f43364ad271e16642739a460776368669238a",
-      "lastmod": "2026-09-07"
+      "signature": "0fa1b41c2203836942e0f3d0c52492fcd6a2ee1c224ba9b837c14a92ebdbb19e",
+      "lastmod": "2026-09-08"
     },
     "HTML/physical-academy-enroll.html": {
       "signature": "7deb5ee4b1c97c49d7f4ac961812dd28c705907877304783aa437adb97c1253e",
@@ -694,8 +694,8 @@
       "lastmod": "2026-08-20"
     },
     "HTML/reasoning-quizzes.html": {
-      "signature": "e75df4e9275c9094e4985fc384dcc6132e328d72744f87e50c776d8f34bd663b",
-      "lastmod": "2026-09-07"
+      "signature": "096737ba3a7d36144eb488c8720836bff5b6cd2a6933be387af9b161c88c6202",
+      "lastmod": "2026-09-08"
     },
     "HTML/recruitment-apply.html": {
       "signature": "e64b49a6462adfbbeb0ff183890402a5a3cfb923aa93107fbc2810b25351533b",
@@ -2028,6 +2028,10 @@
     "jobs/southern-railway-apprentices-2026.html": {
       "signature": "febf403a7ec8474f6372c4f1be74f03ae56afaf4cb0431641dc9c591b5cea9c1",
       "lastmod": "2026-09-03"
+    },
+    "jobs/ssc-chsl-2026.html": {
+      "signature": "0fef37c774de48b0b8629d6245194dee7a29bdd4ae0566b31fc4d6a387c8019f",
+      "lastmod": "2026-09-08"
     },
     "jobs/ssc-je-junior-engineer-2026.html": {
       "signature": "3d2e5bae1fd5b50b5648a1ed79066250c0e87b00e3dd0f9605e05777b2f46011",
