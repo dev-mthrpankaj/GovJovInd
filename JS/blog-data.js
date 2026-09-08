@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "ssc-chsl-syllabus-2026",
+  title: "SSC CHSL Syllabus 2026: Tier 1 & Tier 2 Exam Pattern, Subject-Wise Topics & Weightage",
+  category: "SSC",
+  date: "2026-09-08",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1788841987000.webp",
+  url: "student-hub/ssc-chsl-syllabus-2026.html",
+  excerpt: "Complete SSC CHSL Syllabus 2026 with Tier 1 and Tier 2 exam pattern, subject-wise topics, negative marking, skill test, typing speed, qualifying marks and topic-wise preparation priorities."
+},
+    {
   id: "india-gdp-growth-7-8-controversy-q1-fy27-explained",
   title: "India GDP Growth 7.8% Controversy Explained: Q1 FY 2026-27 Data & Exam Facts",
   category: "Current Affairs",
