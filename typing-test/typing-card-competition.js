@@ -54,11 +54,13 @@
     const presetKey = url.searchParams.get("preset") || "";
     const language = url.searchParams.get("language") || "english";
     const difficulty = url.searchParams.get("difficulty") || "medium";
-    if (!presetKey) return null;
+    const passage = url.searchParams.get("passage");
+    if (!presetKey || passage === null || !/^\d+$/.test(passage)) return null;
+    const passageId = `${presetKey}:${language}:${difficulty}:${passage}`;
     const preset = window.GJU_TYPING_CONFIG?.getPreset ? window.GJU_TYPING_CONFIG.getPreset(presetKey) : null;
     const durationSeconds = Math.round((Number(preset?.duration) || durationFromPage(presetKey)) * 60);
-    const key = [presetKey, language, difficulty, durationSeconds].join("|");
-    return { presetKey, language, difficulty, durationSeconds, key };
+    const key = [presetKey, language, difficulty, durationSeconds, passageId].join("|");
+    return { presetKey, language, difficulty, durationSeconds, passageId, key };
   }
 
   function durationFromPage(presetKey) {
@@ -99,7 +101,8 @@
         preset_key: cohort.presetKey,
         language: cohort.language,
         difficulty: cohort.difficulty,
-        duration_seconds: String(cohort.durationSeconds)
+        duration_seconds: String(cohort.durationSeconds),
+        passage_id: cohort.passageId
       });
       const request = async (bearer) => fetch(API_BASE + "stats.php?" + query.toString(), {
         method: "GET", mode: "cors", cache: "no-store",
