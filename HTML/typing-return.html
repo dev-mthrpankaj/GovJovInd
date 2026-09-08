@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Returning to Typing Test | GovJobUpdates</title>
+</head>
+<body>
+  <p>Returning to your typing test…</p>
+  <script>
+    (function () {
+      "use strict";
+      let target = "../typing-test/index.html";
+      try {
+        const saved = sessionStorage.getItem("gju:typing-return") || "";
+        sessionStorage.removeItem("gju:typing-return");
+        if (/^\/typing-test\/app\.html(?:[?#].*)?$/.test(saved)) target = ".." + saved;
+      } catch (error) {}
+      window.location.replace(target);
+    })();
+  </script>
+</body>
+</html>
