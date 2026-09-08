@@ -3,142 +3,47 @@ import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWith
 
 (function(){
   "use strict";
-  function markAuthReady(){ document.body.classList.remove("gju-auth-pending"); document.body.classList.add("gju-auth-ready"); }
+  function markAuthReady(){document.body.classList.remove("gju-auth-pending");document.body.classList.add("gju-auth-ready");}
   const config=window.GJU_FIREBASE_CONFIG;
   if(!config||!config.apiKey){console.warn("[GovJobUpdates] Firebase auth config missing.");markAuthReady();return;}
-  const app=getApps().length?getApps()[0]:initializeApp(config), auth=getAuth(app);
-  const authPersistenceReady=setPersistence(auth,browserLocalPersistence).catch(e=>console.warn("[GovJobUpdates] Firebase auth persistence setup failed:",e.message));
-  const provider=new GoogleAuthProvider(), page=document.body.dataset.authPage||"", SESSION_KEY="gju:candidate-session", ACCOUNT_KEY="gju:site-account";
-  const ACCOUNT_SYNC_URL="https://test.govjobupdates.com/live-test/account-api/session.php";
-  const $=s=>document.querySelector(s), isAndroidApp=/GovJobUpdatesApp/i.test(navigator.userAgent||""); let authStateKnown=false;
 
-  function show(msg,isError){const n=$("#authMessage");if(!n)return;n.textContent=msg;n.classList.remove("hidden");n.classList.toggle("error",!!isError);}
+  const app=getApps().length?getApps()[0]:initializeApp(config),auth=getAuth(app);
+  const authPersistenceReady=setPersistence(auth,browserLocalPersistence).catch(e=>console.warn("[GovJobUpdates] Firebase auth persistence setup failed:",e.message));
+  const provider=new GoogleAuthProvider(),page=document.body.dataset.authPage||"",SESSION_KEY="gju:candidate-session",ACCOUNT_KEY="gju:site-account";
+  const API_BASE="https://test.govjobupdates.com/live-test/account-api/";
+  const ACCOUNT_SYNC_URL=API_BASE+"session.php",OTP_REQUEST_URL=API_BASE+"email-otp-request.php",OTP_VERIFY_URL=API_BASE+"email-otp-verify.php",RESET_OTP_REQUEST_URL=API_BASE+"password-reset-otp-request.php",RESET_CONFIRM_URL=API_BASE+"password-reset-confirm.php";
+  const $=s=>document.querySelector(s),isAndroidApp=/GovJobUpdatesApp/i.test(navigator.userAgent||"");let authStateKnown=false,pendingSignup=null,pendingReset=null;
+  function show(msg,isError){const n=$("#authMessage");if(!n)return;n.textContent=msg||"";n.classList.toggle("hidden",!msg);n.classList.toggle("error",!!isError);}
   function busy(form,state){if(!form)return;form.querySelectorAll("button").forEach(b=>b.disabled=!!state);}
   function cleanMobile(v){return String(v||"").replace(/[^0-9]/g,"").slice(-10);}
-
-  async function syncMySqlAccount(user,extra={}){
-    if(!user)return null;
-    try{
-      const token=await user.getIdToken();
-      const response=await fetch(ACCOUNT_SYNC_URL,{
-        method:"POST",
-        headers:{Authorization:`Bearer ${token}`,"Content-Type":"application/json"},
-        body:JSON.stringify({mobile:cleanMobile(extra.mobile||""),display_name:extra.display_name||user.displayName||""}),
-        credentials:"omit",
-        cache:"no-store"
-      });
-      let payload=null; try{payload=await response.json();}catch{}
-      if(!response.ok||!payload?.success)throw new Error(payload?.message||`HTTP ${response.status}`);
-      try{localStorage.setItem(ACCOUNT_KEY,JSON.stringify(payload.account));}catch{}
-      window.dispatchEvent(new CustomEvent("gju:site-account-synced",{detail:{account:payload.account}}));
-      return payload.account;
-    }catch(e){
-      console.warn("[GovJobUpdates] MySQL account sync skipped; Firebase login remains active:",e.message);
-      return null;
-    }
-  }
-
+  function isVerifiedUser(user){return !!(user&&user.emailVerified);}
+  async function jsonRequest(url,{body={},token=""}={}){const headers={"Content-Type":"application/json"};if(token)headers.Authorization=`Bearer ${token}`;const response=await fetch(url,{method:"POST",headers,body:JSON.stringify(body),credentials:"omit",cache:"no-store"});let payload=null;try{payload=await response.json();}catch{}if(!response.ok||!payload?.success){const err=new Error(payload?.message||`Request failed (${response.status})`);err.code=payload?.error||"request_failed";throw err;}return payload;}
+  async function syncMySqlAccount(user,extra={}){if(!user||!user.emailVerified)return null;try{const token=await user.getIdToken(true),payload=await jsonRequest(ACCOUNT_SYNC_URL,{token,body:{mobile:cleanMobile(extra.mobile||""),display_name:extra.display_name||user.displayName||""}});try{localStorage.setItem(ACCOUNT_KEY,JSON.stringify(payload.account));}catch{}window.dispatchEvent(new CustomEvent("gju:site-account-synced",{detail:{account:payload.account}}));return payload.account;}catch(e){console.warn("[GovJobUpdates] MySQL account sync skipped; Firebase login remains active:",e.message);return null;}}
   function redirectTarget(defaultPath="dashboard.html"){try{const value=new URLSearchParams(window.location.search).get("redirect");if(value&&/^[a-z0-9-]+\.html(?:[?#].*)?$/i.test(value))return value;}catch{}return defaultPath;}
   function go(path){window.location.href=path;}
-  function rememberSession(user){if(!user)return;const data={userId:user.uid,name:user.displayName||"",email:user.email||"",provider:user.providerData?.[0]?.providerId||"password",loggedInAt:Date.now()};try{localStorage.setItem(SESSION_KEY,JSON.stringify(data));}catch{}}
+  function rememberSession(user){if(!isVerifiedUser(user))return;const data={userId:user.uid,name:user.displayName||"",email:user.email||"",provider:user.providerData?.[0]?.providerId||"password",loggedInAt:Date.now()};try{localStorage.setItem(SESSION_KEY,JSON.stringify(data));}catch{}}
   function clearSession(){try{localStorage.removeItem(SESSION_KEY);localStorage.removeItem(ACCOUNT_KEY);sessionStorage.removeItem(SESSION_KEY);}catch{}}
-
-  async function completeGoogleLogin(user,redirectToDashboard=true){
-    await authPersistenceReady;
-    rememberSession(user);
-    syncHeader(user);
-    markAuthReady();
-    await syncMySqlAccount(user,{display_name:user.displayName||""});
-    if(redirectToDashboard)go(redirectTarget("dashboard.html"));
-  }
-
-  async function startGoogleLogin(button,messageFn=show,redirectToDashboard=true){
-    if(button)button.disabled=true;
-    try{
-      if(isAndroidApp){messageFn("Google login Android app WebView me Google policy ki wajah se blocked hai. Please email/password login use karein.",true);return;}
-      const res=await signInWithPopup(auth,provider);
-      await completeGoogleLogin(res.user,redirectToDashboard);
-    }catch(err){messageFn(readableError(err),true);}finally{if(button)button.disabled=false;}
-  }
-
+  async function completeVerifiedLogin(user,extra={},redirect=true){if(!isVerifiedUser(user))throw new Error("Email verification required.");rememberSession(user);syncHeader(user);markAuthReady();await syncMySqlAccount(user,extra);if(redirect)go(redirectTarget("dashboard.html"));}
+  async function completeGoogleLogin(user,redirectToDashboard=true){await authPersistenceReady;await completeVerifiedLogin(user,{display_name:user.displayName||""},redirectToDashboard);}
+  async function startGoogleLogin(button,messageFn=show,redirectToDashboard=true){if(button)button.disabled=true;try{if(isAndroidApp){messageFn("Google login Android app WebView me Google policy ki wajah se blocked hai. Please email/password login use karein.",true);return;}const res=await signInWithPopup(auth,provider);await completeGoogleLogin(res.user,redirectToDashboard);}catch(err){messageFn(readableError(err),true);}finally{if(button)button.disabled=false;}}
   function prepareGoogleButton(button){if(!isAndroidApp||!button)return false;button.hidden=true;const divider=button.previousElementSibling;if(divider?.classList?.contains("auth-divider"))divider.hidden=true;return true;}
   function headerHref(pageName){const path=window.location.pathname.replace(/\\/g,"/");if(/\/HTML\/[^/]+\.html$/i.test(path))return pageName;if(/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path))return`../../HTML/${pageName}`;return`HTML/${pageName}`;}
-  function syncHeader(user){const link=document.querySelector("[data-auth-entry], .header-login-btn");if(!link)return;const label=link.querySelector("span")||link,icon=link.querySelector("i");if(user){link.href=link.dataset.dashboardHref||headerHref("dashboard.html");link.classList.add("is-active");link.setAttribute("aria-label","Open candidate dashboard");label.textContent="Dashboard";if(icon){icon.className="fas fa-chart-line";icon.setAttribute("aria-hidden","true");}}else{link.href=link.dataset.loginHref||headerHref("login.html");link.classList.remove("is-active");link.setAttribute("aria-label","Login to candidate dashboard");label.textContent="Login";if(icon){icon.className="fas fa-user-circle";icon.setAttribute("aria-hidden","true");}}}
-
-  window.CandidateAuth=window.CandidateAuth||{};
-  window.CandidateAuth.syncHeaderEntry=function(){if(!authStateKnown)return;syncHeader(auth.currentUser);markAuthReady();};
-  window.CandidateAuth.syncMySqlAccount=()=>syncMySqlAccount(auth.currentUser);
-
-  function bindLogin(){
-    const loginForm=$("#loginForm"),signupForm=$("#signupForm"),googleBtn=$("#googleLoginBtn");
-    const activateTab=target=>{document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active",b.dataset.authTab===target));loginForm?.classList.toggle("hidden",target!=="login");signupForm?.classList.toggle("hidden",target!=="signup");show("",false);$("#authMessage")?.classList.add("hidden");};
-    document.querySelectorAll("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>activateTab(btn.dataset.authTab||"login")));
-    try{if(new URLSearchParams(window.location.search).get("mode")==="signup")activateTab("signup");}catch{}
-
-    loginForm?.addEventListener("submit",async e=>{
-      e.preventDefault();busy(loginForm,true);
-      try{
-        await authPersistenceReady;
-        const email=$("#loginEmail").value.trim(),pass=$("#loginPassword").value,res=await signInWithEmailAndPassword(auth,email,pass);
-        rememberSession(res.user);syncHeader(res.user);markAuthReady();
-        await syncMySqlAccount(res.user);
-        go(redirectTarget("dashboard.html"));
-      }catch(err){show(readableError(err),true);}finally{busy(loginForm,false);}
-    });
-
-    signupForm?.addEventListener("submit",async e=>{
-      e.preventDefault();busy(signupForm,true);
-      try{
-        await authPersistenceReady;
-        const name=$("#signupName").value.trim(),mobile=cleanMobile($("#signupMobile")?.value);
-        if(mobile.length!==10){show("Please enter valid 10 digit mobile number.",true);return;}
-        const email=$("#signupEmail").value.trim(),pass=$("#signupPassword").value,res=await createUserWithEmailAndPassword(auth,email,pass);
-        if(name)await updateProfile(res.user,{displayName:name});
-        rememberSession(res.user);syncHeader(res.user);markAuthReady();
-        await syncMySqlAccount(res.user,{mobile,display_name:name});
-        go(redirectTarget("dashboard.html"));
-      }catch(err){show(readableError(err),true);}finally{busy(signupForm,false);}
-    });
-
-    if(!prepareGoogleButton(googleBtn))googleBtn?.addEventListener("click",()=>startGoogleLogin(googleBtn,show,true));
+  function syncHeader(user){const link=document.querySelector("[data-auth-entry], .header-login-btn");if(!link)return;const label=link.querySelector("span")||link,icon=link.querySelector("i");if(isVerifiedUser(user)){link.href=link.dataset.dashboardHref||headerHref("dashboard.html");link.classList.add("is-active");link.setAttribute("aria-label","Open candidate dashboard");label.textContent="Dashboard";if(icon){icon.className="fas fa-chart-line";icon.setAttribute("aria-hidden","true");}}else{link.href=link.dataset.loginHref||headerHref("login.html");link.classList.remove("is-active");link.setAttribute("aria-label","Login to candidate dashboard");label.textContent="Login";if(icon){icon.className="fas fa-user-circle";icon.setAttribute("aria-hidden","true");}}}
+  async function requestSignupOtp(user,extra={}){const token=await user.getIdToken(true),payload=await jsonRequest(OTP_REQUEST_URL,{token,body:{mobile:cleanMobile(extra.mobile||""),display_name:extra.display_name||user.displayName||""}});return payload.challenge;}
+  async function beginUnverifiedLogin(user){clearSession();syncHeader(null);const challenge=await requestSignupOtp(user,{});pendingSignup={email:user.email||"",name:user.displayName||"",mobile:"",challenge};window.GJUAuthOtpUI?.showSignupOtp(user.email||"");show("We sent a 6-digit verification code to your email.",false);}
+  function bindOtpEvents(){
+    window.addEventListener("gju:otp-verify-request",async event=>{const detail=event.detail||{};show("");try{if(detail.mode==="signup"){if(!auth.currentUser||!pendingSignup?.challenge)throw new Error("Verification session expired. Please login again.");const token=await auth.currentUser.getIdToken(true);await jsonRequest(OTP_VERIFY_URL,{token,body:{challenge:pendingSignup.challenge,code:detail.code}});await auth.currentUser.reload();await auth.currentUser.getIdToken(true);if(!auth.currentUser.emailVerified)throw new Error("Email verification could not be confirmed. Please try again.");const extra={mobile:pendingSignup.mobile||"",display_name:pendingSignup.name||auth.currentUser.displayName||""};pendingSignup=null;show("Email verified successfully. Opening your dashboard…",false);await completeVerifiedLogin(auth.currentUser,extra,true);return;}if(detail.mode==="reset"){if(!pendingReset?.challenge)throw new Error("Reset session expired. Please start again.");const payload=await jsonRequest(OTP_VERIFY_URL,{body:{challenge:pendingReset.challenge,code:detail.code,purpose:"password_reset"}});pendingReset.resetToken=payload.reset_token||"";if(!pendingReset.resetToken)throw new Error("Reset authorization was not created. Please try again.");window.GJUAuthOtpUI?.showResetPassword();show("OTP verified. Set your new password.",false);}}catch(err){show(readableError(err),true);}});
+    window.addEventListener("gju:otp-resend-request",async event=>{const detail=event.detail||{};show("");try{if(detail.mode==="signup"){if(!auth.currentUser)throw new Error("Verification session expired. Please login again.");const challenge=await requestSignupOtp(auth.currentUser,{mobile:pendingSignup?.mobile||"",display_name:pendingSignup?.name||auth.currentUser.displayName||""});pendingSignup={...(pendingSignup||{}),email:auth.currentUser.email||detail.email||"",challenge};}else{const payload=await jsonRequest(RESET_OTP_REQUEST_URL,{body:{email:detail.email||pendingReset?.email||"",website:""}});pendingReset={email:detail.email||pendingReset?.email||"",challenge:payload.challenge||"",resetToken:""};}show("A new OTP has been sent.",false);}catch(err){show(readableError(err),true);}});
+    window.addEventListener("gju:password-reset-otp-request",async event=>{const email=String(event.detail?.email||"").trim();show("");try{const payload=await jsonRequest(RESET_OTP_REQUEST_URL,{body:{email,website:""}});pendingReset={email,challenge:payload.challenge||"",resetToken:""};if(!pendingReset.challenge)throw new Error("Unable to start password reset.");window.GJUAuthOtpUI?.showResetOtp(email);show("If this email is registered, a 6-digit OTP has been sent.",false);}catch(err){show(readableError(err),true);}});
+    window.addEventListener("gju:password-reset-submit",async event=>{try{if(!pendingReset?.resetToken)throw new Error("Reset authorization expired. Please verify OTP again.");await jsonRequest(RESET_CONFIRM_URL,{body:{reset_token:pendingReset.resetToken,password:event.detail?.password||""}});const email=pendingReset.email;pendingReset=null;window.GJUAuthOtpUI?.backToAuth();const field=$("#loginEmail");if(field)field.value=email;show("Password updated successfully. You can now login.",false);}catch(err){show(readableError(err),true);}});
   }
-
-  function bindDashboard(){
-    const loading=$("#dashboardLoading"),content=$("#dashboardContent"),guest=$("#dashboardGuest"),logoutBtn=$("#logoutBtn"),dashboardLoginForm=$("#dashboardLoginForm"),dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"),dashboardMessage=$("#dashboardAuthMessage");
-    const showDashboardMessage=(msg,isError)=>{if(!dashboardMessage)return;dashboardMessage.textContent=msg;dashboardMessage.classList.toggle("hidden",!msg);dashboardMessage.classList.toggle("error",!!isError);};
-
-    dashboardLoginForm?.addEventListener("submit",async e=>{
-      e.preventDefault();busy(dashboardLoginForm,true);showDashboardMessage("",false);
-      try{
-        await authPersistenceReady;
-        const email=$("#dashboardLoginEmail").value.trim(),pass=$("#dashboardLoginPassword").value,res=await signInWithEmailAndPassword(auth,email,pass);
-        rememberSession(res.user);syncHeader(res.user);markAuthReady();
-        await syncMySqlAccount(res.user);
-      }catch(err){showDashboardMessage(readableError(err),true);}finally{busy(dashboardLoginForm,false);}
-    });
-
-    if(!prepareGoogleButton(dashboardGoogleBtn))dashboardGoogleBtn?.addEventListener("click",()=>{showDashboardMessage("",false);startGoogleLogin(dashboardGoogleBtn,showDashboardMessage,false);});
-
-    onAuthStateChanged(auth,user=>{
-      authStateKnown=true;syncHeader(user);markAuthReady();
-      if(!user){clearSession();if(logoutBtn)logoutBtn.textContent="Login";if(loading)loading.hidden=false;if(guest)guest.hidden=true;if(content)content.hidden=true;return;}
-      rememberSession(user);
-      if(logoutBtn)logoutBtn.textContent="Logout";
-      if(loading)loading.hidden=true;if(guest)guest.hidden=true;if(content)content.hidden=false;
-      $("#userName")&&($("#userName").textContent=user.displayName||"GovJobUpdates User");
-      $("#userEmail")&&($("#userEmail").textContent=user.email||"No email available");
-      $("#profileName")&&($("#profileName").textContent=user.displayName||"GovJobUpdates User");
-      $("#profileEmail")&&($("#profileEmail").textContent=user.email||"No email available");
-      syncMySqlAccount(user);
-    });
-
-    logoutBtn?.addEventListener("click",async()=>{if(!auth.currentUser){go("login.html");return;}await signOut(auth);clearSession();syncHeader(null);markAuthReady();go("login.html");});
-  }
-
-  onAuthStateChanged(auth,user=>{authStateKnown=true;if(user)rememberSession(user);else clearSession();syncHeader(user);markAuthReady();});
-
-  function readableError(err){const code=String(err?.code||"");if(code.includes("invalid-credential"))return"Email ya password galat hai.";if(code.includes("email-already-in-use"))return"Is email se account already bana hua hai.";if(code.includes("weak-password"))return"Password kam se kam 6 characters ka rakho.";if(code.includes("unauthorized-domain"))return"Firebase me govjobupdates.com ko Authorized domains me add karo.";if(code.includes("popup"))return"Google popup complete nahi hua. Dobara try karo.";return"Login request failed. Please try again.";}
-
-  if(page==="login")bindLogin();
-  if(page==="dashboard")bindDashboard();
+  window.CandidateAuth=window.CandidateAuth||{};window.CandidateAuth.syncHeaderEntry=function(){if(!authStateKnown)return;syncHeader(auth.currentUser);markAuthReady();};window.CandidateAuth.syncMySqlAccount=()=>syncMySqlAccount(auth.currentUser);
+  function bindLogin(){const loginForm=$("#loginForm"),signupForm=$("#signupForm"),googleBtn=$("#googleLoginBtn");const activateTab=target=>{window.GJUAuthOtpUI?.backToAuth();document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("is-active",b.dataset.authTab===target));loginForm?.classList.toggle("hidden",target!=="login");signupForm?.classList.toggle("hidden",target!=="signup");show("");};document.querySelectorAll("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>activateTab(btn.dataset.authTab||"login")));try{if(new URLSearchParams(window.location.search).get("mode")==="signup")activateTab("signup");}catch{}
+    loginForm?.addEventListener("submit",async e=>{e.preventDefault();busy(loginForm,true);show("");try{await authPersistenceReady;const email=$("#loginEmail").value.trim(),pass=$("#loginPassword").value,res=await signInWithEmailAndPassword(auth,email,pass);if(!res.user.emailVerified){await beginUnverifiedLogin(res.user);return;}await completeVerifiedLogin(res.user,{},true);}catch(err){show(readableError(err),true);}finally{busy(loginForm,false);}});
+    signupForm?.addEventListener("submit",async e=>{e.preventDefault();busy(signupForm,true);show("");try{await authPersistenceReady;const name=$("#signupName").value.trim(),mobile=cleanMobile($("#signupMobile")?.value);if(mobile.length!==10){show("Please enter valid 10 digit mobile number.",true);return;}const email=$("#signupEmail").value.trim(),pass=$("#signupPassword").value,res=await createUserWithEmailAndPassword(auth,email,pass);if(name)await updateProfile(res.user,{displayName:name});const challenge=await requestSignupOtp(res.user,{mobile,display_name:name});pendingSignup={email,name,mobile,challenge};clearSession();syncHeader(null);window.GJUAuthOtpUI?.showSignupOtp(email);show("Account created. Enter the OTP sent to your email to activate it.",false);}catch(err){show(readableError(err),true);}finally{busy(signupForm,false);}});
+    if(!prepareGoogleButton(googleBtn))googleBtn?.addEventListener("click",()=>startGoogleLogin(googleBtn,show,true));bindOtpEvents();}
+  function bindDashboard(){const loading=$("#dashboardLoading"),content=$("#dashboardContent"),guest=$("#dashboardGuest"),logoutBtn=$("#logoutBtn"),dashboardLoginForm=$("#dashboardLoginForm"),dashboardGoogleBtn=$("#dashboardGoogleLoginBtn"),dashboardMessage=$("#dashboardAuthMessage");const showDashboardMessage=(msg,isError)=>{if(!dashboardMessage)return;dashboardMessage.textContent=msg;dashboardMessage.classList.toggle("hidden",!msg);dashboardMessage.classList.toggle("error",!!isError);};dashboardLoginForm?.addEventListener("submit",async e=>{e.preventDefault();busy(dashboardLoginForm,true);showDashboardMessage("",false);try{await authPersistenceReady;const email=$("#dashboardLoginEmail").value.trim(),pass=$("#dashboardLoginPassword").value,res=await signInWithEmailAndPassword(auth,email,pass);if(!res.user.emailVerified){await signOut(auth);clearSession();showDashboardMessage("Please verify your email from the Login page before opening the dashboard.",true);return;}await completeVerifiedLogin(res.user,{},false);}catch(err){showDashboardMessage(readableError(err),true);}finally{busy(dashboardLoginForm,false);}});if(!prepareGoogleButton(dashboardGoogleBtn))dashboardGoogleBtn?.addEventListener("click",()=>{showDashboardMessage("",false);startGoogleLogin(dashboardGoogleBtn,showDashboardMessage,false);});onAuthStateChanged(auth,user=>{authStateKnown=true;const trusted=isVerifiedUser(user);syncHeader(trusted?user:null);markAuthReady();if(!trusted){clearSession();if(logoutBtn)logoutBtn.textContent="Login";if(loading)loading.hidden=false;if(guest)guest.hidden=true;if(content)content.hidden=true;return;}rememberSession(user);if(logoutBtn)logoutBtn.textContent="Logout";if(loading)loading.hidden=true;if(guest)guest.hidden=true;if(content)content.hidden=false;if($("#userName"))$("#userName").textContent=user.displayName||"GovJobUpdates User";if($("#userEmail"))$("#userEmail").textContent=user.email||"No email available";if($("#profileName"))$("#profileName").textContent=user.displayName||"GovJobUpdates User";if($("#profileEmail"))$("#profileEmail").textContent=user.email||"No email available";syncMySqlAccount(user);});logoutBtn?.addEventListener("click",async()=>{if(!auth.currentUser){go("login.html");return;}await signOut(auth);clearSession();syncHeader(null);markAuthReady();go("login.html");});}
+  onAuthStateChanged(auth,user=>{authStateKnown=true;if(isVerifiedUser(user))rememberSession(user);else clearSession();syncHeader(isVerifiedUser(user)?user:null);markAuthReady();});
+  function readableError(err){const code=String(err?.code||"");if(code.includes("invalid-credential"))return"Email ya password galat hai.";if(code.includes("email-already-in-use"))return"Is email se account already bana hua hai.";if(code.includes("weak-password"))return"Password kam se kam 6 characters ka rakho.";if(code.includes("unauthorized-domain"))return"Firebase me govjobupdates.com ko Authorized domains me add karo.";if(code.includes("popup"))return"Google popup complete nahi hua. Dobara try karo.";if(code.includes("invalid_otp"))return"OTP galat hai. Please check karke dobara try karo.";if(code.includes("expired"))return"OTP ya verification session expire ho gaya hai. Naya OTP request karo.";if(code.includes("rate"))return"Bahut requests ho gayi hain. Thodi der baad dobara try karo.";return err?.message&&err.message.length<180?err.message:"Login request failed. Please try again.";}
+  if(page==="login")bindLogin();if(page==="dashboard")bindDashboard();
 }());
