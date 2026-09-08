@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0226-20260908093624-0aab46c1",
+        "title": "SSC CHSL 10+2 Online Form 2026 for 2536 Post",
+        "organization": "Staff Selection Commission (SSC)",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "10+2 Intermediate Exam in Any Recognized Board Kindly Read Notification for More Details",
+        "totalPosts": "2536",
+        "startDate": "2026-09-07",
+        "lastDate": "2026-10-07",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ssc.gov.in/",
+        "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_chsl_2026.pdf",
+        "detailPage": "../jobs/ssc-chsl-2026.html",
+        "updatedAt": "2026-09-08",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0223-20260907221234-4e4bc839",
         "title": "CSC Aadhar Supervisor Operator Online Form 2026",
         "organization": "Common Service Center",
