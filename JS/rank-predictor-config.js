@@ -31,6 +31,29 @@ const RANK_PREDICTOR_CONFIG = {
             states: ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"]
         },
         {
+            examId: "rrb-group-d-2026",
+            examName: "RRB GROUP D 2026",
+            board: "RRB",
+            examType: "online",
+            sheetName: "RRB GROUP D 2026",
+            totalQuestions: 100,
+            marksPerCorrect: 1,
+            negativeMarking: 0.33,
+            hasShifts: true,
+            normalization: true,
+            supportedModes: ["online"],
+            subjects: [
+                { name: "Mathematics", questions: 25 },
+                { name: "Reasoning", questions: 30 },
+                { name: "Current Affairs", questions: 20 },
+                { name: "General Science", questions: 25 }
+            ],
+            subjectPassingCriteria: [],
+            categories: ["UR", "OBC", "EWS", "SC", "ST"],
+            horizontalCategories: ["None"],
+            states: ["Other"]
+        },
+        {
             examId: "up-homeguard-2026",
             examName: "Uttar Pradesh Home Guard 2026",
             board: "UPPRPB",
