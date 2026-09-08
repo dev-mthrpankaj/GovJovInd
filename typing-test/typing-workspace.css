@@ -40,11 +40,17 @@
 .gju-typing-attempt-page .gju-typing-live-card article:first-child { background: #edf2ff; }
 .gju-typing-attempt-page .gju-typing-live-card strong { font-variant-numeric: tabular-nums; font-size: 1.45rem; }
 .gju-typing-attempt-page .gju-typing-live-card span { font-size: .64rem; }
+.gju-typing-attempt-page .gju-typing-rules-shortcut { font-variant-numeric: tabular-nums; font-size: 1.45rem; font-weight: 700; color: #172440; text-decoration: none; }
+.gju-typing-attempt-page .gju-typing-rules-shortcut:hover,
+.gju-typing-attempt-page .gju-typing-rules-shortcut:focus-visible { color: #315bd6; text-decoration: underline; }
+#rulesCard { scroll-margin-top: 86px; }
 .workspace-coach h2 { font-size: .95rem; margin: 0 0 16px; }
 .workspace-coach label { display: flex; justify-content: space-between; font-size: .76rem; color: #526078; }
 .workspace-coach progress { width: 100%; height: 7px; margin: 8px 0 14px; accent-color: #315bd6; }
 .workspace-coach p { margin: 0; font-size: .79rem; line-height: 1.6; color: #526078; }
-.typing-test-page.gju-typing-attempt-page .gju-typing-results { margin: 0 24px 24px; border: 1px solid #dce3ef; border-radius: 18px; scroll-margin-top: 90px; }
+.typing-test-page.gju-typing-attempt-page .gju-typing-results { margin: 0 24px 24px; border: 1px solid #dce3ef; border-radius: 18px; scroll-margin-top: 90px; background: #fff; position: relative; z-index: 1; }
+.gju-typing-attempt-page[data-state="finished"] .gju-typing-attempt-layout { display: none; }
+.gju-typing-attempt-page[data-state="finished"] .gju-typing-results { margin-top: 16px; }
 .workspace-advice { color: #526078; line-height: 1.6; }
 .workspace-next { display: inline-block; padding: 14px; color: #315bd6; }
 .gju-typing-attempt-page .gju-typing-result-grid { margin-top: 18px; }
@@ -64,6 +70,7 @@
  .gju-typing-attempt-page .gju-typing-attempt-sidebar { grid-template-columns: 1fr; }
  .gju-typing-attempt-page .gju-typing-live-card { grid-row: 1; grid-template-columns: repeat(3,minmax(0,1fr)); }
  .gju-typing-attempt-page .gju-typing-live-card strong { font-size: 1.2rem; }
+ .gju-typing-attempt-page .gju-typing-rules-shortcut { font-size: 1.2rem; }
  .gju-typing-attempt-page .gju-typing-attempt-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
  .gju-typing-attempt-page #submitButton { margin: 0; }
  .typing-test-page.gju-typing-attempt-page .gju-typing-results { margin: 0 10px 14px; }
@@ -80,7 +87,8 @@
 .gju-typing-attempt-page .gju-typing-attempt-topbar { min-height: 64px; }
 .gju-typing-attempt-page > .gju-typing-live-card { margin: 12px 20px 0; padding: 10px; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; }
 .gju-typing-attempt-page > .gju-typing-live-card article { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; }
-.gju-typing-attempt-page > .gju-typing-live-card strong { margin: 0; font-size: 1.2rem; }
+.gju-typing-attempt-page > .gju-typing-live-card strong,
+.gju-typing-attempt-page > .gju-typing-live-card .gju-typing-rules-shortcut { margin: 0; font-size: 1.2rem; }
 .gju-typing-attempt-page .gju-typing-attempt-layout { padding: 12px 20px; gap: 14px; grid-template-columns: minmax(0,1fr) 260px; align-items: start; }
 .gju-typing-attempt-page .gju-typing-attempt-main { box-sizing: border-box; height: clamp(420px,calc(var(--typing-viewport,100dvh) - 176px),800px); padding: 16px; gap: 12px; grid-template-rows: minmax(0,1.2fr) minmax(0,1fr) auto auto; }
 .gju-typing-attempt-page .gju-typing-attempt-block { display: flex; flex-direction: column; min-height: 0; }
@@ -103,13 +111,15 @@
  .gju-typing-attempt-page .workspace-coach { grid-column: auto; }
  .gju-typing-attempt-page > .gju-typing-live-card { margin: 8px 10px 0; }
  .gju-typing-attempt-page > .gju-typing-live-card article { display: block; padding: 6px; }
- .gju-typing-attempt-page > .gju-typing-live-card strong { margin-top: 4px; }
+ .gju-typing-attempt-page > .gju-typing-live-card strong,
+ .gju-typing-attempt-page > .gju-typing-live-card .gju-typing-rules-shortcut { margin-top: 4px; }
 }
 @media (max-width: 600px) {
  .gju-typing-attempt-page .gju-typing-attempt-topbar { min-height: 54px; }
  .gju-typing-attempt-page > .gju-typing-live-card { padding: 8px; gap: 4px; border-radius: 10px; }
  .gju-typing-attempt-page > .gju-typing-live-card span { font-size: .55rem; }
- .gju-typing-attempt-page > .gju-typing-live-card strong { font-size: .95rem; }
+ .gju-typing-attempt-page > .gju-typing-live-card strong,
+ .gju-typing-attempt-page > .gju-typing-live-card .gju-typing-rules-shortcut { font-size: .95rem; }
  .gju-typing-attempt-page .gju-typing-attempt-main { height: clamp(310px,calc(var(--typing-viewport,100svh) - 150px),650px); padding: 10px; gap: 8px; }
  .gju-typing-attempt-page .workspace-legend { display: none; }
  .gju-typing-attempt-page .workspace-hint { font-size: .7rem; line-height: 1.35; }
