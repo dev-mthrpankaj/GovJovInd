@@ -187,7 +187,7 @@
     const state = routeState();
     startingSession = apiRequest("start.php", "POST", state).then(data => {
       rankSession = data.rankSession || null;
-      renderMiniStats(currentStats, "Ranked session ready. Full-duration completion counts toward your rank.");
+      renderMiniStats(currentStats, "Ranked session active. Full-duration completion counts toward your rank.");
       return rankSession;
     }).catch(error => {
       rankSession = null;
@@ -319,7 +319,7 @@
         }
         setGate("ready");
         await loadStats();
-        if (app.dataset.state !== "finished") await startRankSession(true);
+        renderMiniStats(currentStats, "Ready. Start typing to begin your ranked session.");
       });
     } catch (error) {
       authReady = true;
@@ -334,9 +334,12 @@
       if (nextState === previousState) return;
       const oldState = previousState;
       previousState = nextState;
-      if (authUser && nextState === "ready" && oldState === "finished") {
+      if (authUser && nextState === "running") {
         rankSession = null;
         startRankSession(true);
+      } else if (authUser && nextState === "ready" && oldState === "finished") {
+        rankSession = null;
+        renderMiniStats(currentStats, "Ready. Start typing to begin your ranked session.");
       }
     });
     observer.observe(app, { attributes: true, attributeFilter: ["data-state"] });
