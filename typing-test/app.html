@@ -19,7 +19,7 @@
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
   <link rel="stylesheet" href="typing-test.css">
-  <link rel="stylesheet" href="typing-workspace.css?v=rules-20260908">
+  <link rel="stylesheet" href="typing-workspace.css?v=result-rules-20260908">
   <link rel="stylesheet" href="typing-header-actions.css?v=header-fullscreen-20260908">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GovJobUpdates Typing Test","url":"https://govjobupdates.com/typing-test/","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
@@ -50,7 +50,7 @@
       <article><span>Accuracy</span><strong id="liveAccuracy">0.0%</strong></article>
       <article><span>Typed Words</span><strong id="liveWords">0</strong></article>
       <article><span>Target WPM</span><strong id="targetWPMText">35</strong></article>
-      <article><span>Practice Accuracy</span><strong id="targetAccuracyText">—</strong></article>
+      <article><span>Practice Accuracy</span><a id="targetAccuracyText" class="gju-typing-rules-shortcut" href="#rulesDetails" aria-label="View typing test rules and sources">—</a></article>
     </section>
 
     <section class="gju-typing-attempt-layout" aria-label="Typing attempt workspace">
@@ -107,8 +107,8 @@
           </details>
         </section>
 
-        <section class="gju-typing-attempt-card">
-          <details class="workspace-settings"><summary>Rules &amp; sources</summary>
+        <section class="gju-typing-attempt-card" id="rulesCard">
+          <details class="workspace-settings" id="rulesDetails" open><summary>Rules &amp; sources</summary>
             <p class="gju-typing-keyboard-note" id="disclaimerText"></p>
             <p class="gju-typing-keyboard-note" id="rulesVerified"></p>
             <p class="gju-typing-keyboard-note" id="rulesSources"></p>
