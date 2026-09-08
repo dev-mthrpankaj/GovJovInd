@@ -38,7 +38,7 @@
     if (!btn || !timer) return;
     const waiting = state.remaining > 0;
     btn.disabled = waiting;
-    timer.textContent = waiting ? `Resend available in ${state.remaining}s` : "Didn't receive it?";
+    timer.textContent = waiting ? `Resend available in ${state.remaining}s` : "Didn't receive the code?";
   }
 
   function startResendTimer(seconds = RESEND_SECONDS) {
@@ -82,6 +82,14 @@
     input?.focus();
   }
 
+  function showForgotPassword() {
+    state.mode = "reset";
+    state.email = "";
+    showPanel("forgotPasswordPanel");
+    setMessage("");
+    $("#forgotEmail")?.focus();
+  }
+
   function showResetPassword() {
     showPanel("resetPasswordPanel");
     setMessage("");
@@ -106,6 +114,21 @@
       otpInput.value = normalizeOtp(otpInput.value);
     });
 
+    $("#forgotPasswordBtn")?.addEventListener("click", showForgotPassword);
+    $("#forgotBackBtn")?.addEventListener("click", backToAuth);
+
+    $("#forgotPasswordForm")?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = String($("#forgotEmail")?.value || "").trim();
+      if (!email) {
+        setMessage("Please enter your registered email.", true);
+        return;
+      }
+      state.mode = "reset";
+      state.email = email;
+      dispatch("gju:password-reset-otp-request", { email });
+    });
+
     $("#otpForm")?.addEventListener("submit", (event) => {
       event.preventDefault();
       const code = normalizeOtp($("#otpCode")?.value);
@@ -122,7 +145,10 @@
       startResendTimer();
     });
 
-    $("#otpBackBtn")?.addEventListener("click", backToAuth);
+    $("#otpBackBtn")?.addEventListener("click", () => {
+      if (state.mode === "reset") showForgotPassword();
+      else backToAuth();
+    });
 
     $("#resetPasswordForm")?.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -139,16 +165,17 @@
       dispatch("gju:password-reset-submit", { email: state.email, password });
     });
 
-    $("#resetBackBtn")?.addEventListener("click", backToAuth);
+    $("#resetBackBtn")?.addEventListener("click", showForgotPassword);
 
     window.GJUAuthOtpUI = {
       showSignupOtp(email) { showOtp("signup", email); },
       showResetOtp(email) { showOtp("reset", email); },
+      showForgotPassword,
       showResetPassword,
       backToAuth,
       startResendTimer,
       setMessage,
-      getState() { return { ...state }; }
+      getState() { return { mode: state.mode, email: state.email, remaining: state.remaining }; }
     };
   }
 
