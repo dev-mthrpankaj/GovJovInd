@@ -4,6 +4,7 @@
   const config = window.GJU_TYPING_CONFIG;
   const passages = window.GJU_TYPING_PASSAGES || {};
   const storage = window.GJUTypingStorage;
+  const evaluators = window.GJUTypingEvaluators;
   if (!config) return;
 
   const app = document.getElementById("typingTestApp");
@@ -20,9 +21,10 @@
     passage: "",
     passageIndex: null,
     hindiInputMode: "mangal",
-    startedAt: 0,
-    pausedAt: 0,
-    pausedMs: 0,
+    startedAt: null,
+    completedTyped: "",
+    completedReference: "",
+    passageRounds: 0,
     finishedAt: 0,
     typed: "",
     composing: false,
@@ -96,7 +98,6 @@
       "startButton",
       "submitButton",
       "cancelButton",
-      "pauseButton",
       "restartButton",
       "resultPanel",
       "resultGrid",
@@ -117,7 +118,9 @@
       "hindiModeField",
       "hindiInputMode",
       "attemptInfo", "practiceHint", "speedGoal", "speedGoalText", "accuracyGoal",
-      "accuracyGoalText", "coachText", "resultAdvice", "retryResult"
+      "accuracyGoalText", "coachText", "resultAdvice", "retryResult",
+      "rulesSources", "rulesVerified", "reviewPanel", "reviewForm", "reviewCount", "reviewMistakes",
+      "reviewHalfMistakes", "reviewCountLabel", "reviewMistakesLabel", "reviewHalfField", "reviewOutput", "reviewNote"
     ].forEach((id) => {
       dom[id] = document.getElementById(id);
     });
@@ -145,7 +148,7 @@
     dom.startButton?.addEventListener("click", startTest);
     dom.submitButton?.addEventListener("click", submitAttempt);
     dom.cancelButton?.addEventListener("click", cancelAttempt);
-    dom.pauseButton?.addEventListener("click", togglePause);
+    dom.reviewForm?.addEventListener("submit", reviewResult);
     dom.restartButton?.addEventListener("click", restartTest);
     dom.retryResult?.addEventListener("click", restartTest);
     dom.fontDecrease?.addEventListener("click", () => updateAttemptFontSize(-1));
@@ -174,15 +177,27 @@
       handleTypingInput();
     });
     dom.typingInput?.addEventListener("input", handleTypingInput);
-    dom.typingInput?.addEventListener("keydown", (event) => {
-      if (event.key === "Tab") return;
-      if (state.status === "ready" && !state.composing && event.key.length === 1) {
-        startClock();
+    dom.typingInput?.addEventListener("beforeinput", (event) => {
+      if (state.status === "finished") { event.preventDefault(); return; }
+      if (state.status === "running" && getRemainingSeconds() <= 0) {
+        event.preventDefault(); finishTest(); return;
+      }
+      if (/insertFromPaste|insertFromDrop/.test(event.inputType || "")) {
+        event.preventDefault(); return;
+      }
+      if (state.preset?.editingAllowed === false && !state.composing) {
+        const input = dom.typingInput;
+        if (/delete|history|Replacement/.test(event.inputType || "")
+          || input.selectionStart !== input.value.length || input.selectionEnd !== input.value.length) {
+          event.preventDefault();
+          input.setSelectionRange(input.value.length, input.value.length);
+          showStatus("Editing is disabled in this CBTST practice. Continue at the end or restart.");
+        }
       }
     });
 
     window.addEventListener("beforeunload", (event) => {
-      if (state.status !== "running" && state.status !== "paused") return;
+      if (state.status !== "running") return;
       event.preventDefault();
       event.returnValue = "";
     });
@@ -219,7 +234,7 @@
     state.passageIndex = Number.isFinite(routePassage) ? routePassage : null;
     state.durationMinutes = Number(preset.duration) || 10;
     state.targetWPM = getTargetWPMForLanguage(preset, state.language);
-    state.targetAccuracy = Number(preset.targetAccuracy) || 95;
+    state.targetAccuracy = preset.targetAccuracy == null ? null : Number(preset.targetAccuracy);
     state.typed = "";
     state.lastResult = null;
 
@@ -265,6 +280,7 @@
   }
 
   function getPreferredHindiInputMode(routeHindiMode) {
+    if (state.preset?.allowedHindiModes?.length === 1) return state.preset.allowedHindiModes[0];
     if (routeHindiMode === "krutidev" || routeHindiMode === "mangal") return routeHindiMode;
     try {
       const saved = window.localStorage?.getItem("gjuTypingHindiInputMode");
@@ -276,6 +292,7 @@
   }
 
   function getTargetWPMForLanguage(preset, language) {
+    if (preset?.targetWPM === null) return null;
     const languageTarget = preset?.targetWPMByLanguage?.[language];
     return Number(languageTarget || preset?.targetWPM) || 30;
   }
@@ -309,7 +326,7 @@
   }
 
   function prepareForChangedSetting(renewPassage = true) {
-    if (state.status === "running" || state.status === "paused") return;
+    if (state.status === "running") return;
     if (renewPassage) prepareTest();
     setStatus("ready");
     render();
@@ -318,9 +335,11 @@
   function prepareTest() {
     state.passage = choosePassage(state.preset, state.language, state.difficulty);
     state.typed = "";
-    state.startedAt = 0;
-    state.pausedAt = 0;
-    state.pausedMs = 0;
+    state.startedAt = null;
+    state.completedTyped = "";
+    state.completedReference = "";
+    state.passageRounds = 0;
+    state.composing = false;
     state.finishedAt = 0;
     state.lastResult = null;
     lastPassageLineTop = 0;
@@ -351,11 +370,6 @@
   function startTest() {
     if (state.status === "finished") restartTest();
     if (state.status === "idle") setStatus("ready");
-    if (state.status === "paused") {
-      resumeTest();
-      return;
-    }
-    startClock();
     focusTypingInput(true);
   }
 
@@ -363,7 +377,6 @@
     if (state.status === "running") return;
     if (state.status !== "ready") return;
     state.startedAt = performance.now();
-    state.pausedMs = 0;
     state.finishedAt = 0;
     setStatus("running");
     trackTypingEvent("typing_test_started", {
@@ -375,28 +388,8 @@
     render();
   }
 
-  function togglePause() {
-    if (state.status === "running") {
-      state.pausedAt = performance.now();
-      setStatus("paused");
-      if (dom.typingInput) dom.typingInput.disabled = true;
-      render();
-      return;
-    }
-    if (state.status === "paused") resumeTest();
-  }
-
-  function resumeTest() {
-    state.pausedMs += performance.now() - state.pausedAt;
-    state.pausedAt = 0;
-    if (dom.typingInput) dom.typingInput.disabled = false;
-    setStatus("running");
-    render();
-    focusTypingInput(true);
-  }
-
   function restartTest() {
-    if ((state.status === "running" || state.status === "paused")
+    if (state.status === "running" && (state.typed || state.completedTyped)
       && !window.confirm("Restart this passage? Your current attempt will be cleared.")) return;
     prepareTest();
     setStatus("ready");
@@ -406,7 +399,7 @@
   }
 
   function cancelAttempt() {
-    if ((state.status === "running" || state.status === "paused")
+    if (state.status === "running"
       && !window.confirm("Leave this test? Your current attempt will not be saved.")) return;
     if (window.history.length > 1) {
       window.history.back();
@@ -416,7 +409,7 @@
   }
 
   function submitAttempt() {
-    const typedValue = dom.typingInput?.value || state.typed || "";
+    const typedValue = state.completedTyped + state.typed;
     if (!typedValue.trim()) {
       showStatus("Type at least one character before submitting.");
       focusTypingInput(true);
@@ -426,11 +419,34 @@
   }
 
   function handleTypingInput() {
+    if (state.status === "finished") return;
+    if (state.status === "running" && getRemainingSeconds() <= 0) {
+      if (dom.typingInput) dom.typingInput.value = state.typed;
+      finishTest(); return;
+    }
     if (state.composing) return;
-    if (state.status === "finished" || state.status === "paused") return;
-    if (state.status === "ready" && dom.typingInput?.value) startClock();
-    state.typed = dom.typingInput?.value || "";
-    if (splitTextUnits(getScoredTypedText()).length >= splitTextUnits(state.passage).length) finishTest();
+    const nextTyped = dom.typingInput?.value || "";
+    // Fallback for non-cancelable mobile/IME edits; committed text stays append-only.
+    if (state.preset?.editingAllowed === false && !nextTyped.startsWith(state.typed)) {
+      dom.typingInput.value = state.typed;
+      dom.typingInput.setSelectionRange?.(state.typed.length, state.typed.length);
+      showStatus("Editing is disabled in this CBTST practice. Continue typing or restart.");
+      return;
+    }
+    if (state.status === "ready" && nextTyped) startClock();
+    state.typed = nextTyped;
+    if (splitTextUnits(getScoredTypedText()).length >= splitTextUnits(state.passage).length) {
+      if (state.preset?.repeatPassage) {
+        // Retain each round for scoring/history; render only the original passage.
+        state.completedTyped += getScoredTypedText() + "\n";
+        const extraUnits = Math.max(0, splitTextUnits(getScoredTypedText()).length - splitTextUnits(state.passage).length);
+        state.completedReference += state.passage + "\u0000".repeat(extraUnits) + "\n";
+        state.passageRounds += 1;
+        state.typed = "";
+        dom.typingInput.value = "";
+        if (dom.passageText) dom.passageText.scrollTop = 0;
+      } else finishTest();
+    }
     render();
   }
 
@@ -445,8 +461,10 @@
 
   function finishTest() {
     if (state.status === "finished") return;
-    state.finishedAt = state.status === "paused" ? state.pausedAt : performance.now();
-    state.typed = dom.typingInput?.value || state.typed;
+    state.finishedAt = performance.now();
+    state.composing = false;
+    // Ignore uncommitted IME text and any input arriving after the deadline.
+    if (dom.typingInput) dom.typingInput.value = state.typed;
     const result = calculateResult();
     state.lastResult = result;
     storage?.saveResult(result);
@@ -473,9 +491,9 @@
   }
 
   function getElapsedMs() {
-    if (!state.startedAt) return 0;
-    const end = state.finishedAt || (state.status === "paused" ? state.pausedAt : performance.now());
-    return Math.max(0, end - state.startedAt - state.pausedMs);
+    if (state.startedAt == null) return 0;
+    const end = state.finishedAt || performance.now();
+    return Math.max(0, Math.min(state.durationMinutes * 60000, end - state.startedAt));
   }
 
   function getElapsedMinutes() {
@@ -488,12 +506,12 @@
   }
 
   function calculateResult() {
-    const typed = getScoredTypedText();
-    const reference = state.passage || "";
+    const typed = state.completedTyped + getScoredTypedText();
+    const reference = state.completedReference + (state.passage || "");
     const typedUnits = splitTextUnits(typed);
     const referenceUnits = splitTextUnits(reference);
     const elapsedMinutes = Math.min(state.durationMinutes, Math.max(getElapsedMinutes(), typed ? 1 / 60 : 1 / 60000));
-    const typedChars = typedUnits.length;
+    const typedChars = typedUnits.length - state.passageRounds;
     let correctChars = 0;
     let incorrectChars = 0;
 
@@ -502,6 +520,8 @@
       else incorrectChars += 1;
     }
 
+    // Round separators are bookkeeping, not keystrokes entered by the candidate.
+    correctChars = Math.max(0, correctChars - state.passageRounds);
     const targetWords = reference.trim().split(/\s+/).filter(Boolean);
     const typedWords = typed.trim().split(/\s+/).filter(Boolean);
     let correctWords = 0;
@@ -515,10 +535,10 @@
     const errors = incorrectChars;
     const netWPM = Math.max(0, (typedChars / 5 - errors / 5) / elapsedMinutes);
     const accuracy = typedChars ? correctChars / typedChars * 100 : 0;
-    const speedPass = netWPM >= state.targetWPM;
-    const accuracyPass = accuracy >= state.targetAccuracy;
+    const speedPass = state.targetWPM != null && netWPM >= state.targetWPM;
+    const accuracyPass = state.targetAccuracy == null || accuracy >= state.targetAccuracy;
 
-    return {
+    const result = {
       id: `${Date.now()}-${Math.round(netWPM * 10)}`,
       presetId: state.preset?.id || "general",
       exam: state.preset?.name || "Typing Test",
@@ -541,8 +561,13 @@
       speedPass,
       accuracyPass,
       targetAchieved: speedPass && accuracyPass,
-      completedAt: new Date().toISOString()
+      completedAt: new Date().toISOString(),
+      passageRounds: state.passageRounds
     };
+    return evaluators ? evaluators.assess(result, {
+      preset: state.preset, typed, complete: getElapsedMs() >= state.durationMinutes * 60000
+    }) : state.preset?.practiceOnly === false ? { ...result, targetAchieved: false,
+      assessmentLabel: "RULE EVALUATOR UNAVAILABLE", assessmentNote: "Practice feedback only; exam evaluation could not load." } : result;
   }
 
   function render() {
@@ -558,24 +583,31 @@
     setText(dom.timerText, formatClock(getRemainingSeconds()));
     setText(dom.liveWPM, preview.netWPM.toFixed(1));
     setText(dom.liveAccuracy, `${preview.accuracy.toFixed(1)}%`);
-    setText(dom.targetWPMText, String(state.targetWPM));
-    setText(dom.targetAccuracyText, `${state.targetAccuracy}%`);
-    const scoredTyped = getScoredTypedText();
+    const isDest = preview.evaluationType === "ssc-dest";
+    const isExam = state.preset?.practiceOnly === false;
+    metricLabel(dom.liveAccuracy, isExam ? "Character Accuracy" : "Accuracy");
+    metricLabel(dom.liveWPM, isExam ? "Practice WPM" : "Net WPM");
+    metricLabel(dom.liveWords, isDest ? "Output Keys" : "Typed Words");
+    metricLabel(dom.targetWPMText, isDest ? "Target Keys" : "Target WPM");
+    metricLabel(dom.targetAccuracyText, state.targetAccuracy == null ? "Scoring" : isExam ? "Notified Accuracy" : "Practice Accuracy");
+    setText(dom.targetWPMText, String(isDest ? preview.targetKeyDepressions : state.targetWPM));
+    setText(dom.targetAccuracyText, state.targetAccuracy == null ? "See rules" : `${state.targetAccuracy}%`);
+    const scoredTyped = state.completedTyped + getScoredTypedText();
     const typedLength = splitTextUnits(scoredTyped).length;
     const typedWords = scoredTyped.trim().split(/\s+/).filter(Boolean).length;
     const passageLength = splitTextUnits(state.passage || "").length;
-    const progress = passageLength ? Math.min(100, (typedLength / passageLength) * 100) : 0;
+    const progress = isDest ? preview.progress : passageLength ? Math.min(100, (splitTextUnits(getScoredTypedText()).length / passageLength) * 100) : 0;
     if (dom.progressBar) dom.progressBar.style.width = `${progress}%`;
-    setText(dom.progressText, `${Math.round(progress)}% complete`);
-    setText(dom.liveWords, String(typedWords));
-    const speedProgress = Math.min(100, preview.netWPM / state.targetWPM * 100);
-    const accuracyProgress = Math.min(100, preview.accuracy / state.targetAccuracy * 100);
+    setText(dom.progressText, `${Math.round(progress)}% ${isDest ? "of key target" : "of passage"}${state.passageRounds ? ` · round ${state.passageRounds + 1}` : ""}`);
+    setText(dom.liveWords, String(isDest ? preview.keyDepressions : typedWords));
+    const speedProgress = Math.min(100, preview.netWPM / (state.targetWPM || Infinity) * 100);
+    const accuracyProgress = Math.min(100, preview.accuracy / (state.targetAccuracy || 100) * 100);
     if (dom.speedGoal) dom.speedGoal.value = speedProgress;
     if (dom.accuracyGoal) dom.accuracyGoal.value = accuracyProgress;
     setText(dom.speedGoalText, `${Math.round(speedProgress)}%`);
     setText(dom.accuracyGoalText, `${Math.round(accuracyProgress)}%`);
     app.classList.toggle("is-time-low", state.status === "running" && getRemainingSeconds() <= 60);
-    setText(dom.coachText, !typedLength ? "Build a steady rhythm, one word at a time."
+    setText(dom.coachText, isExam ? (isDest ? "Build accurate output toward 2,000 keys. Volume alone is not an official pass." : "Live WPM and accuracy are practice feedback. See Rules & sources for exam evaluation.") : !typedLength ? "Build a steady rhythm, one word at a time."
       : !preview.accuracyPass ? "Slow down slightly. Check the highlighted mismatches before building speed."
       : !preview.speedPass ? "Your accuracy is on target. Build speed with a steady rhythm."
       : "Both targets reached so far. Keep your rhythm through the rest of the test.");
@@ -642,12 +674,16 @@
     setText(dom.modeLabel, label(preset?.mode || "practice"));
     setText(dom.examLabel, preset?.name || "Typing Test");
     setText(dom.languageLabel, state.language === "hindi" ? `Hindi (${getHindiInputModeLabel()})` : label(state.language));
-    setText(dom.disclaimerText, preset?.disclaimer || "Practice settings are configurable. For exam-specific preparation, verify the latest official notification.");
+    setText(dom.disclaimerText, preset?.officialRuleNote || preset?.disclaimer || "Practice settings only.");
+    setText(dom.rulesVerified, preset?.lastVerified ? `Sources checked: ${preset.lastVerified}. Applies to the recruitment cycle named above.` : preset?.sourceStatus || "Personal practice benchmarks; no official qualification claimed.");
+    if (dom.rulesSources) {
+      const sources = [preset?.officialSource, ...(preset?.additionalSources || [])].filter(Boolean);
+      dom.rulesSources.innerHTML = sources.map((url, index) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${index ? "Additional official source" : "Official source"}</a>`).join(" · ");
+    }
     setText(dom.keyboardNote, getKeyboardNote(preset, state.language));
     setText(dom.storageText, storage?.isPersistent ? "Completed results are saved on this device. Unfinished attempts are not saved." : "Results cannot be saved on this device. Keep this tab open to review your result.");
     setText(dom.statusText, label(state.status));
-    setText(dom.practiceHint, state.status === "paused" ? "Practice paused. Select Resume when you are ready."
-      : state.status === "finished" ? "Attempt complete. Review your feedback below."
+    setText(dom.practiceHint, state.status === "finished" ? "Attempt complete. Review your feedback below."
       : state.status === "running" ? "Keep a steady rhythm. The underlined character shows your position."
       : "Start typing to begin the timer. Aim for accuracy first.");
     if (dom.passageText) dom.passageText.lang = state.language === "hindi" ? "hi" : "en";
@@ -661,7 +697,6 @@
       if (preset?.keyboardNote) return preset.keyboardNote;
       return "Hindi mode uses Mangal Unicode display. For serious exam practice, select the official Hindi keyboard layout in your system/IME; use phonetic only for casual practice.";
     }
-    if (preset?.keyboardNote) return preset.keyboardNote;
     return "English mode uses your standard keyboard layout.";
   }
 
@@ -686,15 +721,16 @@
   function renderButtonState() {
     if (dom.startButton) {
       dom.startButton.disabled = state.status === "running";
-      dom.startButton.textContent = state.status === "paused" ? "Resume" : "Start";
+      dom.startButton.textContent = "Start";
     }
-    if (dom.pauseButton) {
-      dom.pauseButton.disabled = !(state.status === "running" || state.status === "paused");
-      dom.pauseButton.textContent = state.status === "paused" ? "Resume" : "Pause";
+    if (dom.hindiInputMode) {
+      dom.hindiInputMode.disabled = state.status === "running" || state.status === "finished" || state.preset?.allowedHindiModes?.length === 1;
+      Array.from(dom.hindiInputMode.options || []).forEach(option => {
+        option.disabled = Boolean(state.preset?.allowedHindiModes && !state.preset.allowedHindiModes.includes(option.value));
+      });
     }
-    if (dom.hindiInputMode) dom.hindiInputMode.disabled = state.status === "running" || state.status === "paused" || state.status === "finished";
     if (dom.restartButton) dom.restartButton.disabled = state.status === "idle";
-    if (dom.submitButton) dom.submitButton.disabled = state.status === "finished" || !Boolean((dom.typingInput?.value || state.typed || "").trim());
+    if (dom.submitButton) dom.submitButton.disabled = state.status === "finished" || !Boolean((state.completedTyped + state.typed).trim());
   }
 
   function updateAttemptFontSize(delta) {
@@ -745,27 +781,75 @@
     dom.resultPanel.hidden = !result;
     if (!result) return;
 
-    dom.resultStatus.className = `gju-typing-result-status ${result.targetAchieved ? "is-pass" : "is-fail"}`;
-    dom.resultStatus.textContent = result.targetAchieved ? "TARGET ACHIEVED" : "TARGET NOT ACHIEVED";
-    setText(dom.resultAdvice, result.targetAchieved
+    dom.resultStatus.className = `gju-typing-result-status ${result.targetAchieved ? "is-pass" : ["rrb", "delhi-hcm", "up-police"].includes(result.evaluationType) ? "" : "is-fail"}`;
+    dom.resultStatus.textContent = result.assessmentLabel || (result.targetAchieved ? "PRACTICE TARGET ACHIEVED" : "PRACTICE TARGET NOT ACHIEVED");
+    setText(dom.resultAdvice, result.evaluationType && result.evaluationType !== "general" ? result.assessmentNote : result.targetAchieved
       ? "You met both practice targets. Try another passage to build consistency."
       : !result.accuracyPass
         ? `Focus on accuracy next: aim for ${result.targetAccuracy}%. Review the red mismatches above, then retry at a comfortable pace.`
         : `Your accuracy is on target. Build another ${Math.max(0, result.targetWPM - result.netWPM).toFixed(1)} WPM to reach your speed goal.`);
     dom.resultGrid.innerHTML = [
-      metric("Speed", `${result.netWPM.toFixed(1)} WPM`),
+      metric("Practice Net WPM", `${result.netWPM.toFixed(1)} WPM`),
       metric("Gross Speed", `${result.grossWPM.toFixed(1)} WPM`),
-      metric("Accuracy", `${result.accuracy.toFixed(1)}%`),
+      metric("Character Accuracy", `${result.accuracy.toFixed(1)}%`),
       metric("Correct Characters", result.correctCharacters.toLocaleString("en-IN")),
       metric("Incorrect Characters", result.incorrectCharacters.toLocaleString("en-IN")),
       metric("Total Typed", result.totalTypedCharacters.toLocaleString("en-IN")),
       metric("Correct Words", result.correctWords.toLocaleString("en-IN")),
       metric("Incorrect Words", result.incorrectWords.toLocaleString("en-IN")),
-      metric("Errors", result.errors.toLocaleString("en-IN")),
+      metric("Character Mismatches", result.errors.toLocaleString("en-IN")),
       metric("Time", formatDuration(result.timeTakenSeconds)),
-      metric("Target WPM", String(result.targetWPM), result.speedPass ? "Pass" : "Needs work"),
-      metric("Target Accuracy", `${result.targetAccuracy}%`, result.accuracyPass ? "Pass" : "Needs work")
+      ...(result.targetWPM == null ? [] : [metric("Speed Benchmark", String(result.targetWPM), "Practice")]),
+      ...(result.targetAccuracy == null ? [] : [metric(result.evaluationType === "up-police" ? "Notified Accuracy" : "Practice Accuracy Goal", `${result.targetAccuracy}%`, result.evaluationType === "up-police" ? "Word-based review required" : "Practice")])
     ].join("");
+    if (result.evaluationType === "ssc-dest") dom.resultGrid.innerHTML = [
+      metric("Output Key Depressions (proxy)", result.keyDepressions),
+      metric("Notified Volume", "About 2,000 keys"), metric("Volume Progress", `${round(result.progress)}%`)
+    ].join("") + dom.resultGrid.innerHTML;
+    if (result.evaluationType === "rrb") dom.resultGrid.innerHTML = [
+      metric("Words Typed", result.typedWords), metric("Minimum Words", result.minimumWords, result.minimumContentMet ? "Reached" : "Not reached"),
+      metric("Final CBTST Speed", "Review needed"), metric("Full / Half Mistakes", "Not auto-classified")
+    ].join("") + dom.resultGrid.innerHTML;
+    const supportsReview = ["rrb", "delhi-hcm", "up-police"].includes(result.evaluationType);
+    if (dom.reviewPanel) dom.reviewPanel.hidden = !supportsReview;
+    if (supportsReview && dom.reviewForm && dom.reviewForm.dataset.resultId !== result.id) {
+      dom.reviewForm.dataset.resultId = result.id;
+      dom.reviewForm.reset();
+      setText(dom.reviewCountLabel, result.evaluationType === "delhi-hcm" ? "Reviewed stroke count" : "Reviewed total words");
+      setText(dom.reviewMistakesLabel, result.evaluationType === "up-police" ? "Reviewed correct words" : result.evaluationType === "rrb" ? "Full mistakes" : "Mistakes");
+      dom.reviewHalfField.hidden = result.evaluationType !== "rrb";
+      dom.reviewHalfMistakes.required = result.evaluationType === "rrb";
+      setText(dom.reviewOutput, "No reviewed calculation yet.");
+      setText(dom.reviewNote, "Enter counts you have checked against the passage and your exam instructions. Character mismatches above are not official mistake counts. This self-review is a practice estimate, not an official result. An early finish cannot establish a full-duration benchmark.");
+    }
+  }
+
+  function metricLabel(node, text) {
+    if (node?.previousElementSibling) node.previousElementSibling.textContent = text;
+  }
+
+  function reviewResult(event) {
+    event.preventDefault();
+    const result = state.lastResult;
+    if (!result || !evaluators) return;
+    try {
+      const count = Number(dom.reviewCount.value);
+      const mistakes = Number(dom.reviewMistakes.value);
+      const half = Number(dom.reviewHalfMistakes.value || 0);
+      if (!dom.reviewCount.value || !dom.reviewMistakes.value || ![count, mistakes, half].every(n => Number.isSafeInteger(n) && n >= 0)) throw new Error("Enter whole, non-negative reviewed counts.");
+      let review;
+      if (result.evaluationType === "rrb") review = evaluators.rrb({words: count, fullMistakes: mistakes, halfMistakes: half, language: result.language});
+      else if (result.evaluationType === "delhi-hcm") review = evaluators.delhi({strokes: count, mistakes, language: result.language});
+      else review = evaluators.upPolice({words: count, correctWords: mistakes, language: result.language});
+      const assessed = result.fullDurationCompleted && review.meetsBenchmark;
+      const details = result.evaluationType === "rrb"
+        ? `Full: ${review.fullMistakes}; half: ${review.halfMistakes}; allowance: ${round(review.allowance)}; ignored: ${round(review.ignoredMistakes)}; final mistakes: ${round(review.finalMistakes)}. Minimum content: ${review.minimumContentMet ? "met" : "not met"}.`
+        : result.evaluationType === "delhi-hcm" ? `Tentative: ${round(review.tentativeSpeed)} WPM; mistakes: ${review.mistakes}; marks: ${!result.fullDurationCompleted ? "not assessed (early finish)" : review.marks == null ? "fractional slab unresolved" : `${review.marks}/25`}.`
+        : `Word accuracy: ${round(review.accuracy)}%; required: 85%. Complete both language tests separately.`;
+      setText(dom.reviewOutput, `${details} Calculated speed over the full ${result.durationMinutes}-minute session: ${round(review.speed)} WPM; required: ${review.requiredSpeed}. ${!result.fullDurationCompleted ? "Early finish: full-duration benchmark not assessed." : assessed ? "Self-reviewed practice benchmark met." : "Self-reviewed practice benchmark not met."}`);
+      result.review = { ...review, selfReviewed: true, benchmarkMet: assessed, fullDurationCompleted: result.fullDurationCompleted };
+      storage?.updateResult?.(result);
+    } catch (error) { setText(dom.reviewOutput, error.message); }
   }
 
   function renderStats() {

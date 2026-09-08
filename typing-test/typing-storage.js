@@ -85,11 +85,23 @@
     return stats;
   }
 
+  function updateResult(result) {
+    const stats = getStats();
+    if (!Array.isArray(stats.history) || !stats.history.some(item => item.id === result.id)) return false;
+    stats.history = stats.history.map(item => item.id === result.id ? result : item);
+    if (stats.personalBest?.id === result.id) stats.personalBest = result;
+    const exam = stats.examStats?.[result.presetId];
+    if (exam?.bestResult?.id === result.id) exam.bestResult = result;
+    // A review enriches one attempt; it never increments totals or mixes review speed into generic best WPM.
+    return write("stats", stats);
+  }
+
   window.GJUTypingStorage = {
     isPersistent: persistent,
     read,
     write,
     getStats,
-    saveResult
+    saveResult,
+    updateResult
   };
 })();

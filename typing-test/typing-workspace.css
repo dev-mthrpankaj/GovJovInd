@@ -119,3 +119,10 @@
  .gju-typing-attempt-page .gju-typing-attempt-sidebar { grid-template-columns: 1fr; }
 }
 .gju-typing-attempt-page > .gju-typing-live-card { grid-row: auto; }
+
+/* Result-only reviewed-count inputs; attempt layout stays unchanged. */
+.typing-review-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.typing-review-form label { display: grid; gap: 6px; font-size: .85rem; max-width: 100%; }
+.typing-review-form label[hidden] { display: none; }
+.typing-review-form input { box-sizing: border-box; max-width: 100%; width: 180px; padding: 10px; border: 1px solid #bccbe3; border-radius: 8px; font: inherit; }
+#rulesSources { overflow-wrap: anywhere; }

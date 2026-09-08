@@ -27,7 +27,7 @@
       description: "Practice Delhi Police Head Constable Ministerial typing with English 30 WPM and Hindi 25 WPM targets. This typing test is free forever with no charge."
     },
     "ssc-stenographer": {
-      title: "SSC Stenographer Practice",
+      title: "SSC Stenographer Transcription Practice",
       category: "SSC",
       icon: "fas fa-microphone-lines",
       logoClass: "gju-typing-logo-ssc",
@@ -177,6 +177,7 @@
 
   function buildPage(presetId, exam) {
     const defaultLanguage = exam.languages[0] || "english";
+    const ruleNote = window.GJU_TYPING_CONFIG?.getPreset(presetId)?.officialRuleNote || "Practice benchmarks only. Verify the selected recruitment’s official instructions.";
     return `
       <nav class="typing-breadcrumb" aria-label="Breadcrumb"><a href="index.html">All typing tests</a><span aria-hidden="true">/</span><span>${escapeHtml(exam.title)}</span></nav>
       <section class="gju-typing-exam-detail-card">
@@ -202,7 +203,7 @@
 
       <section class="gju-typing-rules-box">
         <strong><i class="fas fa-circle-info" aria-hidden="true"></i> Typing Rules</strong>
-        <span>Exam typing/skill-test requirements may vary according to the latest official recruitment notification. Always verify the official notification before relying on these settings.</span>
+        <span>${escapeHtml(ruleNote)}</span>
       </section>
 
 
