@@ -1,3 +1,14 @@
+(function loadTypingCardCompetition() {
+  "use strict";
+  if (!/^\/typing-test\//i.test(window.location.pathname) || /\/app\.html$/i.test(window.location.pathname)) return;
+  if (document.querySelector('script[data-gju-typing-card-competition]')) return;
+  const script = document.createElement("script");
+  script.src = new URL("typing-card-competition.js?v=20260908a", window.location.href).href;
+  script.defer = true;
+  script.dataset.gjuTypingCardCompetition = "1";
+  document.head.appendChild(script);
+}());
+
 (function () {
   "use strict";
 
