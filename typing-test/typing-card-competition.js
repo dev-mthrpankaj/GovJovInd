@@ -5,156 +5,23 @@
   const FIREBASE_APP = "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   const FIREBASE_AUTH = "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
   const cache = new Map();
-  let authUser = null;
-  let authResolved = false;
-  let renderQueued = false;
+  let authUser = null, authResolved = false, renderQueued = false;
 
-  function injectStyles() {
-    if (document.getElementById("gjuTypingCardCompetitionStyles")) return;
-    const style = document.createElement("style");
-    style.id = "gjuTypingCardCompetitionStyles";
-    style.textContent = `
-      .gju-typing-card-standing{margin:12px 0 0;padding-top:11px;border-top:1px solid #e5eaf2;font-variant-numeric:tabular-nums}
-      .gju-typing-card-standing-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
-      .gju-typing-card-standing-main>span{min-width:0;padding:8px 10px;border:1px solid #e2e8f2;border-radius:10px;background:#f8faff}
-      .gju-typing-card-standing small{display:block;color:#748096;font-size:9px;line-height:1.2;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
-      .gju-typing-card-standing strong{display:flex;align-items:baseline;gap:4px;margin-top:3px;color:#172440;font-size:14px;line-height:1.2;white-space:nowrap}
-      .gju-typing-card-standing strong em{font-style:normal;color:#66738b;font-size:9px;font-weight:700;letter-spacing:.03em}
-      .gju-typing-card-standing-rank strong{font-size:15px}
-      .gju-typing-card-standing-meta{margin:7px 2px 0;color:#68758d;font-size:10px;line-height:1.4;white-space:normal}
-      .gju-typing-card-standing-meta b{color:#33415d;font-weight:700}
-      .gju-typing-card-standing-empty{padding:9px 10px;border:1px dashed #d7deea;border-radius:10px;background:#fbfcff;color:#748096;font-size:11px;line-height:1.35;text-align:center}
-      .gju-typing-card-standing.is-loading .gju-typing-card-standing-empty{color:#8994a7}
-      .gju-typing-card-standing-note{margin-top:6px;color:#748096;font-size:10px;line-height:1.35}
-      @media(max-width:480px){.gju-typing-card-standing-main{gap:6px}.gju-typing-card-standing-main>span{padding:7px 8px}.gju-typing-card-standing strong{font-size:13px}.gju-typing-card-standing-rank strong{font-size:14px}.gju-typing-card-standing-meta{font-size:9.5px}}
-    `;
-    document.head.appendChild(style);
-  }
-
-  function formatCount(value) {
-    const number = Number(value);
-    return Number.isFinite(number) ? number.toLocaleString("en-IN") : "—";
-  }
-
-  function speedValue(value) {
-    const number = Number(value);
-    return Number.isFinite(number) ? number.toFixed(1) : "—";
-  }
-
-  function speedStrong(value) {
-    const text = speedValue(value);
-    return text === "—" ? "—" : `${text}<em>WPM</em>`;
-  }
-
-  function standingHtml(stats, state) {
-    if (state === "loading") return `<div class="gju-typing-card-standing-empty">Loading competitive standing…</div>`;
-    if (state === "login") return `<div class="gju-typing-card-standing-empty">Login to see your competitive standing.</div>`;
-    if (state === "error") return `<div class="gju-typing-card-standing-empty">Ranking is temporarily unavailable.</div>`;
-
-    const best = stats?.best?.netWpm;
-    const rank = Number(stats?.rank) || 0;
-    const rankedUsers = Number(stats?.rankedUsers) || 0;
-    const average = stats?.communityAverage;
-    const top = stats?.topSpeed;
-    const hasPersonalRank = best != null && rank > 0;
-    const hasCommunity = rankedUsers > 0 || average != null || top != null;
-
-    if (!hasPersonalRank && !hasCommunity) {
-      return `<div class="gju-typing-card-standing-empty">No ranked attempts yet</div>`;
-    }
-
-    if (!hasPersonalRank) {
-      return `<div class="gju-typing-card-standing-empty">No ranked attempt yet</div><div class="gju-typing-card-standing-meta">${rankedUsers ? `<b>${formatCount(rankedUsers)}</b> ranked candidate${rankedUsers === 1 ? "" : "s"}` : "Community ranking active"}${average != null ? ` · Avg <b>${speedValue(average)}</b> WPM` : ""}${top != null ? ` · Top <b>${speedValue(top)}</b> WPM` : ""}</div>`;
-    }
-
-    return `<div class="gju-typing-card-standing-main"><span><small>Your Best</small><strong>${speedStrong(best)}</strong></span><span class="gju-typing-card-standing-rank"><small>Your Rank</small><strong>#${formatCount(rank)}</strong></span></div><div class="gju-typing-card-standing-meta">${rankedUsers ? `of <b>${formatCount(rankedUsers)}</b> ranked candidate${rankedUsers === 1 ? "" : "s"}` : "Ranked attempt"}${average != null ? ` · Avg <b>${speedValue(average)}</b> WPM` : ""}${top != null ? ` · Top <b>${speedValue(top)}</b> WPM` : ""}</div>`;
-  }
-
-  function parseCard(card) {
-    const link = card.querySelector('a[href*="app.html?preset="]');
-    if (!link) return null;
-    let url;
-    try { url = new URL(link.getAttribute("href"), window.location.href); } catch (error) { return null; }
-    const presetKey = url.searchParams.get("preset") || "";
-    const language = url.searchParams.get("language") || "english";
-    const difficulty = url.searchParams.get("difficulty") || "medium";
-    const passage = url.searchParams.get("passage");
-    if (!presetKey || passage === null || !/^\d+$/.test(passage)) return null;
-    const passageId = `${presetKey}:${language}:${difficulty}:${passage}`;
-    const preset = window.GJU_TYPING_CONFIG?.getPreset ? window.GJU_TYPING_CONFIG.getPreset(presetKey) : null;
-    const durationSeconds = Math.round((Number(preset?.duration) || durationFromPage(presetKey)) * 60);
-    const key = [presetKey, language, difficulty, durationSeconds, passageId].join("|");
-    return { presetKey, language, difficulty, durationSeconds, passageId, key };
-  }
-
-  function durationFromPage(presetKey) {
-    const fixed = {"ssc-cgl-dest":15,"delhi-police-hc-ministerial":10,"upsssc-junior-assistant":5,"up-police-computer-operator":15,"up-clerical":5,"ssc-stenographer":40};
-    return fixed[presetKey] || 10;
-  }
-
-  function ensureStanding(card) {
-    let node = card.querySelector(".gju-typing-card-standing");
-    if (node) return node;
-    node = document.createElement("div");
-    node.className = "gju-typing-card-standing is-loading";
-    node.setAttribute("aria-label", "Competitive typing statistics");
-    node.innerHTML = standingHtml(null, "loading");
-    const head = card.querySelector(".gju-typing-passage-card-head") || card;
-    head.appendChild(node);
-    return node;
-  }
-
-  async function getToken(forceRefresh) {
-    if (!authUser) return "";
-    try { return await authUser.getIdToken(Boolean(forceRefresh)); } catch (error) { return ""; }
-  }
-
-  async function fetchStats(cohort) {
-    if (cache.has(cohort.key)) return cache.get(cohort.key);
-    const promise = (async () => {
-      let token = await getToken(false);
-      if (!token) return { state:"login", stats:null };
-      const query = new URLSearchParams({preset_key:cohort.presetKey,language:cohort.language,difficulty:cohort.difficulty,duration_seconds:String(cohort.durationSeconds),passage_id:cohort.passageId});
-      const request = async (bearer) => fetch(API_BASE + "stats.php?" + query.toString(), {method:"GET",mode:"cors",cache:"no-store",headers:{"Accept":"application/json","Authorization":`Bearer ${bearer}`}});
-      let response = await request(token);
-      if (response.status === 401) { token = await getToken(true); if (token) response = await request(token); }
-      const data = await response.json().catch(() => null);
-      if (!response.ok || !data || data.success !== true) throw new Error(data?.message || "Ranking unavailable");
-      return { state:"ready", stats:data.stats || null };
-    })().catch(() => ({ state:"error", stats:null }));
-    cache.set(cohort.key,promise);
-    return promise;
-  }
-
-  async function renderCards() {
-    renderQueued=false;
-    const cards=Array.from(document.querySelectorAll(".gju-typing-passage-card"));
-    if(!cards.length)return;
-    injectStyles();
-    const groups=new Map();
-    cards.forEach(card=>{const cohort=parseCard(card);if(!cohort)return;const standing=ensureStanding(card);if(!groups.has(cohort.key))groups.set(cohort.key,{cohort,nodes:[]});groups.get(cohort.key).nodes.push(standing);});
-    if(!authResolved)return;
-    for(const {cohort,nodes} of groups.values()){
-      if(!authUser){nodes.forEach(node=>{node.classList.remove("is-loading");node.innerHTML=standingHtml(null,"login");});continue;}
-      const result=await fetchStats(cohort);
-      nodes.forEach(node=>{node.classList.remove("is-loading");node.innerHTML=standingHtml(result.stats,result.state);});
-    }
-  }
-
+  function injectStyles(){if(document.getElementById("gjuTypingCardCompetitionStyles"))return;const style=document.createElement("style");style.id="gjuTypingCardCompetitionStyles";style.textContent=`.gju-typing-card-standing{margin:12px 0 0;padding-top:11px;border-top:1px solid #e5eaf2;font-variant-numeric:tabular-nums}.gju-typing-card-standing-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.gju-typing-card-standing-main>span{min-width:0;padding:8px 10px;border:1px solid #e2e8f2;border-radius:10px;background:#f8faff}.gju-typing-card-standing small{display:block;color:#748096;font-size:9px;line-height:1.2;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}.gju-typing-card-standing strong{display:flex;align-items:baseline;gap:4px;margin-top:3px;color:#172440;font-size:14px;line-height:1.2;white-space:nowrap}.gju-typing-card-standing strong em{font-style:normal;color:#66738b;font-size:9px;font-weight:700;letter-spacing:.03em}.gju-typing-card-standing-rank strong{font-size:15px}.gju-typing-card-standing-meta{margin:7px 2px 0;color:#68758d;font-size:10px;line-height:1.4;white-space:normal}.gju-typing-card-standing-meta b{color:#33415d;font-weight:700}.gju-typing-card-standing-empty{padding:9px 10px;border:1px dashed #d7deea;border-radius:10px;background:#fbfcff;color:#748096;font-size:11px;line-height:1.35;text-align:center}.gju-typing-card-standing.is-loading .gju-typing-card-standing-empty{color:#8994a7}@media(max-width:480px){.gju-typing-card-standing-main{gap:6px}.gju-typing-card-standing-main>span{padding:7px 8px}.gju-typing-card-standing strong{font-size:13px}.gju-typing-card-standing-rank strong{font-size:14px}.gju-typing-card-standing-meta{font-size:9.5px}}`;document.head.appendChild(style);}
+  function ensureLeaderboardClient(){if(document.querySelector('script[data-gju-typing-leaderboard]'))return;const s=document.createElement("script");s.src="typing-leaderboard.js?v=leaderboard-20260908a";s.defer=true;s.dataset.gjuTypingLeaderboard="1";document.head.appendChild(s);}
+  function formatCount(v){const n=Number(v);return Number.isFinite(n)?n.toLocaleString("en-IN"):"—";}
+  function speedValue(v){const n=Number(v);return Number.isFinite(n)?n.toFixed(1):"—";}
+  function speedStrong(v){const t=speedValue(v);return t==="—"?"—":`${t}<em>WPM</em>`;}
+  function standingHtml(stats,state){if(state==="loading")return `<div class="gju-typing-card-standing-empty">Loading competitive standing…</div>`;if(state==="login")return `<div class="gju-typing-card-standing-empty">Login to see your competitive standing.</div>`;if(state==="error")return `<div class="gju-typing-card-standing-empty">Ranking is temporarily unavailable.</div>`;const best=stats?.best?.netWpm,rank=Number(stats?.rank)||0,rankedUsers=Number(stats?.rankedUsers)||0,average=stats?.communityAverage,top=stats?.topSpeed,hasPersonalRank=best!=null&&rank>0,hasCommunity=rankedUsers>0||average!=null||top!=null;if(!hasPersonalRank&&!hasCommunity)return `<div class="gju-typing-card-standing-empty">No ranked attempts yet</div>`;if(!hasPersonalRank)return `<div class="gju-typing-card-standing-empty">No ranked attempt yet</div><div class="gju-typing-card-standing-meta">${rankedUsers?`<b>${formatCount(rankedUsers)}</b> ranked candidate${rankedUsers===1?"":"s"}`:"Community ranking active"}${average!=null?` · Avg <b>${speedValue(average)}</b> WPM`:""}${top!=null?` · Top <b>${speedValue(top)}</b> WPM`:""}</div>`;return `<div class="gju-typing-card-standing-main"><span><small>Your Best</small><strong>${speedStrong(best)}</strong></span><span class="gju-typing-card-standing-rank"><small>Your Rank</small><strong>#${formatCount(rank)}</strong></span></div><div class="gju-typing-card-standing-meta">${rankedUsers?`of <b>${formatCount(rankedUsers)}</b> ranked candidate${rankedUsers===1?"":"s"}`:"Ranked attempt"}${average!=null?` · Avg <b>${speedValue(average)}</b> WPM`:""}${top!=null?` · Top <b>${speedValue(top)}</b> WPM`:""}</div>`;}
+  function durationFromPage(k){const fixed={"ssc-cgl-dest":15,"delhi-police-hc-ministerial":10,"upsssc-junior-assistant":5,"up-police-computer-operator":15,"up-clerical":5,"ssc-stenographer":40};return fixed[k]||10;}
+  function parseCard(card){const link=card.querySelector('a[href*="app.html?preset="]');if(!link)return null;let url;try{url=new URL(link.getAttribute("href"),window.location.href);}catch(e){return null;}const presetKey=url.searchParams.get("preset")||"",language=url.searchParams.get("language")||"english",difficulty=url.searchParams.get("difficulty")||"medium",passage=url.searchParams.get("passage");if(!presetKey||passage===null||!/^\d+$/.test(passage))return null;const passageId=`${presetKey}:${language}:${difficulty}:${passage}`,preset=window.GJU_TYPING_CONFIG?.getPreset?window.GJU_TYPING_CONFIG.getPreset(presetKey):null,durationSeconds=Math.round((Number(preset?.duration)||durationFromPage(presetKey))*60),key=[presetKey,language,difficulty,durationSeconds,passageId].join("|");return{presetKey,language,difficulty,durationSeconds,passageId,key};}
+  function ensureStanding(card){let node=card.querySelector(".gju-typing-card-standing");if(node)return node;node=document.createElement("div");node.className="gju-typing-card-standing is-loading";node.setAttribute("aria-label","Competitive typing statistics");node.innerHTML=standingHtml(null,"loading");(card.querySelector(".gju-typing-passage-card-head")||card).appendChild(node);return node;}
+  async function getToken(force){if(!authUser)return"";try{return await authUser.getIdToken(Boolean(force));}catch(e){return"";}}
+  async function fetchStats(c){if(cache.has(c.key))return cache.get(c.key);const promise=(async()=>{let token=await getToken(false);if(!token)return{state:"login",stats:null};const q=new URLSearchParams({preset_key:c.presetKey,language:c.language,difficulty:c.difficulty,duration_seconds:String(c.durationSeconds),passage_id:c.passageId});const req=async bearer=>fetch(API_BASE+"stats.php?"+q.toString(),{method:"GET",mode:"cors",cache:"no-store",headers:{Accept:"application/json",Authorization:`Bearer ${bearer}`}});let response=await req(token);if(response.status===401){token=await getToken(true);if(token)response=await req(token);}const data=await response.json().catch(()=>null);if(!response.ok||!data||data.success!==true)throw new Error(data?.message||"Ranking unavailable");return{state:"ready",stats:data.stats||null};})().catch(()=>({state:"error",stats:null}));cache.set(c.key,promise);return promise;}
+  async function renderCards(){renderQueued=false;const cards=Array.from(document.querySelectorAll(".gju-typing-passage-card"));if(!cards.length)return;injectStyles();const groups=new Map();cards.forEach(card=>{const cohort=parseCard(card);if(!cohort)return;const standing=ensureStanding(card);if(!groups.has(cohort.key))groups.set(cohort.key,{cohort,nodes:[]});groups.get(cohort.key).nodes.push(standing);});if(!authResolved)return;for(const{cohort,nodes}of groups.values()){if(!authUser){nodes.forEach(node=>{node.classList.remove("is-loading");node.innerHTML=standingHtml(null,"login");});continue;}const result=await fetchStats(cohort);nodes.forEach(node=>{node.classList.remove("is-loading");node.innerHTML=standingHtml(result.stats,result.state);});}}
   function queueRender(){if(renderQueued)return;renderQueued=true;window.requestAnimationFrame(renderCards);}
-
-  async function initAuth(){
-    const config=window.GJU_FIREBASE_CONFIG;
-    if(!config?.apiKey){authResolved=true;queueRender();return;}
-    try{
-      const [appMod,authMod]=await Promise.all([import(FIREBASE_APP),import(FIREBASE_AUTH)]);
-      const firebaseApp=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(config);
-      const auth=authMod.getAuth(firebaseApp);
-      authMod.onAuthStateChanged(auth,user=>{authResolved=true;authUser=user&&user.emailVerified?user:null;cache.clear();queueRender();},()=>{authResolved=true;authUser=null;queueRender();});
-    }catch(error){authResolved=true;authUser=null;queueRender();}
-  }
-
-  const observer=new MutationObserver(mutations=>{if(mutations.some(mutation=>Array.from(mutation.addedNodes||[]).some(node=>node.nodeType===1&&(node.matches?.(".gju-typing-passage-card")||node.querySelector?.(".gju-typing-passage-card")))))queueRender();});
-  function init(){observer.observe(document.body,{childList:true,subtree:true});queueRender();initAuth();}
+  async function initAuth(){const config=window.GJU_FIREBASE_CONFIG;if(!config?.apiKey){authResolved=true;queueRender();return;}try{const[appMod,authMod]=await Promise.all([import(FIREBASE_APP),import(FIREBASE_AUTH)]),firebaseApp=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(config),auth=authMod.getAuth(firebaseApp);authMod.onAuthStateChanged(auth,user=>{authResolved=true;authUser=user&&user.emailVerified?user:null;cache.clear();queueRender();},()=>{authResolved=true;authUser=null;queueRender();});}catch(e){authResolved=true;authUser=null;queueRender();}}
+  const observer=new MutationObserver(mutations=>{if(mutations.some(m=>Array.from(m.addedNodes||[]).some(node=>node.nodeType===1&&(node.matches?.(".gju-typing-passage-card")||node.querySelector?.(".gju-typing-passage-card")))))queueRender();});
+  function init(){observer.observe(document.body,{childList:true,subtree:true});ensureLeaderboardClient();queueRender();initAuth();}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
