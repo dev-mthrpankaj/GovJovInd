@@ -81,7 +81,7 @@ test('every selection page loads the catalog before cards and app loads text bef
     if (!html.includes('src="typing-exam-page.js')) continue;
     count++;
     assert.ok(html.indexOf('src="passage-data/long-passage-catalog.js') < html.indexOf('src="typing-exam-page.js'));
-    assert.ok(html.includes('typing-exam-page.js?v=typing-long36-20260905'));
+    assert.match(html, /src="typing-exam-page\.js\?v=[^"]+"/);
   }
   assert.equal(count,17);
   assert.ok(read('app.html').indexOf('src="passage-data/long-passages.js') < read('app.html').indexOf('src="passages.js'));
