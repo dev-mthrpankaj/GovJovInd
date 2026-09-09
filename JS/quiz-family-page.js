@@ -140,11 +140,107 @@
     render();
   }
 
+  function installCompactFilterStyles() {
+    if (document.getElementById("gju-family-filter-v2")) return;
+    const style = document.createElement("style");
+    style.id = "gju-family-filter-v2";
+    style.textContent = `
+      .family-toolbar.family-filter-v2 {
+        grid-template-columns: minmax(280px, .9fr) minmax(0, 1.35fr);
+        align-items: center;
+        gap: 10px 14px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(15,23,42,.065);
+      }
+      .family-filter-v2 .family-filter-heading {
+        grid-column: 1 / -1;
+        min-height: 30px;
+      }
+      .family-filter-v2 .family-filter-copy {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 5px 9px;
+      }
+      .family-filter-v2 .family-filter-copy strong {
+        font-size: 14px;
+      }
+      .family-filter-v2 .family-filter-copy small {
+        font-size: 11px;
+      }
+      .family-filter-v2 .family-search {
+        grid-column: 1;
+        min-height: 46px;
+        padding: 9px 14px 9px 42px;
+        align-items: center;
+      }
+      .family-filter-v2 .family-search > i {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .family-filter-v2 .family-control-caption {
+        display: none;
+      }
+      .family-filter-v2 .family-search input {
+        font-size: 14px;
+        font-weight: 650;
+      }
+      .family-filter-v2 .family-select {
+        display: none;
+      }
+      .family-filter-v2 .family-subject-chips {
+        grid-column: 2;
+        margin: 0;
+        padding: 2px 1px 3px;
+        gap: 7px;
+      }
+      .family-filter-v2 .family-subject-chip {
+        min-height: 36px;
+        padding: 7px 12px;
+      }
+      .family-filter-v2 .family-filter-reset {
+        min-height: 32px;
+        background: #fff;
+      }
+      .family-filter-v2 + .family-list-head {
+        margin-top: 4px;
+      }
+      @media (max-width: 760px) {
+        .family-toolbar.family-filter-v2 {
+          grid-template-columns: 1fr;
+          gap: 9px;
+          padding: 11px;
+        }
+        .family-filter-v2 .family-filter-heading,
+        .family-filter-v2 .family-search,
+        .family-filter-v2 .family-subject-chips {
+          grid-column: 1;
+        }
+        .family-filter-v2 .family-filter-copy {
+          display: grid;
+          gap: 1px;
+        }
+        .family-filter-v2 .family-search {
+          min-height: 44px;
+        }
+        .family-filter-v2 .family-subject-chips {
+          margin-inline: -1px;
+          padding-inline: 1px;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   function enhanceFilterUi() {
     if (!toolbar) return;
 
+    installCompactFilterStyles();
+    toolbar.classList.add("family-filter-v2");
+
     if (!toolbar.querySelector(".family-filter-heading")) {
-      toolbar.insertAdjacentHTML("afterbegin", '<div class="family-filter-heading"><div class="family-filter-copy"><span class="family-filter-eyebrow">Filter Practice Sets</span><strong>Find the right quiz quickly</strong><small>Search by quiz name or choose a subject.</small></div><button class="family-filter-reset" type="button" data-family-filter-reset hidden><i class="fas fa-rotate-left" aria-hidden="true"></i><span>Clear filters</span></button></div>');
+      toolbar.insertAdjacentHTML("afterbegin", '<div class="family-filter-heading"><div class="family-filter-copy"><span class="family-filter-eyebrow">Filter Practice Sets</span><strong>Find the right quiz quickly</strong><small>Search by quiz name or tap a subject.</small></div><button class="family-filter-reset" type="button" data-family-filter-reset hidden><i class="fas fa-rotate-left" aria-hidden="true"></i><span>Clear filters</span></button></div>');
     }
 
     const search = toolbar.querySelector(".family-search");
@@ -158,7 +254,7 @@
     }
 
     if (!toolbar.querySelector(".family-subject-chips")) {
-      toolbar.insertAdjacentHTML("beforeend", '<div class="family-subject-chips" role="group" aria-label="Quick subject filters"></div>');
+      toolbar.insertAdjacentHTML("beforeend", '<div class="family-subject-chips" role="group" aria-label="Filter quizzes by subject"></div>');
     }
 
     subjectChips = toolbar.querySelector(".family-subject-chips");
