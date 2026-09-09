@@ -1,0 +1,16 @@
+(function(){"use strict";
+const COMMONS="https://commons.wikimedia.org/wiki/Special:Redirect/file/";
+const LOGOS={
+  ssc:{src:COMMONS+"Staff%20Selection%20Commission.webp?width=128",alt:"Staff Selection Commission logo"},
+  delhiPolice:{src:COMMONS+"Delhi%20Police%20Logo.png?width=128",alt:"Delhi Police logo"},
+  railways:{src:COMMONS+"Indian%20railways%2018%20star%20logo.jpg?width=128",alt:"Indian Railways logo"},
+  upPolice:{src:COMMONS+"Logo%20of%20Uttar%20Pradesh%20Police.png?width=128",alt:"Uttar Pradesh Police logo"},
+  sbi:{src:"https://sbi.co.in/redirect/images/download.png",alt:"State Bank of India logo"}
+};
+function logoFor(text,preset){const value=(String(text||"")+" "+String(preset||"")).toLowerCase();if(value.includes("delhi-police")||value.includes("delhi police"))return LOGOS.delhiPolice;if(value.includes("up-police")||value.includes("up police computer"))return LOGOS.upPolice;if(value.includes("rrb")||value.includes("railway"))return LOGOS.railways;if(value.includes("sbi"))return LOGOS.sbi;if(value.includes("ssc")||value.includes("stenographer"))return LOGOS.ssc;return null;}
+function apply(container,logo){if(!container||!logo||container.dataset.gjuOrgLogo==="1")return;const fallback=container.innerHTML;const img=document.createElement("img");img.src=logo.src;img.alt=logo.alt;img.width=48;img.height=48;img.loading="lazy";img.decoding="async";img.className="gju-typing-org-logo-img";img.addEventListener("error",()=>{container.innerHTML=fallback;container.classList.remove("has-org-logo");container.dataset.gjuOrgLogo="fallback";},{once:true});container.innerHTML="";container.appendChild(img);container.classList.add("has-org-logo");container.dataset.gjuOrgLogo="1";}
+function enhance(){document.querySelectorAll(".gju-typing-exam-card").forEach(card=>{const href=card.querySelector("a[href]")?.getAttribute("href")||"";const text=card.dataset.typingName||card.textContent;apply(card.querySelector(".gju-typing-exam-logo"),logoFor(text,href));});const page=document.querySelector(".gju-typing-exam-detail-page");if(page){const preset=page.dataset.typingPreset||"";const title=page.querySelector("h1")?.textContent||"";apply(page.querySelector(".gju-typing-hero-topline .gju-typing-exam-logo"),logoFor(title,preset));}}
+function styles(){if(document.getElementById("gjuTypingOrgLogoStyles"))return;const s=document.createElement("style");s.id="gjuTypingOrgLogoStyles";s.textContent=`.gju-typing-exam-logo.has-org-logo{display:grid!important;place-items:center;background:#fff!important;border:1px solid #e1e7f0!important;overflow:hidden;padding:4px!important}.gju-typing-org-logo-img{display:block;width:100%;height:100%;max-width:48px;max-height:48px;object-fit:contain}.gju-typing-exam-card .gju-typing-exam-logo.has-org-logo{width:48px;height:48px}.gju-typing-hero-topline .gju-typing-exam-logo.has-org-logo{width:56px;height:56px;padding:5px!important}@media(max-width:480px){.gju-typing-exam-card .gju-typing-exam-logo.has-org-logo{width:44px;height:44px}.gju-typing-hero-topline .gju-typing-exam-logo.has-org-logo{width:50px;height:50px}}`;document.head.appendChild(s);}
+function init(){styles();enhance();new MutationObserver(enhance).observe(document.body,{childList:true,subtree:true});}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
