@@ -18,7 +18,6 @@
   const PROGRESS_API = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
   const LOCAL_ATTEMPTS_KEY = "GovJobUpdatesQuiz.attempts";
 
-  let subjectChips = null;
   let resetButton = null;
   let pagination = null;
   let quizzes = [];
@@ -112,25 +111,22 @@
   }
 
   function installUiStyles() {
-    if (document.getElementById("gju-family-filter-v3")) return;
+    if (document.getElementById("gju-family-filter-v4")) return;
     const style = document.createElement("style");
-    style.id = "gju-family-filter-v3";
+    style.id = "gju-family-filter-v4";
     style.textContent = `
-      .family-toolbar.family-filter-v3{grid-template-columns:minmax(0,1fr) 260px;align-items:center;gap:10px 12px;padding:12px 14px;border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.065)}
-      .family-filter-v3 .family-filter-heading{grid-column:1/-1;min-height:28px}
-      .family-filter-v3 .family-filter-copy{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
-      .family-filter-v3 .family-filter-copy strong{font-size:14px}.family-filter-v3 .family-filter-copy small{font-size:11px}
-      .family-filter-v3 .family-search,.family-filter-v3 .family-select{min-height:48px;padding-top:20px;padding-bottom:7px}
-      .family-filter-v3 .family-subject-chips{grid-column:1/-1;margin-top:0;padding:1px 1px 2px}
-      .family-filter-v3 .family-subject-chips::before{content:"Popular subjects";display:inline-flex;align-items:center;flex:0 0 auto;margin-right:3px;color:#64748b;font-size:11px;font-weight:800;white-space:nowrap}
-      .family-filter-v3 .family-subject-chip{min-height:32px;padding:6px 11px}
+      .family-toolbar.family-filter-v4{grid-template-columns:minmax(0,1fr) 260px;align-items:center;gap:10px 12px;padding:12px 14px;border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.065)}
+      .family-filter-v4 .family-filter-heading{grid-column:1/-1;min-height:28px}
+      .family-filter-v4 .family-filter-copy{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
+      .family-filter-v4 .family-filter-copy strong{font-size:14px}.family-filter-v4 .family-filter-copy small{font-size:11px}
+      .family-filter-v4 .family-search,.family-filter-v4 .family-select{min-height:48px;padding-top:20px;padding-bottom:7px}
       .family-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
       .family-page-btn{display:inline-flex;align-items:center;justify-content:center;min-width:38px;min-height:38px;padding:7px 11px;border:1px solid var(--fq-border);border-radius:10px;background:#fff;color:#475569;cursor:pointer;font:inherit;font-size:12px;font-weight:800}
       .family-page-btn:hover,.family-page-btn:focus-visible{border-color:var(--fq-accent);color:var(--fq-accent-strong)}
       .family-page-btn[aria-current="page"]{border-color:var(--fq-accent);background:var(--fq-accent);color:#fff;box-shadow:0 6px 14px var(--fq-accent-glow)}
       .family-page-btn:disabled{opacity:.42;cursor:not-allowed}
       .family-page-summary{width:100%;margin-top:2px;color:var(--fq-muted);font-size:11px;text-align:center}
-      @media(max-width:760px){.family-toolbar.family-filter-v3{grid-template-columns:1fr;gap:9px;padding:11px}.family-filter-v3 .family-filter-heading,.family-filter-v3 .family-search,.family-filter-v3 .family-select,.family-filter-v3 .family-subject-chips{grid-column:1}.family-filter-v3 .family-filter-copy{display:grid;gap:1px}.family-filter-v3 .family-search,.family-filter-v3 .family-select{min-height:52px}.family-filter-v3 .family-subject-chips{margin-inline:-1px;padding-inline:1px}.family-filter-v3 .family-subject-chips::before{position:sticky;left:0;background:#fff;padding-right:5px;z-index:1}.family-pagination{margin-top:16px}}
+      @media(max-width:760px){.family-toolbar.family-filter-v4{grid-template-columns:1fr;gap:9px;padding:11px}.family-filter-v4 .family-filter-heading,.family-filter-v4 .family-search,.family-filter-v4 .family-select{grid-column:1}.family-filter-v4 .family-filter-copy{display:grid;gap:1px}.family-filter-v4 .family-search,.family-filter-v4 .family-select{min-height:52px}.family-pagination{margin-top:16px}}
     `;
     document.head.appendChild(style);
   }
@@ -138,8 +134,11 @@
   function enhanceFilterUi() {
     if (!toolbar) return;
     installUiStyles();
-    toolbar.classList.remove("family-filter-v2");
-    toolbar.classList.add("family-filter-v3");
+    toolbar.classList.remove("family-filter-v2", "family-filter-v3");
+    toolbar.classList.add("family-filter-v4");
+
+    const oldChips = toolbar.querySelector(".family-subject-chips");
+    if (oldChips) oldChips.remove();
 
     if (!toolbar.querySelector(".family-filter-heading")) {
       toolbar.insertAdjacentHTML("afterbegin", '<div class="family-filter-heading"><div class="family-filter-copy"><span class="family-filter-eyebrow">Filter Practice Sets</span><strong>Find the right quiz quickly</strong><small>Search by quiz name or choose a subject.</small></div><button class="family-filter-reset" type="button" data-family-filter-reset hidden><i class="fas fa-rotate-left" aria-hidden="true"></i><span>Clear filters</span></button></div>');
@@ -148,8 +147,6 @@
     if (search && !search.querySelector(".family-control-caption")) search.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Search quizzes</span>');
     const select = toolbar.querySelector(".family-select");
     if (select && !select.querySelector(".family-control-caption")) select.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Choose subject</span>');
-    if (!toolbar.querySelector(".family-subject-chips")) toolbar.insertAdjacentHTML("beforeend", '<div class="family-subject-chips" role="group" aria-label="Popular subject filters"></div>');
-    subjectChips = toolbar.querySelector(".family-subject-chips");
     resetButton = toolbar.querySelector("[data-family-filter-reset]");
 
     if (list && !document.getElementById("familyQuizPagination")) {
@@ -164,14 +161,9 @@
     const current = subjectSelect.value;
     subjectSelect.innerHTML = '<option value="">All Subjects</option>' + values.map((s) => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
     if (values.includes(current)) subjectSelect.value = current;
-    if (subjectChips) {
-      const chipValues = [{ value: "", label: "All subjects" }].concat(values.map((value) => ({ value, label: value })));
-      subjectChips.innerHTML = chipValues.map((item) => `<button class="family-subject-chip" type="button" data-family-subject="${esc(item.value)}" aria-pressed="false">${esc(item.label)}</button>`).join("");
-    }
   }
 
   function syncFilterUi(query, subject) {
-    if (subjectChips) subjectChips.querySelectorAll("[data-family-subject]").forEach((chip) => chip.setAttribute("aria-pressed", String((chip.dataset.familySubject || "") === subject)));
     if (resetButton) resetButton.hidden = !query && !subject;
     root.classList.toggle("has-active-filters", !!query || !!subject);
   }
@@ -223,7 +215,7 @@
     const pageItems = filtered.slice(startIndex, startIndex + PAGE_SIZE);
 
     if (meta) {
-      if (!filtered.length) meta.textContent = `No quizzes match your filters`;
+      if (!filtered.length) meta.textContent = "No quizzes match your filters";
       else if (filtered.length <= PAGE_SIZE) meta.textContent = filtered.length === quizzes.length ? `Showing all ${quizzes.length} published quiz${quizzes.length === 1 ? "" : "zes"}` : `Showing ${filtered.length} of ${quizzes.length} quizzes`;
       else meta.textContent = `Showing ${startIndex + 1}–${Math.min(startIndex + PAGE_SIZE, filtered.length)} of ${filtered.length} quizzes`;
     }
@@ -305,12 +297,6 @@
   enhanceFilterUi();
   if (subjectSelect) subjectSelect.addEventListener("change", resetPageAndRender);
   if (searchInput) searchInput.addEventListener("input", resetPageAndRender);
-  if (subjectChips) subjectChips.addEventListener("click", (event) => {
-    const chip = event.target.closest("[data-family-subject]");
-    if (!chip || !subjectChips.contains(chip) || !subjectSelect) return;
-    subjectSelect.value = chip.dataset.familySubject || "";
-    resetPageAndRender();
-  });
   if (resetButton) resetButton.addEventListener("click", () => {
     if (searchInput) searchInput.value = "";
     if (subjectSelect) subjectSelect.value = "";
