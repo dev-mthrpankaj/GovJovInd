@@ -653,7 +653,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-08-31",
         "examEndDate": "2026-09-09",
         "releaseDate": "2026-08-17",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/101682/login.html",
         "detailPage": "../AdmitCard_Details/HTML/Indian-Air-Force-Agniveer-Vayu-Musician-Admit-Card-2026.html",
