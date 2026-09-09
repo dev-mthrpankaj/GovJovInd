@@ -23,6 +23,21 @@
     general: "Flexible typing practice for speed, accuracy, and consistency."
   };
 
+  function injectPolishStyles() {
+    if (document.querySelector('link[data-gju-typing-ui-polish]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "typing-ui-polish.css?v=20260909a";
+    link.dataset.gjuTypingUiPolish = "1";
+    document.head.appendChild(link);
+  }
+
+  function syncLandingTrustCopy() {
+    const benefits = document.querySelector(".typing-benefits");
+    const first = benefits?.querySelector("span");
+    if (first) first.textContent = "Login to save rank & progress";
+  }
+
   function normalize(value) {
     return String(value || "").trim().toLowerCase();
   }
@@ -116,6 +131,8 @@
     searchInput?.focus();
   });
   searchInput?.addEventListener("input", syncCards);
+  injectPolishStyles();
+  syncLandingTrustCopy();
   enhanceCards();
   syncCards();
 
