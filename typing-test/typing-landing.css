@@ -11,7 +11,7 @@
 .typing-entry-actions a span { margin-left: 12px; }
 .typing-benefits { display: flex; justify-content: flex-start; gap: 10px 24px; flex-wrap: wrap; font-size: .875rem; color: #526078; }
 .typing-benefits span::before { content: '✓'; color: #08734f; margin-right: 6px; }
-.typing-directory-title { text-align: center; font-size: 1.3rem; margin: 14px 0 0; }
+.typing-directory-title { text-align: center; font-size: clamp(1.45rem,2.4vw,1.8rem); line-height: 1.25; letter-spacing: -.02em; color: #172440; margin: 24px 0 2px; font-weight: 800; }
 .typing-test-page .gju-typing-exam-search { width: min(720px,100%); margin: 0 auto; min-height: 52px; border-radius: 12px; box-shadow: none; }
 .typing-test-page .gju-typing-exam-search input { min-height: 50px; }
 .typing-test-page .gju-typing-filter-row { margin: 0; }
@@ -20,7 +20,7 @@
 .typing-test-page .gju-typing-card-kicker { color: #526078; font-size: .7rem; letter-spacing: .06em; }
 .typing-test-page .gju-typing-card-foot { background: #fff; }
 .typing-test-page .gju-typing-exam-card a, .typing-test-page .gju-typing-start-btn { background: #315bd6; border-radius: 9px; }
-.typing-test-page .gju-typing-free-strip { margin: 0 auto; box-shadow: none; background: transparent; border: 0; font-size: .82rem; }
+.typing-test-page .gju-typing-free-strip { display: none; }
 .typing-breadcrumb { width: min(1040px,100%); display: flex; flex-wrap: wrap; gap: 10px; margin: 0 auto; color: #596579; font-size: .875rem; }
 .typing-breadcrumb a { color: #315bd6; }
 .typing-test-page .gju-typing-exam-detail-card { box-shadow: none; border-radius: 20px; margin-bottom: 0; padding: 26px; grid-template-columns: minmax(0,1.4fr) minmax(240px,.7fr); }
@@ -79,6 +79,17 @@
 .typing-rank-invite strong { font-size: 1rem; color: #172440; }
 .typing-rank-invite p { margin: 6px 0 0; max-width: 65ch; font-size: .875rem; line-height: 1.6; color: #526078; }
 .typing-rank-invite a { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-height: 44px; padding: 10px 14px; border: 1px solid #315bd6; border-radius: 9px; color: #315bd6; background: #fff; font-weight: 700; text-decoration: none; }
+
+/* Landing-only hierarchy polish: reduce repetition and make the directory easier to scan. */
+.gju-typing-index-page .gju-typing-exams-hero { margin-bottom: 6px; }
+.gju-typing-index-page .typing-directory-title + .gju-typing-exam-search { margin-top: 4px; }
+.gju-typing-index-page .gju-typing-filter-row { margin-top: -4px; }
+.gju-typing-index-page .typing-selection-summary { margin-top: -4px; }
+.gju-typing-index-page .gju-typing-exam-grid { margin-top: 2px; }
+.gju-typing-index-page .gju-typing-set-meta .gju-typing-meta-pill:nth-child(n+3) { display: none; }
+.gju-typing-index-page .gju-typing-exam-card p { color: #5b6880; line-height: 1.55; }
+.gju-typing-index-page .gju-typing-card-foot { border-top: 1px solid #edf1f7; }
+
 @media (max-width: 760px) {
  .typing-rank-invite { flex-direction: column; align-items: stretch; }
  .typing-test-page .gju-typing-exam-detail-card { grid-template-columns: 1fr; padding: 20px; gap: 20px; }
@@ -95,6 +106,8 @@
  .typing-entry-actions a { padding: 13px 10px; font-size: .85rem; text-align: center; }
  .typing-entry-actions a span { display: none; }
  .typing-benefits { justify-content: start; }
+ .typing-directory-title { margin-top: 16px; font-size: 1.45rem; }
+ .gju-typing-index-page .gju-typing-filter-row { margin-top: -2px; }
  .typing-test-page .gju-typing-passage-panel { padding: 16px; }
  .typing-test-page .gju-typing-passage-card-grid, .typing-test-page .gju-typing-how-grid { grid-template-columns: 1fr; }
  .typing-quick-start { flex-direction: column; align-items: stretch; }
