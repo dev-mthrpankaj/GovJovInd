@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0139-20260909064520-b60f0653",
+        "title": "UPSC CAPF CPF Assistant Commandant Name Wise Result 2026",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-09-08",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.upsc.gov.in/sites/default/files/WR-NameList-CAPF-26-Engl-080926.pdf",
+        "detailPage": "../jobs/upsc-capf-cpf-assistant-commandant-2026.html",
+        "updatedAt": "2026-09-09",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0140-20260909140340-8e591ced",
+        "title": "AFCAT 02/2026 Result – Declared",
+        "organization": "Career Indian Air Force (Bhartiya Vayu Sena)",
+        "department": "IAF",
+        "category": "Defence",
+        "year": "2026",
+        "resultDate": "2026-09-09",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
+        "detailPage": "../jobs/afcat-02-2026.html",
+        "updatedAt": "2026-09-09",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0137-20260907222407-3ae83bec",
         "title": "UPSSSC Manchitrak Cartographer Mains Result 2026 Advt No 11-Exam/2023",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
