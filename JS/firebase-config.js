@@ -9,6 +9,106 @@ window.GJU_FIREBASE_CONFIG = {
   measurementId: "G-XGXW3B2BN8"
 };
 
+(function installGlobalAuthStateSync() {
+  "use strict";
+
+  if (window.__GJU_GLOBAL_AUTH_SYNC__) return;
+  window.__GJU_GLOBAL_AUTH_SYNC__ = true;
+
+  const SESSION_KEY = "gju:candidate-session";
+  const ACCOUNT_KEY = "gju:site-account";
+  const APP_MODULE = "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  const AUTH_MODULE = "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+  window.GJU_AUTH_STATE_KNOWN = false;
+  window.GJU_AUTH_USER = null;
+
+  function rememberVerifiedUser(user) {
+    const data = {
+      userId: user.uid,
+      name: user.displayName || "",
+      email: user.email || "",
+      provider: user.providerData?.[0]?.providerId || "password",
+      loggedInAt: Date.now()
+    };
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (_error) {}
+  }
+
+  function clearSavedAuth() {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(ACCOUNT_KEY);
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (_error) {}
+  }
+
+  function syncHeader(user) {
+    const link = document.querySelector("[data-auth-entry], .header-login-btn");
+    if (!link) return;
+    const verified = Boolean(user && user.emailVerified);
+    const label = link.querySelector("span") || link;
+    const icon = link.querySelector("i");
+    const loginHref = link.dataset.loginHref || link.getAttribute("href") || "HTML/login.html";
+    const dashboardHref = link.dataset.dashboardHref || link.getAttribute("href") || "HTML/dashboard.html";
+
+    link.classList.toggle("is-active", verified);
+    link.href = verified ? dashboardHref : loginHref;
+    link.setAttribute("aria-label", verified ? "Open candidate dashboard" : "Login to candidate dashboard");
+    if (label) label.textContent = verified ? "Dashboard" : "Login";
+    if (icon) {
+      icon.className = verified ? "fas fa-chart-line" : "fas fa-user-circle";
+      icon.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  async function start() {
+    try {
+      const [appMod, authMod] = await Promise.all([import(APP_MODULE), import(AUTH_MODULE)]);
+      const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(window.GJU_FIREBASE_CONFIG);
+      const auth = authMod.getAuth(app);
+
+      try {
+        await authMod.setPersistence(auth, authMod.browserLocalPersistence);
+      } catch (error) {
+        console.warn("[GovJobUpdates] Persistent login setup failed:", error?.message || error);
+      }
+
+      authMod.onAuthStateChanged(auth, (user) => {
+        const verifiedUser = user && user.emailVerified ? user : null;
+        window.GJU_AUTH_STATE_KNOWN = true;
+        window.GJU_AUTH_USER = verifiedUser;
+
+        if (verifiedUser) rememberVerifiedUser(verifiedUser);
+        else clearSavedAuth();
+
+        syncHeader(verifiedUser);
+        window.dispatchEvent(new CustomEvent("gju:auth-state", { detail: { user: verifiedUser } }));
+      }, () => {
+        window.GJU_AUTH_STATE_KNOWN = true;
+        window.GJU_AUTH_USER = null;
+        clearSavedAuth();
+        syncHeader(null);
+        window.dispatchEvent(new CustomEvent("gju:auth-state", { detail: { user: null } }));
+      });
+    } catch (error) {
+      console.warn("[GovJobUpdates] Global auth sync unavailable:", error?.message || error);
+      window.GJU_AUTH_STATE_KNOWN = true;
+      window.GJU_AUTH_USER = null;
+      clearSavedAuth();
+      syncHeader(null);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+})();
+
 (function installQuizAttemptAuthGate() {
   "use strict";
 
@@ -29,13 +129,8 @@ window.GJU_FIREBASE_CONFIG = {
   let gateBusy = false;
 
   function hasCandidateSession() {
-    try {
-      const raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "null";
-      const saved = JSON.parse(raw);
-      return Boolean(saved && saved.userId);
-    } catch (_error) {
-      return false;
-    }
+    if (window.GJU_AUTH_STATE_KNOWN) return Boolean(window.GJU_AUTH_USER);
+    return false;
   }
 
   function withTimeout(promise, timeoutMs) {
@@ -46,7 +141,7 @@ window.GJU_FIREBASE_CONFIG = {
   }
 
   async function getAuthenticatedUser() {
-    if (hasCandidateSession()) return { source: "candidate-session" };
+    if (window.GJU_AUTH_STATE_KNOWN) return window.GJU_AUTH_USER || null;
     if (authCheckPromise) return authCheckPromise;
 
     authCheckPromise = (async function () {
@@ -57,7 +152,7 @@ window.GJU_FIREBASE_CONFIG = {
         ]);
         const app = getApps().length ? getApps()[0] : initializeApp(window.GJU_FIREBASE_CONFIG);
         const auth = getAuth(app);
-        if (auth.currentUser) return auth.currentUser;
+        if (auth.currentUser?.emailVerified) return auth.currentUser;
 
         return await withTimeout(new Promise((resolve) => {
           let finished = false;
@@ -66,7 +161,7 @@ window.GJU_FIREBASE_CONFIG = {
             if (finished) return;
             finished = true;
             unsubscribe();
-            resolve(user || null);
+            resolve(user && user.emailVerified ? user : null);
           };
           unsubscribe = onAuthStateChanged(auth, finish, function () { finish(null); });
         }), AUTH_TIMEOUT_MS);
