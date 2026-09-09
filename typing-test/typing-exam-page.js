@@ -1,1 +1,1 @@
-PLACEHOLDER
+(function(){"use strict";var competition=document.createElement("script");competition.src="typing-card-competition.js?v=leaderboard-auth-20260909a";competition.defer=true;competition.dataset.gjuTypingCardCompetition="1";document.head.appendChild(competition);var page=document.createElement("script");page.src="https://raw.githubusercontent.com/dev-mthrpankaj/GovJovInd/12006941a1f7ee4ff1a8e1bb5945d5ea488a5069/typing-test/typing-exam-page.js";page.defer=true;document.head.appendChild(page);})();
