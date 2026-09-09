@@ -20,3 +20,7 @@ Scope: `/typing-test/` and its 17 linked exam/language selection pages. The atte
 - Authenticated ranking API calls and production deployment were not tested. Search Console indexing and search performance cannot be confirmed by source checks.
 
 Google guidance consulted: https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
+
+## Follow-up: guest practice correction
+
+The intended product rule, clarified by the owner, is that ordinary practice needs no login. Login is required only for ranked attempts. The previous audit incorrectly treated the existing client-side input lock as the intended requirement. The follow-up removes that lock, corrects landing/selection copy and FAQ schema, and keeps ranked requests authenticated. Guest results remain local and a login after an attempt starts does not retroactively rank it. Four regression checks cover guest input, local results, late login and signed-in ranking (mocked API). Browser and live API verification remain pending.
