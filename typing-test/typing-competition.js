@@ -22,7 +22,7 @@
     const style = document.createElement("style");
     style.id = "gjuTypingCompetitionStyles";
     style.textContent = `
-      .gju-typing-competition-gate{margin:12px 0 14px;padding:14px 16px;border:1px solid #d8e0ee;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 8px 24px rgba(23,36,64,.06)}
+      .gju-typing-competition-gate{margin:10px 0 0;padding:0;border:0;background:transparent;display:flex;flex-direction:column;align-items:stretch;gap:12px}.gju-typing-competition-gate .gju-typing-button,.gju-typing-competition-result .gju-typing-button{min-height:44px;padding:10px 12px;font-size:13px;white-space:normal;text-align:center;box-sizing:border-box}
       .gju-typing-competition-gate[hidden]{display:none!important}.gju-typing-competition-gate strong{display:block;color:#172440;font-size:15px}.gju-typing-competition-gate p{margin:4px 0 0;color:#60708e;font-size:13px;line-height:1.45}.gju-typing-competition-gate a{flex:0 0 auto;text-decoration:none}
       .gju-typing-competition-card{margin:12px 0 0;padding:14px;border:1px solid #d8e0ee;border-radius:14px;background:#fff}.gju-typing-competition-card h3{margin:0 0 10px;font-size:15px;color:#172440}.gju-typing-competition-status{margin:0;color:#60708e;font-size:12px;line-height:1.45}.gju-typing-competition-status.is-good{color:#177245}.gju-typing-competition-status.is-warn{color:#9a5b00}
       .gju-typing-competition-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}.gju-typing-competition-metric{padding:10px 8px;border:1px solid #e3e8f1;border-radius:10px;text-align:center;background:#f8faff}.gju-typing-competition-metric span{display:block;color:#6d7890;font-size:11px}.gju-typing-competition-metric strong{display:block;margin-top:3px;color:#172440;font-size:17px;font-variant-numeric:tabular-nums}
@@ -39,9 +39,10 @@
       const gate = document.createElement("section");
       gate.id = "typingCompetitionGate";
       gate.className = "gju-typing-competition-gate";
-      gate.innerHTML = `<div><strong id="typingCompetitionGateTitle">Checking your account…</strong><p id="typingCompetitionGateText">Ranked typing attempts use your GovJobUpdates account.</p></div><a id="typingCompetitionLogin" class="gju-typing-button gju-typing-button-primary" href="../HTML/login.html?redirect=typing-return.html">Login / Sign Up</a>`;
-      const layout = app.querySelector(".gju-typing-attempt-layout");
-      layout?.parentNode?.insertBefore(gate, layout);
+      gate.innerHTML = `<div><strong id="typingCompetitionGateTitle">Checking your account…</strong><p id="typingCompetitionGateText">Ranked typing attempts use your GovJobUpdates account.</p></div><a id="typingCompetitionLogin" class="gju-typing-button gju-typing-button-primary" href="../HTML/login.html?redirect=typing-return.html">Sign in for ranked attempt</a><button id="typingContinueGuest" type="button" class="gju-typing-button">Continue without login</button>`;
+      const side = app.querySelector(".gju-typing-attempt-sidebar");
+      side?.appendChild(gate);
+      gate.querySelector("#typingContinueGuest")?.addEventListener("click",()=>{gate.hidden=true;input.focus();});
       gate.querySelector("#typingCompetitionLogin")?.addEventListener("click", () => {
         try { sessionStorage.setItem("gju:typing-return", window.location.pathname + window.location.search + window.location.hash); } catch (error) {}
       });
@@ -54,14 +55,17 @@
       card.innerHTML = `<h3>Competitive ranking</h3><p class="gju-typing-competition-status" id="typingCompetitionStatus">Login required for ranked attempts.</p><div class="gju-typing-competition-grid" id="typingCompetitionMiniGrid" hidden></div>`;
       if (side) side.insertBefore(card, side.firstElementChild || null);
     }
+    const gate = document.getElementById("typingCompetitionGate");
+    if(gate)document.getElementById("typingCompetitionCard")?.appendChild(gate);
     if (resultPanel && !document.getElementById("typingCompetitionResult")) {
       const card = document.createElement("section");
       card.id = "typingCompetitionResult";
       card.className = "gju-typing-competition-result";
       card.hidden = true;
-      card.innerHTML = `<h3>Your competitive standing</h3><p class="gju-typing-competition-status" id="typingCompetitionResultStatus">Saving ranked result…</p><div class="gju-typing-competition-grid" id="typingCompetitionResultGrid"></div><p class="gju-typing-competition-result-note" id="typingCompetitionResultNote"></p>`;
+      card.innerHTML = `<h3 id="typingCompetitionResultTitle">Your competitive standing</h3><p class="gju-typing-competition-status" id="typingCompetitionResultStatus">Saving ranked result…</p><div class="gju-typing-competition-grid" id="typingCompetitionResultGrid"></div><p class="gju-typing-competition-result-note" id="typingCompetitionResultNote"></p><a id="typingResultLogin" class="gju-typing-button gju-typing-button-primary" href="../HTML/login.html?redirect=typing-return.html" hidden>Sign in for your next ranked attempt</a>`;
       const grid = document.getElementById("resultGrid");
       resultPanel.insertBefore(card, grid || null);
+      card.querySelector("#typingResultLogin")?.addEventListener("click",()=>{try{sessionStorage.setItem("gju:typing-return",window.location.pathname+window.location.search);}catch(error){}});
     }
   }
 
@@ -90,7 +94,7 @@
       if (title) title.textContent = "Ranked typing is temporarily unavailable";
       if (text) text.textContent = "You can continue practising without ranking. " + (message || "Try signing in again for ranked attempts.");
     } else {
-      if (title) title.textContent = "Login required for ranked typing";
+      if (title) title.textContent = "Want to see your rank?";
       if (text) text.textContent = "Practise without login. Sign in before starting to save a ranked attempt and see your rank.";
     }
   }
@@ -244,7 +248,28 @@
     renderMiniStats(stats);
   }
 
+  function renderGuestResult() {
+    const card=document.getElementById("typingCompetitionResult");
+    if(!card)return;
+    card.hidden=false;
+    const title=document.getElementById("typingCompetitionResultTitle");
+    const status=document.getElementById("typingCompetitionResultStatus");
+    const grid=document.getElementById("typingCompetitionResultGrid");
+    const note=document.getElementById("typingCompetitionResultNote");
+    const link=document.getElementById("typingResultLogin");
+    if(title)title.textContent="Ready to see your rank?";
+    if(status)status.textContent="Your practice result is ready. This attempt was not ranked.";
+    if(grid)grid.innerHTML="";
+    if(note)note.textContent=authUser?"Start a new attempt while signed in and complete the full timer to get ranked.":"Sign in before your next attempt to compare your eligible result with other students.";
+    if(link)link.hidden=Boolean(authUser);
+  }
+
   async function submitRankedResult(result) {
+    if(result && (!authUser || rankedAttemptUserId !== authUser.uid)){renderGuestResult();return;}
+    const title=document.getElementById("typingCompetitionResultTitle");
+    if(title)title.textContent="Your competitive standing";
+    const login=document.getElementById("typingResultLogin");
+    if(login)login.hidden=true;
     if (!result || !authUser || rankedAttemptUserId !== authUser.uid || lastSubmittedResultId === String(result.id || "")) return;
     lastSubmittedResultId = String(result.id || Date.now());
     const card = document.getElementById("typingCompetitionResult");

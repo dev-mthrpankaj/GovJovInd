@@ -24,3 +24,18 @@ Google guidance consulted: https://developers.google.com/search/docs/crawling-in
 ## Follow-up: guest practice correction
 
 The intended product rule, clarified by the owner, is that ordinary practice needs no login. Login is required only for ranked attempts. The previous audit incorrectly treated the existing client-side input lock as the intended requirement. The follow-up removes that lock, corrects landing/selection copy and FAQ schema, and keeps ranked requests authenticated. Guest results remain local and a login after an attempt starts does not retroactively rank it. Four regression checks cover guest input, local results, late login and signed-in ranking (mocked API). Browser and live API verification remain pending.
+
+## Advertising-readiness follow-up
+
+Live desktop Chrome interaction now verified the landing's category/search/empty-state flow, English difficulty selection, Hindi RRB language/difficulty selection, show-more, guest typing, English/Hindi results, retry, return navigation and the public passage leaderboard. Pasting is intentionally blocked; typing with keyboard events starts the clock normally. The public leaderboard returned a valid empty result for the tested passage. No ranked attempt was submitted to production.
+
+Concrete issues found and corrected:
+
+- The full-width account banner displaced the typing workspace and pushed Finish below the initial desktop viewport. Place its sign-in and guest controls inside the ranking sidebar card instead.
+- Students had no prominent ranked sign-in action at selection and no next-attempt ranking prompt on guest results. Add both with an explanation of full-duration eligibility; preserve the selected passage on the login return route.
+- The cookie Privacy Policy link resolved under `/typing-test/HTML/` instead of `/HTML/`. Correct typing-directory root depth in the shared script.
+- Broad substring matching incorrectly assigned the SSC logo to UPSSSC. Restrict SSC matching to a separate word.
+
+Automated typing checks pass, including the guest-result prompt; all 19 typing HTML pages pass local-link, ID, H1 and JSON-LD checks. The separate site-search suite has a pre-existing missing RPSC APO admit-card destination in its bundled index (not modified in this change).
+
+Limitations: this browser exposes no viewport-resize API, and local previews are blocked by browser URL policy. Mobile breakpoints have source review, not a real-device/browser visual sign-off. Signed-in production ranking and the end-to-end login return still require an authenticated session. These are remaining checks before calling the full advertising flow verified.

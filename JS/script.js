@@ -53,6 +53,8 @@ const getHtmlDepthFromRoot = () => {
   const path = window.location.pathname.replace(/\\/g, '/');
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return 2;
 
+  if (/\/typing-test(?:\/|$)/i.test(path)) return 1;
+
   const htmlMatch = path.match(/\/HTML\/(.+\.html)$/i);
   if (htmlMatch) return htmlMatch[1].split('/').filter(Boolean).length;
 

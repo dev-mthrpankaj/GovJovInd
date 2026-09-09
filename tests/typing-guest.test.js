@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 function setup(){
  const nodes={};
- for(const id of ['typingTestApp','typingInput','resultPanel','typingCompetitionGate','typingCompetitionGateTitle','typingCompetitionGateText'])nodes[id]={dataset:{state:'ready'},hidden:false,classList:{add(){},remove(){}},removeAttribute(){},setAttribute(){}};
+ for(const id of ['typingTestApp','typingInput','resultPanel','typingCompetitionGate','typingCompetitionGateTitle','typingCompetitionGateText','typingCompetitionResult','typingCompetitionResultTitle','typingCompetitionResultStatus','typingCompetitionResultGrid','typingCompetitionResultNote','typingResultLogin'])nodes[id]={dataset:{state:'ready'},hidden:false,classList:{add(){},remove(){}},removeAttribute(){},setAttribute(){}};
  const input=nodes.typingInput;input.readOnly=true;
  let localSaves=0,requests=0,observer;
  const window={GJU_TYPING_CONFIG:{},location:{search:''},GJUTypingStorage:{saveResult(){localSaves++;return 'saved';}}};
@@ -36,4 +36,13 @@ test('a student signed in before typing still starts and submits a ranked sessio
  s.window.hooks.watchAttemptState();s.state('running');
  await s.window.hooks.submitRankedResult({id:'ranked',durationMinutes:10,timeTakenSeconds:600});
  assert.equal(s.requests,2);
+});
+
+test('guest result explains ranking and offers sign-in for the next attempt',async()=>{
+ const s=setup();await s.window.hooks.submitRankedResult({id:'guest-result'});
+ assert.equal(s.nodes.typingCompetitionResult.hidden,false);
+ assert.match(s.nodes.typingCompetitionResultStatus.textContent,/not ranked/);
+ assert.match(s.nodes.typingCompetitionResultNote.textContent,/next attempt/);
+ assert.equal(s.nodes.typingResultLogin.hidden,false);
+ assert.equal(s.requests,0);
 });
