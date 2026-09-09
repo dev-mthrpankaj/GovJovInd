@@ -15,6 +15,7 @@
   let startingSession = null;
   let currentStats = null;
   let lastSubmittedResultId = "";
+  let rankedAttemptUserId = null;
 
   function injectStyles() {
     if (document.getElementById("gjuTypingCompetitionStyles")) return;
@@ -68,6 +69,10 @@
     const gate = document.getElementById("typingCompetitionGate");
     const title = document.getElementById("typingCompetitionGateTitle");
     const text = document.getElementById("typingCompetitionGateText");
+    // Account checks must never block ordinary typing practice.
+    input.readOnly = false;
+    input.classList.remove("gju-typing-login-locked");
+    input.removeAttribute("aria-disabled");
     if (!gate) return;
     if (state === "ready") {
       gate.hidden = true;
@@ -77,18 +82,16 @@
       return;
     }
     gate.hidden = false;
-    input.readOnly = true;
-    input.classList.add("gju-typing-login-locked");
-    input.setAttribute("aria-disabled", "true");
+
     if (state === "checking") {
       if (title) title.textContent = "Checking your account…";
-      if (text) text.textContent = "Please wait a moment before typing.";
+      if (text) text.textContent = "You can practise now. Login is needed only for ranked attempts.";
     } else if (state === "error") {
       if (title) title.textContent = "Ranked typing is temporarily unavailable";
-      if (text) text.textContent = message || "Please refresh and try again.";
+      if (text) text.textContent = "You can continue practising without ranking. " + (message || "Try signing in again for ranked attempts.");
     } else {
       if (title) title.textContent = "Login required for ranked typing";
-      if (text) text.textContent = "Your best speed, community average and rank are saved to your account.";
+      if (text) text.textContent = "Practise without login. Sign in before starting to save a ranked attempt and see your rank.";
     }
   }
 
@@ -242,7 +245,7 @@
   }
 
   async function submitRankedResult(result) {
-    if (!result || !authUser || lastSubmittedResultId === String(result.id || "")) return;
+    if (!result || !authUser || rankedAttemptUserId !== authUser.uid || lastSubmittedResultId === String(result.id || "")) return;
     lastSubmittedResultId = String(result.id || Date.now());
     const card = document.getElementById("typingCompetitionResult");
     if (card) card.hidden = false;
@@ -250,7 +253,8 @@
     if (status) { status.textContent = "Saving ranked result…"; status.className = "gju-typing-competition-status"; }
     const previousBest = currentStats?.best?.netWpm ?? null;
     let session = rankSession;
-    if (!session) session = await startRankSession(false);
+    if (!session && startingSession) session = await startingSession;
+    if (!authUser || rankedAttemptUserId !== authUser.uid) return;
     if (!session?.token) {
       renderResultCompetition(result, null, previousBest);
       return;
@@ -312,6 +316,11 @@
         rankSession = null;
         currentStats = null;
         if (!authUser) {
+          rankedAttemptUserId = null;
+          const mini = document.getElementById("typingCompetitionMiniGrid");
+          const result = document.getElementById("typingCompetitionResult");
+          if (mini) mini.hidden = true;
+          if (result) result.hidden = true;
           setGate("login");
           const status = document.getElementById("typingCompetitionStatus");
           if (status) { status.textContent = "Login required for ranked attempts."; status.className = "gju-typing-competition-status"; }
@@ -334,9 +343,10 @@
       if (nextState === previousState) return;
       const oldState = previousState;
       previousState = nextState;
-      if (authUser && nextState === "running") {
+      if (nextState === "running") {
+        rankedAttemptUserId = authUser?.uid || null;
         rankSession = null;
-        startRankSession(true);
+        if (authUser) startRankSession(true);
       } else if (authUser && nextState === "ready" && oldState === "finished") {
         rankSession = null;
         renderMiniStats(currentStats, "Ready. Start typing to begin your ranked session.");
@@ -346,8 +356,7 @@
   }
 
   injectUi();
-  input.readOnly = true;
-  input.classList.add("gju-typing-login-locked");
+
   hookStorage();
   watchAttemptState();
   initAuth();

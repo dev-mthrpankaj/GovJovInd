@@ -27,7 +27,7 @@
   function syncLandingTrustCopy() {
     const benefits = document.querySelector(".typing-benefits");
     const first = benefits?.querySelector("span");
-    if (first) first.textContent = "Free account required to start";
+    if (first) first.textContent = "No login needed for practice";
   }
 
   function normalize(value) {
