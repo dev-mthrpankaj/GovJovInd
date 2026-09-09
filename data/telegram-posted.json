@@ -2355,6 +2355,27 @@
       "title": "SSC CHSL 10+2 Online Form 2026 for 2536 Post",
       "lastPostedAt": "2026-09-08T06:06:33.795Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0227-20260909064226-83803697": {
+      "updatedAt": "2026-09-09",
+      "hash": "c670b844f87afeaa5b07fd15a97ed55dd66dd2c9deb797c91a086791e4adb119",
+      "title": "UKSSSC Personal Assistant Online Form 2026 for 101 Post",
+      "lastPostedAt": "2026-09-09T08:47:36.973Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0228-20260909130615-e805cd50": {
+      "updatedAt": "2026-09-09",
+      "hash": "4c4c2cafd0c47cf09f53a9e64894a477dacc3ba0f497c35d5f8bec08bcd3bdcc",
+      "title": "CMD Green Marshal Online Form 2026 for 162 Post",
+      "lastPostedAt": "2026-09-09T08:47:37.817Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0229-20260909131935-76e9d19b": {
+      "updatedAt": "2026-09-09",
+      "hash": "abe66c2aae71dba568629077f420d1d60f2b990e23619050cafe781acda4f3fe",
+      "title": "GSRTC Helper Online Form 2026 for 2510 Post",
+      "lastPostedAt": "2026-09-09T08:47:38.271Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -3798,6 +3819,48 @@
       "hash": "ced32323819206c73bbb2d14ee89cc0093749024e1a43bf386ff2d7ead1d9ae2",
       "title": "NTA UGC NET June 2026 Re-Exam Admit Card",
       "lastPostedAt": "2026-09-06T14:46:07.511Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0139-20260909090913-0a06406a": {
+      "updatedAt": "2026-09-09",
+      "hash": "40df964cefba2005c44b9caa9a4a944dfce8878460489f3e741b8f6c5d331215",
+      "title": "Patna High Court Group C Assistant Exam Date 2026",
+      "lastPostedAt": "2026-09-09T08:47:38.750Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0140-20260909091145-3c98ade8": {
+      "updatedAt": "2026-09-09",
+      "hash": "1818b2d1ca02f1f2fa7192851b73ec60e74f9e5e4c2b2de5f72ed9921ed70f37",
+      "title": "UPPSC Assistant Professor Mains Admit Card 2026",
+      "lastPostedAt": "2026-09-09T08:47:39.201Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0141-20260909091342-0415dfb3": {
+      "updatedAt": "2026-09-09",
+      "hash": "53167663656b537e694884906969e49ac0dd70a5d355dbf512d6359e50fbc5ed",
+      "title": "SSC Selection Post 14th Exam City Details 2026 for 3003 Post",
+      "lastPostedAt": "2026-09-09T08:47:43.128Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0142-20260909091550-f9e367f1": {
+      "updatedAt": "2026-09-09",
+      "hash": "f711177d4ed251242d5c2d72afb43a706ed68934c29368dd3c4648e79aee0339",
+      "title": "UPSSSC Forest Guard Mains Exam Fee Payment 2026",
+      "lastPostedAt": "2026-09-09T08:47:43.768Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0143-20260909091717-255d328c": {
+      "updatedAt": "2026-09-09",
+      "hash": "1654ac05000d4e058dd58c57c747a3ef56b62291fc2ad8b3dd5c811202d4c852",
+      "title": "UPSSSC Forensic Science Laboratory Mains Exam Fee Payment 2026",
+      "lastPostedAt": "2026-09-09T08:47:44.432Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0144-20260909101551-632f7b68": {
+      "updatedAt": "2026-09-09",
+      "hash": "5892160293ea6194af4daec99e6c510e3161789b780dd4a8658d82a2953f4906",
+      "title": "SSC Stenographer Admit Card 2026",
+      "lastPostedAt": "2026-09-09T08:47:44.890Z",
       "stateReason": "new"
     }
   },
@@ -6007,6 +6070,13 @@
       "hash": "124d78127573d0cb9d1060f01b4e3b68b03b9cc94069a83e166f2842631200dc",
       "title": "DDA Result 2026 for Various Post",
       "lastPostedAt": "2026-09-07T17:34:26.952Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0139-20260909064520-b60f0653": {
+      "updatedAt": "2026-09-09",
+      "hash": "d63738b73101bac34be1331915348b9f7d53fb2f691007783a7002af4e1f1501",
+      "title": "UPSC CAPF CPF Assistant Commandant Name Wise Result 2026",
+      "lastPostedAt": "2026-09-09T08:47:45.547Z",
       "stateReason": "new"
     }
   }
