@@ -14,15 +14,17 @@
   const empty = document.getElementById("familyQuizEmpty");
   const toolbar = root.querySelector(".family-toolbar");
 
-  let subjectChips = null;
-  let resetButton = null;
-
+  const PAGE_SIZE = 12;
   const PROGRESS_API = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
   const LOCAL_ATTEMPTS_KEY = "GovJobUpdatesQuiz.attempts";
 
+  let subjectChips = null;
+  let resetButton = null;
+  let pagination = null;
   let quizzes = [];
   let progressByQuiz = new Map();
   let firebaseImportPromise = null;
+  let currentPage = 1;
 
   function slugify(v) {
     return String(v || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "quiz";
@@ -48,13 +50,7 @@
   }
 
   function family(item) {
-    return String(
-      item.examFamilySlug ||
-      item.exam_family_slug ||
-      (item.examFamily && item.examFamily.slug) ||
-      (item.exam_family && item.exam_family.slug) ||
-      ""
-    ).trim().toLowerCase();
+    return String(item.examFamilySlug || item.exam_family_slug || (item.examFamily && item.examFamily.slug) || (item.exam_family && item.exam_family.slug) || "").trim().toLowerCase();
   }
 
   function normalize(item) {
@@ -78,17 +74,11 @@
     return Number.isFinite(n) ? n : fallback;
   }
 
-  function percent(v) {
-    return Math.max(0, Math.min(100, Math.round(number(v))));
-  }
+  function percent(v) { return Math.max(0, Math.min(100, Math.round(number(v)))); }
 
   function formatDate(v) {
     const d = new Date(v);
-    return Number.isNaN(d.getTime()) ? "Recent" : d.toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
+    return Number.isNaN(d.getTime()) ? "Recent" : d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
   }
 
   function readLocalProgress() {
@@ -103,26 +93,13 @@
     rows.forEach((a) => {
       const id = String(a.quizId || a.quizKey || "").trim();
       if (!id) return;
-
       const when = new Date(a.completedAt || a.timestamp || 0).getTime() || 0;
       const current = map.get(id);
       const best = number(a.bestPercentage, a.percentage);
-
       if (!current) {
-        map.set(id, {
-          quizKey: id,
-          completedAt: a.completedAt || a.timestamp,
-          bestPercentage: best,
-          percentage: number(a.percentage),
-          attemptCount: 1,
-          rank: null,
-          rankedUsers: null,
-          hasRankedAttempt: false,
-          _time: when,
-        });
+        map.set(id, { quizKey: id, completedAt: a.completedAt || a.timestamp, bestPercentage: best, percentage: number(a.percentage), attemptCount: 1, rank: null, rankedUsers: null, hasRankedAttempt: false, _time: when });
         return;
       }
-
       current.attemptCount += 1;
       current.bestPercentage = Math.max(current.bestPercentage, best);
       if (when > current._time) {
@@ -134,131 +111,51 @@
     return map;
   }
 
-  function load() {
-    quizzes = items().filter((i) => i && family(i) === familySlug).map(normalize);
-    subjects();
-    render();
-  }
-
-  function installCompactFilterStyles() {
-    if (document.getElementById("gju-family-filter-v2")) return;
+  function installUiStyles() {
+    if (document.getElementById("gju-family-filter-v3")) return;
     const style = document.createElement("style");
-    style.id = "gju-family-filter-v2";
+    style.id = "gju-family-filter-v3";
     style.textContent = `
-      .family-toolbar.family-filter-v2 {
-        grid-template-columns: minmax(280px, .9fr) minmax(0, 1.35fr);
-        align-items: center;
-        gap: 10px 14px;
-        padding: 12px 14px;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(15,23,42,.065);
-      }
-      .family-filter-v2 .family-filter-heading {
-        grid-column: 1 / -1;
-        min-height: 30px;
-      }
-      .family-filter-v2 .family-filter-copy {
-        display: flex;
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: 5px 9px;
-      }
-      .family-filter-v2 .family-filter-copy strong {
-        font-size: 14px;
-      }
-      .family-filter-v2 .family-filter-copy small {
-        font-size: 11px;
-      }
-      .family-filter-v2 .family-search {
-        grid-column: 1;
-        min-height: 46px;
-        padding: 9px 14px 9px 42px;
-        align-items: center;
-      }
-      .family-filter-v2 .family-search > i {
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      .family-filter-v2 .family-control-caption {
-        display: none;
-      }
-      .family-filter-v2 .family-search input {
-        font-size: 14px;
-        font-weight: 650;
-      }
-      .family-filter-v2 .family-select {
-        display: none;
-      }
-      .family-filter-v2 .family-subject-chips {
-        grid-column: 2;
-        margin: 0;
-        padding: 2px 1px 3px;
-        gap: 7px;
-      }
-      .family-filter-v2 .family-subject-chip {
-        min-height: 36px;
-        padding: 7px 12px;
-      }
-      .family-filter-v2 .family-filter-reset {
-        min-height: 32px;
-        background: #fff;
-      }
-      .family-filter-v2 + .family-list-head {
-        margin-top: 4px;
-      }
-      @media (max-width: 760px) {
-        .family-toolbar.family-filter-v2 {
-          grid-template-columns: 1fr;
-          gap: 9px;
-          padding: 11px;
-        }
-        .family-filter-v2 .family-filter-heading,
-        .family-filter-v2 .family-search,
-        .family-filter-v2 .family-subject-chips {
-          grid-column: 1;
-        }
-        .family-filter-v2 .family-filter-copy {
-          display: grid;
-          gap: 1px;
-        }
-        .family-filter-v2 .family-search {
-          min-height: 44px;
-        }
-        .family-filter-v2 .family-subject-chips {
-          margin-inline: -1px;
-          padding-inline: 1px;
-        }
-      }
+      .family-toolbar.family-filter-v3{grid-template-columns:minmax(0,1fr) 260px;align-items:center;gap:10px 12px;padding:12px 14px;border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.065)}
+      .family-filter-v3 .family-filter-heading{grid-column:1/-1;min-height:28px}
+      .family-filter-v3 .family-filter-copy{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
+      .family-filter-v3 .family-filter-copy strong{font-size:14px}.family-filter-v3 .family-filter-copy small{font-size:11px}
+      .family-filter-v3 .family-search,.family-filter-v3 .family-select{min-height:48px;padding-top:20px;padding-bottom:7px}
+      .family-filter-v3 .family-subject-chips{grid-column:1/-1;margin-top:0;padding:1px 1px 2px}
+      .family-filter-v3 .family-subject-chips::before{content:"Popular subjects";display:inline-flex;align-items:center;flex:0 0 auto;margin-right:3px;color:#64748b;font-size:11px;font-weight:800;white-space:nowrap}
+      .family-filter-v3 .family-subject-chip{min-height:32px;padding:6px 11px}
+      .family-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+      .family-page-btn{display:inline-flex;align-items:center;justify-content:center;min-width:38px;min-height:38px;padding:7px 11px;border:1px solid var(--fq-border);border-radius:10px;background:#fff;color:#475569;cursor:pointer;font:inherit;font-size:12px;font-weight:800}
+      .family-page-btn:hover,.family-page-btn:focus-visible{border-color:var(--fq-accent);color:var(--fq-accent-strong)}
+      .family-page-btn[aria-current="page"]{border-color:var(--fq-accent);background:var(--fq-accent);color:#fff;box-shadow:0 6px 14px var(--fq-accent-glow)}
+      .family-page-btn:disabled{opacity:.42;cursor:not-allowed}
+      .family-page-summary{width:100%;margin-top:2px;color:var(--fq-muted);font-size:11px;text-align:center}
+      @media(max-width:760px){.family-toolbar.family-filter-v3{grid-template-columns:1fr;gap:9px;padding:11px}.family-filter-v3 .family-filter-heading,.family-filter-v3 .family-search,.family-filter-v3 .family-select,.family-filter-v3 .family-subject-chips{grid-column:1}.family-filter-v3 .family-filter-copy{display:grid;gap:1px}.family-filter-v3 .family-search,.family-filter-v3 .family-select{min-height:52px}.family-filter-v3 .family-subject-chips{margin-inline:-1px;padding-inline:1px}.family-filter-v3 .family-subject-chips::before{position:sticky;left:0;background:#fff;padding-right:5px;z-index:1}.family-pagination{margin-top:16px}}
     `;
     document.head.appendChild(style);
   }
 
   function enhanceFilterUi() {
     if (!toolbar) return;
-
-    installCompactFilterStyles();
-    toolbar.classList.add("family-filter-v2");
+    installUiStyles();
+    toolbar.classList.remove("family-filter-v2");
+    toolbar.classList.add("family-filter-v3");
 
     if (!toolbar.querySelector(".family-filter-heading")) {
-      toolbar.insertAdjacentHTML("afterbegin", '<div class="family-filter-heading"><div class="family-filter-copy"><span class="family-filter-eyebrow">Filter Practice Sets</span><strong>Find the right quiz quickly</strong><small>Search by quiz name or tap a subject.</small></div><button class="family-filter-reset" type="button" data-family-filter-reset hidden><i class="fas fa-rotate-left" aria-hidden="true"></i><span>Clear filters</span></button></div>');
+      toolbar.insertAdjacentHTML("afterbegin", '<div class="family-filter-heading"><div class="family-filter-copy"><span class="family-filter-eyebrow">Filter Practice Sets</span><strong>Find the right quiz quickly</strong><small>Search by quiz name or choose a subject.</small></div><button class="family-filter-reset" type="button" data-family-filter-reset hidden><i class="fas fa-rotate-left" aria-hidden="true"></i><span>Clear filters</span></button></div>');
     }
-
     const search = toolbar.querySelector(".family-search");
-    if (search && !search.querySelector(".family-control-caption")) {
-      search.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Search quizzes</span>');
-    }
-
+    if (search && !search.querySelector(".family-control-caption")) search.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Search quizzes</span>');
     const select = toolbar.querySelector(".family-select");
-    if (select && !select.querySelector(".family-control-caption")) {
-      select.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Choose subject</span>');
-    }
-
-    if (!toolbar.querySelector(".family-subject-chips")) {
-      toolbar.insertAdjacentHTML("beforeend", '<div class="family-subject-chips" role="group" aria-label="Filter quizzes by subject"></div>');
-    }
-
+    if (select && !select.querySelector(".family-control-caption")) select.insertAdjacentHTML("afterbegin", '<span class="family-control-caption">Choose subject</span>');
+    if (!toolbar.querySelector(".family-subject-chips")) toolbar.insertAdjacentHTML("beforeend", '<div class="family-subject-chips" role="group" aria-label="Popular subject filters"></div>');
     subjectChips = toolbar.querySelector(".family-subject-chips");
     resetButton = toolbar.querySelector("[data-family-filter-reset]");
+
+    if (list && !document.getElementById("familyQuizPagination")) {
+      list.insertAdjacentHTML("afterend", '<nav class="family-pagination" id="familyQuizPagination" aria-label="Quiz pages"></nav>');
+    }
+    pagination = document.getElementById("familyQuizPagination");
   }
 
   function subjects() {
@@ -267,7 +164,6 @@
     const current = subjectSelect.value;
     subjectSelect.innerHTML = '<option value="">All Subjects</option>' + values.map((s) => `<option value="${esc(s)}">${esc(s)}</option>`).join("");
     if (values.includes(current)) subjectSelect.value = current;
-
     if (subjectChips) {
       const chipValues = [{ value: "", label: "All subjects" }].concat(values.map((value) => ({ value, label: value })));
       subjectChips.innerHTML = chipValues.map((item) => `<button class="family-subject-chip" type="button" data-family-subject="${esc(item.value)}" aria-pressed="false">${esc(item.label)}</button>`).join("");
@@ -275,28 +171,19 @@
   }
 
   function syncFilterUi(query, subject) {
-    if (subjectChips) {
-      subjectChips.querySelectorAll("[data-family-subject]").forEach((chip) => {
-        chip.setAttribute("aria-pressed", String((chip.dataset.familySubject || "") === subject));
-      });
-    }
-
+    if (subjectChips) subjectChips.querySelectorAll("[data-family-subject]").forEach((chip) => chip.setAttribute("aria-pressed", String((chip.dataset.familySubject || "") === subject)));
     if (resetButton) resetButton.hidden = !query && !subject;
     root.classList.toggle("has-active-filters", !!query || !!subject);
   }
 
   function rankText(p) {
-    const rank = number(p && p.rank, 0);
-    const total = number(p && p.rankedUsers, 0);
+    const rank = number(p && p.rank, 0), total = number(p && p.rankedUsers, 0);
     return rank > 0 && total > 0 ? `#${rank} / ${total}` : "—";
   }
 
   function progressMarkup(q) {
     const p = progressByQuiz.get(q.id);
-    if (!p) {
-      return '<div class="family-user-progress is-empty"><span><i class="far fa-calendar"></i><b>Last Attempt</b><em>Not attempted</em></span><span><i class="fas fa-trophy"></i><b>Best Score</b><em>—</em></span><span><i class="fas fa-medal"></i><b>Rank</b><em>—</em></span></div>';
-    }
-
+    if (!p) return '<div class="family-user-progress is-empty"><span><i class="far fa-calendar"></i><b>Last Attempt</b><em>Not attempted</em></span><span><i class="fas fa-trophy"></i><b>Best Score</b><em>—</em></span><span><i class="fas fa-medal"></i><b>Rank</b><em>—</em></span></div>';
     return `<div class="family-user-progress"><span><i class="far fa-calendar"></i><b>Last Attempt</b><em>${esc(formatDate(p.completedAt))}</em></span><span><i class="fas fa-trophy"></i><b>Best Score</b><em>${percent(p.bestPercentage)}%</em></span><span><i class="fas fa-medal"></i><b>Rank</b><em>${esc(rankText(p))}</em></span></div>`;
   }
 
@@ -308,63 +195,71 @@
     return `<a class="family-start-btn${reattempt ? " is-reattempt" : ""}" href="quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(familySlug)}" aria-label="${label}: ${esc(q.title)}"><span>${label}</span><i class="${icon}" aria-hidden="true"></i></a>`;
   }
 
+  function renderPagination(total) {
+    if (!pagination) return;
+    const pages = Math.ceil(total / PAGE_SIZE);
+    if (pages <= 1) { pagination.innerHTML = ""; pagination.hidden = true; return; }
+    pagination.hidden = false;
+    currentPage = Math.min(Math.max(1, currentPage), pages);
+    const start = (currentPage - 1) * PAGE_SIZE + 1;
+    const end = Math.min(currentPage * PAGE_SIZE, total);
+    let html = `<button class="family-page-btn" type="button" data-page="${currentPage - 1}" ${currentPage === 1 ? "disabled" : ""} aria-label="Previous page"><i class="fas fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span></button>`;
+    for (let p = 1; p <= pages; p += 1) html += `<button class="family-page-btn" type="button" data-page="${p}" ${p === currentPage ? 'aria-current="page"' : ""}>${p}</button>`;
+    html += `<button class="family-page-btn" type="button" data-page="${currentPage + 1}" ${currentPage === pages ? "disabled" : ""} aria-label="Next page"><span class="sr-only">Next</span><i class="fas fa-chevron-right" aria-hidden="true"></i></button><span class="family-page-summary">Showing ${start}–${end} of ${total} quizzes</span>`;
+    pagination.innerHTML = html;
+  }
+
   function render() {
     if (!list) return;
-
     const query = String((searchInput && searchInput.value) || "").trim().toLowerCase();
     const subject = String((subjectSelect && subjectSelect.value) || "").trim();
-    const filtered = quizzes.filter((q) =>
-      (!subject || q.subject === subject) &&
-      (!query || `${q.title} ${q.description} ${q.subject}`.toLowerCase().includes(query))
-    );
-
+    const filtered = quizzes.filter((q) => (!subject || q.subject === subject) && (!query || `${q.title} ${q.description} ${q.subject}`.toLowerCase().includes(query)));
     syncFilterUi(query, subject);
-
     if (count) count.textContent = String(quizzes.length);
+
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    currentPage = Math.min(currentPage, totalPages);
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    const pageItems = filtered.slice(startIndex, startIndex + PAGE_SIZE);
+
     if (meta) {
-      meta.textContent = filtered.length === quizzes.length
-        ? `Showing all ${quizzes.length} published quiz${quizzes.length === 1 ? "" : "zes"}`
-        : `Showing ${filtered.length} of ${quizzes.length} quizzes`;
+      if (!filtered.length) meta.textContent = `No quizzes match your filters`;
+      else if (filtered.length <= PAGE_SIZE) meta.textContent = filtered.length === quizzes.length ? `Showing all ${quizzes.length} published quiz${quizzes.length === 1 ? "" : "zes"}` : `Showing ${filtered.length} of ${quizzes.length} quizzes`;
+      else meta.textContent = `Showing ${startIndex + 1}–${Math.min(startIndex + PAGE_SIZE, filtered.length)} of ${filtered.length} quizzes`;
     }
 
     if (!filtered.length) {
       list.innerHTML = "";
       if (empty) empty.hidden = false;
+      renderPagination(0);
       return;
     }
-
     if (empty) empty.hidden = true;
-    list.innerHTML = filtered.map((q) =>
-      `<article class="family-quiz-card"><div class="family-card-top"><span class="family-subject-badge">${esc(q.subject)}</span><span class="family-access-badge"><i class="fas fa-unlock-keyhole" aria-hidden="true"></i> Free</span></div><div class="family-quiz-card-main"><h2>${esc(q.title)}</h2><p>${esc(q.description)}</p><div class="family-quiz-meta" aria-label="Quiz details"><span><i class="far fa-circle-question" aria-hidden="true"></i><small>Questions</small><strong>${q.questions || "—"}</strong></span><span><i class="far fa-clock" aria-hidden="true"></i><small>Duration</small><strong>${q.duration} min</strong></span><span><i class="fas fa-scale-balanced" aria-hidden="true"></i><small>Marking</small><strong>+${q.marks} / -${q.negative}</strong></span></div>${progressMarkup(q)}</div><div class="family-card-actions">${actionMarkup(q)}</div></article>`
-    ).join("");
+    list.innerHTML = pageItems.map((q) => `<article class="family-quiz-card"><div class="family-card-top"><span class="family-subject-badge">${esc(q.subject)}</span><span class="family-access-badge"><i class="fas fa-unlock-keyhole" aria-hidden="true"></i> Free</span></div><div class="family-quiz-card-main"><h2>${esc(q.title)}</h2><p>${esc(q.description)}</p><div class="family-quiz-meta" aria-label="Quiz details"><span><i class="far fa-circle-question" aria-hidden="true"></i><small>Questions</small><strong>${q.questions || "—"}</strong></span><span><i class="far fa-clock" aria-hidden="true"></i><small>Duration</small><strong>${q.duration} min</strong></span><span><i class="fas fa-scale-balanced" aria-hidden="true"></i><small>Marking</small><strong>+${q.marks} / -${q.negative}</strong></span></div>${progressMarkup(q)}</div><div class="family-card-actions">${actionMarkup(q)}</div></article>`).join("");
+    renderPagination(filtered.length);
+  }
+
+  function resetPageAndRender() { currentPage = 1; render(); }
+
+  function load() {
+    quizzes = items().filter((i) => i && family(i) === familySlug).map(normalize);
+    subjects();
+    currentPage = 1;
+    render();
   }
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {
-      if (window.GJU_FIREBASE_CONFIG && window.GJU_FIREBASE_CONFIG.apiKey) {
-        resolve();
-        return;
-      }
+      if (window.GJU_FIREBASE_CONFIG && window.GJU_FIREBASE_CONFIG.apiKey) { resolve(); return; }
       const existing = document.querySelector(`script[src="${src}"]`);
-      if (existing) {
-        existing.addEventListener("load", resolve, { once: true });
-        existing.addEventListener("error", reject, { once: true });
-        return;
-      }
-      const s = document.createElement("script");
-      s.src = src;
-      s.onload = resolve;
-      s.onerror = reject;
-      document.head.appendChild(s);
+      if (existing) { existing.addEventListener("load", resolve, { once: true }); existing.addEventListener("error", reject, { once: true }); return; }
+      const s = document.createElement("script"); s.src = src; s.onload = resolve; s.onerror = reject; document.head.appendChild(s);
     });
   }
 
   async function getFirebaseModules() {
     if (firebaseImportPromise) return firebaseImportPromise;
-    firebaseImportPromise = Promise.all([
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
-    ]).then(([appMod, authMod]) => ({ appMod, authMod }));
+    firebaseImportPromise = Promise.all([import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"), import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js")]).then(([appMod, authMod]) => ({ appMod, authMod }));
     return firebaseImportPromise;
   }
 
@@ -372,36 +267,17 @@
     try {
       await loadScript("../JS/firebase-config.js");
       if (!window.GJU_FIREBASE_CONFIG || !window.GJU_FIREBASE_CONFIG.apiKey) return "";
-
       const { appMod, authMod } = await getFirebaseModules();
       const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(window.GJU_FIREBASE_CONFIG);
       const auth = authMod.getAuth(app);
       let user = auth.currentUser;
-
-      if (!user) {
-        user = await new Promise((resolve) => {
-          let done = false;
-          let unsub = function () {};
-          const timer = setTimeout(() => {
-            if (done) return;
-            done = true;
-            unsub();
-            resolve(auth.currentUser || null);
-          }, 2500);
-          unsub = authMod.onAuthStateChanged(auth, (next) => {
-            if (done) return;
-            done = true;
-            clearTimeout(timer);
-            unsub();
-            resolve(next || null);
-          });
-        });
-      }
-
+      if (!user) user = await new Promise((resolve) => {
+        let done = false, unsub = function () {};
+        const timer = setTimeout(() => { if (done) return; done = true; unsub(); resolve(auth.currentUser || null); }, 2500);
+        unsub = authMod.onAuthStateChanged(auth, (next) => { if (done) return; done = true; clearTimeout(timer); unsub(); resolve(next || null); });
+      });
       return user ? user.getIdToken() : "";
-    } catch (_e) {
-      return "";
-    }
+    } catch (_e) { return ""; }
   }
 
   function applyProgress(rows) {
@@ -409,61 +285,45 @@
     (Array.isArray(rows) ? rows : []).forEach((row) => {
       const id = String(row.quizKey || row.quizId || "").trim();
       if (!id) return;
-      map.set(id, {
-        quizKey: id,
-        completedAt: row.completedAt,
-        bestPercentage: number(row.bestPercentage, row.percentage),
-        percentage: number(row.percentage),
-        attemptCount: Math.max(1, number(row.attemptCount, 1)),
-        rank: row.rank == null ? null : number(row.rank, 0),
-        rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0),
-        hasRankedAttempt: row.hasRankedAttempt === true,
-      });
+      map.set(id, { quizKey: id, completedAt: row.completedAt, bestPercentage: number(row.bestPercentage, row.percentage), percentage: number(row.percentage), attemptCount: Math.max(1, number(row.attemptCount, 1)), rank: row.rank == null ? null : number(row.rank, 0), rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0), hasRankedAttempt: row.hasRankedAttempt === true });
     });
     progressByQuiz = map.size ? map : readLocalProgress();
     render();
   }
 
   async function loadProgress() {
-    progressByQuiz = readLocalProgress();
-    render();
-    const token = await getIdToken();
-    if (!token) return;
-
+    progressByQuiz = readLocalProgress(); render();
+    const token = await getIdToken(); if (!token) return;
     try {
-      const response = await fetch(PROGRESS_API, {
-        method: "GET",
-        mode: "cors",
-        cache: "no-store",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(PROGRESS_API, { method: "GET", mode: "cors", cache: "no-store", headers: { Accept: "application/json", Authorization: `Bearer ${token}` } });
       const data = await response.json().catch(() => null);
       if (!response.ok || !data || data.success !== true) return;
       applyProgress(data.progress);
     } catch (_e) {}
   }
 
-  if (subjectSelect) subjectSelect.addEventListener("change", render);
-  if (searchInput) searchInput.addEventListener("input", render);
   enhanceFilterUi();
-  if (subjectChips) {
-    subjectChips.addEventListener("click", (event) => {
-      const chip = event.target.closest("[data-family-subject]");
-      if (!chip || !subjectChips.contains(chip) || !subjectSelect) return;
-      subjectSelect.value = chip.dataset.familySubject || "";
-      render();
-    });
-  }
-  if (resetButton) {
-    resetButton.addEventListener("click", () => {
-      if (searchInput) searchInput.value = "";
-      if (subjectSelect) subjectSelect.value = "";
-      render();
-    });
-  }
+  if (subjectSelect) subjectSelect.addEventListener("change", resetPageAndRender);
+  if (searchInput) searchInput.addEventListener("input", resetPageAndRender);
+  if (subjectChips) subjectChips.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-family-subject]");
+    if (!chip || !subjectChips.contains(chip) || !subjectSelect) return;
+    subjectSelect.value = chip.dataset.familySubject || "";
+    resetPageAndRender();
+  });
+  if (resetButton) resetButton.addEventListener("click", () => {
+    if (searchInput) searchInput.value = "";
+    if (subjectSelect) subjectSelect.value = "";
+    resetPageAndRender();
+  });
+  if (pagination) pagination.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-page]");
+    if (!button || button.disabled) return;
+    currentPage = Math.max(1, Number(button.dataset.page) || 1);
+    render();
+    const head = root.querySelector(".family-list-head");
+    if (head) head.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   document.addEventListener("gju:admin-quiz-index-ready", load);
 
   load();
