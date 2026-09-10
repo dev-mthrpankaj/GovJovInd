@@ -3787,10 +3787,10 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0128-20260902161604-056cd6e2": {
-      "updatedAt": "2026-09-04",
-      "hash": "6f36d2d682f60f8d03f8990208b7002b9278a8c41109fc03d6373ae4472d33f9",
-      "title": "UP Police Home Guard PET Admit Card 2026 | Re-Exam Notice",
-      "lastPostedAt": "2026-09-04T02:39:13.762Z",
+      "updatedAt": "2026-09-10",
+      "hash": "15672c664c7cc0adc4da5438658c0fd46308166c9857c2ff168f77b685d49447",
+      "title": "UP Police Home Guard PET Exam Postponed 2026",
+      "lastPostedAt": "2026-09-10T14:22:20.459Z",
       "stateReason": "update"
     },
     "admitCards:admit-sheet-0130-20260902225218-01a831d2": {
@@ -3931,6 +3931,20 @@
       "hash": "a502bf13a3e7d34e13a5f9722276fc541b74549529633d16e7e604e6e4c988f8",
       "title": "SSC Delhi Police Constable Executive PE&MT Admit Card",
       "lastPostedAt": "2026-09-10T09:24:15.831Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0149-20260910194246-9b480ffa": {
+      "updatedAt": "2026-09-10",
+      "hash": "986c36089537aa98d0611086f22e763cc02a12af45a9b6d70d3542b482992577",
+      "title": "MPPSC Assistant Town Planner Admit Card 2026",
+      "lastPostedAt": "2026-09-10T14:22:21.039Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0150-20260910194840-58b175e9": {
+      "updatedAt": "2026-09-10",
+      "hash": "693c6c2d0149b8427a19f864e7f1b962aa53c11a1cb0f947fabba8b926d6a760",
+      "title": "MPESB Agriculture Extension Officer Admit Card 2026 for 2784 Post",
+      "lastPostedAt": "2026-09-10T14:22:21.436Z",
       "stateReason": "new"
     }
   },
