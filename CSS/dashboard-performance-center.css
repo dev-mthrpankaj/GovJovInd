@@ -1,9 +1,9 @@
 body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-section-rail{display:none!important}
 body[data-auth-page="dashboard"].dashboard-performance-center [data-dashboard-zone][hidden]{display:none!important}
 .dashboard-view-tabs{
-  position:sticky;
-  z-index:40;
-  top:8px;
+  position:relative;
+  min-width:0;
+  width:100%;
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:5px;
@@ -13,7 +13,7 @@ body[data-auth-page="dashboard"].dashboard-performance-center [data-dashboard-zo
   background:rgba(255,255,255,.94);
   box-shadow:0 9px 28px rgba(15,23,42,.09);
   backdrop-filter:blur(14px);
-  scroll-margin-top:8px;
+  scroll-margin-top:100px;
 }
 .dashboard-view-tabs button{
   display:flex;
