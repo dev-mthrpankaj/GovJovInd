@@ -3,6 +3,15 @@
 
   window.GOVJOB_BLOGS = [
     {
+  id: "ssc-cpo-2026-exam-pattern",
+  title: "SSC CPO 2026 Exam Pattern Changed: Paper 1, Paper 2, PET & Selection",
+  category: "SSC",
+  date: "2026-09-10",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1789034623906.webp",
+  url: "student-hub/ssc-cpo-2026-exam-pattern.html",
+  excerpt: "SSC CPO 2026 new exam pattern explained: Paper 1 has 100 questions with 15-minute sectional timing, while Paper 2 now includes Reasoning, GK, Quant and English for 320 marks."
+},
+    {
   id: "ssc-chsl-syllabus-2026",
   title: "SSC CHSL Syllabus 2026: Tier 1 & Tier 2 Exam Pattern, Subject-Wise Topics & Weightage",
   category: "SSC",
