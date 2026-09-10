@@ -353,7 +353,7 @@
 
         renderHome();
 
-        if (directQuiz) {
+        if (directQuiz && params.get("ready") !== "1") {
             startQuiz(quizId);
             return;
         }
@@ -530,10 +530,10 @@
         setText(elements.quizSearchMeta, text);
     }
 
-    async function requireFirebaseAuth() {
+    async function requireFirebaseAuth(quizId) {
         if (hasCandidateSession()) return true;
         if (!window.GJU_FIREBASE_CONFIG || typeof window.GJU_FIREBASE_CONFIG !== "object") {
-            redirectToLogin();
+            redirectToLogin(quizId);
             return false;
         }
 
@@ -555,7 +555,7 @@
             console.warn("[GJU Quizzes] Auth check failed:", error);
         }
 
-        redirectToLogin();
+        redirectToLogin(quizId);
         return false;
     }
 
@@ -575,14 +575,21 @@
         ]);
     }
 
-    function redirectToLogin() {
-        window.alert("Quiz attempt karne ke liye kripya pehle Login karein.");
-        window.location.href = "login.html";
+    function redirectToLogin(quizId) {
+        const currentParams = new URLSearchParams(window.location.search);
+        const returnParams = new URLSearchParams({ quiz: quizId, ready: "1" });
+        ["family", "subject"].forEach(function (key) {
+            const value = currentParams.get(key);
+            if (value) returnParams.set(key, value);
+        });
+        const returnTo = "quiz-attempt.html?" + returnParams.toString();
+        window.alert("Please log in or sign up to attempt this quiz. You will return to this quiz after login.");
+        window.location.href = "login.html?redirect=" + encodeURIComponent(returnTo);
     }
 
     async function startQuiz(quizId, forceNew = false) {
         if (state.isLoading) return;
-        if (!(await requireFirebaseAuth())) return;
+        if (!(await requireFirebaseAuth(quizId))) return;
         const meta = registry.getQuizById(quizId);
         if (!meta) return;
 
