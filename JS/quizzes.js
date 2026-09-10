@@ -962,9 +962,9 @@
         const previous = state.statuses[index] || "not-visited";
         if (previous === status) return;
         state.statuses[index] = status;
-        if (!state.statusCounts) state.statusCounts = countStatuses(state.statuses);
-        if (state.statusCounts[previous] !== undefined) state.statusCounts[previous] = Math.max(0, state.statusCounts[previous] - 1);
-        if (state.statusCounts[status] !== undefined) state.statusCounts[status] += 1;
+        // Derive every counter from the updated statuses using the same mapping
+        // as new and resumed attempts (status names differ from counter keys).
+        state.statusCounts = countStatuses(state.statuses);
         updateAnsweredCount();
     }
 
