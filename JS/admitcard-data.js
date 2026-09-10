@@ -333,7 +333,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-09",
         "examEndDate": "2026-09-10",
         "releaseDate": "2026-09-05",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=LH/Iqy2lIvm6yfwjd7BOsNPROEv0WO16vwSfOqO4R9E=",
         "detailPage": "../jobs/ugc-net-june-2026.html",
