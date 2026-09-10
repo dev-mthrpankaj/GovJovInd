@@ -116,12 +116,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://mppsc.co.in/candidate-login/Admit-Card",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../jobs/mppsc-assistant-town-planner-2026.html",
         "updatedAt": "2026-09-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0150-20260910194840-58b175e9",
@@ -136,12 +136,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "available",
         "tags": [],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/Group2_SG1_Tac26/default_tac.htm",
-        "detailPage": "../HTML/admitcard.html",
+        "detailPage": "../jobs/mpesb-agriculture-extension-officer-2026.html",
         "updatedAt": "2026-09-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "admit-sheet-0139-20260909090913-0a06406a",
