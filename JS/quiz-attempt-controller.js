@@ -10,6 +10,7 @@
     const THEME_KEY = "gju:quiz-attempt-theme";
     let pausedSeconds = 0;
     let startAttempted = false;
+    let awaitingStart = params.get("ready") === "1";
     let pausedResumePending = false;
     let timeoutId = 0;
     let legacyHomeObserver = null;
@@ -165,6 +166,10 @@
         const p = view.querySelector("[data-loading-message]");
         if (h) h.textContent = title;
         if (p) p.textContent = message;
+        const ready = view.querySelector("[data-attempt-start]");
+        const spinner = view.querySelector(".attempt-loading-spinner");
+        if (ready) ready.hidden = true;
+        if (spinner) spinner.hidden = Boolean(isError);
         const retry = view.querySelector("[data-attempt-retry]");
         const back = view.querySelector("[data-attempt-exit]");
         if (retry) retry.hidden = !isError;
@@ -268,8 +273,22 @@
         if (startAttempted || !quizId) return;
         const registry = window.GJU_QUIZZES;
         if (!registry || typeof registry.getQuizById !== "function") return;
-        if (!registry.getQuizById(quizId)) return;
+        const quiz = registry.getQuizById(quizId);
+        if (!quiz) return;
+        if (awaitingStart) {
+            window.clearTimeout(timeoutId);
+            setLoading(quiz.title || "Your selected quiz", "Your quiz is ready. Click Start Quiz when you are ready. If you have a saved attempt, you can choose to resume it next.", false);
+            const view = document.getElementById("loadingView");
+            const button = view?.querySelector("[data-attempt-start]");
+            const back = view?.querySelector("[data-attempt-exit]");
+            const spinner = view?.querySelector(".attempt-loading-spinner");
+            if (button) button.hidden = false;
+            if (back) back.hidden = false;
+            if (spinner) spinner.hidden = true;
+            return;
+        }
         setLoading("Starting your quiz…", "Quiz found. Preparing your attempt.", false);
+        startLoadingTimeout();
         dispatchDirectStart();
     }
     function watchViews() {
@@ -294,6 +313,16 @@
         });
         targets.forEach((target) => observer.observe(target, { attributes: true, attributeFilter: ["class"] }));
     }
+    function startLoadingTimeout() {
+        window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(function () {
+            const visible = ["examView", "resultView", "reviewView", "resumeModal"].some(function (id) {
+                const node = document.getElementById(id);
+                return node && !node.classList.contains("hidden");
+            });
+            if (!visible) setLoading("Quiz could not start", "The quiz data could not be loaded. Please retry or return to the quiz list.", true);
+        }, 12000);
+    }
     function init() {
         document.body.classList.add("quiz-attempt-route");
         installPremiumStyles();
@@ -312,17 +341,11 @@
             syncSaveIndicator(event.detail?.status, event.detail?.persistent);
         });
         window.setTimeout(resolveAndStart, 0);
-        timeoutId = window.setTimeout(function () {
-            const visible = ["examView", "resultView", "reviewView", "resumeModal"].some(function (id) {
-                const node = document.getElementById(id);
-                return node && !node.classList.contains("hidden");
-            });
-            if (!visible) setLoading("Quiz could not start", "The quiz data could not be loaded. Please retry or return to the quiz list.", true);
-        }, 12000);
+        startLoadingTimeout();
     }
 
     document.addEventListener("click", function (event) {
-        const target = event.target.closest && event.target.closest("[data-action], [data-attempt-resume], [data-attempt-exit], [data-attempt-retry], [data-quiz-theme-toggle], [data-quiz-fullscreen-toggle]");
+        const target = event.target.closest && event.target.closest("[data-action], [data-attempt-resume], [data-attempt-exit], [data-attempt-retry], [data-attempt-start], [data-quiz-theme-toggle], [data-quiz-fullscreen-toggle]");
         if (!target) return;
         if (target.hasAttribute("data-quiz-fullscreen-toggle")) {
             event.preventDefault();
@@ -339,6 +362,12 @@
         if (target.matches("[data-action='back-home'], [data-action='cancel-resume']")) { event.preventDefault(); event.stopPropagation(); exitToSource(); return; }
         if (target.hasAttribute("data-attempt-resume")) { event.preventDefault(); resumePausedAttempt(); return; }
         if (target.hasAttribute("data-attempt-exit")) { event.preventDefault(); exitToSource(); return; }
+        if (target.hasAttribute("data-attempt-start")) {
+            event.preventDefault();
+            awaitingStart = false;
+            resolveAndStart();
+            return;
+        }
         if (target.hasAttribute("data-attempt-retry")) { event.preventDefault(); window.location.reload(); }
     }, true);
     document.addEventListener("click", function (event) {
