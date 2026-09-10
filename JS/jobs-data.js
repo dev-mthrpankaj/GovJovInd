@@ -114,14 +114,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/PCRT_GD_2026_RuleBook_09092026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0234-20260910134022-e7ce848d",
+        "detailPage": "../jobs/mpesb-constable-2026.html",
         "updatedAt": "2026-09-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0235-20260910134424-5a5e0297",
@@ -138,14 +138,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://scholarship.up.gov.in/Popup.aspx",
         "officialNotification": "https://scholarship.up.gov.in/RegistrationNew.aspx",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0235-20260910134424-5a5e0297",
+        "detailPage": "../jobs/up-scholarship-2026.html",
         "updatedAt": "2026-09-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0227-20260909064226-83803697",
