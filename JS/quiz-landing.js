@@ -1,14 +1,6 @@
 (function(){
 "use strict";
 
-const styleHref="../CSS/quiz-selection-ui.css?v=20260908-exclusive";
-if(!document.querySelector(`link[href^="${styleHref.split("?")[0]}"]`)){
-  const link=document.createElement("link");
-  link.rel="stylesheet";
-  link.href=styleHref;
-  document.head.appendChild(link);
-}
-
 const familyLists={ssc:document.querySelector('[data-family-list="ssc"]'),banking:document.querySelector('[data-family-list="banking"]'),police:document.querySelector('[data-family-list="police"]'),rrb:document.querySelector('[data-family-list="rrb"]')};
 const familyAliases={railway:"rrb",rrb:"rrb",ssc:"ssc",banking:"banking",police:"police"};
 const familyConfig={
@@ -29,18 +21,19 @@ const subjectConfig={
 };
 
 let loaded=false;
+let failed=false;
 let allItems=[];
 let currentSelection=null;
 let currentMode="exam";
 
 function esc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
 function slugify(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"quiz"}
-function sourceItems(){for(const p of[window.GJU_QUIZ_INDEX,window.GJU_ADMIN_QUIZ_INDEX,window.GJU_PUBLISHED_QUIZ_INDEX]){if(Array.isArray(p))return p;if(p&&Array.isArray(p.quizzes))return p.quizzes;if(p&&Array.isArray(p.items))return p.items;if(p&&Array.isArray(p.data))return p.data}return[]}
+function sourceItems(){for(const p of[window.GJU_QUIZ_INDEX,window.GJU_ADMIN_QUIZ_INDEX,window.GJU_PUBLISHED_QUIZ_INDEX]){if(Array.isArray(p))return p;if(p&&Array.isArray(p.quizzes))return p.quizzes;if(p&&Array.isArray(p.items))return p.items;if(p&&Array.isArray(p.data))return p.data}return null}
 function rawFamily(item){return String(item.examFamilySlug||item.exam_family_slug||(item.examFamily&&item.examFamily.slug)||(item.exam_family&&item.exam_family.slug)||"").trim().toLowerCase()}
 function family(item){return familyAliases[rawFamily(item)]||rawFamily(item)}
 function dateValue(item,index){for(const value of[item.publishedAt,item.published_at,item.updatedAt,item.updated_at,item.createdAt,item.created_at]){if(value==null||value==="")continue;const numeric=Number(value);if(Number.isFinite(numeric)&&numeric>0)return numeric;const parsed=Date.parse(value);if(Number.isFinite(parsed))return parsed}return index}
-function normalize(item,index){const f=family(item),ss=slugify(item.subjectSlug||item.subject_slug||(item.subject&&item.subject.slug)||item.subject||"practice"),sn=String(item.subjectName||item.subject_name||(item.subject&&item.subject.name)||item.subject||ss).trim(),qs=slugify(item.quizSlug||item.quiz_slug||item.slug||item.id||item.title||"quiz");return{id:`admin-${ss}-${qs}`.replace(/-+/g,"-"),title:String(item.title||item.quizTitle||item.quiz_title||qs).trim(),subject:sn,subjectSlug:ss,family:f,duration:Number(item.durationMinutes||item.duration_minutes)||30,questions:Number(item.totalQuestions||item.total_questions||item.activeQuestions||item.active_questions)||0,order:dateValue(item,index)}}
-function row(q){const href=`quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(q.family)}`;return `<article class="quiz-family-quiz-row"><div class="quiz-family-quiz-main"><span class="quiz-family-quiz-subject">${esc(q.subject)}</span><span class="quiz-family-quiz-title" title="${esc(q.title)}">${esc(q.title)}</span><div class="quiz-family-quiz-meta"><span><i class="far fa-circle-question" aria-hidden="true"></i>${q.questions?q.questions+" Questions":"Practice Set"}</span><span><i class="far fa-clock" aria-hidden="true"></i>${q.duration} Min</span></div></div><a class="quiz-family-start" href="${href}" aria-label="Start ${esc(q.title)}"><span>Start</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>`}
+function normalize(item,index){const f=family(item),ss=slugify(item.subjectSlug||item.subject_slug||(item.subject&&item.subject.slug)||item.subject||"practice"),sn=String(item.subjectName||item.subject_name||(item.subject&&item.subject.name)||item.subject||ss).trim(),qs=slugify(item.quizSlug||item.quiz_slug||item.slug||item.id||item.title||"quiz");return{id:`admin-${ss}-${qs}`.replace(/-+/g,"-"),title:String(item.title||item.quizTitle||item.quiz_title||qs).trim(),subject:sn,subjectSlug:ss,examSlug:String(item.examSlug||item.exam_slug||(item.exam&&item.exam.slug)||""),family:f,duration:Number(item.durationMinutes||item.duration_minutes)||30,questions:Number(item.totalQuestions||item.total_questions||item.activeQuestions||item.active_questions)||0,order:dateValue(item,index)}}
+function row(q){const href=`quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(q.family)}`;return `<article class="quiz-family-quiz-row"><div class="quiz-family-quiz-main"><span class="quiz-family-quiz-subject">${esc(q.subject)}</span><span class="quiz-family-quiz-title" title="${esc(q.title)}">${esc(q.title)}</span><div class="quiz-family-quiz-meta"><span><i class="far fa-circle-question" aria-hidden="true"></i>${q.questions?q.questions+" Questions":"Practice Set"}</span><span><i class="far fa-clock" aria-hidden="true"></i>${q.duration} Min</span></div></div><a class="quiz-family-start" href="${href}" aria-label="Start ${esc(q.title)}"><span>Start quiz</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>`}
 
 function renderLegacyFamilies(items){Object.entries(familyLists).forEach(([slug,list])=>{if(!list)return;const rows=items.filter(q=>q.family===slug).sort((a,b)=>b.order-a.order).slice(0,5);list.innerHTML=rows.length?rows.map(row).join(""):'<div class="quiz-family-no-quizzes"><span>No published quizzes available in this category yet.</span></div>'})}
 
@@ -49,20 +42,24 @@ function setMode(mode,focus){
   const layout=document.querySelector(".quiz-discovery-layout");
   if(layout)layout.dataset.mode=currentMode;
   const heroLinks=document.querySelectorAll(".quiz-practice-paths a");
-  heroLinks.forEach(link=>link.classList.remove("is-active-path"));
-  const activeLink=currentMode==="subject"?heroLinks[0]:heroLinks[1];
+  heroLinks.forEach(link=>{link.classList.remove("is-active-path");link.removeAttribute("aria-current")});
+  const activeLink=document.querySelector(currentMode==="subject"?'.quiz-practice-paths a[href="#subjectQuizDirectory"]':'.quiz-practice-paths a[href="#examQuizFamilies"]');
   activeLink?.classList.add("is-active-path");
+  activeLink?.setAttribute("aria-current","true");
   clearSelection();
   currentSelection=null;
-  showPlaceholder(currentMode);
+  if(currentMode==="exam")selectExam("ssc",false);
+  else showPlaceholder(currentMode);
   if(focus){
-    layout?.scrollIntoView({behavior:"smooth",block:"start"});
+    layout?.scrollIntoView({behavior:scrollBehavior(),block:"start"});
     window.setTimeout(()=>{
       if(currentMode==="subject")document.querySelector(".quiz-discovery-subjects .quiz-subject-card")?.focus();
       else document.querySelector(".quiz-exam-selector")?.focus();
     },250);
   }
 }
+
+function scrollBehavior(){return window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}
 
 function showPlaceholder(mode){
   const root=document.querySelector("#selectedQuizResults .quiz-family-feed");
@@ -75,7 +72,7 @@ function buildFocusedUI(){
   const landing=document.getElementById("quizLandingPage");
   const subjectSection=document.getElementById("subjectQuizDirectory");
   const examSection=document.getElementById("examQuizFamilies");
-  const subjectGrid=subjectSection&&subjectSection.querySelector(".quiz-subject-grid");
+  const subjectGrid=subjectSection&&subjectSection.querySelector(".quiz-subject-grid")?.cloneNode(true);
   if(!landing||!subjectSection||!examSection||!subjectGrid||document.querySelector(".quiz-discovery-layout"))return;
 
   const layout=document.createElement("section");
@@ -93,6 +90,8 @@ function buildFocusedUI(){
     button.type="button";
     button.className="quiz-exam-selector";
     button.dataset.examSelector=slug;
+    button.setAttribute("aria-pressed","false");
+    button.setAttribute("aria-controls","selectedQuizResults");
     button.innerHTML=`<img src="${cfg.image}" alt="${esc(cfg.alt)}" width="40" height="40"><span class="quiz-exam-selector-copy"><strong>${esc(cfg.title)}</strong><span>${esc(cfg.description)}</span></span><i class="fas fa-chevron-right" aria-hidden="true"></i>`;
     button.addEventListener("click",()=>selectExam(slug,true));
     examList.appendChild(button);
@@ -106,8 +105,11 @@ function buildFocusedUI(){
     const href=card.getAttribute("href")||"";
     const slug=Object.keys(subjectConfig).find(key=>subjectConfig[key].href===href);
     if(!slug)return;
-    card.dataset.subjectSelector=slug;
-    card.addEventListener("click",event=>{event.preventDefault();selectSubject(slug,true)});
+    const button=document.createElement("button");
+    button.type="button";button.className=card.className;button.innerHTML=card.innerHTML;
+    button.dataset.subjectSelector=slug;button.setAttribute("aria-pressed","false");
+    button.setAttribute("aria-controls","selectedQuizResults");
+    button.addEventListener("click",()=>selectSubject(slug,true));card.replaceWith(button);
   });
 
   layout.append(examPanel,subjectPanel);
@@ -122,20 +124,25 @@ function buildFocusedUI(){
   results.innerHTML='<div class="quiz-family-feed"></div>';
   layout.after(results);
 
-  const heroLinks=document.querySelectorAll(".quiz-practice-paths a");
-  if(heroLinks[0])heroLinks[0].addEventListener("click",event=>{event.preventDefault();setMode("subject",true)});
-  if(heroLinks[1])heroLinks[1].addEventListener("click",event=>{event.preventDefault();setMode("exam",true)});
-  setMode("exam",false);
+  document.querySelectorAll('a[href="#subjectQuizDirectory"],a[href="#examQuizFamilies"]').forEach(link=>{
+    link.addEventListener("click",event=>{
+      if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+      event.preventDefault();const mode=link.hash==="#subjectQuizDirectory"?"subject":"exam";
+      window.history.replaceState(null,"",link.hash);setMode(mode,true);
+    });
+  });
+  setMode(window.location.hash==="#subjectQuizDirectory"?"subject":"exam",false);
+
 }
 
-function clearSelection(){document.querySelectorAll(".quiz-exam-selector.is-selected,.quiz-subject-card.is-selected").forEach(el=>el.classList.remove("is-selected"))}
+function clearSelection(){document.querySelectorAll("[data-exam-selector],[data-subject-selector]").forEach(el=>{el.classList.remove("is-selected");el.setAttribute("aria-pressed","false")})}
 
 function renderFocusedResults(items,meta){
   const root=document.querySelector("#selectedQuizResults .quiz-family-feed");
   if(!root)return;
   const latest=items.slice().sort((a,b)=>b.order-a.order).slice(0,5);
   const icon=meta.image?`<span class="quiz-family-feed-icon"><img src="${meta.image}" alt="${esc(meta.alt||meta.title)}" width="48" height="48"></span>`:`<span class="quiz-family-feed-icon"><i class="${meta.icon||"fas fa-layer-group"}" aria-hidden="true"></i></span>`;
-  root.innerHTML=`<div class="quiz-family-feed-head">${icon}<div><span class="quiz-family-feed-kicker">${esc(meta.kicker)}</span><h3>${esc(meta.title)}</h3><p>${esc(meta.description)}</p></div></div><div class="quiz-family-latest">${latest.length?latest.map(row).join(""):'<div class="quiz-family-no-quizzes"><span>No published quizzes available for this selection yet.</span></div>'}</div><a class="quiz-family-view-all" href="${meta.href}">View All ${esc(meta.title)} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`;
+  root.innerHTML=`<div class="quiz-family-feed-head">${icon}<div><span class="quiz-family-feed-kicker">${esc(meta.kicker)}</span><h2>${esc(meta.title)}</h2><p>${esc(meta.description)}</p></div></div><div class="quiz-family-latest">${!loaded?`<div class="quiz-family-no-quizzes" role="status">${failed?"Quiz sets could not be loaded. Refresh to try again, or open the full category below.":"Loading latest quizzes…"}</div>`:latest.length?latest.map(row).join(""):'<div class="quiz-family-no-quizzes"><span>No published quizzes available for this selection yet.</span></div>'}</div><a class="quiz-family-view-all" href="${meta.href}">View All ${esc(meta.title)} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`;
 }
 
 function selectExam(slug,scroll){
@@ -144,9 +151,10 @@ function selectExam(slug,scroll){
   if(currentMode!=="exam")setMode("exam",false);
   clearSelection();
   document.querySelector(`[data-exam-selector="${slug}"]`)?.classList.add("is-selected");
+  document.querySelector(`[data-exam-selector="${slug}"]`)?.setAttribute("aria-pressed","true");
   currentSelection={type:"exam",slug};
   renderFocusedResults(allItems.filter(q=>q.family===slug),cfg);
-  if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:"smooth",block:"start"});
+  if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:scrollBehavior(),block:"start"});
 }
 
 function selectSubject(slug,scroll){
@@ -155,17 +163,19 @@ function selectSubject(slug,scroll){
   if(currentMode!=="subject")setMode("subject",false);
   clearSelection();
   document.querySelector(`[data-subject-selector="${slug}"]`)?.classList.add("is-selected");
+  document.querySelector(`[data-subject-selector="${slug}"]`)?.setAttribute("aria-pressed","true");
   currentSelection={type:"subject",slug};
-  renderFocusedResults(allItems.filter(q=>q.subjectSlug===slug),{title:`${cfg.title} Quizzes`,kicker:"Topic-wise practice",description:cfg.description,href:cfg.href,icon:cfg.icon});
-  if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:"smooth",block:"start"});
+  renderFocusedResults(allItems.filter(q=>q.family==="topic-wise"&&q.examSlug===slug),{title:`${cfg.title} Quizzes`,kicker:"Topic-wise practice",description:cfg.description,href:cfg.href,icon:cfg.icon});
+  if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:scrollBehavior(),block:"start"});
 }
 
 function refreshSelection(){if(!currentSelection)return;if(currentSelection.type==="exam")selectExam(currentSelection.slug,false);else selectSubject(currentSelection.slug,false)}
 
 function load(){
   const raw=sourceItems();
-  if(!raw.length)return false;
-  allItems=raw.map(normalize).filter(q=>familyLists[q.family]);
+  if(raw===null)return false;
+  allItems=raw.filter(q=>q&&typeof q==="object").map(normalize);
+  loaded=true;failed=false;
   renderLegacyFamilies(allItems);
   buildFocusedUI();
   refreshSelection();
@@ -175,8 +185,9 @@ function load(){
 
 if(!Object.values(familyLists).some(Boolean))return;
 buildFocusedUI();
-document.addEventListener("gju:admin-quiz-index-ready",()=>load(),{once:true});
+document.addEventListener("gju:admin-quiz-index-ready",()=>load());
 load();
 window.setTimeout(()=>{if(!loaded)load()},900);
 window.setTimeout(()=>{if(!loaded)load()},2200);
+window.setTimeout(()=>{if(!loaded&&!load()){failed=true;refreshSelection();Object.values(familyLists).forEach(list=>{if(list)list.innerHTML='<p class="quiz-family-no-quizzes">Latest quizzes could not be loaded. Open the category below to continue.</p>'})}},8000);
 }());
