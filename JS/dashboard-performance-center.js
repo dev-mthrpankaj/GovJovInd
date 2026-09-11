@@ -81,10 +81,8 @@
       </section>
     `;
 
-    const profile = hero.querySelector(".dashboard-hero-main");
-    if (profile) profile.insertAdjacentElement("afterend", tabs);
-    else hero.prepend(tabs);
-    hero.insertAdjacentElement("afterend", overview);
+    hero.insertAdjacentElement("afterend", tabs);
+    tabs.insertAdjacentElement("afterend", overview);
     tabs.addEventListener("click", handleTabClick);
     overview.addEventListener("click", handleTabClick);
   }

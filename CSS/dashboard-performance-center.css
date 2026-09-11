@@ -349,7 +349,6 @@ body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-rank-zo
   .dashboard-focus-box{grid-column:1/-1}
 }
 @media(max-width:700px){
-  .dashboard-view-tabs{top:5px}
   .dashboard-view-tabs button{font-size:.74rem;padding:7px 6px}
   .dashboard-brief-card,.dashboard-overview-card{border-radius:12px}
   .dashboard-brief-main{grid-template-columns:92px minmax(0,1fr);gap:14px}
