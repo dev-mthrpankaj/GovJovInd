@@ -2,6 +2,7 @@ body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-section
 body[data-auth-page="dashboard"].dashboard-performance-center [data-dashboard-zone][hidden]{display:none!important}
 .dashboard-view-tabs{
   position:relative;
+  /* Keep the three dashboard views directly below the profile hero. */
   order:0!important;
   grid-column:1/-1;
   min-width:0;
@@ -16,6 +17,8 @@ body[data-auth-page="dashboard"].dashboard-performance-center [data-dashboard-zo
   box-shadow:0 9px 28px rgba(15,23,42,.09);
   backdrop-filter:blur(14px);
   scroll-margin-top:100px;
+  z-index:2;
+  isolation:isolate;
 }
 .dashboard-view-tabs button{
   display:flex;
@@ -45,6 +48,19 @@ body[data-auth-page="dashboard"].dashboard-performance-center [data-dashboard-zo
   display:grid;
   grid-template-columns:minmax(0,1.3fr) minmax(320px,.7fr);
   gap:1rem;
+  position:relative;
+  z-index:1;
+}
+
+/* The professional dashboard is composed after login by separate scripts.
+   These scoped rules make the view cards retain their reserved slot between
+   the hero and the selected panel, rather than being visually covered by it. */
+body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-hero + .dashboard-section-rail + .dashboard-view-tabs,
+body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-hero + .dashboard-view-tabs{
+  display:grid!important;
+  visibility:visible!important;
+  opacity:1!important;
+  margin:0!important;
 }
 .dashboard-brief-card,
 .dashboard-overview-card{

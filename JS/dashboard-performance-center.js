@@ -83,7 +83,13 @@
       </section>
     `;
 
-    hero.insertAdjacentElement("afterend", tabs);
+    // Other dashboard enhancements may add a (visually retired) section rail
+    // after the hero. Insert the three view cards after that rail so they stay
+    // in the intended gap immediately below the hero on every load order.
+    const rail = hero.nextElementSibling?.classList.contains("dashboard-section-rail")
+      ? hero.nextElementSibling
+      : null;
+    (rail || hero).insertAdjacentElement("afterend", tabs);
     tabs.insertAdjacentElement("afterend", overview);
     tabs.addEventListener("click", handleTabClick);
     overview.addEventListener("click", handleTabClick);
