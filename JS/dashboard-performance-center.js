@@ -56,6 +56,8 @@
     const tabs = document.createElement("nav");
     tabs.id = "dashboardViewTabs";
     tabs.className = "dashboard-view-tabs";
+    tabs.style.order = "0";
+    tabs.style.gridColumn = "1 / -1";
     tabs.setAttribute("aria-label", "Dashboard views");
     tabs.innerHTML = `
       <button type="button" data-dashboard-tab="overview" class="is-active"><i class="fas fa-house" aria-hidden="true"></i><span>Overview</span></button>
