@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0145-20260911222242-fef87645",
+        "title": "MPPSC Assistant Professor Result 2026 for 1930 Post",
+        "organization": "Madhya Pradesh Public Service Commission",
+        "department": "MPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-11",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://mppsc.mp.gov.in/whats-new",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-09-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
+        "id": "result-sheet-0146-20260911223126-50758e61",
+        "title": "UPSSSC Lekhpal Result 2026 for 7994 Post",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-11",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=163&Result_Type=M&Exam_Code=5&Advt_Code=568&Dept_Code=557&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-09-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0141-20260910150042-1a680217",
         "title": "UPPSC Assistant Town Planner Result 2026 – Declared",
         "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
