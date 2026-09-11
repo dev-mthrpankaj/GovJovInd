@@ -14,12 +14,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://mppsc.mp.gov.in/whats-new",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../jobs/mppsc-assistant-professor.html",
         "updatedAt": "2026-09-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0146-20260911223126-50758e61",
@@ -32,12 +32,30 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=163&Result_Type=M&Exam_Code=5&Advt_Code=568&Dept_Code=557&Post_Code=1&OnlyIntview=No",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../jobs/upsssc-lekhpal-advt-02-exam-2025.html",
         "updatedAt": "2026-09-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0147-20260911225444-4c8653f4",
+        "title": "CBSE KVS NVS Teaching and Non Teaching Tier II Result 2026",
+        "organization": "Central Board of Secondary Education (CBSE)",
+        "department": "CBSE",
+        "category": "Education",
+        "year": "2026",
+        "resultDate": "2026-09-11",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://examinationservices.nic.in/recsys2025/root/CandidateLogin.aspx?enc=Ei4cajBkK1gZSfgr53ImFbEsl0hvvhEEwgxfU0IzC28jtU4yhpqb3pomlo4g+VC8",
+        "detailPage": "../jobs/cbse-kvs-nvs-various-post-2025.html",
+        "updatedAt": "2026-09-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0141-20260910150042-1a680217",
