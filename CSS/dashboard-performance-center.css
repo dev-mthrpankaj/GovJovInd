@@ -2,6 +2,8 @@ body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-section
 body[data-auth-page="dashboard"].dashboard-performance-center [data-dashboard-zone][hidden]{display:none!important}
 .dashboard-view-tabs{
   position:relative;
+  order:0!important;
+  grid-column:1/-1;
   min-width:0;
   width:100%;
   display:grid;
