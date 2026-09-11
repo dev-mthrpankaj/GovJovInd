@@ -62,6 +62,16 @@ body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-hero + 
   opacity:1!important;
   margin:0!important;
 }
+
+/* On wide dashboards the professional hero deliberately leaves a visual
+   breathing area below its metrics. Place the three view cards in that space
+   and keep the selected panel completely below the cards. */
+@media (min-width:701px){
+  body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-hero + .dashboard-section-rail + .dashboard-view-tabs,
+  body[data-auth-page="dashboard"].dashboard-performance-center .dashboard-hero + .dashboard-view-tabs{
+    transform:translateY(-5.1rem);
+  }
+}
 .dashboard-brief-card,
 .dashboard-overview-card{
   min-width:0;
