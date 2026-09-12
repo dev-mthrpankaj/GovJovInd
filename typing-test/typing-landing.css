@@ -105,7 +105,11 @@
 .gju-typing-index-page .gju-typing-exam-card[data-typing-category="up"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/UPSSSC.jpg'); }
 .gju-typing-index-page .gju-typing-exam-card[data-typing-name*="up police"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/UP Police.jpg'); }
 .gju-typing-index-page .gju-typing-exam-card[data-typing-name*="delhi police"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/Delhi police.png'); }
-.gju-typing-index-page .gju-typing-exam-card[data-typing-category="banking"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/Ibps.png'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-category="banking"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/IBPS.jpg'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-name*="ibps"] .gju-typing-exam-logo,
+.gju-typing-index-page .gju-typing-exam-card[data-typing-name*="rbi"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/IBPS.jpg'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-name*="sbi"] .gju-typing-exam-logo,
+.gju-typing-index-page .gju-typing-exam-card[data-typing-name*="sbi clerk"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/bank.png'); }
 .typing-test-page .gju-typing-passage-card .gju-typing-card-foot { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid #edf1f7; }
 .typing-test-page .gju-typing-passage-card .gju-typing-start-btn { flex: 1 1 140px; min-height: 44px; }
 .typing-test-page .gju-typing-passage-card .gju-typing-leaderboard-open { flex: 1 1 100px; min-height: 44px; margin: 0; font-size: .8rem; }
