@@ -878,7 +878,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "17",
         "startDate": "2026-08-22",
         "lastDate": "2026-09-12",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://files.govjobupdates.com/notifications/2026/DPCC-2026.pdf",
         "officialNotification": "https://files.govjobupdates.com/notifications/2026/DPCC-2026.pdf",
