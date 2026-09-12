@@ -104,6 +104,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0156-20260912194035-638442c1",
+        "title": "SSC CGL Exam Date 2026",
+        "organization": "Staff Selection Commission (SSC)",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-30",
+        "examEndDate": "2026-10-30",
+        "releaseDate": "2026-09-12",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ssc.gov.in/",
+        "detailPage": "../jobs/ssc-cgl-2026.html",
+        "updatedAt": "2026-09-12",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0128-20260902161604-056cd6e2",
         "title": "UP Police Home Guard PET Exam Postponed 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board UPPRPB",
