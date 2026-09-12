@@ -1,0 +1,51 @@
+name: Hydrate Job Static Fallbacks
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'jobs/**/*.html'
+      - 'scripts/hydrate-job-static-fallbacks.js'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hydrate-job-fallbacks-main
+  cancel-in-progress: false
+
+jobs:
+  hydrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Populate static job fallbacks from inline job data
+        run: npm run hydrate:job-fallbacks
+
+      - name: Commit generated fallbacks when changed
+        run: |
+          git add jobs
+
+          if git diff --cached --quiet; then
+            echo "Static fallbacks are already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Hydrate static job fallbacks"
+          git push
