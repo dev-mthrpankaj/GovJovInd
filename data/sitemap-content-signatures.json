@@ -77,10 +77,6 @@
       "signature": "3a61e7d4b7c1b221f81547e7fc6a615503ea8f5a638180441ea7d9f8a4e885f4",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/06-UPPSC-Assistant-Town-Planner-Admit-Card-2026.html": {
-      "signature": "06eb2489fb0e535867fdf2fa3462c6dcd04791705c58c822c6c0e5a321b04cc1",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html": {
       "signature": "893d2d4874663926adcccd3a8a82454e09cf1c0ff4cce14e90ae198f36070714",
       "lastmod": "2026-08-12"
@@ -103,14 +99,6 @@
     },
     "AdmitCard_Details/HTML/51-UPESSC-Assistant-Professor-Interview-Admit-Card-2026.html": {
       "signature": "1ffe4ee6b6ef7433749cc61bf6425e5fae86c6d4816b47b0584066a8be7a981c",
-      "lastmod": "2026-08-12"
-    },
-    "AdmitCard_Details/HTML/AFCAT-02-2026-Admit-Card-2026.html": {
-      "signature": "c1c625cde042466e61052ac638807137d9b1f77ee5d671561479c35fbc9df160",
-      "lastmod": "2026-08-12"
-    },
-    "AdmitCard_Details/HTML/AFCAT-02-2026-Exam-City-2026.html": {
-      "signature": "b9becc5d977ef0c96c5acf566638bf3c3ad750023cc92f88d225d02c94f460f8",
       "lastmod": "2026-08-12"
     },
     "AdmitCard_Details/HTML/AIIMS-CRE-5th-Admit-Card-2026.html": {
@@ -389,10 +377,6 @@
       "signature": "4da5202e12ab4f5e71c7895aea882274c61cd72d01e630ba592aec3a507e9071",
       "lastmod": "2026-08-26"
     },
-    "AdmitCard_Details/HTML/UPSC-CAPF-Admit-Card-2026.html": {
-      "signature": "833ee00e0ea706cfbffa47aa32f09b2b9dbf129abb1a0fbe303afd7a9a751a56",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/UPSC-Civil-Services-Mains-Admit-Card-2026.html": {
       "signature": "c245d5c879d3b3e39cd87587d053a7efdaab55704809a2d9ebcc96ea4eb5fc1c",
       "lastmod": "2026-08-14"
@@ -464,10 +448,6 @@
     "AnswerKey_Details/HTML/3007-UPPSC-GIC-Lecturer-Answer-Key-2026.html": {
       "signature": "93822fb28b91c9b61951b756d14dfb72de310db32127cf5441796e0b0fddf13b",
       "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/AFCAT-02-2026-Answer-Key.html": {
-      "signature": "6d978e3e071db24df660020b48562bf5df28a1075239f1f17e60dc93adac129a",
-      "lastmod": "2026-08-11"
     },
     "AnswerKey_Details/HTML/AIBE-XXI-Final-Answer-Key-2026.html": {
       "signature": "fa0ab78cc210e748eebd908a269a685f2b86b93c392c42d77556695b11a7b4cc",
@@ -564,14 +544,6 @@
     "AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html": {
       "signature": "d0a799ca0663d6d6403190dc6a07cc5788591cd870db5092eacc2f8e3521bb45",
       "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/UPPSC-Assistant-Town-Planner-Answer-Key-2026.html": {
-      "signature": "9acc9b12f85bcea7ba3e7f9867fa1095b4fab1c9328a67a1dbcef019649740d4",
-      "lastmod": "2026-08-14"
-    },
-    "AnswerKey_Details/HTML/UPSC-CAPF-CPF-Assistant-Commandant-Answer-Key-2026.html": {
-      "signature": "1986780536622cf75b18f52e1a8edd910b45aba0622669a469a5645d69495575",
-      "lastmod": "2026-08-14"
     },
     "AnswerKey_Details/HTML/UPSC-CMS-Answer-Key-2026.html": {
       "signature": "7e8260fb61dd426d523641b55ace587766aef24262305901a88f77eecb9aa62b",
@@ -1365,10 +1337,6 @@
       "signature": "2a142a5341a56c258fc520ec929045f557fd46f410ccc7faa6ad9ebe53d14d17",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026.html": {
-      "signature": "a695386f6e56387ed794ae7ca2ae18ce4ddaf854d0723c51ac806a7f71ea95ef",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/2419-UPSC-NDA-II-2026.html": {
       "signature": "19274109c15738e907eefc2714b9adb7141ad24b8cbe739a28f9e58aae950ad7",
       "lastmod": "2026-08-12"
@@ -1895,10 +1863,6 @@
     },
     "Job_Details/HTML/UPPSC-Computer-Operator-Programmer-2026.html": {
       "signature": "f759c5e8126de889c531070eaa1497c34197c51710e5174dd934bbe5af4be36e",
-      "lastmod": "2026-08-27"
-    },
-    "Job_Details/HTML/UPSC-EPFO-APFC-2026.html": {
-      "signature": "86815b5106721d0feb09f9edb0052383274e2967522f7ed48a1ef75edeb93903",
       "lastmod": "2026-08-27"
     },
     "Job_Details/HTML/UPSC-Principal-Vice-Principal-2026.html": {
