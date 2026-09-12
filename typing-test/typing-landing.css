@@ -98,6 +98,14 @@
 .typing-test-page .gju-typing-card-title-row h3 { margin: 0; color: #172440; font-size: 1.15rem; line-height: 1.35; }
 .typing-test-page .gju-typing-card-title-row { align-items: center; }
 .typing-test-page .gju-typing-card-foot a { min-height: 44px; }
+.gju-typing-index-page .gju-typing-exam-card:is([data-typing-category="ssc"],[data-typing-category="railway"],[data-typing-category="up"],[data-typing-category="banking"]) .gju-typing-exam-logo { background-color:#fff; background-position:center; background-repeat:no-repeat; background-size:contain; border:1px solid #dbe4f2; box-shadow:0 3px 8px rgba(23,36,64,.08); }
+.gju-typing-index-page .gju-typing-exam-card:is([data-typing-category="ssc"],[data-typing-category="railway"],[data-typing-category="up"],[data-typing-category="banking"]) .gju-typing-exam-logo i { display:none; }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-category="ssc"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/ssc.webp'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-category="railway"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/railway.webp'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-category="up"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/UPSSSC.jpg'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-name*="up police"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/UP Police.jpg'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-name*="delhi police"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/Delhi police.png'); }
+.gju-typing-index-page .gju-typing-exam-card[data-typing-category="banking"] .gju-typing-exam-logo { background-image:url('../Assets/quiz/Ibps.png'); }
 .typing-test-page .gju-typing-passage-card .gju-typing-card-foot { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid #edf1f7; }
 .typing-test-page .gju-typing-passage-card .gju-typing-start-btn { flex: 1 1 140px; min-height: 44px; }
 .typing-test-page .gju-typing-passage-card .gju-typing-leaderboard-open { flex: 1 1 100px; min-height: 44px; margin: 0; font-size: .8rem; }
