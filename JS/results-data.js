@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0143-20260910151254-754f3b10",
+        "title": "DSSSB Result 2026 for Various Post – OUT",
+        "organization": "Delhi Subordinate Service Selection Board DSSSB",
+        "department": "DSSSB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-10",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://dsssb.delhi.gov.in/doit/dsssb/latest-result",
+        "detailPage": "../jobs/dsssb-result.html",
+        "updatedAt": "2026-09-12",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0148-20260912062753-00c4045d",
+        "title": "NTA CSIR UGC NET June 2026 Result – Score Card",
+        "organization": "National Testing Agency (NTA)",
+        "department": "NTA",
+        "category": "Education",
+        "year": "2026",
+        "resultDate": "2026-09-11",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=FzCM1cz3k8ohC+69JQLEE0a8bYjxrP5YMYMZP4fujh8=",
+        "detailPage": "../jobs/nta-csir-ugc-net-june-2026.html",
+        "updatedAt": "2026-09-12",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0145-20260911222242-fef87645",
         "title": "MPPSC Assistant Professor Result 2026 for 1930 Post",
         "organization": "Madhya Pradesh Public Service Commission",
