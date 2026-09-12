@@ -20,7 +20,7 @@
 .quiz-practice-paths i{grid-area:arrow;align-self:center;color:var(--quiz-blue)}
 .quiz-hero-trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;color:var(--quiz-muted);font-size:13px}
 .quiz-hero-trust span{display:inline-flex;gap:6px;align-items:center}.quiz-hero-trust i{color:#187345}
-.quiz-landing-hero .quiz-login-note{margin-top:12px;font-size:14px}.quiz-login-note a{color:var(--quiz-blue);text-underline-offset:3px}
+.quiz-landing-hero .quiz-login-note{margin-top:12px;font-size:14px}.quiz-login-note strong{color:var(--quiz-ink);font-weight:800}
 .quiz-section,.quiz-discovery-layout,.quiz-dynamic-results{scroll-margin-top:110px}
 .quiz-section{padding-top:36px}.quiz-section-heading{margin-bottom:18px}.quiz-section-heading h2,.quiz-guide-copy h2{margin:5px 0 8px;font-size:clamp(23px,3vw,28px);line-height:1.25;letter-spacing:-.02em}.quiz-section-heading p,.quiz-guide-copy>p{margin:0;color:var(--quiz-muted);font-size:16px}
 .quiz-discovery-layout{margin-top:24px}.quiz-selector-panel{padding:20px;border:1px solid var(--quiz-line);border-radius:16px;background:#fff}
