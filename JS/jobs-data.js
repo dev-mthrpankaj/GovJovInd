@@ -1026,14 +1026,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://doc.sarkariresults.org.in/UPSC_EPFO_APFC_AdvtNo-52-2026-Special-Engl-210826.pdf",
-        "detailPage": "../Job_Details/HTML/UPSC-EPFO-APFC-2026.html",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0195-20260822083236-ea675678",
         "updatedAt": "2026-08-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0196-20260822174300-508026e5",
@@ -5120,14 +5120,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
-        "detailPage": "../Job_Details/HTML/2418-Indian-Air-Force-AFCAT-02-2026",
+        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0033",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "job-sheet-0032",

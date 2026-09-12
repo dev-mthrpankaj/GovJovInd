@@ -238,12 +238,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "objectionLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
-        "detailPage": "../AnswerKey_Details/HTML/AFCAT-02-2026-Answer-Key.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-08-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0053-20260811200623-908bb46c",
@@ -436,12 +436,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://www.upsc.gov.in/sites/default/files/ProvAnsKeyCAPF-26-GenAbilityIntellg-220726.pdf",
         "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/UPSC-CAPF-CPF-Assistant-Commandant-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-07-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0042-20260724093403-2ec25976",
@@ -700,12 +700,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://uppsc.up.nic.in/Open_PDF_DB.aspx?I4PnQ0tBagmjG3pVtCZxxLIYwjGNF6yI",
         "objectionLink": "https://uppsc.up.nic.in/",
-        "detailPage": "../AnswerKey_Details/HTML/UPPSC-Assistant-Town-Planner-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-07-09",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0030-20260708182144-deaf1cd5",
