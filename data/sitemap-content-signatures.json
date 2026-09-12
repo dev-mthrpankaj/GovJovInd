@@ -1345,10 +1345,6 @@
       "signature": "08513a41075eca510fa1b21437f02dbedf2f4097c323c5463e59a14c8de42252",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/2421-SSC-CGL-2026.html": {
-      "signature": "97d7088bcdb94e3b5c83dae5922ff8c359469f072c5cecf83d8466f58dd3cb06",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/2422-Punjab-and-Sind-Bank-Apprentice-2026.html": {
       "signature": "9922ade24d1a83e95e8cfdd900a5e8d74a53c00fa21b6bf50b3f3417189f5b4a",
       "lastmod": "2026-08-12"
@@ -2075,6 +2071,10 @@
     },
     "jobs/southern-railway-apprentices-2026.html": {
       "signature": "ef043cb4e26861c50e0ac05827ec8533f11cebe970ad1d3939a940e099d32a13",
+      "lastmod": "2026-09-12"
+    },
+    "jobs/ssc-cgl-2026.html": {
+      "signature": "a973555e78391d584f80bd637995727378781cbbbf78cb6e95ed9db7ac7eae1b",
       "lastmod": "2026-09-12"
     },
     "jobs/ssc-chsl-2026.html": {
