@@ -16,7 +16,14 @@
 .typing-test-page .gju-typing-exam-search input { min-height: 50px; }
 .typing-test-page .gju-typing-filter-row { margin: 0; }
 .typing-test-page .gju-typing-exam-card { border-radius: 14px; box-shadow: 0 4px 16px #15244b05; border-color: #dce3ef; }
-.typing-test-page .gju-typing-exam-card::before, .typing-test-page .gju-typing-passage-card::before { display: none; }
+.typing-test-page .gju-typing-passage-card::before { display: none; }
+/* Category-colored accent bar so the grid can be scanned by group, not just read card-by-card. */
+.typing-test-page .gju-typing-exam-card[data-typing-category="ssc"]::before { background: linear-gradient(180deg,#b91c1c,#f59e0b); }
+.typing-test-page .gju-typing-exam-card[data-typing-category="railway"]::before { background: linear-gradient(180deg,#dc2626,#ef4444); }
+.typing-test-page .gju-typing-exam-card[data-typing-category="up"]::before { background: linear-gradient(180deg,#7c3aed,#ec4899); }
+.typing-test-page .gju-typing-exam-card[data-typing-category="banking"]::before { background: linear-gradient(180deg,#0f766e,#2563eb); }
+.typing-test-page .gju-typing-exam-card[data-typing-category="general"]::before { background: linear-gradient(180deg,#2563eb,#6366f1); }
+.typing-test-page .gju-typing-exam-card:hover, .typing-test-page .gju-typing-exam-card:focus-within { border-color: #315bd6; box-shadow: 0 14px 32px rgba(49,91,214,.14); }
 .typing-test-page .gju-typing-card-kicker { color: #526078; font-size: .7rem; letter-spacing: .06em; }
 .typing-test-page .gju-typing-card-foot { background: #fff; }
 .typing-test-page .gju-typing-exam-card a, .typing-test-page .gju-typing-start-btn { background: #315bd6; border-radius: 9px; }
@@ -29,7 +36,10 @@
 .typing-test-page .gju-typing-hero-summary article { min-height: 78px; border-radius: 12px; padding: 12px; }
 .typing-test-page .gju-typing-hero-summary span { font-size: .67rem; }
 .typing-test-page .gju-typing-exam-category { font-size: .68rem; }
-.typing-test-page .gju-typing-hero-start { background: #315bd6; border-radius: 10px; }
+/* This is a jump-link to the picker below, not the actual "start test" action — so it gets an
+   outline treatment. Solid-fill blue is reserved for buttons that actually begin a test. */
+.typing-test-page .gju-typing-hero-start { background: #fff; color: #315bd6; border: 1px solid #315bd6; border-radius: 10px; box-shadow: none; }
+.typing-test-page .gju-typing-hero-start:hover, .typing-test-page .gju-typing-hero-start:focus-visible { background: #f0f5ff; color: #315bd6; }
 .typing-test-page .gju-typing-free-note { border: 0; margin: 0; background: transparent; font-size: .875rem; }
 .typing-test-page .gju-typing-rules-box { margin-bottom: 0; font-size: .875rem; line-height: 1.6; border: 1px solid #e0e6ef; background: #fff; border-radius: 10px; }
 .typing-test-page .gju-typing-rules-box strong { color: #526078; }
@@ -75,10 +85,13 @@
 .typing-skip-link:focus { transform: translateY(0); color: white; }
 .typing-related { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 18px; width: min(1040px,100%); margin: 0 auto; padding: 16px 0; font-size: .9rem; }
 .typing-related a { display: inline-flex; align-items: center; min-height: 44px; color: #315bd6; text-underline-offset: 3px; }
-.typing-rank-invite { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 16px 0; padding: 16px; border: 1px solid #cbdaf7; border-radius: 12px; background: #f5f8ff; text-align: left; }
-.typing-rank-invite strong { font-size: 1rem; color: #172440; }
-.typing-rank-invite p { margin: 6px 0 0; max-width: 65ch; font-size: .875rem; line-height: 1.6; color: #526078; }
-.typing-rank-invite a { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-height: 44px; padding: 10px 14px; border: 1px solid #315bd6; border-radius: 9px; color: #315bd6; background: #fff; font-weight: 700; text-decoration: none; }
+/* Demoted from a boxed callout to a slim inline note: it sat right above .typing-quick-start,
+   two near-identical light-blue boxes back to back, which read as a double banner before the
+   actual passage grid. Only one boxed callout (quick-start) remains now. */
+.typing-rank-invite { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin: 10px 0 16px; padding: 0; border: 0; border-radius: 0; background: transparent; text-align: left; }
+.typing-rank-invite strong { font-size: .875rem; font-weight: 700; color: #526078; }
+.typing-rank-invite p { display: none; }
+.typing-rank-invite a { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-height: 32px; padding: 0; border: 0; border-radius: 0; color: #315bd6; background: transparent; font-weight: 700; font-size: .875rem; text-decoration: underline; text-underline-offset: 2px; }
 
 /* Landing-only hierarchy polish: reduce repetition and make the directory easier to scan. */
 .gju-typing-index-page .gju-typing-exams-hero { margin-bottom: 6px; }
