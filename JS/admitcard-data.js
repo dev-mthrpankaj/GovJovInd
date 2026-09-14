@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0158-20260914185642-09e96e65",
+        "title": "CTET September 2026 Exam Date",
+        "organization": "Central Board of Secondary  Education (CBSE)",
+        "department": "CBSE",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-12-12",
+        "examEndDate": "2026-12-13",
+        "releaseDate": "2026-09-14",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdnbbsr.s3waas.gov.in/s3443dec3062d0286986e21dc0631734c9/uploads/2026/09/20260914325514446.pdf",
+        "detailPage": "../jobs/ctet-september-2026.html",
+        "updatedAt": "2026-09-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0151-20260912063839-de6b6afe",
         "title": "Indian Air Force Agniveer Vayu Exam City Details 2026 | Intake 02/2027",
         "organization": "Indian  Air Force",

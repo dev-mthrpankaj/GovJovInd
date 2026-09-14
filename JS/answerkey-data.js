@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0063-20260914184349-76283f44",
+        "title": "DSSSB Answer Key 2026 for Various Post",
+        "organization": "Delhi Subordinate Services Selection Board DSSSB",
+        "department": "DSSSB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-08-01",
+        "examEndDate": "2026-10-01",
+        "releaseDate": "2026-09-14",
+        "objectionLastDate": "",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/101323/login.html",
+        "objectionLink": "",
+        "detailPage": "../jobs/dsssb-answer-key.html",
+        "updatedAt": "2026-09-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0061-20260907211007-a5ef3c70",
         "title": "RRB Railway Group D Answer Key 2026 for 22195",
         "organization": "Railway Recruitment Board Recruitment",
