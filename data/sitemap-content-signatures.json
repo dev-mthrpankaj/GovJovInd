@@ -425,10 +425,6 @@
       "signature": "2702906fe6fb3c3f986eb42a902b58d7df498bfe24e367d6694b827a44ded131",
       "lastmod": "2026-08-12"
     },
-    "AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html": {
-      "signature": "3428ce972fabbd879c77e26ea7f63418f0e9f31bdb329cd99bfb120feebafb14",
-      "lastmod": "2026-08-14"
-    },
     "AnswerKey_Details/HTML/125-UPSSSC-Pharmacist-Answer-Key-2026.html": {
       "signature": "1025f9e167944f223488c4f9a5a0be5d1aa2f4576db99f611070e685c8a56757",
       "lastmod": "2026-08-12"
@@ -2005,6 +2001,10 @@
       "signature": "d82363b59dc3b03a57e4b2639724f2e467783580a3f00ebd3cda826dba4ca55d",
       "lastmod": "2026-09-12"
     },
+    "jobs/mpesb-naib-tehsildar-2026.html": {
+      "signature": "c2edc6424fb31929c5a190dc30a93edd78cc008f9d7d5287b8dc5bc772cbbb66",
+      "lastmod": "2026-09-14"
+    },
     "jobs/mppsc-assistant-professor.html": {
       "signature": "1113bca707656d433af70aa19984aa2020bf9e77803f143d84e9ab9f5c44b28d",
       "lastmod": "2026-09-12"
@@ -2050,7 +2050,7 @@
       "lastmod": "2026-09-12"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
-      "signature": "b849e76421c432be97dc67560a2c78329c5aa754e22c1474092613f736420a34",
+      "signature": "aa6ce78f8571e0a43bf3861a9da2fdd56d6c24dd0beb1eb3b1d41c8149d58e34",
       "lastmod": "2026-09-14"
     },
     "jobs/rpsc-apo-2026.html": {
@@ -2576,10 +2576,6 @@
     "Result_Details/HTML/Punjab-Sind-Bank-Apprentice-Result-2026.html": {
       "signature": "25726d16315823091596f49ee3f5eebbaaac112d071c9251233220d31856910e",
       "lastmod": "2026-08-14"
-    },
-    "Result_Details/HTML/Railway-RRB-NTPC-10+2-Level-UG-Result-2026.html": {
-      "signature": "be5bce13b8eab5a8e981f3843ec07a14a50a54ee6bd129ebd730263784cc64da",
-      "lastmod": "2026-08-25"
     },
     "Result_Details/HTML/Railway-RRB-NTPC-Graduate-CBTST-Result-2026.html": {
       "signature": "c2989716a7a56cb1d9e9daf46d11bc47ff3d8f36550d15b5824e116f79c8cdef",
