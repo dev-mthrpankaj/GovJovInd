@@ -644,12 +644,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rrb.indianrailways.gov.in/",
-        "detailPage": "../Result_Details/HTML/Railway-RRB-NTPC-10+2-Level-UG-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0110-20260823125920-d5227cc1",

@@ -859,12 +859,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
         "objectionLink": "https://digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=100181&orgId=33128",
-        "detailPage": "../AnswerKey_Details/HTML/1106-RRB-NTPC-Undergraduate-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0022",
