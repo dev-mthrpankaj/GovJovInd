@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0157-20260914082938-cc98e185",
+        "title": "Railway RRB NTPC 10+2 Level UG CBT II Admit Card 2026",
+        "organization": "Railway Recruitment Board (RRB)",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-17",
+        "examEndDate": "",
+        "releaseDate": "2026-09-13",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/100181/login.html",
+        "detailPage": "../jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html",
+        "updatedAt": "2026-09-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0151-20260912063839-de6b6afe",
         "title": "Indian Air Force Agniveer Vayu Exam City Details 2026 | Intake 02/2027",
         "organization": "Indian  Air Force",

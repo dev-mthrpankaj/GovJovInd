@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0238-20260914084101-8639a10a",
+        "title": "MPESB Naib Tehsildar Online Form 2026",
+        "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "किसी मान्यता प्राप्त विश्वविद्यालय से निम्न में से किसी विषय में स्नातक (Graduation) होना चाहिए: कला (Arts) विज्ञान (Science) वाणिज्य (Commerce) कृषि (Agriculture)",
+        "totalPosts": "73",
+        "startDate": "2026-09-17",
+        "lastDate": "2026-10-01",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://esb.mp.gov.in/e_default.html",
+        "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/Nayab_Tehsildar_2026_Rule_Book_11092026.pdf",
+        "detailPage": "../jobs/mpesb-naib-tehsildar-2026.html",
+        "updatedAt": "2026-09-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0236-20260912074336-3164cb4c",
         "title": "NCRTC Various Post Online Form 2026",
         "organization": "National Capital Region Transport Corporation (NCRTC)",
