@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0159-20260915151938-8868a35b",
+        "title": "SBI Junior Associates Clerk JCA Pre Exam Training Letter 2026 for 9124 Post",
+        "organization": "State  Bank of India",
+        "department": "SBI",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-09-28",
+        "examEndDate": "2026-09-03",
+        "releaseDate": "2026-09-15",
+        "status": "exam-over",
+        "tags": [],
+        "downloadLink": "https://sbi.bank.in/web/careers/ja-studymat-reg-202627",
+        "detailPage": "../jobs/sbi-junior-associates-clerk-jca-2026.html",
+        "updatedAt": "2026-09-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0157-20260914082938-cc98e185",
         "title": "Railway RRB NTPC 10+2 Level UG CBT II Admit Card 2026",
         "organization": "Railway Recruitment Board (RRB)",
