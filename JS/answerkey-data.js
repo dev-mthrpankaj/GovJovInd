@@ -58,7 +58,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-09-07",
         "objectionLastDate": "2026-09-15",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://rpsc.rajasthan.gov.in/Static/AnswerKeys/2A391A07-19AD-4A3D-8E8F-33C0B79C48E1.pdf",
         "objectionLink": "",
