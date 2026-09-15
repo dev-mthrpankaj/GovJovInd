@@ -776,12 +776,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ctet.nic.in/",
-        "detailPage": "../AdmitCard_Details/HTML/CTET-September-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0108-20260820234013-f44809c3",
