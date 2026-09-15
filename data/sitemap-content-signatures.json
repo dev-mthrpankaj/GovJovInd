@@ -1753,10 +1753,6 @@
       "signature": "815d5821a32e871e545db835df6a4bcda7e18245a08e851f98470293753cef98",
       "lastmod": "2026-08-27"
     },
-    "Job_Details/HTML/SBI-Junior-Associates-Clerk-2026.html": {
-      "signature": "715327c43a5dfdb96b22dc40996bfbfb181b9e5d16a00077e1d70581a75c0570",
-      "lastmod": "2026-08-27"
-    },
     "Job_Details/HTML/SIB-Probationary-Officer-CA-2026.html": {
       "signature": "76907f4867627de6888c935e4a9ad0ced2bd32531e1ecd214f9083ece4b8cb9e",
       "lastmod": "2026-08-12"
@@ -1898,8 +1894,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/bbmb-hindi-translator-2026.html": {
-      "signature": "278b209b0b8cbfd72b710430105adb0a2f6ea91896c484bf2dffe8c8cabe27b9",
-      "lastmod": "2026-09-12"
+      "signature": "2b63de061feb270f4ce3e36bebc134d50fb7f9dc51c07478447ee60a97e0ebd4",
+      "lastmod": "2026-09-15"
     },
     "jobs/bpcl-non-management-post-2026.html": {
       "signature": "e0861284dfed397bcf6cde4942aaf74cbe5e830e3018294165d8b3e23d50674e",
@@ -1934,8 +1930,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/ctet-september-2026.html": {
-      "signature": "c293e6ea47b66102e15dba65c2ded3bd93e5c66df39d5241660cb6478f9ffde0",
-      "lastmod": "2026-09-14"
+      "signature": "b109b710f6fff3750e1c55f4493c611adf984cfac306c2cceb4aea0a73aa5b79",
+      "lastmod": "2026-09-15"
     },
     "jobs/dda-result.html": {
       "signature": "a026c1d85fb56e8fed2737e1a86fe97a31bb6be2548152288aa6cb914eb99997",
@@ -1988,6 +1984,14 @@
     "jobs/indian-air-force-agniveer-vayu-2026.html": {
       "signature": "94bdf8e04ebe98d7bc0c66fc52d97362f09080087533c96d8d215a3f04a39328",
       "lastmod": "2026-09-12"
+    },
+    "jobs/isro-icrb-2026.html": {
+      "signature": "2968aa7335ca4cdd76666ae2c8f368a184b58919ab39f39fb85f8142d0ec2491",
+      "lastmod": "2026-09-15"
+    },
+    "jobs/isro-istrac-2026.html": {
+      "signature": "a49aeeb818f0648dfd62fcf6c85f363f74bd8301830e70ef9ffabd5671f2fce8",
+      "lastmod": "2026-09-15"
     },
     "jobs/mecl-non-executive-2026.html": {
       "signature": "9daa0ac0513147a2264aaea1fa712b3a99ac56f9a2a40bb7be66b811a9e45f02",
@@ -2042,20 +2046,20 @@
       "lastmod": "2026-09-12"
     },
     "jobs/patna-high-court-assistant-2026.html": {
-      "signature": "1da996b8f5a5b566b1ce6f1b1baed97c50bb90943834f076d439a37ab31f73ef",
-      "lastmod": "2026-09-12"
+      "signature": "c4190af34144418dc16c20e27d4fd023f40160263039084c9aa5b91169bc0599",
+      "lastmod": "2026-09-15"
     },
     "jobs/pgimer-group-c-various-post-2026.html": {
       "signature": "17ecf5b9e3a3e6dd20457cd26440c4abeccf84ac9d23d0103c8a475732a67495",
       "lastmod": "2026-09-12"
     },
     "jobs/punjab-and-haryana-high-court-driver-2026.html": {
-      "signature": "23cef86f3182a0bef7cd9017ad01fc05e47423157981b34087c19fd54c9f4a51",
-      "lastmod": "2026-09-12"
+      "signature": "c824f2c4da75d02dd17df7da1c016adf6dd4e397b86b768a608f51c4dce51c1f",
+      "lastmod": "2026-09-15"
     },
     "jobs/punjab-and-haryana-high-court-frash-2026.html": {
-      "signature": "92e66e46b80162cda1c848a63407a3f0e5d638d50f61b067008ab362b66ae2b6",
-      "lastmod": "2026-09-12"
+      "signature": "d63011e171f9665a98b6a9a9c1703bd046fca2945c9399e5aea5487d0b1d4b0f",
+      "lastmod": "2026-09-15"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
       "signature": "aa6ce78f8571e0a43bf3861a9da2fdd56d6c24dd0beb1eb3b1d41c8149d58e34",
@@ -2070,8 +2074,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/rrb-group-d-2026.html": {
-      "signature": "eaf9300e59b31e0226e9f02e9e546221d474cf23502064d13aa33dd1c89c4bca",
-      "lastmod": "2026-09-12"
+      "signature": "ed7f72a756a40308c5d05ff3aaeee160651453133ab32f938214e9b0248629dc",
+      "lastmod": "2026-09-15"
     },
     "jobs/rrb-railway-paramedical-2026.html": {
       "signature": "448acf6203a8e8410c2a741c1455c0cad33bac494fee054d3aa472b1cc9e169b",
@@ -2080,6 +2084,10 @@
     "jobs/sbi-junior-associates-clerk-2026.html": {
       "signature": "44b9dfbb04abe1604405d1f443bfe2f45d1d32891d69fb60d182f7be907ba300",
       "lastmod": "2026-09-12"
+    },
+    "jobs/sbi-junior-associates-clerk-jca-2026.html": {
+      "signature": "569de9d004f1efbc8455f620ca25377e7695a4e19332d23267ee7d72745b85ba",
+      "lastmod": "2026-09-15"
     },
     "jobs/sbi-po-2026.html": {
       "signature": "300447f302d686e8b6a2d46f3511820627216958059037cdf2e81f67473bc3c3",
@@ -2182,8 +2190,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/upsc-cms-admit-card.html": {
-      "signature": "15fe47d66c79f4ac878e0c4af833b6f7265f34cb2fd70a0f8962bb05675d7ca4",
-      "lastmod": "2026-09-12"
+      "signature": "a91ec7c875016a0364ec4549ecf7513ec34db8f35d1dc63135293bc5063f734e",
+      "lastmod": "2026-09-15"
     },
     "jobs/upsc-epfo-apfc-2026.html": {
       "signature": "997677497e65227cbc3fb984b994eb7c49ec6e6dfb80b63c808bf17c428cad9a",
