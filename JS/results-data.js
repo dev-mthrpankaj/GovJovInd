@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0149-20260915162740-c4b60269",
+        "title": "Bihar Vidhan Parishad LDC, DEO Final Result 2026",
+        "organization": "Bihar Legislative Council Secretariat",
+        "department": "BLSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://vidhanparishad.bihar.gov.in/document/Recruitment/2026/ldc_pre.pdf",
+        "detailPage": "../jobs/bihar-vidhan-parishad-admit-card.html",
+        "updatedAt": "2026-09-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0143-20260910151254-754f3b10",
         "title": "DSSSB Result 2026 for Various Post – OUT",
         "organization": "Delhi Subordinate Service Selection Board DSSSB",

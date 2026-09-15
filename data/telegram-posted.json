@@ -2056,11 +2056,11 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0184-20260815184742-1b7a8e81": {
-      "updatedAt": "2026-08-15",
-      "hash": "849d73b883288c5e6b1a7b94ae9d1cdd5b9299e5df152d9742b9754b1556fc5d",
+      "updatedAt": "2026-09-15",
+      "hash": "aee18b527da81086cde62267f2972567e688cedc8764e4b4b6c6f923ae1f7882",
       "title": "MP High Court Assistant Grade III Online Form 2026 for 1174 Post",
-      "lastPostedAt": "2026-08-15T14:09:14.243Z",
-      "stateReason": "new"
+      "lastPostedAt": "2026-09-15T11:41:35.571Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0186-20260817201854-06efe503": {
       "updatedAt": "2026-08-17",
@@ -2322,11 +2322,11 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0222-20260906120656-a7c35c06": {
-      "updatedAt": "2026-09-06",
-      "hash": "d9bcac0e89ed4b63f4e1e43b4f9b1ca1476ecce83682ff57a86f5da63ef25110",
+      "updatedAt": "2026-09-15",
+      "hash": "d216234e84d762da6cd61a3e26214ae8dea9bb026905d438e2cf689226f5c863",
       "title": "DHC Personal Assistant Online Form 2026 for 150 Post",
-      "lastPostedAt": "2026-09-06T14:46:04.953Z",
-      "stateReason": "new"
+      "lastPostedAt": "2026-09-15T11:41:36.275Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0223-20260907221234-4e4bc839": {
       "updatedAt": "2026-09-07",
@@ -2459,6 +2459,13 @@
       "hash": "08804f9abcd3add31c5576c7e8c4ba8d0e76f1cb6ad06e494f8fa0035af485d0",
       "title": "RRB Railway Paramedical Online Form 2026 for 590 Post",
       "lastPostedAt": "2026-09-14T13:35:36.672Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0242-20260915163951-58aea706": {
+      "updatedAt": "2026-09-15",
+      "hash": "ebd35c43a901187da23143505f31ec45f82a0173f8c92ebd75a40f9d86eee94b",
+      "title": "RUHS Medical Officer Online Form 2026 for 600 Post",
+      "lastPostedAt": "2026-09-15T11:41:36.704Z",
       "stateReason": "new"
     }
   },
@@ -3906,11 +3913,11 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0139-20260909090913-0a06406a": {
-      "updatedAt": "2026-09-09",
-      "hash": "40df964cefba2005c44b9caa9a4a944dfce8878460489f3e741b8f6c5d331215",
-      "title": "Patna High Court Group C Assistant Exam Date 2026",
-      "lastPostedAt": "2026-09-09T08:47:38.750Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-15",
+      "hash": "ae3b89b07b000fac15ef09e50b1f1953bfa73cd6023e778f1dc5ff53d12b83d4",
+      "title": "Patna High Court Group C Assistant Admit Card 2026",
+      "lastPostedAt": "2026-09-15T11:41:37.145Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0140-20260909091145-3c98ade8": {
       "updatedAt": "2026-09-09",
@@ -4050,6 +4057,27 @@
       "hash": "30e0fd12e71017d8da8af264011bcdaad7e8833760250216cab8c6610a5fee8f",
       "title": "SBI Junior Associates Clerk JCA Pre Exam Training Letter 2026 for 9124 Post",
       "lastPostedAt": "2026-09-15T10:11:13.821Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0160-20260915154030-2b5d15cb": {
+      "updatedAt": "2026-09-15",
+      "hash": "de6efb615a9078df5b3d2b43b1d591755424d81b86dc44869e2e0ee0146b55dc",
+      "title": "ISRO ISTRAC Various Post Exam Date 2026",
+      "lastPostedAt": "2026-09-15T11:41:37.612Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0161-20260915160754-29772ef9": {
+      "updatedAt": "2026-09-15",
+      "hash": "aa939895eef68ec5b1c6d6c14eccfe5702aeb84cf8c3abe81b7ebd59b096e377",
+      "title": "ISRO ICRB Admit Card 2026 for 244 Post",
+      "lastPostedAt": "2026-09-15T11:41:41.362Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0162-20260915162101-739f3d3f": {
+      "updatedAt": "2026-09-15",
+      "hash": "ffebfc0436c7e2168a572e3b4eaa6ea91e5a643d98f13ba0fe073f9d8de60006",
+      "title": "UPESSC Principal Admit Card 2026 for 111 Post",
+      "lastPostedAt": "2026-09-15T11:41:41.808Z",
       "stateReason": "new"
     }
   },
@@ -6336,6 +6364,13 @@
       "hash": "943107171bd49521ef7b02345998e65ac29d068f0263cd14ceb08d2ccba578c9",
       "title": "NTA CSIR UGC NET June 2026 Result – Score Card",
       "lastPostedAt": "2026-09-12T01:36:58.303Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0149-20260915162740-c4b60269": {
+      "updatedAt": "2026-09-15",
+      "hash": "c5c9364bf4d5339acb7998b1bac1c1ac3640c723aed6472fc6856aed28554ae6",
+      "title": "Bihar Vidhan Parishad LDC, DEO Final Result 2026",
+      "lastPostedAt": "2026-09-15T11:41:42.417Z",
       "stateReason": "new"
     }
   }
