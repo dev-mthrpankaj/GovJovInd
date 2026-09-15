@@ -1629,10 +1629,6 @@
       "signature": "00560f0bc9b8379e969941c6471b0e8e28665b834b792b47f01c3533cd592333",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/MP-High-Court-Assistant-Grade-III-2026.html": {
-      "signature": "6d78fc24838d7c03404ad62f50566acc238fbb729f0d62fb6b99a7b6920fc2c1",
-      "lastmod": "2026-08-27"
-    },
     "Job_Details/HTML/MPESB-Group-2-Sub-Group-4-2026.html": {
       "signature": "150339eb87c217bb5a1412793512dc979cdd2668498ee7840b9022aa20d36a9d",
       "lastmod": "2026-08-12"
@@ -1897,6 +1893,10 @@
       "signature": "2b63de061feb270f4ce3e36bebc134d50fb7f9dc51c07478447ee60a97e0ebd4",
       "lastmod": "2026-09-15"
     },
+    "jobs/bihar-vidhan-parishad-admit-card.html": {
+      "signature": "64236320dc07bbdd2063ea67f35910dd39e4a9488e69d20647f4ed9df50e19e0",
+      "lastmod": "2026-09-15"
+    },
     "jobs/bpcl-non-management-post-2026.html": {
       "signature": "e0861284dfed397bcf6cde4942aaf74cbe5e830e3018294165d8b3e23d50674e",
       "lastmod": "2026-09-12"
@@ -1942,8 +1942,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/dhc-personal-assistant-2026.html": {
-      "signature": "24e1ccba8613fb6f642fd579fce2999f04a14b651adb6c57b8e723ade1a546ec",
-      "lastmod": "2026-09-12"
+      "signature": "298d44bd7cb1725110b04dc0cc0576f9e5145f59b5e5442ce6ff41da51e003b2",
+      "lastmod": "2026-09-15"
     },
     "jobs/district-court-rewari-stenographer-2026.html": {
       "signature": "1ff9bdd675edd96c668eedccaae908409309ddd90c68968ace474423622b2bd1",
@@ -1996,6 +1996,10 @@
     "jobs/mecl-non-executive-2026.html": {
       "signature": "9daa0ac0513147a2264aaea1fa712b3a99ac56f9a2a40bb7be66b811a9e45f02",
       "lastmod": "2026-09-14"
+    },
+    "jobs/mp-high-court-assistant-grade-iii-2026.html": {
+      "signature": "c47503710e23d0f3c1637e69c2ebf95bc27ecb15752e8136ad0188c56e2a4828",
+      "lastmod": "2026-09-15"
     },
     "jobs/mp-police-asi-and-head-constable-computer-2026.html": {
       "signature": "78df9f5d8cc63b7c64bba563085fc27abd12e008a386534b0228cc96ed82d378",
@@ -2081,6 +2085,10 @@
       "signature": "448acf6203a8e8410c2a741c1455c0cad33bac494fee054d3aa472b1cc9e169b",
       "lastmod": "2026-09-14"
     },
+    "jobs/ruhs-medical-officer-2026.html": {
+      "signature": "c6b631d527ac1fc67f3799ac088e72da0e645d86700f42cb36da297ae4c2f226",
+      "lastmod": "2026-09-15"
+    },
     "jobs/sbi-junior-associates-clerk-2026.html": {
       "signature": "44b9dfbb04abe1604405d1f443bfe2f45d1d32891d69fb60d182f7be907ba300",
       "lastmod": "2026-09-12"
@@ -2158,7 +2166,7 @@
       "lastmod": "2026-09-12"
     },
     "jobs/upessc-principal-2026.html": {
-      "signature": "0a367b5c665b3bba7efba5fbddd7bbd3c1431efcbe8e7c895b3a8da92446d8d0",
+      "signature": "1f42fb2782903bfe9d3f8e3868d2303a1190c6b856b638b9fbdd1f28db924c8a",
       "lastmod": "2026-09-15"
     },
     "jobs/upessc-up-special-tet-2026.html": {
