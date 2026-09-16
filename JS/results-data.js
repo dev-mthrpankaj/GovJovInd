@@ -40,6 +40,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0152-20260916163745-e551ef75",
+        "title": "RRB JE Junior Engineer CBT II Result 2026 for 2569 Post CEN 05/2025",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-09-16",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/97996/login.html",
+        "detailPage": "../jobs/rrb-je-junior-engineer-2025.html",
+        "updatedAt": "2026-09-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0149-20260915162740-c4b60269",
         "title": "Bihar Vidhan Parishad LDC, DEO Final Result 2026",
         "organization": "Bihar Legislative Council Secretariat",

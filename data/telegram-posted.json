@@ -2474,6 +2474,41 @@
       "title": "UPSSSC Senior Instructor Cadre Online Form 2026",
       "lastPostedAt": "2026-09-15T14:59:25.801Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0244-20260916170341-d225b802": {
+      "updatedAt": "2026-09-16",
+      "hash": "de5066b725c1e0bb06b44c28d31c58408eb8b406d5205baf87a631d483d1333b",
+      "title": "UPESSC UP PGT Teacher Online Form 2026 for 2607 Post",
+      "lastPostedAt": "2026-09-16T12:11:40.724Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0245-20260916170824-07ca78ed": {
+      "updatedAt": "2026-09-16",
+      "hash": "a73fbc943b31e6caeda507d56ef9587de459bd8c837ead8e5571fed1722f3667",
+      "title": "UPESSC UP Primary Teacher PRT Online Form 2026 for 12405 Post",
+      "lastPostedAt": "2026-09-16T12:11:41.422Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0246-20260916172108-5de0e474": {
+      "updatedAt": "2026-09-16",
+      "hash": "cb36311d4b1561b85cf548367382e1d7c35c9d16b0255fe14d755962f5fd22e4",
+      "title": "UKSSSC Scaler Group C Online Form 2026",
+      "lastPostedAt": "2026-09-16T12:11:41.929Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0247-20260916172818-6058225c": {
+      "updatedAt": "2026-09-16",
+      "hash": "fbb885ef958ea707a1d48cd1c717e0d84b6d1d4b9047afbd3dae4bb1d1f9a15b",
+      "title": "Bihar STET Online Form 2026 | Teacher Eligibility Test",
+      "lastPostedAt": "2026-09-16T12:11:42.377Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0248-20260916173345-bfc06d58": {
+      "updatedAt": "2026-09-16",
+      "hash": "ed5cfe8fde270cf1aa5f4bcfa96f182e6ec9d9caa6df6396f63424a6a85e9181",
+      "title": "UPSSSC Lekhpal DV Documents Upload 2026",
+      "lastPostedAt": "2026-09-16T12:11:42.848Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -6406,6 +6441,13 @@
       "hash": "d43d8e1d0c7d19874c4a38aa2bdd6f62046dcb36bf5c4ed3fee126ed6b92d72c",
       "title": "RPSC Sub Inspector SI PET Result 2026",
       "lastPostedAt": "2026-09-16T03:33:38.565Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0152-20260916163745-e551ef75": {
+      "updatedAt": "2026-09-16",
+      "hash": "d966bc83e0d913e4625ee7c65d4c199230f290d6432e94f047e1b5e906f5af5e",
+      "title": "RRB JE Junior Engineer CBT II Result 2026 for 2569 Post CEN 05/2025",
+      "lastPostedAt": "2026-09-16T12:11:46.466Z",
       "stateReason": "new"
     }
   }
