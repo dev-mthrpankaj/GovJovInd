@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0150-20260916084557-4259b694",
+        "title": "Indian Overseas Bank Apprentice Result 2026 for 750 Post",
+        "organization": "Indian Overseas  Bank (IOB)",
+        "department": "IOB",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-09-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.iob.bank.in/documents/d/guest/annexure-state-wise-result",
+        "detailPage": "../jobs/iob-apprentice-2026.html",
+        "updatedAt": "2026-09-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0151-20260916085108-c9517fa9",
+        "title": "RPSC Sub Inspector SI PET Result 2026",
+        "organization": "Rajasthan Public Service Commission (RPSC)",
+        "department": "RPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rpsc.rajasthan.gov.in/Static/Result/E8D3D6E0D02C4C759E893A2AEE40F498.pdf",
+        "detailPage": "../jobs/rpsc-sub-inspector-2026.html",
+        "updatedAt": "2026-09-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0149-20260915162740-c4b60269",
         "title": "Bihar Vidhan Parishad LDC, DEO Final Result 2026",
         "organization": "Bihar Legislative Council Secretariat",
