@@ -4086,6 +4086,20 @@
       "title": "UPESSC Principal Admit Card 2026 for 111 Post",
       "lastPostedAt": "2026-09-15T11:41:41.808Z",
       "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0163-20260916080540-09a99831": {
+      "updatedAt": "2026-09-16",
+      "hash": "180b40768f65025fb3b77ebd5646a6d81baa4cb6ca4745ff79b6966201e53868",
+      "title": "IOB Local Bank Officer LBO Exam Date 2026 for 250 Post",
+      "lastPostedAt": "2026-09-16T03:33:36.549Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0164-20260916083551-f1f2311d": {
+      "updatedAt": "2026-09-16",
+      "hash": "8f1b4ecaae621900b5ed239b245c118843f3e46bd5e8b7becd13e6e039234d77",
+      "title": "UPCISB UP Cooperative Bank Various Post Admit Card 2026 for 2085 Post",
+      "lastPostedAt": "2026-09-16T03:33:37.308Z",
+      "stateReason": "new"
     }
   },
   "answerKeys": {
@@ -6378,6 +6392,20 @@
       "hash": "c5c9364bf4d5339acb7998b1bac1c1ac3640c723aed6472fc6856aed28554ae6",
       "title": "Bihar Vidhan Parishad LDC, DEO Final Result 2026",
       "lastPostedAt": "2026-09-15T11:41:42.417Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0150-20260916084557-4259b694": {
+      "updatedAt": "2026-09-16",
+      "hash": "1b89a00723801423ab8776ee36f558119c6c573dc4c406b0fae1ee1059c47081",
+      "title": "Indian Overseas Bank Apprentice Result 2026 for 750 Post",
+      "lastPostedAt": "2026-09-16T03:33:37.991Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0151-20260916085108-c9517fa9": {
+      "updatedAt": "2026-09-16",
+      "hash": "d43d8e1d0c7d19874c4a38aa2bdd6f62046dcb36bf5c4ed3fee126ed6b92d72c",
+      "title": "RPSC Sub Inspector SI PET Result 2026",
+      "lastPostedAt": "2026-09-16T03:33:38.565Z",
       "stateReason": "new"
     }
   }
