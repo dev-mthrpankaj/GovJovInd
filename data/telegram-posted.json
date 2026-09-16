@@ -4060,18 +4060,18 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0154-20260912071022-0cb7bcc8": {
-      "updatedAt": "2026-09-12",
-      "hash": "ea004eab54d3674cf7e9fdc36d62e72cab6a520fb70f4c14e44a17636a39732d",
-      "title": "UPSSSC Pharmaceutical Ayurvedic Exam City Details 2024 for 1002 Post",
-      "lastPostedAt": "2026-09-12T02:59:32.064Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-16",
+      "hash": "5ec68a30a05cf80a296b3ad3803b98bd96dc896729ecf041424110ad7965aa2f",
+      "title": "UPSSSC Pharmaceutical Ayurvedic Admit Card 2024 for 1002 Post",
+      "lastPostedAt": "2026-09-16T12:46:46.712Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0155-20260912072644-ba8a2c50": {
-      "updatedAt": "2026-09-12",
-      "hash": "63f2355ea18e19249a523775c327deca909b23ccd068d17cd262e9af61049906",
-      "title": "UPSSSC Excise Constable 2026 Exam City Details",
-      "lastPostedAt": "2026-09-12T02:59:32.632Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-16",
+      "hash": "5dfcfa55c1835e57ab1e71489f4e10169be19ee6b6f4a0f25ba4c56839ede325",
+      "title": "UPSSSC Excise Constable Admit Card 2026",
+      "lastPostedAt": "2026-09-16T12:46:47.396Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0156-20260912194035-638442c1": {
       "updatedAt": "2026-09-12",
@@ -4920,6 +4920,20 @@
       "hash": "7ba83344a58193e09d3dc515657f5ce75db1f0a57ef7f4d089aeb5bbdedd1add",
       "title": "DSSSB Answer Key 2026 for Various Post",
       "lastPostedAt": "2026-09-14T13:35:37.662Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0064-20260916174600-3654bb3e": {
+      "updatedAt": "2026-09-16",
+      "hash": "bae7179b62453489fac719363d5706924f08479e120bd5935ab208e0af8a39e8",
+      "title": "UPSC CDS II Answer Key 2026 for 451 Post",
+      "lastPostedAt": "2026-09-16T12:46:47.850Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0065-20260916175142-05102bb0": {
+      "updatedAt": "2026-09-16",
+      "hash": "2b5ac457666a0178bd0e1209ac7106becf20b516f051931d6a1a720144bb1842",
+      "title": "UPSC NDA II Answer Key 2026 for 394 Post",
+      "lastPostedAt": "2026-09-16T12:46:48.286Z",
       "stateReason": "new"
     }
   },
