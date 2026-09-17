@@ -7,8 +7,7 @@
 <meta name="description" content="Practise free Hindi quizzes by topic. Revise Hindi grammar, vocabulary and comprehension, choose a published set and review your timed performance.">
 <link rel="canonical" href="https://govjobupdates.com/HTML/hindi-quizzes.html">
 <link rel="stylesheet" href="../CSS/style.css">
-<link rel="stylesheet" href="../CSS/subject-quizzes.css?v=20260917-subject-v3">
-<link rel="stylesheet" href="../CSS/hindi-quiz-theme.css?v=20260917-hindi-v1">
+<link rel="stylesheet" href="../CSS/subject-quizzes.css?v=20260907-subject-v2">
 <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CollectionPage", "@id": "https://govjobupdates.com/HTML/hindi-quizzes.html#webpage", "url": "https://govjobupdates.com/HTML/hindi-quizzes.html", "name": "Free Hindi Quizzes: Topic-Wise Practice", "description": "Practise free Hindi quizzes by topic. Revise Hindi grammar, vocabulary and comprehension, choose a published set and review your timed performance.", "inLanguage": "en", "isPartOf": {"@type": "WebSite", "name": "GovJobUpdates", "url": "https://govjobupdates.com/"}, "breadcrumb": {"@id": "https://govjobupdates.com/HTML/hindi-quizzes.html#breadcrumb"}}, {"@type": "BreadcrumbList", "@id": "https://govjobupdates.com/HTML/hindi-quizzes.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://govjobupdates.com/"}, {"@type": "ListItem", "position": 2, "name": "Quizzes", "item": "https://govjobupdates.com/HTML/quiz.html"}, {"@type": "ListItem", "position": 3, "name": "Hindi", "item": "https://govjobupdates.com/HTML/hindi-quizzes.html"}]}]}</script>
 <meta property="og:site_name" content="GovJobUpdates">
@@ -74,55 +73,67 @@
 </header>
 <a class="subject-skip-link" href="#subject-practice">Skip to practice</a>
 <main class="subject-quiz-page" data-subject-quiz-page data-exam-slug="hindi" data-subject-name="Hindi">
-
-<section class="hq-hero">
-<div class="hq-hero-inner">
-<nav class="hq-breadcrumb" aria-label="Breadcrumb">
+<section class="subject-quiz-hero">
+<nav class="subject-quiz-breadcrumb" aria-label="Breadcrumb">
 <a href="../index.html">Home</a>
-<i class="fas fa-chevron-right" aria-hidden="true"></i>
+<i class="fas fa-chevron-right" aria-hidden="true">
+</i>
 <a href="quiz.html">Quizzes</a>
-<i class="fas fa-chevron-right" aria-hidden="true"></i>
+<i class="fas fa-chevron-right" aria-hidden="true">
+</i>
 <span aria-current="page">Hindi</span>
 </nav>
-<div class="hq-hero-main">
-<div class="hq-mark-wrap">
-<h1 class="hq-mark">हिंदी<span class="hq-mark-en">Free Hindi Topic-Wise Quizzes</span></h1>
+<span class="subject-quiz-kicker">
+<i class="fas fa-book-open" aria-hidden="true">
+</i> Practice by Subject</span>
+<h1>Free Hindi Topic-Wise Quizzes</h1>
+<p class="subject-hero-lead">Strengthen Hindi grammar and vocabulary.</p>
+<p>Practise Hindi language topics with focused quizzes. Revise grammar rules, word meanings and comprehension for your exam preparation.</p>
+<div class="subject-hero-actions">
+<a class="subject-primary-link" href="#subject-practice">Find a practice set <span aria-hidden="true">↓</span>
+</a>
+<a href="#subject-guide">Explore the study guide</a>
 </div>
-<div class="hq-hero-copy">
-<p>Revise grammar, vocabulary and comprehension with focused, timed sets. Pick a topic below and see exactly where you stand.</p>
-<div class="hq-search-row">
-<label class="hq-search-wrap">
-<i class="fas fa-magnifying-glass" aria-hidden="true"></i>
-<input type="search" data-subject-search placeholder="Search by title or topic" maxlength="120" aria-label="Search Hindi quizzes">
-<span class="hq-search-go" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
-</label>
-</div>
-<div class="hq-trust-line">
-<span><i class="fas fa-check-circle" aria-hidden="true"></i> Free practice</span>
-<span><i class="fas fa-stopwatch" aria-hidden="true"></i> Timed attempts</span>
-<span><i class="fas fa-chart-line" aria-hidden="true"></i> Score &amp; rank tracked</span>
-</div>
-</div>
-</div>
+<div class="subject-quiz-trust">
+<span>Free Practice</span>
+<span>Topic Wise</span>
+<span>Timed Attempts</span>
+<span>Performance Tracking</span>
 </div>
 </section>
-
-<section id="subject-practice" class="hq-section" aria-labelledby="topicsTitle">
-<div class="hq-row-head">
-<h2 id="topicsTitle">Topics</h2>
+<section id="subject-practice" class="subject-quiz-section" aria-labelledby="topicsTitle">
+<div class="subject-quiz-heading">
+<div>
+<span>Choose a Topic</span>
+<h2 id="topicsTitle">Hindi Topics</h2>
+</div>
+<p>Choose from topics with published quizzes. The number beside each topic shows the available sets.</p>
+</div>
+<div class="subject-topic-toolbar">
+<label class="subject-topic-select-wrap">Topic<select class="subject-topic-select" data-subject-topic-select disabled>
+<option value="all">Loading topics…</option>
+</select>
+</label>
+<label class="subject-search-wrap">Search quizzes<input type="search" data-subject-search placeholder="Search by title or topic" maxlength="120">
+</label>
+<div class="subject-topic-current">Showing: <strong data-active-topic-label>All Topics</strong>
+</div>
 </div>
 <div class="subject-topic-grid" data-subject-topic-grid>
 <div class="subject-topic-empty">Loading available topics…</div>
 </div>
 </section>
-
-<section id="subject-sets" class="hq-section" aria-labelledby="quizTitle">
-<div class="hq-row-head">
-<h2 id="quizTitle">Practice sets</h2>
-<p class="hq-count-line" role="status" aria-live="polite">
+<section id="subject-sets" class="subject-quiz-section subject-sets-section" aria-labelledby="quizTitle">
+<div class="subject-quiz-heading">
+<div>
+<span>Published Practice Sets</span>
+<h2 id="quizTitle">Hindi Quizzes</h2>
+</div>
+<p>Choose a set to begin. Sign in when prompted to attempt a quiz and save your results.</p>
+</div>
+<p class="subject-quiz-count-line" role="status" aria-live="polite">
 <strong data-subject-quiz-count>…</strong> <span data-subject-count-label>Loading practice sets</span>
 </p>
-</div>
 <div class="subject-quiz-grid" data-subject-quiz-list aria-busy="true">
 </div>
 <div class="subject-quiz-empty" data-subject-quiz-empty hidden>
@@ -131,8 +142,7 @@
 <p>Enable JavaScript to load and filter the published quiz sets. You can still read the study guide below or <a href="quiz.html">browse other quiz categories</a>.</p>
 </noscript>
 </section>
-
-<section id="subject-guide" class="hq-section hq-tail subject-seo-copy" aria-labelledby="guide-title">
+<section id="subject-guide" class="subject-seo-copy" aria-labelledby="guide-title">
 <span class="subject-section-kicker">Plan your revision</span>
 <h2 id="guide-title">A focused guide to Hindi practice</h2>
 <p>Use these areas to plan your revision. Quiz availability is shown in the practice section above; this guide is not a list of currently published sets.</p>
@@ -156,8 +166,7 @@
 </div>
 <p class="subject-exam-note">Preparing for a specific exam? Use the <a href="ssc-quizzes.html">SSC</a>, <a href="banking-quizzes.html">Banking</a>, <a href="rrb-quizzes.html">Railway</a> or <a href="police-quizzes.html">Police</a> practice pages for exam-based sets. Match your revision topics to your target exam’s syllabus.</p>
 </section>
-
-<section class="hq-section subject-faq" aria-labelledby="faq-title">
+<section class="subject-faq" aria-labelledby="faq-title">
 <h2 id="faq-title">Before you start</h2>
 <details>
 <summary>Are these Hindi quizzes free?</summary>
@@ -172,8 +181,7 @@
 <p>The practice filters show topics with published quizzes. If a topic has no published set yet, it will not appear in the filter. You can explore exam-based practice while more sets are added.</p>
 </details>
 </section>
-
-<section class="hq-section subject-more" aria-labelledby="more-title">
+<section class="subject-more" aria-labelledby="more-title">
 <h2 id="more-title">Continue with another subject</h2>
 <div class="subject-related-links">
 <a href="maths-quizzes.html">Maths</a>
@@ -186,13 +194,12 @@
 <a href="quiz.html">All quiz categories →</a>
 </div>
 </section>
-
 </main>
 <script src="../JS/script.js" defer>
 </script>
-<script src="https://test.govjobupdates.com/live-test/quiz-data/quiz-index.js?v=20260917-subject-v3" defer>
+<script src="https://test.govjobupdates.com/live-test/quiz-data/quiz-index.js?v=20260907-subject-v2" defer>
 </script>
-<script src="../JS/subject-quizzes.js?v=20260917-subject-v3" defer>
+<script src="../JS/subject-quizzes.js?v=20260907-subject-v2" defer>
 </script>
 <script src="../JS/firebase-config.js" defer>
 </script>
