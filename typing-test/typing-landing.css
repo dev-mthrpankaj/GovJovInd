@@ -169,3 +169,158 @@
  .typing-test-page *, .typing-test-page *::before, .typing-test-page *::after { transition: none; animation: none; scroll-behavior: auto; }
  .typing-test-page .gju-typing-exam-card:hover, .typing-test-page .gju-typing-passage-card:hover { transform: none; }
 }
+/* —— Priority 1: exam detail SEO + visual hierarchy —— */
+.gju-typing-hero-lead {
+  max-width: 38rem;
+  margin: 0 0 4px;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #526078;
+}
+.gju-typing-hero-start-solid {
+  background: #315bd6 !important;
+  color: #fff !important;
+  border-color: #315bd6 !important;
+}
+.gju-typing-hero-start-solid:hover,
+.gju-typing-hero-start-solid:focus-visible {
+  background: #234cc7 !important;
+  color: #fff !important;
+}
+.gju-typing-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #dce3ef;
+  background: #fff;
+  color: #315bd6;
+  font-weight: 700;
+  text-decoration: none;
+}
+.gju-typing-hero-secondary:hover {
+  background: #f0f5ff;
+}
+
+.gju-typing-rules-box-enhanced {
+  border-left: 4px solid #315bd6 !important;
+  padding: 16px 18px !important;
+}
+.gju-typing-rules-box-enhanced strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #172440 !important;
+  font-size: 0.95rem;
+}
+
+.gju-typing-evaluate-section {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+  padding: 28px 22px;
+  border: 1px solid #dce3ef;
+  border-radius: 18px;
+  background: #fff;
+}
+.gju-typing-evaluate-intro {
+  margin: 0 0 20px;
+  color: #526078;
+  line-height: 1.6;
+  max-width: 42rem;
+}
+.gju-typing-evaluate-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.gju-typing-evaluate-card {
+  padding: 16px;
+  border: 1px solid #e8eef8;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f8faff 0%, #fff 100%);
+}
+.gju-typing-evaluate-step {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: #edf2ff;
+  color: #315bd6;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.gju-typing-evaluate-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #172440;
+}
+.gju-typing-evaluate-card p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #526078;
+}
+.gju-typing-evaluate-note {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+}
+.gju-typing-evaluate-note i {
+  color: #b45309;
+  margin-top: 3px;
+}
+.gju-typing-evaluate-note strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #92400e;
+}
+.gju-typing-evaluate-note p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #78350f;
+}
+
+.gju-typing-checklist {
+  margin: 12px 0 0;
+  padding-left: 1.15rem;
+  color: #526078;
+  line-height: 1.7;
+}
+.gju-typing-checklist li {
+  margin-bottom: 6px;
+}
+
+.typing-related-enhanced {
+  padding: 18px 0 8px;
+  border-top: 1px solid #e8eef8;
+  margin-top: 8px;
+}
+.typing-related-enhanced strong {
+  width: 100%;
+  margin-bottom: 4px;
+  color: #172440;
+}
+
+@media (max-width: 900px) {
+  .gju-typing-evaluate-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px) {
+  .gju-typing-evaluate-grid {
+    grid-template-columns: 1fr;
+  }
+  .gju-typing-evaluate-section {
+    padding: 20px 14px;
+  }
+}
