@@ -426,7 +426,6 @@
     }
     if (state.composing) return;
     const nextTyped = dom.typingInput?.value || "";
-    // Fallback for non-cancelable mobile/IME edits; committed text stays append-only.
     if (state.preset?.editingAllowed === false && !nextTyped.startsWith(state.typed)) {
       dom.typingInput.value = state.typed;
       dom.typingInput.setSelectionRange?.(state.typed.length, state.typed.length);
@@ -437,7 +436,6 @@
     state.typed = nextTyped;
     if (splitTextUnits(getScoredTypedText()).length >= splitTextUnits(state.passage).length) {
       if (state.preset?.repeatPassage) {
-        // Retain each round for scoring/history; render only the original passage.
         state.completedTyped += getScoredTypedText() + "\n";
         const extraUnits = Math.max(0, splitTextUnits(getScoredTypedText()).length - splitTextUnits(state.passage).length);
         state.completedReference += state.passage + "\u0000".repeat(extraUnits) + "\n";
@@ -463,7 +461,6 @@
     if (state.status === "finished") return;
     state.finishedAt = performance.now();
     state.composing = false;
-    // Ignore uncommitted IME text and any input arriving after the deadline.
     if (dom.typingInput) dom.typingInput.value = state.typed;
     const result = calculateResult();
     state.lastResult = result;
@@ -520,7 +517,6 @@
       else incorrectChars += 1;
     }
 
-    // Round separators are bookkeeping, not keystrokes entered by the candidate.
     correctChars = Math.max(0, correctChars - state.passageRounds);
     const targetWords = reference.trim().split(/\s+/).filter(Boolean);
     const typedWords = typed.trim().split(/\s+/).filter(Boolean);
@@ -564,10 +560,25 @@
       completedAt: new Date().toISOString(),
       passageRounds: state.passageRounds
     };
-    return evaluators ? evaluators.assess(result, {
-      preset: state.preset, typed, complete: getElapsedMs() >= state.durationMinutes * 60000
-    }) : state.preset?.practiceOnly === false ? { ...result, targetAchieved: false,
-      assessmentLabel: "RULE EVALUATOR UNAVAILABLE", assessmentNote: "Practice feedback only; exam evaluation could not load." } : result;
+
+    const isFinal = state.finishedAt > 0 || state.status === "finished";
+
+    return evaluators
+      ? evaluators.assess(result, {
+          preset: state.preset,
+          typed,
+          reference,
+          complete: getElapsedMs() >= state.durationMinutes * 60000,
+          final: isFinal
+        })
+      : state.preset?.practiceOnly === false
+        ? {
+            ...result,
+            targetAchieved: false,
+            assessmentLabel: "RULE EVALUATOR UNAVAILABLE",
+            assessmentNote: "Practice feedback only; exam evaluation could not load."
+          }
+        : result;
   }
 
   function render() {
@@ -625,8 +636,6 @@
       renderedPassage = state.passage;
       renderedUnits = [];
     }
-    // Update only the edited suffix, including the previous and new cursor.
-    // Long passages must not rebuild tens of thousands of nodes on every key.
     let firstChanged = 0;
     while (firstChanged < typed.length && firstChanged < renderedUnits.length
       && typed[firstChanged] === renderedUnits[firstChanged]) firstChanged += 1;
@@ -781,14 +790,30 @@
     dom.resultPanel.hidden = !result;
     if (!result) return;
 
-    dom.resultStatus.className = `gju-typing-result-status ${result.targetAchieved ? "is-pass" : ["rrb", "delhi-hcm", "up-police"].includes(result.evaluationType) ? "" : "is-fail"}`;
-    dom.resultStatus.textContent = result.assessmentLabel || (result.targetAchieved ? "PRACTICE TARGET ACHIEVED" : "PRACTICE TARGET NOT ACHIEVED");
-    setText(dom.resultAdvice, result.evaluationType && result.evaluationType !== "general" ? result.assessmentNote : result.targetAchieved
-      ? "You met both practice targets. Try another passage to build consistency."
-      : !result.accuracyPass
-        ? `Focus on accuracy next: aim for ${result.targetAccuracy}%. Review the red mismatches above, then retry at a comfortable pace.`
-        : `Your accuracy is on target. Build another ${Math.max(0, result.targetWPM - result.netWPM).toFixed(1)} WPM to reach your speed goal.`);
-    dom.resultGrid.innerHTML = [
+    const neutralTypes = ["rrb", "delhi-hcm", "up-police"];
+    dom.resultStatus.className = `gju-typing-result-status ${
+      result.targetAchieved
+        ? "is-pass"
+        : neutralTypes.includes(result.evaluationType)
+          ? ""
+          : "is-fail"
+    }`;
+    dom.resultStatus.textContent =
+      result.assessmentLabel ||
+      (result.targetAchieved ? "PRACTICE TARGET ACHIEVED" : "PRACTICE TARGET NOT ACHIEVED");
+
+    setText(
+      dom.resultAdvice,
+      result.evaluationType && result.evaluationType !== "general"
+        ? result.assessmentNote
+        : result.targetAchieved
+          ? "You met both practice targets. Try another passage to build consistency."
+          : !result.accuracyPass
+            ? `Focus on accuracy next: aim for ${result.targetAccuracy}%. Review the red mismatches above, then retry at a comfortable pace.`
+            : `Your accuracy is on target. Build another ${Math.max(0, result.targetWPM - result.netWPM).toFixed(1)} WPM to reach your speed goal.`
+    );
+
+    let grid = [
       metric("Practice Net WPM", `${result.netWPM.toFixed(1)} WPM`),
       metric("Gross Speed", `${result.grossWPM.toFixed(1)} WPM`),
       metric("Character Accuracy", `${result.accuracy.toFixed(1)}%`),
@@ -800,27 +825,97 @@
       metric("Character Mismatches", result.errors.toLocaleString("en-IN")),
       metric("Time", formatDuration(result.timeTakenSeconds)),
       ...(result.targetWPM == null ? [] : [metric("Speed Benchmark", String(result.targetWPM), "Practice")]),
-      ...(result.targetAccuracy == null ? [] : [metric(result.evaluationType === "up-police" ? "Notified Accuracy" : "Practice Accuracy Goal", `${result.targetAccuracy}%`, result.evaluationType === "up-police" ? "Word-based review required" : "Practice")])
-    ].join("");
-    if (result.evaluationType === "ssc-dest") dom.resultGrid.innerHTML = [
-      metric("Output Key Depressions (proxy)", result.keyDepressions),
-      metric("Notified Volume", "About 2,000 keys"), metric("Volume Progress", `${round(result.progress)}%`)
-    ].join("") + dom.resultGrid.innerHTML;
-    if (result.evaluationType === "rrb") dom.resultGrid.innerHTML = [
-      metric("Words Typed", result.typedWords), metric("Minimum Words", result.minimumWords, result.minimumContentMet ? "Reached" : "Not reached"),
-      metric("Final CBTST Speed", "Review needed"), metric("Full / Half Mistakes", "Not auto-classified")
-    ].join("") + dom.resultGrid.innerHTML;
-    const supportsReview = ["rrb", "delhi-hcm", "up-police"].includes(result.evaluationType);
+      ...(result.targetAccuracy == null
+        ? []
+        : [
+            metric(
+              result.evaluationType === "up-police" ? "Notified Accuracy" : "Practice Accuracy Goal",
+              `${result.targetAccuracy}%`,
+              result.evaluationType === "up-police" ? "Word-based review required" : "Practice"
+            )
+          ])
+    ];
+
+    if (result.evaluationType === "ssc-dest") {
+      grid = [
+        metric("Output Key Depressions (proxy)", result.keyDepressions),
+        metric("Notified Volume", "About 2,000 keys"),
+        metric("Volume Progress", `${round(result.progress)}%`)
+      ].concat(grid);
+    }
+
+    if (result.evaluationType === "ssc-chsl" && result.sscPractice) {
+      const s = result.sscPractice;
+      grid = [
+        metric("SSC Practice Net WPM", `${s.netWPM} WPM`, "Estimate"),
+        metric("SSC Gross WPM", `${s.grossWPM} WPM`, "Keys÷5"),
+        metric("Required Speed", `${s.requiredSpeed} WPM`),
+        metric("Full Mistakes (approx)", String(s.fullMistakes)),
+        metric("Half Mistakes (approx)", String(s.halfMistakes)),
+        metric("Mistake units", String(s.totalMistakeUnits)),
+        metric("Mistake % (approx)", `${s.mistakePercent}%`),
+        metric("UR limit 7%", s.withinUrMistakeLimit ? "Within" : "Above", "Practice"),
+        metric("Reserved limit 10%", s.withinReservedMistakeLimit ? "Within" : "Above", "Practice"),
+        metric("Key depressions (proxy)", String(s.keyDepressions))
+      ].concat(grid);
+    }
+
+    if (result.evaluationType === "rrb") {
+      grid = [
+        metric("Words Typed", result.typedWords),
+        metric("Minimum Words", result.minimumWords, result.minimumContentMet ? "Reached" : "Not reached"),
+        metric("Final CBTST Speed", "Review needed"),
+        metric("Full / Half Mistakes", "Not auto-classified")
+      ].concat(grid);
+    }
+
+    dom.resultGrid.innerHTML = grid.join("");
+
+    const supportsReview = ["rrb", "delhi-hcm", "up-police", "ssc-chsl"].includes(result.evaluationType);
     if (dom.reviewPanel) dom.reviewPanel.hidden = !supportsReview;
+
     if (supportsReview && dom.reviewForm && dom.reviewForm.dataset.resultId !== result.id) {
       dom.reviewForm.dataset.resultId = result.id;
       dom.reviewForm.reset();
-      setText(dom.reviewCountLabel, result.evaluationType === "delhi-hcm" ? "Reviewed stroke count" : "Reviewed total words");
-      setText(dom.reviewMistakesLabel, result.evaluationType === "up-police" ? "Reviewed correct words" : result.evaluationType === "rrb" ? "Full mistakes" : "Mistakes");
-      dom.reviewHalfField.hidden = result.evaluationType !== "rrb";
-      dom.reviewHalfMistakes.required = result.evaluationType === "rrb";
+      setText(
+        dom.reviewCountLabel,
+        result.evaluationType === "delhi-hcm"
+          ? "Reviewed stroke count"
+          : result.evaluationType === "ssc-chsl"
+            ? "Reviewed key depressions (optional)"
+            : "Reviewed total words"
+      );
+      setText(
+        dom.reviewMistakesLabel,
+        result.evaluationType === "up-police"
+          ? "Reviewed correct words"
+          : result.evaluationType === "rrb" || result.evaluationType === "ssc-chsl"
+            ? "Full mistakes"
+            : "Mistakes"
+      );
+      dom.reviewHalfField.hidden = !(result.evaluationType === "rrb" || result.evaluationType === "ssc-chsl");
+      dom.reviewHalfMistakes.required = result.evaluationType === "rrb" || result.evaluationType === "ssc-chsl";
+
+      if (result.evaluationType === "ssc-chsl" && result.sscPractice) {
+        if (dom.reviewCount) {
+          dom.reviewCount.value = String(result.sscPractice.keyDepressions);
+          dom.reviewCount.required = false;
+        }
+        if (dom.reviewMistakes) {
+          dom.reviewMistakes.value = String(result.sscPractice.fullMistakes);
+        }
+        if (dom.reviewHalfMistakes) {
+          dom.reviewHalfMistakes.value = String(result.sscPractice.halfMistakes);
+        }
+      }
+
       setText(dom.reviewOutput, "No reviewed calculation yet.");
-      setText(dom.reviewNote, "Enter counts you have checked against the passage and your exam instructions. Character mismatches above are not official mistake counts. This self-review is a practice estimate, not an official result. An early finish cannot establish a full-duration benchmark.");
+      setText(
+        dom.reviewNote,
+        result.evaluationType === "ssc-chsl"
+          ? "Auto full/half counts are a practice approximation. Adjust counts if you disagree, then recalculate. This is not an official SSC result. Early finish cannot establish a full-duration benchmark."
+          : "Enter counts you have checked against the passage and your exam instructions. Character mismatches above are not official mistake counts. This self-review is a practice estimate, not an official result. An early finish cannot establish a full-duration benchmark."
+      );
     }
   }
 
@@ -836,20 +931,99 @@
       const count = Number(dom.reviewCount.value);
       const mistakes = Number(dom.reviewMistakes.value);
       const half = Number(dom.reviewHalfMistakes.value || 0);
-      if (!dom.reviewCount.value || !dom.reviewMistakes.value || ![count, mistakes, half].every(n => Number.isSafeInteger(n) && n >= 0)) throw new Error("Enter whole, non-negative reviewed counts.");
+
+      if (result.evaluationType === "ssc-chsl") {
+        if (![mistakes, half].every((n) => Number.isSafeInteger(n) && n >= 0)) {
+          throw new Error("Enter whole, non-negative full/half mistake counts.");
+        }
+        if (dom.reviewCount.value && !(Number.isSafeInteger(count) && count >= 0)) {
+          throw new Error("Enter a whole, non-negative key depression count.");
+        }
+      } else if (
+        !dom.reviewCount.value ||
+        !dom.reviewMistakes.value ||
+        ![count, mistakes, half].every((n) => Number.isSafeInteger(n) && n >= 0)
+      ) {
+        throw new Error("Enter whole, non-negative reviewed counts.");
+      }
+
       let review;
-      if (result.evaluationType === "rrb") review = evaluators.rrb({words: count, fullMistakes: mistakes, halfMistakes: half, language: result.language});
-      else if (result.evaluationType === "delhi-hcm") review = evaluators.delhi({strokes: count, mistakes, language: result.language});
-      else review = evaluators.upPolice({words: count, correctWords: mistakes, language: result.language});
-      const assessed = result.fullDurationCompleted && review.meetsBenchmark;
-      const details = result.evaluationType === "rrb"
-        ? `Full: ${review.fullMistakes}; half: ${review.halfMistakes}; allowance: ${round(review.allowance)}; ignored: ${round(review.ignoredMistakes)}; final mistakes: ${round(review.finalMistakes)}. Minimum content: ${review.minimumContentMet ? "met" : "not met"}.`
-        : result.evaluationType === "delhi-hcm" ? `Tentative: ${round(review.tentativeSpeed)} WPM; mistakes: ${review.mistakes}; marks: ${!result.fullDurationCompleted ? "not assessed (early finish)" : review.marks == null ? "fractional slab unresolved" : `${review.marks}/25`}.`
-        : `Word accuracy: ${round(review.accuracy)}%; required: 85%. Complete both language tests separately.`;
-      setText(dom.reviewOutput, `${details} Calculated speed over the full ${result.durationMinutes}-minute session: ${round(review.speed)} WPM; required: ${review.requiredSpeed}. ${!result.fullDurationCompleted ? "Early finish: full-duration benchmark not assessed." : assessed ? "Self-reviewed practice benchmark met." : "Self-reviewed practice benchmark not met."}`);
-      result.review = { ...review, selfReviewed: true, benchmarkMet: assessed, fullDurationCompleted: result.fullDurationCompleted };
+      if (result.evaluationType === "ssc-chsl") {
+        const keys =
+          Number.isFinite(count) && count > 0
+            ? count
+            : result.sscPractice?.keyDepressions || 0;
+        review = evaluators.chsl({
+          typedText: "",
+          referenceText: "",
+          minutes: result.durationMinutes || 10,
+          language: result.language,
+          fullMistakes: mistakes,
+          halfMistakes: half,
+          keyDepressions: keys
+        });
+      } else if (result.evaluationType === "rrb") {
+        review = evaluators.rrb({
+          words: count,
+          fullMistakes: mistakes,
+          halfMistakes: half,
+          language: result.language
+        });
+      } else if (result.evaluationType === "delhi-hcm") {
+        review = evaluators.delhi({
+          strokes: count,
+          mistakes,
+          language: result.language
+        });
+      } else {
+        review = evaluators.upPolice({
+          words: count,
+          correctWords: mistakes,
+          language: result.language
+        });
+      }
+
+      const assessed =
+        result.fullDurationCompleted &&
+        (result.evaluationType === "ssc-chsl" ? review.speedMet : review.meetsBenchmark);
+
+      let details;
+      if (result.evaluationType === "ssc-chsl") {
+        details = `Full: ${review.fullMistakes}; half: ${review.halfMistakes}; deductions: ${review.deductions}; gross: ${review.grossWPM} WPM; net: ${review.netWPM} WPM; required: ${review.requiredSpeed}.`;
+      } else if (result.evaluationType === "rrb") {
+        details = `Full: ${review.fullMistakes}; half: ${review.halfMistakes}; allowance: ${round(review.allowance)}; ignored: ${round(review.ignoredMistakes)}; final mistakes: ${round(review.finalMistakes)}. Minimum content: ${review.minimumContentMet ? "met" : "not met"}.`;
+      } else if (result.evaluationType === "delhi-hcm") {
+        details = `Tentative: ${round(review.tentativeSpeed)} WPM; mistakes: ${review.mistakes}; marks: ${
+          !result.fullDurationCompleted
+            ? "not assessed (early finish)"
+            : review.marks == null
+              ? "fractional slab unresolved"
+              : `${review.marks}/25`
+        }.`;
+      } else {
+        details = `Word accuracy: ${round(review.accuracy)}%; required: 85%. Complete both language tests separately.`;
+      }
+
+      setText(
+        dom.reviewOutput,
+        `${details} Calculated over the full ${result.durationMinutes}-minute session. ${
+          !result.fullDurationCompleted
+            ? "Early finish: full-duration benchmark not assessed."
+            : assessed
+              ? "Self-reviewed practice benchmark met."
+              : "Self-reviewed practice benchmark not met."
+        }`
+      );
+      result.review = {
+        ...review,
+        selfReviewed: true,
+        benchmarkMet: assessed,
+        fullDurationCompleted: result.fullDurationCompleted
+      };
       storage?.updateResult?.(result);
-    } catch (error) { setText(dom.reviewOutput, error.message); }
+    } catch (error) {
+      setText(dom.reviewOutput, error.message);
+    }
   }
 
   function renderStats() {
@@ -859,13 +1033,17 @@
     setText(dom.bestAccuracy, `${round(stats.bestAccuracy || 0).toFixed(1)}%`);
     if (!dom.historyList) return;
     const history = Array.isArray(stats.history) ? stats.history.slice(0, 5) : [];
-    dom.historyList.innerHTML = history.length ? history.map((item) => {
-      return `<li><strong>${escapeHtml(item.exam)}</strong><span>${item.netWPM.toFixed(1)} WPM · ${item.accuracy.toFixed(1)}% · ${label(item.language)}</span></li>`;
-    }).join("") : "<li><strong>No attempts yet</strong><span>Your recent results will appear here.</span></li>";
+    dom.historyList.innerHTML = history.length
+      ? history
+          .map((item) => {
+            return `<li><strong>${escapeHtml(item.exam)}</strong><span>${item.netWPM.toFixed(1)} WPM · ${item.accuracy.toFixed(1)}% · ${label(item.language)}</span></li>`;
+          })
+          .join("")
+      : "<li><strong>No attempts yet</strong><span>Your recent results will appear here.</span></li>";
   }
 
   function metric(labelText, value, tag) {
-    return `<article class="gju-typing-result-metric"><span>${escapeHtml(labelText)}</span><strong>${escapeHtml(value)}</strong>${tag ? `<em>${escapeHtml(tag)}</em>` : ""}</article>`;
+    return `<article class="gju-typing-result-metric"><span>${escapeHtml(labelText)}</span><strong>${escapeHtml(String(value))}</strong>${tag ? `<em>${escapeHtml(tag)}</em>` : ""}</article>`;
   }
 
   function showStatus(message) {
