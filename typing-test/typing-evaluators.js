@@ -1,8 +1,7 @@
 (function (root) {
   "use strict";
 
-  // Character mismatches are never silently treated as official full/half mistakes.
-  // SSC full/half classification is a PRACTICE APPROXIMATION only.
+  // SSC full/half classification = PRACTICE APPROXIMATION only.
 
   function nonNegative(value, name) {
     if (!Number.isFinite(value) || value < 0) {
@@ -22,10 +21,15 @@
     return Math.round((Number(value) || 0) * 100) / 100;
   }
 
-  function tokenizeWords(text) {
+  function cleanText(text) {
     return String(text || "")
       .replace(/\u0000/g, "")
-      .replace(/\r\n?/g, "\n")
+      .normalize("NFC")
+      .replace(/\r\n?/g, "\n");
+  }
+
+  function tokenizeWords(text) {
+    return cleanText(text)
       .trim()
       .split(/\s+/u)
       .filter(Boolean);
@@ -44,31 +48,23 @@
   }
 
   function keyDepressionsFromText(text) {
-    return Array.from(
-      String(text || "")
-        .normalize("NFC")
-        .replace(/\u0000/g, "")
-        .replace(/\r\n?/g, "\n")
-    ).length;
+    return Array.from(cleanText(text)).length;
   }
 
   /**
-   * Practice approximation of SSC full / half mistakes.
-   *
-   * IMPORTANT (time-limited tests):
-   * Only the attempted prefix of the passage is compared to typed text.
-   * Untyped remaining words of a long practice passage are NOT counted as
-   * omission / full mistakes. Otherwise long excerpts produce thousands of
-   * false mistakes and 0 net WPM.
+   * Only the reference PREFIX matching typed length is scored.
+   * Untyped remainder of long passages is NEVER counted as omission.
+   * If character accuracy is ~100%, full mistakes should be near 0.
    */
   function classifySscMistakes(referenceText, typedText, language) {
-    const refWordsAll = tokenizeWords(referenceText);
-    const typedWords = tokenizeWords(typedText);
+    const cleanTyped = cleanText(typedText);
+    const cleanRef = cleanText(referenceText);
     const isHindi = language === "hindi";
 
-    // Attempted span = what the candidate actually typed (from start of passage).
-    const attemptCount = typedWords.length;
-    const refWords = refWordsAll.slice(0, attemptCount);
+    // Critical fix: score only attempted span (same length as typed).
+    const refPrefix = cleanRef.slice(0, cleanTyped.length);
+    const refWords = tokenizeWords(refPrefix);
+    const typedWords = tokenizeWords(cleanTyped);
 
     let fullMistakes = 0;
     let halfMistakes = 0;
@@ -79,13 +75,11 @@
       const ref = refWords[ri];
       const typed = typedWords[ti];
 
-      // Extra typed words beyond attempted reference prefix
       if (ref == null) {
         fullMistakes += 1;
         ti += 1;
         continue;
       }
-      // Should not happen often: refWords is sliced to attemptCount
       if (typed == null) {
         fullMistakes += 1;
         ri += 1;
@@ -98,7 +92,6 @@
         continue;
       }
 
-      // Transposition of two consecutive words → half mistake
       if (
         ri + 1 < refWords.length &&
         ti + 1 < typedWords.length &&
@@ -121,7 +114,6 @@
         continue;
       }
 
-      // Same core, different punctuation/spacing attached → half
       if (refCore && typedCore && refCore === typedCore && ref !== typed) {
         halfMistakes += 1;
         ri += 1;
@@ -129,7 +121,6 @@
         continue;
       }
 
-      // Capitalisation (English only) → half
       if (!isHindi && refCore && typedCore && sameIgnoreCase(refCore, typedCore)) {
         halfMistakes += 1;
         ri += 1;
@@ -137,20 +128,18 @@
         continue;
       }
 
-      // Wrong / substituted word → full
       fullMistakes += 1;
       ri += 1;
       ti += 1;
     }
 
     const totalMistakeUnits = fullMistakes + halfMistakes * 0.5;
-    // Denominator = attempted words (not full long passage)
-    const referenceWordCount = Math.max(attemptCount, 1);
+    const referenceWordCount = Math.max(typedWords.length, 1);
     const mistakePercent = (totalMistakeUnits / referenceWordCount) * 100;
 
     return {
-      referenceWordCount: attemptCount,
-      passageWordCount: refWordsAll.length,
+      referenceWordCount: typedWords.length,
+      passageWordCount: tokenizeWords(cleanRef).length,
       typedWordCount: typedWords.length,
       fullMistakes,
       halfMistakes,
@@ -171,8 +160,8 @@
     keyDepressions: keyOverride
   }) {
     const minutesSafe = duration(minutes);
-    const cleanTyped = String(typedText || "").replace(/\u0000/g, "");
-    const cleanRef = String(referenceText || "").replace(/\u0000/g, "");
+    const cleanTyped = cleanText(typedText);
+    const cleanRef = cleanText(referenceText);
     const keys =
       keyOverride != null
         ? nonNegative(keyOverride, "Key depressions")
