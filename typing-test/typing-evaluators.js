@@ -24,6 +24,7 @@
 
   function tokenizeWords(text) {
     return String(text || "")
+      .replace(/\u0000/g, "")
       .replace(/\r\n?/g, "\n")
       .trim()
       .split(/\s+/u)
@@ -43,17 +44,31 @@
   }
 
   function keyDepressionsFromText(text) {
-    return Array.from(String(text || "").normalize("NFC").replace(/\r\n?/g, "\n")).length;
+    return Array.from(
+      String(text || "")
+        .normalize("NFC")
+        .replace(/\u0000/g, "")
+        .replace(/\r\n?/g, "\n")
+    ).length;
   }
 
   /**
    * Practice approximation of SSC full / half mistakes.
-   * Not identical to official evaluator.
+   *
+   * IMPORTANT (time-limited tests):
+   * Only the attempted prefix of the passage is compared to typed text.
+   * Untyped remaining words of a long practice passage are NOT counted as
+   * omission / full mistakes. Otherwise long excerpts produce thousands of
+   * false mistakes and 0 net WPM.
    */
   function classifySscMistakes(referenceText, typedText, language) {
-    const refWords = tokenizeWords(referenceText);
+    const refWordsAll = tokenizeWords(referenceText);
     const typedWords = tokenizeWords(typedText);
     const isHindi = language === "hindi";
+
+    // Attempted span = what the candidate actually typed (from start of passage).
+    const attemptCount = typedWords.length;
+    const refWords = refWordsAll.slice(0, attemptCount);
 
     let fullMistakes = 0;
     let halfMistakes = 0;
@@ -64,11 +79,13 @@
       const ref = refWords[ri];
       const typed = typedWords[ti];
 
+      // Extra typed words beyond attempted reference prefix
       if (ref == null) {
         fullMistakes += 1;
         ti += 1;
         continue;
       }
+      // Should not happen often: refWords is sliced to attemptCount
       if (typed == null) {
         fullMistakes += 1;
         ri += 1;
@@ -104,6 +121,7 @@
         continue;
       }
 
+      // Same core, different punctuation/spacing attached → half
       if (refCore && typedCore && refCore === typedCore && ref !== typed) {
         halfMistakes += 1;
         ri += 1;
@@ -111,7 +129,7 @@
         continue;
       }
 
-      // Capitalisation (English only)
+      // Capitalisation (English only) → half
       if (!isHindi && refCore && typedCore && sameIgnoreCase(refCore, typedCore)) {
         halfMistakes += 1;
         ri += 1;
@@ -119,26 +137,27 @@
         continue;
       }
 
+      // Wrong / substituted word → full
       fullMistakes += 1;
       ri += 1;
       ti += 1;
     }
 
     const totalMistakeUnits = fullMistakes + halfMistakes * 0.5;
-    const referenceWordCount = refWords.length;
-    const mistakePercent = referenceWordCount
-      ? (totalMistakeUnits / referenceWordCount) * 100
-      : 0;
+    // Denominator = attempted words (not full long passage)
+    const referenceWordCount = Math.max(attemptCount, 1);
+    const mistakePercent = (totalMistakeUnits / referenceWordCount) * 100;
 
     return {
-      referenceWordCount,
+      referenceWordCount: attemptCount,
+      passageWordCount: refWordsAll.length,
       typedWordCount: typedWords.length,
       fullMistakes,
       halfMistakes,
       totalMistakeUnits: round2(totalMistakeUnits),
       mistakePercent: round2(mistakePercent),
       classificationNote:
-        "Practice approximation of SSC full/half mistakes. Official scripts may be evaluated differently."
+        "Practice approximation: only the typed portion of the passage is scored. Untyped remaining text is not counted as omission. Not an official SSC result."
     };
   }
 
@@ -152,15 +171,17 @@
     keyDepressions: keyOverride
   }) {
     const minutesSafe = duration(minutes);
+    const cleanTyped = String(typedText || "").replace(/\u0000/g, "");
+    const cleanRef = String(referenceText || "").replace(/\u0000/g, "");
     const keys =
       keyOverride != null
         ? nonNegative(keyOverride, "Key depressions")
-        : keyDepressionsFromText(typedText);
+        : keyDepressionsFromText(cleanTyped);
     const grossWords = keys / 5;
 
     let classified = null;
     if (fullMistakes == null || halfMistakes == null) {
-      classified = classifySscMistakes(referenceText, typedText, language);
+      classified = classifySscMistakes(cleanRef, cleanTyped, language);
       fullMistakes = classified.fullMistakes;
       halfMistakes = classified.halfMistakes;
     } else {
@@ -175,7 +196,7 @@
     const requiredSpeed = language === "hindi" ? 30 : 35;
 
     const referenceWordCount =
-      classified?.referenceWordCount ?? tokenizeWords(referenceText).length;
+      classified?.referenceWordCount ?? Math.max(tokenizeWords(cleanTyped).length, 1);
     const totalMistakeUnits = fullMistakes + halfMistakes * 0.5;
     const mistakePercent = referenceWordCount
       ? (totalMistakeUnits / referenceWordCount) * 100
@@ -350,7 +371,6 @@
     }
 
     if (type === "ssc-chsl") {
-      // Skip heavy classification during live metric ticks
       if (!final) {
         return {
           ...result,
