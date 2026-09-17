@@ -44,6 +44,7 @@ const getCurrentPageName = () => {
 const getCurrentSectionPageName = () => {
   const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
   if (/\/rank-predictor(?:\/|$)/i.test(path)) return 'rank-predictor.html';
+  if (/\/typing-test(?:\/|$)/i.test(path)) return 'typing-test/';
   return getCurrentPageName();
 };
 
@@ -271,8 +272,15 @@ const getHomeHref = () => {
   return 'index.html';
 };
 
+const getTypingTestHref = () => {
+  if (isNotFoundPage()) return '/typing-test/';
+  return getRootRelativeHref('typing-test/');
+};
+
 const getSharedPageHref = (pageName) => {
-  return pageName === 'index.html' ? getHomeHref() : getCandidatePageHref(pageName);
+  if (pageName === 'index.html') return getHomeHref();
+  if (pageName === 'typing-test/' || pageName === 'typing-test') return getTypingTestHref();
+  return getCandidatePageHref(pageName);
 };
 
 const getActivePageClass = (pageName) => {
@@ -281,6 +289,7 @@ const getActivePageClass = (pageName) => {
   const currentPage = getCurrentSectionPageName();
   const path = window.location.pathname.replace(/\\/g, '/').toLowerCase();
   if (pageName === 'student-hub.html' && /\/html\/student-hub\/[^/]+\.html$/i.test(path)) return ' class="active"';
+  if ((pageName === 'typing-test/' || pageName === 'typing-test') && /\/typing-test(?:\/|$)/i.test(path)) return ' class="active"';
 
   return currentPage === pageName || (!currentPage && pageName === 'index.html') ? ' class="active"' : '';
 };
@@ -306,6 +315,9 @@ const normalizeHeaderActiveLinks = (navRoot = document.querySelector('header nav
   const activeLink = links.find((link) => getHrefPageName(link.getAttribute('href')) === currentPage)
     || (/\/html\/student-hub\/[^/]+\.html$/i.test(path)
       ? links.find((link) => getHrefPageName(link.getAttribute('href')) === 'student-hub.html')
+      : null)
+    || (/\/typing-test(?:\/|$)/i.test(path)
+      ? links.find((link) => /typing-test/i.test(link.getAttribute('href') || ''))
       : null);
 
   links.forEach((link) => {
@@ -321,6 +333,7 @@ const getSharedNavMarkup = () => {
     ['answer-key.html', 'Answer Key'],
     ['results.html', 'Results'],
     ['quiz.html', 'Quiz'],
+    ['typing-test/', 'Typing Test'],
     ['rank-predictor.html', 'Rank Predictor'],
     ['student-hub.html', 'Student Hub'],
     ['documents.html', 'Documents'],
@@ -394,7 +407,8 @@ const ensureSharedHeader = () => {
     nav = document.createElement('nav');
     container.appendChild(nav);
   }
-  if (!nav.querySelector('a[href]') || !Array.from(nav.querySelectorAll('a')).some((link) => link.textContent.trim() === 'Student Hub')) {
+  const navLabels = Array.from(nav.querySelectorAll('a')).map((link) => link.textContent.trim());
+  if (!nav.querySelector('a[href]') || !navLabels.includes('Student Hub') || !navLabels.includes('Typing Test')) {
     nav.innerHTML = `<ul>${getSharedNavMarkup()}</ul>`;
   }
   normalizeHeaderActiveLinks(nav);
@@ -452,6 +466,7 @@ const ensureSharedFooter = () => {
           <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
           <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
           <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
+          <li><a href="${getSharedPageHref('typing-test/')}">Typing Test</a></li>
         </ul>
       </div>
       <div class="footer-section">
