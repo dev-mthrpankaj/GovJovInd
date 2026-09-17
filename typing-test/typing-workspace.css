@@ -48,12 +48,12 @@
 .workspace-coach label { display: flex; justify-content: space-between; font-size: .76rem; color: #526078; }
 .workspace-coach progress { width: 100%; height: 7px; margin: 8px 0 14px; accent-color: #315bd6; }
 .workspace-coach p { margin: 0; font-size: .79rem; line-height: 1.6; color: #526078; }
-.typing-test-page.gju-typing-attempt-page .gju-typing-results { margin: 0 24px 24px; border: 1px solid #dce3ef; border-radius: 18px; scroll-margin-top: 90px; background: #fff; position: relative; z-index: 1; }
+.typing-test-page.gju-typing-attempt-page .gju-typing-results { margin: 0 24px 24px; border: 1px solid #dce3ef; border-radius: 18px; scroll-margin-top: 90px; background: #fff; position: relative; z-index: 1; padding: 1.25rem 1.35rem; }
 .gju-typing-attempt-page[data-state="finished"] .gju-typing-attempt-layout { display: none; }
 .gju-typing-attempt-page[data-state="finished"] .gju-typing-results { margin-top: 16px; }
 .workspace-advice { color: #526078; line-height: 1.6; }
 .workspace-next { display: inline-block; padding: 14px; color: #315bd6; }
-.gju-typing-attempt-page .gju-typing-result-grid { margin-top: 18px; }
+.gju-typing-attempt-page .gju-typing-result-grid { margin-top: 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
 .workspace-storage { margin: 0 24px 20px; color: #596579; font-size: .75rem; }
 .gju-typing-attempt-page :focus-visible { outline: 3px solid #315bd6; outline-offset: 3px; }
 .typing-workspace-body > footer { text-align: center; padding: 16px; color: #596579; font: 12px system-ui; }
@@ -82,7 +82,6 @@
 }
 .typing-test-page.gju-typing-attempt-page { align-content: start; }
 .typing-test-page.gju-typing-attempt-page:fullscreen { overflow-y: auto; }
-/* Keep the reading passage and input together inside the available viewport. */
 .typing-test-page.gju-typing-attempt-page { min-height: 0; }
 .gju-typing-attempt-page .gju-typing-attempt-topbar { min-height: 64px; }
 .gju-typing-attempt-page > .gju-typing-live-card { margin: 12px 20px 0; padding: 10px; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; }
@@ -130,9 +129,126 @@
 }
 .gju-typing-attempt-page > .gju-typing-live-card { grid-row: auto; }
 
-/* Result-only reviewed-count inputs; attempt layout stays unchanged. */
 .typing-review-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
 .typing-review-form label { display: grid; gap: 6px; font-size: .85rem; max-width: 100%; }
 .typing-review-form label[hidden] { display: none; }
 .typing-review-form input { box-sizing: border-box; max-width: 100%; width: 180px; padding: 10px; border: 1px solid #bccbe3; border-radius: 8px; font: inherit; }
 #rulesSources { overflow-wrap: anywhere; }
+
+/* —— Student-friendly result screen —— */
+.gju-typing-result-status.is-neutral {
+  background: #fef3c7;
+  color: #92400e;
+}
+.gju-result-hero {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0 8px;
+}
+.gju-result-metric-hero {
+  padding: 18px 16px !important;
+  background: linear-gradient(180deg, #edf2ff 0%, #f8fbff 100%) !important;
+  border: 1px solid #c7d7fe !important;
+  border-radius: 14px !important;
+  text-align: center;
+}
+.gju-result-metric-hero span {
+  display: block;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #64748b;
+}
+.gju-result-metric-hero strong {
+  display: block;
+  margin-top: 6px !important;
+  font-size: 2rem !important;
+  font-variant-numeric: tabular-nums;
+  color: #1e3a8a !important;
+  line-height: 1.1;
+}
+.gju-result-metric-hero em {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: #64748b;
+  font-style: normal;
+  font-weight: 600;
+}
+.gju-result-section {
+  margin: 20px 0 12px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fafbff;
+}
+.gju-result-section-title {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #172440;
+}
+.gju-result-section-note {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #64748b;
+}
+.gju-result-grid-ssc { margin-top: 0 !important; }
+.gju-result-details {
+  margin: 16px 0 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 4px 14px 14px;
+  background: #fff;
+}
+.gju-result-details > summary {
+  cursor: pointer;
+  padding: 12px 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #315bd6;
+  list-style: none;
+}
+.gju-result-details > summary::-webkit-details-marker { display: none; }
+.gju-result-details > summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.gju-result-details[open] > summary::before { transform: rotate(90deg); }
+.gju-result-details .gju-typing-result-grid { margin-top: 4px; }
+.gju-typing-result-metric {
+  padding: .85rem;
+  border: 1px solid #dce3ef;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+.gju-typing-result-metric span {
+  display: block;
+  color: #64748b;
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.gju-typing-result-metric strong {
+  display: block;
+  margin-top: .2rem;
+  color: #172440;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+.gju-typing-result-metric em {
+  display: inline-block;
+  margin-top: .4rem;
+  color: #315bd6;
+  font-style: normal;
+  font-weight: 900;
+  font-size: .8rem;
+}
+@media (max-width: 600px) {
+  .gju-result-hero { grid-template-columns: 1fr; }
+  .gju-result-metric-hero strong { font-size: 1.65rem !important; }
+}

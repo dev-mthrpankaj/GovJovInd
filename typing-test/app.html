@@ -19,7 +19,7 @@
   <link rel="shortcut icon" href="../Assets/Home%20Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home%20Page/apple-icon.png">
   <link rel="stylesheet" href="typing-test.css">
-  <link rel="stylesheet" href="typing-workspace.css?v=result-rules-20260908">
+  <link rel="stylesheet" href="typing-workspace.css?v=result-ui-20260917">
   <link rel="stylesheet" href="typing-header-actions.css?v=header-fullscreen-20260908">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GovJobUpdates Typing Test","url":"https://govjobupdates.com/typing-test/","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
@@ -45,8 +45,27 @@
         <section class="gju-typing-attempt-card workspace-coach" aria-label="Practice goals"><h2>Practice feedback</h2><p id="coachText">Build a steady rhythm, one word at a time.</p></section>
       </aside>
     </section>
-    <section class="gju-typing-results" id="resultPanel" aria-labelledby="resultTitle" hidden><h2 id="resultTitle">Typing Test Result</h2><div id="resultStatus" class="gju-typing-result-status"></div><p id="resultAdvice" class="workspace-advice"></p><button class="gju-typing-button gju-typing-button-primary" id="retryResult" type="button">Practise this passage again</button><a class="workspace-next" href="index.html">Choose another test</a><div class="gju-typing-result-grid" id="resultGrid"></div><details class="workspace-settings" id="reviewPanel" hidden><summary>Optional self-review calculation</summary><p class="workspace-advice" id="reviewNote"></p><form id="reviewForm" class="typing-review-form"><label><span id="reviewCountLabel">Reviewed total words</span><input id="reviewCount" type="number" min="0" max="1000000" step="1" required></label><label><span id="reviewMistakesLabel">Full mistakes</span><input id="reviewMistakes" type="number" min="0" max="1000000" step="1" required></label><label id="reviewHalfField"><span>Half mistakes</span><input id="reviewHalfMistakes" type="number" min="0" max="1000000" step="1"></label><button class="gju-typing-button" type="submit">Calculate reviewed practice result</button></form><p class="workspace-advice" id="reviewOutput" role="status"></p></details></section>
-    <p class="gju-typing-sr-only" id="modeLabel">Practice</p><p class="workspace-storage" id="storageText"></p>
+    <section class="gju-typing-results" id="resultPanel" aria-labelledby="resultTitle" hidden>
+      <h2 id="resultTitle">Typing Test Result</h2>
+      <div id="resultStatus" class="gju-typing-result-status"></div>
+      <p id="resultAdvice" class="workspace-advice"></p>
+      <button class="gju-typing-button gju-typing-button-primary" id="retryResult" type="button">Practise this passage again</button>
+      <a class="workspace-next" href="index.html">Choose another test</a>
+      <div id="resultGrid"></div>
+      <details class="workspace-settings" id="reviewPanel" hidden>
+        <summary>Optional self-review calculation</summary>
+        <p class="workspace-advice" id="reviewNote"></p>
+        <form id="reviewForm" class="typing-review-form">
+          <label><span id="reviewCountLabel">Reviewed total words</span><input id="reviewCount" type="number" min="0" max="1000000" step="1" required></label>
+          <label><span id="reviewMistakesLabel">Full mistakes</span><input id="reviewMistakes" type="number" min="0" max="1000000" step="1" required></label>
+          <label id="reviewHalfField"><span>Half mistakes</span><input id="reviewHalfMistakes" type="number" min="0" max="1000000" step="1"></label>
+          <button class="gju-typing-button" type="submit">Calculate reviewed practice result</button>
+        </form>
+        <p class="workspace-advice" id="reviewOutput" role="status"></p>
+      </details>
+    </section>
+    <p class="gju-typing-sr-only" id="modeLabel">Practice</p>
+    <p class="workspace-storage" id="storageText"></p>
   </main>
   <script src="../JS/firebase-config.js" defer></script>
   <script type="module" src="../JS/firebase-analytics.js"></script>
@@ -65,7 +84,7 @@
   <script src="typing-competition-passage-shim.js?v=passage-ranking-20260908" defer></script>
   <script src="typing-competition.js?v=ads-20260909" defer></script>
   <script src="typing-leaderboard.js?v=leaderboard-20260908a" defer></script>
-  <script src="typing-test.js?v=ssc-ref-20260917f" defer></script>
+  <script src="typing-test.js?v=result-ui-20260917" defer></script>
   <footer><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved.</div></footer>
 </body>
 </html>
