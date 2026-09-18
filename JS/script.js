@@ -432,7 +432,13 @@ const ensureSharedFooter = () => {
     footer.prepend(content);
   }
 
-  if (content.querySelectorAll('.footer-section').length < 4 || !content.querySelector('.footer-social')) {
+  const needsCanonicalFooter =
+    content.querySelectorAll('.footer-section').length < 4 ||
+    !content.querySelector('.footer-social') ||
+    !content.querySelector('.footer-section a[href*="rank-predictor"]') ||
+    !content.querySelector('.footer-section a[href*="typing-test"]');
+
+  if (needsCanonicalFooter) {
     content.innerHTML = `
       <div class="footer-section">
         <h3>GovJobUpdates</h3>
@@ -466,6 +472,7 @@ const ensureSharedFooter = () => {
           <li><a href="${getSharedPageHref('admitcard.html')}">Admit Card</a></li>
           <li><a href="${getSharedPageHref('answer-key.html')}">Answer Key</a></li>
           <li><a href="${getSharedPageHref('results.html')}">Results</a></li>
+          <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
           <li><a href="${getSharedPageHref('typing-test/')}">Typing Test</a></li>
         </ul>
       </div>
@@ -473,14 +480,12 @@ const ensureSharedFooter = () => {
         <h3>Resources</h3>
         <ul>
           <li><a href="${getSharedPageHref('quiz.html')}">Quiz</a></li>
-          <li><a href="${getSharedPageHref('rank-predictor.html')}">Rank Predictor</a></li>
           <li><a href="${getSharedPageHref('student-hub.html')}">Student Hub</a></li>
           <li><a href="${getSharedPageHref('documents.html')}">Documents</a></li>
           <li><a href="${getSharedPageHref('up-certificate-services.html')}">UP Services</a></li>
           <li><a href="${getSharedPageHref('about-us.html')}">About Us</a></li>
           <li><a href="${getSharedPageHref('contact.html')}">Contact</a></li>
           <li><a href="${getSharedPageHref('refund-policy.html')}">Refund Policy</a></li>
-          <li><a href="${getSharedPageHref('disclaimer.html')}">Disclaimer</a></li>
         </ul>
       </div>
       <div class="footer-section">
