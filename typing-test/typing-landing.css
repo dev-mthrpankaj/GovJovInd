@@ -496,6 +496,13 @@
   animation: gjuTypingHeroEmblem 12s ease-in-out alternate infinite;
   pointer-events: none;
 }
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-ssc .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/ssc.webp");
+  opacity: .2;
+}
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-railway .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/railway.webp");
+}
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-copy {
   position: relative;
   z-index: 1;
