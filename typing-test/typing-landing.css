@@ -370,6 +370,28 @@
   line-height: 1.55;
   color: #78350f;
 }
+.gju-typing-evaluate-cta {
+  margin: 18px 0 0;
+  text-align: center;
+}
+.gju-typing-evaluate-cta a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #315bd6;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.gju-typing-evaluate-cta a:hover,
+.gju-typing-evaluate-cta a:focus-visible {
+  background: #2748b0;
+  color: #fff;
+}
 
 .gju-typing-checklist {
   margin: 12px 0 0;

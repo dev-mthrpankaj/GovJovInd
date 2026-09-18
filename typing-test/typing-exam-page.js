@@ -361,6 +361,44 @@
   <span>${escapeHtml(ruleNote)}</span>
 </section>
 
+<section class="gju-typing-evaluate-section" id="howPracticeWorks" aria-labelledby="howPracticeWorksTitle">
+  <div class="gju-typing-section-label">Evaluation guide</div>
+  <h2 id="howPracticeWorksTitle">How to use this practice page</h2>
+  <p class="gju-typing-evaluate-intro">Use this as a study checklist. Exact software, passage and evaluation on exam day follow the official notification only.</p>
+  <div class="gju-typing-evaluate-grid">
+    <article class="gju-typing-evaluate-card">
+      <span class="gju-typing-evaluate-step">1</span>
+      <h3>Pick language</h3>
+      <p>Choose the language you will practise, then open a passage set that matches your level.</p>
+    </article>
+    <article class="gju-typing-evaluate-card">
+      <span class="gju-typing-evaluate-step">2</span>
+      <h3>Full timer</h3>
+      <p>Finish the full session for a realistic WPM reading. Early stops inflate speed.</p>
+    </article>
+    <article class="gju-typing-evaluate-card">
+      <span class="gju-typing-evaluate-step">3</span>
+      <h3>Track accuracy</h3>
+      <p>Review WPM, accuracy and errors after each attempt so you can improve week by week.</p>
+    </article>
+    <article class="gju-typing-evaluate-card">
+      <span class="gju-typing-evaluate-step">4</span>
+      <h3>Verify official</h3>
+      <p>Always confirm duration, font and pass criteria from the latest official notice for your exam.</p>
+    </article>
+  </div>
+  <div class="gju-typing-evaluate-note">
+    <i class="fas fa-shield-halved" aria-hidden="true"></i>
+    <div>
+      <strong>What this site shows</strong>
+      <p>Results here are free student practice only. They are <strong>not</strong> an official exam qualification.</p>
+    </div>
+  </div>
+  <p class="gju-typing-evaluate-cta">
+    <a href="#typingLanguageTitle"><i class="fas fa-keyboard" aria-hidden="true"></i> Continue to practice</a>
+  </p>
+</section>
+
 <section class="gju-typing-language-panel" aria-labelledby="typingLanguageTitle">
   <h2 id="typingLanguageTitle">1. Choose language</h2>
   <div class="gju-typing-language-buttons">
