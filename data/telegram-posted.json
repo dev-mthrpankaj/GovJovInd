@@ -3976,18 +3976,18 @@
       "stateReason": "update"
     },
     "admitCards:admit-sheet-0142-20260909091550-f9e367f1": {
-      "updatedAt": "2026-09-09",
-      "hash": "f711177d4ed251242d5c2d72afb43a706ed68934c29368dd3c4648e79aee0339",
-      "title": "UPSSSC Forest Guard Mains Exam Fee Payment 2026",
-      "lastPostedAt": "2026-09-09T08:47:43.768Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-18",
+      "hash": "7a31660affce35bc5780ad029c4469cbcf69d2d0af1296fd41259be047582c4e",
+      "title": "UPSSSC Forest Guard Mains Exam City Details 2026",
+      "lastPostedAt": "2026-09-18T13:20:14.402Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0143-20260909091717-255d328c": {
-      "updatedAt": "2026-09-09",
-      "hash": "1654ac05000d4e058dd58c57c747a3ef56b62291fc2ad8b3dd5c811202d4c852",
-      "title": "UPSSSC Forensic Science Laboratory Mains Exam Fee Payment 2026",
-      "lastPostedAt": "2026-09-09T08:47:44.432Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-18",
+      "hash": "3f436e6bf73f74732b0b80413d922221e1c0173cf0ca641de732d15d0d919340",
+      "title": "UPSSSC Forensic Science Laboratory Mains Exam City Details 2026",
+      "lastPostedAt": "2026-09-18T13:20:15.108Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0144-20260909101551-632f7b68": {
       "updatedAt": "2026-09-09",
@@ -4123,11 +4123,11 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0163-20260916080540-09a99831": {
-      "updatedAt": "2026-09-16",
-      "hash": "180b40768f65025fb3b77ebd5646a6d81baa4cb6ca4745ff79b6966201e53868",
-      "title": "IOB Local Bank Officer LBO Exam Date 2026 for 250 Post",
-      "lastPostedAt": "2026-09-16T03:33:36.549Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-18",
+      "hash": "142251d93c0df2f81dd3fd361096b60cf45575b31a0778f82f336bb05fb5c221",
+      "title": "Indian Overseas Bank (IOB)",
+      "lastPostedAt": "2026-09-18T13:20:15.604Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0164-20260916083551-f1f2311d": {
       "updatedAt": "2026-09-16",
@@ -4955,6 +4955,20 @@
       "hash": "2b5ac457666a0178bd0e1209ac7106becf20b516f051931d6a1a720144bb1842",
       "title": "UPSC NDA II Answer Key 2026 for 394 Post",
       "lastPostedAt": "2026-09-16T12:46:48.286Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0066-20260918183225-e0b3e406": {
+      "updatedAt": "2026-09-18",
+      "hash": "349eb3cbec5ba270d27bc159276254214b13e666b5f79ff05703fb55c374f729",
+      "title": "NTA AIAPGET Final Answer Key 2026",
+      "lastPostedAt": "2026-09-18T13:20:16.007Z",
+      "stateReason": "new"
+    },
+    "answerKeys:answerkey-sheet-0067-20260918184349-db475f0a": {
+      "updatedAt": "2026-09-18",
+      "hash": "3d4cda937fb02f9f148766a55518bdb7dd17fd29d154f71c3fcfff3afa081c8b",
+      "title": "RSSB Computer Instructor Answer Key 2026 for 3951 Post",
+      "lastPostedAt": "2026-09-18T13:20:16.479Z",
       "stateReason": "new"
     }
   },
@@ -6444,11 +6458,11 @@
       "stateReason": "new"
     },
     "results:result-sheet-0143-20260910151254-754f3b10": {
-      "updatedAt": "2026-09-12",
-      "hash": "2881ba8326ecbbb2d53f20319237acaca25e774b50798b3081e1edf321a6a4de",
-      "title": "DSSSB Result 2026 for Various Post – OUT",
-      "lastPostedAt": "2026-09-12T01:36:57.918Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-18",
+      "hash": "a7a80858b8a14d497bdc6cec96a509484be35bed193cfd420bd2dda5c50f1b81",
+      "title": "DSSSB Result 2026 for 808/24 , 817/23",
+      "lastPostedAt": "2026-09-18T13:20:20.322Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0148-20260912062753-00c4045d": {
       "updatedAt": "2026-09-12",
@@ -6483,6 +6497,34 @@
       "hash": "d966bc83e0d913e4625ee7c65d4c199230f290d6432e94f047e1b5e906f5af5e",
       "title": "RRB JE Junior Engineer CBT II Result 2026 for 2569 Post CEN 05/2025",
       "lastPostedAt": "2026-09-16T12:11:46.466Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0153-20260918172559-09264c36": {
+      "updatedAt": "2026-09-18",
+      "hash": "b4b0500c31b0f4e85664c646b766a33755046c1c78ef4dfe6b5420661564e5e4",
+      "title": "UP ANM Training Result / Merit List 2026 for 1800 Seats",
+      "lastPostedAt": "2026-09-18T13:20:20.709Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0154-20260918173412-35b96d4c": {
+      "updatedAt": "2026-09-18",
+      "hash": "2bd1a660d03f9b3c017b94e61994dc4293de2599dabd4a119b036f5a3d0faeb2",
+      "title": "NTA UGC NET June 2026 Re-Exam Result",
+      "lastPostedAt": "2026-09-18T13:20:21.086Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0155-20260918174153-d91a2237": {
+      "updatedAt": "2026-09-18",
+      "hash": "24454cdc451730374976f7896d1194d243f90ed2397a5f3b4651b5186a468862",
+      "title": "HPSC Haryana Civil Service Mains Result 2026",
+      "lastPostedAt": "2026-09-18T13:20:21.913Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0156-20260918174757-a5057cd3": {
+      "updatedAt": "2026-09-18",
+      "hash": "d60e627b8bc923cc0102d84b58a37cfb55971d9da4cb1026ad2a419990a6076d",
+      "title": "Indian Navy SSR / MR INET Result 2026",
+      "lastPostedAt": "2026-09-18T13:20:22.597Z",
       "stateReason": "new"
     }
   }
