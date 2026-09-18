@@ -64,6 +64,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0168-20260918202139-d9f6e0ed",
+        "title": "MPESB Group 2 Sub Group 4 Patwari Admit Card 2026 for 2106 Post",
+        "organization": "Madhya Pradesh Employees Selection Board",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-22",
+        "examEndDate": "",
+        "releaseDate": "2026-09-18",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/Group2_SG4_TAC26/default_tac.htm",
+        "detailPage": "../jobs/mpesb-group-2-sub-group-4-2026.html",
+        "updatedAt": "2026-09-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0141-20260909091342-0415dfb3",
         "title": "SSC Selection Post 14th Admit Card 2026 for 3003 Post",
         "organization": "Staff Selection Commission",
