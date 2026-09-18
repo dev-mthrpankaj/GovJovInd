@@ -112,6 +112,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0158-20260918203725-1ad56f06",
+        "title": "NTA AIAPGET Result 2026 – OUT",
+        "organization": "National Testing Agency (NTA)",
+        "department": "NTA",
+        "category": "Education",
+        "year": "2026",
+        "resultDate": "2026-09-18",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=EU2nJaTepF908NeNySmtkjs0/iPIvXk12Fg+hTlccys=",
+        "detailPage": "../jobs/nta-aiapget-2026.html",
+        "updatedAt": "2026-09-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0150-20260916084557-4259b694",
         "title": "Indian Overseas Bank Apprentice Result 2026 for 750 Post",
         "organization": "Indian Overseas  Bank (IOB)",
