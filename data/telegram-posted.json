@@ -2084,11 +2084,11 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0188-20260817210604-9d0843d9": {
-      "updatedAt": "2026-08-17",
-      "hash": "b6f811f06f77bbf33f022a9f84abf9277215387ebdf0928fd95f5206e5bab709",
-      "title": "MPESB Primary and Secondary Teachers MSPSTET Online Form 2026",
-      "lastPostedAt": "2026-08-17T16:16:17.443Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-18",
+      "hash": "22a23e8c4bcfd1598ef27c01193c2544d3e88da7648d46fc5a3c6f7aad216294",
+      "title": "MPESB Primary and Secondary Teachers MSPSTET Online Form 2026 Date Extended",
+      "lastPostedAt": "2026-09-18T15:04:39.295Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0193-20260820132026-ba8f0f5d": {
       "updatedAt": "2026-08-20",
@@ -2508,6 +2508,13 @@
       "hash": "ed5cfe8fde270cf1aa5f4bcfa96f182e6ec9d9caa6df6396f63424a6a85e9181",
       "title": "UPSSSC Lekhpal DV Documents Upload 2026",
       "lastPostedAt": "2026-09-16T12:11:42.848Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0249-20260918195443-bdb81d14": {
+      "updatedAt": "2026-09-18",
+      "hash": "3b8dfe4f13b0769432f1ac596b4e31a0ea07fac75a006d2b61678c0651f76ec0",
+      "title": "UPSSSC Junior Engineer Agriculture Online Form 2026 for 134 Post",
+      "lastPostedAt": "2026-09-18T15:04:40.010Z",
       "stateReason": "new"
     }
   },
@@ -4155,6 +4162,13 @@
       "hash": "0a5b0781f68a74e84015e061b088b78efea99b369695d94977f6da24e42a3b4c",
       "title": "MPESB Van Rakshak, Jail Prahari Physical Exam Date 2026 for 1679 Post",
       "lastPostedAt": "2026-09-17T18:53:40.513Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0168-20260918202139-d9f6e0ed": {
+      "updatedAt": "2026-09-18",
+      "hash": "04efc5a758a7bf2c6dae6f76bc72130e5ccf6150cec1ad6e78ed59d44fec24d1",
+      "title": "MPESB Group 2 Sub Group 4 Patwari Admit Card 2026 for 2106 Post",
+      "lastPostedAt": "2026-09-18T15:04:40.573Z",
       "stateReason": "new"
     }
   },
