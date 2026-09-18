@@ -52,8 +52,85 @@
 .typing-test-page .gju-typing-card-foot { background: #fff; }
 .typing-test-page .gju-typing-exam-card a, .typing-test-page .gju-typing-start-btn { background: #315bd6; border-radius: 9px; }
 .typing-test-page .gju-typing-free-strip { display: none; }
-.typing-breadcrumb { width: min(1040px,100%); display: flex; flex-wrap: wrap; gap: 10px; margin: 0 auto; color: #596579; font-size: .875rem; }
-.typing-breadcrumb a { color: #315bd6; }
+/* Breadcrumb: quiet trail aligned to the same 1040px column as the hero.
+   Must stay secondary to H1 — muted links, current page slightly stronger, no CTA blue.
+   Reset global `nav` chrome (mobile drawer order/position) so trail stays above the hero. */
+.typing-test-page.gju-typing-exam-detail-page > .typing-breadcrumb,
+.typing-test-page.gju-typing-exam-detail-page > .typing-related {
+  order: 0;
+  position: static;
+  left: auto;
+  right: auto;
+  top: auto;
+  transform: none;
+  box-shadow: none;
+  border-bottom: 0;
+  background: transparent;
+  transition: none;
+}
+.typing-test-page.gju-typing-exam-detail-page > .typing-breadcrumb {
+  width: min(1040px, 100%);
+  justify-self: center;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 2px;
+  /* Pull trail against the hero so it reads as page chrome, not a separate band */
+  margin-bottom: -12px;
+}
+.typing-test-page.gju-typing-exam-detail-page {
+  padding-top: clamp(12px, 2vw, 24px);
+}
+.typing-breadcrumb {
+  color: #7a8699;
+  font-size: .8125rem;
+  line-height: 1.35;
+}
+.typing-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.typing-breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+.typing-breadcrumb li:not(:last-child)::after {
+  content: "";
+  display: inline-block;
+  width: .34rem;
+  height: .34rem;
+  margin: 0 .55rem;
+  border-top: 1.5px solid #9aa6b8;
+  border-right: 1.5px solid #9aa6b8;
+  transform: rotate(45deg);
+  opacity: .75;
+  flex-shrink: 0;
+}
+.typing-breadcrumb a {
+  color: #5b6880;
+  font-weight: 500;
+  text-decoration: none;
+}
+.typing-breadcrumb a:hover,
+.typing-breadcrumb a:focus-visible {
+  color: #315bd6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.typing-breadcrumb [aria-current="page"] {
+  color: #172440;
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: min(36ch, 68vw);
+}
 .typing-test-page .gju-typing-exam-detail-card { box-shadow: none; border-radius: 20px; margin-bottom: 0; padding: 26px; grid-template-columns: minmax(0,1.4fr) minmax(240px,.7fr); }
 .typing-test-page .gju-typing-exam-detail-card::before { display: none; }
 .typing-test-page .gju-typing-exam-detail-card h1 { max-width: none; text-transform: none; font-size: clamp(1.8rem,3.3vw,2.6rem); line-height: 1.16; font-weight: 800; }
@@ -151,6 +228,10 @@
 }
 @media (max-width: 480px) {
  .typing-test-page.gju-typing-index-page, .typing-test-page.gju-typing-exam-detail-page { padding: 16px 12px; gap: 16px; }
+ .typing-test-page.gju-typing-exam-detail-page > .typing-breadcrumb { margin-bottom: -4px; padding: 0; }
+ .typing-breadcrumb { font-size: .75rem; }
+ .typing-breadcrumb li:not(:last-child)::after { margin: 0 .42rem; }
+ .typing-breadcrumb [aria-current="page"] { max-width: min(28ch, 58vw); }
  .typing-test-page .gju-typing-exams-hero { padding: 24px 16px; text-align: left; justify-items: start; }
  .typing-entry-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
  .typing-entry-actions .typing-exam-jump { grid-column: 1 / -1; }

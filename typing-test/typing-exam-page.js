@@ -157,6 +157,15 @@
     }
   };
 
+  function getCategoryCrumb(category) {
+    const key = String(category || "").toLowerCase();
+    if (key.includes("ssc")) return { label: "SSC", filter: "ssc" };
+    if (key.includes("railway")) return { label: "Railway", filter: "railway" };
+    if (key.includes("up")) return { label: "UP Govt", filter: "up" };
+    if (key.includes("bank")) return { label: "Banking", filter: "banking" };
+    return { label: "Hindi / English", filter: "general" };
+  }
+
   // Short-set counts before long catalog excerpts are appended.
   const difficultyCountsByLanguage = {
     english: { easy: 18, medium: 12, hard: 12 },
@@ -309,11 +318,15 @@
       window.GJU_TYPING_CONFIG?.getPreset(presetId)?.officialRuleNote ||
       "Practice benchmarks only. Verify the selected recruitment’s official instructions.";
 
+    const categoryCrumb = getCategoryCrumb(exam.category);
+
     return `
 <nav class="typing-breadcrumb" aria-label="Breadcrumb">
-  <a href="index.html">All typing tests</a>
-  <span aria-hidden="true">/</span>
-  <span>${escapeHtml(exam.title)}</span>
+  <ol>
+    <li><a href="index.html">All typing tests</a></li>
+    <li><a href="index.html#typingDirectory">${escapeHtml(categoryCrumb.label)}</a></li>
+    <li><span aria-current="page">${escapeHtml(exam.title)}</span></li>
+  </ol>
 </nav>
 
 <section class="gju-typing-exam-detail-card">
