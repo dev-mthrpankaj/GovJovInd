@@ -1,193 +1,390 @@
-(function(){
-"use strict";
+(function () {
+  "use strict";
 
-const familyLists={ssc:document.querySelector('[data-family-list="ssc"]'),banking:document.querySelector('[data-family-list="banking"]'),police:document.querySelector('[data-family-list="police"]'),rrb:document.querySelector('[data-family-list="rrb"]')};
-const familyAliases={railway:"rrb",rrb:"rrb",ssc:"ssc",banking:"banking",police:"police"};
-const familyConfig={
-  ssc:{title:"SSC Quizzes",kicker:"Staff Selection Commission",description:"CGL, CHSL, CPO and other SSC exam practice.",image:"../Assets/quiz/ssc.webp",alt:"SSC",href:"ssc-quizzes.html"},
-  banking:{title:"Banking Quizzes",kicker:"Banking Exams",description:"IBPS, SBI and other banking exam practice.",image:"../Assets/quiz/bank.webp",alt:"Banking",href:"banking-quizzes.html"},
-  police:{title:"Police Quizzes",kicker:"Police Recruitment",description:"Exam-focused practice for Police recruitments.",image:"../Assets/quiz/police.webp",alt:"Police",href:"police-quizzes.html"},
-  rrb:{title:"RRB Railway Quizzes",kicker:"Railway Recruitment Board",description:"Practice sets for RRB and Railway examinations.",image:"../Assets/quiz/railway.webp",alt:"RRB Railway",href:"rrb-quizzes.html"}
-};
-const subjectConfig={
-  maths:{title:"Mathematics",description:"Arithmetic, algebra & geometry",href:"maths-quizzes.html",icon:"fas fa-calculator"},
-  reasoning:{title:"Reasoning",description:"Logical, verbal & analytical",href:"reasoning-quizzes.html",icon:"fas fa-brain"},
-  english:{title:"English",description:"Grammar, vocabulary & comprehension",href:"english-quizzes.html",icon:"fas fa-language"},
-  hindi:{title:"Hindi",description:"Grammar, vocabulary & language",href:"hindi-quizzes.html",icon:"fas fa-book-open"},
-  "general-awareness":{title:"General Awareness",description:"History, polity, geography & static GK",href:"general-awareness-quizzes.html",icon:"fas fa-earth-asia"},
-  "general-science":{title:"General Science",description:"Physics, chemistry & biology",href:"general-science-quizzes.html",icon:"fas fa-flask"},
-  computer:{title:"Computer",description:"Fundamentals, terminology & concepts",href:"computer-quizzes.html",icon:"fas fa-laptop-code"},
-  "current-affairs":{title:"Current Affairs",description:"Current affairs practice topics",href:"current-affairs-quizzes.html",icon:"fas fa-newspaper"}
-};
+  const familyLists = {
+    ssc: document.querySelector('[data-family-list="ssc"]'),
+    banking: document.querySelector('[data-family-list="banking"]'),
+    police: document.querySelector('[data-family-list="police"]'),
+    rrb: document.querySelector('[data-family-list="rrb"]')
+  };
+  const familyAliases = { railway: "rrb", rrb: "rrb", ssc: "ssc", banking: "banking", police: "police" };
+  const familyConfig = {
+    ssc: {
+      title: "SSC Quizzes",
+      kicker: "Staff Selection Commission",
+      description: "CGL, CHSL, CPO and other SSC exam practice.",
+      image: "../Assets/quiz/ssc.webp",
+      alt: "SSC",
+      href: "ssc-quizzes.html"
+    },
+    banking: {
+      title: "Banking Quizzes",
+      kicker: "Banking Exams",
+      description: "IBPS, SBI and other banking exam practice.",
+      image: "../Assets/quiz/bank.webp",
+      alt: "Banking",
+      href: "banking-quizzes.html"
+    },
+    police: {
+      title: "Police Quizzes",
+      kicker: "Police Recruitment",
+      description: "Exam-focused practice for Police recruitments.",
+      image: "../Assets/quiz/police.webp",
+      alt: "Police",
+      href: "police-quizzes.html"
+    },
+    rrb: {
+      title: "RRB Railway Quizzes",
+      kicker: "Railway Recruitment Board",
+      description: "Practice sets for RRB and Railway examinations.",
+      image: "../Assets/quiz/railway.webp",
+      alt: "RRB Railway",
+      href: "rrb-quizzes.html"
+    }
+  };
+  const subjectConfig = {
+    maths: { title: "Mathematics", kicker: "Topic-wise", description: "Arithmetic, algebra & geometry", href: "maths-quizzes.html", icon: "fas fa-calculator" },
+    reasoning: { title: "Reasoning", kicker: "Topic-wise", description: "Logical, verbal & analytical", href: "reasoning-quizzes.html", icon: "fas fa-brain" },
+    english: { title: "English", kicker: "Topic-wise", description: "Grammar, vocabulary & comprehension", href: "english-quizzes.html", icon: "fas fa-language" },
+    hindi: { title: "Hindi", kicker: "Topic-wise", description: "Grammar, vocabulary & language", href: "hindi-quizzes.html", icon: "fas fa-book-open" },
+    "general-awareness": { title: "General Awareness", kicker: "Topic-wise", description: "History, polity, geography & static GK", href: "general-awareness-quizzes.html", icon: "fas fa-earth-asia" },
+    "general-science": { title: "General Science", kicker: "Topic-wise", description: "Physics, chemistry & biology", href: "general-science-quizzes.html", icon: "fas fa-flask" },
+    computer: { title: "Computer", kicker: "Topic-wise", description: "Fundamentals, terminology & concepts", href: "computer-quizzes.html", icon: "fas fa-laptop-code" },
+    "current-affairs": { title: "Current Affairs", kicker: "Topic-wise", description: "Current affairs practice topics", href: "current-affairs-quizzes.html", icon: "fas fa-newspaper" }
+  };
 
-let loaded=false;
-let failed=false;
-let allItems=[];
-let currentSelection=null;
-let currentMode="exam";
+  let loaded = false;
+  let failed = false;
+  let allItems = [];
+  let currentSelection = null;
+  let currentMode = "exam";
 
-function esc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
-function slugify(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"quiz"}
-function sourceItems(){for(const p of[window.GJU_QUIZ_INDEX,window.GJU_ADMIN_QUIZ_INDEX,window.GJU_PUBLISHED_QUIZ_INDEX]){if(Array.isArray(p))return p;if(p&&Array.isArray(p.quizzes))return p.quizzes;if(p&&Array.isArray(p.items))return p.items;if(p&&Array.isArray(p.data))return p.data}return null}
-function rawFamily(item){return String(item.examFamilySlug||item.exam_family_slug||(item.examFamily&&item.examFamily.slug)||(item.exam_family&&item.exam_family.slug)||"").trim().toLowerCase()}
-function family(item){return familyAliases[rawFamily(item)]||rawFamily(item)}
-function dateValue(item,index){for(const value of[item.publishedAt,item.published_at,item.updatedAt,item.updated_at,item.createdAt,item.created_at]){if(value==null||value==="")continue;const numeric=Number(value);if(Number.isFinite(numeric)&&numeric>0)return numeric;const parsed=Date.parse(value);if(Number.isFinite(parsed))return parsed}return index}
-function normalize(item,index){const f=family(item),ss=slugify(item.subjectSlug||item.subject_slug||(item.subject&&item.subject.slug)||item.subject||"practice"),sn=String(item.subjectName||item.subject_name||(item.subject&&item.subject.name)||item.subject||ss).trim(),qs=slugify(item.quizSlug||item.quiz_slug||item.slug||item.id||item.title||"quiz");return{id:`admin-${ss}-${qs}`.replace(/-+/g,"-"),title:String(item.title||item.quizTitle||item.quiz_title||qs).trim(),subject:sn,subjectSlug:ss,examSlug:String(item.examSlug||item.exam_slug||(item.exam&&item.exam.slug)||""),family:f,duration:Number(item.durationMinutes||item.duration_minutes)||30,questions:Number(item.totalQuestions||item.total_questions||item.activeQuestions||item.active_questions)||0,order:dateValue(item,index)}}
-function row(q){const href=`quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(q.family)}`;return `<article class="quiz-family-quiz-row"><div class="quiz-family-quiz-main"><span class="quiz-family-quiz-subject">${esc(q.subject)}</span><span class="quiz-family-quiz-title" title="${esc(q.title)}">${esc(q.title)}</span><div class="quiz-family-quiz-meta"><span><i class="far fa-circle-question" aria-hidden="true"></i>${q.questions?q.questions+" Questions":"Practice Set"}</span><span><i class="far fa-clock" aria-hidden="true"></i>${q.duration} Min</span></div></div><a class="quiz-family-start" href="${href}" aria-label="Start ${esc(q.title)}"><span>Start quiz</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>`}
-
-function renderLegacyFamilies(items){Object.entries(familyLists).forEach(([slug,list])=>{if(!list)return;const rows=items.filter(q=>q.family===slug).sort((a,b)=>b.order-a.order).slice(0,5);list.innerHTML=rows.length?rows.map(row).join(""):'<div class="quiz-family-no-quizzes"><span>No published quizzes available in this category yet.</span></div>'})}
-
-function setMode(mode,focus){
-  currentMode=mode==="subject"?"subject":"exam";
-  const layout=document.querySelector(".quiz-discovery-layout");
-  if(layout)layout.dataset.mode=currentMode;
-  const heroLinks=document.querySelectorAll(".quiz-practice-paths a");
-  heroLinks.forEach(link=>{link.classList.remove("is-active-path");link.removeAttribute("aria-current")});
-  const activeLink=document.querySelector(currentMode==="subject"?'.quiz-practice-paths a[href="#subjectQuizDirectory"]':'.quiz-practice-paths a[href="#examQuizFamilies"]');
-  activeLink?.classList.add("is-active-path");
-  activeLink?.setAttribute("aria-current","true");
-  clearSelection();
-  currentSelection=null;
-  if(currentMode==="exam")selectExam("ssc",false);
-  else showPlaceholder(currentMode);
-  if(focus){
-    layout?.scrollIntoView({behavior:scrollBehavior(),block:"start"});
-    window.setTimeout(()=>{
-      if(currentMode==="subject")document.querySelector(".quiz-discovery-subjects .quiz-subject-card")?.focus();
-      else document.querySelector(".quiz-exam-selector")?.focus();
-    },250);
+  function esc(v) {
+    return String(v == null ? "" : v)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
-}
+  function slugify(v) {
+    return String(v || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "quiz";
+  }
+  function sourceItems() {
+    for (const p of [window.GJU_QUIZ_INDEX, window.GJU_ADMIN_QUIZ_INDEX, window.GJU_PUBLISHED_QUIZ_INDEX]) {
+      if (Array.isArray(p)) return p;
+      if (p && Array.isArray(p.quizzes)) return p.quizzes;
+      if (p && Array.isArray(p.items)) return p.items;
+      if (p && Array.isArray(p.data)) return p.data;
+    }
+    return null;
+  }
+  function rawFamily(item) {
+    return String(
+      item.examFamilySlug ||
+        item.exam_family_slug ||
+        (item.examFamily && item.examFamily.slug) ||
+        (item.exam_family && item.exam_family.slug) ||
+        ""
+    )
+      .trim()
+      .toLowerCase();
+  }
+  function family(item) {
+    return familyAliases[rawFamily(item)] || rawFamily(item);
+  }
+  function dateValue(item, index) {
+    for (const value of [item.publishedAt, item.published_at, item.updatedAt, item.updated_at, item.createdAt, item.created_at]) {
+      if (value == null || value === "") continue;
+      const numeric = Number(value);
+      if (Number.isFinite(numeric) && numeric > 0) return numeric;
+      const parsed = Date.parse(value);
+      if (Number.isFinite(parsed)) return parsed;
+    }
+    return index;
+  }
+  function normalize(item, index) {
+    const f = family(item);
+    const ss = slugify(item.subjectSlug || item.subject_slug || (item.subject && item.subject.slug) || item.subject || "practice");
+    const sn = String(item.subjectName || item.subject_name || (item.subject && item.subject.name) || item.subject || ss).trim();
+    const qs = slugify(item.quizSlug || item.quiz_slug || item.slug || item.id || item.title || "quiz");
+    return {
+      id: `admin-${ss}-${qs}`.replace(/-+/g, "-"),
+      title: String(item.title || item.quizTitle || item.quiz_title || qs).trim(),
+      subject: sn,
+      subjectSlug: ss,
+      examSlug: String(item.examSlug || item.exam_slug || (item.exam && item.exam.slug) || ""),
+      family: f,
+      duration: Number(item.durationMinutes || item.duration_minutes) || 30,
+      questions: Number(item.totalQuestions || item.total_questions || item.activeQuestions || item.active_questions) || 0,
+      order: dateValue(item, index)
+    };
+  }
 
-function scrollBehavior(){return window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}
+  function entryCardInner(cfg) {
+    const media = cfg.image
+      ? `<span class="quiz-entry-media"><img src="${esc(cfg.image)}" alt="${esc(cfg.alt || cfg.title)}" width="40" height="40"></span>`
+      : `<span class="quiz-entry-media quiz-entry-media-icon"><i class="${esc(cfg.icon || "fas fa-layer-group")}" aria-hidden="true"></i></span>`;
+    return `${media}<span class="quiz-entry-copy"><span class="quiz-entry-kicker">${esc(cfg.kicker || "")}</span><strong>${esc(cfg.title)}</strong><span class="quiz-entry-blurb">${esc(cfg.description)}</span></span><i class="fas fa-chevron-right quiz-entry-chevron" aria-hidden="true"></i>`;
+  }
 
-function showPlaceholder(mode){
-  const root=document.querySelector("#selectedQuizResults .quiz-family-feed");
-  if(!root)return;
-  const text=mode==="subject"?"Choose a subject above to view matching quizzes.":"Choose an exam above to view matching quizzes.";
-  root.innerHTML=`<div class="quiz-results-placeholder"><span><i class="fas fa-hand-pointer" aria-hidden="true"></i>${text}</span></div>`;
-}
+  function row(q) {
+    const href = `quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(q.family)}`;
+    return `<article class="quiz-family-quiz-row"><div class="quiz-family-quiz-main"><span class="quiz-family-quiz-subject">${esc(q.subject)}</span><span class="quiz-family-quiz-title" title="${esc(q.title)}">${esc(q.title)}</span><div class="quiz-family-quiz-meta"><span><i class="far fa-circle-question" aria-hidden="true"></i>${q.questions ? q.questions + " Questions" : "Practice Set"}</span><span><i class="far fa-clock" aria-hidden="true"></i>${q.duration} Min</span></div></div><a class="quiz-family-start" href="${href}" aria-label="Start ${esc(q.title)}"><span>Start quiz</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a></article>`;
+  }
 
-function buildFocusedUI(){
-  const landing=document.getElementById("quizLandingPage");
-  const subjectSection=document.getElementById("subjectQuizDirectory");
-  const examSection=document.getElementById("examQuizFamilies");
-  const subjectGrid=subjectSection&&subjectSection.querySelector(".quiz-subject-grid")?.cloneNode(true);
-  if(!landing||!subjectSection||!examSection||!subjectGrid||document.querySelector(".quiz-discovery-layout"))return;
-
-  const layout=document.createElement("section");
-  layout.className="quiz-discovery-layout";
-  layout.id="quizPracticeSelector";
-  layout.dataset.mode="exam";
-  layout.setAttribute("aria-label","Choose exam or subject practice");
-
-  const examPanel=document.createElement("section");
-  examPanel.className="quiz-selector-panel quiz-discovery-exams";
-  examPanel.innerHTML='<div class="quiz-selector-panel-head"><span>Prepare for your exam</span><h2>By Exam</h2><p>Choose an exam family to see only its latest quiz sets.</p></div><div class="quiz-exam-selector-list"></div>';
-  const examList=examPanel.querySelector(".quiz-exam-selector-list");
-  Object.entries(familyConfig).forEach(([slug,cfg])=>{
-    const button=document.createElement("button");
-    button.type="button";
-    button.className="quiz-exam-selector";
-    button.dataset.examSelector=slug;
-    button.setAttribute("aria-pressed","false");
-    button.setAttribute("aria-controls","selectedQuizResults");
-    button.innerHTML=`<img src="${cfg.image}" alt="${esc(cfg.alt)}" width="40" height="40"><span class="quiz-exam-selector-copy"><strong>${esc(cfg.title)}</strong><span>${esc(cfg.description)}</span></span><i class="fas fa-chevron-right" aria-hidden="true"></i>`;
-    button.addEventListener("click",()=>selectExam(slug,true));
-    examList.appendChild(button);
-  });
-
-  const subjectPanel=document.createElement("section");
-  subjectPanel.className="quiz-selector-panel quiz-discovery-subjects";
-  subjectPanel.innerHTML='<div class="quiz-selector-panel-head"><span>Strengthen a topic</span><h2>By Subject</h2><p>Choose a subject to see only quizzes from that subject.</p></div>';
-  subjectPanel.appendChild(subjectGrid);
-  subjectGrid.querySelectorAll(".quiz-subject-card").forEach(card=>{
-    const href=card.getAttribute("href")||"";
-    const slug=Object.keys(subjectConfig).find(key=>subjectConfig[key].href===href);
-    if(!slug)return;
-    const button=document.createElement("button");
-    button.type="button";button.className=card.className;button.innerHTML=card.innerHTML;
-    button.dataset.subjectSelector=slug;button.setAttribute("aria-pressed","false");
-    button.setAttribute("aria-controls","selectedQuizResults");
-    button.addEventListener("click",()=>selectSubject(slug,true));card.replaceWith(button);
-  });
-
-  layout.append(examPanel,subjectPanel);
-  subjectSection.before(layout);
-  subjectSection.classList.add("quiz-discovery-source");
-  examSection.classList.add("quiz-discovery-source");
-
-  const results=document.createElement("section");
-  results.className="quiz-dynamic-results";
-  results.id="selectedQuizResults";
-  results.setAttribute("aria-live","polite");
-  results.innerHTML='<div class="quiz-family-feed"></div>';
-  layout.after(results);
-
-  document.querySelectorAll('a[href="#subjectQuizDirectory"],a[href="#examQuizFamilies"]').forEach(link=>{
-    link.addEventListener("click",event=>{
-      if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
-      event.preventDefault();const mode=link.hash==="#subjectQuizDirectory"?"subject":"exam";
-      window.history.replaceState(null,"",link.hash);setMode(mode,true);
+  function renderLegacyFamilies(items) {
+    Object.entries(familyLists).forEach(([slug, list]) => {
+      if (!list) return;
+      const rows = items
+        .filter((q) => q.family === slug)
+        .sort((a, b) => b.order - a.order)
+        .slice(0, 5);
+      list.innerHTML = rows.length
+        ? rows.map(row).join("")
+        : '<div class="quiz-family-no-quizzes"><span>No published quizzes available in this category yet.</span></div>';
     });
-  });
-  setMode(window.location.hash==="#subjectQuizDirectory"?"subject":"exam",false);
+  }
 
-}
+  function modeFromHash() {
+    const hash = window.location.hash;
+    if (hash === "#subjectQuizDirectory" || hash === "#quizPracticeSelector-subject") return "subject";
+    return "exam";
+  }
 
-function clearSelection(){document.querySelectorAll("[data-exam-selector],[data-subject-selector]").forEach(el=>{el.classList.remove("is-selected");el.setAttribute("aria-pressed","false")})}
+  function setMode(mode, focus) {
+    currentMode = mode === "subject" ? "subject" : "exam";
+    const layout = document.querySelector(".quiz-discovery-layout");
+    if (layout) layout.dataset.mode = currentMode;
+    const heroLinks = document.querySelectorAll(".quiz-practice-paths a");
+    heroLinks.forEach((link) => {
+      link.classList.remove("is-active-path");
+      link.removeAttribute("aria-current");
+    });
+    const activeLink = document.querySelector(
+      currentMode === "subject"
+        ? '.quiz-practice-paths a[data-quiz-path="subject"]'
+        : '.quiz-practice-paths a[data-quiz-path="exam"]'
+    );
+    activeLink?.classList.add("is-active-path");
+    activeLink?.setAttribute("aria-current", "true");
+    clearSelection();
+    currentSelection = null;
+    if (currentMode === "exam") selectExam("ssc", false);
+    else showPlaceholder(currentMode);
+    if (focus) {
+      layout?.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+      window.setTimeout(() => {
+        if (currentMode === "subject") document.querySelector(".quiz-discovery-subjects .quiz-entry-card")?.focus();
+        else document.querySelector(".quiz-discovery-exams .quiz-entry-card")?.focus();
+      }, 250);
+    }
+  }
 
-function renderFocusedResults(items,meta){
-  const root=document.querySelector("#selectedQuizResults .quiz-family-feed");
-  if(!root)return;
-  const latest=items.slice().sort((a,b)=>b.order-a.order).slice(0,5);
-  const icon=meta.image?`<span class="quiz-family-feed-icon"><img src="${meta.image}" alt="${esc(meta.alt||meta.title)}" width="48" height="48"></span>`:`<span class="quiz-family-feed-icon"><i class="${meta.icon||"fas fa-layer-group"}" aria-hidden="true"></i></span>`;
-  root.innerHTML=`<div class="quiz-family-feed-head">${icon}<div><span class="quiz-family-feed-kicker">${esc(meta.kicker)}</span><h2>${esc(meta.title)}</h2><p>${esc(meta.description)}</p></div></div><div class="quiz-family-latest">${!loaded?`<div class="quiz-family-no-quizzes" role="status">${failed?"Quiz sets could not be loaded. Refresh to try again, or open the full category below.":"Loading latest quizzes…"}</div>`:latest.length?latest.map(row).join(""):'<div class="quiz-family-no-quizzes"><span>No published quizzes available for this selection yet.</span></div>'}</div><a class="quiz-family-view-all" href="${meta.href}">View All ${esc(meta.title)} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`;
-}
+  function scrollBehavior() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  }
 
-function selectExam(slug,scroll){
-  const cfg=familyConfig[slug];
-  if(!cfg)return;
-  if(currentMode!=="exam")setMode("exam",false);
-  clearSelection();
-  document.querySelector(`[data-exam-selector="${slug}"]`)?.classList.add("is-selected");
-  document.querySelector(`[data-exam-selector="${slug}"]`)?.setAttribute("aria-pressed","true");
-  currentSelection={type:"exam",slug};
-  renderFocusedResults(allItems.filter(q=>q.family===slug),cfg);
-  if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:scrollBehavior(),block:"start"});
-}
+  function showPlaceholder(mode) {
+    const root = document.querySelector("#selectedQuizResults .quiz-family-feed");
+    if (!root) return;
+    const text =
+      mode === "subject" ? "Choose a subject above to view matching quizzes." : "Choose an exam above to view matching quizzes.";
+    root.innerHTML = `<div class="quiz-results-placeholder"><span><i class="fas fa-hand-pointer" aria-hidden="true"></i>${text}</span></div>`;
+  }
 
-function selectSubject(slug,scroll){
-  const cfg=subjectConfig[slug];
-  if(!cfg)return;
-  if(currentMode!=="subject")setMode("subject",false);
-  clearSelection();
-  document.querySelector(`[data-subject-selector="${slug}"]`)?.classList.add("is-selected");
-  document.querySelector(`[data-subject-selector="${slug}"]`)?.setAttribute("aria-pressed","true");
-  currentSelection={type:"subject",slug};
-  renderFocusedResults(allItems.filter(q=>q.family==="topic-wise"&&q.examSlug===slug),{title:`${cfg.title} Quizzes`,kicker:"Topic-wise practice",description:cfg.description,href:cfg.href,icon:cfg.icon});
-  if(scroll)document.getElementById("selectedQuizResults")?.scrollIntoView({behavior:scrollBehavior(),block:"start"});
-}
+  function buildFocusedUI() {
+    const landing = document.getElementById("quizLandingPage");
+    const subjectSection = document.getElementById("subjectQuizDirectory");
+    const examSection = document.getElementById("examQuizFamilies");
+    if (!landing || !subjectSection || !examSection || document.querySelector(".quiz-discovery-layout")) return;
 
-function refreshSelection(){if(!currentSelection)return;if(currentSelection.type==="exam")selectExam(currentSelection.slug,false);else selectSubject(currentSelection.slug,false)}
+    const layout = document.createElement("section");
+    layout.className = "quiz-discovery-layout";
+    layout.id = "quizPracticeSelector";
+    layout.dataset.mode = "exam";
+    layout.setAttribute("aria-label", "Choose exam or subject practice");
 
-function load(){
-  const raw=sourceItems();
-  if(raw===null)return false;
-  allItems=raw.filter(q=>q&&typeof q==="object").map(normalize);
-  loaded=true;failed=false;
-  renderLegacyFamilies(allItems);
+    const examPanel = document.createElement("section");
+    examPanel.className = "quiz-selector-panel quiz-discovery-exams";
+    examPanel.innerHTML =
+      '<div class="quiz-selector-panel-head"><span>Prepare for your exam</span><h2>Exam-wise practice</h2><p>Choose an exam family to see its latest quiz sets.</p></div><div class="quiz-entry-grid" role="list"></div>';
+    const examList = examPanel.querySelector(".quiz-entry-grid");
+    Object.entries(familyConfig).forEach(([slug, cfg]) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "quiz-entry-card";
+      button.dataset.examSelector = slug;
+      button.setAttribute("role", "listitem");
+      button.setAttribute("aria-pressed", "false");
+      button.setAttribute("aria-controls", "selectedQuizResults");
+      button.innerHTML = entryCardInner(cfg);
+      button.addEventListener("click", () => selectExam(slug, true));
+      examList.appendChild(button);
+    });
+
+    const subjectPanel = document.createElement("section");
+    subjectPanel.className = "quiz-selector-panel quiz-discovery-subjects";
+    subjectPanel.innerHTML =
+      '<div class="quiz-selector-panel-head"><span>Strengthen a topic</span><h2>Subject-wise practice</h2><p>Choose a subject to see matching topic quizzes.</p></div><div class="quiz-entry-grid" role="list"></div>';
+    const subjectList = subjectPanel.querySelector(".quiz-entry-grid");
+    Object.entries(subjectConfig).forEach(([slug, cfg]) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "quiz-entry-card";
+      button.dataset.subjectSelector = slug;
+      button.setAttribute("role", "listitem");
+      button.setAttribute("aria-pressed", "false");
+      button.setAttribute("aria-controls", "selectedQuizResults");
+      button.innerHTML = entryCardInner(cfg);
+      button.addEventListener("click", () => selectSubject(slug, true));
+      subjectList.appendChild(button);
+    });
+
+    layout.append(examPanel, subjectPanel);
+    subjectSection.before(layout);
+    subjectSection.classList.add("quiz-discovery-source");
+    examSection.classList.add("quiz-discovery-source");
+
+    const results = document.createElement("section");
+    results.className = "quiz-dynamic-results";
+    results.id = "selectedQuizResults";
+    results.setAttribute("aria-live", "polite");
+    results.innerHTML = '<div class="quiz-family-feed"></div>';
+    layout.after(results);
+
+    document.querySelectorAll(".quiz-practice-paths a[data-quiz-path], a[href='#quizPracticeSelector'], a[href='#subjectQuizDirectory'], a[href='#examQuizFamilies']").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const path = link.getAttribute("data-quiz-path");
+        const hash = link.hash;
+        const mode =
+          path === "subject" || hash === "#subjectQuizDirectory" || hash === "#quizPracticeSelector-subject"
+            ? "subject"
+            : "exam";
+        event.preventDefault();
+        const nextHash = mode === "subject" ? "#quizPracticeSelector-subject" : "#quizPracticeSelector";
+        window.history.replaceState(null, "", nextHash);
+        setMode(mode, true);
+      });
+    });
+
+    const guideLink = document.querySelector('.quiz-guide-card a[href="#examQuizFamilies"], .quiz-guide-card a[href="#quizPracticeSelector"]');
+    if (guideLink) {
+      guideLink.setAttribute("href", "#quizPracticeSelector");
+      guideLink.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        window.history.replaceState(null, "", "#quizPracticeSelector");
+        setMode("exam", true);
+      });
+    }
+
+    setMode(modeFromHash(), false);
+  }
+
+  function clearSelection() {
+    document.querySelectorAll("[data-exam-selector],[data-subject-selector]").forEach((el) => {
+      el.classList.remove("is-selected");
+      el.setAttribute("aria-pressed", "false");
+    });
+  }
+
+  function renderFocusedResults(items, meta) {
+    const root = document.querySelector("#selectedQuizResults .quiz-family-feed");
+    if (!root) return;
+    const latest = items
+      .slice()
+      .sort((a, b) => b.order - a.order)
+      .slice(0, 5);
+    const icon = meta.image
+      ? `<span class="quiz-family-feed-icon"><img src="${esc(meta.image)}" alt="${esc(meta.alt || meta.title)}" width="48" height="48"></span>`
+      : `<span class="quiz-family-feed-icon"><i class="${esc(meta.icon || "fas fa-layer-group")}" aria-hidden="true"></i></span>`;
+    root.innerHTML = `<div class="quiz-family-feed-head">${icon}<div><span class="quiz-family-feed-kicker">${esc(meta.kicker)}</span><h2>${esc(meta.title)}</h2><p>${esc(meta.description)}</p></div></div><div class="quiz-family-latest">${
+      !loaded
+        ? `<div class="quiz-family-no-quizzes" role="status">${
+            failed
+              ? "Quiz sets could not be loaded. Refresh to try again, or open the full category below."
+              : "Loading latest quizzes…"
+          }</div>`
+        : latest.length
+          ? latest.map(row).join("")
+          : '<div class="quiz-family-no-quizzes"><span>No published quizzes available for this selection yet.</span></div>'
+    }</div><a class="quiz-family-view-all" href="${esc(meta.href)}">View All ${esc(meta.title)} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>`;
+  }
+
+  function selectExam(slug, scroll) {
+    const cfg = familyConfig[slug];
+    if (!cfg) return;
+    if (currentMode !== "exam") setMode("exam", false);
+    clearSelection();
+    document.querySelector(`[data-exam-selector="${slug}"]`)?.classList.add("is-selected");
+    document.querySelector(`[data-exam-selector="${slug}"]`)?.setAttribute("aria-pressed", "true");
+    currentSelection = { type: "exam", slug };
+    renderFocusedResults(
+      allItems.filter((q) => q.family === slug),
+      cfg
+    );
+    if (scroll) document.getElementById("selectedQuizResults")?.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+  }
+
+  function selectSubject(slug, scroll) {
+    const cfg = subjectConfig[slug];
+    if (!cfg) return;
+    if (currentMode !== "subject") setMode("subject", false);
+    clearSelection();
+    document.querySelector(`[data-subject-selector="${slug}"]`)?.classList.add("is-selected");
+    document.querySelector(`[data-subject-selector="${slug}"]`)?.setAttribute("aria-pressed", "true");
+    currentSelection = { type: "subject", slug };
+    renderFocusedResults(
+      allItems.filter((q) => q.family === "topic-wise" && q.examSlug === slug),
+      { title: `${cfg.title} Quizzes`, kicker: "Topic-wise practice", description: cfg.description, href: cfg.href, icon: cfg.icon }
+    );
+    if (scroll) document.getElementById("selectedQuizResults")?.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+  }
+
+  function refreshSelection() {
+    if (!currentSelection) return;
+    if (currentSelection.type === "exam") selectExam(currentSelection.slug, false);
+    else selectSubject(currentSelection.slug, false);
+  }
+
+  function load() {
+    const raw = sourceItems();
+    if (raw === null) return false;
+    allItems = raw.filter((q) => q && typeof q === "object").map(normalize);
+    loaded = true;
+    failed = false;
+    renderLegacyFamilies(allItems);
+    buildFocusedUI();
+    refreshSelection();
+    loaded = true;
+    return true;
+  }
+
+  if (!Object.values(familyLists).some(Boolean)) return;
   buildFocusedUI();
-  refreshSelection();
-  loaded=true;
-  return true;
-}
-
-if(!Object.values(familyLists).some(Boolean))return;
-buildFocusedUI();
-document.addEventListener("gju:admin-quiz-index-ready",()=>load());
-load();
-window.setTimeout(()=>{if(!loaded)load()},900);
-window.setTimeout(()=>{if(!loaded)load()},2200);
-window.setTimeout(()=>{if(!loaded&&!load()){failed=true;refreshSelection();Object.values(familyLists).forEach(list=>{if(list)list.innerHTML='<p class="quiz-family-no-quizzes">Latest quizzes could not be loaded. Open the category below to continue.</p>'})}},8000);
-}());
+  document.addEventListener("gju:admin-quiz-index-ready", () => load());
+  load();
+  window.setTimeout(() => {
+    if (!loaded) load();
+  }, 900);
+  window.setTimeout(() => {
+    if (!loaded) load();
+  }, 2200);
+  window.setTimeout(() => {
+    if (!loaded && !load()) {
+      failed = true;
+      refreshSelection();
+      Object.values(familyLists).forEach((list) => {
+        if (list)
+          list.innerHTML =
+            '<p class="quiz-family-no-quizzes">Latest quizzes could not be loaded. Open the category below to continue.</p>';
+      });
+    }
+  }, 8000);
+})();
