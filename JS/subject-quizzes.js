@@ -9,7 +9,6 @@
   const countLabel = document.querySelector("[data-subject-count-label]");
   const empty = document.querySelector("[data-subject-quiz-empty]");
   const topicSelect = document.querySelector("[data-subject-topic-select]");
-  const topicGrid = document.querySelector("[data-subject-topic-grid]");
   const search = document.querySelector("[data-subject-search]");
   const activeTopicLabel = document.querySelector("[data-active-topic-label]");
 
@@ -440,14 +439,6 @@
         : "<h3>" + esc(subjectName) + ' practice is growing</h3><p>No topic-wise sets are published here yet. Explore exam-based practice in the meantime.</p><a href="quiz.html#examQuizFamilies">Explore exam quizzes →</a>';
     }
 
-    if (topicGrid) {
-      topicGrid.querySelectorAll("[data-topic]").forEach((button) => {
-        const selected = button.dataset.topic === activeTopic;
-        button.classList.toggle("is-active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-      });
-    }
-
     renderPagination(visible.length);
   }
 
@@ -476,17 +467,6 @@
   }
 
   function renderTopicControls() {
-    if (topicGrid) {
-      topicGrid.hidden = publishedTopics.length === 0;
-      topicGrid.innerHTML = [{ slug: "all", name: "All topics", count: allItems.length }, ...publishedTopics]
-        .map(
-          (topic) =>
-            '<button type="button" class="subject-topic-chip" data-topic="' + esc(topic.slug) + '" aria-pressed="' +
-            (topic.slug === activeTopic) + '"><span>' + esc(topic.name) + "</span><small>" + topic.count + " " +
-            (topic.count === 1 ? "quiz" : "quizzes") + "</small></button>"
-        )
-        .join("");
-    }
     if (topicSelect) {
       topicSelect.innerHTML =
         '<option value="all">All Topics (' + allItems.length + ")</option>" +
@@ -518,7 +498,6 @@
     if (loaded) return;
     list.hidden = true;
     list.setAttribute("aria-busy", "false");
-    if (topicGrid) topicGrid.hidden = true;
     if (topicSelect) {
       topicSelect.innerHTML = '<option value="all">Topics unavailable</option>';
       topicSelect.disabled = true;
@@ -539,12 +518,6 @@
   if (search) {
     search.addEventListener("input", () => {
       if (loaded) resetPageAndRender();
-    });
-  }
-  if (topicGrid) {
-    topicGrid.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-topic]");
-      if (button) setTopic(button.dataset.topic);
     });
   }
   if (empty) {
