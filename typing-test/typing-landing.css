@@ -503,6 +503,26 @@
 .typing-test-page .gju-typing-hero-refined.gju-typing-hero-railway .gju-typing-hero-plane::after {
   background-image: url("../Assets/quiz/railway.webp");
 }
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-up .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/UPSSSC.jpg");
+  opacity: .2;
+}
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-up-police .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/UP Police.jpg");
+  opacity: .2;
+}
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-delhi-police .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/Delhi police.png");
+  opacity: .2;
+}
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-banking .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/IBPS.jpg");
+  opacity: .2;
+}
+.typing-test-page .gju-typing-hero-refined.gju-typing-hero-sbi .gju-typing-hero-plane::after {
+  background-image: url("../Assets/quiz/bank.png");
+  opacity: .2;
+}
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-copy {
   position: relative;
   z-index: 1;
