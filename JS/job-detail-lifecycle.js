@@ -378,17 +378,51 @@
   function syncMobileActionWithFooter() {
     const bar = $('mobileActionBar');
     const footer = document.querySelector('body > footer');
-    if (!bar || !footer) return;
+    if (!bar) return;
+
+    // Keep the mobile action bar hidden until the "About This Recruitment"
+    // section is reached. This is detected by its heading, so no HTML changes
+    // or extra IDs are required on individual job pages.
+    const aboutSection = [...document.querySelectorAll('.gjd-section')].find(section => {
+      const heading = section.querySelector('h2');
+      return heading && heading.textContent.trim().toLowerCase() === 'about this recruitment';
+    });
+
+    let aboutReached = false;
     let footerVisible = false;
+
+    // Prevent a mobile flash before IntersectionObserver reports its first state.
+    bar.classList.add('is-footer-visible');
+
     const setState = () => {
       const topVisible = Boolean(document.querySelector('.go-top-btn.is-visible'));
-      const hide = footerVisible || topVisible;
+      const hide = !aboutReached || footerVisible || topVisible;
       bar.classList.toggle('is-footer-visible', hide);
       bar.setAttribute('aria-hidden', hide ? 'true' : 'false');
     };
+
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(entries => { footerVisible = entries.some(e => e.isIntersecting); setState(); }, {threshold:0}).observe(footer);
+      if (aboutSection) {
+        new IntersectionObserver(entries => {
+          if (entries.some(e => e.isIntersecting)) aboutReached = true;
+          setState();
+        }, {threshold:0}).observe(aboutSection);
+      } else {
+        // If a legacy page has no About section, preserve the previous behaviour.
+        aboutReached = true;
+      }
+
+      if (footer) {
+        new IntersectionObserver(entries => {
+          footerVisible = entries.some(e => e.isIntersecting);
+          setState();
+        }, {threshold:0}).observe(footer);
+      }
+    } else {
+      // Fallback for very old browsers without IntersectionObserver.
+      aboutReached = !aboutSection || window.scrollY >= aboutSection.offsetTop - window.innerHeight;
     }
+
     window.addEventListener('scroll', setState, {passive:true});
     window.addEventListener('resize', setState, {passive:true});
     setState();
