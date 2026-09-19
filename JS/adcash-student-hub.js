@@ -11,8 +11,8 @@
       mobile300x250: '12187270',
       mobile300x100: '' // unused — weak fill
     },
-    // Floating video (user can dismiss) — redesigned articles only
-    videoSliderZoneId: '12187522',
+    // Floating video — off (too intrusive on exam/study pages)
+    videoSliderZoneId: '',
     aclibSrc: 'https://acscdn.com/script/aclib.js',
     emptyHideMs: 4000
   };

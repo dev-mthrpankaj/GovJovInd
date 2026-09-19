@@ -8,7 +8,7 @@
 */
 (function () {
   // Cache-bust shared article assets after ad-rail styling updates
-  const bust = "20260919-adrail";
+  const bust = "20260919-novideo";
   document.querySelectorAll('link[rel="stylesheet"][href*="blog.css"]').forEach((link) => {
     const href = link.getAttribute("href") || "";
     if (!/[?&]v=/.test(href)) link.setAttribute("href", href + (href.includes("?") ? "&" : "?") + "v=" + bust);
@@ -272,7 +272,7 @@
       ? current.src.replace(/[^/]+$/, 'adcash-student-hub.js')
       : '../../JS/adcash-student-hub.js';
     const el = document.createElement('script');
-    el.src = src.includes('?') ? src : `${src}?v=20260919-adrail`;
+    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20260919-novideo';
     el.defer = true;
     el.dataset.adcashStudentHub = '1';
     document.body.appendChild(el);
