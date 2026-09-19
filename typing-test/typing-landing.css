@@ -439,14 +439,14 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  align-items: end;
-  min-height: clamp(320px, 52vh, 460px);
+  align-items: center;
+  min-height: 0;
   margin: 0 auto;
-  padding: clamp(28px, 4.5vw, 48px);
+  padding: clamp(18px, 2.4vw, 26px) clamp(18px, 3vw, 32px);
   overflow: hidden;
   isolation: isolate;
   border: 1px solid rgba(49, 91, 214, .14);
-  border-radius: 22px;
+  border-radius: 18px;
   background: #0f1b33;
   box-shadow: none;
 }
@@ -486,12 +486,12 @@
   content: "";
   position: absolute;
   top: 50%;
-  right: clamp(18px, 6vw, 64px);
-  width: min(42vw, 280px);
-  height: min(42vw, 280px);
+  right: clamp(12px, 4vw, 40px);
+  width: min(28vw, 180px);
+  height: min(28vw, 180px);
   transform: translateY(-50%);
   background: url("../Assets/quiz/railway.webp") center / contain no-repeat;
-  opacity: .22;
+  opacity: .18;
   filter: saturate(1.05);
   animation: gjuTypingHeroEmblem 12s ease-in-out alternate infinite;
   pointer-events: none;
@@ -527,17 +527,17 @@
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 14px;
+  gap: 8px;
   max-width: 38rem;
   animation: gjuTypingHeroRise .7s cubic-bezier(.22, 1, .36, 1) both;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-brand {
   margin: 0;
   color: rgba(255, 255, 255, .96);
-  font-size: clamp(1.55rem, 3.1vw, 2.2rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
   font-weight: 800;
-  letter-spacing: -.025em;
-  line-height: 1.12;
+  letter-spacing: -.02em;
+  line-height: 1.15;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-brand span {
   color: #8eb0ff;
@@ -545,14 +545,14 @@
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-topline {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-exam-logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
   background-color: #fff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .16);
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-exam-category {
   margin: 0;
@@ -561,19 +561,19 @@
   border-radius: 0;
   background: transparent;
   color: rgba(226, 234, 255, .82);
-  font-size: .78rem;
+  font-size: .72rem;
   font-weight: 650;
   letter-spacing: .06em;
   text-transform: uppercase;
 }
 .typing-test-page .gju-typing-hero-refined h1 {
   margin: 0;
-  max-width: 14ch;
+  max-width: 18ch;
   color: #fff;
-  font-size: clamp(1.85rem, 3.8vw, 2.7rem);
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -.03em;
+  line-height: 1.12;
+  letter-spacing: -.025em;
   text-transform: none;
   text-wrap: balance;
 }
@@ -581,25 +581,25 @@
   margin: 0;
   max-width: 34rem;
   color: rgba(226, 234, 255, .88);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: .95rem;
+  line-height: 1.5;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 0;
-  margin: 2px 0 0;
+  gap: 6px 0;
+  margin: 0;
   padding: 0;
   color: rgba(214, 224, 245, .9);
-  font-size: .9rem;
-  line-height: 1.4;
+  font-size: .84rem;
+  line-height: 1.35;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-meta span {
   display: inline-flex;
   align-items: baseline;
   gap: .28rem;
-  padding-right: 14px;
-  margin-right: 14px;
+  padding-right: 12px;
+  margin-right: 12px;
   border-right: 1px solid rgba(255, 255, 255, .22);
   text-transform: none;
   font-weight: 500;
@@ -613,7 +613,7 @@
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-meta strong {
   color: #fff;
-  font-size: 1.05rem;
+  font-size: .95rem;
   font-weight: 800;
   letter-spacing: -.01em;
 }
@@ -621,14 +621,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 18px;
-  margin-top: 4px;
+  gap: 10px 14px;
+  margin-top: 2px;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-start-solid {
-  min-height: 48px;
-  padding: 12px 20px;
-  border-radius: 11px;
-  box-shadow: 0 10px 28px rgba(49, 91, 214, .35);
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(49, 91, 214, .32);
   transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
 }
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-start-solid:hover,
@@ -658,8 +658,8 @@
 .typing-test-page .gju-typing-hero-refined .gju-typing-hero-footnote {
   margin: 0;
   color: rgba(198, 210, 232, .72);
-  font-size: .86rem;
-  line-height: 1.45;
+  font-size: .8rem;
+  line-height: 1.4;
 }
 .gju-typing-rules-inline {
   margin: 0 0 18px;
@@ -685,19 +685,19 @@
 }
 @media (max-width: 760px) {
   .typing-test-page .gju-typing-exam-detail-card.gju-typing-hero-refined {
-    min-height: clamp(300px, 58vh, 420px);
-    padding: 24px 18px 28px;
-    border-radius: 18px;
+    min-height: 0;
+    padding: 16px 14px 18px;
+    border-radius: 16px;
   }
   .typing-test-page .gju-typing-hero-refined .gju-typing-hero-plane::after {
-    width: min(56vw, 180px);
-    height: min(56vw, 180px);
-    right: 8px;
-    opacity: .16;
+    width: min(42vw, 120px);
+    height: min(42vw, 120px);
+    right: 6px;
+    opacity: .14;
   }
   .typing-test-page .gju-typing-hero-refined .gju-typing-hero-meta span {
     border-right: 0;
-    margin-right: 12px;
+    margin-right: 10px;
     padding-right: 0;
   }
 }
