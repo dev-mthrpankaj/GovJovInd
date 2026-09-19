@@ -22,9 +22,9 @@ window.GovJobUpdatesJobs = [
         "updatedAt": "2026-09-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "needsReview": "no",
+        "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -1032,7 +1032,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -1368,7 +1368,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -1770,13 +1770,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/sbijajul26/",
         "officialNotification": "https://sbi.bank.in/webfiles/uploads/files_2627/08/JA_2026_Detailed_Advt_Eng.pdf",
-        "detailPage": "../jobs/sbi-junior-associates-clerk-jca-2026.html",
+        "detailPage": "../jobs/sbi-junior-associates-clerk-2026.html",
         "updatedAt": "2026-08-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -2628,7 +2628,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -3732,7 +3732,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -3882,7 +3882,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -4122,7 +4122,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -4484,7 +4484,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -5144,7 +5144,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -5318,14 +5318,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/psbeoaapr26/",
         "officialNotification": "https://punjabandsind.bank.in/system/uploads/recruitment/7932_2026052021072462916.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0037",
+        "detailPage": "../jobs/bank-of-india-so-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "resolved",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0038",
@@ -5348,14 +5348,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/20787BD8A34D461A80CD78EE212A5723.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0038",
+        "detailPage": "../jobs/rpsc-apo-2026.html",
         "updatedAt": "2026-05-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "resolved",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0042",
@@ -5414,7 +5414,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -5474,7 +5474,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -5504,7 +5504,7 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "manual",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
