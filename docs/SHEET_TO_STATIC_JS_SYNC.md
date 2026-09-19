@@ -102,27 +102,36 @@ This confirms that placeholder qualification values were not published, that the
 
 ### Detail page link sanitization
 
-Every exported `detailPage` value is validated before the static JS files are written. Broken local links from the Sheet are replaced with safe listing/detail fallbacks so generated data does not publish missing detail pages.
+Every exported `detailPage` value is normalized and validated before the static JS files are written.
 
-The script treats a `detailPage` value as broken when it is empty, malformed, contains `.html.html`, points at a missing local file, uses the wrong relative path, or targets a missing job/result/answer key/admit card detail page.
+**Normalization (fixes the “I updated Sheet but link still broken” case):**
 
-Fallbacks are:
+Sheet values like these are auto-converted to a valid relative path:
+
+- `https://govjobupdates.com/jobs/mpesb-mspstet-2026.html`
+- `/jobs/mpesb-mspstet-2026.html`
+- `jobs/mpesb-mspstet-2026.html`
+
+→ `../jobs/mpesb-mspstet-2026.html`
+
+**Resolution:** if Sheet Detail Page is empty/wrong but a matching `jobs/*.html` lifecycle page already exists, sync links that file automatically (`detailPageSource: "resolved"`).
+
+**Safe fallback (jobs only):** never publish `job-details.html?id=…` (that page shows Job Not Found for sheet IDs). Last resort is:
 
 ```text
-jobs: ../Job_Details/HTML/job-details.html?id=<id>
+jobs: ../HTML/latest-jobs.html
 admitCards: ../HTML/admitcard.html
 answerKeys: ../HTML/answer-key.html
 results: ../HTML/results.html
 ```
 
-Rows with a Sheet detail page that exists receive:
+Rows with a usable Sheet / normalized / resolved detail page receive:
 
 ```js
-detailPageSource: "sheet",
 detailPageNeedsReview: "no"
 ```
 
-Rows where the fallback is used receive:
+Rows where only the listing fallback is used receive:
 
 ```js
 detailPageSource: "fallback",
@@ -141,6 +150,13 @@ Run the generated link-data check with:
 npm run validate:sheet-links
 ```
 
+**Best practice in Google Sheet → Detail Page column:**
+
+```text
+../jobs/your-page-slug-2026.html
+```
+
+Full site URLs also work now (they are normalized), but relative `/jobs/` paths are preferred.
 ## Data format
 
 ### Latest Jobs

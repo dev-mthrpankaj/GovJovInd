@@ -40,7 +40,8 @@ const GENERATED_DATA_FILES = {
   results: { file: path.join(ROOT_DIR, "JS", "results-data.js"), globalVariable: "GovJobUpdatesResults" }
 };
 const DETAIL_PAGE_FALLBACKS = {
-  jobs: (record) => `../Job_Details/HTML/job-details.html?id=${encodeURIComponent(String(record.id || "").replace(/^job-/, ""))}`,
+  // Never use job-details.html?id=… — that page cannot resolve sheet IDs and shows "Job Not Found".
+  jobs: () => "../HTML/latest-jobs.html",
   admitCards: () => "../HTML/admitcard.html",
   answerKeys: () => "../HTML/answer-key.html",
   results: () => "../HTML/results.html"
@@ -626,6 +627,123 @@ function isMalformedDetailPage(value) {
   return false;
 }
 
+/**
+ * Sheet authors often paste live URLs or paths without `../`.
+ * Normalize those to repo-relative listing links before validation.
+ */
+function normalizeIncomingDetailPage(rawValue) {
+  let value = normalizeText(rawValue);
+  if (!value) return "";
+
+  value = value.replace(/\\/g, "/").trim();
+
+  // Live site / CDN style URLs → site-root path
+  value = value.replace(/^(?:https?:)?\/\/(?:www\.)?govjobupdates\.com\//i, "/");
+
+  // Still absolute http(s) to another host — leave as-is (will be rejected later)
+  if (isExternalLink(value)) return value;
+
+  // Root-absolute → relative from JS/
+  if (value.startsWith("/")) {
+    value = `..${value}`;
+  }
+
+  // Bare folder paths (common Sheet habit)
+  if (/^(jobs|Job_Details|AdmitCard_Details|AnswerKey_Details|Result_Details|HTML)\//i.test(value)) {
+    value = `../${value}`;
+  }
+
+  // Drop accidental /index.html noise on folder targets
+  value = value.replace(/\/index\.html$/i, "/");
+
+  return value;
+}
+
+function listJobsHtmlFiles() {
+  const jobsDir = path.join(ROOT_DIR, "jobs");
+  if (!fs.existsSync(jobsDir)) return [];
+  return fs.readdirSync(jobsDir).filter((name) => /\.html$/i.test(name));
+}
+
+const JOB_TITLE_STOPWORDS = new Set([
+  "online", "form", "post", "posts", "for", "the", "and", "or", "of", "in", "to", "a", "an",
+  "recruitment", "various", "date", "extended", "apply", "notification", "advt", "adv",
+  "group", "level", "exam", "examination", "job", "jobs", "sarkari", "naukri", "with"
+]);
+
+function significantTokensFromText(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/\.html$/i, "")
+    .split(/[^a-z0-9]+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 3 && !JOB_TITLE_STOPWORDS.has(token));
+}
+
+function scoreJobsFileAgainstTitle(fileName, title) {
+  const fileTokens = significantTokensFromText(fileName);
+  const titleTokens = new Set(significantTokensFromText(title));
+  if (!fileTokens.length || !titleTokens.size) return 0;
+
+  let hits = 0;
+  fileTokens.forEach((token) => {
+    if (titleTokens.has(token)) hits += 1;
+  });
+
+  // Require strong overlap so unrelated pages are not linked.
+  if (hits < 2) return 0;
+  if (hits / fileTokens.length < 0.6) return 0;
+  return hits * 10 + (hits / fileTokens.length) * 5;
+}
+
+/**
+ * When Sheet Detail Page is empty/wrong but a /jobs/ lifecycle page already exists,
+ * resolve it automatically instead of publishing a broken Job Not Found URL.
+ */
+function resolveJobsLifecycleDetailPage(record, originalDetailPage) {
+  const jobsFiles = listJobsHtmlFiles();
+  if (!jobsFiles.length) return "";
+
+  const jobsDir = path.join(ROOT_DIR, "jobs");
+  const original = normalizeText(originalDetailPage);
+
+  // 1) Explicit /jobs/ path inside whatever the Sheet had (incl. full URL before normalize)
+  const jobsPathMatch = original.match(/(?:^|\/)jobs\/([^/?#]+\.html)/i);
+  if (jobsPathMatch) {
+    const fileName = decodeLocalPath(jobsPathMatch[1]);
+    if (fs.existsSync(path.join(jobsDir, fileName))) return `../jobs/${fileName}`;
+  }
+
+  // 2) Legacy Job_Details filename → migrated jobs/ slug
+  const legacyMatch = original.match(/Job_Details\/HTML\/([^/?#]+?)(?:\.html)?(?:$|[?#])/i);
+  if (legacyMatch) {
+    const base = decodeLocalPath(legacyMatch[1]);
+    const candidates = [
+      `${base}.html`,
+      `${base.toLowerCase()}.html`,
+      `${base.replace(/_/g, "-")}.html`,
+      `${base.replace(/_/g, "-").toLowerCase()}.html`
+    ];
+    for (const candidate of candidates) {
+      if (fs.existsSync(path.join(jobsDir, candidate))) return `../jobs/${candidate}`;
+    }
+  }
+
+  // 3) Title ↔ jobs/*.html filename token match
+  let bestFile = "";
+  let bestScore = 0;
+  jobsFiles.forEach((fileName) => {
+    const score = scoreJobsFileAgainstTitle(fileName, record.title);
+    if (score > bestScore) {
+      bestScore = score;
+      bestFile = fileName;
+    }
+  });
+
+  if (bestFile && bestScore >= 20) return `../jobs/${bestFile}`;
+  return "";
+}
+
 function localDetailPageExists(rawTarget) {
   const clean = stripUrlFragmentAndQuery(rawTarget);
   if (!clean || isExternalLink(clean)) return false;
@@ -655,21 +773,44 @@ function getDetailPageValidationReason(detailPage) {
 
 function sanitizeDetailPage(record, contentType) {
   const originalDetailPage = normalizeText(record.detailPage);
-  const reason = getDetailPageValidationReason(originalDetailPage);
+  const normalizedDetailPage = normalizeIncomingDetailPage(originalDetailPage);
+  const reason = getDetailPageValidationReason(normalizedDetailPage);
+
   if (reason === "valid detailPage") {
+    const wasNormalized = normalizedDetailPage !== originalDetailPage;
     return {
       ...record,
-      detailPage: originalDetailPage,
+      detailPage: normalizedDetailPage,
       detailPageSource: "sheet",
       detailPageNeedsReview: "no",
       __detailPageValidation: {
         originalDetailPage,
-        publishedDetailPage: originalDetailPage,
-        reason,
+        publishedDetailPage: normalizedDetailPage,
+        reason: wasNormalized ? "normalized detailPage" : reason,
         detailPageNeedsReview: "no",
         source: "sheet"
       }
     };
+  }
+
+  // Jobs: prefer an existing /jobs/ lifecycle page over a broken dynamic fallback.
+  if (contentType === "jobs") {
+    const resolved = resolveJobsLifecycleDetailPage(record, originalDetailPage || normalizedDetailPage);
+    if (resolved && localDetailPageExists(resolved)) {
+      return {
+        ...record,
+        detailPage: resolved,
+        detailPageSource: "resolved",
+        detailPageNeedsReview: "no",
+        __detailPageValidation: {
+          originalDetailPage,
+          publishedDetailPage: resolved,
+          reason: `${reason} → resolved /jobs/ page`,
+          detailPageNeedsReview: "no",
+          source: "resolved"
+        }
+      };
+    }
   }
 
   const fallback = getDetailPageFallback(record, contentType);
