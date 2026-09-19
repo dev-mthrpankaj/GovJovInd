@@ -6,16 +6,16 @@
     enabled: true,
     zones: {
       // Desktop — Latest Update ke baad
-      desktop728x90: '',
+      desktop728x90: '12187254',
       // Desktop — sidebar
-      desktop120x600: '',
+      desktop120x600: '12187246',
       // Mobile priority (+ desktop mid before Important Links)
-      mobile300x250: '',
+      mobile300x250: '12187270',
       // Mobile — thin strip under Latest Update
-      mobile300x100: ''
+      mobile300x100: '12187262'
     },
-    // Used only while Display zone IDs above are empty
-    autotagZoneId: 'w79tkqtsja',
+    // Display zones active — Autotag off
+    autotagZoneId: '',
     aclibSrc: 'https://acscdn.com/script/aclib.js'
   };
 
