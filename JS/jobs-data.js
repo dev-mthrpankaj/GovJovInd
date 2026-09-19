@@ -1026,14 +1026,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://bbmb.gov.in/job-openings-recruitment-hi.htm",
         "officialNotification": "https://bbmb.gov.in/writereaddata/Portal/JobOpening/124_1_Final_Detailed_Advt._2_of_2026__English.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0210-20260830094040-1f6d65bd",
+        "detailPage": "../jobs/bbmb-hindi-translator-2026.html",
         "updatedAt": "2026-08-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0207-20260829170149-1d778c45",
@@ -1362,14 +1362,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://upsconline.nic.in/ora/ora-candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fora%2Fora-candidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2Fc096ae39-e65b-be28-022d-cf10ebd3c835&response_type=code&scope=openid",
         "officialNotification": "https://doc.sarkariresults.org.in/UPSC_EPFO_APFC_AdvtNo-52-2026-Special-Engl-210826.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0195-20260822083236-ea675678",
+        "detailPage": "../jobs/upsc-epfo-apfc-2026.html",
         "updatedAt": "2026-08-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0196-20260822174300-508026e5",
@@ -1770,14 +1770,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/sbijajul26/",
         "officialNotification": "https://sbi.bank.in/webfiles/uploads/files_2627/08/JA_2026_Detailed_Advt_Eng.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0180-20260811184900-66526a9a",
+        "detailPage": "../jobs/sbi-junior-associates-clerk-jca-2026.html",
         "updatedAt": "2026-08-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0181-20260811185205-aecbcc71",
@@ -2622,14 +2622,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://www.aiimsexams.ac.in/otr",
         "officialNotification": "https://rrpdocuments.aiimsexams.ac.in/1784895678667-599501489.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVRUVRLXWMSLVSAP7%2F20260724%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260724T123142Z&X-Amz-Expires=18000&X-Amz-Signature=da360d8042b5a681b3bd89781d3afa00ed09f88a92c0d95f96a674acf79fc6c6&X-Amz-SignedHeaders=host&response-content-type=application%2Fpdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0126-20260724135941-321a4ae1",
+        "detailPage": "../jobs/aiims-norcet-11th-2026.html",
         "updatedAt": "2026-07-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0127-20260724140054-e1d22fcf",
@@ -3726,14 +3726,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://applycareer.co.in/DHC/HighCourt2026DHJSE/",
         "officialNotification": "https://delhihighcourt.nic.in/files/2026-07/recuritment/adv-eng_dhjs-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0095",
+        "detailPage": "../jobs/delhi-high-court-hjs-2026.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0091",
@@ -3876,14 +3876,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://careers.ntpc.co.in/recruitment/login.php",
         "officialNotification": "https://careers.ntpc.co.in/recruitment/pdf_viewer.php?token=Yy9lZEVxaENxT2ZINzROdmRUUkJlTzRRMlZkaFhtOVcyWXpLdXJYVW9WZXJNSVJibFVzaURGaFdSNlRvV2I4Z1hGTW5uUFcwM3BNM1c5bUlyWkM1blByclJLdGowbHYyeHpaSzFlK0xlejQ9OjpVL1BjTTF6R21hRXNCV0I1NnhBSit3PT0%3D",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0090",
+        "detailPage": "../jobs/ntpc-act-2026.html",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0087",
@@ -4116,14 +4116,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ssc.gov.in/",
         "officialNotification": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0036",
+        "detailPage": "../jobs/ssc-cgl-2026.html",
         "updatedAt": "2026-06-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0078",
@@ -4478,14 +4478,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/sbipojun26/",
         "officialNotification": "https://sbi.bank.in/csfile/18062026_1_Detailed_Adv.2026.pdf?t=1781759726353",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0070",
+        "detailPage": "../jobs/sbi-po-2026.html",
         "updatedAt": "2026-06-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0066",
@@ -5138,14 +5138,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://sso.rajasthan.gov.in/",
         "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0047",
+        "detailPage": "../jobs/rpsc-apo-2026.html",
         "updatedAt": "2026-05-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0041",
@@ -5408,14 +5408,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/100343/login.html",
         "officialNotification": "https://afcat.edcil.co.in/assets/images/news/AFCAT_02_2026/Notification%20for%20AFCAT%20Cycle%2002-2026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0033",
+        "detailPage": "../jobs/afcat-02-2026.html",
         "updatedAt": "2026-05-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0032",
@@ -5468,14 +5468,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.upsc.gov.in/",
         "officialNotification": "https://www.upsc.gov.in/",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0034",
+        "detailPage": "../jobs/upsc-nda-ii-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0035",
@@ -5498,14 +5498,14 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsconline.nic.in/",
         "officialNotification": "https://www.upsc.gov.in/",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0035",
+        "detailPage": "../jobs/upsc-cds-ii-2026.html",
         "updatedAt": "2026-05-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0030",
