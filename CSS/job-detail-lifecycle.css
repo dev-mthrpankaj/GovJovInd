@@ -68,3 +68,53 @@
     display:none !important;
   }
 }
+
+/* Adcash Display slots — /jobs/ only (injected by JS/adcash-jobs.js) */
+.gjd-ad{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin:0;
+  padding:12px 10px;
+  border:1px dashed #d5e2f0;
+  border-radius:14px;
+  background:#f8fbfe;
+  overflow:hidden;
+}
+.gjd-ad-label{
+  font-size:.58rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#94a3b8;
+}
+.gjd-ad-frame{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+}
+.gjd-ad--leaderboard .gjd-ad-frame{min-height:90px;max-width:728px}
+.gjd-ad--mobile-strip .gjd-ad-frame{min-height:100px;max-width:300px}
+.gjd-ad--rectangle .gjd-ad-frame{min-height:250px;max-width:300px}
+.gjd-ad--skyscraper{
+  margin-top:14px;
+  position:sticky;
+  top:calc(var(--gjd-sticky-top,92px) + 8px);
+}
+.gjd-ad--skyscraper .gjd-ad-frame{min-height:600px;max-width:120px}
+.gjd-ad--desktop-only{display:flex}
+.gjd-ad--mobile-only{display:none}
+@media(max-width:860px){
+  .gjd-ad--desktop-only{display:none!important}
+  .gjd-ad--mobile-only{display:flex}
+  .gjd-ad--skyscraper{display:none!important}
+  .gjd-ad{padding:10px 8px;border-radius:12px}
+}
+@media print{
+  .gjd-ad{display:none!important}
+}

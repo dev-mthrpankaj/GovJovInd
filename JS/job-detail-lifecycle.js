@@ -436,4 +436,20 @@
   initInteractions();
   window.addEventListener('resize', syncStickyNavigation, {passive:true});
   setInterval(updateStageCountdown, 60000);
+
+  // Adcash Display / Autotag — /jobs/ only (see JS/adcash-jobs.js)
+  (() => {
+    if (!/\/jobs\//i.test(String(window.location.pathname || '').replace(/\\/g, '/'))) return;
+    if (document.querySelector('script[data-adcash-jobs]')) return;
+    const current = document.currentScript;
+    const src = current && current.src
+      ? current.src.replace(/[^/]+$/, 'adcash-jobs.js')
+      : '../JS/adcash-jobs.js';
+    const el = document.createElement('script');
+    el.src = src;
+    el.defer = true;
+    el.dataset.adcashJobs = '1';
+    document.body.appendChild(el);
+  })();
 })();
+
