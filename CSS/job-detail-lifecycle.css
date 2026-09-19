@@ -100,7 +100,10 @@
 }
 .gjd-ad--leaderboard .gjd-ad-frame{min-height:90px;max-width:728px}
 .gjd-ad--mobile-strip .gjd-ad-frame{min-height:100px;max-width:300px}
-.gjd-ad--rectangle .gjd-ad-frame{min-height:250px;max-width:300px}
+.gjd-ad--rectangle .gjd-ad-frame,
+.gjd-ad--mobile-top .gjd-ad-frame{min-height:250px;max-width:300px}
+.gjd-ad.is-empty,
+.gjd-ad[hidden]{display:none!important}
 .gjd-layout.has-ad-rail{
   grid-template-columns:minmax(0,1fr) 270px 132px;
   gap:18px;

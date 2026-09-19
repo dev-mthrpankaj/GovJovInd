@@ -1,22 +1,22 @@
 (() => {
   'use strict';
 
-  // Adcash ads — /jobs/ pages only. Paste Display zone IDs below when ready.
+  // Adcash ads — /jobs/ pages only.
   const CONFIG = {
     enabled: true,
     zones: {
       // Desktop — Latest Update ke baad
       desktop728x90: '12187254',
-      // Desktop — sidebar
+      // Desktop — sidebar rail
       desktop120x600: '12187246',
-      // Mobile priority (+ desktop mid before Important Links)
+      // 300×250 — mobile top + mid (fill rate strong)
       mobile300x250: '12187270',
-      // Mobile — thin strip under Latest Update
+      // Optional thin strip — only used if 300×250 missing
       mobile300x100: '12187262'
     },
-    // Display zones active — Autotag off
     autotagZoneId: '',
-    aclibSrc: 'https://acscdn.com/script/aclib.js'
+    aclibSrc: 'https://acscdn.com/script/aclib.js',
+    emptyHideMs: 4000
   };
 
   window.ADCASH_JOBS_CONFIG = CONFIG;
@@ -70,31 +70,39 @@
   };
 
   const injectDisplaySlots = () => {
-    const content = document.querySelector('.gjd-page .gjd-content');
     const updateStrip = document.querySelector('.gjd-page .gjd-update-strip');
     const links = document.querySelector('.gjd-page #important-links');
     const sidebar = document.querySelector('.gjd-page .gjd-sidebar');
+    const layout = document.querySelector('.gjd-page .gjd-layout');
 
     if (updateStrip && updateStrip.parentNode) {
+      // Desktop leaderboard under Latest Update
       if (filledZones.desktop728x90) {
         const slot = makeSlot('leaderboard', '728x90');
         slot.classList.add('gjd-ad--desktop-only');
         updateStrip.insertAdjacentElement('afterend', slot);
       }
-      if (filledZones.mobile300x100) {
+
+      // Mobile: put strong 300×250 just under Latest Update (hero/update area)
+      // 300×100 often has no fill — leave empty "AD" box, so prefer 300×250 here.
+      if (filledZones.mobile300x250) {
+        const slot = makeSlot('mobile-top', '300x250');
+        slot.classList.add('gjd-ad--mobile-only', 'gjd-ad--rectangle');
+        updateStrip.insertAdjacentElement('afterend', slot);
+      } else if (filledZones.mobile300x100) {
         const slot = makeSlot('mobile-strip', '300x100');
         slot.classList.add('gjd-ad--mobile-only');
         updateStrip.insertAdjacentElement('afterend', slot);
       }
     }
 
+    // Mid content — before Important Links (desktop + mobile)
     if (links && links.parentNode && filledZones.mobile300x250) {
       const slot = makeSlot('rectangle', '300x250');
       links.insertAdjacentElement('beforebegin', slot);
     }
 
-    // 120×600 sits as a 3rd column beside Quick Nav — not inside the sidebar
-    const layout = document.querySelector('.gjd-page .gjd-layout');
+    // Desktop skyscraper rail beside Quick Nav
     if (layout && filledZones.desktop120x600) {
       const slot = makeSlot('skyscraper', '120x600');
       slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
@@ -110,7 +118,8 @@
   const fireDisplayBanners = () => {
     const map = [
       ['leaderboard', filledZones.desktop728x90, () => isDesktop()],
-      ['mobile-strip', filledZones.mobile300x100, () => isMobile()],
+      ['mobile-top', filledZones.mobile300x250, () => isMobile()],
+      ['mobile-strip', filledZones.mobile300x100, () => isMobile() && !filledZones.mobile300x250],
       ['rectangle', filledZones.mobile300x250, () => true],
       ['skyscraper', filledZones.desktop120x600, () => isDesktop()]
     ];
@@ -119,6 +128,23 @@
       if (!zoneId || !shouldShow()) return;
       const frame = document.querySelector(`[data-adcash-frame="${slotKey}"]`);
       runBannerIn(frame, zoneId);
+    });
+  };
+
+  const hideEmptySlots = () => {
+    document.querySelectorAll('.gjd-ad[data-adcash-slot]').forEach((slot) => {
+      if (window.getComputedStyle(slot).display === 'none') return;
+      const frame = slot.querySelector('.gjd-ad-frame');
+      if (!frame) return;
+      const hasCreative = Boolean(
+        frame.querySelector('iframe, img, a, object, embed')
+        || (frame.children.length > 1)
+        || (frame.offsetHeight > 40 && frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length > 20)
+      );
+      if (!hasCreative) {
+        slot.classList.add('is-empty');
+        slot.hidden = true;
+      }
     });
   };
 
@@ -138,10 +164,10 @@
     if (hasDisplay) {
       injectDisplaySlots();
       fireDisplayBanners();
+      window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
       return;
     }
 
-    // No Display zones yet — Autotag only on /jobs/ so ads can start today
     runAutotagFallback();
   };
 
