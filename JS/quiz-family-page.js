@@ -315,3 +315,17 @@
   load();
   loadProgress();
 }());
+// Adcash Display - category pages only (not quiz landing)
+(() => {
+  if (document.querySelector("script[data-adcash-quiz-category]")) return;
+  const current = document.currentScript;
+  const base = current && current.src
+    ? current.src.replace(/[^/]+(?:\?.*)?$/, "adcash-quiz-category.js")
+    : "../JS/adcash-quiz-category.js";
+  const el = document.createElement("script");
+  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-quizads";
+  el.defer = true;
+  el.dataset.adcashQuizCategory = "1";
+  document.body.appendChild(el);
+})();
+
