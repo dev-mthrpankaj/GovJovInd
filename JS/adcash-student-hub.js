@@ -173,6 +173,7 @@
       sky
       && !sky.hidden
       && !sky.classList.contains('is-empty')
+      && sky.classList.contains('is-filled')
       && window.getComputedStyle(sky).display !== 'none'
     );
     if (layout) {

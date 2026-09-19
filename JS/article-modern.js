@@ -272,7 +272,7 @@
       ? current.src.replace(/[^/]+$/, 'adcash-student-hub.js')
       : '../../JS/adcash-student-hub.js';
     const el = document.createElement('script');
-    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20260919-adnote';
+    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20260919-adaudit';
     el.defer = true;
     el.dataset.adcashStudentHub = '1';
     document.body.appendChild(el);

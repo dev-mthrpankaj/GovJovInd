@@ -31,8 +31,10 @@
     Object.entries(zones).filter(([, id]) => Boolean(String(id || '').trim()))
   );
   const hasDisplay = Object.keys(filledZones).length > 0;
-  const isDesktop = () => window.matchMedia('(min-width: 861px)').matches;
-  const isMobile = () => !isDesktop();
+  // CSS: mobile-only ≤860, leaderboard ≥861, skyscraper rail ≥1101
+  const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
+  const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
+  const isMobile = () => !isDesktopLeader();
 
   const loadAclib = () => new Promise((resolve, reject) => {
     if (window.aclib && typeof window.aclib.runBanner === 'function') {
@@ -111,6 +113,7 @@
 
     // Desktop skyscraper rail beside Quick Nav
     // has-ad-rail is applied only after creative fill is confirmed (avoid blank 132px gap)
+    // CSS also hides rail below 1101px — keep JS fire gate in sync
     if (layout && filledZones.desktop120x600) {
       const slot = makeSlot('skyscraper', '120x600');
       slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
@@ -124,11 +127,11 @@
 
   const fireDisplayBanners = () => {
     const map = [
-      ['leaderboard', filledZones.desktop728x90, () => isDesktop()],
+      ['leaderboard', filledZones.desktop728x90, () => isDesktopLeader()],
       ['mobile-top', filledZones.mobile300x250, () => isMobile()],
       ['mobile-strip', filledZones.mobile300x100, () => isMobile() && !filledZones.mobile300x250],
       ['rectangle', filledZones.mobile300x250, () => true],
-      ['skyscraper', filledZones.desktop120x600, () => isDesktop()]
+      ['skyscraper', filledZones.desktop120x600, () => isDesktopRail()]
     ];
 
     map.forEach(([slotKey, zoneId, shouldShow]) => {
