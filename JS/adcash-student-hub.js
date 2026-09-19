@@ -30,7 +30,7 @@
   );
   if (!Object.keys(zones).length) return;
 
-  const isDesktop = () => window.matchMedia('(min-width: 901px)').matches;
+  const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
   const isMobile = () => !isDesktop();
 
   const loadAclib = () => new Promise((resolve, reject) => {
@@ -73,6 +73,7 @@
     const hero = document.querySelector('main.blog-article-page .blog-article-hero');
     const faq = document.querySelector('main.blog-article-page #faq');
     const sidebar = document.querySelector('main.blog-article-page .article-sidebar');
+    const layout = document.querySelector('main.blog-article-page .article-layout');
 
     // 1) Hero ke just neeche (after trust strip + stats)
     if (hero && hero.parentNode) {
@@ -94,11 +95,26 @@
       faq.insertAdjacentElement('beforebegin', slot);
     }
 
-    // 3) Sidebar — desktop skyscraper under TOC/share
-    if (sidebar && zones.desktop120x600) {
+    // 3) Desktop: TOC + 120×600 side-by-side in one sticky rail
+    //    (never stack ad under TOC inside .article-sidebar)
+    if (layout && zones.desktop120x600) {
       const slot = makeSlot('skyscraper', '120x600');
       slot.classList.add('gju-blog-ad--desktop-only', 'gju-blog-ad--rail');
-      sidebar.appendChild(slot);
+      layout.classList.add('has-ad-rail');
+
+      if (sidebar && layout.contains(sidebar)) {
+        let rail = layout.querySelector(':scope > .article-aside-rail')
+          || sidebar.closest('.article-aside-rail');
+        if (!rail) {
+          rail = document.createElement('div');
+          rail.className = 'article-aside-rail';
+          sidebar.replaceWith(rail);
+          rail.appendChild(sidebar);
+        }
+        if (!rail.contains(slot)) rail.appendChild(slot);
+      } else {
+        layout.appendChild(slot);
+      }
     }
   };
 
@@ -147,6 +163,7 @@
     injectSlots();
     fireBanners();
     fireVideoSlider();
+    window.dispatchEvent(new Event('resize'));
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
   };
 

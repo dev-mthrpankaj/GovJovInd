@@ -7,6 +7,13 @@
   Safe to include on every article page as-is.
 */
 (function () {
+  // Cache-bust shared article assets after ad-rail styling updates
+  const bust = "20260919-adrail";
+  document.querySelectorAll('link[rel="stylesheet"][href*="blog.css"]').forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    if (!/[?&]v=/.test(href)) link.setAttribute("href", href + (href.includes("?") ? "&" : "?") + "v=" + bust);
+  });
+
   const article = document.querySelector("[data-blog-id]");
   const content = document.querySelector(".blog-article-content");
   const sidebar = document.querySelector(".article-sidebar");
@@ -17,15 +24,21 @@
     return header ? Math.ceil(header.getBoundingClientRect().height) : 72;
   };
 
+  const stickyAside = () =>
+    document.querySelector(".article-aside-rail") || sidebar;
+
   const syncSidebarPosition = () => {
-    if (!sidebar) return;
+    const aside = stickyAside();
+    if (!aside) return;
 
     const stickyTop = getHeaderHeight() + 16;
     document.documentElement.style.setProperty("--article-sidebar-sticky-top", `${stickyTop}px`);
 
     if (!relatedSectionForSidebar) return;
     const relatedTop = relatedSectionForSidebar.getBoundingClientRect().top;
-    sidebar.classList.toggle("is-near-related", relatedTop <= stickyTop + 8);
+    const near = relatedTop <= stickyTop + 8;
+    aside.classList.toggle("is-near-related", near);
+    if (sidebar && sidebar !== aside) sidebar.classList.toggle("is-near-related", near);
   };
 
   /* ---------- Reading progress bar ---------- */
@@ -259,7 +272,7 @@
       ? current.src.replace(/[^/]+$/, 'adcash-student-hub.js')
       : '../../JS/adcash-student-hub.js';
     const el = document.createElement('script');
-    el.src = src;
+    el.src = src.includes('?') ? src : `${src}?v=20260919-adrail`;
     el.defer = true;
     el.dataset.adcashStudentHub = '1';
     document.body.appendChild(el);
