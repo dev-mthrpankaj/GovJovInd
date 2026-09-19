@@ -32,14 +32,13 @@
     state: "loading"
   };
 
-  scheduleWhenIdle(start);
-
-  function scheduleWhenIdle(callback) {
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(callback, { timeout: 4000 });
-    } else {
-      window.setTimeout(callback, 1500);
-    }
+  // This script is loaded on pages whose footer already exists, but some shared
+  // page scripts can rebuild/replace the footer after load. Start promptly and
+  // keep the widget mounted if the footer changes.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
   }
 
   function start() {
@@ -51,6 +50,7 @@
     refreshStats();
     startHeartbeat();
     startStatsRefresh();
+    watchFooter();
 
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
@@ -165,6 +165,22 @@
     }
   }
 
+  let footerObserver = null;
+
+  function watchFooter() {
+    if (!("MutationObserver" in window)) return;
+    if (footerObserver) footerObserver.disconnect();
+
+    footerObserver = new MutationObserver(() => {
+      if (!document.querySelector("footer .footer-live-visitors")) {
+        ensureVisitorWidget();
+        updateStatsUi(statsState);
+      }
+    });
+
+    footerObserver.observe(document.body, { childList: true, subtree: true });
+  }
+
   function ensureVisitorWidget() {
     const footer = document.querySelector("footer");
     if (!footer) return null;
@@ -228,5 +244,6 @@
   window.addEventListener("pagehide", () => {
     if (heartbeatTimer) window.clearInterval(heartbeatTimer);
     if (statsTimer) window.clearInterval(statsTimer);
+    if (footerObserver) footerObserver.disconnect();
   });
 }());
