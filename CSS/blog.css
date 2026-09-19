@@ -1757,14 +1757,19 @@
 }
 .gju-blog-ad--rectangle,
 .gju-blog-ad--mobile-top{
+  display:flex;
   margin:1.2rem auto;
+  margin-inline:auto;
   width:100%;
   max-width:340px;
+  justify-self:center;
 }
 .gju-blog-ad--rectangle .gju-blog-ad-frame,
 .gju-blog-ad--mobile-top .gju-blog-ad-frame{
   min-height:250px;
-  max-width:300px;
+  width:300px;
+  max-width:100%;
+  margin-inline:auto;
 }
 .gju-blog-ad--skyscraper.gju-blog-ad--rail{
   margin:0;
@@ -1796,8 +1801,13 @@
   .article-aside-rail{display:contents}
   .article-layout.has-ad-rail{grid-template-columns:minmax(0,1fr)}
   .gju-blog-ad{
-    margin:1rem 0;
+    margin:1rem auto;
     padding:10px;
+  }
+  .gju-blog-ad--rectangle,
+  .gju-blog-ad--mobile-top{
+    margin:1rem auto;
+    width:min(100%, 340px);
   }
   .gju-blog-ad-label{
     margin:-10px -10px 0;
