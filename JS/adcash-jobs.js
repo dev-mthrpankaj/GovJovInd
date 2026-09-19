@@ -58,7 +58,13 @@
     wrap.className = `gjd-ad gjd-ad--${slotKey}`;
     wrap.dataset.adcashSlot = slotKey;
     wrap.setAttribute('aria-label', 'Advertisement');
-    wrap.innerHTML = `<div class="gjd-ad-label">Ad</div><div class="gjd-ad-frame" data-adcash-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>`;
+    wrap.innerHTML = `
+      <div class="gjd-ad-label">
+        <span class="gjd-ad-label-tag">Ad</span>
+        <span class="gjd-ad-label-note">GovJobUpdates does not endorse this.</span>
+      </div>
+      <div class="gjd-ad-frame" data-adcash-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
+    `.trim();
     return wrap;
   };
 

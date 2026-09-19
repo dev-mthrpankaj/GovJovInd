@@ -84,11 +84,36 @@
   overflow:hidden;
 }
 .gjd-ad-label{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:.3rem .5rem;
+  width:100%;
+  text-align:center;
+  line-height:1.35;
+  text-transform:none;
+  letter-spacing:0;
+}
+.gjd-ad-label-tag{
   font-size:.58rem;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
   color:#94a3b8;
+}
+.gjd-ad-label-note{
+  font-size:.65rem;
+  font-weight:600;
+  color:#94a3b8;
+}
+.gjd-ad--skyscraper.gjd-ad--rail .gjd-ad-label{
+  flex-direction:column;
+  gap:.15rem;
+}
+.gjd-ad--skyscraper.gjd-ad--rail .gjd-ad-label-note{
+  font-size:.55rem;
+  line-height:1.25;
 }
 .gjd-ad-frame{
   display:flex;
