@@ -52,14 +52,14 @@ const isNotFoundPage = () => document.body?.classList.contains('not-found-page')
 
 const getHtmlDepthFromRoot = () => {
   const path = window.location.pathname.replace(/\\/g, '/');
-  if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return 2;
-
-  if (/\/typing-test(?:\/|$)/i.test(path)) return 1;
-
-  const htmlMatch = path.match(/\/HTML\/(.+\.html)$/i);
-  if (htmlMatch) return htmlMatch[1].split('/').filter(Boolean).length;
-
-  return 0;
+  // Count directory segments under site root so /jobs/foo.html → ../typing-test/
+  // (not typing-test/ which wrongly resolves to /jobs/typing-test/).
+  let parts = path.split('/').filter(Boolean);
+  if (!parts.length) return 0;
+  if (/\.[a-z0-9]+$/i.test(parts[parts.length - 1])) {
+    parts = parts.slice(0, -1);
+  }
+  return parts.length;
 };
 
 const getRootPrefix = () => '../'.repeat(getHtmlDepthFromRoot());
@@ -207,8 +207,16 @@ const getCandidatePageHref = (pageName) => {
 
   const path = window.location.pathname.replace(/\\/g, '/');
   if (/\/(?:Job_Details|AdmitCard_Details|Result_Details|AnswerKey_Details)\/HTML\/[^/]+\.html$/i.test(path)) return `../../HTML/${pageName}`;
+  // Lifecycle job pages live under /jobs/ — HTML tools are one level up.
+  if (/\/jobs(?:\/|$)/i.test(path)) return `../HTML/${pageName}`;
   const htmlDepth = getHtmlDepthFromRoot();
-  if (htmlDepth) return `${'../'.repeat(Math.max(htmlDepth - 1, 0))}${pageName}`;
+  if (htmlDepth) {
+    // Pages already inside /HTML/… use sibling-relative links.
+    if (/\/HTML(?:\/|$)/i.test(path)) {
+      return `${'../'.repeat(Math.max(htmlDepth - 1, 0))}${pageName}`;
+    }
+    return `${'../'.repeat(htmlDepth)}HTML/${pageName}`;
+  }
   return `HTML/${pageName}`;
 };
 
@@ -274,7 +282,10 @@ const getHomeHref = () => {
 
 const getTypingTestHref = () => {
   if (isNotFoundPage()) return '/typing-test/';
-  return getRootRelativeHref('typing-test/');
+  // Always climb to site root first — never nest under /jobs/ or other sections.
+  const depth = getHtmlDepthFromRoot();
+  if (!depth) return 'typing-test/';
+  return `${'../'.repeat(depth)}typing-test/`;
 };
 
 const getSharedPageHref = (pageName) => {

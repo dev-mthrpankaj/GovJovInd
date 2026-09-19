@@ -109,6 +109,9 @@
 .gju-quiz-ad--skyscraper .gju-quiz-ad-frame {
   width: 120px;
   max-width: 120px;
+  min-height: 0;
+}
+.gju-quiz-ad--skyscraper.is-filled .gju-quiz-ad-frame {
   min-height: 600px;
 }
 
@@ -117,7 +120,7 @@
 .gju-quiz-ad.is-empty,
 .gju-quiz-ad[hidden] { display: none !important; }
 
-/* Layout: content | sticky 120×600 */
+/* Layout: content | sticky 120×600 — only while skyscraper is filled */
 .family-quiz-page:has(.has-quiz-ad-rail),
 .subject-quiz-page:has(.has-quiz-ad-rail) {
   width: min(100%, 1400px);
@@ -132,6 +135,15 @@
   align-items: start;
 }
 
+.family-discovery.ad-rail-empty,
+.subject-sets-section.ad-rail-empty,
+.gju-typing-ad-host.ad-rail-empty,
+.family-discovery:not(.has-quiz-ad-rail),
+.subject-sets-section:not(.has-quiz-ad-rail),
+.gju-typing-ad-host:not(.has-quiz-ad-rail) {
+  display: block;
+}
+
 .gju-quiz-ad-rail-main {
   min-width: 0;
 }
@@ -143,6 +155,11 @@
 
 .typing-test-page:has(.has-quiz-ad-rail) .gju-typing-ad-host {
   width: min(1340px, 100%);
+}
+
+.typing-test-page:has(.ad-rail-empty) .gju-typing-ad-host,
+.typing-test-page:not(:has(.has-quiz-ad-rail)) .gju-typing-ad-host {
+  width: min(1180px, 100%);
 }
 
 @media (max-width: 1099px) {

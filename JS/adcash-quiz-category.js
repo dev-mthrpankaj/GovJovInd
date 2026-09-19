@@ -10,7 +10,7 @@
       mobile300x250: '12187270'
     },
     aclibSrc: 'https://acscdn.com/script/aclib.js',
-    cssHref: '../CSS/adcash-quiz-category.css?v=20260919-quizads',
+    cssHref: '../CSS/adcash-quiz-category.css?v=20260919-emptyrail',
     emptyHideMs: 4000,
     desktopMinPx: 1100
   };
@@ -82,13 +82,13 @@
   };
 
   const wrapRailHost = (host) => {
-    if (!host || host.classList.contains('has-quiz-ad-rail')) {
+    if (!host || host.querySelector(':scope > .gju-quiz-ad-rail-main')) {
       return host.querySelector(':scope > .gju-quiz-ad-rail-main') || host;
     }
     const mainCol = document.createElement('div');
     mainCol.className = 'gju-quiz-ad-rail-main';
     while (host.firstChild) mainCol.appendChild(host.firstChild);
-    host.classList.add('has-quiz-ad-rail');
+    host.classList.add('gju-quiz-ad-host-ready');
     host.appendChild(mainCol);
     return mainCol;
   };
@@ -154,21 +154,62 @@
     });
   };
 
+  const expectedMinFill = (slot) => {
+    const key = slot.dataset.adcashSlot || '';
+    if (key === 'skyscraper') return 280;
+    return 120;
+  };
+
+  const creativeFillPx = (frame) => {
+    if (!frame) return 0;
+    let maxH = 0;
+    frame.querySelectorAll('iframe, img, object, embed, video, a, ins, div').forEach((node) => {
+      maxH = Math.max(maxH, node.offsetHeight || 0, node.clientHeight || 0);
+    });
+    if (!maxH) maxH = Math.max(frame.scrollHeight || 0, frame.offsetHeight || 0);
+    return maxH;
+  };
+
+  const slotLooksFilled = (slot) => {
+    const frame = slot.querySelector('.gju-quiz-ad-frame');
+    if (!frame) return false;
+    const fill = creativeFillPx(frame);
+    if (fill < expectedMinFill(slot)) return false;
+    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
+    const hasLinks = frame.querySelectorAll('a').length > 0;
+    const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
+    return hasMedia || (hasLinks && fill >= expectedMinFill(slot)) || htmlLen > 80;
+  };
+
+  const syncQuizAdRail = () => {
+    document.querySelectorAll('.gju-quiz-ad-host-ready, .family-discovery, .subject-sets-section').forEach((host) => {
+      const skyEl = host.querySelector('.gju-quiz-ad--skyscraper');
+      if (!skyEl && !host.classList.contains('gju-quiz-ad-host-ready')) return;
+      const skyLive = Boolean(
+        skyEl
+        && !skyEl.hidden
+        && !skyEl.classList.contains('is-empty')
+        && skyEl.classList.contains('is-filled')
+        && window.getComputedStyle(skyEl).display !== 'none'
+      );
+      host.classList.toggle('has-quiz-ad-rail', skyLive);
+      host.classList.toggle('ad-rail-empty', Boolean(skyEl) && !skyLive);
+    });
+  };
+
   const hideEmptySlots = () => {
     document.querySelectorAll('.gju-quiz-ad[data-adcash-slot]').forEach((slot) => {
-      if (window.getComputedStyle(slot).display === 'none') return;
-      const frame = slot.querySelector('.gju-quiz-ad-frame');
-      if (!frame) return;
-      const hasCreative = Boolean(
-        frame.querySelector('iframe, img, a, object, embed')
-        || frame.children.length > 1
-        || (frame.offsetHeight > 40 && frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length > 20)
-      );
-      if (!hasCreative) {
-        slot.classList.add('is-empty');
-        slot.hidden = true;
+      if (slotLooksFilled(slot)) {
+        slot.classList.remove('is-empty');
+        slot.hidden = false;
+        slot.classList.add('is-filled');
+        return;
       }
+      slot.classList.add('is-empty');
+      slot.classList.remove('is-filled');
+      slot.hidden = true;
     });
+    syncQuizAdRail();
   };
 
   const boot = async () => {
@@ -181,6 +222,8 @@
     injectSlots();
     fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
+    window.setTimeout(hideEmptySlots, 5500);
+    window.setTimeout(hideEmptySlots, 9000);
   };
 
   if (document.readyState === 'loading') {

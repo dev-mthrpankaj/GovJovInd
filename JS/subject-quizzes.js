@@ -550,7 +550,7 @@
     ? current.src.replace(/[^/]+(?:\?.*)?$/, "adcash-quiz-category.js")
     : "../JS/adcash-quiz-category.js";
   const el = document.createElement("script");
-  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-quizads";
+  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-emptyrail";
   el.defer = true;
   el.dataset.adcashQuizCategory = "1";
   document.body.appendChild(el);
