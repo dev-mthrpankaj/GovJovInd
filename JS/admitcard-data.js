@@ -233,7 +233,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-18",
         "examEndDate": "",
         "releaseDate": "2026-09-09",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1149/101044/login.html",
         "detailPage": "../jobs/patna-high-court-assistant-2026.html",
