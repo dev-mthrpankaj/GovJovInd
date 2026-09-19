@@ -291,9 +291,61 @@
     }
   };
 
+  function improveExamDetailStructure(main) {
+    if (!main || main.dataset.structureFixed === "1") return;
+    const hero =
+      main.querySelector(".gju-typing-hero-refined") ||
+      main.querySelector(".gju-typing-exam-detail-card");
+    if (!hero) return;
+
+    const language = main.querySelector(".gju-typing-language-panel");
+    const passage = main.querySelector(".gju-typing-passage-panel");
+    const evaluate = main.querySelector(".gju-typing-evaluate-section");
+    const info = main.querySelector(".gju-typing-exam-info-grid");
+    const faq = main.querySelector(".gju-typing-faq-section");
+    const related = main.querySelector(".typing-related");
+    const noscript = Array.from(main.children).find((el) => el.tagName === "NOSCRIPT");
+
+    // Drop redundant mid-page CTA (hero + passage cards already cover start)
+    main.querySelectorAll(".gju-typing-evaluate-cta").forEach((el) => el.remove());
+
+    let cursor = hero;
+    const place = (node) => {
+      if (!node || node === cursor) return;
+      cursor.insertAdjacentElement("afterend", node);
+      cursor = node;
+    };
+
+    // Practice first, guide/about later
+    if (noscript) place(noscript);
+    place(language);
+    place(passage);
+    place(evaluate);
+    place(info);
+    place(faq);
+    place(related);
+
+    if (evaluate) {
+      evaluate.classList.add("is-after-practice");
+      const label = evaluate.querySelector(".gju-typing-section-label");
+      if (label && !/after practice/i.test(label.textContent)) {
+        label.textContent = "After you practice";
+      }
+    }
+
+    main.dataset.structureFixed = "1";
+  }
+
   function init() {
     const main = document.querySelector("main.typing-test-page");
     if (!main) return;
+
+    if (
+      main.classList.contains("gju-typing-exam-detail-page") ||
+      main.querySelector(".gju-typing-hero-refined, .gju-typing-evaluate-section")
+    ) {
+      improveExamDetailStructure(main);
+    }
 
     const iframe = main.querySelector('iframe[src*="app.html?preset="]');
     const iframePreset = iframe
@@ -307,6 +359,7 @@
 
     if (!main.querySelector(".gju-typing-passage-panel")) {
       main.innerHTML = buildPage(presetId, exam);
+      improveExamDetailStructure(main);
     }
 
     bindLanguage(main);
@@ -741,7 +794,7 @@ ${buildFaqSection(exam.title)}
     ? current.src.replace(/[^/]+(?:\?.*)?$/, "adcash-typing-category.js")
     : "adcash-typing-category.js";
   const el = document.createElement("script");
-  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-typingads";
+  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-structure";
   el.defer = true;
   el.dataset.adcashTypingCategory = "1";
   document.body.appendChild(el);

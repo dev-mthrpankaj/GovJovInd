@@ -143,17 +143,17 @@
       else page.appendChild(slot);
     }
 
-    if (zones.desktop120x600 && passagePanel) {
+    if (zones.desktop120x600 && (languagePanel || passagePanel)) {
       let host = page.querySelector('.gju-typing-ad-host');
       if (!host) {
         host = document.createElement('div');
         host.className = 'gju-typing-ad-host';
-        passagePanel.parentNode.insertBefore(host, passagePanel);
+        const first = languagePanel || passagePanel;
+        first.parentNode.insertBefore(host, first);
+        if (languagePanel) host.appendChild(languagePanel);
         const mobileAd = page.querySelector('.gju-quiz-ad--mobile-mid');
-        if (mobileAd && mobileAd.nextElementSibling === passagePanel) {
-          host.appendChild(mobileAd);
-        }
-        host.appendChild(passagePanel);
+        if (mobileAd) host.appendChild(mobileAd);
+        if (passagePanel) host.appendChild(passagePanel);
       }
       wrapRailHost(host);
       const slot = makeSlot('skyscraper', '120x600');

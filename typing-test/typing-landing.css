@@ -661,15 +661,18 @@
   font-size: .8rem;
   line-height: 1.4;
 }
-.gju-typing-rules-inline {
-  margin: 0 0 18px;
-  padding: 12px 14px;
-  border-left: 3px solid #315bd6;
-  border-radius: 0 10px 10px 0;
-  background: #f5f8ff;
-  color: #526078;
-  font-size: .88rem;
-  line-height: 1.6;
+.gju-typing-evaluate-cta {
+  display: none !important;
+}
+
+.gju-typing-evaluate-section.is-after-practice {
+  margin-top: clamp(28px, 4vw, 42px);
+  padding-top: clamp(22px, 3vw, 32px);
+  border-top: 1px solid #dce5f5;
+}
+
+.gju-typing-ad-host .gju-typing-language-panel {
+  margin-bottom: 14px;
 }
 .gju-typing-rules-inline strong {
   color: #172440;
