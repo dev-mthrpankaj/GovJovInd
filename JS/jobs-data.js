@@ -902,7 +902,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "60",
         "startDate": "2026-09-03",
         "lastDate": "2026-09-19",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://pgimer.edu.in/PGIMER_PORTAL/PGIMERPORTAL/home.jsp",
         "officialNotification": "https://pgimer.edu.in/PGIMER_PORTAL/AbstractFilePath?FileType=E&FileName=Advt.%20guidelines%20group%20C%20pgi%20and%20ABC%20sangrur.%205301Sep2026132817.pdf&PathKey=VACANCY_PATH",
