@@ -733,3 +733,16 @@ ${buildFaqSection(exam.title)}
     init();
   }
 })();
+// Adcash Display - typing category pages
+(() => {
+  if (document.querySelector("script[data-adcash-typing-category]")) return;
+  const current = document.currentScript;
+  const base = current && current.src
+    ? current.src.replace(/[^/]+(?:\?.*)?$/, "adcash-typing-category.js")
+    : "adcash-typing-category.js";
+  const el = document.createElement("script");
+  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-typingads";
+  el.defer = true;
+  el.dataset.adcashTypingCategory = "1";
+  document.body.appendChild(el);
+})();

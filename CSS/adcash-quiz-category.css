@@ -124,7 +124,8 @@
 }
 
 .family-discovery.has-quiz-ad-rail,
-.subject-sets-section.has-quiz-ad-rail {
+.subject-sets-section.has-quiz-ad-rail,
+.gju-typing-ad-host.has-quiz-ad-rail {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 132px;
   gap: 14px;
@@ -135,13 +136,23 @@
   min-width: 0;
 }
 
+.gju-typing-ad-host {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
+.typing-test-page:has(.has-quiz-ad-rail) .gju-typing-ad-host {
+  width: min(1340px, 100%);
+}
+
 @media (max-width: 1099px) {
   .gju-quiz-ad--desktop-only { display: none !important; }
   .gju-quiz-ad--mobile-only { display: flex; }
   .gju-quiz-ad--skyscraper { display: none !important; }
 
   .family-discovery.has-quiz-ad-rail,
-  .subject-sets-section.has-quiz-ad-rail {
+  .subject-sets-section.has-quiz-ad-rail,
+  .gju-typing-ad-host.has-quiz-ad-rail {
     display: block;
   }
 
