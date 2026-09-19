@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/MSPSTET_2026_RuleBookforTeachers_17082026.pdf",
-        "detailPage": "../Job_Details/HTML/job-details.html?id=sheet-0188-20260817210604-9d0843d9",
+        "detailPage": "../jobs/mpesb-mspstet-2026.html",
         "updatedAt": "2026-09-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "needsReview": "yes",
+        "needsReview": "no",
         "qualificationSource": "fallback",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "manual",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0249-20260918195443-bdb81d14",
