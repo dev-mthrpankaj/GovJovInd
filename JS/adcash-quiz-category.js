@@ -10,7 +10,7 @@
       mobile300x250: '12187270'
     },
     aclibSrc: 'https://acscdn.com/script/aclib.js',
-    cssHref: '../CSS/adcash-quiz-category.css?v=20260919-emptyrail',
+    cssHref: '../CSS/adcash-quiz-category.css?v=20260919-railpark',
     emptyHideMs: 4000,
     desktopMinPx: 1100
   };
@@ -88,7 +88,9 @@
     const mainCol = document.createElement('div');
     mainCol.className = 'gju-quiz-ad-rail-main';
     while (host.firstChild) mainCol.appendChild(host.firstChild);
-    host.classList.add('gju-quiz-ad-host-ready');
+    // Grid side-rail from inject — prevents skyscraper stacking under content first
+    host.classList.add('gju-quiz-ad-host-ready', 'has-quiz-ad-rail');
+    host.classList.remove('ad-rail-empty');
     host.appendChild(mainCol);
     return mainCol;
   };

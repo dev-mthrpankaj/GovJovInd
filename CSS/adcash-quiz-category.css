@@ -1,4 +1,4 @@
-/* Adcash Display — quiz category pages only (family + subject) */
+/* Adcash Display — quiz category + typing category pages */
 
 .gju-quiz-ad {
   display: flex;
@@ -78,7 +78,7 @@
   margin-inline: auto;
 }
 
-/* Desktop skyscraper rail */
+/* Desktop skyscraper rail — always column 2 so it never stacks under content */
 .gju-quiz-ad--skyscraper {
   margin: 0;
   padding: 10px 6px 12px;
@@ -89,6 +89,9 @@
   position: sticky;
   top: calc(var(--header-height, 72px) + 16px);
   z-index: 2;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
 }
 
 .gju-quiz-ad--skyscraper .gju-quiz-ad-label {
@@ -115,36 +118,51 @@
   min-height: 600px;
 }
 
+/* Pending load: keep slot in the side column (measurable) but quiet chrome */
+.gju-quiz-ad--skyscraper:not(.is-filled):not(.is-empty) {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.gju-quiz-ad--skyscraper:not(.is-filled):not(.is-empty) .gju-quiz-ad-label {
+  opacity: 0;
+}
+
 .gju-quiz-ad--desktop-only { display: flex; }
 .gju-quiz-ad--mobile-only { display: none; }
 .gju-quiz-ad.is-empty,
 .gju-quiz-ad[hidden] { display: none !important; }
 
-/* Layout: content | sticky 120×600 — only while skyscraper is filled */
+/* Page width expands only while rail is live */
 .family-quiz-page:has(.has-quiz-ad-rail),
 .subject-quiz-page:has(.has-quiz-ad-rail) {
   width: min(100%, 1400px);
 }
 
-.family-discovery.has-quiz-ad-rail,
-.subject-sets-section.has-quiz-ad-rail,
-.gju-typing-ad-host.has-quiz-ad-rail {
+/*
+  Host grid starts as soon as skyscraper is injected (gju-quiz-ad-host-ready).
+  This prevents the skyscraper from briefly stacking under the cards (bottom → side jump).
+*/
+.family-discovery.gju-quiz-ad-host-ready,
+.subject-sets-section.gju-quiz-ad-host-ready,
+.gju-typing-ad-host.gju-quiz-ad-host-ready {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 132px;
   gap: 14px;
   align-items: start;
 }
 
-.family-discovery.ad-rail-empty,
-.subject-sets-section.ad-rail-empty,
-.gju-typing-ad-host.ad-rail-empty,
-.family-discovery:not(.has-quiz-ad-rail),
-.subject-sets-section:not(.has-quiz-ad-rail),
-.gju-typing-ad-host:not(.has-quiz-ad-rail) {
-  display: block;
+/* Empty after check: collapse rail column (still grid — never display:block) */
+.family-discovery.gju-quiz-ad-host-ready.ad-rail-empty,
+.subject-sets-section.gju-quiz-ad-host-ready.ad-rail-empty,
+.gju-typing-ad-host.gju-quiz-ad-host-ready.ad-rail-empty {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
 }
 
 .gju-quiz-ad-rail-main {
+  grid-column: 1;
+  grid-row: 1;
   min-width: 0;
 }
 
@@ -167,10 +185,14 @@
   .gju-quiz-ad--mobile-only { display: flex; }
   .gju-quiz-ad--skyscraper { display: none !important; }
 
+  .family-discovery.gju-quiz-ad-host-ready,
+  .subject-sets-section.gju-quiz-ad-host-ready,
+  .gju-typing-ad-host.gju-quiz-ad-host-ready,
   .family-discovery.has-quiz-ad-rail,
   .subject-sets-section.has-quiz-ad-rail,
   .gju-typing-ad-host.has-quiz-ad-rail {
     display: block;
+    grid-template-columns: none;
   }
 
   .gju-quiz-ad--mobile-mid {
