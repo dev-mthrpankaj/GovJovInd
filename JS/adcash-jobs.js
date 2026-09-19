@@ -117,13 +117,17 @@
     if (layout && filledZones.desktop120x600) {
       const slot = makeSlot('skyscraper', '120x600');
       slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
-      if (sidebar && sidebar.parentNode === layout) {
-        sidebar.insertAdjacentElement('afterend', slot);
-      } else {
-        layout.appendChild(slot);
-      }
-    }
-  };
+     if (sidebar && sidebar.parentNode === layout) {
+     sidebar.insertAdjacentElement('afterend', slot);
+     } else {
+     layout.appendChild(slot);
+     }
+
+     // Reserve the skyscraper column immediately
+     // to prevent layout shift when the ad loads.
+     layout.classList.add('has-ad-rail');
+     }
+     };
 
   const fireDisplayBanners = () => {
     const map = [
