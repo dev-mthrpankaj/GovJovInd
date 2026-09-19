@@ -1,0 +1,158 @@
+(() => {
+  'use strict';
+
+  // Adcash — only redesigned Student Hub articles
+  // Gate: main.blog-article-page + .blog-article-hero (same styling as SSC CPO pattern page)
+  const CONFIG = {
+    enabled: true,
+    zones: {
+      desktop728x90: '12187254',
+      desktop120x600: '12187246',
+      mobile300x250: '12187270',
+      mobile300x100: '' // unused — weak fill
+    },
+    // Floating video (user can dismiss) — redesigned articles only
+    videoSliderZoneId: '12187522',
+    aclibSrc: 'https://acscdn.com/script/aclib.js',
+    emptyHideMs: 4000
+  };
+
+  window.ADCASH_STUDENT_HUB_CONFIG = CONFIG;
+
+  const path = String(window.location.pathname || '').replace(/\\/g, '/');
+  if (!CONFIG.enabled) return;
+  if (!/\/student-hub\//i.test(path) && !/\/HTML\/student-hub\//i.test(path)) return;
+  if (!document.querySelector('main.blog-article-page .blog-article-hero')) return;
+  if (window.matchMedia('(print)').matches) return;
+
+  const zones = Object.fromEntries(
+    Object.entries(CONFIG.zones || {}).filter(([, id]) => Boolean(String(id || '').trim()))
+  );
+  if (!Object.keys(zones).length) return;
+
+  const isDesktop = () => window.matchMedia('(min-width: 901px)').matches;
+  const isMobile = () => !isDesktop();
+
+  const loadAclib = () => new Promise((resolve, reject) => {
+    if (window.aclib && typeof window.aclib.runBanner === 'function') {
+      resolve(window.aclib);
+      return;
+    }
+    const existing = document.querySelector('script[data-adcash-aclib]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.aclib), { once: true });
+      existing.addEventListener('error', () => reject(new Error('aclib load failed')), { once: true });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = CONFIG.aclibSrc;
+    script.async = true;
+    script.dataset.adcashAclib = '1';
+    script.onload = () => resolve(window.aclib);
+    script.onerror = () => reject(new Error('aclib load failed'));
+    document.head.appendChild(script);
+  });
+
+  const makeSlot = (slotKey, sizeLabel) => {
+    const wrap = document.createElement('aside');
+    wrap.className = `gju-blog-ad gju-blog-ad--${slotKey}`;
+    wrap.dataset.adcashSlot = slotKey;
+    wrap.setAttribute('aria-label', 'Advertisement');
+    wrap.innerHTML = `<div class="gju-blog-ad-label">Ad</div><div class="gju-blog-ad-frame" data-adcash-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>`;
+    return wrap;
+  };
+
+  const runBannerIn = (frame, zoneId) => {
+    if (!frame || !zoneId || !window.aclib || typeof window.aclib.runBanner !== 'function') return;
+    const runner = document.createElement('script');
+    runner.textContent = `aclib.runBanner({ zoneId: ${JSON.stringify(String(zoneId))} });`;
+    frame.appendChild(runner);
+  };
+
+  const injectSlots = () => {
+    const hero = document.querySelector('main.blog-article-page .blog-article-hero');
+    const faq = document.querySelector('main.blog-article-page #faq');
+    const sidebar = document.querySelector('main.blog-article-page .article-sidebar');
+
+    // 1) Hero ke just neeche (after trust strip + stats)
+    if (hero && hero.parentNode) {
+      if (zones.desktop728x90) {
+        const slot = makeSlot('leaderboard', '728x90');
+        slot.classList.add('gju-blog-ad--desktop-only');
+        hero.insertAdjacentElement('afterend', slot);
+      }
+      if (zones.mobile300x250) {
+        const slot = makeSlot('mobile-top', '300x250');
+        slot.classList.add('gju-blog-ad--mobile-only', 'gju-blog-ad--rectangle');
+        hero.insertAdjacentElement('afterend', slot);
+      }
+    }
+
+    // 2) FAQ se pehle — high-intent mid slot
+    if (faq && faq.parentNode && zones.mobile300x250) {
+      const slot = makeSlot('rectangle', '300x250');
+      faq.insertAdjacentElement('beforebegin', slot);
+    }
+
+    // 3) Sidebar — desktop skyscraper under TOC/share
+    if (sidebar && zones.desktop120x600) {
+      const slot = makeSlot('skyscraper', '120x600');
+      slot.classList.add('gju-blog-ad--desktop-only', 'gju-blog-ad--rail');
+      sidebar.appendChild(slot);
+    }
+  };
+
+  const fireBanners = () => {
+    const map = [
+      ['leaderboard', zones.desktop728x90, () => isDesktop()],
+      ['mobile-top', zones.mobile300x250, () => isMobile()],
+      ['rectangle', zones.mobile300x250, () => true],
+      ['skyscraper', zones.desktop120x600, () => isDesktop()]
+    ];
+    map.forEach(([slotKey, zoneId, shouldShow]) => {
+      if (!zoneId || !shouldShow()) return;
+      runBannerIn(document.querySelector(`[data-adcash-frame="${slotKey}"]`), zoneId);
+    });
+  };
+
+  const hideEmptySlots = () => {
+    document.querySelectorAll('.gju-blog-ad[data-adcash-slot]').forEach((slot) => {
+      if (window.getComputedStyle(slot).display === 'none') return;
+      const frame = slot.querySelector('.gju-blog-ad-frame');
+      if (!frame) return;
+      const hasCreative = Boolean(
+        frame.querySelector('iframe, img, a, object, embed')
+        || frame.children.length > 1
+        || (frame.offsetHeight > 40 && frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length > 20)
+      );
+      if (!hasCreative) {
+        slot.classList.add('is-empty');
+        slot.hidden = true;
+      }
+    });
+  };
+
+  const fireVideoSlider = () => {
+    const zoneId = String(CONFIG.videoSliderZoneId || '').trim();
+    if (!zoneId || !window.aclib || typeof window.aclib.runVideoSlider !== 'function') return;
+    window.aclib.runVideoSlider({ zoneId });
+  };
+
+  const boot = async () => {
+    try {
+      await loadAclib();
+    } catch {
+      return;
+    }
+    injectSlots();
+    fireBanners();
+    fireVideoSlider();
+    window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();

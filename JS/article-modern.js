@@ -249,4 +249,19 @@
       relatedSection.hidden = false;
     }
   }
+
+  // Adcash Display — redesigned Student Hub articles only
+  (() => {
+    if (!document.querySelector('main.blog-article-page .blog-article-hero')) return;
+    if (document.querySelector('script[data-adcash-student-hub]')) return;
+    const current = document.currentScript;
+    const src = current && current.src
+      ? current.src.replace(/[^/]+$/, 'adcash-student-hub.js')
+      : '../../JS/adcash-student-hub.js';
+    const el = document.createElement('script');
+    el.src = src;
+    el.defer = true;
+    el.dataset.adcashStudentHub = '1';
+    document.body.appendChild(el);
+  })();
 })();
