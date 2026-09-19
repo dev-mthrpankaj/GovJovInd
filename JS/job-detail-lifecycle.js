@@ -380,36 +380,33 @@
     const footer = document.querySelector('body > footer');
     if (!bar) return;
 
-    // Keep the mobile action bar hidden until the "About This Recruitment"
-    // section is reached. This is detected by its heading, so no HTML changes
-    // or extra IDs are required on individual job pages.
+    // Mobile CTA stays completely hidden until the About section is actually
+    // in view. No HTML changes or extra IDs are required.
     const aboutSection = [...document.querySelectorAll('.gjd-section')].find(section => {
       const heading = section.querySelector('h2');
       return heading && heading.textContent.trim().toLowerCase() === 'about this recruitment';
     });
 
-    let aboutReached = false;
+    let aboutVisible = false;
     let footerVisible = false;
-
-    // Prevent a mobile flash before IntersectionObserver reports its first state.
-    bar.classList.add('is-footer-visible');
 
     const setState = () => {
       const topVisible = Boolean(document.querySelector('.go-top-btn.is-visible'));
-      const hide = !aboutReached || footerVisible || topVisible;
-      bar.classList.toggle('is-footer-visible', hide);
-      bar.setAttribute('aria-hidden', hide ? 'true' : 'false');
+      const visible = aboutVisible && !footerVisible && !topVisible;
+      bar.classList.toggle('is-visible', visible);
+      bar.classList.toggle('is-footer-visible', !visible);
+      bar.setAttribute('aria-hidden', visible ? 'false' : 'true');
     };
 
     if ('IntersectionObserver' in window) {
       if (aboutSection) {
         new IntersectionObserver(entries => {
-          if (entries.some(e => e.isIntersecting)) aboutReached = true;
+          aboutVisible = entries.some(e => e.isIntersecting);
           setState();
-        }, {threshold:0}).observe(aboutSection);
+        }, {threshold:0.05}).observe(aboutSection);
       } else {
-        // If a legacy page has no About section, preserve the previous behaviour.
-        aboutReached = true;
+        // Legacy page without an About section: keep the bar available.
+        aboutVisible = true;
       }
 
       if (footer) {
@@ -419,13 +416,15 @@
         }, {threshold:0}).observe(footer);
       }
     } else {
-      // Fallback for very old browsers without IntersectionObserver.
-      aboutReached = !aboutSection || window.scrollY >= aboutSection.offsetTop - window.innerHeight;
+      aboutVisible = !aboutSection ||
+        (window.scrollY + window.innerHeight >= aboutSection.offsetTop + 20);
     }
+
+    // Hide it immediately before the first observer callback.
+    setState();
 
     window.addEventListener('scroll', setState, {passive:true});
     window.addEventListener('resize', setState, {passive:true});
-    setState();
   }
 
   function initInteractions() {
