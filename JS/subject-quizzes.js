@@ -358,7 +358,7 @@
     if (!pagination && list && list.parentNode) {
       list.insertAdjacentHTML(
         "afterend",
-        '<nav class="subject-pagination" data-subject-pagination aria-label="Quiz pages" hidden></nav>'
+        '<div class="subject-pagination" data-subject-pagination role="navigation" aria-label="Quiz pages" hidden></div>'
       );
       pagination = document.querySelector("[data-subject-pagination]");
     }

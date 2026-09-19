@@ -410,6 +410,26 @@
 .family-list-head h2 { margin: 4px 0 0; color: var(--fq-ink); font-size: 23px; letter-spacing: -0.015em; }
 .family-list-head p { margin: 4px 0 0; color: var(--fq-muted); font-size: 13px; }
 
+/* Override global style.css `nav { position:fixed }` on mobile — pagination is not header nav */
+.family-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 22px 0 4px;
+  position: static !important;
+  transform: none !important;
+  inset: auto !important;
+  width: 100% !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  z-index: auto !important;
+}
+
 .family-quiz-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

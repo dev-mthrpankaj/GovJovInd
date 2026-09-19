@@ -120,7 +120,7 @@
       .family-filter-v4 .family-filter-copy{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
       .family-filter-v4 .family-filter-copy strong{font-size:14px}.family-filter-v4 .family-filter-copy small{font-size:11px}
       .family-filter-v4 .family-search,.family-filter-v4 .family-select{min-height:48px;padding-top:20px;padding-bottom:7px}
-      .family-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;margin:22px 0 4px}
+      .family-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;margin:22px 0 4px;position:static!important;transform:none!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;inset:auto!important;width:100%!important;max-height:none!important;overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important;z-index:auto!important}
       .family-page-btn{display:inline-flex;align-items:center;justify-content:center;min-width:38px;min-height:38px;padding:7px 11px;border:1px solid var(--fq-border);border-radius:10px;background:#fff;color:#475569;cursor:pointer;font:inherit;font-size:12px;font-weight:800}
       .family-page-btn:hover,.family-page-btn:focus-visible{border-color:var(--fq-accent);color:var(--fq-accent-strong)}
       .family-page-btn[aria-current="page"]{border-color:var(--fq-accent);background:var(--fq-accent);color:#fff;box-shadow:0 6px 14px var(--fq-accent-glow)}
@@ -150,7 +150,8 @@
     resetButton = toolbar.querySelector("[data-family-filter-reset]");
 
     if (list && !document.getElementById("familyQuizPagination")) {
-      list.insertAdjacentHTML("afterend", '<nav class="family-pagination" id="familyQuizPagination" aria-label="Quiz pages"></nav>');
+      // Use div[role=navigation] — global style.css targets bare `nav` as mobile header menu (position:fixed)
+      list.insertAdjacentHTML("afterend", '<div class="family-pagination" id="familyQuizPagination" role="navigation" aria-label="Quiz pages"></div>');
     }
     pagination = document.getElementById("familyQuizPagination");
   }
