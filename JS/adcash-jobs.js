@@ -93,15 +93,17 @@
       links.insertAdjacentElement('beforebegin', slot);
     }
 
-    if (sidebar && filledZones.desktop120x600) {
+    // 120×600 sits as a 3rd column beside Quick Nav — not inside the sidebar
+    const layout = document.querySelector('.gjd-page .gjd-layout');
+    if (layout && filledZones.desktop120x600) {
       const slot = makeSlot('skyscraper', '120x600');
-      slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--sidebar');
-      sidebar.appendChild(slot);
-    }
-
-    // Fallback mid placement if update strip missing but content exists
-    if (content && !document.querySelector('[data-adcash-slot="rectangle"]') && filledZones.mobile300x250 && links) {
-      /* already handled above */
+      slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
+      layout.classList.add('has-ad-rail');
+      if (sidebar && sidebar.parentNode === layout) {
+        sidebar.insertAdjacentElement('afterend', slot);
+      } else {
+        layout.appendChild(slot);
+      }
     }
   };
 

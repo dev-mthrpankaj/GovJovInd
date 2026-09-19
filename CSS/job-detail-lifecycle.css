@@ -101,18 +101,38 @@
 .gjd-ad--leaderboard .gjd-ad-frame{min-height:90px;max-width:728px}
 .gjd-ad--mobile-strip .gjd-ad-frame{min-height:100px;max-width:300px}
 .gjd-ad--rectangle .gjd-ad-frame{min-height:250px;max-width:300px}
-.gjd-ad--skyscraper{
-  margin-top:14px;
+.gjd-layout.has-ad-rail{
+  grid-template-columns:minmax(0,1fr) 270px 132px;
+  gap:18px;
+}
+.gjd-page .gjd-main:has(.has-ad-rail){
+  width:min(1380px,calc(100% - 24px));
+}
+.gjd-ad--skyscraper.gjd-ad--rail{
+  margin:0;
+  padding:10px 6px;
+  align-self:start;
   position:sticky;
   top:calc(var(--gjd-sticky-top,92px) + 8px);
+  width:132px;
+  justify-self:end;
 }
-.gjd-ad--skyscraper .gjd-ad-frame{min-height:600px;max-width:120px}
+.gjd-ad--skyscraper .gjd-ad-frame{min-height:600px;width:120px;max-width:120px}
 .gjd-ad--desktop-only{display:flex}
 .gjd-ad--mobile-only{display:none}
+@media(max-width:1200px){
+  .gjd-layout.has-ad-rail{grid-template-columns:minmax(0,1fr) 245px 132px;gap:14px}
+}
+@media(max-width:1100px){
+  /* Prefer Quick Nav over skyscraper when space is tight */
+  .gjd-layout.has-ad-rail{grid-template-columns:minmax(0,1fr) 245px}
+  .gjd-ad--rail{display:none!important}
+}
 @media(max-width:860px){
   .gjd-ad--desktop-only{display:none!important}
   .gjd-ad--mobile-only{display:flex}
   .gjd-ad--skyscraper{display:none!important}
+  .gjd-layout.has-ad-rail{grid-template-columns:1fr}
   .gjd-ad{padding:10px 8px;border-radius:12px}
 }
 @media print{
