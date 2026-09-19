@@ -14,7 +14,7 @@ const excludedNameToken = /(?:^|[ ._-])(draft|drafts|tests|backup|backups|bak|ol
 const excludedExactNames = new Set(["test", "test-page", "test-pages"]);
 
 const sitemapGroups = [
-  { name: "jobs", file: "sitemap-jobs.xml", match: p => /^Job_Details\//i.test(p) },
+  { name: "jobs", file: "sitemap-jobs.xml", match: p => /^(jobs|Job_Details)\//i.test(p) },
   { name: "admit-cards", file: "sitemap-admit-cards.xml", match: p => /^AdmitCard_Details\//i.test(p) },
   { name: "results", file: "sitemap-results.xml", match: p => /^Result_Details\//i.test(p) },
   { name: "answer-keys", file: "sitemap-answer-keys.xml", match: p => /^AnswerKey_Details\//i.test(p) },
