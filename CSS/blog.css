@@ -1810,9 +1810,22 @@
   line-height:1.25;
 }
 .gju-blog-ad--skyscraper .gju-blog-ad-frame{
-  min-height:600px;
+  min-height:0;
   width:120px;
   max-width:120px;
+}
+.gju-blog-ad--skyscraper.is-filled .gju-blog-ad-frame{
+  min-height:600px;
+}
+.article-aside-rail.ad-rail-empty{
+  /* TOC only — skyscraper slot is hidden */
+  gap: 0;
+}
+.article-layout.has-ad-rail.ad-rail-empty{
+  grid-template-columns: minmax(0, 1fr) max-content;
+}
+.blog-article-page:has(.article-layout.ad-rail-empty){
+  width: min(1180px, 100%);
 }
 .gju-blog-ad--desktop-only{display:flex}
 .gju-blog-ad--mobile-only{display:none}

@@ -133,8 +133,20 @@
   grid-template-columns:minmax(0,1fr) 270px 132px;
   gap:18px;
 }
-.gjd-page .gjd-main:has(.has-ad-rail){
+/* Collapse 3rd column when skyscraper is empty / hidden */
+.gjd-layout.has-ad-rail.ad-rail-empty,
+.gjd-layout:has(> .gjd-ad--skyscraper.is-empty),
+.gjd-layout:has(> .gjd-ad--skyscraper[hidden]){
+  grid-template-columns:minmax(0,1fr) 270px;
+  gap:18px;
+}
+.gjd-page .gjd-main:has(.has-ad-rail:not(.ad-rail-empty)){
   width:min(1380px,calc(100% - 24px));
+}
+.gjd-page .gjd-main:has(.ad-rail-empty),
+.gjd-page .gjd-main:has(.gjd-ad--skyscraper.is-empty),
+.gjd-page .gjd-main:has(.gjd-ad--skyscraper[hidden]){
+  width:min(1180px,calc(100% - 24px));
 }
 .gjd-ad--skyscraper.gjd-ad--rail{
   margin:0;
@@ -145,7 +157,15 @@
   width:132px;
   justify-self:end;
 }
-.gjd-ad--skyscraper .gjd-ad-frame{min-height:600px;width:120px;max-width:120px}
+/* Don't reserve 600px blank until creative actually fills */
+.gjd-ad--skyscraper .gjd-ad-frame{
+  min-height:0;
+  width:120px;
+  max-width:120px;
+}
+.gjd-ad--skyscraper.is-filled .gjd-ad-frame{
+  min-height:600px;
+}
 .gjd-ad--desktop-only{display:flex}
 .gjd-ad--mobile-only{display:none}
 @media(max-width:1200px){

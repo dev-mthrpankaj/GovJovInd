@@ -137,21 +137,65 @@
     });
   };
 
+  const expectedMinFill = (slot) => {
+    const key = slot.dataset.adcashSlot || '';
+    if (key === 'skyscraper') return 280;
+    if (key === 'leaderboard') return 50;
+    return 120;
+  };
+
+  const creativeFillPx = (frame) => {
+    if (!frame) return 0;
+    let maxH = 0;
+    frame.querySelectorAll('iframe, img, object, embed, video, a, ins, div').forEach((node) => {
+      maxH = Math.max(maxH, node.offsetHeight || 0, node.clientHeight || 0);
+    });
+    if (!maxH) maxH = Math.max(frame.scrollHeight || 0, frame.offsetHeight || 0);
+    return maxH;
+  };
+
+  const slotLooksFilled = (slot) => {
+    const frame = slot.querySelector('.gju-blog-ad-frame');
+    if (!frame) return false;
+    const fill = creativeFillPx(frame);
+    if (fill < expectedMinFill(slot)) return false;
+    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
+    const hasLinks = frame.querySelectorAll('a').length > 0;
+    const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
+    return hasMedia || (hasLinks && fill >= expectedMinFill(slot)) || htmlLen > 80;
+  };
+
+  const syncBlogAdRail = () => {
+    const layout = document.querySelector('main.blog-article-page .article-layout');
+    const rail = document.querySelector('main.blog-article-page .article-aside-rail');
+    const sky = document.querySelector('main.blog-article-page .gju-blog-ad--skyscraper');
+    const skyLive = Boolean(
+      sky
+      && !sky.hidden
+      && !sky.classList.contains('is-empty')
+      && window.getComputedStyle(sky).display !== 'none'
+    );
+    if (layout) {
+      // Keep rail wrapper column even when skyscraper is empty (TOC still needs it)
+      layout.classList.toggle('has-ad-rail', Boolean(rail));
+      layout.classList.toggle('ad-rail-empty', Boolean(rail) && !skyLive);
+    }
+    if (rail) rail.classList.toggle('ad-rail-empty', !skyLive);
+  };
+
   const hideEmptySlots = () => {
     document.querySelectorAll('.gju-blog-ad[data-adcash-slot]').forEach((slot) => {
-      if (window.getComputedStyle(slot).display === 'none') return;
-      const frame = slot.querySelector('.gju-blog-ad-frame');
-      if (!frame) return;
-      const hasCreative = Boolean(
-        frame.querySelector('iframe, img, a, object, embed')
-        || frame.children.length > 1
-        || (frame.offsetHeight > 40 && frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length > 20)
-      );
-      if (!hasCreative) {
-        slot.classList.add('is-empty');
-        slot.hidden = true;
+      if (slotLooksFilled(slot)) {
+        slot.classList.remove('is-empty');
+        slot.hidden = false;
+        slot.classList.add('is-filled');
+        return;
       }
+      slot.classList.add('is-empty');
+      slot.classList.remove('is-filled');
+      slot.hidden = true;
     });
+    syncBlogAdRail();
   };
 
   const fireVideoSlider = () => {
@@ -169,8 +213,10 @@
     injectSlots();
     fireBanners();
     fireVideoSlider();
-    window.dispatchEvent(new Event('resize'));
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
+    window.setTimeout(hideEmptySlots, 5500);
+    window.setTimeout(hideEmptySlots, 9000);
+    window.dispatchEvent(new Event('resize'));
   };
 
   if (document.readyState === 'loading') {

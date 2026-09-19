@@ -16,7 +16,8 @@
     },
     autotagZoneId: '',
     aclibSrc: 'https://acscdn.com/script/aclib.js',
-    emptyHideMs: 4000
+    emptyHideMs: 3500,
+    emptyRecheckMs: [5500, 9000]
   };
 
   window.ADCASH_JOBS_CONFIG = CONFIG;
@@ -109,10 +110,10 @@
     }
 
     // Desktop skyscraper rail beside Quick Nav
+    // has-ad-rail is applied only after creative fill is confirmed (avoid blank 132px gap)
     if (layout && filledZones.desktop120x600) {
       const slot = makeSlot('skyscraper', '120x600');
       slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
-      layout.classList.add('has-ad-rail');
       if (sidebar && sidebar.parentNode === layout) {
         sidebar.insertAdjacentElement('afterend', slot);
       } else {
@@ -137,21 +138,71 @@
     });
   };
 
+  const expectedMinFill = (slot) => {
+    const key = slot.dataset.adcashSlot || '';
+    if (key === 'skyscraper') return 280;
+    if (key === 'leaderboard') return 50;
+    if (key === 'mobile-strip') return 60;
+    return 120; // rectangles
+  };
+
+  const creativeFillPx = (frame) => {
+    if (!frame) return 0;
+    const nodes = frame.querySelectorAll('iframe, img, object, embed, video, a, ins, div');
+    let maxH = 0;
+    nodes.forEach((node) => {
+      const h = Math.max(node.offsetHeight || 0, node.clientHeight || 0);
+      if (h > maxH) maxH = h;
+    });
+    // Fallback: frame itself grew with content
+    if (!maxH) maxH = Math.max(frame.scrollHeight || 0, frame.offsetHeight || 0);
+    return maxH;
+  };
+
+  const slotLooksFilled = (slot) => {
+    const frame = slot.querySelector('.gjd-ad-frame');
+    if (!frame) return false;
+    const fill = creativeFillPx(frame);
+    const minFill = expectedMinFill(slot);
+    // Tiny stub buttons / sparse default creatives fail this check
+    if (fill < minFill) return false;
+    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
+    const hasLinks = frame.querySelectorAll('a').length > 0;
+    const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
+    return hasMedia || (hasLinks && fill >= minFill) || htmlLen > 80;
+  };
+
+  const syncAdRailLayout = () => {
+    const layout = document.querySelector('.gjd-page .gjd-layout');
+    if (!layout) return;
+    const sky = layout.querySelector('.gjd-ad--skyscraper.gjd-ad--rail');
+    const skyLive = Boolean(
+      sky
+      && !sky.hidden
+      && !sky.classList.contains('is-empty')
+      && sky.classList.contains('is-filled')
+      && window.getComputedStyle(sky).display !== 'none'
+    );
+    layout.classList.toggle('has-ad-rail', skyLive);
+    layout.classList.toggle('ad-rail-empty', Boolean(sky) && !skyLive);
+  };
+
   const hideEmptySlots = () => {
     document.querySelectorAll('.gjd-ad[data-adcash-slot]').forEach((slot) => {
-      if (window.getComputedStyle(slot).display === 'none') return;
-      const frame = slot.querySelector('.gjd-ad-frame');
-      if (!frame) return;
-      const hasCreative = Boolean(
-        frame.querySelector('iframe, img, a, object, embed')
-        || (frame.children.length > 1)
-        || (frame.offsetHeight > 40 && frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length > 20)
-      );
-      if (!hasCreative) {
-        slot.classList.add('is-empty');
-        slot.hidden = true;
+      if (window.getComputedStyle(slot).display === 'none' && !slot.classList.contains('gjd-ad--skyscraper')) {
+        return;
       }
+      if (slotLooksFilled(slot)) {
+        slot.classList.remove('is-empty');
+        slot.hidden = false;
+        slot.classList.add('is-filled');
+        return;
+      }
+      slot.classList.add('is-empty');
+      slot.classList.remove('is-filled');
+      slot.hidden = true;
     });
+    syncAdRailLayout();
   };
 
   const runAutotagFallback = () => {
@@ -171,6 +222,7 @@
       injectDisplaySlots();
       fireDisplayBanners();
       window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
+      (CONFIG.emptyRecheckMs || []).forEach((ms) => window.setTimeout(hideEmptySlots, ms));
       return;
     }
 
