@@ -2,6 +2,16 @@
   const thumbnail = "../Assets/Home%20Page/GovJobUpdates_Resized_1785125335748.webp";
 
   window.GOVJOB_BLOGS = [
+
+    {
+  id: "pan-card-online-apply-2026-step-by-step-guide-hindi",
+  title: "PAN Card Online Apply 2026: पैन कार्ड कैसे बनाएं? Step-by-Step Guide in Hindi",
+  category: "Student Services",
+  date: "2026-09-20",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1789878973994.webp",
+  url: "student-hub/pan-card-online-apply-2026-step-by-step-guide-hindi.html",
+  excerpt: "PAN Card Online Apply 2026 की पूरी हिंदी guide: Instant e-PAN, Aadhaar OTP, नया Form 93, जरूरी documents, fees, regular PAN application और PAN status check करने की step-by-step जानकारी।"
+},
     {
   id: "ssc-cpo-2026-exam-pattern",
   title: "SSC CPO 2026 Exam Pattern Changed: Paper 1, Paper 2, PET & Selection",
