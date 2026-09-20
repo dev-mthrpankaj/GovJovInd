@@ -1608,11 +1608,11 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0118-20260716211450-0ef9bcd2": {
-      "updatedAt": "2026-07-16",
-      "hash": "8abf68ff1b4fa1ff406ed4657cdcc3e3af1d9a819786a3358de9590e295acd6c",
-      "title": "JSSC JILCCE Inter Level Online Form 2026 for 326 Post",
-      "lastPostedAt": "2026-07-16T16:06:09.743Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-19",
+      "hash": "cfc8cb16acf5fe169210c177e5bb6b30228936e0052dc4109396cbf7da389e49",
+      "title": "JSSC JILCCE Inter Level Online Form 2026 for 326 Post Re Open",
+      "lastPostedAt": "2026-09-19T16:44:06.427Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0115-20260716205802-97ca1c2a": {
       "updatedAt": "2026-07-16",
@@ -2529,6 +2529,13 @@
       "hash": "c8c1cba1702dd2f1b1b221ea9e23513f259f36138a1ce1b1155dbdaa98334643",
       "title": "AIIMS Rajkot Senior Resident Online Form 2026",
       "lastPostedAt": "2026-09-19T13:12:41.377Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0252-20260919210156-be0e4882": {
+      "updatedAt": "2026-09-19",
+      "hash": "c5fe1ab7ac570084ab96e0f9027c56fe312f3e836a90f88800b7334dd37e75d1",
+      "title": "JMI Teaching Recruitment 2026 for Various Post",
+      "lastPostedAt": "2026-09-19T16:44:07.508Z",
       "stateReason": "new"
     }
   },
@@ -4060,18 +4067,18 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0151-20260912063839-de6b6afe": {
-      "updatedAt": "2026-09-12",
-      "hash": "7fd0f684061c87bbc84cb4cbb5e39b5c8a1ae5d4f0c69b12f6b1f757292c3591",
-      "title": "Indian Air Force Agniveer Vayu Exam City Details 2026 | Intake 02/2027",
-      "lastPostedAt": "2026-09-12T01:36:56.135Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-19",
+      "hash": "6e246f3b5bb206a1f7f8e55f22416941eb395c7309c54ff215547aed7ae2e2e4",
+      "title": "Indian Air Force Agniveer Vayu Exam Admit Card 2026 | Intake 02/2027",
+      "lastPostedAt": "2026-09-19T16:44:07.982Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0152-20260912064642-3e565950": {
-      "updatedAt": "2026-09-12",
-      "hash": "a8cbce03fd332ae046ffa247c4008a2423223afcd790b7016f9d897f0bb5de6f",
-      "title": "Indian Air Force Airmen Group Y Medical Assistant Exam City Details 2026 | Intake 02/2027",
-      "lastPostedAt": "2026-09-12T01:36:56.899Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-19",
+      "hash": "6071f4fbb25b942bacc833deb6946120bc3030d8a255523a3a52da047d9bf512",
+      "title": "Indian Air Force Airmen Group Y Medical Assistant Admit Card 2026 | Intake 02/2027",
+      "lastPostedAt": "2026-09-19T16:44:08.388Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0153-20260912065903-87091ac9": {
       "updatedAt": "2026-09-12",
