@@ -31,7 +31,7 @@ function updateElement(html, id, value, options = {}) {
   const str = String(value);
   if (!str && !options.allowEmpty) return html;
   const expression = new RegExp(
-    `(<[a-z0-9]+\\\\b[^>]*\\\\bid=["']${id}["'][^>]*>)[\\\\s\\\\S]*?(</[a-z0-9]+>)`,
+    `(<[a-z0-9]+\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\\\S]*?(</[a-z0-9]+>)`,
     'i'
   );
   const match = html.match(expression);
@@ -42,7 +42,7 @@ function updateElement(html, id, value, options = {}) {
 function setAttr(html, id, attr, value) {
   if (value === undefined || value === null || value === '') return html;
   const expression = new RegExp(
-    `(<[a-z0-9]+\\\\b[^>]*\\\\bid=["']${id}["'][^>]*\\\\b${attr}=["'])[^"']*(["'])`,
+    `(<[a-z0-9]+\\b[^>]*\\bid=["']${id}["'][^>]*\\b${attr}=["'])[^"']*(["'])`,
     'i'
   );
   if (!expression.test(html)) return html;
@@ -61,7 +61,7 @@ function updateMeta(html, selector, value) {
 
 function replaceScriptJson(html, id, value) {
   const expression = new RegExp(
-    `(<script[^>]*\\\\bid=["']${id}["'][^>]*>)[\\\\s\\\\S]*?(</script>)`,
+    `(<script[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\\\S]*?(</script>)`,
     'i'
   );
   if (!expression.test(html)) return html;
