@@ -5758,11 +5758,11 @@
       "stateReason": "new"
     },
     "results:result-sheet-0009": {
-      "updatedAt": "2026-06-04",
-      "hash": "92a34edb3ae215843406dbc92733661b7dd80a987f49eacc935e3d84029954df",
-      "title": "Rajasthan REET Upper Primary Teacher Result 2026",
-      "lastPostedAt": "2026-07-05T10:30:20.462Z",
-      "stateReason": "new"
+      "updatedAt": "2026-06-05",
+      "hash": "1ccafd6c2a87109fedcc16877e4bc15ef149095d7bf5b44407840d2a337188c2",
+      "title": "SSC Delhi Police Head Constable (Ministerial) Result",
+      "lastPostedAt": "2026-09-21T19:16:18.615Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0006": {
       "updatedAt": "2026-06-02",
@@ -6637,6 +6637,27 @@
       "hash": "4c5ec6432a6b839b93ba5714d540a617d2a012f06bf079a2d4d4bf57f40b3741",
       "title": "MPESB Pre Agriculture Test PAT Result 2026",
       "lastPostedAt": "2026-09-21T15:54:26.412Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0011-1": {
+      "updatedAt": "2026-06-16",
+      "hash": "119a0313ce40ed178d3eb7cf0b8bf9c3f3c0a8d2f9d2846cc5b7cc5bad605d61",
+      "title": "UPSC Civil Services IAS IFS Result 2026",
+      "lastPostedAt": "2026-09-21T19:16:17.741Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0007-1": {
+      "updatedAt": "2026-06-04",
+      "hash": "da47d42824afeb717db31f225692ba5b69b37d612b3cae19cea4a37b08b88cbc",
+      "title": "SSC JHT Paper-II Result 2026 – Out",
+      "lastPostedAt": "2026-09-21T19:16:19.039Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0005": {
+      "updatedAt": "2026-06-02",
+      "hash": "cd7ae667a3630737ece1f7e91fce3ff77ef610899d410f154490d1fe854567b3",
+      "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
+      "lastPostedAt": "2026-09-21T19:16:19.428Z",
       "stateReason": "new"
     }
   }
