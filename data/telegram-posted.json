@@ -4191,6 +4191,13 @@
       "title": "MPESB Group 2 Sub Group 4 Patwari Admit Card 2026 for 2106 Post",
       "lastPostedAt": "2026-09-18T15:04:40.573Z",
       "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0169-20260921082834-8bbacd60": {
+      "updatedAt": "2026-09-21",
+      "hash": "733b53ad6083e3d44931fe269f38862e4f7abb2940010e6e91d2df9ea0516e03",
+      "title": "HPRCA Assistant Staff Nurse Admit Card 2026 for 312 Post",
+      "lastPostedAt": "2026-09-21T07:07:20.641Z",
+      "stateReason": "new"
     }
   },
   "answerKeys": {
@@ -6574,6 +6581,13 @@
       "hash": "8ab754d7f0586069303068fbbdeea6a23226c34a3440098e77c62b4ea7a3a644",
       "title": "NTA AIAPGET Result 2026 – OUT",
       "lastPostedAt": "2026-09-18T15:11:47.035Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0159-20260921083512-5174921e": {
+      "updatedAt": "2026-09-21",
+      "hash": "f956f911dc74280358bb85997379c253d10b0b2e4130364c2e839c30d6795007",
+      "title": "UPPSC Various Post Result 2024 for 109 Post",
+      "lastPostedAt": "2026-09-21T07:07:21.354Z",
       "stateReason": "new"
     }
   }
