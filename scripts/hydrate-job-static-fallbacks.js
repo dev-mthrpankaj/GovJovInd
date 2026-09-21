@@ -133,7 +133,7 @@ function normalizeLinks(job) {
 }
 
 function isUrl(value) {
-  return /^https?:\\/\\//i.test(String(value || ''));
+  return /^https?:\/\//i.test(String(value || ''));
 }
 
 function hydrate(html, job) {
@@ -152,8 +152,8 @@ function hydrate(html, job) {
   html = html.replace(/(<link[^>]*rel=["']canonical["'][^>]*href=["'])[^"']*(["'])/i,
     (m,a,b) => a + escAttr(job.seo && job.seo.canonical || '') + b);
 
-  if (job.seo && job.seo.title) html = html.replace(/<title>[\\s\\S]*?<\\/title>/i, '<title>' + esc(job.seo.title) + '</title>');
-  else if (job.title) html = html.replace(/<title>[\\s\\S]*?<\\/title>/i, '<title>' + esc(job.title) + '</title>');
+  if (job.seo && job.seo.title) html = html.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + esc(job.seo.title) + '</title>');
+  else if (job.title) html = html.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + esc(job.title) + '</title>');
 
   // Hero.
   html = updateElement(html, 'jobOrganization', job.organization);
