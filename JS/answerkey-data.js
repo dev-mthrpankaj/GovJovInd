@@ -656,12 +656,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
         "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
-        "detailPage": "../AnswerKey_Details/HTML/Railway-RRB-NTPC-Graduate-Level-CBT-II-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-07-15",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0035-20260711163654-cb7fc711",

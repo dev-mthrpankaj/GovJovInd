@@ -680,12 +680,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
-        "detailPage": "../Result_Details/HTML/Railway-RRB-NTPC-Graduate-Level-CBT-II-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0126-20260829175113-2157fbde",
