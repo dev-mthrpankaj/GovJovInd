@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0159-20260921083512-5174921e",
+        "title": "UPPSC Various Post Result 2024 for 109 Post",
+        "organization": "Uttar Pradesh Public Service Commission",
+        "department": "UPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-19",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://uppsc.up.nic.in/Open_PDF.aspx?I4PnQ0tBagmNKfqXmoSUnj3RSz4YcAsN",
+        "detailPage": "../jobs/uppsc-various-post-2024.html",
+        "updatedAt": "2026-09-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0143-20260910151254-754f3b10",
         "title": "DSSSB Result 2026 for 808/24 , 817/23",
         "organization": "Delhi Subordinate Service Selection Board DSSSB",
