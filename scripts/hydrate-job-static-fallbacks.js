@@ -69,18 +69,17 @@ function replaceScriptJson(html, id, value) {
 }
 
 function readJobData(html, file) {
-  const matches = html.match(/<script\\b[^>]*\\bid=["']jobData["'][^>]*>[\\s\\S]*?<\\/script>/ig) || [];
+  const matches = html.match(/<script\b[^>]*\bid=["']jobData["'][^>]*>[\s\S]*?<\/script>/ig) || [];
   if (matches.length !== 1) {
     throw new Error(`${file}: expected exactly one #jobData block, found ${matches.length}`);
   }
-  const body = matches[0].replace(/^<script\\b[^>]*>/i, '').replace(/<\\/script>$/i, '');
+  const body = matches[0].replace(/^<script\b[^>]*>/i, '').replace(/<\/script>$/i, '');
   try {
     return JSON.parse(body.trim());
   } catch (error) {
     throw new Error(`${file}: invalid #jobData JSON (${error.message})`);
   }
 }
-
 function fmtDate(value, long = false) {
   if (!value) return '';
   const d = new Date(value);
