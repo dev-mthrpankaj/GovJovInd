@@ -31,14 +31,13 @@ function updateElement(html, id, value, options = {}) {
   const str = String(value);
   if (!str && !options.allowEmpty) return html;
   const expression = new RegExp(
-    `(<[a-z0-9]+\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\S]*?(</[a-z0-9]+>)`,
+    `(<([a-z0-9]+)\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\S]*?(</\\2>)`,
     'i'
   );
   const match = html.match(expression);
   if (!match) return html;
-  return html.replace(expression, `$1${options.html ? str : esc(str)}$2`);
+  return html.replace(expression, `$1${options.html ? str : esc(str)}$3`);
 }
-
 function setAttr(html, id, attr, value) {
   if (value === undefined || value === null || value === '') return html;
   const expression = new RegExp(
