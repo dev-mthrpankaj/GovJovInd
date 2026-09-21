@@ -28,7 +28,7 @@ function jsonEsc(v) {
 }
 
 function readJobData(html, file) {
-  const match = html.match(/<script\\b[^>]*\\bid=["']jobData["'][^>]*>([\\s\\S]*?)<\\/script>/i);
+  const match = html.match(/<script\b[^>]*\bid=["']jobData["'][^>]*>([\s\S]*?)<\/script>/i);
   if (!match) throw new Error(file + ': #jobData was not found');
   try {
     return JSON.parse(match[1].trim());
@@ -119,7 +119,7 @@ function iconForType(type) {
 }
 
 function schemaLocation(location) {
-  const parts = String(location || '').split(/\\s*(?:&|,|\\/|\\band\\b)\\s*/i).map(x=>x.trim()).filter(Boolean);
+  const parts = String(location || '').split(/\s*(?:&|,|\/|\band\b)\s*/i).map(x=>x.trim()).filter(Boolean);
   const places = (parts.length ? parts : ['India']).map(name => ({
     '@type':'Place',
     address:{'@type':'PostalAddress', ...(name && !/^india$/i.test(name) ? {addressRegion:name} : {}), addressCountry:'IN'}
@@ -129,9 +129,9 @@ function schemaLocation(location) {
 
 function baseSalary(salary) {
   const text = String(salary || '');
-  const matches = [...text.matchAll(/\\d[\\d,]*/g)].map(m=>Number(m[0].replace(/,/g,''))).filter(Number.isFinite);
+  const matches = [...text.matchAll(/\d[\d,]*/g)].map(m=>Number(m[0].replace(/,/g,''))).filter(Number.isFinite);
   if (!matches.length) return undefined;
-  const value = {'@type':'QuantitativeValue', unitText:/year|annual|annum|p\\.a\\./i.test(text) ? 'YEAR' : 'MONTH'};
+  const value = {'@type':'QuantitativeValue', unitText:/year|annual|annum|p\.a\./i.test(text) ? 'YEAR' : 'MONTH'};
   if (matches.length >= 2) { value.minValue=Math.min(...matches.slice(0,2)); value.maxValue=Math.max(...matches.slice(0,2)); }
   else value.value=matches[0];
   return {'@type':'MonetaryAmount',currency:'INR',value};
