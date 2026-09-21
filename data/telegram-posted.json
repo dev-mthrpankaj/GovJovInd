@@ -5555,11 +5555,11 @@
       "stateReason": "new"
     },
     "results:result-sheet-0039": {
-      "updatedAt": "2026-07-02",
-      "hash": "a9d85545f765cd42c6452f8c2e84b98b6e7be543d8fa2257fef8b118ca0ad167",
-      "title": "SBI CBO Circle Based Officers Result 2026 for 2050 Post",
-      "lastPostedAt": "2026-07-05T09:46:24.293Z",
-      "stateReason": "new"
+      "updatedAt": "2026-07-03",
+      "hash": "6580bbd7a30845eabe9c99402fe093a9bab5b5e951ff5f47cd9e9dc71a81805b",
+      "title": "JPSC Jharkhand PCS Pre Result 2026",
+      "lastPostedAt": "2026-09-21T15:54:16.855Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0040": {
       "updatedAt": "2026-07-03",
@@ -5632,11 +5632,11 @@
       "stateReason": "new"
     },
     "results:result-sheet-0036": {
-      "updatedAt": "2026-07-01",
-      "hash": "1a670c8d40c575fb4859e74f9dfabe83095b6a2245fbb47be47b53d54ae09139",
-      "title": "RRB Group D Score Card Result 2025",
-      "lastPostedAt": "2026-07-05T09:52:06.207Z",
-      "stateReason": "new"
+      "updatedAt": "2026-07-02",
+      "hash": "bb682afc3d0a3c1190ef8ce915cfe717cfb256c532af7a455cbc2445adcdfa13",
+      "title": "RBI Officer Grade B DEPR Result 2026 for 60 Post",
+      "lastPostedAt": "2026-09-21T15:54:17.893Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0037": {
       "updatedAt": "2026-07-02",
@@ -5702,25 +5702,25 @@
       "stateReason": "new"
     },
     "results:result-sheet-0016": {
-      "updatedAt": "2026-06-20",
-      "hash": "7213353fc813d6565d35ee59ae3ce7b52db3458faf9505a9fdbb665560348341",
-      "title": "BPSC 70th Final Result 2026",
-      "lastPostedAt": "2026-07-05T10:30:07.436Z",
-      "stateReason": "new"
+      "updatedAt": "2026-06-22",
+      "hash": "0ef73d1b1082c9d1ded9654cef0cfede45e9a576b98d45079f90601863da3cea",
+      "title": "RBI Office Attendant Result 2026 for 572 Post",
+      "lastPostedAt": "2026-09-21T15:54:24.160Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0015": {
-      "updatedAt": "2026-06-19",
-      "hash": "39020574e177bef3cd18dccabbefd3779e0a4e5094883b1e3af74c502aa9f43d",
-      "title": "SSC Delhi Police Constable Executive Result 2026",
-      "lastPostedAt": "2026-07-05T10:30:08.004Z",
-      "stateReason": "new"
+      "updatedAt": "2026-06-20",
+      "hash": "a3e0e2f49d12f55e852df0270f02ff92aba6cdb2208a8867a13464086e77603c",
+      "title": "BPSC 70th Final Result 2026",
+      "lastPostedAt": "2026-09-21T15:54:24.812Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0014": {
-      "updatedAt": "2026-06-18",
-      "hash": "75cf23772df11913d263b8cbbc7588637bb7939366cfe6b78a32473d591a74e5",
-      "title": "MPESB Pre Agriculture Test PAT Result 2026",
-      "lastPostedAt": "2026-07-05T10:30:08.589Z",
-      "stateReason": "new"
+      "updatedAt": "2026-06-19",
+      "hash": "ede9c92b8470d9e836410f16c329b9d507b9a88c383735ba51e0897bda7162b2",
+      "title": "SSC Delhi Police Constable Executive Result 2026",
+      "lastPostedAt": "2026-09-21T15:54:25.519Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0013": {
       "updatedAt": "2026-06-17",
@@ -6602,6 +6602,41 @@
       "hash": "f956f911dc74280358bb85997379c253d10b0b2e4130364c2e839c30d6795007",
       "title": "UPPSC Various Post Result 2024 for 109 Post",
       "lastPostedAt": "2026-09-21T07:07:21.354Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0027-1": {
+      "updatedAt": "2026-07-01",
+      "hash": "c7e84ff92e00e436e77ef2976451d3e68c1cc6c144743baed168d1354bc34885",
+      "title": "RRB Group D Result Ranchi 2025",
+      "lastPostedAt": "2026-09-21T15:54:18.482Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0025-1": {
+      "updatedAt": "2026-06-27",
+      "hash": "bd35248755f850c61f326264f9f3ddbbd73f14929fe4c511c8b9b2314684f5ce",
+      "title": "UPSSSC ASO Assistant Statistical Officer Eligibility Result 2026 | 1565 Post",
+      "lastPostedAt": "2026-09-21T15:54:18.987Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0020-1": {
+      "updatedAt": "2026-06-24",
+      "hash": "2e4e8d4c6853d42c5db67af0bd0064227abf3f8a7d599e3d2d512c7f8a8c7079",
+      "title": "Rajasthan RSSB Agriculture Supervisor Result 2026",
+      "lastPostedAt": "2026-09-21T15:54:19.651Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0018-1": {
+      "updatedAt": "2026-06-23",
+      "hash": "e3b34d077d07f7a410bc9e137e2572b62bf441aa0533f1e86699e35ae4a81400",
+      "title": "UPPSC Staff Nurse Result 2026",
+      "lastPostedAt": "2026-09-21T15:54:23.530Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0013-1": {
+      "updatedAt": "2026-06-18",
+      "hash": "4c5ec6432a6b839b93ba5714d540a617d2a012f06bf079a2d4d4bf57f40b3741",
+      "title": "MPESB Pre Agriculture Test PAT Result 2026",
+      "lastPostedAt": "2026-09-21T15:54:26.412Z",
       "stateReason": "new"
     }
   }
