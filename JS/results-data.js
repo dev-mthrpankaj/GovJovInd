@@ -832,24 +832,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0115-20260825101733-93bc18da",
-        "title": "Railway RRB NTPC 10+2 Level UG Result 2026 – Declared",
-        "organization": "Railway Recruitment Board (RRB)",
-        "department": "RRB",
-        "category": "Central Government",
-        "year": "2026",
-        "resultDate": "2026-08-24",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://rrb.indianrailways.gov.in/",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-08-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0110-20260823125920-d5227cc1",
         "title": "HTET Score Card 2026 | Teacher Eligibility Test",
         "organization": "Haryana Teacher Eligibility Test",
@@ -1120,24 +1102,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0099-20260814211155-86a3098b",
-        "title": "Delhi High Court HJS Prelims Result 2026 – Out",
-        "organization": "High Court of Delhi",
-        "department": "HCD",
-        "category": "Judiciary",
-        "year": "2026",
-        "resultDate": "2026-08-14",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://delhihighcourt.nic.in/files/2026-08/upload_complete_notice.pdf",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-08-14",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0100-20260814211614-1e8f2a27",
         "title": "MHA IB Security Assistant / Executive Final Result 2026",
         "organization": "Ministry of Home Affairs",
@@ -1184,12 +1148,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://www.aiimsexams.ac.in/landingpage/result",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../Result_Details/HTML/AIIMS-CRE-5th-Group-B-C-Result-2026.html",
         "updatedAt": "2026-08-12",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0092-20260812184522-b4cc8bec",
