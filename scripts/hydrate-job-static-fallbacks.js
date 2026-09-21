@@ -31,7 +31,7 @@ function updateElement(html, id, value, options = {}) {
   const str = String(value);
   if (!str && !options.allowEmpty) return html;
   const expression = new RegExp(
-    `(<[a-z0-9]+\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\\\S]*?(</[a-z0-9]+>)`,
+    `(<[a-z0-9]+\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\S]*?(</[a-z0-9]+>)`,
     'i'
   );
   const match = html.match(expression);
@@ -61,7 +61,7 @@ function updateMeta(html, selector, value) {
 
 function replaceScriptJson(html, id, value) {
   const expression = new RegExp(
-    `(<script[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\\\S]*?(</script>)`,
+    `(<script[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\S]*?(</script>)`,
     'i'
   );
   if (!expression.test(html)) return html;
@@ -211,9 +211,9 @@ function hydrate(html, job) {
     html = updateElement(html, 'quickFacts', job.quickFacts.map(f =>
       '<article><span>' + esc(f.label) + '</span><strong>' + esc(f.value) + '</strong></article>'
     ).join(''), {html:true, allowEmpty:true});
-    html = html.replace(/(<[^>]*\\bid=["']quickFacts["'][^>]*?)\\bhidden(?=[ >])/i, '$1');
+    html = html.replace(/(<[^>]*\bid=["']quickFacts["'][^>]*?)\bhidden(?=[ >])/i, '$1');
   } else {
-    html = html.replace(/(<[^>]*\\bid=["']quickFacts["'][^>]*)(\\s+hidden)/i, '$1');
+    html = html.replace(/(<[^>]*\bid=["']quickFacts["'][^>]*)(\s+hidden)/i, '$1');
   }
 
   // Overview.
@@ -262,8 +262,8 @@ function hydrate(html, job) {
     esc(fmtDate(u.date)) + '</time><div><strong>' + esc(u.title || 'Recruitment Update') +
     '</strong><p>' + esc(u.text || '') + '</p></div></article>'
   ).join(''), {html:true, allowEmpty:true});
-  if (updates.length) html = html.replace(/(<[^>]*\\bid=["']updateHistory["'][^>]*?)\\bhidden(?=[ >])/i, '$1');
-  else html = html.replace(/(<[^>]*\\bid=["']updateHistory["'][^>]*)(\\s+hidden)/i, '$1');
+  if (updates.length) html = html.replace(/(<[^>]*\bid=["']updateHistory["'][^>]*?)\bhidden(?=[ >])/i, '$1');
+  else html = html.replace(/(<[^>]*\bid=["']updateHistory["'][^>]*)(\s+hidden)/i, '$1');
 
   // Vacancy / eligibility / fee / selection / documents.
   html = updateElement(html, 'vacancyTable', (job.vacancyRows || []).map(r =>
@@ -294,7 +294,7 @@ function hydrate(html, job) {
   const archiveSteps = job.applySteps || [];
   if (archiveSteps.length && (!currentStage || currentStage.type !== 'application')) {
     html = updateElement(html, 'applicationArchiveSteps', archiveSteps.map(x => '<li>' + esc(x) + '</li>').join(''), {html:true, allowEmpty:true});
-    html = html.replace(/(<[^>]*\\bid=["']applicationArchive["'][^>]*?)\\bhidden(?=[ >])/i, '$1');
+    html = html.replace(/(<[^>]*\bid=["']applicationArchive["'][^>]*?)\bhidden(?=[ >])/i, '$1');
   }
 
   // Important links.
@@ -386,8 +386,8 @@ for (const file of files) {
   }
 }
 
-console.log(`\\n${write ? 'Updated' : 'Preview'}: ${changed} changed, ${skipped} already current, ${errors.length} errors.`);
+console.log(`\n${write ? 'Updated' : 'Preview'}: ${changed} changed, ${skipped} already current, ${errors.length} errors.`);
 if (errors.length) {
-  console.error(errors.join('\\n'));
+  console.error(errors.join('\n'));
   process.exitCode = 1;
 }
