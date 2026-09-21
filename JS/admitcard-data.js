@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0169-20260921082834-8bbacd60",
+        "title": "HPRCA Assistant Staff Nurse Admit Card 2026 for 312 Post",
+        "organization": "Himachal Pradesh Rajya Chayan Aayog",
+        "department": "HPRCA",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-25",
+        "examEndDate": "",
+        "releaseDate": "2026-09-20",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn3.tcsion.com/EForms/configuredHtml/33096/102551/QmkJbBvLwTF0TTlLwN/Index.html",
+        "detailPage": "../jobs/hprca-assistant-staff-nurse-12-2026.html",
+        "updatedAt": "2026-09-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0151-20260912063839-de6b6afe",
         "title": "Indian Air Force Agniveer Vayu Exam Admit Card 2026 | Intake 02/2027",
         "organization": "Indian  Air Force",
