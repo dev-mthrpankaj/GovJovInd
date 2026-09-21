@@ -1,4 +1,5 @@
 name: Hydrate Job Static Fallbacks
+# Static SEO hydration runs automatically after job HTML or hydrator changes.
 
 on:
   push:
