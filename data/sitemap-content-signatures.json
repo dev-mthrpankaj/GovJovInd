@@ -65,10 +65,6 @@
       "signature": "13843d660bcb7f3191d556e318a4876f2310abe5573b60e4bd9d3ebce81819f3",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/06-2025-RRB-NTPC-Graduate-CBT-2-Admit-Card-2026.html": {
-      "signature": "dac09c63f158573492fb82b15d947115051b71a2afd092b870c4742ed1e3af3a",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/06-BPSC-Prosecution-Officer-Admit-Card-2026.html": {
       "signature": "0ae08246725799d41975c82ce1e392d314df8cc561117faa8cba53b0ec92e61f",
       "lastmod": "2026-08-12"
@@ -496,10 +492,6 @@
     "AnswerKey_Details/HTML/Railway-RRB-Isolated-Categories-Answer-Key-2026.html": {
       "signature": "2486ce011af268db731ea27a661e41cf2351f7d843c8ab9d1c1c273cdafb3985",
       "lastmod": "2026-08-14"
-    },
-    "AnswerKey_Details/HTML/Railway-RRB-NTPC-Graduate-Level-CBT-II-Answer-Key-2026.html": {
-      "signature": "55e3065f01b488a3e73e765ce2aa0346b8ff40b525022100a6084e63e3f1bcbc",
-      "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/Rajasthan-RSSB-LDC-Jr-Assistant-Answer-Key-2026.html": {
       "signature": "e42bac818f0ca7f0ee03b5aaf4abe21587ddf785790967cb71eb516561cc785c",
@@ -1934,7 +1926,7 @@
       "lastmod": "2026-09-12"
     },
     "jobs/hprca-assistant-staff-nurse-12-2026.html": {
-      "signature": "4936a92c24dda8f7b87d1a4d600a9c7783b430a052cc5cf10e2cd5b08f908e10",
+      "signature": "d747de91387c264426e6c44034c169e255a4d4ae4af67692f3a2d762c0d4ad24",
       "lastmod": "2026-09-21"
     },
     "jobs/hpsc-haryana-civil-service-2026.html": {
@@ -2073,6 +2065,10 @@
       "signature": "d63011e171f9665a98b6a9a9c1703bd046fca2945c9399e5aea5487d0b1d4b0f",
       "lastmod": "2026-09-15"
     },
+    "jobs/railway-rrb-ntpc-graduate-cen-06-2025.html": {
+      "signature": "a12a75c4da8b5a84c4b1b8852364178f4f1c59260afa90744419ec0852459548",
+      "lastmod": "2026-09-21"
+    },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
       "signature": "aa6ce78f8571e0a43bf3861a9da2fdd56d6c24dd0beb1eb3b1d41c8149d58e34",
       "lastmod": "2026-09-14"
@@ -2122,8 +2118,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/sbi-junior-associates-clerk-jca-2026.html": {
-      "signature": "569de9d004f1efbc8455f620ca25377e7695a4e19332d23267ee7d72745b85ba",
-      "lastmod": "2026-09-15"
+      "signature": "084926d50357c721456601da7ae5da1bab19cdcb4ffee1c8537cdcc9f15a1744",
+      "lastmod": "2026-09-21"
     },
     "jobs/sbi-po-2026.html": {
       "signature": "300447f302d686e8b6a2d46f3511820627216958059037cdf2e81f67473bc3c3",
@@ -2246,7 +2242,7 @@
       "lastmod": "2026-09-18"
     },
     "jobs/uppsc-various-post-2024.html": {
-      "signature": "a7c67e7916080ccbe22f0e4b0d60fd71464ebdbf582d0e7daa990d6681acb15a",
+      "signature": "09a914b6235395e9ef4c949543472a496048411c4347a9e7f1de4b7e9a773cea",
       "lastmod": "2026-09-21"
     },
     "jobs/upsc-capf-cpf-assistant-commandant-2026.html": {
@@ -2688,10 +2684,6 @@
     "Result_Details/HTML/Railway-RRB-NTPC-Graduate-CBTST-Result-2026.html": {
       "signature": "c2989716a7a56cb1d9e9daf46d11bc47ff3d8f36550d15b5824e116f79c8cdef",
       "lastmod": "2026-08-12"
-    },
-    "Result_Details/HTML/Railway-RRB-NTPC-Graduate-Level-CBT-II-Result-2026.html": {
-      "signature": "1ee1d66db8cb7c850d118e7d47c86d2d50a41eab794f6398ab980619a9a3fb76",
-      "lastmod": "2026-08-29"
     },
     "Result_Details/HTML/Rajasthan-Patwari-Final-Result-2025.html": {
       "signature": "6c8de5bc8c51680618b0d75d847646df24be4d4ada2b6a0e86ab015dfc7b48d1",
