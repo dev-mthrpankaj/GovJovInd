@@ -1,23 +1,40 @@
 (() => {
   'use strict';
 
-  // Adcash — only redesigned Student Hub articles
-  // Gate: main.blog-article-page + .blog-article-hero (same styling as SSC CPO pattern page)
+  // Adsterra — redesigned Student Hub articles only
+  // Gate: main.blog-article-page + .blog-article-hero
   const CONFIG = {
     enabled: true,
-    zones: {
-      desktop728x90: '12187254',
-      desktop120x600: '12187246',
-      mobile300x250: '12187270',
-      mobile300x100: '' // unused — weak fill
+    // Agar blank: Adsterra COPY CODE se exact host paste karo
+    invokeHost: 'www.highperformanceformat.com',
+    units: {
+      leaderboard: {
+        key: '83b45963c9b5e297e2716b97e5e7f1cd',
+        width: 728,
+        height: 90
+      },
+      skyscraper: {
+        key: 'b4cefd61066cf540b9a4543442f3bcb8',
+        width: 160,
+        height: 600
+      },
+      rectangle: {
+        key: '87119e54e06ec212fda2497c6e91b073',
+        width: 300,
+        height: 250
+      },
+      mobileStrip: {
+        key: 'cdd822299805deaaddd42d620ded189a',
+        width: 320,
+        height: 50
+      }
     },
-    // Floating video — off (too intrusive on exam/study pages)
-    videoSliderZoneId: '',
-    aclibSrc: 'https://acscdn.com/script/aclib.js',
-    emptyHideMs: 4000
+    emptyHideMs: 4000,
+    emptyRecheckMs: [7000, 11000],
+    bannerGapMs: 400
   };
 
-  window.ADCASH_STUDENT_HUB_CONFIG = CONFIG;
+  window.ADSTERRA_STUDENT_HUB_CONFIG = CONFIG;
 
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
   if (!CONFIG.enabled) return;
@@ -25,54 +42,23 @@
   if (!document.querySelector('main.blog-article-page .blog-article-hero')) return;
   if (window.matchMedia('(print)').matches) return;
 
-  const zones = Object.fromEntries(
-    Object.entries(CONFIG.zones || {}).filter(([, id]) => Boolean(String(id || '').trim()))
-  );
-  if (!Object.keys(zones).length) return;
-
+  const units = CONFIG.units || {};
   const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
   const isMobile = () => !isDesktop();
-
-  const loadAclib = () => new Promise((resolve, reject) => {
-    if (window.aclib && typeof window.aclib.runBanner === 'function') {
-      resolve(window.aclib);
-      return;
-    }
-    const existing = document.querySelector('script[data-adcash-aclib]');
-    if (existing) {
-      existing.addEventListener('load', () => resolve(window.aclib), { once: true });
-      existing.addEventListener('error', () => reject(new Error('aclib load failed')), { once: true });
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = CONFIG.aclibSrc;
-    script.async = true;
-    script.dataset.adcashAclib = '1';
-    script.onload = () => resolve(window.aclib);
-    script.onerror = () => reject(new Error('aclib load failed'));
-    document.head.appendChild(script);
-  });
 
   const makeSlot = (slotKey, sizeLabel) => {
     const wrap = document.createElement('aside');
     wrap.className = `gju-blog-ad gju-blog-ad--${slotKey}`;
-    wrap.dataset.adcashSlot = slotKey;
+    wrap.dataset.adSlot = slotKey;
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
       <div class="gju-blog-ad-label">
         <span class="gju-blog-ad-label-tag">Ad</span>
         <span class="gju-blog-ad-label-note">GovJobUpdates does not endorse this.</span>
       </div>
-      <div class="gju-blog-ad-frame" data-adcash-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
+      <div class="gju-blog-ad-frame" data-ad-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
     `.trim();
     return wrap;
-  };
-
-  const runBannerIn = (frame, zoneId) => {
-    if (!frame || !zoneId || !window.aclib || typeof window.aclib.runBanner !== 'function') return;
-    const runner = document.createElement('script');
-    runner.textContent = `aclib.runBanner({ zoneId: ${JSON.stringify(String(zoneId))} });`;
-    frame.appendChild(runner);
   };
 
   const injectSlots = () => {
@@ -81,30 +67,33 @@
     const sidebar = document.querySelector('main.blog-article-page .article-sidebar');
     const layout = document.querySelector('main.blog-article-page .article-layout');
 
-    // 1) Hero ke just neeche (after trust strip + stats)
+    // 1) Hero ke just neeche
     if (hero && hero.parentNode) {
-      if (zones.desktop728x90) {
+      if (units.leaderboard?.key) {
         const slot = makeSlot('leaderboard', '728x90');
         slot.classList.add('gju-blog-ad--desktop-only');
         hero.insertAdjacentElement('afterend', slot);
       }
-      if (zones.mobile300x250) {
+      if (units.rectangle?.key) {
         const slot = makeSlot('mobile-top', '300x250');
         slot.classList.add('gju-blog-ad--mobile-only', 'gju-blog-ad--rectangle');
+        hero.insertAdjacentElement('afterend', slot);
+      } else if (units.mobileStrip?.key) {
+        const slot = makeSlot('mobile-strip', '320x50');
+        slot.classList.add('gju-blog-ad--mobile-only');
         hero.insertAdjacentElement('afterend', slot);
       }
     }
 
-    // 2) FAQ se pehle — high-intent mid slot
-    if (faq && faq.parentNode && zones.mobile300x250) {
+    // 2) FAQ se pehle
+    if (faq && faq.parentNode && units.rectangle?.key) {
       const slot = makeSlot('rectangle', '300x250');
       faq.insertAdjacentElement('beforebegin', slot);
     }
 
-    // 3) Desktop: TOC + 120×600 side-by-side in one sticky rail
-    //    (never stack ad under TOC inside .article-sidebar)
-    if (layout && zones.desktop120x600) {
-      const slot = makeSlot('skyscraper', '120x600');
+    // 3) Desktop rail: TOC + 160×600
+    if (layout && units.skyscraper?.key && isDesktop()) {
+      const slot = makeSlot('skyscraper', '160x600');
       slot.classList.add('gju-blog-ad--desktop-only', 'gju-blog-ad--rail');
       layout.classList.add('has-ad-rail');
 
@@ -124,24 +113,69 @@
     }
   };
 
-  const fireBanners = () => {
-    const map = [
-      ['leaderboard', zones.desktop728x90, () => isDesktop()],
-      ['mobile-top', zones.mobile300x250, () => isMobile()],
-      ['rectangle', zones.mobile300x250, () => true],
-      ['skyscraper', zones.desktop120x600, () => isDesktop()]
+  const invokeUrl = (key) => {
+    const host = String(CONFIG.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
+    return `https://${host}/${key}/invoke.js`;
+  };
+
+  const loadBannerInto = (frame, unit) => new Promise((resolve) => {
+    if (!frame || !unit?.key) {
+      resolve(false);
+      return;
+    }
+    frame.innerHTML = '';
+
+    const opts = {
+      key: unit.key,
+      format: 'iframe',
+      height: unit.height,
+      width: unit.width,
+      params: {}
+    };
+
+    window.atOptions = opts;
+
+    const conf = document.createElement('script');
+    conf.type = 'text/javascript';
+    conf.textContent = `atOptions = ${JSON.stringify(opts)};`;
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = invokeUrl(unit.key);
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+
+    frame.appendChild(conf);
+    frame.appendChild(script);
+  });
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  const fireBanners = async () => {
+    const queue = [
+      ['leaderboard', units.leaderboard, () => isDesktop()],
+      ['mobile-top', units.rectangle, () => isMobile()],
+      ['mobile-strip', units.mobileStrip, () => isMobile() && !units.rectangle?.key],
+      ['rectangle', units.rectangle, () => true],
+      ['skyscraper', units.skyscraper, () => isDesktop()]
     ];
-    map.forEach(([slotKey, zoneId, shouldShow]) => {
-      if (!zoneId || !shouldShow()) return;
-      runBannerIn(document.querySelector(`[data-adcash-frame="${slotKey}"]`), zoneId);
-    });
+
+    for (const [slotKey, unit, shouldShow] of queue) {
+      if (!unit?.key || !shouldShow()) continue;
+      const frame = document.querySelector(`[data-ad-frame="${slotKey}"]`);
+      if (!frame) continue;
+      await loadBannerInto(frame, unit);
+      await sleep(CONFIG.bannerGapMs || 400);
+    }
   };
 
   const expectedMinFill = (slot) => {
-    const key = slot.dataset.adcashSlot || '';
+    const key = slot.dataset.adSlot || '';
     if (key === 'skyscraper') return 280;
     if (key === 'leaderboard') return 50;
-    return 120;
+    if (key === 'mobile-strip') return 40;
+    return 100;
   };
 
   const creativeFillPx = (frame) => {
@@ -177,7 +211,6 @@
       && window.getComputedStyle(sky).display !== 'none'
     );
     if (layout) {
-      // Keep rail wrapper column even when skyscraper is empty (TOC still needs it)
       layout.classList.toggle('has-ad-rail', Boolean(rail));
       layout.classList.toggle('ad-rail-empty', Boolean(rail) && !skyLive);
     }
@@ -185,7 +218,7 @@
   };
 
   const hideEmptySlots = () => {
-    document.querySelectorAll('.gju-blog-ad[data-adcash-slot]').forEach((slot) => {
+    document.querySelectorAll('.gju-blog-ad[data-ad-slot]').forEach((slot) => {
       if (slotLooksFilled(slot)) {
         slot.classList.remove('is-empty');
         slot.hidden = false;
@@ -199,24 +232,13 @@
     syncBlogAdRail();
   };
 
-  const fireVideoSlider = () => {
-    const zoneId = String(CONFIG.videoSliderZoneId || '').trim();
-    if (!zoneId || !window.aclib || typeof window.aclib.runVideoSlider !== 'function') return;
-    window.aclib.runVideoSlider({ zoneId });
-  };
-
   const boot = async () => {
-    try {
-      await loadAclib();
-    } catch {
-      return;
-    }
     injectSlots();
-    fireBanners();
-    fireVideoSlider();
+    await fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
-    window.setTimeout(hideEmptySlots, 5500);
-    window.setTimeout(hideEmptySlots, 9000);
+    (CONFIG.emptyRecheckMs || []).forEach((ms) => {
+      window.setTimeout(hideEmptySlots, ms);
+    });
     window.dispatchEvent(new Event('resize'));
   };
 

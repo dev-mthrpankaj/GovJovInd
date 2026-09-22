@@ -1698,7 +1698,7 @@
   }
 }
 
-/* Adcash slots — match article TOC/share cards (JS/adcash-student-hub.js) */
+/* Adsterra slots — Student Hub articles (JS/adcash-student-hub.js) */
 .gju-blog-ad{
   display:flex;
   flex-direction:column;
@@ -1788,13 +1788,20 @@
   max-width:100%;
   margin-inline:auto;
 }
+.gju-blog-ad--mobile-strip .gju-blog-ad-frame{
+  min-height:50px;
+  max-width:320px;
+}
+
+/* Skyscraper rail — 160×600 (was 120×600) */
 .gju-blog-ad--skyscraper.gju-blog-ad--rail{
   margin:0;
   padding:10px 6px 12px;
-  flex:0 0 132px;
-  width:132px;
-  max-width:132px;
+  flex:0 0 176px;
+  width:176px;
+  max-width:176px;
   align-self:flex-start;
+  min-height:620px;
 }
 .gju-blog-ad--skyscraper.gju-blog-ad--rail .gju-blog-ad-label{
   margin:-10px -6px 0;
@@ -1810,15 +1817,16 @@
   line-height:1.25;
 }
 .gju-blog-ad--skyscraper .gju-blog-ad-frame{
-  min-height:0;
-  width:120px;
-  max-width:120px;
-}
-.gju-blog-ad--skyscraper.is-filled .gju-blog-ad-frame{
   min-height:600px;
+  width:160px;
+  min-width:160px;
+  max-width:160px;
+}
+.gju-blog-ad--skyscraper.is-empty:not([hidden]){
+  opacity:.35;
+  pointer-events:none;
 }
 .article-aside-rail.ad-rail-empty{
-  /* TOC only — skyscraper slot is hidden */
   gap: 0;
 }
 .article-layout.has-ad-rail.ad-rail-empty{
@@ -1826,6 +1834,9 @@
 }
 .blog-article-page:has(.article-layout.ad-rail-empty){
   width: min(1180px, 100%);
+}
+.blog-article-page:has(.article-layout.has-ad-rail:not(.ad-rail-empty)){
+  width: min(1320px, 100%);
 }
 .gju-blog-ad--desktop-only{display:flex}
 .gju-blog-ad--mobile-only{display:none}
@@ -1845,13 +1856,8 @@
   .gju-blog-ad--rectangle,
   .gju-blog-ad--mobile-top{
     margin:1rem auto;
-    width:min(100%, 340px);
-  }
-  .gju-blog-ad-label{
-    margin:-10px -10px 0;
   }
 }
 @media print{
-  .gju-blog-ad,
-  .article-aside-rail .gju-blog-ad{display:none!important}
+  .gju-blog-ad{display:none!important}
 }
