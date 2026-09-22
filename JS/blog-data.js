@@ -4,6 +4,16 @@
   window.GOVJOB_BLOGS = [
 
     {
+  id: "ssc-cgl-tier-2-previous-year-papers",
+  title: "SSC CGL Tier 2 Previous Year Papers PDF – Free Download",
+  category: "SSC",
+  date: "2026-09-22",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1790078248210.webp",
+  url: "student-hub/ssc-cgl-tier-2-previous-year-papers.html",
+  excerpt: "Download SSC CGL Tier 2 Previous Year Papers PDF from 2022 onwards. Practise year-wise papers, understand the Tier-II pattern and improve your SSC CGL Mains preparation."
+},
+
+    {
   id: "pan-card-online-apply-2026-step-by-step-guide-hindi",
   title: "PAN Card Online Apply 2026: पैन कार्ड कैसे बनाएं? Step-by-Step Guide in Hindi",
   category: "Student Services",
