@@ -3591,11 +3591,11 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0083-20260723185343-0a1cf9ed": {
-      "updatedAt": "2026-07-23",
-      "hash": "2891e38358f16d8be06a0fd59c460d4f7604ad5fc266d2ab808ae68ecdf24c68",
+      "updatedAt": "2026-09-22",
+      "hash": "043f93dda303ae47a240a95b622df6a334df3d2b6326c38df7f9959553e5aa58",
       "title": "SSC Delhi Police Head Constable Ministerial PET & MT / DV Admit Card 2026",
-      "lastPostedAt": "2026-07-23T16:23:20.757Z",
-      "stateReason": "new"
+      "lastPostedAt": "2026-09-22T11:31:09.892Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0084-20260723190100-8df4c274": {
       "updatedAt": "2026-07-23",
@@ -4046,11 +4046,11 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0148-20260910140725-0bc9bdd6": {
-      "updatedAt": "2026-09-10",
-      "hash": "a502bf13a3e7d34e13a5f9722276fc541b74549529633d16e7e604e6e4c988f8",
+      "updatedAt": "2026-09-22",
+      "hash": "a91a14a3c3a3bc318ee0987f19a7ab17f90acabc33d1814e7f5ce45c369173b7",
       "title": "SSC Delhi Police Constable Executive PE&MT Admit Card",
-      "lastPostedAt": "2026-09-10T09:24:15.831Z",
-      "stateReason": "new"
+      "lastPostedAt": "2026-09-22T11:31:11.027Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0149-20260910194246-9b480ffa": {
       "updatedAt": "2026-09-10",
@@ -4211,6 +4211,13 @@
       "hash": "05a1ac2d1c92c26fa913641c5cde8cf958b48d4f56270718cffb23811fd29e7e",
       "title": "Railway RRB ALP Assistant Loco Pilot Exam Date 2026 OUT",
       "lastPostedAt": "2026-09-21T15:25:16.881Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0172-20260922155314-b6d4b607": {
+      "updatedAt": "2026-09-22",
+      "hash": "3aeb62ea327ea608136f55c63ff785e3a590faf88bfab4834831a92a87d82de8",
+      "title": "UPPSC PCS 2025 Interview Admit Card 2026",
+      "lastPostedAt": "2026-09-22T11:31:11.409Z",
       "stateReason": "new"
     }
   },
