@@ -479,7 +479,7 @@
       ? current.src.replace(/[^/]+$/, 'adcash-jobs.js')
       : '../JS/adcash-jobs.js';
     const el = document.createElement('script');
-    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20260919-adaudit';
+    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20260922-adsterra';
     el.defer = true;
     el.dataset.adcashJobs = '1';
     document.body.appendChild(el);
