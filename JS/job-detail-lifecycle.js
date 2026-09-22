@@ -316,12 +316,18 @@
     return legacy;
   }
 
+  const linkIconClass = icon => {
+    const brandIcons = new Set(['fa-telegram', 'fa-whatsapp', 'fa-youtube', 'fa-instagram', 'fa-linkedin', 'fa-facebook', 'fa-twitter']);
+    return `${brandIcons.has(icon) ? 'fab' : 'fas'} ${icon}`;
+  };
+
   function renderLinks() {
     const links = normalizeLinks();
     setHTML('importantLinks', links.map((l, i) => {
       const disabled = !isUrl(l.url);
       const badge = l.badge || (i === 0 ? 'Latest' : '');
-      return `<div class="gjd-link-row ${l.highlight ? 'is-highlight' : ''}"><div><i class="fas ${esc(l.icon || iconForType(l.type))}"></i><p><strong>${esc(l.label)}</strong><small>${esc(l.note || '')}</small>${badge ? `<em class="gjd-link-badge">${esc(badge)}</em>` : ''}</p></div><a href="${esc(l.url || '#')}" ${disabled ? 'class="is-disabled" aria-disabled="true"' : 'target="_blank" rel="noopener noreferrer"'}>${esc(l.buttonLabel || (disabled ? 'Awaited' : 'Open Link'))}</a></div>`;
+      const icon = l.icon || iconForType(l.type);
+      return `<div class="gjd-link-row ${l.highlight ? 'is-highlight' : ''}"><div><i class="${linkIconClass(icon)}"></i><p><strong>${esc(l.label)}</strong><small>${esc(l.note || '')}</small>${badge ? `<em class="gjd-link-badge">${esc(badge)}</em>` : ''}</p></div><a href="${esc(l.url || '#')}" ${disabled ? 'class="is-disabled" aria-disabled="true"' : 'target="_blank" rel="noopener noreferrer"'}>${esc(l.buttonLabel || (disabled ? 'Awaited' : 'Open Link'))}</a></div>`;
     }).join(''));
   }
 
