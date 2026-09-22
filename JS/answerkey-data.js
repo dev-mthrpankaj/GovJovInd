@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0068-20260922190729-be338349",
+        "title": "UPSSSC Excise Constable Answer Key 2026",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission (UPSSSC)",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-20",
+        "examEndDate": "",
+        "releaseDate": "2026-09-22",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://drive.google.com/file/d/18E2myzE4c8wpAM31ZvAeuWxxqClG9gzz/view",
+        "objectionLink": "",
+        "detailPage": "../jobs/upsssc-excise-constable-2026.html",
+        "updatedAt": "2026-09-22",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0066-20260918183225-e0b3e406",
         "title": "NTA AIAPGET Final Answer Key 2026",
         "organization": "National Testing Agency (NTA)",

@@ -84,6 +84,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0173-20260922191937-208a7995",
+        "title": "UTET Admit Card 2026 | Uttarakhand Teacher Eligibility Test",
+        "organization": "Uttarakhand Teacher Eligibility Test",
+        "department": "UTET",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-09-29",
+        "examEndDate": "",
+        "releaseDate": "2026-09-22",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ukutet.com/admit-card",
+        "detailPage": "../jobs/utet-2026.html",
+        "updatedAt": "2026-09-22",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0159-20260915151938-8868a35b",
         "title": "SBI Junior Associates Clerk Admit Card 2026 for 9124 Post",
         "organization": "State  Bank of India",
