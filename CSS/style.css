@@ -4666,3 +4666,99 @@ header nav a[aria-current="page"] {
 @media (prefers-reduced-motion: reduce) {
   .home-page main *, .home-page main *::before, .home-page main *::after { animation: none !important; transition: none !important; }
 }
+
+/* ========== Self / affiliation banners ========== */
+.gju-self-ad{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  margin:1.1rem auto;
+  padding:10px 12px;
+  max-width:100%;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  background:#f8fafc;
+  box-sizing:border-box;
+}
+.gju-self-ad__link{
+  display:block;
+  line-height:0;
+  border-radius:8px;
+  overflow:hidden;
+}
+.gju-self-ad__link img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  margin:0 auto;
+}
+.gju-self-ad__note{
+  margin:0;
+  font-size:.65rem;
+  font-weight:600;
+  color:#94a3b8;
+  text-align:center;
+}
+.gju-self-ad--leaderboard{
+  max-width:760px;
+}
+.gju-self-ad--leaderboard img{
+  width:728px;
+  max-width:100%;
+}
+.gju-self-ad--rectangle{
+  max-width:340px;
+}
+.gju-self-ad--rectangle img{
+  width:300px;
+  max-width:100%;
+}
+.gju-self-ad--strip{
+  max-width:340px;
+}
+.gju-self-ad--strip img{
+  width:320px;
+  max-width:100%;
+}
+
+/* Wide-screen gutter skyscraper (right) */
+.gju-self-ad-rail{
+  display:none;
+  position:fixed;
+  top:100px;
+  right:max(12px, calc((100vw - 1240px) / 2 - 176px));
+  z-index:40;
+  width:176px;
+  padding:8px 6px;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  background:#f8fafc;
+  box-shadow:0 8px 24px rgba(15,23,42,.08);
+}
+.gju-self-ad-rail .gju-self-ad__link img{
+  width:160px;
+  height:600px;
+  object-fit:cover;
+}
+.gju-self-ad-rail .gju-self-ad__note{
+  font-size:.55rem;
+  line-height:1.25;
+  padding:0 4px;
+}
+
+@media (min-width:1400px){
+  .gju-self-ad-rail{display:block}
+}
+@media (max-width:860px){
+  .gju-self-ad--desktop-only{display:none!important}
+  .gju-self-ad--mobile-only{display:flex}
+}
+@media (min-width:861px){
+  .gju-self-ad--mobile-only{display:none!important}
+}
+@media print{
+  .gju-self-ad,
+  .gju-self-ad-rail{display:none!important}
+}
