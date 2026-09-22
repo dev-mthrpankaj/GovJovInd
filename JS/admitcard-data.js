@@ -293,7 +293,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-22",
         "examEndDate": "",
         "releaseDate": "2026-09-18",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/Group2_SG4_TAC26/default_tac.htm",
         "detailPage": "../jobs/mpesb-group-2-sub-group-4-2026.html",
