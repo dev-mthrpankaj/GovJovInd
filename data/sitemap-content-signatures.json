@@ -189,10 +189,6 @@
       "signature": "5911438ab7c8097207c4fd69dc7bb33b32360e69c1c506a99c665cc7d8abd600",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/Delhi-Police-Constable-Physical-Admit-Card-2026.html": {
-      "signature": "f5008eae597eb5ba48d63a30b77c2d2a973949e3b984edd9cdc820141d8359ca",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/DSSSB-MTS-Admit-Card-2026.html": {
       "signature": "215758f8df04bd44e5a95cd0ed870a09ae7e4f2a6e97d10a4baacf5c75a0e102",
       "lastmod": "2026-08-12"
@@ -345,10 +341,6 @@
       "signature": "9bbf568f9281f48695796d3e33413b2b98ead9a0c51db31f1c940365494934e6",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/SSC-Delhi-Police-Head-Constable-Ministerial-Admit-Card-2025.html": {
-      "signature": "f6489fecc79c254232ea708e2162c5276f628db1379c89a611958fe87dd60d0c",
-      "lastmod": "2026-08-14"
-    },
     "AdmitCard_Details/HTML/SSC-JHT-Junior-Hindi-Translator-Admit-Card-2026.html": {
       "signature": "dd1cdf052d6e991e366bdc147c2b51fed521a5c07ac044242a5d5c4009cf04ea",
       "lastmod": "2026-08-25"
@@ -399,10 +391,6 @@
     },
     "AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html": {
       "signature": "1d19905f90f4c665ddee293521afa089249caf0ffe0f493cf34fb6f0aa454c92",
-      "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html": {
-      "signature": "80c4c643f6c51b93872306a739481bb93d513d20b9b82c33ef00e6ab3a47ceab",
       "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html": {
@@ -463,10 +451,6 @@
     },
     "AnswerKey_Details/HTML/BSNL-Senior-Executive-Trainee-SET-Answer-Key-2026.html": {
       "signature": "52829f4f5871956164f0d77c30aef545258a4d566a4bae0aeaf799d66397261e",
-      "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/Delhi-Police-Constable-Final-Answer-Key-2025.html": {
-      "signature": "571763baa43d27a88f3e4955c605b3994a9887678d567ff0cbeb022c95f14676",
       "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/DSSSB-Various-Post-Answer-Key-2026.html": {
@@ -1061,10 +1045,6 @@
       "signature": "6d6849fe1044a2fabbe341c1bb683d1a4b381cb65b9a31efe2e083599deaa9ee",
       "lastmod": "2026-08-27"
     },
-    "Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html": {
-      "signature": "9294dce43ae0d77594364a60548231061071f22fce6dbf71477d7a1b0cd01287",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/1009-CGPSC-ADLPO-Recruitment-2026.html": {
       "signature": "7c8083afba6d4d743a7e1f86e6a53f96995fbf7bbef08b5433f3a5dc3dc25e24",
       "lastmod": "2026-08-12"
@@ -1416,10 +1396,6 @@
     "Job_Details/HTML/2449-BPSSC-Bihar-Police-ASI-Technical-2026.html": {
       "signature": "a1e0b7295f17d29574f4c473d6285f765d9239ee6e797e684734ef41c6e3079a",
       "lastmod": "2026-08-27"
-    },
-    "Job_Details/HTML/999-DPC-execuitive-2026.html": {
-      "signature": "360770d86b16c1e5139279474be3c2b4372a615b35487a242fd3df29dac3bbbf",
-      "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/AAI-Manager-Junior-Executive-2026.html": {
       "signature": "ebcf3b7a46b6080b09c823a728d4b890df6f1d9ce847340ca671d9ca345847b5",
@@ -2421,10 +2397,6 @@
       "signature": "bc51394874ece4d5d5edaf977df13a387b45aede566d45bd1b14a3a57199556c",
       "lastmod": "2026-08-12"
     },
-    "Result_Details/HTML/3005-SSC-Delhi-Police-Head-Constable-Ministerial-Result-2026.html": {
-      "signature": "caf05e0c997066c49b9205c390d70d94eca0bb647a8a8f41738aa0261f483be9",
-      "lastmod": "2026-08-12"
-    },
     "Result_Details/HTML/3006-BPSC-70th-Combined-Competitive-Exam-Final-Result-2026.html": {
       "signature": "d189cb135cdd05aaf056c6a4c5c826b72fd924c0f3cb91bd4276173309f2bf5b",
       "lastmod": "2026-08-12"
@@ -2463,14 +2435,6 @@
     },
     "Result_Details/HTML/3006-RRB-Prayagraj-Group-D-Level-1-Result-2026.html": {
       "signature": "ca9913289995d020bbfb8f5d636dda24be33ab332cc4559d84893efabe791a08",
-      "lastmod": "2026-08-12"
-    },
-    "Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html": {
-      "signature": "5350abf4fc7d3bdcecc7533a44877d45f76e436c6aba22aa2cb02c1d59de2851",
-      "lastmod": "2026-08-12"
-    },
-    "Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html": {
-      "signature": "9c88a8d597e94097b9dc966c158c5797aa5db514c82e3f32c53710177d500864",
       "lastmod": "2026-08-12"
     },
     "Result_Details/HTML/3006-SSC-Stenographer-Grade-C-D-Result-2026.html": {
