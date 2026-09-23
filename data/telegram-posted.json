@@ -2551,6 +2551,13 @@
       "title": "Indian Army TGC 145 Online Form 2026 | Technical Graduate Course",
       "lastPostedAt": "2026-09-22T14:10:55.556Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0255-20260923211306-24b14d32": {
+      "updatedAt": "2026-09-23",
+      "hash": "47c6022bb7487f8baef9208ad51b3041eab75931b0e7549ec4ec778fb9c610cd",
+      "title": "IBPS Hindi Officer Online Form 2026",
+      "lastPostedAt": "2026-09-23T17:01:26.346Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -4018,17 +4025,17 @@
       "stateReason": "update"
     },
     "admitCards:admit-sheet-0142-20260909091550-f9e367f1": {
-      "updatedAt": "2026-09-18",
-      "hash": "7a31660affce35bc5780ad029c4469cbcf69d2d0af1296fd41259be047582c4e",
-      "title": "UPSSSC Forest Guard Mains Exam City Details 2026",
-      "lastPostedAt": "2026-09-18T13:20:14.402Z",
+      "updatedAt": "2026-09-23",
+      "hash": "bb4daa05ab2480080361f1aa1691a7e3571b2789ee01ba0ed6284861c1c832df",
+      "title": "UPSSSC Forest Guard Admit Card 2026",
+      "lastPostedAt": "2026-09-23T17:01:27.110Z",
       "stateReason": "update"
     },
     "admitCards:admit-sheet-0143-20260909091717-255d328c": {
-      "updatedAt": "2026-09-18",
-      "hash": "3f436e6bf73f74732b0b80413d922221e1c0173cf0ca641de732d15d0d919340",
-      "title": "UPSSSC Forensic Science Laboratory Mains Exam City Details 2026",
-      "lastPostedAt": "2026-09-18T13:20:15.108Z",
+      "updatedAt": "2026-09-23",
+      "hash": "35784ef7d8b8ce71556fa60f0d7a2445efbc1a1908f06a5d0e28da52d7e9f6ea",
+      "title": "UPSSSC Forensic Science Laboratory Admit Card 2026",
+      "lastPostedAt": "2026-09-23T17:01:27.470Z",
       "stateReason": "update"
     },
     "admitCards:admit-sheet-0144-20260909101551-632f7b68": {
@@ -4239,6 +4246,13 @@
       "hash": "7929cfc7083a0f738e64410fb27b607a470cfbaf5d7431f8c3de72e0e42525f2",
       "title": "UTET Admit Card 2026 | Uttarakhand Teacher Eligibility Test",
       "lastPostedAt": "2026-09-22T14:10:56.024Z",
+      "stateReason": "new"
+    },
+    "admitCards:admit-sheet-0174-20260923203742-226f4287": {
+      "updatedAt": "2026-09-23",
+      "hash": "3f7d8d888165bcd59ce2ca96fb34a713044463b58578598ec5d2415e7d2e9c9b",
+      "title": "AAI Manager, Junior Executive Exam Date 2026 for 389 Post",
+      "lastPostedAt": "2026-09-23T17:01:28.365Z",
       "stateReason": "new"
     }
   },
@@ -6693,6 +6707,13 @@
       "hash": "cd7ae667a3630737ece1f7e91fce3ff77ef610899d410f154490d1fe854567b3",
       "title": "UPSSSC Assistant Boring Technician Recruitment 2026 Eligibility Result",
       "lastPostedAt": "2026-09-21T19:16:19.428Z",
+      "stateReason": "new"
+    },
+    "results:result-sheet-0160-20260923220417-cad4d401": {
+      "updatedAt": "2026-09-23",
+      "hash": "f405c3cccf29fd72422b48f343c0c747fcfd6cee5da9681e33409d01ff4e0298",
+      "title": "IBPS CRP PO MT XVI Pre Result 2026",
+      "lastPostedAt": "2026-09-23T17:01:28.899Z",
       "stateReason": "new"
     }
   }
