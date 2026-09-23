@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0255-20260923211306-24b14d32",
+        "title": "IBPS Hindi Officer Online Form 2026",
+        "organization": "Institute of Banking Personal Selection (IBPS)",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Post Graduation Degree from a recognized university in Hindi with English as a major or elective subject at Graduation. OR Post Graduation Degree from a recognized university in English with Hindi as major or elective subject at Graduation. OR",
+        "totalPosts": "NA",
+        "startDate": "2026-09-23",
+        "lastDate": "2026-10-06",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ibpsreg.ibps.in/ibpsvpspt26/",
+        "officialNotification": "https://jobjhalak.com/wp-content/uploads/2026/09/Advertisement-for-Hindi-Officer-Grade-E-Sept-2026.pdf",
+        "detailPage": "../jobs/ibps-hindi-officer-2026.html",
+        "updatedAt": "2026-09-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0253-20260922172117-e40628d8",
         "title": "Railway RRB NTPC Graduate Level Online Form 2026 | CEN 06/2026",
         "organization": "Railway Recruitment Board",

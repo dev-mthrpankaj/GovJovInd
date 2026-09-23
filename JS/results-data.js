@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0160-20260923220417-cad4d401",
+        "title": "IBPS CRP PO MT XVI Pre Result 2026",
+        "organization": "Institute of Banking Personnel Selection",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-09-23",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ibpsreg.ibps.in/crppoxvijun26/restza_sep26/login.php?appid=c60e35e0968181af45992cb962f15189",
+        "detailPage": "../jobs/ibps-po-mt-xvi-2026.html",
+        "updatedAt": "2026-09-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0152-20260916163745-e551ef75",
         "title": "RRB JE Junior Engineer CBT-2 Result & Cut-Off : List of candidates shortlisted for Document Verification",
         "organization": "Railway Recruitment Board",
