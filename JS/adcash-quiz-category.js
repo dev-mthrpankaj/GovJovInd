@@ -1,31 +1,39 @@
 (() => {
   'use strict';
 
-  // Adcash Display — quiz category pages only (exam family + subject)
-  // Not on quiz landing (quiz.html) or quiz attempt pages.
+  // Adsterra — quiz category pages only (exam family + subject)
+  // Not on quiz.html landing or quiz attempt pages.
   const CONFIG = {
     enabled: true,
-    zones: {
-      desktop120x600: '12187246',
-      mobile300x250: '12187270'
+    invokeHost: 'www.highperformanceformat.com',
+    units: {
+      skyscraper: {
+        key: 'b4cefd61066cf540b9a4543442f3bcb8',
+        width: 160,
+        height: 600
+      },
+      rectangle: {
+        key: '87119e54e06ec212fda2497c6e91b073',
+        width: 300,
+        height: 250
+      }
     },
-    aclibSrc: 'https://acscdn.com/script/aclib.js',
-    cssHref: '../CSS/adcash-quiz-category.css?v=20260919-railpark',
+    cssHref: '../CSS/adcash-quiz-category.css?v=20260923-adsterra',
     emptyHideMs: 4000,
+    emptyRecheckMs: [7000, 11000],
+    bannerGapMs: 400,
     desktopMinPx: 1100
   };
 
-  window.ADCASH_QUIZ_CATEGORY_CONFIG = CONFIG;
+  window.ADSTERRA_QUIZ_CATEGORY_CONFIG = CONFIG;
 
   const familyPage = document.querySelector('main.family-quiz-page');
   const subjectPage = document.querySelector('main.subject-quiz-page, main[data-subject-quiz-page]');
   if (!CONFIG.enabled || (!familyPage && !subjectPage)) return;
   if (window.matchMedia('(print)').matches) return;
 
-  const zones = Object.fromEntries(
-    Object.entries(CONFIG.zones || {}).filter(([, id]) => Boolean(String(id || '').trim()))
-  );
-  if (!Object.keys(zones).length) return;
+  const units = CONFIG.units || {};
+  if (!units.skyscraper?.key && !units.rectangle?.key) return;
 
   const isDesktop = () => window.matchMedia(`(min-width: ${CONFIG.desktopMinPx}px)`).matches;
   const isMobile = () => !isDesktop();
@@ -39,46 +47,19 @@
     document.head.appendChild(link);
   };
 
-  const loadAclib = () => new Promise((resolve, reject) => {
-    if (window.aclib && typeof window.aclib.runBanner === 'function') {
-      resolve(window.aclib);
-      return;
-    }
-    const existing = document.querySelector('script[data-adcash-aclib]');
-    if (existing) {
-      existing.addEventListener('load', () => resolve(window.aclib), { once: true });
-      existing.addEventListener('error', () => reject(new Error('aclib load failed')), { once: true });
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = CONFIG.aclibSrc;
-    script.async = true;
-    script.dataset.adcashAclib = '1';
-    script.onload = () => resolve(window.aclib);
-    script.onerror = () => reject(new Error('aclib load failed'));
-    document.head.appendChild(script);
-  });
-
   const makeSlot = (slotKey, sizeLabel) => {
     const wrap = document.createElement('aside');
     wrap.className = `gju-quiz-ad gju-quiz-ad--${slotKey}`;
-    wrap.dataset.adcashSlot = slotKey;
+    wrap.dataset.adSlot = slotKey;
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
       <div class="gju-quiz-ad-label">
         <span class="gju-quiz-ad-label-tag">Ad</span>
         <span class="gju-quiz-ad-label-note">GovJobUpdates does not endorse this.</span>
       </div>
-      <div class="gju-quiz-ad-frame" data-adcash-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
+      <div class="gju-quiz-ad-frame" data-ad-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
     `.trim();
     return wrap;
-  };
-
-  const runBannerIn = (frame, zoneId) => {
-    if (!frame || !zoneId || !window.aclib || typeof window.aclib.runBanner !== 'function') return;
-    const runner = document.createElement('script');
-    runner.textContent = `aclib.runBanner({ zoneId: ${JSON.stringify(String(zoneId))} });`;
-    frame.appendChild(runner);
   };
 
   const wrapRailHost = (host) => {
@@ -88,7 +69,6 @@
     const mainCol = document.createElement('div');
     mainCol.className = 'gju-quiz-ad-rail-main';
     while (host.firstChild) mainCol.appendChild(host.firstChild);
-    // Grid side-rail from inject — prevents skyscraper stacking under content first
     host.classList.add('gju-quiz-ad-host-ready', 'has-quiz-ad-rail');
     host.classList.remove('ad-rail-empty');
     host.appendChild(mainCol);
@@ -96,13 +76,12 @@
   };
 
   const injectSlots = () => {
-    // --- Exam family pages (SSC / Banking / Police / RRB) ---
     if (familyPage) {
       const discovery = familyPage.querySelector('.family-discovery');
       const grid = familyPage.querySelector('#familyQuizList, .family-quiz-grid');
       const listHead = familyPage.querySelector('.family-list-head');
 
-      if (zones.mobile300x250 && grid && grid.parentNode) {
+      if (units.rectangle?.key && grid && grid.parentNode) {
         const slot = makeSlot('mobile-mid', '300x250');
         slot.classList.add('gju-quiz-ad--mobile-only');
         if (listHead && listHead.parentNode === grid.parentNode) {
@@ -112,22 +91,21 @@
         }
       }
 
-      if (zones.desktop120x600 && discovery) {
+      if (units.skyscraper?.key && discovery && isDesktop()) {
         wrapRailHost(discovery);
-        const slot = makeSlot('skyscraper', '120x600');
+        const slot = makeSlot('skyscraper', '160x600');
         slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
         discovery.appendChild(slot);
       }
       return;
     }
 
-    // --- Subject pages (Maths / English / …) ---
     if (subjectPage) {
       const sets = subjectPage.querySelector('#subject-sets, .subject-sets-section');
       const grid = subjectPage.querySelector('[data-subject-quiz-list], .subject-quiz-grid');
       const heading = sets && sets.querySelector('.subject-quiz-heading');
 
-      if (zones.mobile300x250 && grid && grid.parentNode) {
+      if (units.rectangle?.key && grid && grid.parentNode) {
         const slot = makeSlot('mobile-mid', '300x250');
         slot.classList.add('gju-quiz-ad--mobile-only');
         const countLine = sets && sets.querySelector('.subject-quiz-count-line');
@@ -136,30 +114,67 @@
         else grid.insertAdjacentElement('beforebegin', slot);
       }
 
-      if (zones.desktop120x600 && sets) {
+      if (units.skyscraper?.key && sets && isDesktop()) {
         wrapRailHost(sets);
-        const slot = makeSlot('skyscraper', '120x600');
+        const slot = makeSlot('skyscraper', '160x600');
         slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
         sets.appendChild(slot);
       }
     }
   };
 
-  const fireBanners = () => {
-    const map = [
-      ['mobile-mid', zones.mobile300x250, () => isMobile()],
-      ['skyscraper', zones.desktop120x600, () => isDesktop()]
+  const invokeUrl = (key) => {
+    const host = String(CONFIG.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
+    return `https://${host}/${key}/invoke.js`;
+  };
+
+  const loadBannerInto = (frame, unit) => new Promise((resolve) => {
+    if (!frame || !unit?.key) {
+      resolve(false);
+      return;
+    }
+    frame.innerHTML = '';
+    const opts = {
+      key: unit.key,
+      format: 'iframe',
+      height: unit.height,
+      width: unit.width,
+      params: {}
+    };
+    window.atOptions = opts;
+    const conf = document.createElement('script');
+    conf.type = 'text/javascript';
+    conf.textContent = `atOptions = ${JSON.stringify(opts)};`;
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = invokeUrl(unit.key);
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    frame.appendChild(conf);
+    frame.appendChild(script);
+  });
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  const fireBanners = async () => {
+    const queue = [
+      ['mobile-mid', units.rectangle, () => isMobile()],
+      ['skyscraper', units.skyscraper, () => isDesktop()]
     ];
-    map.forEach(([slotKey, zoneId, shouldShow]) => {
-      if (!zoneId || !shouldShow()) return;
-      runBannerIn(document.querySelector(`[data-adcash-frame="${slotKey}"]`), zoneId);
-    });
+    for (const [slotKey, unit, shouldShow] of queue) {
+      if (!unit?.key || !shouldShow()) continue;
+      const frame = document.querySelector(`[data-ad-frame="${slotKey}"]`);
+      if (!frame) continue;
+      await loadBannerInto(frame, unit);
+      await sleep(CONFIG.bannerGapMs || 400);
+    }
   };
 
   const expectedMinFill = (slot) => {
-    const key = slot.dataset.adcashSlot || '';
+    const key = slot.dataset.adSlot || '';
     if (key === 'skyscraper') return 280;
-    return 120;
+    return 100;
   };
 
   const creativeFillPx = (frame) => {
@@ -200,7 +215,7 @@
   };
 
   const hideEmptySlots = () => {
-    document.querySelectorAll('.gju-quiz-ad[data-adcash-slot]').forEach((slot) => {
+    document.querySelectorAll('.gju-quiz-ad[data-ad-slot]').forEach((slot) => {
       if (slotLooksFilled(slot)) {
         slot.classList.remove('is-empty');
         slot.hidden = false;
@@ -216,16 +231,12 @@
 
   const boot = async () => {
     ensureCss();
-    try {
-      await loadAclib();
-    } catch {
-      return;
-    }
     injectSlots();
-    fireBanners();
+    await fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
-    window.setTimeout(hideEmptySlots, 5500);
-    window.setTimeout(hideEmptySlots, 9000);
+    (CONFIG.emptyRecheckMs || []).forEach((ms) => {
+      window.setTimeout(hideEmptySlots, ms);
+    });
   };
 
   if (document.readyState === 'loading') {

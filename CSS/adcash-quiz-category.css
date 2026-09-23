@@ -1,4 +1,4 @@
-/* Adcash Display — quiz category + typing category pages */
+/* Adsterra — quiz category + typing category pages (160×600 rail) */
 
 .gju-quiz-ad {
   display: flex;
@@ -65,7 +65,7 @@
   margin: 0 auto;
 }
 
-/* Mobile / mid rectangle */
+/* Mobile / mid rectangle 300×250 */
 .gju-quiz-ad--mobile-mid {
   width: min(100%, 340px);
   margin: 1rem auto 1.15rem;
@@ -78,13 +78,13 @@
   margin-inline: auto;
 }
 
-/* Desktop skyscraper rail — always column 2 so it never stacks under content */
+/* Desktop skyscraper rail — 160×600 (column 2, never under content) */
 .gju-quiz-ad--skyscraper {
   margin: 0;
   padding: 10px 6px 12px;
-  width: 132px;
-  max-width: 132px;
-  flex: 0 0 132px;
+  width: 176px;
+  max-width: 176px;
+  flex: 0 0 176px;
   align-self: start;
   position: sticky;
   top: calc(var(--header-height, 72px) + 16px);
@@ -92,6 +92,7 @@
   grid-column: 2;
   grid-row: 1;
   justify-self: end;
+  min-height: 620px;
 }
 
 .gju-quiz-ad--skyscraper .gju-quiz-ad-label {
@@ -110,20 +111,23 @@
 }
 
 .gju-quiz-ad--skyscraper .gju-quiz-ad-frame {
-  width: 120px;
-  max-width: 120px;
-  min-height: 0;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  min-height: 600px;
 }
+
 .gju-quiz-ad--skyscraper.is-filled .gju-quiz-ad-frame {
   min-height: 600px;
 }
 
-/* Pending load: keep slot in the side column (measurable) but quiet chrome */
+/* Pending load: keep slot in side column, quiet chrome */
 .gju-quiz-ad--skyscraper:not(.is-filled):not(.is-empty) {
   border-color: transparent;
   background: transparent;
   box-shadow: none;
 }
+
 .gju-quiz-ad--skyscraper:not(.is-filled):not(.is-empty) .gju-quiz-ad-label {
   opacity: 0;
 }
@@ -133,26 +137,26 @@
 .gju-quiz-ad.is-empty,
 .gju-quiz-ad[hidden] { display: none !important; }
 
-/* Page width expands only while rail is live */
+/* Page width expands while rail is live */
 .family-quiz-page:has(.has-quiz-ad-rail),
 .subject-quiz-page:has(.has-quiz-ad-rail) {
-  width: min(100%, 1400px);
+  width: min(100%, 1440px);
 }
 
 /*
-  Host grid starts as soon as skyscraper is injected (gju-quiz-ad-host-ready).
-  This prevents the skyscraper from briefly stacking under the cards (bottom → side jump).
+  Host grid as soon as skyscraper is injected (gju-quiz-ad-host-ready).
+  Prevents skyscraper stacking under cards (bottom → side jump).
 */
 .family-discovery.gju-quiz-ad-host-ready,
 .subject-sets-section.gju-quiz-ad-host-ready,
 .gju-typing-ad-host.gju-quiz-ad-host-ready {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 132px;
+  grid-template-columns: minmax(0, 1fr) 176px;
   gap: 14px;
   align-items: start;
 }
 
-/* Empty after check: collapse rail column (still grid — never display:block) */
+/* Empty after check: collapse rail column */
 .family-discovery.gju-quiz-ad-host-ready.ad-rail-empty,
 .subject-sets-section.gju-quiz-ad-host-ready.ad-rail-empty,
 .gju-typing-ad-host.gju-quiz-ad-host-ready.ad-rail-empty {
@@ -172,7 +176,7 @@
 }
 
 .typing-test-page:has(.has-quiz-ad-rail) .gju-typing-ad-host {
-  width: min(1340px, 100%);
+  width: min(1380px, 100%);
 }
 
 .typing-test-page:has(.ad-rail-empty) .gju-typing-ad-host,
