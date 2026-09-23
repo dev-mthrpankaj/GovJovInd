@@ -13,10 +13,6 @@
       "signature": "b389d28d6ac259e186202163dcc12e3bb23640904086534ddc6d8a074681534d",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/01-RRB-ALP-CBT-2-Admit-Card-2026.html": {
-      "signature": "e13c8b1ac3e81bfabf15af74ce5e10c14e28980c78bff259b012dee0e8cda5c0",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/01-UPTET-Admit-Card-2026.html": {
       "signature": "1c651a07d285299254616c44a82f02b9ec3fad28ffca34c74000ef34a419d831",
       "lastmod": "2026-08-14"
@@ -52,10 +48,6 @@
     "AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html": {
       "signature": "39e543243420a9130419eef2d255c330aa7c90ffed50f124bf6c50fc6e0f30c0",
       "lastmod": "2026-08-14"
-    },
-    "AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html": {
-      "signature": "b06d10fc185a1bcf9112e37022fe47c53207f509d5eb4f01c23fe967dd4511b8",
-      "lastmod": "2026-08-12"
     },
     "AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html": {
       "signature": "ae2c1ce28d79b969bdc8569cd9fdadcfde8fc8f0764437333b2bb12768190e65",
@@ -301,10 +293,6 @@
       "signature": "cfde4888493acc7a52caacf19407b5b34e7adc164137fbc13dfbeea1e9cbc807",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/RPSC-Sub-Inspector-SI-PET-Admit-Card-2026.html": {
-      "signature": "fc2b57601ffd132c396a3aa4abbf2076a2d33bbe2cd2184f8fe7c65878d22de7",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/RRB-Isolated-Categories-Admit-Card-2026.html": {
       "signature": "5123875d47b74070b1058adf0c0d9dc110266465de17a45f11fc4d0c471a09cf",
       "lastmod": "2026-08-12"
@@ -483,10 +471,6 @@
     },
     "AnswerKey_Details/HTML/RPSC-Senior-Teacher-Grade-II-Answer-Key-2026.html": {
       "signature": "e567fc1155a55633793b422fe88d526df6280a5e1dd928e8a642e003d9f526ca",
-      "lastmod": "2026-08-14"
-    },
-    "AnswerKey_Details/HTML/RRB-ALP-CBT-2-Answer-Key-2026.html": {
-      "signature": "68eaee0460fc8fc18310bcc1640abb6151a5e3f4ca4c01ddd731ef12e8052584",
       "lastmod": "2026-08-14"
     },
     "AnswerKey_Details/HTML/RRB-JE-CBT-2-Answer-Key-2026.html": {
@@ -1124,10 +1108,6 @@
     "Job_Details/HTML/1012-JNU-Non-Teaching-Posts-2026.html": {
       "signature": "7b9594c0069c3f0ad9e89413f1587ef50181098cb63a6149638ff04b7e5f2f47",
       "lastmod": "2026-08-27"
-    },
-    "Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html": {
-      "signature": "543de1bf5e681628761a02b672c988b5c5c86c816b01d511d72a484eca0cd9df",
-      "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/1013-CRPF-Constable-Tradesman-Pioneer-2026.html": {
       "signature": "0cbeccc5876178d63f66e74be9eafda94825b10558a70c5d0b4d6f0248c67ba5",
@@ -1982,8 +1962,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/mpesb-constable-2026.html": {
-      "signature": "f19ac684d1c96732edacf6b47d7d1e78b8436a80646e72eaa3c793ad1965c16b",
-      "lastmod": "2026-09-22"
+      "signature": "3b884945f159dc90b1955665741c11788a4b387578046e0f4f56a3f28f999c79",
+      "lastmod": "2026-09-23"
     },
     "jobs/mpesb-group-2-sub-group-4-2026.html": {
       "signature": "e46ffac308b612ccb3fdb116f6091bbd79c9f580ef72c77ab220216c478f86b3",
@@ -2092,6 +2072,10 @@
     "jobs/rrb-je-junior-engineer-2025.html": {
       "signature": "18af48b5124c4a197080e085990651ecf13765625858b1aed52de977b9ac2b09",
       "lastmod": "2026-09-22"
+    },
+    "jobs/rrb-railway-alp.html": {
+      "signature": "591e7f07184763bca6c32a71dcc2381820249b335e8cd579900b196460201bd8",
+      "lastmod": "2026-09-23"
     },
     "jobs/rrb-railway-paramedical-2026.html": {
       "signature": "448acf6203a8e8410c2a741c1455c0cad33bac494fee054d3aa472b1cc9e169b",
@@ -2819,10 +2803,6 @@
     },
     "Result_Details/HTML/UPSSSC-Forensic-Science-Laboratory-Eligibility-Result-2026.html": {
       "signature": "3d40d4ba5bbec6d75e75c679ec62c0cc6da7cc92c9e582d16b38e9f776707fa6",
-      "lastmod": "2026-08-29"
-    },
-    "Result_Details/HTML/UPSSSC-Forest-Guard-Eligibility-Result-2026.html": {
-      "signature": "575756b0bf64f0bf609da453161facd97d285061ab5c7507238c000e3c355c8a",
       "lastmod": "2026-08-29"
     },
     "Result_Details/HTML/UPSSSC-Health-Worker-Female-Result-2026.html": {
