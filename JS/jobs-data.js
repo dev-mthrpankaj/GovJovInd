@@ -950,7 +950,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "507",
         "startDate": "2026-09-09",
         "lastDate": "2026-09-23",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://esb.mponline.gov.in/Portal/Examinations/Vyapam/examsList.aspx",
         "officialNotification": "https://esb.mp.gov.in/Rulebooks/RB_2026/SI_Rulebook_2026_01092026.pdf",
