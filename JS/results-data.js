@@ -626,12 +626,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=160&Result_Type=P&Exam_Code=5&Advt_Code=574&Dept_Code=605&Post_Code=1&OnlyIntview=No",
-        "detailPage": "../Result_Details/HTML/UPSSSC-Forest-Guard-Eligibility-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0123-20260828214742-b3a2e96e",
@@ -698,12 +698,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=LH/Iqy2lIvm6yfwjd7BOsNPROEv0WO16vwSfOqO4R9E=",
-        "detailPage": "../Result_Details/HTML/UGC-NET-June-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0120-20260828213842-5604a466",
@@ -2462,12 +2462,12 @@ window.GovJobUpdatesResults = [
             "Ministerial"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Head-Constable-Ministerial-Additional-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0024",
@@ -2598,12 +2598,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/3006-SSC-Delhi-Police-Constable-Executive-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0013-1",
@@ -2689,12 +2689,12 @@ window.GovJobUpdatesResults = [
             "Delhi Police Head Constable"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/3005-SSC-Delhi-Police-Head-Constable-Ministerial-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0011",
@@ -2823,12 +2823,12 @@ window.GovJobUpdatesResults = [
             "Result"
         ],
         "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98076/login.html",
-        "detailPage": "../Job_Details/HTML/1001-Railway-RRB-Paramedical-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0004",

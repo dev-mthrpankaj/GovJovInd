@@ -1216,12 +1216,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcardview/Login?enc=EU2nJaTepF908NeNySmtkjs0/iPIvXk12Fg+hTlccys=",
-        "detailPage": "../AdmitCard_Details/HTML/NTA-AIAPGET-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0115-20260820235203-37d95916",
@@ -1436,12 +1436,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/RSSB-Computer-Instructor-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-12",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0100-20260810134150-7db9c43a",
@@ -1496,12 +1496,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://sscnr.nic.in/newlook/ADMIT_CARD_CONSTABLE_EXE_2025/CheckRoll.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/Delhi-Police-Constable-Physical-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-09",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0098-20260808180613-20cd4d47",
@@ -1676,12 +1676,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
-        "detailPage": "../AdmitCard_Details/HTML/RPSC-Sub-Inspector-SI-PET-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0090-20260729211959-f0d0b847",
@@ -1696,12 +1696,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://mppsc.mp.gov.in/Admitcard",
-        "detailPage": "../AdmitCard_Details/HTML/MPPSC-Assistant-Professor-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0091-20260729212759-2092b06f",
@@ -2056,12 +2056,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=FzCM1cz3k8ohC+69JQLEE0a8bYjxrP5YMYMZP4fujh8=",
-        "detailPage": "../AdmitCard_Details/HTML/NTA-CSIR-UGC-NET-June-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-15",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0066-20260715124535-86795b2a",
@@ -2236,12 +2236,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCard/AuthForAdvanceCity/Login?enc=DJ8reokIYhe/x0Hlb6GKa2eP3bwuWfUYlE5wsMgdC5o=",
-        "detailPage": "../AdmitCard_Details/HTML/NTA-CSIR-UGC-NET-June-2026-Exam-City-Details.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0057-20260710215039-3de97acb",
@@ -2756,12 +2756,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://www.rrbpatna.gov.in/pdf/Notice%20on%20Tentative%20date_CBT-2_English.pdf",
-        "detailPage": "../AdmitCard_Details/HTML/01-RRB-ALP-CBT-2-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0042",
@@ -2856,12 +2856,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/97996/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/05-RRB-JE-Junior-Engineer-CBT-II-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0027",

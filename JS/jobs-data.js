@@ -2058,13 +2058,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/iobjul26/",
         "officialNotification": "https://www.iob.bank.in/documents/d/guest/lbo-final-ad-2026-27",
-        "detailPage": "../Job_Details/HTML/IOB-Local-Bank-Officer-2026.html",
+        "detailPage": "../jobs/iob-local-bank-officer-2026.html",
         "updatedAt": "2026-08-08",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -2322,13 +2322,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://www.rcfltd.com/hrrecruitment/recruitment-1",
         "officialNotification": "https://www.rcfltd.com/files/MT%202026.pdf",
-        "detailPage": "../Job_Details/HTML/RCFL-Management-Trainee-2026.html",
+        "detailPage": "../jobs/rcfl-management-trainee-2026.html",
         "updatedAt": "2026-08-03",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -3006,13 +3006,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://principalhe.upessc.org/otr/",
         "officialNotification": "https://upessc.up.gov.in/Notice/3e23-9b4f-4145-8397-89fe.pdf",
-        "detailPage": "../Job_Details/HTML/UPESSC-Principal-Recruitment-2026.html",
+        "detailPage": "../jobs/upessc-principal-2026.html",
         "updatedAt": "2026-07-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -5768,13 +5768,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/home",
         "officialNotification": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf",
-        "detailPage": "../Job_Details/HTML/1012-RRB-ALP-CEN-01-2026.html",
+        "detailPage": "../jobs/railway-rrb-alp-2026.html",
         "updatedAt": "2026-05-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
@@ -6518,13 +6518,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ssc.gov.in/",
         "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/1008-SSC-Delhi-Police-Head-Constable-Ministerial-2026.html",
+        "detailPage": "../jobs/ssc-delhi-police-hc-ministerial-2025.html",
         "updatedAt": "2025-09-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     }
 ];

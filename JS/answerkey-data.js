@@ -304,12 +304,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/ExamSys26Part2/Root/CandidateLogin.aspx?enc=Ei4cajBkK1gZSfgr53ImFTqGsyg38PlGNCGSuvSzsiVbovgbG6pVEHea7DNFe38E",
         "objectionLink": "https://examinationservices.nic.in/ExamSys26Part2/Root/CandidateLogin.aspx?enc=Ei4cajBkK1gZSfgr53ImFTqGsyg38PlGNCGSuvSzsiVbovgbG6pVEHea7DNFe38E",
-        "detailPage": "../AnswerKey_Details/HTML/NTA-CSIR-UGC-NET-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-08-16",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0054-20260813213638-80ed0c6d",
@@ -436,12 +436,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/97789/login.html",
         "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/97789/login.html",
-        "detailPage": "../AnswerKey_Details/HTML/RRB-ALP-CBT-2-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-08-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0048-20260801162745-64bd7685",
@@ -876,12 +876,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://sscexams.cbexams.com/DPCExecutivep2025EFinalkeydjfdlandingpage/loginnew.aspx",
         "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/Delhi-Police-Constable-Final-Answer-Key-2025.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-07-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0029-20260707223716-0578a187",
@@ -1044,12 +1044,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://ssc.gov.in/home/answer-key",
         "objectionLink": "",
-        "detailPage": "../AnswerKey_Details/HTML/1105-SSC-Delhi-Police-Head-Constable-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-22",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0021",
