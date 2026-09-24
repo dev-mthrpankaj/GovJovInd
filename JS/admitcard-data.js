@@ -25,7 +25,7 @@ window.GovJobUpdatesAdmitCards = [
     },
     {
         "id": "admit-sheet-0176-20260924205437-59c93eaa",
-        "title": "UP Police Constable PET Exam Schedule 2026",
+        "title": "UP Police Constable PET Admit Card 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
         "department": "UPPRPB",
         "category": "State Government",
@@ -35,7 +35,7 @@ window.GovJobUpdatesAdmitCards = [
         "releaseDate": "2026-09-24",
         "status": "available",
         "tags": [],
-        "downloadLink": "https://uppbpb.gov.in/FilesUploaded/Notice/72006016e1ebae-500c-4578-98d2-0e511181b7a7.pdf",
+        "downloadLink": "https://upcons2025.com/upconadmitcardPET/loginpage.aspx",
         "detailPage": "../jobs/up-police-constable-32679.html",
         "updatedAt": "2026-09-24",
         "telegramStatus": "ready",
