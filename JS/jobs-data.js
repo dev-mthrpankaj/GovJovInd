@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0256-20260924160100-3123c7f8",
+        "title": "BPSC Bihar Teacher TRE 4 Online Form 2026 for 32388 Post",
+        "organization": "Bihar Public Service Commission",
+        "department": "BPSC",
+        "category": "State government",
+        "year": "2026",
+        "qualification": "Senior Secondary with 50% Marks and 2 Year Diploma in Elementary Education OR Senior Secondary with 45% Marks and 2 Year Diploma in Elementary Education (AS PER NCTE Norms 2002) OR Senior Secondary with 50% Marks and 4 Year B.L.Ed",
+        "totalPosts": "38388",
+        "startDate": "2026-09-25",
+        "lastDate": "2026-10-25",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Important-Notice-Probable-Date-of-Online-Application-TRE-4.0Date_BPSC-20260901-lavk2s.pdf",
+        "officialNotification": "https://drive.google.com/file/d/1efo9sC6ztZEOm7DL1BuDSQY7Ji0-V6zj/view",
+        "detailPage": "../jobs/bpsc-bihar-teacher-tre-4-0-2026.html",
+        "updatedAt": "2026-09-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0255-20260923211306-24b14d32",
         "title": "IBPS Hindi Officer Online Form 2026",
         "organization": "Institute of Banking Personal Selection (IBPS)",
