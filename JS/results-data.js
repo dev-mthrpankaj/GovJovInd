@@ -40,6 +40,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0162-20260924211906-8adb3e33",
+        "title": "RBI Assistant Mains Result 2026 | Reserve Bank of India",
+        "organization": "Reserve Bank of India RBI",
+        "department": "RBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-09-24",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rbidocs.rbi.org.in/rdocs/content/pdfs/03ASSISTANT2025_24092026.pdf",
+        "detailPage": "../jobs/rbi-assistant-2026.html",
+        "updatedAt": "2026-09-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0160-20260923220417-cad4d401",
         "title": "IBPS CRP PO MT XVI Pre Result 2026",
         "organization": "Institute of Banking Personnel Selection",
