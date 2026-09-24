@@ -76,37 +76,39 @@
   };
 
   const injectLanding = (page) => {
-    const search = page.querySelector('.rank-search-panel');
-    const grid = page.querySelector('#rankCardGrid, .rank-card-grid');
-    const note = page.querySelector('.rank-cards-note');
+  const search = page.querySelector('.rank-search-panel');
+  const grid = page.querySelector('#rankCardGrid, .rank-card-grid');
+  const note = page.querySelector('.rank-cards-note');
+  const guide = page.querySelector('#rankPredictorSeoSupport, .page-guide');
+  const faq = page.querySelector('.seo-faq');
 
-    if (units.rectangle?.key && (search || grid)) {
-      const slot = makeSlot('mobile-mid', '300x250');
-      slot.classList.add('gju-quiz-ad--mobile-only');
-      if (search) search.insertAdjacentElement('afterend', slot);
-      else grid.insertAdjacentElement('beforebegin', slot);
-    }
+  if (units.rectangle?.key && (search || grid)) {
+    const slot = makeSlot('mobile-mid', '300x250');
+    slot.classList.add('gju-quiz-ad--mobile-only');
+    if (search) search.insertAdjacentElement('afterend', slot);
+    else grid.insertAdjacentElement('beforebegin', slot);
+  }
 
-    if (units.skyscraper?.key && grid && isDesktop()) {
-      let host = page.querySelector('.gju-rank-ad-host');
-      if (!host) {
-        host = document.createElement('div');
-        host.className = 'gju-rank-ad-host';
-        const start = search || grid;
-        start.parentNode.insertBefore(host, start);
-        [search, page.querySelector('.gju-quiz-ad--mobile-mid'), grid, note]
-          .filter(Boolean)
-          .forEach((el) => {
-            if (host.contains(el)) return;
-            host.appendChild(el);
-          });
-      }
-      wrapRailHost(host);
-      const slot = makeSlot('skyscraper', '160x600');
-      slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
-      host.appendChild(slot);
+  if (units.skyscraper?.key && grid && isDesktop()) {
+    let host = page.querySelector('.gju-rank-ad-host');
+    if (!host) {
+      host = document.createElement('div');
+      host.className = 'gju-rank-ad-host';
+      const start = search || grid;
+      start.parentNode.insertBefore(host, start);
+      [search, page.querySelector('.gju-quiz-ad--mobile-mid'), grid, note, guide, faq]
+        .filter(Boolean)
+        .forEach((el) => {
+          if (host.contains(el)) return;
+          host.appendChild(el);
+        });
     }
-  };
+    wrapRailHost(host);
+    const slot = makeSlot('skyscraper', '160x600');
+    slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
+    host.appendChild(slot);
+  }
+};
 
   const injectForm = (page) => {
     const hero = page.querySelector('.predictor-hero');

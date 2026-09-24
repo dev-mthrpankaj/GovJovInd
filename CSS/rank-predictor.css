@@ -2496,3 +2496,23 @@ body {
         border-radius: 20px;
     }
 }
+
+/* ALLOW sticky ads on rank pages */
+html.rank-ads-ready,
+body.rank-ads-ready {
+  overflow-x: clip; /* hidden se better; sticky kam toot-ti */
+}
+
+main.rank-cards-page,
+main.rank-predictor-page {
+  overflow-x: visible !important;
+  overflow: visible !important;
+}
+
+/* Rank landing / form — sticky skyscraper needs this */
+html:has(main.rank-cards-page),
+html:has(main.rank-predictor-page),
+body:has(main.rank-cards-page),
+body:has(main.rank-predictor-page) {
+  overflow-x: visible;
+}
