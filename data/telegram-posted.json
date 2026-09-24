@@ -2558,6 +2558,13 @@
       "title": "IBPS Hindi Officer Online Form 2026",
       "lastPostedAt": "2026-09-23T17:01:26.346Z",
       "stateReason": "new"
+    },
+    "jobs:job-sheet-0256-20260924160100-3123c7f8": {
+      "updatedAt": "2026-09-24",
+      "hash": "273efee7683b64d6db1b43b621118d24dcc5f13c0268320a52bdf15c74d1251f",
+      "title": "BPSC Bihar Teacher TRE 4 Online Form 2026 for 32388 Post",
+      "lastPostedAt": "2026-09-24T13:46:15.262Z",
+      "stateReason": "new"
     }
   },
   "admitCards": {
@@ -6633,11 +6640,11 @@
       "stateReason": "new"
     },
     "results:result-sheet-0154-20260918173412-35b96d4c": {
-      "updatedAt": "2026-09-18",
-      "hash": "2bd1a660d03f9b3c017b94e61994dc4293de2599dabd4a119b036f5a3d0faeb2",
-      "title": "NTA UGC NET June 2026 Re-Exam Result",
-      "lastPostedAt": "2026-09-18T13:20:21.086Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-24",
+      "hash": "6ffbb2a60ec498d13ac227947dd785fd25fb8387029a1da53d3ab2c7c48a9298",
+      "title": "NTA UGC NET June 2026 Result | Certificate – Issue",
+      "lastPostedAt": "2026-09-24T13:46:15.862Z",
+      "stateReason": "update"
     },
     "results:result-sheet-0155-20260918174153-d91a2237": {
       "updatedAt": "2026-09-18",
