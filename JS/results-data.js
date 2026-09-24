@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0161-20260924150700-85543158",
+        "title": "NEET PG Result 2026 – Out",
+        "organization": "National Board of Examination in Medical Sciences (NBE)",
+        "department": "NBE",
+        "category": "Health",
+        "year": "2026",
+        "resultDate": "2026-09-24",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://drive.google.com/file/d/1q7FuIq_qW6ROTMcYHQEdMj2KZmnFZmNz/view",
+        "detailPage": "../jobs/neet-pg-2026.html",
+        "updatedAt": "2026-09-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0160-20260923220417-cad4d401",
         "title": "IBPS CRP PO MT XVI Pre Result 2026",
         "organization": "Institute of Banking Personnel Selection",

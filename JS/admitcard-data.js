@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0175-20260924151026-2fe446fd",
+        "title": "BOB Local Bank Officer LBO Exam Date 2026 Released",
+        "organization": "Bank of Baroda (BOB)",
+        "department": "BOB",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-10-03",
+        "examEndDate": "",
+        "releaseDate": "2026-09-24",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2026/26-09/Notification-23-21.pdf",
+        "detailPage": "../jobs/bob-local-bank-officer-2026.html",
+        "updatedAt": "2026-09-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0142-20260909091550-f9e367f1",
         "title": "UPSSSC Forest Guard Admit Card 2026",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
