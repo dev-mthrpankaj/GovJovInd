@@ -204,3 +204,30 @@
 @media print {
   .gju-quiz-ad { display: none !important; }
 }
+
+/* Rank predictor ad host */
+.gju-rank-ad-host.gju-quiz-ad-host-ready.has-quiz-ad-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 176px;
+  gap: 1rem 1.25rem;
+  align-items: start;
+  width: min(1180px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gju-rank-ad-host .gju-quiz-ad-rail-main {
+  min-width: 0;
+}
+
+.gju-rank-ad-host.ad-rail-empty {
+  display: block;
+  grid-template-columns: none;
+}
+
+@media (max-width: 1099px) {
+  .gju-rank-ad-host.gju-quiz-ad-host-ready.has-quiz-ad-rail {
+    display: block;
+    grid-template-columns: none;
+  }
+}
