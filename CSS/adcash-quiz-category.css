@@ -1,4 +1,4 @@
-/* Adsterra — quiz category + typing category pages (160×600 rail) */
+/* Adsterra — quiz category + typing category (stable 160×600 rail) */
 
 .gju-quiz-ad {
   display: flex;
@@ -54,7 +54,7 @@
   max-width: 100%;
   overflow: hidden;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .gju-quiz-ad-frame iframe,
@@ -78,7 +78,7 @@
   margin-inline: auto;
 }
 
-/* Desktop skyscraper rail — 160×600 (column 2, never under content) */
+/* Desktop skyscraper — chrome + size from first paint (no flash) */
 .gju-quiz-ad--skyscraper {
   margin: 0;
   padding: 10px 6px 12px;
@@ -93,6 +93,11 @@
   grid-row: 1;
   justify-self: end;
   min-height: 620px;
+  border: 1px solid #dbe5f1;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, #f8fbff 0%, #ffffff 62%, #f8fafc 100%);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
 }
 
 .gju-quiz-ad--skyscraper .gju-quiz-ad-label {
@@ -102,6 +107,7 @@
   align-items: center;
   text-align: center;
   gap: 0.2rem;
+  opacity: 1;
 }
 
 .gju-quiz-ad--skyscraper .gju-quiz-ad-label-note {
@@ -115,37 +121,29 @@
   min-width: 160px;
   max-width: 160px;
   min-height: 600px;
+  background: #fff;
 }
 
 .gju-quiz-ad--skyscraper.is-filled .gju-quiz-ad-frame {
   min-height: 600px;
 }
 
-/* Pending load: keep slot in side column, quiet chrome */
-.gju-quiz-ad--skyscraper:not(.is-filled):not(.is-empty) {
-  border-color: transparent;
-  background: transparent;
-  box-shadow: none;
-}
-
-.gju-quiz-ad--skyscraper:not(.is-filled):not(.is-empty) .gju-quiz-ad-label {
-  opacity: 0;
-}
-
 .gju-quiz-ad--desktop-only { display: flex; }
 .gju-quiz-ad--mobile-only { display: none; }
-.gju-quiz-ad.is-empty,
-.gju-quiz-ad[hidden] { display: none !important; }
 
-/* Page width expands while rail is live */
+.gju-quiz-ad.is-empty,
+.gju-quiz-ad[hidden] {
+  display: none !important;
+}
+
+/* Page width while rail is live */
 .family-quiz-page:has(.has-quiz-ad-rail),
 .subject-quiz-page:has(.has-quiz-ad-rail) {
   width: min(100%, 1440px);
 }
 
 /*
-  Host grid as soon as skyscraper is injected (gju-quiz-ad-host-ready).
-  Prevents skyscraper stacking under cards (bottom → side jump).
+  Host grid as soon as skyscraper injects — prevents bottom→side jump
 */
 .family-discovery.gju-quiz-ad-host-ready,
 .subject-sets-section.gju-quiz-ad-host-ready,
@@ -156,7 +154,6 @@
   align-items: start;
 }
 
-/* Empty after check: collapse rail column */
 .family-discovery.gju-quiz-ad-host-ready.ad-rail-empty,
 .subject-sets-section.gju-quiz-ad-host-ready.ad-rail-empty,
 .gju-typing-ad-host.gju-quiz-ad-host-ready.ad-rail-empty {
