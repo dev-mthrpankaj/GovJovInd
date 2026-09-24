@@ -18,7 +18,7 @@
         height: 250
       }
     },
-    cssHref: '/CSS/adcash-quiz-category.css?v=20260924-rank',
+    cssHref: '/CSS/adcash-quiz-category.css?v=20260925-rank',
     emptyHideMs: 4000,
     emptyRecheckMs: [7000, 11000],
     bannerGapMs: 400,
