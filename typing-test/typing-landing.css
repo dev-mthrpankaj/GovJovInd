@@ -713,3 +713,188 @@
     transform: none;
   }
 }
+/* ===== Landing v2 — hierarchy (2026-09-24) ===== */
+.gju-typing-hero-v2 .typing-hero-lead {
+  max-width: 36rem;
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  line-height: 1.55;
+  color: #475569;
+}
+
+.typing-entry-actions-v2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.75rem;
+  margin-top: 1.15rem;
+}
+
+.typing-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.15rem;
+  border-radius: 10px;
+  border: 1.5px solid #bacbf0;
+  background: #fff;
+  color: #315bd6;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.typing-secondary-action:hover {
+  background: #f0f5ff;
+  border-color: #315bd6;
+}
+
+.typing-benefits-v2 {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.typing-benefits-v2 li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #526078;
+}
+
+.typing-benefits-v2 i { color: #315bd6; }
+
+.gju-typing-popular { margin: 0.5rem auto 1.1rem; max-width: 1180px; width: 100%; }
+.gju-typing-section-head { margin-bottom: 0.85rem; }
+.gju-typing-section-head h2 {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  color: #172440;
+  font-weight: 800;
+}
+.gju-typing-section-head p {
+  margin: 0;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.gju-typing-popular-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.gju-typing-popular-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.05rem;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gju-typing-popular-card:hover {
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.1);
+}
+
+.gju-typing-popular-kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #315bd6;
+}
+
+.gju-typing-popular-card strong { font-size: 1rem; color: #172440; }
+.gju-typing-popular-card span:last-child {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.gju-typing-quick-lang {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0 auto 1.35rem;
+  max-width: 1180px;
+  width: 100%;
+}
+
+.gju-typing-quick-lang-card {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.05rem 1.15rem;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  min-height: 92px;
+  align-content: center;
+}
+
+.gju-typing-quick-lang-card--hi {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 55%, #14b8a6 100%);
+}
+.gju-typing-quick-lang-card--en {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #3b82f6 100%);
+}
+
+.gju-typing-quick-lang-card > span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  opacity: 0.9;
+  letter-spacing: 0.04em;
+}
+.gju-typing-quick-lang-card strong { font-size: 1.15rem; }
+.gju-typing-quick-lang-card em {
+  font-style: normal;
+  font-size: 0.88rem;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.typing-directory-sub {
+  margin: -0.15rem auto 0.85rem;
+  max-width: 1180px;
+  text-align: center;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.gju-typing-exam-card p {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+@media (max-width: 960px) {
+  .gju-typing-popular-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .gju-typing-popular-grid,
+  .gju-typing-quick-lang { grid-template-columns: 1fr; }
+
+  .typing-entry-actions-v2 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .typing-primary-action,
+  .typing-secondary-action,
+  .typing-exam-jump {
+    justify-content: center;
+    text-align: center;
+  }
+}
