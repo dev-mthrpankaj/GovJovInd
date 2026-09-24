@@ -593,7 +593,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-24",
         "examEndDate": "",
         "releaseDate": "2026-09-15",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://admitcards.upessc.org/login",
         "detailPage": "../jobs/upessc-principal-2026.html",
