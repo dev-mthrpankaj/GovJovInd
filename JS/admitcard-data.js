@@ -1436,12 +1436,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/crppoxvijun26/oecla_aug26/login.php?appid=a4fe64b0f7c33f95f3c4d31e06680eaf",
-        "detailPage": "../AdmitCard_Details/HTML/IBPS-PO-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0107-20260814210727-c49487e0",
@@ -1576,12 +1576,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upcons2025.com/upcon2025dvpstadmitcard/loginpage.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/UP-Police-Constable-DV-PST-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0099-20260809192117-d603bcbf",
@@ -3287,12 +3287,12 @@ window.GovJobUpdatesAdmitCards = [
             "Constable"
         ],
         "downloadLink": "https://upcons2025-com.translate.goog/upcondiad2025/loginpage.aspx?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=hi&_x_tr_pto=tc",
-        "detailPage": "../Job_Details/HTML/2033-UP-Police_Constable-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0014",

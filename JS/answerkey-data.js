@@ -1186,12 +1186,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
         "objectionLink": "https://upcons2025.com/con2025questionobjections/Login.aspx",
-        "detailPage": "../AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0017",
@@ -1368,12 +1368,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://www.upessc.net/tgtqsobj2026/Login.aspx",
         "objectionLink": "#",
-        "detailPage": "../AnswerKey_Details/HTML/UP-TGT-2022-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0010",

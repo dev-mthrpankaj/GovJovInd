@@ -68,12 +68,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://ibpsreg.ibps.in/crppoxvijun26/restza_sep26/login.php?appid=c60e35e0968181af45992cb962f15189",
-        "detailPage": "../jobs/ibps-po-mt-xvi-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-09-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0152-20260916163745-e551ef75",
@@ -1508,12 +1508,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://upcons2025.com/conwrittentest2025/Loginpage.aspx",
-        "detailPage": "../Result_Details/HTML/UP-Police-Constable-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-31",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0072-20260728122411-91a0455d",
@@ -1544,12 +1544,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://www.upessc.net/TGTResults/Login.aspx",
-        "detailPage": "../Result_Details/HTML/UPESSC-UP-TGT-Final-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0074-20260728221945-854c1922",
