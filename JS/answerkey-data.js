@@ -26,6 +26,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "answerkey-sheet-0072-20260925153036-d410a580",
+        "title": "ISRO ICRB Answer Key 2026 for 244 Post",
+        "organization": "Indian Space Research Organization (ISRO) Centralised Recruitment Board ICRB",
+        "department": "ICRB",
+        "category": "Research",
+        "year": "2026",
+        "examDate": "2026-09-21",
+        "examEndDate": "",
+        "releaseDate": "2026-09-25",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/101396/login.html",
+        "objectionLink": "",
+        "detailPage": "../jobs/isro-icrb-2026.html",
+        "updatedAt": "2026-09-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0069-20260924151805-4c9fd229",
         "title": "SSC Stenographer Answer Key 2026",
         "organization": "Staff Selection Commission",
