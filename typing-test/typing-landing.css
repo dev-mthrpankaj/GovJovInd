@@ -713,3 +713,124 @@
     transform: none;
   }
 }
+/* ===== Directory control panel (title + search + filters) ===== */
+.gju-typing-index-page .typing-directory-title,
+.gju-typing-index-page .gju-typing-exam-search,
+.gju-typing-index-page .gju-typing-filter-row,
+.gju-typing-index-page .typing-selection-summary {
+  width: 100%;
+  max-width: none;
+}
+
+/* Unified panel look when ad host wraps them */
+.gju-typing-index-page .gju-typing-ad-host .gju-quiz-ad-rail-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Control stack: title → search → chips → count */
+.gju-typing-index-page .typing-directory-title {
+  margin: 8px 0 0;
+  text-align: left;
+  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+  letter-spacing: -0.02em;
+}
+
+.gju-typing-index-page .gju-typing-exam-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 14px;
+  min-height: 52px;
+  border: 1px solid #d5deee;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(23, 36, 64, 0.04);
+}
+
+.gju-typing-index-page .gju-typing-exam-search i {
+  color: #7a8699;
+  flex-shrink: 0;
+}
+
+.gju-typing-index-page .gju-typing-exam-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  color: #172440;
+}
+
+.gju-typing-index-page .gju-typing-exam-search:focus-within {
+  border-color: #315bd6;
+  box-shadow: 0 0 0 4px rgba(49, 91, 214, 0.12);
+}
+
+.gju-typing-index-page .gju-typing-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.gju-typing-index-page .gju-typing-filter {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid #d5deee;
+  border-radius: 999px;
+  background: #fff;
+  color: #526078;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.gju-typing-index-page .gju-typing-filter:hover {
+  border-color: #315bd6;
+  color: #315bd6;
+}
+
+.gju-typing-index-page .gju-typing-filter.is-selected {
+  background: #315bd6;
+  border-color: #315bd6;
+  color: #fff;
+}
+
+.gju-typing-index-page .typing-selection-summary {
+  margin: 0;
+  text-align: left;
+  color: #7a8699;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* Optional: soft card around the whole control cluster (no extra HTML) */
+.gju-typing-index-page .gju-quiz-ad-rail-main > .typing-directory-title {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .gju-typing-index-page .typing-directory-title {
+    text-align: center;
+  }
+
+  .gju-typing-index-page .typing-selection-summary {
+    text-align: center;
+  }
+
+  .gju-typing-index-page .gju-typing-filter-row {
+    justify-content: center;
+  }
+}
