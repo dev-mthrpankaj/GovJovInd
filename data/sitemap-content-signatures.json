@@ -189,10 +189,6 @@
       "signature": "acbd3edd35db13b88c89d8ffb0411958d730ebae27ca2687d406795ee487601b",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/IBPS-PO-Admit-Card-2026.html": {
-      "signature": "a3afe7c6651da68d77fa7fb83f6b8ef841cf0c302640c49a743d5f4cfd53bb2c",
-      "lastmod": "2026-08-14"
-    },
     "AdmitCard_Details/HTML/IBPS-SO-Specialist-Officers-XVI-Admit-Card-2026.html": {
       "signature": "1256f7f16402e66b7e177a0b4ff5c569bb2672df2cbf3080736f148ade1b1164",
       "lastmod": "2026-08-21"
@@ -317,10 +313,6 @@
       "signature": "deea42babf8a6c10cbbac0e600aef763027525067afb41a0bc62e348bace7286",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/UP-Police-Constable-DV-PST-Admit-Card-2026.html": {
-      "signature": "af6eec12b28c531efb35b9275f90238aae1eb6f1d37aca68d603c4e56dde98c2",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/UPCISB-Co-operative-Banking-Exam-Admit-Card-2026.html": {
       "signature": "916b1b6097d0124b3e3d4ed2dd5d63df48f5f4728430c2ded3b67c4b86bc8f24",
       "lastmod": "2026-08-14"
@@ -359,10 +351,6 @@
     },
     "AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html": {
       "signature": "1d19905f90f4c665ddee293521afa089249caf0ffe0f493cf34fb6f0aa454c92",
-      "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/1105-UP-Police-Constable-Answer-Key-2025.html": {
-      "signature": "7eae95d401df8f902fa24f167d984abcfd2e12a3e958ce43d9339b1a749bb89d",
       "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/1105-UPSC-ISS-Statistics-Answer-Key-2026.html": {
@@ -1177,10 +1165,6 @@
       "signature": "4cdfabce743df1a264b2c24ca36205494ec32fb9b233dfd34da0a30be301c12c",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/2033-UP-Police_Constable-2026.html": {
-      "signature": "1af13d0ec6b5db7283b0d36a7e6e86c7f3baa48c4be6699fc824a8044b87805c",
-      "lastmod": "2026-08-27"
-    },
     "Job_Details/HTML/2045-MPESB-Van-Rakshak,-Jail-Prahari-2026.html": {
       "signature": "cc509ff6dc0c0825296e66c9ee508185a8ae4591360efb66a9e809c5d47dbd6b",
       "lastmod": "2026-08-12"
@@ -1431,10 +1415,6 @@
     },
     "Job_Details/HTML/IBPS-Clerk-XVI-2026.html": {
       "signature": "759cd60818aee87f1187a1e1d5d662346ebbaba8eff08c41c5357182a531b682",
-      "lastmod": "2026-08-12"
-    },
-    "Job_Details/HTML/IBPS-PO-MT-XVI-Recruitment-2026.html": {
-      "signature": "e710a2162261492e9abb8287262325f88492aa9235ce4d86031ec8a8b0d688ef",
       "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/IBPS-SO-Specialist-Officers-XVI-2026.html": {
@@ -1774,8 +1754,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/bpsc-bihar-teacher-tre-4-0-2026.html": {
-      "signature": "505f59085da018359d05a1e622835cf3984c9abf20bd15d5f0f3bb5aeb283c84",
-      "lastmod": "2026-09-24"
+      "signature": "231762cd0c5b7b67d82b5db7ccac3cf2224d389252da01a9e762cbd7d262cb91",
+      "lastmod": "2026-09-25"
     },
     "jobs/bpssc-police-company-commander-2026.html": {
       "signature": "d860f11168b4f7b827633bb8b22979318060735af0a618498460c48e121c01bb",
@@ -1849,6 +1829,10 @@
       "signature": "179c9da7d7d9c106a31c9dfa0f4ce8e2d924339b66565cc39996659721b9caa8",
       "lastmod": "2026-09-12"
     },
+    "jobs/hppsc-hpas-2026.html": {
+      "signature": "1b3e315f088726f33aaeaeed4b4480e705a1f8fda1af2528dc6d6db41cb881a9",
+      "lastmod": "2026-09-25"
+    },
     "jobs/hprca-assistant-staff-nurse-12-2026.html": {
       "signature": "d747de91387c264426e6c44034c169e255a4d4ae4af67692f3a2d762c0d4ad24",
       "lastmod": "2026-09-21"
@@ -1872,10 +1856,6 @@
     "jobs/ibps-po-2026.html": {
       "signature": "99c1d7a20edf6d9d10769dccf1b098f257feb2ea8521901c61eb91f7f15a4131",
       "lastmod": "2026-09-24"
-    },
-    "jobs/ibps-po-mt-xvi-2026.html": {
-      "signature": "aa9baad3a06acbbad896d88da22ef52d8c99193903c7ecb15e012071cbc692ca",
-      "lastmod": "2026-09-23"
     },
     "jobs/ibps-rrb-xv-2026.html": {
       "signature": "666f9b74c8d76a42530f95b4b934dc3df7e14087f465d09db7dfc452e582cc11",
@@ -1902,8 +1882,8 @@
       "lastmod": "2026-09-18"
     },
     "jobs/isro-icrb-2026.html": {
-      "signature": "afd507ae07b79024af1cffab6f010208d27623dd435b7f3540a1734eb647a111",
-      "lastmod": "2026-09-15"
+      "signature": "148c66cf344f1c035a36e8d82c2efe839941153d608d6477eeb8120c8527b3bc",
+      "lastmod": "2026-09-25"
     },
     "jobs/isro-istrac-2026.html": {
       "signature": "a49aeeb818f0648dfd62fcf6c85f363f74bd8301830e70ef9ffabd5671f2fce8",
@@ -2022,7 +2002,7 @@
       "lastmod": "2026-09-22"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
-      "signature": "23941b47370f166c77221c192daede5d649e5fef3a5efe9051381d9f68025330",
+      "signature": "44e5ed8b1b1a7c4f1618ebff7ced5ad19883ce5cac0ae1d5fa68e69564d08a9f",
       "lastmod": "2026-09-25"
     },
     "jobs/rbi-assistant-2026.html": {
@@ -2728,10 +2708,6 @@
     "Result_Details/HTML/UP-Panchayat-Sahayak-Merit-List-2024.html": {
       "signature": "6c58925478784a21fcbe9b2497077d0810c31522fdd86db4309c8b0f569ebc7a",
       "lastmod": "2026-08-17"
-    },
-    "Result_Details/HTML/UP-Police-Constable-Result-2026.html": {
-      "signature": "4ac053680571268feb6f69dfde098ebbccaa7c2cec91cefcf643a93b20ef93b7",
-      "lastmod": "2026-08-12"
     },
     "Result_Details/HTML/UP-Police-Sub-Inspector-SI-Final-Result-2026.html": {
       "signature": "bf732e45b180fddbb6848e68d56375c248dd8c4cf8cfc88351ecf3518228c8e7",
