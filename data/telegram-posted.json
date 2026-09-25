@@ -2385,11 +2385,11 @@
       "stateReason": "new"
     },
     "jobs:job-sheet-0231-20260910132825-2e0bd694": {
-      "updatedAt": "2026-09-10",
-      "hash": "39b6bb63cf7a3bef5bfa2aaaeb497e978af396cd1367cc865973aa1976c57738",
-      "title": "Bank of India SO Specialist Officer Online Form 2026 for 205 Post",
-      "lastPostedAt": "2026-09-10T08:58:32.672Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-25",
+      "hash": "c6d455f0d4cf9a0412a2eee4ed0bfd9707a8c0bfbef5e895ada3d4676c83f8ae",
+      "title": "Bank of India SO Specialist Officer Online Form 2026 for 205 Post (Date Extended)",
+      "lastPostedAt": "2026-09-25T16:19:39.462Z",
+      "stateReason": "update"
     },
     "jobs:job-sheet-0232-20260910133252-6206416a": {
       "updatedAt": "2026-09-10",
@@ -2571,6 +2571,20 @@
       "hash": "1d1acbc8ddfaa51ddea0615e3d849e563d6b8d1aa5da3b30f78eb572ad31426f",
       "title": "BTSC Fishery Extension Officer Online Form 2026 for 231 Post",
       "lastPostedAt": "2026-09-24T16:11:29.737Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0258-20260925204100-5bc0982f": {
+      "updatedAt": "2026-09-25",
+      "hash": "9c1daf679a3789627b4d5aef697171b4574a9fabe3665dd6c6cfc485a1772398",
+      "title": "SBI SCO Specialist Cadre Officer Online Form 2026 (Date Extended)",
+      "lastPostedAt": "2026-09-25T16:19:40.211Z",
+      "stateReason": "new"
+    },
+    "jobs:job-sheet-0259-20260925205554-22a1b9b0": {
+      "updatedAt": "2026-09-25",
+      "hash": "4646742a2ff39070f622ff56170e8b80d722100baa81437a025d9660093ab2b5",
+      "title": "CSIR NGRI Technician Online Form 2026",
+      "lastPostedAt": "2026-09-25T16:19:40.662Z",
       "stateReason": "new"
     }
   },
@@ -4074,11 +4088,11 @@
       "stateReason": "new"
     },
     "admitCards:admit-sheet-0147-20260910140153-fd28ad5e": {
-      "updatedAt": "2026-09-10",
-      "hash": "a7c5ee48da8d6d7b718e49c797566901a836eedfcaf9ed1a71f384ccec91d660",
-      "title": "UPSSSC PET Exam Date 2026 | Preliminary Eligibility Test",
-      "lastPostedAt": "2026-09-10T09:24:15.253Z",
-      "stateReason": "new"
+      "updatedAt": "2026-09-25",
+      "hash": "1599185b5011d334a90c151b157429e25154bc3c31e60f9ad0e471b32f3ad7b4",
+      "title": "UPSSSC PET New Exam Date 2026 | Preliminary Eligibility Test",
+      "lastPostedAt": "2026-09-25T16:19:41.164Z",
+      "stateReason": "update"
     },
     "admitCards:admit-sheet-0148-20260910140725-0bc9bdd6": {
       "updatedAt": "2026-09-22",
