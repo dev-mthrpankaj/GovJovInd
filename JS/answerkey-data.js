@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0071-20260925061431-5f6ebfe1",
+        "title": "Railway RRB NTPC 10+2 Level UG CBT II Answer Key 2026",
+        "organization": "Railway Recruitment Board (RRB)",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-17",
+        "examEndDate": "",
+        "releaseDate": "2026-09-25",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/100181/login.html",
+        "objectionLink": "",
+        "detailPage": "../jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html",
+        "updatedAt": "2026-09-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0069-20260924151805-4c9fd229",
         "title": "SSC Stenographer Answer Key 2026",
         "organization": "Staff Selection Commission",
