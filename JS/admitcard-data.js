@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0178-20260925125247-36bdcba8",
+        "title": "HPPSC HPAS Exam Date 2026",
+        "organization": "Himachal Pradesh Public Service Commission (HPPSC)",
+        "department": "HPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-13",
+        "examEndDate": "",
+        "releaseDate": "2026-09-25",
+        "status": "exam-over",
+        "tags": [],
+        "downloadLink": "https://hppsc.hp.gov.in/CommonControls/ViewCMSFile?qs=KI3gZ53zz1wSGo29lXLTBfw1DHezN8KfEg%2BrikZhi%2FLLqiZME0%2BQRfdkGlH8WWht78y905KNM%2B7O%2FlWbWn%2B2v5d0CrjYde3AqRUU%2FklGx%2Fk%3D",
+        "detailPage": "../jobs/hppsc-hpas-2026.html",
+        "updatedAt": "2026-09-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0175-20260924151026-2fe446fd",
         "title": "BOB Local Bank Officer LBO Exam Date 2026 Released",
         "organization": "Bank of Baroda (BOB)",
