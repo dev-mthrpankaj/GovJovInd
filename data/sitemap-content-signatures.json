@@ -1249,10 +1249,6 @@
       "signature": "d86b9767b10932ff3c7322b3f155e245c6e01188801da7ec4c8993a42cfbf984",
       "lastmod": "2026-08-27"
     },
-    "Job_Details/HTML/2430-RRB-Technician-Recruitment-2026.html": {
-      "signature": "99e1e9e0720c223b225fccbe10aa34eb595c788c94000b1e6120c835f44c47fe",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/2431-RPSC-RAS-Pre-Recruitment-2026.html": {
       "signature": "e251c8fac0d0e7c132dc02931170bd9cee4d8e67f3402c5ac7ea47e14d14a73c",
       "lastmod": "2026-08-12"
@@ -1742,8 +1738,8 @@
       "lastmod": "2026-09-15"
     },
     "jobs/bob-local-bank-officer-2026.html": {
-      "signature": "5eaf5374abe15cfd94f01195be7de003140327f3eb41bdf3b0b652806da3cb1a",
-      "lastmod": "2026-09-24"
+      "signature": "943008e2e37f24dc4131da5110a12253187ab6dce4b9aead6b5d414825b0dca6",
+      "lastmod": "2026-09-27"
     },
     "jobs/bpcl-non-management-post-2026.html": {
       "signature": "e0861284dfed397bcf6cde4942aaf74cbe5e830e3018294165d8b3e23d50674e",
@@ -1846,8 +1842,8 @@
       "lastmod": "2026-09-12"
     },
     "jobs/iaf-medical-assistant-2026.html": {
-      "signature": "c4127cc27eb8b71ba35d4b8dafb1f177f302bd2eaa9c3f26e1f383aa06734f6e",
-      "lastmod": "2026-09-19"
+      "signature": "0b0d2db4fa920289cab3810d434a221be02d89f50d2500187f00209fdc0465f4",
+      "lastmod": "2026-09-26"
     },
     "jobs/ibps-hindi-officer-2026.html": {
       "signature": "17dd75ee42d158a5c6bcd324ecaaacc8a474bb5ac7ed1ff0abc28842a5611aa9",
@@ -1938,7 +1934,7 @@
       "lastmod": "2026-09-17"
     },
     "jobs/mppsc-assistant-professor-admit-card.html": {
-      "signature": "adef44c484da21db1b4f2de92c5515dfe10db781ca607af35ebd410d2b0c69e7",
+      "signature": "9f1f60b7a0396c00cb745ada7c8e61e027be2d05d58cfad45811f27858a6e977",
       "lastmod": "2026-09-26"
     },
     "jobs/mppsc-assistant-professor.html": {
@@ -2008,6 +2004,10 @@
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
       "signature": "44e5ed8b1b1a7c4f1618ebff7ced5ad19883ce5cac0ae1d5fa68e69564d08a9f",
       "lastmod": "2026-09-25"
+    },
+    "jobs/railway-rrb-technician-cen-02-2026.html": {
+      "signature": "44d34ef1b1803022f74b1515201427c5e47f41093146e19ee835fb21d461935e",
+      "lastmod": "2026-09-27"
     },
     "jobs/rbi-assistant-2026.html": {
       "signature": "647a1a8da4e9a820baaefa89b3069785da2be1dca07a6d5ab076299a4773fda6",
