@@ -1214,7 +1214,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "441",
         "startDate": "2026-08-28",
         "lastDate": "2026-09-27",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://sronline.etrpindia.com/rrcchennaiapprentice26/recruitmentIndex",
         "officialNotification": "https://sronline.etrpindia.com/rrcchennaiapprentice26/notifications/Act%20Apprentices%20Notification%202026-27%20with%20enclosures.pdf",
