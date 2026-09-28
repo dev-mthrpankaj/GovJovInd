@@ -64,6 +64,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0182-20260928155304-189e5ddd",
+        "title": "Chhattisgarh State Eligibility Test SET Admit Card 2026",
+        "organization": "Chhattisgarh Staff Selection Board",
+        "department": "CSSB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-10-04",
+        "examEndDate": "",
+        "releaseDate": "2026-09-28",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://vyapamprofile.cgstate.gov.in/online/",
+        "detailPage": "../jobs/chhattisgarh-set-2026.html",
+        "updatedAt": "2026-09-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0175-20260924151026-2fe446fd",
         "title": "BOB Local Bank Officer LBO Admit Card 2026 Released",
         "organization": "Bank of Baroda (BOB)",

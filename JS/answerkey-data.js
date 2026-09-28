@@ -1310,12 +1310,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://ssc.gov.in/home/answer-key",
         "objectionLink": "",
-        "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-16",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0014",

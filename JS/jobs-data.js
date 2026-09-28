@@ -2754,13 +2754,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101396//Index.html",
         "officialNotification": "https://www.isro.gov.in/media_isro/pdf/recruitmentNotice/2026/July/Bilingual%20Advertisement_Asst_JPA_UDC_Steno_ICRB_2026_27072026.pdf",
-        "detailPage": "../Job_Details/HTML/ISRO-ICRB-Various-Post-Recruitment-2026.html",
+        "detailPage": "../jobs/isro-icrb-2026.html",
         "updatedAt": "2026-07-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {

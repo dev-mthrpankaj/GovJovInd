@@ -644,12 +644,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=FzCM1cz3k8ohC+69JQLEE0a8bYjxrP5YMYMZP4fujh8=",
-        "detailPage": "../Result_Details/HTML/NTA-CSIR-UGC-NET-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-30",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0121-20260828214157-52c0ebcf",
@@ -698,12 +698,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=161&Result_Type=P&Exam_Code=7&Advt_Code=734&Dept_Code=659&Post_Code=1&OnlyIntview=No",
-        "detailPage": "../Result_Details/HTML/UPSSSC-Forensic-Science-Laboratory-Eligibility-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0124-20260828214920-d91e9ddc",
@@ -716,12 +716,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://ibpsreg.ibps.in/rbiafeb26/scda_jul26/login.php?appid=f19af99ea9ac5529cb603f7e8eadcba9",
-        "detailPage": "../Result_Details/HTML/RBI-Assistant-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0125-20260828215237-33d3c59e",
@@ -842,12 +842,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://www.upsc.gov.in/sites/default/files/WR-CAPF-2026-Roll-Engl-250826.pdf",
-        "detailPage": "../Result_Details/HTML/UPSC-CAPF-Assistant-Commandant-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0113-20260825101328-aca3f9a9",
@@ -1040,12 +1040,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rpsc.rajasthan.gov.in/Static/Result/94493DB089244C93AD508A6B3ED77C77.pdf",
-        "detailPage": "../Result_Details/HTML/RPSC-School-Lecturer-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-17",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0105-20260817203208-66a272e4",
@@ -1184,12 +1184,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://esb.mp.gov.in/results/RESULT_26/JAIL_VAN_RES26/default_Results.htm",
-        "detailPage": "../Result_Details/HTML/MPESB-Van-Rakshak-Jail-Prahari-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0091-20260812184351-96f8b0a1",
@@ -1274,12 +1274,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://govjobupdates.com/Result_Details/HTML/RPSC-School-Lecturer-PGT-Result-2026.html",
-        "detailPage": "../Result_Details/HTML/RPSC-School-Lecturer-PGT-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0090-20260811202603-fb62b101",
@@ -1310,12 +1310,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rpsc.rajasthan.gov.in/Static/Result/4859FAB1C92E4AF9AFBEEFED59242904.pdf",
-        "detailPage": "../Result_Details/HTML/RPSC-School-Lecturer-PGT-Hindi-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0085-20260807205237-a841e37d",
@@ -2234,12 +2234,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/RRBRanchiGroupDResult.pdf",
-        "detailPage": "../Result_Details/HTML/3010-RRB-Ranchi-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0028",
@@ -2252,12 +2252,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rrbbilaspur.gov.in/file/result/30-BILASPUR-RRB_Level-1_Provisional-Publishing_Report-v1.0.pdf",
-        "detailPage": "../Result_Details/HTML/3011-RRB-Bilaspur-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0029",
@@ -2270,12 +2270,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/RRB_Ahemdabad_groupd_Result.pdf",
-        "detailPage": "../Result_Details/HTML/3009-RRB-Ahmedabad-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0030",
@@ -2288,12 +2288,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rrbbhopal.gov.in/2026/15-BHOPAL-RRB_Level_1_Provisional-Merit-List-v2.pdf",
-        "detailPage": "../Result_Details/HTML/3008-RRB-Bhopal-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0031",
@@ -2306,12 +2306,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/rrbBhubaneshwarresult26.pdf",
-        "detailPage": "../Result_Details/HTML/3007-RRB-Bhubaneswar-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0032",
@@ -2324,12 +2324,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://www.rrbchennai.gov.in/",
-        "detailPage": "../Result_Details/HTML/3006-RRB-Chennai-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0033",
@@ -2342,12 +2342,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://doc.sarkariresults.org.in/RRBPrayagrajGroupDResult.pdf",
-        "detailPage": "../Result_Details/HTML/3006-RRB-Prayagraj-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0034",
@@ -2360,12 +2360,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=96410&orgId=33015",
-        "detailPage": "../Result_Details/HTML/3011-RRB-Group-D-Score-Card-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0035",
@@ -2378,12 +2378,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://govjobupdates.com/Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html",
-        "detailPage": "../Result_Details/HTML/3006-RRB-Group-D-Level-1-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-07-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0025-1",
@@ -2540,12 +2540,12 @@ window.GovJobUpdatesResults = [
             "TPO"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/3007-SSC-Delhi-Police-Head-Constable-AWO-TPO-Additional-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0018-1",
@@ -2926,11 +2926,11 @@ window.GovJobUpdatesResults = [
             "head constable"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Job_Details/HTML/1000-SSC-DP-AWO-TPO-2025.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];
