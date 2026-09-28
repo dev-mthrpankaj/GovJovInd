@@ -40,7 +40,7 @@
       // 1. Vacancy Details ke just upar
       beforeVacancy: {
         id: '7468185',
-        src: '//quarrelsomebitter.com/brXuV.s/d/Gxlo0eYbWgci/teumv9-umZVUz1/kPPGTFcA0TNRjUg/yiMHDAEFtUN/zvQa2tOgDuInwFNBQk'
+        src: '//quarrelsomebitter.com/bfX_Vps.dRGL1j0TYWlacD/We/mL9GuGZkUBIrkvPUTUca0-NSjigQxO0nDyU/tmNPzjqT2eOBD/YEY4g0Qh'
       },
       // 2. Eligibility Criteria aur Application Fee ke beech
       betweenEligibilityFee: {
@@ -99,9 +99,16 @@
     if (!frame || !zone?.src) return;
 
     const script = document.createElement('script');
-    script.async = true;
-    script.referrerPolicy = 'no-referrer-when-downgrade';
-    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
+    script.textContent = `(function(gnddmv){
+      var d = document;
+      var s = d.createElement('script');
+      var l = d.currentScript || d.scripts[d.scripts.length - 1];
+      s.settings = gnddmv || {};
+      s.src = '${zone.src.startsWith('//') ? 'https:' + zone.src : zone.src}';
+      s.async = true;
+      s.referrerPolicy = 'no-referrer-when-downgrade';
+      l.parentNode.insertBefore(s, l);
+    })({});`;
     frame.appendChild(script);
   };
 
