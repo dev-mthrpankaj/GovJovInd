@@ -29,6 +29,10 @@
   .gjd-sticky-card{position:sticky;top:var(--gjd-sticky-top,92px);max-height:calc(100vh - var(--gjd-sticky-top,92px) - 16px);overflow:auto;overscroll-behavior:contain;}
 }
 
+.gjd-link-row i.fa-telegram{background:#229ed9;color:#fff}
+.gjd-link-row i.fa-whatsapp{background:#25d366;color:#fff}
+.gjd-link-row i.fa-youtube{background:#ff0033;color:#fff}
+
 
 /* Mobile CTA footer collision guard */
 @media(max-width:860px){
