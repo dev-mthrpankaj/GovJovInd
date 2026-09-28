@@ -2493,12 +2493,12 @@ window.GovJobUpdatesResults = [
             "Driver"
         ],
         "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../Result_Details/HTML/3008-SSC-Delhi-Police-Constable-Driver-Additional-Result-2026.html",
+        "detailPage": "../HTML/results.html",
         "updatedAt": "2026-06-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0023",
