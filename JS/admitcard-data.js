@@ -44,6 +44,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0181-20260928135252-e74b1f4a",
+        "title": "SSC Delhi Police HC AWO TPO PE-MT Admit Card",
+        "organization": "Staff Selection Commission (SSC)",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-30",
+        "examEndDate": "2026-10-01",
+        "releaseDate": "2026-09-23",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://sscnr.nic.in/newlook/ADMIT_CARD_OF_HC_MIN_2025/ADMIT_CARD_OF_HC_MIN_2025.html",
+        "detailPage": "../jobs/ssc-delhi-police-hc-awo-tpo-exam-2025.html",
+        "updatedAt": "2026-09-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0175-20260924151026-2fe446fd",
         "title": "BOB Local Bank Officer LBO Admit Card 2026 Released",
         "organization": "Bank of Baroda (BOB)",
