@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0075-20260928170233-84c74812",
+        "title": "UPESSC Principal Answer Key 2026",
+        "organization": "Uttar Pradesh Education Service Selection Commission",
+        "department": "UPESSC",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-09-24",
+        "examEndDate": "",
+        "releaseDate": "2026-09-26",
+        "objectionLastDate": "2026-10-01",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://www.upessc.net/UPESSCPrincipalQC/Login.aspx",
+        "objectionLink": "https://www.upessc.net/UPESSCPrincipalQC/Login.aspx",
+        "detailPage": "../jobs/upessc-principal-2026.html",
+        "updatedAt": "2026-09-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0073-20260926195406-24439da3",
         "title": "Indian Air Force Agniveer Vayu Exam Answer Key 2026 | Intake 02/2027",
         "organization": "Indian  Air Force",
