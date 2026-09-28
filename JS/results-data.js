@@ -2932,27 +2932,5 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0001",
-        "title": "RPSC RAS 2024 Final Result",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "State PSC",
-        "category": "Result",
-        "year": "2024",
-        "resultDate": "2026-04-18",
-        "status": "released",
-        "tags": [
-            "RPSC",
-            "RAS",
-            "Final Result"
-        ],
-        "resultLink": "https://rpsc.rajasthan.gov.in",
-        "detailPage": "../Result_Details/HTML/3007-RPSC-RAS-Final-Result-2026.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "draft",
-        "telegramReady": "no",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
     }
 ];
