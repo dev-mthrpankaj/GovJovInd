@@ -84,6 +84,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0183-20260928203932-7ef99106",
+        "title": "UPPSC Assistant Town Planner Mains Exam City 2026",
+        "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
+        "department": "UPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-10-06",
+        "examEndDate": "",
+        "releaseDate": "2026-09-28",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=dc",
+        "detailPage": "../jobs/uppsc-assistant-town-planner-nov-2025.html",
+        "updatedAt": "2026-09-28",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0175-20260924151026-2fe446fd",
         "title": "BOB Local Bank Officer LBO Admit Card 2026 Released",
         "organization": "Bank of Baroda (BOB)",
