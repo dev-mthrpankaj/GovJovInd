@@ -40,7 +40,7 @@
       // 1. Vacancy Details ke just upar
       beforeVacancy: {
         id: '7468185',
-        src: '//quarrelsomebitter.com/bfX_Vps.dRGL1j0TYWlacD/We/mL9GuGZkUBIrkvPUTUca0-NSjigQxO0nDyU/tmNPzjqT2eOBD/YEY4g0Qh'
+        src: '//quarrelsomebitter.com/b/XPWs.dbGY1wQqYW/ce/Weymj9/uaz/UilakFPST-c/0VNUjBg-xjOED1UotoNnzbQc2iO/DNE/4FOSQU'
       },
       // 2. Eligibility Criteria aur Application Fee ke beech
       betweenEligibilityFee: {
