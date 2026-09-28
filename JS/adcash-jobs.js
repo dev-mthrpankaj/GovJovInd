@@ -1,11 +1,9 @@
 (() => {
   'use strict';
 
-  // Adsterra banners — /jobs/ pages only
-  // Replaces AdCash; same slot layout (728x90, 160x600 rail, 300x250, 320x50)
-  const CONFIG = {
+  // ====================== ADSTERRA CONFIG (Existing) ======================
+  const ADSTERRA = {
     enabled: true,
-    // If ads blank: open Adsterra COPY CODE and paste exact invoke host here
     invokeHost: 'www.highperformanceformat.com',
     units: {
       leaderboard: {
@@ -32,24 +30,40 @@
     emptyHideMs: 4000,
     emptyRecheckMs: [7000, 11000],
     railFinalCheckMs: 12000,
-    // Sequential load avoids global atOptions race (Adsterra limit)
     bannerGapMs: 400
   };
 
-  window.ADSTERRA_JOBS_CONFIG = CONFIG;
+  // ====================== HILLTOPADS CONFIG (New) ======================
+  const HILLTOP = {
+    enabled: true,
+    zones: {
+      // 1. Hero ke just baad
+      afterHero: {
+        id: '7468185',
+        src: '//quarrelsomebitter.com/b.XMVjsgdsGEld0hYjWVc-/pegmC9duoZXU/ltkgPfTFc/0BNKj/gixVOyDfUXtEN/zNQs2/OhDpEy4-OcQb'
+      },
+      // 2. Vacancy Details ke just upar
+      beforeVacancy: {
+        id: '7468201',
+        src: '//quarrelsomebitter.com/brXuV.s/d/Gxlo0eYbWgci/teumv9-umZVUz1/kPPGTFcA0TNRjUg/yiMHDAEFtUN/zvQa2tOgDuInwFNBQk'
+      },
+      // 3. Eligibility aur Application Fee ke beech
+      betweenEligibilityFee: {
+        id: '7468169',
+        src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
+      }
+    }
+  };
 
+  // ====================== COMMON ======================
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
-  if (!CONFIG.enabled || !/\/jobs\//i.test(path)) return;
+  if (!/\/jobs\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
 
-  const units = CONFIG.units || {};
-  const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
-  const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
-  const isMobile = () => !isDesktopLeader();
-
-  const makeSlot = (slotKey, sizeLabel) => {
+  // ---------- Helper: Create Ad Slot ----------
+  const makeSlot = (slotKey, network = 'adsterra') => {
     const wrap = document.createElement('aside');
-    wrap.className = `gjd-ad gjd-ad--${slotKey}`;
+    wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--${network}`;
     wrap.dataset.adSlot = slotKey;
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
@@ -57,12 +71,73 @@
         <span class="gjd-ad-label-tag">Ad</span>
         <span class="gjd-ad-label-note">GovJobUpdates does not endorse this.</span>
       </div>
-      <div class="gjd-ad-frame" data-ad-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
-    `.trim();
+      <div class="gjd-ad-frame" data-ad-frame="${slotKey}"></div>
+    `;
     return wrap;
   };
 
-  const injectDisplaySlots = () => {
+  // ====================== HILLTOPADS INJECTION ======================
+  const injectHilltopAds = () => {
+    if (!HILLTOP.enabled) return;
+
+    // 1. Hero ke just baad
+    const hero = document.querySelector('.gjd-hero, .gjd-page-header, [class*="hero"], .gjd-banner-header');
+    if (hero && HILLTOP.zones.afterHero) {
+      const slot = makeSlot('hilltop-after-hero', 'hilltop');
+      hero.insertAdjacentElement('afterend', slot);
+      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.afterHero);
+    }
+
+    // 2. Vacancy Details ke just upar
+    // Looking for section that contains "Vacancy Details" or "POST DISTRIBUTION"
+    const vacancySection = Array.from(document.querySelectorAll('h2, h3, .gjd-section-title, [class*="section"]'))
+      .find(el => /vacancy|post distribution|vacancies/i.test(el.textContent || ''));
+    
+    if (vacancySection) {
+      const section = vacancySection.closest('section, .gjd-card, .gjd-box, div') || vacancySection.parentElement;
+      if (section && HILLTOP.zones.beforeVacancy) {
+        const slot = makeSlot('hilltop-before-vacancy', 'hilltop');
+        section.insertAdjacentElement('beforebegin', slot);
+        loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.beforeVacancy);
+      }
+    }
+
+    // 3. Eligibility Criteria aur Application Fee ke beech
+    const eligibilitySection = Array.from(document.querySelectorAll('h2, h3, .gjd-section-title'))
+      .find(el => /eligibility criteria/i.test(el.textContent || ''));
+    
+    const feeSection = Array.from(document.querySelectorAll('h2, h3, .gjd-section-title'))
+      .find(el => /application fee|payment information/i.test(el.textContent || ''));
+
+    if (eligibilitySection && feeSection && HILLTOP.zones.betweenEligibilityFee) {
+      const feeBox = feeSection.closest('section, .gjd-card, .gjd-box, div') || feeSection.parentElement;
+      if (feeBox) {
+        const slot = makeSlot('hilltop-between-elig-fee', 'hilltop');
+        feeBox.insertAdjacentElement('beforebegin', slot);
+        loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.betweenEligibilityFee);
+      }
+    }
+  };
+
+  const loadHilltop = (frame, zone) => {
+    if (!frame || !zone?.src) return;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.referrerPolicy = 'no-referrer-when-downgrade';
+    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
+    frame.appendChild(script);
+  };
+
+  // ====================== ADSTERRA (Existing Logic - unchanged) ======================
+  const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
+  const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
+  const isMobile = () => !isDesktopLeader();
+
+  const injectAdsterraSlots = () => {
+    if (!ADSTERRA.enabled) return;
+
+    const units = ADSTERRA.units || {};
     const updateStrip = document.querySelector('.gjd-page .gjd-update-strip');
     const links = document.querySelector('.gjd-page #important-links');
     const sidebar = document.querySelector('.gjd-page .gjd-sidebar');
@@ -70,31 +145,29 @@
 
     if (updateStrip && updateStrip.parentNode) {
       if (units.leaderboard?.key) {
-        const slot = makeSlot('leaderboard', '728x90');
+        const slot = makeSlot('leaderboard');
         slot.classList.add('gjd-ad--desktop-only');
         updateStrip.insertAdjacentElement('afterend', slot);
       }
-
       if (units.rectangle?.key) {
-        const slot = makeSlot('mobile-top', '300x250');
+        const slot = makeSlot('mobile-top');
         slot.classList.add('gjd-ad--mobile-only', 'gjd-ad--rectangle');
         updateStrip.insertAdjacentElement('afterend', slot);
       } else if (units.mobileStrip?.key) {
-        const slot = makeSlot('mobile-strip', '320x50');
+        const slot = makeSlot('mobile-strip');
         slot.classList.add('gjd-ad--mobile-only');
         updateStrip.insertAdjacentElement('afterend', slot);
       }
     }
 
     if (links && links.parentNode && units.rectangle?.key) {
-      const slot = makeSlot('rectangle', '300x250');
+      const slot = makeSlot('rectangle');
       links.insertAdjacentElement('beforebegin', slot);
     }
 
-    // Skyscraper 160x600 — reserve rail first (no CLS jump)
     if (layout && units.skyscraper?.key && isDesktopRail()) {
       layout.classList.add('has-ad-rail');
-      const slot = makeSlot('skyscraper', '160x600');
+      const slot = makeSlot('skyscraper');
       slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
       if (sidebar && sidebar.parentNode === layout) {
         sidebar.insertAdjacentElement('afterend', slot);
@@ -105,7 +178,7 @@
   };
 
   const invokeUrl = (key) => {
-    const host = String(CONFIG.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
+    const host = String(ADSTERRA.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
     return `https://${host}/${key}/invoke.js`;
   };
 
@@ -114,10 +187,7 @@
       resolve(false);
       return;
     }
-
-    // Clear previous
     frame.innerHTML = '';
-
     const opts = {
       key: unit.key,
       format: 'iframe',
@@ -125,8 +195,6 @@
       width: unit.width,
       params: {}
     };
-
-    // Set global just before this unit's invoke (Adsterra reads window.atOptions)
     window.atOptions = opts;
 
     const conf = document.createElement('script');
@@ -146,7 +214,9 @@
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-  const fireDisplayBanners = async () => {
+  const fireAdsterraBanners = async () => {
+    if (!ADSTERRA.enabled) return;
+    const units = ADSTERRA.units || {};
     const queue = [
       ['leaderboard', units.leaderboard, () => isDesktopLeader()],
       ['mobile-top', units.rectangle, () => isMobile()],
@@ -160,108 +230,18 @@
       const frame = document.querySelector(`[data-ad-frame="${slotKey}"]`);
       if (!frame) continue;
       await loadBannerInto(frame, unit);
-      await sleep(CONFIG.bannerGapMs || 400);
+      await sleep(ADSTERRA.bannerGapMs || 400);
     }
   };
 
-  const expectedMinFill = (slot) => {
-    const key = slot.dataset.adSlot || '';
-    if (key === 'skyscraper') return 280;
-    if (key === 'leaderboard') return 50;
-    if (key === 'mobile-strip') return 40;
-    return 100;
-  };
-
-  const creativeFillPx = (frame) => {
-    if (!frame) return 0;
-    const nodes = frame.querySelectorAll('iframe, img, object, embed, video, a, ins, div');
-    let maxH = 0;
-    nodes.forEach((node) => {
-      const h = Math.max(node.offsetHeight || 0, node.clientHeight || 0);
-      if (h > maxH) maxH = h;
-    });
-    if (!maxH) maxH = Math.max(frame.scrollHeight || 0, frame.offsetHeight || 0);
-    return maxH;
-  };
-
-  const slotLooksFilled = (slot) => {
-    const frame = slot.querySelector('.gjd-ad-frame');
-    if (!frame) return false;
-    const fill = creativeFillPx(frame);
-    if (fill < expectedMinFill(slot)) return false;
-    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
-    const hasLinks = frame.querySelectorAll('a').length > 0;
-    const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
-    return hasMedia || (hasLinks && fill >= expectedMinFill(slot)) || htmlLen > 80;
-  };
-
-  const syncAdRailLayout = (allowCollapse) => {
-    const layout = document.querySelector('.gjd-page .gjd-layout');
-    if (!layout) return;
-
-    const sky = layout.querySelector('.gjd-ad--skyscraper.gjd-ad--rail');
-    if (!sky) {
-      layout.classList.remove('has-ad-rail', 'ad-rail-empty');
-      return;
-    }
-
-    const skyLive = Boolean(
-      sky
-      && !sky.classList.contains('is-empty')
-      && sky.classList.contains('is-filled')
-      && window.getComputedStyle(sky).display !== 'none'
-    );
-
-    if (skyLive) {
-      layout.classList.add('has-ad-rail');
-      layout.classList.remove('ad-rail-empty');
-      sky.hidden = false;
-    } else if (allowCollapse) {
-      layout.classList.remove('has-ad-rail');
-      layout.classList.add('ad-rail-empty');
-      sky.hidden = true;
-    } else {
-      layout.classList.add('has-ad-rail');
-      layout.classList.remove('ad-rail-empty');
-    }
-  };
-
-  const hideEmptySlots = (allowRailCollapse) => {
-    document.querySelectorAll('.gjd-ad[data-ad-slot]').forEach((slot) => {
-      const isSky = slot.dataset.adSlot === 'skyscraper';
-
-      if (window.getComputedStyle(slot).display === 'none' && !isSky) return;
-
-      if (slotLooksFilled(slot)) {
-        slot.classList.remove('is-empty');
-        slot.classList.add('is-filled');
-        slot.hidden = false;
-        return;
-      }
-
-      slot.classList.add('is-empty');
-      slot.classList.remove('is-filled');
-
-      if (isSky) {
-        if (allowRailCollapse) slot.hidden = true;
-        return;
-      }
-
-      slot.hidden = true;
-    });
-
-    syncAdRailLayout(Boolean(allowRailCollapse));
-  };
-
+  // ====================== BOOT ======================
   const boot = async () => {
-    injectDisplaySlots();
-    await fireDisplayBanners();
+    // Pehle HilltopAds inject karo
+    injectHilltopAds();
 
-    window.setTimeout(() => hideEmptySlots(false), CONFIG.emptyHideMs);
-    (CONFIG.emptyRecheckMs || []).forEach((ms) => {
-      window.setTimeout(() => hideEmptySlots(false), ms);
-    });
-    window.setTimeout(() => hideEmptySlots(true), CONFIG.railFinalCheckMs);
+    // Phir Adsterra
+    injectAdsterraSlots();
+    await fireAdsterraBanners();
   };
 
   if (document.readyState === 'loading') {

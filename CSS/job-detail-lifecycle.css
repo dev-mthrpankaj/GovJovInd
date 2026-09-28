@@ -195,3 +195,32 @@
 @media print{
   .gjd-ad{display:none!important}
 }
+
+/* ========== HilltopAds Support ========== */
+.gjd-ad--hilltop {
+  margin: 28px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.gjd-ad--hilltop .gjd-ad-frame {
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gjd-ad--hilltop .gjd-ad-frame iframe,
+.gjd-ad--hilltop .gjd-ad-frame > div,
+.gjd-ad--hilltop .gjd-ad-frame > ins {
+  margin: 0 auto !important;
+  max-width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .gjd-ad--hilltop {
+    margin: 20px 0;
+  }
+}
