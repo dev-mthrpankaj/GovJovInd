@@ -39,7 +39,7 @@
     zones: {
       // 1. Vacancy Details ke just upar
       beforeVacancy: {
-        id: '7468201',
+        id: '7468185',
         src: '//quarrelsomebitter.com/brXuV.s/d/Gxlo0eYbWgci/teumv9-umZVUz1/kPPGTFcA0TNRjUg/yiMHDAEFtUN/zvQa2tOgDuInwFNBQk'
       },
       // 2. Eligibility Criteria aur Application Fee ke beech
