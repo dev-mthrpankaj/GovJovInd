@@ -33,21 +33,16 @@
     bannerGapMs: 400
   };
 
-  // ====================== HILLTOPADS CONFIG (New) ======================
+  // ====================== HILLTOPADS CONFIG (Corrected - Only 2 ads) ======================
   const HILLTOP = {
     enabled: true,
     zones: {
-      // 1. Hero ke just baad
-      afterHero: {
-        id: '7468185',
-        src: '//quarrelsomebitter.com/b.XMVjsgdsGEld0hYjWVc-/pegmC9duoZXU/ltkgPfTFc/0BNKj/gixVOyDfUXtEN/zNQs2/OhDpEy4-OcQb'
-      },
-      // 2. Vacancy Details ke just upar
+      // 1. Vacancy Details ke just upar
       beforeVacancy: {
         id: '7468201',
         src: '//quarrelsomebitter.com/brXuV.s/d/Gxlo0eYbWgci/teumv9-umZVUz1/kPPGTFcA0TNRjUg/yiMHDAEFtUN/zvQa2tOgDuInwFNBQk'
       },
-      // 3. Eligibility aur Application Fee ke beech
+      // 2. Eligibility Criteria aur Application Fee ke beech
       betweenEligibilityFee: {
         id: '7468169',
         src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
@@ -76,46 +71,27 @@
     return wrap;
   };
 
-  // ====================== HILLTOPADS INJECTION ======================
+  // ====================== HILLTOPADS INJECTION (Corrected) ======================
   const injectHilltopAds = () => {
     if (!HILLTOP.enabled) return;
 
-    // 1. Hero ke just baad
-    const hero = document.querySelector('.gjd-hero, .gjd-page-header, [class*="hero"], .gjd-banner-header');
-    if (hero && HILLTOP.zones.afterHero) {
-      const slot = makeSlot('hilltop-after-hero', 'hilltop');
-      hero.insertAdjacentElement('afterend', slot);
-      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.afterHero);
+    // 1. Vacancy Details ke just upar
+    const vacancySection = document.querySelector('#vacancy-details');
+    if (vacancySection && HILLTOP.zones.beforeVacancy) {
+      const slot = makeSlot('hilltop-before-vacancy', 'hilltop');
+      vacancySection.insertAdjacentElement('beforebegin', slot);
+      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.beforeVacancy);
     }
 
-    // 2. Vacancy Details ke just upar
-    // Looking for section that contains "Vacancy Details" or "POST DISTRIBUTION"
-    const vacancySection = Array.from(document.querySelectorAll('h2, h3, .gjd-section-title, [class*="section"]'))
-      .find(el => /vacancy|post distribution|vacancies/i.test(el.textContent || ''));
-    
-    if (vacancySection) {
-      const section = vacancySection.closest('section, .gjd-card, .gjd-box, div') || vacancySection.parentElement;
-      if (section && HILLTOP.zones.beforeVacancy) {
-        const slot = makeSlot('hilltop-before-vacancy', 'hilltop');
-        section.insertAdjacentElement('beforebegin', slot);
-        loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.beforeVacancy);
-      }
-    }
-
-    // 3. Eligibility Criteria aur Application Fee ke beech
-    const eligibilitySection = Array.from(document.querySelectorAll('h2, h3, .gjd-section-title'))
-      .find(el => /eligibility criteria/i.test(el.textContent || ''));
-    
-    const feeSection = Array.from(document.querySelectorAll('h2, h3, .gjd-section-title'))
-      .find(el => /application fee|payment information/i.test(el.textContent || ''));
+    // 2. Eligibility Criteria aur Application Fee ke beech (Sahi position)
+    const eligibilitySection = document.querySelector('#eligibility');
+    const feeSection = document.querySelector('#application-fee');
 
     if (eligibilitySection && feeSection && HILLTOP.zones.betweenEligibilityFee) {
-      const feeBox = feeSection.closest('section, .gjd-card, .gjd-box, div') || feeSection.parentElement;
-      if (feeBox) {
-        const slot = makeSlot('hilltop-between-elig-fee', 'hilltop');
-        feeBox.insertAdjacentElement('beforebegin', slot);
-        loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.betweenEligibilityFee);
-      }
+      const slot = makeSlot('hilltop-between-elig-fee', 'hilltop');
+      // Eligibility ke baad insert karo
+      eligibilitySection.insertAdjacentElement('afterend', slot);
+      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.betweenEligibilityFee);
     }
   };
 
@@ -236,10 +212,7 @@
 
   // ====================== BOOT ======================
   const boot = async () => {
-    // Pehle HilltopAds inject karo
     injectHilltopAds();
-
-    // Phir Adsterra
     injectAdsterraSlots();
     await fireAdsterraBanners();
   };
