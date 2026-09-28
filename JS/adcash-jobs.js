@@ -39,8 +39,8 @@
     zones: {
       // 1. Vacancy Details ke just upar
       beforeVacancy: {
-        id: '7468201',
-        src: '//quarrelsomebitter.com/brXuV.s/d/Gxlo0eYbWgci/teumv9-umZVUz1/kPPGTFcA0TNRjUg/yiMHDAEFtUN/zvQa2tOgDuInwFNBQk'
+        id: '7468169',
+        src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
       },
       // 2. Eligibility Criteria aur Application Fee ke beech
       betweenEligibilityFee: {
