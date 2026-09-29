@@ -127,6 +127,28 @@
       .family-page-btn:disabled{opacity:.42;cursor:not-allowed}
       .family-page-summary{width:100%;margin-top:2px;color:var(--fq-muted);font-size:11px;text-align:center}
       @media(max-width:760px){.family-toolbar.family-filter-v4{grid-template-columns:1fr;gap:9px;padding:11px}.family-filter-v4 .family-filter-heading,.family-filter-v4 .family-search,.family-filter-v4 .family-select{grid-column:1}.family-filter-v4 .family-filter-copy{display:grid;gap:1px}.family-filter-v4 .family-search,.family-filter-v4 .family-select{min-height:52px}.family-pagination{margin-top:16px}}
+
+      /* Challenge Button Styles */
+      .family-card-actions{display:flex;flex-direction:column;gap:8px}
+      .family-challenge-btn{
+        display:inline-flex;align-items:center;justify-content:center;gap:8px;
+        width:100%;min-height:42px;padding:10px 14px;border-radius:12px;
+        border:1px solid #dbe5f3;background:#f8fafc;color:#1e40af;
+        font:inherit;font-size:13px;font-weight:700;cursor:pointer;
+        transition:all .18s ease;
+      }
+      .family-challenge-btn:hover:not(:disabled){
+        background:#eff6ff;border-color:#93c5fd;color:#1d4ed8;
+      }
+      .family-challenge-btn:disabled{
+        opacity:.55;cursor:not-allowed;background:#f1f5f9;color:#64748b;
+      }
+      .family-challenge-btn.is-login{
+        background:#fff7ed;border-color:#fdba74;color:#c2410c;
+      }
+      .family-challenge-btn.is-login:hover{
+        background:#ffedd5;border-color:#fb923c;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -150,7 +172,6 @@
     resetButton = toolbar.querySelector("[data-family-filter-reset]");
 
     if (list && !document.getElementById("familyQuizPagination")) {
-      // Use div[role=navigation] — global style.css targets bare `nav` as mobile header menu (position:fixed)
       list.insertAdjacentHTML("afterend", '<div class="family-pagination" id="familyQuizPagination" role="navigation" aria-label="Quiz pages"></div>');
     }
     pagination = document.getElementById("familyQuizPagination");
@@ -180,12 +201,55 @@
     return `<div class="family-user-progress"><span><i class="far fa-calendar"></i><b>Last Attempt</b><em>${esc(formatDate(p.completedAt))}</em></span><span><i class="fas fa-trophy"></i><b>Best Score</b><em>${percent(p.bestPercentage)}%</em></span><span><i class="fas fa-medal"></i><b>Rank</b><em>${esc(rankText(p))}</em></span></div>`;
   }
 
+  function isLoggedIn() {
+    return Boolean(window.GJU_AUTH_USER);
+  }
+
+  function getChallengeMarkup(q) {
+    const p = progressByQuiz.get(q.id);
+    const hasScore = p && number(p.bestPercentage, 0) > 0;
+    const totalQ = number(q.questions, 0);
+
+    if (!isLoggedIn()) {
+      return `<button type="button" class="family-challenge-btn is-login" data-challenge-login>
+        <i class="fas fa-lock" aria-hidden="true"></i>
+        <span>Login to Challenge</span>
+      </button>`;
+    }
+
+    if (!hasScore || totalQ <= 0) {
+      return `<button type="button" class="family-challenge-btn" disabled title="Attempt the quiz first to challenge your friend">
+        <i class="fas fa-user-friends" aria-hidden="true"></i>
+        <span>Challenge Your Friend</span>
+      </button>`;
+    }
+
+    const bestPct = percent(p.bestPercentage);
+    const correct = Math.round((bestPct / 100) * totalQ);
+
+    return `<button type="button" class="family-challenge-btn"
+      data-challenge="1"
+      data-quiz-id="${esc(q.id)}"
+      data-quiz-title="${esc(q.title)}"
+      data-score="${correct}"
+      data-total="${totalQ}"
+      data-percent="${bestPct}">
+      <i class="fas fa-trophy" aria-hidden="true"></i>
+      <span>Challenge Your Friend</span>
+    </button>`;
+  }
+
   function actionMarkup(q) {
     const p = progressByQuiz.get(q.id);
     const reattempt = !!(p && number(p.attemptCount, 0) > 0);
     const label = reattempt ? "Reattempt Quiz" : "Start Quiz";
     const icon = reattempt ? "fas fa-rotate-right" : "fas fa-arrow-right";
-    return `<a class="family-start-btn${reattempt ? " is-reattempt" : ""}" href="quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(familySlug)}" aria-label="${label}: ${esc(q.title)}"><span>${label}</span><i class="${icon}" aria-hidden="true"></i></a>`;
+    return `
+      <a class="family-start-btn${reattempt ? " is-reattempt" : ""}" href="quiz-attempt.html?quiz=${encodeURIComponent(q.id)}&family=${encodeURIComponent(familySlug)}" aria-label="${label}: ${esc(q.title)}">
+        <span>${label}</span><i class="${icon}" aria-hidden="true"></i>
+      </a>
+      ${getChallengeMarkup(q)}
+    `;
   }
 
   function renderPagination(total) {
@@ -295,6 +359,58 @@
     } catch (_e) {}
   }
 
+  // ========== Challenge Share Logic ==========
+  async function shareChallenge(btn) {
+    const title = btn.dataset.quizTitle || "this quiz";
+    const score = btn.dataset.score;
+    const total = btn.dataset.total;
+    const percent = btn.dataset.percent;
+    const quizId = btn.dataset.quizId;
+
+    const quizUrl = `${window.location.origin}/HTML/quiz-attempt.html?quiz=${encodeURIComponent(quizId)}&family=${encodeURIComponent(familySlug)}`;
+
+    const text = `Hi, I scored ${score}/${total} (${percent}%) in "${title}".\nCan you beat me?\nAttempt this Quiz → ${quizUrl}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Challenge: ${title}`,
+          text: text,
+          url: quizUrl
+        });
+        return;
+      } catch (err) {
+        if (err.name === "AbortError") return;
+      }
+    }
+
+    // Fallback → WhatsApp
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+  }
+
+  // Event delegation for Challenge buttons
+  document.addEventListener("click", (e) => {
+    const challengeBtn = e.target.closest("[data-challenge]");
+    if (challengeBtn) {
+      e.preventDefault();
+      shareChallenge(challengeBtn);
+      return;
+    }
+
+    const loginBtn = e.target.closest("[data-challenge-login]");
+    if (loginBtn) {
+      e.preventDefault();
+      const redirect = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.href = `login.html?redirect=${redirect}`;
+    }
+  });
+
+  // Re-render when auth state changes
+  window.addEventListener("gju:auth-state", () => {
+    render();
+  });
+
   enhanceFilterUi();
   if (subjectSelect) subjectSelect.addEventListener("change", resetPageAndRender);
   if (searchInput) searchInput.addEventListener("input", resetPageAndRender);
@@ -316,6 +432,7 @@
   load();
   loadProgress();
 }());
+
 // Adcash Display - category pages only (not quiz landing)
 (() => {
   if (document.querySelector("script[data-adcash-quiz-category]")) return;
@@ -329,4 +446,3 @@
   el.dataset.adcashQuizCategory = "1";
   document.body.appendChild(el);
 })();
-
