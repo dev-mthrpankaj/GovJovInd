@@ -388,7 +388,7 @@
       "</div>" +
       progressMarkup(item) +
       '<div class="subject-card-actions">' +
-      '<a class="subject-start-btn' + (reattempt ? " is-reattempt" : "") + '" href="' + href + '">' +
+      '<a class="subject-quiz-start' + (reattempt ? " is-reattempt" : "") + '" href="' + href + '" aria-label="' + label + ": " + esc(item.title) + '">' +
       "<span>" + label + '</span><i class="' + icon + '" aria-hidden="true"></i>' +
       "</a>" +
       getChallengeMarkup(item) +
