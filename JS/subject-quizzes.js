@@ -13,11 +13,16 @@
   const activeTopicLabel = document.querySelector("[data-active-topic-label]");
 
   const PAGE_SIZE = 12;
-  const PROGRESS_API = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
+  const PROGRESS_API =
+    "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
   const LOCAL_ATTEMPTS_KEY = "GovJobUpdatesQuiz.attempts";
 
   function slugify(value) {
-    return String(value || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   function esc(value) {
@@ -29,8 +34,14 @@
       .replace(/'/g, "&#039;");
   }
 
-  const examSlug = slugify(page.dataset.examSlug || page.dataset.subjectSlug || "");
-  const subjectName = String(page.dataset.subjectName || "Subject").trim();
+  const examSlug = slugify(
+    page.dataset.examSlug || page.dataset.subjectSlug || ""
+  );
+
+  const subjectName = String(
+    page.dataset.subjectName || "Subject"
+  ).trim();
+
   if (!examSlug || !list) return;
 
   let activeTopic = "all";
@@ -42,7 +53,9 @@
   let progressByQuiz = new Map();
   let firebaseImportPromise = null;
 
-  /* ---------------------------------------------------------------- data */
+  /* ============================================================
+     DATA
+  ============================================================ */
 
   function number(value, fallback = 0) {
     const n = Number(value);
@@ -55,14 +68,26 @@
 
   function formatDate(value) {
     const d = new Date(value);
+
     return Number.isNaN(d.getTime())
       ? "Recent"
-      : d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+      : d.toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
   }
 
   function sourcePayload() {
-    for (const source of [window.GJU_QUIZ_INDEX, window.GJU_ADMIN_QUIZ_INDEX, window.GJU_PUBLISHED_QUIZ_INDEX]) {
-      if (Array.isArray(source)) return { quizzes: source };
+    for (const source of [
+      window.GJU_QUIZ_INDEX,
+      window.GJU_ADMIN_QUIZ_INDEX,
+      window.GJU_PUBLISHED_QUIZ_INDEX,
+    ]) {
+      if (Array.isArray(source)) {
+        return { quizzes: source };
+      }
+
       if (source && typeof source === "object") {
         const quizzes = Array.isArray(source.quizzes)
           ? source.quizzes
@@ -71,14 +96,24 @@
           : Array.isArray(source.data)
           ? source.data
           : null;
-        if (quizzes) return { quizzes };
+
+        if (quizzes) {
+          return { quizzes };
+        }
       }
     }
+
     return null;
   }
 
   function getSubjectSlug(item) {
-    return slugify(item.subjectSlug || item.subject_slug || (item.subject && item.subject.slug) || item.subject || "");
+    return slugify(
+      item.subjectSlug ||
+        item.subject_slug ||
+        (item.subject && item.subject.slug) ||
+        item.subject ||
+        ""
+    );
   }
 
   function getFamily(item) {
@@ -92,155 +127,359 @@
   }
 
   function getExamSlug(item) {
-    return slugify(item.examSlug || item.exam_slug || (item.exam && item.exam.slug) || "");
+    return slugify(
+      item.examSlug ||
+        item.exam_slug ||
+        (item.exam && item.exam.slug) ||
+        ""
+    );
   }
 
   function getTopics(item) {
     const raw = Array.isArray(item.topics) ? item.topics : [];
     const seen = new Set();
+
     return raw
       .map((topic) =>
         typeof topic === "string"
-          ? { slug: slugify(topic), name: String(topic) }
-          : { slug: slugify(topic && topic.slug), name: String((topic && topic.name) || (topic && topic.slug) || "") }
+          ? {
+              slug: slugify(topic),
+              name: String(topic),
+            }
+          : {
+              slug: slugify(topic && topic.slug),
+              name: String(
+                (topic && topic.name) ||
+                  (topic && topic.slug) ||
+                  ""
+              ),
+            }
       )
-      .filter((topic) => topic.slug && !seen.has(topic.slug) && (seen.add(topic.slug), true));
+      .filter(
+        (topic) =>
+          topic.slug &&
+          !seen.has(topic.slug) &&
+          (seen.add(topic.slug), true)
+      );
   }
 
   function dateValue(item, index) {
-    for (const value of [item.publishedAt, item.published_at, item.updatedAt, item.updated_at, item.createdAt, item.created_at]) {
+    for (const value of [
+      item.publishedAt,
+      item.published_at,
+      item.updatedAt,
+      item.updated_at,
+      item.createdAt,
+      item.created_at,
+    ]) {
       if (value == null || value === "") continue;
+
       const numeric = Number(value);
-      if (Number.isFinite(numeric) && numeric > 0) return numeric;
+
+      if (Number.isFinite(numeric) && numeric > 0) {
+        return numeric;
+      }
+
       const parsed = Date.parse(value);
-      if (Number.isFinite(parsed)) return parsed;
+
+      if (Number.isFinite(parsed)) {
+        return parsed;
+      }
     }
+
     return index;
   }
 
   function normalize(item, index) {
     const subjectSlug = getSubjectSlug(item);
-    const quizSlug = slugify(item.quizSlug || item.quiz_slug || item.slug || item.id || item.title || "quiz") || "quiz";
+
+    const quizSlug =
+      slugify(
+        item.quizSlug ||
+          item.quiz_slug ||
+          item.slug ||
+          item.id ||
+          item.title ||
+          "quiz"
+      ) || "quiz";
+
     return {
-      // Must match the family pages so saved attempts and ranks resolve to the same quiz key.
+      /*
+       * IMPORTANT:
+       * This ID must remain identical to the ID used by
+       * quiz-family-page.js and quiz-attempt.html.
+       */
       id: `admin-${subjectSlug}-${quizSlug}`.replace(/-+/g, "-"),
-      title: String(item.title || item.quizTitle || item.quiz_title || quizSlug).trim(),
+
+      title: String(
+        item.title ||
+          item.quizTitle ||
+          item.quiz_title ||
+          quizSlug
+      ).trim(),
+
       subjectSlug,
+
       family: getFamily(item),
+
       examSlug: getExamSlug(item),
+
       topics: getTopics(item),
-      duration: Number(item.durationMinutes || item.duration_minutes) || 30,
-      questions: Number(item.totalQuestions || item.total_questions || item.activeQuestions || item.active_questions) || 0,
-      marks: Number(item.marksPerQuestion || item.marks_per_question) || 1,
-      negative: Number(item.negativeMarks || item.negative_marks) || 0.25,
+
+      duration:
+        Number(
+          item.durationMinutes ||
+            item.duration_minutes
+        ) || 30,
+
+      questions:
+        Number(
+          item.totalQuestions ||
+            item.total_questions ||
+            item.activeQuestions ||
+            item.active_questions
+        ) || 0,
+
+      marks:
+        Number(
+          item.marksPerQuestion ||
+            item.marks_per_question
+        ) || 1,
+
+      negative:
+        Number(
+          item.negativeMarks ||
+            item.negative_marks
+        ) || 0.25,
+
       order: dateValue(item, index),
     };
   }
 
   function topicName(slug) {
-    const found = publishedTopics.find((topic) => topic.slug === slug);
+    const found = publishedTopics.find(
+      (topic) => topic.slug === slug
+    );
+
     return found ? found.name : "All Topics";
   }
 
-  /* ------------------------------------------------------------ progress */
+  /* ============================================================
+     PROGRESS
+  ============================================================ */
 
   function readLocalProgress() {
     let rows = [];
+
     try {
-      const raw = localStorage.getItem(LOCAL_ATTEMPTS_KEY);
+      const raw = localStorage.getItem(
+        LOCAL_ATTEMPTS_KEY
+      );
+
       const parsed = raw ? JSON.parse(raw) : [];
+
       rows = Array.isArray(parsed) ? parsed : [];
     } catch (_e) {}
 
     const map = new Map();
+
     rows.forEach((a) => {
-      const id = String(a.quizId || a.quizKey || "").trim();
+      const id = String(
+        a.quizId || a.quizKey || ""
+      ).trim();
+
       if (!id) return;
-      const when = new Date(a.completedAt || a.timestamp || 0).getTime() || 0;
-      const best = number(a.bestPercentage, a.percentage);
+
+      const when =
+        new Date(
+          a.completedAt ||
+            a.timestamp ||
+            0
+        ).getTime() || 0;
+
+      const best = number(
+        a.bestPercentage,
+        a.percentage
+      );
+
       const current = map.get(id);
+
       if (!current) {
         map.set(id, {
           quizKey: id,
-          completedAt: a.completedAt || a.timestamp,
+          completedAt:
+            a.completedAt ||
+            a.timestamp,
           bestPercentage: best,
-          percentage: number(a.percentage),
+          percentage: number(
+            a.percentage
+          ),
           attemptCount: 1,
           rank: null,
           rankedUsers: null,
           hasRankedAttempt: false,
           _time: when,
         });
+
         return;
       }
+
       current.attemptCount += 1;
-      current.bestPercentage = Math.max(current.bestPercentage, best);
+
+      current.bestPercentage = Math.max(
+        current.bestPercentage,
+        best
+      );
+
       if (when > current._time) {
-        current.completedAt = a.completedAt || a.timestamp;
-        current.percentage = number(a.percentage);
+        current.completedAt =
+          a.completedAt ||
+          a.timestamp;
+
+        current.percentage = number(
+          a.percentage
+        );
+
         current._time = when;
       }
     });
+
     return map;
   }
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {
-      if (window.GJU_FIREBASE_CONFIG && window.GJU_FIREBASE_CONFIG.apiKey) {
+      if (
+        window.GJU_FIREBASE_CONFIG &&
+        window.GJU_FIREBASE_CONFIG.apiKey
+      ) {
         resolve();
         return;
       }
-      const existing = document.querySelector('script[src="' + src + '"]');
+
+      const existing = document.querySelector(
+        'script[src="' + src + '"]'
+      );
+
       if (existing) {
-        existing.addEventListener("load", resolve, { once: true });
-        existing.addEventListener("error", reject, { once: true });
+        existing.addEventListener(
+          "load",
+          resolve,
+          { once: true }
+        );
+
+        existing.addEventListener(
+          "error",
+          reject,
+          { once: true }
+        );
+
         return;
       }
+
       const s = document.createElement("script");
+
       s.src = src;
+
       s.onload = resolve;
+
       s.onerror = reject;
+
       document.head.appendChild(s);
     });
   }
 
   async function getFirebaseModules() {
-    if (firebaseImportPromise) return firebaseImportPromise;
+    if (firebaseImportPromise) {
+      return firebaseImportPromise;
+    }
+
     firebaseImportPromise = Promise.all([
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
-      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
-    ]).then(([appMod, authMod]) => ({ appMod, authMod }));
+      import(
+        "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"
+      ),
+      import(
+        "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"
+      ),
+    ]).then(([appMod, authMod]) => ({
+      appMod,
+      authMod,
+    }));
+
     return firebaseImportPromise;
   }
 
   async function getIdToken() {
     try {
-      await loadScript("../JS/firebase-config.js");
-      if (!window.GJU_FIREBASE_CONFIG || !window.GJU_FIREBASE_CONFIG.apiKey) return "";
-      const { appMod, authMod } = await getFirebaseModules();
-      const app = appMod.getApps().length ? appMod.getApps()[0] : appMod.initializeApp(window.GJU_FIREBASE_CONFIG);
-      const auth = authMod.getAuth(app);
-      let user = auth.currentUser;
-      if (!user) {
-        user = await new Promise((resolve) => {
-          let done = false;
-          let unsub = function () {};
-          const timer = setTimeout(() => {
-            if (done) return;
-            done = true;
-            unsub();
-            resolve(auth.currentUser || null);
-          }, 2500);
-          unsub = authMod.onAuthStateChanged(auth, (next) => {
-            if (done) return;
-            done = true;
-            clearTimeout(timer);
-            unsub();
-            resolve(next || null);
-          });
-        });
+      await loadScript(
+        "../JS/firebase-config.js"
+      );
+
+      if (
+        !window.GJU_FIREBASE_CONFIG ||
+        !window.GJU_FIREBASE_CONFIG.apiKey
+      ) {
+        return "";
       }
-      return user ? user.getIdToken() : "";
+
+      const {
+        appMod,
+        authMod,
+      } = await getFirebaseModules();
+
+      const app = appMod.getApps().length
+        ? appMod.getApps()[0]
+        : appMod.initializeApp(
+            window.GJU_FIREBASE_CONFIG
+          );
+
+      const auth = authMod.getAuth(app);
+
+      let user = auth.currentUser;
+
+      if (!user) {
+        user = await new Promise(
+          (resolve) => {
+            let done = false;
+
+            let unsub = function () {};
+
+            const timer = setTimeout(() => {
+              if (done) return;
+
+              done = true;
+
+              unsub();
+
+              resolve(
+                auth.currentUser || null
+              );
+            }, 2500);
+
+            unsub =
+              authMod.onAuthStateChanged(
+                auth,
+                (next) => {
+                  if (done) return;
+
+                  done = true;
+
+                  clearTimeout(timer);
+
+                  unsub();
+
+                  resolve(
+                    next || null
+                  );
+                }
+              );
+          }
+        );
+      }
+
+      return user
+        ? user.getIdToken()
+        : "";
     } catch (_e) {
       return "";
     }
@@ -248,245 +487,959 @@
 
   function applyProgress(rows) {
     const map = new Map();
-    (Array.isArray(rows) ? rows : []).forEach((row) => {
-      const id = String(row.quizKey || row.quizId || "").trim();
+
+    (Array.isArray(rows)
+      ? rows
+      : []
+    ).forEach((row) => {
+      const id = String(
+        row.quizKey ||
+          row.quizId ||
+          ""
+      ).trim();
+
       if (!id) return;
+
       map.set(id, {
         quizKey: id,
-        completedAt: row.completedAt,
-        bestPercentage: number(row.bestPercentage, row.percentage),
-        percentage: number(row.percentage),
-        attemptCount: Math.max(1, number(row.attemptCount, 1)),
-        rank: row.rank == null ? null : number(row.rank, 0),
-        rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0),
-        hasRankedAttempt: row.hasRankedAttempt === true,
+        completedAt:
+          row.completedAt,
+
+        bestPercentage: number(
+          row.bestPercentage,
+          row.percentage
+        ),
+
+        percentage: number(
+          row.percentage
+        ),
+
+        attemptCount: Math.max(
+          1,
+          number(
+            row.attemptCount,
+            1
+          )
+        ),
+
+        rank:
+          row.rank == null
+            ? null
+            : number(
+                row.rank,
+                0
+              ),
+
+        rankedUsers:
+          row.rankedUsers == null
+            ? null
+            : number(
+                row.rankedUsers,
+                0
+              ),
+
+        hasRankedAttempt:
+          row.hasRankedAttempt === true,
       });
     });
-    progressByQuiz = map.size ? map : readLocalProgress();
-    if (loaded) render();
+
+    progressByQuiz =
+      map.size
+        ? map
+        : readLocalProgress();
+
+    if (loaded) {
+      render();
+    }
   }
 
   async function loadProgress() {
-    progressByQuiz = readLocalProgress();
-    if (loaded) render();
-    const token = await getIdToken();
+    progressByQuiz =
+      readLocalProgress();
+
+    if (loaded) {
+      render();
+    }
+
+    const token =
+      await getIdToken();
+
     if (!token) return;
+
     try {
-      const response = await fetch(PROGRESS_API, {
-        method: "GET",
-        mode: "cors",
-        cache: "no-store",
-        headers: { Accept: "application/json", Authorization: "Bearer " + token },
-      });
-      const data = await response.json().catch(() => null);
-      if (!response.ok || !data || data.success !== true) return;
-      applyProgress(data.progress);
+      const response =
+        await fetch(
+          PROGRESS_API,
+          {
+            method: "GET",
+            mode: "cors",
+            cache: "no-store",
+            headers: {
+              Accept:
+                "application/json",
+              Authorization:
+                "Bearer " + token,
+            },
+          }
+        );
+
+      const data =
+        await response
+          .json()
+          .catch(() => null);
+
+      if (
+        !response.ok ||
+        !data ||
+        data.success !== true
+      ) {
+        return;
+      }
+
+      applyProgress(
+        data.progress
+      );
     } catch (_e) {}
   }
 
-  /* -------------------------------------------------------------- markup */
+  /* ============================================================
+     CHALLENGE
+  ============================================================ */
 
-  function rankText(p) {
-    const rank = number(p && p.rank, 0);
-    const total = number(p && p.rankedUsers, 0);
-    return rank > 0 && total > 0 ? "#" + rank + " / " + total : "—";
-  }
-
-  function progressMarkup(item) {
-    const p = progressByQuiz.get(item.id);
-    if (!p) {
-      return (
-        '<div class="subject-user-progress is-empty">' +
-        '<span><i class="far fa-calendar" aria-hidden="true"></i><b>Last Attempt</b><em>Not attempted</em></span>' +
-        '<span><i class="fas fa-trophy" aria-hidden="true"></i><b>Best Score</b><em>—</em></span>' +
-        '<span><i class="fas fa-medal" aria-hidden="true"></i><b>Rank</b><em>—</em></span>' +
-        "</div>"
-      );
-    }
-    const best = percent(p.bestPercentage);
-    return (
-      '<div class="subject-user-progress">' +
-      '<span><i class="far fa-calendar" aria-hidden="true"></i><b>Last Attempt</b><em>' + esc(formatDate(p.completedAt)) + "</em></span>" +
-      '<span><i class="fas fa-trophy" aria-hidden="true"></i><b>Best Score</b><em>' + best + "%</em></span>" +
-      '<span><i class="fas fa-medal" aria-hidden="true"></i><b>Rank</b><em>' + esc(rankText(p)) + "</em></span>" +
-      "</div>" +
-      '<div class="subject-score-bar" role="img" aria-label="Best score ' + best + ' percent"><i style="width:' + best + '%"></i></div>'
+  function isLoggedIn() {
+    return Boolean(
+      window.GJU_AUTH_USER
     );
   }
 
-  function isLoggedIn() {
-    return Boolean(window.GJU_AUTH_USER);
-  }
-
   function getChallengeMarkup(item) {
-    const p = progressByQuiz.get(item.id);
-    const hasScore = p && number(p.bestPercentage, 0) > 0;
-    const totalQ = number(item.questions, 0);
+    const p =
+      progressByQuiz.get(
+        item.id
+      );
 
+    const hasScore =
+      p &&
+      number(
+        p.bestPercentage,
+        0
+      ) > 0;
+
+    const totalQ =
+      number(
+        item.questions,
+        0
+      );
+
+    /*
+     * Not logged in
+     */
     if (!isLoggedIn()) {
       return (
-        '<button type="button" class="subject-challenge-btn is-login" data-challenge-login>' +
+        '<button type="button" ' +
+        'class="subject-challenge-btn is-login" ' +
+        'data-challenge-login>' +
         '<i class="fas fa-lock" aria-hidden="true"></i>' +
         "<span>Login to Challenge</span>" +
         "</button>"
       );
     }
 
+    /*
+     * Logged in but quiz not attempted
+     */
     if (!hasScore || totalQ <= 0) {
       return (
-        '<button type="button" class="subject-challenge-btn" disabled title="Attempt the quiz first to challenge your friend">' +
+        '<button type="button" ' +
+        'class="subject-challenge-btn" ' +
+        'disabled ' +
+        'title="Attempt the quiz first to challenge your friend">' +
         '<i class="fas fa-user-friends" aria-hidden="true"></i>' +
         "<span>Challenge Your Friend</span>" +
         "</button>"
       );
     }
 
-    const bestPct = percent(p.bestPercentage);
-    const correct = Math.round((bestPct / 100) * totalQ);
+    const bestPct =
+      percent(
+        p.bestPercentage
+      );
+
+    /*
+     * This is an approximation based on percentage.
+     * It matches the existing challenge behaviour.
+     */
+    const correct =
+      Math.round(
+        (bestPct / 100) *
+          totalQ
+      );
 
     return (
-      '<button type="button" class="subject-challenge-btn" ' +
+      '<button type="button" ' +
+      'class="subject-challenge-btn" ' +
       'data-challenge="1" ' +
-      'data-quiz-id="' + esc(item.id) + '" ' +
-      'data-quiz-title="' + esc(item.title) + '" ' +
-      'data-score="' + correct + '" ' +
-      'data-total="' + totalQ + '" ' +
-      'data-percent="' + bestPct + '">' +
+      'data-quiz-id="' +
+      esc(item.id) +
+      '" ' +
+      'data-quiz-title="' +
+      esc(item.title) +
+      '" ' +
+      'data-score="' +
+      correct +
+      '" ' +
+      'data-total="' +
+      totalQ +
+      '" ' +
+      'data-percent="' +
+      bestPct +
+      '">' +
       '<i class="fas fa-trophy" aria-hidden="true"></i>' +
       "<span>Challenge Your Friend</span>" +
       "</button>"
     );
   }
 
-  function card(item) {
-    const p = progressByQuiz.get(item.id);
-    const attempts = number(p && p.attemptCount, 0);
-    const reattempt = attempts > 0;
-    const href =
-      "quiz-attempt.html?quiz=" + encodeURIComponent(item.id) + "&family=topic-wise&subject=" + encodeURIComponent(examSlug);
-    const topicText = item.topics.length ? item.topics.slice(0, 2).map((topic) => topic.name).join(" · ") : "Mixed Practice";
-    const label = reattempt ? "Reattempt Quiz" : "Start Quiz";
-    const icon = reattempt ? "fas fa-rotate-right" : "fas fa-arrow-right";
-    const status = reattempt
-      ? '<span class="subject-quiz-status is-done"><i class="fas fa-circle-check" aria-hidden="true"></i> Attempted' +
-        (attempts > 1 ? " &times;" + attempts : "") +
-        "</span>"
-      : '<span class="subject-quiz-status"><i class="fas fa-unlock-keyhole" aria-hidden="true"></i> Free</span>';
+  async function shareChallenge(btn) {
+    if (!btn) return;
+
+    const title =
+      btn.dataset.quizTitle ||
+      "this quiz";
+
+    const score =
+      btn.dataset.score || "0";
+
+    const total =
+      btn.dataset.total || "0";
+
+    const percentValue =
+      btn.dataset.percent || "0";
+
+    const quizId =
+      btn.dataset.quizId || "";
+
+    if (!quizId) {
+      console.error(
+        "GovJobUpdates: Challenge button is missing quiz ID."
+      );
+
+      return;
+    }
+
+    /*
+     * IMPORTANT:
+     * examSlug is intentionally used here while still inside
+     * the main IIFE, so there is no scope/reference error.
+     */
+    const quizUrl =
+      window.location.origin +
+      "/HTML/quiz-attempt.html?quiz=" +
+      encodeURIComponent(
+        quizId
+      ) +
+      "&family=topic-wise&subject=" +
+      encodeURIComponent(
+        examSlug
+      );
+
+    const text =
+      "Hi, I scored " +
+      score +
+      "/" +
+      total +
+      " (" +
+      percentValue +
+      '%) in "' +
+      title +
+      '".\n' +
+      "Can you beat me?\n" +
+      "Attempt this Quiz → " +
+      quizUrl;
+
+    /*
+     * Native Share
+     */
+    if (
+      typeof navigator !== "undefined" &&
+      typeof navigator.share === "function"
+    ) {
+      try {
+        await navigator.share({
+          title:
+            "Challenge: " +
+            title,
+
+          text: text,
+
+          url: quizUrl,
+        });
+
+        return;
+      } catch (err) {
+        /*
+         * User cancelled the native share sheet.
+         * Do NOT automatically open WhatsApp in that case.
+         */
+        if (
+          err &&
+          err.name ===
+            "AbortError"
+        ) {
+          return;
+        }
+
+        /*
+         * For a genuine share failure,
+         * continue to WhatsApp fallback.
+         */
+      }
+    }
+
+    /*
+     * WhatsApp fallback
+     */
+    const waUrl =
+      "https://wa.me/?text=" +
+      encodeURIComponent(text);
+
+    const popup =
+      window.open(
+        waUrl,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    /*
+     * Some browsers may block window.open.
+     * In that case navigate normally.
+     */
+    if (!popup) {
+      window.location.href =
+        waUrl;
+    }
+  }
+
+  function handleChallengeClick(event) {
+    const challengeBtn =
+      event.target.closest(
+        "[data-challenge]"
+      );
+
+    if (challengeBtn) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      /*
+       * Prevent double-click / double-share
+       */
+      if (
+        challengeBtn.dataset.sharing ===
+        "1"
+      ) {
+        return;
+      }
+
+      challengeBtn.dataset.sharing =
+        "1";
+
+      Promise.resolve(
+        shareChallenge(
+          challengeBtn
+        )
+      ).finally(() => {
+        challengeBtn.dataset.sharing =
+          "0";
+      });
+
+      return;
+    }
+
+    const loginBtn =
+      event.target.closest(
+        "[data-challenge-login]"
+      );
+
+    if (loginBtn) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const redirect =
+        encodeURIComponent(
+          window.location.pathname +
+            window.location.search +
+            window.location.hash
+        );
+
+      /*
+       * Subject pages are inside /HTML/,
+       * so login.html is the correct relative destination.
+       */
+      window.location.href =
+        "login.html?redirect=" +
+        redirect;
+    }
+  }
+
+  /* ============================================================
+     MARKUP
+  ============================================================ */
+
+  function rankText(p) {
+    const rank =
+      number(
+        p && p.rank,
+        0
+      );
+
+    const total =
+      number(
+        p && p.rankedUsers,
+        0
+      );
+
+    return rank > 0 &&
+      total > 0
+      ? "#" +
+          rank +
+          " / " +
+          total
+      : "—";
+  }
+
+  function progressMarkup(item) {
+    const p =
+      progressByQuiz.get(
+        item.id
+      );
+
+    if (!p) {
+      return (
+        '<div class="subject-user-progress is-empty">' +
+        '<span>' +
+        '<i class="far fa-calendar" aria-hidden="true"></i>' +
+        "<b>Last Attempt</b>" +
+        "<em>Not attempted</em>" +
+        "</span>" +
+
+        "<span>" +
+        '<i class="fas fa-trophy" aria-hidden="true"></i>' +
+        "<b>Best Score</b>" +
+        "<em>—</em>" +
+        "</span>" +
+
+        "<span>" +
+        '<i class="fas fa-medal" aria-hidden="true"></i>' +
+        "<b>Rank</b>" +
+        "<em>—</em>" +
+        "</span>" +
+
+        "</div>"
+      );
+    }
+
+    const best =
+      percent(
+        p.bestPercentage
+      );
 
     return (
-      '<article class="subject-quiz-card' + (reattempt ? " is-attempted" : "") + '">' +
+      '<div class="subject-user-progress">' +
+
+      "<span>" +
+      '<i class="far fa-calendar" aria-hidden="true"></i>' +
+      "<b>Last Attempt</b>" +
+      "<em>" +
+      esc(
+        formatDate(
+          p.completedAt
+        )
+      ) +
+      "</em>" +
+      "</span>" +
+
+      "<span>" +
+      '<i class="fas fa-trophy" aria-hidden="true"></i>' +
+      "<b>Best Score</b>" +
+      "<em>" +
+      best +
+      "%</em>" +
+      "</span>" +
+
+      "<span>" +
+      '<i class="fas fa-medal" aria-hidden="true"></i>' +
+      "<b>Rank</b>" +
+      "<em>" +
+      esc(
+        rankText(p)
+      ) +
+      "</em>" +
+      "</span>" +
+
+      "</div>" +
+
+      '<div class="subject-score-bar" ' +
+      'role="img" aria-label="Best score ' +
+      best +
+      ' percent">' +
+      '<i style="width:' +
+      best +
+      '%"></i>' +
+      "</div>"
+    );
+  }
+
+  function card(item) {
+    const p =
+      progressByQuiz.get(
+        item.id
+      );
+
+    const attempts =
+      number(
+        p &&
+          p.attemptCount,
+        0
+      );
+
+    const reattempt =
+      attempts > 0;
+
+    const href =
+      "quiz-attempt.html?quiz=" +
+      encodeURIComponent(
+        item.id
+      ) +
+      "&family=topic-wise&subject=" +
+      encodeURIComponent(
+        examSlug
+      );
+
+    const topicText =
+      item.topics.length
+        ? item.topics
+            .slice(0, 2)
+            .map(
+              (topic) =>
+                topic.name
+            )
+            .join(" · ")
+        : "Mixed Practice";
+
+    const label =
+      reattempt
+        ? "Reattempt Quiz"
+        : "Start Quiz";
+
+    const icon =
+      reattempt
+        ? "fas fa-rotate-right"
+        : "fas fa-arrow-right";
+
+    const status =
+      reattempt
+        ? '<span class="subject-quiz-status is-done">' +
+          '<i class="fas fa-circle-check" aria-hidden="true"></i> Attempted' +
+          (attempts > 1
+            ? " &times;" +
+              attempts
+            : "") +
+          "</span>"
+        : '<span class="subject-quiz-status">' +
+          '<i class="fas fa-unlock-keyhole" aria-hidden="true"></i> Free' +
+          "</span>";
+
+    return (
+      '<article class="subject-quiz-card' +
+      (reattempt
+        ? " is-attempted"
+        : "") +
+      '">' +
+
       '<div class="subject-quiz-card-top">' +
-      '<span class="subject-quiz-family">Topic Wise</span>' +
+
+      '<span class="subject-quiz-family">' +
+      "Topic Wise" +
+      "</span>" +
+
       status +
+
       "</div>" +
-      '<span class="subject-quiz-exam">' + esc(topicText) + "</span>" +
-      "<h3>" + esc(item.title) + "</h3>" +
+
+      '<span class="subject-quiz-exam">' +
+      esc(topicText) +
+      "</span>" +
+
+      "<h3>" +
+      esc(item.title) +
+      "</h3>" +
+
       '<div class="subject-quiz-meta" aria-label="Quiz details">' +
-      '<span><i class="far fa-circle-question" aria-hidden="true"></i><small>Questions</small><strong>' + (item.questions || "—") + "</strong></span>" +
-      '<span><i class="far fa-clock" aria-hidden="true"></i><small>Duration</small><strong>' + item.duration + " min</strong></span>" +
-      '<span><i class="fas fa-scale-balanced" aria-hidden="true"></i><small>Marking</small><strong>+' + item.marks + " / -" + item.negative + "</strong></span>" +
+
+      "<span>" +
+      '<i class="far fa-circle-question" aria-hidden="true"></i>' +
+      "<small>Questions</small>" +
+      "<strong>" +
+      (item.questions ||
+        "—") +
+      "</strong>" +
+      "</span>" +
+
+      "<span>" +
+      '<i class="far fa-clock" aria-hidden="true"></i>' +
+      "<small>Duration</small>" +
+      "<strong>" +
+      item.duration +
+      " min</strong>" +
+      "</span>" +
+
+      "<span>" +
+      '<i class="fas fa-scale-balanced" aria-hidden="true"></i>' +
+      "<small>Marking</small>" +
+      "<strong>+" +
+      item.marks +
+      " / -" +
+      item.negative +
+      "</strong>" +
+      "</span>" +
+
       "</div>" +
+
       progressMarkup(item) +
+
       '<div class="subject-card-actions">' +
-      '<a class="subject-quiz-start' + (reattempt ? " is-reattempt" : "") + '" href="' + href + '" aria-label="' + label + ": " + esc(item.title) + '">' +
-      "<span>" + label + '</span><i class="' + icon + '" aria-hidden="true"></i>' +
+
+      '<a class="subject-quiz-start' +
+      (reattempt
+        ? " is-reattempt"
+        : "") +
+      '" href="' +
+      href +
+      '" aria-label="' +
+      label +
+      ": " +
+      esc(item.title) +
+      '">' +
+
+      "<span>" +
+      label +
+      "</span>" +
+
+      '<i class="' +
+      icon +
+      '" aria-hidden="true"></i>' +
+
       "</a>" +
-      getChallengeMarkup(item) +
+
+      getChallengeMarkup(
+        item
+      ) +
+
       "</div>" +
+
       "</article>"
     );
   }
 
-  /* ---------------------------------------------------------- pagination */
+  /* ============================================================
+     PAGINATION
+  ============================================================ */
 
   function ensurePagination() {
-    if (pagination) return pagination;
-    pagination = document.querySelector("[data-subject-pagination]");
-    if (!pagination && list && list.parentNode) {
+    if (pagination) {
+      return pagination;
+    }
+
+    pagination =
+      document.querySelector(
+        "[data-subject-pagination]"
+      );
+
+    if (
+      !pagination &&
+      list &&
+      list.parentNode
+    ) {
       list.insertAdjacentHTML(
         "afterend",
         '<div class="subject-pagination" data-subject-pagination role="navigation" aria-label="Quiz pages" hidden></div>'
       );
-      pagination = document.querySelector("[data-subject-pagination]");
+
+      pagination =
+        document.querySelector(
+          "[data-subject-pagination]"
+        );
     }
-    if (pagination && !pagination.dataset.bound) {
-      pagination.dataset.bound = "1";
-      pagination.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-page]");
-        if (!button || button.disabled) return;
-        currentPage = Math.max(1, Number(button.dataset.page) || 1);
-        render();
-        const anchor = document.getElementById("subject-sets") || list;
-        if (anchor) anchor.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+
+    if (
+      pagination &&
+      !pagination.dataset.bound
+    ) {
+      pagination.dataset.bound =
+        "1";
+
+      pagination.addEventListener(
+        "click",
+        (event) => {
+          const button =
+            event.target.closest(
+              "[data-page]"
+            );
+
+          if (
+            !button ||
+            button.disabled
+          ) {
+            return;
+          }
+
+          currentPage =
+            Math.max(
+              1,
+              Number(
+                button.dataset.page
+              ) || 1
+            );
+
+          render();
+
+          const anchor =
+            document.getElementById(
+              "subject-sets"
+            ) || list;
+
+          if (anchor) {
+            anchor.scrollIntoView({
+              behavior:
+                "smooth",
+              block: "start",
+            });
+          }
+        }
+      );
     }
+
     return pagination;
   }
 
   function renderPagination(total) {
-    const nav = ensurePagination();
+    const nav =
+      ensurePagination();
+
     if (!nav) return;
-    const pages = Math.ceil(total / PAGE_SIZE);
+
+    const pages =
+      Math.ceil(
+        total / PAGE_SIZE
+      );
+
     if (pages <= 1) {
       nav.innerHTML = "";
       nav.hidden = true;
       return;
     }
+
     nav.hidden = false;
-    currentPage = Math.min(Math.max(1, currentPage), pages);
-    const start = (currentPage - 1) * PAGE_SIZE + 1;
-    const end = Math.min(currentPage * PAGE_SIZE, total);
+
+    currentPage =
+      Math.min(
+        Math.max(
+          1,
+          currentPage
+        ),
+        pages
+      );
+
+    const start =
+      (currentPage - 1) *
+        PAGE_SIZE +
+      1;
+
+    const end =
+      Math.min(
+        currentPage *
+          PAGE_SIZE,
+        total
+      );
+
     let html =
-      '<button class="subject-page-btn" type="button" data-page="' + (currentPage - 1) + '" ' +
-      (currentPage === 1 ? "disabled" : "") +
-      ' aria-label="Previous page"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>';
-    for (let p = 1; p <= pages; p += 1) {
+      '<button class="subject-page-btn" type="button" data-page="' +
+      (currentPage - 1) +
+      '" ' +
+      (currentPage === 1
+        ? "disabled"
+        : "") +
+      ' aria-label="Previous page">' +
+      '<i class="fas fa-chevron-left" aria-hidden="true"></i>' +
+      "</button>";
+
+    for (
+      let p = 1;
+      p <= pages;
+      p += 1
+    ) {
       html +=
-        '<button class="subject-page-btn" type="button" data-page="' + p + '" ' +
-        (p === currentPage ? 'aria-current="page"' : "") +
-        ">" + p + "</button>";
+        '<button class="subject-page-btn" type="button" data-page="' +
+        p +
+        '" ' +
+        (p === currentPage
+          ? 'aria-current="page"'
+          : "") +
+        ">" +
+        p +
+        "</button>";
     }
+
     html +=
-      '<button class="subject-page-btn" type="button" data-page="' + (currentPage + 1) + '" ' +
-      (currentPage === pages ? "disabled" : "") +
-      ' aria-label="Next page"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>';
-    html += '<span class="subject-page-summary">Showing ' + start + "–" + end + " of " + total + " quizzes</span>";
+      '<button class="subject-page-btn" type="button" data-page="' +
+      (currentPage + 1) +
+      '" ' +
+      (currentPage === pages
+        ? "disabled"
+        : "") +
+      ' aria-label="Next page">' +
+      '<i class="fas fa-chevron-right" aria-hidden="true"></i>' +
+      "</button>";
+
+    html +=
+      '<span class="subject-page-summary">Showing ' +
+      start +
+      "–" +
+      end +
+      " of " +
+      total +
+      " quizzes</span>";
+
     nav.innerHTML = html;
   }
 
-  /* -------------------------------------------------------------- render */
+  /* ============================================================
+     RENDER
+  ============================================================ */
 
   function render() {
-    const query = String((search && search.value) || "").trim().toLocaleLowerCase();
-    const visible = allItems.filter(
-      (item) =>
-        (activeTopic === "all" || item.topics.some((topic) => topic.slug === activeTopic)) &&
-        (!query || [item.title, ...item.topics.map((topic) => topic.name)].join(" ").toLocaleLowerCase().includes(query))
+    const query =
+      String(
+        (search &&
+          search.value) ||
+          ""
+      )
+        .trim()
+        .toLocaleLowerCase();
+
+    const visible =
+      allItems.filter(
+        (item) =>
+          (activeTopic ===
+            "all" ||
+            item.topics.some(
+              (topic) =>
+                topic.slug ===
+                activeTopic
+            )) &&
+          (!query ||
+            [
+              item.title,
+              ...item.topics.map(
+                (topic) =>
+                  topic.name
+              ),
+            ]
+              .join(" ")
+              .toLocaleLowerCase()
+              .includes(query))
+      );
+
+    const totalPages =
+      Math.max(
+        1,
+        Math.ceil(
+          visible.length /
+            PAGE_SIZE
+        )
+      );
+
+    currentPage =
+      Math.min(
+        Math.max(
+          1,
+          currentPage
+        ),
+        totalPages
+      );
+
+    const startIndex =
+      (currentPage - 1) *
+      PAGE_SIZE;
+
+    const pageItems =
+      visible.slice(
+        startIndex,
+        startIndex +
+          PAGE_SIZE
+      );
+
+    list.innerHTML =
+      pageItems
+        .map(card)
+        .join("");
+
+    list.setAttribute(
+      "aria-busy",
+      "false"
     );
 
-    const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
-    currentPage = Math.min(Math.max(1, currentPage), totalPages);
-    const startIndex = (currentPage - 1) * PAGE_SIZE;
-    const pageItems = visible.slice(startIndex, startIndex + PAGE_SIZE);
+    list.hidden =
+      visible.length === 0;
 
-    list.innerHTML = pageItems.map(card).join("");
-    list.setAttribute("aria-busy", "false");
-    list.hidden = visible.length === 0;
-
-    if (count) count.textContent = String(visible.length);
-    if (countLabel) {
-      countLabel.textContent = (visible.length === 1 ? "quiz" : "quizzes") + " available" + (query ? " matching your search" : "");
+    if (count) {
+      count.textContent =
+        String(
+          visible.length
+        );
     }
-    if (activeTopicLabel) activeTopicLabel.textContent = activeTopic === "all" ? "All Topics" : topicName(activeTopic);
+
+    if (countLabel) {
+      countLabel.textContent =
+        (visible.length === 1
+          ? "quiz"
+          : "quizzes") +
+        " available" +
+        (query
+          ? " matching your search"
+          : "");
+    }
+
+    if (activeTopicLabel) {
+      activeTopicLabel.textContent =
+        activeTopic === "all"
+          ? "All Topics"
+          : topicName(
+              activeTopic
+            );
+    }
 
     if (empty) {
-      empty.hidden = visible.length !== 0;
-      empty.innerHTML = allItems.length
-        ? '<h3>No matching quizzes</h3><p>Try another title or topic, or clear your filters to see every available set.</p><button type="button" data-clear-subject-filters>Clear filters</button>'
-        : "<h3>" + esc(subjectName) + ' practice is growing</h3><p>No topic-wise sets are published here yet. Explore exam-based practice in the meantime.</p><a href="quiz.html#examQuizFamilies">Explore exam quizzes →</a>';
+      empty.hidden =
+        visible.length !== 0;
+
+      empty.innerHTML =
+        allItems.length
+          ? '<h3>No matching quizzes</h3>' +
+            "<p>Try another title or topic, or clear your filters to see every available set.</p>" +
+            '<button type="button" data-clear-subject-filters>Clear filters</button>'
+          : "<h3>" +
+            esc(
+              subjectName
+            ) +
+            " practice is growing</h3>" +
+            "<p>No topic-wise sets are published here yet. Explore exam-based practice in the meantime.</p>" +
+            '<a href="quiz.html#examQuizFamilies">Explore exam quizzes →</a>';
     }
 
-    renderPagination(visible.length);
+    renderPagination(
+      visible.length
+    );
   }
 
   function resetPageAndRender() {
@@ -495,181 +1448,449 @@
   }
 
   function setTopic(slug) {
-    activeTopic = slug || "all";
-    if (topicSelect) topicSelect.value = activeTopic;
+    activeTopic =
+      slug || "all";
+
+    if (topicSelect) {
+      topicSelect.value =
+        activeTopic;
+    }
+
     resetPageAndRender();
   }
 
   function buildPublishedTopics() {
     const map = new Map();
-    allItems.forEach((item) =>
-      item.topics.forEach((topic) => {
-        const current = map.get(topic.slug) || { slug: topic.slug, name: topic.name, count: 0 };
-        current.count += 1;
-        if (!current.name && topic.name) current.name = topic.name;
-        map.set(topic.slug, current);
-      })
+
+    allItems.forEach(
+      (item) =>
+        item.topics.forEach(
+          (topic) => {
+            const current =
+              map.get(
+                topic.slug
+              ) || {
+                slug: topic.slug,
+                name: topic.name,
+                count: 0,
+              };
+
+            current.count +=
+              1;
+
+            if (
+              !current.name &&
+              topic.name
+            ) {
+              current.name =
+                topic.name;
+            }
+
+            map.set(
+              topic.slug,
+              current
+            );
+          }
+        )
     );
-    publishedTopics = [...map.values()].sort((a, b) => a.name.localeCompare(b.name));
+
+    publishedTopics =
+      [...map.values()].sort(
+        (a, b) =>
+          a.name.localeCompare(
+            b.name
+          )
+      );
   }
 
   function renderTopicControls() {
-    if (topicSelect) {
-      topicSelect.innerHTML =
-        '<option value="all">All Topics (' + allItems.length + ")</option>" +
-        publishedTopics
-          .map((topic) => '<option value="' + esc(topic.slug) + '">' + esc(topic.name) + " (" + topic.count + ")</option>")
-          .join("");
-      topicSelect.value = activeTopic;
-      topicSelect.disabled = publishedTopics.length === 0;
+    if (!topicSelect) {
+      return;
     }
+
+    topicSelect.innerHTML =
+      '<option value="all">All Topics (' +
+      allItems.length +
+      ")</option>" +
+      publishedTopics
+        .map(
+          (topic) =>
+            '<option value="' +
+            esc(
+              topic.slug
+            ) +
+            '">' +
+            esc(
+              topic.name
+            ) +
+            " (" +
+            topic.count +
+            ")</option>"
+        )
+        .join("");
+
+    topicSelect.value =
+      activeTopic;
+
+    topicSelect.disabled =
+      publishedTopics.length ===
+      0;
   }
 
   function load() {
-    const source = sourcePayload();
-    if (!source) return false;
-    allItems = source.quizzes
-      .filter((item) => item && typeof item === "object")
-      .map(normalize)
-      .filter((item) => item.family === "topic-wise" && item.examSlug === examSlug)
-      .sort((a, b) => b.order - a.order);
+    const source =
+      sourcePayload();
+
+    if (!source) {
+      return false;
+    }
+
+    allItems =
+      source.quizzes
+        .filter(
+          (item) =>
+            item &&
+            typeof item ===
+              "object"
+        )
+        .map(normalize)
+        .filter(
+          (item) =>
+            item.family ===
+              "topic-wise" &&
+            item.examSlug ===
+              examSlug
+        )
+        .sort(
+          (a, b) =>
+            b.order -
+            a.order
+        );
+
     buildPublishedTopics();
-    if (activeTopic !== "all" && !publishedTopics.some((topic) => topic.slug === activeTopic)) activeTopic = "all";
+
+    if (
+      activeTopic !==
+        "all" &&
+      !publishedTopics.some(
+        (topic) =>
+          topic.slug ===
+          activeTopic
+      )
+    ) {
+      activeTopic = "all";
+    }
+
     renderTopicControls();
+
     loaded = true;
+
     render();
+
     return true;
   }
 
   function showLoadError() {
     if (loaded) return;
+
     list.hidden = true;
-    list.setAttribute("aria-busy", "false");
+
+    list.setAttribute(
+      "aria-busy",
+      "false"
+    );
+
     if (topicSelect) {
-      topicSelect.innerHTML = '<option value="all">Topics unavailable</option>';
-      topicSelect.disabled = true;
+      topicSelect.innerHTML =
+        '<option value="all">Topics unavailable</option>';
+
+      topicSelect.disabled =
+        true;
     }
-    if (count) count.textContent = "";
-    if (countLabel) countLabel.textContent = "Practice sets could not be loaded";
-    if (pagination) pagination.hidden = true;
+
+    if (count) {
+      count.textContent = "";
+    }
+
+    if (countLabel) {
+      countLabel.textContent =
+        "Practice sets could not be loaded";
+    }
+
+    if (pagination) {
+      pagination.hidden =
+        true;
+    }
+
     if (empty) {
       empty.hidden = false;
+
       empty.innerHTML =
-        '<h3>We could not load the quizzes</h3><p>Please refresh this page to try again. You can still read the study guide below.</p><button type="button" data-retry-subject>Try again</button>';
+        "<h3>We could not load the quizzes</h3>" +
+        "<p>Please refresh this page to try again. You can still read the study guide below.</p>" +
+        '<button type="button" data-retry-subject>Try again</button>';
     }
   }
 
-  /* ---------------------------------------------------------------- wire */
+  /* ============================================================
+     CHALLENGE STYLES
+  ============================================================ */
 
-  if (topicSelect) topicSelect.addEventListener("change", () => setTopic(topicSelect.value));
-  if (search) {
-    search.addEventListener("input", () => {
-      if (loaded) resetPageAndRender();
-    });
-  }
-  if (empty) {
-    empty.addEventListener("click", (event) => {
-      if (event.target.closest("[data-clear-subject-filters]")) {
-        if (search) search.value = "";
-        setTopic("all");
-        if (search) search.focus();
-      }
-      if (event.target.closest("[data-retry-subject]")) window.location.reload();
-    });
-  }
-  document.addEventListener("gju:admin-quiz-index-ready", () => load());
-
-  ensurePagination();
-  load();
-  loadProgress();
-  window.setTimeout(() => {
-    if (!loaded) load();
-  }, 900);
-  window.setTimeout(() => {
-    if (!loaded && !load()) showLoadError();
-  }, 8000);
-})();
-// Adcash Display - category pages only (not quiz landing)
-(() => {
-  if (document.querySelector("script[data-adcash-quiz-category]")) return;
-  const current = document.currentScript;
-  const base = current && current.src
-    ? current.src.replace(/[^/]+(?:\?.*)?$/, "adcash-quiz-category.js")
-    : "../JS/adcash-quiz-category.js";
-  const el = document.createElement("script");
-  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-railpark";
-  el.defer = true;
-  el.dataset.adcashQuizCategory = "1";
-  document.body.appendChild(el);
-    // ========== Challenge Your Friend Feature ==========
-  (function injectChallengeStyles() {
-    if (document.getElementById("gju-subject-challenge-css")) return;
-    const style = document.createElement("style");
-    style.id = "gju-subject-challenge-css";
-    style.textContent = `
-      .subject-card-actions{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-      .subject-challenge-btn{
-        display:inline-flex;align-items:center;justify-content:center;gap:8px;
-        width:100%;min-height:42px;padding:10px 14px;border-radius:12px;
-        border:1px solid #dbe5f3;background:#f8fafc;color:#1e40af;
-        font:inherit;font-size:13px;font-weight:700;cursor:pointer;
-        transition:all .18s ease;
-      }
-      .subject-challenge-btn:hover:not(:disabled){background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}
-      .subject-challenge-btn:disabled{opacity:.55;cursor:not-allowed;background:#f1f5f9;color:#64748b}
-      .subject-challenge-btn.is-login{background:#fff7ed;border-color:#fdba74;color:#c2410c}
-      .subject-challenge-btn.is-login:hover{background:#ffedd5;border-color:#fb923c}
-    `;
-    document.head.appendChild(style);
-  })();
-
-  async function shareChallenge(btn) {
-    const title = btn.dataset.quizTitle || "this quiz";
-    const score = btn.dataset.score;
-    const total = btn.dataset.total;
-    const percentVal = btn.dataset.percent;
-    const quizId = btn.dataset.quizId;
-
-    const quizUrl =
-      window.location.origin +
-      "/HTML/quiz-attempt.html?quiz=" +
-      encodeURIComponent(quizId) +
-      "&family=topic-wise&subject=" +
-      encodeURIComponent(examSlug);
-
-    const text =
-      "Hi, I scored " + score + "/" + total + " (" + percentVal + '%) in "' + title +
-      '".\nCan you beat me?\nAttempt this Quiz → ' + quizUrl;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: "Challenge: " + title, text: text, url: quizUrl });
-        return;
-      } catch (err) {
-        if (err.name === "AbortError") return;
-      }
-    }
-    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener,noreferrer");
-  }
-
-  document.addEventListener("click", function (e) {
-    const challengeBtn = e.target.closest("[data-challenge]");
-    if (challengeBtn) {
-      e.preventDefault();
-      shareChallenge(challengeBtn);
+  function injectChallengeStyles() {
+    if (
+      document.getElementById(
+        "gju-subject-challenge-css"
+      )
+    ) {
       return;
     }
-    const loginBtn = e.target.closest("[data-challenge-login]");
-    if (loginBtn) {
-      e.preventDefault();
-      const redirect = encodeURIComponent(window.location.pathname + window.location.search);
-      window.location.href = "login.html?redirect=" + redirect;
+
+    const style =
+      document.createElement(
+        "style"
+      );
+
+    style.id =
+      "gju-subject-challenge-css";
+
+    style.textContent = `
+      .subject-card-actions{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        margin-top:12px;
+      }
+
+      .subject-challenge-btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        width:100%;
+        min-height:42px;
+        padding:10px 14px;
+        border-radius:12px;
+        border:1px solid #dbe5f3;
+        background:#f8fafc;
+        color:#1e40af;
+        font:inherit;
+        font-size:13px;
+        font-weight:700;
+        cursor:pointer;
+        transition:all .18s ease;
+      }
+
+      .subject-challenge-btn:hover:not(:disabled){
+        background:#eff6ff;
+        border-color:#93c5fd;
+        color:#1d4ed8;
+      }
+
+      .subject-challenge-btn:focus-visible{
+        outline:3px solid rgba(59,130,246,.25);
+        outline-offset:2px;
+      }
+
+      .subject-challenge-btn:disabled{
+        opacity:.55;
+        cursor:not-allowed;
+        background:#f1f5f9;
+        color:#64748b;
+      }
+
+      .subject-challenge-btn.is-login{
+        background:#fff7ed;
+        border-color:#fdba74;
+        color:#c2410c;
+      }
+
+      .subject-challenge-btn.is-login:hover{
+        background:#ffedd5;
+        border-color:#fb923c;
+      }
+
+      .subject-challenge-btn[data-sharing="1"]{
+        opacity:.7;
+        cursor:wait;
+      }
+    `;
+
+    document.head.appendChild(
+      style
+    );
+  }
+
+  /* ============================================================
+     EVENT WIRING
+  ============================================================ */
+
+  if (topicSelect) {
+    topicSelect.addEventListener(
+      "change",
+      () =>
+        setTopic(
+          topicSelect.value
+        )
+    );
+  }
+
+  if (search) {
+    search.addEventListener(
+      "input",
+      () => {
+        if (loaded) {
+          resetPageAndRender();
+        }
+      }
+    );
+  }
+
+  if (empty) {
+    empty.addEventListener(
+      "click",
+      (event) => {
+        if (
+          event.target.closest(
+            "[data-clear-subject-filters]"
+          )
+        ) {
+          if (search) {
+            search.value = "";
+          }
+
+          setTopic("all");
+
+          if (search) {
+            search.focus();
+          }
+        }
+
+        if (
+          event.target.closest(
+            "[data-retry-subject]"
+          )
+        ) {
+          window.location.reload();
+        }
+      }
+    );
+  }
+
+  /*
+   * Challenge buttons are generated dynamically during render(),
+   * therefore event delegation is used.
+   */
+  document.addEventListener(
+    "click",
+    handleChallengeClick
+  );
+
+  /*
+   * Auth state can change after the page has already rendered.
+   */
+  window.addEventListener(
+    "gju:auth-state",
+    () => {
+      if (loaded) {
+        render();
+      }
     }
-  });
+  );
 
-  window.addEventListener("gju:auth-state", function () {
-    if (loaded) render();
-  });
+  /*
+   * Quiz index may load after this script.
+   */
+  document.addEventListener(
+    "gju:admin-quiz-index-ready",
+    () => load()
+  );
 
+  /* ============================================================
+     INIT
+  ============================================================ */
+
+  injectChallengeStyles();
+
+  ensurePagination();
+
+  load();
+
+  loadProgress();
+
+  /*
+   * Retry once shortly after page load in case the quiz-index
+   * script has not finished loading yet.
+   */
+  window.setTimeout(
+    () => {
+      if (!loaded) {
+        load();
+      }
+    },
+    900
+  );
+
+  /*
+   * Final fallback.
+   */
+  window.setTimeout(
+    () => {
+      if (
+        !loaded &&
+        !load()
+      ) {
+        showLoadError();
+      }
+    },
+    8000
+  );
 })();
 
+/* ================================================================
+   ADCASH DISPLAY - CATEGORY PAGES ONLY
+================================================================ */
+
+(() => {
+  if (
+    document.querySelector(
+      "script[data-adcash-quiz-category]"
+    )
+  ) {
+    return;
+  }
+
+  const current =
+    document.currentScript;
+
+  const base =
+    current &&
+    current.src
+      ? current.src.replace(
+          /[^/]+(?:\?.*)?$/,
+          "adcash-quiz-category.js"
+        )
+      : "../JS/adcash-quiz-category.js";
+
+  const el =
+    document.createElement(
+      "script"
+    );
+
+  el.src =
+    base
+      .replace(
+        /[?&]v=[^&]*/gi,
+        ""
+      )
+      .replace(/\?$/, "") +
+    "?v=20260919-railpark";
+
+  el.defer = true;
+
+  el.dataset.adcashQuizCategory =
+    "1";
+
+  document.body.appendChild(
+    el
+  );
+})();
