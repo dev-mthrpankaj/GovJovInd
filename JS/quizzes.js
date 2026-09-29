@@ -48,7 +48,6 @@
         timerId: 0,
         persistTimerId: 0,
         result: null,
-        resultRank: null,
         reviewFilter: "all",
         isLoading: false,
         loadingQuizId: "",
@@ -194,17 +193,6 @@
         });
         elements.questionCard?.addEventListener("touchstart", handleQuestionTouchStart, { passive: true });
         elements.questionCard?.addEventListener("touchend", handleQuestionTouchEnd, { passive: true });
-        window.addEventListener("gju:quiz-progress-synced", function (event) {
-    const progress = event.detail && event.detail.progress;
-    if (!progress || !state.result) return;
-    if (String(progress.quizKey || progress.quizId || "") !== String(state.result.quizId || "")) return;
-
-    setResultRank({
-        rank: Number(progress.rank) || 0,
-        rankedUsers: Number(progress.rankedUsers) || 0,
-        pending: false
-    });
-});
     }
 
     function handleClick(event) {
@@ -1240,12 +1228,6 @@
         saveAttempt(result);
         renderResult();
         showView("result");
-        state.resultRank = { pending: true };
-if (!window.GJU_AUTH_USER) {
-    setResultRank({ loginRequired: true });
-} else {
-    setResultRank({ pending: true });
-}
     }
 
     function calculateResult(reason) {
@@ -1429,45 +1411,10 @@ if (!window.GJU_AUTH_USER) {
             </article>
             <section class="result-panel result-key-metrics">
                 <div class="result-metric-grid">
-                         function getResultRankText() {
-        const r = state.resultRank;
-        if (!r) return "…";
-        if (r.loginRequired) return "Login";
-        if (r.pending) return "…";
-        if (r.rank > 0 && r.rankedUsers > 0) return "#" + r.rank + "/" + r.rankedUsers;
-        return "—";
-    }
-
-    function getResultRankDetail() {
-        const r = state.resultRank;
-        if (!r) return "Fetching rank";
-        if (r.loginRequired) return "Login to see rank";
-        if (r.pending) return "Calculating…";
-        if (r.rank > 0 && r.rankedUsers > 0) return "Among quiz attempts";
-        return "Rank unavailable";
-    }
-
-    function setResultRank(data) {
-        state.resultRank = data || null;
-        if (!state.result || !views.result || views.result.classList.contains("hidden")) return;
-
-        const metrics = views.result.querySelectorAll(".result-metric");
-        metrics.forEach(function (el) {
-            const label = el.querySelector("span");
-            if (!label || label.textContent.trim() !== "Your Rank") return;
-            const strong = el.querySelector("strong");
-            const small = el.querySelector("small");
-            if (strong) strong.textContent = getResultRankText();
-            if (small) small.textContent = getResultRankDetail();
-            el.classList.remove("success", "neutral", "warning", "primary");
-            el.classList.add(state.resultRank && state.resultRank.rank > 0 ? "success" : "neutral");
-        });
-    }
                     ${renderResultMetric("Score", formatMarks(result.score), `Out of ${formatMarks(result.maxScore)}`, "fa-trophy", "primary")}
                     ${renderResultMetric("Accuracy", `${formatNumber(result.accuracy)}%`, `${result.correct} of ${result.attempted} attempted`, "fa-bullseye", result.accuracy >= 70 ? "success" : "warning")}
                     ${renderResultMetric("Attempt Rate", `${formatNumber(insights.attemptRate)}%`, `${result.unattempted} left unattempted`, "fa-list-check", insights.attemptRate >= 85 ? "success" : "warning")}
                     ${renderResultMetric("Average Pace", `${insights.secondsPerQuestion}s`, "Per question", "fa-stopwatch", "neutral")}
-                    ${renderResultMetric("Your Rank", getResultRankText(), getResultRankDetail(), "fa-medal", state.resultRank && state.resultRank.rank > 0 ? "success" : "neutral")}
                 </div>
             </section>
             <section class="result-panel result-attempt-panel">
