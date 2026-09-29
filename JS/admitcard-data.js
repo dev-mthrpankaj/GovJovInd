@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0184-20260929131255-3ef2892f",
+        "title": "Delhi High Court JJA Judicial Assistant Restorer Mains Admit Card 2026",
+        "organization": "Delhi High  Court",
+        "department": "DHC",
+        "category": "Judiciary",
+        "year": "2026",
+        "examDate": "2026-10-04",
+        "examEndDate": "",
+        "releaseDate": "2026-09-29",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/33131/97738/login.html",
+        "detailPage": "../jobs/delhi-h-c-jr-judicial-assistant-restorer-2026.html",
+        "updatedAt": "2026-09-29",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0156-20260912194035-638442c1",
         "title": "SSC CGL Tier 1 Admit Card 2026 for 12256 Post",
         "organization": "Staff Selection Commission (SSC)",
