@@ -4,6 +4,16 @@
   window.GOVJOB_BLOGS = [
 
     {
+  id: "upsssc-previous-year-question-papers",
+  title: "UPSSSC Previous Year Question Papers: All Exams & Years",
+  category: "UPSSSC",
+  date: "2026-09-30",
+  image: "../Assets/Home%20Page/GovJobUpdates_Resized_1790774683916.webp",
+  url: "student-hub/upsssc-previous-year-question-papers.html",
+  excerpt: "Download UPSSSC Previous Year Question Papers for PET, VDO, Junior Assistant, Lekhpal, Stenographer and other UPSSSC exams. Papers will be added year-wise as they become available."
+},
+
+    {
   id: "ssc-cgl-tier-2-previous-year-papers",
   title: "SSC CGL Tier 2 Previous Year Papers PDF – Free Download",
   category: "SSC",
