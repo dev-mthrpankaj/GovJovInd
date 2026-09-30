@@ -5,7 +5,6 @@
   // Gate: main.blog-article-page + .blog-article-hero
   const CONFIG = {
     enabled: true,
-    // Agar blank: Adsterra COPY CODE se exact host paste karo
     invokeHost: 'www.highperformanceformat.com',
     units: {
       leaderboard: {
@@ -36,6 +35,23 @@
 
   window.ADSTERRA_STUDENT_HUB_CONFIG = CONFIG;
 
+  // ====================== HILLTOPADS (Student Hub articles) ======================
+  const HILLTOP = {
+    enabled: true,
+    zones: {
+      // 1. Pehle 2 paragraphs ke baad
+      after2Para: {
+        id: '7468169',
+        src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
+      },
+      // 2. Last 2 paragraphs se pehle
+      beforeLast2Para: {
+        id: '7468185',
+        src: '//quarrelsomebitter.com/b.XMVjsgdsGEld0hYjWVc-/pegmC9duoZXU/ltkgPfTFc/0BNKj/gixVOyDfUXtEN/zNQs2/OhDpEy4-OcQb'
+      }
+    }
+  };
+
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
   if (!CONFIG.enabled) return;
   if (!/\/student-hub\//i.test(path) && !/\/HTML\/student-hub\//i.test(path)) return;
@@ -59,6 +75,58 @@
       <div class="gju-blog-ad-frame" data-ad-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
     `.trim();
     return wrap;
+  };
+
+  const loadHilltop = (frame, zone) => {
+    if (!frame || !zone?.src) return;
+    const script = document.createElement('script');
+    script.async = true;
+    script.referrerPolicy = 'no-referrer-when-downgrade';
+    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
+    frame.appendChild(script);
+  };
+
+  const makeHilltopSlot = (slotKey) => {
+    const slot = makeSlot(slotKey, 'hilltop');
+    slot.classList.add('gju-blog-ad--hilltop');
+    slot.dataset.adNetwork = 'hilltop';
+    return slot;
+  };
+
+  const getArticleParagraphs = () => {
+    const content = document.querySelector('main.blog-article-page .blog-article-content');
+    if (!content) return [];
+    return Array.from(content.querySelectorAll('p')).filter((p) => {
+      const text = (p.textContent || '').trim();
+      return text.length > 40;
+    });
+  };
+
+  const injectHilltopAds = () => {
+    if (!HILLTOP.enabled) return;
+    if (document.querySelector('[data-hilltop-hub-ad]')) return;
+
+    const paras = getArticleParagraphs();
+    if (paras.length < 4) return;
+
+    // 1) Pehle 2 para ke baad
+    if (HILLTOP.zones.after2Para && paras[1]) {
+      const slot = makeHilltopSlot('hilltop-after-2para');
+      slot.dataset.hilltopHubAd = HILLTOP.zones.after2Para.id;
+      paras[1].insertAdjacentElement('afterend', slot);
+      loadHilltop(slot.querySelector('.gju-blog-ad-frame'), HILLTOP.zones.after2Para);
+    }
+
+    // 2) Last 2 para se pehle
+    if (HILLTOP.zones.beforeLast2Para && paras.length >= 4) {
+      const target = paras[paras.length - 2];
+      if (target) {
+        const slot = makeHilltopSlot('hilltop-before-last-2para');
+        slot.dataset.hilltopHubAd = HILLTOP.zones.beforeLast2Para.id;
+        target.insertAdjacentElement('beforebegin', slot);
+        loadHilltop(slot.querySelector('.gju-blog-ad-frame'), HILLTOP.zones.beforeLast2Para);
+      }
+    }
   };
 
   const injectSlots = () => {
@@ -219,6 +287,12 @@
 
   const hideEmptySlots = () => {
     document.querySelectorAll('.gju-blog-ad[data-ad-slot]').forEach((slot) => {
+      if (slot.dataset.adNetwork === 'hilltop') {
+        slot.hidden = false;
+        slot.classList.remove('is-empty');
+        slot.classList.add('is-filled');
+        return;
+      }
       if (slotLooksFilled(slot)) {
         slot.classList.remove('is-empty');
         slot.hidden = false;
@@ -232,7 +306,69 @@
     syncBlogAdRail();
   };
 
+  const ensureHilltopCss = () => {
+    if (document.querySelector('style[data-hub-hilltop-css]')) return;
+    const style = document.createElement('style');
+    style.dataset.hubHilltopCss = '1';
+    style.textContent = `
+      .gju-blog-ad--hilltop {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: min(100%, 360px);
+        margin: 28px auto;
+        padding: 12px 14px 16px;
+        border: 1px dashed #d5e2f0;
+        border-radius: 14px;
+        background: #f8fbfe;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      .gju-blog-ad--hilltop .gju-blog-ad-label {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        border: 0;
+        background: transparent;
+        padding: 0 0 4px;
+        margin: 0;
+      }
+      .gju-blog-ad--hilltop .gju-blog-ad-frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        max-width: 100%;
+        min-height: 250px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .gju-blog-ad--hilltop .gju-blog-ad-frame iframe,
+      .gju-blog-ad--hilltop .gju-blog-ad-frame img,
+      .gju-blog-ad--hilltop .gju-blog-ad-frame > div,
+      .gju-blog-ad--hilltop .gju-blog-ad-frame > a {
+        display: block;
+        max-width: 300px;
+        max-height: 250px;
+        margin: 0 auto;
+      }
+      @media (max-width: 480px) {
+        .gju-blog-ad--hilltop {
+          width: 100%;
+          margin: 20px auto;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
   const boot = async () => {
+    ensureHilltopCss();
+    injectHilltopAds();
     injectSlots();
     await fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);

@@ -1861,3 +1861,59 @@
 @media print{
   .gju-blog-ad{display:none!important}
 }
+/* Student Hub — Hilltop MultiTag (jobs-style box) */
+.gju-blog-ad--hilltop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: min(100%, 360px);
+  margin: 28px auto;
+  padding: 12px 14px 16px;
+  border: 1px dashed #d5e2f0;
+  border-radius: 14px;
+  background: #f8fbfe;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gju-blog-ad--hilltop .gju-blog-ad-label {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  border: 0;
+  background: transparent;
+  padding: 0 0 4px;
+  margin: 0;
+}
+
+.gju-blog-ad--hilltop .gju-blog-ad-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  max-width: 100%;
+  min-height: 250px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.gju-blog-ad--hilltop .gju-blog-ad-frame iframe,
+.gju-blog-ad--hilltop .gju-blog-ad-frame img,
+.gju-blog-ad--hilltop .gju-blog-ad-frame > div,
+.gju-blog-ad--hilltop .gju-blog-ad-frame > a {
+  display: block;
+  max-width: 300px;
+  max-height: 250px;
+  margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+  .gju-blog-ad--hilltop {
+    width: 100%;
+    margin: 20px auto;
+  }
+}
