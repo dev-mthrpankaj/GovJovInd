@@ -235,15 +235,16 @@
         storage.write("unfinished", saved);
     }
     function fireStartTrigger() {
-        const trigger = document.createElement("button");
-        trigger.type = "button";
-        trigger.hidden = true;
-        trigger.tabIndex = -1;
-        trigger.dataset.startQuiz = quizId;
-        trigger.setAttribute("aria-hidden", "true");
-        document.body.appendChild(trigger);
-        trigger.click();
-        trigger.remove();
+        // Start the quiz through the real quiz engine API. A synthetic click
+        // is fragile here because multiple document/body capture listeners
+        // (including the auth gate) can intercept the event before quizzes.js.
+        if (typeof window.GJU_START_QUIZ !== "function") {
+            console.error("[GJU Quiz Attempt] Quiz engine start API is unavailable.");
+            return;
+        }
+        Promise.resolve(window.GJU_START_QUIZ(quizId)).catch(function (error) {
+            console.error("[GJU Quiz Attempt] Direct quiz start failed:", error);
+        });
     }
     function resumePausedAttempt() {
         writePausedTimeBackToSavedAttempt();
