@@ -186,12 +186,16 @@
     const routeLanguage = routeParams.get("language");
     const routeDifficulty = routeParams.get("difficulty");
     const routePassage = Number(routeParams.get("passage"));
+    const routeDuration = Number(routeParams.get("duration"));
     const routeHindiMode = routeParams.get("hindiMode");
     if (routeLanguage && preset.languages.includes(routeLanguage)) state.language = routeLanguage;
     if (routeDifficulty && config.difficulties.includes(routeDifficulty)) state.difficulty = routeDifficulty;
     state.hindiInputMode = getPreferredHindiInputMode(routeHindiMode);
     state.passageIndex = Number.isFinite(routePassage) ? routePassage : null;
     state.durationMinutes = Number(preset.duration) || 10;
+    if (Number.isFinite(routeDuration) && routeDuration >= 1 && routeDuration <= 180) {
+      state.durationMinutes = routeDuration;
+    }
     state.targetWPM = getTargetWPMForLanguage(preset, state.language);
     state.targetAccuracy = preset.targetAccuracy == null ? null : Number(preset.targetAccuracy);
     state.typed = "";
