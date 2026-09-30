@@ -96,11 +96,15 @@
       const current = map.get(id);
       const best = number(a.bestPercentage, a.percentage);
       if (!current) {
-        map.set(id, { quizKey: id, completedAt: a.completedAt || a.timestamp, bestPercentage: best, percentage: number(a.percentage), attemptCount: 1, rank: null, rankedUsers: null, hasRankedAttempt: false, _time: when });
+        map.set(id, { quizKey: id, completedAt: a.completedAt || a.timestamp, bestPercentage: best, percentage: number(a.percentage), bestScore: number(a.score, NaN), bestMaxScore: number(a.maxScore, NaN), attemptCount: 1, rank: null, rankedUsers: null, hasRankedAttempt: false, _time: when });
         return;
       }
       current.attemptCount += 1;
-      current.bestPercentage = Math.max(current.bestPercentage, best);
+      if (best > current.bestPercentage) {
+        current.bestPercentage = best;
+        current.bestScore = number(a.score, NaN);
+        current.bestMaxScore = number(a.maxScore, NaN);
+      }
       if (when > current._time) {
         current.completedAt = a.completedAt || a.timestamp;
         current.percentage = number(a.percentage);
@@ -225,14 +229,15 @@
     }
 
     const bestPct = percent(p.bestPercentage);
-    const correct = Math.round((bestPct / 100) * totalQ);
+    const score = Number.isFinite(Number(p.bestScore)) ? Number(p.bestScore) : Math.round((bestPct / 100) * totalQ);
+    const maxScore = Number.isFinite(Number(p.bestMaxScore)) ? Number(p.bestMaxScore) : totalQ;
 
     return `<button type="button" class="family-challenge-btn"
       data-challenge="1"
       data-quiz-id="${esc(q.id)}"
       data-quiz-title="${esc(q.title)}"
-      data-score="${correct}"
-      data-total="${totalQ}"
+      data-score="${score}"
+      data-max-score="${maxScore}"
       data-percent="${bestPct}">
       <i class="fas fa-trophy" aria-hidden="true"></i>
       <span>Challenge Your Friend</span>
@@ -342,7 +347,7 @@
     (Array.isArray(rows) ? rows : []).forEach((row) => {
       const id = String(row.quizKey || row.quizId || "").trim();
       if (!id) return;
-      map.set(id, { quizKey: id, completedAt: row.completedAt, bestPercentage: number(row.bestPercentage, row.percentage), percentage: number(row.percentage), attemptCount: Math.max(1, number(row.attemptCount, 1)), rank: row.rank == null ? null : number(row.rank, 0), rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0), hasRankedAttempt: row.hasRankedAttempt === true });
+      map.set(id, { quizKey: id, completedAt: row.completedAt, bestPercentage: number(row.bestPercentage, row.percentage), percentage: number(row.percentage), bestScore: number(row.bestScore, row.score), bestMaxScore: number(row.bestMaxScore, row.maxScore), attemptCount: Math.max(1, number(row.attemptCount, 1)), rank: row.rank == null ? null : number(row.rank, 0), rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0), hasRankedAttempt: row.hasRankedAttempt === true });
     });
     progressByQuiz = map.size ? map : readLocalProgress();
     render();
@@ -363,13 +368,13 @@
   async function shareChallenge(btn) {
     const title = btn.dataset.quizTitle || "this quiz";
     const score = btn.dataset.score;
-    const total = btn.dataset.total;
+    const maxScore = btn.dataset.maxScore;
     const percent = btn.dataset.percent;
     const quizId = btn.dataset.quizId;
 
     const quizUrl = `${window.location.origin}/HTML/quiz-attempt.html?quiz=${encodeURIComponent(quizId)}&family=${encodeURIComponent(familySlug)}`;
 
-    const text = `Hi, I scored ${score}/${total} (${percent}%) in "${title}".\nCan you beat me?\nAttempt this Quiz → ${quizUrl}`;
+    const text = `🏆 Challenge Accepted? 😏\nMaine "${title}" mein ${score}/${maxScore} Marks (${percent}%) score kiye!\n\nAb tumhari baari 😎\nKya tum mera score beat kar sakte ho? 🔥\n\n👉 Take the Quiz & Prove It:\n${quizUrl}`;
 
     if (navigator.share) {
       try {
