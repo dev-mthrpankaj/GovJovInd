@@ -19,7 +19,7 @@
  height: 250
  }
  },
- cssHref: '../CSS/adcash-quiz-category.css?v=20260923-adsterra',
+ cssHref: '../CSS/adcash-quiz-category.css?v=20260930-hilltop-typing',
  emptyHideMs: 4000,
  emptyRecheckMs: [7000, 11000],
  bannerGapMs: 400,
@@ -27,6 +27,16 @@
  };
 
  window.ADSTERRA_TYPING_CATEGORY_CONFIG = CONFIG;
+
+ // ====================== HILLTOPADS CONFIG ======================
+ const HILLTOP = {
+ enabled: true,
+ zone: {
+ id: '7468169',
+ src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
+ }
+ };
+
 
  const indexPage = document.querySelector('main.gju-typing-index-page');
  const examPage = document.querySelector('main.gju-typing-exam-detail-page');
@@ -143,6 +153,52 @@
  }
  };
 
+
+ const loadHilltop = (frame, zone) => {
+ if (!frame || !zone?.src) return;
+ const script = document.createElement('script');
+ script.async = true;
+ script.referrerPolicy = 'no-referrer-when-downgrade';
+ script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
+ frame.appendChild(script);
+ };
+
+ const makeHilltopSlot = (slotKey) => {
+ const slot = makeSlot(slotKey, 'hilltop');
+ slot.classList.add('gju-quiz-ad--hilltop');
+ slot.dataset.adNetwork = 'hilltop';
+ slot.dataset.hilltopZone = HILLTOP.zone.id;
+ return slot;
+ };
+
+ const injectHilltop = () => {
+ if (!HILLTOP.enabled || !HILLTOP.zone?.src) return;
+ if (document.querySelector('[data-hilltop-typing-ad]')) return;
+
+ let target = null;
+
+ if (indexPage) {
+ const guide = indexPage.querySelector('.gju-typing-faq-section');
+ if (guide && guide.parentNode) {
+ target = guide;
+ }
+ } else if (examPage) {
+ const evaluate = examPage.querySelector('.gju-typing-evaluate-section');
+ if (evaluate && evaluate.parentNode) {
+ target = evaluate;
+ }
+ }
+
+ if (!target) return;
+
+ const slot = makeHilltopSlot(
+ indexPage ? 'hilltop-after-directory' : 'hilltop-after-passages'
+ );
+ slot.dataset.hilltopTypingAd = HILLTOP.zone.id;
+ target.insertAdjacentElement('beforebegin', slot);
+ loadHilltop(slot.querySelector('.gju-quiz-ad-frame'), HILLTOP.zone);
+ };
+
  const injectSlots = () => {
  if (indexPage) injectIndex(indexPage);
  else if (examPage) injectExam(examPage);
@@ -240,6 +296,12 @@
 
  const hideEmptySlots = () => {
  document.querySelectorAll('.gju-quiz-ad[data-ad-slot]').forEach((slot) => {
+ if (slot.dataset.adNetwork === 'hilltop') {
+ slot.hidden = false;
+ slot.classList.remove('is-empty');
+ slot.classList.add('is-filled');
+ return;
+ }
  if (slotLooksFilled(slot)) {
  slot.classList.remove('is-empty');
  slot.hidden = false;
@@ -256,6 +318,7 @@
  const boot = async () => {
  ensureCss();
  injectSlots();
+ injectHilltop();
  await fireBanners();
  window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
  (CONFIG.emptyRecheckMs || []).forEach((ms) => {
