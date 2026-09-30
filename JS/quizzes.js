@@ -1471,6 +1471,13 @@
                     <button class="quiz-btn quiz-btn-primary" type="button" data-start-quiz="${escapeAttr(result.quizId)}">Retake Quiz</button>
                 </div>
             </section>
+            <section class="result-panel result-leaderboard-panel">
+                <div class="result-section-heading">
+                    <div><span class="result-section-kicker">LIVE LEADERBOARD</span><h2>Top Performers</h2></div>
+                    <span class="result-section-note">Ranked by score, then time</span>
+                </div>
+                ${renderResultLeaderboard(result)}
+            </section>
             ${sectionScorecard}
             <div class="result-actions">
                 <button class="quiz-btn quiz-btn-primary" type="button" data-action="review-answers"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Review Mistakes</button>
