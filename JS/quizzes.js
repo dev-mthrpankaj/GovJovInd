@@ -630,6 +630,13 @@
         }
     }
 
+    // Public bridge for the dedicated quiz-attempt controller.
+    // The attempt page must start the quiz directly instead of relying on
+    // a synthetic DOM click that can be intercepted by other capture handlers.
+    window.GJU_START_QUIZ = function (quizId, forceNew) {
+        return startQuiz(quizId, forceNew);
+    };
+
     async function loadQuizSet(quizId) {
         const loaded = await registry.loadQuizById?.(quizId);
         return loaded || registry.getQuizById(quizId);
