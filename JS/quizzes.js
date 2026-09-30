@@ -50,6 +50,8 @@
         result: null,
         rankInfo: null,
         rankRequestId: 0,
+        leaderboardInfo: null,
+        leaderboardRequestId: 0,
         reviewFilter: "all",
         isLoading: false,
         loadingQuizId: "",
@@ -1477,6 +1479,8 @@
             </div>
         `;
         typesetQuizMath(views.result);
+        if (!result.rankInfo) loadResultRank(result);
+        if (!result.leaderboardInfo) loadResultLeaderboard(result);
     }
     function formatQuizRank(result) {
         const info = result && result.rankInfo;
