@@ -48,6 +48,8 @@
         timerId: 0,
         persistTimerId: 0,
         result: null,
+        rankInfo: null,
+        rankRequestId: 0,
         reviewFilter: "all",
         isLoading: false,
         loadingQuizId: "",
@@ -1423,6 +1425,7 @@
             <section class="result-panel result-key-metrics">
                 <div class="result-metric-grid">
                     ${renderResultMetric("Score", formatMarks(result.score), `Out of ${formatMarks(result.maxScore)}`, "fa-trophy", "primary")}
+                    ${renderResultMetric("Rank", formatQuizRank(result), result.rankInfo?.status === "ready" ? "Among ranked attempts" : result.rankInfo?.status === "loading" ? "Fetching rank..." : "Not available", "fa-ranking-star", result.rankInfo?.status === "ready" ? "success" : "neutral")}
                     ${renderResultMetric("Accuracy", `${formatNumber(result.accuracy)}%`, `${result.correct} of ${result.attempted} attempted`, "fa-bullseye", result.accuracy >= 70 ? "success" : "warning")}
                     ${renderResultMetric("Attempt Rate", `${formatNumber(insights.attemptRate)}%`, `${result.unattempted} left unattempted`, "fa-list-check", insights.attemptRate >= 85 ? "success" : "warning")}
                     ${renderResultMetric("Average Pace", `${insights.secondsPerQuestion}s`, "Per question", "fa-stopwatch", "neutral")}
@@ -1474,6 +1477,39 @@
             </div>
         `;
         typesetQuizMath(views.result);
+    }
+    function formatQuizRank(result) {
+        const info = result && result.rankInfo;
+        if (info && info.status === "ready" && Number(info.rank) > 0) return info.total > 0 ? "#" + formatNumber(info.rank) + " / " + formatNumber(info.total) : "#" + formatNumber(info.rank);
+        if (info && info.status === "loading") return "…";
+        return "—";
+    }
+
+    async function loadResultRank(result) {
+        if (!result || result.rankInfo) return;
+        const requestId = ++state.rankRequestId;
+        result.rankInfo = { status: "loading" };
+        if (isViewVisible("result")) renderResult();
+        try {
+            if (!window.GJU_FIREBASE_CONFIG || typeof window.GJU_FIREBASE_CONFIG !== "object") throw new Error("Firebase config unavailable");
+            const [{ initializeApp, getApps }, { getAuth, onAuthStateChanged }] = await Promise.all([import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"), import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js")]);
+            const app = getApps().length ? getApps()[0] : initializeApp(window.GJU_FIREBASE_CONFIG);
+            const auth = getAuth(app);
+            const user = await withTimeout(new Promise((resolve) => { const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => { unsubscribe(); resolve(firebaseUser); }); }), AUTH_CHECK_TIMEOUT_MS);
+            if (!user) throw new Error("User not authenticated");
+            const token = await user.getIdToken();
+            const response = await fetch("https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php", { method: "GET", mode: "cors", cache: "no-store", headers: { Accept: "application/json", Authorization: "Bearer " + token } });
+            const data = await response.json().catch(() => null);
+            const rows = data && Array.isArray(data.progress) ? data.progress : [];
+            const row = rows.find((item) => String(item.quizKey || item.quizId || "").trim() === String(result.quizId).trim());
+            const rank = row ? Number(row.rank) : NaN;
+            const total = row ? Number(row.rankedUsers) : NaN;
+            result.rankInfo = response.ok && data && data.success === true && Number.isFinite(rank) && rank > 0 ? { status: "ready", rank: rank, total: Number.isFinite(total) && total > 0 ? total : 0 } : { status: "unavailable" };
+        } catch (error) {
+            result.rankInfo = { status: "unavailable" };
+            console.warn("[GJU Quizzes] Result rank lookup failed:", error);
+        }
+        if (isViewVisible("result") && requestId === state.rankRequestId) renderResult();
     }
     function renderResultMetric(label, value, detail, icon, tone) {
         return `
