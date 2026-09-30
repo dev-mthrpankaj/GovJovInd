@@ -794,7 +794,7 @@ ${buildFaqSection(exam.title)}
     ? current.src.replace(/[^/]+(?:\?.*)?$/, "adcash-typing-category.js")
     : "adcash-typing-category.js";
   const el = document.createElement("script");
-  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260919-railpark";
+  el.src = base.replace(/[?&]v=[^&]*/gi, "").replace(/\?$/, "") + "?v=20260930-hilltop-typing";
   el.defer = true;
   el.dataset.adcashTypingCategory = "1";
   document.body.appendChild(el);
