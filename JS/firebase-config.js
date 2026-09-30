@@ -99,6 +99,7 @@ window.GJU_FIREBASE_CONFIG = {
       window.GJU_AUTH_USER = null;
       clearSavedAuth();
       syncHeader(null);
+      window.dispatchEvent(new CustomEvent("gju:auth-state", { detail: { user: null, unavailable: true } }));
     }
   }
 
