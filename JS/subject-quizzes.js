@@ -254,16 +254,20 @@
 
   function applyProgress(rows) {
     const map = new Map();
+    const local = readLocalProgress();
     (Array.isArray(rows) ? rows : []).forEach((row) => {
       const id = String(row.quizKey || row.quizId || "").trim();
       if (!id) return;
+      const localRow = local.get(id);
+      const serverPct = number(row.bestPercentage, row.percentage);
+      const localMatchesServer = localRow && Math.abs(number(localRow.bestPercentage) - serverPct) < 0.01;
       map.set(id, {
         quizKey: id,
         completedAt: row.completedAt,
-        bestPercentage: number(row.bestPercentage, row.percentage),
+        bestPercentage: serverPct,
         percentage: number(row.percentage),
-        bestScore: number(row.bestScore, row.score),
-        bestMaxScore: number(row.bestMaxScore, row.maxScore),
+        bestScore: number(row.bestScore, number(row.score, localMatchesServer ? localRow.bestScore : NaN)),
+        bestMaxScore: number(row.bestMaxScore, number(row.maxScore, localMatchesServer ? localRow.bestMaxScore : NaN)),
         attemptCount: Math.max(1, number(row.attemptCount, 1)),
         rank: row.rank == null ? null : number(row.rank, 0),
         rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0),
