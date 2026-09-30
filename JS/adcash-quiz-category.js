@@ -32,6 +32,14 @@
   if (!CONFIG.enabled || (!familyPage && !subjectPage)) return;
   if (window.matchMedia('(print)').matches) return;
 
+  const HILLTOP = {
+    enabled: true,
+    zone: {
+      id: '7468169',
+      src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
+    }
+  };
+
   const units = CONFIG.units || {};
   if (!units.skyscraper?.key && !units.rectangle?.key) return;
 
@@ -73,6 +81,39 @@
     host.classList.remove('ad-rail-empty');
     host.appendChild(mainCol);
     return mainCol;
+  };
+
+  const loadHilltop = (frame, zone) => {
+    if (!frame || !zone?.src) return;
+    const script = document.createElement('script');
+    script.async = true;
+    script.referrerPolicy = 'no-referrer-when-downgrade';
+    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
+    frame.appendChild(script);
+  };
+
+  const injectHilltop = () => {
+    if (!HILLTOP.enabled || !HILLTOP.zone?.src) return;
+    if (document.querySelector('[data-hilltop-quiz-ad]')) return;
+
+    const familyPage = document.querySelector('main.family-quiz-page');
+    const subjectPage = document.querySelector('main.subject-quiz-page, main[data-subject-quiz-page]');
+    const host = familyPage || subjectPage;
+    if (!host) return;
+
+    const pagination = familyPage
+      ? familyPage.querySelector('.family-pagination')
+      : subjectPage
+        ? subjectPage.querySelector('[data-subject-pagination]')
+        : null;
+
+    if (!pagination || !pagination.parentNode) return;
+
+    const slot = makeSlot('hilltop-after-pagination', 'hilltop');
+    slot.dataset.hilltopQuizAd = HILLTOP.zone.id;
+    slot.classList.add('gju-quiz-ad--hilltop');
+    pagination.insertAdjacentElement('afterend', slot);
+    loadHilltop(slot.querySelector('.gju-quiz-ad-frame'), HILLTOP.zone);
   };
 
   const injectSlots = () => {
@@ -232,6 +273,7 @@
   const boot = async () => {
     ensureCss();
     injectSlots();
+    injectHilltop();
     await fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
     (CONFIG.emptyRecheckMs || []).forEach((ms) => {
