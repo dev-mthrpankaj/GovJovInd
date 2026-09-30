@@ -1276,7 +1276,13 @@
         maxScore = round2(maxScore);
         const percentage = maxScore ? Math.max(0, round2((score / maxScore) * 100)) : 0;
         const accuracy = attempted ? round2((correct / attempted) * 100) : 0;
-        const timeTaken = Math.max(0, Math.round(((Number(state.quizSet.durationMinutes) || 30) * 60) - state.remainingSeconds));
+        // Calculate final time from the actual submission moment, not the last 1-second timer tick.
+        // This keeps ranked attempts accurate even when Submit is pressed between timer ticks.
+        const durationSeconds = Math.max(1, Number(state.quizSet.durationMinutes) || 30) * 60;
+        const timeTaken = Math.min(
+            durationSeconds,
+            Math.max(0, Math.floor((Date.now() - Number(state.startedAt || Date.now())) / 1000))
+        );
 
         return {
             id: `attempt-${Date.now()}`,
