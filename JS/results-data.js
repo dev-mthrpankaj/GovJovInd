@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0164-20260930200737-0a89774b",
+        "title": "UPSSSC Platoon Commander, Block Organizer Eligibility Result 2026 for 295 Post",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-30",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=166&Result_Type=P&Exam_Code=7&Advt_Code=732&Dept_Code=608&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../jobs/upsssc-platoon-commander-block-organizer-2026.html",
+        "updatedAt": "2026-09-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0165-20260930201041-70d3e281",
+        "title": "UPSSSC Havaldar Instructor Eligibility Result 2026 for 209 Post",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-30",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=165&Result_Type=P&Exam_Code=5&Advt_Code=573&Dept_Code=604&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../jobs/upsssc-havaldar-instructor-2026.html",
+        "updatedAt": "2026-09-30",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0143-20260910151254-754f3b10",
         "title": "DSSSB Result 2026 for Assistant Sanitary Inspector",
         "organization": "Delhi Subordinate Service Selection Board DSSSB",
@@ -688,24 +724,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0122-20260828214452-b5ad933e",
-        "title": "UPSSSC Forest Guard Eligibility Result 2026 for 708 Post",
-        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
-        "department": "UPSSSC",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-08-27",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=160&Result_Type=P&Exam_Code=5&Advt_Code=574&Dept_Code=605&Post_Code=1&OnlyIntview=No",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-08-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0123-20260828214742-b3a2e96e",
         "title": "UPSSSC Forensic Science Laboratory Eligibility Result 2026",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
@@ -742,24 +760,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "yes"
     },
     {
-        "id": "result-sheet-0125-20260828215237-33d3c59e",
-        "title": "Railway RRB NTPC Graduate Level CBT II Result 2026 – OUT | CEN 06/2025",
-        "organization": "Railway Recruitment Board",
-        "department": "RRB",
-        "category": "Central Government",
-        "year": "2026",
-        "resultDate": "2026-08-27",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-08-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0126-20260829175113-2157fbde",
         "title": "NTA UGC NET June 2026 Result – Declared",
         "organization": "The University Grants Commission (UGC)",
@@ -772,24 +772,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://cnr.nic.in/Results26/Score/Login?enc=LH/Iqy2lIvm6yfwjd7BOsNPROEv0WO16vwSfOqO4R9E=",
         "detailPage": "../HTML/results.html",
         "updatedAt": "2026-08-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "result-sheet-0120-20260828213842-5604a466",
-        "title": "SBI Probationary Officers PO Result 2026 for 1500 Post",
-        "organization": "State Bank of India",
-        "department": "SBI",
-        "category": "Banking",
-        "year": "2026",
-        "resultDate": "2026-08-28",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://sbi.bank.in/webfiles/uploads/files_2627/08/SBIPO2026-Prelims-WTRESULT-15_columns.pdf",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-08-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "fallback",
@@ -1192,24 +1174,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0101-20260814211742-fafcb44f",
-        "title": "MPESB Van Rakshak, Jail Prahari Result 2026 for 1679 Post",
-        "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
-        "department": "MPESB",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-08-14",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://esb.mp.gov.in/results/RESULT_26/JAIL_VAN_RES26/default_Results.htm",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-08-14",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0091-20260812184351-96f8b0a1",
         "title": "AIIMS CRE 5th Group B & C Result 2026 for 1484 Post",
         "organization": "All India Institute of Medical Sciences (AIIMS)",
@@ -1516,24 +1480,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0076-20260731181718-c05cc710",
-        "title": "UP Police Constable Result 2026 for 32679 Post",
-        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
-        "department": "UPPRPB",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-07-31",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://upcons2025.com/conwrittentest2025/Loginpage.aspx",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-07-31",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0072-20260728122411-91a0455d",
         "title": "CBI Apprentice Result 2026 for 4500 Post",
         "organization": "Central Bank of India",
@@ -1550,24 +1496,6 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0073-20260728220857-1ce35d05",
-        "title": "UP TGT 2022 Final Result 2026",
-        "organization": "Uttar Pradesh Secondary Education Service Selection Board (UPSESSB)",
-        "department": "UPSESSB",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-07-28",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://www.upessc.net/TGTResults/Login.aspx",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-07-28",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0074-20260728221945-854c1922",
@@ -2496,76 +2424,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0022",
-        "title": "SSC Delhi Police Constable Driver Additional Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-25",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Constable",
-            "Driver"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "result-sheet-0023",
-        "title": "SSC Delhi Police Head Constable Ministerial Additional Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-25",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Head Constable",
-            "Ministerial"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "result-sheet-0024",
-        "title": "SSC Delhi Police Head Constable AWO / TPO Additional Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-25",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Head Constable",
-            "AWO",
-            "TPO"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-24",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0018-1",
         "title": "UPPSC Staff Nurse Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",
@@ -2654,30 +2512,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0014",
-        "title": "SSC Delhi Police Constable Executive Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-19",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "Delhi Police",
-            "Constable",
-            "Executive",
-            "Result"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-19",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "result-sheet-0013-1",
         "title": "MPESB Pre Agriculture Test PAT Result 2026",
         "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
@@ -2745,28 +2579,6 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0009",
-        "title": "SSC Delhi Police Head Constable (Ministerial) Result",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-05",
-        "status": "released",
-        "tags": [
-            "SSC",
-            "HCM",
-            "Delhi Police Head Constable"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-06-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     },
     {
         "id": "result-sheet-0011",
@@ -2926,29 +2738,5 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0002",
-        "title": "SSC Delhi Police HC (AWO/TPO) 2025 -  Result 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-05-29",
-        "status": "released",
-        "tags": [
-            "ssc",
-            "awo",
-            "tpo",
-            "delhi police",
-            "head constable"
-        ],
-        "resultLink": "https://ssc.gov.in/home/candidate-result",
-        "detailPage": "../HTML/results.html",
-        "updatedAt": "2026-05-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     }
 ];
