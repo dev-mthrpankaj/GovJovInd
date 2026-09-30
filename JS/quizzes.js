@@ -52,6 +52,9 @@
         rankRequestId: 0,
         leaderboardInfo: null,
         leaderboardRequestId: 0,
+        currentUserDisplayName: "",
+        leaderboardInfo: null,
+        leaderboardRequestId: 0,
         reviewFilter: "all",
         isLoading: false,
         loadingQuizId: "",
@@ -1496,8 +1499,21 @@
         return '<div class="result-leaderboard-table" role="table"><div class="result-leaderboard-head"><span>Rank</span><span>Participant</span><span>Score</span><span>Accuracy</span><span>Time</span></div>' +
             info.rows.map(function (row) {
                 const isCurrent = Number(row.rank) === Number(result.rankInfo && result.rankInfo.rank);
-                return '<div class="result-leaderboard-row' + (isCurrent ? ' is-current' : '') + '"><strong>#' + formatNumber(row.rank) + '</strong><span>' + (isCurrent ? 'You' : 'Participant') + '</span><span>' + formatMarks(row.score) + '/' + formatMarks(row.maxScore) + '</span><span>' + formatNumber(row.percentage) + '%</span><span>' + formatTime(row.timeTakenSeconds) + '</span></div>';
+                const participant = isCurrent ? (result.currentUserDisplayName || "You") : maskLeaderboardName(row.displayName || row.name || "");
+                return '<div class="result-leaderboard-row' + (isCurrent ? ' is-current' : '') + '"><strong>#' + formatNumber(row.rank) + '</strong><span>' + escapeHtml(participant) + (isCurrent ? ' <small class="result-you-badge">YOU</small>' : '') + '</span><span>' + formatMarks(row.score) + '/' + formatMarks(row.maxScore) + '</span><span>' + formatNumber(row.percentage) + '%</span><span>' + formatTime(row.timeTakenSeconds) + '</span></div>';
             }).join("") + '</div>';
+    }
+
+    function maskLeaderboardName(value) {
+        const name = String(value || "").trim().replace(/\s+/g, " ");
+        if (!name) return "Participant";
+        const parts = name.split(" ");
+        if (parts.length === 1) return name;
+        const first = parts.shift();
+        const last = parts.pop();
+        const middle = parts.length ? " " + parts.join(" ") + " " : " ";
+        const maskedLast = last.length <= 2 ? last.charAt(0) + "*" : last.charAt(0) + "**" + last.slice(-1);
+        return first + middle + maskedLast;
     }
 
     async function loadResultLeaderboard(result) {
@@ -1508,6 +1524,7 @@
         try {
             const token = await getResultFirebaseToken();
             if (!token) throw new Error("User not authenticated");
+            result.currentUserDisplayName = getCurrentUserDisplayName();
             const url = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php?leaderboard=1&quiz_key=" + encodeURIComponent(result.quizId) + "&limit=10";
             const response = await fetch(url, { method: "GET", mode: "cors", cache: "no-store", headers: { Accept: "application/json", Authorization: "Bearer " + token } });
             const data = await response.json().catch(() => null);
@@ -1519,6 +1536,14 @@
             console.warn("[GJU Quizzes] Result leaderboard lookup failed:", error);
         }
         if (isViewVisible("result") && requestId === state.leaderboardRequestId) renderResult();
+    }
+
+    function getCurrentUserDisplayName() {
+        try {
+            const user = window.GJU_AUTH_USER;
+            if (user) return String(user.displayName || user.name || user.fullName || "").trim();
+        } catch (_e) {}
+        return "";
     }
 
     async function getResultFirebaseToken() {
