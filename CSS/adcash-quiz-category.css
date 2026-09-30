@@ -280,3 +280,68 @@ main.rank-cards-page .gju-rank-ad-host .gju-quiz-ad--skyscraper.gju-quiz-ad--rai
     position: static !important;
   }
 }
+
+/* Hilltop — full-width inline ad used between typing content and the guide */
+.gju-quiz-ad--hilltop {
+  width: min(100%, 1380px);
+  margin: 1.35rem auto 1.5rem;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  min-height: 58px;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-label {
+  margin: 0 0 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  justify-content: flex-start;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-label-tag {
+  font-size: 0.58rem;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-label-note {
+  font-size: 0.62rem;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame {
+  width: 100%;
+  max-width: 100%;
+  min-height: 38px;
+  border-radius: 6px;
+  background: transparent;
+  overflow: visible;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame > * {
+  display: block;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.gju-quiz-ad--hilltop.is-filled {
+  display: flex;
+}
+
+@media (max-width: 1099px) {
+  .gju-quiz-ad--hilltop {
+    width: min(100%, 1000px);
+    margin: 1rem auto 1.25rem;
+    padding: 6px 4px;
+    min-height: 54px;
+  }
+
+  .gju-quiz-ad--hilltop .gju-quiz-ad-label {
+    justify-content: center;
+  }
+
+  .gju-quiz-ad--hilltop .gju-quiz-ad-frame {
+    min-height: 36px;
+  }
+}
