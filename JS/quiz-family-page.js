@@ -229,8 +229,8 @@
     }
 
     const bestPct = percent(p.bestPercentage);
-    const score = Number.isFinite(Number(p.bestScore)) ? Number(p.bestScore) : Math.round((bestPct / 100) * totalQ);
-    const maxScore = Number.isFinite(Number(p.bestMaxScore)) ? Number(p.bestMaxScore) : totalQ;
+    const maxScore = Number.isFinite(Number(p.bestMaxScore)) ? Number(p.bestMaxScore) : totalQ * number(q.marks, 1);
+    const score = Number.isFinite(Number(p.bestScore)) ? Number(p.bestScore) : Math.round((bestPct / 100) * maxScore * 100) / 100;
 
     return `<button type="button" class="family-challenge-btn"
       data-challenge="1"
