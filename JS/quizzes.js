@@ -338,7 +338,7 @@
     function openInitialRoute() {
         // Dedicated quiz-attempt.html has its own startup controller.
         // Do not let the legacy quiz engine start the same quiz a second time.
-        if (/(^|\\/)quiz-attempt\\.html$/i.test(window.location.pathname)) return;
+        if (/(^|\/)quiz-attempt\.html$/i.test(window.location.pathname)) return;
 
         const params = new URLSearchParams(window.location.search);
         const subject = params.get("subject");
