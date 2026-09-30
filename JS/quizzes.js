@@ -1482,6 +1482,52 @@
         if (!result.rankInfo) loadResultRank(result);
         if (!result.leaderboardInfo) loadResultLeaderboard(result);
     }
+    function renderResultLeaderboard(result) {
+        const info = result && result.leaderboardInfo;
+        if (!info || info.status === "loading") return '<div class="result-leaderboard-loading">Fetching the latest leaderboard…</div>';
+        if (info.status !== "ready" || !Array.isArray(info.rows) || !info.rows.length) return '<div class="result-leaderboard-empty">Leaderboard is not available for this quiz yet.</div>';
+        return '<div class="result-leaderboard-table" role="table"><div class="result-leaderboard-head"><span>Rank</span><span>Participant</span><span>Score</span><span>Accuracy</span><span>Time</span></div>' +
+            info.rows.map(function (row) {
+                const isCurrent = Number(row.rank) === Number(result.rankInfo && result.rankInfo.rank);
+                return '<div class="result-leaderboard-row' + (isCurrent ? ' is-current' : '') + '"><strong>#' + formatNumber(row.rank) + '</strong><span>' + (isCurrent ? 'You' : 'Participant') + '</span><span>' + formatMarks(row.score) + '/' + formatMarks(row.maxScore) + '</span><span>' + formatNumber(row.percentage) + '%</span><span>' + formatTime(row.timeTakenSeconds) + '</span></div>';
+            }).join("") + '</div>';
+    }
+
+    async function loadResultLeaderboard(result) {
+        if (!result || result.leaderboardInfo) return;
+        const requestId = ++state.leaderboardRequestId;
+        result.leaderboardInfo = { status: "loading", rows: [] };
+        if (isViewVisible("result")) renderResult();
+        try {
+            const token = await getResultFirebaseToken();
+            if (!token) throw new Error("User not authenticated");
+            const url = "https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php?leaderboard=1&quiz_key=" + encodeURIComponent(result.quizId) + "&limit=10";
+            const response = await fetch(url, { method: "GET", mode: "cors", cache: "no-store", headers: { Accept: "application/json", Authorization: "Bearer " + token } });
+            const data = await response.json().catch(() => null);
+            result.leaderboardInfo = response.ok && data && data.success === true && Array.isArray(data.leaderboard)
+                ? { status: "ready", rows: data.leaderboard }
+                : { status: "unavailable", rows: [] };
+        } catch (error) {
+            result.leaderboardInfo = { status: "unavailable", rows: [] };
+            console.warn("[GJU Quizzes] Result leaderboard lookup failed:", error);
+        }
+        if (isViewVisible("result") && requestId === state.leaderboardRequestId) renderResult();
+    }
+
+    async function getResultFirebaseToken() {
+        if (!window.GJU_FIREBASE_CONFIG || typeof window.GJU_FIREBASE_CONFIG !== "object") return null;
+        const [{ initializeApp, getApps }, { getAuth, onAuthStateChanged }] = await Promise.all([
+            import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+            import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js")
+        ]);
+        const app = getApps().length ? getApps()[0] : initializeApp(window.GJU_FIREBASE_CONFIG);
+        const auth = getAuth(app);
+        const user = await withTimeout(new Promise((resolve) => {
+            const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => { unsubscribe(); resolve(firebaseUser); });
+        }), AUTH_CHECK_TIMEOUT_MS);
+        return user ? user.getIdToken() : null;
+    }
+
     function formatQuizRank(result) {
         const info = result && result.rankInfo;
         if (info && info.status === "ready" && Number(info.rank) > 0) return info.total > 0 ? "#" + formatNumber(info.rank) + " / " + formatNumber(info.total) : "#" + formatNumber(info.rank);
