@@ -275,6 +275,15 @@
         if (!registry || typeof registry.getQuizById !== "function") return;
         const quiz = registry.getQuizById(quizId);
         if (!quiz) return;
+
+        // Firebase Auth must finish its initial state resolution before the
+        // synthetic Start Quiz click is dispatched. Otherwise the auth gate
+        // can intercept the click while Firebase is still initializing.
+        if (window.GJU_AUTH_STATE_KNOWN !== true && !awaitingStart) {
+            setLoading("Checking your account…", "Verifying your login before starting the quiz.", false);
+            return;
+        }
+
         if (awaitingStart) {
             window.clearTimeout(timeoutId);
             setLoading(quiz.title || "Your selected quiz", "Your quiz is ready. Click Start Quiz when you are ready. If you have a saved attempt, you can choose to resume it next.", false);
@@ -321,7 +330,7 @@
                 return node && !node.classList.contains("hidden");
             });
             if (!visible) setLoading("Quiz could not start", "The quiz data could not be loaded. Please retry or return to the quiz list.", true);
-        }, 12000);
+        }, 20000);
     }
     function init() {
         document.body.classList.add("quiz-attempt-route");
@@ -337,6 +346,7 @@
         setLoading("Starting your quiz…", "Loading published quiz information.", false);
         watchViews();
         document.addEventListener("gju:admin-quiz-index-ready", function () { window.setTimeout(resolveAndStart, 0); });
+        window.addEventListener("gju:auth-state", function () { window.setTimeout(resolveAndStart, 0); });
         document.addEventListener("gju:quiz-save-state", function (event) {
             syncSaveIndicator(event.detail?.status, event.detail?.persistent);
         });
