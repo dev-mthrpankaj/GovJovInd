@@ -19,7 +19,7 @@
  height: 250
  }
  },
- cssHref: '../CSS/adcash-quiz-category.css?v=20260930-hilltop-typing-v4',
+ cssHref: '../CSS/adcash-quiz-category.css?v=20260930-hilltop-box-v5',
  emptyHideMs: 4000,
  emptyRecheckMs: [7000, 11000],
  bannerGapMs: 400,

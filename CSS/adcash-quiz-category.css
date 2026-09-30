@@ -458,3 +458,74 @@ main.rank-cards-page .gju-rank-ad-host .gju-quiz-ad--skyscraper.gju-quiz-ad--rai
     width:100%!important;
   }
 }
+
+/* ===================== Hilltop MultiTag — Jobs-style box ===================== */
+
+.gju-quiz-ad--hilltop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: min(100%, 360px);
+  margin: 1.5rem auto;
+  padding: 12px 14px 16px;
+  border: 1px dashed #d5e2f0;
+  border-radius: 14px;
+  background: #f8fbfe;
+  box-shadow: none;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-label {
+  align-self: stretch;
+  justify-content: center;
+  text-align: center;
+  border-bottom: none;
+  background: transparent;
+  padding: 0 0 4px;
+}
+
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame {
+  width: 300px;
+  max-width: 100%;
+  min-height: 250px;
+  max-height: 260px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important;
+  border-radius: 8px;
+  background: #fff;
+  position: relative;
+}
+
+/* Creative ko box ke andar lock karo */
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame iframe,
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame img,
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame > div,
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame > a,
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame > ins,
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame > span {
+  display: block !important;
+  max-width: 300px !important;
+  width: auto !important;
+  max-height: 250px !important;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 480px) {
+  .gju-quiz-ad--hilltop {
+    width: 100%;
+    margin: 1.1rem auto;
+    padding: 10px 10px 14px;
+  }
+
+  .gju-quiz-ad--hilltop .gju-quiz-ad-frame {
+    width: 100%;
+    max-width: 300px;
+  }
+}
