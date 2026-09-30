@@ -35,19 +35,13 @@
 
   window.ADSTERRA_STUDENT_HUB_CONFIG = CONFIG;
 
-  // ====================== HILLTOPADS (Student Hub articles) ======================
+  // ====================== HILLTOPADS — 1 unit, article middle ======================
   const HILLTOP = {
     enabled: true,
     zones: {
-      // 1. Pehle 2 paragraphs ke baad
-      after2Para: {
+      midArticle: {
         id: '7468169',
         src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
-      },
-      // 2. Last 2 paragraphs se pehle
-      beforeLast2Para: {
-        id: '7468185',
-        src: '//quarrelsomebitter.com/b.XMVjsgdsGEld0hYjWVc-/pegmC9duoZXU/ltkgPfTFc/0BNKj/gixVOyDfUXtEN/zNQs2/OhDpEy4-OcQb'
       }
     }
   };
@@ -93,40 +87,35 @@
     return slot;
   };
 
-  const getArticleParagraphs = () => {
-    const content = document.querySelector('main.blog-article-page .blog-article-content');
-    if (!content) return [];
-    return Array.from(content.querySelectorAll('p')).filter((p) => {
-      const text = (p.textContent || '').trim();
-      return text.length > 40;
-    });
-  };
-
   const injectHilltopAds = () => {
     if (!HILLTOP.enabled) return;
     if (document.querySelector('[data-hilltop-hub-ad]')) return;
 
-    const paras = getArticleParagraphs();
-    if (paras.length < 4) return;
+    const content = document.querySelector('main.blog-article-page .blog-article-content');
+    if (!content) return;
 
-    // 1) Pehle 2 para ke baad
-    if (HILLTOP.zones.after2Para && paras[1]) {
-      const slot = makeHilltopSlot('hilltop-after-2para');
-      slot.dataset.hilltopHubAd = HILLTOP.zones.after2Para.id;
-      paras[1].insertAdjacentElement('afterend', slot);
-      loadHilltop(slot.querySelector('.gju-blog-ad-frame'), HILLTOP.zones.after2Para);
-    }
+    // Sirf main content sections (FAQ / sources / tags skip)
+    const sections = Array.from(content.querySelectorAll(':scope > section')).filter((sec) => {
+      if (sec.id === 'faq') return false;
+      if (sec.classList.contains('blog-source-box')) return false;
+      if (sec.getAttribute('aria-label') === 'Tags') return false;
+      return true;
+    });
 
-    // 2) Last 2 para se pehle
-    if (HILLTOP.zones.beforeLast2Para && paras.length >= 4) {
-      const target = paras[paras.length - 2];
-      if (target) {
-        const slot = makeHilltopSlot('hilltop-before-last-2para');
-        slot.dataset.hilltopHubAd = HILLTOP.zones.beforeLast2Para.id;
-        target.insertAdjacentElement('beforebegin', slot);
-        loadHilltop(slot.querySelector('.gju-blog-ad-frame'), HILLTOP.zones.beforeLast2Para);
-      }
-    }
+    if (sections.length < 2) return;
+
+    // Middle section ke baad
+    const midIndex = Math.floor(sections.length / 2) - 1;
+    const anchor = sections[Math.max(0, midIndex)];
+    if (!anchor) return;
+
+    const zone = HILLTOP.zones.midArticle;
+    if (!zone) return;
+
+    const slot = makeHilltopSlot('hilltop-mid-article');
+    slot.dataset.hilltopHubAd = '1';
+    anchor.insertAdjacentElement('afterend', slot);
+    loadHilltop(slot.querySelector('.gju-blog-ad-frame'), zone);
   };
 
   const injectSlots = () => {
