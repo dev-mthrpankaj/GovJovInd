@@ -165,6 +165,8 @@
           completedAt: a.completedAt || a.timestamp,
           bestPercentage: best,
           percentage: number(a.percentage),
+          bestScore: number(a.score, NaN),
+          bestMaxScore: number(a.maxScore, NaN),
           attemptCount: 1,
           rank: null,
           rankedUsers: null,
@@ -174,7 +176,11 @@
         return;
       }
       current.attemptCount += 1;
-      current.bestPercentage = Math.max(current.bestPercentage, best);
+      if (best > current.bestPercentage) {
+        current.bestPercentage = best;
+        current.bestScore = number(a.score, NaN);
+        current.bestMaxScore = number(a.maxScore, NaN);
+      }
       if (when > current._time) {
         current.completedAt = a.completedAt || a.timestamp;
         current.percentage = number(a.percentage);
@@ -256,6 +262,8 @@
         completedAt: row.completedAt,
         bestPercentage: number(row.bestPercentage, row.percentage),
         percentage: number(row.percentage),
+        bestScore: number(row.bestScore, row.score),
+        bestMaxScore: number(row.bestMaxScore, row.maxScore),
         attemptCount: Math.max(1, number(row.attemptCount, 1)),
         rank: row.rank == null ? null : number(row.rank, 0),
         rankedUsers: row.rankedUsers == null ? null : number(row.rankedUsers, 0),
@@ -326,12 +334,13 @@
     }
 
     const bestPct = percent(p.bestPercentage);
-    const correct = Math.round((bestPct / 100) * totalQ);
+    const score = Number.isFinite(Number(p.bestScore)) ? Number(p.bestScore) : Math.round((bestPct / 100) * totalQ);
+    const maxScore = Number.isFinite(Number(p.bestMaxScore)) ? Number(p.bestMaxScore) : totalQ;
     return '<button type="button" class="subject-challenge-btn" data-subject-challenge="1"' +
       ' data-quiz-id="' + esc(item.id) + '"' +
       ' data-quiz-title="' + esc(item.title) + '"' +
-      ' data-score="' + correct + '"' +
-      ' data-total="' + totalQ + '"' +
+      ' data-score="' + score + '"' +
+      ' data-max-score="' + maxScore + '"' +
       ' data-percent="' + bestPct + '">' +
       '<i class="fas fa-trophy" aria-hidden="true"></i><span>Challenge Your Friend</span></button>';
   }
@@ -339,12 +348,12 @@
   async function shareSubjectChallenge(btn) {
     const title = btn.dataset.quizTitle || "this quiz";
     const score = btn.dataset.score;
-    const total = btn.dataset.total;
+    const maxScore = btn.dataset.maxScore;
     const pct = btn.dataset.percent;
     const quizId = btn.dataset.quizId;
     const quizUrl = window.location.origin + "/HTML/quiz-attempt.html?quiz=" + encodeURIComponent(quizId) +
       "&family=topic-wise&subject=" + encodeURIComponent(examSlug);
-    const text = "Hi, I scored " + score + "/" + total + " (" + pct + "%) in \"" + title + "\".\\nCan you beat me?\\nAttempt this Quiz → " + quizUrl;
+    const text = "🏆 Challenge Accepted? 😏\\nMaine \"" + title + "\" mein " + score + "/" + maxScore + " Marks (" + pct + "%) score kiye!\\n\\nAb tumhari baari 😎\\nKya tum mera score beat kar sakte ho? 🔥\\n\\n👉 Take the Quiz & Prove It:\\n" + quizUrl;
 
     if (navigator.share) {
       try {
