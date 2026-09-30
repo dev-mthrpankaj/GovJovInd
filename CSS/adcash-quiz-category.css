@@ -347,22 +347,24 @@ main.rank-cards-page .gju-rank-ad-host .gju-quiz-ad--skyscraper.gju-quiz-ad--rai
 }
 
 
-/* Hilltop typing v3: centered 300x250 creative stage */
+/* Hilltop typing v4: mirror the stable Jobs Hilltop centering */
 .gju-quiz-ad--hilltop{
   display:flex!important;
   flex-direction:column!important;
   align-items:center!important;
   justify-content:flex-start!important;
-  width:min(100%,1180px)!important;
-  margin:18px auto 24px!important;
+  width:100%!important;
+  max-width:1180px!important;
+  margin:28px auto!important;
   padding:0!important;
-  min-height:278px!important;
+  min-height:250px!important;
   border:0!important;
   border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
   overflow:visible!important;
   box-sizing:border-box!important;
+  text-align:center!important;
 }
 
 .gju-quiz-ad--hilltop .gju-quiz-ad-label{
@@ -393,14 +395,12 @@ main.rank-cards-page .gju-rank-ad-host .gju-quiz-ad--skyscraper.gju-quiz-ad--rai
 .gju-quiz-ad--hilltop .gju-quiz-ad-frame{
   position:relative!important;
   display:flex!important;
-  flex:0 0 250px!important;
-  align-items:flex-start!important;
+  align-items:center!important;
   justify-content:center!important;
-  width:300px!important;
-  max-width:calc(100vw - 32px)!important;
-  height:250px!important;
-  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
   min-height:250px!important;
+  height:auto!important;
   margin:0 auto!important;
   padding:0!important;
   border:0!important;
@@ -414,18 +414,13 @@ main.rank-cards-page .gju-rank-ad-host .gju-quiz-ad--skyscraper.gju-quiz-ad--rai
 .gju-quiz-ad--hilltop .gju-quiz-ad-frame > *{
   position:static!important;
   inset:auto!important;
-  top:auto!important;
-  right:auto!important;
-  bottom:auto!important;
-  left:auto!important;
   float:none!important;
   transform:none!important;
   display:block!important;
-  flex:0 0 auto!important;
-  width:300px!important;
-  max-width:300px!important;
-  height:250px!important;
-  max-height:250px!important;
+  width:auto!important;
+  max-width:100%!important;
+  height:auto!important;
+  max-height:none!important;
   margin:0 auto!important;
   padding:0!important;
 }
@@ -435,36 +430,31 @@ main.rank-cards-page .gju-rank-ad-host .gju-quiz-ad--skyscraper.gju-quiz-ad--rai
 .gju-quiz-ad--hilltop .gju-quiz-ad-frame a,
 .gju-quiz-ad--hilltop .gju-quiz-ad-frame ins,
 .gju-quiz-ad--hilltop .gju-quiz-ad-frame object,
-.gju-quiz-ad--hilltop .gju-quiz-ad-frame embed{
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame embed,
+.gju-quiz-ad--hilltop .gju-quiz-ad-frame > div{
   position:static!important;
   inset:auto!important;
   float:none!important;
   transform:none!important;
   display:block!important;
-  width:300px!important;
-  max-width:300px!important;
-  height:250px!important;
-  max-height:250px!important;
+  width:auto!important;
+  max-width:100%!important;
+  height:auto!important;
+  max-height:none!important;
   margin:0 auto!important;
-  padding:0!important;
 }
 
 @media(max-width:1099px){
   .gju-quiz-ad--hilltop{
     width:100%!important;
-    margin:14px auto 20px!important;
-    min-height:268px!important;
-  }
-
-  .gju-quiz-ad--hilltop .gju-quiz-ad-label{
-    margin-bottom:5px!important;
+    max-width:100%!important;
+    margin:20px auto!important;
+    min-height:250px!important;
+    padding:0!important;
   }
 
   .gju-quiz-ad--hilltop .gju-quiz-ad-frame{
-    width:300px!important;
-    max-width:calc(100vw - 24px)!important;
-    height:250px!important;
     min-height:250px!important;
-    flex-basis:250px!important;
+    width:100%!important;
   }
 }
