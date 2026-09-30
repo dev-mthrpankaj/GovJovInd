@@ -357,7 +357,7 @@
     const quizId = btn.dataset.quizId;
     const quizUrl = window.location.origin + "/HTML/quiz-attempt.html?quiz=" + encodeURIComponent(quizId) +
       "&family=topic-wise&subject=" + encodeURIComponent(examSlug);
-    const text = "🏆 Challenge Accepted? 😏\\nMaine \"" + title + "\" mein " + score + "/" + maxScore + " Marks (" + pct + "%) score kiye!\\n\\nAb tumhari baari 😎\\nKya tum mera score beat kar sakte ho? 🔥\\n\\n👉 Take the Quiz & Prove It:\\n" + quizUrl;
+    const text = "🏆 Challenge Accepted? 😏\nMaine \"" + title + "\" mein " + score + "/" + maxScore + " Marks (" + pct + "%) score kiye!\n\nAb tumhari baari 😎\nKya tum mera score beat kar sakte ho? 🔥\n\n👉 Take the Quiz & Prove It:\n" + quizUrl;
 
     if (navigator.share) {
       try {
