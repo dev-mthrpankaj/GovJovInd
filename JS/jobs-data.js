@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0263-20261001061821-8bee06db",
+        "title": "Assam Rifle Rally Online Form 2026 for 354 Post",
+        "organization": "Assam Rifle",
+        "department": "AR",
+        "category": "Defense",
+        "year": "2026",
+        "qualification": "10+2 Intermediate with Physics, Chemistry and English Exam from Any Recognized Board in India. 10th Matric Exam with ITI Certificate in Related Trade.",
+        "totalPosts": "354",
+        "startDate": "2026-09-28",
+        "lastDate": "2026-10-28",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://www.assamrifles.gov.in/onlineapp/Default.aspx",
+        "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/09/df021abc-bee8-4cb5-b6d7-f727db99bd43.pdf",
+        "detailPage": "../jobs/assam-rifle-rally-2026.html",
+        "updatedAt": "2026-10-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0257-20260924213242-28228881",
         "title": "BTSC Fishery Extension Officer Online Form 2026 for 231 Post",
         "organization": "Bihar Technical Service Commission (BTSC)",
