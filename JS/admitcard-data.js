@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0185-20261001222039-3eb96fe7",
+        "title": "IBPS Clerk XVI Admit Card 2026 for 11403 Post",
+        "organization": "Institute of  Banking Personal Selection (IBPS)",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-10-10",
+        "examEndDate": "2026-10-11",
+        "releaseDate": "2026-10-01",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/csaxvijul26/oecla_sep26/login.php?appid=948c445571d2f4e9f8749da0111eee4b",
+        "detailPage": "../jobs/ibps-clerk-xvi-2026.html",
+        "updatedAt": "2026-10-01",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0184-20260929131255-3ef2892f",
         "title": "Delhi High Court JJA Judicial Assistant Restorer Mains Admit Card 2026",
         "organization": "Delhi High  Court",
@@ -73,7 +93,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-30",
         "examEndDate": "2026-10-01",
         "releaseDate": "2026-09-23",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://sscnr.nic.in/newlook/ADMIT_CARD_OF_HC_MIN_2025/ADMIT_CARD_OF_HC_MIN_2025.html",
         "detailPage": "../jobs/ssc-delhi-police-hc-awo-tpo-exam-2025.html",
