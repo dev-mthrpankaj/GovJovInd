@@ -1213,10 +1213,6 @@
       "signature": "45647d600193c9fa546887a5546b6ad0fe0863689939b5e9b8cd61060259e2e6",
       "lastmod": "2026-08-14"
     },
-    "Job_Details/HTML/2428-NALCO-Non-Executive-Recruitment-2026.html": {
-      "signature": "a237b0467238985597b3e0bd6ce5e90d4d2d1f4c5fbbecc657ac4952b57910c8",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/2429-EDCIL-Various-Posts-Recruitment-2026.html": {
       "signature": "d86b9767b10932ff3c7322b3f155e245c6e01188801da7ec4c8993a42cfbf984",
       "lastmod": "2026-08-27"
@@ -1248,10 +1244,6 @@
     "Job_Details/HTML/2438-DSSSB-Various-Post-Form-1979-2026.html": {
       "signature": "9e347c3602f5b9215c00a6f10c641c06bcc71cd7fb05e79e89604dc94094d447",
       "lastmod": "2026-08-27"
-    },
-    "Job_Details/HTML/2441-UKSSSC-AAO-2026.html": {
-      "signature": "b8aedb2186b0afccdf420171c8e912d054f4999fdd44710587cd7662e730d562",
-      "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/2442-DRDO-RAC-Scientist-2026.html": {
       "signature": "b13832de82336bb5ffd81d2d4cd5006f5ce1678404e3c4c20d22deb82e384927",
@@ -1944,6 +1936,10 @@
     "jobs/mppsc-assistant-town-planner-2026.html": {
       "signature": "0993f726d9b1c9f448384132752492e6f882035602ab01e5c009c5b657cc510d",
       "lastmod": "2026-09-12"
+    },
+    "jobs/nalco-non-executive-2026.html": {
+      "signature": "f28ec3dbac8603ccf81c28858f838d4266f470383319852094723f0b73f48068",
+      "lastmod": "2026-10-02"
     },
     "jobs/nbems-various-post-2026.html": {
       "signature": "dc333951dfb6d48d4fbf071e8d08d6b89fe755cfce1289ec04e8e5729e15aa67",
