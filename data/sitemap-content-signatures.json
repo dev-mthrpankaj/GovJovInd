@@ -1513,10 +1513,6 @@
       "signature": "3f5b3625cde4201708a5a2af7e1609700e7794d04883c25e30d38ffa2ecb28bf",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/RRB-JE-Junior-Engineer-2026.html": {
-      "signature": "e6068f465ad052026f6849a5685de3e125309eb36acc2519a5cd9073efe30c1a",
-      "lastmod": "2026-08-27"
-    },
     "Job_Details/HTML/RRB-Railway-Section-Controller-2026.html": {
       "signature": "38dc58b0add7edaba23364a16b2120ced5e6544802704348563f3a8f11ab2aca",
       "lastmod": "2026-08-12"
@@ -2036,6 +2032,10 @@
     "jobs/rrb-je-junior-engineer-2025.html": {
       "signature": "18af48b5124c4a197080e085990651ecf13765625858b1aed52de977b9ac2b09",
       "lastmod": "2026-09-22"
+    },
+    "jobs/rrb-junior-engineer-2026.html": {
+      "signature": "ef304befaa4e86f69fe80099bea443a9066bb40f6fdbd5aaa90639fa3c07859e",
+      "lastmod": "2026-10-02"
     },
     "jobs/rrb-railway-alp.html": {
       "signature": "a53a9cc7470fac569ec2ca8c7d25cc1f9efa35e4ca2c12398593ad4f58f234f5",
