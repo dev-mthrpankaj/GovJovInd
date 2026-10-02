@@ -4,6 +4,36 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0051",
+        "title": "UKSSSC AAO Online Form 2026 for 90 Post",
+        "organization": "Uttarakhand Subordinate Service Selection Commission",
+        "department": "Agriculture",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Post-wise educational qualification as specified in the official notification.",
+        "totalPosts": "90",
+        "startDate": "2026-06-01",
+        "lastDate": "2026-06-21",
+        "status": "closed",
+        "tags": [
+            "Uttarakhand Subordinate Service Selection Commission Recruitment 2026",
+            "UKSSSC AAO",
+            "Sarkari Naukri",
+            "State Government Jobs",
+            "Govt Jobs 2026"
+        ],
+        "applyLink": "http://ukssscrecruitment.in",
+        "officialNotification": "http://ukssscrecruitment.in/PDF_Documents/Adv_77.pdf",
+        "detailPage": "../jobs/uksssc-aao-2026.html",
+        "updatedAt": "2026-10-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "yes",
+        "qualificationSource": "fallback",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0187-20260817205955-6aa4d836",
         "title": "MPESB Group 3 Sub Engineer Online Form 2026 for 1700 Post Re-Open",
         "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
@@ -5138,36 +5168,6 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "job-sheet-0051",
-        "title": "UKSSSC AAO Online Form 2026 for 90 Post",
-        "organization": "Uttarakhand Subordinate Service Selection Commission",
-        "department": "Agriculture",
-        "category": "State Government",
-        "year": "2026",
-        "qualification": "Post-wise educational qualification as specified in the official notification.",
-        "totalPosts": "90",
-        "startDate": "2026-06-01",
-        "lastDate": "2026-06-21",
-        "status": "closed",
-        "tags": [
-            "Uttarakhand Subordinate Service Selection Commission Recruitment 2026",
-            "UKSSSC AAO",
-            "Sarkari Naukri",
-            "State Government Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "http://ukssscrecruitment.in",
-        "officialNotification": "http://ukssscrecruitment.in/PDF_Documents/Adv_77.pdf",
-        "detailPage": "../Job_Details/HTML/2441-UKSSSC-AAO-2026.html",
-        "updatedAt": "2026-06-03",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "yes",
-        "qualificationSource": "fallback",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
