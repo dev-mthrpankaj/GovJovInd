@@ -356,28 +356,6 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0062-20260907212102-630cb1e7",
-        "title": "RPSC Rajasthan APO Answer Key 2026 for 371 Post",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "RPSC",
-        "category": "State Government",
-        "year": "2026",
-        "examDate": "2026-09-02",
-        "examEndDate": "",
-        "releaseDate": "2026-09-07",
-        "objectionLastDate": "2026-09-15",
-        "status": "objection-closed",
-        "tags": [],
-        "downloadLink": "https://rpsc.rajasthan.gov.in/Static/AnswerKeys/2A391A07-19AD-4A3D-8E8F-33C0B79C48E1.pdf",
-        "objectionLink": "",
-        "detailPage": "../jobs/rpsc-apo-2026.html",
-        "updatedAt": "2026-09-07",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "answerkey-sheet-0060-20260902223108-76a1e79b",
         "title": "HTET OMR Sheet 2026 | Teacher Eligibility Test",
         "organization": "Haryana Teacher Eligibility",

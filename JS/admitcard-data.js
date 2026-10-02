@@ -1184,26 +1184,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0123-20260826153734-cab1dee9",
-        "title": "RPSC Rajasthan APO Admit Card 2026 for 371 Post",
-        "organization": "Rajasthan Public Service Commission",
-        "department": "RPSC",
-        "category": "State Government",
-        "year": "2026",
-        "examDate": "2026-09-02",
-        "examEndDate": "",
-        "releaseDate": "2026-08-26",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://recruitment.rajasthan.gov.in/postdetailgetadmitcardservlet",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-08-26",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "admit-sheet-0124-20260826154026-ef32c12d",
         "title": "UPSSSC Stenographer 2023 Skill Test Admit Card 2026 | Advt No 09-Exam/2023",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
