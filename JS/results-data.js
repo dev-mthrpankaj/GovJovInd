@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0166-20261002061140-06554e93",
+        "title": "RRB Railway ALP Assistant Loco Pilot CBT II Result 2026",
+        "organization": "Railway  Recruitment Board (RRB)",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-10-01",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/97789/login.html",
+        "detailPage": "../jobs/rrb-railway-alp.html",
+        "updatedAt": "2026-10-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0164-20260930200737-0a89774b",
         "title": "UPSSSC Platoon Commander, Block Organizer Eligibility Result 2026 for 295 Post",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
