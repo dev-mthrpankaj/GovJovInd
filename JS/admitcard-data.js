@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0186-20261002091558-ff9d0f39",
+        "title": "Railway RRB Technician Grade III DV Admit Card 2026 for 6238 Post",
+        "organization": "Railway Recruitment Board (RRB)",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-10-06",
+        "examEndDate": "",
+        "releaseDate": "2026-06-16",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/98138/login.html",
+        "detailPage": "../jobs/rrb-technician-cen-02-2025.html",
+        "updatedAt": "2026-10-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0185-20261001222039-3eb96fe7",
         "title": "IBPS Clerk XVI Admit Card 2026 for 11403 Post",
         "organization": "Institute of  Banking Personal Selection (IBPS)",

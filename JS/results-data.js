@@ -2587,30 +2587,5 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes",
         "detailPageSource": "fallback",
         "detailPageNeedsReview": "yes"
-    },
-    {
-        "id": "result-sheet-0004",
-        "title": "Railway RRB Technician CEN 02/2025 Grade III Result 2026 for 6238 Post",
-        "organization": "Railway Recuitment Board",
-        "department": "RRB",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-05-30",
-        "status": "released",
-        "tags": [
-            "Railway",
-            "RRB",
-            "Technician",
-            "Grade III",
-            "CEN 02/2025",
-            "Result"
-        ],
-        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98138/login.html",
-        "detailPage": "../Job_Details/HTML/1002-Railway-RRB-Technician-2026.html",
-        "updatedAt": "2026-05-30",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
     }
 ];
