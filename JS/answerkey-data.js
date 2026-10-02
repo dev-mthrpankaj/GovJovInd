@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0078-20261002100916-70acced7",
+        "title": "UPSSSC Assistant Boring Technician Revised Answer Key 2026",
+        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-07-12",
+        "examEndDate": "",
+        "releaseDate": "2026-09-12",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://drive.google.com/file/d/1sVbOjN-Sspl-4-hRlncwByNQF29WSSp4/view",
+        "objectionLink": "",
+        "detailPage": "../jobs/upsssc-assistant-boring-technician-2026.html",
+        "updatedAt": "2026-10-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0076-20260929182426-af8f4e78",
         "title": "UPSSSC Forensic Science Laboratory Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
