@@ -1513,10 +1513,6 @@
       "signature": "3f5b3625cde4201708a5a2af7e1609700e7794d04883c25e30d38ffa2ecb28bf",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/RRB-Railway-Section-Controller-2026.html": {
-      "signature": "38dc58b0add7edaba23364a16b2120ced5e6544802704348563f3a8f11ab2aca",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/RRC-Prayagraj-Apprentices-2026.html": {
       "signature": "e1e3ff8fb60b2ff5fb88bbb04e648e62f5e23f215ca7a383d696bb1cd557330c",
       "lastmod": "2026-08-12"
@@ -2044,6 +2040,10 @@
     "jobs/rrb-railway-paramedical-2026.html": {
       "signature": "448acf6203a8e8410c2a741c1455c0cad33bac494fee054d3aa472b1cc9e169b",
       "lastmod": "2026-09-14"
+    },
+    "jobs/rrb-railway-section-controller-2026.html": {
+      "signature": "acb45b325feae87a370edfb9728b4d69cc972f3f981befa1352dd54265f102c9",
+      "lastmod": "2026-10-02"
     },
     "jobs/rrb-technician-cen-02-2025.html": {
       "signature": "7fe8876e541ec915d7121ef886abc75bbe12163fa3a125fcabc280330099ff0d",
