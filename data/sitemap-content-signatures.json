@@ -53,10 +53,6 @@
       "signature": "ae2c1ce28d79b969bdc8569cd9fdadcfde8fc8f0764437333b2bb12768190e65",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/05-UPSSSC-Main-Exam-Admit-Card-2026.html": {
-      "signature": "13843d660bcb7f3191d556e318a4876f2310abe5573b60e4bd9d3ebce81819f3",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/06-BPSC-Prosecution-Officer-Admit-Card-2026.html": {
       "signature": "0ae08246725799d41975c82ce1e392d314df8cc561117faa8cba53b0ec92e61f",
       "lastmod": "2026-08-12"
@@ -327,10 +323,6 @@
     },
     "AdmitCard_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-City-Intimation-2026.html": {
       "signature": "190cf0d6c1775e0f3c9ea45928665c2ec41f468d18961b2cc727b137199d0c90",
-      "lastmod": "2026-08-12"
-    },
-    "AdmitCard_Details/HTML/UPSSSC-Assistant-Boring-Technician-Mains-Admit-Card-2026.html": {
-      "signature": "da3644f27084899cbc4b81f6f068aa42bb0f5b85b6bd9b5e7c587fa0a7607224",
       "lastmod": "2026-08-12"
     },
     "AdmitCard_Details/HTML/UPSSSC-Lower-PCS-Mains-Admit-Card-2026.html": {
@@ -956,10 +948,6 @@
     "HTML/write-for-us.html": {
       "signature": "8e8e3ef2b28f9836628ffdaab3113e933788df86d6c75638c5b0e43eabb47077",
       "lastmod": "2026-08-31"
-    },
-    "Job_Details/HTML/1004-UPSSSC-Assistant-Boring-Technician-2026.html": {
-      "signature": "9e6acbc1356c8e5f8d74500f1a6c190af9a9acd797d6215f780daf94312cf3e5",
-      "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/1004-UPSSSC-Lekhpal-job-detail.html": {
       "signature": "6cb5a8ecd073a150da4a5c62cf4d360c43f6cd3fda3d7466d31c9367f6fbfec7",
@@ -2264,6 +2252,10 @@
     "jobs/upsc-various-post-2026.html": {
       "signature": "0cd375882cbd353c7c58ad91dfc295309d421ff35a2aec1dfb551e1742bad4b0",
       "lastmod": "2026-09-14"
+    },
+    "jobs/upsssc-assistant-boring-technician-2026.html": {
+      "signature": "0d7e8ea3af92151887bc85d3822bd12ea24068e467e38763046be6a758138512",
+      "lastmod": "2026-10-02"
     },
     "jobs/upsssc-cartographer-advt-no-11-exam-2023.html": {
       "signature": "72f0fd2777331d68a0f24a95f06fccced4921c5bf4ef4419ea341a77f161fc2c",
