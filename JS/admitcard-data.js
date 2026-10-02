@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0187-20261002141655-3f3b9af2",
+        "title": "NALCO Non Executive Admit Card 2026",
+        "organization": "National Aluminium Company Limited",
+        "department": "NALCO",
+        "category": "Public Sector",
+        "year": "2026",
+        "examDate": "2026-07-27",
+        "examEndDate": "",
+        "releaseDate": "2026-07-15",
+        "status": "exam-over",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/nalconeapr26/oecla_jun26/downloadClose.php",
+        "detailPage": "../jobs/nalco-non-executive-2026.html",
+        "updatedAt": "2026-10-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0185-20261001222039-3eb96fe7",
         "title": "IBPS Clerk XVI Admit Card 2026 for 11403 Post",
         "organization": "Institute of  Banking Personal Selection (IBPS)",
