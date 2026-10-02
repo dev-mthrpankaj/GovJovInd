@@ -1,0 +1,74 @@
+# GovJobUpdates
+
+> GovJobUpdates is an independent Indian government-job and competitive-exam information portal. It provides recruitment updates, permanent recruitment lifecycle pages, admit-card updates, answer keys, results, free exam quizzes, typing practice, rank-prediction tools, student guidance and selected document/UP services.
+
+GovJobUpdates is not a government website and is not affiliated with any recruiting authority. Recruitment information should always be verified against the official notification and official recruiting-authority website before an application is submitted.
+
+## Core Job & Recruitment Resources
+
+- [Latest Government Jobs](https://govjobupdates.com/HTML/latest-jobs.html) — Current government recruitment listings covering central and state vacancies, with qualification, dates, status and links to detailed recruitment pages.
+- [Recruitment Pages](https://govjobupdates.com/jobs/) — Canonical recruitment lifecycle area. Where available, a recruitment page is intended to remain useful across notification, application, exam, admit card, answer key, result and later selection stages.
+- [SSC CHSL Recruitment 2026](https://govjobupdates.com/jobs/ssc-chsl-2026.html) — Example of the current canonical `/jobs/` recruitment-page structure.
+- [SSC CGL Recruitment 2026](https://govjobupdates.com/jobs/ssc-cgl-2026.html) — Recruitment lifecycle page for SSC CGL 2026.
+
+## Exam & Recruitment Update Sections
+
+- [Latest Admit Cards](https://govjobupdates.com/HTML/admitcard.html) — Admit-card and examination-entry updates.
+- [Latest Answer Keys](https://govjobupdates.com/HTML/answer-key.html) — Answer-key and objection-related updates.
+- [Latest Results](https://govjobupdates.com/HTML/results.html) — Examination and recruitment result updates.
+- [Free Government Exam Quizzes](https://govjobupdates.com/HTML/quiz.html) — Free practice quizzes for SSC, Railway, Police, Banking and topic-wise subjects.
+- [Rank Predictor](https://govjobupdates.com/HTML/rank-predictor.html) — Exam rank/merit prediction tools available on GovJobUpdates.
+
+## Typing & Skill Practice
+
+- [Free Typing Tests](https://govjobupdates.com/typing-test/) — Free Hindi and English typing practice, including exam-focused practice for SSC, Railway, UP government recruitment and other typing-based examinations.
+- [English Typing Test](https://govjobupdates.com/typing-test/english-typing-test.html) — General English typing practice.
+- [Hindi Typing Test](https://govjobupdates.com/typing-test/hindi-typing-test.html) — General Hindi typing practice.
+
+## Student Resources
+
+- [Student Hub](https://govjobupdates.com/HTML/student-hub.html) — Evergreen exam-preparation and student-guidance content covering government exams, eligibility, documents, preparation and related topics.
+- [Government Exams 2026 Calendar & Eligibility Guide](https://govjobupdates.com/HTML/student-hub/government-exams-2026-complete-calendar-vacancy-eligibility-guide.html) — Guide covering major government-exam categories, vacancies, eligibility and preparation planning.
+- [Documents](https://govjobupdates.com/HTML/documents.html) — Document-related tools and resources for students and applicants.
+- [UP Services](https://govjobupdates.com/HTML/up-certificate-services.html) — Selected UP certificate/document assistance services.
+
+## Main Topic Coverage
+
+GovJobUpdates covers government recruitment and exam information across SSC, Railway/RRB, UPSC, Police, Banking, Teaching, Defence, PSU, State Government, technical and administrative recruitment. Current recruitment availability changes over time; the Latest Government Jobs page and individual recruitment pages should be used for current status.
+
+## Information Model
+
+Recruitment pages may contain:
+- Recruitment notification and vacancy information
+- Eligibility and educational qualification
+- Age limit and applicable relaxations
+- Application dates and fees
+- Selection process
+- Exam dates and city/admit-card information when released
+- Answer-key and objection information when released
+- Result, cutoff, interview, document-verification or final-merit updates when released
+- Official notification and official application links
+- Related preparation resources where relevant
+
+## Official-Source Policy
+
+GovJobUpdates is an information and preparation platform, not the recruiting authority. Official notifications, corrigenda and recruiting-authority websites are the final sources for eligibility, vacancy counts, dates, fees, reservation rules, application acceptance and selection decisions.
+
+## Site Structure
+
+- Jobs: https://govjobupdates.com/jobs/
+- Admit Cards: https://govjobupdates.com/HTML/admitcard.html
+- Answer Keys: https://govjobupdates.com/HTML/answer-key.html
+- Results: https://govjobupdates.com/HTML/results.html
+- Quizzes: https://govjobupdates.com/HTML/quiz.html
+- Rank Predictor: https://govjobupdates.com/HTML/rank-predictor.html
+- Typing Tests: https://govjobupdates.com/typing-test/
+- Student Hub: https://govjobupdates.com/HTML/student-hub.html
+- Documents: https://govjobupdates.com/HTML/documents.html
+- UP Services: https://govjobupdates.com/HTML/up-certificate-services.html
+- About: https://govjobupdates.com/HTML/about-us.html
+- Contact: https://govjobupdates.com/HTML/contact.html
+
+## Sitemap
+
+- https://govjobupdates.com/sitemap.xml
