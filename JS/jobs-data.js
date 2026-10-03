@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0267-20261003194220-1a1e8df0",
+        "title": "UPSSSC Sports Directorate Online Form 2026 for 108 Post",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "UPSSSC PET 2025 Score Card Knowledge Related to Post More Details Read the Notification.",
+        "totalPosts": "108",
+        "startDate": "2026-10-14",
+        "lastDate": "2026-11-04",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://www.sarkariresult.com/wp-content/uploads/2026/09/ViewPdf.pdf",
+        "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/09/ViewPdf.pdf",
+        "detailPage": "../jobs/upsssc-sports-directorate-2026.html",
+        "updatedAt": "2026-10-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0051",
         "title": "UKSSSC AAO Online Form 2026 for 90 Post",
         "organization": "Uttarakhand Subordinate Service Selection Commission",

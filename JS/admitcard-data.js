@@ -944,26 +944,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0128-20260902161604-056cd6e2",
-        "title": "UP Police Home Guard PET Exam Postponed 2026",
-        "organization": "Uttar Pradesh Police Recruitment & Promotion Board UPPRPB",
-        "department": "UPPRPB",
-        "category": "State Government",
-        "year": "2026",
-        "examDate": "2026-09-14",
-        "examEndDate": "2026-09-30",
-        "releaseDate": "2026-09-08",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://www.hgupexam2025.com/hg2025petadmitcard/loginpage.aspx",
-        "detailPage": "../jobs/up-police-home-guard-2025.html",
-        "updatedAt": "2026-09-10",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0145-20260910135227-c2c8174f",
         "title": "MP Police ASI and Head Constable Computer PET Admit Card 2026",
         "organization": "Madhya Pradesh Employee Selection Board",

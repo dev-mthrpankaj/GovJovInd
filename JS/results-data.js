@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0168-20261003202353-d03e5d97",
+        "title": "UP Police Home Guard Final Result 2026",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-10-03",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.hgupexam2025.com/hg25finalresults/loginpage.aspx",
+        "detailPage": "../jobs/up-police-home-guard-2025.html",
+        "updatedAt": "2026-10-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0166-20261002061140-06554e93",
         "title": "RRB Railway ALP Assistant Loco Pilot CBT II Result 2026",
         "organization": "Railway  Recruitment Board (RRB)",
