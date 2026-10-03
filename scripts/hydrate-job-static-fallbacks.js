@@ -6,6 +6,8 @@
  * in the browser; this simply gives crawlers and no-JS clients a useful
  * fallback.
  *
+ * Pages without #jobData (OTR guides, static helpers, etc.) are safely skipped.
+ *
  * Usage:
  *   node scripts/hydrate-job-static-fallbacks.js          # preview changes
  *   node scripts/hydrate-job-static-fallbacks.js --write  # update files
@@ -28,14 +30,19 @@ function escapeHtml(value) {
 
 function updateElement(html, id, value) {
   if (value === undefined || value === null || value === '') return html;
-  const expression = new RegExp(`(<([a-z0-9]+)\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\S]*?(<\\/\\2>)`, 'i');
+  const expression = new RegExp(
+    `(<([a-z0-9]+)\\b[^>]*\\bid=["']${id}["'][^>]*>)[\\s\\S]*?(<\\/\\2>)`,
+    'i'
+  );
   if (!expression.test(html)) return html;
   return html.replace(expression, `$1${escapeHtml(value)}$3`);
 }
 
 function readJobData(html, file) {
-  const match = html.match(/<script\b[^>]*\bid=["']jobData["'][^>]*>([\s\S]*?)<\/script>/i);
-  if (!match) throw new Error(`${file}: #jobData was not found`);
+  const match = html.match(
+    /<script\b[^>]*\bid=["']jobData["'][^>]*>([\s\S]*?)<\/script>/i
+  );
+  if (!match) return null; // no jobData → skip (not an error)
   try {
     return JSON.parse(match[1].trim());
   } catch (error) {
@@ -43,7 +50,11 @@ function readJobData(html, file) {
   }
 }
 
-const files = fs.readdirSync(jobsDir).filter(file => file.endsWith('.html')).sort();
+const files = fs
+  .readdirSync(jobsDir)
+  .filter((file) => file.endsWith('.html'))
+  .sort();
+
 let changed = 0;
 let skipped = 0;
 const errors = [];
@@ -51,8 +62,16 @@ const errors = [];
 for (const file of files) {
   const filePath = path.join(jobsDir, file);
   const original = fs.readFileSync(filePath, 'utf8');
+
   try {
     const job = readJobData(original, file);
+
+    // Non-lifecycle pages (OTR guides, static helpers, etc.)
+    if (!job) {
+      skipped += 1;
+      continue;
+    }
+
     let html = original;
     html = updateElement(html, 'jobOrganization', job.organization);
     html = updateElement(html, 'jobTitle', job.title);
@@ -64,6 +83,7 @@ for (const file of files) {
       skipped += 1;
       continue;
     }
+
     changed += 1;
     console.log(`${write ? 'Updated' : 'Would update'} jobs/${file}`);
     if (write) fs.writeFileSync(filePath, html, 'utf8');
@@ -72,7 +92,10 @@ for (const file of files) {
   }
 }
 
-console.log(`\n${write ? 'Updated' : 'Preview'}: ${changed} changed, ${skipped} already current, ${errors.length} errors.`);
+console.log(
+  `\n${write ? 'Updated' : 'Preview'}: ${changed} changed, ${skipped} already current / skipped, ${errors.length} errors.`
+);
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;
