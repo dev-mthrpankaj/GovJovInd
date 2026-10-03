@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0079-20261003090918-39533cf7",
+        "title": "NBEMS Group A, B, C Various Post Answer Key 2026",
+        "organization": "National Board of Examination (NBE)",
+        "department": "NBE",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-05",
+        "examEndDate": "2026-09-06",
+        "releaseDate": "2026-10-02",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://cdn3.digialm.com/EForms/configuredHtml/1815/101418/login.html",
+        "objectionLink": "https://cdn3.digialm.com/EForms/configuredHtml/1815/101418/login.html",
+        "detailPage": "../jobs/nbems-various-post-2026.html",
+        "updatedAt": "2026-10-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0078-20261002100916-70acced7",
         "title": "UPSSSC Assistant Boring Technician Revised Answer Key 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
