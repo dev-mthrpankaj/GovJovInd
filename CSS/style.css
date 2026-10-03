@@ -2021,6 +2021,72 @@ main {
   color: inherit;
   text-decoration: none;
 }
+/* ===== Color variants for Fresh Updates ===== */
+
+/* Summary cards */
+.home-page .home-update-summary-card--blue i {
+  background: #eef6ff;
+  color: var(--home-blue);
+}
+.home-page .home-update-summary-card--saffron i {
+  background: #fff4e8;
+  color: var(--home-saffron);
+}
+.home-page .home-update-summary-card--green i {
+  background: #eaf8ef;
+  color: var(--home-green);
+}
+.home-page .home-update-summary-card--navy i {
+  background: #eef0f6;
+  color: #1e3a5f;
+}
+
+.home-page .home-update-summary-card--saffron {
+  border-color: #ffe0bf;
+}
+.home-page .home-update-summary-card--green {
+  border-color: #c8ebd4;
+}
+.home-page .home-update-summary-card--navy {
+  border-color: #d0d7e6;
+}
+
+/* List items */
+.home-page .home-update-item--blue {
+  border-left-color: var(--home-blue);
+}
+.home-page .home-update-item--saffron {
+  border-left-color: var(--home-saffron);
+}
+.home-page .home-update-item--green {
+  border-left-color: var(--home-green);
+}
+.home-page .home-update-item--navy {
+  border-left-color: #1e3a5f;
+}
+
+.home-page .home-update-item--saffron .home-update-icon {
+  background: #fff4e8;
+  color: var(--home-saffron);
+}
+.home-page .home-update-item--green .home-update-icon {
+  background: #eaf8ef;
+  color: var(--home-green);
+}
+.home-page .home-update-item--navy .home-update-icon {
+  background: #eef0f6;
+  color: #1e3a5f;
+}
+
+.home-page .home-update-item--saffron .home-update-type {
+  color: var(--home-saffron);
+}
+.home-page .home-update-item--green .home-update-type {
+  color: var(--home-green);
+}
+.home-page .home-update-item--navy .home-update-type {
+  color: #1e3a5f;
+}
 
 .home-page .home-update-icon {
   display: grid;
