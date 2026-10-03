@@ -589,10 +589,9 @@
 .blog-article-cover img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: none;
-  object-fit: contain;
-  background: #f8fafc;
+  aspect-ratio: 21 / 8;
+  max-height: 430px;
+  object-fit: cover;
 }
 
 .blog-article-cover figcaption {
@@ -1664,8 +1663,7 @@
   }
 
   .blog-article-cover img {
-    aspect-ratio: auto;
-    object-fit: contain;
+    aspect-ratio: 16 / 9;
   }
 
   .article-key-takeaways {
