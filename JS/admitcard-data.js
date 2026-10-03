@@ -273,7 +273,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-03",
         "examEndDate": "",
         "releaseDate": "2026-09-27",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/bobjul26/oecla_sep26/login.php?appid=c6391b5560ed30fe3af4a2c4bc3956e3",
         "detailPage": "../jobs/bob-local-bank-officer-2026.html",
