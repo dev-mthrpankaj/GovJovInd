@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0268-20261004185327-77c6b22b",
+        "title": "North Western Railway RRC NWR Apprentices Online Form 2026 for 2008 Post",
+        "organization": "North Western Railway",
+        "department": "NWR",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Matriculation Passed from any Recognized Board in India ITI  in Related Trade from any Recognized Board/",
+        "totalPosts": "2008",
+        "startDate": "2026-10-07",
+        "lastDate": "2026-11-06",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://www.rrcjaipur.in/",
+        "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/10/1005_12061494.pdf",
+        "detailPage": "../jobs/north-western-railway-rrc-nwr-apprentices.html",
+        "updatedAt": "2026-10-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0267-20261003194220-1a1e8df0",
         "title": "UPSSSC Sports Directorate Online Form 2026 for 108 Post",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
