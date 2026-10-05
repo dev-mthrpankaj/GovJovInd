@@ -2986,36 +2986,6 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0093-1",
-        "title": "IBPS PO Probationary Officer XVI Online Form 2026 for 7365 Post",
-        "organization": "Institute of Banking Personal Selection",
-        "department": "IBPS",
-        "category": "Banking",
-        "year": "2026",
-        "qualification": "Bachelor Degree in Any Stream in Any Recognized Board in India For more details Read Notification",
-        "totalPosts": "6715",
-        "startDate": "2026-07-01",
-        "lastDate": "2026-07-21",
-        "status": "closed",
-        "tags": [
-            "Institute of Banking Personal Selection Recruitment 2026",
-            "IBPS PO Probationary Officer XVI",
-            "Sarkari Naukri",
-            "Banking Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "https://ibpsreg.ibps.in/crppoxvijun26/",
-        "officialNotification": "https://www.ibps.in/wp-content/uploads/Detailed-Notification_CRP-PO-XVI_Final_V1_30.06.2026.pdf",
-        "detailPage": "../jobs/ibps-clerk-xvi-2026.html",
-        "updatedAt": "2026-07-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "no",
-        "qualificationSource": "qualification",
-        "detailPageSource": "resolved",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "job-sheet-0094-112",
         "title": "IBPS SO Specialist Officers XVI Online Form 2026 for 1035 Post",
         "organization": "Institute of Banking Personal Selection",
@@ -4042,7 +4012,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0091",
+        "id": "job-sheet-0090",
         "title": "ICSIL DEO, MTS, Driver Online Form 2026",
         "organization": "Intelligent Communication Systems India Ltd.",
         "department": "ICSIL",
@@ -4096,7 +4066,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0089",
+        "id": "job-sheet-0088",
         "title": "Delhi High Court HJS Online Form 2026",
         "organization": "High Court of Delhi",
         "department": "High Court",
