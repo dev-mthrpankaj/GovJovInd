@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0080-20261005183606-0606cf49",
+        "title": "UTET Answer Key 2026 | Uttarakhand Teacher Eligibility Test",
+        "organization": "Uttarakhand Teacher Eligibility Test",
+        "department": "UTET",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-09-29",
+        "examEndDate": "",
+        "releaseDate": "2026-10-05",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://ukutet.com/",
+        "objectionLink": "",
+        "detailPage": "../jobs/utet-2026.html",
+        "updatedAt": "2026-10-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0079-20261003090918-39533cf7",
         "title": "NBEMS Group A, B, C Various Post Answer Key 2026",
         "organization": "National Board of Examination (NBE)",
@@ -568,12 +590,12 @@ window.GovJobUpdatesAnswerKeys = [
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101492/login.html",
         "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101492/login.html",
-        "detailPage": "../AnswerKey_Details/HTML/Railway-RRB-Isolated-Categories-Answer-Key-2026.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-08-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0047-20260730134452-d72ed530",

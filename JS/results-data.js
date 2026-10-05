@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0169-20261005195328-b41bf68e",
+        "title": "Railway RRB Isolated Categories Result 2026 for 312 Post",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-10-05",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/05180818/Chief-law-assistant.pdf",
+        "detailPage": "../jobs/railway-rrb-isolated-categories-cen08-2025.html",
+        "updatedAt": "2026-10-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0168-20261003202353-d03e5d97",
         "title": "UP Police Home Guard Final Result 2026",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
