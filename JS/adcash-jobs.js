@@ -1,31 +1,15 @@
 (() => {
   'use strict';
 
-  // ====================== ADSTERRA CONFIG (Existing - No Change) ======================
+  // ====================== ADSTERRA CONFIG (No Change) ======================
   const ADSTERRA = {
     enabled: true,
     invokeHost: 'www.highperformanceformat.com',
     units: {
-      leaderboard: {
-        key: '83b45963c9b5e297e2716b97e5e7f1cd',
-        width: 728,
-        height: 90
-      },
-      skyscraper: {
-        key: 'b4cefd61066cf540b9a4543442f3bcb8',
-        width: 160,
-        height: 600
-      },
-      rectangle: {
-        key: '87119e54e06ec212fda2497c6e91b073',
-        width: 300,
-        height: 250
-      },
-      mobileStrip: {
-        key: 'cdd822299805deaaddd42d620ded189a',
-        width: 320,
-        height: 50
-      }
+      leaderboard: { key: '83b45963c9b5e297e2716b97e5e7f1cd', width: 728, height: 90 },
+      skyscraper: { key: 'b4cefd61066cf540b9a4543442f3bcb8', width: 160, height: 600 },
+      rectangle: { key: '87119e54e06ec212fda2497c6e91b073', width: 300, height: 250 },
+      mobileStrip: { key: 'cdd822299805deaaddd42d620ded189a', width: 320, height: 50 }
     },
     emptyHideMs: 4000,
     emptyRecheckMs: [7000, 11000],
@@ -37,24 +21,20 @@
   const MONDIAD = {
     enabled: true,
     banners: {
-      // 1. Vacancy Details ke just upar
       beforeVacancy: 'ac17bf39-e9f2-44b3-97fe-7db6025f4264',
-      // 2. Eligibility Criteria aur Application Fee ke beech
       betweenEligibilityFee: '256be70b-6a65-405b-9266-889c7d9a4f09'
     },
-    // Dynamic sirf jobs pe
     dynamic: {
       enabled: true,
       id: 'e044e301-ed91-4417-b5f4-1ca1360fd2db'
     }
   };
 
-  // ====================== COMMON ======================
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
   if (!/\/jobs\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
 
-  // ---------- Helper: Create Ad Slot ----------
+  // ---------- Helper ----------
   const makeSlot = (slotKey, network = 'adsterra') => {
     const wrap = document.createElement('aside');
     wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--${network}`;
@@ -70,31 +50,16 @@
     return wrap;
   };
 
-  // ====================== MONDIAD INJECTION ======================
-  const injectMondiadBanners = () => {
-    if (!MONDIAD.enabled) return;
-
-    // 1. Vacancy Details ke just upar
-    const vacancySection = document.querySelector('#vacancy-details');
-    if (vacancySection && MONDIAD.banners.beforeVacancy) {
-      const slot = makeSlot('mondiad-before-vacancy', 'mondiad');
-      vacancySection.insertAdjacentElement('beforebegin', slot);
-      const frame = slot.querySelector('.gjd-ad-frame');
-      frame.innerHTML = `<div data-mndbanid="${MONDIAD.banners.beforeVacancy}"></div>`;
-    }
-
-    // 2. Eligibility Criteria aur Application Fee ke beech
-    const eligibilitySection = document.querySelector('#eligibility');
-    const feeSection = document.querySelector('#application-fee');
-
-    if (eligibilitySection && feeSection && MONDIAD.banners.betweenEligibilityFee) {
-      const slot = makeSlot('mondiad-between-elig-fee', 'mondiad');
-      eligibilitySection.insertAdjacentElement('afterend', slot);
-      const frame = slot.querySelector('.gjd-ad-frame');
-      frame.innerHTML = `<div data-mndbanid="${MONDIAD.banners.betweenEligibilityFee}"></div>`;
-    }
+  // Load Mondiad banner.js if not already present
+  const ensureMondiadBannerScript = () => {
+    if (document.querySelector('script[src*="ss.mrmnd.com/banner.js"]')) return;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://ss.mrmnd.com/banner.js';
+    document.head.appendChild(script);
   };
 
+  // Load Dynamic
   const loadMondiadDynamic = () => {
     if (!MONDIAD.dynamic?.enabled || !MONDIAD.dynamic.id) return;
     if (document.querySelector('script[src*="dynamic.js"][data-mnddynid]')) return;
@@ -106,14 +71,36 @@
     document.head.appendChild(script);
   };
 
-  // ====================== ADSTERRA (Existing Logic - unchanged) ======================
+  // Inject Mondiad Banners
+  const injectMondiadBanners = () => {
+    if (!MONDIAD.enabled) return;
+
+    // 1. Before Vacancy Details
+    const vacancySection = document.querySelector('#vacancy-details');
+    if (vacancySection && MONDIAD.banners.beforeVacancy) {
+      const slot = makeSlot('mondiad-before-vacancy', 'mondiad');
+      vacancySection.insertAdjacentElement('beforebegin', slot);
+      slot.querySelector('.gjd-ad-frame').innerHTML = 
+        `<div data-mndbanid="${MONDIAD.banners.beforeVacancy}"></div>`;
+    }
+
+    // 2. Between Eligibility & Fee
+    const eligibilitySection = document.querySelector('#eligibility');
+    if (eligibilitySection && MONDIAD.banners.betweenEligibilityFee) {
+      const slot = makeSlot('mondiad-between-elig-fee', 'mondiad');
+      eligibilitySection.insertAdjacentElement('afterend', slot);
+      slot.querySelector('.gjd-ad-frame').innerHTML = 
+        `<div data-mndbanid="${MONDIAD.banners.betweenEligibilityFee}"></div>`;
+    }
+  };
+
+  // ====================== ADSTERRA (unchanged) ======================
   const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
   const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
   const isMobile = () => !isDesktopLeader();
 
   const injectAdsterraSlots = () => {
     if (!ADSTERRA.enabled) return;
-
     const units = ADSTERRA.units || {};
     const updateStrip = document.querySelector('.gjd-page .gjd-update-strip');
     const links = document.querySelector('.gjd-page #important-links');
@@ -160,18 +147,9 @@
   };
 
   const loadBannerInto = (frame, unit) => new Promise((resolve) => {
-    if (!frame || !unit?.key) {
-      resolve(false);
-      return;
-    }
+    if (!frame || !unit?.key) { resolve(false); return; }
     frame.innerHTML = '';
-    const opts = {
-      key: unit.key,
-      format: 'iframe',
-      height: unit.height,
-      width: unit.width,
-      params: {}
-    };
+    const opts = { key: unit.key, format: 'iframe', height: unit.height, width: unit.width, params: {} };
     window.atOptions = opts;
 
     const conf = document.createElement('script');
@@ -189,7 +167,7 @@
     frame.appendChild(script);
   });
 
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
   const fireAdsterraBanners = async () => {
     if (!ADSTERRA.enabled) return;
@@ -213,8 +191,9 @@
 
   // ====================== BOOT ======================
   const boot = async () => {
+    ensureMondiadBannerScript();   // ← yeh important hai
     injectMondiadBanners();
-    loadMondiadDynamic();          // Dynamic sirf jobs pe
+    loadMondiadDynamic();
     injectAdsterraSlots();
     await fireAdsterraBanners();
   };
