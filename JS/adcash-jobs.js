@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  // ====================== ADSTERRA CONFIG (Existing) ======================
+  // ====================== ADSTERRA CONFIG (Existing - No Change) ======================
   const ADSTERRA = {
     enabled: true,
     invokeHost: 'www.highperformanceformat.com',
@@ -33,20 +33,19 @@
     bannerGapMs: 400
   };
 
-  // ====================== HILLTOPADS CONFIG (Corrected - Only 2 ads) ======================
-  const HILLTOP = {
+  // ====================== MONDIAD CONFIG ======================
+  const MONDIAD = {
     enabled: true,
-    zones: {
+    banners: {
       // 1. Vacancy Details ke just upar
-      beforeVacancy: {
-        id: '7468169',
-        src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
-      },
+      beforeVacancy: 'ac17bf39-e9f2-44b3-97fe-7db6025f4264',
       // 2. Eligibility Criteria aur Application Fee ke beech
-      betweenEligibilityFee: {
-        id: '7468185',
-        src: '//quarrelsomebitter.com/b.XMVjsgdsGEld0hYjWVc-/pegmC9duoZXU/ltkgPfTFc/0BNKj/gixVOyDfUXtEN/zNQs2/OhDpEy4-OcQb'
-      }
+      betweenEligibilityFee: '256be70b-6a65-405b-9266-889c7d9a4f09'
+    },
+    // Dynamic sirf jobs pe
+    dynamic: {
+      enabled: true,
+      id: 'e044e301-ed91-4417-b5f4-1ca1360fd2db'
     }
   };
 
@@ -71,38 +70,40 @@
     return wrap;
   };
 
-  // ====================== HILLTOPADS INJECTION (Corrected) ======================
-  const injectHilltopAds = () => {
-    if (!HILLTOP.enabled) return;
+  // ====================== MONDIAD INJECTION ======================
+  const injectMondiadBanners = () => {
+    if (!MONDIAD.enabled) return;
 
     // 1. Vacancy Details ke just upar
     const vacancySection = document.querySelector('#vacancy-details');
-    if (vacancySection && HILLTOP.zones.beforeVacancy) {
-      const slot = makeSlot('hilltop-before-vacancy', 'hilltop');
+    if (vacancySection && MONDIAD.banners.beforeVacancy) {
+      const slot = makeSlot('mondiad-before-vacancy', 'mondiad');
       vacancySection.insertAdjacentElement('beforebegin', slot);
-      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.beforeVacancy);
+      const frame = slot.querySelector('.gjd-ad-frame');
+      frame.innerHTML = `<div data-mndbanid="${MONDIAD.banners.beforeVacancy}"></div>`;
     }
 
-    // 2. Eligibility Criteria aur Application Fee ke beech (Sahi position)
+    // 2. Eligibility Criteria aur Application Fee ke beech
     const eligibilitySection = document.querySelector('#eligibility');
     const feeSection = document.querySelector('#application-fee');
 
-    if (eligibilitySection && feeSection && HILLTOP.zones.betweenEligibilityFee) {
-      const slot = makeSlot('hilltop-between-elig-fee', 'hilltop');
-      // Eligibility ke baad insert karo
+    if (eligibilitySection && feeSection && MONDIAD.banners.betweenEligibilityFee) {
+      const slot = makeSlot('mondiad-between-elig-fee', 'mondiad');
       eligibilitySection.insertAdjacentElement('afterend', slot);
-      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.betweenEligibilityFee);
+      const frame = slot.querySelector('.gjd-ad-frame');
+      frame.innerHTML = `<div data-mndbanid="${MONDIAD.banners.betweenEligibilityFee}"></div>`;
     }
   };
 
-  const loadHilltop = (frame, zone) => {
-    if (!frame || !zone?.src) return;
+  const loadMondiadDynamic = () => {
+    if (!MONDIAD.dynamic?.enabled || !MONDIAD.dynamic.id) return;
+    if (document.querySelector('script[src*="dynamic.js"][data-mnddynid]')) return;
 
     const script = document.createElement('script');
     script.async = true;
-    script.referrerPolicy = 'no-referrer-when-downgrade';
-    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
-    frame.appendChild(script);
+    script.src = 'https://ss.mrmnd.com/dynamic.js';
+    script.setAttribute('data-mnddynid', MONDIAD.dynamic.id);
+    document.head.appendChild(script);
   };
 
   // ====================== ADSTERRA (Existing Logic - unchanged) ======================
@@ -212,7 +213,8 @@
 
   // ====================== BOOT ======================
   const boot = async () => {
-    injectHilltopAds();
+    injectMondiadBanners();
+    loadMondiadDynamic();          // Dynamic sirf jobs pe
     injectAdsterraSlots();
     await fireAdsterraBanners();
   };
