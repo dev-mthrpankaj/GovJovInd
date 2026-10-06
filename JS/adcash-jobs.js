@@ -17,7 +17,6 @@
   // ====================== EXOCLICK ======================
   const EXOCLICK = {
     enabled: true,
-    // Common script (sirf ek baar load hoga)
     providerScript: 'https://a.magsrv.com/ad-provider.js',
     zones: {
       beforeVacancy: '6048598',          // Jobs-300x250-1
@@ -25,12 +24,12 @@
     }
   };
 
-  // Only jobs pages
+  // Only on /jobs/ pages
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
   if (!/\/jobs\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
 
-  // ---------- Helper: Create Ad Slot ----------
+  // ---------- Helper ----------
   const makeSlot = (slotKey, network = 'adsterra') => {
     const wrap = document.createElement('aside');
     wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--${network}`;
@@ -49,13 +48,14 @@
     return wrap;
   };
 
-  // ---------- Load ExoClick Provider Script (only once) ----------
+  // ---------- Force Load ExoClick Provider ----------
   const loadExoProvider = () => {
     return new Promise((resolve) => {
       if (document.querySelector('script[src*="a.magsrv.com/ad-provider.js"]')) {
         resolve(true);
         return;
       }
+
       const script = document.createElement('script');
       script.async = true;
       script.type = 'application/javascript';
@@ -66,11 +66,15 @@
     });
   };
 
-  // ---------- Inject ExoClick Banners ----------
-  const injectExoClickBanners = async () => {
+  // ---------- Inject ExoClick 300x250 ----------
+  const injectExoClick = async () => {
     if (!EXOCLICK.enabled) return;
 
+    // Force load provider
     await loadExoProvider();
+
+    // Wait for provider to be ready
+    await new Promise(r => setTimeout(r, 1200));
 
     // 1. Before Vacancy Details
     const vacancy = document.querySelector('#vacancy-details');
@@ -80,13 +84,11 @@
 
       const frame = slot.querySelector('.gjd-ad-frame');
       if (frame) {
+        frame.innerHTML = '';
         const ins = document.createElement('ins');
         ins.className = 'eas6a97888e2';
         ins.setAttribute('data-zoneid', EXOCLICK.zones.beforeVacancy);
         frame.appendChild(ins);
-
-        // Serve the ad
-        (window.AdProvider = window.AdProvider || []).push({"serve": {}});
       }
     }
 
@@ -98,14 +100,18 @@
 
       const frame = slot.querySelector('.gjd-ad-frame');
       if (frame) {
+        frame.innerHTML = '';
         const ins = document.createElement('ins');
         ins.className = 'eas6a97888e2';
         ins.setAttribute('data-zoneid', EXOCLICK.zones.betweenEligibilityFee);
         frame.appendChild(ins);
-
-        (window.AdProvider = window.AdProvider || []).push({"serve": {}});
       }
     }
+
+    // Serve all ExoClick ads
+    try {
+      (window.AdProvider = window.AdProvider || []).push({"serve": {}});
+    } catch (e) {}
   };
 
   // ====================== ADSTERRA ======================
@@ -131,10 +137,6 @@
       if (units.rectangle?.key) {
         const slot = makeSlot('mobile-top');
         slot.classList.add('gjd-ad--mobile-only', 'gjd-ad--rectangle');
-        updateStrip.insertAdjacentElement('afterend', slot);
-      } else if (units.mobileStrip?.key) {
-        const slot = makeSlot('mobile-strip');
-        slot.classList.add('gjd-ad--mobile-only');
         updateStrip.insertAdjacentElement('afterend', slot);
       }
     }
@@ -208,11 +210,11 @@
   // ====================== BOOT ======================
   const boot = async () => {
     try {
-      await injectExoClickBanners();
+      await injectExoClick();
       injectAdsterraSlots();
       await fireAdsterraBanners();
     } catch (err) {
-      console.warn('[GovJobUpdates] Ad boot error:', err);
+      console.warn('[Ads] Boot error:', err);
     }
   };
 
