@@ -33,77 +33,57 @@
     bannerGapMs: 400
   };
 
-  // ====================== HILLTOPADS CONFIG (Corrected - Only 2 ads) ======================
-  const HILLTOP = {
-    enabled: true,
-    zones: {
-      // 1. Vacancy Details ke just upar
-      beforeVacancy: {
-        id: '7468169',
-        src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
-      },
-      // 2. Eligibility Criteria aur Application Fee ke beech
-      betweenEligibilityFee: {
-        id: '7468185',
-        src: '//quarrelsomebitter.com/b.XMVjsgdsGEld0hYjWVc-/pegmC9duoZXU/ltkgPfTFc/0BNKj/gixVOyDfUXtEN/zNQs2/OhDpEy4-OcQb'
-      }
+ // ====================== MYBID CONFIG ======================
+const MYBID = {
+  enabled: true,
+  adCodeId: '467256',
+  beforeVacancy: '2029429',
+  betweenEligibilityFee: '2029430'
+};
+
+const injectMyBidAds = () => {
+  if (!MYBID.enabled) return;
+
+  const placements = [
+    {
+      target: '#vacancy-details',
+      position: 'beforebegin',
+      slotKey: 'mybid-before-vacancy',
+      bannerId: MYBID.beforeVacancy
+    },
+    {
+      target: '#eligibility',
+      position: 'afterend',
+      slotKey: 'mybid-between-elig-fee',
+      bannerId: MYBID.betweenEligibilityFee
     }
-  };
+  ];
 
-  // ====================== COMMON ======================
-  const path = String(window.location.pathname || '').replace(/\\/g, '/');
-  if (!/\/jobs\//i.test(path)) return;
-  if (window.matchMedia('(print)').matches) return;
+  let inserted = false;
 
-  // ---------- Helper: Create Ad Slot ----------
-  const makeSlot = (slotKey, network = 'adsterra') => {
-    const wrap = document.createElement('aside');
-    wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--${network}`;
-    wrap.dataset.adSlot = slotKey;
-    wrap.setAttribute('aria-label', 'Advertisement');
-    wrap.innerHTML = `
-      <div class="gjd-ad-label">
-        <span class="gjd-ad-label-tag">Ad</span>
-        <span class="gjd-ad-label-note">GovJobUpdates does not endorse this.</span>
-      </div>
-      <div class="gjd-ad-frame" data-ad-frame="${slotKey}"></div>
-    `;
-    return wrap;
-  };
+  placements.forEach(({ target, position, slotKey, bannerId }) => {
+    const section = document.querySelector(target);
+    if (!section) return;
 
-  // ====================== HILLTOPADS INJECTION (Corrected) ======================
-  const injectHilltopAds = () => {
-    if (!HILLTOP.enabled) return;
+    const slot = makeSlot(slotKey, 'mybid');
+    const frame = slot.querySelector('.gjd-ad-frame');
 
-    // 1. Vacancy Details ke just upar
-    const vacancySection = document.querySelector('#vacancy-details');
-    if (vacancySection && HILLTOP.zones.beforeVacancy) {
-      const slot = makeSlot('hilltop-before-vacancy', 'hilltop');
-      vacancySection.insertAdjacentElement('beforebegin', slot);
-      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.beforeVacancy);
-    }
+    const banner = document.createElement('div');
+    banner.dataset.bannerId = bannerId;
+    frame.appendChild(banner);
 
-    // 2. Eligibility Criteria aur Application Fee ke beech (Sahi position)
-    const eligibilitySection = document.querySelector('#eligibility');
-    const feeSection = document.querySelector('#application-fee');
+    section.insertAdjacentElement(position, slot);
+    inserted = true;
+  });
 
-    if (eligibilitySection && feeSection && HILLTOP.zones.betweenEligibilityFee) {
-      const slot = makeSlot('hilltop-between-elig-fee', 'hilltop');
-      // Eligibility ke baad insert karo
-      eligibilitySection.insertAdjacentElement('afterend', slot);
-      loadHilltop(slot.querySelector('.gjd-ad-frame'), HILLTOP.zones.betweenEligibilityFee);
-    }
-  };
-
-  const loadHilltop = (frame, zone) => {
-    if (!frame || !zone?.src) return;
-
+  if (inserted && !document.querySelector('script[data-admpid="467256"]')) {
     const script = document.createElement('script');
     script.async = true;
-    script.referrerPolicy = 'no-referrer-when-downgrade';
-    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
-    frame.appendChild(script);
-  };
+    script.src = 'https://js.mbidadm.com/static/scripts.js';
+    script.dataset.admpid = MYBID.adCodeId;
+    document.head.appendChild(script);
+  }
+};
 
   // ====================== ADSTERRA (Existing Logic - unchanged) ======================
   const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
