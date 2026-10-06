@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  // ====================== ADSTERRA CONFIG (No Change) ======================
   const ADSTERRA = {
     enabled: true,
     invokeHost: 'www.highperformanceformat.com',
@@ -11,13 +10,9 @@
       rectangle: { key: '87119e54e06ec212fda2497c6e91b073', width: 300, height: 250 },
       mobileStrip: { key: 'cdd822299805deaaddd42d620ded189a', width: 320, height: 50 }
     },
-    emptyHideMs: 4000,
-    emptyRecheckMs: [7000, 11000],
-    railFinalCheckMs: 12000,
     bannerGapMs: 400
   };
 
-  // ====================== MONDIAD CONFIG ======================
   const MONDIAD = {
     enabled: true,
     banners: {
@@ -34,12 +29,12 @@
   if (!/\/jobs\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
 
-  // ---------- Helper ----------
   const makeSlot = (slotKey, network = 'adsterra') => {
     const wrap = document.createElement('aside');
     wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--${network}`;
     wrap.dataset.adSlot = slotKey;
     wrap.setAttribute('aria-label', 'Advertisement');
+    wrap.style.minHeight = network === 'mondiad' ? '280px' : '';
     wrap.innerHTML = `
       <div class="gjd-ad-label">
         <span class="gjd-ad-label-tag">Ad</span>
@@ -50,18 +45,25 @@
     return wrap;
   };
 
-  // Load Mondiad banner.js if not already present
-  const ensureMondiadBannerScript = () => {
-    if (document.querySelector('script[src*="ss.mrmnd.com/banner.js"]')) return;
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://ss.mrmnd.com/banner.js';
-    document.head.appendChild(script);
+  // Load banner.js
+  const loadBannerScript = () => {
+    return new Promise((resolve) => {
+      if (document.querySelector('script[src*="ss.mrmnd.com/banner.js"]')) {
+        resolve();
+        return;
+      }
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://ss.mrmnd.com/banner.js';
+      script.onload = () => resolve();
+      script.onerror = () => resolve();
+      document.head.appendChild(script);
+    });
   };
 
   // Load Dynamic
-  const loadMondiadDynamic = () => {
-    if (!MONDIAD.dynamic?.enabled || !MONDIAD.dynamic.id) return;
+  const loadDynamic = () => {
+    if (!MONDIAD.dynamic.enabled) return;
     if (document.querySelector('script[src*="dynamic.js"][data-mnddynid]')) return;
 
     const script = document.createElement('script');
@@ -71,30 +73,34 @@
     document.head.appendChild(script);
   };
 
-  // Inject Mondiad Banners
-  const injectMondiadBanners = () => {
+  const injectMondiad = async () => {
     if (!MONDIAD.enabled) return;
 
-    // 1. Before Vacancy Details
-    const vacancySection = document.querySelector('#vacancy-details');
-    if (vacancySection && MONDIAD.banners.beforeVacancy) {
+    await loadBannerScript();
+
+    // thoda wait taaki script ready ho jaye
+    await new Promise(r => setTimeout(r, 800));
+
+    // 1. Before Vacancy
+    const vacancy = document.querySelector('#vacancy-details');
+    if (vacancy && MONDIAD.banners.beforeVacancy) {
       const slot = makeSlot('mondiad-before-vacancy', 'mondiad');
-      vacancySection.insertAdjacentElement('beforebegin', slot);
+      vacancy.insertAdjacentElement('beforebegin', slot);
       slot.querySelector('.gjd-ad-frame').innerHTML = 
-        `<div data-mndbanid="${MONDIAD.banners.beforeVacancy}"></div>`;
+        `<div data-mndbanid="${MONDIAD.banners.beforeVacancy}" style="min-height:250px;"></div>`;
     }
 
     // 2. Between Eligibility & Fee
-    const eligibilitySection = document.querySelector('#eligibility');
-    if (eligibilitySection && MONDIAD.banners.betweenEligibilityFee) {
+    const eligibility = document.querySelector('#eligibility');
+    if (eligibility && MONDIAD.banners.betweenEligibilityFee) {
       const slot = makeSlot('mondiad-between-elig-fee', 'mondiad');
-      eligibilitySection.insertAdjacentElement('afterend', slot);
+      eligibility.insertAdjacentElement('afterend', slot);
       slot.querySelector('.gjd-ad-frame').innerHTML = 
-        `<div data-mndbanid="${MONDIAD.banners.betweenEligibilityFee}"></div>`;
+        `<div data-mndbanid="${MONDIAD.banners.betweenEligibilityFee}" style="min-height:250px;"></div>`;
     }
   };
 
-  // ====================== ADSTERRA (unchanged) ======================
+  // ========== ADSTERRA (same as before) ==========
   const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
   const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
   const isMobile = () => !isDesktopLeader();
@@ -107,7 +113,7 @@
     const sidebar = document.querySelector('.gjd-page .gjd-sidebar');
     const layout = document.querySelector('.gjd-page .gjd-layout');
 
-    if (updateStrip && updateStrip.parentNode) {
+    if (updateStrip?.parentNode) {
       if (units.leaderboard?.key) {
         const slot = makeSlot('leaderboard');
         slot.classList.add('gjd-ad--desktop-only');
@@ -117,14 +123,10 @@
         const slot = makeSlot('mobile-top');
         slot.classList.add('gjd-ad--mobile-only', 'gjd-ad--rectangle');
         updateStrip.insertAdjacentElement('afterend', slot);
-      } else if (units.mobileStrip?.key) {
-        const slot = makeSlot('mobile-strip');
-        slot.classList.add('gjd-ad--mobile-only');
-        updateStrip.insertAdjacentElement('afterend', slot);
       }
     }
 
-    if (links && links.parentNode && units.rectangle?.key) {
+    if (links?.parentNode && units.rectangle?.key) {
       const slot = makeSlot('rectangle');
       links.insertAdjacentElement('beforebegin', slot);
     }
@@ -133,67 +135,51 @@
       layout.classList.add('has-ad-rail');
       const slot = makeSlot('skyscraper');
       slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
-      if (sidebar && sidebar.parentNode === layout) {
-        sidebar.insertAdjacentElement('afterend', slot);
-      } else {
-        layout.appendChild(slot);
-      }
+      (sidebar?.parentNode === layout ? sidebar : layout).insertAdjacentElement(
+        sidebar?.parentNode === layout ? 'afterend' : 'beforeend', slot
+      );
     }
   };
 
-  const invokeUrl = (key) => {
-    const host = String(ADSTERRA.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
-    return `https://${host}/${key}/invoke.js`;
-  };
+  const invokeUrl = (key) => `https://www.highperformanceformat.com/${key}/invoke.js`;
 
   const loadBannerInto = (frame, unit) => new Promise((resolve) => {
-    if (!frame || !unit?.key) { resolve(false); return; }
+    if (!frame || !unit?.key) return resolve(false);
     frame.innerHTML = '';
-    const opts = { key: unit.key, format: 'iframe', height: unit.height, width: unit.width, params: {} };
-    window.atOptions = opts;
+    window.atOptions = { key: unit.key, format: 'iframe', height: unit.height, width: unit.width, params: {} };
 
     const conf = document.createElement('script');
-    conf.type = 'text/javascript';
-    conf.textContent = `atOptions = ${JSON.stringify(opts)};`;
-
+    conf.textContent = `atOptions = ${JSON.stringify(window.atOptions)};`;
     const script = document.createElement('script');
-    script.type = 'text/javascript';
     script.async = true;
     script.src = invokeUrl(unit.key);
     script.onload = () => resolve(true);
     script.onerror = () => resolve(false);
-
-    frame.appendChild(conf);
-    frame.appendChild(script);
+    frame.append(conf, script);
   });
-
-  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
   const fireAdsterraBanners = async () => {
     if (!ADSTERRA.enabled) return;
-    const units = ADSTERRA.units || {};
+    const units = ADSTERRA.units;
     const queue = [
-      ['leaderboard', units.leaderboard, () => isDesktopLeader()],
-      ['mobile-top', units.rectangle, () => isMobile()],
-      ['mobile-strip', units.mobileStrip, () => isMobile() && !units.rectangle?.key],
+      ['leaderboard', units.leaderboard, isDesktopLeader],
+      ['mobile-top', units.rectangle, isMobile],
       ['rectangle', units.rectangle, () => true],
-      ['skyscraper', units.skyscraper, () => isDesktopRail()]
+      ['skyscraper', units.skyscraper, isDesktopRail]
     ];
-
-    for (const [slotKey, unit, shouldShow] of queue) {
-      if (!unit?.key || !shouldShow()) continue;
-      const frame = document.querySelector(`[data-ad-frame="${slotKey}"]`);
-      if (!frame) continue;
-      await loadBannerInto(frame, unit);
-      await sleep(ADSTERRA.bannerGapMs || 400);
+    for (const [key, unit, check] of queue) {
+      if (!unit?.key || !check()) continue;
+      const frame = document.querySelector(`[data-ad-frame="${key}"]`);
+      if (frame) {
+        await loadBannerInto(frame, unit);
+        await new Promise(r => setTimeout(r, 400));
+      }
     }
   };
 
-  // ====================== BOOT ======================
   const boot = async () => {
-    ensureMondiadBannerScript();   // ← yeh important hai
-    injectMondiadBanners();
-    loadMondiadDynamic();
+    await injectMondiad();
+    loadDynamic();
     injectAdsterraSlots();
     await fireAdsterraBanners();
   };
