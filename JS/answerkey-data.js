@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0081-20261007195456-89420cef",
+        "title": "MPESB Group 2 Sub Group 4 Patwari Answer Key 2026 for 2106 Post",
+        "organization": "Madhya Pradesh Employees Selection Board",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-09-23",
+        "examEndDate": "2026-10-03",
+        "releaseDate": "2026-10-06",
+        "objectionLastDate": "2026-10-09",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://g2sg4crt2026.cbtexam.in/Home/ListofExam.aspx",
+        "objectionLink": "https://g2sg4crt2026.cbtexam.in/Home/ListofExam.aspx",
+        "detailPage": "../jobs/mpesb-group-2-sub-group-4-2026.html",
+        "updatedAt": "2026-10-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0080-20261005183606-0606cf49",
         "title": "UTET Answer Key 2026 | Uttarakhand Teacher Eligibility Test",
         "organization": "Uttarakhand Teacher Eligibility Test",

@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0170-20261007201330-88f746d2",
+        "title": "SSC CHSL 2025 Final Result 2026",
+        "organization": "Staff Selection Commission (SSC)",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-10-07",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ssc.gov.in/api/attachment/uploads/masterData/Results/List_07102026.pdf",
+        "detailPage": "../HTML/results.html",
+        "updatedAt": "2026-10-07",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "result-sheet-0169-20261005195328-b41bf68e",
         "title": "Railway RRB Isolated Categories Result 2026 for 312 Post",
         "organization": "Railway Recruitment Board",
