@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0155-20260918174153-d91a2237",
+        "title": "HPSC Haryana Civil Service Mains Result Marks 2026",
+        "organization": "The Haryana Public Service Commission (HPSC)",
+        "department": "HPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-09-18",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://hpsc.gov.in/Portals/0/Rollwise_Int_Marks_HCS_08_10_2026.pdf",
+        "detailPage": "../jobs/hpsc-haryana-civil-service-2026.html",
+        "updatedAt": "2026-10-08",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0169-20261005195328-b41bf68e",
         "title": "Railway RRB Isolated Categories Result 2026 with Marks",
         "organization": "Railway Recruitment Board",
@@ -32,12 +50,12 @@ window.GovJobUpdatesResults = [
         "status": "released",
         "tags": [],
         "resultLink": "https://nationalinsurance.nic.co.in/sites/default/files/2026-10/List%20of%20Roll%20Numbers%20of%20Provisionally%20Shortlisted%20Candidates.pdf",
-        "detailPage": "../HTML/results.html",
+        "detailPage": "../jobs/nicl-assistant-2026.html",
         "updatedAt": "2026-10-08",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "result-sheet-0170-20261007201330-88f746d2",
@@ -321,24 +339,6 @@ window.GovJobUpdatesResults = [
         "tags": [],
         "resultLink": "https://training.dgmhup.in/NotificationUpload/16776-2026-Sep-14-19-1-9.pdf",
         "detailPage": "../jobs/up-anm-2026.html",
-        "updatedAt": "2026-09-18",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0155-20260918174153-d91a2237",
-        "title": "HPSC Haryana Civil Service Mains Result 2026",
-        "organization": "The Haryana Public Service Commission (HPSC)",
-        "department": "HPSC",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-09-18",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://hpsc.gov.in/Portals/0/Mains_Result_HCS_17_09_2026.pdf",
-        "detailPage": "../jobs/hpsc-haryana-civil-service-2026.html",
         "updatedAt": "2026-09-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",

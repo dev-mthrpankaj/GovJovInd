@@ -393,7 +393,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-01",
         "examEndDate": "2026-10-08",
         "releaseDate": "2026-09-24",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upcons2025.com/upconadmitcardPET/loginpage.aspx",
         "detailPage": "../jobs/up-police-constable-32679.html",
