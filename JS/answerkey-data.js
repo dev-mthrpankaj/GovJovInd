@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0082-20261009174851-c1039edb",
+        "title": "SSC Selection Post 14th Answer Key 2026 for 3003 Post",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-16",
+        "examEndDate": "2026-09-26",
+        "releaseDate": "2026-10-09",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://ssc.gov.in/login",
+        "objectionLink": "https://ssc.gov.in/login",
+        "detailPage": "../jobs/ssc-selection-post-2026.html",
+        "updatedAt": "2026-10-09",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0081-20261007195456-89420cef",
         "title": "MPESB Group 2 Sub Group 4 Patwari Answer Key 2026 for 2106 Post",
         "organization": "Madhya Pradesh Employees Selection Board",
