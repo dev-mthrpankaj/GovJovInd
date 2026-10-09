@@ -34,6 +34,8 @@
   const document=root.document;
   const base=new URL('../',document.currentScript.src);
   const categories=['All','Jobs','Admit Cards','Answer Keys','Results','Quizzes','Typing','Articles','Tools','Pages'];
+  // Categories driven by live listing / remote sources — static index must not re-add deleted rows.
+  const LIVE_REPLACE_CATEGORIES=new Set(['Jobs','Admit Cards','Answer Keys','Results','Articles','Quizzes']);
   const quick=[
     {title:'Latest Government Jobs',url:'HTML/latest-jobs.html',category:'Jobs'},
     {title:'Free Quiz Practice',url:'HTML/quiz.html',category:'Quizzes'},
@@ -43,6 +45,7 @@
     {title:'Student Hub',url:'HTML/student-hub.html',category:'Articles'}
   ];
   let indexed=[], pending=null, loaded=false, failed=false, remoteState='', remoteStarted=false, listingsStarted=false, category='All', limit=30;
+  let liveCategories=new Set();
   let trigger,dialog,input,results,status,more,filters,retry,previousFocus,debounce;
   function node(tag,cls,text) {const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n;}
   function render() {
@@ -73,9 +76,17 @@
         const response=await fetch(new URL('data/site-search-index.json',base),{signal:controller.signal,cache:'no-cache',credentials:'same-origin'});
         if(!response.ok)throw Error('Index unavailable');
         const data=await response.json();if(data.version!==1||!Array.isArray(data.items))throw Error('Invalid index');
+        // Keep live/remote rows; do not re-insert static rows for categories already replaced by live data.
         const remote=indexed.filter(x=>x.remote||x.live);
-        const merged=new Map(data.items.filter(x=>safeUrl(x.url,base)).map(x=>[x.url+'|'+x.category,x]));
-        remote.forEach(x=>merged.set(x.url+'|'+x.category,x));indexed=prepare([...merged.values()]);loaded=true;
+        const merged=new Map(
+          data.items
+            .filter(x=>safeUrl(x.url,base))
+            .filter(x=>!liveCategories.has(x.category))
+            .map(x=>[x.url+'|'+x.category,x])
+        );
+        remote.forEach(x=>merged.set(x.url+'|'+x.category,x));
+        indexed=prepare([...merged.values()]);
+        loaded=true;
       }catch{failed=true;}finally{clearTimeout(timer);pending=null;render();}
     })();return pending;
   }
@@ -92,21 +103,35 @@
     for(const [file,globalName,group,fallback] of sources) {
       const apply=()=>{
         const rows=root[globalName];if(!Array.isArray(rows))return;
-        const merged=new Map(indexed.map(x=>[x.url+'|'+x.category,x]));
+        // REPLACE this category instead of merge — deleted sheet rows disappear from search.
+        const merged=new Map(
+          indexed
+            .filter(x=>x.category!==group)
+            .map(x=>[x.url+'|'+x.category,x])
+        );
         if(group==='Articles'){
           articleRecords(rows,base).forEach(item=>merged.set(item.url+'|'+item.category,item));
-          indexed=prepare([...merged.values()]);render();return;
+        } else {
+          for(const row of rows) {
+            if(!row || typeof row.title!=='string')continue;
+            let href;
+            try{href=row.detailPage?new URL(row.detailPage,new URL('HTML/',base)).href:null;}catch{href=null;}
+            const safe=href && safeUrl(href,base);
+            const url=safe?new URL(safe).href.slice(base.href.length):fallback+'?q='+encodeURIComponent(row.title);
+            const key=url+'|'+group;
+            merged.set(key,{
+              title:row.title,
+              url,
+              category:group,
+              description:String(row.organization||row.description||'').slice(0,260),
+              keywords:[row.department,row.category,row.qualification,...(Array.isArray(row.tags)?row.tags:[])].filter(Boolean).join(' '),
+              live:true
+            });
+          }
         }
-        for(const row of rows) {
-          if(!row || typeof row.title!=='string')continue;
-          let href;
-          try{href=row.detailPage?new URL(row.detailPage,new URL('HTML/',base)).href:null;}catch{href=null;}
-          const safe=href && safeUrl(href,base);
-          const url=safe?new URL(safe).href.slice(base.href.length):fallback+'?q='+encodeURIComponent(row.title);
-          const key=url+'|'+group,old=merged.get(key);
-          merged.set(key,{title:row.title,url,category:group,description:String(row.organization||row.description||old?.description||'').slice(0,260),keywords:[old?.keywords,row.department,row.category,row.qualification,...(Array.isArray(row.tags)?row.tags:[])].filter(Boolean).join(' '),live:true});
-        }
-        indexed=prepare([...merged.values()]);render();
+        liveCategories.add(group);
+        indexed=prepare([...merged.values()]);
+        render();
       };
       if(Array.isArray(root[globalName])){apply();continue;}
       const src=new URL('JS/'+file,base).href;
@@ -133,7 +158,17 @@
       const familyQuery=['ssc','banking','police','rrb'].includes(family)?`&family=${encodeURIComponent(family)}`:'';
       return {title:String(x.title||x.quizTitle||x.quiz_title||quiz),url:`HTML/quiz-attempt.html?quiz=${encodeURIComponent(id)}${familyQuery}`,category:'Quizzes',description:String(x.description||x.summary||'Published practice quiz').slice(0,260),keywords:`${subject} ${x.subjectName||x.subject_name||''} ${x.examFamilySlug||x.exam_family_slug||x.examFamily?.slug||x.exam_family?.slug||''} ${Array.isArray(x.tags)?x.tags.join(' '):''}`,remote:true};
     });
-    const merged=new Map(indexed.map(x=>[x.url+'|'+x.category,x]));entries.forEach(x=>merged.set(x.url+'|'+x.category,x));indexed=prepare([...merged.values()]);remoteState='';render();
+    // REPLACE Quizzes category with current remote list.
+    const merged=new Map(
+      indexed
+        .filter(x=>x.category!=='Quizzes')
+        .map(x=>[x.url+'|'+x.category,x])
+    );
+    entries.forEach(x=>merged.set(x.url+'|'+x.category,x));
+    liveCategories.add('Quizzes');
+    indexed=prepare([...merged.values()]);
+    remoteState='';
+    render();
   }
   function loadRemote() {
     if(remoteStarted)return;remoteStarted=true;

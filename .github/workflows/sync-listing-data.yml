@@ -36,13 +36,17 @@ jobs:
       - name: Generate static JS data files and cache versions
         run: node scripts/sync-apps-script-to-js.js
 
-      - name: Commit generated data files and cache versions
+      - name: Rebuild site search index from current listings
+        run: node scripts/generate-search-index.js
+
+      - name: Commit generated data files, cache versions, and search index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add JS/jobs-data.js JS/admitcard-data.js JS/answerkey-data.js JS/results-data.js JS/rank-predictor-exams-data.js
           git add HTML/latest-jobs.html HTML/admitcard.html HTML/answer-key.html HTML/results.html HTML/rank-predictor.html
+          git add data/site-search-index.json
 
           if git diff --cached --quiet; then
             echo "No listing data changes to commit."

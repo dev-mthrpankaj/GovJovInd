@@ -9,10 +9,13 @@ const decode = text => String(text || '').replace(/<[^>]*>/g, ' ').replace(/&#(x
 const attr = (tag, name) => (tag.match(new RegExp(`\\b${name}\\s*=\\s*(["'])(.*?)\\1`, 'i')) || [])[2] || '';
 const metadata = (html, name) => { const tag = (html.match(/<meta\b[^>]*>/gi) || []).find(t => attr(t,'name').toLowerCase() === name); return tag ? decode(attr(tag,'content')) : ''; };
 function category(file) {
-  if (/^(Job_Details|jobs)\//i.test(file) || /latest-jobs/.test(file)) return 'Jobs';
-  if (/^AdmitCard_Details\//i.test(file) || /admitcard/.test(file)) return 'Admit Cards';
-  if (/^AnswerKey_Details\//i.test(file) || /answer-key/.test(file)) return 'Answer Keys';
-  if (/^Result_Details\//i.test(file) || /\/results\.html$/.test(file)) return 'Results';
+  // jobs/ lifecycle pages stay searchable as Jobs.
+  if (/^jobs\//i.test(file) || /latest-jobs/.test(file)) return 'Jobs';
+  // Legacy detail folders are driven only by listing data files (sheet truth).
+  if (/^Job_Details\//i.test(file)) return null;
+  if (/^AdmitCard_Details\//i.test(file) || /admitcard/.test(file)) return /AdmitCard_Details/i.test(file) ? null : 'Admit Cards';
+  if (/^AnswerKey_Details\//i.test(file) || /answer-key/.test(file)) return /AnswerKey_Details/i.test(file) ? null : 'Answer Keys';
+  if (/^Result_Details\//i.test(file) || /\/results\.html$/.test(file)) return /Result_Details/i.test(file) ? null : 'Results';
   if (/^HTML\/student-hub\//.test(file)) return 'Articles';
   if (/typing-test\//.test(file)) return 'Typing';
   if (/quiz|live-test-info/.test(file)) return 'Quizzes';
@@ -20,19 +23,21 @@ function category(file) {
   return 'Pages';
 }
 const records = new Map();
-const add = record => { if (record.title && record.url) records.set(`${record.url}|${record.category}`, record); };
+const add = record => { if (record.title && record.url && record.category) records.set(`${record.url}|${record.category}`, record); };
 const files = execFileSync('git', ['ls-files', '-z'], {cwd:root, encoding:'utf8'}).split('\0');
 for (const file of files) {
   if (!/\.html$/i.test(file) || /(^|\/)(\.|node_modules|android-webview-app|reports|admin|backend)/i.test(file) || /(?:^|[\/_ .-])(backup|draft|old|copy|test-page)(?:[\/_ .-]|$)/i.test(file) || /(?:admin|checkout|order|profile|quiz-attempt|quiz-result|scorecard|404|payment|reset-password|store-product|recruitment-job|recruitment-selection|recruitment-status)/i.test(file)) continue;
   const html = fs.readFileSync(path.join(root,file), 'utf8');
   if (/noindex/i.test(metadata(html,'robots')) || /http-equiv\s*=\s*["']refresh/i.test(html)) continue;
+  const cat = category(file);
+  if (!cat) continue;
   const title = decode((html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)||[])[1]).replace(/\s*[|–-]\s*GovJobUpdates.*$/i,'');
   if (!title) continue;
   const description = metadata(html,'description').slice(0,260);
   const headings = (html.match(/<h[12]\b[^>]*>[\s\S]*?<\/h[12]>/gi)||[]).map(decode).join(' ').slice(0,1200);
-  add({title,url:file,category:category(file),description,keywords: `${metadata(html,'keywords').slice(0,650)} ${headings}`.trim()});
+  add({title,url:file,category:cat,description,keywords: `${metadata(html,'keywords').slice(0,650)} ${headings}`.trim()});
 }
-// Listing sync can publish a title before a detail page changes. Index its metadata too.
+// Sheet-backed listings are the source of truth for Jobs / Admit / Answer / Results titles.
 const listingSources = [
   ['jobs-data.js','GovJobUpdatesJobs','Jobs','HTML/latest-jobs.html'],
   ['admitcard-data.js','GovJobUpdatesAdmitCards','Admit Cards','HTML/admitcard.html'],
