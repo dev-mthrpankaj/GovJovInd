@@ -1581,10 +1581,6 @@
       "signature": "8035a97c5b3bcc75dd6111d6afe57b178eb777f2898ed16a2df0723b566e11fc",
       "lastmod": "2026-08-27"
     },
-    "Job_Details/HTML/WCL-Mining-Sirdar-Assistant-Foreman-2026.html": {
-      "signature": "ed0753e595d280e0e2336448097096d7abda60052b05eb619cd29c30f5e2a823",
-      "lastmod": "2026-08-12"
-    },
     "jobs/aai-manager-junior-executive-2026.html": {
       "signature": "e1e784d915bfd640e27f75687f8026b14ead5e238fbae5147dc6a95ed255c1fa",
       "lastmod": "2026-09-23"
@@ -2324,6 +2320,10 @@
     "jobs/utet-2026.html": {
       "signature": "92e2b37c6e6096aa5047417814788d82d3793924b0d20a6c6fc44c7a3049c334",
       "lastmod": "2026-10-05"
+    },
+    "jobs/wcl-mining-sirdar-assistant-foreman-2026.html": {
+      "signature": "8a5f7d34f0e354fedc3bcf412da558d6122dc91c790d57ebb374abf8c8f7ff88",
+      "lastmod": "2026-10-11"
     },
     "rank-predictor/mpesb-group-2-subgroup-4/index.html": {
       "signature": "7cf90012884bced18b835c3fe0bf51e064e88d130c96816af7281d466738c1a4",
