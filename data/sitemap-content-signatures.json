@@ -329,10 +329,6 @@
       "signature": "16810a081f3f1c63a38521be339109e794dca60617092859dfdb6b55f03c2417",
       "lastmod": "2026-08-14"
     },
-    "AnswerKey_Details/HTML/1104-SSC-GD-Constable-Answer-Key-2026.html": {
-      "signature": "1d19905f90f4c665ddee293521afa089249caf0ffe0f493cf34fb6f0aa454c92",
-      "lastmod": "2026-08-12"
-    },
     "AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html": {
       "signature": "2702906fe6fb3c3f986eb42a902b58d7df498bfe24e367d6694b827a44ded131",
       "lastmod": "2026-08-12"
@@ -1024,10 +1020,6 @@
     "Job_Details/HTML/1103-Railway-SECR-Nagpur-Apprentice-2026.html": {
       "signature": "a83026a6c650261bc1cb67b41068d9e35322c3e9c83957d8437a63ddeb4e888f",
       "lastmod": "2026-08-12"
-    },
-    "Job_Details/HTML/1104-SSC-GD-Constable-2026.html": {
-      "signature": "7de42790dc3a5750f6c8299c3b19ed17a804ad240ab7093fb21b8859f9c77cd1",
-      "lastmod": "2026-08-27"
     },
     "Job_Details/HTML/1201-Bihar-BEd-CET-2026.html": {
       "signature": "cd30303040820307052762752e2b500afd379b2c88862946b7a7412be56ab584",
@@ -2092,6 +2084,10 @@
     "jobs/ssc-delhi-police-hc-ministerial-2025.html": {
       "signature": "a220b0aea81e77d867c88ee698854be921a6b16d6b2d89f6b5a73ce15b96e92c",
       "lastmod": "2026-09-22"
+    },
+    "jobs/ssc-gd-constable-2026.html": {
+      "signature": "d47415d2baa104a323e97919a496dad1f058607f79edae37722cebbfd67226d5",
+      "lastmod": "2026-10-12"
     },
     "jobs/ssc-je-junior-engineer-2026.html": {
       "signature": "16b322d649b556657a3e73343ce5958eeadb4275e8d5e492a6208d14b36440c9",
