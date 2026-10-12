@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "25",
         "startDate": "2026-10-13",
         "lastDate": "2026-11-11",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://dsssbonline.nic.in/",
         "officialNotification": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/final_advt_05_2026.pdf",
