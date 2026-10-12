@@ -4,6 +4,54 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0278-20261011185630-0f3a6ca6",
+        "title": "Naval Dockyard Visakhapatnam Apprentices Online Form 2026",
+        "organization": "Naval Dockyard Visakhapatnam",
+        "department": "NDV",
+        "category": "Navy",
+        "year": "2026",
+        "qualification": "Class 10th Exam Passed with 50% Marks. ITI NCVT / SCVT Certificate with Minimum 65% Marks. More Details Read the Notification.",
+        "totalPosts": "283",
+        "startDate": "2026-10-07",
+        "lastDate": "2026-10-28",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://www.apprenticeshipregistration.com/Register.php",
+        "officialNotification": "https://www.apprenticeshipregistration.com/awscdn/notice/advt.pdf",
+        "detailPage": "../jobs/naval-dockyard-apprentices-oct26.html",
+        "updatedAt": "2026-10-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "job-sheet-0279-20261011193425-d4f869d7",
+        "title": "Delhi DSSSB Sweeper, Safai Karamchari, Chowkidar Online Form 2026",
+        "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
+        "department": "DSSSB",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Matriculation pass or equivalent from a recognized board. More Details Read the Notification.",
+        "totalPosts": "25",
+        "startDate": "2026-10-13",
+        "lastDate": "2026-11-11",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://dsssbonline.nic.in/",
+        "officialNotification": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/final_advt_05_2026.pdf",
+        "detailPage": "../jobs/delhi-dsssb-sweeper-chowkidar-05-2026.html",
+        "updatedAt": "2026-10-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0277-20261009085505-7c0127c1",
         "title": "NTA UGC NET JRF December 2026 Online Form",
         "organization": "University Grant Commission UGC",
@@ -1052,7 +1100,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "212",
         "startDate": "2026-09-12",
         "lastDate": "2026-10-09",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://upsconline.nic.in/candidate/realms/candidate-portal/protocol/openid-connect/auth?client_id=account&redirect_uri=https%3A%2F%2Fupsconline.nic.in%2Fcandidate%2Frealms%2Fcandidate-portal%2Faccount%2Flogin-redirect&state=0%2F2fc07d23-7f1c-ae1e-6f91-87c58145b036&response_type=code&scope=openid",
         "officialNotification": "https://www.upsc.gov.in/sites/default/files/AdvtNo-11-2026-Engl-100926.pdf",
@@ -1076,7 +1124,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "122",
         "startDate": "2026-09-12",
         "lastDate": "2026-10-11",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://ibpsreg.ibps.in/mecljul26/",
         "officialNotification": "https://mecl.co.in/writereaddata/meclpdf/Final_Advt_03R26.pdf",
@@ -1124,7 +1172,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "90",
         "startDate": "2026-09-10",
         "lastDate": "2026-10-09",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/102029/Index.html",
         "officialNotification": "https://ncrtc.in/wp-content/uploads/2026/09/322026VacancyNoticeforOnM.pdf",
@@ -1412,7 +1460,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "65",
         "startDate": "2026-09-10",
         "lastDate": "2026-10-10",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://www.whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u",
         "officialNotification": "https://bpssc.bihar.gov.in/Notices/Advt%20No.-11-2026.pdf",
@@ -2684,7 +2732,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "518",
         "startDate": "2026-09-10",
         "lastDate": "2026-10-09",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://jkssb.nic.in/dynamic-jkssb-test/pages/login.aspx",
         "officialNotification": "https://jkssb.nic.in/Pdf/Advertisement_08OF2026_04082026.pdf",
@@ -3136,30 +3184,6 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0126-20260724135941-321a4ae1",
-        "title": "AIIMS NORCET Nursing Officer 11th Online Form 2026",
-        "organization": "All India Institute of Medical Science (AIIMS)",
-        "department": "AIIMS",
-        "category": "Health",
-        "year": "2026",
-        "qualification": "Diploma in General Nursing Midwifery and Registered as a Nursery and Midwife in State / Nursing Council with 2 Year Experience in 50 Bedded Hospital",
-        "totalPosts": "Not Mentioned",
-        "startDate": "2026-07-24",
-        "lastDate": "2026-08-13",
-        "status": "closed",
-        "tags": [],
-        "applyLink": "https://www.aiimsexams.ac.in/otr",
-        "officialNotification": "https://rrpdocuments.aiimsexams.ac.in/1784895678667-599501489.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVRUVRLXWMSLVSAP7%2F20260724%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260724T123142Z&X-Amz-Expires=18000&X-Amz-Signature=da360d8042b5a681b3bd89781d3afa00ed09f88a92c0d95f96a674acf79fc6c6&X-Amz-SignedHeaders=host&response-content-type=application%2Fpdf",
-        "detailPage": "../jobs/aiims-norcet-11th-2026.html",
-        "updatedAt": "2026-07-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "no",
-        "qualificationSource": "qualification",
-        "detailPageSource": "resolved",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "job-sheet-0127-20260724140054-e1d22fcf",
         "title": "SIB Probationary Officer CA Online Form 2026",
         "organization": "South Indian Bank",
@@ -3516,30 +3540,6 @@ window.GovJobUpdatesJobs = [
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "job-sheet-0123-20260718210320-6d460b5a",
-        "title": "WCL Mining Sirdar, Assistant Foreman Online Form 2026 for 444 Post",
-        "organization": "Western Coalfields Limited (WCL)",
-        "department": "WCL",
-        "category": "Public Sector",
-        "year": "2026",
-        "qualification": "Post-wise educational qualification as specified in the official notification.",
-        "totalPosts": "444",
-        "startDate": "2026-07-20",
-        "lastDate": "2026-08-10",
-        "status": "closed",
-        "tags": [],
-        "applyLink": "https://westerncoal.in/en/career/recruitment",
-        "officialNotification": "https://docs.westerncoal.in/strapi/uploads/Recruitment_Not_English_58616ee33e.pdf",
-        "detailPage": "../Job_Details/HTML/WCL-Mining-Sirdar-Assistant-Foreman-2026.html",
-        "updatedAt": "2026-07-18",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "yes",
-        "qualificationSource": "fallback",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
@@ -4054,7 +4054,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0063",
+        "id": "job-sheet-0060",
         "title": "Haryana HSSC Group D Common Eligibility Test CET Online Form 2026",
         "organization": "Haryana Staff Selection Commission",
         "department": "HSSC",
@@ -4108,7 +4108,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0086",
+        "id": "job-sheet-0083",
         "title": "ICSIL DEO, MTS, Driver Online Form 2026",
         "organization": "Intelligent Communication Systems India Ltd.",
         "department": "ICSIL",
@@ -4132,7 +4132,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0057",
+        "id": "job-sheet-0051-4",
         "title": "NIACL Apprentice Online Form 2026 for 550 Post",
         "organization": "The New India Assurance Co. Ltd. (NIACL)",
         "department": "NIACL",
@@ -4162,7 +4162,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0082",
+        "id": "job-sheet-0079",
         "title": "IOCL Mathura Refinery Apprentices Online Form 2026",
         "organization": "Indian Oil Corporation Limited",
         "department": "IOCL",
@@ -4192,7 +4192,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0083",
+        "id": "job-sheet-0080",
         "title": "JNU Non Teaching Post Online Form 2026 for 267 Post",
         "organization": "Jawaharlal Nehru University",
         "department": "JNU",
@@ -4222,7 +4222,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0080",
+        "id": "job-sheet-0077",
         "title": "UPSSSC Vidhan Bhavan Rakshak Guard Online Form 2026 for 170 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "UPSSSC",
@@ -4252,7 +4252,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0081",
+        "id": "job-sheet-0078",
         "title": "NTPC Assistant Chemist Trainee ACT Online Form 2026",
         "organization": "NTPC Limited",
         "department": "NTPC",
@@ -4282,7 +4282,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0078",
+        "id": "job-sheet-0075",
         "title": "ISRO ISTRAC Various Post Online Form 2026",
         "organization": "Indian Space Research Organisation",
         "department": "ISRO",
@@ -4312,7 +4312,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0079",
+        "id": "job-sheet-0076",
         "title": "Naini Aerospace Limited Various Post Online Form 2026",
         "organization": "Naini Aerospace Limited (NAel)",
         "department": "NAel",
@@ -4342,7 +4342,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0075",
+        "id": "job-sheet-0072",
         "title": "BPSSC Bihar Police Company Commander Online Form 2026",
         "organization": "Bihar Police Subordinate Services Commission",
         "department": "BPSSC",
@@ -4372,7 +4372,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0076",
+        "id": "job-sheet-0073",
         "title": "AAICLAS Assistant Security Online Form 2026",
         "organization": "AAI Cargo Logistics and Allied Services Company Limited",
         "department": "AAICLAS",
@@ -4402,7 +4402,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0077",
+        "id": "job-sheet-0074",
         "title": "BPSSC Bihar Police Company Commander Online Form 2026",
         "organization": "Bihar Police Subordinate Services Commission",
         "department": "BPSSC",
@@ -4432,7 +4432,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0073",
+        "id": "job-sheet-0070",
         "title": "Indian Navy SSC Officers Various Post Online Form 2026",
         "organization": "Join Indian Navy (Nausena Bharti)",
         "department": "Defence",
@@ -4462,7 +4462,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0074",
+        "id": "job-sheet-0071",
         "title": "UPPSC Pre Online Form 2026 for 500 Post",
         "organization": "Uttar Pradesh Public Service Commission",
         "department": "UPSC",
@@ -4492,7 +4492,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0033",
+        "id": "job-sheet-0031",
         "title": "SSC CGL 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -4522,7 +4522,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0069",
+        "id": "job-sheet-0066",
         "title": "CGPSC ADPPO Online Form 2026",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
         "department": "CGPSC",
@@ -4552,7 +4552,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0070",
+        "id": "job-sheet-0067",
         "title": "CBI Apprentice Online Form 2026 for 4500 Post",
         "organization": "Central Bank of India",
         "department": "CBI",
@@ -4582,7 +4582,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0071",
+        "id": "job-sheet-0068",
         "title": "BEML Non Executive Operator Online Form 2026 for 362 Post",
         "organization": "Bharat Earth Movers Limited (BEML)",
         "department": "BEML",
@@ -4612,7 +4612,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0072",
+        "id": "job-sheet-0069",
         "title": "NEEPCO Executive Online Form 2026",
         "organization": "North Eastern Electric Power Corporation Limited (NEEPCO)",
         "department": "NEEPCO",
@@ -4642,7 +4642,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0040",
+        "id": "job-sheet-0038",
         "title": "UPSSSC Lower PCS Recruitment 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Administration",
@@ -4672,7 +4672,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0065",
+        "id": "job-sheet-0062",
         "title": "UPSC IAS Mains Online Form 2026",
         "organization": "Union Public Service Commission",
         "department": "UPSC",
@@ -4702,7 +4702,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0066",
+        "id": "job-sheet-0063",
         "title": "HPPSC Assistant Professor Online Form 2026 for 373 Post",
         "organization": "Himachal Pradesh Public Service Commission",
         "department": "HPPSC",
@@ -4732,7 +4732,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0067",
+        "id": "job-sheet-0064",
         "title": "CERSAI Manager Online Form 2026",
         "organization": "Central Registry of Securitisation Asset Reconstruction and Security",
         "department": "CERSAI",
@@ -4762,7 +4762,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0068",
+        "id": "job-sheet-0065",
         "title": "UPSRTC UP Bus Conductor Online Form 2026",
         "organization": "UPSRTC",
         "department": "UPSRTC",
@@ -4792,7 +4792,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0064",
+        "id": "job-sheet-0061",
         "title": "UPSRLM Various Post Online Form 2026 for 3447 Post",
         "organization": "UPSRLM",
         "department": "UPSRLM",
@@ -4822,7 +4822,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0062",
+        "id": "job-sheet-0059",
         "title": "SBI PO Recruitment 2026",
         "organization": "State Bank of India",
         "department": "Banking",
@@ -4852,7 +4852,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0058",
+        "id": "job-sheet-0055",
         "title": "CGPSC Assistant District Prosecution Officer ADPO Online Form 2026",
         "organization": "Chhattisgarh Public Service Commission (CGPSC)",
         "department": "CGPSC",
@@ -4882,7 +4882,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0059",
+        "id": "job-sheet-0056",
         "title": "Indian Air Force Airmen Group Y Medical Assistant Online Form 2026 | Intake 02/2027",
         "organization": "Join Indian Army",
         "department": "Defence",
@@ -4912,7 +4912,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0060",
+        "id": "job-sheet-0057",
         "title": "BOB Corporate and Institutional Credit Online Form 2026",
         "organization": "Bank of Baroda",
         "department": "Banking",
@@ -4942,7 +4942,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0055",
+        "id": "job-sheet-0053",
         "title": "BPSSC ASI Technical Online Form 2026",
         "organization": "Bihar Police Sub-Ordinate Services Commission",
         "department": "Police",
@@ -4972,7 +4972,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0054",
+        "id": "job-sheet-0052",
         "title": "AIIMS CRE 5th Group B & C Various Post Online Form 2026 for 1484 Post",
         "organization": "All India Institute of Medical Sciences (AIIMS)",
         "department": "Medical Education",
@@ -5002,7 +5002,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0052",
+        "id": "job-sheet-0050",
         "title": "Karnataka Police Constable Online Form 2026 for 596 Post (KK)",
         "organization": "Karnataka Examination Authority (KEA)",
         "department": "Police",
@@ -5032,7 +5032,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0053",
+        "id": "job-sheet-0051-5",
         "title": "Karnataka Police Constable Online Form 2026 for 3395 Post (RPC)",
         "organization": "Karnataka Examination Authority (KEA)",
         "department": "Police",
@@ -5062,7 +5062,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0049",
+        "id": "job-sheet-0047",
         "title": "CISF Recruitment 2026 Apply Online for ASI Paramedical Staff",
         "organization": "Central Industrial Security Force",
         "department": "Defence",
@@ -5182,7 +5182,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0061",
+        "id": "job-sheet-0058",
         "title": "Railway SECR Nagpur Apprentice Online Form 2026 for 1079 Post",
         "organization": "South East Central Railway (SECR Nagpur)",
         "department": "Railway",
@@ -5212,7 +5212,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0044",
+        "id": "job-sheet-0042",
         "title": "DSSSB Various Post Online Form 2026 for 1979 Post",
         "organization": "Delhi Subordinate Services Selection Board (DSSSB)",
         "department": "Administration",
@@ -5242,7 +5242,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0046",
+        "id": "job-sheet-0044",
         "title": "UPSSSC Excise Constable Online Form 2026 for 722 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Excise",
@@ -5272,7 +5272,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0043",
+        "id": "job-sheet-0041",
         "title": "Allahabad High Court RO / ARO / CA Recruitment 2026",
         "organization": "Allahabad High Court",
         "department": "Judiciary",
@@ -5302,7 +5302,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0045",
+        "id": "job-sheet-0043",
         "title": "JSSC CGL Technician Online Form 2026 for 611 Post",
         "organization": "Jharkhand Staff Selection Comission",
         "department": "Technical",
@@ -5332,7 +5332,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0041",
+        "id": "job-sheet-0039",
         "title": "BPSC 72nd Pre Online Form 2026 (1189 Posts)",
         "organization": "Bihar Public Service Commission",
         "department": "Administration",
@@ -5362,7 +5362,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0042",
+        "id": "job-sheet-0040",
         "title": "BSNL Junior Telecom Officer JTO Recruitment 2026",
         "organization": "Bharat Sanchar Nigam Limited",
         "department": "Telecom",
@@ -5422,7 +5422,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0039",
+        "id": "job-sheet-0037",
         "title": "RPSC RAS Pre Recruitment 2026",
         "organization": "Rajasthan Public Service Commision",
         "department": "Administration",
@@ -5452,7 +5452,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0038",
+        "id": "job-sheet-0036",
         "title": "EDCIL Various Post Online Form 2026 for 879 Post",
         "organization": "EDCIL India Limited",
         "department": "Education",
@@ -5482,7 +5482,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0036",
+        "id": "job-sheet-0034",
         "title": "Indian Navy 10+2 B.Tech Cadet Entry Online Form 2026",
         "organization": "Join Indian Navy",
         "department": "Defence",
@@ -5512,7 +5512,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0037",
+        "id": "job-sheet-0035",
         "title": "UPSSSC Agriculture Technical Assistant Group-C Recruitment 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "Agriculture",
@@ -5542,7 +5542,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0034",
+        "id": "job-sheet-0032",
         "title": "Punjab & Sindh Bank Apprentice Online Form 2026 for 635",
         "organization": "Punjab and Sindh Bank",
         "department": "Banking",
@@ -5572,7 +5572,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0035",
+        "id": "job-sheet-0033",
         "title": "RPSC School Lecturer Special Education Online Form 2026 for 121 Post",
         "organization": "Rajasthan Public Service Commission",
         "department": "Education",
@@ -5602,7 +5602,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0030",
+        "id": "job-sheet-0029",
         "title": "AFCAT 02/2026 Online Form",
         "organization": "Indian Air Force",
         "department": "Defence",
@@ -5632,7 +5632,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0029",
+        "id": "job-sheet-0028",
         "title": "CSIR CIMFR Technician/Grade II Online Form 2026",
         "organization": "Council of Scientific & Industrial Research",
         "department": "Research",
@@ -5662,37 +5662,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0031",
-        "title": "UPSC NDA II Online Form 2026 for 394 Post",
-        "organization": "Union Public Service Commission",
-        "department": "Defence",
-        "category": "Defence",
-        "year": "2026",
-        "qualification": "Post-wise educational qualification as specified in the official notification.",
-        "totalPosts": "394",
-        "startDate": "2026-05-20",
-        "lastDate": "2026-06-09",
-        "status": "closed",
-        "tags": [
-            "Union Public Service Commission Recruitment 2026",
-            "UPSC NDA II",
-            "Sarkari Naukri",
-            "Central Government Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "https://www.upsc.gov.in/",
-        "officialNotification": "https://www.upsc.gov.in/",
-        "detailPage": "../jobs/upsc-nda-ii-2026.html",
-        "updatedAt": "2026-05-20",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "yes",
-        "qualificationSource": "fallback",
-        "detailPageSource": "resolved",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "job-sheet-0032",
+        "id": "job-sheet-0030",
         "title": "UPSC CDS II Online Form 2026 for 451 Post",
         "organization": "Union Public Service Commission",
         "department": "Defence",
@@ -5722,7 +5692,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0028",
+        "id": "job-sheet-0027",
         "title": "NTPC Assistant Executive Online Form 2026 for 250 Post",
         "organization": "NTPC",
         "department": "Power",
@@ -6143,36 +6113,6 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "job-sheet-0015",
-        "title": "UPTET Online Form 2026",
-        "organization": "Uttar Pradesh Exam Regulatory Authority",
-        "department": "Education",
-        "category": "Teaching",
-        "year": "2026",
-        "qualification": "Degree, B.Ed, TET or post-wise teaching qualification as per official notification.",
-        "totalPosts": "Not specified",
-        "startDate": "2026-05-01",
-        "lastDate": "2026-05-03",
-        "status": "closed",
-        "tags": [
-            "Uttar Pradesh Exam Regulatory Authority Recruitment 2026",
-            "UPTET",
-            "Sarkari Naukri",
-            "Teaching Jobs",
-            "Govt Jobs 2026"
-        ],
-        "applyLink": "https://uptet.upessc.org/otr/",
-        "officialNotification": "",
-        "detailPage": "../Job_Details/HTML/1202-UPTET-2026.html",
-        "updatedAt": "2026-05-01",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "yes",
-        "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "job-sheet-0016",
         "title": "Bihar CET B.Ed Online Form 2026",
         "organization": "Bihar CET B.Ed",
         "department": "Admission",
@@ -6202,7 +6142,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0017",
+        "id": "job-sheet-0016",
         "title": "RBI Officer Grade-B Online Form 2026",
         "organization": "Reserve Bank of India",
         "department": "Banking",
@@ -6232,7 +6172,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0018",
+        "id": "job-sheet-0017",
         "title": "UPESSC Assistant Professor B.Ed Online Form 2025",
         "organization": "Uttar Pradesh Education Service Selection Commission",
         "department": "Education",
@@ -6262,7 +6202,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0019",
+        "id": "job-sheet-0018",
         "title": "MPPSC ADPO Online Form 2026",
         "organization": "Madhya Pradesh Public Service Commission",
         "department": "State PSC",
@@ -6292,7 +6232,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0020",
+        "id": "job-sheet-0019",
         "title": "UPSSSC Havildar Instructor Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "State SSC",
@@ -6322,7 +6262,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0022",
+        "id": "job-sheet-0021-1",
         "title": "UP Cooperative Bank Various Post Online Form 2026",
         "organization": "Uttar Pradesh Cooperative Institution Service Board",
         "department": "Banking",
@@ -6352,7 +6292,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0023",
+        "id": "job-sheet-0022",
         "title": "SSC Stenographer Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -6382,7 +6322,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0024",
+        "id": "job-sheet-0023",
         "title": "SSC JHT Online Form 2026",
         "organization": "Staff Selection Commission",
         "department": "SSC",
@@ -6412,7 +6352,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0025",
+        "id": "job-sheet-0024",
         "title": "SSB Constable Tradesman Online Form 2026",
         "organization": "Sashastra Seema Bal",
         "department": "Defence",
@@ -6442,7 +6382,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0026",
+        "id": "job-sheet-0025",
         "title": "UPSSSC Assistant Statistical Officer ASO Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
         "department": "State SSC",
@@ -6472,7 +6412,7 @@ window.GovJobUpdatesJobs = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "job-sheet-0027",
+        "id": "job-sheet-0026",
         "title": "Punjab PSPCL JE Electrical Online Form 2026",
         "organization": "Punjab State Power Corporation Limited",
         "department": "Power",
@@ -6499,36 +6439,6 @@ window.GovJobUpdatesJobs = [
         "needsReview": "yes",
         "qualificationSource": "fallback",
         "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "job-sheet-0056",
-        "title": "SSC Delhi Police Head Constable (Ministerial) 2025",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Central Government",
-        "year": "2025",
-        "qualification": "Candidates must have passed 12th Standard (Intermediate) from a recognized board\nMore Details Click on View Deatail Page",
-        "totalPosts": "509",
-        "startDate": "2025-09-29",
-        "lastDate": "2025-10-20",
-        "status": "closed",
-        "tags": [
-            "Staff Selection Commission Recruitment 2025",
-            "SSC Delhi Police Head Constable (Ministerial)",
-            "Sarkari Naukri",
-            "Central Government Jobs",
-            "Govt Jobs 2025"
-        ],
-        "applyLink": "https://ssc.gov.in/",
-        "officialNotification": "",
-        "detailPage": "../jobs/ssc-delhi-police-hc-ministerial-2025.html",
-        "updatedAt": "2025-09-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "needsReview": "no",
-        "qualificationSource": "qualification",
-        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     }
 ];
