@@ -2959,30 +2959,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0001",
-        "title": "SSC GD Constable Admit Card 2026",
-        "organization": "Staff Selection Commission",
-        "department": "SSC",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-04-27",
-        "examEndDate": "2026-05-30",
-        "releaseDate": "2026-04-24",
-        "status": "exam-over",
-        "tags": [
-            "SSC",
-            "GD Constable",
-            "Admit Card"
-        ],
-        "downloadLink": "https://ssc.gov.in/login",
-        "detailPage": "../Job_Details/HTML/1104-SSC-GD-Constable-2026.html",
-        "updatedAt": "2026-05-20",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0006",
         "title": "UPSC Civil Services IAS IFS Admit Card 2026",
         "organization": "Union Public Service Commision",

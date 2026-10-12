@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0177-20261012194955-90a16d59",
+        "title": "SSC GD Constable Result 2026 for 25487 Post",
+        "organization": "Staff Selection Commission",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-10-12",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://doc.sarkariresults.org.in/SSC_GD_writeup_12102026.pdf",
+        "detailPage": "../jobs/ssc-gd-constable-2026.html",
+        "updatedAt": "2026-10-12",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0176-20261010124526-97adc262",
         "title": "AIIMS NORCET Nursing Officer 11th Stage II Result 2026 – Out",
         "organization": "All India Institute of Medical Science (AIIMS)",
