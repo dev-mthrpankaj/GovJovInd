@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0280-20261013083058-c41ff7dd",
+        "title": "UPSSSC Combined Junior Engineer (Mechanical) Online Form 2026",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "UPSSSC PET Score Card Diploma in Mechanical Engineering. More Eligibility Details Read the Notification.",
+        "totalPosts": "1156",
+        "startDate": "2026-11-03",
+        "lastDate": "2026-11-25",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
+        "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?jAU6hktxazvbqqXOxn/+K5vdNynOGrWfuuQh2I05faY=",
+        "detailPage": "../jobs/upsssc-junior-engineer-agriculture-2026.html",
+        "updatedAt": "2026-10-13",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "resolved",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0278-20261011185630-0f3a6ca6",
         "title": "Naval Dockyard Visakhapatnam Apprentices Online Form 2026",
         "organization": "Naval Dockyard Visakhapatnam",
