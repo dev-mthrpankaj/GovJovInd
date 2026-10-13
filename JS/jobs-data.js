@@ -18,13 +18,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://upsssc.gov.in/ViewPdf.aspx?jAU6hktxazvbqqXOxn/+K5vdNynOGrWfuuQh2I05faY=",
-        "detailPage": "../jobs/upsssc-junior-engineer-agriculture-2026.html",
+        "detailPage": "../jobs/upsssc-combined-junior-engineer-mechanical-24-exam.html",
         "updatedAt": "2026-10-13",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "resolved",
+        "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
     {
