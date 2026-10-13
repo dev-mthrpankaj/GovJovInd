@@ -1,8 +1,7 @@
 (() => {
   'use strict';
 
-  // Adsterra — redesigned Student Hub articles only
-  // Gate: main.blog-article-page + .blog-article-hero
+  // Adsterra — Student Hub articles (skyscraper removed → ExoClick)
   const CONFIG = {
     enabled: true,
     invokeHost: 'www.highperformanceformat.com',
@@ -12,11 +11,7 @@
         width: 728,
         height: 90
       },
-      skyscraper: {
-        key: 'b4cefd61066cf540b9a4543442f3bcb8',
-        width: 160,
-        height: 600
-      },
+      // skyscraper: REMOVED — ExoClick 6054152
       rectangle: {
         key: '87119e54e06ec212fda2497c6e91b073',
         width: 300,
@@ -35,14 +30,14 @@
 
   window.ADSTERRA_STUDENT_HUB_CONFIG = CONFIG;
 
-  // ====================== HILLTOPADS — 1 unit, article middle ======================
-  const HILLTOP = {
+  // ====================== EXOCLICK ======================
+  const EXOCLICK = {
     enabled: true,
     zones: {
-      midArticle: {
-        id: '7468169',
-        src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
-      }
+      // Mid-article 300x250 (was Hilltop)
+      midArticle: '6048598',
+      // Desktop skyscraper 160x600 (was Adsterra)
+      skyscraper: '6054152'
     }
   };
 
@@ -56,10 +51,11 @@
   const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
   const isMobile = () => !isDesktop();
 
-  const makeSlot = (slotKey, sizeLabel) => {
+  const makeSlot = (slotKey, sizeLabel, network = 'adsterra') => {
     const wrap = document.createElement('aside');
-    wrap.className = `gju-blog-ad gju-blog-ad--${slotKey}`;
+    wrap.className = `gju-blog-ad gju-blog-ad--${slotKey} gju-blog-ad--${network}`;
     wrap.dataset.adSlot = slotKey;
+    wrap.dataset.adNetwork = network;
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
       <div class="gju-blog-ad-label">
@@ -71,30 +67,37 @@
     return wrap;
   };
 
-  const loadHilltop = (frame, zone) => {
-    if (!frame || !zone?.src) return;
-    const script = document.createElement('script');
-    script.async = true;
-    script.referrerPolicy = 'no-referrer-when-downgrade';
-    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
-    frame.appendChild(script);
+  const loadExoClick = (frame, zoneId) => {
+    if (!frame || !zoneId) return;
+
+    const ins = document.createElement('ins');
+    ins.className = 'eas6a97888e2';
+    ins.dataset.zoneid = zoneId;
+    frame.appendChild(ins);
+
+    window.AdProvider = window.AdProvider || [];
+
+    if (!document.querySelector('script[src*="ad-provider.js"]')) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.type = 'application/javascript';
+      script.src = 'https://a.magsrv.com/ad-provider.js';
+      document.head.appendChild(script);
+    }
+
+    const pushScript = document.createElement('script');
+    pushScript.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
+    frame.appendChild(pushScript);
   };
 
-  const makeHilltopSlot = (slotKey) => {
-    const slot = makeSlot(slotKey, 'hilltop');
-    slot.classList.add('gju-blog-ad--hilltop');
-    slot.dataset.adNetwork = 'hilltop';
-    return slot;
-  };
-
-  const injectHilltopAds = () => {
-    if (!HILLTOP.enabled) return;
-    if (document.querySelector('[data-hilltop-hub-ad]')) return;
+  // ====================== EXOCLICK: mid-article 300x250 ======================
+  const injectExoClickMidArticle = () => {
+    if (!EXOCLICK.enabled || !EXOCLICK.zones.midArticle) return;
+    if (document.querySelector('[data-exoclick-hub-ad]')) return;
 
     const content = document.querySelector('main.blog-article-page .blog-article-content');
     if (!content) return;
 
-    // Sirf main content sections (FAQ / sources / tags skip)
     const sections = Array.from(content.querySelectorAll(':scope > section')).filter((sec) => {
       if (sec.id === 'faq') return false;
       if (sec.classList.contains('blog-source-box')) return false;
@@ -104,27 +107,51 @@
 
     if (sections.length < 2) return;
 
-    // Middle section ke baad
     const midIndex = Math.floor(sections.length / 2) - 1;
     const anchor = sections[Math.max(0, midIndex)];
     if (!anchor) return;
 
-    const zone = HILLTOP.zones.midArticle;
-    if (!zone) return;
-
-    const slot = makeHilltopSlot('hilltop-mid-article');
-    slot.dataset.hilltopHubAd = '1';
+    const slot = makeSlot('exoclick-mid-article', '300x250', 'exoclick');
+    slot.classList.add('gju-blog-ad--exoclick-mid');
+    slot.dataset.exoclickHubAd = '1';
     anchor.insertAdjacentElement('afterend', slot);
-    loadHilltop(slot.querySelector('.gju-blog-ad-frame'), zone);
+    loadExoClick(slot.querySelector('.gju-blog-ad-frame'), EXOCLICK.zones.midArticle);
   };
 
+  // ====================== EXOCLICK: skyscraper 160x600 ======================
+  const injectExoClickSkyscraper = () => {
+    if (!EXOCLICK.enabled || !EXOCLICK.zones.skyscraper || !isDesktop()) return;
+
+    const layout = document.querySelector('main.blog-article-page .article-layout');
+    const sidebar = document.querySelector('main.blog-article-page .article-sidebar');
+    if (!layout) return;
+
+    const slot = makeSlot('skyscraper', '160x600', 'exoclick');
+    slot.classList.add('gju-blog-ad--desktop-only', 'gju-blog-ad--rail');
+    layout.classList.add('has-ad-rail');
+
+    if (sidebar && layout.contains(sidebar)) {
+      let rail = layout.querySelector(':scope > .article-aside-rail')
+        || sidebar.closest('.article-aside-rail');
+      if (!rail) {
+        rail = document.createElement('div');
+        rail.className = 'article-aside-rail';
+        sidebar.replaceWith(rail);
+        rail.appendChild(sidebar);
+      }
+      if (!rail.contains(slot)) rail.appendChild(slot);
+    } else {
+      layout.appendChild(slot);
+    }
+
+    loadExoClick(slot.querySelector('.gju-blog-ad-frame'), EXOCLICK.zones.skyscraper);
+  };
+
+  // ====================== ADSTERRA slots (no skyscraper) ======================
   const injectSlots = () => {
     const hero = document.querySelector('main.blog-article-page .blog-article-hero');
     const faq = document.querySelector('main.blog-article-page #faq');
-    const sidebar = document.querySelector('main.blog-article-page .article-sidebar');
-    const layout = document.querySelector('main.blog-article-page .article-layout');
 
-    // 1) Hero ke just neeche
     if (hero && hero.parentNode) {
       if (units.leaderboard?.key) {
         const slot = makeSlot('leaderboard', '728x90');
@@ -142,31 +169,9 @@
       }
     }
 
-    // 2) FAQ se pehle
     if (faq && faq.parentNode && units.rectangle?.key) {
       const slot = makeSlot('rectangle', '300x250');
       faq.insertAdjacentElement('beforebegin', slot);
-    }
-
-    // 3) Desktop rail: TOC + 160×600
-    if (layout && units.skyscraper?.key && isDesktop()) {
-      const slot = makeSlot('skyscraper', '160x600');
-      slot.classList.add('gju-blog-ad--desktop-only', 'gju-blog-ad--rail');
-      layout.classList.add('has-ad-rail');
-
-      if (sidebar && layout.contains(sidebar)) {
-        let rail = layout.querySelector(':scope > .article-aside-rail')
-          || sidebar.closest('.article-aside-rail');
-        if (!rail) {
-          rail = document.createElement('div');
-          rail.className = 'article-aside-rail';
-          sidebar.replaceWith(rail);
-          rail.appendChild(sidebar);
-        }
-        if (!rail.contains(slot)) rail.appendChild(slot);
-      } else {
-        layout.appendChild(slot);
-      }
     }
   };
 
@@ -214,8 +219,8 @@
       ['leaderboard', units.leaderboard, () => isDesktop()],
       ['mobile-top', units.rectangle, () => isMobile()],
       ['mobile-strip', units.mobileStrip, () => isMobile() && !units.rectangle?.key],
-      ['rectangle', units.rectangle, () => true],
-      ['skyscraper', units.skyscraper, () => isDesktop()]
+      ['rectangle', units.rectangle, () => true]
+      // skyscraper omitted — ExoClick handles it
     ];
 
     for (const [slotKey, unit, shouldShow] of queue) {
@@ -250,7 +255,7 @@
     if (!frame) return false;
     const fill = creativeFillPx(frame);
     if (fill < expectedMinFill(slot)) return false;
-    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
+    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video, ins'));
     const hasLinks = frame.querySelectorAll('a').length > 0;
     const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
     return hasMedia || (hasLinks && fill >= expectedMinFill(slot)) || htmlLen > 80;
@@ -276,7 +281,8 @@
 
   const hideEmptySlots = () => {
     document.querySelectorAll('.gju-blog-ad[data-ad-slot]').forEach((slot) => {
-      if (slot.dataset.adNetwork === 'hilltop') {
+      // ExoClick mid / sky — keep visible (fill detection flaky for ins tags)
+      if (slot.dataset.adNetwork === 'exoclick') {
         slot.hidden = false;
         slot.classList.remove('is-empty');
         slot.classList.add('is-filled');
@@ -295,12 +301,12 @@
     syncBlogAdRail();
   };
 
-  const ensureHilltopCss = () => {
-    if (document.querySelector('style[data-hub-hilltop-css]')) return;
+  const ensureExoClickCss = () => {
+    if (document.querySelector('style[data-hub-exoclick-css]')) return;
     const style = document.createElement('style');
-    style.dataset.hubHilltopCss = '1';
+    style.dataset.hubExoclickCss = '1';
     style.textContent = `
-      .gju-blog-ad--hilltop {
+      .gju-blog-ad--exoclick-mid {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -315,7 +321,7 @@
         overflow: hidden;
         box-sizing: border-box;
       }
-      .gju-blog-ad--hilltop .gju-blog-ad-label {
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-label {
         width: 100%;
         justify-content: center;
         text-align: center;
@@ -324,7 +330,7 @@
         padding: 0 0 4px;
         margin: 0;
       }
-      .gju-blog-ad--hilltop .gju-blog-ad-frame {
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-frame {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -336,17 +342,18 @@
         border-radius: 8px;
         background: #fff;
       }
-      .gju-blog-ad--hilltop .gju-blog-ad-frame iframe,
-      .gju-blog-ad--hilltop .gju-blog-ad-frame img,
-      .gju-blog-ad--hilltop .gju-blog-ad-frame > div,
-      .gju-blog-ad--hilltop .gju-blog-ad-frame > a {
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-frame iframe,
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-frame img,
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-frame > div,
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-frame > a,
+      .gju-blog-ad--exoclick-mid .gju-blog-ad-frame ins {
         display: block;
         max-width: 300px;
         max-height: 250px;
         margin: 0 auto;
       }
       @media (max-width: 480px) {
-        .gju-blog-ad--hilltop {
+        .gju-blog-ad--exoclick-mid {
           width: 100%;
           margin: 20px auto;
         }
@@ -356,8 +363,9 @@
   };
 
   const boot = async () => {
-    ensureHilltopCss();
-    injectHilltopAds();
+    ensureExoClickCss();
+    injectExoClickMidArticle();
+    injectExoClickSkyscraper();
     injectSlots();
     await fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
