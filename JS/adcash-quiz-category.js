@@ -1,47 +1,33 @@
 (() => {
   'use strict';
 
-  // Adsterra — quiz category pages only (exam family + subject)
-  // Not on quiz.html landing or quiz attempt pages.
+  // Quiz category pages only (family + subject). Not quiz.html / attempt pages.
   const CONFIG = {
     enabled: true,
-    invokeHost: 'www.highperformanceformat.com',
-    units: {
-      skyscraper: {
-        key: 'b4cefd61066cf540b9a4543442f3bcb8',
-        width: 160,
-        height: 600
-      },
-      rectangle: {
-        key: '87119e54e06ec212fda2497c6e91b073',
-        width: 300,
-        height: 250
-      }
-    },
-    cssHref: '../CSS/adcash-quiz-category.css?v=20260923-adsterra',
+    cssHref: '../CSS/adcash-quiz-category.css?v=20261013-exoclick',
     emptyHideMs: 4000,
     emptyRecheckMs: [7000, 11000],
-    bannerGapMs: 400,
     desktopMinPx: 1100
   };
 
-  window.ADSTERRA_QUIZ_CATEGORY_CONFIG = CONFIG;
+  const EXOCLICK = {
+    enabled: true,
+    zones: {
+      // was Hilltop 300x250 (after pagination)
+      afterPagination: '6048598',
+      // was Adsterra skyscraper 160x600
+      skyscraper: '6054152',
+      // mobile mid 300x250 (was Adsterra rectangle)
+      mobileMid: '6048602'
+    }
+  };
+
+  window.EXOCLICK_QUIZ_CATEGORY_CONFIG = { CONFIG, EXOCLICK };
 
   const familyPage = document.querySelector('main.family-quiz-page');
   const subjectPage = document.querySelector('main.subject-quiz-page, main[data-subject-quiz-page]');
   if (!CONFIG.enabled || (!familyPage && !subjectPage)) return;
   if (window.matchMedia('(print)').matches) return;
-
-  const HILLTOP = {
-    enabled: true,
-    zone: {
-      id: '7468169',
-      src: '//quarrelsomebitter.com/bSX.V/s/dcGilS0/YsWJcV/Heump9xuJZAU/lnk1PbTqcN0eNPjRgoxTNojIkhtgN/zLQm2FO/DgEG3lMHwY'
-    }
-  };
-
-  const units = CONFIG.units || {};
-  if (!units.skyscraper?.key && !units.rectangle?.key) return;
 
   const isDesktop = () => window.matchMedia(`(min-width: ${CONFIG.desktopMinPx}px)`).matches;
   const isMobile = () => !isDesktop();
@@ -55,10 +41,11 @@
     document.head.appendChild(link);
   };
 
-  const makeSlot = (slotKey, sizeLabel) => {
+  const makeSlot = (slotKey, sizeLabel, network = 'exoclick') => {
     const wrap = document.createElement('aside');
-    wrap.className = `gju-quiz-ad gju-quiz-ad--${slotKey}`;
+    wrap.className = `gju-quiz-ad gju-quiz-ad--${slotKey} gju-quiz-ad--${network}`;
     wrap.dataset.adSlot = slotKey;
+    wrap.dataset.adNetwork = network;
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
       <div class="gju-quiz-ad-label">
@@ -68,6 +55,28 @@
       <div class="gju-quiz-ad-frame" data-ad-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
     `.trim();
     return wrap;
+  };
+
+  const loadExoClick = (frame, zoneId) => {
+    if (!frame || !zoneId) return;
+    const ins = document.createElement('ins');
+    ins.className = 'eas6a97888e2';
+    ins.dataset.zoneid = zoneId;
+    frame.appendChild(ins);
+
+    window.AdProvider = window.AdProvider || [];
+
+    if (!document.querySelector('script[src*="ad-provider.js"]')) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.type = 'application/javascript';
+      script.src = 'https://a.magsrv.com/ad-provider.js';
+      document.head.appendChild(script);
+    }
+
+    const pushScript = document.createElement('script');
+    pushScript.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
+    frame.appendChild(pushScript);
   };
 
   const wrapRailHost = (host) => {
@@ -83,21 +92,10 @@
     return mainCol;
   };
 
-  const loadHilltop = (frame, zone) => {
-    if (!frame || !zone?.src) return;
-    const script = document.createElement('script');
-    script.async = true;
-    script.referrerPolicy = 'no-referrer-when-downgrade';
-    script.src = zone.src.startsWith('//') ? 'https:' + zone.src : zone.src;
-    frame.appendChild(script);
-  };
+  const injectExoClickAfterPagination = () => {
+    if (!EXOCLICK.enabled || !EXOCLICK.zones.afterPagination) return;
+    if (document.querySelector('[data-exoclick-quiz-ad]')) return;
 
-  const injectHilltop = () => {
-    if (!HILLTOP.enabled || !HILLTOP.zone?.src) return;
-    if (document.querySelector('[data-hilltop-quiz-ad]')) return;
-
-    const familyPage = document.querySelector('main.family-quiz-page');
-    const subjectPage = document.querySelector('main.subject-quiz-page, main[data-subject-quiz-page]');
     const host = familyPage || subjectPage;
     if (!host) return;
 
@@ -109,34 +107,38 @@
 
     if (!pagination || !pagination.parentNode) return;
 
-    const slot = makeSlot('hilltop-after-pagination', 'hilltop');
-    slot.dataset.hilltopQuizAd = HILLTOP.zone.id;
-    slot.classList.add('gju-quiz-ad--hilltop');
+    const slot = makeSlot('exoclick-after-pagination', '300x250', 'exoclick');
+    slot.dataset.exoclickQuizAd = EXOCLICK.zones.afterPagination;
+    slot.classList.add('gju-quiz-ad--exoclick-mid');
     pagination.insertAdjacentElement('afterend', slot);
-    loadHilltop(slot.querySelector('.gju-quiz-ad-frame'), HILLTOP.zone);
+    loadExoClick(slot.querySelector('.gju-quiz-ad-frame'), EXOCLICK.zones.afterPagination);
   };
 
   const injectSlots = () => {
+    if (!EXOCLICK.enabled) return;
+
     if (familyPage) {
       const discovery = familyPage.querySelector('.family-discovery');
       const grid = familyPage.querySelector('#familyQuizList, .family-quiz-grid');
       const listHead = familyPage.querySelector('.family-list-head');
 
-      if (units.rectangle?.key && grid && grid.parentNode) {
-        const slot = makeSlot('mobile-mid', '300x250');
+      if (EXOCLICK.zones.mobileMid && grid && grid.parentNode && isMobile()) {
+        const slot = makeSlot('mobile-mid', '300x250', 'exoclick');
         slot.classList.add('gju-quiz-ad--mobile-only');
         if (listHead && listHead.parentNode === grid.parentNode) {
           listHead.insertAdjacentElement('afterend', slot);
         } else {
           grid.insertAdjacentElement('beforebegin', slot);
         }
+        loadExoClick(slot.querySelector('.gju-quiz-ad-frame'), EXOCLICK.zones.mobileMid);
       }
 
-      if (units.skyscraper?.key && discovery && isDesktop()) {
+      if (EXOCLICK.zones.skyscraper && discovery && isDesktop()) {
         wrapRailHost(discovery);
-        const slot = makeSlot('skyscraper', '160x600');
+        const slot = makeSlot('skyscraper', '160x600', 'exoclick');
         slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
         discovery.appendChild(slot);
+        loadExoClick(slot.querySelector('.gju-quiz-ad-frame'), EXOCLICK.zones.skyscraper);
       }
       return;
     }
@@ -146,97 +148,24 @@
       const grid = subjectPage.querySelector('[data-subject-quiz-list], .subject-quiz-grid');
       const heading = sets && sets.querySelector('.subject-quiz-heading');
 
-      if (units.rectangle?.key && grid && grid.parentNode) {
-        const slot = makeSlot('mobile-mid', '300x250');
+      if (EXOCLICK.zones.mobileMid && grid && grid.parentNode && isMobile()) {
+        const slot = makeSlot('mobile-mid', '300x250', 'exoclick');
         slot.classList.add('gju-quiz-ad--mobile-only');
         const countLine = sets && sets.querySelector('.subject-quiz-count-line');
         if (countLine) countLine.insertAdjacentElement('afterend', slot);
         else if (heading) heading.insertAdjacentElement('afterend', slot);
         else grid.insertAdjacentElement('beforebegin', slot);
+        loadExoClick(slot.querySelector('.gju-quiz-ad-frame'), EXOCLICK.zones.mobileMid);
       }
 
-      if (units.skyscraper?.key && sets && isDesktop()) {
+      if (EXOCLICK.zones.skyscraper && sets && isDesktop()) {
         wrapRailHost(sets);
-        const slot = makeSlot('skyscraper', '160x600');
+        const slot = makeSlot('skyscraper', '160x600', 'exoclick');
         slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
         sets.appendChild(slot);
+        loadExoClick(slot.querySelector('.gju-quiz-ad-frame'), EXOCLICK.zones.skyscraper);
       }
     }
-  };
-
-  const invokeUrl = (key) => {
-    const host = String(CONFIG.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
-    return `https://${host}/${key}/invoke.js`;
-  };
-
-  const loadBannerInto = (frame, unit) => new Promise((resolve) => {
-    if (!frame || !unit?.key) {
-      resolve(false);
-      return;
-    }
-    frame.innerHTML = '';
-    const opts = {
-      key: unit.key,
-      format: 'iframe',
-      height: unit.height,
-      width: unit.width,
-      params: {}
-    };
-    window.atOptions = opts;
-    const conf = document.createElement('script');
-    conf.type = 'text/javascript';
-    conf.textContent = `atOptions = ${JSON.stringify(opts)};`;
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = invokeUrl(unit.key);
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    frame.appendChild(conf);
-    frame.appendChild(script);
-  });
-
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-  const fireBanners = async () => {
-    const queue = [
-      ['mobile-mid', units.rectangle, () => isMobile()],
-      ['skyscraper', units.skyscraper, () => isDesktop()]
-    ];
-    for (const [slotKey, unit, shouldShow] of queue) {
-      if (!unit?.key || !shouldShow()) continue;
-      const frame = document.querySelector(`[data-ad-frame="${slotKey}"]`);
-      if (!frame) continue;
-      await loadBannerInto(frame, unit);
-      await sleep(CONFIG.bannerGapMs || 400);
-    }
-  };
-
-  const expectedMinFill = (slot) => {
-    const key = slot.dataset.adSlot || '';
-    if (key === 'skyscraper') return 280;
-    return 100;
-  };
-
-  const creativeFillPx = (frame) => {
-    if (!frame) return 0;
-    let maxH = 0;
-    frame.querySelectorAll('iframe, img, object, embed, video, a, ins, div').forEach((node) => {
-      maxH = Math.max(maxH, node.offsetHeight || 0, node.clientHeight || 0);
-    });
-    if (!maxH) maxH = Math.max(frame.scrollHeight || 0, frame.offsetHeight || 0);
-    return maxH;
-  };
-
-  const slotLooksFilled = (slot) => {
-    const frame = slot.querySelector('.gju-quiz-ad-frame');
-    if (!frame) return false;
-    const fill = creativeFillPx(frame);
-    if (fill < expectedMinFill(slot)) return false;
-    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
-    const hasLinks = frame.querySelectorAll('a').length > 0;
-    const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
-    return hasMedia || (hasLinks && fill >= expectedMinFill(slot)) || htmlLen > 80;
   };
 
   const syncQuizAdRail = () => {
@@ -257,9 +186,9 @@
 
   const hideEmptySlots = () => {
     document.querySelectorAll('.gju-quiz-ad[data-ad-slot]').forEach((slot) => {
-      if (slotLooksFilled(slot)) {
-        slot.classList.remove('is-empty');
+      if (slot.dataset.adNetwork === 'exoclick') {
         slot.hidden = false;
+        slot.classList.remove('is-empty');
         slot.classList.add('is-filled');
         return;
       }
@@ -270,11 +199,10 @@
     syncQuizAdRail();
   };
 
-  const boot = async () => {
+  const boot = () => {
     ensureCss();
+    injectExoClickAfterPagination();
     injectSlots();
-    injectHilltop();
-    await fireBanners();
     window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
     (CONFIG.emptyRecheckMs || []).forEach((ms) => {
       window.setTimeout(hideEmptySlots, ms);
