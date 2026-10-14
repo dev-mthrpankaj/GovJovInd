@@ -293,7 +293,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-12",
         "examEndDate": "2026-10-13",
         "releaseDate": "2026-10-02",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/SMBPortal/Login",
         "detailPage": "../jobs/rrb-railway-section-controller-2026.html",
