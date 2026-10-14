@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0179-20261014170755-471b3e48",
+        "title": "UP Police Constable Final Result 2026 – Declared",
+        "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
+        "department": "UPPRPB",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-10-14",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upcons2025.com/finalResultsupConstable/loginpage.aspx",
+        "detailPage": "../jobs/up-police-constable-32679.html",
+        "updatedAt": "2026-10-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0143-20260910151254-754f3b10",
         "title": "DSSSB Result 2026 for Assistant Teacher",
         "organization": "Delhi Subordinate Service Selection Board DSSSB",
