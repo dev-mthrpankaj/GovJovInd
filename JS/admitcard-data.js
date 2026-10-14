@@ -2794,29 +2794,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0019",
-        "title": "RSSB Forester Admit Card/Exam City Details 2026 for 259 Post",
-        "organization": "RSSB",
-        "department": "RSSB",
-        "category": "Admit card",
-        "year": "2026",
-        "examDate": "2026-06-28",
-        "examEndDate": "",
-        "releaseDate": "2026-06-24",
-        "status": "exam-over",
-        "tags": [
-            "RSSB",
-            "Forester"
-        ],
-        "downloadLink": "https://rssb.rajasthan.gov.in/admitcards",
-        "detailPage": "../AdmitCard_Details/HTML/1105-RSSB-Vanpal-Admit-Card-2026.html",
-        "updatedAt": "2026-06-19",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0015",
         "title": "CSBC Bihar Police Constable Operator Exam City / Admit Card 2026 | 993 Post",
         "organization": "Central Selection Board of Constable CSBC",
