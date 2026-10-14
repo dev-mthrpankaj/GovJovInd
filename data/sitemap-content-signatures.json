@@ -45,10 +45,6 @@
       "signature": "ae2c1ce28d79b969bdc8569cd9fdadcfde8fc8f0764437333b2bb12768190e65",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/06-BPSC-Prosecution-Officer-Admit-Card-2026.html": {
-      "signature": "0ae08246725799d41975c82ce1e392d314df8cc561117faa8cba53b0ec92e61f",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html": {
       "signature": "3a61e7d4b7c1b221f81547e7fc6a615503ea8f5a638180441ea7d9f8a4e885f4",
       "lastmod": "2026-08-12"
@@ -96,10 +92,6 @@
     "AdmitCard_Details/HTML/BPSC-Auditor-Admit-Card-2026.html": {
       "signature": "e4a71369ca14363aae9dc00152e5c37d766f1451da4b71e0c37f31a33447649e",
       "lastmod": "2026-08-14"
-    },
-    "AdmitCard_Details/HTML/BPSC-Prosecution-Officer-Admit-Card-2026.html": {
-      "signature": "250b332e0c4094118703c59656c7255666e79a8507dc31f87c7a2888c6ce3b70",
-      "lastmod": "2026-08-12"
     },
     "AdmitCard_Details/HTML/BPSSC-ASI-Technical-Admit-Card-2026.html": {
       "signature": "1454c55f3ea60e832a5fc2d430420c6cbb5da37f8f0ff7e8cfd228d750dac6c3",
@@ -351,10 +343,6 @@
     },
     "AnswerKey_Details/HTML/Bihar-BPSC-Stenographer-Final-Answer-Key-2026.html": {
       "signature": "80fde9422867662f8ceda2e679f48a1c38d32977995affbad8c18a3207c28414",
-      "lastmod": "2026-08-14"
-    },
-    "AnswerKey_Details/HTML/BPSC-APO-Answer-Key-2026.html": {
-      "signature": "51b75df42a061451cb3b1505c54d74450619723f8d6df8c03a99bd3bca2744f6",
       "lastmod": "2026-08-14"
     },
     "AnswerKey_Details/HTML/BPSC-Assistant-Environmental-Scientist-Answer-Key-2026.html": {
@@ -1604,6 +1592,10 @@
     "jobs/bpsc-bihar-teacher-tre-4-0-2026.html": {
       "signature": "231762cd0c5b7b67d82b5db7ccac3cf2224d389252da01a9e762cbd7d262cb91",
       "lastmod": "2026-09-25"
+    },
+    "jobs/bpsc-prosecution-officer-2026.html": {
+      "signature": "6b4e3b4f75ccaf3c349459433eb9013e44a30feff82416ed6ec8444139f99e52",
+      "lastmod": "2026-10-14"
     },
     "jobs/bpssc-police-company-commander-2026.html": {
       "signature": "d860f11168b4f7b827633bb8b22979318060735af0a618498460c48e121c01bb",
