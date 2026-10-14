@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0282-20261014172726-d2fe826f",
+        "title": "Indian Army TES Online Form 2026 | 57 Batch Course",
+        "organization": "Join Indian Army",
+        "department": "JIA",
+        "category": "Defence",
+        "year": "2026",
+        "qualification": "JEE Mains 2026 has been made Mandatory from Indian Army TES 57 Course. Passed 10+2 Intermediate with at Least Minimum 60% Aggregate Marks in Physics, Chemistry, Maths PCM Stream",
+        "totalPosts": "90",
+        "startDate": "2026-10-14",
+        "lastDate": "2026-11-12",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://joinindianarmy.nic.in/Authentication.aspx",
+        "officialNotification": "https://doc.sarkariresults.org.in/SarkariResult.Com_Army_NOTIFICATION_OF_TES-57.pdf",
+        "detailPage": "../jobs/indian-army-tes-57-2026.html",
+        "updatedAt": "2026-10-14",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0187-20260817205955-6aa4d836",
         "title": "MPESB Group 3 Sub Engineer Online Form 2026 for 1700 Post Re-Open",
         "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
