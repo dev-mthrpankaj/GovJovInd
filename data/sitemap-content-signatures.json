@@ -165,10 +165,6 @@
       "signature": "acbd3edd35db13b88c89d8ffb0411958d730ebae27ca2687d406795ee487601b",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/IBPS-SO-Specialist-Officers-XVI-Admit-Card-2026.html": {
-      "signature": "1256f7f16402e66b7e177a0b4ff5c569bb2672df2cbf3080736f148ade1b1164",
-      "lastmod": "2026-08-21"
-    },
     "AdmitCard_Details/HTML/Indian-Air-Force-Agniveer-Vayu-Musician-Admit-Card-2026.html": {
       "signature": "622a432807cc498bfeee740c5c6f06aeefe88ce1f8296602bee36f621b36a1bc",
       "lastmod": "2026-08-21"
@@ -1253,10 +1249,6 @@
       "signature": "759cd60818aee87f1187a1e1d5d662346ebbaba8eff08c41c5357182a531b682",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/IBPS-SO-Specialist-Officers-XVI-2026.html": {
-      "signature": "f9ef2f3a647f2e3ea7dbabe5cd219fd211ed7e7abc3ce10526e7f998b764af46",
-      "lastmod": "2026-08-27"
-    },
     "Job_Details/HTML/ICERT-Scientist-B-2026.html": {
       "signature": "9548c85ad9a59f64b73521290a812d0615631e6011e154cd1d632ae58a3985ec",
       "lastmod": "2026-08-12"
@@ -1720,6 +1712,10 @@
     "jobs/ibps-rrb-xv-2026.html": {
       "signature": "666f9b74c8d76a42530f95b4b934dc3df7e14087f465d09db7dfc452e582cc11",
       "lastmod": "2026-09-12"
+    },
+    "jobs/ibps-so-2026.html": {
+      "signature": "6409a6439f3eca73b72bb5a427d0b279d5b0b289c885c3392a3646d78ef36fef",
+      "lastmod": "2026-10-15"
     },
     "jobs/indian-air-force-agniveer-vayu-2026.html": {
       "signature": "822e4c6a288ad7d4e63258135c99e8fadfe573130bd192dc4a638bcd712c6ee9",
