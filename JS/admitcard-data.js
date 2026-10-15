@@ -1304,26 +1304,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0108-20260820234013-f44809c3",
-        "title": "IBPS SO Specialist Officers XVI Admit Card 2026 for 1035 Post",
-        "organization": "Institute of Banking Personal Selection",
-        "department": "IBPS",
-        "category": "Banking",
-        "year": "2026",
-        "examDate": "2026-08-29",
-        "examEndDate": "",
-        "releaseDate": "2026-08-20",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibpsreg.ibps.in/crpspxvimy26/oecla_aug26/login.php?appid=b4efe9284e9d84a16019c7ca6ca9547b",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-08-21",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "admit-sheet-0109-20260820234154-0da599ee",
         "title": "BSNL JTO Junior Telecom Officer Admit Card 2026 for 100 Post",
         "organization": "Bharat Sanchar Nigam Limited",
