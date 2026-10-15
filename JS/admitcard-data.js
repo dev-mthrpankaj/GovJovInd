@@ -2204,26 +2204,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0048",
-        "title": "SSB Head Constable Admit Card 2026",
-        "organization": "Sashastra Seema Bal",
-        "department": "SSB",
-        "category": "Defence",
-        "year": "2026",
-        "examDate": "2026-07-07",
-        "examEndDate": "",
-        "releaseDate": "2026-07-04",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/SSB-Head-Constable-Ministerial-Exam-Date-2026.html",
-        "updatedAt": "2026-07-05",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0049",
         "title": "MPESB ADDET Animal Husbandry Admit Card 2026",
         "organization": "Madhya Pradesh Employees Selection Board (MPESB)",

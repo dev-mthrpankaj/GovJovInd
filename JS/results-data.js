@@ -42,6 +42,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0181-20261015182016-5c5dab29",
+        "title": "SSB HC (Ministerial) Result 2026",
+        "organization": "Sashastra Seema Bal (SSB)",
+        "department": "SSB",
+        "category": "Defence",
+        "year": "2026",
+        "resultDate": "2026-10-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101413/login.html",
+        "detailPage": "../jobs/ssb-head-constable-admit-card.html",
+        "updatedAt": "2026-10-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0179-20261014170755-471b3e48",
         "title": "UP Police Constable Final Result 2026 – Declared",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
