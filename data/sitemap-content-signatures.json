@@ -265,10 +265,6 @@
       "signature": "a2a7ff27d55f0329741322d91dbdd3e3f089c768a79cca6dec1d5620fa96c8e1",
       "lastmod": "2026-08-14"
     },
-    "AdmitCard_Details/HTML/SSB-Head-Constable-Ministerial-Exam-Date-2026.html": {
-      "signature": "9bbf568f9281f48695796d3e33413b2b98ead9a0c51db31f1c940365494934e6",
-      "lastmod": "2026-08-14"
-    },
     "AdmitCard_Details/HTML/SSC-JHT-Junior-Hindi-Translator-Admit-Card-2026.html": {
       "signature": "dd1cdf052d6e991e366bdc147c2b51fed521a5c07ac044242a5d5c4009cf04ea",
       "lastmod": "2026-08-25"
@@ -383,10 +379,6 @@
     },
     "AnswerKey_Details/HTML/RSSB-Lab-Assistant-Answer-Key-2026.html": {
       "signature": "0ad775a366b1f51c67ee3cf5bce940ad9d8d71caf12b4bf18a29ffd0fb26aabc",
-      "lastmod": "2026-08-12"
-    },
-    "AnswerKey_Details/HTML/SSB-Head-Constable-Ministerial-Answer-Key-2026.html": {
-      "signature": "3f591514a743b8678a80250f46857c5ccc373e6c98fc262992d3627dfc9b4b76",
       "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/UPPSC-Assistant-Acharya-Answer-Key-2026.html": {
@@ -2022,8 +2014,8 @@
       "lastmod": "2026-09-21"
     },
     "jobs/sbi-po-2026.html": {
-      "signature": "300447f302d686e8b6a2d46f3511820627216958059037cdf2e81f67473bc3c3",
-      "lastmod": "2026-09-12"
+      "signature": "fcf264cba1d61beab1647c2e4b40900decbefd326a6f880152bdba3d1e2be8ca",
+      "lastmod": "2026-10-15"
     },
     "jobs/sbi-sco-2026.html": {
       "signature": "401a675d7882920fa14f28d8d086e3c0bf314da8fdb180f5f5f2602140fe2e2c",
@@ -2044,6 +2036,10 @@
     "jobs/southern-railway-apprentices-2026.html": {
       "signature": "18ac8b7b2a72d79b670e26f2f97b6734cf1e24be7cbee172015445f952f1cbfe",
       "lastmod": "2026-09-16"
+    },
+    "jobs/ssb-head-constable-admit-card.html": {
+      "signature": "bc7b7f514f1b6c3ed0d50ccc5f8e413bc65007ef4dac62e352867aa4c8ced8c6",
+      "lastmod": "2026-10-15"
     },
     "jobs/ssc-cgl-2026.html": {
       "signature": "47cd7ba040f32edd28158e7625004c3f80773e715ca0d9c994aef7c9f34f04dc",
