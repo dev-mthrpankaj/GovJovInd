@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0011",
+        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
+        "organization": "Border Security force",
+        "department": "BSF",
+        "category": "Result",
+        "year": "2026",
+        "resultDate": "2026-06-09",
+        "status": "released",
+        "tags": [
+            "BSF"
+        ],
+        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2026/06/SarkariResult.Com_BSF_Constable_Tradesman_Result.pdf",
+        "detailPage": "../jobs/bsf-constable-tradesman-july-2025.html",
+        "updatedAt": "2026-10-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0179-20261014170755-471b3e48",
         "title": "UP Police Constable Final Result 2026 – Declared",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",
@@ -1210,24 +1230,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0085-20260807205237-a841e37d",
-        "title": "MPESB PNST Pre Nursing Result 2026 – Out",
-        "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
-        "department": "MPESB",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-08-07",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://esb.mp.gov.in/results/RESULT_26/PNST_RES26/default_Results.htm",
-        "detailPage": "../Result_Details/HTML/MPESB-PNST-Pre-Nursing-Result-2026.html",
-        "updatedAt": "2026-08-07",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0086-20260807205430-591a9ea4",
         "title": "MPESB ADDET Animal Husbandry Result 2026",
         "organization": "Madhya Pradesh Employees Selection Board (MPESB",
@@ -1846,26 +1848,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://www.upsc.gov.in/exams-related-info/written-result",
         "detailPage": "../Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html",
         "updatedAt": "2026-06-16",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0011",
-        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
-        "organization": "Border Security force",
-        "department": "BSF",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-09",
-        "status": "released",
-        "tags": [
-            "BSF"
-        ],
-        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2026/06/SarkariResult.Com_BSF_Constable_Tradesman_Result.pdf",
-        "detailPage": "../Result_Details/HTML/3006-BSF-Constable-Tradesmen-Result-2026.html",
-        "updatedAt": "2026-06-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
