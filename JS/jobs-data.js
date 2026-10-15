@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0283-20261014193837-bc06e76d",
+        "title": "UCO Bank Apprentice Online Form 2026 for 530 Post",
+        "organization": "UCO Bank",
+        "department": "UCOB",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Graduation Degree in Any Stream in Any Recognized University. More Details Read the Notification.",
+        "totalPosts": "530",
+        "startDate": "2026-10-14",
+        "lastDate": "2026-10-29",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://beep.bfsissc.com/#/",
+        "officialNotification": "https://uco.bank.in/documents/20120/0/Final+Advertisement+Apprenticeship+Engagement+2026-27.pdf/b7a52d0a-0aa2-2f0e-e266-e0038dd28a71?t=1791908189791",
+        "detailPage": "../jobs/uco-bank-apprentice-2026.html",
+        "updatedAt": "2026-10-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0282-20261014172726-d2fe826f",
         "title": "Indian Army TES Online Form 2026 | 57 Batch Course",
         "organization": "Join Indian Army",
