@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0083-20261015161558-e07b049b",
+        "title": "RRB Technician CEN 02/2026 – Grade I Signal & Grade III Recruitment Answer key",
+        "organization": "Railway Recruitment Board (RRB)",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-10-06",
+        "examEndDate": "2026-10-09",
+        "releaseDate": "2026-10-15",
+        "objectionLastDate": "2026-10-21",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/102594/meI2OsGJezsPvhZrvT/login.html",
+        "objectionLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/102594/meI2OsGJezsPvhZrvT/login.html",
+        "detailPage": "../jobs/railway-rrb-technician-cen-02-2026.html",
+        "updatedAt": "2026-10-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0039-20260720173744-1370f07e",
         "title": "RSSB Forester Final Answer Key 2026 – OUT",
         "organization": "Rajasthan Staff Selection Board (RSSB)",
