@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0197-20261015185233-b440e3f5",
+        "title": "JTET Admit Card 2026 | Jharkhand Teacher Eligibility Test",
+        "organization": "Jharkhand Teacher Eligibility Test",
+        "department": "JTET",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-11-01",
+        "examEndDate": "",
+        "releaseDate": "2026-10-15",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://jactetonline.com/",
+        "detailPage": "../jobs/jharkhand-teacher-eligibility-test-2026.html",
+        "updatedAt": "2026-10-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0174-20260923203742-226f4287",
         "title": "AAI Manager, Junior Executive Admit Card 2026 for 389 Post",
         "organization": "Airports Authority of India (AAI)",
@@ -1296,12 +1316,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/crpspxvimy26/oecla_aug26/login.php?appid=b4efe9284e9d84a16019c7ca6ca9547b",
-        "detailPage": "../AdmitCard_Details/HTML/IBPS-SO-Specialist-Officers-XVI-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0109-20260820234154-0da599ee",

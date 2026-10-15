@@ -60,6 +60,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0182-20261015185931-9745c0fd",
+        "title": "IBPS SO Specialist Officers XVI Result 2026 for 1035 Post",
+        "organization": "Institute of Banking Personal Selection",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-10-15",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ibpsreg.ibps.in/crpspxvimy26/presta_oct26/login.php?appid=f8a5692529ba20a12e158903a42a917c",
+        "detailPage": "../jobs/ibps-so-2026.html",
+        "updatedAt": "2026-10-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0179-20261014170755-471b3e48",
         "title": "UP Police Constable Final Result 2026 – Declared",
         "organization": "Uttar Pradesh Police Recruitment & Promotion Board",

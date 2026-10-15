@@ -3246,13 +3246,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://ibpsreg.ibps.in/crpspxvimy26/",
         "officialNotification": "https://www.ibps.in/wp-content/uploads/Detailed-Notification-CRP-SPL-XVI_Final_V1_30.06.2026.pdf",
-        "detailPage": "../Job_Details/HTML/IBPS-SO-Specialist-Officers-XVI-2026.html",
+        "detailPage": "../jobs/ibps-clerk-xvi-2026.html",
         "updatedAt": "2026-07-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
