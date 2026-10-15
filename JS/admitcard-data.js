@@ -1144,26 +1144,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0129-20260902202511-e2271928",
-        "title": "SBI Probationary Officers PO Mains Admit Card 2026 for 1500 Post",
-        "organization": "State Bank of India",
-        "department": "SBI",
-        "category": "Banking",
-        "year": "2026",
-        "examDate": "2026-09-12",
-        "examEndDate": "",
-        "releaseDate": "2026-09-02",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibpsreg.ibps.in/sbipojun26/oecla_aug26/login.php?appid=9ffa4307ae3a0ea80932c577bade9718",
-        "detailPage": "../jobs/sbi-po-2026.html",
-        "updatedAt": "2026-09-04",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0131-20260903172342-48cd5dee",
         "title": "NTPC Assistant Chemist Trainee ACT Admit Card 2026",
         "organization": "NTPC Limited",
