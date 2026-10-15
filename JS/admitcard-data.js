@@ -213,7 +213,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-15",
         "examEndDate": "",
         "releaseDate": "2026-10-09",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/ibpsvpspt26/oecla_oct26/login.php?appid=7d82c3722c757eb56af21c562b51c7a4",
         "detailPage": "../jobs/ibps-hindi-officer-2026.html",
