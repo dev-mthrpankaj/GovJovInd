@@ -64,6 +64,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0200-20261016212018-6288dabe",
+        "title": "Bihar STET Exam Date 2026 | Teacher Eligibility Test",
+        "organization": "Bihar State Teacher Eligibility Test",
+        "department": "BSTET",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-10-25",
+        "examEndDate": "2026-11-20",
+        "releaseDate": "2026-10-16",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://pbs.twimg.com/media/HUwGMSuaEAAC86p?format=jpg&name=large",
+        "detailPage": "../jobs/bihar-stet-2026.html",
+        "updatedAt": "2026-10-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0120-20260824103320-458d1e88",
         "title": "ONGC Graduate Trainee (Geologists & Engineers) Recruitment 2026",
         "organization": "Oil and Natural Gas Corporation Limited",

@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0284-20261016210730-773542d2",
+        "title": "UPSSSC Lower PCS 10+2 Online Form 2026 for 1784 Post",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "UPSSSC PET 2025 PET Score Card Intermediate Passed from any Recognized Board in India. More Details Read the Notification.",
+        "totalPosts": "1784",
+        "startDate": "2026-11-10",
+        "lastDate": "2026-12-01",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
+        "officialNotification": "https://doc.sarkariresults.org.in/upsssc-26exam-2026-notification.pdf",
+        "detailPage": "../jobs/upsssc-lower-pcs-inter-2026.html",
+        "updatedAt": "2026-10-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0245-20260916170824-07ca78ed",
         "title": "UPESSC UP Primary Teacher PRT Online Form 2026 for 12405 Post (Extended)",
         "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
