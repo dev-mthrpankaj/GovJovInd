@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0084-20261016173526-2d24701c",
+        "title": "RRB Railway Section Controller Answer Key 2026",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-10-12",
+        "examEndDate": "2026-10-13",
+        "releaseDate": "2026-10-16",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://qa-efmprd.digialm.com//EForms/configuredHtml/33128/102721/yTOWT6zoDJDKpLRfP3/login.html",
+        "objectionLink": "https://qa-efmprd.digialm.com//EForms/configuredHtml/33128/102721/yTOWT6zoDJDKpLRfP3/login.html",
+        "detailPage": "../jobs/rrb-railway-section-controller-2026.html",
+        "updatedAt": "2026-10-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0083-20261015161558-e07b049b",
         "title": "RRB Technician CEN 02/2026 – Grade I Signal & Grade III Recruitment Answer key",
         "organization": "Railway Recruitment Board (RRB)",
