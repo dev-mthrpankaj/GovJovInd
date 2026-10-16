@@ -47,8 +47,24 @@ const EXCLUDED_FILES = new Set([
 
 
 function replaceInner(html, id, content) {
-  return html.replace(/(<([a-z0-9]+)\b[^>]*\bid=["']([^"']+)["'][^>]*>)[\s\S]*?(<\/\2>)/gi,
-    (whole, open, tag, foundId, close) => foundId === id ? open + content + close : whole);
+  const openingPattern = /<([a-z0-9]+)\b[^>]*\bid=["']([^"']+)["'][^>]*>/gi;
+  let match;
+  while ((match = openingPattern.exec(html))) {
+    if (match[2] !== id) continue;
+    const tagName = match[1];
+    const innerStart = match.index + match[0].length;
+    const tokenPattern = new RegExp('</?' + tagName + '\\b[^>]*>', 'gi');
+    tokenPattern.lastIndex = innerStart;
+    let depth = 1;
+    let token;
+    while ((token = tokenPattern.exec(html))) {
+      if (/^<\//.test(token[0])) depth -= 1;
+      else if (!/\/\s*>$/.test(token[0])) depth += 1;
+      if (depth === 0) return html.slice(0, innerStart) + content + html.slice(token.index);
+    }
+    return html;
+  }
+  return html;
 }
 function updateMetaContent(html, selector, value) {
   return html.replace(selector, tag => tag.replace(/\bcontent=["'][^"']*["']/i, 'content="' + escapeHtml(value) + '"'));
@@ -179,7 +195,7 @@ function renderStaticContent(html, job) {
   setText('guidanceHeading', (current && current.guidanceTitle) || ((current && current.type === 'application') ? 'How to Apply' : 'What Candidates Should Do Now'));
   setHTML('guidanceSteps', arr(guidance).map(x => '<li>' + esc(x) + '</li>').join(''));
   const applySteps = arr(job.applySteps);
-  html = hideElement(html, 'applicationArchive', !(current && current.type !== 'application' && applySteps.length));
+  html = hideElement(html, 'applicationArchive', !((!current || current.type !== 'application') && applySteps.length));
   setHTML('applicationArchiveSteps', applySteps.map(x => '<li>' + esc(x) + '</li>').join(''));
 
   const links = Array.isArray(job.importantLinks) ? job.importantLinks : [
