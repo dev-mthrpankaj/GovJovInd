@@ -45,6 +45,165 @@ const EXCLUDED_FILES = new Set([
   'upessc-otr.html'
 ]);
 
+
+function replaceInner(html, id, content) {
+  return html.replace(/(<([a-z0-9]+)\b[^>]*\bid=["']([^"']+)["'][^>]*>)[\s\S]*?(<\/\2>)/gi,
+    (whole, open, tag, foundId, close) => foundId === id ? open + content + close : whole);
+}
+function updateMetaContent(html, selector, value) {
+  return html.replace(selector, tag => tag.replace(/\bcontent=["'][^"']*["']/i, 'content="' + escapeHtml(value) + '"'));
+}
+function hideElement(html, id, shouldHide) {
+  return html.replace(/<([a-z0-9]+)\b([^>]*\bid=["']([^"']+)["'][^>]*)>/gi, (whole, tag, attrs, foundId) => {
+    if (foundId !== id) return whole;
+    const clean = attrs.replace(/\shidden(?:=["'][^"']*["'])?/i, '');
+    return '<' + tag + clean + (shouldHide ? ' hidden' : '') + '>';
+  });
+}
+function fmtDate(value, longFormat) {
+  if (!value) return 'As per official schedule';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return new Intl.DateTimeFormat('en-IN', longFormat
+    ? {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}
+    : {day:'2-digit', month:'short', year:'numeric', timeZone:'UTC'}).format(date);
+}
+function renderStaticContent(html, job) {
+  const arr = value => Array.isArray(value) ? value : [];
+  const esc = escapeHtml;
+  const setText = (id, value, fallback) => {
+    html = updateElement(html, id, value == null || value === '' ? (fallback == null ? '—' : fallback) : value);
+  };
+  const setHTML = (id, value) => { html = replaceInner(html, id, value || ''); };
+  const stages = arr(job.lifecycle);
+  const current = (job.currentStage && stages.find(x => x.id === job.currentStage))
+    || [...stages].reverse().find(x => x.current || /current|latest|released|declared|open|live/i.test(x.status || ''))
+    || stages[stages.length - 1] || null;
+  const icon = type => ({
+    notification:'fa-bell', application:'fa-paper-plane', correction:'fa-edit', exam_date:'fa-calendar-alt',
+    city_intimation:'fa-city', admit_card:'fa-id-card', exam:'fa-pen', answer_key:'fa-key',
+    objection:'fa-exclamation-circle', revised_answer_key:'fa-key', result:'fa-poll', scorecard:'fa-chart-bar',
+    cut_off:'fa-chart-line', physical:'fa-running', pet:'fa-running', pst:'fa-ruler-combined',
+    skill_test:'fa-keyboard', typing_test:'fa-keyboard', dv:'fa-folder-open', document_verification:'fa-folder-open',
+    medical:'fa-heartbeat', interview:'fa-user-tie', final_result:'fa-trophy', joining:'fa-briefcase', notice:'fa-bullhorn'
+  }[type] || 'fa-circle');
+  const tone = status => /final|selected|declared|released|qualified|completed|active|open|live/i.test(status || '') ? 'success'
+    : /soon|scheduled|upcoming|await|pending|tba|to be/i.test(status || '') ? 'info'
+    : /objection|closing|deadline|attention/i.test(status || '') ? 'warning'
+    : /cancel|postpon|rejected|closed|expired/i.test(status || '') ? 'danger' : 'neutral';
+
+  if (job.seo && job.seo.title) {
+    html = html.replace(/<title\b[^>]*>[\s\S]*?<\/title>/i, '<title>' + esc(job.seo.title) + '</title>');
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bproperty=["']og:title["'])[^>]*>/i, job.seo.title);
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bname=["']twitter:title["'])[^>]*>/i, job.seo.title);
+  }
+  if (job.seo && job.seo.description) {
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/i, job.seo.description);
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bproperty=["']og:description["'])[^>]*>/i, job.seo.description);
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bname=["']twitter:description["'])[^>]*>/i, job.seo.description);
+  }
+
+  setText('jobOrganization', job.organization);
+  setText('jobTitle', job.title);
+  setText('breadcrumbCurrent', job.shortTitle || job.title);
+  setText('jobSummary', job.summary);
+  setHTML('jobTags', arr(job.tags).map(x => '<span>' + esc(x) + '</span>').join(''));
+  setText('latestUpdate', job.latestUpdate || (current && current.summary) || 'Recruitment page updated.');
+  setText('updatedAt', job.updated ? 'Updated ' + fmtDate(job.updated, false) : 'Updated recently');
+  setText('updatedBy', 'Updated by ' + (job.updatedBy || 'GovJobUpdates'));
+
+  const status = (current && current.status) || job.status || 'Latest update available';
+  setHTML('recruitmentStatus', '<span class="gjd-status-dot"></span>' + esc(status));
+  html = html.replace(/(<[^>]*\bid=["']recruitmentStatus["'][^>]*\bclass=["'])[^"']*(["'][^>]*>)/i,
+    '$1gjd-status is-' + ((current && current.tone) || tone(status)) + '$2');
+  setText('mobileStatusLabel', (current && (current.shortLabel || current.label)) || 'Latest Stage');
+  setText('mobileStageValue', status);
+  setText('stageCardLabel', 'Current Recruitment Stage');
+  setText('stageHeadline', (current && current.label) || 'Recruitment Update');
+  setText('stageDate', current && (current.date || current.deadline) ? fmtDate(current.date || current.deadline, true) : status);
+  setText('stageStatusText', status);
+  html = hideElement(html, 'stageCountdown', true);
+
+  const metrics = arr(job.metrics).length ? arr(job.metrics) : [
+    {label:'Total Vacancies', value:job.vacancies == null ? '—' : job.vacancies, icon:'fa-users'},
+    {label:'Current Stage', value:(current && (current.shortLabel || current.label)) || 'Recruitment', icon:icon(current && current.type)},
+    {label:'Qualification', value:job.qualificationShort || 'See eligibility', icon:'fa-graduation-cap'},
+    {label:'Job Location', value:job.location || 'India', icon:'fa-map-marker-alt'}
+  ];
+  setHTML('metricsGrid', metrics.slice(0,4).map(m => '<article><span class="gjd-metric-icon"><i class="fas ' + esc(m.icon || 'fa-circle') +
+    '"></i></span><div><small>' + esc(m.label) + '</small><strong>' + esc(m.value == null ? '—' : m.value) + '</strong></div></article>').join(''));
+  const facts = arr(job.quickFacts);
+  setHTML('quickFacts', facts.map(f => '<article><span>' + esc(f.label) + '</span><strong>' + esc(f.value) + '</strong></article>').join(''));
+  html = hideElement(html, 'quickFacts', !facts.length);
+  setHTML('overviewGrid', arr(job.overview).map(p => '<div class="gjd-info-item"><span>' + esc(p[0]) + '</span><strong>' + esc(p[1]) + '</strong></div>').join(''));
+  if (job.overviewNote) setText('overviewNote', job.overviewNote);
+
+  const dates = job.dates || {};
+  const timeline = stages.length ? stages : [
+    {label:'Notification Released',type:'notification',date:dates.notification},
+    {label:'Application Start',type:'application',date:dates.applicationStart},
+    {label:'Last Date to Apply',type:'application',date:dates.applicationEnd},
+    {label:'Fee Payment Last Date',type:'application',date:dates.feeEnd},
+    {label:'Correction Window',type:'correction',date:dates.correction},
+    {label:'Exam Date',type:'exam_date',date:dates.exam}
+  ].filter(x => x.date);
+  setHTML('lifecycleTimeline', timeline.map(stage => {
+    const active = current && current.id === stage.id;
+    const meta = [stage.status, stage.note].filter(Boolean).join(' • ');
+    return '<div class="gjd-timeline-item ' + (active ? 'is-primary is-current ' : '') + 'is-' + esc(stage.tone || tone(stage.status)) +
+      '" data-stage-id="' + esc(stage.id || '') + '"><div class="gjd-timeline-dot"><i class="fas ' + icon(stage.type) +
+      '"></i></div><div><strong>' + esc(stage.label || stage.id || 'Stage') + '</strong><small>' + esc(meta || 'Recruitment lifecycle') +
+      '</small>' + (stage.summary ? '<p class="gjd-stage-summary">' + esc(stage.summary) + '</p>' : '') +
+      '</div><div class="gjd-timeline-date">' + esc(stage.date ? fmtDate(stage.date, true) : (stage.dateText || 'As per schedule')) + '</div></div>';
+  }).join(''));
+
+  const updates = arr(job.updates);
+  setHTML('updateHistory', updates.map((u,i) => '<article class="gjd-update-history-item ' + (i === 0 ? 'is-latest' : '') +
+    '"><time>' + esc(fmtDate(u.date, false)) + '</time><div><strong>' + esc(u.title || 'Recruitment Update') +
+    '</strong><p>' + esc(u.text || '') + '</p></div></article>').join(''));
+  html = hideElement(html, 'updateHistory', !updates.length);
+
+  setHTML('vacancyTable', arr(job.vacancyRows).map(r => '<tr><td><strong>' + esc(r[0]) + '</strong></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>').join(''));
+  setText('vacancyTotal', job.vacancies);
+  setText('ageLimit', job.ageLimit);
+  setText('ageRelaxation', job.ageRelaxation, 'Age relaxation as per rules.');
+  setText('education', job.education);
+  setText('educationNote', job.educationNote, 'Refer to the official notification.');
+  setText('otherEligibility', job.otherEligibility);
+  setHTML('feeGrid', arr(job.fees).map(p => '<div class="gjd-fee-item"><span>' + esc(p[0]) + '</span><strong>' + esc(p[1]) + '</strong></div>').join(''));
+  setText('paymentMode', job.paymentMode);
+  setHTML('selectionFlow', arr(job.selection).map((x,i) => '<div class="gjd-selection-step"><b>' + String(i+1).padStart(2,'0') + '</b><span>' + esc(x) + '</span></div>').join(''));
+  setHTML('documentsGrid', arr(job.documents).map(x => '<div class="gjd-check-item"><i class="fas fa-check-circle"></i><span>' + esc(x) + '</span></div>').join(''));
+
+  const guidance = (current && current.guidance) || job.currentGuidance || job.applySteps || [];
+  setText('guidanceHeading', (current && current.guidanceTitle) || ((current && current.type === 'application') ? 'How to Apply' : 'What Candidates Should Do Now'));
+  setHTML('guidanceSteps', arr(guidance).map(x => '<li>' + esc(x) + '</li>').join(''));
+  const applySteps = arr(job.applySteps);
+  html = hideElement(html, 'applicationArchive', !(current && current.type !== 'application' && applySteps.length));
+  setHTML('applicationArchiveSteps', applySteps.map(x => '<li>' + esc(x) + '</li>').join(''));
+
+  const links = Array.isArray(job.importantLinks) ? job.importantLinks : [
+    ...(job.links && job.links.apply ? [{label:'Apply Online',note:'Official application portal',url:job.links.apply,icon:'fa-paper-plane',type:'application'}] : []),
+    ...(job.links && job.links.notification ? [{label:'Download Notification',note:'Official PDF / notice',url:job.links.notification,icon:'fa-file-pdf',type:'notification'}] : []),
+    ...(job.links && job.links.official ? [{label:'Official Website',note:'Recruitment authority website',url:job.links.official,icon:'fa-landmark',type:'official'}] : [])
+  ];
+  setHTML('importantLinks', links.map((l,i) => {
+    const valid = l.url && l.url !== '#';
+    const iconName = l.icon || icon(l.type);
+    const prefix = /^fa-(telegram|whatsapp|youtube|instagram|linkedin|facebook|twitter)$/.test(iconName) ? 'fab' : 'fas';
+    const badge = l.badge || (i === 0 ? 'Latest' : '');
+    return '<div class="gjd-link-row ' + (l.highlight ? 'is-highlight' : '') + '"><div><i class="' + prefix + ' ' + esc(iconName) +
+      '"></i><p><strong>' + esc(l.label) + '</strong><small>' + esc(l.note || '') + '</small>' +
+      (badge ? '<em class="gjd-link-badge">' + esc(badge) + '</em>' : '') + '</p></div><a href="' + esc(valid ? l.url : '#') +
+      '"' + (valid ? ' target="_blank" rel="noopener noreferrer"' : ' class="is-disabled" aria-disabled="true"') + '>' +
+      esc(l.buttonLabel || (valid ? 'Open Link' : 'Awaited')) + '</a></div>';
+  }).join(''));
+  setHTML('faqList', arr(job.faqs).map((p,i) => '<div class="gjd-faq-item"><button class="gjd-faq-question" type="button" aria-expanded="' +
+    (i === 0 ? 'true' : 'false') + '"><span>' + esc(p[0]) + '</span><i class="fas fa-plus"></i></button><div class="gjd-faq-answer"><p>' +
+    esc(p[1]) + '</p></div></div>').join(''));
+  return html;
+}
+
 function readJobData(html, file) {
   const match = html.match(
     /<script\b[^>]*\bid=["']jobData["'][^>]*>([\s\S]*?)<\/script>/i
@@ -91,6 +250,7 @@ for (const file of files) {
     html = updateElement(html, 'jobSummary', job.summary);
     html = updateElement(html, 'breadcrumbCurrent', job.shortTitle || job.title);
     html = updateElement(html, 'latestUpdate', job.latestUpdate);
+    html = renderStaticContent(html, job);
 
     if (html === original) {
       skipped += 1;
