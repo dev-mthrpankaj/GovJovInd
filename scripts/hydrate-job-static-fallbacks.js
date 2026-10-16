@@ -99,17 +99,27 @@ function updateCanonical(html, value) {
   return html.replace(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i, tag =>
     tag.replace(/\bhref=["'][^"']*["']/i, 'href="' + escapeHtml(value) + '"'));
 }
+function setClassById(html, id, className) {
+  return html.replace(/<([a-z0-9]+)\b([^>]*\bid=["']([^"']+)["'][^>]*)>/gi, (whole, tag, attrs, foundId) => {
+    if (foundId !== id) return whole;
+    if (/\bclass=["'][^"']*["']/i.test(attrs)) {
+      attrs = attrs.replace(/\bclass=["'][^"']*["']/i, 'class="' + escapeHtml(className) + '"');
+    } else attrs += ' class="' + escapeHtml(className) + '"';
+    return '<' + tag + attrs + '>';
+  });
+}
 function fmtDate(value, longFormat) {
   if (!value) return 'As per official schedule';
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return String(value);
   return new Intl.DateTimeFormat('en-IN', longFormat
-    ? {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}
+    ? {day:'numeric', month:'long', year:'numeric', timeZone:'Asia/Kolkata'}
     : {day:'2-digit', month:'short', year:'numeric', timeZone:'UTC'}).format(date);
 }
 function renderStaticContent(html, job, file) {
   const arr = value => Array.isArray(value) ? value : [];
   const esc = escapeHtml;
+  const num = value => typeof value === 'number' ? new Intl.NumberFormat('en-IN').format(value) : value;
   const setText = (id, value, fallback) => {
     html = updateElement(html, id, value == null || value === '' ? (fallback == null ? '—' : fallback) : value);
   };
@@ -175,8 +185,7 @@ function renderStaticContent(html, job, file) {
 
   const status = (current && current.status) || job.status || 'Latest update available';
   setHTML('recruitmentStatus', '<span class="gjd-status-dot"></span>' + esc(status));
-  html = html.replace(/(<[^>]*\bid=["']recruitmentStatus["'][^>]*\bclass=["'])[^"']*(["'][^>]*>)/i,
-    '$1gjd-status is-' + ((current && current.tone) || tone(status)) + '$2');
+  html = setClassById(html, 'recruitmentStatus', 'gjd-status is-' + ((current && current.tone) || tone(status)));
   setText('mobileStatusLabel', (current && (current.shortLabel || current.label)) || 'Latest Stage');
   setText('mobileStageValue', status);
   setText('stageCardLabel', 'Current Recruitment Stage');
@@ -225,7 +234,7 @@ function renderStaticContent(html, job, file) {
   html = hideElement(html, 'updateHistory', !updates.length);
 
   setHTML('vacancyTable', arr(job.vacancyRows).map(r => '<tr><td><strong>' + esc(r[0]) + '</strong></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>').join(''));
-  setText('vacancyTotal', job.vacancies);
+  setText('vacancyTotal', num(job.vacancies));
   setText('ageLimit', job.ageLimit);
   setText('ageRelaxation', job.ageRelaxation, 'Age relaxation as per rules.');
   setText('education', job.education);
