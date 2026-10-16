@@ -994,33 +994,6 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0021",
-        "title": "MPESB Van Rakshak, Jail Prahari Answer Key 2026 for 1679 Post",
-        "organization": "Madhya Pradesh Employee Selection Board (MPESB)",
-        "department": "MPESB",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-06-04",
-        "examEndDate": "",
-        "releaseDate": "2026-06-22",
-        "objectionLastDate": "2026-06-25",
-        "status": "objection-closed",
-        "tags": [
-            "MPESB",
-            "Van Rakshak",
-            "Jail Prahari",
-            "Answer Key"
-        ],
-        "downloadLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
-        "objectionLink": "https://jailvancrt2026.cbtexam.in/Home/ListofExam.aspx",
-        "detailPage": "../AnswerKey_Details/HTML/1106-MPESB-Van-Rakshak-Jail-Prahari-Answer-Key-2026.html",
-        "updatedAt": "2026-06-22",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "answerkey-sheet-0018",
         "title": "UPPSC GIC Lecturer Government Inter College Answer Key 2026",
         "organization": "Uttar Pradesh Public Service Commission",
