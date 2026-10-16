@@ -84,7 +84,7 @@ function fmtDate(value, longFormat) {
     ? {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}
     : {day:'2-digit', month:'short', year:'numeric', timeZone:'UTC'}).format(date);
 }
-function renderStaticContent(html, job) {
+function renderStaticContent(html, job, file) {
   const arr = value => Array.isArray(value) ? value : [];
   const esc = escapeHtml;
   const setText = (id, value, fallback) => {
@@ -217,6 +217,62 @@ function renderStaticContent(html, job) {
   setHTML('faqList', arr(job.faqs).map((p,i) => '<div class="gjd-faq-item"><button class="gjd-faq-question" type="button" aria-expanded="' +
     (i === 0 ? 'true' : 'false') + '"><span>' + esc(p[0]) + '</span><i class="fas fa-plus"></i></button><div class="gjd-faq-answer"><p>' +
     esc(p[1]) + '</p></div></div>').join(''));
+  // Static JSON-LD mirrors the lifecycle renderer so schema is present before JavaScript runs.
+  const canonical = (job.seo && job.seo.canonical) || ('https://govjobupdates.com/jobs/' + file);
+  const applicationEnd = (job.dates && job.dates.applicationEnd) ||
+    (stages.find(x => x.type === 'application' && x.deadline) || {}).deadline;
+  const endDate = applicationEnd ? new Date(applicationEnd) : null;
+  const notificationDate = (job.dates && job.dates.notification) ||
+    ((stages.find(x => x.type === 'notification') || {}).date);
+  const jobPostingActive = endDate && !Number.isNaN(endDate.getTime()) && endDate.getTime() >= Date.now();
+  const buildLocation = value => {
+    const raw = String(value || '').trim();
+    const parts = raw ? raw.split(/\s*(?:&|,|\/|\band\b)\s*/i).map(x => x.trim()).filter(Boolean) : ['India'];
+    const places = parts.map(name => {
+      const address = {'@type':'PostalAddress','addressCountry':'IN'};
+      if (name && !/^india$/i.test(name)) address.addressRegion = name;
+      return {'@type':'Place',address:address};
+    });
+    return places.length === 1 ? places[0] : places;
+  };
+  const buildSalary = value => {
+    const raw = String(value || '');
+    const matches = Array.from(raw.matchAll(/\d[\d,]*/g)).map(m => Number(m[0].replace(/,/g,''))).filter(Number.isFinite);
+    if (!matches.length) return undefined;
+    const quantity = {'@type':'QuantitativeValue','unitText':/year|annual|annum|p\.a\./i.test(raw) ? 'YEAR' : 'MONTH'};
+    if (matches.length >= 2) {
+      quantity.minValue = Math.min(matches[0], matches[1]);
+      quantity.maxValue = Math.max(matches[0], matches[1]);
+    } else quantity.value = matches[0];
+    return {'@type':'MonetaryAmount','currency':'INR',value:quantity};
+  };
+  const primarySchema = jobPostingActive ? {
+    '@context':'https://schema.org','@type':'JobPosting',title:job.title,description:job.summary,
+    datePosted:notificationDate,validThrough:applicationEnd,employmentType:job.employmentType || 'FULL_TIME',
+    hiringOrganization:{'@type':'Organization',name:job.organization,sameAs:(job.links && job.links.official) || canonical},
+    jobLocation:buildLocation(job.location),applicantLocationRequirements:{'@type':'Country','name':'India'},
+    baseSalary:buildSalary(job.salary),url:canonical
+  } : {
+    '@context':'https://schema.org','@type':'WebPage',name:(job.seo && job.seo.title) || job.title,
+    description:(job.seo && job.seo.description) || job.summary,url:canonical,dateModified:job.updated,
+    about:{'@type':'Thing','name':job.title},
+    publisher:{'@type':'Organization','name':'GovJobUpdates','url':'https://govjobupdates.com/'}
+  };
+  Object.keys(primarySchema).forEach(key => primarySchema[key] === undefined && delete primarySchema[key]);
+  const breadcrumbSchema = {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
+    {'@type':'ListItem','position':1,'name':'Home','item':'https://govjobupdates.com/'},
+    {'@type':'ListItem','position':2,'name':'Jobs','item':'https://govjobupdates.com/HTML/latest-jobs.html'},
+    {'@type':'ListItem','position':3,'name':job.shortTitle || job.title,'item':canonical}
+  ]};
+  const faqSchema = {'@context':'https://schema.org','@type':'FAQPage','mainEntity':arr(job.faqs).map(pair => ({
+    '@type':'Question','name':pair[0],'acceptedAnswer':{'@type':'Answer','text':pair[1]}
+  }))};
+  const scriptJson = value => JSON.stringify(value).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
+  html = replaceInner(html, 'primarySchema', scriptJson(primarySchema));
+  html = replaceInner(html, 'jobPostingSchema', scriptJson(primarySchema));
+  html = replaceInner(html, 'breadcrumbSchema', scriptJson(breadcrumbSchema));
+  html = replaceInner(html, 'faqSchema', scriptJson(faqSchema));
+
   return html;
 }
 
@@ -266,7 +322,7 @@ for (const file of files) {
     html = updateElement(html, 'jobSummary', job.summary);
     html = updateElement(html, 'breadcrumbCurrent', job.shortTitle || job.title);
     html = updateElement(html, 'latestUpdate', job.latestUpdate);
-    html = renderStaticContent(html, job);
+    html = renderStaticContent(html, job, file);
 
     if (html === original) {
       skipped += 1;
