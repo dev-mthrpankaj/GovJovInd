@@ -20,15 +20,25 @@
     const d = new Date(value);
     return Number.isNaN(d.getTime()) ? null : d;
   };
-  const fmtDate = (value, withYear = true) => {
+   const fmtDate = (value, withYear = true) => {
     const d = parseDate(value);
     if (!d) return value || 'As per official schedule';
-    return new Intl.DateTimeFormat('en-IN', {day:'2-digit', month:'short', ...(withYear ? {year:'numeric'} : {})}).format(d);
+    return new Intl.DateTimeFormat('en-IN', {
+      day: '2-digit',
+      month: 'short',
+      ...(withYear ? { year: 'numeric' } : {}),
+      timeZone: 'Asia/Kolkata',
+    }).format(d);
   };
   const fmtDateLong = value => {
     const d = parseDate(value);
     if (!d) return value || 'As per official schedule';
-    return new Intl.DateTimeFormat('en-IN', {day:'numeric', month:'long', year:'numeric'}).format(d);
+    return new Intl.DateTimeFormat('en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Asia/Kolkata',
+    }).format(d);
   };
   const num = value => typeof value === 'number' ? new Intl.NumberFormat('en-IN').format(value) : value;
   const setText = (id, value, fallback = '—') => { const el = $(id); if (el) el.textContent = value ?? fallback; };

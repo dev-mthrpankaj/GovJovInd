@@ -3,21 +3,12 @@
 
 /*
  * Full static SEO hydrate for jobs/*.html lifecycle pages.
- *
- * Reads each page's inline #jobData JSON and fills the SAME DOM targets that
- * JS/job-detail-lifecycle.js fills in the browser. Crawlers (and no-JS) then
- * see complete content; the browser script still runs and overwrites with the
- * same strings → no visual change, no duplication.
- *
- * Safety:
- *  - Only replaces content of known ids (structure / classes untouched)
- *  - Pages without #jobData are skipped
- *  - Runtime-only UI (countdown ticks, sticky, ads, related-jobs) is left alone
- *  - recruitmentStatus uses balanced span matching (nested status-dot safe)
+ * Balanced tag matching (no nested-tag truncation).
+ * Dates always Asia/Kolkata → same output local + CI.
  *
  * Usage:
- *   node scripts/hydrate-job-static-fallbacks.js            # preview
- *   node scripts/hydrate-job-static-fallbacks.js --write    # write files
+ *   node scripts/hydrate-job-static-fallbacks.js
+ *   node scripts/hydrate-job-static-fallbacks.js --write
  */
 
 const fs = require('fs');
@@ -26,8 +17,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..');
 const jobsDir = path.join(root, 'jobs');
 const write = process.argv.includes('--write');
-
-// ─── helpers (mirror job-detail-lifecycle.js) ───────────────────────────────
+const TZ = 'Asia/Kolkata';
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>'"]/g, (c) =>
@@ -52,6 +42,7 @@ function fmtDate(value, withYear = true) {
     day: '2-digit',
     month: 'short',
     ...(withYear ? { year: 'numeric' } : {}),
+    timeZone: TZ,
   }).format(d);
 }
 
@@ -62,6 +53,7 @@ function fmtDateLong(value) {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    timeZone: TZ,
   }).format(d);
 }
 
@@ -82,30 +74,14 @@ function toneFor(status) {
 }
 
 const TYPE_ICONS = {
-  notification: 'fa-bell',
-  application: 'fa-paper-plane',
-  correction: 'fa-edit',
-  exam_date: 'fa-calendar-alt',
-  city_intimation: 'fa-city',
-  admit_card: 'fa-id-card',
-  exam: 'fa-pen',
-  answer_key: 'fa-key',
-  objection: 'fa-exclamation-circle',
-  revised_answer_key: 'fa-key',
-  result: 'fa-poll',
-  scorecard: 'fa-chart-bar',
-  cut_off: 'fa-chart-line',
-  physical: 'fa-running',
-  pet: 'fa-running',
-  pst: 'fa-ruler-combined',
-  skill_test: 'fa-keyboard',
-  typing_test: 'fa-keyboard',
-  dv: 'fa-folder-open',
-  document_verification: 'fa-folder-open',
-  medical: 'fa-heartbeat',
-  interview: 'fa-user-tie',
-  final_result: 'fa-trophy',
-  joining: 'fa-briefcase',
+  notification: 'fa-bell', application: 'fa-paper-plane', correction: 'fa-edit',
+  exam_date: 'fa-calendar-alt', city_intimation: 'fa-city', admit_card: 'fa-id-card',
+  exam: 'fa-pen', answer_key: 'fa-key', objection: 'fa-exclamation-circle',
+  revised_answer_key: 'fa-key', result: 'fa-poll', scorecard: 'fa-chart-bar',
+  cut_off: 'fa-chart-line', physical: 'fa-running', pet: 'fa-running',
+  pst: 'fa-ruler-combined', skill_test: 'fa-keyboard', typing_test: 'fa-keyboard',
+  dv: 'fa-folder-open', document_verification: 'fa-folder-open', medical: 'fa-heartbeat',
+  interview: 'fa-user-tie', final_result: 'fa-trophy', joining: 'fa-briefcase',
   notice: 'fa-bullhorn',
 };
 
@@ -115,30 +91,56 @@ function iconForType(type) {
 
 function linkIconClass(icon) {
   const brand = new Set([
-    'fa-telegram',
-    'fa-whatsapp',
-    'fa-youtube',
-    'fa-instagram',
-    'fa-linkedin',
-    'fa-facebook',
-    'fa-twitter',
+    'fa-telegram', 'fa-whatsapp', 'fa-youtube', 'fa-instagram',
+    'fa-linkedin', 'fa-facebook', 'fa-twitter',
   ]);
   return `${brand.has(icon) ? 'fab' : 'fas'} ${icon}`;
 }
 
-// ─── DOM mutation helpers (structure-preserving) ────────────────────────────
-
-/** Replace inner content of <tag id="id">...</tag> (first match). */
+/** Balanced tag replace: finds OUTER closing tag for element with id. */
 function setInner(html, id, inner) {
-  const re = new RegExp(
-    `(<([a-z0-9]+)\\b[^>]*\\bid=["']${id}["'][^>]*>)([\\s\\S]*?)(<\\/\\2>)`,
-    'i'
-  );
-  if (!re.test(html)) return html;
-  return html.replace(re, `$1${inner}$4`);
+  const idRe = new RegExp(`\\bid=["']${id}["']`, 'i');
+  const idx = html.search(idRe);
+  if (idx === -1) return html;
+
+  const openAngle = html.lastIndexOf('<', idx);
+  if (openAngle === -1) return html;
+
+  const tagMatch = html.slice(openAngle).match(/^<([a-z0-9]+)\b[^>]*>/i);
+  if (!tagMatch) return html;
+  const tag = tagMatch[1].toLowerCase();
+  const openEnd = openAngle + tagMatch[0].length;
+
+  const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
+  const closeRe = new RegExp(`</${tag}\\s*>`, 'gi');
+  let depth = 1;
+  let pos = openEnd;
+  let end = -1;
+
+  while (pos < html.length && depth > 0) {
+    openRe.lastIndex = pos;
+    closeRe.lastIndex = pos;
+    const nextOpen = openRe.exec(html);
+    const nextClose = closeRe.exec(html);
+    if (!nextClose) break;
+
+    if (nextOpen && nextOpen.index < nextClose.index) {
+      depth += 1;
+      pos = nextOpen.index + nextOpen[0].length;
+    } else {
+      depth -= 1;
+      if (depth === 0) {
+        end = nextClose.index + nextClose[0].length;
+        break;
+      }
+      pos = nextClose.index + nextClose[0].length;
+    }
+  }
+
+  if (end === -1) return html;
+  return html.slice(0, openEnd) + inner + html.slice(end - `</${tag}>`.length);
 }
 
-/** Set text-only content (escaped). Skip if value empty/undefined. */
 function setText(html, id, value, fallback) {
   if (value === undefined || value === null) {
     if (fallback === undefined) return html;
@@ -148,11 +150,6 @@ function setText(html, id, value, fallback) {
   return setInner(html, id, esc(value));
 }
 
-/**
- * Replace recruitmentStatus including nested status-dot span.
- * Uses balanced span matching so the OUTER </span> is found, not the inner one.
- * Also cleans orphaned "Checking latest stage</span>" left by older broken runs.
- */
 function setRecruitmentStatus(html, label, tone) {
   const idRe = /id=["']recruitmentStatus["']/i;
   const idx = html.search(idRe);
@@ -179,7 +176,6 @@ function setRecruitmentStatus(html, label, tone) {
   }
   if (end === -1) return html;
 
-  // Clean leftover from previous broken hydrate runs
   const tail = html.slice(end);
   const orphan = /^\s*Checking latest stage\s*<\/span>/i.exec(tail);
   if (orphan) end += orphan[0].length;
@@ -187,11 +183,9 @@ function setRecruitmentStatus(html, label, tone) {
   const replacement =
     `<span class="gjd-status is-${esc(tone)}" id="recruitmentStatus">` +
     `<span class="gjd-status-dot"></span>${esc(label)}</span>`;
-
   return html.slice(0, openStart) + replacement + html.slice(end);
 }
 
-/** Update <a id="..."> href + optional <span> label + optional <i> icon class. */
 function setLink(html, id, url, label, icon) {
   const re = new RegExp(
     `<a\\b([^>]*\\bid=["']${id}["'][^>]*)>([\\s\\S]*?)<\\/a>`,
@@ -227,19 +221,13 @@ function setLink(html, id, url, label, icon) {
   }
 
   attrs = attrs.replace(/\s*\bclass="([^"]*)"/i, (full, cls) => {
-    const cleaned = cls
-      .split(/\s+/)
-      .filter((c) => c && c !== 'is-disabled')
-      .join(' ');
+    const cleaned = cls.split(/\s+/).filter((c) => c && c !== 'is-disabled').join(' ');
     return ` class="${cleaned}"`;
   });
   attrs = attrs.replace(/\s*\baria-disabled\s*=\s*(["']).*?\1/gi, '');
 
   if (label && /<span\b/i.test(body)) {
-    body = body.replace(
-      /(<span\b[^>]*>)([\s\S]*?)(<\/span>)/i,
-      `$1${esc(label)}$3`
-    );
+    body = body.replace(/(<span\b[^>]*>)([\s\S]*?)(<\/span>)/i, `$1${esc(label)}$3`);
   }
 
   if (icon && /<i\b/i.test(body)) {
@@ -256,7 +244,6 @@ function setLink(html, id, url, label, icon) {
   return html.replace(re, `<a${attrs}>${body}</a>`);
 }
 
-/** Script tags with id (JSON-LD): replace text content only. */
 function setScriptJson(html, id, obj) {
   const re = new RegExp(
     `(<script\\b[^>]*\\bid=["']${id}["'][^>]*>)([\\s\\S]*?)(<\\/script>)`,
@@ -266,7 +253,6 @@ function setScriptJson(html, id, obj) {
   return html.replace(re, `$1${JSON.stringify(obj)}$3`);
 }
 
-/** Toggle hidden attribute on an element by id. */
 function setHidden(html, id, hidden) {
   const re = new RegExp(
     `(<([a-z0-9]+)\\b)([^>]*\\bid=["']${id}["'][^>]*)(>)`,
@@ -282,8 +268,6 @@ function setHidden(html, id, hidden) {
   }
   return html.replace(re, `${m[1]}${attrs}${m[4]}`);
 }
-
-// ─── schema builders (mirror lifecycle JS) ──────────────────────────────────
 
 function buildSchemaJobLocation(location) {
   const raw = String(location || '').trim();
@@ -317,8 +301,6 @@ function buildSchemaBaseSalary(salary) {
   return { '@type': 'MonetaryAmount', currency: 'INR', value };
 }
 
-// ─── resolve stage / actions (mirror lifecycle JS) ──────────────────────────
-
 function resolveCurrentStage(job) {
   const lifecycle = Array.isArray(job.lifecycle) ? job.lifecycle : [];
   if (!lifecycle.length) return null;
@@ -348,42 +330,22 @@ function getPrimaryAction(job, currentStage) {
     };
   }
   if (isUrl(job.links?.official)) {
-    return {
-      label: 'Check Latest Updates',
-      url: job.links.official,
-      icon: 'fa-external-link-alt',
-    };
+    return { label: 'Check Latest Updates', url: job.links.official, icon: 'fa-external-link-alt' };
   }
   if (isUrl(job.links?.notification)) {
-    return {
-      label: 'View Recruitment Notice',
-      url: job.links.notification,
-      icon: 'fa-file-pdf',
-    };
+    return { label: 'View Recruitment Notice', url: job.links.notification, icon: 'fa-file-pdf' };
   }
-  return {
-    label: 'Check Latest Updates',
-    url: '#important-links',
-    icon: 'fa-bell',
-  };
+  return { label: 'Check Latest Updates', url: '#important-links', icon: 'fa-bell' };
 }
 
 function getSecondaryAction(job, currentStage) {
   if (isUrl(currentStage?.secondaryAction?.url)) return currentStage.secondaryAction;
   if (isUrl(job.secondaryAction?.url)) return job.secondaryAction;
   if (isUrl(job.links?.notification)) {
-    return {
-      label: 'Official Notification',
-      url: job.links.notification,
-      icon: 'fa-file-pdf',
-    };
+    return { label: 'Official Notification', url: job.links.notification, icon: 'fa-file-pdf' };
   }
   if (isUrl(job.links?.official)) {
-    return {
-      label: 'Official Website',
-      url: job.links.official,
-      icon: 'fa-landmark',
-    };
+    return { label: 'Official Website', url: job.links.official, icon: 'fa-landmark' };
   }
   return { label: 'Important Links', url: '#important-links', icon: 'fa-link' };
 }
@@ -392,36 +354,16 @@ function normalizeLinks(job) {
   if (Array.isArray(job.importantLinks)) return job.importantLinks;
   const legacy = [];
   if (job.links?.apply) {
-    legacy.push({
-      label: 'Apply Online',
-      note: 'Official application portal',
-      url: job.links.apply,
-      icon: 'fa-paper-plane',
-      type: 'application',
-    });
+    legacy.push({ label: 'Apply Online', note: 'Official application portal', url: job.links.apply, icon: 'fa-paper-plane', type: 'application' });
   }
   if (job.links?.notification) {
-    legacy.push({
-      label: 'Download Notification',
-      note: 'Official PDF / notice',
-      url: job.links.notification,
-      icon: 'fa-file-pdf',
-      type: 'notification',
-    });
+    legacy.push({ label: 'Download Notification', note: 'Official PDF / notice', url: job.links.notification, icon: 'fa-file-pdf', type: 'notification' });
   }
   if (job.links?.official) {
-    legacy.push({
-      label: 'Official Website',
-      note: 'Recruitment authority website',
-      url: job.links.official,
-      icon: 'fa-landmark',
-      type: 'official',
-    });
+    legacy.push({ label: 'Official Website', note: 'Recruitment authority website', url: job.links.official, icon: 'fa-landmark', type: 'official' });
   }
   return legacy;
 }
-
-// ─── HTML builders (exact mirror of lifecycle render*) ──────────────────────
 
 function buildTags(job) {
   return (job.tags || []).map((x) => `<span>${esc(x)}</span>`).join('');
@@ -432,36 +374,16 @@ function buildMetrics(job, currentStage) {
     Array.isArray(job.metrics) && job.metrics.length
       ? job.metrics
       : [
-          {
-            label: 'Total Vacancies',
-            value: num(job.vacancies),
-            icon: 'fa-users',
-          },
-          {
-            label: 'Current Stage',
-            value: currentStage?.shortLabel || currentStage?.label || 'Recruitment',
-            icon: iconForType(currentStage?.type),
-          },
-          {
-            label: 'Qualification',
-            value: job.qualificationShort || 'See eligibility',
-            icon: 'fa-graduation-cap',
-          },
-          {
-            label: 'Job Location',
-            value: job.location || 'India',
-            icon: 'fa-map-marker-alt',
-          },
+          { label: 'Total Vacancies', value: num(job.vacancies), icon: 'fa-users' },
+          { label: 'Current Stage', value: currentStage?.shortLabel || currentStage?.label || 'Recruitment', icon: iconForType(currentStage?.type) },
+          { label: 'Qualification', value: job.qualificationShort || 'See eligibility', icon: 'fa-graduation-cap' },
+          { label: 'Job Location', value: job.location || 'India', icon: 'fa-map-marker-alt' },
         ];
   return metrics
     .slice(0, 4)
     .map(
       (m) =>
-        `<article><span class="gjd-metric-icon"><i class="fas ${esc(
-          m.icon || 'fa-circle'
-        )}"></i></span><div><small>${esc(m.label)}</small><strong>${esc(
-          num(m.value) ?? '—'
-        )}</strong></div></article>`
+        `<article><span class="gjd-metric-icon"><i class="fas ${esc(m.icon || 'fa-circle')}"></i></span><div><small>${esc(m.label)}</small><strong>${esc(num(m.value) ?? '—')}</strong></div></article>`
     )
     .join('');
 }
@@ -472,24 +394,14 @@ function buildQuickFacts(job) {
   return {
     hasData: true,
     html: facts
-      .map(
-        (f) =>
-          `<article><span>${esc(f.label)}</span><strong>${esc(
-            f.value
-          )}</strong></article>`
-      )
+      .map((f) => `<article><span>${esc(f.label)}</span><strong>${esc(f.value)}</strong></article>`)
       .join(''),
   };
 }
 
 function buildOverview(job) {
   return (job.overview || [])
-    .map(
-      ([a, b]) =>
-        `<div class="gjd-info-item"><span>${esc(a)}</span><strong>${esc(
-          b
-        )}</strong></div>`
-    )
+    .map(([a, b]) => `<div class="gjd-info-item"><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`)
     .join('');
 }
 
@@ -509,13 +421,7 @@ function buildLifecycle(job, currentStage) {
       .filter(([, key]) => legacy[key])
       .map(
         ([label, key, type]) =>
-          `<div class="gjd-timeline-item"><div class="gjd-timeline-dot"><i class="fas ${iconForType(
-            type
-          )}"></i></div><div><strong>${esc(
-            label
-          )}</strong><small>Recruitment schedule</small></div><div class="gjd-timeline-date">${esc(
-            fmtDateLong(legacy[key])
-          )}</div></div>`
+          `<div class="gjd-timeline-item"><div class="gjd-timeline-dot"><i class="fas ${iconForType(type)}"></i></div><div><strong>${esc(label)}</strong><small>Recruitment schedule</small></div><div class="gjd-timeline-date">${esc(fmtDateLong(legacy[key]))}</div></div>`
       )
       .join('');
   }
@@ -524,23 +430,7 @@ function buildLifecycle(job, currentStage) {
       const isCurrent = currentStage && stage.id === currentStage.id;
       const tone = stage.tone || toneFor(stage.status);
       const meta = [stage.status, stage.note].filter(Boolean).join(' • ');
-      return `<div class="gjd-timeline-item ${
-        isCurrent ? 'is-primary is-current' : ''
-      } is-${esc(tone)}" data-stage-id="${esc(
-        stage.id || ''
-      )}"><div class="gjd-timeline-dot"><i class="fas ${iconForType(
-        stage.type
-      )}"></i></div><div><strong>${esc(
-        stage.label || stage.id || 'Stage'
-      )}</strong><small>${esc(meta || 'Recruitment lifecycle')}</small>${
-        stage.summary
-          ? `<p class="gjd-stage-summary">${esc(stage.summary)}</p>`
-          : ''
-      }</div><div class="gjd-timeline-date">${esc(
-        stage.date
-          ? fmtDateLong(stage.date)
-          : stage.dateText || 'As per schedule'
-      )}</div></div>`;
+      return `<div class="gjd-timeline-item ${isCurrent ? 'is-primary is-current' : ''} is-${esc(tone)}" data-stage-id="${esc(stage.id || '')}"><div class="gjd-timeline-dot"><i class="fas ${iconForType(stage.type)}"></i></div><div><strong>${esc(stage.label || stage.id || 'Stage')}</strong><small>${esc(meta || 'Recruitment lifecycle')}</small>${stage.summary ? `<p class="gjd-stage-summary">${esc(stage.summary)}</p>` : ''}</div><div class="gjd-timeline-date">${esc(stage.date ? fmtDateLong(stage.date) : stage.dateText || 'As per schedule')}</div></div>`;
     })
     .join('');
 }
@@ -553,11 +443,7 @@ function buildUpdateHistory(job) {
     html: updates
       .map(
         (u, i) =>
-          `<article class="gjd-update-history-item ${
-            i === 0 ? 'is-latest' : ''
-          }"><time>${esc(fmtDate(u.date))}</time><div><strong>${esc(
-            u.title || 'Recruitment Update'
-          )}</strong><p>${esc(u.text || '')}</p></div></article>`
+          `<article class="gjd-update-history-item ${i === 0 ? 'is-latest' : ''}"><time>${esc(fmtDate(u.date))}</time><div><strong>${esc(u.title || 'Recruitment Update')}</strong><p>${esc(u.text || '')}</p></div></article>`
       )
       .join(''),
   };
@@ -565,46 +451,25 @@ function buildUpdateHistory(job) {
 
 function buildVacancyRows(job) {
   return (job.vacancyRows || [])
-    .map(
-      (r) =>
-        `<tr><td><strong>${esc(r[0])}</strong></td><td>${esc(
-          r[1]
-        )}</td><td>${esc(r[2])}</td></tr>`
-    )
+    .map((r) => `<tr><td><strong>${esc(r[0])}</strong></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`)
     .join('');
 }
 
 function buildFees(job) {
   return (job.fees || [])
-    .map(
-      ([a, b]) =>
-        `<div class="gjd-fee-item"><span>${esc(a)}</span><strong>${esc(
-          b
-        )}</strong></div>`
-    )
+    .map(([a, b]) => `<div class="gjd-fee-item"><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`)
     .join('');
 }
 
 function buildSelection(job) {
   return (job.selection || [])
-    .map(
-      (x, i) =>
-        `<div class="gjd-selection-step"><b>${String(i + 1).padStart(
-          2,
-          '0'
-        )}</b><span>${esc(x)}</span></div>`
-    )
+    .map((x, i) => `<div class="gjd-selection-step"><b>${String(i + 1).padStart(2, '0')}</b><span>${esc(x)}</span></div>`)
     .join('');
 }
 
 function buildDocuments(job) {
   return (job.documents || [])
-    .map(
-      (x) =>
-        `<div class="gjd-check-item"><i class="fas fa-check-circle"></i><span>${esc(
-          x
-        )}</span></div>`
-    )
+    .map((x) => `<div class="gjd-check-item"><i class="fas fa-check-circle"></i><span>${esc(x)}</span></div>`)
     .join('');
 }
 
@@ -619,19 +484,7 @@ function buildLinks(job) {
       const disabled = !isUrl(l.url);
       const badge = l.badge || (i === 0 ? 'Latest' : '');
       const icon = l.icon || iconForType(l.type);
-      return `<div class="gjd-link-row ${
-        l.highlight ? 'is-highlight' : ''
-      }"><div><i class="${linkIconClass(icon)}"></i><p><strong>${esc(
-        l.label
-      )}</strong><small>${esc(l.note || '')}</small>${
-        badge ? `<em class="gjd-link-badge">${esc(badge)}</em>` : ''
-      }</p></div><a href="${esc(l.url || '#')}" ${
-        disabled
-          ? 'class="is-disabled" aria-disabled="true"'
-          : 'target="_blank" rel="noopener noreferrer"'
-      }>${esc(
-        l.buttonLabel || (disabled ? 'Awaited' : 'Open Link')
-      )}</a></div>`;
+      return `<div class="gjd-link-row ${l.highlight ? 'is-highlight' : ''}"><div><i class="${linkIconClass(icon)}"></i><p><strong>${esc(l.label)}</strong><small>${esc(l.note || '')}</small>${badge ? `<em class="gjd-link-badge">${esc(badge)}</em>` : ''}</p></div><a href="${esc(l.url || '#')}" ${disabled ? 'class="is-disabled" aria-disabled="true"' : 'target="_blank" rel="noopener noreferrer"'}>${esc(l.buttonLabel || (disabled ? 'Awaited' : 'Open Link'))}</a></div>`;
     })
     .join('');
 }
@@ -640,11 +493,7 @@ function buildFaq(job) {
   return (job.faqs || [])
     .map(
       ([q, a], i) =>
-        `<div class="gjd-faq-item"><button class="gjd-faq-question" type="button" aria-expanded="${
-          i === 0 ? 'true' : 'false'
-        }"><span>${esc(q)}</span><i class="fas fa-plus"></i></button><div class="gjd-faq-answer"><p>${esc(
-          a
-        )}</p></div></div>`
+        `<div class="gjd-faq-item"><button class="gjd-faq-question" type="button" aria-expanded="${i === 0 ? 'true' : 'false'}"><span>${esc(q)}</span><i class="fas fa-plus"></i></button><div class="gjd-faq-answer"><p>${esc(a)}</p></div></div>`
     )
     .join('');
 }
@@ -706,24 +555,9 @@ function buildSchemas(job) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://govjobupdates.com/',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Jobs',
-        item: 'https://govjobupdates.com/HTML/latest-jobs.html',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: job.shortTitle || job.title,
-        item: canonical,
-      },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://govjobupdates.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Jobs', item: 'https://govjobupdates.com/HTML/latest-jobs.html' },
+      { '@type': 'ListItem', position: 3, name: job.shortTitle || job.title, item: canonical },
     ],
   };
 
@@ -740,58 +574,27 @@ function buildSchemas(job) {
   return { primary, breadcrumb, faq };
 }
 
-// ─── head meta soft-sync ────────────────────────────────────────────────────
-
 function syncHeadMeta(html, job) {
   if (!job.seo) return html;
   if (job.seo.title) {
-    html = html.replace(
-      /<title>[\s\S]*?<\/title>/i,
-      `<title>${esc(job.seo.title)}</title>`
-    );
-    html = html.replace(
-      /(<meta\s+property=["']og:title["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.title)}$2`
-    );
-    html = html.replace(
-      /(<meta\s+name=["']twitter:title["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.title)}$2`
-    );
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${esc(job.seo.title)}</title>`);
+    html = html.replace(/(<meta\s+property=["']og:title["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.title)}$2`);
+    html = html.replace(/(<meta\s+name=["']twitter:title["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.title)}$2`);
   }
   if (job.seo.description) {
-    html = html.replace(
-      /(<meta\s+name=["']description["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.description)}$2`
-    );
-    html = html.replace(
-      /(<meta\s+property=["']og:description["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.description)}$2`
-    );
-    html = html.replace(
-      /(<meta\s+name=["']twitter:description["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.description)}$2`
-    );
+    html = html.replace(/(<meta\s+name=["']description["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.description)}$2`);
+    html = html.replace(/(<meta\s+property=["']og:description["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.description)}$2`);
+    html = html.replace(/(<meta\s+name=["']twitter:description["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.description)}$2`);
   }
   if (job.seo.canonical) {
-    html = html.replace(
-      /(<link\s+rel=["']canonical["']\s+href=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.canonical)}$2`
-    );
-    html = html.replace(
-      /(<meta\s+property=["']og:url["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.canonical)}$2`
-    );
+    html = html.replace(/(<link\s+rel=["']canonical["']\s+href=["'])[^"']*(["'])/i, `$1${esc(job.seo.canonical)}$2`);
+    html = html.replace(/(<meta\s+property=["']og:url["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.canonical)}$2`);
   }
   if (job.seo.robots) {
-    html = html.replace(
-      /(<meta\s+name=["']robots["']\s+content=["'])[^"']*(["'])/i,
-      `$1${esc(job.seo.robots)}$2`
-    );
+    html = html.replace(/(<meta\s+name=["']robots["']\s+content=["'])[^"']*(["'])/i, `$1${esc(job.seo.robots)}$2`);
   }
   return html;
 }
-
-// ─── main hydrate for one page ──────────────────────────────────────────────
 
 function readJobData(html, file) {
   const match = html.match(
@@ -810,80 +613,34 @@ function hydratePage(original, job) {
   let html = original;
 
   html = syncHeadMeta(html, job);
-
   html = setText(html, 'jobOrganization', job.organization);
   html = setText(html, 'jobTitle', job.title);
   html = setText(html, 'breadcrumbCurrent', job.shortTitle || job.title);
   html = setText(html, 'jobSummary', job.summary);
   html = setInner(html, 'jobTags', buildTags(job));
-  html = setText(
-    html,
-    'latestUpdate',
-    job.latestUpdate || currentStage?.summary || 'Recruitment page updated.'
-  );
-  html = setText(
-    html,
-    'updatedAt',
-    job.updated ? `Updated ${fmtDate(job.updated)}` : 'Updated recently'
-  );
-  html = setText(
-    html,
-    'updatedBy',
-    `Updated by ${job.updatedBy || 'GovJobUpdates'}`
-  );
+  html = setText(html, 'latestUpdate', job.latestUpdate || currentStage?.summary || 'Recruitment page updated.');
+  html = setText(html, 'updatedAt', job.updated ? `Updated ${fmtDate(job.updated)}` : 'Updated recently');
+  html = setText(html, 'updatedBy', `Updated by ${job.updatedBy || 'GovJobUpdates'}`);
 
-  const statusLabel =
-    currentStage?.status || job.status || 'Latest update available';
+  const statusLabel = currentStage?.status || job.status || 'Latest update available';
   const tone = currentStage?.tone || toneFor(statusLabel);
   html = setRecruitmentStatus(html, statusLabel, tone);
-  html = setText(
-    html,
-    'mobileStatusLabel',
-    currentStage?.shortLabel || currentStage?.label || 'Latest Stage'
-  );
+  html = setText(html, 'mobileStatusLabel', currentStage?.shortLabel || currentStage?.label || 'Latest Stage');
   html = setText(html, 'mobileStageValue', statusLabel);
 
   const stageLabel = currentStage?.label || 'Recruitment Update';
   const stageDate = currentStage?.date || currentStage?.deadline || null;
   html = setText(html, 'stageCardLabel', 'Current Recruitment Stage');
   html = setText(html, 'stageHeadline', stageLabel);
-  html = setText(
-    html,
-    'stageDate',
-    stageDate ? fmtDateLong(stageDate) : statusLabel
-  );
+  html = setText(html, 'stageDate', stageDate ? fmtDateLong(stageDate) : statusLabel);
   html = setText(html, 'stageStatusText', statusLabel);
 
   const primary = getPrimaryAction(job, currentStage);
   const secondary = getSecondaryAction(job, currentStage);
-  html = setLink(
-    html,
-    'heroPrimaryBtn',
-    primary.url,
-    primary.label,
-    primary.icon || 'fa-arrow-right'
-  );
-  html = setLink(
-    html,
-    'sidePrimaryBtn',
-    primary.url,
-    primary.label,
-    primary.icon || 'fa-arrow-right'
-  );
-  html = setLink(
-    html,
-    'mobilePrimaryBtn',
-    primary.url,
-    primary.label,
-    primary.icon || 'fa-arrow-right'
-  );
-  html = setLink(
-    html,
-    'heroSecondaryBtn',
-    secondary.url,
-    secondary.label,
-    secondary.icon || 'fa-file-alt'
-  );
+  html = setLink(html, 'heroPrimaryBtn', primary.url, primary.label, primary.icon || 'fa-arrow-right');
+  html = setLink(html, 'sidePrimaryBtn', primary.url, primary.label, primary.icon || 'fa-arrow-right');
+  html = setLink(html, 'mobilePrimaryBtn', primary.url, primary.label, primary.icon || 'fa-arrow-right');
+  html = setLink(html, 'heroSecondaryBtn', secondary.url, secondary.label, secondary.icon || 'fa-file-alt');
 
   html = setInner(html, 'metricsGrid', buildMetrics(job, currentStage));
   const qf = buildQuickFacts(job);
@@ -911,12 +668,7 @@ function hydratePage(original, job) {
   html = setText(html, 'ageLimit', job.ageLimit);
   html = setText(html, 'ageRelaxation', job.ageRelaxation, 'Age relaxation as per rules.');
   html = setText(html, 'education', job.education);
-  html = setText(
-    html,
-    'educationNote',
-    job.educationNote,
-    'Refer to the official notification.'
-  );
+  html = setText(html, 'educationNote', job.educationNote, 'Refer to the official notification.');
   html = setText(html, 'otherEligibility', job.otherEligibility);
 
   html = setInner(html, 'feeGrid', buildFees(job));
@@ -925,26 +677,18 @@ function hydratePage(original, job) {
   html = setInner(html, 'selectionFlow', buildSelection(job));
   html = setInner(html, 'documentsGrid', buildDocuments(job));
 
-  const guidance =
-    currentStage?.guidance || job.currentGuidance || job.applySteps || [];
+  const guidance = currentStage?.guidance || job.currentGuidance || job.applySteps || [];
   const guidanceHeading =
     currentStage?.guidanceTitle ||
-    (currentStage?.type === 'application'
-      ? 'How to Apply'
-      : 'What Candidates Should Do Now');
+    (currentStage?.type === 'application' ? 'How to Apply' : 'What Candidates Should Do Now');
   html = setText(html, 'guidanceHeading', guidanceHeading);
   html = setInner(html, 'guidanceSteps', buildGuidanceSteps(guidance));
 
   const applySteps = job.applySteps || [];
-  const showArchive =
-    currentStage?.type !== 'application' && applySteps.length > 0;
+  const showArchive = currentStage?.type !== 'application' && applySteps.length > 0;
   if (showArchive) {
     html = setHidden(html, 'applicationArchive', false);
-    html = setInner(
-      html,
-      'applicationArchiveSteps',
-      buildGuidanceSteps(applySteps)
-    );
+    html = setInner(html, 'applicationArchiveSteps', buildGuidanceSteps(applySteps));
   }
 
   html = setInner(html, 'importantLinks', buildLinks(job));
@@ -959,17 +703,12 @@ function hydratePage(original, job) {
   return html;
 }
 
-// ─── run ────────────────────────────────────────────────────────────────────
-
 if (!fs.existsSync(jobsDir)) {
   console.error(`jobs/ directory not found at ${jobsDir}`);
   process.exit(1);
 }
 
-const files = fs
-  .readdirSync(jobsDir)
-  .filter((f) => f.endsWith('.html'))
-  .sort();
+const files = fs.readdirSync(jobsDir).filter((f) => f.endsWith('.html')).sort();
 
 let changed = 0;
 let skipped = 0;
