@@ -104,7 +104,7 @@ function renderStaticContent(html, job) {
 
   // SEO fields are written to the source HTML, not left for browser-only rendering.
   if (job.seo?.title) {
-    html = html.replace(/<title\\b[^>]*>[\\s\\S]*?<\\/title>/i, '<title>' + esc(job.seo.title) + '</title>');
+    html = html.replace(/<title\b[^>]*>[\\s\\S]*?<\\/title>/i, '<title>' + esc(job.seo.title) + '</title>');
     for (const [selector, value] of [
       ['meta[property="og:title"]', job.seo.title], ['meta[name="twitter:title"]', job.seo.title]
     ]) html = updateMeta(html, selector, value);
@@ -248,7 +248,7 @@ function renderStaticContent(html, job) {
 }
 
 function updateMeta(html, selector, value) {
-  const attrMatch = selector.match(/^(meta)\\[(name|property)=["']([^"']+)["']\\]$/i);
+  const attrMatch = selector.match(/^(meta)\[(name|property)=["']([^"']+)["']\\]$/i);
   if (!attrMatch) return html;
   const expression = new RegExp('(<meta\\b(?=[^>]*\\b' + attrMatch[2] + '=["\\']' + attrMatch[3] + '["\\'])[^>]*\\bcontent=["\\'])[^"\\']*(["\\'][^>]*>)','i');
   return expression.test(html) ? html.replace(expression, (_m,a,b)=>a+escapeHtml(value)+b) : html;
@@ -268,7 +268,7 @@ function staticAction(html, id, action) {
   const expression = new RegExp('(<a\\b[^>]*\\bid=["\\']' + id + '["\\'][^>]*)(>)([\\s\\S]*?)(<\\/a>)','i');
   if (!expression.test(html)) return html;
   return html.replace(expression, (_m, before, open, inner, close) => {
-    let attrs = before.replace(/\\s(?:href|target|rel|aria-disabled|class)=["'][^"']*["']/gi, '');
+    let attrs = before.replace(/\s(?:href|target|rel|aria-disabled|class)=["'][^"']*["']/gi, '');
     const url = action.url && action.url !== '#' ? action.url : '#important-links';
     attrs += ' href="' + escAttr(url) + '"';
     if (/^https?:\\/\\//i.test(url)) attrs += ' target="_blank" rel="noopener noreferrer"';
@@ -276,8 +276,8 @@ function staticAction(html, id, action) {
     attrs += disabledClass;
     const icon = action.icon || 'fa-arrow-right';
     const label = action.label || 'Check Latest Updates';
-    const updatedInner = inner.replace(/<i\\b[^>]*><\\/i>/i, '<i class="fas ' + escAttr(icon) + '"></i>')
-      .replace(/<span\\b[^>]*>[\\s\\S]*?<\\/span>/i, '<span>' + escapeHtml(label) + '</span>');
+    const updatedInner = inner.replace(/<i\b[^>]*><\/i>/i, '<i class="fas ' + escAttr(icon) + '"></i>')
+      .replace(/<span\b[^>]*>[\\s\\S]*?<\\/span>/i, '<span>' + escapeHtml(label) + '</span>');
     return attrs + open + updatedInner + close;
   });
 }
