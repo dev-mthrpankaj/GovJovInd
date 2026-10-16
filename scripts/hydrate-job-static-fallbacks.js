@@ -76,6 +76,29 @@ function hideElement(html, id, shouldHide) {
     return '<' + tag + clean + (shouldHide ? ' hidden' : '') + '>';
   });
 }
+function setAction(html, id, action) {
+  return html.replace(/<a\b([^>]*\bid=["']([^"']+)["'][^>]*)>([\s\S]*?)<\/a>/gi, (whole, attrs, foundId, inner) => {
+    if (foundId !== id) return whole;
+    const url = action && action.url && action.url !== '#' ? action.url : '#important-links';
+    attrs = attrs.replace(/\s(?:href|target|rel|aria-disabled)=["'][^"']*["']/gi, '');
+    attrs = attrs.replace(/\sclass=["']([^"']*)["']/i, (match, classes) => {
+      const updated = classes.split(/\s+/).filter(name => name && name !== 'is-disabled').join(' ');
+      return updated ? ' class="' + updated + '"' : '';
+    });
+    attrs += ' href="' + escapeHtml(url) + '"';
+    if (/^https?:\/\//i.test(url)) attrs += ' target="_blank" rel="noopener noreferrer"';
+    else if (!(action && action.url && action.url !== '#')) attrs += ' aria-disabled="true"';
+    const iconName = (action && action.icon) || 'fa-arrow-right';
+    const label = (action && action.label) || 'Check Latest Updates';
+    inner = inner.replace(/<i\b[^>]*>/i, '<i class="fas ' + escapeHtml(iconName) + '">');
+    inner = inner.replace(/<span\b[^>]*>[\s\S]*?<\/span>/i, '<span>' + escapeHtml(label) + '</span>');
+    return '<a' + attrs + '>' + inner + '</a>';
+  });
+}
+function updateCanonical(html, value) {
+  return html.replace(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/i, tag =>
+    tag.replace(/\bhref=["'][^"']*["']/i, 'href="' + escapeHtml(value) + '"'));
+}
 function fmtDate(value, longFormat) {
   if (!value) return 'As per official schedule';
   const date = new Date(value);
@@ -127,6 +150,28 @@ function renderStaticContent(html, job, file) {
   setText('latestUpdate', job.latestUpdate || (current && current.summary) || 'Recruitment page updated.');
   setText('updatedAt', job.updated ? 'Updated ' + fmtDate(job.updated, false) : 'Updated recently');
   setText('updatedBy', 'Updated by ' + (job.updatedBy || 'GovJobUpdates'));
+
+  if (job.seo && job.seo.canonical) {
+    html = updateCanonical(html, job.seo.canonical);
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bproperty=["']og:url["'])[^>]*>/i, job.seo.canonical);
+  }
+  if (job.seo && job.seo.robots) {
+    html = updateMetaContent(html, /<meta\b(?=[^>]*\bname=["']robots["'])[^>]*>/i, job.seo.robots);
+  }
+  const primaryAction = (current && current.primaryAction && current.primaryAction.url && current.primaryAction.url !== '#') ? current.primaryAction
+    : (job.primaryAction && job.primaryAction.url && job.primaryAction.url !== '#') ? job.primaryAction
+    : (current && current.secondaryAction && current.secondaryAction.url && current.secondaryAction.url !== '#')
+      ? {label:current.secondaryAction.label || 'View Latest Notice',url:current.secondaryAction.url,icon:current.secondaryAction.icon || 'fa-file-alt'}
+    : (job.links && job.links.official) ? {label:'Check Latest Updates',url:job.links.official,icon:'fa-external-link-alt'}
+    : (job.links && job.links.notification) ? {label:'View Recruitment Notice',url:job.links.notification,icon:'fa-file-pdf'}
+    : {label:'Check Latest Updates',url:'#important-links',icon:'fa-bell'};
+  const secondaryAction = (current && current.secondaryAction && current.secondaryAction.url && current.secondaryAction.url !== '#') ? current.secondaryAction
+    : (job.secondaryAction && job.secondaryAction.url && job.secondaryAction.url !== '#') ? job.secondaryAction
+    : (job.links && job.links.notification) ? {label:'Official Notification',url:job.links.notification,icon:'fa-file-pdf'}
+    : (job.links && job.links.official) ? {label:'Official Website',url:job.links.official,icon:'fa-landmark'}
+    : {label:'Important Links',url:'#important-links',icon:'fa-link'};
+  ['heroPrimaryBtn','sidePrimaryBtn','mobilePrimaryBtn'].forEach(id => { html = setAction(html, id, primaryAction); });
+  html = setAction(html, 'heroSecondaryBtn', secondaryAction);
 
   const status = (current && current.status) || job.status || 'Latest update available';
   setHTML('recruitmentStatus', '<span class="gjd-status-dot"></span>' + esc(status));
