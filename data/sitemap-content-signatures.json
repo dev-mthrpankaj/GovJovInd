@@ -277,10 +277,6 @@
       "signature": "4da5202e12ab4f5e71c7895aea882274c61cd72d01e630ba592aec3a507e9071",
       "lastmod": "2026-08-26"
     },
-    "AdmitCard_Details/HTML/UPSC-Civil-Services-Mains-Admit-Card-2026.html": {
-      "signature": "c245d5c879d3b3e39cd87587d053a7efdaab55704809a2d9ebcc96ea4eb5fc1c",
-      "lastmod": "2026-08-14"
-    },
     "AdmitCard_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-City-Intimation-2026.html": {
       "signature": "190cf0d6c1775e0f3c9ea45928665c2ec41f468d18961b2cc727b137199d0c90",
       "lastmod": "2026-08-12"
@@ -953,10 +949,6 @@
       "signature": "0074cf0c1bd8d3430dc1b77dbbd7282064b7024670fb3d41a5fbbc4925f4b7ea",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html": {
-      "signature": "04340e8f4a767d68b9c16d8b3bdf1ebff914bf5934c8fd24e5d8603f0b6f883b",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/1016-BPSC-33rd-Bihar-Judicial-Service-2026.html": {
       "signature": "3d5b4a81da8c7059a8f06a03dbf619acaea569d97cec3ef38436ead6222bb8d2",
       "lastmod": "2026-08-12"
@@ -1012,10 +1004,6 @@
     "Job_Details/HTML/1211-RBI-Officer-Grade-B-2026.html": {
       "signature": "5c931520a97c37be589968f6cb9077ed0b022cb1a50f5473aa7772c4bf10ed6c",
       "lastmod": "2026-08-27"
-    },
-    "Job_Details/HTML/2032-UPSC-IAS-IFS.html": {
-      "signature": "4cdfabce743df1a264b2c24ca36205494ec32fb9b233dfd34da0a30be301c12c",
-      "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html": {
       "signature": "035e08fb347c6f7264b911f340252d4f97523a1d3574c2d4b930b99b43e53963",
@@ -1534,7 +1522,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/bihar-stet-2026.html": {
-      "signature": "04d8a4f9258f811d66f1870a1442628c77450f4acb906b90ed5710afad905f88",
+      "signature": "3eaee3f684027e8d0de118bf0835a63b752254b3aead3045100bc1c4fa5f69ab",
       "lastmod": "2026-10-16"
     },
     "jobs/bihar-vidhan-parishad-admit-card.html": {
@@ -1586,7 +1574,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/cgpsc-adppo-2026.html": {
-      "signature": "ae604d6ec97dc29f2e0a10cc90dba02b8145a19fd2c7407aebcac6673323aec0",
+      "signature": "2705c5c0bbb38f5adbead64eaab124bb5f76d45833838d5192f87d4190b06477",
       "lastmod": "2026-10-16"
     },
     "jobs/chhattisgarh-set-2026.html": {
@@ -1978,7 +1966,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/rrb-railway-section-controller-2026.html": {
-      "signature": "77903929a588578eaa0503c169d706ea2c9ee41fbb8bee322b2f99d5ed813f89",
+      "signature": "f4a1bea4879f32cc5116df0545f8cd26cb0b2373a769ef2b68ab6e98d35458ac",
       "lastmod": "2026-10-16"
     },
     "jobs/rrb-technician-cen-02-2025.html": {
@@ -2209,6 +2197,10 @@
       "signature": "d51899a451d84980cf8a14019a8960d75425a5282ea40749393c3d5d74286b76",
       "lastmod": "2026-10-16"
     },
+    "jobs/upsc-civil-services-ias-ifs-2026.html": {
+      "signature": "b13478a15ffd3d72de83565c31f94c0286387a8eb47350a2bfc4dfd41f821457",
+      "lastmod": "2026-10-17"
+    },
     "jobs/upsc-cms-admit-card.html": {
       "signature": "dc0d2fc5faaff7ad6cc2959e675c316e945f0f845259e3f33e8434b85c352bd4",
       "lastmod": "2026-10-16"
@@ -2271,6 +2263,10 @@
     },
     "jobs/upsssc-lekhpal-advt-02-exam-2025.html": {
       "signature": "e51d5d2e6ee355dcd972ea1a2db8f064a6fa6c9af7e37be96ea6732716a370d4",
+      "lastmod": "2026-10-16"
+    },
+    "jobs/upsssc-lower-pcs-inter-2026.html": {
+      "signature": "add1c9e139612647df1b0d56de1caf368c854a5f13c678f9d55492465bae6f1d",
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-otr.html": {
@@ -2388,10 +2384,6 @@
     "Result_Details/HTML/3006-UPPSC-Staff-Nurse-Allopathy-Supplementary-Result-2026.html": {
       "signature": "6fa5d1c839a08497c2726059c1dd79bceea619f4f5b4f36f7548189c6fa0cc9d",
       "lastmod": "2026-08-12"
-    },
-    "Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html": {
-      "signature": "96a7e545cea224b885ebc57ce59b7af3825768368fe579ff22afb3d8275ef43d",
-      "lastmod": "2026-08-14"
     },
     "Result_Details/HTML/3007-MPESB-Pre-Agriculture-Test-PAT-Result-2026.html": {
       "signature": "717ab9e7ca5bb8607ad20071f5a26538545775f4d36613999f5b8777b2c7df8b",
