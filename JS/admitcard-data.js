@@ -1536,12 +1536,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsconline.nic.in/",
-        "detailPage": "../AdmitCard_Details/HTML/UPSC-Civil-Services-Mains-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0104-20260813213928-cefc1a98",
@@ -2831,11 +2831,11 @@ window.GovJobUpdatesAdmitCards = [
             "Central"
         ],
         "downloadLink": "https://upsconline.nic.in/login",
-        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];

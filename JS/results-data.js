@@ -1882,29 +1882,5 @@ window.GovJobUpdatesResults = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0011-1",
-        "title": "UPSC Civil Services IAS IFS Result 2026",
-        "organization": "Union Public Service Commission",
-        "department": "IAS&IFS",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-15",
-        "status": "released",
-        "tags": [
-            "UPSC",
-            "IAS",
-            "IPS",
-            "IFS",
-            "Central"
-        ],
-        "resultLink": "https://www.upsc.gov.in/exams-related-info/written-result",
-        "detailPage": "../Result_Details/HTML/3006-UPSC-Civil-Services-Prelims-Result-2026.html",
-        "updatedAt": "2026-06-16",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
     }
 ];

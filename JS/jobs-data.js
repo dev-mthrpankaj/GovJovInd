@@ -4704,13 +4704,13 @@ window.GovJobUpdatesJobs = [
         ],
         "applyLink": "https://upsconline.nic.in/login",
         "officialNotification": "https://www.upsc.gov.in/sites/default/files/WindowCAF-CSM-26-Engl-190626_0.pdf",
-        "detailPage": "../Job_Details/HTML/1015-UPSC-CSE-Mains-CAF-Update-2026.html",
+        "detailPage": "../jobs/upsc-various-post-2026.html",
         "updatedAt": "2026-06-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "yes",
         "qualificationSource": "fallback",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {

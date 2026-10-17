@@ -1112,12 +1112,12 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://akc.cbt-exam.in/",
         "objectionLink": "https://akc.cbt-exam.in/",
-        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-06-06",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "answerkey-sheet-0016",
@@ -1166,11 +1166,11 @@ window.GovJobUpdatesAnswerKeys = [
         ],
         "downloadLink": "https://sarkariresult.com.im/wp-content/uploads/2026/05/UPSC-Civil-Services-Answer-GS-Paper-1.pdf",
         "objectionLink": "#",
-        "detailPage": "../Job_Details/HTML/2032-UPSC-IAS-IFS.html",
+        "detailPage": "../HTML/answer-key.html",
         "updatedAt": "2026-05-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];
