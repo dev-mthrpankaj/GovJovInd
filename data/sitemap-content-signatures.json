@@ -1610,7 +1610,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/cwc-assistant-manager-2026.html": {
-      "signature": "4d548f130643a21ed81328bdf05dd7c4b8e72a572a28a9c1368d1e6ad7ffa988",
+      "signature": "dc97d5d17d5e54f584e93eaa6222eac1c600803763bb4ede497aa96818a57976",
       "lastmod": "2026-10-18"
     },
     "jobs/dav-public-school-2026.html": {
@@ -1958,7 +1958,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/rrb-junior-engineer-2026.html": {
-      "signature": "2ac8633ebc0fec0a98c77253e0cea95222264e092693ff475c792396c23ea35b",
+      "signature": "84cf65d2dfcc53d98cdc69b5e48799afc539a0dbfbf0e8d0e81bb2ff9c587f38",
       "lastmod": "2026-10-18"
     },
     "jobs/rrb-railway-alp.html": {
@@ -2170,7 +2170,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/uppsc-assistant-teacher-july-2025.html": {
-      "signature": "83fd05a7fb7e141291fe1928493f46a39962c6a2b4847727fb005dc0727cd186",
+      "signature": "75a606d0a092f8ada5375084bf259ee51592155b8f1115d034404f1461619f27",
       "lastmod": "2026-10-18"
     },
     "jobs/uppsc-assistant-town-planner-nov-2025.html": {
@@ -2202,8 +2202,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsc-civil-services-ias-ifs-2026.html": {
-      "signature": "b13478a15ffd3d72de83565c31f94c0286387a8eb47350a2bfc4dfd41f821457",
-      "lastmod": "2026-10-17"
+      "signature": "67ca02861b05c0577c0ea9ac12ac742518e197f82aec46ee08e2b41947df88cb",
+      "lastmod": "2026-10-18"
     },
     "jobs/upsc-cms-admit-card.html": {
       "signature": "dc0d2fc5faaff7ad6cc2959e675c316e945f0f845259e3f33e8434b85c352bd4",
@@ -2278,7 +2278,7 @@
       "lastmod": "2026-10-01"
     },
     "jobs/upsssc-pet-2026.html": {
-      "signature": "5a19acf11f8a557e81ed13478e656293390fb95160b60a521d623d831a12a8b7",
+      "signature": "1801e3e4cc7a2c4bc9728f4ca91adbc3c26e6ac7eee96bbd8af3dd8827a900d7",
       "lastmod": "2026-10-18"
     },
     "jobs/upsssc-pharmaceutical-ayurvedic-2024.html": {
@@ -2361,6 +2361,18 @@
       "signature": "01a4cc267212ab2fbdb9e57bee446a2a59554a10cd20df1f023c208cc8377bb7",
       "lastmod": "2026-10-10"
     },
+    "rank-predictor/ssc-cpo/index.html": {
+      "signature": "989fdc8f623d50da1389ce0098d1dbccc87b4f4857163d40c4aec065b00b03b9",
+      "lastmod": "2026-10-18"
+    },
+    "rank-predictor/up-home-guard/index.html": {
+      "signature": "12993a831146cbe43e2fd6e9a75adc82897c59d13338fff4d343002b6c4e14f6",
+      "lastmod": "2026-10-18"
+    },
+    "rank-predictor/up-police/index.html": {
+      "signature": "3100db7e91a53465455d79e0b59ed505863770f11a44f87252e13785c6c21b78",
+      "lastmod": "2026-10-18"
+    },
     "rank-predictor/uppsc-atp-2026/index.html": {
       "signature": "79bf1bcfec9101fcdb05488e3a3fe7f5c880243be254df2760f30129ff2a1a0f",
       "lastmod": "2026-10-09"
@@ -2368,6 +2380,10 @@
     "rank-predictor/upsssc-lower-pcs-2026/index.html": {
       "signature": "585dead5887490b086e52381eceb73d2d629ad38f71ce63cb810290147ea764d",
       "lastmod": "2026-10-09"
+    },
+    "rank-predictor/upsssc-pet-2026/index.html": {
+      "signature": "109b8a89b34bf88280699f9df7c495872731fa5eff69134dccf77d661eef8ab8",
+      "lastmod": "2026-10-18"
     },
     "Result_Details/HTML/2156-JPSC-Combined-Civil-Services-Prelims-Result-2026.html": {
       "signature": "bc51394874ece4d5d5edaf977df13a387b45aede566d45bd1b14a3a57199556c",
