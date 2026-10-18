@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0285-20261018095356-a60b1faa",
+        "title": "CWC Assistant Manager Online Form 2026 for 327 Post",
+        "organization": "CWC Assistant Manager",
+        "department": "CWC",
+        "category": "Central Government",
+        "year": "2026",
+        "qualification": "Two years Post Graduation Degree/Post Graduation Diploma in any Discipline More Details Read the Notification.",
+        "totalPosts": "327",
+        "startDate": "2026-10-17",
+        "lastDate": "2026-11-15",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://ibpsreg.ibps.in/cwcaug26/",
+        "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/10/cwc-notice-2026.pdf",
+        "detailPage": "../jobs/nicl-assistant-2026.html",
+        "updatedAt": "2026-10-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "resolved",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0284-20261016210730-773542d2",
         "title": "UPSSSC Lower PCS 10+2 Online Form 2026 for 1784 Post",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
