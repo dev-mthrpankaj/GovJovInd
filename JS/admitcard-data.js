@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0107-20260814210727-c49487e0",
+        "title": "UPSC Civil Services Mains Admit Card 2026",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-08-24",
+        "examEndDate": "",
+        "releaseDate": "2026-08-14",
+        "status": "exam-over",
+        "tags": [],
+        "downloadLink": "https://upsconline.nic.in/",
+        "detailPage": "../jobs/upsc-civil-services-ias-ifs-2026.html",
+        "updatedAt": "2026-10-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0147-20260910140153-fd28ad5e",
         "title": "UPSSSC PET Admit Card 2026 | Preliminary Eligibility Test",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
@@ -1524,26 +1544,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0107-20260814210727-c49487e0",
-        "title": "UPSC Civil Services Mains Admit Card 2026",
-        "organization": "Union Public Service Commission",
-        "department": "UPSC",
-        "category": "Central Government",
-        "year": "2026",
-        "examDate": "2026-08-24",
-        "examEndDate": "",
-        "releaseDate": "2026-08-14",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://upsconline.nic.in/",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-08-14",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "admit-sheet-0104-20260813213928-cefc1a98",
         "title": "Allahabad High Court Research Associates Admit Card 2026",
         "organization": "Allahabad High Court",
@@ -2811,31 +2811,5 @@ window.GovJobUpdatesAdmitCards = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0006",
-        "title": "UPSC Civil Services IAS IFS Admit Card 2026",
-        "organization": "Union Public Service Commision",
-        "department": "UPSC",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-05-24",
-        "examEndDate": "",
-        "releaseDate": "2026-05-17",
-        "status": "exam-over",
-        "tags": [
-            "UPSC",
-            "IAS",
-            "IPS",
-            "IFS",
-            "Central"
-        ],
-        "downloadLink": "https://upsconline.nic.in/login",
-        "detailPage": "../HTML/admitcard.html",
-        "updatedAt": "2026-05-18",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     }
 ];

@@ -1145,32 +1145,5 @@ window.GovJobUpdatesAnswerKeys = [
         "telegramReady": "yes",
         "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "answerkey-sheet-0009",
-        "title": "UPSC Civil Services IAS IFS Answer Key 2026",
-        "organization": "Union Public Service Commission",
-        "department": "Civil Services",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-05-24",
-        "examEndDate": "",
-        "releaseDate": "2026-05-27",
-        "objectionLastDate": "",
-        "status": "objection-closed",
-        "tags": [
-            "UPSC",
-            "CSE Pre",
-            "IAS",
-            "IFS"
-        ],
-        "downloadLink": "https://sarkariresult.com.im/wp-content/uploads/2026/05/UPSC-Civil-Services-Answer-GS-Paper-1.pdf",
-        "objectionLink": "#",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-05-29",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
     }
 ];
