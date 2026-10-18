@@ -7,9 +7,9 @@
     title: "SSC CPO Previous Year Question Papers PDF: Paper 1 & Paper 2 Download",
     category: "SSC",
     date: "2026-10-18",
-    image: "../Assets/Home%20Page/GovJobUpdates_Resized_1790774683916.webp",
+    image: "../Assets/Home%20Page/GovJobUpdates_Resized_1792324308590.webp",
     url: "student-hub/ssc-cpo-previous-year-pyqs.html",
-    excerpt: "Download SSC CPO previous year question papers PDF for 2022 to 2025, Paper 1 and Paper 2. Understand the revised 2026 pattern (100-question Paper 1, 160-question Paper 2) and practise the right way."
+    excerpt: "Download SSC CPO previous year question papers PDF for 2019 to future exams, Paper 1 and Paper 2. Understand the revised 2026 pattern (100-question Paper 1, 160-question Paper 2) and practise the right way."
 },
 
     {
