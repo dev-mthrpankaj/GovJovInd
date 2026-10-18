@@ -2204,7 +2204,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "5",
         "startDate": "2026-08-19",
         "lastDate": "2026-10-18",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://rojgaarsangam.up.gov.in/JobSeekerLogin?ReturnUrl=/Job/PHPDeveloper-51206",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/08/Social-Media-Content-Creator-Notification-2026.pdf",

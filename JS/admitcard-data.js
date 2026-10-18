@@ -73,7 +73,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-07",
         "examEndDate": "2026-10-18",
         "releaseDate": "2026-10-06",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/JAIL_VAN_TAC26/VAN_PPT/default_tac.htm",
         "detailPage": "../jobs/mpesb-van-rakshak-jail-prahari-2026.html",
