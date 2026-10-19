@@ -22,24 +22,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0183-20261019155208-ea7e9848",
-        "title": "SBI Junior Associates Clerk Backlog Result 2026",
-        "organization": "State Bank Of India",
-        "department": "SBI",
-        "category": "Banking",
-        "year": "SBI",
-        "resultDate": "2026-10-17",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://sbi.bank.in/web/careers/ja-spldrive-pre-2026",
-        "detailPage": "../jobs/sbi-junior-associates-clerk-2026.html",
-        "updatedAt": "2026-10-19",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0132-20260903170828-ff0a2f56",
         "title": "UPPSC Assistant Teacher LT Grade Final Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",

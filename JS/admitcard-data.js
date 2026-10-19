@@ -24,6 +24,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0201-20261019201842-f435468a",
+        "title": "SBI Junior Associates Clerk Backlog Mains Admit Card 2026 for 1538 Post",
+        "organization": "State  Bank of India",
+        "department": "SBI",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-10-29",
+        "examEndDate": "",
+        "releaseDate": "2026-10-19",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/sbijasrdjl26/oecla_oct26/login.php?appid=04e9489a07d6ad26422f6cd271a26ea2",
+        "detailPage": "../jobs/sbi-junior-associates-clerk-2026.html",
+        "updatedAt": "2026-10-19",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0107-20260814210727-c49487e0",
         "title": "UPSC Civil Services Mains Admit Card 2026",
         "organization": "Union Public Service Commission",
