@@ -1044,26 +1044,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0146-20260910135801-f48a05f9",
-        "title": "SBI Junior Associates Clerk Backlog Admit Card 2026 for 1538 Post",
-        "organization": "State Bank of India",
-        "department": "Banking",
-        "category": "Central Government",
-        "year": "2026",
-        "examDate": "2026-09-16",
-        "examEndDate": "",
-        "releaseDate": "2026-09-09",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibpsreg.ibps.in/sbijasrdjl26/oecla_sep26/login.php?appid=59aa359ce90f3aa7138427a0a18efaa7",
-        "detailPage": "../jobs/sbi-junior-associates-clerk-2026.html",
-        "updatedAt": "2026-09-10",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0149-20260910194246-9b480ffa",
         "title": "MPPSC Assistant Town Planner Admit Card 2026",
         "organization": "Madhya Pradesh Public Service Commission",
