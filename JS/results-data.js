@@ -22,6 +22,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0183-20261019204914-a7fed3c6",
+        "title": "UPSC CDS II Result 2026 for 451 Post",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Defence",
+        "year": "2026",
+        "resultDate": "2026-10-19",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.upsc.gov.in/sites/default/files/WR-CDSE-II-2026-Engl-19102026.pdf",
+        "detailPage": "../jobs/upsc-cds-ii-2026.html",
+        "updatedAt": "2026-10-19",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0132-20260903170828-ff0a2f56",
         "title": "UPPSC Assistant Teacher LT Grade Final Result 2026",
         "organization": "Uttar Pradesh Public Service Commission",

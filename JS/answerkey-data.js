@@ -466,28 +466,6 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0064-20260916174600-3654bb3e",
-        "title": "UPSC CDS II Answer Key 2026 for 451 Post",
-        "organization": "Union Public Service Commission",
-        "department": "UPSC",
-        "category": "Defence",
-        "year": "2026",
-        "examDate": "2026-09-13",
-        "examEndDate": "",
-        "releaseDate": "2026-09-16",
-        "objectionLastDate": "",
-        "status": "objection-closed",
-        "tags": [],
-        "downloadLink": "https://www.upsc.gov.in/whats-new/Combined%20Defence%20Services%20Examination%20%28II%29%2C%202026/Provisional%20Answer%20Key",
-        "objectionLink": "https://www.upsc.gov.in/whats-new/Combined%20Defence%20Services%20Examination%20%28II%29%2C%202026/Provisional%20Answer%20Key",
-        "detailPage": "../jobs/upsc-cds-ii-2026.html",
-        "updatedAt": "2026-09-16",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "answerkey-sheet-0063-20260914184349-76283f44",
         "title": "DSSSB Answer Key 2026 for Various Post",
         "organization": "Delhi Subordinate Services Selection Board DSSSB",
