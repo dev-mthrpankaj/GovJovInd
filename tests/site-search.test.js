@@ -41,6 +41,13 @@ test('unsafe and external URLs are rejected, nested site roots work',()=>{
   assert.equal(safeUrl('../outside.html',base+'project/'),null);
   assert.equal(safeUrl('HTML/quiz.html',base+'project/'),base+'project/HTML/quiz.html');
 });
+test('local file previews allow only same-project file links',()=>{
+  const localBase='file:///C:/site/';
+  assert.equal(safeUrl('typing-test/index.html',localBase),'file:///C:/site/typing-test/index.html');
+  assert.equal(safeUrl('../outside.html',localBase),null);
+  assert.equal(safeUrl('file:///C:/private/outside.html',localBase),null);
+  assert.equal(safeUrl('https://govjobupdates.com/typing-test/',localBase),null);
+});
 test('empty queries and category filters remain usable; hostile text stays data',()=>{
   assert.equal(search(index,'','Typing').length,index.filter(x=>x.category==='Typing').length);
   assert.equal(search(index,'thisdoesnotexist12345').length,0);

@@ -17,7 +17,11 @@
     }).filter(Boolean).sort((a,b)=>b.score-a.score||a.item.title.localeCompare(b.item.title)).map(x=>x.item);
   }
   function safeUrl(value, base) {
-    try {const url=new URL(value,base);return /^https?:$/.test(url.protocol)&&url.origin===new URL(base).origin&&url.pathname.startsWith(new URL(base).pathname)?url.href:null;}catch{return null;}
+    try {
+      const url=new URL(value,base),root=new URL(base);
+      const supportedProtocol=/^https?:$/.test(url.protocol)||(root.protocol==='file:'&&url.protocol==='file:');
+      return supportedProtocol&&url.origin===root.origin&&url.pathname.startsWith(root.pathname)?url.href:null;
+    }catch{return null;}
   }
   function articleRecords(rows, base) {
     return (Array.isArray(rows)?rows:[]).flatMap(row=>{
