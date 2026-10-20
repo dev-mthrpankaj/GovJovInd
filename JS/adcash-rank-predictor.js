@@ -1,21 +1,19 @@
 (() => {
   'use strict';
 
-  // Rank Predictor ads — JS only, no HTML edits
+  // Rank Predictor exam pages only: /rank-predictor/exam-slug/
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
   if (!/\/rank-predictor\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
   if (document.documentElement.dataset.rankAdsBooted === '1') return;
   document.documentElement.dataset.rankAdsBooted = '1';
 
-  // ===== EXOCLICK zones (apne zone IDs yahan) =====
+  // Same zones as jobs (adcash-jobs.js) — change if needed
   const EXOCLICK = {
     enabled: true,
     zones: {
-      // Desktop skyscraper 160x600
-      skyscraper: '6054152',
-      // Form ke baad 300x250 (in-content)
-      afterForm: '6048598'
+      skyscraper: '6054152', // 160x600 desktop rail
+      afterForm: '6048598'   // 300x250 after form
     }
   };
 
@@ -36,81 +34,89 @@
     return wrap;
   };
 
-  const loadExoClick = (frame, zoneId) => {
+  const ensureAdProvider = () =>
+    new Promise((resolve) => {
+      if (window.AdProvider && document.querySelector('script[src*="ad-provider.js"]')) {
+        resolve();
+        return;
+      }
+      window.AdProvider = window.AdProvider || [];
+      const existing = document.querySelector('script[src*="ad-provider.js"]');
+      if (existing) {
+        existing.addEventListener('load', () => resolve(), { once: true });
+        // already loaded
+        if (existing.dataset.loaded === '1') resolve();
+        setTimeout(resolve, 800);
+        return;
+      }
+      const script = document.createElement('script');
+      script.async = true;
+      script.type = 'application/javascript';
+      script.src = 'https://a.magsrv.com/ad-provider.js';
+      script.onload = () => {
+        script.dataset.loaded = '1';
+        resolve();
+      };
+      script.onerror = () => resolve();
+      document.head.appendChild(script);
+    });
+
+  const loadExoClick = async (frame, zoneId) => {
     if (!frame || !zoneId) return;
+    frame.innerHTML = '';
 
     const ins = document.createElement('ins');
     ins.className = 'eas6a97888e2';
     ins.dataset.zoneid = zoneId;
     frame.appendChild(ins);
 
+    await ensureAdProvider();
     window.AdProvider = window.AdProvider || [];
-
-    if (!document.querySelector('script[src*="ad-provider.js"]')) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.type = 'application/javascript';
-      script.src = 'https://a.magsrv.com/ad-provider.js';
-      document.head.appendChild(script);
-    }
-
-    const pushScript = document.createElement('script');
-    pushScript.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
-    frame.appendChild(pushScript);
+    window.AdProvider.push({ serve: {} });
   };
 
   const hideIfEmpty = (slot) => {
-    setTimeout(() => {
+    const check = () => {
       if (!slot || !slot.isConnected) return;
       const frame = slot.querySelector('.gjd-ad-frame');
       if (!frame) return;
       const hasCreative = frame.querySelector(
-        'iframe, img, video, a[href], ins iframe, ins img, ins div[style], ins > div'
+        'iframe, img, video, a[href], ins iframe, ins img'
       );
-      if (!hasCreative) {
-        slot.classList.add('is-empty');
-      }
-    }, 4500);
+      if (!hasCreative) slot.classList.add('is-empty');
+    };
+    setTimeout(check, 3500);
+    setTimeout(check, 7000);
   };
 
-  const injectAfterForm = () => {
+  /** Form khatam = poora #rankSubmitForm ke baad / Rank Guide se pehle */
+  const injectAfterForm = async () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.afterForm) return;
     if (document.querySelector('[data-ad-slot="rank-after-form"]')) return;
 
-    // Poora form/Step-4 block — checkbox ke andar nahi
-    const formBlock =
-      document.querySelector('#dataConsent')?.closest(
-        'details, .form-section-card, .form-accordion, section, form'
-      ) ||
-      document.querySelector('#consentTitle')?.closest(
-        'details, .form-section-card, .form-accordion, section, form'
-      ) ||
-      document.querySelector('.review-submit-grid')?.closest(
-        'details, .form-section-card, .form-accordion, section, form'
-      ) ||
-      document.querySelector('#rankPredictorApp form') ||
-      document.querySelector('#rankPredictorApp [data-panel="submit"]');
-
-    const guide = document.querySelector(
-      '#rankPredictorSeoSupport, .page-guide, [aria-labelledby="rankGuideTitle"]'
-    );
+    const submitForm = document.querySelector('#rankSubmitForm');
+    const guide = document.querySelector('#rankPredictorSeoSupport, .page-guide');
+    const formActions = document.querySelector('#rankSubmitForm .form-actions');
 
     const slot = makeSlot('rank-after-form');
     slot.classList.add('gjd-ad--rectangle');
 
-    if (formBlock && formBlock.parentNode) {
-      formBlock.insertAdjacentElement('afterend', slot);
+    if (submitForm && submitForm.parentNode) {
+      // Poori form ke baad (Submit/Reset ke neeche)
+      submitForm.insertAdjacentElement('afterend', slot);
+    } else if (formActions && formActions.parentNode) {
+      formActions.insertAdjacentElement('afterend', slot);
     } else if (guide && guide.parentNode) {
       guide.insertAdjacentElement('beforebegin', slot);
     } else {
       return;
     }
 
-    loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.afterForm);
+    await loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.afterForm);
     hideIfEmpty(slot);
   };
 
-  const injectSkyscraper = () => {
+  const injectSkyscraper = async () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.skyscraper) return;
     if (!isDesktopRail()) return;
     if (document.querySelector('[data-ad-slot="rank-skyscraper"]')) return;
@@ -118,7 +124,8 @@
     const slot = makeSlot('rank-skyscraper');
     slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
     document.body.appendChild(slot);
-    loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.skyscraper);
+
+    await loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.skyscraper);
     hideIfEmpty(slot);
   };
 
@@ -128,7 +135,7 @@
     style.id = 'rank-predictor-ads-css';
     style.textContent = `
       .gjd-ad {
-        margin: 20px auto;
+        margin: 24px auto;
         text-align: center;
         max-width: 100%;
       }
@@ -151,11 +158,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 50px;
+        min-height: 0;
       }
       .gjd-ad--rank-after-form {
         max-width: 336px;
-        margin: 24px auto;
+        margin: 28px auto 8px;
         clear: both;
       }
       .gjd-ad--rank-skyscraper.gjd-ad--rail {
@@ -170,22 +177,20 @@
         display: none !important;
       }
       @media (max-width: 1100px) {
-        .gjd-ad--desktop-only {
-          display: none !important;
-        }
+        .gjd-ad--desktop-only { display: none !important; }
       }
     `;
     document.head.appendChild(style);
   };
 
-  const boot = () => {
+  const boot = async () => {
     ensureCss();
-    injectAfterForm();
-    injectSkyscraper();
+    await injectAfterForm();
+    await injectSkyscraper();
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
+    document.addEventListener('DOMContentLoaded', () => { boot(); }, { once: true });
   } else {
     boot();
   }
