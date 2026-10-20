@@ -313,10 +313,6 @@
       "signature": "93822fb28b91c9b61951b756d14dfb72de310db32127cf5441796e0b0fddf13b",
       "lastmod": "2026-08-12"
     },
-    "AnswerKey_Details/HTML/AIBE-XXI-Final-Answer-Key-2026.html": {
-      "signature": "fa0ab78cc210e748eebd908a269a685f2b86b93c392c42d77556695b11a7b4cc",
-      "lastmod": "2026-08-12"
-    },
     "AnswerKey_Details/HTML/Bihar-BPSC-Stenographer-Final-Answer-Key-2026.html": {
       "signature": "80fde9422867662f8ceda2e679f48a1c38d32977995affbad8c18a3207c28414",
       "lastmod": "2026-08-14"
@@ -1501,6 +1497,10 @@
       "signature": "73edb724c67450de793ded6a891dce5ad6b35ce84c23559c94a45d651ce9f462",
       "lastmod": "2026-10-16"
     },
+    "jobs/aibe-xxii-2026.html": {
+      "signature": "39168f0795f15be41b76363be8503ae5928c30dc7f014704707db0faa1e524cd",
+      "lastmod": "2026-10-20"
+    },
     "jobs/aiims-norcet-11th-2026.html": {
       "signature": "fee0b22a4ce53d62e07569dd8598a1d6153b419110f26f94a14a33e711e9f5c3",
       "lastmod": "2026-10-16"
@@ -2432,10 +2432,6 @@
     "Result_Details/HTML/3010-UPSSSC-Technical-Assistant-Group-C-Eligibility-Result-2026.html": {
       "signature": "c99a678e61d3d96f5eae4ba3e34dfc5f1b339da6eee29ac39e3732dd0c8406b7",
       "lastmod": "2026-08-14"
-    },
-    "Result_Details/HTML/AIBE-All-India-Bar-Exam-XXI-Result-2026.html": {
-      "signature": "35cd71fcd6384a9a51d9ffd9ae0873e2a3d7c699c04a6caa811dfe7e32ce73c6",
-      "lastmod": "2026-08-12"
     },
     "Result_Details/HTML/AIIMS-CRE-5th-Group-B-C-Result-2026.html": {
       "signature": "de3c54fb648a20fb2df6bf425ebd22e8481c2f08e32aabcc352aa3aaad3d2acd",
