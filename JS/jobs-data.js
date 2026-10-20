@@ -66,13 +66,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://aibe.digivarsity.online/WebApp/Forms/Authentication.aspx",
         "officialNotification": "https://aibe.digivarsity.online/WebApp/Forms/Home.aspx",
-        "detailPage": "../jobs/bank-of-india-so-2026.html",
+        "detailPage": "../jobs/aibe-xxii-2026.html",
         "updatedAt": "2026-10-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "resolved",
+        "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
     {

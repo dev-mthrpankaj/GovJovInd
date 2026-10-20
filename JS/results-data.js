@@ -1518,24 +1518,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0063-20260718211647-f2f96bde",
-        "title": "AIBE All India Bar Exam XXI Result 2026",
-        "organization": "All India Bar Examination",
-        "department": "AIBE",
-        "category": "Judiciary",
-        "year": "2026",
-        "resultDate": "2026-07-18",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://aibe.digivarsity.online/WebApp/Forms/UserAuthentication.aspx",
-        "detailPage": "../Result_Details/HTML/AIBE-All-India-Bar-Exam-XXI-Result-2026.html",
-        "updatedAt": "2026-07-18",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0059-20260717124124-cac5f6a3",
         "title": "NTA SWAYAM Result 2026 : Score Card – Out",
         "organization": "Natinal Testing Agency",
