@@ -366,24 +366,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0166-20261002061140-06554e93",
-        "title": "RRB Railway ALP Assistant Loco Pilot CBT II Result 2026",
-        "organization": "Railway  Recruitment Board (RRB)",
-        "department": "RRB",
-        "category": "Central Government",
-        "year": "2026",
-        "resultDate": "2026-10-01",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/97789/login.html",
-        "detailPage": "../jobs/rrb-railway-alp.html",
-        "updatedAt": "2026-10-02",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0167-20261002064435-7369ef34",
         "title": "RPSC APO Result 2026",
         "organization": "Rajasthan Public Service Commission",
