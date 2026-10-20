@@ -1,29 +1,26 @@
 (() => {
   'use strict';
 
-  // Rank Predictor exam pages only: /rank-predictor/exam-slug/
   const path = String(window.location.pathname || '').replace(/\\/g, '/');
   if (!/\/rank-predictor\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
   if (document.documentElement.dataset.rankAdsBooted === '1') return;
   document.documentElement.dataset.rankAdsBooted = '1';
 
-  // Same ExoClick zones as jobs
   const EXOCLICK = {
     enabled: true,
     zones: {
-      skyscraper: '6054152', // 160x600 — same as adcash-jobs.js
-      afterForm: '6048598'   // 300x250 after form
+      skyscraper: '6054152',
+      afterForm: '6048598'
     }
   };
 
   const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
 
-  // Match jobs makeSlot shape (slotKey drives CSS like gjd-ad--skyscraper)
-  const makeSlot = (slotKey, network = 'exoclick') => {
+  const makeSlot = (slotKey) => {
     const wrap = document.createElement('aside');
-    wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--${network}`;
-    wrap.dataset.adSlot = slotKey === 'skyscraper' ? 'rank-skyscraper' : `rank-${slotKey}`;
+    wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--exoclick`;
+    wrap.dataset.adSlot = slotKey === 'skyscraper' ? 'rank-skyscraper' : 'rank-after-form';
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
       <div class="gjd-ad-label">
@@ -35,7 +32,7 @@
     return wrap;
   };
 
-  // Same ExoClick loader pattern as adcash-jobs.js
+  // Jobs-identical ExoClick loader
   const loadExoClick = (frame, zoneId) => {
     if (!frame || !zoneId) return;
 
@@ -69,7 +66,6 @@
       );
       if (!hasCreative) {
         slot.classList.add('is-empty');
-        // Non-rail: hide fully. Rail: keep space, dim (jobs style)
         if (!isRail) slot.hidden = true;
       }
     };
@@ -77,10 +73,8 @@
     setTimeout(check, 8000);
   };
 
-  /** After full submit form — never inside consent */
   const injectAfterForm = () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.afterForm) return;
-
     document.querySelectorAll('[data-ad-slot="rank-after-form"]').forEach((el) => el.remove());
 
     const submitForm = document.querySelector('#rankSubmitForm');
@@ -89,7 +83,6 @@
 
     const slot = makeSlot('after-form');
     slot.classList.add('gjd-ad--rectangle');
-    slot.dataset.adSlot = 'rank-after-form';
 
     if (submitForm && submitForm.parentNode) {
       submitForm.insertAdjacentElement('afterend', slot);
@@ -104,8 +97,9 @@
   };
 
   /**
-   * Jobs-style sticky skyscraper rail
-   * Rank pages have no .gjd-layout — turn #rankPredictorApp into a 2-col grid on desktop
+   * Jobs-style rail:
+   * Wrap ALL page content in .rank-ad-content-col (column 1)
+   * Skyscraper in column 2 — sticky, no overlap with tabs/forms
    */
   const injectSkyscraper = () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.skyscraper) return;
@@ -113,16 +107,27 @@
 
     document.querySelectorAll('[data-ad-slot="rank-skyscraper"]').forEach((el) => el.remove());
 
-    const app = document.querySelector('#rankPredictorApp') || document.querySelector('main.rank-predictor-page');
+    const app =
+      document.querySelector('#rankPredictorApp') ||
+      document.querySelector('main.rank-predictor-page');
     if (!app) return;
+
+    // Already wrapped?
+    let contentCol = app.querySelector(':scope > .rank-ad-content-col');
+    if (!contentCol) {
+      contentCol = document.createElement('div');
+      contentCol.className = 'rank-ad-content-col';
+      // Move every current child into content column
+      while (app.firstChild) {
+        contentCol.appendChild(app.firstChild);
+      }
+      app.appendChild(contentCol);
+    }
 
     app.classList.add('rank-has-ad-rail');
 
     const slot = makeSlot('skyscraper');
     slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
-    slot.dataset.adSlot = 'rank-skyscraper';
-
-    // Last child of main = right rail column (grid)
     app.appendChild(slot);
 
     loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.skyscraper);
@@ -134,7 +139,7 @@
     const style = document.createElement('style');
     style.id = 'rank-predictor-ads-css';
     style.textContent = `
-      /* Shared ad chrome (jobs-aligned) */
+      /* ---- in-content 300x250 ---- */
       .gjd-ad {
         display: flex;
         flex-direction: column;
@@ -145,7 +150,6 @@
         border-radius: 14px;
         background: #f8fbfe;
         overflow: hidden;
-        max-width: 100%;
         box-sizing: border-box;
       }
       .gjd-ad-label {
@@ -174,45 +178,56 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        max-width: 100%;
         overflow: hidden;
       }
-      .gjd-ad--rectangle .gjd-ad-frame,
-      .gjd-ad--after-form .gjd-ad-frame {
+      .gjd-ad--after-form .gjd-ad-frame,
+      .gjd-ad--rectangle .gjd-ad-frame {
         min-height: 250px;
         max-width: 300px;
       }
-      .gjd-ad--after-form,
       .gjd-ad[data-ad-slot="rank-after-form"] {
         max-width: 336px;
         margin: 28px auto 12px;
-        clear: both;
       }
       .gjd-ad.is-empty:not(.gjd-ad--rail) {
         display: none !important;
       }
 
-      /* ===== Jobs-style sticky skyscraper rail ===== */
+      /* ---- Jobs-style desktop rail (no overlap) ---- */
       @media (min-width: 1101px) {
         #rankPredictorApp.rank-has-ad-rail,
         main.rank-predictor-page.rank-has-ad-rail {
-          display: grid;
+          display: grid !important;
           grid-template-columns: minmax(0, 1fr) 176px;
           gap: 18px;
           align-items: start;
-          width: min(1180px, calc(100% - 32px));
-          margin-left: auto;
-          margin-right: auto;
+          width: min(1180px, calc(100% - 24px)) !important;
+          max-width: min(1180px, calc(100% - 24px)) !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: 0;
+          padding-right: 0;
           box-sizing: border-box;
         }
-        /* All direct children except the rail stay in first column */
-        #rankPredictorApp.rank-has-ad-rail > *:not(.gjd-ad--skyscraper),
-        main.rank-predictor-page.rank-has-ad-rail > *:not(.gjd-ad--skyscraper) {
+
+        .rank-ad-content-col {
           grid-column: 1;
+          min-width: 0;
+          max-width: 100%;
         }
+
+        /* Sticky tabs / form-actions stay INSIDE content col only */
+        .rank-ad-content-col .tab-card,
+        .rank-ad-content-col .form-actions,
+        .rank-ad-content-col .sticky-actions {
+          max-width: 100%;
+          left: auto !important;
+          right: auto !important;
+        }
+
         .gjd-ad--skyscraper.gjd-ad--rail {
           grid-column: 2;
-          grid-row: 1 / span 50;
+          grid-row: 1;
           margin: 0;
           padding: 10px 6px;
           align-self: start;
@@ -221,14 +236,19 @@
           top: calc(92px + 8px);
           width: 176px;
           min-height: 620px;
-          z-index: 5;
+          z-index: 4;
+          background: #f8fbfe;
+          border: 1px solid #e1eaf4;
+          border-radius: 14px;
         }
+
         .gjd-ad--skyscraper .gjd-ad-frame {
           min-height: 600px;
           width: 160px;
           min-width: 160px;
           max-width: 160px;
         }
+
         .gjd-ad--skyscraper.gjd-ad--rail .gjd-ad-label {
           flex-direction: column;
           gap: 0.15rem;
@@ -238,7 +258,7 @@
           line-height: 1.25;
           text-align: center;
         }
-        /* Empty rail: keep space, soft dim (jobs) */
+
         .gjd-ad--skyscraper.is-empty:not([hidden]) {
           opacity: 0.35;
           pointer-events: none;
@@ -246,18 +266,20 @@
       }
 
       .gjd-ad--desktop-only { display: flex; }
-      .gjd-ad--mobile-only { display: none; }
 
       @media (max-width: 1100px) {
         .gjd-ad--rail,
-        .gjd-ad--skyscraper,
-        .gjd-ad--desktop-only {
+        .gjd-ad--skyscraper {
           display: none !important;
         }
         #rankPredictorApp.rank-has-ad-rail,
         main.rank-predictor-page.rank-has-ad-rail {
-          display: block;
-          width: auto;
+          display: block !important;
+          width: calc(100% - 16px) !important;
+          max-width: 1200px !important;
+        }
+        .rank-ad-content-col {
+          display: contents;
         }
       }
 
