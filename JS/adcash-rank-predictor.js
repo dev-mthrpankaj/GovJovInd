@@ -1,263 +1,136 @@
 (() => {
   'use strict';
 
-  // Adsterra — Rank Predictor landing + form pages
-  // Units: same as quiz/jobs (160×600 + 300×250)
-  const CONFIG = {
-    enabled: true,
-    invokeHost: 'www.highperformanceformat.com',
-    units: {
-      skyscraper: {
-        key: 'b4cefd61066cf540b9a4543442f3bcb8',
-        width: 160,
-        height: 600
-      },
-      rectangle: {
-        key: '87119e54e06ec212fda2497c6e91b073',
-        width: 300,
-        height: 250
-      }
-    },
-    cssHref: '/CSS/adcash-quiz-category.css?v=20260925-rank',
-    emptyHideMs: 4000,
-    emptyRecheckMs: [7000, 11000],
-    bannerGapMs: 400,
-    desktopMinPx: 1100
-  };
-
-  window.ADSTERRA_RANK_PREDICTOR_CONFIG = CONFIG;
-
-  const landing = document.querySelector('main.rank-cards-page, #rankCardsApp');
-  const formPage = document.querySelector('main.rank-predictor-page, #rankPredictorApp');
-  if (!CONFIG.enabled || (!landing && !formPage)) return;
+  // Rank Predictor ads — JS only, no HTML edits
+  const path = String(window.location.pathname || '').replace(/\\/g, '/');
+  if (!/\/rank-predictor\//i.test(path)) return;
   if (window.matchMedia('(print)').matches) return;
+  if (document.documentElement.dataset.rankAdsBooted === '1') return;
+  document.documentElement.dataset.rankAdsBooted = '1';
 
-  const units = CONFIG.units || {};
-  if (!units.skyscraper?.key && !units.rectangle?.key) return;
-
-  const isDesktop = () => window.matchMedia(`(min-width: ${CONFIG.desktopMinPx}px)`).matches;
-  const isMobile = () => !isDesktop();
-
-  const ensureCss = () => {
-    if (document.querySelector('link[data-adcash-quiz-css], link[data-adcash-rank-css]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = CONFIG.cssHref;
-    link.dataset.adcashRankCss = '1';
-    document.head.appendChild(link);
+  // ===== EXOCLICK zones (apne zone IDs yahan) =====
+  const EXOCLICK = {
+    enabled: true,
+    zones: {
+      // Desktop skyscraper 160x600
+      skyscraper: '6054152',
+      // Form ke baad 300x250 (in-content)
+      afterForm: '6048598'
+    }
   };
 
-  const makeSlot = (slotKey, sizeLabel) => {
+  const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
+
+  const makeSlot = (slotKey) => {
     const wrap = document.createElement('aside');
-    wrap.className = `gju-quiz-ad gju-quiz-ad--${slotKey}`;
+    wrap.className = `gjd-ad gjd-ad--${slotKey} gjd-ad--exoclick`;
     wrap.dataset.adSlot = slotKey;
     wrap.setAttribute('aria-label', 'Advertisement');
     wrap.innerHTML = `
-      <div class="gju-quiz-ad-label">
-        <span class="gju-quiz-ad-label-tag">Ad</span>
-        <span class="gju-quiz-ad-label-note">GovJobUpdates does not endorse this.</span>
+      <div class="gjd-ad-label">
+        <span class="gjd-ad-label-tag">Ad</span>
+        <span class="gjd-ad-label-note">GovJobUpdates does not endorse this.</span>
       </div>
-      <div class="gju-quiz-ad-frame" data-ad-frame="${slotKey}" data-ad-size="${sizeLabel}"></div>
-    `.trim();
+      <div class="gjd-ad-frame" data-ad-frame="${slotKey}"></div>
+    `;
     return wrap;
   };
 
-  const wrapRailHost = (host) => {
-    if (!host || host.querySelector(':scope > .gju-quiz-ad-rail-main')) {
-      return host.querySelector(':scope > .gju-quiz-ad-rail-main') || host;
+  const loadExoClick = (frame, zoneId) => {
+    if (!frame || !zoneId) return;
+
+    const ins = document.createElement('ins');
+    ins.className = 'eas6a97888e2';
+    ins.dataset.zoneid = zoneId;
+    frame.appendChild(ins);
+
+    window.AdProvider = window.AdProvider || [];
+
+    if (!document.querySelector('script[src*="ad-provider.js"]')) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.type = 'application/javascript';
+      script.src = 'https://a.magsrv.com/ad-provider.js';
+      document.head.appendChild(script);
     }
-    const mainCol = document.createElement('div');
-    mainCol.className = 'gju-quiz-ad-rail-main';
-    while (host.firstChild) mainCol.appendChild(host.firstChild);
-    host.classList.add('gju-rank-ad-host', 'gju-quiz-ad-host-ready', 'has-quiz-ad-rail');
-    host.classList.remove('ad-rail-empty');
-    host.appendChild(mainCol);
-    return mainCol;
+
+    const pushScript = document.createElement('script');
+    pushScript.textContent = `(AdProvider = window.AdProvider || []).push({"serve": {}});`;
+    frame.appendChild(pushScript);
   };
 
-  const injectLanding = (page) => {
-  const search = page.querySelector('.rank-search-panel');
-  const grid = page.querySelector('#rankCardGrid, .rank-card-grid');
-  const note = page.querySelector('.rank-cards-note');
-  const guide = page.querySelector('#rankPredictorSeoSupport, .page-guide');
-  const faq = page.querySelector('.seo-faq');
+  const injectAfterForm = () => {
+    if (!EXOCLICK.enabled || !EXOCLICK.zones.afterForm) return;
+    if (document.querySelector('[data-ad-slot="rank-after-form"]')) return;
 
-  if (units.rectangle?.key && (search || grid)) {
-    const slot = makeSlot('mobile-mid', '300x250');
-    slot.classList.add('gju-quiz-ad--mobile-only');
-    if (search) search.insertAdjacentElement('afterend', slot);
-    else grid.insertAdjacentElement('beforebegin', slot);
-  }
+    // Form end anchors (stable, no HTML change needed)
+    const anchors = [
+      document.querySelector('#dataConsent'),
+      document.querySelector('#consentTitle')?.closest('.form-section-card, .form-accordion, details, section'),
+      document.querySelector('.review-submit-grid')?.closest('.form-section-card, .form-accordion, details, section'),
+      document.querySelector('#rankPredictorApp form'),
+      document.querySelector('#rankPredictorApp [data-panel="submit"]'),
+      document.querySelector('#rankPredictorSeoSupport'),
+      document.querySelector('.page-guide')
+    ].filter(Boolean);
 
-  if (units.skyscraper?.key && grid && isDesktop()) {
-    let host = page.querySelector('.gju-rank-ad-host');
-    if (!host) {
-      host = document.createElement('div');
-      host.className = 'gju-rank-ad-host';
-      const start = search || grid;
-      start.parentNode.insertBefore(host, start);
-      [search, page.querySelector('.gju-quiz-ad--mobile-mid'), grid, note, guide, faq]
-        .filter(Boolean)
-        .forEach((el) => {
-          if (host.contains(el)) return;
-          host.appendChild(el);
-        });
-    }
-    wrapRailHost(host);
-    const slot = makeSlot('skyscraper', '160x600');
-    slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
-    host.appendChild(slot);
-  }
-};
+    const slot = makeSlot('rank-after-form');
+    slot.classList.add('gjd-ad--rectangle');
 
-  const injectForm = (page) => {
-    const hero = page.querySelector('.predictor-hero');
-    const tabs = page.querySelector('.tab-card');
-    const workspace = page.querySelector('.predictor-workspace');
-    const formsCol = page.querySelector('.forms-column');
+    // Prefer: form block ke baad; warna guide se pehle
+    const consentBlock = anchors[0] || anchors[1] || anchors[2];
+    const guide = document.querySelector('#rankPredictorSeoSupport, .page-guide');
 
-    // 300×250 — after hero / before tabs (never inside form fields)
-    if (units.rectangle?.key) {
-      const slot = makeSlot('mobile-mid', '300x250');
-      slot.classList.add('gju-quiz-ad--mobile-only');
-      if (tabs) tabs.insertAdjacentElement('beforebegin', slot);
-      else if (hero) hero.insertAdjacentElement('afterend', slot);
-      else page.insertBefore(slot, page.firstChild);
+    if (consentBlock && consentBlock.parentNode) {
+      consentBlock.insertAdjacentElement('afterend', slot);
+    } else if (guide && guide.parentNode) {
+      guide.insertAdjacentElement('beforebegin', slot);
+    } else {
+      const app = document.querySelector('#rankPredictorApp');
+      if (app) app.appendChild(slot);
+      else return;
     }
 
-    // 160×600 — desktop rail beside workspace
-    if (units.skyscraper?.key && isDesktop() && (workspace || formsCol)) {
-      let host = page.querySelector('.gju-rank-ad-host');
-      if (!host) {
-        host = document.createElement('div');
-        host.className = 'gju-rank-ad-host';
-        const anchor = workspace || formsCol;
-        anchor.parentNode.insertBefore(host, anchor);
-        host.appendChild(anchor);
-        const mid = page.querySelector('.gju-quiz-ad--mobile-mid');
-        if (mid && mid.parentNode === page) host.insertBefore(mid, host.firstChild);
+    loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.afterForm);
+  };
+
+  const injectSkyscraper = () => {
+    if (!EXOCLICK.enabled || !EXOCLICK.zones.skyscraper) return;
+    if (!isDesktopRail()) return;
+    if (document.querySelector('[data-ad-slot="rank-skyscraper"]')) return;
+
+    const slot = makeSlot('rank-skyscraper');
+    slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
+    // Fixed rail — CSS below
+    document.body.appendChild(slot);
+    loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.skyscraper);
+  };
+
+  const ensureCss = () => {
+    if (document.getElementById('rank-predictor-ads-css')) return;
+    const style = document.createElement('style');
+    style.id = 'rank-predictor-ads-css';
+    style.textContent = `
+      .gjd-ad { margin: 16px 0; text-align: center; }
+      .gjd-ad-label { font-size: 11px; color: #6b7c93; margin-bottom: 6px; display: flex; gap: 8px; justify-content: center; align-items: center; }
+      .gjd-ad-label-tag { font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+      .gjd-ad-frame { display: flex; justify-content: center; min-height: 50px; }
+      .gjd-ad--rank-after-form { max-width: 320px; margin-left: auto; margin-right: auto; }
+      .gjd-ad--rank-skyscraper.gjd-ad--rail {
+        position: fixed; top: 120px; right: 12px; z-index: 40;
+        width: 160px; margin: 0;
       }
-      wrapRailHost(host);
-      const slot = makeSlot('skyscraper', '160x600');
-      slot.classList.add('gju-quiz-ad--desktop-only', 'gju-quiz-ad--rail');
-      host.appendChild(slot);
-    }
-  };
-
-  const invokeUrl = (key) => {
-    const host = String(CONFIG.invokeHost || 'www.highperformanceformat.com').replace(/^https?:\/\//, '');
-    return `https://${host}/${key}/invoke.js`;
-  };
-
-  const loadBannerInto = (frame, unit) => new Promise((resolve) => {
-    if (!frame || !unit?.key) {
-      resolve(false);
-      return;
-    }
-    frame.innerHTML = '';
-    const opts = {
-      key: unit.key,
-      format: 'iframe',
-      height: unit.height,
-      width: unit.width,
-      params: {}
-    };
-    window.atOptions = opts;
-    const conf = document.createElement('script');
-    conf.type = 'text/javascript';
-    conf.textContent = `atOptions = ${JSON.stringify(opts)};`;
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = invokeUrl(unit.key);
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    frame.appendChild(conf);
-    frame.appendChild(script);
-  });
-
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-  const fireBanners = async () => {
-    const queue = [
-      ['mobile-mid', units.rectangle, () => isMobile()],
-      ['skyscraper', units.skyscraper, () => isDesktop()]
-    ];
-    for (const [slotKey, unit, shouldShow] of queue) {
-      if (!unit?.key || !shouldShow()) continue;
-      const frame = document.querySelector(`[data-ad-frame="${slotKey}"]`);
-      if (!frame) continue;
-      await loadBannerInto(frame, unit);
-      await sleep(CONFIG.bannerGapMs || 400);
-    }
-  };
-
-  const expectedMinFill = (slot) => {
-    const key = slot.dataset.adSlot || '';
-    if (key === 'skyscraper') return 280;
-    return 100;
-  };
-
-  const creativeFillPx = (frame) => {
-    if (!frame) return 0;
-    let maxH = 0;
-    frame.querySelectorAll('iframe, img, object, embed, video, a, ins, div').forEach((node) => {
-      maxH = Math.max(maxH, node.offsetHeight || 0, node.clientHeight || 0);
-    });
-    if (!maxH) maxH = Math.max(frame.scrollHeight || 0, frame.offsetHeight || 0);
-    return maxH;
-  };
-
-  const slotLooksFilled = (slot) => {
-    const frame = slot.querySelector('.gju-quiz-ad-frame');
-    if (!frame) return false;
-    const fill = creativeFillPx(frame);
-    if (fill < expectedMinFill(slot)) return false;
-    const hasMedia = Boolean(frame.querySelector('iframe, img, object, embed, video'));
-    const hasLinks = frame.querySelectorAll('a').length > 0;
-    const htmlLen = frame.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '').trim().length;
-    return hasMedia || (hasLinks && fill >= expectedMinFill(slot)) || htmlLen > 80;
-  };
-
-  const syncRail = () => {
-    document.querySelectorAll('.gju-rank-ad-host').forEach((host) => {
-      const skyEl = host.querySelector('.gju-quiz-ad--skyscraper');
-      const skyLive = Boolean(
-        skyEl
-        && !skyEl.hidden
-        && !skyEl.classList.contains('is-empty')
-        && skyEl.classList.contains('is-filled')
-        && window.getComputedStyle(skyEl).display !== 'none'
-      );
-      host.classList.toggle('has-quiz-ad-rail', skyLive);
-      host.classList.toggle('ad-rail-empty', Boolean(skyEl) && !skyLive);
-    });
-  };
-
-  const hideEmptySlots = () => {
-    document.querySelectorAll('.gju-quiz-ad[data-ad-slot]').forEach((slot) => {
-      if (slotLooksFilled(slot)) {
-        slot.classList.remove('is-empty');
-        slot.hidden = false;
-        slot.classList.add('is-filled');
-        return;
+      @media (max-width: 1100px) {
+        .gjd-ad--desktop-only { display: none !important; }
       }
-      slot.classList.add('is-empty');
-      slot.classList.remove('is-filled');
-      slot.hidden = true;
-    });
-    syncRail();
+    `;
+    document.head.appendChild(style);
   };
 
-  const boot = async () => {
+  const boot = () => {
     ensureCss();
-    if (landing) injectLanding(landing);
-    else if (formPage) injectForm(formPage);
-    await fireBanners();
-    window.setTimeout(hideEmptySlots, CONFIG.emptyHideMs);
-    (CONFIG.emptyRecheckMs || []).forEach((ms) => {
-      window.setTimeout(hideEmptySlots, ms);
-    });
+    injectAfterForm();
+    injectSkyscraper();
   };
 
   if (document.readyState === 'loading') {

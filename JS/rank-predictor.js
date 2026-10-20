@@ -2481,3 +2481,18 @@
         return escapeHtml(value);
     }
 }());
+
+  // Ads — /rank-predictor/ only (see JS/adcash-rank-predictor.js)
+  (() => {
+    if (!/\/rank-predictor\//i.test(String(window.location.pathname || '').replace(/\\/g, '/'))) return;
+    if (document.querySelector('script[data-adcash-rank]')) return;
+    const current = document.currentScript;
+    const src = current && current.src
+      ? current.src.replace(/[^/]+$/, 'adcash-rank-predictor.js')
+      : '/JS/adcash-rank-predictor.js';
+    const el = document.createElement('script');
+    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20261019-rank-ads';
+    el.defer = true;
+    el.dataset.adcashRank = '1';
+    document.body.appendChild(el);
+  })();
