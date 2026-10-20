@@ -813,7 +813,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-25",
         "examEndDate": "2026-10-20",
         "releaseDate": "2026-09-21",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/98228/login.html",
         "detailPage": "../jobs/railway-rrb-ntpc-graduate-cen-06-2025.html",
