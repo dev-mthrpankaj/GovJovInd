@@ -44,7 +44,6 @@
       const existing = document.querySelector('script[src*="ad-provider.js"]');
       if (existing) {
         existing.addEventListener('load', () => resolve(), { once: true });
-        // already loaded
         if (existing.dataset.loaded === '1') resolve();
         setTimeout(resolve, 800);
         return;
@@ -92,20 +91,21 @@
   /** Form khatam = poora #rankSubmitForm ke baad / Rank Guide se pehle */
   const injectAfterForm = async () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.afterForm) return;
-    if (document.querySelector('[data-ad-slot="rank-after-form"]')) return;
+
+    // Pehle galat jagah ke slots hatao
+    document.querySelectorAll('[data-ad-slot="rank-after-form"]').forEach((el) => el.remove());
 
     const submitForm = document.querySelector('#rankSubmitForm');
-    const guide = document.querySelector('#rankPredictorSeoSupport, .page-guide');
-    const formActions = document.querySelector('#rankSubmitForm .form-actions');
+    const guide = document.querySelector('#rankPredictorSeoSupport');
+
+    if (!submitForm && !guide) return;
 
     const slot = makeSlot('rank-after-form');
     slot.classList.add('gjd-ad--rectangle');
 
+    // ONLY: poori form ke baad — consent/label ke andar kabhi nahi
     if (submitForm && submitForm.parentNode) {
-      // Poori form ke baad (Submit/Reset ke neeche)
       submitForm.insertAdjacentElement('afterend', slot);
-    } else if (formActions && formActions.parentNode) {
-      formActions.insertAdjacentElement('afterend', slot);
     } else if (guide && guide.parentNode) {
       guide.insertAdjacentElement('beforebegin', slot);
     } else {
@@ -119,7 +119,8 @@
   const injectSkyscraper = async () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.skyscraper) return;
     if (!isDesktopRail()) return;
-    if (document.querySelector('[data-ad-slot="rank-skyscraper"]')) return;
+
+    document.querySelectorAll('[data-ad-slot="rank-skyscraper"]').forEach((el) => el.remove());
 
     const slot = makeSlot('rank-skyscraper');
     slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
