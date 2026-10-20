@@ -59,39 +59,55 @@
     frame.appendChild(pushScript);
   };
 
+  const hideIfEmpty = (slot) => {
+    setTimeout(() => {
+      if (!slot || !slot.isConnected) return;
+      const frame = slot.querySelector('.gjd-ad-frame');
+      if (!frame) return;
+      const hasCreative = frame.querySelector(
+        'iframe, img, video, a[href], ins iframe, ins img, ins div[style], ins > div'
+      );
+      if (!hasCreative) {
+        slot.classList.add('is-empty');
+      }
+    }, 4500);
+  };
+
   const injectAfterForm = () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.afterForm) return;
     if (document.querySelector('[data-ad-slot="rank-after-form"]')) return;
 
-    // Form end anchors (stable, no HTML change needed)
-    const anchors = [
-      document.querySelector('#dataConsent'),
-      document.querySelector('#consentTitle')?.closest('.form-section-card, .form-accordion, details, section'),
-      document.querySelector('.review-submit-grid')?.closest('.form-section-card, .form-accordion, details, section'),
-      document.querySelector('#rankPredictorApp form'),
-      document.querySelector('#rankPredictorApp [data-panel="submit"]'),
-      document.querySelector('#rankPredictorSeoSupport'),
-      document.querySelector('.page-guide')
-    ].filter(Boolean);
+    // Poora form/Step-4 block — checkbox ke andar nahi
+    const formBlock =
+      document.querySelector('#dataConsent')?.closest(
+        'details, .form-section-card, .form-accordion, section, form'
+      ) ||
+      document.querySelector('#consentTitle')?.closest(
+        'details, .form-section-card, .form-accordion, section, form'
+      ) ||
+      document.querySelector('.review-submit-grid')?.closest(
+        'details, .form-section-card, .form-accordion, section, form'
+      ) ||
+      document.querySelector('#rankPredictorApp form') ||
+      document.querySelector('#rankPredictorApp [data-panel="submit"]');
+
+    const guide = document.querySelector(
+      '#rankPredictorSeoSupport, .page-guide, [aria-labelledby="rankGuideTitle"]'
+    );
 
     const slot = makeSlot('rank-after-form');
     slot.classList.add('gjd-ad--rectangle');
 
-    // Prefer: form block ke baad; warna guide se pehle
-    const consentBlock = anchors[0] || anchors[1] || anchors[2];
-    const guide = document.querySelector('#rankPredictorSeoSupport, .page-guide');
-
-    if (consentBlock && consentBlock.parentNode) {
-      consentBlock.insertAdjacentElement('afterend', slot);
+    if (formBlock && formBlock.parentNode) {
+      formBlock.insertAdjacentElement('afterend', slot);
     } else if (guide && guide.parentNode) {
       guide.insertAdjacentElement('beforebegin', slot);
     } else {
-      const app = document.querySelector('#rankPredictorApp');
-      if (app) app.appendChild(slot);
-      else return;
+      return;
     }
 
     loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.afterForm);
+    hideIfEmpty(slot);
   };
 
   const injectSkyscraper = () => {
@@ -101,9 +117,9 @@
 
     const slot = makeSlot('rank-skyscraper');
     slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
-    // Fixed rail — CSS below
     document.body.appendChild(slot);
     loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.skyscraper);
+    hideIfEmpty(slot);
   };
 
   const ensureCss = () => {
@@ -111,17 +127,52 @@
     const style = document.createElement('style');
     style.id = 'rank-predictor-ads-css';
     style.textContent = `
-      .gjd-ad { margin: 16px 0; text-align: center; }
-      .gjd-ad-label { font-size: 11px; color: #6b7c93; margin-bottom: 6px; display: flex; gap: 8px; justify-content: center; align-items: center; }
-      .gjd-ad-label-tag { font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
-      .gjd-ad-frame { display: flex; justify-content: center; min-height: 50px; }
-      .gjd-ad--rank-after-form { max-width: 320px; margin-left: auto; margin-right: auto; }
+      .gjd-ad {
+        margin: 20px auto;
+        text-align: center;
+        max-width: 100%;
+      }
+      .gjd-ad-label {
+        font-size: 11px;
+        color: #6b7c93;
+        margin-bottom: 6px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .gjd-ad-label-tag {
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+      .gjd-ad-frame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
+      }
+      .gjd-ad--rank-after-form {
+        max-width: 336px;
+        margin: 24px auto;
+        clear: both;
+      }
       .gjd-ad--rank-skyscraper.gjd-ad--rail {
-        position: fixed; top: 120px; right: 12px; z-index: 40;
-        width: 160px; margin: 0;
+        position: fixed;
+        top: 120px;
+        right: 12px;
+        z-index: 40;
+        width: 160px;
+        margin: 0;
+      }
+      .gjd-ad.is-empty {
+        display: none !important;
       }
       @media (max-width: 1100px) {
-        .gjd-ad--desktop-only { display: none !important; }
+        .gjd-ad--desktop-only {
+          display: none !important;
+        }
       }
     `;
     document.head.appendChild(style);
