@@ -32,7 +32,6 @@
     return wrap;
   };
 
-  // Jobs-identical ExoClick loader
   const loadExoClick = (frame, zoneId) => {
     if (!frame || !zoneId) return;
 
@@ -97,38 +96,61 @@
   };
 
   /**
-   * Jobs-style rail:
-   * Wrap ALL page content in .rank-ad-content-col (column 1)
-   * Skyscraper in column 2 — sticky, no overlap with tabs/forms
+   * Layout:
+   *  [ hero — full width ]
+   *  [ exam-selector-card — full width ]
+   *  [ rank-ad-layout:  content (tabs+form+guide)  |  skyscraper ]
    */
   const injectSkyscraper = () => {
     if (!EXOCLICK.enabled || !EXOCLICK.zones.skyscraper) return;
     if (!isDesktopRail()) return;
 
     document.querySelectorAll('[data-ad-slot="rank-skyscraper"]').forEach((el) => el.remove());
+    document.querySelectorAll('.rank-ad-layout').forEach((el) => {
+      // unwrap if re-running
+      const parent = el.parentNode;
+      if (!parent) return;
+      const content = el.querySelector('.rank-ad-content-col');
+      if (content) {
+        while (content.firstChild) parent.insertBefore(content.firstChild, el);
+      }
+      el.remove();
+    });
 
     const app =
       document.querySelector('#rankPredictorApp') ||
       document.querySelector('main.rank-predictor-page');
     if (!app) return;
 
-    // Already wrapped?
-    let contentCol = app.querySelector(':scope > .rank-ad-content-col');
-    if (!contentCol) {
-      contentCol = document.createElement('div');
-      contentCol.className = 'rank-ad-content-col';
-      // Move every current child into content column
-      while (app.firstChild) {
-        contentCol.appendChild(app.firstChild);
-      }
-      app.appendChild(contentCol);
-    }
+    // Start rail AFTER hero + choose exam
+    const startEl =
+      app.querySelector('.tab-card') ||
+      app.querySelector('.predictor-workspace') ||
+      app.querySelector('#rankSubmitForm');
 
-    app.classList.add('rank-has-ad-rail');
+    if (!startEl || !startEl.parentNode) return;
+
+    const layout = document.createElement('div');
+    layout.className = 'rank-ad-layout';
+
+    const contentCol = document.createElement('div');
+    contentCol.className = 'rank-ad-content-col';
+
+    // Move startEl and all following siblings into content column
+    let node = startEl;
+    const toMove = [];
+    while (node) {
+      toMove.push(node);
+      node = node.nextElementSibling;
+    }
+    toMove.forEach((n) => contentCol.appendChild(n));
 
     const slot = makeSlot('skyscraper');
     slot.classList.add('gjd-ad--desktop-only', 'gjd-ad--rail');
-    app.appendChild(slot);
+
+    layout.appendChild(contentCol);
+    layout.appendChild(slot);
+    app.appendChild(layout);
 
     loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.skyscraper);
     hideIfEmpty(slot, true);
@@ -139,7 +161,6 @@
     const style = document.createElement('style');
     style.id = 'rank-predictor-ads-css';
     style.textContent = `
-      /* ---- in-content 300x250 ---- */
       .gjd-ad {
         display: flex;
         flex-direction: column;
@@ -193,41 +214,29 @@
         display: none !important;
       }
 
-      /* ---- Jobs-style desktop rail (no overlap) ---- */
+      /* Hero + Choose Exam = full width (no ad beside them) */
+      /* From tab-card downward = content | skyscraper */
       @media (min-width: 1101px) {
-        #rankPredictorApp.rank-has-ad-rail,
-        main.rank-predictor-page.rank-has-ad-rail {
-          display: grid !important;
+        .rank-ad-layout {
+          display: grid;
           grid-template-columns: minmax(0, 1fr) 176px;
           gap: 18px;
           align-items: start;
-          width: min(1180px, calc(100% - 24px)) !important;
-          max-width: min(1180px, calc(100% - 24px)) !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
-          padding-left: 0;
-          padding-right: 0;
+          width: 100%;
           box-sizing: border-box;
         }
-
         .rank-ad-content-col {
           grid-column: 1;
           min-width: 0;
           max-width: 100%;
         }
-
-        /* Sticky tabs / form-actions stay INSIDE content col only */
         .rank-ad-content-col .tab-card,
         .rank-ad-content-col .form-actions,
         .rank-ad-content-col .sticky-actions {
           max-width: 100%;
-          left: auto !important;
-          right: auto !important;
         }
-
         .gjd-ad--skyscraper.gjd-ad--rail {
           grid-column: 2;
-          grid-row: 1;
           margin: 0;
           padding: 10px 6px;
           align-self: start;
@@ -241,14 +250,12 @@
           border: 1px solid #e1eaf4;
           border-radius: 14px;
         }
-
         .gjd-ad--skyscraper .gjd-ad-frame {
           min-height: 600px;
           width: 160px;
           min-width: 160px;
           max-width: 160px;
         }
-
         .gjd-ad--skyscraper.gjd-ad--rail .gjd-ad-label {
           flex-direction: column;
           gap: 0.15rem;
@@ -258,7 +265,6 @@
           line-height: 1.25;
           text-align: center;
         }
-
         .gjd-ad--skyscraper.is-empty:not([hidden]) {
           opacity: 0.35;
           pointer-events: none;
@@ -272,11 +278,8 @@
         .gjd-ad--skyscraper {
           display: none !important;
         }
-        #rankPredictorApp.rank-has-ad-rail,
-        main.rank-predictor-page.rank-has-ad-rail {
-          display: block !important;
-          width: calc(100% - 16px) !important;
-          max-width: 1200px !important;
+        .rank-ad-layout {
+          display: block;
         }
         .rank-ad-content-col {
           display: contents;
