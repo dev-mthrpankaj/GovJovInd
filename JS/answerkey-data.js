@@ -1050,32 +1050,6 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0010",
-        "title": "Indian Navy Civilian INCET 01/2025 Answer Key 2026",
-        "organization": "Join Indian Navy",
-        "department": "Defence",
-        "category": "Answer Key",
-        "year": "2026",
-        "examDate": "2026-02-02",
-        "examEndDate": "",
-        "releaseDate": "2026-05-29",
-        "objectionLastDate": "2026-06-11",
-        "status": "objection-closed",
-        "tags": [
-            "Indian Navy",
-            "INCET",
-            "Civilian"
-        ],
-        "downloadLink": "https://akc.cbt-exam.in/",
-        "objectionLink": "https://akc.cbt-exam.in/",
-        "detailPage": "../HTML/answer-key.html",
-        "updatedAt": "2026-06-06",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
-    },
-    {
         "id": "answerkey-sheet-0016",
         "title": "UPPSC Assistant Professor GDC Answer Key 2026 for 1253 Post",
         "organization": "Uttar Pradesh Public Service Commission",

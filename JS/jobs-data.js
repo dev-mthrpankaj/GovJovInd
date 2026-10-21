@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0290-20261021105927-5205ae47",
+        "title": "Delhi University DU Assistant Online Form 2026 for 126 Post",
+        "organization": "University of Delhi (New Delhi)",
+        "department": "DU",
+        "category": "Education",
+        "year": "2026",
+        "qualification": "A Bachelor’s Degree from any recognized University/Institution Three Years’ of experience as Assistant or equivalent in the Level 4 More Details Read the Notification.",
+        "totalPosts": "126",
+        "startDate": "2026-10-23",
+        "lastDate": "2026-11-09",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://www.du.ac.in/index.php?mact=News,cntnt01,detail,0&cntnt01articleid=19035&cntnt01returnid=219",
+        "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/10/du-assistant-notice-2026.pdf",
+        "detailPage": "../jobs/delhi-university-assistant-2026.html",
+        "updatedAt": "2026-10-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0287-20261020082236-5fef3ad5",
         "title": "BTSC Touring Veterinary Officer Online Form 2026",
         "organization": "Bihar Technical Service Commission",

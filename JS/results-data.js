@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0184-20261021112606-4c672784",
+        "title": "BPCL Non Management Post Result Out 2026 for 154 Post",
+        "organization": "Bharat Petroleum Corporation Limited (BPCL)",
+        "department": "BPCL",
+        "category": "Public Sector",
+        "year": "2026",
+        "resultDate": "2026-10-11",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.bharatpetroleum.in/careers/job-openings",
+        "detailPage": "../jobs/bpcl-non-management-post-2026.html",
+        "updatedAt": "2026-10-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0155-20260918174153-d91a2237",
         "title": "HPSC HCS Final Result 2026",
         "organization": "The Haryana Public Service Commission (HPSC)",

@@ -1204,26 +1204,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0136-20260906114934-9bf9ab45",
-        "title": "BPCL Non Management Post Admit Card 2026 for 154 Post",
-        "organization": "Bharat Petroleum Corporation Limited (BPCL)",
-        "department": "BPCL",
-        "category": "Public Sector",
-        "year": "2026",
-        "examDate": "2026-09-12",
-        "examEndDate": "",
-        "releaseDate": "2026-09-03",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibpsreg.ibps.in/bpclmar26/oecla_sep26/login.php?appid=49ce7ee1f1d0a52fec2b75550e12124e",
-        "detailPage": "../jobs/bpcl-non-management-post-2026.html",
-        "updatedAt": "2026-09-06",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0137-20260906115435-407c3070",
         "title": "CSBC Bihar Police Constable GD Special Branch PET PST Admit Card 2026",
         "organization": "Central Selection Board of Constable (CSBC)",
