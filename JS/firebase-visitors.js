@@ -235,11 +235,43 @@
     node.textContent = value === "--" ? "--" : formatNumber(value);
   }
 
+  // ========== UPDATED: 2 Decimal Compact Format (1.01k, 5.05k style) ==========
   function formatNumber(value) {
-    const number = Number(value || 0);
-    try { return new Intl.NumberFormat("en-IN").format(number); }
-    catch { return String(number); }
+    const num = Math.floor(Number(value) || 0);
+
+    if (num < 1000) {
+      return String(num);
+    }
+
+    // 1,000 – 9,999 → 1k, 1.01k, 1.1k, 5.05k
+    if (num < 10000) {
+      const val = num / 1000;
+      return parseFloat(val.toFixed(2)).toString().replace(/\.?0+$/, "") + "k";
+    }
+
+    // 10,000 – 99,999 → 10k, 12.5k, 12.55k
+    if (num < 100000) {
+      const val = num / 1000;
+      return parseFloat(val.toFixed(2)).toString().replace(/\.?0+$/, "") + "k";
+    }
+
+    // 1 Lakh – 9.99 Lakh → 1L, 1.01L, 1.25L
+    if (num < 1000000) {
+      const val = num / 100000;
+      return parseFloat(val.toFixed(2)).toString().replace(/\.?0+$/, "") + "L";
+    }
+
+    // 10 Lakh – 99.99 Lakh
+    if (num < 10000000) {
+      const val = num / 100000;
+      return parseFloat(val.toFixed(2)).toString().replace(/\.?0+$/, "") + "L";
+    }
+
+    // 1 Crore+
+    const val = num / 10000000;
+    return parseFloat(val.toFixed(2)).toString().replace(/\.?0+$/, "") + "Cr";
   }
+  // ===========================================================================
 
   window.addEventListener("pagehide", () => {
     if (heartbeatTimer) window.clearInterval(heartbeatTimer);
