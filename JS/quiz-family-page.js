@@ -68,6 +68,23 @@
     };
   }
 
+  /** Natural sort: Quiz-2 before Quiz-10 */
+  function naturalTitleKey(title) {
+    return String(title || "")
+      .toLowerCase()
+      .replace(/(\d+)/g, (_, n) => n.padStart(8, "0"));
+  }
+
+  function sortQuizzes(list) {
+    return list.slice().sort((a, b) => {
+      const sub = String(a.subject || "").localeCompare(String(b.subject || ""), "en", {
+        sensitivity: "base",
+      });
+      if (sub !== 0) return sub;
+      return naturalTitleKey(a.title).localeCompare(naturalTitleKey(b.title), "en");
+    });
+  }
+
   function number(v, fallback = 0) {
     const n = Number(v);
     return Number.isFinite(n) ? n : fallback;
@@ -132,7 +149,6 @@
       .family-page-summary{width:100%;margin-top:2px;color:var(--fq-muted);font-size:11px;text-align:center}
       @media(max-width:760px){.family-toolbar.family-filter-v4{grid-template-columns:1fr;gap:9px;padding:11px}.family-filter-v4 .family-filter-heading,.family-filter-v4 .family-search,.family-filter-v4 .family-select{grid-column:1}.family-filter-v4 .family-filter-copy{display:grid;gap:1px}.family-filter-v4 .family-search,.family-filter-v4 .family-select{min-height:52px}.family-pagination{margin-top:16px}}
 
-      /* Challenge Button Styles */
       .family-card-actions{display:flex;flex-direction:column;gap:8px}
       .family-challenge-btn{
         display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -304,7 +320,9 @@
   function resetPageAndRender() { currentPage = 1; render(); }
 
   function load() {
-    quizzes = items().filter((i) => i && family(i) === familySlug).map(normalize);
+    quizzes = sortQuizzes(
+      items().filter((i) => i && family(i) === familySlug).map(normalize)
+    );
     subjects();
     currentPage = 1;
     render();
@@ -368,7 +386,6 @@
     } catch (_e) {}
   }
 
-  // ========== Challenge Share Logic ==========
   async function shareChallenge(btn) {
     const title = btn.dataset.quizTitle || "this quiz";
     const score = btn.dataset.score;
@@ -393,12 +410,10 @@
       }
     }
 
-    // Fallback → WhatsApp
     const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
   }
 
-  // Event delegation for Challenge buttons
   document.addEventListener("click", (e) => {
     const challengeBtn = e.target.closest("[data-challenge]");
     if (challengeBtn) {
@@ -415,7 +430,6 @@
     }
   });
 
-  // Re-render when auth state changes
   window.addEventListener("gju:auth-state", () => {
     render();
   });
