@@ -25,10 +25,6 @@
       "signature": "363064e782741f3513a103d7a4b1ad7cc3d20e6c94e3677c5cc70c439c5dc1e6",
       "lastmod": "2026-08-12"
     },
-    "AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html": {
-      "signature": "e83ad0593e64278519b22aeb93e442dd43400aaf034a789c2514855c5c987828",
-      "lastmod": "2026-08-12"
-    },
     "AdmitCard_Details/HTML/04-RIICO-Various-Posts-Admit-Card-2026.html": {
       "signature": "37b1236697fca118274984a4dc64d7ee19e65272d91ad4ea56e1c326b4c5bc48",
       "lastmod": "2026-08-12"
@@ -296,10 +292,6 @@
     "AdmitCard_Details/HTML/UPSSSC-Teacher-Cadre-Mains-Exam-Admit-Card-2026.html": {
       "signature": "16810a081f3f1c63a38521be339109e794dca60617092859dfdb6b55f03c2417",
       "lastmod": "2026-08-14"
-    },
-    "AnswerKey_Details/HTML/125-UPSSSC-Pharmacist-Answer-Key-2026.html": {
-      "signature": "1025f9e167944f223488c4f9a5a0be5d1aa2f4576db99f611070e685c8a56757",
-      "lastmod": "2026-08-12"
     },
     "AnswerKey_Details/HTML/126-UPSSSC-Various-Post-UP-Pollution-Answer-Key-2026.html": {
       "signature": "63bbb558580f85d12450a46d5956c88141522efe76649314d8c5753be4e78170",
@@ -2304,6 +2296,10 @@
     "jobs/upsssc-pharmaceutical-ayurvedic-2024.html": {
       "signature": "dd7a175e39678e7486e7dbf89c347528faafcb301ca246f75a3bf800c6affe9c",
       "lastmod": "2026-10-16"
+    },
+    "jobs/upsssc-pharmacist-2026.html": {
+      "signature": "7158882698a058d0761f1612ef275e02a53a6ea0f7e52911fada3f28f6a23dc0",
+      "lastmod": "2026-10-21"
     },
     "jobs/upsssc-physical-instructor-2026.html": {
       "signature": "b1d208d81b9dfd8d8ff48a9c3221fda1ad736f8e64773e2be73aed5df3b3c4e3",
