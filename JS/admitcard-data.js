@@ -213,7 +213,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-07",
         "examEndDate": "2026-10-21",
         "releaseDate": "2026-10-07",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/ongcjul26/intcla_oct26/login.php?appid=9fbc48c03d568af85a09030c6808b493",
         "detailPage": "../jobs/ongc-engineer-graduate-trainee.html",
