@@ -2575,29 +2575,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0024",
-        "title": "UPSSSC Pharmacist Admit Card 2026 for 560 Post",
-        "organization": "Uttar Pradesh Subordinate Services Selection Commission",
-        "department": "UPSSSC",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-29",
-        "examEndDate": "",
-        "releaseDate": "2026-06-25",
-        "status": "exam-over",
-        "tags": [
-            "UPSSSC",
-            "Pharmacist"
-        ],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../AdmitCard_Details/HTML/03-UPSSSC-UP-Pollution-Various-Post-Admit-Card-2026.html",
-        "updatedAt": "2026-06-26",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0025",
         "title": "UPSSSC BCG Technician Admit Card 2026 for 255 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
