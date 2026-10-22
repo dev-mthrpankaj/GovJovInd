@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0204-20261022170257-49dc03cb",
+        "title": "MPPSC MP ADPO Admit Card 2026",
+        "organization": "Madhya Pradesh Public Service Commission",
+        "department": "MPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-11-01",
+        "examEndDate": "",
+        "releaseDate": "2026-10-22",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/AdmitCard/PO26Login.aspx",
+        "detailPage": "../jobs/mppsc-mp-adpo-2026.html",
+        "updatedAt": "2026-10-22",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0202-20261020194338-b7e77f10",
         "title": "RRB ALP CBAT Exam City Details 2026",
         "organization": "Railway Recruitment Board (RRB)",
