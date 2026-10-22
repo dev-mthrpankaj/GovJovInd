@@ -193,7 +193,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-22",
         "examEndDate": "",
         "releaseDate": "2026-10-15",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/uiicljul26/oecla_oct26/login.php?appid=ce02324495f4184290ee0e7c5a463df6",
         "detailPage": "../jobs/uiic-ao-sep-2026.html",

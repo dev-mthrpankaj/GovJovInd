@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "126",
         "startDate": "2026-10-23",
         "lastDate": "2026-11-09",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://www.du.ac.in/index.php?mact=News,cntnt01,detail,0&cntnt01articleid=19035&cntnt01returnid=219",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/10/du-assistant-notice-2026.pdf",
