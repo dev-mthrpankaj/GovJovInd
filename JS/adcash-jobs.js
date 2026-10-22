@@ -1,17 +1,12 @@
 (() => {
   'use strict';
 
-  // ====================== ADSTERRA (skyscraper removed) ======================
+  // ====================== ADSTERRA (skyscraper & leaderboard removed) ======================
   const ADSTERRA = {
     enabled: true,
     invokeHost: 'www.highperformanceformat.com',
     units: {
-      leaderboard: {
-        key: '83b45963c9b5e297e2716b97e5e7f1cd',
-        width: 728,
-        height: 90
-      },
-      // skyscraper: REMOVED — now ExoClick zone 6054152
+      // leaderboard: REMOVED — replaced by ExoClick zone 6063122
       rectangle: {
         key: '87119e54e06ec212fda2497c6e91b073',
         width: 300,
@@ -37,7 +32,9 @@
       beforeVacancy: '6048598',
       betweenEligibilityFee: '6048602',
       // Desktop skyscraper rail 160x600
-      skyscraper: '6054152'
+      skyscraper: '6054152',
+      // Desktop HillTop 728x90 (Replaced Adsterra Leaderboard)
+      hillTop: '6063122' 
     }
   };
 
@@ -84,13 +81,27 @@
     frame.appendChild(pushScript);
   };
 
-  // ====================== EXOCLICK INJECTION ======================
+  // ====================== VIEWPORT CHECKS ======================
+  const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
+  const isMobile = () => !isDesktopLeader();
   const isDesktopRail = () => window.matchMedia('(min-width: 1101px)').matches;
 
+  // ====================== EXOCLICK INJECTION ======================
   const injectExoClickAds = () => {
     if (!EXOCLICK.enabled) return;
 
-    // 1. Vacancy Details ke just upar (300x250)
+    // 1. HillTop 728x90 (Replaces Adsterra leaderboard)
+    if (EXOCLICK.zones.hillTop && isDesktopLeader()) {
+      const updateStrip = document.querySelector('.gjd-page .gjd-update-strip');
+      if (updateStrip && updateStrip.parentNode) {
+        const slot = makeSlot('hilltop', 'exoclick');
+        slot.classList.add('gjd-ad--desktop-only');
+        updateStrip.insertAdjacentElement('afterend', slot);
+        loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.hillTop);
+      }
+    }
+
+    // 2. Vacancy Details ke just upar (300x250)
     const vacancySection = document.querySelector('#vacancy-details');
     if (vacancySection && EXOCLICK.zones.beforeVacancy) {
       const slot = makeSlot('exoclick-before-vacancy', 'exoclick');
@@ -98,7 +109,7 @@
       loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.beforeVacancy);
     }
 
-    // 2. Eligibility aur Application Fee ke beech (300x250)
+    // 3. Eligibility aur Application Fee ke beech (300x250)
     const eligibilitySection = document.querySelector('#eligibility');
     if (eligibilitySection && EXOCLICK.zones.betweenEligibilityFee) {
       const slot = makeSlot('exoclick-between-elig-fee', 'exoclick');
@@ -106,7 +117,7 @@
       loadExoClick(slot.querySelector('.gjd-ad-frame'), EXOCLICK.zones.betweenEligibilityFee);
     }
 
-    // 3. Desktop skyscraper rail 160x600 (replaces Adsterra skyscraper)
+    // 4. Desktop skyscraper rail 160x600
     if (EXOCLICK.zones.skyscraper && isDesktopRail()) {
       const layout = document.querySelector('.gjd-page .gjd-layout');
       const sidebar = document.querySelector('.gjd-page .gjd-sidebar');
@@ -124,10 +135,7 @@
     }
   };
 
-  // ====================== ADSTERRA (no skyscraper) ======================
-  const isDesktopLeader = () => window.matchMedia('(min-width: 861px)').matches;
-  const isMobile = () => !isDesktopLeader();
-
+  // ====================== ADSTERRA (no leaderboard/skyscraper) ======================
   const injectAdsterraSlots = () => {
     if (!ADSTERRA.enabled) return;
 
@@ -136,11 +144,7 @@
     const links = document.querySelector('.gjd-page #important-links');
 
     if (updateStrip && updateStrip.parentNode) {
-      if (units.leaderboard?.key) {
-        const slot = makeSlot('leaderboard');
-        slot.classList.add('gjd-ad--desktop-only');
-        updateStrip.insertAdjacentElement('afterend', slot);
-      }
+      // Leaderboard removed, now handled by ExoClick
       if (units.rectangle?.key) {
         const slot = makeSlot('mobile-top');
         slot.classList.add('gjd-ad--mobile-only', 'gjd-ad--rectangle');
@@ -199,11 +203,10 @@
     if (!ADSTERRA.enabled) return;
     const units = ADSTERRA.units || {};
     const queue = [
-      ['leaderboard', units.leaderboard, () => isDesktopLeader()],
+      // Leaderboard removed from queue
       ['mobile-top', units.rectangle, () => isMobile()],
       ['mobile-strip', units.mobileStrip, () => isMobile() && !units.rectangle?.key],
       ['rectangle', units.rectangle, () => true]
-      // skyscraper intentionally omitted
     ];
 
     for (const [slotKey, unit, shouldShow] of queue) {
@@ -217,8 +220,8 @@
 
   // ====================== BOOT ======================
   const boot = async () => {
-    injectExoClickAds();
-    injectAdsterraSlots();
+    injectExoClickAds();   // ExoClick (HillTop, Skyscraper, In-content) inject honge
+    injectAdsterraSlots(); // Adsterra (Mobile top, Rectangle) inject honge
     await fireAdsterraBanners();
   };
 
