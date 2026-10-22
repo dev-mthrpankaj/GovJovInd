@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0291-20261022084639-4dc97890",
+        "title": "LIC HFL Apprentice Online Form 2026 for 232 Post",
+        "organization": "LIC Housing Finance Limited (LIC HFL)",
+        "department": "LIC",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "A Bachelor’s Degree from any recognized University/Institution More Details Read the Notification.",
+        "totalPosts": "232",
+        "startDate": "2026-10-20",
+        "lastDate": "2026-11-01",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://nats.education.gov.in/student_type.php",
+        "officialNotification": "https://cdn.lichousing.com/2026/10/Apprentecis-Advertisement-Notification-Batch-10.pdf",
+        "detailPage": "../jobs/lic-hfl-apprentice-2026.html",
+        "updatedAt": "2026-10-22",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0290-20261021105927-5205ae47",
         "title": "Delhi University DU Assistant Online Form 2026 for 126 Post",
         "organization": "University of Delhi (New Delhi)",
