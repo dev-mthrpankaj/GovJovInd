@@ -981,10 +981,6 @@
       "signature": "de35822203d5279bebcf4724b632ae19e8cb77e3d973e59d10f4b2d80d96bd2e",
       "lastmod": "2026-08-12"
     },
-    "Job_Details/HTML/1209-MPPSC-ADPO-2026.html": {
-      "signature": "780e4ea3d99c8c2897c12454044891fb3e20b8c85d6cc8ffbc49cec20111fec6",
-      "lastmod": "2026-08-12"
-    },
     "Job_Details/HTML/1210-UPESSC-Aided-School-Teacher-2025.html": {
       "signature": "c567c2d50d5831cc0ee66521e874d6eaf56a24fd1bd0650d67af6da98ce786eb",
       "lastmod": "2026-08-12"
@@ -1279,10 +1275,6 @@
     },
     "Job_Details/HTML/MPHC-Senior-Computer-Programmer-Assistant-2026.html": {
       "signature": "a0c5f9777b02d0c3b8d6a191d3e3107716fd13f1e375da6a169cebb7213cc533",
-      "lastmod": "2026-08-12"
-    },
-    "Job_Details/HTML/MPPSC-ADPO-2026.html": {
-      "signature": "c886c223acd72d3897e7d30af185a942f34019ce69166bcdb77a69e683c7a065",
       "lastmod": "2026-08-12"
     },
     "Job_Details/HTML/Nainital-Bank-Specialist-Officer-2026.html": {
@@ -1820,6 +1812,10 @@
     "jobs/mppsc-assistant-town-planner-2026.html": {
       "signature": "22454cae4fc24e31a2ee8b70aacf49bcda91ef90593a232815039aadd25ec745",
       "lastmod": "2026-10-16"
+    },
+    "jobs/mppsc-mp-adpo-2026.html": {
+      "signature": "37ade793b1b7048dc300170b8d0102738f46f78ea792f4fc93c0cb16068868e7",
+      "lastmod": "2026-10-22"
     },
     "jobs/nalco-non-executive-2026.html": {
       "signature": "fa4098ec78fc88a2a2e8a6a13ce1e54f09e6abc7e5637ddab44c00628a2e3e25",
