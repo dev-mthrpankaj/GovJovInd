@@ -1404,26 +1404,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0110-20260820234324-49d454f7",
-        "title": "National Insurance NICL Assistant Admit Card 2026 for 500 Post",
-        "organization": "National Insurance Company Limited (NICL)",
-        "department": "NICL",
-        "category": "Public Sector",
-        "year": "2026",
-        "examDate": "2026-08-27",
-        "examEndDate": "",
-        "releaseDate": "2026-08-20",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibpsreg.ibps.in/nicljul26/oecla_aug26/login.php?appid=a926805370094a107b2689a5bce28ba4",
-        "detailPage": "../AdmitCard_Details/HTML/NICL-Assistant-Admit-Card-2026.html",
-        "updatedAt": "2026-08-21",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0112-20260820234654-e169ed7e",
         "title": "BSF HC Ministerial and ASI Steno 2024 Admit Card",
         "organization": "Border Security Force",
