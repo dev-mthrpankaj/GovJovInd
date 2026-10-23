@@ -393,7 +393,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-22",
         "examEndDate": "2026-10-23",
         "releaseDate": "2026-10-09",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://applycareer.co.in/dhc/highcourt2026dhjse/DHJSE2026_AdmitMain.aspx",
         "detailPage": "../jobs/delhi-high-court-hjs-2026.html",
