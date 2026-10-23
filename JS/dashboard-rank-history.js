@@ -394,9 +394,11 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
 
     if (apiBaseUrl) {
       try {
+        // The server now identifies the student from this verified Firebase token, not from the uid in the body.
+        const idToken = typeof user.getIdToken === "function" ? await user.getIdToken() : "";
         const response = await fetch(`${apiBaseUrl}/dashboard.php`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", ...(idToken ? { Authorization: `Bearer ${idToken}` } : {}) },
           body: JSON.stringify(payload)
         });
         const data = await response.json();
