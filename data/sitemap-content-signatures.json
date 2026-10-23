@@ -1553,6 +1553,10 @@
       "signature": "8b5da9d0cdb9e1b8cddb43af4a45a341b168d6e08423772ec7ab2c4ccae380cc",
       "lastmod": "2026-10-16"
     },
+    "jobs/cci-various-post-2026.html": {
+      "signature": "eb8d40c28e0c9565a35052cf453d7a3a71373ac842cb484bade7ed375aae41d8",
+      "lastmod": "2026-10-23"
+    },
     "jobs/cgpsc-admit-card.html": {
       "signature": "a6ec1ac50bf2c4587b726c7244b5f2b60017bf98eef0f4ef8758caaa66dc1f4e",
       "lastmod": "2026-10-16"
@@ -2058,7 +2062,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/ssc-gd-constable-2026.html": {
-      "signature": "dc1bf7ea738b2934a0fe5d88ae9665cb81cb768ba20c9b835a3ac75f4cd98f10",
+      "signature": "0b88e452d4f8925f88cbac783c6c1cca3f2b34e97170930903e1e453ef3f3411",
       "lastmod": "2026-10-23"
     },
     "jobs/ssc-je-junior-engineer-2026.html": {
@@ -2157,6 +2161,10 @@
       "signature": "69126d497f762404860bbc88b9ced48ecc63e1aa169f3a9abea64ed32aca9753",
       "lastmod": "2026-10-16"
     },
+    "jobs/upessc-up-head-master-2026.html": {
+      "signature": "119fb08e4063253a6bd8653ce5da67b05283dbab8823a377ddab5706bb4d6382",
+      "lastmod": "2026-10-23"
+    },
     "jobs/upessc-up-pgt-teacher-2026.html": {
       "signature": "d279951a21e88f448b0b440de40bb8b87e8c01a5d0931d441daf9b1b06bcdfea",
       "lastmod": "2026-10-19"
@@ -2165,9 +2173,17 @@
       "signature": "289915921243b0de7db2146bf84ee512c7d5355971fddd1fd16079ac06500c0f",
       "lastmod": "2026-10-16"
     },
+    "jobs/upessc-up-principal-2026.html": {
+      "signature": "6331d7c250ddd945d2e208eefee1fb6963c29d66989478f1ed38d2f8fc67d33f",
+      "lastmod": "2026-10-23"
+    },
     "jobs/upessc-up-special-tet-2026.html": {
       "signature": "01ab1a11a99eb43078000290dbba99192dfba7122cac1e9b084153deca3c7e25",
       "lastmod": "2026-10-16"
+    },
+    "jobs/upessc-up-tgt-2026.html": {
+      "signature": "8db110192146d39437020cccd26931bf68163bcb204025c1595881c84b2db5c7",
+      "lastmod": "2026-10-23"
     },
     "jobs/uppsc-assistant-professor-1253-post.html": {
       "signature": "1cec9d7f52a0c29e16b30ea6f4744ac98051093fd540721b8b4bd51ef02821d6",
