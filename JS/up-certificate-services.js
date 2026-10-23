@@ -24,7 +24,12 @@
   function money(paise) { return `₹${Math.round(Number(paise || 0) / 100)}`; }
   function selectedServices() { return $$('#serviceChoices input[name="services"]:checked').map((input) => input.value); }
   function hasIncome() { return selectedServices().includes("Income Certificate"); }
-  function hasCasteOrDomicile() { return selectedServices().some((service) => service !== "Income Certificate"); }
+  const EWS_SERVICES = ["EWS Central Certificate", "EWS State Certificate"];
+  const isCommonSetService = (service) => service !== "Income Certificate" && service !== "PAN Card" && !EWS_SERVICES.includes(service);
+  function hasCasteOrDomicile() { return selectedServices().some(isCommonSetService); }
+  function hasEws() { return selectedServices().some((service) => EWS_SERVICES.includes(service)); }
+  function hasPan() { return selectedServices().includes("PAN Card"); }
+  function panType() { return clean($('input[name="panType"]:checked')?.value).toLowerCase(); }
   function incomeFor() { return clean($('input[name="incomeFor"]:checked')?.value).toLowerCase(); }
   function onlineDocuments() { return Boolean($("#onlineDocumentsToggle")?.checked); }
   function homeDelivery() { return Boolean($("#homeDeliveryToggle")?.checked); }
@@ -133,6 +138,8 @@
     const services = selectedServices();
     const income = hasIncome();
     const common = hasCasteOrDomicile();
+    const ews = hasEws();
+    const pan = hasPan();
     const online = onlineDocuments();
     const delivery = homeDelivery();
 
@@ -145,10 +152,15 @@
     $("#incomeForSection")?.toggleAttribute("hidden", !income);
     $$('input[name="incomeFor"]').forEach((radio) => { radio.required = income; });
 
+    $("#panTypeSection")?.toggleAttribute("hidden", !pan);
+    $$('input[name="panType"]').forEach((radio) => { radio.required = pan; });
+
     $("#onlineDocumentsArea")?.toggleAttribute("hidden", !online);
     $("#offlineDocumentsNote")?.toggleAttribute("hidden", online);
     $("#commonDocumentsSection")?.toggleAttribute("hidden", !common);
     $("#incomeDocumentsSection")?.toggleAttribute("hidden", !income);
+    $("#ewsDocumentsSection")?.toggleAttribute("hidden", !ews);
+    $("#panDocumentsSection")?.toggleAttribute("hidden", !pan);
 
     setRequired("aadhaarFile", online && common);
     setRequired("letterFile", online && common);
@@ -156,16 +168,24 @@
     setRequired("incomeAadhaarFile", online && income);
     setRequired("incomeLetterFile", online && income);
     setRequired("incomePhotoFile", online && income);
+    setRequired("ewsAadhaarFile", online && ews);
+    setRequired("ewsPhotoFile", online && ews);
+    setRequired("ewsIncomeFile", online && ews);
+    setRequired("panAadhaarFile", online && pan);
+    setRequired("panPhotoFile", online && pan);
+    setRequired("panSignatureFile", online && pan);
 
     if ($("#offlineRequiredDocuments")) {
       const groups = [];
       if (common) groups.push("Caste/Domicile: Aadhaar Card, Sabhasad/Pradhan Letter Pad and Passport Size Photo");
       if (income) groups.push(`Income (${incomeFor() === "father" ? "Father" : incomeFor() === "self" ? "Self" : "select Self/Father"}): separate Aadhaar front + back single PDF/print set, separate Sabhasad/Pradhan Letter Pad and separate Passport Size Photo`);
+      if (ews) groups.push("EWS (Central/State): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Income Certificate");
+      if (pan) groups.push(`PAN Card (${panType() === "correction" ? "Correction / Update" : panType() === "new" ? "New PAN" : "select New/Correction"}): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Signature on white paper`);
       $("#offlineRequiredDocuments").textContent = groups.length
         ? `Required documents — ${groups.join(". ")}.`
         : "Select at least one certificate to see the required documents.";
     }
-    $("#offlineIncomePhoneNote")?.toggleAttribute("hidden", !income);
+    $("#offlineIncomePhoneNote")?.toggleAttribute("hidden", !(income || ews || pan));
 
     $("#deliveryAddressArea")?.toggleAttribute("hidden", !delivery);
     ["deliveryName", "deliveryMobile", "deliveryAddress", "deliveryPincode"].forEach((id) => setRequired(id, delivery));
@@ -206,6 +226,7 @@
     return {
       services: selectedServices(),
       income_for: hasIncome() ? incomeFor() : "",
+      pan_type: hasPan() ? panType() : "",
       applicant_name: clean($("#applicantName")?.value),
       father_husband_name: clean($("#fatherName")?.value),
       mobile: clean($("#mobileNumber")?.value),
@@ -231,6 +252,12 @@
       income_aadhaar: $("#incomeAadhaarFile")?.files?.[0] || null,
       income_letter: $("#incomeLetterFile")?.files?.[0] || null,
       income_photo: $("#incomePhotoFile")?.files?.[0] || null,
+      ews_aadhaar: $("#ewsAadhaarFile")?.files?.[0] || null,
+      ews_photo: $("#ewsPhotoFile")?.files?.[0] || null,
+      ews_income: $("#ewsIncomeFile")?.files?.[0] || null,
+      pan_aadhaar: $("#panAadhaarFile")?.files?.[0] || null,
+      pan_photo: $("#panPhotoFile")?.files?.[0] || null,
+      pan_signature: $("#panSignatureFile")?.files?.[0] || null,
       extra: $("#extraFile")?.files?.[0] || null
     };
   }
@@ -252,6 +279,9 @@
     if (data.services.includes("Income Certificate") && !["self", "father"].includes(data.income_for)) {
       throw new Error("Please select whether the Income Certificate is for Self or Father.");
     }
+    if (data.services.includes("PAN Card") && !["new", "correction"].includes(data.pan_type)) {
+      throw new Error("Please select whether the PAN Card request is for New PAN or Correction / Update.");
+    }
     if (!data.applicant_name || !data.father_husband_name || !data.mobile || !data.email || !data.district || !data.tehsil) {
       throw new Error("Please fill all required applicant details.");
     }
@@ -268,8 +298,10 @@
     }
 
     if (data.document_submission_mode === "online") {
-      const common = data.services.some((service) => service !== "Income Certificate");
+      const common = data.services.some(isCommonSetService);
       const income = data.services.includes("Income Certificate");
+      const ews = data.services.some((service) => EWS_SERVICES.includes(service));
+      const pan = data.services.includes("PAN Card");
 
       if (common) {
         validateFile(files.aadhaar, "Caste / Domicile Aadhaar Card");
@@ -281,6 +313,18 @@
         validateFile(files.income_aadhaar, "Income Certificate Aadhaar Front + Back", { pdfOnly: true });
         validateFile(files.income_letter, "Income Certificate Sabhasad / Pradhan Letter Pad");
         validateFile(files.income_photo, "Income Certificate Passport Size Photo", { imageOnly: true });
+      }
+
+      if (ews) {
+        validateFile(files.ews_aadhaar, "EWS Aadhaar Front + Back", { pdfOnly: true });
+        validateFile(files.ews_photo, "EWS Recent Passport Size Photo", { imageOnly: true });
+        validateFile(files.ews_income, "EWS Income Certificate");
+      }
+
+      if (pan) {
+        validateFile(files.pan_aadhaar, "PAN Aadhaar Front + Back", { pdfOnly: true });
+        validateFile(files.pan_photo, "PAN Recent Passport Size Photo", { imageOnly: true });
+        validateFile(files.pan_signature, "PAN Signature", { imageOnly: true });
       }
 
       if (files.extra) validateFile(files.extra, "Extra Document");
@@ -361,9 +405,11 @@
     const trackUrl = `up-certificate-status.html?request_id=${encodeURIComponent(requestId)}`;
     const documents = data.document_submission_mode === "offline" ? "Submit offline" : "Uploaded online";
     const delivery = data.home_delivery ? "Home delivery requested" : "Digital copy only";
-    const incomeMeta = data.services.includes("Income Certificate")
+    const incomeMeta = (data.services.includes("Income Certificate")
       ? `<div class="success-meta-row"><span>Income Certificate For</span><strong>${escapeHtml(data.income_for === "father" ? "Father" : "Self")}</strong></div>`
-      : "";
+      : "") + (data.services.includes("PAN Card")
+      ? `<div class="success-meta-row"><span>PAN Card Request</span><strong>${escapeHtml(data.pan_type === "correction" ? "Correction / Update" : "New PAN")}</strong></div>`
+      : "");
 
     box.dataset.requestId = requestId;
     box.innerHTML = `<div class="success-title"><i class="fas fa-circle-check"></i> Application submitted successfully</div>
@@ -557,7 +603,7 @@
     });
     $("#upCertificateForm")?.addEventListener("submit", handleSubmit);
     $("#certSuccess")?.addEventListener("click", handleSuccessActions);
-    $$('#serviceChoices input, input[name="incomeFor"], #onlineDocumentsToggle, #homeDeliveryToggle')
+    $$('#serviceChoices input, input[name="incomeFor"], input[name="panType"], #onlineDocumentsToggle, #homeDeliveryToggle')
       .forEach((element) => element.addEventListener("change", refreshUI));
     refreshUI();
   }
