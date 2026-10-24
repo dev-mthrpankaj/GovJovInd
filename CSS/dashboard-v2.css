@@ -48,7 +48,7 @@
 .gd-m span{font-size:11px;color:var(--mut);display:block}.gd-m strong{font-size:15px}
 .gd-old{margin-top:10px;font-size:13px}.gd-old summary{cursor:pointer;color:var(--pri);font-weight:700}
 .gd-link{background:0;border:0;color:var(--pri);font-weight:700;cursor:pointer}
-.gd-tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;margin:16px 0;position:sticky;top:8px;z-index:20;box-shadow:0 4px 14px rgba(15,31,61,.06)}
+.gd-tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;margin:16px 0;position:sticky;top:92px;z-index:20;box-shadow:0 4px 14px rgba(15,31,61,.06)}
 .gd-tabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;border:0;background:0;border-radius:11px;font-weight:700;font-size:14px;color:var(--mut);cursor:pointer;min-height:46px}
 .gd-tabs button.on{background:var(--pri);color:#fff}
 .gd-panel{display:none}.gd-panel.on{display:block}.gd-panel .gd-kpis{margin-top:0}
