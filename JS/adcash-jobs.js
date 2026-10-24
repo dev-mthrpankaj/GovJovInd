@@ -3,7 +3,7 @@
 
   // ====================== ADSTERRA (skyscraper removed) ======================
   const ADSTERRA = {
-    enabled: false,
+    enabled: true,
     invokeHost: 'www.highperformanceformat.com',
     units: {
       leaderboard: {
@@ -31,7 +31,7 @@
 
   // ====================== EXOCLICK ======================
   const EXOCLICK = {
-    enabled: false,
+    enabled: true,
     zones: {
       // In-content 300x250
       beforeVacancy: '6048598',
@@ -73,7 +73,7 @@
 
     if (!document.querySelector('script[src*="ad-provider.js"]')) {
       const script = document.createElement('script');
-      script.async = false;
+      script.async = true;
       script.type = 'application/javascript';
       script.src = 'https://a.magsrv.com/ad-provider.js';
       document.head.appendChild(script);
@@ -184,9 +184,9 @@
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.async = false;
+    script.async = true;
     script.src = invokeUrl(unit.key);
-    script.onload = () => resolve(false);
+    script.onload = () => resolve(true);
     script.onerror = () => resolve(false);
 
     frame.appendChild(conf);
@@ -202,7 +202,7 @@
       ['leaderboard', units.leaderboard, () => isDesktopLeader()],
       ['mobile-top', units.rectangle, () => isMobile()],
       ['mobile-strip', units.mobileStrip, () => isMobile() && !units.rectangle?.key],
-      ['rectangle', units.rectangle, () => false]
+      ['rectangle', units.rectangle, () => true]
       // skyscraper intentionally omitted
     ];
 
@@ -223,7 +223,7 @@
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: false });
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
   } else {
     boot();
   }
