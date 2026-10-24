@@ -1,9 +1,11 @@
-name: Sync listing data from Google Sheet
+name: Sync listing data from Admin database
 
+# Runs only when you press "Publish to Website" in the admin (workflow_dispatch),
+# plus once every night at 00:10 IST so date-based statuses (exam-over, closed...) roll over.
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "40 18 * * *"
 
 permissions:
   contents: write
@@ -16,14 +18,16 @@ jobs:
   sync-listing-data:
     runs-on: ubuntu-latest
     env:
-      GJU_SHEET_API_URL: "https://script.google.com/macros/s/AKfycbweqlqEKOhfn_PtfRZdu_uH9KAr3226-lbeu-gCF-fLh0lq7EP6yRTDHlPwLgMIHjdn/exec"
+      # Full feed URL incl. key, e.g. https://YOUR-DOMAIN/test/live-test/content-feed.php?key=FEED_KEY
+      # Store it as a repository secret named GJU_CONTENT_FEED_URL (never commit it).
+      GJU_SHEET_API_URL: ${{ secrets.GJU_CONTENT_FEED_URL }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Rebase on latest main before generating files
         run: git pull --rebase --autostash origin main
@@ -51,7 +55,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No listing data changes to commit."
           else
-            git commit -m "Sync listing data from Google Sheet"
+            git commit -m "Sync listing data from admin database"
             git pull --rebase --autostash origin main
             git push
           fi
