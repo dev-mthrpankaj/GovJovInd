@@ -2,6 +2,7 @@ import{getApps,initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/fir
 import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import{getDatabase,ref,get,update}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 const cfg=window.GJU_FIREBASE_CONFIG,rc=window.RANK_PREDICTOR_CONFIG||{};
+const TYPING="https://test.govjobupdates.com/live-test/typing-api/history.php";
 const PROGRESS="https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
 const $=s=>document.querySelector(s),n=v=>Number.isFinite(+v)?+v:0,esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const avg=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:0,T=d=>new Date(String(d).replace(" ","T"));
@@ -65,13 +66,43 @@ function renderRank(all,profile){
 }
 function bindMob(){$("#gdMob")?.addEventListener("submit",async e=>{e.preventDefault();const m=$("#gdMobIn").value.replace(/\D/g,"").slice(-10);if(m.length!==10)return;await update(ref(db,`users/${auth.currentUser.uid}`),{mobile:m});load(auth.currentUser)})}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-rid]");if(!b)return;const a=rankList[+b.dataset.rid];if(!a)return;try{sessionStorage.setItem(RES_KEY,JSON.stringify(snap(a)));location.href="rank-result.html"}catch{alert("Browser storage blocked hai, result open nahi ho paaya.")}});
+
+const pretty=k=>String(k||"").replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase()).replace(/\bSsc\b/,"SSC").replace(/\bCgl\b/,"CGL").replace(/\bChsl\b/,"CHSL").replace(/\bHc\b/,"HC").replace(/\bDest\b/,"DEST");
+const LANG={en:"English",hi:"Hindi"},w1=x=>Math.round(n(x)*10)/10;
+function line(v,unit){if(v.length<2)return'<div class="gd-empty">Take 2+ typing tests to see your speed trend.</div>';const w=300,h=90,mx=Math.max(...v,1),st=w/(v.length-1),d=v[v.length-1]-v[0];
+ const pts=v.map((y,i)=>`${(i*st).toFixed(1)},${(h-8-(y/mx)*(h-16)).toFixed(1)}`).join(" ");
+ return`<svg viewBox="0 0 ${w} ${h}" width="100%" height="90" role="img" aria-label="Speed trend"><polyline points="${pts}" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg><p class="sub" style="margin:6px 0 0">${d>=0?"Up":"Down"} ${Math.abs(w1(d))} ${unit} across your last ${v.length} tests</p>`}
+function renderTyping(att){
+ const A=att.slice().sort((a,b)=>T(b.createdAt)-T(a.createdAt)),E=document.getElementById("gdTKpis");
+ if(!A.length){E.innerHTML="";["#gdTTrend","#gdTTips","#gdTBest","#gdTRecent"].forEach(s=>$(s).innerHTML='<div class="gd-empty">Abhi koi typing test nahi mila. <a href="../typing-test/index.html">Typing test dein</a></div>');return}
+ const net=A.map(a=>n(a.netWpm)),best=Math.max(...net),l5=avg(net.slice(0,5)),p5=net.length>5?avg(net.slice(5,10)):null,acc=avg(A.map(a=>n(a.accuracy))),mins=Math.round(A.reduce((s,a)=>s+n(a.durationSeconds),0)/60);
+ E.innerHTML=[["Best speed",w1(best)+" WPM","net, all tests"],["Recent average",w1(l5)+" WPM",p5===null?"last 5 tests":(l5>=p5?"▲ ":"▼ ")+Math.abs(w1(l5-p5))+" vs previous 5"],["Avg accuracy",Math.round(acc)+"%","across all tests"],["Tests taken",A.length,mins+" min practised"]].map(k=>`<div class="gd-kpi"><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></div>`).join("");
+ $("#gdTTrend").innerHTML=line(A.slice(0,12).map(a=>n(a.netWpm)).reverse(),"WPM");
+ const tips=[];
+ if(acc<92)tips.push(["🎯",`Accuracy is ${Math.round(acc)}%. Slow down a little; errors cut your net speed and fail typing tests.`]);
+ if(p5!==null)tips.push([l5>=p5?"📈":"📉",l5>=p5?`Your recent average is up ${w1(l5-p5)} WPM. Keep the daily routine.`:`Recent average dropped ${w1(p5-l5)} WPM. Revise weak keys and practise 15 min daily.`]);
+ if(A.length<5)tips.push(["🚀","Take at least 5 tests to unlock reliable trends."]);
+ if(acc>=95&&p5!==null&&l5<=p5)tips.push(["⚡","Accuracy is solid. Now push speed with longer 10-15 min tests."]);
+ if(!tips.length)tips.push(["💪","Good consistency. Try a harder level to keep improving."]);
+ $("#gdTTips").innerHTML=tips.map(([i,t])=>`<div class="gd-ins"><i>${i}</i><div>${t}</div></div>`).join("");
+ const g={};A.forEach(a=>{const k=[a.presetKey,a.language,a.difficulty].join("|");(g[k]??=[]).push(a)});
+ const rows=Object.values(g).map(x=>({a:x[0],best:Math.max(...x.map(i=>n(i.netWpm))),acc:Math.max(...x.map(i=>n(i.accuracy))),c:x.length})).sort((a,b)=>b.best-a.best),mx=Math.max(...rows.map(r=>r.best),1);
+ $("#gdTBest").innerHTML=rows.slice(0,8).map(r=>`<div class="gd-bar"><div><span>${esc(pretty(r.a.presetKey))}</span><span>${w1(r.best)} WPM</span></div><div class="gd-track"><i class="s-ok" style="width:${Math.round(r.best/mx*100)}%"></i></div><small style="color:var(--mut);font-size:12px"><span class="gd-tag">${esc(LANG[r.a.language]||r.a.language)}</span> <span class="gd-tag">${esc(r.a.difficulty)}</span> · ${r.c} test${r.c>1?"s":""} · best accuracy ${Math.round(r.acc)}%</small></div>`).join("");
+ $("#gdTRecent").innerHTML=A.slice(0,8).map(a=>`<div class="gd-row"><div><strong>${esc(pretty(a.presetKey))}</strong><small>${esc(LANG[a.language]||a.language)} · ${esc(a.difficulty)} · ${fmt(a.createdAt)} · ${Math.round(n(a.durationSeconds)/60)} min · ${Math.round(n(a.accuracy))}% accurate${a.eligible?' · <span class="gd-tag gd-ok">Ranked</span>':""}</small></div><span class="gd-pill">${w1(a.netWpm)} <small>WPM</small></span></div>`).join("");
+}
+function tabs(){const go=t=>{document.querySelectorAll(".gd-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));document.querySelectorAll(".gd-panel").forEach(p=>p.classList.toggle("on",p.id==="gdP-"+t));history.replaceState(null,"","#"+t)};
+ document.getElementById("gdTabs").addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)go(b.dataset.tab)});
+ const h=location.hash.slice(1);if(["practice","rank","typing"].includes(h))go(h)}
+tabs();
 async function load(user){
  const tok=await user.getIdToken(),profile={mobile:""};
  try{const s=await get(ref(db,`users/${user.uid}`));if(s.exists())profile.mobile=String(s.val().mobile||"").replace(/\D/g,"").slice(-10)}catch{}
  const base=String(rc.apiBaseUrl||"").replace(/\/+$/,"");
- const [q,r]=await Promise.all([
+ const [q,r,t]=await Promise.all([
   fetch(PROGRESS,{headers:{Accept:"application/json",Authorization:`Bearer ${tok}`},cache:"no-store"}).then(x=>x.json()).catch(()=>null),
-  base?fetch(`${base}/dashboard.php`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${tok}`},body:JSON.stringify({firebaseUid:user.uid,userId:user.uid,name:user.displayName||"",email:user.email||"",mobile:profile.mobile})}).then(x=>x.json()).catch(()=>null):null]);
+  base?fetch(`${base}/dashboard.php`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${tok}`},body:JSON.stringify({firebaseUid:user.uid,userId:user.uid,name:user.displayName||"",email:user.email||"",mobile:profile.mobile})}).then(x=>x.json()).catch(()=>null):null,
+  fetch(TYPING,{headers:{Accept:"application/json",Authorization:`Bearer ${tok}`},cache:"no-store"}).then(x=>x.json()).catch(()=>null)]);
  render(q&&q.success?q.progress:[],r,profile);
+ renderTyping(t&&t.success?t.attempts:[]);
 }
 onAuthStateChanged(auth,u=>{if(u)load(u).catch(()=>{$("#gdHello").textContent="Could not load data. Please refresh."})});
