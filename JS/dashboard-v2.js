@@ -72,23 +72,23 @@ const LANG={en:"English",hi:"Hindi"},w1=x=>Math.round(n(x)*10)/10;
 function line(v,unit){if(v.length<2)return'<div class="gd-empty">Take 2+ typing tests to see your speed trend.</div>';const w=300,h=90,mx=Math.max(...v,1),st=w/(v.length-1),d=v[v.length-1]-v[0];
  const pts=v.map((y,i)=>`${(i*st).toFixed(1)},${(h-8-(y/mx)*(h-16)).toFixed(1)}`).join(" ");
  return`<svg viewBox="0 0 ${w} ${h}" width="100%" height="90" role="img" aria-label="Speed trend"><polyline points="${pts}" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg><p class="sub" style="margin:6px 0 0">${d>=0?"Up":"Down"} ${Math.abs(w1(d))} ${unit} across your last ${v.length} tests</p>`}
-function renderTyping(att){
- const A=att.slice().sort((a,b)=>T(b.createdAt)-T(a.createdAt)),E=document.getElementById("gdTKpis");
- if(!A.length){E.innerHTML="";["#gdTTrend","#gdTTips","#gdTBest","#gdTRecent"].forEach(s=>$(s).innerHTML='<div class="gd-empty">Abhi koi typing test nahi mila. <a href="../typing-test/index.html">Typing test dein</a></div>');return}
- const net=A.map(a=>n(a.netWpm)),best=Math.max(...net),l5=avg(net.slice(0,5)),p5=net.length>5?avg(net.slice(5,10)):null,acc=avg(A.map(a=>n(a.accuracy))),mins=Math.round(A.reduce((s,a)=>s+n(a.durationSeconds),0)/60);
- E.innerHTML=[["Best speed",w1(best)+" WPM","net, all tests"],["Recent average",w1(l5)+" WPM",p5===null?"last 5 tests":(l5>=p5?"▲ ":"▼ ")+Math.abs(w1(l5-p5))+" vs previous 5"],["Avg accuracy",Math.round(acc)+"%","across all tests"],["Tests taken",A.length,mins+" min practised"]].map(k=>`<div class="gd-kpi"><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></div>`).join("");
+function renderTyping(d){
+ const A=(d.attempts||[]).slice().sort((x,y)=>T(y.createdAt)-T(x.createdAt)),R=(d.ranked||[]).slice().sort((x,y)=>x.rank-y.rank),E=$("#gdTKpis");
+ const key=o=>[o.presetKey,o.language,o.difficulty,o.durationSeconds,o.passageId].join("|"),rk={};R.forEach(r=>rk[key(r)]=r);
+ if(!A.length&&!R.length){E.innerHTML="";["#gdTTrend","#gdTTips","#gdTBest","#gdTRecent"].forEach(s=>$(s).innerHTML='<div class="gd-empty">Abhi koi ranked typing test nahi mila. <a href="../typing-test/index.html">Ranked test dein</a></div>');return}
+ const net=A.map(a=>n(a.netWpm)),best=net.length?Math.max(...net):0,l5=avg(net.slice(0,5)),p5=net.length>5?avg(net.slice(5,10)):null,top=R[0];
+ E.innerHTML=[["Best rank",top?"#"+top.rank:"--",top?`of ${top.rankedUsers} · Top ${Math.max(1,Math.ceil(top.rank/top.rankedUsers*100))}%`:"no rank yet"],["Best speed",w1(best)+" WPM","net, ranked tests"],["Recent average",w1(l5)+" WPM",p5===null?"last 5 ranked tests":(l5>=p5?"▲ ":"▼ ")+Math.abs(w1(l5-p5))+" vs previous 5"],["Ranked tests",A.length,`${R.length} rank${R.length===1?"":"s"} held`]].map(k=>`<div class="gd-kpi"><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></div>`).join("");
+ $("#gdTBest").innerHTML=R.length?R.map(r=>{const gap=w1(r.topSpeed-r.bestNetWpm),pc=Math.round(r.bestNetWpm/Math.max(r.topSpeed,1)*100),l=r.rank===1?"ok":r.percentile>=50?"mid":"bad";
+  return`<div class="gd-trank"><div class="gd-tbadge t-${l}"><small>RANK</small><b>#${r.rank}</b><span>of ${r.rankedUsers}</span></div><div class="gd-tbody"><h3>${esc(pretty(r.presetKey))}</h3><p class="sub" style="margin:2px 0 8px"><span class="gd-tag">${esc(LANG[r.language]||r.language)}</span> <span class="gd-tag">${esc(r.difficulty)}</span> <span class="gd-tag">${Math.round(r.durationSeconds/60)} min</span> · ${r.rankedAttempts} ranked test${r.rankedAttempts>1?"s":""} · better than ${Math.max(0,r.rankedUsers-r.rank)} student${r.rankedUsers-r.rank===1?"":"s"}</p><div class="gd-track"><i class="s-${l}" style="width:${pc}%"></i></div><div class="gd-tnums"><span>You <b>${w1(r.bestNetWpm)}</b> WPM</span><span>Community avg <b>${w1(r.communityAverage)}</b></span><span>Top <b>${w1(r.topSpeed)}</b></span></div><p class="gd-gap">${r.rank===1?"🏆 You hold the #1 spot here.":`Add <b>${gap} WPM</b> to reach #1.`}</p></div></div>`}).join(""):'<div class="gd-empty">Rank abhi calculate nahi hui. Ek ranked test poora karein.</div>';
  $("#gdTTrend").innerHTML=line(A.slice(0,12).map(a=>n(a.netWpm)).reverse(),"WPM");
- const tips=[];
- if(acc<92)tips.push(["🎯",`Accuracy is ${Math.round(acc)}%. Slow down a little; errors cut your net speed and fail typing tests.`]);
- if(p5!==null)tips.push([l5>=p5?"📈":"📉",l5>=p5?`Your recent average is up ${w1(l5-p5)} WPM. Keep the daily routine.`:`Recent average dropped ${w1(p5-l5)} WPM. Revise weak keys and practise 15 min daily.`]);
- if(A.length<5)tips.push(["🚀","Take at least 5 tests to unlock reliable trends."]);
- if(acc>=95&&p5!==null&&l5<=p5)tips.push(["⚡","Accuracy is solid. Now push speed with longer 10-15 min tests."]);
- if(!tips.length)tips.push(["💪","Good consistency. Try a harder level to keep improving."]);
+ const tips=[],acc=avg(A.map(a=>n(a.accuracy)));
+ if(top&&top.rank>1){const ca=top.communityAverage;if(ca&&top.bestNetWpm<ca)tips.push(["📊",`Your best (${w1(top.bestNetWpm)}) is below the community average (${w1(ca)}) in ${esc(pretty(top.presetKey))}. Add ${w1(ca-top.bestNetWpm)} WPM to move into the top half.`]);else tips.push(["🎯",`You are #${top.rank}. ${w1(top.topSpeed-top.bestNetWpm)} more WPM takes you to #1.`])}
+ if(acc&&acc<95)tips.push(["✍️",`Accuracy is ${Math.round(acc)}%. Ranking breaks ties by accuracy, so clean typing helps your rank.`]);
+ if(p5!==null)tips.push([l5>=p5?"📈":"📉",l5>=p5?`Recent average is up ${w1(l5-p5)} WPM. Keep the daily routine.`:`Recent average dropped ${w1(p5-l5)} WPM. Practise 15 min daily before the next ranked test.`]);
+ if(A.length<5)tips.push(["🚀","Take at least 5 ranked tests to unlock reliable trends."]);
+ if(!tips.length)tips.push(["💪","Great consistency. Keep pushing for the next rank."]);
  $("#gdTTips").innerHTML=tips.map(([i,t])=>`<div class="gd-ins"><i>${i}</i><div>${t}</div></div>`).join("");
- const g={};A.forEach(a=>{const k=[a.presetKey,a.language,a.difficulty].join("|");(g[k]??=[]).push(a)});
- const rows=Object.values(g).map(x=>({a:x[0],best:Math.max(...x.map(i=>n(i.netWpm))),acc:Math.max(...x.map(i=>n(i.accuracy))),c:x.length})).sort((a,b)=>b.best-a.best),mx=Math.max(...rows.map(r=>r.best),1);
- $("#gdTBest").innerHTML=rows.slice(0,8).map(r=>`<div class="gd-bar"><div><span>${esc(pretty(r.a.presetKey))}</span><span>${w1(r.best)} WPM</span></div><div class="gd-track"><i class="s-ok" style="width:${Math.round(r.best/mx*100)}%"></i></div><small style="color:var(--mut);font-size:12px"><span class="gd-tag">${esc(LANG[r.a.language]||r.a.language)}</span> <span class="gd-tag">${esc(r.a.difficulty)}</span> · ${r.c} test${r.c>1?"s":""} · best accuracy ${Math.round(r.acc)}%</small></div>`).join("");
- $("#gdTRecent").innerHTML=A.slice(0,8).map(a=>`<div class="gd-row"><div><strong>${esc(pretty(a.presetKey))}</strong><small>${esc(LANG[a.language]||a.language)} · ${esc(a.difficulty)} · ${fmt(a.createdAt)} · ${Math.round(n(a.durationSeconds)/60)} min · ${Math.round(n(a.accuracy))}% accurate${a.eligible?' · <span class="gd-tag gd-ok">Ranked</span>':""}</small></div><span class="gd-pill">${w1(a.netWpm)} <small>WPM</small></span></div>`).join("");
+ $("#gdTRecent").innerHTML=A.slice(0,8).map(a=>{const c=rk[key(a)];return`<div class="gd-row"><div><strong>${esc(pretty(a.presetKey))}</strong><small>${esc(LANG[a.language]||a.language)} · ${esc(a.difficulty)} · ${fmt(a.createdAt)} · ${Math.round(n(a.durationSeconds)/60)} min · ${Math.round(n(a.accuracy))}% accurate${c?` · <span class="gd-tag">Current rank #${c.rank}</span>`:""}</small></div><span class="gd-pill">${w1(a.netWpm)} <small>WPM</small></span></div>`}).join("")||'<div class="gd-empty">No ranked tests yet.</div>';
 }
 function tabs(){const go=t=>{document.querySelectorAll(".gd-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));document.querySelectorAll(".gd-panel").forEach(p=>p.classList.toggle("on",p.id==="gdP-"+t));history.replaceState(null,"","#"+t)};
  document.getElementById("gdTabs").addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)go(b.dataset.tab)});
@@ -103,6 +103,6 @@ async function load(user){
   base?fetch(`${base}/dashboard.php`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${tok}`},body:JSON.stringify({firebaseUid:user.uid,userId:user.uid,name:user.displayName||"",email:user.email||"",mobile:profile.mobile})}).then(x=>x.json()).catch(()=>null):null,
   fetch(TYPING,{headers:{Accept:"application/json",Authorization:`Bearer ${tok}`},cache:"no-store"}).then(x=>x.json()).catch(()=>null)]);
  render(q&&q.success?q.progress:[],r,profile);
- renderTyping(t&&t.success?t.attempts:[]);
+ renderTyping(t&&t.success?t:{attempts:[],ranked:[]});
 }
 onAuthStateChanged(auth,u=>{if(u)load(u).catch(()=>{$("#gdHello").textContent="Could not load data. Please refresh."})});
