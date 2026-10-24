@@ -77,9 +77,29 @@ import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.14
     window.setTimeout(callback, 2000);
   }
 
+  function startSecondaryAnalytics() {
+    const robots = document.querySelector('meta[name="robots"]')?.content || "";
+    if (/\bnoindex\b/i.test(robots) || window.__GJU_SECONDARY_GA_STARTED__) return;
+    window.__GJU_SECONDARY_GA_STARTED__ = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", "G-720WQEDV95");
+
+    if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-720WQEDV95";
+      document.head.appendChild(script);
+    }
+  }
+
   function startAnalytics() {
     if (analyticsStarted) return;
     analyticsStarted = true;
+
+    startSecondaryAnalytics();
 
     // Pehle se chal rahe firebase instance ko check karega, nahi toh naya banayega
     const app = getApps().length ? getApps()[0] : initializeApp(config);
