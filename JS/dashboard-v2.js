@@ -11,7 +11,8 @@ const fmt=d=>{const x=T(d);return isNaN(x)?"Recent":x.toLocaleDateString("en-IN"
 const dur=s=>s>=60?Math.round(s/60)+" min":s+" s";
 if(!cfg||!cfg.apiKey)throw new Error("firebase config missing");
 const app=getApps().length?getApps()[0]:initializeApp(cfg),auth=getAuth(app),db=getDatabase(app);
-function ring(p){const r=56,c=2*Math.PI*r;return`<svg width="132" height="132"><circle cx="66" cy="66" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="11"/><circle cx="66" cy="66" r="${r}" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p/100)}"/></svg><b>${p}%<span>AVG BEST SCORE</span></b>`}
+const RC={b1:"#f87171",b2:"#fb923c",b3:"#facc15",b4:"#a3e635",b5:"#4ade80"};
+function ring(p,has){const r=56,c=2*Math.PI*r,[b,t]=lvl(p),col=has?RC[b]:"#fff";return`<svg width="132" height="132"><circle cx="66" cy="66" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="11"/><circle cx="66" cy="66" r="${r}" fill="none" stroke="${col}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p/100)}"/></svg><b>${p}%<span>AVG BEST SCORE</span></b>${has?`<em class="gd-rl" style="background:${col}">${t}</em>`:""}`}
 function trend(rows){if(rows.length<2)return'<div class="gd-empty">Attempt 2+ quizzes to see your trend.</div>';
  const v=rows.slice().reverse().map(r=>n(r.percentage)),w=300,h=90,st=w/(v.length-1),d=v[v.length-1]-v[0];
  const pts=v.map((y,i)=>`${(i*st).toFixed(1)},${(h-8-(y/100)*(h-16)).toFixed(1)}`).join(" ");
@@ -30,7 +31,7 @@ function render(rows,rk,profile){
  const wk=new Set(sorted.filter(r=>Date.now()-T(r.completedAt)<6048e5).map(r=>String(r.completedAt).slice(0,10))).size;
  const by={};rows.forEach(r=>{(by[r.subject||"General"]??=[]).push(n(r.bestPercentage||r.percentage))});
  const subs=Object.entries(by).map(([name,a])=>({name,p:avg(a)})).sort((a,b)=>b.p-a.p),weak=subs.length?subs[subs.length-1].name:"";
- $("#gdRing").innerHTML=ring(prep);
+ $("#gdRing").innerHTML=ring(prep,rows.length>0);
  $("#gdHello").textContent=rows.length?(prep>=70?"You are on track. Keep the momentum.":prep>=45?"Good base. A few focused sets will lift your score.":"Start with basics and build daily practice."):"Take your first quiz to unlock your preparation report.";
  const rr=rows.filter(r=>n(r.rank)>0).sort((a,b)=>n(a.rank)-n(b.rank))[0];
  $("#gdKpis").innerHTML=[["Quizzes attempted",attempts,`${rows.length} unique sets`],["Avg best score",rows.length?Math.round(avgBest)+"%":"--","across your quizzes"],["Accuracy",rows.length?Math.round(acc)+"%":"--","correct of attempted"],["Best quiz rank",rr?"#"+rr.rank:"--",rr?`of ${rr.rankedUsers} · ${esc(String(rr.quizTitle).slice(0,26))}`:"No ranked quiz yet"]].map(k=>`<div class="gd-kpi"><span>${k[0]}</span><strong>${k[1]}</strong><small>${k[2]}</small></div>`).join("");
