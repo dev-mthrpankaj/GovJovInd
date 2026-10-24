@@ -37,10 +37,34 @@ function render(rows,rk,profile){
  $("#gdTrend").innerHTML=trend(sorted.slice(0,8));
  $("#gdInsights").innerHTML=insights(rows,subs);
  $("#gdRecent").innerHTML=sorted.length?sorted.slice(0,6).map(r=>{const l=lvl(n(r.percentage))[0];return`<div class="gd-row"><div><strong>${esc(r.quizTitle)}</strong><small>${esc(r.subject)} · ${fmt(r.completedAt)} · ${n(r.correct)}/${n(r.totalQuestions)} correct · ${dur(n(r.timeTakenSeconds))}</small></div><span class="gd-pill" style="color:var(--${l})">${Math.round(n(r.percentage))}%</span></div>`}).join(""):'<div class="gd-empty">Nothing yet. <a href="quiz.html">Take your first quiz</a></div>';
- const att=(rk&&rk.attempts)||[],last=att.slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))[0];
- $("#gdRank").innerHTML=att.length?`<div class="gd-rank"><div><span>Latest percentile</span><strong>${n(last.percentile).toFixed(1)}%</strong></div><div><span>Best percentile</span><strong>${Math.max(...att.map(a=>n(a.percentile))).toFixed(1)}%</strong></div></div><p class="sub" style="margin-top:10px">${esc(last.examName||"Rank Predictor")} · ${att.length} prediction${att.length>1?"s":""}</p>`:`<div class="gd-empty">No rank prediction yet.<br><a href="rank-predictor.html">Predict your rank</a></div>${profile.mobile?"":'<form class="gd-mob" id="gdMob"><input id="gdMobIn" inputmode="numeric" maxlength="10" placeholder="Mobile used in Rank Predictor"><button>Save</button></form>'}`;
- $("#gdMob")?.addEventListener("submit",async e=>{e.preventDefault();const m=$("#gdMobIn").value.replace(/\D/g,"").slice(-10);if(m.length!==10)return;await update(ref(db,`users/${auth.currentUser.uid}`),{mobile:m});load(auth.currentUser)});
+ renderRank((rk&&rk.attempts)||[],profile);
 }
+
+const RES_KEY="gju_rank_predictor_latest_result";let rankList=[];
+const fr=v=>{const x=Number(v);return Number.isFinite(x)&&x>0?"#"+x.toLocaleString("en-IN"):"--"},mk=v=>{const x=Number(v);return Number.isFinite(x)?Math.round(x*100)/100:"--"};
+const rt=a=>new Date(a.completedAt||a.createdAt||a.timestamp||0).getTime()||0;
+const nm=a=>a.normalizedMarks??a.normalisedMarks??a.rawMarks;
+function snap(a){return{resultData:a,payload:{examId:a.examId||"",examName:a.examName||"",sheetName:a.sheetName||"",mode:a.mode||"",rollNumber:a.rollNumber||"",gender:a.gender||"",category:a.category||"",horizontalCategory:a.horizontalCategory||"",state:a.state||"",examDate:a.examDate||"",shift:a.shift||"",totalQuestions:a.totalQuestions,totalAttempted:a.totalAttempted,rightAnswers:a.rightAnswers,wrongAnswers:a.wrongAnswers,unattempted:a.unattempted,rawMarks:a.rawMarks,normalizedMarks:nm(a),subjectData:a.subjectData||a.subjectAnalysis||[]},examName:a.examName||"",exam:{examId:a.examId||"",examName:a.examName||"",board:a.board||"",hasShifts:Boolean(a.hasShifts),normalization:Boolean(a.normalization)},derived:{normalizedMarks:nm(a)},savedAt:new Date().toISOString()}}
+function renderRank(all,profile){
+ const yr=Date.now()-365*864e5,mob=profile.mobile;
+ let att=all.filter(a=>!rt(a)||rt(a)>=yr);
+ const mine=att.filter(a=>String(a.mobileNumber||a.mobile||"").replace(/\D/g,"").slice(-10)===mob);
+ if(mob)att=mine;
+ att=att.sort((a,b)=>rt(b)-rt(a));rankList=att;
+ const form=mob?"":`<form class="gd-mob" id="gdMob"><input id="gdMobIn" inputmode="numeric" maxlength="10" placeholder="Rank Predictor me jo mobile diya tha"><button>Save mobile</button></form><p class="sub" style="margin-top:6px">Isi mobile se aapke rank records match hote hain.</p>`;
+ if(!att.length){$("#gdRank").innerHTML=`<div class="gd-empty">Abhi koi rank record nahi mila.<br><a href="rank-predictor.html">Rank predict karein</a></div>${form}`;bindMob();return}
+ const ranks=att.map(a=>n(a.overallRank)).filter(x=>x>0),pcs=att.map(a=>n(a.percentile)),L=att[0];
+ const by=new Map();att.forEach((a,i)=>{const k=a.examId||a.examName;if(!by.has(k))by.set(k,[]);by.get(k).push(i)});
+ const sum=[["Latest rank",fr(L.overallRank)],["Best rank",ranks.length?fr(Math.min(...ranks)):"--"],["Best percentile",Math.max(...pcs).toFixed(1)+"%"],["Predictions",att.length]].map(x=>`<div><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+ const cards=[...by.values()].map(ix=>{const a=att[ix[0]],prev=ix[1]!==undefined?att[ix[1]]:null;
+  let mv="";if(prev&&n(a.overallRank)>0&&n(prev.overallRank)>0){const d=n(prev.overallRank)-n(a.overallRank);mv=d===0?'<em class="t-mid">Rank unchanged</em>':`<em class="${d>0?"t-ok":"t-bad"}">${d>0?"▲ improved":"▼ dropped"} by ${Math.abs(d).toLocaleString("en-IN")} (was ${fr(prev.overallRank)})</em>`}
+  const m=[["Overall rank",fr(a.overallRank)],["Percentile",mk(a.percentile)+"%"],["Normalized marks",mk(nm(a))],["Raw marks",mk(a.rawMarks)],["Shift rank",fr(a.shiftRank)],["Category rank",fr(a.categoryRank)],["State rank",fr(a.stateRank)]].map(x=>`<div><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+  const older=ix.slice(1,5).map(i=>`<div class="gd-row"><div><small>${fmt(att[i].completedAt||att[i].createdAt)} · rank ${fr(att[i].overallRank)} · ${mk(att[i].percentile)}%</small></div><button class="gd-link" data-rid="${i}">Open</button></div>`).join("");
+  return`<article class="gd-exam"><div class="gd-exam-h"><div><small>${esc(a.board||"Exam")}</small><h3>${esc(a.examName||"Rank Predictor Exam")}</h3><p class="sub" style="margin:2px 0 0">${ix.length} check${ix.length>1?"s":""} · latest ${fmt(a.completedAt||a.createdAt)}</p></div>${mv}</div><div class="gd-m">${m}</div><div class="gd-hero-actions" style="margin-top:12px"><button class="gd-btn gd-sm" data-rid="${ix[0]}">Open full result</button><a class="gd-btn gd-sm gd-out" href="rank-predictor.html">Check again</a></div>${older?`<details class="gd-old"><summary>Earlier checks (${ix.length-1})</summary>${older}</details>`:""}</article>`}).join("");
+ $("#gdRank").innerHTML=`<div class="gd-rank gd-rank4">${sum}</div><div class="gd-exams">${cards}</div>${form}`;bindMob();
+}
+function bindMob(){$("#gdMob")?.addEventListener("submit",async e=>{e.preventDefault();const m=$("#gdMobIn").value.replace(/\D/g,"").slice(-10);if(m.length!==10)return;await update(ref(db,`users/${auth.currentUser.uid}`),{mobile:m});load(auth.currentUser)})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-rid]");if(!b)return;const a=rankList[+b.dataset.rid];if(!a)return;try{sessionStorage.setItem(RES_KEY,JSON.stringify(snap(a)));location.href="rank-result.html"}catch{alert("Browser storage blocked hai, result open nahi ho paaya.")}});
 async function load(user){
  const tok=await user.getIdToken(),profile={mobile:""};
  try{const s=await get(ref(db,`users/${user.uid}`));if(s.exists())profile.mobile=String(s.val().mobile||"").replace(/\D/g,"").slice(-10)}catch{}
