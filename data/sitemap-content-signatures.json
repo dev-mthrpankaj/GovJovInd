@@ -1133,10 +1133,6 @@
       "signature": "2ceced06f2e6d15fb69d47079c1c9ddbf07c1ea72259238d9aeec5b1008101f5",
       "lastmod": "2026-08-27"
     },
-    "Job_Details/HTML/BOB-SO-Various-Post-2026.html": {
-      "signature": "2ca4f6709a2eac42b96277812d82a13a174f282067fe2aa95a25c3838a2e630e",
-      "lastmod": "2026-08-27"
-    },
     "Job_Details/HTML/BPSSC-Bihar-Forest-Range-Officer-FRO-2026.html": {
       "signature": "9de2b61e67375e99d22e129fc3686f4f4535ef8c6483049f99450260a67beb8c",
       "lastmod": "2026-08-12"
@@ -1513,6 +1509,10 @@
       "signature": "038fe12fd4a122da057ba3a4e7166320ec907c8d6299ebd150a9fc2174a0bf52",
       "lastmod": "2026-10-16"
     },
+    "jobs/bob-so-various-post-2026.html": {
+      "signature": "c152d988a865e7632d8f5008c470db42727fd184074760ada4c0839f910aa702",
+      "lastmod": "2026-10-24"
+    },
     "jobs/bpcl-non-management-post-2026.html": {
       "signature": "737c0962508ea38c23049554549ea11b77775d8674f5a2c0480801a1e123a421",
       "lastmod": "2026-10-21"
@@ -1637,6 +1637,10 @@
       "signature": "1f6e4c7fc9c3a62c789c3824adb2b51f8d7a1c85c8927a6b87b82e33136f712f",
       "lastmod": "2026-10-16"
     },
+    "jobs/drrmlims-various-post-2026.html": {
+      "signature": "f253546881fe4de33b7ff6231ba6d4b75e3f5db1bfc71c38c212332d310f8be1",
+      "lastmod": "2026-10-24"
+    },
     "jobs/dsssb-answer-key.html": {
       "signature": "96e5c5afb541ed2bf8421992f6e0988418056a9d0fad1f79d4676b6bc69dee06",
       "lastmod": "2026-10-16"
@@ -1728,6 +1732,10 @@
     "jobs/isro-istrac-2026.html": {
       "signature": "46049a1d6d34f470c72f4b09e054615a2bef0d748e1f9f4ddcc8ff25a5249560",
       "lastmod": "2026-10-16"
+    },
+    "jobs/isro-ursc-technician-b-driver-2026.html": {
+      "signature": "a885861a4015e783786e2625272e99802e679f600c084eb75cfdf741d83b4236",
+      "lastmod": "2026-10-24"
     },
     "jobs/itbp-head-constable-sep26.html": {
       "signature": "b84ee10ea97032c670f6403c30802dfe99031ddcd2c2aa83d332460d6788c733",
@@ -2134,8 +2142,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/up-police-home-guard-2025.html": {
-      "signature": "18940c0362143d173d75a65ca4463e1b6746ff272ee9cfb0e426891b6ef2827d",
-      "lastmod": "2026-10-16"
+      "signature": "1a6fdfe1f5e52d25da0838b68ccf9046b67ed04e3aae47ff37600c56815b5f19",
+      "lastmod": "2026-10-24"
     },
     "jobs/up-scholarship-2026.html": {
       "signature": "029f09b76d4b4922e9ba63fd745bb93ae411147d77d2520b90137a5851f823c5",
