@@ -3000,13 +3000,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://bankofbaroda.bank.in/career/current-opportunities/recruitment-of-professionals-on-regular-basis-for-digital-banking-department-26-08",
         "officialNotification": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2026/26-08/Advertisement-Regular-06-08-2026-05-34.pdf",
-        "detailPage": "../Job_Details/HTML/BOB-SO-Various-Post-2026.html",
+        "detailPage": "../jobs/bob-so-various-post-2026.html",
         "updatedAt": "2026-08-06",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "sheet",
+        "detailPageSource": "resolved",
         "detailPageNeedsReview": "no"
     },
     {
