@@ -6,7 +6,7 @@ const TYPING="https://test.govjobupdates.com/live-test/typing-api/history.php";
 const PROGRESS="https://test.govjobupdates.com/live-test/practice-quiz-api/progress.php";
 const $=s=>document.querySelector(s),n=v=>Number.isFinite(+v)?+v:0,esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const avg=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:0,T=d=>new Date(String(d).replace(" ","T"));
-const lvl=p=>p>=70?["ok","Strong"]:p>=45?["mid","Average"]:["bad","Needs work"];
+const lvl=p=>{p=Math.round(p);return p<=20?["b1","Very weak"]:p<=40?["b2","Weak"]:p<=60?["b3","Average"]:p<=80?["b4","Good"]:["b5","Excellent"]};
 const fmt=d=>{const x=T(d);return isNaN(x)?"Recent":x.toLocaleDateString("en-IN",{day:"2-digit",month:"short"})};
 const dur=s=>s>=60?Math.round(s/60)+" min":s+" s";
 if(!cfg||!cfg.apiKey)throw new Error("firebase config missing");
@@ -37,7 +37,7 @@ function render(rows,rk,profile){
  $("#gdSubjects").innerHTML=subs.length?subs.map(s=>{const[l,t]=lvl(s.p);return`<div class="gd-bar"><div><span>${esc(s.name)}</span><span><em class="t-${l}">${t}</em> ${Math.round(s.p)}%</span></div><div class="gd-track"><i class="s-${l}" style="width:${Math.round(s.p)}%"></i></div></div>`}).join(""):'<div class="gd-empty">No subject data yet. <a href="quiz.html">Start a quiz</a></div>';
  $("#gdTrend").innerHTML=trend(sorted.slice(0,8));
  $("#gdInsights").innerHTML=insights(rows,subs);
- $("#gdRecent").innerHTML=sorted.length?sorted.slice(0,6).map(r=>{const l=lvl(n(r.percentage))[0];return`<div class="gd-row"><div><strong>${esc(r.quizTitle)}</strong><small>${esc(r.subject)} · ${fmt(r.completedAt)} · ${n(r.correct)}/${n(r.totalQuestions)} correct · ${dur(n(r.timeTakenSeconds))}${n(r.attemptCount)>1?` · ${n(r.attemptCount)} attempts`:""}${n(r.rank)>0?` · <span class="gd-tag">Rank #${n(r.rank)} of ${n(r.rankedUsers)}</span>`:""}</small></div><span class="gd-pill" style="color:var(--${l})">${Math.round(n(r.percentage))}%</span></div>`}).join(""):'<div class="gd-empty">Nothing yet. <a href="quiz.html">Take your first quiz</a></div>';
+ $("#gdRecent").innerHTML=sorted.length?sorted.slice(0,6).map(r=>{const l=lvl(n(r.percentage))[0];return`<div class="gd-row"><div><strong>${esc(r.quizTitle)}</strong><small>${esc(r.subject)} · ${fmt(r.completedAt)} · ${n(r.correct)}/${n(r.totalQuestions)} correct · ${dur(n(r.timeTakenSeconds))}${n(r.attemptCount)>1?` · ${n(r.attemptCount)} attempts`:""}${n(r.rank)>0?` · <span class="gd-tag">Rank #${n(r.rank)} of ${n(r.rankedUsers)}</span>`:""}</small></div><span class="gd-pill c-${l}">${Math.round(n(r.percentage))}%</span></div>`}).join(""):'<div class="gd-empty">Nothing yet. <a href="quiz.html">Take your first quiz</a></div>';
  renderRank((rk&&rk.attempts)||[],profile);
 }
 
