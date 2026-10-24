@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0207-20261024145818-7e0b862d",
+        "title": "Bank of Baroda SO Various Post Admit Card 2026 for 206 Post",
+        "organization": "Bank of Baroda (BOB)",
+        "department": "BOB",
+        "category": "Banking",
+        "year": "2026",
+        "examDate": "2026-11-01",
+        "examEndDate": "",
+        "releaseDate": "2026-10-24",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://ibpsreg.ibps.in/bobdoct26/oecla_oct26/login.php?appid=f45182b711dcad2d160e2b9de0f01c64",
+        "detailPage": "../jobs/bob-so-various-post-2026.html",
+        "updatedAt": "2026-10-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0171-20260921204146-88ab998b",
         "title": "Railway RRB ALP Assistant Loco Pilot Exam City Details 2026",
         "organization": "Railway Recruitment Board",
