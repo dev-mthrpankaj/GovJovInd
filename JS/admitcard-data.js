@@ -853,7 +853,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-28",
         "examEndDate": "2026-10-24",
         "releaseDate": "2026-09-22",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/OTRAppForm/Applicant_OtrAuthentication.aspx?WEqGEem9m0+8Y4tNQqJiNYurmbKsjJR/fgSlThSTh6o=#no-back",
         "detailPage": "../jobs/uppsc-pre.html",
