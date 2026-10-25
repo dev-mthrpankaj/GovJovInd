@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0208-20261025223539-cc8827a0",
+        "title": "MP Police SI Sub Inspector Subedar Admit Card 2026 for 507 Post",
+        "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-10-28",
+        "examEndDate": "",
+        "releaseDate": "2026-10-25",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/SUBEDAR_SI_RES_TAC26/default_tac.htm",
+        "detailPage": "../jobs/mp-police-si-subedar-2026.html",
+        "updatedAt": "2026-10-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0207-20261024145818-7e0b862d",
         "title": "Bank of Baroda SO Various Post Admit Card 2026 for 206 Post",
         "organization": "Bank of Baroda (BOB)",
