@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0297-20261025075245-a354d55b",
+        "title": "NTA JEE MAINS 2027 Session 1 Online Form 2027",
+        "organization": "National Testing Agency",
+        "department": "NTA",
+        "category": "Education",
+        "year": "2026",
+        "qualification": "Passed / Appeared 10+2 Intermediate Exam from Any Recognized Board in India. Class 12th Exam Passed in 2025 or 2026 Class 12th 2027 Appearing Candidate Also Eligible for Paper Wise Eligibility Details Read the Information Brochure. More Details Read the Notification.",
+        "totalPosts": "NA",
+        "startDate": "2026-10-24",
+        "lastDate": "2026-11-22",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://examinationservices.nic.in/JeeMaink2027/root/Home.aspx?enc=Ei4cajBkK1gZSfgr53ImFVj34FesvYg1WX45sPjGXBr/RK0fiT9U+NCx0+00pns5",
+        "officialNotification": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/10/202610241890224107.pdf",
+        "detailPage": "../jobs/nta-jee-mains-2027-session-1.html",
+        "updatedAt": "2026-10-25",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0295-20261024153321-de1e6258",
         "title": "ISRO URSC Technician B, Driver Online Form 2026",
         "organization": "Indian Space Research Organisation (ISRO)",
