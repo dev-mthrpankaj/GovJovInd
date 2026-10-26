@@ -38,7 +38,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1265",
         "startDate": "2026-10-27",
         "lastDate": "2026-11-25",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://www.rrbapply.gov.in/#/auth/landing",
         "officialNotification": "https://rrb.indianrailways.gov.in/-/image/1793016775903CEN_08_2026__Station_master_Hindi.pdf/examsDocuments",
