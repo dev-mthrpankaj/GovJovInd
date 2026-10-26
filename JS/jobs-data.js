@@ -6,7 +6,7 @@ window.GovJobUpdatesJobs = [
     {
         "id": "job-sheet-0298-20261026125631-d3e3f593",
         "title": "UPPSC RO ARO Online Form 2026 for 501 Post",
-        "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
+        "organization": "Uttar Pradesh Public Service Commission",
         "department": "UPPSC",
         "category": "State Government",
         "year": "2026",
@@ -18,14 +18,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://uppsc.up.nic.in/CandidatePages/Notifications.aspx",
         "officialNotification": "https://uppsc.up.nic.in/OuterPages/View_Enclosure.aspx?ID=307&flag=E&FID=947",
-        "detailPage": "../HTML/latest-jobs.html",
+        "detailPage": "../jobs/uppsc-ro-aro-2026.html",
         "updatedAt": "2026-10-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0297-20261025075245-a354d55b",
