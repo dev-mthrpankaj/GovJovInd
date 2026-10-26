@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0298-20261026125631-d3e3f593",
+        "title": "UPPSC RO ARO Online Form 2026 for 501 Post",
+        "organization": "Uttar Pradesh Public Service Commission (UPPSC)",
+        "department": "UPPSC",
+        "category": "State Government",
+        "year": "2026",
+        "qualification": "Bachelor Degree Passed in Any Stream a Recognized University in India. More Details Read the Notification.",
+        "totalPosts": "501",
+        "startDate": "2026-10-26",
+        "lastDate": "2026-11-26",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://uppsc.up.nic.in/CandidatePages/Notifications.aspx",
+        "officialNotification": "https://uppsc.up.nic.in/OuterPages/View_Enclosure.aspx?ID=307&flag=E&FID=947",
+        "detailPage": "../HTML/latest-jobs.html",
+        "updatedAt": "2026-10-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
+    },
+    {
         "id": "job-sheet-0297-20261025075245-a354d55b",
         "title": "NTA JEE MAINS 2027 Session 1 Online Form 2027",
         "organization": "National Testing Agency",
