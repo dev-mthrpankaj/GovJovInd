@@ -473,7 +473,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-23",
         "examEndDate": "2026-10-25",
         "releaseDate": "2026-10-09",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://portal.mphc.gov.in/PDF/web_pdf/RE/Notification%20of%20online%20pre%20exam%20dates%20of%20DC%20AG-III.pdf",
         "detailPage": "../jobs/mp-high-court-assistant-grade-iii-2026.html",

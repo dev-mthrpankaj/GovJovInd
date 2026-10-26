@@ -672,24 +672,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0146-20260911223126-50758e61",
-        "title": "UPSSSC Lekhpal Result 2026 for 7994 Post",
-        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
-        "department": "UPSSSC",
-        "category": "State Government",
-        "year": "2026",
-        "resultDate": "2026-09-11",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=163&Result_Type=M&Exam_Code=5&Advt_Code=568&Dept_Code=557&Post_Code=1&OnlyIntview=No",
-        "detailPage": "../jobs/upsssc-lekhpal-advt-02-exam-2025.html",
-        "updatedAt": "2026-09-11",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0147-20260911225444-4c8653f4",
         "title": "CBSE KVS NVS Teaching and Non Teaching Tier II Result 2026",
         "organization": "Central Board of Secondary Education (CBSE)",
