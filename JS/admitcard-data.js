@@ -913,7 +913,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-09-26",
         "examEndDate": "2026-10-27",
         "releaseDate": "2026-09-21",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/sbijajul26/oecla_sep26/login.php?appid=24c6ba07c29762dbe2586e1f533198ec",
         "detailPage": "../jobs/sbi-junior-associates-clerk-jca-2026.html",
