@@ -550,12 +550,12 @@ window.GovJobUpdatesAdmitCards = [
         "department": "SSC",
         "category": "Central Government",
         "year": "2026",
-        "examDate": "2026-11-20",
+        "examDate": "2026-11-23",
         "examEndDate": "2026-11-28",
-        "releaseDate": "2026-10-03",
+        "releaseDate": "2026-10-27",
         "status": "available",
         "tags": [],
-        "downloadLink": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_01102026.pdf",
+        "downloadLink": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Important%20notice_revised_dated_26_10_2026.pdf",
         "detailPage": "../jobs/ssc-cpo-si-2026.html",
         "updatedAt": "2026-10-03",
         "telegramStatus": "ready",
@@ -1216,12 +1216,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/pnbjul26/oecla_aug26/login.php?appid=35f6fc5c222701ae165314c834a28fb9",
-        "detailPage": "../AdmitCard_Details/HTML/PNB-Local-Bank-Officer-LBO-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-28",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0124-20260826154026-ef32c12d",
@@ -1236,12 +1236,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=INTRIM",
-        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-Stenographer-Skill-Test-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0125-20260826154603-654f82dc",
@@ -1256,12 +1256,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=INTRIM",
-        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-Stenographer-Skill-Test-Admit-Card-2024.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0126-20260826154849-b07941e5",
@@ -1276,12 +1276,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/Advertismentwise_DownloadDocument.aspx?inptprmtr=ac",
-        "detailPage": "../AdmitCard_Details/HTML/UPPSC-Lecturer-Technical-Education-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0121-20260825084559-fcf228bc",
@@ -1296,12 +1296,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ssc.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/SSC-JHT-Junior-Hindi-Translator-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0109-20260820234154-0da599ee",
@@ -1316,12 +1316,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibtexamination.com/secuAdmitcard/bsnlAdmitcard05/",
-        "detailPage": "../AdmitCard_Details/HTML/BSNL-JTO-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0112-20260820234654-e169ed7e",
@@ -1336,12 +1336,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/102021/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/BSF-HC-Ministerial-ASI-Steno-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0113-20260820234837-3c86de3f",
@@ -1356,12 +1356,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-Lower-PCS-Mains-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "draft",
         "telegramReady": "no",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0115-20260820235203-37d95916",
@@ -1376,12 +1376,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://sssc.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/Punjab-and-Haryana-High-Court-Clerk-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0116-20260820235329-886a8f88",
@@ -1396,12 +1396,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/101682/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/Indian-Air-Force-Agniveer-Vayu-Musician-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0117-20260821224200-a021c7f9",
@@ -1416,12 +1416,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/97495/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/Coal-India-CIL-MT-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0118-20260821224430-a9fdd19d",
@@ -1436,12 +1436,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn3.digialm.com//EForms/configuredHtml/1815/94357/Index.html",
-        "detailPage": "../AdmitCard_Details/HTML/NEET-PG-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0104-20260813213928-cefc1a98",
@@ -1456,12 +1456,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://apps2.allahabadhighcourt.in/recruit/RAcurrent/index.jsp",
-        "detailPage": "../AdmitCard_Details/HTML/Allahabad-High-Court-Private-Secretary-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-13",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0105-20260813214237-cf0df4f1",
@@ -1476,12 +1476,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/sbiscoljun26/oecla_aug26/login.php?appid=c173e0639d9a342a925248b36d69f553",
-        "detailPage": "../AdmitCard_Details/HTML/SBI-Law-Officer-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-13",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0102-20260812164819-bec413c1",
@@ -1496,12 +1496,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibtexamination.com/secuAdmitcard/bsnlAdmitcard05/",
-        "detailPage": "../AdmitCard_Details/HTML/BSNL-JTO-Junior-Telecom-Officer-Exam-City-Details-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-12",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0100-20260810134150-7db9c43a",
@@ -1516,12 +1516,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://apply-csbc.com/csbc_det_admitcards/searchApplication",
-        "detailPage": "../AdmitCard_Details/HTML/CSBC-Bihar-Police-Constable-Driver-DET-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-10",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0098-20260808180613-20cd4d47",
@@ -1536,12 +1536,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://applyssb.com/ssb_ct_si_pet_admitcards_26_v2/applicationAfterIndex",
-        "detailPage": "../AdmitCard_Details/HTML/SSB-Constable-Tradesman-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-08",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0097-20260806202458-96898a98",
@@ -1556,12 +1556,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/boicojun26/oecla_aug26/login.php?appid=beb71e80ca57b23bf5fce4728732e5fa",
-        "detailPage": "../AdmitCard_Details/HTML/BOI-Credit-Officers-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-06",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0095-20260804180418-aaea01b4",
@@ -1576,12 +1576,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://mppsc.mponline.gov.in/Portal/Examinations/MPPSC/2026/Admitcard/SM25Login.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/MPPSC-SSE-Mains-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-04",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0094-20260803194118-882cbbfe",
@@ -1596,12 +1596,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cetonline.karnataka.gov.in/kea/",
-        "detailPage": "../AdmitCard_Details/HTML/Karnataka-Police-Constable-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-03",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0093-20260801160824-43c20b02",
@@ -1616,12 +1616,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://psc.cg.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/CGPSC-State-Engineering-Service-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-08-01",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0087-20260729101614-1e6c0634",
@@ -1636,12 +1636,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101642/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/PSPCL-Junior-Engineer-Electrical-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0091-20260729212759-2092b06f",
@@ -1656,12 +1656,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://doc.sarkariresults.org.in/SSB_PET_PST_Exam_Date.pdf",
-        "detailPage": "../AdmitCard_Details/HTML/SSB-Constable-Tradesman-PET-PST-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-29",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0082-20260723175406-a5351408",
@@ -1676,12 +1676,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://aiimsexams.ac.in/advertisement/6a2cdd89be81945a8330d450",
-        "detailPage": "../AdmitCard_Details/HTML/AIIMS-CRE-5th-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-24",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0085-20260723192448-b73bf49c",
@@ -1696,12 +1696,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_7_2026_weadmitcards_v3/applicationIndex",
-        "detailPage": "../AdmitCard_Details/HTML/BPSSC-ASI-Technical-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-23",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0076-20260720174151-11fe2c5d",
@@ -1716,12 +1716,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://sso.rajasthan.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/RPSC-Junior-Legal-Officer-JLO-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0077-20260720174525-53a73726",
@@ -1736,12 +1736,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://trc.mponline.gov.in/Portal/Services/TRC26/DPI/PS/index.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/MPESB-Primary-School-Teacher-PSTST-Admit-Card-2025.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0078-20260720210607-78d457f1",
@@ -1756,12 +1756,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=97789&orgId=33128",
-        "detailPage": "../AdmitCard_Details/HTML/RRB-Railway-ALP-CBT-2-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0079-20260720210814-8cccc768",
@@ -1776,12 +1776,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_5_2026_weadmitcards_v1/applicationIndex",
-        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-05-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0080-20260720211003-d183f79a",
@@ -1796,12 +1796,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_6_2026_weadmitcards_v2/applicationIndex",
-        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-May-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-20",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0075-20260719124327-84175ef9",
@@ -1816,12 +1816,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://hedbiharrec.samarth.edu.in/index.php/site/index",
-        "detailPage": "../AdmitCard_Details/HTML/BSUSC-Bihar-Assistant-Professor-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0071-20260718090539-a4a9d149",
@@ -1836,12 +1836,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadvdistinti/AdmitCard_wc.aspx?ID=MAIN&L=ac",
-        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-ASO-Assistant-Statistical-Officer-City-Intimation-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0073-20260718095832-ebcd7f15",
@@ -1856,12 +1856,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/Rajasthan-RSSB-Women-Supervisor-City-Intimation-2026.html",
-        "detailPage": "../AdmitCard_Details/HTML/Rajasthan-RSSB-Women-Supervisor-City-Intimation-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0074-20260718100127-a7c3abd8",
@@ -1876,12 +1876,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/HPSC-Haryana-PGT-Computer-Science-Interview-Letter-2026.html",
-        "detailPage": "../AdmitCard_Details/HTML/HPSC-Haryana-PGT-Computer-Science-Interview-Letter-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-18",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0070-20260716211123-25f78d13",
@@ -1896,12 +1896,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/RBI-Grade-B-Phase-II-Admit-Card-2026.html",
-        "detailPage": "../AdmitCard_Details/HTML/RBI-Grade-B-Phase-II-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-16",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0066-20260715124535-86795b2a",
@@ -1916,12 +1916,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://beml.registrationform.in/",
-        "detailPage": "../AdmitCard_Details/HTML/BEML-Non-Executive-Operator-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-15",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0067-20260715124851-1beb5345",
@@ -1936,12 +1936,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://spe.ukssscrecruitment.in/UKSSSC_PAGES/DownloadAdmitCard.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/UKSSSC-Group-C-Driver-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-15",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0068-20260715125245-836b0c5d",
@@ -1956,12 +1956,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1149/100145/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/Patna-High-Court-Computer-Operator-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-15",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0053-20260710213644-f5d2a9af",
@@ -1976,12 +1976,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://bpssc.bihar.gov.in/Notices/Notice%20E-Admit%20Card%20on%20website%204.pdf",
-        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Havildar-Instructor-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-14",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0051-20260707220538-5591608c",
@@ -1996,12 +1996,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://apply-bpssc.com/bpssc_4_2026_weadmitcards_v1/applicationIndex",
-        "detailPage": "../AdmitCard_Details/HTML/BPSSC-Bihar-Police-ASI-Operation-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0054-20260710213953-37a5195f",
@@ -2016,12 +2016,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../AdmitCard_Details/HTML/UPSSSC-Teacher-Cadre-Mains-Exam-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0057-20260710215039-3de97acb",
@@ -2036,12 +2036,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/knowlocationservlet",
-        "detailPage": "../AdmitCard_Details/HTML/RPSC-Senior-Teacher-Grade-II-TGT-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0059-20260710215519-2375b813",
@@ -2056,12 +2056,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/recsys2025/downloadadmitcard/LoginDOB.aspx?enc=Ei4cajBkK1gZSfgr53ImFSuabJtfdyH7GsL2cij2dPKFqA5XsHH8yMmK+6SEPU/E",
-        "detailPage": "../AdmitCard_Details/HTML/CBSE-Group-A-B-C-Skill-Test-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0060-20260710220117-fcaa98ac",
@@ -2076,12 +2076,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101323/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/DSSSB-MTS-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0061-20260710220419-47ebc07d",
@@ -2096,12 +2096,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rojgarresult.com/wp-content/uploads/2026/07/pspcl-je-exam-2026.pdf",
-        "detailPage": "../AdmitCard_Details/HTML/PSPCL-JE-Electrical-Exam-Date-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0063-20260710220902-f080d8aa",
@@ -2116,12 +2116,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://govjobupdates.com/AdmitCard_Details/HTML/BPSC-72nd-Pre-Exam-Date-2026.html",
-        "detailPage": "../AdmitCard_Details/HTML/BPSC-72nd-Pre-Exam-Date-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-11",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0047",
@@ -2136,12 +2136,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rssbasonline.com/Interview/Index",
-        "detailPage": "../AdmitCard_Details/HTML/RSSB-Rajasthan-Platoon-Commander-Interview-Letter-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0049",
@@ -2156,12 +2156,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/ADDET_TAC26/default_tac.htm",
-        "detailPage": "../AdmitCard_Details/HTML/MPESB-ADDET-Animal-Husbandry-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-05",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0030",
@@ -2176,12 +2176,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://www.upessc.net/ap2022callletter/Login.aspx",
-        "detailPage": "../AdmitCard_Details/HTML/51-UPESSC-Assistant-Professor-Interview-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0031",
@@ -2196,12 +2196,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/sbiaapr26/oecla_jun26/login.php?appid=42f888ad90671cdf0f66feefc29b82ec",
-        "detailPage": "../AdmitCard_Details/HTML/04-SBI-Apprentice-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0033",
@@ -2216,12 +2216,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://upcisb.upsdc.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/UPCISB-Co-operative-Banking-Exam-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0034",
@@ -2236,12 +2236,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/recSys2025/root/CandidateLogin.aspx?enc=Ei4cajBkK1gZSfgr53ImFSuabJtfdyH7GsL2cij2dPKFqA5XsHH8yMmK+6SEPU/E",
-        "detailPage": "../AdmitCard_Details/HTML/CBSE-DRQ-Skill-Test-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0035",
@@ -2256,12 +2256,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/rectlogingetadmitcard",
-        "detailPage": "../AdmitCard_Details/HTML/RSMSSB-Clerk-Grade-II-Junior-Assistant-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0036",
@@ -2276,12 +2276,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://bpsconline.bihar.gov.in/candidate/login",
-        "detailPage": "../AdmitCard_Details/HTML/BPSC-Auditor-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0037",
@@ -2296,32 +2296,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://examinationservices.nic.in/AdmitCardService/Admitcard/Login?enc=y4cMoXShddrjVCWgrykM85f7JaXFXY4HVEJI6IyyUic=",
-        "detailPage": "../AdmitCard_Details/HTML/NTA-ICAR-AIEEA-PG-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0038",
-        "title": "BSNL Senior Executive Trainee SET Admit Card 2026 for 120 Post",
-        "organization": "Bhartiya Sanchar Nigam limited",
-        "department": "BSNL",
-        "category": "Public Sector",
-        "year": "2026",
-        "examDate": "2026-07-05",
-        "examEndDate": "",
-        "releaseDate": "2026-07-01",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibtexamination.com/secuAdmitcard/bsnlAdmitcard03/",
-        "detailPage": "../AdmitCard_Details/HTML/03-BSNL-Senior-Executive-Trainee-SET-Admit-Card-2026.html",
-        "updatedAt": "2026-07-02",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0040",
@@ -2336,32 +2316,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://sso.rajasthan.gov.in/",
-        "detailPage": "../AdmitCard_Details/HTML/RPSC-Senior-Teacher-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0042",
-        "title": "CBI Apprentice Exam Date 2026 for 4500 Post",
-        "organization": "Central Bank  of India",
-        "department": "CBI",
-        "category": "Banking",
-        "year": "2026",
-        "examDate": "2026-07-05",
-        "examEndDate": "",
-        "releaseDate": "2026-07-02",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://beep.bfsissc.com/candidate_login",
-        "detailPage": "../AdmitCard_Details/HTML/03-Central-Bank-Apprentice-Admit-Card-2026.html",
-        "updatedAt": "2026-07-02",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0043",
@@ -2376,36 +2336,12 @@ window.GovJobUpdatesAdmitCards = [
         "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/riicosep25/oecla_jun26/login.php?appid=2599483d1ccf65d6f7f814ab9ce00705",
-        "detailPage": "../AdmitCard_Details/HTML/04-RIICO-Various-Posts-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-07-02",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0027",
-        "title": "CG Police SI 2024 Admit Card for 341 Post",
-        "organization": "Chhattisgarh Public Service Commission (CGPSC)",
-        "department": "CGPSC",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-07-12",
-        "examEndDate": "",
-        "releaseDate": "2026-06-26",
-        "status": "exam-over",
-        "tags": [
-            "CGPSC",
-            "CG Police",
-            "SI"
-        ],
-        "downloadLink": "https://online.ecgpsconline.in/",
-        "detailPage": "../AdmitCard_Details/HTML/01-CGPSC-Subedar-SI-Platoon-Commander-Admit-Card-2026.html",
-        "updatedAt": "2026-06-27",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0022",
@@ -2424,12 +2360,12 @@ window.GovJobUpdatesAdmitCards = [
             "ASI"
         ],
         "downloadLink": "https://bpssc.bihar.gov.in/Notices/Notice%20E-Admit%20Card%20on%20website%203.pdf",
-        "detailPage": "../AdmitCard_Details/HTML/07-BPSSC-Bihar-Police-ASI-Operator-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0023",
@@ -2447,12 +2383,12 @@ window.GovJobUpdatesAdmitCards = [
             "UP Pollution"
         ],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../AdmitCard_Details/HTML/04-UPSSSC-Pharmacist-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0025",
@@ -2470,12 +2406,12 @@ window.GovJobUpdatesAdmitCards = [
             "BCG Technician"
         ],
         "downloadLink": "https://upsssc.gov.in/upssscadmitcard/admitCard.aspx?ID=MAIN",
-        "detailPage": "../AdmitCard_Details/HTML/05-UPSSSC-BCG-Technician-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0026",
@@ -2493,12 +2429,12 @@ window.GovJobUpdatesAdmitCards = [
             "Non Executive"
         ],
         "downloadLink": "https://cdn.digialm.com//EForms/configuredHtml/1258/101292/login.html",
-        "detailPage": "../AdmitCard_Details/HTML/06-POWERGRID-Officer-Trainee-CS-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0021",
@@ -2516,12 +2452,12 @@ window.GovJobUpdatesAdmitCards = [
             "Forest Research Institute"
         ],
         "downloadLink": "https://friexam.in/",
-        "detailPage": "../AdmitCard_Details/HTML/03-ICFRE-FRI-Various-Post-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-25",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0017",
@@ -2540,12 +2476,12 @@ window.GovJobUpdatesAdmitCards = [
             "Mains"
         ],
         "downloadLink": "https://uppsc.up.nic.in/CandidatePages/AdmitCard/AdmitCard_New.aspx?/8bFzGHgwwQekRCuzX8myYgXeumKuaEdRUSHoDKMVpNo7ipUM5Umm/B6TkvaNJ4jtfCXcIGTdVBq1kfENS1QM2x/lFXCHcndJKOngbu5r70z1Yz+WgYUkLhAqSRXqlbkqNpUeiQfOT8BoNbyeAz77Q==",
-        "detailPage": "../AdmitCard_Details/HTML/1106-UPPSC-APO-Mains-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0018",
@@ -2563,37 +2499,12 @@ window.GovJobUpdatesAdmitCards = [
             "Apprentice"
         ],
         "downloadLink": "https://bankofbaroda.bank.in/",
-        "detailPage": "../AdmitCard_Details/HTML/1107-Bank-of-Baroda-Apprentice-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-06-19",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0015",
-        "title": "CSBC Bihar Police Constable Operator Exam City / Admit Card 2026 | 993 Post",
-        "organization": "Central Selection Board of Constable CSBC",
-        "department": "State Police",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-28",
-        "examEndDate": "",
-        "releaseDate": "2026-06-22",
-        "status": "exam-over",
-        "tags": [
-            "CSBC",
-            "Bihar Police",
-            "Constable",
-            "Operator"
-        ],
-        "downloadLink": "https://apply-csbc.com/csbc_2_2026_weadmitcards/applicationIndex",
-        "detailPage": "../AdmitCard_Details/HTML/02-CSBC-Bihar-Police-Constable-Driver-Admit-Card-2026.html",
-        "updatedAt": "2026-06-15",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0014",
@@ -2612,12 +2523,12 @@ window.GovJobUpdatesAdmitCards = [
             "Telecom"
         ],
         "downloadLink": "https://ibtexamination.com/secuAdmitcard/bsnlAdmitcard03/",
-        "detailPage": "../Job_Details/HTML/2395-BSNL-SeniorExecutive-Trainee-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-31",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0013",
@@ -2636,12 +2547,12 @@ window.GovJobUpdatesAdmitCards = [
             "Agniveer"
         ],
         "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/2000519/login.html",
-        "detailPage": "../Job_Details/HTML/2048-Indian-Army-Agniveer-CEE-Admit-Card-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-27",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     },
     {
         "id": "admit-sheet-0012",
@@ -2660,33 +2571,11 @@ window.GovJobUpdatesAdmitCards = [
             "UKSSSC"
         ],
         "downloadLink": "https://test2.safedotesolution.com/",
-        "detailPage": "../Job_Details/HTML/2047-UKSSSC-GroupC-Driver-Admit-2026.html",
+        "detailPage": "../HTML/admitcard.html",
         "updatedAt": "2026-05-26",
         "telegramStatus": "ready",
         "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "admit-sheet-0011",
-        "title": "BPSSC Bihar Police Havildar Clerk Admit Card 2026",
-        "organization": "Bihar Police Subordinate Services Commission",
-        "department": "State Police",
-        "category": "Admit Card",
-        "year": "2026",
-        "examDate": "2026-06-10",
-        "examEndDate": "",
-        "releaseDate": "2026-05-25",
-        "status": "exam-over",
-        "tags": [
-            "Bihar Police"
-        ],
-        "downloadLink": "https://apply-bpssc.com/bpssc_1_2026_we_admitcards/searchApplication",
-        "detailPage": "../Job_Details/HTML/2046-BPSSC-Bihar-Police-Havildar-Clerk-Admit-2026.html",
-        "updatedAt": "2026-05-25",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
+        "detailPageSource": "fallback",
+        "detailPageNeedsReview": "yes"
     }
 ];
