@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0209-20261027141831-e51c0723",
+        "title": "UPSC CGSE Geo Scientist Exam Date 2027 – OUT",
+        "organization": "Union Public Service Commission",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2027-01-10",
+        "examEndDate": "",
+        "releaseDate": "2026-10-27",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://jobjhalak.com/wp-content/uploads/2026/10/UPSC-Geo-Scientist-2027-Exam-Notice.pdf",
+        "detailPage": "../jobs/upsc-cgse-2027.html",
+        "updatedAt": "2026-10-27",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0208-20261025223539-cc8827a0",
         "title": "MP Police SI Sub Inspector Subedar Admit Card 2026 for 507 Post",
         "organization": "Madhya Pradesh Employees Selection Board (MPESB)",
