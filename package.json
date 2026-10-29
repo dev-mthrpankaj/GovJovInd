@@ -11,6 +11,7 @@
     "audit:rank-seo": "node scripts/audit-rank-predictor-seo.js",
     "generate:rank-pages": "node scripts/generate-rank-predictor-pages.js",
     "generate:rank-pages:local": "node scripts/generate-rank-predictor-pages.js --local",
+    "hydrate:listings": "node scripts/hydrate-listing-pages.js --write",
     "hydrate:job-fallbacks": "node scripts/hydrate-job-static-fallbacks.js --write",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "generate:search-index": "node scripts/generate-search-index.js",

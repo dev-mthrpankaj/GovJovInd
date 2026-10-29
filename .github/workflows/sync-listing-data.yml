@@ -40,6 +40,9 @@ jobs:
       - name: Generate static JS data files and cache versions
         run: node scripts/sync-apps-script-to-js.js
 
+      - name: Hydrate static listing cards into HTML pages
+        run: node scripts/hydrate-listing-pages.js --write
+
       - name: Rebuild site search index from current listings
         run: node scripts/generate-search-index.js
 

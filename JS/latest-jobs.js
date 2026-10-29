@@ -33,6 +33,11 @@
 
     const pageSize = 10;
     let visibleCount = pageSize;
+    // Cards pre-rendered into the HTML by scripts/hydrate-listing-pages.js.
+    // While staticMode is on, JS leaves them alone (no flash / layout shift)
+    // and only takes over when the visitor searches, filters or loads more.
+    let staticMode = false;
+    let staticCount = 0;
     let currentJobs = [];
 
     const excludedNonJobIds = new Set(["job-1017"]);
@@ -376,6 +381,12 @@
 
     function renderJobs() {
         if (!elements.listings || !elements.jobCount) return;
+        if (staticMode) {
+            const total = jobs.length;
+            elements.jobCount.textContent = `Showing ${Math.min(staticCount, total)} of ${total} jobs`;
+            if (elements.loadMore) elements.loadMore.hidden = staticCount >= total;
+            return;
+        }
         if (!jobs.length) {
             elements.jobCount.textContent = "Showing 0 of 0 jobs";
             renderEmptyState("Jobs data is currently unavailable");
@@ -409,7 +420,20 @@
         renderJobs();
     }
 
+    function leaveStatic() {
+        if (!staticMode) return;
+        staticMode = false;
+        visibleCount = Math.max(pageSize, staticCount);
+    }
+
     function bindEvents() {
+        [elements.search, elements.department, elements.year, elements.status, elements.sort].forEach((element) => {
+            if (!element) return;
+            element.addEventListener("input", leaveStatic);
+            element.addEventListener("change", leaveStatic);
+        });
+        if (elements.reset) elements.reset.addEventListener("click", leaveStatic);
+        if (elements.loadMore) elements.loadMore.addEventListener("click", leaveStatic);
         [elements.search, elements.department, elements.year, elements.status, elements.sort].forEach((element) => {
             if (!element) return;
             element.addEventListener("input", () => { visibleCount = pageSize; renderJobs(); });
@@ -430,13 +454,19 @@
         const sheetJobs = await window.GovJobUpdatesSheetData.load("jobs", jobs);
         if (!Array.isArray(sheetJobs) || !sheetJobs.length || sheetJobs === jobs) return;
         jobs = filterJobLifecycleRecords(sheetJobs);
-        visibleCount = pageSize;
+        visibleCount = staticMode ? Math.max(pageSize, staticCount) : pageSize;
+        staticMode = false;
         hydrateFilters();
         renderJobs();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         applyInitialSearchQuery();
+        const staticBlock = elements.listings && elements.listings.querySelector(".static-listing");
+        if (staticBlock) {
+            staticCount = Number(staticBlock.dataset.staticCount) || 0;
+            staticMode = staticCount > 0 && !(elements.search && elements.search.value);
+        }
         hydrateFilters();
         bindEvents();
         renderJobs();
