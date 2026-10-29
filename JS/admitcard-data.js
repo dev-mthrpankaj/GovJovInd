@@ -233,7 +233,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-10-29",
         "examEndDate": "",
         "releaseDate": "2026-10-19",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://ibpsreg.ibps.in/sbijasrdjl26/oecla_oct26/login.php?appid=04e9489a07d6ad26422f6cd271a26ea2",
         "detailPage": "../jobs/sbi-junior-associates-clerk-2026.html",
