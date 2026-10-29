@@ -195,8 +195,7 @@ for (const p of PAGES) {
   // keep only records that have a valid internal detail page, so every card is a real crawlable link
   const linked = sorted.filter((r) => normalizeDetail(r.detailPage)).slice(0, LIMIT);
   const cards = linked.map((r) => p.render(r, st, p.label)).join("\n");
-  const nav = `<nav class="related-links" aria-label="Related sections"><a href="latest-jobs.html">Latest Jobs</a> <a href="admitcard.html">Admit Card</a> <a href="answer-key.html">Answer Key</a> <a href="results.html">Results</a> <a href="rank-predictor.html">Rank Predictor</a> <a href="student-hub.html">Student Hub</a></nav>`;
-  const block = `${START}\n<p class="static-listing-intro">${esc(p.intro)}</p>${nav}\n<div class="static-listing" data-static-count="${linked.length}">${cards}\n</div>\n${END}`;
+  const block = `${START}\n<p class="static-listing-intro">${esc(p.intro)}</p>\n<div class="static-listing" data-static-count="${linked.length}">${cards}\n</div>\n${END}`;
   const file = path.join(ROOT, p.html);
   const before = fs.readFileSync(file, "utf8");
   const after = inject(before, p.id, block);
