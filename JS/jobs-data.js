@@ -974,7 +974,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "N/A",
         "startDate": "2026-10-01",
         "lastDate": "2026-10-31",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://sletregistration.cbrt.co.in/",
         "officialNotification": "https://rojgarresult.com/wp-content/uploads/2026/10/notice-2026.pdf",

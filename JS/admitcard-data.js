@@ -84,6 +84,26 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "admit-sheet-0214-20261031222117-07dbf17f",
+        "title": "Rajasthan RVUNL JE, AE, CA Exam Date 2026 for 2005 Post",
+        "organization": "Rajasthan Rajya Vidyut Utpadan Nigam LTD (RVUNL)",
+        "department": "RVUNL",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-11-29",
+        "examEndDate": "2027-01-15",
+        "releaseDate": "2026-10-31",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://jankalyanfile.rajasthan.gov.in/WebMyWayFiles/DepartmentMaster/183/2026/Oct/30409/183c9350bd1-0990-44ea-b75f-f5ab6dc473c0.pdf",
+        "detailPage": "../jobs/rvunl-je-ae-ca-2026.html",
+        "updatedAt": "2026-10-31",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0209-20261027141831-e51c0723",
         "title": "UPSC CGSE Geo Scientist Exam Date 2027 – OUT",
         "organization": "Union Public Service Commission",
