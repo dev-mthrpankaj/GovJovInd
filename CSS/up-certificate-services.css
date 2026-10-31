@@ -413,3 +413,50 @@
   font-weight:900;
   line-height:1.2;
 }
+
+
+/* ===== 2026-10 visual hierarchy pass ===== */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.cert-trust-strip{margin:0;padding:.6rem .9rem;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:.88rem;line-height:1.4}
+.cert-trust-strip i{margin-right:.35rem}
+/* steps give the long form a clear 1-2-3-4-5 reading order */
+.cert-step-head{display:flex;align-items:center;gap:.7rem;margin-top:.9rem;padding-top:.9rem;border-top:1px solid #e2e8f0}
+.cert-step-head:first-child,.cert-form>.cert-step-head[data-step="1"]{margin-top:0;padding-top:0;border-top:0}
+.cert-step-head>span{flex:0 0 auto;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#1d4ed8;color:#fff;font-weight:900;font-size:.9rem}
+.cert-step-head strong{display:block;font-size:1.05rem;color:#0f172a;line-height:1.2}
+.cert-step-head small{display:block;color:#64748b;font-size:.82rem;line-height:1.35}
+/* the form is the primary object on the page */
+#certificateForm{border:2px solid #bfdbfe;box-shadow:0 10px 30px rgba(37,99,235,.10)}
+#certificateForm>h2{font-size:clamp(1.35rem,4.5vw,1.8rem)}
+/* side cards are supporting content: smaller headings, quieter notes */
+.payment-box .cert-card h2{font-size:1.1rem}
+.payment-box #requiredDocs,.payment-box .cert-card:last-child{font-size:.92rem}
+.payment-box #requiredDocs .doc-list li{font-size:.9rem}
+.payment-feature-list li.warn{color:#9a3412}
+.payment-feature-list li.warn i{color:#ea580c}
+.cert-note.safe-note{font-size:.88rem}
+/* total is the number people look for */
+.payment-summary-row.payment-total strong{font-size:1.7rem}
+/* refund consent sits directly above the pay button */
+.cert-consent{display:flex;gap:.65rem;align-items:flex-start;padding:.85rem .9rem;border:1.5px solid #fdba74;border-radius:12px;background:#fff7ed;color:#7c2d12;font-size:.9rem;line-height:1.45;cursor:pointer}
+.cert-consent input{flex:0 0 auto;width:20px;height:20px;margin-top:.15rem;accent-color:#ea580c}
+.cert-consent a{color:#9a3412;font-weight:800;text-decoration:underline}
+.success-refund-note{color:#9a3412;font-size:.88rem}
+#motherRow[hidden]{display:none}
+/* desktop: keep the live total in view while scrolling the long form */
+@media(min-width:1040px){
+  .cert-grid .payment-box{align-self:stretch;align-content:start}
+  .payment-box #paymentCard{position:sticky;top:84px;z-index:2}
+  .cert-hero h1{font-size:clamp(2rem,3.4vw,2.6rem)}
+}
+.cert-pay-btn{min-height:56px;font-size:1.08rem}
+
+/* ===== resume upload + banner ===== */
+.cert-resume-banner{display:flex;gap:.7rem;align-items:flex-start;padding:.85rem 1rem;border-radius:12px;background:#fef2f2;border:1.5px solid #fca5a5;color:#7f1d1d;font-size:.92rem;line-height:1.45}
+.cert-resume-banner[hidden]{display:none}
+.cert-resume-banner i{margin-top:.2rem}
+.cert-resume-banner a{color:#991b1b;font-weight:800;text-decoration:underline}
+.cert-resume-banner button{background:none;border:0;color:#7f1d1d;text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+.cert-consent-soft{background:#f8fafc;border-color:#cbd5e1;color:#334155}
+.cert-consent-soft a{color:#1d4ed8}
+.cert-consent [lang="hi"],.cert-trust-strip [lang="hi"]{display:block;margin-top:.2rem}

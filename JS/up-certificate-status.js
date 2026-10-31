@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-  const STATUS_API_URL =
-    "https://test.govjobupdates.com/live-test/certificate-api/status.php";
+  const API_BASE = (window.GJU_CERT_CONFIG && window.GJU_CERT_CONFIG.apiBase) || "https://test.govjobupdates.com/live-test/certificate-api";
+  const STATUS_API_URL = API_BASE + "/status.php";
 
   const $ = (selector) => document.querySelector(selector);
 
@@ -38,14 +38,14 @@
     under_review: {
       title: "Application Submitted",
       pill: "Submitted",
-      note: "Your certificate assistance application has been submitted/forwarded for processing. Final approval remains with the concerned government authority.",
+      note: "Your certificate assistance application has been submitted/forwarded for processing. Final approval remains with the concerned government authority. The fee is non-refundable from this stage.",
       step: 2,
       className: ""
     },
     processing: {
       title: "Processing",
       pill: "Processing",
-      note: "Your application is currently being processed. Please check again later for the next update.",
+      note: "Your application has been filed and is being processed. Please check again later for the next update. The fee is non-refundable from this stage.",
       step: 3,
       className: "is-processing"
     },
@@ -87,6 +87,17 @@
       text: "GovJobUpdates assistance request completed."
     }
   ];
+
+  function esc(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+  }
+
+  function serviceLabel(service) {
+    let label = service.service_type || "Certificate";
+    if (service.service_type === "Income Certificate" && service.beneficiary_type) label += ` (${service.beneficiary_type === "father" ? "Father" : "Self"})`;
+    if (service.service_type === "PAN Card" && service.service_option) label += ` (${service.service_option === "correction" ? "Correction / Update" : "New PAN"})`;
+    return label;
+  }
 
   function clean(value) {
     return String(value || "").replace(/\s+/g, " ").trim();
@@ -163,15 +174,24 @@
   }
 
   function renderApplication(application) {
-    const statusKey = String(application.application_status || "documents_uploaded").toLowerCase();
-    const state = STATUS_MAP[statusKey] || STATUS_MAP.documents_uploaded;
+    let statusKey = String(application.application_status || "documents_uploaded").toLowerCase();
+    let state = STATUS_MAP[statusKey] || STATUS_MAP.documents_uploaded;
+    const summary = application.result_summary || {};
+    if (statusKey === "completed" && summary.state === "partial") {
+      state = { title: "Partly Completed", pill: summary.label || "Partly completed", step: 4, className: "is-processing",
+        note: "Some certificates were approved and some were rejected. See each certificate below. The fee for submitted applications is non-refundable; contact support with your Request ID for the next step." };
+    }
+    if (application.refund_status && application.refund_status !== "none" && Number(application.refunded_paise) > 0) {
+      state = Object.assign({}, state, { note: state.note + ` Refunded: \u20b9${(Number(application.refunded_paise) / 100).toFixed(2)} (${application.refund_status}).` });
+    }
 
     $("#trackEmpty")?.setAttribute("hidden", "");
     $("#trackResultContent")?.classList.add("show");
 
     $("#trackApplicant").textContent = application.applicant_name || "-";
     $("#trackRequest").textContent = application.request_id || "-";
-    $("#trackService").textContent = application.service_type || "-";
+    const allServices = Array.isArray(application.services) ? application.services : [];
+    $("#trackService").textContent = allServices.length ? allServices.map(serviceLabel).join(", ") : (application.service_type || "-");
     $("#trackGovernmentApplication").textContent = application.government_application_number || "Not issued yet";
     $("#trackCertificateNumber").textContent = application.certificate_number || "Not issued yet";
     $("#trackPayment").textContent =
@@ -195,7 +215,7 @@
     if (services.length && servicesCard && servicesBox) {
       servicesBox.innerHTML = services.map((service) => `
         <div class="track-details" style="grid-template-columns:1fr; margin:.55rem 0">
-          <div><span>${service.service_type || "Certificate"}${service.service_type === "Income Certificate" && service.beneficiary_type ? ` (${service.beneficiary_type === "father" ? "Father" : "Self"})` : ""}${service.service_type === "PAN Card" && service.service_option ? ` (${service.service_option === "correction" ? "Correction / Update" : "New PAN"})` : ""}</span><strong>${String(service.service_status || "pending").replace(/_/g," ")}</strong></div>
+          <div><span>${esc(serviceLabel(service))}</span><strong>${esc(String(service.service_status || "pending").replace(/_/g," "))}</strong></div>
         </div>`).join("");
       servicesCard.hidden = false;
     } else if (servicesCard) { servicesCard.hidden = true; }
@@ -255,6 +275,10 @@
     try {
       const application = await loadStatus(requestId, mobile);
       renderApplication(application);
+      if (application.can_resume_upload && typeof window.GJUResumePrefill === "function") {
+        window.GJUResumePrefill(application.request_id, mobile);
+        $("#trackStatusNote").textContent += " Your documents are still pending: use \"Resume document upload\" below. No second payment is needed.";
+      }
     } catch (error) {
       $("#trackResultContent")?.classList.remove("show");
       $("#trackEmpty")?.removeAttribute("hidden");

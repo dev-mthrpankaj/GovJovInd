@@ -200,3 +200,17 @@
   .track-result-head{display:grid}
   .track-status-pill{width:max-content}
 }
+
+/* ===== resume document upload ===== */
+.resume-card form{display:grid;gap:.5rem;margin-top:.6rem}
+.resume-card label{font-weight:700;font-size:.92rem;color:#0f172a}
+.resume-card input[type=text],.resume-card input[type=tel],.resume-card input[type=email]{width:100%;padding:.75rem .85rem;border:1.5px solid #cbd5e1;border-radius:10px;font:inherit;min-height:46px}
+.resume-card.is-highlight{border:2px solid #f59e0b;box-shadow:0 8px 24px rgba(245,158,11,.18)}
+.resume-card h2 i{color:#d97706;margin-right:.35rem}
+#resumeDocs{display:grid;gap:.75rem;margin-top:.9rem}
+#resumeDocs[hidden],#resumeProgress[hidden],#resumeUploadBtn[hidden]{display:none}
+.resume-doc{display:grid;gap:.3rem;padding:.7rem .8rem;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc}
+.resume-doc input[type=file]{width:100%}
+#resumeUploadBtn{margin-top:.8rem}
+.track-message.is-ok{background:#ecfdf5;border-color:#6ee7b7;color:#065f46}
+[lang="hi"]{display:inline}

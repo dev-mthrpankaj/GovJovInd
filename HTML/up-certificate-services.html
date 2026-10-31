@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,15 +22,16 @@
   <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
   <link rel="stylesheet" href="../CSS/style.css">
-  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20260819-pricing1">
+  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20261031-mother1">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate, Income Certificate, EWS Certificate and PAN Card Assistance"}</script>
   <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"UP Certificate Services","item":"https://govjobupdates.com/HTML/up-certificate-services.html"}]}</script>
-  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The live service assistance fee is shown separately for each selected certificate. Payment is collected securely online and does not guarantee certificate approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"For caste and domicile requests, one common document set is used. Income Certificate requires a separate Aadhaar front-and-back PDF, separate Sabhasad or Pradhan letter pad and separate passport-size photo. EWS Certificate (Central and State) needs Aadhaar front-and-back PDF, a recent passport-size photo and an Income Certificate. PAN Card needs Aadhaar front-and-back PDF, a recent passport-size photo and a signature. Additional information or documents may be requested by phone if required."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
+  <script type="application/ld+json" data-schema="faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GovJobUpdates a government certificate portal?","acceptedAnswer":{"@type":"Answer","text":"No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department."}},{"@type":"Question","name":"What is the UP certificate assistance fee?","acceptedAnswer":{"@type":"Answer","text":"The current assistance fee is loaded live for each certificate and shown before payment. Payment is collected securely online; the fee covers form filling, document checking and request handling and does not guarantee approval."}},{"@type":"Question","name":"Which documents are usually needed?","acceptedAnswer":{"@type":"Answer","text":"Aadhaar card, Sabhasad or Pradhan letter pad, passport size photo, Aadhaar-linked active mobile number and email ID are requested on this page. No payment screenshot or UTR entry is required."}},{"@type":"Question","name":"Can I get a refund?","acceptedAnswer":{"@type":"Answer","text":"Once your request is submitted and moves to Processing, the assistance fee is not refunded, because the application has already been filed for you. A refund is considered only for a duplicate payment, a failed payment where money was deducted, or a request cancelled before submission."}},{"@type":"Question","name":"Where should I check certificate status?","acceptedAnswer":{"@type":"Answer","text":"Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel."}}]}</script>
 </head>
 <body>
   <header><div class="header-container"><div class="logo-container"><img src="../Assets/Home%20Page/favicon-96x96.png" alt="GovJobUpdates Logo" class="logo-img" width="46" height="46" decoding="async"><a href="../index.html" class="logo">GovJob<span>Updates</span></a><span class="header-tiranga" aria-hidden="true"></span></div><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button><nav><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="quiz.html">Quiz</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html" class="active">UP Services</a></li><li><a href="about-us.html">About Us</a></li></ul></nav><div class="header-auth-actions"><a class="header-login-btn" href="login.html" aria-label="Login to candidate dashboard" data-auth-entry data-login-href="login.html" data-dashboard-href="dashboard.html"><i class="fas fa-user-circle" aria-hidden="true"></i><span>Login</span></a></div></div></header>
   <main class="cert-page">
+    <div class="cert-resume-banner" id="resumeBanner" role="status" hidden></div>
     <section class="cert-hero">
       <div>
         <span class="cert-badge"><i class="fas fa-certificate" aria-hidden="true"></i> UP CSC/eDistrict Assistance</span>
@@ -45,48 +46,19 @@
       <div class="cert-card">
         <h2>Service Fee</h2>
         <div class="cert-fee"><span>Live assistance pricing</span><strong id="heroServiceFee">Loading...</strong></div>
-        <p class="cert-note safe-note"><span class="note-line"><span class="note-lang">English:</span>Payment is collected securely through Razorpay. No UTR or payment screenshot is required. Final certificate approval is handled only by the concerned government authority.</span></p>
+        <p class="cert-note safe-note"><span class="note-line">Payment is collected securely through Razorpay. No UTR or payment screenshot is required. Final certificate approval is handled only by the concerned government authority.</span></p>
       </div>
     </section>
 
-    <section class="cert-card" aria-labelledby="serviceSafetyTitle">
-      <h2 id="serviceSafetyTitle">Important UP Services Safety Information</h2>
-      <div class="safety-grid">
-        <article class="safety-card warning"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><strong>Not a Government Website</strong><span>GovJobUpdates only provides application assistance. Official approval/rejection is handled by the concerned government department.</span></article>
-        <article class="safety-card"><i class="fas fa-receipt" aria-hidden="true"></i><strong id="safetyFeeTitle">Live Assistance Fee</strong><span>The fee is for form filling, document checking and request handling. It is not a government guarantee or approval fee.</span></article>
-        <article class="safety-card success"><i class="fas fa-shield-halved" aria-hidden="true"></i><strong>Document Privacy</strong><span>Uploaded documents are used only for CSC/eDistrict application assistance and verification related to your request.</span></article>
-        <article class="safety-card"><i class="fas fa-lock" aria-hidden="true"></i><strong>Secure Online Payment</strong><span>Pay through Razorpay. Payment is verified automatically by the secure Serverbyt backend before documents are uploaded.</span></article>
-      </div>
-    </section>
-
-    <section class="cert-card">
-      <h2>Available Services</h2>
-      <div class="cert-service-grid">
-        <div class="cert-service"><i class="fas fa-users" aria-hidden="true"></i><strong>Caste Certificate</strong><span>SC / ST / OBC State / OBC Central</span></div>
-        <div class="cert-service"><i class="fas fa-house-user" aria-hidden="true"></i><strong>Domicile Certificate</strong><span>Mool Niwas / Niwas Praman Patra</span></div>
-        <div class="cert-service"><i class="fas fa-indian-rupee-sign" aria-hidden="true"></i><strong>Income Certificate</strong><span>Aay Praman Patra</span></div>
-        <div class="cert-service"><i class="fas fa-scale-balanced" aria-hidden="true"></i><strong>EWS Certificate</strong><span>EWS Central / EWS State</span></div>
-        <div class="cert-service"><i class="fas fa-id-card" aria-hidden="true"></i><strong>PAN Card</strong><span>New PAN / Correction</span></div>
-      </div>
-      <p class="cert-note"><span class="note-line"><span class="note-lang">English:</span>OBC caste certificate can be requested as State or Central. SC/ST caste certificate category is selected separately.</span></p>
-    </section>
-
-    <section class="cert-card" aria-labelledby="processTitle">
-      <h2 id="processTitle">How the Service Works</h2>
-      <ol class="process-list">
-        <li><div><strong>Fill the request form</strong><span>Enter applicant details, district, tehsil, Aadhaar-linked mobile number and certificate type, then select the required documents.</span></div></li>
-        <li><div><strong>Pay securely</strong><span>The current fee for each selected certificate is calculated automatically from live server pricing. Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required.</span></div></li>
-        <li><div><strong>Automatic payment verification</strong><span>The Serverbyt backend verifies the Razorpay payment before document upload is allowed.</span></div></li>
-        <li><div><strong>Documents upload & request creation</strong><span>After successful payment verification, online documents are uploaded to the protected Google Drive workflow. If offline submission is selected, your Request ID is created and you can submit the documents physically.</span></div></li>
-      </ol>
-    </section>
+    <p class="cert-trust-strip"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> GovJobUpdates is <strong>not a government website</strong>. We only assist with applications; approval is by the concerned department. <span lang="hi">यह सरकारी वेबसाइट नहीं है; हम केवल आवेदन में सहायता करते हैं।</span></p>
 
     <section class="cert-grid">
       <div class="cert-card" id="certificateForm">
         <h2>Certificate Request Form</h2>
         <form class="cert-form" id="upCertificateForm">
+          <div class="cert-step-head" data-step="1"><span>1</span><div><strong>Choose certificate(s)</strong><small>You can select more than one.</small></div></div>
           <fieldset class="cert-choice-group">
-            <legend>Select Certificate Service(s)</legend>
+            <legend class="sr-only">Select Certificate Service(s)</legend>
             <div class="cert-choice-grid" id="serviceChoices">
               <label class="cert-choice"><input type="checkbox" name="services" value="SC Caste Certificate"><span>SC Caste Certificate</span></label>
               <label class="cert-choice"><input type="checkbox" name="services" value="ST Caste Certificate"><span>ST Caste Certificate</span></label>
@@ -98,7 +70,7 @@
               <label class="cert-choice"><input type="checkbox" name="services" value="EWS State Certificate"><span>EWS State Certificate</span></label>
               <label class="cert-choice"><input type="checkbox" name="services" value="PAN Card"><span>PAN Card</span></label>
             </div>
-            <p class="cert-submit-note">You can select more than one certificate. Caste and Domicile share one common document set; Income, EWS (Central and State share one set) and PAN Card each use their own separate document set.</p>
+            <p class="cert-submit-note">OBC can be State or Central; SC/ST are selected separately. Caste and Domicile share one common document set; Income, EWS (Central and State share one set) and PAN Card each use their own separate document set.</p>
           </fieldset>
 
           <fieldset class="cert-choice-group income-for-section" id="incomeForSection" hidden>
@@ -119,12 +91,15 @@
             <p class="cert-submit-note">Select whether you need a new PAN card or a correction/update in an existing PAN.</p>
           </fieldset>
 
-          <div class="cert-row"><div class="cert-field"><label for="applicantName">Applicant Name</label><input id="applicantName" type="text" required placeholder="Full name"></div><div class="cert-field"><label for="fatherName">Father / Husband Name</label><input id="fatherName" type="text" required placeholder="Father or husband name"></div></div>
-          <div class="cert-row"><div class="cert-field"><label for="mobileNumber">Aadhaar-linked Active Mobile Number for OTP</label><input id="mobileNumber" type="tel" required maxlength="10" inputmode="numeric" placeholder="Aadhaar se linked 10 digit mobile number"></div><div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" type="email" required placeholder="Email address"></div></div>
-          <p class="cert-note safe-note"><span class="note-line"><span class="note-lang">English:</span>For Aadhaar authentication, enter the applicant's Aadhaar-linked active mobile number.</span></p>
-          <div class="cert-row"><div class="cert-field"><label for="district">District</label><input id="district" type="text" required placeholder="District in UP"></div><div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" type="text" required placeholder="Tehsil"></div></div>
-          <div class="cert-field"><label for="aadhaarLast4">Aadhaar Last 4 Digits</label><input id="aadhaarLast4" inputmode="numeric" maxlength="4" placeholder="Only last 4 digits"></div>
+          <div class="cert-step-head" data-step="2"><span>2</span><div><strong>Applicant details</strong><small>Enter names exactly as on your Aadhaar.</small></div></div>
+          <div class="cert-row"><div class="cert-field"><label for="applicantName">Applicant Name</label><input id="applicantName" name="applicant_name" type="text" required autocomplete="name" placeholder="Full name"></div><div class="cert-field"><label for="fatherName" id="fatherLabel">Father / Husband Name</label><input id="fatherName" name="father_name" type="text" required autocomplete="off" placeholder="Father or husband name"></div></div>
+          <div class="cert-row" id="motherRow"><div class="cert-field"><label for="motherName">Mother&rsquo;s Name</label><input id="motherName" name="mother_name" type="text" required autocomplete="off" placeholder="Mother&rsquo;s full name"><small class="cert-field-help">Required for all certificates. <span lang="hi">सभी प्रमाण पत्रों के लिए माता का नाम आवश्यक है।</span></small></div></div>
+          <div class="cert-row"><div class="cert-field"><label for="mobileNumber">Aadhaar-linked Active Mobile Number for OTP</label><input id="mobileNumber" name="mobile" type="tel" autocomplete="tel-national" pattern="[6-9][0-9]{9}" required maxlength="10" inputmode="numeric" placeholder="Aadhaar se linked 10 digit mobile number"></div><div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" name="email" type="email" autocomplete="email" required placeholder="Email address"></div></div>
+          <p class="cert-note safe-note"><span class="note-line">For Aadhaar authentication, enter the applicant's Aadhaar-linked active mobile number.</span></p>
+          <div class="cert-row"><div class="cert-field"><label for="district">District</label><input id="district" name="district" type="text" autocomplete="address-level2" required placeholder="District in UP"></div><div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" name="tehsil" type="text" autocomplete="off" required placeholder="Tehsil"></div></div>
+          <div class="cert-field"><label for="aadhaarLast4">Aadhaar Last 4 Digits</label><input id="aadhaarLast4" name="aadhaar_last4" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off" maxlength="4" placeholder="Only last 4 digits"></div>
 
+          <div class="cert-step-head" data-step="3"><span>3</span><div><strong>Documents</strong><small>Upload now, or submit physically after payment.</small></div></div>
           <div class="cert-toggle-card">
             <div><strong>Upload documents online?</strong><span>Turn this off if you will submit documents physically/offline.</span></div>
             <label class="cert-switch"><input id="onlineDocumentsToggle" type="checkbox" checked><span></span></label>
@@ -177,7 +152,8 @@
             </section>
 
             <div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div>
-            <p class="cert-note" id="onlineDocumentSummary">Upload clear files. Each file must be under 1.5 MB.</p>
+            <p class="cert-note" id="onlineDocumentSummary">Upload clear files. Large phone photos are shrunk automatically; PDFs must be under 1.5 MB.</p>
+            <label class="cert-consent cert-consent-soft" for="privacyConsent"><input type="checkbox" id="privacyConsent" name="privacy_ack"><span>I agree that GovJobUpdates may store my uploaded documents only to prepare my application, and delete them about 90 days after the request is completed. <span lang="hi">मैं सहमत हूँ कि मेरे दस्तावेज़ केवल आवेदन के लिए रखे जाएँगे और आवेदन पूरा होने के लगभग 90 दिन बाद हटा दिए जाएँगे।</span> <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a></span></label>
           </div>
           <div class="cert-note safe-note" id="offlineDocumentsNote" hidden>
             <span class="note-line">After payment, your Request ID will be created immediately. Submit the required documents physically/offline.</span>
@@ -185,6 +161,7 @@
             <span class="note-line" id="offlineIncomePhoneNote" hidden>For Income, EWS and PAN Card requests, additional information or documents may be requested on your registered mobile number if required during processing.</span>
           </div>
 
+          <div class="cert-step-head" data-step="4"><span>4</span><div><strong>Delivery &amp; notes</strong><small>Optional.</small></div></div>
           <div class="cert-toggle-card">
             <div><strong>Do you want Home Delivery?</strong><span id="deliveryFeeCopy">Digital copy is included. The live delivery charge is added once for all certificates sent together.</span></div>
             <label class="cert-switch"><input id="homeDeliveryToggle" type="checkbox"><span></span></label>
@@ -197,6 +174,8 @@
           </div>
 
           <div class="cert-field"><label for="extraNote">Extra Note</label><textarea id="extraNote" placeholder="Any additional information"></textarea></div>
+          <div class="cert-step-head" data-step="5"><span>5</span><div><strong>Review &amp; pay</strong><small>Check the total on the right, then confirm the refund rule.</small></div></div>
+          <label class="cert-consent" for="refundConsent"><input type="checkbox" id="refundConsent" name="refund_policy_ack" required><span><strong>No refund once processing starts.</strong> <span lang="hi">(प्रोसेसिंग शुरू होने के बाद फीस वापस नहीं होगी)</span> After your application is submitted / moves to <em>Processing</em>, the fee is non-refundable because we have already applied on your behalf. Refunds are limited to duplicate or failed payments, or a request cancelled before submission. See the <a href="refund-policy.html" target="_blank" rel="noopener">Refund Policy</a>.</span></label>
           <div class="cert-progress" id="certProgress" role="status" aria-live="polite"></div>
           <div class="cert-error" id="certError" role="alert" aria-live="assertive"></div>
           <button class="btn btn-primary cert-pay-btn" type="submit" id="certSubmitBtn" disabled><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading Live Pricing...</button>
@@ -217,6 +196,7 @@
             <li><i class="fas fa-shield-halved" aria-hidden="true"></i><span>Payment handled securely through Razorpay Checkout.</span></li>
             <li><i class="fas fa-circle-check" aria-hidden="true"></i><span>Server-side payment verification before document upload.</span></li>
             <li><i class="fas fa-ban" aria-hidden="true"></i><span>No UTR entry and no payment screenshot required.</span></li>
+            <li class="warn"><i class="fas fa-circle-exclamation" aria-hidden="true"></i><span><strong>Non-refundable once Processing starts.</strong></span></li>
           </ul>
           <p class="cert-note safe-note"><span class="note-line"><span class="note-lang">Note:</span>If payment succeeds but document upload is interrupted, do not make a second payment. Use the retry option shown on the same page.</span></p>
         </div>
@@ -236,17 +216,39 @@
 
         <div class="cert-card">
           <h2>Privacy & Disclaimer</h2>
-          <p class="cert-note"><span class="note-line"><span class="note-lang">English:</span>Uploaded documents are used only for CSC/eDistrict application assistance and verification. GovJobUpdates is not a government website. Certificate approval is handled by the concerned government authority.</span></p>
+          <p class="cert-note"><span class="note-line">Uploaded documents are used only for CSC/eDistrict application assistance and verification. GovJobUpdates is not a government website. Certificate approval is handled by the concerned government authority.</span></p>
           <p class="cert-note safe-note">Before submitting personal documents and making payment, please read our <a href="privacy-policy.html">Privacy Policy</a>. For correction or deletion requests, contact us with your request ID and service type.</p>
         </div>
       </aside>
     </section>
+    <section class="cert-card" aria-labelledby="serviceSafetyTitle">
+      <h2 id="serviceSafetyTitle">Important UP Services Safety Information</h2>
+      <div class="safety-grid">
+        <article class="safety-card warning"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><strong>Not a Government Website</strong><span>GovJobUpdates only provides application assistance. Official approval/rejection is handled by the concerned government department.</span></article>
+        <article class="safety-card"><i class="fas fa-receipt" aria-hidden="true"></i><strong id="safetyFeeTitle">Live Assistance Fee</strong><span>The fee is for form filling, document checking and request handling. It is not a government guarantee or approval fee.</span></article>
+        <article class="safety-card success"><i class="fas fa-shield-halved" aria-hidden="true"></i><strong>Document Privacy</strong><span>Uploaded documents are used only for CSC/eDistrict application assistance and verification related to your request.</span></article>
+        <article class="safety-card"><i class="fas fa-lock" aria-hidden="true"></i><strong>Secure Online Payment</strong><span>Pay through Razorpay. Payment is verified automatically by the secure server before documents are uploaded.</span></article>
+      </div>
+    </section>
+
+
+    <section class="cert-card" aria-labelledby="processTitle">
+      <h2 id="processTitle">How the Service Works</h2>
+      <ol class="process-list">
+        <li><div><strong>Fill the request form</strong><span>Enter applicant details, district, tehsil, Aadhaar-linked mobile number and certificate type, then select the required documents.</span></div></li>
+        <li><div><strong>Pay securely</strong><span>The current fee for each selected certificate is calculated automatically from live server pricing. Razorpay Checkout opens after the form is validated. No UTR or payment screenshot is required. The fee becomes non-refundable once your application is submitted for processing.</span></div></li>
+        <li><div><strong>Automatic payment verification</strong><span>Our server verifies the Razorpay payment before document upload is allowed.</span></div></li>
+        <li><div><strong>Documents upload & request creation</strong><span>After successful payment verification, online documents are uploaded to the protected Google Drive workflow. If offline submission is selected, your Request ID is created and you can submit the documents physically.</span></div></li>
+      </ol>
+    </section>
+
     <section class="cert-card seo-faq" aria-labelledby="upServicesFaqTitle">
       <h2 id="upServicesFaqTitle">UP Certificate Services FAQs</h2>
       <div class="seo-faq-list">
         <details><summary>Is GovJobUpdates a government certificate portal?</summary><p>No. GovJobUpdates provides application assistance only. Certificate approval, rejection and verification are handled by the concerned government department.</p></details>
         <details><summary>What is the UP certificate assistance fee?</summary><p>The current assistance fee is loaded live for each certificate and shown before payment. Payment is collected securely online; the fee covers form filling, document checking and request handling and does not guarantee approval.</p></details>
         <details><summary>Which documents are usually needed?</summary><p>Aadhaar card, Sabhasad or Pradhan letter pad, passport size photo, Aadhaar-linked active mobile number and email ID are requested on this page. No payment screenshot or UTR entry is required.</p></details>
+        <details><summary>Can I get a refund?</summary><p>Once your request is submitted and moves to Processing, the assistance fee is not refunded, because the application has already been filed for you. A refund is considered only for a duplicate payment, a failed payment where money was deducted, or a request cancelled before submission.</p></details>
         <details><summary>Where should I check certificate status?</summary><p>Certificate status should be checked on the official UP eDistrict portal or through the concerned official channel.</p></details>
       </div>
     </section>
@@ -255,7 +257,9 @@
 <footer><div class="footer-content"><div class="footer-section"><h3>GovJobUpdates</h3><p>India's trusted government job portal for latest jobs, admit cards, results, answer keys, rank prediction, UP certificate assistance and document tools. GovJobUpdates is not a government website; always verify details from the official source before applying.</p><div class="social-icons footer-social" aria-label="GovJobUpdates social links"><a class="social-instagram" href="https://www.instagram.com/govjobupdates_official/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a><a class="social-youtube" href="https://www.youtube.com/@GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to GovJobUpdates on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a><a class="social-telegram" href="https://t.me/GovJobUpdates_official" target="_blank" rel="noopener noreferrer" aria-label="Join GovJobUpdates on Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a><a class="social-whatsapp" href="https://whatsapp.com/channel/0029VbDCoQXH5JM3NUBUQC3u" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates WhatsApp channel"><i class="fab fa-whatsapp" aria-hidden="true"></i></a><a class="social-x" href="https://x.com/GovJobUpdatesIN" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on X at @GovJobUpdatesIN"><span aria-hidden="true">X</span></a><a class="social-linkedin" href="https://www.linkedin.com/company/govjobupdates/" target="_blank" rel="noopener noreferrer" aria-label="Follow GovJobUpdates on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><ul><li><a href="../index.html">Home</a></li><li><a href="latest-jobs.html">Jobs</a></li><li><a href="admitcard.html">Admit Card</a></li><li><a href="answer-key.html">Answer Key</a></li><li><a href="results.html">Results</a></li><li><a href="rank-predictor.html">Rank Predictor</a></li><li><a href="../typing-test/index.html">Typing Test</a></li></ul></div><div class="footer-section"><h3>Resources</h3><ul><li><a href="quiz.html">Quiz</a></li><li><a href="student-hub.html">Student Hub</a></li><li><a href="documents.html">Documents</a></li><li><a href="up-certificate-services.html">UP Services</a></li><li><a href="about-us.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="refund-policy.html">Refund Policy</a></li></ul></div><div class="footer-section"><h3>Contact Us</h3><ul><li><i class="fas fa-envelope" aria-hidden="true"></i> support@govjobupdates.com</li><li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Shikohabad, UP, India</li></ul></div></div><div class="copyright">&copy; 2026 GovJobUpdates. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a> | <a href="refund-policy.html">Refund Policy</a> | <a href="disclaimer.html">Disclaimer</a></div></footer>
   <script src="../JS/script.js?v=20260519-up-services-layout-fix" defer></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="../JS/up-certificate-services.js?v=20260819-pricing1" defer></script>
+  <script src="../JS/up-certificate-config.js?v=20261031-v3"></script>
+  <script src="../JS/up-certificate-common.js?v=20261031-v3" defer></script>
+  <script src="../JS/up-certificate-services.js?v=20261031-v3" defer></script>
   <script src="../JS/firebase-config.js?v=20260513-up5" defer></script>
   <script type="module" src="../JS/firebase-analytics.js"></script>
   <script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>

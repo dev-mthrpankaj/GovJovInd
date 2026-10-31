@@ -1,12 +1,11 @@
 (function () {
   "use strict";
 
-  const CERTIFICATE_API_BASE = "https://test.govjobupdates.com/live-test/certificate-api";
-  const CERTIFICATE_DRIVE_API_URL = "https://script.google.com/macros/s/AKfycbxDgRkmo0ZxktOZGdArFW-7APDT68ZJpETTvLSsaS4rD6h52TcB-lL-iJtypwg5gttPcQ/exec";
+  const C = window.GJUCert;
+  if (!C) { console.error("up-certificate-common.js must load before this script."); return; }
+  const CERTIFICATE_API_BASE = C.API_BASE;
   const DEFAULT_SERVICE_FEE_PAISE = 11000;
   const DEFAULT_DELIVERY_FEE_PAISE = 5000;
-  const MAX_FILE_SIZE_BYTES = 1.5 * 1024 * 1024;
-  const ALLOWED_DOCUMENT_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "application/pdf"]);
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
@@ -29,6 +28,8 @@
   function hasCasteOrDomicile() { return selectedServices().some(isCommonSetService); }
   function hasEws() { return selectedServices().some((service) => EWS_SERVICES.includes(service)); }
   function hasPan() { return selectedServices().includes("PAN Card"); }
+  function isPanOnly() { const s = selectedServices(); return s.length > 0 && s.every((x) => x === "PAN Card"); }
+  const validPersonName = C.validPersonName;
   function panType() { return clean($('input[name="panType"]:checked')?.value).toLowerCase(); }
   function incomeFor() { return clean($('input[name="incomeFor"]:checked')?.value).toLowerCase(); }
   function onlineDocuments() { return Boolean($("#onlineDocumentsToggle")?.checked); }
@@ -46,6 +47,7 @@
     if (!box) return;
     box.textContent = message || "";
     box.classList.toggle("show", Boolean(message));
+    if (message) box.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   function clearMessages() {
@@ -162,6 +164,7 @@
     $("#ewsDocumentsSection")?.toggleAttribute("hidden", !ews);
     $("#panDocumentsSection")?.toggleAttribute("hidden", !pan);
 
+    setRequired("privacyConsent", online);
     setRequired("aadhaarFile", online && common);
     setRequired("letterFile", online && common);
     setRequired("photoFile", online && common);
@@ -190,6 +193,15 @@
     $("#deliveryAddressArea")?.toggleAttribute("hidden", !delivery);
     ["deliveryName", "deliveryMobile", "deliveryAddress", "deliveryPincode"].forEach((id) => setRequired(id, delivery));
 
+    // PAN needs the father's name only (never husband); every other certificate also needs the mother's name.
+    const panOnly = isPanOnly();
+    const fatherLabel = $("#fatherLabel");
+    if (fatherLabel) fatherLabel.textContent = panOnly ? "Father\u2019s Name" : "Father / Husband Name";
+    const fatherInput = $("#fatherName");
+    if (fatherInput) fatherInput.placeholder = panOnly ? "Father\u2019s full name" : "Father or husband name";
+    $("#motherRow")?.toggleAttribute("hidden", panOnly);
+    setRequired("motherName", !panOnly);
+
     setSubmitState("ready");
   }
 
@@ -216,10 +228,18 @@
       button.innerHTML = '<i class="fas fa-rotate-right"></i> Retry Document Upload';
       return;
     }
-    button.disabled = !pricingReady;
-    button.innerHTML = pricingReady
-      ? `<i class="fas fa-lock"></i> Pay ${money(currentTotalPaise())} &amp; Submit Application`
-      : '<i class="fas fa-spinner fa-spin"></i> Loading Live Pricing...';
+    if (!pricingReady) {
+      button.disabled = true;
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading Live Pricing...';
+      return;
+    }
+    if (!selectedServices().length) {
+      button.disabled = true;
+      button.innerHTML = '<i class="fas fa-hand-pointer"></i> Select a certificate to continue';
+      return;
+    }
+    button.disabled = false;
+    button.innerHTML = `<i class="fas fa-lock"></i> Pay ${money(currentTotalPaise())} &amp; Submit Application`;
   }
 
   function collectApplicationData() {
@@ -229,6 +249,9 @@
       pan_type: hasPan() ? panType() : "",
       applicant_name: clean($("#applicantName")?.value),
       father_husband_name: clean($("#fatherName")?.value),
+      mother_name: isPanOnly() ? "" : clean($("#motherName")?.value),
+      refund_policy_ack: Boolean($("#refundConsent")?.checked),
+      privacy_ack: onlineDocuments() && Boolean($("#privacyConsent")?.checked),
       mobile: clean($("#mobileNumber")?.value),
       email: clean($("#emailId")?.value),
       district: clean($("#district")?.value),
@@ -264,14 +287,13 @@
 
   function validateFile(file, label, options = {}) {
     if (!file) throw new Error(`${label} is required.`);
-    if (file.size <= 0 || file.size > MAX_FILE_SIZE_BYTES) throw new Error(`${label} must be under 1.5 MB.`);
-
+    if (file.size <= 0) throw new Error(`${label} is empty.`);
     const type = String(file.type || "").toLowerCase();
-    if (options.pdfOnly && type !== "application/pdf") throw new Error(`${label} must be a PDF file.`);
-    if (options.imageOnly && !type.startsWith("image/")) throw new Error(`${label} must be an image file.`);
-    if (!options.pdfOnly && !options.imageOnly && !ALLOWED_DOCUMENT_TYPES.has(type)) {
-      throw new Error(`${label} must be JPG, PNG, WEBP or PDF.`);
-    }
+    const isPdf = type === "application/pdf" || /\.pdf$/i.test(file.name || "");
+    if (options.pdfOnly && !isPdf) throw new Error(`${label} must be a PDF file.`);
+    if (options.imageOnly && isPdf) throw new Error(`${label} must be an image file.`);
+    if (isPdf && file.size > C.LIMIT) throw new Error(`${label} (PDF) must be under 1.5 MB.`);
+    if (!isPdf && file.size > 25 * 1024 * 1024) throw new Error(`${label} is too large (max 25 MB).`);
   }
 
   function validateApplication(data, files) {
@@ -282,9 +304,15 @@
     if (data.services.includes("PAN Card") && !["new", "correction"].includes(data.pan_type)) {
       throw new Error("Please select whether the PAN Card request is for New PAN or Correction / Update.");
     }
-    if (!data.applicant_name || !data.father_husband_name || !data.mobile || !data.email || !data.district || !data.tehsil) {
+    const panOnly = data.services.length > 0 && data.services.every((x) => x === "PAN Card");
+    if (!data.applicant_name || !data.father_husband_name || (!panOnly && !data.mother_name) || !data.mobile || !data.email || !data.district || !data.tehsil) {
       throw new Error("Please fill all required applicant details.");
     }
+    if (!validPersonName(data.applicant_name)) throw new Error("Applicant name should contain letters only.");
+    if (!validPersonName(data.father_husband_name)) throw new Error(panOnly ? "Father\u2019s name should contain letters only." : "Father / Husband name should contain letters only.");
+    if (!panOnly && !validPersonName(data.mother_name)) throw new Error("Mother\u2019s name should contain letters only.");
+    if (!data.refund_policy_ack) throw new Error("Please tick the refund rule box to continue.");
+    if (data.document_submission_mode === "online" && !data.privacy_ack) throw new Error("Please tick the document storage notice to upload documents online.");
     if (!validateMobile(data.mobile)) throw new Error("Please enter a valid 10 digit Indian mobile number.");
     if (!validateEmail(data.email)) throw new Error("Please enter a valid email address.");
     if (data.aadhaar_last4 && !/^\d{4}$/.test(data.aadhaar_last4)) {
@@ -331,72 +359,27 @@
     }
   }
 
-  async function postJson(url, payload) {
-    const response = await fetch(url, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-store",
-      credentials: "omit",
-      headers: { "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest" },
-      body: JSON.stringify(payload)
-    });
-    let result;
-    try { result = await response.json(); } catch { throw new Error("The certificate server returned an invalid response."); }
-    if (!response.ok || !result?.success) throw new Error(result?.message || "The request could not be completed.");
-    return result;
-  }
+  const createOrder = (data) => C.postJson("create-order.php", data);
+  const verifyPayment = (requestId, payment) => C.verifyPayment(requestId, payment);
+  const uploadDocuments = (requestId, uploadToken, files) => C.uploadDocuments(requestId, uploadToken, files);
 
-  const createOrder = (data) => postJson(`${CERTIFICATE_API_BASE}/create-order.php`, data);
-  const verifyPayment = (requestId, payment) => postJson(`${CERTIFICATE_API_BASE}/verify-payment.php`, {
-    request_id: requestId,
-    razorpay_order_id: payment.razorpay_order_id,
-    razorpay_payment_id: payment.razorpay_payment_id,
-    razorpay_signature: payment.razorpay_signature
-  });
+  const FILE_RULES = {
+    aadhaar: ["Caste / Domicile Aadhaar Card", {}], letter: ["Caste / Domicile Sabhasad / Pradhan Letter Pad", {}], photo: ["Caste / Domicile Passport Size Photo", { imageOnly: true }],
+    income_aadhaar: ["Income Certificate Aadhaar Front + Back", { pdfOnly: true }], income_letter: ["Income Certificate Sabhasad / Pradhan Letter Pad", {}], income_photo: ["Income Certificate Passport Size Photo", { imageOnly: true }],
+    ews_aadhaar: ["EWS Aadhaar Front + Back", { pdfOnly: true }], ews_photo: ["EWS Recent Passport Size Photo", { imageOnly: true }], ews_income: ["EWS Income Certificate", {}],
+    pan_aadhaar: ["PAN Aadhaar Front + Back", { pdfOnly: true }], pan_photo: ["PAN Recent Passport Size Photo", { imageOnly: true }], pan_signature: ["PAN Signature", { imageOnly: true }],
+    extra: ["Extra Document", {}]
+  };
 
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      if (!file) { resolve(null); return; }
-      if (file.size > MAX_FILE_SIZE_BYTES) { reject(new Error(`${file.name} must be under 1.5 MB.`)); return; }
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = String(reader.result || "");
-        resolve({
-          name: file.name,
-          type: file.type || "application/octet-stream",
-          size: file.size,
-          data: result.includes(",") ? result.split(",")[1] : result
-        });
-      };
-      reader.onerror = () => reject(new Error(`Could not read ${file.name}.`));
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function buildFilesPayload(files) {
-    const payload = {};
-    for (const [key, value] of Object.entries(files)) payload[key] = await fileToBase64(value);
-    return payload;
-  }
-
-  async function uploadDocuments(requestId, uploadToken, files) {
-    const payload = await buildFilesPayload(files);
-    const response = await fetch(CERTIFICATE_DRIVE_API_URL, {
-      method: "POST",
-      redirect: "follow",
-      cache: "no-store",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({
-        action: "uploadCertificateDocuments",
-        data: { requestId, uploadToken },
-        files: payload
-      })
-    });
-    const text = await response.text();
-    let result;
-    try { result = JSON.parse(text); } catch { throw new Error("Google Drive upload service returned an invalid response."); }
-    if (!result?.success) throw new Error(result?.message || "Document upload failed.");
-    return result;
+  /** Checks the real file bytes and shrinks big phone photos BEFORE any money is taken. */
+  async function prepareAll(files) {
+    const out = {};
+    for (const [key, file] of Object.entries(files)) {
+      if (!file) { out[key] = null; continue; }
+      const [label, opts] = FILE_RULES[key] || [key, {}];
+      out[key] = await C.prepareFile(file, label, opts);
+    }
+    return out;
   }
 
   function setSuccess(requestId, data) {
@@ -420,6 +403,7 @@
         <div class="success-meta-row"><span>Delivery</span><strong>${delivery}</strong></div>
       </div>
       <p>Please save your Request ID. Use it with your registered mobile number to track the request.</p>
+      <p class="success-refund-note"><i class="fas fa-circle-info"></i> Reminder: once the status changes to Processing, the fee is non-refundable.</p>
       <div class="cert-success-actions">
         <button class="btn copy-success" type="button" data-cert-action="copy-request"><i class="fas fa-copy"></i> Copy Request ID</button>
         <a class="btn btn-primary" href="${trackUrl}"><i class="fas fa-route"></i> Track Application</a>
@@ -467,10 +451,12 @@
                 files,
                 data
               };
+              C.savePending(verified.request_id);
               setSubmitState("uploading");
               setProgress("Payment verified. Uploading documents...");
               const uploaded = await uploadDocuments(verifiedPayment.requestId, verifiedPayment.uploadToken, files);
               verifiedPayment = null;
+              C.clearPending();
               setProgress("", false);
               setSuccess(uploaded.request_id || order.request_id, data);
               resolve(uploaded);
@@ -482,10 +468,10 @@
           } catch (error) {
             setProgress("", false);
             if (verifiedPayment) {
-              setError("Payment is verified, but document upload could not finish. Do not pay again. Click Retry Document Upload. " + (error.message || ""));
+              setError("Payment is verified, but document upload could not finish. Do NOT pay again. Click Retry Document Upload. You can also finish later from Track Application > Resume document upload (Request ID " + order.request_id + "). " + (error.message || ""));
               setSubmitState("retry");
             } else {
-              setError(error.message || "Payment verification failed.");
+              setError(`We could not confirm your payment right now. If money was deducted, do NOT pay again - it is matched to your request automatically. Save your Request ID ${order.request_id} and check Track Application after a few minutes.`);
               setSubmitState("ready");
             }
             reject(error);
@@ -512,12 +498,12 @@
     setSubmitState("uploading");
     setProgress("Retrying document upload. No additional payment will be taken...");
     try {
-      const files = selectedFiles();
-      validateApplication(verifiedPayment.data, files);
+      const files = verifiedPayment.files;
       const uploaded = await uploadDocuments(verifiedPayment.requestId, verifiedPayment.uploadToken, files);
       const requestId = uploaded.request_id || verifiedPayment.requestId;
       const data = verifiedPayment.data;
       verifiedPayment = null;
+      C.clearPending();
       setProgress("", false);
       setSuccess(requestId, data);
       setSubmitState("ready");
@@ -539,15 +525,23 @@
 
     clearMessages();
     const data = collectApplicationData();
-    const files = selectedFiles();
+    let files = selectedFiles();
 
-    try { validateApplication(data, files); }
-    catch (error) { setError(error.message); return; }
+    try {
+      validateApplication(data, files);
+      if (data.document_submission_mode === "online") {
+        setSubmitState("creating");
+        setProgress("Checking and optimising your documents...");
+        files = await prepareAll(files);
+        setProgress("", false);
+      }
+    } catch (error) { setProgress("", false); setError(error.message); setSubmitState("ready"); return; }
 
-    setSubmitState("creating");
     if (!pricingReady) {
-      throw new Error("Live pricing is still loading. Please wait a moment and try again.");
+      setError("Live pricing is still loading. Please wait a moment and try again.");
+      return;
     }
+    setSubmitState("creating");
     setProgress(`Creating your secure ${money(currentTotalPaise())} payment order...`);
 
     try {
@@ -595,7 +589,18 @@
     if (target.dataset.certAction === "new-application") startNewApplication();
   }
 
+  function showResumeBanner() {
+    const banner = $("#resumeBanner");
+    const pending = C.loadPending();
+    if (!banner || !pending) return;
+    const link = `up-certificate-status.html?request_id=${encodeURIComponent(pending.requestId)}#resume`;
+    banner.innerHTML = `<i class="fas fa-circle-exclamation" aria-hidden="true"></i><div><strong>You have a paid request waiting for documents (${escapeHtml(pending.requestId)}).</strong><br>Do not pay again. <a href="${link}">Resume document upload</a> &middot; <button type="button" id="dismissResume">Dismiss</button></div>`;
+    banner.hidden = false;
+    $("#dismissResume")?.addEventListener("click", () => { C.clearPending(); banner.hidden = true; });
+  }
+
   function init() {
+    showResumeBanner();
     loadPricing().catch((error) => {
       pricingReady = false;
       setError(error.message || "Live certificate pricing could not be loaded.");
@@ -603,7 +608,7 @@
     });
     $("#upCertificateForm")?.addEventListener("submit", handleSubmit);
     $("#certSuccess")?.addEventListener("click", handleSuccessActions);
-    $$('#serviceChoices input, input[name="incomeFor"], input[name="panType"], #onlineDocumentsToggle, #homeDeliveryToggle')
+    $$('#serviceChoices input, input[name="incomeFor"], input[name="panType"], #onlineDocumentsToggle, #homeDeliveryToggle, #refundConsent')
       .forEach((element) => element.addEventListener("change", refreshUI));
     refreshUI();
   }
