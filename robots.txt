@@ -1,4 +1,7 @@
+# GovJobUpdates - https://govjobupdates.com/robots.txt
 User-agent: *
+
+# Live test: private, admin and API parts
 Allow: /live-test/
 Disallow: /live-test/admin/
 Disallow: /live-test/payment-
@@ -8,14 +11,23 @@ Disallow: /live-test/autosave.php
 Disallow: /live-test/submit.php
 Disallow: /live-test/api/
 Disallow: /live-test/log-violation.php
+Disallow: /tmp-live-test-
+
+# App and internal folders
 Disallow: /android-webview-app/
 Disallow: /reports/
-Disallow: /.edge-
-Disallow: /.sixth/
 Disallow: /generated-job-pages/
 Disallow: /generated_job_pages/
-Disallow: /tmp-live-test-
+Disallow: /.edge-
+Disallow: /.sixth/
 Disallow: /.cache/
+
+# Old WordPress URLs from the previous owner (these pages no longer exist)
+Disallow: /feed/
+Disallow: /*/feed/
+Disallow: /job/
+Disallow: /gov/
+
 Allow: /
 
 Sitemap: https://govjobupdates.com/sitemap.xml
