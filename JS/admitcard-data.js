@@ -1224,26 +1224,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0135-20260906114715-0c1c9a6d",
-        "title": "UPCISB UP Cooperative Bank Admit Card 2026",
-        "organization": "UPCISB UP Cooperative Bank",
-        "department": "UPCISB",
-        "category": "Banking",
-        "year": "2026",
-        "examDate": "2026-09-07",
-        "examEndDate": "2026-09-08",
-        "releaseDate": "2026-09-03",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ibpsreg.ibps.in/upcisbfeb26/oecla_jun26/login.php?appid=e87add4dbe0535bc45783f1dd503ea40",
-        "detailPage": "../jobs/upcisb-2026.html",
-        "updatedAt": "2026-09-06",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0131-20260903172342-48cd5dee",
         "title": "NTPC Assistant Chemist Trainee ACT Admit Card 2026",
         "organization": "NTPC Limited",
