@@ -10,12 +10,12 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "92748260457a93a1d1eb0ee47a1b650dc4d983dfbd9ab8870c85d3b2d3279d9c",
-      "lastmod": "2026-10-31"
+      "signature": "1ecb27557d211876916f7a2801f45586560d7348b937d38086eb4a69a0593fa0",
+      "lastmod": "2026-11-01"
     },
     "HTML/answer-key.html": {
-      "signature": "87a785b35bd9b3b42ba3253d1c33ab45ce3d2ae3834e15683c930cd448c1fed0",
-      "lastmod": "2026-10-29"
+      "signature": "c3f9bc63f54a1a4e811981922bd47a3e659365b57de2d35567323429fd87655f",
+      "lastmod": "2026-11-01"
     },
     "HTML/banking-quizzes.html": {
       "signature": "aa63672d2c2ea791bd778ef8bbb0e752a4c9582121ab794c285c7b99146dada9",
@@ -62,8 +62,8 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "8340f01707d7bb9491104412961caf3e855703fa36a03d700ae52e2b03eb99f6",
-      "lastmod": "2026-10-31"
+      "signature": "04c1a94fa93b2ff07bc7f99e790a01bf75506f284d3860db86242c891e0adc06",
+      "lastmod": "2026-11-01"
     },
     "HTML/live-test-info.html": {
       "signature": "1586a3f526a7b3bdb011fe30173ba0d82c8c02c2abcbc0370b70bcb20c7a539b",
@@ -130,8 +130,8 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "b12e6f4bbf1ef7095d6f5ea05289bbe8a85697880766f8457f79faca662448d5",
-      "lastmod": "2026-10-31"
+      "signature": "29775b56453875115991885cbfe5fac630113f3a1a3f8de1db5db79118d59757",
+      "lastmod": "2026-11-01"
     },
     "HTML/rrb-quizzes.html": {
       "signature": "80539be166ac988564e9c6402052019e889672bb89affd72a9466ebbebc9aca3",
@@ -1097,6 +1097,14 @@
       "signature": "3744ed7dd6451b44d5396533233ca71e46fb5d91c29fb46a433f8306c448a4ab",
       "lastmod": "2026-10-16"
     },
+    "jobs/bel-probationary-engineer-2026.html": {
+      "signature": "6513f6ba4e054e563ad582b6e6a48a37c8f038cad8b6d1a08060ddd65eeeae7d",
+      "lastmod": "2026-11-01"
+    },
+    "jobs/bhel-artisan-2026.html": {
+      "signature": "e76875555b88f104085d35289f533f3e0ef10a544ae744fc0f76f8bf14cf5d85",
+      "lastmod": "2026-11-01"
+    },
     "jobs/bihar-blet-2026.html": {
       "signature": "aeb5155f01919c3bf23725a434a3401d35378a6b23f56e901c99544c242fbed2",
       "lastmod": "2026-10-27"
@@ -1122,7 +1130,7 @@
       "lastmod": "2026-10-21"
     },
     "jobs/bpsc-aes-2025.html": {
-      "signature": "2cd1590b867ca643722881c2afff89bb3415d6f3ebba7eb8c44a3ebab7372ba9",
+      "signature": "4008105e7db5d87bb4ee0f4403854261e06f54b292f3e032294f801ab7569c68",
       "lastmod": "2026-11-01"
     },
     "jobs/bpsc-assistant-section-officer-aso.html": {
@@ -1425,6 +1433,10 @@
       "signature": "59d55b4a47d9a325b0332a36ec3abf46e99fcc781d8570eb13dc3555e2a815d7",
       "lastmod": "2026-10-16"
     },
+    "jobs/mppgcil-iti-apprentice-2026.html": {
+      "signature": "e73489bf75bd3f7ba1a8006476a372e1fc809e7d3e0b74fcf3b4f2a285d74126",
+      "lastmod": "2026-11-01"
+    },
     "jobs/mppsc-assistant-professor-admit-card.html": {
       "signature": "bdc0bf677b91cde9b017355e152080ae6e877f948aa5bb9197ee31d655d015f8",
       "lastmod": "2026-10-16"
@@ -1473,6 +1485,10 @@
       "signature": "cf60f317ee9a5cde0d543db24c10fb0dff4db708990336c5a423725984d5a404",
       "lastmod": "2026-10-16"
     },
+    "jobs/npcil-apprentice-2026.html": {
+      "signature": "d850e39abc39f9890434963da2ab2ff09654cc3adf5602e6977c219fc2c947ef",
+      "lastmod": "2026-11-01"
+    },
     "jobs/nta-aiapget-2026.html": {
       "signature": "b8524615e2e0c1728302ee7a7cc97e747c613cf7c82fcd30a4c5e8aec014f36a",
       "lastmod": "2026-10-16"
@@ -1490,8 +1506,8 @@
       "lastmod": "2026-10-25"
     },
     "jobs/nta-ugc-net-jrf-december-2026.html": {
-      "signature": "c5332e9f11bb305c147e056795ce41f4f23da70b38a917594c282c6d7d797cf9",
-      "lastmod": "2026-10-16"
+      "signature": "0e5fb0ed39da6e18f46645c6b74d6a33b0e72462ceb590086617fc502d0055a5",
+      "lastmod": "2026-11-01"
     },
     "jobs/ntpc-act-2026.html": {
       "signature": "a97efa48b4b7482085a26070e209818667b838554cdd7aafd9c3051b3d872922",
@@ -1518,8 +1534,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/railway-rrb-alp-2026.html": {
-      "signature": "1a33c97f69e7499eeb5b9a40bd72cbfc909894daac9b51e3f3f57df123650772",
-      "lastmod": "2026-10-31"
+      "signature": "e827d9119a469715938c925ee4fc08aee86a4d9b6f6ba70adc61d4aa6069e824",
+      "lastmod": "2026-11-01"
     },
     "jobs/railway-rrb-isolated-categories-cen08-2025.html": {
       "signature": "2f87fc7f0250ec9874142f3879ae6714b3bd0e8beffdebcc2d8ee1bdb63029d3",
@@ -1534,7 +1550,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
-      "signature": "777d4901f632b6c4f4ae4782a63c30f262a378631ff90e75b0965a26728406ac",
+      "signature": "0b59a56d6595f845acddc63422b195ec4d9457af20e324d33f2d4193e00ca997",
       "lastmod": "2026-11-01"
     },
     "jobs/railway-rrb-ntpc-under-graduate-2026.html": {
@@ -1622,8 +1638,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/rvunl-je-ae-ca-2026.html": {
-      "signature": "64a0ad0c8edf0da1179195e935e664cab9aa930af1e2e1dd4d6cac87f26e7c70",
-      "lastmod": "2026-10-31"
+      "signature": "59266d5a28635654b2a56b7a8305cb2e66666ccebabe9353448f3d973a6f34e3",
+      "lastmod": "2026-11-01"
     },
     "jobs/sbi-junior-associates-clerk-2026.html": {
       "signature": "faddbb4194aef4c373c19707c20e8cdd26abb955152f83294c078d3b0a2959c1",
@@ -1782,7 +1798,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upcisb-2026.html": {
-      "signature": "e09ee39b7d6d87a5a3ed899b5878024972c63c096859c0d24f4cb2c124c9e63f",
+      "signature": "3daf97c38363c11ebfd1e05a20d7e20b1773aed9e9be061414883e2d3298341d",
       "lastmod": "2026-11-01"
     },
     "jobs/upcisb-up-cooperative-2026.html": {
