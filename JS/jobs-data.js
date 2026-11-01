@@ -302,7 +302,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "232",
         "startDate": "2026-10-20",
         "lastDate": "2026-11-01",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://nats.education.gov.in/student_type.php",
         "officialNotification": "https://cdn.lichousing.com/2026/10/Apprentecis-Advertisement-Notification-Batch-10.pdf",
