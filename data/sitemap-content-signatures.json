@@ -10,7 +10,7 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "17754e982a7347884af3bcc2de94ac752de0f5580690c40b18cb240b0511bb47",
+      "signature": "92748260457a93a1d1eb0ee47a1b650dc4d983dfbd9ab8870c85d3b2d3279d9c",
       "lastmod": "2026-10-31"
     },
     "HTML/answer-key.html": {
@@ -62,7 +62,7 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "eedc1f5c186015568c2335717620358a88540cbb66d3ac0455220d20d1ce1113",
+      "signature": "8340f01707d7bb9491104412961caf3e855703fa36a03d700ae52e2b03eb99f6",
       "lastmod": "2026-10-31"
     },
     "HTML/live-test-info.html": {
@@ -130,8 +130,8 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "ba5306f584f50505522d2fccf045f7cc3fbc6aaf5f3159803d17dbfd770a6e56",
-      "lastmod": "2026-10-29"
+      "signature": "b12e6f4bbf1ef7095d6f5ea05289bbe8a85697880766f8457f79faca662448d5",
+      "lastmod": "2026-10-31"
     },
     "HTML/rrb-quizzes.html": {
       "signature": "80539be166ac988564e9c6402052019e889672bb89affd72a9466ebbebc9aca3",
@@ -1121,6 +1121,10 @@
       "signature": "737c0962508ea38c23049554549ea11b77775d8674f5a2c0480801a1e123a421",
       "lastmod": "2026-10-21"
     },
+    "jobs/bpsc-aes-2025.html": {
+      "signature": "2cd1590b867ca643722881c2afff89bb3415d6f3ebba7eb8c44a3ebab7372ba9",
+      "lastmod": "2026-11-01"
+    },
     "jobs/bpsc-assistant-section-officer-aso.html": {
       "signature": "8ee87b846ddbcfa5e77ca4e20502707fe54d49e2e7c80d6f94914333615f2d3d",
       "lastmod": "2026-10-28"
@@ -1530,8 +1534,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
-      "signature": "5c00055894d3d7e02dc18caf3d6dc5e1d0be45f842ee0905ea3d8da83a262ed3",
-      "lastmod": "2026-10-16"
+      "signature": "777d4901f632b6c4f4ae4782a63c30f262a378631ff90e75b0965a26728406ac",
+      "lastmod": "2026-11-01"
     },
     "jobs/railway-rrb-ntpc-under-graduate-2026.html": {
       "signature": "f07c3c5ad9b8387bd8b2eae24c48db8e30f823f4b92c1642edca8dbff827b67c",
@@ -1778,8 +1782,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upcisb-2026.html": {
-      "signature": "0e8cdf43ab7632c6878796b7a0bc1bd43f3dc34f5e018a831f4b23a225037d8a",
-      "lastmod": "2026-10-16"
+      "signature": "e09ee39b7d6d87a5a3ed899b5878024972c63c096859c0d24f4cb2c124c9e63f",
+      "lastmod": "2026-11-01"
     },
     "jobs/upcisb-up-cooperative-2026.html": {
       "signature": "07be8242f535935452bd03b1531977a8677f6d71cc59d15ce4cd68c76f187fda",
