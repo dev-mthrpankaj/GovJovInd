@@ -531,18 +531,27 @@
         font-size: 11px;
     }
 
-    /* Sticky action bar: frosted, safe-area aware. It lives INSIDE the form,
-       so it releases at the end of the form and never covers the ad below. */
-    .rank-predictor-page .sticky-actions {
-        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-        margin: 0 -12px -14px;
+    /* Action bar is NOT sticky: Submit is only needed at the very end of the
+       form, and a pinned bar hides fields (State/District etc.) on small phones. */
+    .rank-predictor-page .sticky-actions,
+    .rank-predictor-page.is-keyboard-open .sticky-actions {
+        position: static;
+        margin: 4px 0 0;
+        padding: 0;
         border: 0;
-        border-top: 1px solid var(--rpp-line);
-        border-radius: 16px 16px 16px 16px;
-        background: rgba(255, 255, 255, 0.92);
-        -webkit-backdrop-filter: saturate(160%) blur(14px);
-        backdrop-filter: saturate(160%) blur(14px);
-        box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.12);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    /* Live marks card is also in normal flow (it is only useful while filling
+       the subject step, not as a permanent header over every field). */
+    .rank-predictor-page .live-summary-card,
+    .rank-predictor-page.is-keyboard-open .live-summary-card {
+        position: static;
+        box-shadow: none;
     }
 
     .rank-predictor-page .sticky-actions .btn-primary {
@@ -628,4 +637,12 @@
 
 @media print {
     .rpp-progress { display: none !important; }
+}
+
+/* Tablets/large phones (<=767px): same rule - nothing pinned over the fields */
+@media (max-width: 767px) {
+    .rank-predictor-page .sticky-actions,
+    .rank-predictor-page .live-summary-card {
+        position: static;
+    }
 }
