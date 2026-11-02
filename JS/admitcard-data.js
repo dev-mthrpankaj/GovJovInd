@@ -344,26 +344,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0147-20260910140153-fd28ad5e",
-        "title": "UPSSSC PET Admit Card 2026 | Preliminary Eligibility Test",
-        "organization": "Uttar Pradesh Subordinate Service Selection Commission",
-        "department": "UPSSSC",
-        "category": "State Government",
-        "year": "2026",
-        "examDate": "2026-10-23",
-        "examEndDate": "2026-11-01",
-        "releaseDate": "2026-10-17",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://upsssc.gov.in/upssscadmitcard/AdmitCard.aspx?ID=P",
-        "detailPage": "../jobs/upsssc-pet-2026.html",
-        "updatedAt": "2026-10-18",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0167-20260917213123-8cca2363",
         "title": "MPESB Van Rakshak, Jail Prahari Physical Admit Card  Out 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board (MPESB)",

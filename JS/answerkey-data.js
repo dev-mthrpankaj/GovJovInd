@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0085-20261102191404-be5df5af",
+        "title": "UPSSSC PET Answer Key 2026 | Preliminary Eligibility Test",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission (UPSSSC)",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-10-25",
+        "examEndDate": "2026-11-01",
+        "releaseDate": "2026-11-02",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://upsssc.gov.in/News.aspx?id=2",
+        "objectionLink": "",
+        "detailPage": "../jobs/upsssc-pet-2026.html",
+        "updatedAt": "2026-11-02",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0025",
         "title": "UPSSSC Pharmacist Answer Key 2026 for 560 Post",
         "organization": "Uttar Pradesh Subordinate Services Selection Commission",
