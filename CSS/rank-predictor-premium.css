@@ -1,0 +1,631 @@
+/* ==========================================================================
+   GovJobUpdates - Rank Predictor PREMIUM FORM LAYER
+   Loads AFTER rank-predictor.css. Purely visual/additive: no selector here
+   changes layout of ad slots (.gjd-ad, .rank-ad-layout) or form logic.
+   Scope: /rank-predictor/<exam>/ form pages (Submit Data + Check My Rank).
+   ========================================================================== */
+
+:root {
+    --rpp-radius: 14px;
+    --rpp-radius-sm: 12px;
+    --rpp-ring: 0 0 0 4px rgba(11, 94, 215, 0.16);
+    --rpp-ok: #0f9d6b;
+    --rpp-ok-soft: #e8f8f1;
+    --rpp-err: #d92d20;
+    --rpp-err-soft: #fff1f0;
+    --rpp-surface: #ffffff;
+    --rpp-surface-2: #f6f9fe;
+    --rpp-line: #dde6f2;
+    --rpp-line-strong: #c3d4ea;
+    --rpp-ease: cubic-bezier(0.22, 0.8, 0.28, 1);
+    --rpp-grad: linear-gradient(135deg, #0b5ed7 0%, #2f7cf0 55%, #4f94ff 100%);
+    --rpp-grad-dark: linear-gradient(135deg, #084298 0%, #0b5ed7 100%);
+}
+
+/* Container-based responsiveness: the form column is narrower on desktop
+   because of the ad rail, so we respond to the FORM width, not the screen. */
+.rank-predictor-page .predictor-form {
+    container-type: inline-size;
+    container-name: rpform;
+}
+
+/* ---------- Form shell ---------- */
+.rank-predictor-page .predictor-form {
+    position: relative;
+    border-radius: 18px;
+    border: 1px solid var(--rpp-line);
+    background:
+        radial-gradient(1200px 220px at 50% -120px, rgba(47, 124, 240, 0.08), transparent 70%),
+        var(--rpp-surface);
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.rank-predictor-page .form-heading h2 {
+    letter-spacing: -0.01em;
+}
+
+/* ---------- Progress bar (injected by premium JS) ---------- */
+.rpp-progress {
+    display: grid;
+    gap: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--rpp-line);
+    border-radius: var(--rpp-radius-sm);
+    background: var(--rpp-surface-2);
+}
+
+.rpp-progress-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--rp-ink);
+}
+
+.rpp-progress-top span:last-child {
+    color: var(--rp-blue);
+    font-variant-numeric: tabular-nums;
+}
+
+.rpp-progress-track {
+    height: 8px;
+    border-radius: 999px;
+    background: #e3ecf8;
+    overflow: hidden;
+}
+
+.rpp-progress-bar {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: var(--rpp-grad);
+    transition: width 0.4s var(--rpp-ease);
+}
+
+.rpp-progress.is-complete .rpp-progress-bar {
+    background: linear-gradient(135deg, #0f9d6b, #34c38f);
+}
+
+.rpp-progress.is-complete .rpp-progress-top span:last-child {
+    color: var(--rpp-ok);
+}
+
+/* ---------- Stepper polish ---------- */
+.rank-predictor-page .form-stepper {
+    border-radius: var(--rpp-radius-sm);
+    border-color: var(--rpp-line);
+    background: var(--rpp-surface-2);
+}
+
+.rank-predictor-page .form-stepper li {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.rank-predictor-page .form-stepper li.is-active span {
+    box-shadow: 0 6px 14px rgba(11, 94, 215, 0.28);
+}
+
+/* ---------- Section cards ---------- */
+.rank-predictor-page .form-section-card {
+    border-radius: var(--rpp-radius);
+    border-color: var(--rpp-line);
+    background: var(--rpp-surface);
+    transition: border-color 0.2s ease, box-shadow 0.25s ease;
+}
+
+.rank-predictor-page .form-accordion[open] {
+    border-color: var(--rpp-line-strong);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
+}
+
+.rank-predictor-page .form-accordion.is-section-done > .section-summary span {
+    color: var(--rpp-ok);
+}
+
+.rank-predictor-page .form-accordion.is-section-done > .section-summary span::after {
+    content: " \2713";
+    font-weight: 900;
+}
+
+.rank-predictor-page .section-summary {
+    min-height: 56px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Fields ---------- */
+.rank-predictor-page .rp-field {
+    position: relative;
+}
+
+.rank-predictor-page .rp-field input,
+.rank-predictor-page .rp-field select,
+.rank-predictor-page .rp-field textarea,
+.rank-predictor-page .subject-input-grid input {
+    height: 56px;
+    min-height: 56px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--rpp-line);
+    border-radius: var(--rpp-radius-sm);
+    background-color: #fcfdff;
+    font-size: 16px; /* never below 16px: prevents iOS auto-zoom */
+    font-weight: 600;
+    -webkit-appearance: none;
+    appearance: none;
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
+}
+
+.rank-predictor-page .rp-field input:hover:not([readonly]):not(:focus),
+.rank-predictor-page .rp-field select:hover:not(:focus) {
+    border-color: var(--rpp-line-strong);
+}
+
+.rank-predictor-page .rp-field input:focus,
+.rank-predictor-page .rp-field select:focus,
+.rank-predictor-page .rp-field textarea:focus,
+.rank-predictor-page .subject-input-grid input:focus {
+    border-color: var(--rp-blue);
+    background-color: #fff;
+    box-shadow: var(--rpp-ring);
+}
+
+.rank-predictor-page .rp-field select {
+    padding-right: 48px;
+    background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235b6575' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 14px 14px;
+}
+
+.rank-predictor-page .rp-field input[readonly] {
+    background-color: #f1f6fd;
+    border-style: dashed;
+    color: var(--rp-blue-dark);
+    cursor: default;
+}
+
+/* Valid state (class added by premium JS, never blocks validation) */
+.rank-predictor-page .rp-field.is-valid input:not([readonly]),
+.rank-predictor-page .rp-field.is-valid select {
+    border-color: #7fd6b3;
+    background-color: #fbfffd;
+}
+
+/* tick drawn on the input itself (robust even when labels wrap to 2 lines) */
+.rank-predictor-page .rp-field.is-valid:not(.has-error) input:not([readonly]):not([type="date"]):not([type="checkbox"]) {
+    padding-right: 46px;
+    background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f9d6b' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 12.5 10 17.5 19 7.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 18px 18px;
+}
+
+@keyframes rpp-pop {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Error state - clearer, with gentle shake */
+.rank-predictor-page .rp-field.has-error input,
+.rank-predictor-page .rp-field.has-error select,
+.rank-predictor-page .rp-field.has-error textarea {
+    border-color: var(--rpp-err);
+    background-color: var(--rpp-err-soft);
+    box-shadow: 0 0 0 4px rgba(217, 45, 32, 0.12);
+}
+
+.rank-predictor-page .rp-field.has-error,
+.rank-predictor-page .choice-field.has-error,
+.rank-predictor-page .consent-row.has-error {
+    animation: rpp-shake 0.36s var(--rpp-ease);
+}
+
+@keyframes rpp-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}
+
+.rank-predictor-page .field-error-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 2px 2px 0;
+    color: var(--rpp-err);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.rank-predictor-page .field-error-message::before {
+    content: "!";
+    flex: 0 0 auto;
+    display: inline-grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--rpp-err);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/* Visual-only text transforms (stored value is untouched) */
+.rank-predictor-page #rollNumber,
+.rank-predictor-page #checkRollNumber {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.rank-predictor-page #candidateName {
+    text-transform: capitalize;
+}
+
+.rank-predictor-page #mobileNumber,
+.rank-predictor-page #checkMobileNumber {
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Native date control: roomy, consistent height on iOS/Android */
+.rank-predictor-page .rp-field input[type="date"] {
+    display: block;
+    min-width: 0;
+    line-height: 1.2;
+    -webkit-min-logical-width: calc(100% - 16px);
+}
+
+.rank-predictor-page .rp-field input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+}
+
+/* ---------- Choice chips (Category / Horizontal) ---------- */
+.rank-predictor-page .choice-chip-row {
+    gap: 10px;
+}
+
+.rank-predictor-page .category-chip {
+    min-height: 48px;
+    padding: 10px 18px;
+    border: 1.5px solid var(--rpp-line);
+    border-radius: 999px;
+    background: #fcfdff;
+    font-weight: 800;
+    transition:
+        border-color 0.16s ease,
+        background-color 0.16s ease,
+        color 0.16s ease,
+        transform 0.12s ease,
+        box-shadow 0.16s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.rank-predictor-page .category-chip:active {
+    transform: scale(0.96);
+}
+
+.rank-predictor-page .category-chip.is-selected {
+    border-color: transparent;
+    background: var(--rpp-grad);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(11, 94, 215, 0.24);
+}
+
+.rank-predictor-page .category-chip.is-selected::before {
+    content: "\2713";
+    margin-right: 6px;
+    font-weight: 900;
+}
+
+/* ---------- Subject cards ---------- */
+.rank-predictor-page .subject-card {
+    border-radius: var(--rpp-radius);
+    border: 1.5px solid var(--rpp-line);
+    background: var(--rpp-surface);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rank-predictor-page .subject-card:focus-within {
+    border-color: var(--rp-blue);
+    box-shadow: 0 10px 24px rgba(11, 94, 215, 0.1);
+}
+
+.rank-predictor-page .subject-card.is-filled {
+    border-color: #9edcc2;
+}
+
+.rank-predictor-page .subject-card.is-filled .subject-card-total strong {
+    color: var(--rpp-ok);
+}
+
+.rank-predictor-page .subject-input-grid input {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-predictor-page .subject-input-grid label {
+    letter-spacing: 0.06em;
+}
+
+/* ---------- Live summary & review cards ---------- */
+.rank-predictor-page .live-summary-card,
+.rank-predictor-page .review-submit-grid > div,
+.rank-predictor-page .fixed-setting {
+    border-radius: var(--rpp-radius-sm);
+}
+
+.rank-predictor-page .live-summary-card strong,
+.rank-predictor-page .review-submit-grid strong {
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-predictor-page .rpp-bump {
+    animation: rpp-bump 0.32s var(--rpp-ease);
+}
+
+@keyframes rpp-bump {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+/* ---------- Consent ---------- */
+.rank-predictor-page .consent-row {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--rpp-line);
+    border-radius: var(--rpp-radius-sm);
+    background: var(--rpp-surface-2);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.rank-predictor-page .consent-row:has(input:checked) {
+    border-color: #7fd6b3;
+    background: var(--rpp-ok-soft);
+}
+
+.rank-predictor-page .consent-row input[type="checkbox"] {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    margin-top: 1px;
+    accent-color: var(--rp-blue);
+}
+
+/* ---------- Buttons ---------- */
+.rank-predictor-page .btn {
+    border-radius: var(--rpp-radius-sm);
+    min-height: 54px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease, filter 0.2s ease;
+}
+
+.rank-predictor-page .btn-primary {
+    border-color: transparent;
+    background: var(--rpp-grad);
+    box-shadow: 0 12px 24px rgba(11, 94, 215, 0.28);
+}
+
+.rank-predictor-page .btn-primary:hover:not(:disabled),
+.rank-predictor-page .btn-primary:focus-visible {
+    background: var(--rpp-grad-dark);
+    box-shadow: 0 14px 28px rgba(11, 94, 215, 0.34);
+}
+
+.rank-predictor-page .btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.99);
+}
+
+.rank-predictor-page .btn:disabled {
+    cursor: progress;
+    filter: saturate(0.85);
+}
+
+/* ---------- Messages ---------- */
+.rank-predictor-page .form-message {
+    border-radius: var(--rpp-radius-sm);
+    scroll-margin-top: 110px;
+    scroll-margin-bottom: 140px;
+}
+
+.rank-predictor-page .form-message:not(.hidden) {
+    animation: rpp-rise 0.28s var(--rpp-ease);
+}
+
+@keyframes rpp-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Tabs & mode cards ---------- */
+.rank-predictor-page .tab-card {
+    border-radius: var(--rpp-radius);
+    border: 1px solid var(--rpp-line);
+}
+
+.rank-predictor-page .tab-btn {
+    border-radius: var(--rpp-radius-sm);
+    min-height: 52px;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rank-predictor-page .tab-btn.is-active {
+    background: var(--rpp-grad);
+    box-shadow: 0 8px 18px rgba(11, 94, 215, 0.26);
+}
+
+.rank-predictor-page .mode-card {
+    border-radius: var(--rpp-radius);
+    border-width: 1.5px;
+}
+
+/* Exam selector inputs get the same premium treatment */
+.rank-predictor-page .exam-selector-card .rp-field input,
+.rank-predictor-page .exam-selector-card .rp-field select {
+    border-width: 1.5px;
+}
+
+/* ---------- Layout inside the form (container driven) ---------- */
+@container rpform (min-width: 560px) {
+    .rank-predictor-page .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 16px;
+    }
+    .rank-predictor-page .form-grid .category-field,
+    .rank-predictor-page .form-grid .online-only {
+        grid-column: 1 / -1;
+    }
+    .rank-predictor-page .subject-entry-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@container rpform (min-width: 860px) {
+    .rank-predictor-page .subject-entry-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 639px) {
+    .rank-predictor-page {
+        width: calc(100% - 12px);
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .rank-predictor-page .predictor-form {
+        padding: 14px 12px;
+        border-radius: 16px;
+    }
+
+    .rank-predictor-page .section-content {
+        padding: 0 12px 14px;
+    }
+
+    /* roomy tap targets */
+    .rank-predictor-page .category-chip {
+        flex: 1 1 calc(50% - 10px);
+        justify-content: center;
+    }
+
+    .rank-predictor-page .form-stepper strong {
+        font-size: 11px;
+    }
+
+    /* Sticky action bar: frosted, safe-area aware. It lives INSIDE the form,
+       so it releases at the end of the form and never covers the ad below. */
+    .rank-predictor-page .sticky-actions {
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+        margin: 0 -12px -14px;
+        border: 0;
+        border-top: 1px solid var(--rpp-line);
+        border-radius: 16px 16px 16px 16px;
+        background: rgba(255, 255, 255, 0.92);
+        -webkit-backdrop-filter: saturate(160%) blur(14px);
+        backdrop-filter: saturate(160%) blur(14px);
+        box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .rank-predictor-page .sticky-actions .btn-primary {
+        flex: 2 1 0;
+    }
+
+    .rank-predictor-page .sticky-actions .btn-outline {
+        flex: 1 1 0;
+    }
+
+    .rank-predictor-page .form-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .rank-predictor-page .form-actions .btn {
+        width: auto;
+    }
+
+    /* space under the form so the after-form ad never touches the bar */
+    .rank-predictor-page [data-ad-slot="rank-after-form"] {
+        margin-top: 22px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 359px) {
+    .rank-predictor-page .category-chip {
+        flex-basis: 100%;
+    }
+    .rank-predictor-page .subject-input-grid input {
+        font-size: 18px;
+    }
+}
+
+/* ---------- Large screens ---------- */
+@media (min-width: 1101px) {
+    .rank-predictor-page .predictor-form {
+        padding: 26px 28px 28px;
+    }
+
+    .rank-predictor-page .form-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-start;
+    }
+
+    .rank-predictor-page .form-actions .btn-primary {
+        min-width: 240px;
+    }
+
+    /* desktop: sticky action bar would fight the sticky ad rail */
+    .rank-predictor-page .sticky-actions {
+        position: static;
+    }
+}
+
+/* ---------- Dark OS preference: keep contrast comfortable ---------- */
+@media (prefers-color-scheme: dark) {
+    /* The site itself is light-themed; we only soften glare for forms. */
+    .rank-predictor-page .rp-field input,
+    .rank-predictor-page .rp-field select {
+        color-scheme: light;
+    }
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .rank-predictor-page *,
+    .rank-predictor-page *::before,
+    .rank-predictor-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (forced-colors: active) {
+    .rank-predictor-page .category-chip.is-selected {
+        outline: 2px solid Highlight;
+    }
+}
+
+@media print {
+    .rpp-progress { display: none !important; }
+}
