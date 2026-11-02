@@ -75,6 +75,7 @@
 
         renderQualificationPanel(data);
         renderSubjectScorecard(data.subjectAnalysis, payload.subjectData, data.subjectData);
+        renderInsights(snapshot, data, payload, { rawMarks, normalizedMarks, totalSubmissions, accuracyIndicator, rankSets });
         renderResultAdSlot();
         setText("shareResultText", buildShareText(snapshot, examName, normalizedMarks));
     }
@@ -157,8 +158,10 @@
             getPrefixedRankSet(data, "normalised"),
             activeBasis === "normalized" ? activeRanks : null
         );
+        // Older responses carry only the top-level ranks with no basis label: treat them as the raw ranks.
+        const legacyFallback = !rawRanks && !normalizedRanks && hasAnyRankValue(activeRanks) ? activeRanks : null;
         return {
-            raw: rawRanks,
+            raw: rawRanks || legacyFallback,
             normalized: normalizedRanks
         };
     }
@@ -261,8 +264,8 @@
     }
 
     function renderSubjectScorecard(subjectAnalysis, payloadSubjectData, resultSubjectData) {
-        const body = getById("resultSubjectBody");
-        if (!body) return;
+        const host = getById("resultSubjectBody");
+        if (!host) return;
 
         const analysisRows = Array.isArray(subjectAnalysis) ? subjectAnalysis : [];
         const payloadRows = Array.isArray(payloadSubjectData) && payloadSubjectData.length
@@ -273,88 +276,97 @@
             : payloadRows.map((subject) => ({
                 name: subject.name,
                 score: subject.marks,
+                maxMarks: subject.maxMarks,
                 attempted: subject.attempted,
                 correct: subject.correct,
                 wrong: subject.wrong,
                 avgScore: null,
                 accuracy: getSubjectAccuracy(subject)
             }));
-        const showAttemptColumns = rows.some((subject) => (
-            !isMissing(subject.attempted) || !isMissing(subject.correct) || !isMissing(subject.wrong)
-        ));
-        const showPassingColumns = rows.some((subject) => subject.passingCriteria || subject.passingStatus);
-        const showSubjectRankColumn = rows.some((subject) => !isMissing(subject.subjectRank));
 
         if (!rows.length) {
-            setSubjectTableHeaders(showAttemptColumns, showPassingColumns, showSubjectRankColumn);
-            body.innerHTML = '<tr><td colspan="4">Not available</td></tr>';
+            host.innerHTML = '<p class="subject-empty">Not available</p>';
+            renderSubjectInsights([]);
             return;
         }
-
-        setSubjectTableHeaders(showAttemptColumns, showPassingColumns, showSubjectRankColumn);
-        body.innerHTML = rows.map((subject) => renderSubjectRow(subject, showAttemptColumns, showPassingColumns, showSubjectRankColumn)).join("");
+        host.innerHTML = rows.map(renderSubjectCard).join("");
+        renderSubjectInsights(rows);
     }
 
-    function setSubjectTableHeaders(showAttemptColumns, showPassingColumns, showSubjectRankColumn) {
-        const tableHead = getById("resultSubjectBody")?.closest("table")?.querySelector("thead");
-        if (!tableHead) return;
-        const attemptHeaders = showAttemptColumns
-            ? "<th>Attempted</th><th>Correct</th><th>Wrong</th>"
-            : "";
-        const subjectRankHeader = showSubjectRankColumn
-            ? "<th>Subject Rank</th>"
-            : "";
-        const passingHeaders = showPassingColumns
-            ? "<th>Passing Criteria</th><th>Status</th>"
-            : "";
-        tableHead.innerHTML = `
-            <tr>
-                <th>Subject</th>
-                <th>Your Score</th>
-                ${subjectRankHeader}
-                ${attemptHeaders}
-                ${passingHeaders}
-                <th>Avg Score</th>
-                <th>Accuracy</th>
-            </tr>
-        `;
-        tableHead.closest("table")?.classList.toggle("has-attempt-columns", showAttemptColumns);
-        tableHead.closest("table")?.classList.toggle("has-passing-columns", showPassingColumns);
-        tableHead.closest("table")?.classList.toggle("has-subject-rank-column", showSubjectRankColumn);
-    }
-
-    function renderSubjectRow(subject, showAttemptColumns, showPassingColumns, showSubjectRankColumn) {
+    function renderSubjectCard(subject) {
+        const score = toNumber(firstValue(subject.score, subject.marks, null));
+        const avg = toNumber(subject.avgScore);
+        const maxMarks = toNumber(subject.maxMarks);
+        const scale = Number.isFinite(maxMarks) && maxMarks > 0
+            ? maxMarks
+            : Math.max(Number.isFinite(score) ? score : 0, Number.isFinite(avg) ? avg : 0, 1) * 1.2;
+        const fill = Number.isFinite(score) ? Math.min(Math.max(score / scale, 0), 1) * 100 : 0;
+        const marker = Number.isFinite(avg) ? Math.min(Math.max(avg / scale, 0), 1) * 100 : null;
         const passingStatus = firstValue(subject.passingStatus, getPassingStatus(subject), null);
-        const subjectRankCell = showSubjectRankColumn
-            ? `<td>${escapeHtml(formatSubjectRank(subject.subjectRank, subject.subjectTotalSubmissions))}</td>`
+        const failed = passingStatus === "Fail";
+        const badges = [
+            subject.qualifyingOnly ? '<span class="subject-badge is-qualifying">Qualifying only</span>' : "",
+            passingStatus === "Pass" ? '<span class="subject-badge is-pass">Passed</span>' : "",
+            failed ? '<span class="subject-badge is-fail">Not passed</span>' : ""
+        ].join("");
+
+        const facts = [];
+        if (!isMissing(subject.correct)) facts.push(["Correct", formatPlain(subject.correct)]);
+        if (!isMissing(subject.wrong)) facts.push(["Wrong", formatPlain(subject.wrong)]);
+        if (!isMissing(subject.attempted)) facts.push(["Attempted", formatPlain(subject.attempted)]);
+        if (!isMissing(subject.accuracy)) facts.push(["Accuracy", formatPercentile(subject.accuracy)]);
+        if (!isMissing(subject.subjectRank)) facts.push(["Subject rank", formatSubjectRank(subject.subjectRank, subject.subjectTotalSubmissions)]);
+        const factsHtml = facts.length
+            ? `<dl class="subject-facts">${facts.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>`
             : "";
-        const attemptCells = showAttemptColumns
-            ? `
-                <td>${escapeHtml(formatPlain(firstValue(subject.attempted, null)))}</td>
-                <td>${escapeHtml(formatPlain(firstValue(subject.correct, null)))}</td>
-                <td>${escapeHtml(formatPlain(firstValue(subject.wrong, null)))}</td>
-            `
+        const ruleHtml = subject.passingCriteria
+            ? `<p class="subject-rule">Required: ${escapeHtml(formatPassingCriteria(subject.passingCriteria))}</p>`
             : "";
-        const passingCells = showPassingColumns
-            ? `
-                <td>${escapeHtml(formatPassingCriteria(subject.passingCriteria))}</td>
-                <td>${escapeHtml(formatPlain(passingStatus))}</td>
-            `
+        const compareHtml = Number.isFinite(score)
+            ? `<div class="subject-compare" role="img" aria-label="Your score ${escapeHtml(formatMarks(score))}${Number.isFinite(avg) ? `, average ${escapeHtml(formatMarks(avg))}` : ""}">
+                    <i style="width:${fill.toFixed(1)}%"></i>${marker === null ? "" : `<b style="left:calc(${marker.toFixed(1)}% - 1px)"></b>`}
+                </div>
+                <div class="subject-legend"><span>Your score</span>${Number.isFinite(avg) ? `<span>Average ${escapeHtml(formatMarks(avg))}</span>` : ""}</div>`
             : "";
+
         return `
-            <tr class="${passingStatus === "Fail" ? "is-failed-subject" : ""}">
-                <td>
-                    <span class="subject-name-text">${escapeHtml(firstValue(subject.name, "Subject"))}</span>
-                    ${subject.qualifyingOnly ? '<span class="subject-qualifying-badge">Qualifying only</span>' : ""}
-                </td>
-                <td>${escapeHtml(formatMarks(firstValue(subject.score, subject.marks, null)))}</td>
-                ${subjectRankCell}
-                ${attemptCells}
-                ${passingCells}
-                <td>${escapeHtml(formatMarks(subject.avgScore))}</td>
-                <td>${escapeHtml(formatPercentile(subject.accuracy))}</td>
-            </tr>
+            <article class="subject-card${failed ? " is-failed-subject" : ""}">
+                <div class="subject-card-head">
+                    <h3>${escapeHtml(firstValue(subject.name, "Subject"))}</h3>
+                    <div class="subject-badges">${badges}</div>
+                </div>
+                <div class="subject-score"><strong>${escapeHtml(formatMarks(score))}</strong>${Number.isFinite(maxMarks) && maxMarks > 0 ? `<small>out of ${escapeHtml(formatMarks(maxMarks))}</small>` : ""}</div>
+                ${compareHtml}
+                ${factsHtml}
+                ${ruleHtml}
+            </article>
         `;
+    }
+
+    function renderSubjectInsights(rows) {
+        const host = getById("subjectInsights");
+        if (!host) return;
+        const comparable = rows
+            .filter((subject) => !subject.qualifyingOnly)
+            .map((subject) => ({
+                name: firstValue(subject.name, "Subject"),
+                diff: toNumber(firstValue(subject.score, subject.marks, null)) - toNumber(subject.avgScore)
+            }))
+            .filter((item) => Number.isFinite(item.diff));
+        if (comparable.length < 2) {
+            host.hidden = true;
+            host.innerHTML = "";
+            return;
+        }
+        const sorted = comparable.slice().sort((x, y) => y.diff - x.diff);
+        const best = sorted[0];
+        const worst = sorted[sorted.length - 1];
+        const fmt = (value) => `${value >= 0 ? "+" : ""}${value.toFixed(1)}`;
+        host.innerHTML = `
+            <div class="insight is-strong"><i class="fas fa-arrow-trend-up" aria-hidden="true"></i><span><strong>Strongest:</strong> ${escapeHtml(best.name)} (${fmt(best.diff)} marks vs average)</span></div>
+            <div class="insight is-weak"><i class="fas fa-bullseye" aria-hidden="true"></i><span><strong>${worst.diff < 0 ? "Needs most work" : "Smallest lead"}:</strong> ${escapeHtml(worst.name)} (${fmt(worst.diff)} marks vs average)</span></div>
+        `;
+        host.hidden = false;
     }
 
     function mergeSubjectRow(subject, payloadRows) {
@@ -362,6 +374,7 @@
         return {
             name: firstValue(subject.name, match.name, "Subject"),
             score: firstValue(subject.score, subject.marks, match.marks, null),
+            maxMarks: firstValue(subject.maxMarks, match.maxMarks, null),
             attempted: firstValue(subject.attempted, subject.totalAttempted, match.attempted, match.totalAttempted, null),
             correct: firstValue(subject.correct, subject.rightAnswers, match.correct, match.rightAnswers, null),
             wrong: firstValue(subject.wrong, subject.wrongAnswers, match.wrong, match.wrongAnswers, null),
@@ -431,6 +444,191 @@
         const attempted = toNumber(subject?.attempted);
         if (!Number.isFinite(correct) || !Number.isFinite(attempted) || attempted <= 0) return null;
         return round2((correct / attempted) * 100);
+    }
+
+    function renderInsights(snapshot, data, payload, ctx) {
+        const raw = toNumber(ctx.rawMarks);
+        const norm = toNumber(ctx.normalizedMarks);
+        const total = toNumber(ctx.totalSubmissions);
+        const hasShifts = getHasShifts(snapshot, data);
+        const normApplied = data.normalizationApplied === true
+            || (data.normalizationApplied === undefined && Number.isFinite(raw) && Number.isFinite(norm) && Math.abs(norm - raw) > 0.004);
+        const active = (normApplied ? ctx.rankSets.normalized || ctx.rankSets.raw : ctx.rankSets.raw || ctx.rankSets.normalized) || {};
+
+        renderCandidateChips(payload, snapshot);
+        const reviewBadge = getById("reviewBadge");
+        if (reviewBadge) reviewBadge.hidden = String(data.reviewStatus || "").toLowerCase() !== "pending";
+
+        // headline
+        setText("headlineRank", formatRank(active.overallRank));
+        setText("headlineBasis", normApplied ? "Normalised marks" : "Raw marks");
+        setText("heroCategoryRank", formatRank(active.categoryRank));
+        setText("heroStateRank", formatRank(active.stateRank));
+        setText("heroShiftRank", formatRank(active.shiftRank));
+        const heroShift = getById("heroShiftRank")?.parentElement;
+        if (heroShift) heroShift.hidden = !hasShifts;
+        const rankNumber = toNumber(String(active.overallRank || "").replace("#", ""));
+        let sub = "Based on candidates who submitted so far.";
+        if (Number.isFinite(total) && total > 0) {
+            if (total >= 30 && Number.isFinite(rankNumber) && rankNumber > 0) {
+                const top = Math.max(0.1, Math.round((rankNumber / total) * 1000) / 10);
+                sub = `Out of ${formatCount(total)} candidates counted so far, you are in the top ${top}%.`;
+            } else {
+                sub = `Only ${formatCount(total)} ${total === 1 ? "submission" : "submissions"} so far, so this rank will change quickly as more candidates join.`;
+            }
+        }
+        setText("headlineSub", sub);
+
+        // percentile ring
+        const percentile = toNumber(String(data.percentile ?? "").replace("%", ""));
+        const ring = getById("percentileRing");
+        if (ring) ring.style.setProperty("--p", Number.isFinite(percentile) ? String(Math.min(Math.max(percentile, 0), 100)) : "0");
+        setText("percentileMeaning", Number.isFinite(percentile)
+            ? `You scored higher than about ${Math.round(percentile)}% of the candidates counted so far.`
+            : "Share of submitted candidates you scored above.");
+
+        // marks delta
+        const delta = getById("resultMarksDelta");
+        if (delta) {
+            if (normApplied && Number.isFinite(raw) && Number.isFinite(norm)) {
+                const diff = norm - raw;
+                delta.textContent = `${diff >= 0 ? "+" : ""}${diff.toFixed(2)} marks after shift normalisation`;
+                delta.classList.toggle("is-negative", diff < 0);
+                delta.hidden = false;
+            } else {
+                delta.hidden = true;
+            }
+        }
+
+        // confidence
+        const level = String(ctx.accuracyIndicator || "").toLowerCase();
+        const levelNumber = level === "high" ? 3 : level === "medium" ? 2 : level === "low" ? 1 : 0;
+        const meter = getById("confidenceMeter");
+        if (meter) meter.dataset.level = String(levelNumber);
+        setText("confidenceMeaning", {
+            3: "1,000+ submissions: a stable estimate.",
+            2: "100 to 999 submissions: a fair estimate that can still move.",
+            1: "Fewer than 100 submissions: treat this rank as rough for now."
+        }[levelNumber] || "More submissions make this estimate more reliable.");
+
+        renderProjection(data.projection);
+        renderRankTabs(data, normApplied, hasShifts);
+        renderMarksBars(snapshot, data, { raw, norm, normApplied, hasShifts });
+    }
+
+    function renderCandidateChips(payload, snapshot) {
+        const list = getById("candidateChips");
+        if (!list) return;
+        const roll = list.querySelector("li");
+        const items = [];
+        const add = (icon, label, value) => {
+            if (!isMissing(value) && String(value).toLowerCase() !== "none") {
+                items.push(`<li><i class="fas ${icon}" aria-hidden="true"></i> ${label ? `${escapeHtml(label)} ` : ""}<strong>${escapeHtml(value)}</strong></li>`);
+            }
+        };
+        add("fa-users", "", payload.category);
+        add("fa-location-dot", "", payload.state);
+        add("fa-clock", "Shift", payload.shift);
+        add("fa-calendar-day", "", formatExamDate(payload.examDate));
+        add("fa-universal-access", "", payload.horizontalCategory);
+        list.innerHTML = "";
+        if (roll) list.appendChild(roll);
+        list.insertAdjacentHTML("beforeend", items.join(""));
+    }
+
+    function formatExamDate(value) {
+        if (isMissing(value)) return "";
+        const date = new Date(`${value}T00:00:00`);
+        return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+    }
+
+    function renderProjection(projection) {
+        const panel = getById("projectionPanel");
+        if (!panel) return;
+        const expected = toNumber(projection?.expectedAppeared);
+        const estimated = toNumber(projection?.estimatedRank);
+        if (!projection || !Number.isFinite(expected) || expected <= 0 || !Number.isFinite(estimated)) {
+            panel.hidden = true;
+            return;
+        }
+        const low = toNumber(projection.rangeLow);
+        const high = toNumber(projection.rangeHigh);
+        const pct = (value) => Math.min(Math.max(value / expected, 0), 1) * 100;
+        setText("projectionRank", `About #${formatCount(estimated)}`);
+        setText("projectionLow", Number.isFinite(low) ? `Best case #${formatCount(low)}` : "");
+        setText("projectionHigh", Number.isFinite(high) ? `Worst case #${formatCount(high)}` : "");
+        const fill = getById("projectionRangeFill");
+        if (fill && Number.isFinite(low) && Number.isFinite(high)) {
+            fill.style.left = `${pct(low)}%`;
+            fill.style.width = `${Math.max(pct(high) - pct(low), 1)}%`;
+        }
+        const dot = getById("projectionRangeDot");
+        if (dot) dot.style.left = `${pct(estimated)}%`;
+        setText("projectionNote", `Out of about ${formatCount(expected)} candidates expected to appear. ${projection.note || "Estimate only; actual rank can differ."}`);
+        panel.hidden = false;
+    }
+
+    function renderRankTabs(data, normApplied, hasShifts) {
+        const tabs = getById("basisTabs");
+        const rawPanel = getById("rankSetRaw");
+        const normPanel = getById("rankSetNormalized");
+        const note = getById("normalizationNote");
+        if (!tabs || !rawPanel || !normPanel) return;
+
+        const show = (basis) => {
+            rawPanel.hidden = basis !== "raw";
+            normPanel.hidden = basis !== "normalized";
+            tabs.querySelectorAll("[data-basis]").forEach((button) => {
+                button.setAttribute("aria-selected", button.dataset.basis === basis ? "true" : "false");
+            });
+        };
+
+        tabs.classList.toggle("is-single", !normApplied);
+        if (!tabs.dataset.bound) {
+            tabs.dataset.bound = "1";
+            tabs.addEventListener("click", (event) => {
+                const button = event.target.closest("[data-basis]");
+                if (button) show(button.dataset.basis);
+            });
+        }
+        show(normApplied ? "normalized" : "raw");
+
+        if (note) {
+            const backendNote = String(data.normalizationNote || "").trim();
+            const text = normApplied
+                ? `Normalised ranks adjust for difficulty differences between shifts. ${backendNote}`.trim()
+                : backendNote;
+            note.textContent = text;
+            note.classList.toggle("is-info", normApplied && !backendNote);
+            note.hidden = !text;
+        }
+    }
+
+    function renderMarksBars(snapshot, data, ctx) {
+        const host = getById("marksBars");
+        if (!host) return;
+        const rows = [];
+        if (Number.isFinite(ctx.raw)) rows.push({ label: "Your raw marks", value: ctx.raw, cls: "is-you" });
+        if (ctx.normApplied && Number.isFinite(ctx.norm)) rows.push({ label: "Your normalised marks", value: ctx.norm, cls: "is-you-norm" });
+        const avg = toNumber(data.averageMarks);
+        const shiftAvg = toNumber(data.averageShiftMarks);
+        const categoryAvg = toNumber(data.categoryAverageMarks);
+        if (Number.isFinite(avg)) rows.push({ label: "Average of all candidates", value: avg, cls: "" });
+        if (ctx.hasShifts && Number.isFinite(shiftAvg)) rows.push({ label: "Average of your shift", value: shiftAvg, cls: "" });
+        if (Number.isFinite(categoryAvg)) rows.push({ label: "Average of your category", value: categoryAvg, cls: "" });
+        if (!rows.length) {
+            host.innerHTML = '<p class="subject-empty">Not available</p>';
+            return;
+        }
+        const exam = snapshot.exam || {};
+        const examMax = getScoringTotalQuestions(exam) * (toNumber(exam.marksPerCorrect) || 0);
+        const scale = examMax > 0 ? examMax : Math.max(...rows.map((row) => row.value), 1) * 1.12;
+        host.innerHTML = rows.map((row) => `
+            <div class="mark-row ${row.cls}">
+                <div class="mark-row-head"><span>${escapeHtml(row.label)}</span><strong>${escapeHtml(formatMarks(row.value))}</strong></div>
+                <div class="mark-track"><i style="width:${(Math.min(Math.max(row.value / scale, 0), 1) * 100).toFixed(1)}%"></i></div>
+            </div>
+        `).join("");
     }
 
     function bindShareButtons(snapshot) {
