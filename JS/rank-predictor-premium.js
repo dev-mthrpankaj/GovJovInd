@@ -333,6 +333,39 @@
     }
 
     /* ---------------------------------------------------------------- *
+     * Scroll-jump guard (mobile)
+     * When a section / subject header is tapped, other sections collapse and
+     * the original code smooth-scrolls the page, so the tapped header "runs
+     * away" and the student has to scroll back. We keep the tapped header on
+     * the same spot of the screen, unless the student scrolls by hand.
+     * ---------------------------------------------------------------- */
+    function holdScroll(summary) {
+        var top0 = summary.getBoundingClientRect().top;
+        var moved = false;
+        var mark = function () { moved = true; };
+        window.addEventListener("touchmove", mark, { passive: true, once: true });
+        window.addEventListener("wheel", mark, { passive: true, once: true });
+        var fix = function () {
+            if (moved || !summary.isConnected) return;
+            var d = summary.getBoundingClientRect().top - top0;
+            if (Math.abs(d) < 2) return;
+            var root = document.documentElement;
+            var prev = root.style.scrollBehavior;
+            root.style.scrollBehavior = "auto";
+            window.scrollBy(0, d);
+            root.style.scrollBehavior = prev;
+        };
+        [30, 90, 180, 300, 480, 720].forEach(function (t) { window.setTimeout(fix, t); });
+    }
+
+    function onSummaryTap(e) {
+        var t = e.target;
+        var summary = t && t.closest ? t.closest("summary") : null;
+        if (!summary || !app || !app.contains(summary)) return;
+        safe(function () { holdScroll(summary); });
+    }
+
+    /* ---------------------------------------------------------------- *
      * Boot
      * ---------------------------------------------------------------- */
     function init() {
@@ -351,6 +384,8 @@
         app.addEventListener("keydown", onKeydown);
         app.addEventListener("focusin", onFocusIn);
         document.addEventListener("paste", onPaste, true);
+        // window-capture runs before the original document-capture accordion handler
+        window.addEventListener("click", onSummaryTap, true);
 
         if ("MutationObserver" in window) {
             mo = new MutationObserver(schedule);
