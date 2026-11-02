@@ -10,7 +10,7 @@ import { getDatabase, ref, get, update, serverTimestamp } from "https://www.gsta
   const apiBaseUrl = String(rankConfig.apiBaseUrl || "").replace(/\/+$/, "");
   const legacyApiUrl = String(rankConfig.apiUrl || "").trim();
   const RESULT_STORAGE_KEY = "gju_rank_predictor_latest_result";
-  const RESULT_PAGE_URL = "rank-result.html";
+  const RESULT_PAGE_URL = "/HTML/rank-result.html";
   const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
   if (!config || !config.apiKey || (!apiBaseUrl && !legacyApiUrl)) return;
 

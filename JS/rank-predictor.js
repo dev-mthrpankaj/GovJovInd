@@ -8,7 +8,7 @@
     const PROCESSING_TEXT = "Processing...";
     const SHARE_BUTTON_IDLE_HTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share / Copy';
     const RESULT_STORAGE_KEY = "gju_rank_predictor_latest_result";
-    const RESULT_PAGE_URL = "rank-result.html";
+    const RESULT_PAGE_URL = "/HTML/rank-result.html";
     const EXAM_LOAD_TIMEOUT_MS = Number(config.examLoadTimeoutMs) > 0 ? Number(config.examLoadTimeoutMs) : 8000;
     const RANK_PREDICTOR_ARCHIVE_AFTER_DAYS = 30;
     const MOBILE_LAYOUT_QUERY = "(max-width: 767px)";
