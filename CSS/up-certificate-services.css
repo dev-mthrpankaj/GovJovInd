@@ -460,3 +460,53 @@
 .cert-consent-soft{background:#f8fafc;border-color:#cbd5e1;color:#334155}
 .cert-consent-soft a{color:#1d4ed8}
 .cert-consent [lang="hi"],.cert-trust-strip [lang="hi"]{display:block;margin-top:.2rem}
+
+/* ===== 2026-11 form clarity pass: required/optional, document cards, selected states ===== */
+/* required fields get a marker; optional ones say so in words */
+.cert-form .cert-field label:has(+ :is(input,select,textarea):required)::after{content:" *";color:#dc2626;font-weight:900}
+.cert-opt{display:inline-block;margin-left:.3rem;padding:.08rem .4rem;border-radius:999px;background:#eef2f7;color:#64748b;font-size:.72rem;font-weight:700;vertical-align:1px}
+
+/* applicant details: names pair up, everything aligns to the top of its row */
+.cert-form .cert-row{align-items:start}
+.cert-form .cert-field>.cert-field-help{margin-top:.1rem}
+
+/* picked options are obvious at a glance */
+.cert-choice{transition:border-color .15s,background-color .15s,box-shadow .15s}
+.cert-choice:has(input:checked){border-color:#2563eb;background:#eff6ff;box-shadow:inset 0 0 0 1px #2563eb;color:#1e3a8a}
+.cert-choice:has(input:focus-visible){outline:3px solid rgba(37,99,235,.3);outline-offset:2px}
+
+/* documents: each upload is one card, sections read as one grid */
+.cert-doc-section{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:.7rem;border-left-width:4px;padding:1rem}
+.cert-doc-section>h3,.cert-doc-section>p,.cert-doc-section>.cert-note,.cert-doc-section>.cert-doc-extra{grid-column:1/-1}
+.cert-doc-section .cert-row-docs{display:contents}
+.cert-doc-section>h3{font-size:1.1rem}
+.cert-doc-section>h3+.cert-field-help{margin-top:-.45rem}
+.income-doc-section{border-left-color:#6366f1}
+.ews-doc-section{border-left-color:#22c55e}
+.pan-doc-section{border-left-color:#f59e0b}
+#onlineDocumentsArea>.cert-doc-section:first-of-type{border-left-color:#2563eb}
+
+.cert-doc-card{align-content:start;gap:.45rem;padding:.8rem;border:1px dashed #93c5fd;border-radius:12px;background:#fff;transition:border-color .15s,background-color .15s}
+.cert-doc-card:hover,.cert-doc-card:focus-within{border-style:solid;border-color:#3b82f6}
+.cert-doc-card input[type=file],.cert-doc-card select{min-height:0;padding:.5rem;border:1px solid #e2e8f0;background:#f8fafc}
+.cert-doc-card select{min-height:44px;padding:.55rem .6rem;background:#fff}
+.cert-doc-card input[type=file]::file-selector-button{margin-right:.65rem;padding:.45rem .8rem;border:0;border-radius:8px;background:#2563eb;color:#fff;font:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
+.cert-doc-card input[type=file]::file-selector-button:hover{background:#1d4ed8}
+.cert-doc-card label+:is(select,input)+label{margin-top:.35rem}
+.cert-doc-card-extra{border-color:#cbd5e1}
+
+/* PAN additional documents sit under their own sub-heading */
+.cert-doc-extra{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:.7rem;margin-top:.35rem;padding-top:.85rem;border-top:1px solid #fde68a}
+.cert-doc-extra[hidden]{display:none}
+.cert-doc-extra>.cert-sub-head{grid-column:1/-1;margin:0;font-weight:900;color:#78350f;font-size:.98rem;line-height:1.3}
+.cert-sub-head small{display:block;margin-top:.15rem;font-weight:500;color:#92400e;font-size:.83rem}
+
+/* the upload tip is a hint, not a warning */
+#onlineDocumentSummary{background:#f8fafc;border-color:#e2e8f0;color:#475569;font-size:.86rem}
+#onlineDocumentSummary::before{content:"\f05a";font-family:"Font Awesome 6 Free","Font Awesome 5 Free";font-weight:900;margin-right:.45rem;color:#64748b}
+
+@media(max-width:559px){
+  .cert-form .cert-row-parents{grid-template-columns:1fr}
+  .cert-doc-section{padding:.85rem}
+}
+@media(prefers-reduced-motion:reduce){.cert-choice,.cert-doc-card{transition:none}}

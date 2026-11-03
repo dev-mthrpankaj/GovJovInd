@@ -22,7 +22,7 @@
   <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
   <link rel="stylesheet" href="../CSS/style.css">
-  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20261031-mother1">
+  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20261103-ux1">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate, Income Certificate, EWS Certificate and PAN Card Assistance"}</script>
   <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"UP Certificate Services","item":"https://govjobupdates.com/HTML/up-certificate-services.html"}]}</script>
@@ -91,13 +91,23 @@
             <p class="cert-submit-note">Select whether you need a new PAN card or a correction/update in an existing PAN.</p>
           </fieldset>
 
-          <div class="cert-step-head" data-step="2"><span>2</span><div><strong>Applicant details</strong><small>Enter names exactly as on your Aadhaar.</small></div></div>
-          <div class="cert-row"><div class="cert-field"><label for="applicantName">Applicant Name</label><input id="applicantName" name="applicant_name" type="text" required autocomplete="name" placeholder="Full name"></div><div class="cert-field"><label for="fatherName" id="fatherLabel">Father / Husband Name</label><input id="fatherName" name="father_name" type="text" required autocomplete="off" placeholder="Father or husband name"></div></div>
-          <div class="cert-row" id="motherRow"><div class="cert-field"><label for="motherName">Mother&rsquo;s Name</label><input id="motherName" name="mother_name" type="text" required autocomplete="off" placeholder="Mother&rsquo;s full name"><small class="cert-field-help">Required for all certificates, including PAN Card. <span lang="hi">सभी प्रमाण पत्रों के लिए माता का नाम आवश्यक है।</span></small></div></div>
-          <div class="cert-row"><div class="cert-field"><label for="mobileNumber">Aadhaar-linked Active Mobile Number for OTP</label><input id="mobileNumber" name="mobile" type="tel" autocomplete="tel-national" pattern="[6-9][0-9]{9}" required maxlength="10" inputmode="numeric" placeholder="Aadhaar se linked 10 digit mobile number"></div><div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" name="email" type="email" autocomplete="email" required placeholder="Email address"></div></div>
-          <p class="cert-note safe-note"><span class="note-line">For Aadhaar authentication, enter the applicant's Aadhaar-linked active mobile number.</span></p>
-          <div class="cert-row"><div class="cert-field"><label for="district">District</label><input id="district" name="district" type="text" autocomplete="address-level2" required placeholder="District in UP"></div><div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" name="tehsil" type="text" autocomplete="off" required placeholder="Tehsil"></div></div>
-          <div class="cert-field"><label for="aadhaarLast4">Aadhaar Last 4 Digits</label><input id="aadhaarLast4" name="aadhaar_last4" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off" maxlength="4" placeholder="Only last 4 digits"></div>
+          <div class="cert-step-head" data-step="2"><span>2</span><div><strong>Applicant details</strong><small>Enter names exactly as on your Aadhaar. All fields are required unless marked optional.</small></div></div>
+          <div class="cert-field"><label for="applicantName">Applicant name</label><input id="applicantName" name="applicant_name" type="text" required autocomplete="name" placeholder="Full name as on Aadhaar"></div>
+          <div class="cert-row cert-row-parents">
+            <div class="cert-field"><label for="fatherName" id="fatherLabel">Father / Husband Name</label><input id="fatherName" name="father_name" type="text" required autocomplete="off" placeholder="Father or husband name"></div>
+            <div class="cert-field" id="motherRow"><label for="motherName">Mother&rsquo;s Name</label><input id="motherName" name="mother_name" type="text" required autocomplete="off" placeholder="Mother&rsquo;s full name"></div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-field"><label for="mobileNumber">Aadhaar-linked mobile number</label><input id="mobileNumber" name="mobile" type="tel" autocomplete="tel-national" pattern="[6-9][0-9]{9}" required maxlength="10" inputmode="numeric" placeholder="10 digit mobile number"><small class="cert-field-help">The OTP for Aadhaar authentication goes to this number.</small></div>
+            <div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" name="email" type="email" autocomplete="email" required placeholder="name@example.com"></div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-field"><label for="district">District</label><input id="district" name="district" type="text" autocomplete="address-level2" required placeholder="District in UP"></div>
+            <div class="cert-field"><label for="tehsil">Tehsil</label><input id="tehsil" name="tehsil" type="text" autocomplete="off" required placeholder="Tehsil"></div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-field"><label for="aadhaarLast4">Aadhaar last 4 digits <span class="cert-opt">optional</span></label><input id="aadhaarLast4" name="aadhaar_last4" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off" maxlength="4" placeholder="Last 4 digits only"></div>
+          </div>
 
           <div class="cert-step-head" data-step="3"><span>3</span><div><strong>Documents</strong><small>Upload now, or submit physically after payment.</small></div></div>
           <div class="cert-toggle-card">
@@ -109,21 +119,21 @@
             <section class="cert-doc-section" id="commonDocumentsSection">
               <h3>Caste / Domicile Documents</h3>
               <p class="cert-field-help">These three documents are shared only between selected Caste and Domicile services.</p>
-              <div class="cert-row">
-                <div class="cert-field"><label for="aadhaarFile">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" accept="image/*,.pdf"><small class="cert-field-help">A clear Aadhaar image or PDF.</small></div>
-                <div class="cert-field"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" accept="image/*,.pdf"></div>
+              <div class="cert-row cert-row-docs">
+                <div class="cert-field cert-doc-card"><label for="aadhaarFile">Upload Aadhaar Card</label><input id="aadhaarFile" type="file" accept="image/*,.pdf"><small class="cert-field-help">A clear Aadhaar image or PDF.</small></div>
+                <div class="cert-field cert-doc-card"><label for="letterFile">Upload Sabhasad / Pradhan Letter Pad</label><input id="letterFile" type="file" accept="image/*,.pdf"></div>
               </div>
-              <div class="cert-field"><label for="photoFile">Upload Passport Size Photo</label><input id="photoFile" type="file" accept="image/*"></div>
+              <div class="cert-field cert-doc-card"><label for="photoFile">Upload Passport Size Photo</label><input id="photoFile" type="file" accept="image/*"></div>
             </section>
 
             <section class="cert-doc-section income-doc-section" id="incomeDocumentsSection" hidden>
               <h3>Income Certificate Documents</h3>
               <p class="cert-field-help">These documents are separate from Caste/Domicile documents and must belong to the person selected under “Income Certificate For”.</p>
-              <div class="cert-row">
-                <div class="cert-field"><label for="incomeAadhaarFile">Income Aadhaar — Front + Back (Single PDF)</label><input id="incomeAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
-                <div class="cert-field"><label for="incomeLetterFile">Income Sabhasad / Pradhan Letter Pad</label><input id="incomeLetterFile" type="file" accept="image/*,.pdf"></div>
+              <div class="cert-row cert-row-docs">
+                <div class="cert-field cert-doc-card"><label for="incomeAadhaarFile">Income Aadhaar — Front + Back (Single PDF)</label><input id="incomeAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
+                <div class="cert-field cert-doc-card"><label for="incomeLetterFile">Income Sabhasad / Pradhan Letter Pad</label><input id="incomeLetterFile" type="file" accept="image/*,.pdf"></div>
               </div>
-              <div class="cert-field"><label for="incomePhotoFile">Income Passport Size Photo</label><input id="incomePhotoFile" type="file" accept="image/*"><small class="cert-field-help">This photo will be used for the Income Certificate.</small></div>
+              <div class="cert-field cert-doc-card"><label for="incomePhotoFile">Income Passport Size Photo</label><input id="incomePhotoFile" type="file" accept="image/*"><small class="cert-field-help">This photo will be used for the Income Certificate.</small></div>
               <div class="cert-note safe-note" id="incomeDocumentNote">
                 <span class="note-line">Additional information or documents may be requested on your registered mobile number if required during Income Certificate processing.</span>
               </div>
@@ -132,44 +142,50 @@
             <section class="cert-doc-section ews-doc-section" id="ewsDocumentsSection" hidden>
               <h3>EWS Certificate Documents</h3>
               <p class="cert-field-help">One common set is used for EWS Central and EWS State. Remaining documents, if needed, will be requested on your registered mobile number.</p>
-              <div class="cert-row">
-                <div class="cert-field"><label for="ewsAadhaarFile">EWS Aadhaar — Front + Back (Single PDF)</label><input id="ewsAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
-                <div class="cert-field"><label for="ewsIncomeFile">Income Certificate</label><input id="ewsIncomeFile" type="file" accept="image/*,.pdf"><small class="cert-field-help">Clear image or PDF of the Income Certificate.</small></div>
+              <div class="cert-row cert-row-docs">
+                <div class="cert-field cert-doc-card"><label for="ewsAadhaarFile">EWS Aadhaar — Front + Back (Single PDF)</label><input id="ewsAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
+                <div class="cert-field cert-doc-card"><label for="ewsIncomeFile">Income Certificate</label><input id="ewsIncomeFile" type="file" accept="image/*,.pdf"><small class="cert-field-help">Clear image or PDF of the Income Certificate.</small></div>
               </div>
-              <div class="cert-field"><label for="ewsPhotoFile">Recent Passport Size Photo</label><input id="ewsPhotoFile" type="file" accept="image/*"></div>
+              <div class="cert-field cert-doc-card"><label for="ewsPhotoFile">Recent Passport Size Photo</label><input id="ewsPhotoFile" type="file" accept="image/*"></div>
               <div class="cert-note safe-note"><span class="note-line">Additional information or documents may be requested on your registered mobile number if required during EWS processing.</span></div>
             </section>
 
             <section class="cert-doc-section pan-doc-section" id="panDocumentsSection" hidden>
               <h3>PAN Card Documents</h3>
               <p class="cert-field-help">These documents are used only for the PAN Card request.</p>
-              <div class="cert-row">
-                <div class="cert-field"><label for="panAadhaarFile">PAN Aadhaar — Front + Back (Single PDF)</label><input id="panAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
-                <div class="cert-field"><label for="panPhotoFile">Recent Passport Size Photo</label><input id="panPhotoFile" type="file" accept="image/*"></div>
+              <div class="cert-row cert-row-docs">
+                <div class="cert-field cert-doc-card"><label for="panAadhaarFile">Aadhaar front + back (PDF)</label><input id="panAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
+                <div class="cert-field cert-doc-card"><label for="panPhotoFile">Recent passport size photo</label><input id="panPhotoFile" type="file" accept="image/*"></div>
               </div>
-              <div class="cert-field"><label for="panSignatureFile">Signature (on white paper)</label><input id="panSignatureFile" type="file" accept="image/*"><small class="cert-field-help">Sign with blue/black pen on plain white paper and upload a clear photo.</small></div>
-              <div id="panNewDocs" hidden>
-                <h4 class="cert-field-help"><strong>Additional Document (New PAN)</strong></h4>
-                <div class="cert-row">
-                  <div class="cert-field"><label for="panIdProofType">Second Proof Type (New PAN)</label><select id="panIdProofType"><option value="">Select proof</option><option value="voter_id">Voter ID Card</option><option value="driving_licence">Driving Licence</option><option value="passport">Passport</option><option value="domicile">Domicile Certificate</option><option value="high_school_marksheet">High School Marksheet</option></select></div>
-                  <div class="cert-field"><label for="panIdProofFile">Second Proof Document</label><input id="panIdProofFile" type="file" accept="image/*,application/pdf"><small class="cert-field-help">Besides Aadhaar, upload any one: Voter ID / Driving Licence / Passport / Domicile Certificate / High School Marksheet. No old PAN card is needed for a New PAN.</small></div>
+              <div class="cert-field cert-doc-card"><label for="panSignatureFile">Signature on white paper</label><input id="panSignatureFile" type="file" accept="image/*"><small class="cert-field-help">Sign with a blue/black pen on plain white paper and upload a clear photo.</small></div>
+              <div id="panNewDocs" class="cert-doc-extra" hidden>
+                <p class="cert-sub-head">Additional document for New PAN <small>One proof besides Aadhaar. No old PAN card is needed.</small></p>
+                <div class="cert-field cert-doc-card">
+                  <label for="panIdProofType">Which proof are you uploading?</label>
+                  <select id="panIdProofType"><option value="">Select proof</option><option value="voter_id">Voter ID Card</option><option value="driving_licence">Driving Licence</option><option value="passport">Passport</option><option value="domicile">Domicile Certificate</option><option value="high_school_marksheet">High School Marksheet</option></select>
+                  <label for="panIdProofFile">Upload the proof</label>
+                  <input id="panIdProofFile" type="file" accept="image/*,application/pdf">
                 </div>
               </div>
-              <div id="panCorrectionDocs" hidden>
-                <h4 class="cert-field-help"><strong>Additional Documents (Correction / Update)</strong></h4>
-                <div class="cert-row">
-                  <div class="cert-field"><label for="panCopyType">PAN Card / FIR / Letter Type</label><select id="panCopyType"><option value="">Select document</option><option value="pan_card">PAN Card</option><option value="fir">FIR</option><option value="pan_letter">PAN Card Letter</option></select></div>
-                  <div class="cert-field"><label for="panCopyFile">Additional Document — PAN Card / FIR / PAN Card Letter</label><input id="panCopyFile" type="file" accept="image/*,application/pdf"></div>
+              <div id="panCorrectionDocs" class="cert-doc-extra" hidden>
+                <p class="cert-sub-head">Additional documents for Correction / Update <small>Both are required along with Aadhaar.</small></p>
+                <div class="cert-field cert-doc-card">
+                  <label for="panCopyType">Which document are you uploading?</label>
+                  <select id="panCopyType"><option value="">Select document</option><option value="pan_card">PAN Card</option><option value="fir">FIR</option><option value="pan_letter">PAN Card Letter</option></select>
+                  <label for="panCopyFile">Upload PAN Card / FIR / PAN Card Letter</label>
+                  <input id="panCopyFile" type="file" accept="image/*,application/pdf">
                 </div>
-                <div class="cert-row">
-                  <div class="cert-field"><label for="panAuthorityType">Letter Pad Type</label><select id="panAuthorityType"><option value="">Select letter pad</option><option value="mla">MLA Letter Pad</option><option value="mp">MP Letter Pad</option></select></div>
-                  <div class="cert-field"><label for="panAuthorityFile">Additional Document — MLA Letter Pad / MP Letter Pad</label><input id="panAuthorityFile" type="file" accept="image/*,application/pdf"><small class="cert-field-help">Correction ke liye existing PAN Card / FIR / PAN Card Letter ke saath MLA ya MP ka letter pad zaroori hai.</small></div>
+                <div class="cert-field cert-doc-card">
+                  <label for="panAuthorityType">Whose letter pad?</label>
+                  <select id="panAuthorityType"><option value="">Select letter pad</option><option value="mla">MLA Letter Pad</option><option value="mp">MP Letter Pad</option></select>
+                  <label for="panAuthorityFile">Upload MLA / MP Letter Pad</label>
+                  <input id="panAuthorityFile" type="file" accept="image/*,application/pdf">
                 </div>
               </div>
               <div class="cert-note safe-note"><span class="note-line">Additional information or documents may be requested on your registered mobile number if required during PAN processing.</span></div>
             </section>
 
-            <div class="cert-field"><label for="extraFile">Extra Document (Optional)</label><input id="extraFile" type="file" accept="image/*,.pdf"></div>
+            <div class="cert-field cert-doc-card cert-doc-card-extra"><label for="extraFile">Extra document <span class="cert-opt">optional</span></label><input id="extraFile" type="file" accept="image/*,.pdf"></div>
             <p class="cert-note" id="onlineDocumentSummary">Upload clear files. Large phone photos are shrunk automatically; PDFs must be under 1.5 MB.</p>
             <label class="cert-consent cert-consent-soft" for="privacyConsent"><input type="checkbox" id="privacyConsent" name="privacy_ack"><span>I agree that GovJobUpdates may store my uploaded documents only to prepare my application, and delete them about 90 days after the request is completed. <span lang="hi">मैं सहमत हूँ कि मेरे दस्तावेज़ केवल आवेदन के लिए रखे जाएँगे और आवेदन पूरा होने के लगभग 90 दिन बाद हटा दिए जाएँगे।</span> <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a></span></label>
           </div>
@@ -180,10 +196,12 @@
           </div>
 
           <div class="cert-step-head" data-step="4"><span>4</span><div><strong>Delivery &amp; notes</strong><small>Optional.</small></div></div>
-          <div class="cert-toggle-card">
+          <div class="cert-toggle-card" id="deliveryToggleCard">
             <div><strong>Do you want Home Delivery?</strong><span id="deliveryFeeCopy">Digital copy is included. The live delivery charge is added once for all certificates sent together.</span></div>
             <label class="cert-switch"><input id="homeDeliveryToggle" type="checkbox"><span></span></label>
           </div>
+
+          <p class="cert-note safe-note" id="panNoDeliveryNote" hidden><span class="note-line">PAN Card is delivered directly to you by the PAN service provider, so there is <strong>no delivery fee</strong> for PAN Card. <span lang="hi">PAN Card की कोई डिलीवरी फीस नहीं है।</span></span></p>
 
           <div id="deliveryAddressArea" hidden>
             <div class="cert-row"><div class="cert-field"><label for="deliveryName">Delivery Recipient Name</label><input id="deliveryName" type="text" placeholder="Name on parcel"></div><div class="cert-field"><label for="deliveryMobile">Delivery Mobile Number</label><input id="deliveryMobile" type="tel" maxlength="10" inputmode="numeric" placeholder="10 digit mobile"></div></div>
@@ -191,7 +209,7 @@
             <div class="cert-field"><label for="deliveryPincode">PIN Code</label><input id="deliveryPincode" inputmode="numeric" maxlength="6" placeholder="6 digit PIN code"></div>
           </div>
 
-          <div class="cert-field"><label for="extraNote">Extra Note</label><textarea id="extraNote" placeholder="Any additional information"></textarea></div>
+          <div class="cert-field"><label for="extraNote">Extra note <span class="cert-opt">optional</span></label><textarea id="extraNote" placeholder="Any additional information"></textarea></div>
           <div class="cert-step-head" data-step="5"><span>5</span><div><strong>Review &amp; pay</strong><small>Check the total on the right, then confirm the refund rule.</small></div></div>
           <label class="cert-consent" for="refundConsent"><input type="checkbox" id="refundConsent" name="refund_policy_ack" required><span><strong>No refund once processing starts.</strong> <span lang="hi">(प्रोसेसिंग शुरू होने के बाद फीस वापस नहीं होगी)</span> After your application is submitted / moves to <em>Processing</em>, the fee is non-refundable because we have already applied on your behalf. Refunds are limited to duplicate or failed payments, or a request cancelled before submission. See the <a href="refund-policy.html" target="_blank" rel="noopener">Refund Policy</a>.</span></label>
           <div class="cert-progress" id="certProgress" role="status" aria-live="polite"></div>

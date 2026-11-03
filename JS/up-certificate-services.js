@@ -33,7 +33,8 @@
   function panType() { return clean($('input[name="panType"]:checked')?.value).toLowerCase(); }
   function incomeFor() { return clean($('input[name="incomeFor"]:checked')?.value).toLowerCase(); }
   function onlineDocuments() { return Boolean($("#onlineDocumentsToggle")?.checked); }
-  function homeDelivery() { return Boolean($("#homeDeliveryToggle")?.checked); }
+  // PAN Card is delivered directly by the PAN provider: no home-delivery option / fee when PAN is the only service.
+  function homeDelivery() { return !isPanOnly() && Boolean($("#homeDeliveryToggle")?.checked); }
 
   function setProgress(message, show = true) {
     const box = $("#certProgress");
@@ -200,6 +201,10 @@
     }
     $("#offlineIncomePhoneNote")?.toggleAttribute("hidden", !(income || ews || pan));
 
+    const noDelivery = isPanOnly();
+    if (noDelivery && $("#homeDeliveryToggle")) $("#homeDeliveryToggle").checked = false;
+    $("#deliveryToggleCard")?.toggleAttribute("hidden", noDelivery);
+    $("#panNoDeliveryNote")?.toggleAttribute("hidden", !noDelivery);
     $("#deliveryAddressArea")?.toggleAttribute("hidden", !delivery);
     ["deliveryName", "deliveryMobile", "deliveryAddress", "deliveryPincode"].forEach((id) => setRequired(id, delivery));
 
