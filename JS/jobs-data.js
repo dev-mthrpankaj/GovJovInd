@@ -42,13 +42,13 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://doc.sarkariresults.org.in/UPSSSC_JE_Electrical_Notification_Oct26.pdf",
-        "detailPage": "../jobs/upsssc-combined-junior-engineer-mechanical-24-exam.html",
+        "detailPage": "../jobs/upsssc-junior-engineer-electrical-oct26.html",
         "updatedAt": "2026-11-03",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "resolved",
+        "detailPageSource": "sheet",
         "detailPageNeedsReview": "no"
     },
     {
