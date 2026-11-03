@@ -204,7 +204,11 @@
     const noDelivery = isPanOnly();
     if (noDelivery && $("#homeDeliveryToggle")) $("#homeDeliveryToggle").checked = false;
     $("#deliveryToggleCard")?.toggleAttribute("hidden", noDelivery);
-    $("#panNoDeliveryNote")?.toggleAttribute("hidden", !noDelivery);
+    $("#panNoDeliveryNote")?.toggleAttribute("hidden", !pan);
+    const panNote = $("#panNoDeliveryText");
+    if (panNote) panNote.innerHTML = noDelivery
+      ? 'PAN Card is delivered directly to you by the PAN service provider, so there is <strong>no delivery fee</strong> for PAN Card. <span lang="hi">PAN Card की कोई डिलीवरी फीस नहीं है।</span>'
+      : 'Home delivery below is only for your other certificates. PAN Card is delivered directly by the PAN service provider, so <strong>PAN has no delivery fee</strong>. <span lang="hi">PAN Card की डिलीवरी फीस नहीं लगेगी।</span>';
     $("#deliveryAddressArea")?.toggleAttribute("hidden", !delivery);
     ["deliveryName", "deliveryMobile", "deliveryAddress", "deliveryPincode"].forEach((id) => setRequired(id, delivery));
 
