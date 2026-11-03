@@ -177,13 +177,23 @@
     setRequired("panAadhaarFile", online && pan);
     setRequired("panPhotoFile", online && pan);
     setRequired("panSignatureFile", online && pan);
+    const panNew = pan && panType() === "new";
+    const panCorr = pan && panType() === "correction";
+    $("#panNewDocs")?.toggleAttribute("hidden", !panNew);
+    $("#panCorrectionDocs")?.toggleAttribute("hidden", !panCorr);
+    setRequired("panIdProofType", online && panNew);
+    setRequired("panIdProofFile", online && panNew);
+    setRequired("panCopyType", online && panCorr);
+    setRequired("panCopyFile", online && panCorr);
+    setRequired("panAuthorityType", online && panCorr);
+    setRequired("panAuthorityFile", online && panCorr);
 
     if ($("#offlineRequiredDocuments")) {
       const groups = [];
       if (common) groups.push("Caste/Domicile: Aadhaar Card, Sabhasad/Pradhan Letter Pad and Passport Size Photo");
       if (income) groups.push(`Income (${incomeFor() === "father" ? "Father" : incomeFor() === "self" ? "Self" : "select Self/Father"}): separate Aadhaar front + back single PDF/print set, separate Sabhasad/Pradhan Letter Pad and separate Passport Size Photo`);
       if (ews) groups.push("EWS (Central/State): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Income Certificate");
-      if (pan) groups.push(`PAN Card (${panType() === "correction" ? "Correction / Update" : panType() === "new" ? "New PAN" : "select New/Correction"}): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Signature on white paper`);
+      if (pan) groups.push(`PAN Card (${panType() === "correction" ? "Correction / Update" : panType() === "new" ? "New PAN" : "select New/Correction"}): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Signature on white paper${panType() === "correction" ? ", additional documents: PAN Card / FIR / PAN Card Letter and MLA / MP Letter Pad" : panType() === "new" ? ", plus one additional proof (Voter ID / Driving Licence / Passport / Domicile Certificate / High School Marksheet)" : ""}`);
       $("#offlineRequiredDocuments").textContent = groups.length
         ? `Required documents — ${groups.join(". ")}.`
         : "Select at least one certificate to see the required documents.";
@@ -193,14 +203,14 @@
     $("#deliveryAddressArea")?.toggleAttribute("hidden", !delivery);
     ["deliveryName", "deliveryMobile", "deliveryAddress", "deliveryPincode"].forEach((id) => setRequired(id, delivery));
 
-    // PAN needs the father's name only (never husband); every other certificate also needs the mother's name.
+    // PAN needs the father's name only (never husband). Mother's name is required for every certificate, PAN included.
     const panOnly = isPanOnly();
     const fatherLabel = $("#fatherLabel");
     if (fatherLabel) fatherLabel.textContent = panOnly ? "Father\u2019s Name" : "Father / Husband Name";
     const fatherInput = $("#fatherName");
     if (fatherInput) fatherInput.placeholder = panOnly ? "Father\u2019s full name" : "Father or husband name";
-    $("#motherRow")?.toggleAttribute("hidden", panOnly);
-    setRequired("motherName", !panOnly);
+    $("#motherRow")?.toggleAttribute("hidden", false);
+    setRequired("motherName", true);
 
     setSubmitState("ready");
   }
@@ -247,9 +257,12 @@
       services: selectedServices(),
       income_for: hasIncome() ? incomeFor() : "",
       pan_type: hasPan() ? panType() : "",
+      pan_id_proof_type: hasPan() && panType() === "new" ? clean($("#panIdProofType")?.value) : "",
+      pan_copy_type: hasPan() && panType() === "correction" ? clean($("#panCopyType")?.value) : "",
+      pan_authority_type: hasPan() && panType() === "correction" ? clean($("#panAuthorityType")?.value) : "",
       applicant_name: clean($("#applicantName")?.value),
       father_husband_name: clean($("#fatherName")?.value),
-      mother_name: isPanOnly() ? "" : clean($("#motherName")?.value),
+      mother_name: clean($("#motherName")?.value),
       refund_policy_ack: Boolean($("#refundConsent")?.checked),
       privacy_ack: onlineDocuments() && Boolean($("#privacyConsent")?.checked),
       mobile: clean($("#mobileNumber")?.value),
@@ -281,6 +294,9 @@
       pan_aadhaar: $("#panAadhaarFile")?.files?.[0] || null,
       pan_photo: $("#panPhotoFile")?.files?.[0] || null,
       pan_signature: $("#panSignatureFile")?.files?.[0] || null,
+      pan_id_proof: hasPan() && panType() === "new" ? ($("#panIdProofFile")?.files?.[0] || null) : null,
+      pan_card_copy: hasPan() && panType() === "correction" ? ($("#panCopyFile")?.files?.[0] || null) : null,
+      pan_authority_letter: hasPan() && panType() === "correction" ? ($("#panAuthorityFile")?.files?.[0] || null) : null,
       extra: $("#extraFile")?.files?.[0] || null
     };
   }
@@ -305,12 +321,12 @@
       throw new Error("Please select whether the PAN Card request is for New PAN or Correction / Update.");
     }
     const panOnly = data.services.length > 0 && data.services.every((x) => x === "PAN Card");
-    if (!data.applicant_name || !data.father_husband_name || (!panOnly && !data.mother_name) || !data.mobile || !data.email || !data.district || !data.tehsil) {
+    if (!data.applicant_name || !data.father_husband_name || !data.mother_name || !data.mobile || !data.email || !data.district || !data.tehsil) {
       throw new Error("Please fill all required applicant details.");
     }
     if (!validPersonName(data.applicant_name)) throw new Error("Applicant name should contain letters only.");
     if (!validPersonName(data.father_husband_name)) throw new Error(panOnly ? "Father\u2019s name should contain letters only." : "Father / Husband name should contain letters only.");
-    if (!panOnly && !validPersonName(data.mother_name)) throw new Error("Mother\u2019s name should contain letters only.");
+    if (!validPersonName(data.mother_name)) throw new Error("Mother\u2019s name should contain letters only.");
     if (!data.refund_policy_ack) throw new Error("Please tick the refund rule box to continue.");
     if (data.document_submission_mode === "online" && !data.privacy_ack) throw new Error("Please tick the document storage notice to upload documents online.");
     if (!validateMobile(data.mobile)) throw new Error("Please enter a valid 10 digit Indian mobile number.");
@@ -353,6 +369,15 @@
         validateFile(files.pan_aadhaar, "PAN Aadhaar Front + Back", { pdfOnly: true });
         validateFile(files.pan_photo, "PAN Recent Passport Size Photo", { imageOnly: true });
         validateFile(files.pan_signature, "PAN Signature", { imageOnly: true });
+        if (data.pan_type === "new") {
+          if (!data.pan_id_proof_type) throw new Error("Please select the second proof type for New PAN.");
+          validateFile(files.pan_id_proof, "PAN Second Proof");
+        } else if (data.pan_type === "correction") {
+          if (!data.pan_copy_type) throw new Error("Please select whether you are uploading the PAN Card, FIR or PAN Card Letter.");
+          if (!data.pan_authority_type) throw new Error("Please select MLA Letter Pad or MP Letter Pad.");
+          validateFile(files.pan_card_copy, "Additional Document: PAN Card / FIR / PAN Card Letter");
+          validateFile(files.pan_authority_letter, "Additional Document: MLA / MP Letter Pad");
+        }
       }
 
       if (files.extra) validateFile(files.extra, "Extra Document");
@@ -368,6 +393,7 @@
     income_aadhaar: ["Income Certificate Aadhaar Front + Back", { pdfOnly: true }], income_letter: ["Income Certificate Sabhasad / Pradhan Letter Pad", {}], income_photo: ["Income Certificate Passport Size Photo", { imageOnly: true }],
     ews_aadhaar: ["EWS Aadhaar Front + Back", { pdfOnly: true }], ews_photo: ["EWS Recent Passport Size Photo", { imageOnly: true }], ews_income: ["EWS Income Certificate", {}],
     pan_aadhaar: ["PAN Aadhaar Front + Back", { pdfOnly: true }], pan_photo: ["PAN Recent Passport Size Photo", { imageOnly: true }], pan_signature: ["PAN Signature", { imageOnly: true }],
+    pan_id_proof: ["PAN Second Proof", {}], pan_card_copy: ["Additional Document: PAN Card / FIR / PAN Card Letter", {}], pan_authority_letter: ["Additional Document: MLA / MP Letter Pad", {}],
     extra: ["Extra Document", {}]
   };
 
