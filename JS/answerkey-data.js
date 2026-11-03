@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0086-20261103232246-60236871",
+        "title": "BSF Head Constable Radio RO / RM Answer Key 2026 for 1121 Post",
+        "organization": "Border Security Force",
+        "department": "BSF",
+        "category": "Defence",
+        "year": "2026",
+        "examDate": "2026-11-02",
+        "examEndDate": "",
+        "releaseDate": "2026-11-04",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/102844/ClDuFlBFdDrdFtl9Zo/login.html",
+        "objectionLink": "https://cdn.digialm.com/EForms/configuredHtml/1258/102844/ClDuFlBFdDrdFtl9Zo/login.html",
+        "detailPage": "../jobs/bsf-hc-ro-rm-august25.html",
+        "updatedAt": "2026-11-03",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0085-20261102191404-be5df5af",
         "title": "UPSSSC PET Answer Key 2026 | Preliminary Eligibility Test",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission (UPSSSC)",

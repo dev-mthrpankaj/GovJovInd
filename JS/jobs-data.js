@@ -1358,7 +1358,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "33320",
         "startDate": "2026-09-25",
         "lastDate": "2026-11-03",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://bpsc.bihar.gov.in/wp-content/uploads/BPSC_content/Notices/Important-Notice-Probable-Date-of-Online-Application-TRE-4.0Date_BPSC-20260901-lavk2s.pdf",
         "officialNotification": "https://drive.google.com/file/d/1efo9sC6ztZEOm7DL1BuDSQY7Ji0-V6zj/view",
