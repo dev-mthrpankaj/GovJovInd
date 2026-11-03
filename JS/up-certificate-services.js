@@ -194,7 +194,7 @@
       if (common) groups.push("Caste/Domicile: Aadhaar Card, Sabhasad/Pradhan Letter Pad and Passport Size Photo");
       if (income) groups.push(`Income (${incomeFor() === "father" ? "Father" : incomeFor() === "self" ? "Self" : "select Self/Father"}): separate Aadhaar front + back single PDF/print set, separate Sabhasad/Pradhan Letter Pad and separate Passport Size Photo`);
       if (ews) groups.push("EWS (Central/State): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Income Certificate");
-      if (pan) groups.push(`PAN Card (${panType() === "correction" ? "Correction / Update" : panType() === "new" ? "New PAN" : "select New/Correction"}): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Signature on white paper${panType() === "correction" ? ", additional documents: PAN Card / FIR / PAN Card Letter and MLA / MP Letter Pad" : panType() === "new" ? ", plus one additional proof (Voter ID / Driving Licence / Passport / Domicile Certificate / High School Marksheet)" : ""}`);
+      if (pan) groups.push(`PAN Card (${panType() === "correction" ? "Correction / Update" : panType() === "new" ? "New PAN" : "select New/Correction"}): Aadhaar front + back single PDF/print set, recent Passport Size Photo and Signature on white paper${panType() === "correction" ? ", additional documents: PAN Card / FIR / PAN Card Letter and MLA / MP Letter Pad" : panType() === "new" ? ", plus one additional proof (Voter ID / Driving Licence / Passport / Domicile Certificate / High School Marksheet / Bank Passbook)" : ""}`);
       $("#offlineRequiredDocuments").textContent = groups.length
         ? `Required documents — ${groups.join(". ")}.`
         : "Select at least one certificate to see the required documents.";
@@ -218,6 +218,10 @@
     if (fatherLabel) fatherLabel.textContent = panOnly ? "Father\u2019s Name" : "Father / Husband Name";
     const fatherInput = $("#fatherName");
     if (fatherInput) fatherInput.placeholder = panOnly ? "Father\u2019s full name" : "Father or husband name";
+    const mobileLabel = $("#mobileLabel");
+    if (mobileLabel) mobileLabel.textContent = panOnly ? "Active mobile number" : "Aadhaar-linked mobile number";
+    const mobileHelp = $("#mobileHelp");
+    if (mobileHelp) mobileHelp.textContent = panOnly ? "We will contact you on this number about your PAN request." : "The OTP for Aadhaar authentication goes to this number.";
     $("#motherRow")?.toggleAttribute("hidden", false);
     setRequired("motherName", true);
     applyPanLock(hasPan() && !panType());

@@ -22,7 +22,7 @@
   <link rel="shortcut icon" href="../Assets/Home Page/favicon.ico">
   <link rel="apple-touch-icon" href="../Assets/Home Page/apple-icon.png">
   <link rel="stylesheet" href="../CSS/style.css">
-  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20261103-ux4">
+  <link rel="stylesheet" href="../CSS/up-certificate-services.css?v=20261103-ux6">
   <link rel="stylesheet" href="../Assets/vendor/fontawesome/css/all.min.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"UP Certificate CSC Assistance","provider":{"@type":"Organization","name":"GovJobUpdates"},"areaServed":{"@type":"State","name":"Uttar Pradesh"},"serviceType":"SC, ST, OBC Caste Certificate, Domicile Certificate, Income Certificate, EWS Certificate and PAN Card Assistance"}</script>
   <script type="application/ld+json" data-schema="breadcrumb">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://govjobupdates.com/"},{"@type":"ListItem","position":2,"name":"UP Certificate Services","item":"https://govjobupdates.com/HTML/up-certificate-services.html"}]}</script>
@@ -100,7 +100,7 @@
             <div class="cert-field" id="motherRow"><label for="motherName">Mother&rsquo;s Name</label><input id="motherName" name="mother_name" type="text" required autocomplete="off" placeholder="Mother&rsquo;s full name"></div>
           </div>
           <div class="cert-row">
-            <div class="cert-field"><label for="mobileNumber">Aadhaar-linked mobile number</label><input id="mobileNumber" name="mobile" type="tel" autocomplete="tel-national" pattern="[6-9][0-9]{9}" required maxlength="10" inputmode="numeric" placeholder="10 digit mobile number"><small class="cert-field-help">The OTP for Aadhaar authentication goes to this number.</small></div>
+            <div class="cert-field"><label for="mobileNumber" id="mobileLabel">Aadhaar-linked mobile number</label><input id="mobileNumber" name="mobile" type="tel" autocomplete="tel-national" pattern="[6-9][0-9]{9}" required maxlength="10" inputmode="numeric" placeholder="10 digit mobile number"><small class="cert-field-help" id="mobileHelp">The OTP for Aadhaar authentication goes to this number.</small></div>
             <div class="cert-field"><label for="emailId">Email ID</label><input id="emailId" name="email" type="email" autocomplete="email" required placeholder="name@example.com"></div>
           </div>
           <div class="cert-row">
@@ -157,30 +157,29 @@
               <p class="cert-field-help">These documents are used only for the PAN Card request.</p>
               <div class="cert-row cert-row-docs">
                 <div class="cert-field cert-doc-card"><label for="panAadhaarFile">Aadhaar front + back (PDF)</label><input id="panAadhaarFile" type="file" accept="application/pdf"><small class="cert-field-help">Both sides must be combined into one PDF file.</small></div>
-                <div class="cert-field cert-doc-card"><label for="panPhotoFile">Recent passport size photo</label><input id="panPhotoFile" type="file" accept="image/*"></div>
+                <div class="cert-field cert-doc-card"><label for="panPhotoFile">Recent passport size photo</label><input id="panPhotoFile" type="file" accept="image/*"><small class="cert-field-help">Recent colour photo with a plain background.</small></div>
               </div>
               <div class="cert-field cert-doc-card"><label for="panSignatureFile">Signature on white paper</label><input id="panSignatureFile" type="file" accept="image/*"><small class="cert-field-help">Sign with a blue/black pen on plain white paper and upload a clear photo.</small></div>
               <div id="panNewDocs" class="cert-doc-extra" hidden>
-                <p class="cert-sub-head">Additional document for New PAN <small>One proof besides Aadhaar. No old PAN card is needed.</small></p>
                 <div class="cert-field cert-doc-card">
-                  <label for="panIdProofType">Which proof are you uploading?</label>
-                  <select id="panIdProofType"><option value="">Select proof</option><option value="voter_id">Voter ID Card</option><option value="driving_licence">Driving Licence</option><option value="passport">Passport</option><option value="domicile">Domicile Certificate</option><option value="high_school_marksheet">High School Marksheet</option></select>
+                  <label for="panIdProofType">Second proof <span class="cert-tag-extra">additional</span></label>
+                  <select id="panIdProofType"><option value="">Select proof</option><option value="voter_id">Voter ID Card</option><option value="driving_licence">Driving Licence</option><option value="passport">Passport</option><option value="domicile">Domicile Certificate</option><option value="high_school_marksheet">High School Marksheet</option><option value="bank_passbook">Bank Passbook</option></select>
                   <label for="panIdProofFile">Upload the proof</label>
                   <input id="panIdProofFile" type="file" accept="image/*,application/pdf">
+                  <small class="cert-field-help">Any one proof besides Aadhaar. No old PAN card is needed.</small>
                 </div>
               </div>
               <div id="panCorrectionDocs" class="cert-doc-extra" hidden>
-                <p class="cert-sub-head">Additional documents for Correction / Update <small>Both are required along with Aadhaar.</small></p>
                 <div class="cert-field cert-doc-card">
-                  <label for="panCopyType">Which document are you uploading?</label>
+                  <label for="panCopyType">PAN Card / FIR / Letter <span class="cert-tag-extra">additional</span></label>
                   <select id="panCopyType"><option value="">Select document</option><option value="pan_card">PAN Card</option><option value="fir">FIR</option><option value="pan_letter">PAN Card Letter</option></select>
-                  <label for="panCopyFile">Upload PAN Card / FIR / PAN Card Letter</label>
+                  <label for="panCopyFile">Upload PAN Card / FIR / Letter</label>
                   <input id="panCopyFile" type="file" accept="image/*,application/pdf">
                 </div>
                 <div class="cert-field cert-doc-card">
-                  <label for="panAuthorityType">Whose letter pad?</label>
+                  <label for="panAuthorityType">MLA / MP Letter Pad <span class="cert-tag-extra">additional</span></label>
                   <select id="panAuthorityType"><option value="">Select letter pad</option><option value="mla">MLA Letter Pad</option><option value="mp">MP Letter Pad</option></select>
-                  <label for="panAuthorityFile">Upload MLA / MP Letter Pad</label>
+                  <label for="panAuthorityFile">Upload the letter pad</label>
                   <input id="panAuthorityFile" type="file" accept="image/*,application/pdf">
                 </div>
               </div>
@@ -247,7 +246,7 @@
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Caste / Domicile:</strong> Aadhaar Card, Sabhasad / Pradhan Letter Pad and Passport Size Photo — common documents are submitted only once.</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Income Certificate (separate set):</strong> Aadhaar front + back combined in one PDF, Sabhasad / Pradhan Letter Pad and Passport Size Photo.</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>EWS Certificate (Central / State — one common set):</strong> Aadhaar front + back combined in one PDF, recent Passport Size Photo and Income Certificate. Any remaining documents will be requested on your registered mobile number.</span></li>
-            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>PAN Card:</strong> Aadhaar front + back combined in one PDF, recent Passport Size Photo and Signature on white paper. <em>New PAN:</em> plus one more proof — Voter ID / Driving Licence / Passport / Domicile Certificate / High School Marksheet (no PAN card upload needed). <em>Correction / Update:</em> plus additional documents: PAN Card / FIR / PAN Card Letter and an MLA / MP Letter Pad.</span></li>
+            <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>PAN Card:</strong> Aadhaar front + back combined in one PDF, recent Passport Size Photo, Signature on white paper. <em>New PAN:</em> plus one more proof — Voter ID / Driving Licence / Passport / Domicile Certificate / High School Marksheet / Bank Passbook (no PAN card upload needed). <em>Correction / Update:</em> plus additional documents: PAN Card / FIR / PAN Card Letter and an MLA / MP Letter Pad.</span></li>
             <li><i class="fas fa-phone" aria-hidden="true"></i><span>For Income Certificate, additional information or documents may be requested on the registered mobile number if required.</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Aadhaar-linked active mobile number for OTP/authentication</span></li>
             <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Email ID</span></li>
@@ -298,7 +297,7 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="../JS/up-certificate-config.js?v=20261031-v3"></script>
   <script src="../JS/up-certificate-common.js?v=20261103-ux2" defer></script>
-  <script src="../JS/up-certificate-services.js?v=20261103-ux3" defer></script>
+  <script src="../JS/up-certificate-services.js?v=20261103-ux5" defer></script>
   <script src="../JS/firebase-config.js?v=20260513-up5" defer></script>
   <script type="module" src="../JS/firebase-analytics.js"></script>
   <script type="module" src="../JS/firebase-visitors.js?v=20260513-up5"></script>

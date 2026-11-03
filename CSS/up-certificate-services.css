@@ -521,3 +521,11 @@
 .cert-lock-hint i{margin-top:.2rem;color:#d97706}
 .cert-form>.cert-locked{opacity:.4;filter:grayscale(.4);user-select:none;pointer-events:none}
 .cert-step-head{scroll-margin-top:96px}
+
+/* New PAN: the additional proof is the 4th card of the main 2x2 grid; its box adds no layout of its own */
+#panNewDocs:not([hidden]){display:contents}
+
+/* PAN: additional-document cards flow into the same 2-column grid as Aadhaar, photo and signature */
+.cert-doc-section>.cert-doc-extra{display:contents}
+.cert-doc-section>.cert-doc-extra[hidden]{display:none}
+.cert-tag-extra{display:inline-block;margin-left:.3rem;padding:.08rem .45rem;border-radius:999px;background:#fef3c7;color:#92400e;font-size:.72rem;font-weight:800;vertical-align:1px}
