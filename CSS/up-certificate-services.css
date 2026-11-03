@@ -514,3 +514,10 @@
 /* side column keeps only the payment card, so nothing scrolls out from under the sticky total */
 .cert-info-grid{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
 @media(min-width:760px){.cert-info-grid{grid-template-columns:1.2fr 1fr}}
+
+/* PAN: form stays locked until New PAN / Correction is chosen */
+.cert-lock-hint{display:flex;gap:.55rem;align-items:flex-start;margin:0;padding:.75rem .9rem;border:1.5px solid #f59e0b;border-radius:12px;background:#fffbeb;color:#78350f;font-size:.93rem;line-height:1.45}
+.cert-lock-hint[hidden]{display:none}
+.cert-lock-hint i{margin-top:.2rem;color:#d97706}
+.cert-form>.cert-locked{opacity:.4;filter:grayscale(.4);user-select:none;pointer-events:none}
+.cert-step-head{scroll-margin-top:96px}

@@ -220,8 +220,30 @@
     if (fatherInput) fatherInput.placeholder = panOnly ? "Father\u2019s full name" : "Father or husband name";
     $("#motherRow")?.toggleAttribute("hidden", false);
     setRequired("motherName", true);
+    applyPanLock(hasPan() && !panType());
 
     setSubmitState("ready");
+  }
+
+  // PAN: the rest of the form stays locked until New PAN or Correction / Update is chosen.
+  let panWasLocked = false;
+  function applyPanLock(locked) {
+    const form = $("#upCertificateForm");
+    const anchor = $("#panLockHint");
+    if (!form || !anchor) return;
+    let after = false;
+    for (const el of form.children) {
+      if (el === anchor) { after = true; continue; }
+      if (!after) continue;
+      el.classList.toggle("cert-locked", locked);
+      if (locked) el.setAttribute("inert", ""); else el.removeAttribute("inert");
+    }
+    anchor.hidden = !locked;
+    if (panWasLocked && !locked) {
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      $('.cert-step-head[data-step="2"]')?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+    panWasLocked = locked;
   }
 
   function setSubmitState(mode) {
