@@ -8,6 +8,11 @@ on:
       - 'jobs/**/*.html'
       - 'scripts/hydrate-job-static-fallbacks.js'
       - 'package.json'
+  # Nightly safety run (02:00 IST): flips time-dependent output such as
+  # JobPosting -> WebPage after an application deadline, and re-hydrates any
+  # page that an earlier run missed.
+  schedule:
+    - cron: '30 20 * * *'
   workflow_dispatch:
 
 permissions:
@@ -33,19 +38,37 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Populate static job fallbacks from inline job data
-        run: npm run hydrate:job-fallbacks
-
-      - name: Commit generated fallbacks when changed
+      # The hydrated output is fully derived from each page's jobData, so on a
+      # push race we never merge: we start again from the newest main, re-run
+      # hydrate, and push. This cannot create conflicts and never touches
+      # anything except files under jobs/.
+      - name: Hydrate static fallbacks and push (retry on race)
         run: |
-          git add jobs
-
-          if git diff --cached --quiet; then
-            echo "Static fallbacks are already current."
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Hydrate static job fallbacks"
-          git push
+
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            npm run hydrate:job-fallbacks
+
+            git add jobs
+            if git diff --cached --quiet; then
+              echo "Static fallbacks are already current."
+              exit 0
+            fi
+
+            git commit -m "Hydrate static job fallbacks"
+
+            if git push origin HEAD:main; then
+              echo "Pushed on attempt ${attempt}."
+              exit 0
+            fi
+
+            echo "Push rejected (main moved). Retrying from latest main (attempt ${attempt}/5)..."
+            sleep $((attempt * 5))
+          done
+
+          echo "Could not push after 5 attempts."
+          exit 1
