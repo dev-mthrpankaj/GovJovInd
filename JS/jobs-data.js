@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0309-20261104114259-35cfb970",
+        "title": "PGCIL Engineer Trainee Online Form 2026 for 319 Post",
+        "organization": "Power Grid Corporation of India Limited PGCIL",
+        "department": "PGCIL",
+        "category": "Public Sector",
+        "year": "2026",
+        "qualification": "Engineering Degree in Related Subject / Branch with appear for the corresponding paper of GATE 2026",
+        "totalPosts": "319",
+        "startDate": "2026-11-03",
+        "lastDate": "2026-11-18",
+        "status": "active",
+        "tags": [],
+        "applyLink": "https://careers.powergrid.in/recruitment-nextgen/h/login.aspx",
+        "officialNotification": "https://www.powergrid.in/sites/default/files/job_opportunities_document/Notice_2_2.pdf",
+        "detailPage": "../jobs/pgcil-engineer-trainee-2026.html",
+        "updatedAt": "2026-11-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0307-20261103171017-c62edb5e",
         "title": "UPSSSC Combined Junior Engineer JE Mechanical Online Form 2026",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission UPSSSC",
