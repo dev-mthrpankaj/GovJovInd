@@ -1,0 +1,82 @@
+/* job-page-v2.css
+ * GovJobUpdates /jobs/ format v2 (static-first).
+ * Additive layer: load AFTER ../CSS/job-detail-lifecycle.css.
+ * Everything here is prefixed .gjv2- so old (hydrated) pages are never affected.
+ */
+html{scroll-padding-top:92px}
+.gjv2-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* AI-citable quick answer */
+.gjv2-answer{margin:0 0 18px;padding:18px 20px;border:1px solid #cfe4fa;border-left:5px solid #176fd0;border-radius:16px;background:#f5faff}
+.gjv2-answer h2{margin:0 0 8px;font-size:1.02rem;color:#12335a}
+.gjv2-answer p{margin:0 0 14px;font-size:.9rem;line-height:1.7;color:#27425f}
+.gjv2-answer dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;margin:0}
+.gjv2-answer dl>div{padding:10px 12px;border-radius:11px;background:#fff;border:1px solid #e1ecf7}
+.gjv2-answer dt{font-size:.64rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#6b7f96}
+.gjv2-answer dd{margin:3px 0 0;font-size:.83rem;font-weight:800;color:#17304e;overflow-wrap:anywhere}
+
+/* tables (dates, overview, vacancy, fee) */
+.gjv2-table{width:100%;min-width:480px;border-collapse:collapse;font-size:.8rem;color:#243a55}
+.gjv2-table caption{caption-side:top;text-align:left;padding:0 0 8px}
+.gjv2-table th,.gjv2-table td{padding:11px 12px;border-bottom:1px solid #e3ecf5;text-align:left;vertical-align:top;line-height:1.5}
+.gjv2-table thead th{background:#f1f7fd;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:#4a6280}
+.gjv2-table tbody th{font-weight:800;color:#17304e}
+.gjv2-kv th{width:36%}
+.gjv2-table tfoot th,.gjv2-table tfoot td{background:#f8fbff;font-weight:900;color:#12335a}
+.gjv2-table tr.is-current>*{background:#f3f9ff;box-shadow:inset 0 0 0 0 transparent}
+.gjv2-table tr.is-current>th:first-child{box-shadow:inset 4px 0 0 #2498e8}
+
+/* status chips */
+.gjv2-chip{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.66rem;font-weight:900;white-space:nowrap;background:#eef2f7;color:#4a5b70}
+.gjv2-chip.is-success{background:#e4f6ea;color:#17803d}
+.gjv2-chip.is-info{background:#e3f1ff;color:#1569b8}
+.gjv2-chip.is-warning{background:#fff1d6;color:#9a5b00}
+.gjv2-chip.is-danger{background:#fde6e6;color:#b42323}
+
+/* selection flow + checklists */
+.gjv2-flow,.gjv2-checklist{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.gjv2-flow{counter-reset:gjv2}
+.gjv2-flow li{counter-increment:gjv2;display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid #e0e9f2;border-radius:12px;background:#fbfdff;font-size:.82rem;font-weight:700;color:#17304e}
+.gjv2-flow li:before{content:counter(gjv2,decimal-leading-zero);flex:none;width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#e8f3ff;color:#176fd0;font-size:.7rem;font-weight:900}
+.gjv2-checklist{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.gjv2-checklist li{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border:1px solid #e0e9f2;border-radius:12px;background:#fbfdff;font-size:.8rem;line-height:1.5;color:#27425f}
+.gjv2-checklist li:before{content:"\2713";flex:none;color:#17803d;font-weight:900}
+
+/* update history */
+.gjv2-history{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.gjv2-history li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;font-size:.76rem;color:#4b6179}
+.gjv2-history time{font-weight:900;color:#17304e}
+.gjv2-history strong{color:#17304e}
+
+/* FAQ (native details, no JS needed, answers always in the DOM) */
+.gjv2-faq{border:1px solid #e0e9f2;border-radius:13px;background:#fff;overflow:hidden}
+.gjv2-faq+.gjv2-faq{margin-top:9px}
+.gjv2-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center;padding:15px;font-weight:800;font-size:.82rem;color:#17304e}
+.gjv2-faq summary::-webkit-details-marker{display:none}
+.gjv2-faq summary:after{content:"+";font-size:1.1rem;line-height:1;color:#176fd0;transition:transform .2s}
+.gjv2-faq[open] summary:after{transform:rotate(45deg)}
+.gjv2-faq-a{padding:0 15px 15px;font-size:.8rem;line-height:1.7;color:#4b6179}
+.gjv2-faq-a p{margin:0}
+
+/* related + misc */
+.gjv2-related{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:9px}
+.gjv2-related a{display:block;padding:12px 14px;border:1px solid #dce7f2;border-radius:13px;background:#fbfdff;text-decoration:none;color:#176fc3;font-weight:900;font-size:.84rem}
+.gjv2-related a:hover,.gjv2-related a:focus-visible{background:#edf6ff;border-color:#c7ddf3}
+.gjv2-related small{display:block;margin-top:3px;color:#6f8196;font-weight:700;font-size:.72rem}
+.gjv2-awaited{min-width:100px;padding:8px 13px;border-radius:9px;text-align:center;font-size:.72rem;font-weight:900;color:#fff;background:#94a3b8}
+.gjv2-archive{margin-top:14px;border:1px dashed #cbd9e8;border-radius:13px;padding:12px 14px}
+.gjv2-archive summary{cursor:pointer;font-weight:800;font-size:.82rem;color:#17304e}
+.gjv2-closed-note{margin:0 0 12px;padding:10px 13px;border-radius:11px;background:#fff1d6;color:#7a4700;font-size:.78rem;font-weight:800}
+.gjv2-byline{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.7rem;color:#6f8196}
+.gjv2-byline a{color:#176fc3;font-weight:800}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #2498e8;outline-offset:2px}
+@media (max-width:560px){.gjv2-history li{grid-template-columns:1fr}.gjv2-answer{padding:15px}}
+@media (prefers-reduced-motion:reduce){.gjv2-faq summary:after{transition:none}}
+@media print{.gjd-mobile-action,.candidate-bottom-nav,.gjd-sidebar,.gjd-share-grid{display:none!important}.gjv2-faq:not([open])>.gjv2-faq-a{display:block}}
+.gjv2-table small{display:block;margin-top:3px;font-weight:600;font-size:.72rem;color:#6f8196}
+/* beat the site-wide table th styling (uppercase / tinted) for row headers */
+.gjd-table-wrap .gjv2-table tbody th,.gjd-table-wrap .gjv2-table tfoot th{text-transform:none;letter-spacing:0;font-size:.82rem;font-weight:800;color:#17304e;background:transparent}
+.gjd-table-wrap .gjv2-table tbody th small{text-transform:none;letter-spacing:0;font-weight:600;font-size:.72rem;color:#6f8196}
+.gjd-table-wrap .gjv2-kv tbody th{background:#f7fafe;width:36%}
+.gjd-table-wrap .gjv2-table tr.is-current>*{background:#f3f9ff}
+@media (max-width:560px){.gjv2-answer dl{grid-template-columns:1fr 1fr}.gjv2-answer dd{font-size:.78rem}}
