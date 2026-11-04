@@ -3,7 +3,6 @@
   "use strict";
   const cfg = w.GJU_CERT_CONFIG || {};
   const API_BASE = cfg.apiBase || "https://test.govjobupdates.com/live-test/certificate-api";
-  const DRIVE_URL = cfg.driveUrl || "";
   const LIMIT = 1.5 * 1024 * 1024;           // size we upload (server/Apps Script limit)
   const RAW_IMAGE_LIMIT = 25 * 1024 * 1024;  // phone photos are accepted and compressed down
   const PENDING_KEY = "gjuCertPendingUpload";
@@ -97,7 +96,11 @@
     try { res = await fetch(`${API_BASE}/${path}`, Object.assign({ mode: "cors", cache: "no-store", credentials: "omit" }, options)); }
     catch (e) { const err = new Error("Network problem. Please check your internet and try again."); err.network = true; throw err; }
     let body;
-    try { body = await res.json(); } catch (e) { throw new Error("The certificate server returned an invalid response."); }
+    try { body = await res.json(); } catch (e) {
+      const err = new Error(res.status === 413 ? "This file is larger than the server allows. Please choose a smaller file." : "The certificate server returned an invalid response.");
+      err.status = res.status;
+      throw err;
+    }
     if (!res.ok || !body || !body.success) {
       const err = new Error((body && body.message) || "The request could not be completed.");
       err.code = body && body.code;
@@ -127,38 +130,50 @@
   const resumeUpload = (requestId, mobile, email) => postJson("resume-upload.php", { request_id: requestId, mobile, email });
 
   /* ---- Drive upload (Apps Script). Network failures are retried; server refusals are not. ---- */
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => { const r = String(reader.result || ""); resolve({ name: file.name, type: file.type || "application/octet-stream", size: file.size, data: r.includes(",") ? r.split(",")[1] : r }); };
-      reader.onerror = () => reject(new Error(`Could not read ${file.name}.`));
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function uploadDocuments(requestId, uploadToken, files) {
-    if (!DRIVE_URL) throw new Error("Document upload service is not configured.");
-    const payload = {};
-    for (const [key, file] of Object.entries(files)) if (file) payload[key] = await fileToBase64(file);
-    const body = JSON.stringify({ action: "uploadCertificateDocuments", data: { requestId, uploadToken }, files: payload });
+  /** Uploads ONE document (multipart, no custom headers => no CORS preflight). Retries only transient failures. */
+  async function uploadOne(requestId, uploadToken, key, file) {
     let lastError;
     for (let attempt = 0; attempt < 3; attempt++) {
-      const ctl = new AbortController();
-      const timer = setTimeout(() => ctl.abort(), 180000);
+      const form = new FormData();
+      form.append("request_id", requestId);
+      form.append("upload_token", uploadToken);
+      form.append("doc_key", key);
+      form.append("file", file, file.name || key);
       try {
-        const res = await fetch(DRIVE_URL, { method: "POST", redirect: "follow", cache: "no-store", headers: { "Content-Type": "text/plain;charset=utf-8" }, body, signal: ctl.signal });
-        const text = await res.text();
-        let result;
-        try { result = JSON.parse(text); } catch (e) { throw new Error("Google Drive upload service returned an invalid response."); }
-        if (!result || !result.success) { const err = new Error((result && result.message) || "Document upload failed."); err.final = true; throw err; }
-        return result;
+        return await request("upload-file.php", { method: "POST", body: form });
       } catch (e) {
         lastError = e;
-        if (e.final) throw e;
-        await sleep(2000 * (attempt + 1));
-      } finally { clearTimeout(timer); }
+        const transient = e.network || e.status === 429 || (e.status >= 500 && e.status < 600);
+        if (!transient) throw e;
+        await sleep(1500 * (attempt + 1));
+      }
     }
-    throw new Error((lastError && lastError.message) || "Document upload failed. Please try again.");
+    throw lastError;
+  }
+
+  /**
+   * Sends every prepared file to our own server (one request per file), then finishes the request.
+   * A failed file can simply be retried: the server replaces an earlier upload of the same document.
+   * onProgress({ index, total, key }) is called before each file.
+   */
+  async function uploadDocuments(requestId, uploadToken, files, onProgress) {
+    const entries = Object.entries(files || {}).filter(([, file]) => file);
+    if (!entries.length) throw new Error("Please choose the required documents.");
+    for (let i = 0; i < entries.length; i++) {
+      const [key, file] = entries[i];
+      if (typeof onProgress === "function") onProgress({ index: i + 1, total: entries.length, key });
+      await uploadOne(requestId, uploadToken, key, file);
+    }
+    let lastError;
+    for (let attempt = 0; attempt < 3; attempt++) {   // safe to repeat: the server treats a second "finish" as success
+      try { return await postJson("upload-complete.php", { request_id: requestId, upload_token: uploadToken }); }
+      catch (e) {
+        lastError = e;
+        if (!(e.network || e.status >= 500)) throw e;
+        await sleep(1500 * (attempt + 1));
+      }
+    }
+    throw lastError;
   }
 
   /* ---- remembers "paid but documents not uploaded" so the customer is always led back (no token stored) ---- */

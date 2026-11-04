@@ -421,7 +421,7 @@
 
   const createOrder = (data) => C.postJson("create-order.php", data);
   const verifyPayment = (requestId, payment) => C.verifyPayment(requestId, payment);
-  const uploadDocuments = (requestId, uploadToken, files) => C.uploadDocuments(requestId, uploadToken, files);
+  const uploadDocuments = (requestId, uploadToken, files) => C.uploadDocuments(requestId, uploadToken, files, (p) => setProgress(`Uploading documents (${p.index} of ${p.total})...`));
 
   const FILE_RULES = {
     aadhaar: ["Caste / Domicile Aadhaar Card", {}], letter: ["Caste / Domicile Sabhasad / Pradhan Letter Pad", {}], photo: ["Caste / Domicile Passport Size Photo", { imageOnly: true }],

@@ -63,7 +63,7 @@
         files[d.key] = await C.prepareFile(file, d.label, C.rulesFromAccept(d.accept));
       }
       progress.textContent = "Uploading documents. Please keep this page open...";
-      await C.uploadDocuments(session.requestId, session.token, files);
+      await C.uploadDocuments(session.requestId, session.token, files, (p) => { progress.textContent = `Uploading documents (${p.index} of ${p.total}). Please keep this page open...`; });
       C.clearPending();
       progress.hidden = true;
       docs.hidden = true; uploadBtn.hidden = true;
