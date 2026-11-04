@@ -1094,7 +1094,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "108",
         "startDate": "2026-10-14",
         "lastDate": "2026-11-04",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://www.sarkariresult.com/wp-content/uploads/2026/09/ViewPdf.pdf",
         "officialNotification": "https://www.sarkariresult.com/wp-content/uploads/2026/09/ViewPdf.pdf",
