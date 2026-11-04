@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0087-20261104182123-19914db8",
+        "title": "SSC CGL Tier-I Answer Key 2026",
+        "organization": "Staff Selection Commission (SSC)",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "examDate": "2026-09-30",
+        "examEndDate": "2026-10-28",
+        "releaseDate": "2026-11-04",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://ssc.gov.in/home",
+        "objectionLink": "https://ssc.gov.in/home",
+        "detailPage": "../jobs/ssc-cgl-2026.html",
+        "updatedAt": "2026-11-04",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0086-20261103232246-60236871",
         "title": "BSF Head Constable Radio RO / RM Answer Key 2026 for 1121 Post",
         "organization": "Border Security Force",

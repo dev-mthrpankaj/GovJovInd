@@ -704,26 +704,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0156-20260912194035-638442c1",
-        "title": "SSC CGL Tier 1 Admit Card 2026 for 12256 Post",
-        "organization": "Staff Selection Commission (SSC)",
-        "department": "SSC",
-        "category": "Central Government",
-        "year": "2026",
-        "examDate": "2026-09-30",
-        "examEndDate": "2026-10-30",
-        "releaseDate": "2026-09-27",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://ssc.gov.in/",
-        "detailPage": "../jobs/ssc-cgl-2026.html",
-        "updatedAt": "2026-09-28",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0180-20260928092146-d4df5978",
         "title": "SSC Delhi Police Constable (Driver) PET/PMT Admit Card",
         "organization": "Staff Selection Commission (SSC)",
