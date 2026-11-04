@@ -505,7 +505,11 @@
             setProgress("Payment received. Verifying securely...");
             const verified = await verifyPayment(order.request_id, payment);
 
-            if (verified.next_action === "upload_documents") {
+            // The server decides the next step. Older responses had no next_action, so also fall back to
+            // "online request + upload token issued" instead of silently skipping the document upload.
+            const mustUpload = verified.next_action === "upload_documents"
+              || (verified.document_submission_mode === "online" && !!verified.upload_token);
+            if (mustUpload && verified.upload_token) {
               verifiedPayment = {
                 requestId: verified.request_id,
                 uploadToken: verified.upload_token,
@@ -524,6 +528,11 @@
             } else {
               setProgress("", false);
               setSuccess(order.request_id, data);
+              if (verified.document_submission_mode === "online" && verified.can_resume_upload) {
+                // Paid, but this response carried no upload token (e.g. a repeated verify call).
+                C.savePending(order.request_id);
+                setError("Payment verified, but your documents are not uploaded yet. Do NOT pay again. Open Track Application > Resume document upload (Request ID " + order.request_id + ") to finish.");
+              }
               resolve(verified);
             }
           } catch (error) {

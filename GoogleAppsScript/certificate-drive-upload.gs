@@ -6,6 +6,11 @@
  * Then:   Project Settings > Script properties > add  PURGE_KEY  = same value as CERTIFICATE_PURGE_KEY
  *         in private/payment-secrets.php, run installTriggers() once, and paste the new /exec URL
  *         into JS/up-certificate-config.js (driveUrl).
+ *         Also add script property  UPLOAD_KEY  = same value as CERTIFICATE_UPLOAD_KEY in
+ *         private/payment-secrets.php (40+ random chars). Without it the server cannot tell this script
+ *         apart from a customer calling upload-complete directly.
+ *         Optional: enable Services > Drive API (advanced) so expired folders are deleted for good
+ *         instead of only moved to the Drive trash.
  *
  * Security model
  *  1. Every upload must carry the one-time upload token issued after a VERIFIED payment. This script never
@@ -89,8 +94,11 @@ function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).se
 function fail_(m) { return json_({ success: false, message: m }); }
 
 function callApi_(path, payload) {
+  const headers = {};
+  const uploadKey = PropertiesService.getScriptProperties().getProperty('UPLOAD_KEY');
+  if (uploadKey) headers['X-Upload-Key'] = uploadKey;
   const res = UrlFetchApp.fetch(CFG.API_BASE + '/' + path, {
-    method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true, followRedirects: false
+    method: 'post', contentType: 'application/json', headers: headers, payload: JSON.stringify(payload), muteHttpExceptions: true, followRedirects: false
   });
   try { return JSON.parse(res.getContentText()); } catch (e) { return null; }
 }
@@ -128,14 +136,34 @@ function purgeExpiredDocuments() {
   if (!list.success) throw new Error('purge-candidates failed: ' + (list.message || ''));
   (list.items || []).forEach(function (item) {
     const m = /folders\/([A-Za-z0-9_-]+)/.exec(String(item.drive_folder_url || ''));
-    try {
-      if (m) DriveApp.getFolderById(m[1]).setTrashed(true);
-    } catch (e) { /* folder already gone: still confirm so the server stops listing it */ }
-    UrlFetchApp.fetch(CFG.API_BASE + '/purge-confirm.php', {
+    if (!m) { console.error('purge: no folder id for ' + item.request_id); return; }   // never confirm what was not deleted
+    const outcome = deleteFolder_(m[1]);
+    if (outcome === 'error') return;   // keep it listed: it is retried tomorrow
+    const res = UrlFetchApp.fetch(CFG.API_BASE + '/purge-confirm.php', {
       method: 'post', headers: headers, contentType: 'application/json',
       payload: JSON.stringify({ request_id: item.request_id }), muteHttpExceptions: true
     });
+    let ok = false;
+    try { ok = JSON.parse(res.getContentText()).success === true; } catch (e) { /* handled below */ }
+    if (!ok) console.error('purge-confirm failed for ' + item.request_id + ' (HTTP ' + res.getResponseCode() + ')');
   });
+}
+
+/** Returns 'deleted' | 'trashed' | 'gone' (already missing) | 'error' (unknown failure: do NOT confirm). */
+function deleteFolder_(id) {
+  try {
+    if (typeof Drive !== 'undefined' && Drive.Files && Drive.Files.remove) {
+      Drive.Files.remove(id);          // permanent (needs the advanced Drive service)
+      return 'deleted';
+    }
+    DriveApp.getFolderById(id).setTrashed(true);   // Drive trash: removed for good after ~30 days
+    return 'trashed';
+  } catch (e) {
+    const msg = String(e && e.message || e);
+    if (/not found|no item with the given id|file not found|404/i.test(msg)) return 'gone';
+    console.error('purge: could not delete ' + id + ': ' + msg);
+    return 'error';
+  }
 }
 
 function installTriggers() {

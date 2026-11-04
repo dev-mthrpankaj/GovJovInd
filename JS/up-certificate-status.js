@@ -56,6 +56,13 @@
       step: 4,
       className: "is-completed"
     },
+    cancelled: {
+      title: "Cancelled",
+      pill: "Cancelled",
+      note: "This request was cancelled and refunded. Contact support with your Request ID if you have questions.",
+      step: 0,
+      className: "is-rejected"
+    },
     rejected: {
       title: "Rejected",
       pill: "Rejected",
