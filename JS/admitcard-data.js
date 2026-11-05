@@ -324,26 +324,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0107-20260814210727-c49487e0",
-        "title": "UPSC Civil Services Mains Admit Card 2026",
-        "organization": "Union Public Service Commission",
-        "department": "UPSC",
-        "category": "Central Government",
-        "year": "2026",
-        "examDate": "2026-08-24",
-        "examEndDate": "",
-        "releaseDate": "2026-08-14",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://upsconline.nic.in/",
-        "detailPage": "../jobs/upsc-civil-services-ias-ifs-2026.html",
-        "updatedAt": "2026-10-18",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0167-20260917213123-8cca2363",
         "title": "MPESB Van Rakshak, Jail Prahari Physical Admit Card  Out 2026 for 1679 Post",
         "organization": "Madhya Pradesh Employee Selection Board (MPESB)",

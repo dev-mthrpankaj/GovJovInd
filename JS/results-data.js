@@ -40,6 +40,24 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "result-sheet-0197-20261105195526-30f7a9f3",
+        "title": "UPSC Civil Services Mains Result 2026",
+        "organization": "Union Public Service Commission UPSC",
+        "department": "UPSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-11-05",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://www.upsc.gov.in/sites/default/files/WR-CSM-2026-Engl-RollList-05112026.pdf",
+        "detailPage": "../jobs/upsc-civil-services-ias-ifs-2026.html",
+        "updatedAt": "2026-11-05",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0194-20261103231648-2ac09884",
         "title": "SSC GD Constable 2026 Result Marks / Score Card for 25487 Post",
         "organization": "Staff Selection Commission",
