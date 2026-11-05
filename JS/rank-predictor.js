@@ -115,6 +115,7 @@
         bindStepperNavigation();
         bindKeyboardFocusHandling(app);
         bindShareCard();
+        bindResponseSheetAutofill();
         applyExamDefaults();
         hydrateCandidateSession();
         renderPendingResult();
@@ -1670,7 +1671,8 @@
         const endpoints = {
             exams: "exams.php",
             submit: "submit.php",
-            check: "check.php"
+            check: "check.php",
+            parseResponse: "parse-response.php"
         };
         if (!baseUrl || !/^https:\/\/[^?#]+\/rank-api$/i.test(baseUrl) || !endpoints[name]) return "";
         return `${baseUrl}/${endpoints[name]}`;
@@ -2479,6 +2481,152 @@
 
     function escapeAttr(value) {
         return escapeHtml(value);
+    }
+
+    // ---- Response sheet auto-fill (SSC cbexams and TCS iON/Digialm via rank-api/parse-response.php) ----
+    function bindResponseSheetAutofill() {
+        const input = getById("answerSheetLink");
+        if (!input || input.dataset.autofillBound === "true") return;
+        input.dataset.autofillBound = "true";
+
+        const label = input.closest("label") || input;
+        const helper = label.querySelector?.(".field-helper");
+        if (helper) helper.textContent = "Optional. Paste your response sheet link and tap Fill. Check the numbers before submitting.";
+        const fallbackNote = document.querySelector(".manual-fallback span");
+        if (fallbackNote) fallbackNote.textContent = "If auto-fill does not work (some links are encrypted or session-based), enter attempted, right and wrong answers manually.";
+
+        const wrap = document.createElement("div");
+        wrap.className = "rp-field online-only response-sheet-autofill";
+        wrap.style.gridColumn = "1 / -1";
+        wrap.innerHTML = `
+            <button class="btn btn-outline" id="fillFromSheetBtn" type="button">Fill from response sheet</button>
+            <div class="form-message hidden" id="responseSheetMessage" role="status" aria-live="polite"></div>`;
+        label.insertAdjacentElement("afterend", wrap);
+        getById("fillFromSheetBtn")?.addEventListener("click", handleFillFromResponseSheet);
+    }
+
+    async function handleFillFromResponseSheet() {
+        const button = getById("fillFromSheetBtn");
+        const exam = getSelectedExam();
+        const url = readValue("answerSheetLink");
+        if (!exam) return showMessage("responseSheetMessage", "Please select an exam first.", "error");
+        if (!/^https?:\/\/\S+$/i.test(url)) return showMessage("responseSheetMessage", "Paste a valid response sheet link first.", "error");
+        const endpoint = getRankApiEndpoint("parseResponse");
+        if (!endpoint) return showMessage("responseSheetMessage", API_INVALID_URL_MESSAGE, "error");
+
+        if (button) button.disabled = true;
+        showMessage("responseSheetMessage", "Reading your response sheet. SSC sheets have several parts, so this can take up to a minute.", "info");
+        try {
+            const result = await postPhpRankApi(endpoint, {
+                answerSheetLink: url,
+                examId: exam.examId || exam.id || "",
+                examName: exam.examName || exam.name || ""
+            });
+            if (!result || result.success !== true || !result.data) {
+                throw new Error(result?.message || "Could not read this response sheet. Please enter marks manually.");
+            }
+            const { filled, notes } = applyParsedResponseSheet(exam, result.data);
+            if (!filled.length) {
+                throw new Error(notes[0] || "Could not match this sheet to the exam sections. Please enter marks manually.");
+            }
+            const warnings = [...notes, ...(Array.isArray(result.data.warnings) ? result.data.warnings : [])];
+            const text = `Filled: ${filled.join("; ")}.${warnings.length ? " Note: " + warnings.join(" ") : ""} Please verify before submitting.`;
+            showMessage("responseSheetMessage", text, warnings.length ? "warning" : "success");
+        } catch (error) {
+            showMessage("responseSheetMessage", error?.message || "Could not read this response sheet. Please enter marks manually.", "error");
+        } finally {
+            if (button) button.disabled = false;
+        }
+    }
+
+    function sheetSubjectKey(name) {
+        const text = String(name || "").toLowerCase()
+            .replace(/^\s*(part|section)[\s\-_]*[a-z0-9]+\b/, "")
+            .replace(/[^a-z0-9]+/g, " ")
+            .trim();
+        const tokens = text.split(/\s+/).filter(Boolean);
+        const groups = [
+            ["reasoning", "intelligence", "logical"],
+            ["awareness", "gk", "knowledge"],
+            ["quantitative", "quant", "math", "aptitude", "numerical"],
+            ["english", "comprehension", "language"]
+        ];
+        const group = groups.findIndex((words) => words.some((word) => tokens.some((token) => token.startsWith(word))));
+        return group >= 0 ? `g:${group}` : `t:${text}`;
+    }
+
+    function mapSheetSections(sections, examSubjects) {
+        const used = new Set();
+        const mapping = sections.map(() => -1);
+        sections.forEach((section, index) => {
+            const key = sheetSubjectKey(section.name);
+            const match = examSubjects.findIndex((subject, subjectIndex) => !used.has(subjectIndex) && sheetSubjectKey(subject.name) === key);
+            if (match >= 0) {
+                mapping[index] = match;
+                used.add(match);
+            }
+        });
+        // Nothing matched by name: fall back to sheet order only when the counts line up exactly.
+        if (mapping.every((value) => value < 0) && sections.length === examSubjects.length) {
+            sections.forEach((_, index) => { mapping[index] = index; });
+        }
+        return mapping;
+    }
+
+    function setSheetInputValue(input, value) {
+        if (!input) return;
+        input.value = String(value);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    function applyParsedResponseSheet(exam, parsed) {
+        const filled = [];
+        const notes = [];
+        const sections = Array.isArray(parsed.subjects) ? parsed.subjects : [];
+        const examSubjects = Array.isArray(exam.subjects) ? exam.subjects : [];
+
+        if (examSubjects.length && dom.subjectControls.length) {
+            const mapping = mapSheetSections(sections, examSubjects);
+            const covered = new Set();
+            sections.forEach((section, index) => {
+                const subjectIndex = mapping[index];
+                const control = dom.subjectControls[subjectIndex];
+                if (subjectIndex < 0 || !control) {
+                    notes.push(`${section.name} could not be matched to a subject, enter it manually.`);
+                    return;
+                }
+                const subject = examSubjects[subjectIndex];
+                const expected = Number(subject.questions) || 0;
+                if (expected && Number(section.totalQuestions) !== expected) {
+                    notes.push(`${section.name} has ${section.totalQuestions} questions but ${subject.name} expects ${expected}.`);
+                }
+                setSheetInputValue(control.correct, Number(section.correct) || 0);
+                setSheetInputValue(control.wrong, Number(section.wrong) || 0);
+                covered.add(subjectIndex);
+                filled.push(`${subject.name} ${section.correct} right, ${section.wrong} wrong`);
+            });
+            const missing = examSubjects.filter((_, index) => !covered.has(index)).map((subject) => subject.name);
+            if (filled.length && missing.length) notes.push(`Not filled: ${missing.join(", ")}.`);
+        } else if (parsed.totals && Number(parsed.totals.totalQuestions) > 0) {
+            const right = Number(parsed.totals.correct) || 0;
+            const wrong = Number(parsed.totals.wrong) || 0;
+            setSheetInputValue(getById("totalAttempted"), right + wrong);
+            setSheetInputValue(getById("rightAnswers"), right);
+            setSheetInputValue(getById("wrongAnswers"), wrong);
+            filled.push(`${right} right, ${wrong} wrong`);
+        }
+
+        if (Number(parsed.totals?.bonus) > 0) {
+            notes.push(`${parsed.totals.bonus} bonus or dropped question(s) were not counted as right or wrong.`);
+        }
+
+        // Candidate details: only fill empty fields, never overwrite what the user typed.
+        const candidate = parsed.candidate || {};
+        [["candidateName", candidate.name], ["rollNumber", candidate.rollNumber], ["shift", candidate.shift]].forEach(([id, value]) => {
+            const field = getById(id);
+            if (field && value && !String(field.value || "").trim()) setSheetInputValue(field, value);
+        });
+        return { filled, notes };
     }
 }());
 
