@@ -2492,36 +2492,66 @@
         const label = input.closest("label") || input;
         const helper = label.querySelector?.(".field-helper");
         if (helper) helper.textContent = "Optional. Paste your response sheet link and tap Fill. Check the numbers before submitting.";
+        const fallbackTitle = document.querySelector(".manual-fallback strong");
+        if (fallbackTitle) fallbackTitle.textContent = "Two ways to enter your marks";
         const fallbackNote = document.querySelector(".manual-fallback span");
-        if (fallbackNote) fallbackNote.textContent = "If auto-fill does not work (some links are encrypted or session-based), enter attempted, right and wrong answers manually.";
+        if (fallbackNote) fallbackNote.textContent = "Paste your response sheet link and tap Fill, or enter attempted, right and wrong answers yourself. Manual entry always works, even after the response sheet link expires.";
 
         const wrap = document.createElement("div");
         wrap.className = "rp-field online-only response-sheet-autofill";
         wrap.style.gridColumn = "1 / -1";
         wrap.innerHTML = `
             <button class="btn btn-outline" id="fillFromSheetBtn" type="button">Fill from response sheet</button>
+            <label class="rp-field" for="responseSheetFiles" style="margin-top:10px">Or upload your saved response sheet pages
+                <input id="responseSheetFiles" type="file" accept=".html,.htm,.txt,text/html,text/plain" multiple>
+                <span class="field-helper">If the link cannot be read, open each PART (A, B, C, D) on the SSC page, save it (Ctrl+S) and select all saved files here.</span>
+            </label>
             <div class="form-message hidden" id="responseSheetMessage" role="status" aria-live="polite"></div>`;
         label.insertAdjacentElement("afterend", wrap);
         getById("fillFromSheetBtn")?.addEventListener("click", handleFillFromResponseSheet);
+        getById("responseSheetFiles")?.addEventListener("change", handleResponseSheetFiles);
     }
 
-    async function handleFillFromResponseSheet() {
-        const button = getById("fillFromSheetBtn");
+    function handleFillFromResponseSheet() {
         const exam = getSelectedExam();
         const url = readValue("answerSheetLink");
         if (!exam) return showMessage("responseSheetMessage", "Please select an exam first.", "error");
         if (!/^https?:\/\/\S+$/i.test(url)) return showMessage("responseSheetMessage", "Paste a valid response sheet link first.", "error");
+        return runResponseSheetParse({ answerSheetLink: url }, "Reading your response sheet. SSC sheets have several parts, so this can take up to a minute.");
+    }
+
+    async function handleResponseSheetFiles(event) {
+        const input = event.target;
+        const files = Array.from(input.files || []).slice(0, 8);
+        if (!files.length) return;
+        if (files.some((file) => file.size > 3 * 1024 * 1024)) {
+            input.value = "";
+            return showMessage("responseSheetMessage", "Each saved page must be smaller than 3 MB.", "error");
+        }
+        try {
+            const parts = await Promise.all(files.map((file) => file.text()));
+            await runResponseSheetParse({ responseSheetHtmlParts: parts }, `Reading ${files.length} saved page${files.length > 1 ? "s" : ""}.`);
+        } catch (error) {
+            showMessage("responseSheetMessage", "Could not read the selected files. Please save the pages again or enter marks manually.", "error");
+        } finally {
+            input.value = "";
+        }
+    }
+
+    async function runResponseSheetParse(payload, progressText) {
+        const button = getById("fillFromSheetBtn");
+        const exam = getSelectedExam();
         const endpoint = getRankApiEndpoint("parseResponse");
+        if (!exam) return showMessage("responseSheetMessage", "Please select an exam first.", "error");
         if (!endpoint) return showMessage("responseSheetMessage", API_INVALID_URL_MESSAGE, "error");
 
         if (button) button.disabled = true;
-        showMessage("responseSheetMessage", "Reading your response sheet. SSC sheets have several parts, so this can take up to a minute.", "info");
+        showMessage("responseSheetMessage", progressText, "info");
         try {
-            const result = await postPhpRankApi(endpoint, {
-                answerSheetLink: url,
+            const result = await postPhpRankApi(endpoint, Object.assign({
                 examId: exam.examId || exam.id || "",
                 examName: exam.examName || exam.name || ""
-            });
+            }, payload));
             if (!result || result.success !== true || !result.data) {
                 throw new Error(result?.message || "Could not read this response sheet. Please enter marks manually.");
             }
@@ -2533,7 +2563,11 @@
             const text = `Filled: ${filled.join("; ")}.${warnings.length ? " Note: " + warnings.join(" ") : ""} Please verify before submitting.`;
             showMessage("responseSheetMessage", text, warnings.length ? "warning" : "success");
         } catch (error) {
-            showMessage("responseSheetMessage", error?.message || "Could not read this response sheet. Please enter marks manually.", "error");
+            let message = error?.message || "Could not read this response sheet. Please enter marks manually.";
+            if (/Upstream status: (401|403|429)/.test(message)) {
+                message = "The exam website did not allow us to open this link automatically. Please upload your saved response sheet pages below, or enter marks manually.";
+            }
+            showMessage("responseSheetMessage", message, "error");
         } finally {
             if (button) button.disabled = false;
         }
