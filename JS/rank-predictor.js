@@ -2506,68 +2506,10 @@
                 <input id="responseSheetFiles" type="file" accept=".html,.htm,.txt,text/html,text/plain" multiple>
                 <span class="field-helper">If the link cannot be read, open each PART (A, B, C, D) on the SSC page, save it (Ctrl+S) and select all saved files here.</span>
             </label>
-            <details class="sheet-bookmarklet" style="margin-top:10px">
-                <summary>One-click method for laptop (recommended if the link is blocked)</summary>
-                <ol style="margin:8px 0 0 18px;padding:0">
-                    <li>Drag this button to your bookmarks bar: <a id="sheetBookmarklet" class="btn btn-outline" href="#" draggable="true" style="display:inline-block;padding:4px 10px">Read SSC sheet</a></li>
-                    <li>Open your SSC response sheet in the browser as usual.</li>
-                    <li>Click the <strong>Read SSC sheet</strong> bookmark. This page opens and your marks are filled in automatically.</li>
-                </ol>
-                <button class="btn btn-outline" id="copySheetBookmarklet" type="button" style="margin-top:8px">Copy code (phone or no bookmarks bar)</button>
-                <span class="field-helper">On a phone: open your SSC response sheet, type <strong>javascript:</strong> in the address bar, paste the copied code after it and press Go.</span>
-            </details>
             <div class="form-message hidden" id="responseSheetMessage" role="status" aria-live="polite"></div>`;
         label.insertAdjacentElement("afterend", wrap);
         getById("fillFromSheetBtn")?.addEventListener("click", handleFillFromResponseSheet);
         getById("responseSheetFiles")?.addEventListener("change", handleResponseSheetFiles);
-        bindSheetBookmarklet();
-        listenForBookmarkletSheet();
-    }
-
-    // ---- One-click import: a bookmark run on the SSC page reads the sheet in the candidate's own browser and sends it here ----
-    const SHEET_BOOKMARKLET_SOURCE = "(function(){var T=\"__TARGET__\";if(!/cbexams\\.com$/i.test(location.hostname)){alert(\"Open your SSC response sheet page first, then tap this bookmark again.\");return;}var w=window.open(T,\"_blank\");if(!w){alert(\"Please allow pop-ups for this page and try again.\");return;}var ready=false,data=null;function send(){if(ready&&data){w.postMessage({type:\"gju-sheet\",parts:data},\"*\");}}window.addEventListener(\"message\",function(e){if(e.source===w&&e.data&&e.data.type===\"gju-sheet-ready\"){ready=true;send();}});function sec(h){var m=/id=[\"']lblsubject[\"'][^>]*>([\\s\\S]*?)<\\/span>/i.exec(h);return m?m[1].replace(/<[^>]*>/g,\"\").replace(/\\s+/g,\" \").trim():\"\";}function ok(h){return /lblsubject|ViewCandResponse/i.test(h)&&!/Just a moment/i.test(h);}function hidden(h){var d=new DOMParser().parseFromString(h,\"text/html\"),o={};d.querySelectorAll(\"input[type=hidden]\").forEach(function(i){if(i.name)o[i.name]=i.value;});return o;}function btns(h){var d=new DOMParser().parseFromString(h,\"text/html\"),o=[];d.querySelectorAll(\"input[type=submit]\").forEach(function(i){if(/^P\\d+$/.test(i.name)&&!i.disabled)o.push([i.name,i.value]);});return o;}function get(u){return fetch(u,{credentials:\"include\"}).then(function(r){return r.ok?r.text():\"\";}).catch(function(){return \"\";});}function post(f){var b=new URLSearchParams();for(var k in f)b.append(k,f[k]);return fetch(location.pathname+location.search,{method:\"POST\",credentials:\"include\",headers:{\"Content-Type\":\"application/x-www-form-urlencoded\"},body:b}).then(function(r){return r.ok?r.text():\"\";}).catch(function(){return \"\";});}async function run(){var first=document.documentElement.outerHTML,pages=[first],seen=[sec(first)],state=await get(location.href);if(!ok(state))state=first;var list=btns(first).slice(0,8);for(var i=0;i<list.length;i++){var name=list[i][0],val=list[i][1],n=parseInt(name.slice(1),10),h=\"\";var pu=location.href.replace(/ViewCandResponse\\d*\\.aspx/i,\"ViewCandResponse\"+(n===1?\"\":n)+\".aspx\");if(pu!==location.href||n!==1){var c=await get(pu);if(ok(c)&&sec(c)&&seen.indexOf(sec(c))<0)h=c;}if(!h){var f=hidden(state);f[name]=val;var c2=await post(f);if(ok(c2)){state=c2;if(seen.indexOf(sec(c2))<0)h=c2;}}if(h){pages.push(h);seen.push(sec(h));}}data=pages;send();setTimeout(function(){if(!ready)alert(\"Could not reach GovJobUpdates. Please keep that tab open and try again.\");},20000);}run().catch(function(){alert(\"Could not read this page. Please save the pages and upload them instead.\");});})();";
-
-    function sheetBookmarkletCode() {
-        const exam = getSelectedExam();
-        const examId = exam?.examId || "";
-        const target = `${window.location.origin}${window.location.pathname}${examId ? `?exam=${encodeURIComponent(examId)}` : ""}#sheet-import`;
-        return SHEET_BOOKMARKLET_SOURCE.replace("__TARGET__", () => target.replace(/["\\]/g, ""));
-    }
-
-    function bindSheetBookmarklet() {
-        const link = getById("sheetBookmarklet");
-        const refresh = () => { if (link) link.setAttribute("href", "javascript:" + sheetBookmarkletCode()); };
-        if (link) {
-            ["pointerenter", "pointerdown", "dragstart", "focus", "touchstart"].forEach((name) => link.addEventListener(name, refresh, { passive: true }));
-            link.addEventListener("click", (event) => {
-                event.preventDefault();
-                showMessage("responseSheetMessage", "Drag this button to your bookmarks bar, then click it while your SSC response sheet is open.", "info");
-            });
-            refresh();
-        }
-        getById("copySheetBookmarklet")?.addEventListener("click", async () => {
-            const code = sheetBookmarkletCode();
-            try {
-                await navigator.clipboard.writeText(code);
-                showMessage("responseSheetMessage", "Code copied. Open your SSC response sheet, type javascript: in the address bar, paste the code after it and press Go.", "success");
-            } catch (error) {
-                window.prompt("Copy this code:", code);
-            }
-        });
-    }
-
-    function listenForBookmarkletSheet() {
-        if (window.location.hash !== "#sheet-import" || !window.opener) return;
-        window.addEventListener("message", (event) => {
-            if (event.source !== window.opener || !/^https:\/\/([a-z0-9-]+\.)*cbexams\.com$/i.test(event.origin)) return;
-            const data = event.data;
-            if (!data || data.type !== "gju-sheet" || !Array.isArray(data.parts)) return;
-            const parts = data.parts.filter((part) => typeof part === "string" && part.length > 0 && part.length < 3 * 1024 * 1024).slice(0, 8);
-            if (!parts.length) return showMessage("responseSheetMessage", "No response sheet pages were received. Please try again or upload the saved pages.", "error");
-            runResponseSheetParse({ responseSheetHtmlParts: parts }, `Reading ${parts.length} page${parts.length > 1 ? "s" : ""} from your SSC response sheet.`);
-        });
-        showMessage("responseSheetMessage", "Waiting for your SSC response sheet...", "info");
-        try { window.opener.postMessage({ type: "gju-sheet-ready" }, "*"); } catch (error) { /* opener closed */ }
     }
 
     function handleFillFromResponseSheet() {
