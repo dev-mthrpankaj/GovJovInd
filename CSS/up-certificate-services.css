@@ -529,3 +529,12 @@
 .cert-doc-section>.cert-doc-extra{display:contents}
 .cert-doc-section>.cert-doc-extra[hidden]{display:none}
 .cert-tag-extra{display:inline-block;margin-left:.3rem;padding:.08rem .45rem;border-radius:999px;background:#fef3c7;color:#92400e;font-size:.72rem;font-weight:800;vertical-align:1px}
+
+/* Step-by-step reveal */
+.cert-form>.cert-stage-hidden{display:none!important}
+.cert-next{display:flex;justify-content:flex-end;margin-top:.4rem}
+.cert-next-btn{width:100%}
+@media(min-width:600px){.cert-next-btn{width:auto}}
+.cert-form>.cert-step-head,.cert-form>.cert-next{animation:certStepIn .35s ease both}
+@keyframes certStepIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.cert-form>*{animation:none!important}}

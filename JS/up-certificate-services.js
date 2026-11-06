@@ -229,26 +229,58 @@
     setSubmitState("ready");
   }
 
-  // PAN: the rest of the form stays locked until New PAN or Correction / Update is chosen.
-  let panWasLocked = false;
-  function applyPanLock(locked) {
+  // Step-by-step reveal: steps 2-5 stay hidden until a certificate is chosen (and PAN type, for PAN),
+  // then open one at a time via the Continue buttons. Once opened, a step stays open until selection is cleared.
+  let stageReached = 1;
+  const STEP2_IDS = ["applicantName", "fatherName", "motherName", "mobileNumber", "emailId", "district", "tehsil"];
+  function renderStages(scrollToStep) {
     const form = $("#upCertificateForm");
     const anchor = $("#panLockHint");
     if (!form || !anchor) return;
-    let after = false;
+    let after = false, step = 2;
     for (const el of form.children) {
       if (el === anchor) { after = true; continue; }
       if (!after) continue;
-      el.classList.toggle("cert-locked", locked);
-      if (locked) el.setAttribute("inert", ""); else el.removeAttribute("inert");
+      if (el.dataset && el.dataset.step) step = Number(el.dataset.step);
+      const isNext = el.classList.contains("cert-next");
+      const hide = isNext ? !(Number(el.dataset.from) === stageReached) : step > stageReached;
+      el.classList.toggle("cert-stage-hidden", hide);
     }
-    anchor.hidden = !locked;
-    if (panWasLocked && !locked) {
+    if (scrollToStep) {
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      $('.cert-step-head[data-step="2"]')?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      $('.cert-step-head[data-step="' + scrollToStep + '"]')?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     }
-    panWasLocked = locked;
   }
+  function applyPanLock(panLocked) {
+    const anchor = $("#panLockHint");
+    const hasService = $$('input[name="services"]:checked').length > 0;
+    const open = hasService && !panLocked;
+    const prev = stageReached;
+    if (!open) stageReached = 1;
+    else if (stageReached < 2) stageReached = 2;
+    if (anchor) {
+      anchor.hidden = open || !hasService;
+    }
+    renderStages(prev < 2 && stageReached === 2 ? 2 : 0);
+  }
+  function advanceFrom(from) {
+    if (stageReached !== from) return;
+    if (from === 2) {
+      for (const id of STEP2_IDS) {
+        const el = document.getElementById(id);
+        if (el && !el.checkValidity()) { el.reportValidity(); el.focus(); return; }
+      }
+      stageReached = 3;
+      renderStages(3);
+    } else if (from === 3) {
+      stageReached = 5;
+      renderStages(4);
+    }
+  }
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest && e.target.closest(".cert-next-btn");
+    if (btn) advanceFrom(Number(btn.closest(".cert-next").dataset.from));
+  });
 
   function setSubmitState(mode) {
     const button = $("#certSubmitBtn");
