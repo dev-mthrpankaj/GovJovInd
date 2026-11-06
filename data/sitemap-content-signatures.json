@@ -10,8 +10,8 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "3efdd68dd7f2799ac104b9066ee35055967de67606ce3dbff0880bdd6453f225",
-      "lastmod": "2026-11-04"
+      "signature": "e8cbfd08ad5562c50c21579ab303133e4dc60efc4e28c647d903bcc9f03e7d06",
+      "lastmod": "2026-11-05"
     },
     "HTML/answer-key.html": {
       "signature": "8c2e4e433c08b28f8761c8e420c6af5ed2290b57c2a2cc36a3b3a87c44b13ac5",
@@ -130,7 +130,7 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "413d5f83251ab3a5b8af654cbdaf9130fa306e0626250c2c7edb6ee327a0fab4",
+      "signature": "47d07e6c46e460e63f9c4c8313c8fe6cf4796ce5c14bae875a83f974cd87c143",
       "lastmod": "2026-11-05"
     },
     "HTML/rrb-quizzes.html": {
@@ -1121,6 +1121,10 @@
       "signature": "d669e57337ef25358b7b96e9024949552b232eaa9be29b7a90dc1e7fd8b20036",
       "lastmod": "2026-10-16"
     },
+    "jobs/ssc-combined-hindi-translator.html": {
+      "signature": "faa09cc9a462a568cfd4ef72d06518b93709c7bebb7485308c9ee6213bb078ca",
+      "lastmod": "2026-11-05"
+    },
     "jobs/ssc-cpo-si-2025.html": {
       "signature": "2778d9399c3384b6b3b52bb16adab7085010ddb6ec77627038cd08421d89a9d4",
       "lastmod": "2026-10-31"
@@ -1310,8 +1314,8 @@
       "lastmod": "2026-10-27"
     },
     "jobs/upsc-civil-services-ias-ifs-2026.html": {
-      "signature": "67ca02861b05c0577c0ea9ac12ac742518e197f82aec46ee08e2b41947df88cb",
-      "lastmod": "2026-10-18"
+      "signature": "28a97d2dee53c2acd642b21b819f975fcf98530a0a788bd4e47ef44b376aaac0",
+      "lastmod": "2026-11-05"
     },
     "jobs/upsc-cms-admit-card.html": {
       "signature": "dc0d2fc5faaff7ad6cc2959e675c316e945f0f845259e3f33e8434b85c352bd4",
