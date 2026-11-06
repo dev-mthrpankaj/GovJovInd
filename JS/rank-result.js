@@ -77,10 +77,122 @@
         setText("resultLastUpdated", formatDateTime(lastUpdated));
 
         renderQualificationPanel(data);
+        renderTopPerformers(data.topPerformers);
+        renderSessionInsights(data.sessionInsights);
         renderSubjectScorecard(data.subjectAnalysis, payload.subjectData, data.subjectData);
         renderInsights(snapshot, data, payload, { rawMarks, normalizedMarks, totalSubmissions, accuracyIndicator, rankSets });
         renderResultAdSlot();
         setText("shareResultText", buildShareText(snapshot, examName, normalizedMarks));
+    }
+
+    function renderTopPerformers(top) {
+        const panel = getById("topPerformersPanel");
+        if (!panel) return;
+        const list = top && Array.isArray(top.list) ? top.list : [];
+        if (!list.length) {
+            panel.hidden = true;
+            return;
+        }
+        panel.hidden = false;
+
+        const best = Math.max(...list.map((item) => Number(item.marks) || 0), 0.01);
+        const basisText = top.basis === "normalized" ? "normalised marks" : "raw marks";
+        setText("topPerformersSub", `Ranked on ${basisText} of ${formatCount(top.total)} candidates who submitted so far. Names are partly hidden for privacy.`);
+
+        const podiumItems = list.filter((item) => Number(item.rank) <= 3).slice(0, 3);
+        const podium = getById("topPodium");
+        if (podium) {
+            const order = [podiumItems[1], podiumItems[0], podiumItems[2]].filter(Boolean);
+            podium.hidden = !podiumItems.length;
+            podium.innerHTML = order.map((item) => (
+                `<div class="podium-step is-rank-${Math.min(Number(item.rank), 3)}${item.isYou ? " is-you" : ""}">` +
+                    `<span class="podium-medal" aria-hidden="true"><i class="fas fa-${Number(item.rank) === 1 ? "crown" : "medal"}"></i></span>` +
+                    `<span class="podium-rank">#${escapeHtml(item.rank)}</span>` +
+                    `<strong class="podium-name">${escapeHtml(item.displayName)}${item.isYou ? ' <em>You</em>' : ""}</strong>` +
+                    `<span class="podium-marks">${formatMarks(item.marks)}</span>` +
+                `</div>`
+            )).join("");
+        }
+
+        const rowsHtml = list.filter((item) => !podiumItems.includes(item));
+        const listNode = getById("topLeaderList");
+        if (listNode) {
+            listNode.hidden = !rowsHtml.length;
+            listNode.innerHTML = rowsHtml.map((item) => buildLeaderRow(item, best)).join("");
+        }
+
+        const you = top.you;
+        const youGap = getById("leaderYouGap");
+        const youList = getById("leaderYouList");
+        const showYou = Boolean(you && you.inTop === false && Number(you.rank) > 0);
+        if (youGap) youGap.hidden = !showYou;
+        if (youList) {
+            youList.hidden = !showYou;
+            youList.innerHTML = showYou ? buildLeaderRow(you, best) : "";
+        }
+    }
+
+    function buildLeaderRow(item, best) {
+        const marks = Number(item.marks) || 0;
+        const width = Math.max(4, Math.min(100, (marks / best) * 100));
+        return `<li class="leader-row${item.isYou ? " is-you" : ""}">` +
+            `<span class="leader-rank">${escapeHtml(item.rank)}</span>` +
+            `<div class="leader-main">` +
+                `<strong class="leader-name">${escapeHtml(item.displayName)}${item.isYou ? ' <em>You</em>' : ""}</strong>` +
+                `<span class="leader-bar" aria-hidden="true"><i style="width:${width.toFixed(1)}%"></i></span>` +
+            `</div>` +
+            `<span class="leader-marks">${formatMarks(item.marks)}</span>` +
+        `</li>`;
+    }
+
+    function renderSessionInsights(insights) {
+        const panel = getById("sessionInsightsPanel");
+        if (!panel) return;
+        const sessions = insights && Array.isArray(insights.sessions) ? insights.sessions : [];
+        if (sessions.length < 2) {
+            panel.hidden = true;
+            return;
+        }
+        panel.hidden = false;
+
+        const note = getById("sessionNormNote");
+        if (note) {
+            note.hidden = Boolean(insights.normalizationApplied);
+            note.textContent = insights.normalizationApplied ? "" : "Normalisation is not applied yet (it needs enough submissions in two or more shifts), so Gain / Loss is not shown.";
+        }
+
+        const highestAvg = Math.max(...sessions.map((item) => Number(item.average) || 0), 0.01);
+        const difficultyText = { hardest: "Hardest", moderate: "Moderate", easiest: "Easiest" };
+        getById("sessionList").innerHTML = sessions.map((item) => {
+            const average = Number(item.average) || 0;
+            const width = Math.max(4, Math.min(100, (average / highestAvg) * 100));
+            const dateText = item.date ? escapeHtml(item.date) : "Date not given";
+            const gain = item.gain === null || item.gain === undefined ? null : Number(item.gain);
+            let gainHtml = '<span class="gain-chip is-na">Not normalised</span>';
+            if (gain !== null && Number.isFinite(gain)) {
+                const tone = gain > 0.004 ? "is-gain" : (gain < -0.004 ? "is-loss" : "is-flat");
+                const sign = gain > 0.004 ? "+" : "";
+                const icon = gain > 0.004 ? "fa-arrow-trend-up" : (gain < -0.004 ? "fa-arrow-trend-down" : "fa-minus");
+                gainHtml = `<span class="gain-chip ${tone}"><i class="fas ${icon}" aria-hidden="true"></i> ${sign}${gain.toFixed(2)}</span>`;
+            }
+            return `<article class="session-card is-${escapeHtml(item.difficulty)}${item.isYours ? " is-yours" : ""}">` +
+                `<header class="session-head">` +
+                    `<span class="session-order">${escapeHtml(item.difficultyRank)}</span>` +
+                    `<div class="session-title"><strong>${dateText}</strong><span>Shift ${escapeHtml(item.shift)} &middot; ${formatCount(item.candidates)} candidates</span></div>` +
+                    `<div class="session-tags">` +
+                        (item.isYours ? '<span class="session-tag is-yours">Your shift</span>' : "") +
+                        `<span class="session-tag is-${escapeHtml(item.difficulty)}">${difficultyText[item.difficulty] || "Moderate"}</span>` +
+                    `</div>` +
+                `</header>` +
+                `<div class="session-avg"><span>Average marks</span><strong>${formatMarks(average)}</strong></div>` +
+                `<span class="session-bar" aria-hidden="true"><i style="width:${width.toFixed(1)}%"></i></span>` +
+                `<dl class="session-stats">` +
+                    `<div><dt>Highest</dt><dd>${formatMarks(item.highest)}</dd></div>` +
+                    `<div><dt>Lowest</dt><dd>${formatMarks(item.lowest)}</dd></div>` +
+                    `<div><dt>Normalisation Gain / Loss</dt><dd>${gainHtml}</dd></div>` +
+                `</dl>` +
+            `</article>`;
+        }).join("");
     }
 
     function renderQualificationPanel(data) {
