@@ -27,8 +27,6 @@
         if (!input) return;
 
         const label = input.closest("label") || input;
-        const helper = label.querySelector?.(".field-helper");
-        if (helper) helper.textContent = "Optional. Paste your response sheet link and tap Fill. Check the numbers before submitting.";
         const fallbackTitle = document.querySelector(".manual-fallback strong");
         if (fallbackTitle) fallbackTitle.textContent = "Two ways to enter your marks";
         const fallbackNote = document.querySelector(".manual-fallback span");
@@ -51,7 +49,7 @@
             <strong style="display:block;font-size:1.05em">Quick fill from your response sheet</strong>
             <span class="field-helper" style="display:block;margin:4px 0 10px">Fills your name, roll number, exam date, shift and right / wrong answers. Check the numbers before submitting. You can still enter everything by hand.</span>
             <details class="sheet-bookmarklet" open>
-                <summary><strong>Option 1: one click with a bookmark</strong></summary>
+                <summary><strong>One click with a bookmark</strong></summary>
                 <ol>
                     <li>Drag this button to your bookmarks bar (only once):
                         <div class="rs-actions"><a id="sheetBookmarklet" class="btn btn-primary" href="#" draggable="true">Read sheet</a></div>
@@ -64,24 +62,16 @@
                 <span class="field-helper">Easiest on Android Chrome: bookmark any page, then Menu &rarr; Bookmarks &rarr; Edit it, set the name to <strong>sheet</strong> and paste the URL as <strong>javascript:</strong> followed by the copied code. On your response sheet page, type <strong>sheet</strong> in the address bar and tap the bookmark in the suggestions (not Go).</span>
             </details>
             <span class="rs-note">To track your rank without login, use the dashboard.</span>
-            <span class="rs-option">Option 2: paste the link</span>
-            <div class="sheet-link-slot"></div>
-            <div class="rs-actions"><button class="btn btn-outline" id="fillFromSheetBtn" type="button">Fill from response sheet</button></div>
-            <label class="rp-field" for="responseSheetFiles" style="margin-top:16px"><strong>Option 3: upload saved pages</strong>
+            <label class="rp-field" for="responseSheetFiles" style="margin-top:16px"><strong>Or upload your saved response sheet pages</strong>
                 <input id="responseSheetFiles" type="file" accept=".html,.htm,.txt,text/html,text/plain" multiple>
                 <span class="field-helper">Open each PART (A, B, C, D) of the response sheet, save it (Ctrl+S) and select all saved files here.</span>
             </label>
             <div class="form-message hidden" id="responseSheetMessage" role="status" aria-live="polite"></div>`;
+        // The link box stays in the page (hidden): the bookmark fills it so the answer key link is saved with the submission.
+        label.style.setProperty("display", "none", "important");
         const anchor = document.getElementById("candidateDetailsSection");
-        if (anchor) {
-            anchor.insertAdjacentElement("beforebegin", wrap);
-            wrap.querySelector(".sheet-link-slot")?.appendChild(label);
-            label.style.display = "block";
-            label.classList.remove("online-only");
-        } else {
-            label.insertAdjacentElement("afterend", wrap);
-        }
-        getById("fillFromSheetBtn")?.addEventListener("click", handleFillFromResponseSheet);
+        if (anchor) anchor.insertAdjacentElement("beforebegin", wrap);
+        else label.insertAdjacentElement("afterend", wrap);
         getById("responseSheetFiles")?.addEventListener("change", handleResponseSheetFiles);
         bindSheetBookmarklet();
         listenForBookmarkletSheet();
@@ -100,7 +90,7 @@
             `var w=window.open(T,"_blank");if(!w){alert("Please allow pop-ups for this page and try again.");return;}` +
             `var ready=false,data=null;` +
             `var t=setTimeout(function(){if(!ready)alert("Could not reach GovJobUpdates. Please keep that tab open and try again.");},20000);` +
-            `function send(){if(ready&&data){clearTimeout(t);w.postMessage({type:"gju-sheet",parts:data},"*");}}` +
+            `function send(){if(ready&&data){clearTimeout(t);w.postMessage({type:"gju-sheet",parts:data,url:location.href},"*");}}` +
             `window.addEventListener("message",function(e){if(e.source===w&&e.data&&e.data.type==="gju-sheet-ready"){ready=true;send();}});` +
             `C().then(function(d){data=d;send();}).catch(function(){clearTimeout(t);alert("Could not read this page. Please save the pages and upload them instead.");});})();`;
         return code.replace(/\s*\n\s*/g, " ");
@@ -116,6 +106,20 @@
         const version = (SELF_SRC.match(/[?&]v=[^&#]*/) || [""])[0].replace(/^&/, "?");
         const reader = `${base}sheet-reader.js${version}`;
         return `(function(){w=open(${JSON.stringify(target)});s=document.createElement("script");s.src=${JSON.stringify(reader)};s.onload=function(){gjuRun(w)};document.body.appendChild(s)})()`;
+    }
+
+    // Keep the response sheet link (sent by the bookmark) in the hidden link field so it is saved with the submission.
+    function rememberSheetLink(link) {
+        const input = getById("answerSheetLink");
+        if (!input || typeof link !== "string" || link.length > 500) return;
+        let url;
+        try { url = new URL(link); } catch (error) { return; }
+        if (url.protocol !== "https:" || !isAllowedSheetOrigin(url.origin)) return;
+        // SSC part pages (ViewCandResponse2.aspx ...) all belong to the same sheet: store the main one.
+        url.pathname = url.pathname.replace(/ViewCandResponse\d+\.aspx/i, "ViewCandResponse.aspx");
+        url.hash = "";
+        input.value = url.toString();
+        input.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
     function isAllowedSheetOrigin(origin) {
@@ -175,24 +179,21 @@
             if (!data || data.type !== "gju-sheet" || !Array.isArray(data.parts)) return;
             const parts = data.parts.filter((part) => typeof part === "string" && part.length > 0 && part.length < 3 * 1024 * 1024).slice(0, 8);
             if (!parts.length) return showMessage("responseSheetMessage", "No response sheet pages were received. Please try again or upload the saved pages.", "error");
+            rememberSheetLink(data.url);
             runResponseSheetParse({ responseSheetHtmlParts: parts }, `Reading ${parts.length} page${parts.length > 1 ? "s" : ""} from your response sheet.`);
         });
         showMessage("responseSheetMessage", "Waiting for your response sheet...", "info");
         try { window.opener.postMessage({ type: "gju-sheet-ready" }, "*"); } catch (error) { /* opener closed */ }
     }
 
-    function handleFillFromResponseSheet() {
-        const exam = getSelectedExam();
-        const url = readValue("answerSheetLink");
-        if (!exam) return showMessage("responseSheetMessage", "Please select an exam first.", "error");
-        if (!/^https?:\/\/\S+$/i.test(url)) return showMessage("responseSheetMessage", "Paste a valid response sheet link first.", "error");
-        return runResponseSheetParse({ answerSheetLink: url }, "Reading your response sheet. SSC sheets have several parts, so this can take up to a minute.");
-    }
-
     async function handleResponseSheetFiles(event) {
         const input = event.target;
         const files = Array.from(input.files || []).slice(0, 8);
         if (!files.length) return;
+        if (!getSelectedExam()) {
+            input.value = "";
+            return showMessage("responseSheetMessage", "Please select an exam first.", "error");
+        }
         if (files.some((file) => file.size > 3 * 1024 * 1024)) {
             input.value = "";
             return showMessage("responseSheetMessage", "Each saved page must be smaller than 3 MB.", "error");

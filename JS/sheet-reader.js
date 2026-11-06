@@ -34,7 +34,7 @@
         function send() {
             if (ready && data) {
                 clearTimeout(timer);
-                target.postMessage({ type: "gju-sheet", parts: data }, "*");
+                target.postMessage({ type: "gju-sheet", parts: data, url: location.href }, "*");
             }
         }
 
