@@ -6,6 +6,7 @@
 (function () {
     "use strict";
 
+    const SELF_SRC = (document.currentScript && document.currentScript.src) || "";
     let api = null;
     let getById, getSelectedExam, showMessage, postPhpRankApi, getRankApiEndpoint, readValue;
 
@@ -49,22 +50,8 @@
             </style>
             <strong style="display:block;font-size:1.05em">Quick fill from your response sheet</strong>
             <span class="field-helper" style="display:block;margin:4px 0 10px">Fills your name, roll number, exam date, shift and right / wrong answers. Check the numbers before submitting. You can still enter everything by hand.</span>
-            <span class="rs-option" style="margin-top:0">Option 1: copy and paste (works on phone and laptop)</span>
-            <ol>
-                <li>Open your response sheet on the exam website (PART A).</li>
-                <li>Select all the text on the page and copy it. On a phone: press and hold on the page, tap <strong>Select all</strong>, then <strong>Copy</strong>.</li>
-                <li>Tap the box below and paste. Do the same for every PART (B, C, D).</li>
-                <li>Tap <strong>Fill from pasted parts</strong>.</li>
-            </ol>
-            <textarea id="sheetPasteBox" rows="2" placeholder="Tap here, then paste the copied response sheet" style="width:100%;margin-top:8px;padding:10px;border:1px solid #c7d2e5;border-radius:8px;font:inherit" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
-            <div id="sheetPasteList" class="field-helper" aria-live="polite"></div>
-            <div class="rs-actions">
-                <button class="btn btn-primary" id="sheetPasteFill" type="button">Fill from pasted parts</button>
-                <button class="btn btn-outline" id="sheetPasteClear" type="button">Clear</button>
-            </div>
-            <span class="rs-note">To track your rank without login, use the dashboard.</span>
-            <details class="sheet-bookmarklet" style="margin-top:16px">
-                <summary><strong>Option 2: one click on a laptop (bookmark)</strong></summary>
+            <details class="sheet-bookmarklet" open>
+                <summary><strong>Option 1: one click with a bookmark</strong></summary>
                 <ol>
                     <li>Drag this button to your bookmarks bar (only once):
                         <div class="rs-actions"><a id="sheetBookmarklet" class="btn btn-primary" href="#" draggable="true">Read sheet</a></div>
@@ -72,11 +59,15 @@
                     <li>Open your response sheet (SSC, RRB or any TCS iON exam) in the browser as usual.</li>
                     <li>Click that bookmark. This page opens and everything is filled in automatically.</li>
                 </ol>
+                <span class="rs-option">On a phone (advanced)</span>
+                <div class="rs-actions"><button class="btn btn-outline" id="copyShortSheetCode" type="button">Copy short code</button></div>
+                <span class="field-helper">Easiest on Android Chrome: bookmark any page, then Menu &rarr; Bookmarks &rarr; Edit it, set the name to <strong>sheet</strong> and paste the URL as <strong>javascript:</strong> followed by the copied code. On your response sheet page, type <strong>sheet</strong> in the address bar and tap the bookmark in the suggestions (not Go).</span>
             </details>
-            <span class="rs-option">Option 3: paste the link</span>
+            <span class="rs-note">To track your rank without login, use the dashboard.</span>
+            <span class="rs-option">Option 2: paste the link</span>
             <div class="sheet-link-slot"></div>
             <div class="rs-actions"><button class="btn btn-outline" id="fillFromSheetBtn" type="button">Fill from response sheet</button></div>
-            <label class="rp-field" for="responseSheetFiles" style="margin-top:16px"><strong>Option 4: upload saved pages</strong>
+            <label class="rp-field" for="responseSheetFiles" style="margin-top:16px"><strong>Option 3: upload saved pages</strong>
                 <input id="responseSheetFiles" type="file" accept=".html,.htm,.txt,text/html,text/plain" multiple>
                 <span class="field-helper">Open each PART (A, B, C, D) of the response sheet, save it (Ctrl+S) and select all saved files here.</span>
             </label>
@@ -93,64 +84,9 @@
         getById("fillFromSheetBtn")?.addEventListener("click", handleFillFromResponseSheet);
         getById("responseSheetFiles")?.addEventListener("change", handleResponseSheetFiles);
         bindSheetBookmarklet();
-        bindSheetPaste();
         listenForBookmarkletSheet();
     }
 
-
-    // ---- Copy and paste: the candidate copies each PART from the exam page and pastes it here (no code, works on phones) ----
-    const pastedParts = [];
-
-    function pastedSectionName(html) {
-        const match = /id=["']lblsubject["'][^>]*>([\s\S]*?)<\/span>/i.exec(html);
-        return match ? match[1].replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim() : "";
-    }
-
-    function renderPastedParts() {
-        const list = getById("sheetPasteList");
-        if (!list) return;
-        list.textContent = pastedParts.length
-            ? `Pasted ${pastedParts.length} part${pastedParts.length > 1 ? "s" : ""}: ` + pastedParts.map((part, index) => part.name || `Part ${index + 1}`).join(", ") + ". Paste the next PART, or tap Fill."
-            : "";
-    }
-
-    function bindSheetPaste() {
-        const box = getById("sheetPasteBox");
-        if (!box) return;
-        box.addEventListener("paste", (event) => {
-            event.preventDefault();
-            const clip = event.clipboardData;
-            let html = clip?.getData("text/html") || "";
-            if (!html || !/Q\.\s*No/i.test(html)) {
-                // Some phones only paste plain text, which has no right/wrong colours.
-                const plain = clip?.getData("text/plain") || "";
-                if (/<[a-z][\s\S]*>/i.test(plain) && /Q\.\s*No/i.test(plain)) html = plain;
-            }
-            if (!html || !/Q\.\s*No/i.test(html)) {
-                return showMessage("responseSheetMessage", "That copy has no questions or colours. Open the response sheet page, choose Select all, tap Copy and paste again. If it keeps failing, use the Option 2 bookmark or enter marks by hand.", "error");
-            }
-            html = html.replace(/<img\b[^>]*>/gi, "").replace(/<script[\s\S]*?<\/script>/gi, "");
-            if (html.length > 3 * 1024 * 1024) return showMessage("responseSheetMessage", "That page is too large. Copy one PART at a time.", "error");
-            const name = pastedSectionName(html);
-            const existing = name ? pastedParts.findIndex((part) => part.name === name) : -1;
-            if (existing >= 0) pastedParts[existing] = { name, html };
-            else if (pastedParts.length < 8) pastedParts.push({ name, html });
-            box.value = "";
-            renderPastedParts();
-            showMessage("responseSheetMessage", `Part received${name ? ": " + name : ""}. Paste the other PARTs, then tap Fill from pasted parts.`, "success");
-        });
-        getById("sheetPasteFill")?.addEventListener("click", () => {
-            const exam = getSelectedExam();
-            if (!exam) return showMessage("responseSheetMessage", "Please select an exam first.", "error");
-            if (!pastedParts.length) return showMessage("responseSheetMessage", "Paste at least one PART first.", "error");
-            return runResponseSheetParse({ responseSheetHtmlParts: pastedParts.map((part) => part.html) }, `Reading ${pastedParts.length} pasted part${pastedParts.length > 1 ? "s" : ""}.`);
-        });
-        getById("sheetPasteClear")?.addEventListener("click", () => {
-            pastedParts.length = 0;
-            renderPastedParts();
-            showMessage("responseSheetMessage", "Cleared. Paste your PARTs again.", "info");
-        });
-    }
 
     // ---- One-click import: a bookmark run on the exam site reads the sheet in the candidate's own browser and sends it here ----
     function sheetBookmarkletCode() {
@@ -168,6 +104,18 @@
             `window.addEventListener("message",function(e){if(e.source===w&&e.data&&e.data.type==="gju-sheet-ready"){ready=true;send();}});` +
             `C().then(function(d){data=d;send();}).catch(function(){clearTimeout(t);alert("Could not read this page. Please save the pages and upload them instead.");});})();`;
         return code.replace(/\s*\n\s*/g, " ");
+    }
+
+    // Short bookmark for phones: opens this page, then loads JS/sheet-reader.js from here. No spaces, about 300 characters.
+    function shortBookmarkletCode() {
+        const exam = getSelectedExam();
+        const examId = exam?.examId || "";
+        const target = `${window.location.origin}${window.location.pathname}${examId ? `?exam=${encodeURIComponent(examId)}` : ""}#sheet-import`;
+        const own = SELF_SRC.replace(/[?#].*$/, "");
+        const base = own ? own.replace(/[^/]+$/, "") : `${window.location.origin}/JS/`;
+        const version = (SELF_SRC.match(/[?&]v=[^&#]*/) || [""])[0].replace(/^&/, "?");
+        const reader = `${base}sheet-reader.js${version}`;
+        return `(function(){w=open(${JSON.stringify(target)});s=document.createElement("script");s.src=${JSON.stringify(reader)};s.onload=function(){gjuRun(w)};document.body.appendChild(s)})()`;
     }
 
     function isAllowedSheetOrigin(origin) {
@@ -199,6 +147,15 @@
             });
             refresh();
         }
+        getById("copyShortSheetCode")?.addEventListener("click", async () => {
+            const code = shortBookmarkletCode();
+            try {
+                await navigator.clipboard.writeText(code);
+                showMessage("responseSheetMessage", "Short code copied. Now follow the phone steps below it.", "success");
+            } catch (error) {
+                window.prompt("Copy this code:", code);
+            }
+        });
         getById("copySheetBookmarklet")?.addEventListener("click", async () => {
             const code = sheetBookmarkletCode();
             try {
