@@ -7,6 +7,9 @@
     const DOWNLOAD_IDLE_HTML = '<i class="fas fa-download" aria-hidden="true"></i> Download Scorecard';
     const IMAGE_SHARE_IDLE_HTML = '<i class="fas fa-image" aria-hidden="true"></i> Share Scorecard';
     const SCORECARD_LOGO_SRC = "../Assets/govjobupdates-logo.png";
+    const SCORECARD_FONT = 'Inter, "Segoe UI", "Noto Sans Devanagari", "Nirmala UI", Arial, sans-serif';
+    // Hide the middle digits of the roll number on the shareable image (set to false to show it in full).
+    const SCORECARD_MASK_ROLL = true;
 
     document.addEventListener("DOMContentLoaded", initRankResult);
 
@@ -706,103 +709,471 @@
         });
     }
 
+    async function ensureScorecardFonts() {
+        if (!document.fonts || typeof document.fonts.load !== "function") return;
+        const sample = "Rank 0123456789#%/.,\u2022\u2014 ABCabc";
+        try {
+            await Promise.all([400, 500, 600, 700, 800].map((weight) => document.fonts.load(`${weight} 24px Inter`, sample)));
+        } catch (error) {
+            /* system fonts are used as a fallback */
+        }
+    }
+
     async function buildScorecardCanvas(snapshot) {
         const model = buildScorecardModel(snapshot);
+        const [logo] = await Promise.all([loadScorecardLogo(), ensureScorecardFonts()]);
         const width = 1200;
-        const subjectRowHeight = 82;
-        const qualificationHeight = model.isNotQualified ? 154 : 0;
-        const subjectsHeight = model.subjects.length ? 92 + (model.subjects.length * subjectRowHeight) : 0;
-        const height = 1180 + qualificationHeight + subjectsHeight;
+
+        // Pass 1 measures the layout on a throw-away canvas, pass 2 paints at the exact height (no dead space).
+        const probe = document.createElement("canvas");
+        probe.width = width;
+        probe.height = 8;
+        const height = renderScorecard(probe.getContext("2d"), model, logo, width, 0);
+
+        let scale = 1.5;
+        while (scale > 1 && width * scale * height * scale > 12000000) scale -= 0.25;
         const canvas = document.createElement("canvas");
+        canvas.width = Math.round(width * scale);
+        canvas.height = Math.round(height * scale);
         const ctx = canvas.getContext("2d");
-        canvas.width = width;
-        canvas.height = height;
-
-        ctx.fillStyle = "#f4f7fb";
-        ctx.fillRect(0, 0, width, height);
-        fillRoundRect(ctx, 64, 64, width - 128, height - 128, 34, "#ffffff");
-        fillRoundRect(ctx, 64, 64, width - 128, 224, 34, "#0b5ed7");
-        fillRoundRect(ctx, 64, 222, width - 128, 66, 0, "#0b5ed7");
-
-        await drawScorecardLogo(ctx, 108, 94, 64);
-        drawText(ctx, "GovJobUpdates", 190, 132, 34, 900, "#ffffff");
-        drawText(ctx, "Rank Predictor Scorecard", 108, 186, 52, 900, "#ffffff");
-        drawWrappedText(ctx, model.examName, 108, 250, 980, 31, 1.25, 800, "#eaf2ff");
-
-        if (model.isNotQualified) {
-            drawQualificationWarning(ctx, model, 108, 318);
-        }
-
-        const offsetY = qualificationHeight;
-        drawText(ctx, "Overall Rank", 108, 374 + offsetY, 30, 900, "#5b6575");
-        drawText(ctx, model.overallRank, 108, 472 + offsetY, 94, 900, "#0b5ed7");
-        drawText(ctx, "Percentile", 680, 374 + offsetY, 30, 900, "#5b6575");
-        drawText(ctx, model.percentile, 680, 456 + offsetY, 70, 900, "#0f766e");
-
-        drawMetricPill(ctx, 108, 548 + offsetY, "Roll Number", model.rollNumber);
-        drawMetricPill(ctx, 420, 548 + offsetY, "Marks", model.marks);
-        drawMetricPill(ctx, 732, 548 + offsetY, "Submissions", model.totalSubmissions);
-
-        const metricY = 704 + offsetY;
-        drawMetricCard(ctx, 108, metricY, "Category Rank", model.categoryRank);
-        drawMetricCard(ctx, 420, metricY, "State Rank", model.stateRank);
-        drawMetricCard(ctx, 732, metricY, "Shift Rank", model.shiftRank);
-
-        let y = 912 + offsetY;
-        drawText(ctx, "Subject Scorecard", 108, y, 34, 900, "#0f172a");
-        y += 36;
-        if (model.subjects.length) {
-            model.subjects.forEach((subject) => {
-                drawSubjectScorecardRow(ctx, subject, 108, y);
-                y += subjectRowHeight;
-            });
-        } else {
-            drawText(ctx, "Subject data not available", 108, y + 42, 28, 800, "#5b6575");
-            y += 92;
-        }
-
-        const footerY = height - 158;
-        ctx.strokeStyle = "#dbe3ee";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(108, footerY - 48);
-        ctx.lineTo(1092, footerY - 48);
-        ctx.stroke();
-        drawWrappedText(ctx, "Generated from GovJobUpdates Rank Predictor. This is an estimated rank based on submitted candidate data.", 108, footerY, 980, 24, 1.4, 800, "#5b6575");
-        drawText(ctx, getPublicSiteOrigin(), 108, footerY + 84, 24, 900, "#0b5ed7");
-
+        ctx.scale(scale, scale);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        renderScorecard(ctx, model, logo, width, height);
         return canvas;
+    }
+
+    function renderScorecard(ctx, m, logo, W, H) {
+        const C = SCORECARD_COLORS;
+        const cardX = 48;
+        const cardTop = 48;
+        const cardW = W - 96;
+        const pad = 56;
+        const radius = 36;
+        const ix = cardX + pad;
+        const iw = cardW - pad * 2;
+        const ir = ix + iw;
+
+        if (H) {
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, "#e9eff8");
+            bg.addColorStop(1, "#dce6f4");
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            ctx.save();
+            ctx.shadowColor = "rgba(15, 23, 42, 0.18)";
+            ctx.shadowBlur = 48;
+            ctx.shadowOffsetY = 18;
+            fillRoundRect(ctx, cardX, cardTop, cardW, H - cardTop * 2, radius, C.white);
+            ctx.restore();
+        }
+
+        /* ---------- Header ---------- */
+        const tileSize = 68;
+        const tileTop = cardTop + 40;
+        const title = layoutScorecardTitle(ctx, m.examName, iw);
+        const titleLineHeight = Math.round(title.size * 1.2);
+        const firstBaseline = tileTop + tileSize + 30 + Math.round(title.size * 0.74);
+        const lastBaseline = firstBaseline + (title.lines.length - 1) * titleLineHeight;
+        const chipsTop = lastBaseline + 30;
+        const chipLayout = layoutScorecardChips(ctx, m.chips, ix, iw, chipsTop);
+        const headerBottom = (chipLayout.bottom || lastBaseline + 4) + 40;
+        const headerH = headerBottom - cardTop;
+
+        if (H) {
+            ctx.save();
+            topRoundedRectPath(ctx, cardX, cardTop, cardW, headerH, radius);
+            ctx.clip();
+            const grad = ctx.createLinearGradient(cardX, cardTop, cardX + cardW, headerBottom);
+            grad.addColorStop(0, C.navy);
+            grad.addColorStop(1, C.blue);
+            ctx.fillStyle = grad;
+            ctx.fillRect(cardX, cardTop, cardW, headerH);
+            ctx.fillStyle = "rgba(255,255,255,0.06)";
+            ctx.beginPath(); ctx.arc(cardX + cardW - 70, cardTop + 40, 190, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = "rgba(255,255,255,0.05)";
+            ctx.beginPath(); ctx.arc(cardX + cardW - 250, headerBottom + 20, 150, 0, Math.PI * 2); ctx.fill();
+            const stripeY = headerBottom - 6;
+            ctx.fillStyle = "#ff9933"; ctx.fillRect(cardX, stripeY, cardW / 3, 6);
+            ctx.fillStyle = "#ffffff"; ctx.fillRect(cardX + cardW / 3, stripeY, cardW / 3, 6);
+            ctx.fillStyle = "#138808"; ctx.fillRect(cardX + (cardW * 2) / 3, stripeY, cardW / 3 + 1, 6);
+            ctx.restore();
+        }
+
+        drawScorecardLogo(ctx, logo, ix, tileTop, tileSize);
+        drawText(ctx, "GovJobUpdates", ix + tileSize + 20, tileTop + 31, 32, 800, "#ffffff");
+        drawLabel(ctx, "Rank Predictor Scorecard", ix + tileSize + 20, tileTop + 58, 15, 600, "rgba(255,255,255,0.78)");
+        drawText(ctx, m.generatedDate, ir, tileTop + 31, 21, 600, "rgba(255,255,255,0.92)", "right");
+        drawLabel(ctx, "Estimated rank", ir, tileTop + 58, 14, 600, "rgba(255,255,255,0.7)", "right");
+
+        title.lines.forEach((line, index) => {
+            drawText(ctx, line, ix, firstBaseline + index * titleLineHeight, title.size, 800, "#ffffff");
+        });
+        chipLayout.items.forEach((chip) => {
+            fillRoundRect(ctx, chip.x, chip.y, chip.w, chip.h, chip.h / 2, "rgba(255,255,255,0.16)");
+            ctx.strokeStyle = "rgba(255,255,255,0.34)";
+            ctx.lineWidth = 1.5;
+            strokeRoundRect(ctx, chip.x, chip.y, chip.w, chip.h, chip.h / 2);
+            drawText(ctx, chip.text, chip.x + 20, chip.y + 28, 19, 600, "#ffffff");
+        });
+
+        let y = headerBottom;
+
+        /* ---------- Qualification warning ---------- */
+        if (m.isNotQualified) {
+            const boxTop = y + 36;
+            const boxH = 128;
+            fillRoundRect(ctx, ix, boxTop, iw, boxH, 18, "#fef2f2");
+            ctx.strokeStyle = "#fecaca";
+            ctx.lineWidth = 2;
+            strokeRoundRect(ctx, ix, boxTop, iw, boxH, 18);
+            fillRoundRect(ctx, ix, boxTop + 18, 7, boxH - 36, 3.5, C.red);
+            drawLabel(ctx, m.qualificationStatus, ix + 32, boxTop + 38, 15, 800, C.red);
+            drawFittedText(ctx, m.failedTitle || m.qualificationMessage, ix + 32, boxTop + 76, iw - 64, 27, 18, 800, "#991b1b");
+            if (m.failedDetail) drawFittedText(ctx, m.failedDetail, ix + 32, boxTop + 108, iw - 64, 19, 14, 500, C.red);
+            y = boxTop + boxH;
+        }
+
+        /* ---------- Hero: rank + percentile ---------- */
+        const heroTop = y + 52;
+        const colGap = 560;
+        drawLabel(ctx, "Overall rank", ix, heroTop + 18, 17, 700, C.muted);
+        drawFittedText(ctx, m.overallRank, ix, heroTop + 150, 440, m.overallRank === "Pending" ? 72 : 132, 48, 800, m.overallRank === "Pending" ? C.faint : C.blue);
+        if (m.totalSubmissionsNumber > 0) {
+            drawText(ctx, `out of ${m.totalSubmissions} candidates`, ix, heroTop + 240, 24, 500, C.slate);
+        }
+        ctx.strokeStyle = C.line;
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ix + 500, heroTop + 4); ctx.lineTo(ix + 500, heroTop + 246); ctx.stroke();
+
+        const px = ix + colGap;
+        const pw = iw - colGap;
+        drawLabel(ctx, "Percentile", px, heroTop + 18, 17, 700, C.muted);
+        if (Number.isFinite(m.percentileValue)) {
+            const numberText = m.percentileValue.toFixed(2);
+            const numberSize = 112;
+            drawText(ctx, numberText, px, heroTop + 150, numberSize, 800, C.teal);
+            const numberWidth = measureText(ctx, numberText, numberSize, 800);
+            drawText(ctx, "%", px + numberWidth + 6, heroTop + 150, 54, 800, C.teal);
+
+            const pct = Math.min(Math.max(m.percentileValue, 0), 100);
+            const trackY = heroTop + 190;
+            fillRoundRect(ctx, px, trackY, pw, 14, 7, "#e2e8f0");
+            const fillW = Math.max(14, (pw * pct) / 100);
+            const fillGrad = ctx.createLinearGradient(px, 0, px + pw, 0);
+            fillGrad.addColorStop(0, "#2dd4bf");
+            fillGrad.addColorStop(1, C.teal);
+            fillRoundRect(ctx, px, trackY, fillW, 14, 7, fillGrad);
+            const markerX = Math.min(Math.max(px + fillW, px + 14), px + pw - 14);
+            ctx.beginPath();
+            ctx.arc(markerX, trackY + 7, 14, 0, Math.PI * 2);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = C.teal;
+            ctx.stroke();
+            drawText(ctx, `Ahead of ${m.percentileValue.toFixed(2)}% of candidates`, px, heroTop + 240, 22, 600, C.slate);
+        } else {
+            drawFittedText(ctx, "Pending", px, heroTop + 150, pw, 72, 40, 800, C.faint);
+        }
+        y = heroTop + 262;
+
+        /* ---------- Key stats ---------- */
+        const statTop = y + 44;
+        const statGap = 20;
+        const statW = (iw - statGap * 2) / 3;
+        const statH = 116;
+        const stats = [
+            { label: "Marks", value: m.marks, suffix: m.maxMarksText ? `/ ${m.maxMarksText}` : "" },
+            { label: "Roll number", value: m.rollNumberMasked, suffix: "" },
+            { label: "Ranking basis", value: m.rankBasisLabel, suffix: "" }
+        ];
+        stats.forEach((stat, index) => {
+            const sx = ix + index * (statW + statGap);
+            fillRoundRect(ctx, sx, statTop, statW, statH, 20, C.soft);
+            ctx.strokeStyle = C.line;
+            ctx.lineWidth = 2;
+            strokeRoundRect(ctx, sx, statTop, statW, statH, 20);
+            drawLabel(ctx, stat.label, sx + 26, statTop + 38, 15, 700, C.muted);
+            const suffixWidth = stat.suffix ? measureText(ctx, stat.suffix, 20, 600) + 10 : 0;
+            const usedSize = drawFittedText(ctx, stat.value, sx + 26, statTop + 86, statW - 52 - suffixWidth, 38, 22, 800, C.ink);
+            if (stat.suffix) {
+                const valueWidth = measureText(ctx, stat.value, usedSize, 800);
+                drawText(ctx, stat.suffix, sx + 26 + valueWidth + 10, statTop + 86, 20, 600, C.muted);
+            }
+        });
+        y = statTop + statH;
+
+        /* ---------- Group ranks ---------- */
+        const groupHeadingY = y + 60;
+        drawSectionHeading(ctx, "Rank across groups", ix, groupHeadingY);
+        const tileTopY = groupHeadingY + 24;
+        const tileGap = 20;
+        const tiles = m.groupRanks;
+        const tileW = (iw - tileGap * (tiles.length - 1)) / tiles.length;
+        const tileH = 128;
+        tiles.forEach((tile, index) => {
+            const tx = ix + index * (tileW + tileGap);
+            fillRoundRect(ctx, tx, tileTopY, tileW, tileH, 20, C.white);
+            ctx.strokeStyle = "#cfd9e8";
+            ctx.lineWidth = 2;
+            strokeRoundRect(ctx, tx, tileTopY, tileW, tileH, 20);
+            fillRoundRect(ctx, tx, tileTopY + 26, 6, tileH - 52, 3, tile.value === "Pending" ? "#cbd5e1" : C.blue);
+            drawLabel(ctx, tile.label, tx + 30, tileTopY + 42, 15, 700, C.muted);
+            drawFittedText(ctx, tile.value === "Pending" ? "\u2014" : tile.value, tx + 30, tileTopY + 102, tileW - 60, 52, 28, 800, tile.value === "Pending" ? C.faint : C.blue);
+        });
+        y = tileTopY + tileH;
+
+        /* ---------- Subject table ---------- */
+        const subjectHeadingY = y + 60;
+        drawSectionHeading(ctx, "Subject-wise performance", ix, subjectHeadingY);
+        const tableTop = subjectHeadingY + 24;
+        if (m.subjects.length) {
+            const scoreX = ix + 470;
+            const accX = ix + 610;
+            const nameW = scoreX - (ix + 28) - 28;
+            const rows = m.subjects.map((subject) => layoutScorecardSubject(ctx, subject, nameW));
+            const headH = 50;
+            const bodyH = rows.reduce((sum, row) => sum + row.height, 0);
+            const tableH = headH + bodyH;
+
+            ctx.save();
+            roundedRectPath(ctx, ix, tableTop, iw, tableH, 22);
+            ctx.clip();
+            ctx.fillStyle = C.white;
+            ctx.fillRect(ix, tableTop, iw, tableH);
+            ctx.fillStyle = "#f1f5f9";
+            ctx.fillRect(ix, tableTop, iw, headH);
+            let rowTop = tableTop + headH;
+            rows.forEach((row, index) => {
+                if (row.failed) {
+                    ctx.fillStyle = "#fff1f2";
+                    ctx.fillRect(ix, rowTop, iw, row.height);
+                } else if (index % 2 === 1) {
+                    ctx.fillStyle = "#fafcfe";
+                    ctx.fillRect(ix, rowTop, iw, row.height);
+                }
+                if (index > 0) {
+                    ctx.fillStyle = "#e8edf4";
+                    ctx.fillRect(ix + 28, rowTop, iw - 56, 1.5);
+                }
+                row.top = rowTop;
+                rowTop += row.height;
+            });
+            ctx.restore();
+            ctx.strokeStyle = "#d5deeb";
+            ctx.lineWidth = 2;
+            strokeRoundRect(ctx, ix, tableTop, iw, tableH, 22);
+
+            drawLabel(ctx, "Subject", ix + 28, tableTop + 31, 14, 700, C.muted);
+            drawLabel(ctx, "Score", scoreX, tableTop + 31, 14, 700, C.muted);
+            drawLabel(ctx, "Accuracy", accX, tableTop + 31, 14, 700, C.muted);
+            if (m.showStatus) drawLabel(ctx, "Status", ir - 28, tableTop + 31, 14, 700, C.muted, "right");
+
+            rows.forEach((row) => {
+                const s = row.subject;
+                const mid = row.top + row.height / 2;
+                const blockTop = row.top + (row.height - row.blockHeight) / 2;
+                row.lines.forEach((line, index) => {
+                    drawText(ctx, line, ix + 28, blockTop + row.size * 0.95 + index * row.lineHeight, row.size, 700, row.failed ? "#991b1b" : C.ink);
+                });
+                if (s.qualifyingOnly) {
+                    const badgeY = blockTop + row.lines.length * row.lineHeight + 6;
+                    const badgeText = "Qualifying only";
+                    const badgeW = measureLabel(ctx, badgeText, 12, 800) + 24;
+                    fillRoundRect(ctx, ix + 28, badgeY, badgeW, 26, 13, row.failed ? "#fee2e2" : "#e0f2fe");
+                    drawLabel(ctx, badgeText, ix + 40, badgeY + 18, 12, 800, row.failed ? C.red : "#0369a1");
+                }
+
+                const scoreSize = 28;
+                drawText(ctx, s.score, scoreX, mid + 10, scoreSize, 800, row.failed ? C.red : C.ink);
+                if (s.maxMarksText) {
+                    const scoreWidth = measureText(ctx, s.score, scoreSize, 800);
+                    drawText(ctx, `/ ${s.maxMarksText}`, scoreX + scoreWidth + 8, mid + 10, 19, 600, C.muted);
+                }
+
+                const accColor = accuracyColor(s.accuracyValue, row.failed);
+                const barW = 130;
+                fillRoundRect(ctx, accX, mid - 6, barW, 12, 6, "#e2e8f0");
+                if (Number.isFinite(s.accuracyValue)) {
+                    const fill = Math.max(12, (barW * Math.min(Math.max(s.accuracyValue, 0), 100)) / 100);
+                    fillRoundRect(ctx, accX, mid - 6, fill, 12, 6, accColor);
+                }
+                drawText(ctx, s.accuracyText, accX + barW + 14, mid + 8, 23, 800, accColor);
+
+                if (s.passingStatus) {
+                    const failedStatus = String(s.passingStatus).toLowerCase() === "fail";
+                    const label = failedStatus ? "Fail" : "Pass";
+                    const badgeW = 88;
+                    fillRoundRect(ctx, ir - 28 - badgeW, mid - 16, badgeW, 32, 16, failedStatus ? "#fee2e2" : "#dcfce7");
+                    drawLabel(ctx, label, ir - 28 - badgeW / 2, mid + 6, 14, 800, failedStatus ? C.red : "#166534", "center");
+                }
+            });
+            y = tableTop + tableH;
+        } else {
+            fillRoundRect(ctx, ix, tableTop, iw, 96, 20, C.soft);
+            drawText(ctx, "Subject-wise data is not available for this result.", ix + 28, tableTop + 58, 23, 600, C.muted);
+            y = tableTop + 96;
+        }
+
+        /* ---------- Footer ---------- */
+        const footTop = y + 56;
+        ctx.strokeStyle = C.line;
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ix, footTop); ctx.lineTo(ir, footTop); ctx.stroke();
+
+        const siteText = getPublicSiteOrigin().replace(/^https?:\/\//, "");
+        const siteWidth = measureText(ctx, siteText, 26, 800);
+        const brandX = ir - siteWidth;
+        drawScorecardLogo(ctx, logo, brandX - 56, footTop + 28, 42);
+        drawText(ctx, siteText, ir, footTop + 62, 26, 800, C.blue, "right");
+        drawText(ctx, "Check your rank free", ir, footTop + 92, 19, 600, C.muted, "right");
+
+        const noteLines = wrapLines(ctx, "Estimated rank based on candidate data submitted on GovJobUpdates. Actual results may differ.", iw - 380, 19, 500);
+        noteLines.forEach((line, index) => drawText(ctx, line, ix, footTop + 52 + index * 28, 19, 500, C.muted));
+        const noteBottom = footTop + 52 + (noteLines.length - 1) * 28;
+        drawText(ctx, `Generated on ${m.generatedAt}`, ix, noteBottom + 32, 17, 600, C.faint);
+
+        const cardBottom = Math.max(noteBottom + 32, footTop + 92) + 52;
+        return cardBottom + cardTop;
+    }
+
+    const SCORECARD_COLORS = {
+        navy: "#0a2463", blue: "#0b5ed7", ink: "#0f172a", slate: "#475569", muted: "#64748b", faint: "#94a3b8",
+        line: "#e2e8f0", soft: "#f8fafc", white: "#ffffff", teal: "#0f766e", red: "#b91c1c"
+    };
+
+    function accuracyColor(value, failed) {
+        if (failed) return "#dc2626";
+        if (!Number.isFinite(value)) return "#94a3b8";
+        if (value >= 80) return "#0f9d6b";
+        if (value >= 60) return "#0b5ed7";
+        return "#d97706";
+    }
+
+    function layoutScorecardTitle(ctx, text, maxWidth) {
+        const value = String(text || "Rank Prediction Result");
+        for (const size of [46, 40, 34]) {
+            const lines = wrapLines(ctx, value, maxWidth, size, 800);
+            if (lines.length <= 2) return { size, lines };
+        }
+        const lines = wrapLines(ctx, value, maxWidth, 32, 800).slice(0, 2);
+        lines[1] = ellipsize(ctx, `${lines[1].replace(/\s+$/, "")}\u2026`, maxWidth, 32, 800);
+        return { size: 32, lines };
+    }
+
+    function layoutScorecardChips(ctx, chips, x, maxWidth, top) {
+        const items = [];
+        if (!chips || !chips.length) return { items, bottom: 0 };
+        const chipH = 42;
+        const gap = 12;
+        let cx = x;
+        let cy = top;
+        chips.forEach((text) => {
+            const w = Math.ceil(measureText(ctx, text, 19, 600)) + 40;
+            if (cx > x && cx + w > x + maxWidth) {
+                cx = x;
+                cy += chipH + gap;
+            }
+            items.push({ text, x: cx, y: cy, w, h: chipH });
+            cx += w + gap;
+        });
+        return { items, bottom: cy + chipH };
+    }
+
+    function layoutScorecardSubject(ctx, subject, nameWidth) {
+        let size = 24;
+        let lines = [subject.name];
+        const sizes = [24, 22, 20];
+        let fitted = false;
+        for (const candidate of sizes) {
+            if (measureText(ctx, subject.name, candidate, 700) <= nameWidth) {
+                size = candidate;
+                fitted = true;
+                break;
+            }
+        }
+        if (!fitted) {
+            size = 20;
+            lines = wrapLines(ctx, subject.name, nameWidth, size, 700);
+            if (lines.length > 2) {
+                lines = lines.slice(0, 2);
+                lines[1] = ellipsize(ctx, `${lines[1].replace(/\s+$/, "")}\u2026`, nameWidth, size, 700);
+            }
+        }
+        const lineHeight = Math.round(size * 1.28);
+        const blockHeight = lines.length * lineHeight + (subject.qualifyingOnly ? 34 : 0);
+        const failed = String(subject.passingStatus || "").toLowerCase() === "fail";
+        return { subject, size, lines, lineHeight, blockHeight, height: Math.max(88, blockHeight + 44), failed, top: 0 };
     }
 
     function buildScorecardModel(snapshot) {
         const data = snapshot.resultData || {};
         const payload = snapshot.payload || {};
+        const exam = snapshot.exam || {};
         const examName = firstValue(payload.examName, snapshot.examName, data.examName, snapshot.exam?.examName, "Rank Prediction Result");
         const rawMarks = firstValue(data.rawMarks, data.marks, payload.rawMarks, null);
         const normalizedMarks = getNormalizedMarks(snapshot, rawMarks);
         const rankSets = getRankSets(data);
-        const activeRanks = normalizeRankBasis(data.rankBasis) === "normalized" && rankSets.normalized ? rankSets.normalized : rankSets.raw || rankSets.normalized || {};
+        const normalizedBasis = normalizeRankBasis(data.rankBasis) === "normalized" && Boolean(rankSets.normalized);
+        const activeRanks = normalizedBasis ? rankSets.normalized : rankSets.raw || rankSets.normalized || {};
         const subjects = getScorecardSubjects(data.subjectAnalysis, payload.subjectData, data.subjectData).slice(0, 7);
         const failedSubjects = Array.isArray(data.failedSubjects) ? data.failedSubjects : [];
         const isNotQualified = data.isQualified === false || String(data.qualificationStatus || "").toLowerCase() === "not qualified" || failedSubjects.length > 0;
+        const hasShifts = getHasShifts(snapshot, data);
 
+        const maxMarks = getScoringTotalQuestions(exam) * toNumber(exam.marksPerCorrect);
+        const marksValue = toNumber(firstValue(normalizedMarks, rawMarks, null));
+        const totalSubmissionsRaw = firstValue(data.totalSubmissions, data.total, data.submissions, payload.totalSubmissions, null);
+        const rollNumber = formatPlain(firstValue(payload.rollNumber, data.rollNumber, "Not available"));
+
+        const chips = [];
+        const addChip = (value) => {
+            if (!isMissing(value) && String(value).trim().toLowerCase() !== "none") chips.push(String(value).trim());
+        };
+        addChip(payload.category);
+        addChip(payload.state);
+        if (hasShifts && !isMissing(payload.shift)) addChip(/^shift/i.test(String(payload.shift)) ? payload.shift : `Shift ${payload.shift}`);
+        addChip(formatExamDate(payload.examDate));
+        addChip(payload.horizontalCategory);
+
+        const groupRanks = [
+            { label: "Category rank", value: formatRank(activeRanks.categoryRank) },
+            { label: "State rank", value: formatRank(activeRanks.stateRank) }
+        ];
+        if (hasShifts) groupRanks.push({ label: "Shift rank", value: formatRank(activeRanks.shiftRank) });
+
+        const now = new Date();
         return {
             examName,
-            rollNumber: formatPlain(firstValue(payload.rollNumber, data.rollNumber, "Not available")),
+            chips,
+            rollNumber,
+            rollNumberMasked: maskRollNumber(rollNumber),
             overallRank: formatRank(activeRanks.overallRank),
-            categoryRank: formatRank(activeRanks.categoryRank),
-            stateRank: formatRank(activeRanks.stateRank),
-            shiftRank: getHasShifts(snapshot, data) ? formatRank(activeRanks.shiftRank) : "Not applicable",
+            groupRanks,
             marks: formatMarks(firstValue(normalizedMarks, rawMarks, null)),
+            maxMarksText: Number.isFinite(maxMarks) && maxMarks > 0 && (!Number.isFinite(marksValue) || marksValue <= maxMarks) ? String(round2(maxMarks)) : "",
             percentile: formatPercentile(data.percentile),
-            totalSubmissions: formatCount(firstValue(data.totalSubmissions, data.total, data.submissions, payload.totalSubmissions, null)),
+            percentileValue: toNumber(String(firstValue(data.percentile, "")).replace("%", "")),
+            totalSubmissions: formatCount(totalSubmissionsRaw),
+            totalSubmissionsNumber: toNumber(totalSubmissionsRaw),
+            rankBasisLabel: normalizedBasis ? "Normalised marks" : "Raw marks",
             isNotQualified,
             qualificationStatus: isNotQualified ? "Not eligible for merit rank" : firstValue(data.qualificationStatus, "Qualified"),
             qualificationMessage: firstValue(data.qualificationMessage, isNotQualified ? "Qualifying criteria was not met." : "Qualifying criteria met."),
             failedTitle: failedSubjects.length ? formatScorecardFailureTitle(failedSubjects[0]) : "",
             failedDetail: failedSubjects.length ? formatScorecardFailureDetail(failedSubjects[0]) : "",
-            subjects
+            subjects,
+            showStatus: subjects.some((subject) => Boolean(subject.passingStatus)),
+            generatedDate: now.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+            generatedAt: now.toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" })
         };
+    }
+
+    function maskRollNumber(value) {
+        const text = String(value || "").trim();
+        if (!SCORECARD_MASK_ROLL || text.length < 7 || /^not available$/i.test(text)) return text;
+        return `${text.slice(0, 3)}${"\u2022".repeat(text.length - 6)}${text.slice(-3)}`;
     }
 
     function getScorecardSubjects(subjectAnalysis, payloadSubjectData, resultSubjectData) {
@@ -815,62 +1186,33 @@
             : payloadRows.map((subject) => ({
                 name: subject.name,
                 score: subject.marks,
+                maxMarks: subject.maxMarks,
                 accuracy: getSubjectAccuracy(subject),
                 qualifyingOnly: isQualifyingOnlySubject(subject)
             }));
-        return rows.map((subject) => ({
-            name: firstValue(subject.name, "Subject"),
-            score: formatMarks(firstValue(subject.score, subject.marks, null)),
-            accuracy: formatPercentile(subject.accuracy),
-            qualifyingOnly: Boolean(subject.qualifyingOnly),
-            passingStatus: firstValue(subject.passingStatus, getPassingStatus(subject), null)
-        }));
+        return rows.map((subject) => {
+            const accuracyValue = toNumber(String(firstValue(subject.accuracy, "")).replace("%", ""));
+            const maxMarks = toNumber(subject.maxMarks);
+            return {
+                name: String(firstValue(subject.name, "Subject")),
+                score: formatMarks(firstValue(subject.score, subject.marks, null)),
+                maxMarksText: Number.isFinite(maxMarks) && maxMarks > 0 ? String(round2(maxMarks)) : "",
+                accuracyValue,
+                accuracyText: Number.isFinite(accuracyValue) ? `${Math.round(accuracyValue * 10) / 10}%` : "\u2014",
+                qualifyingOnly: Boolean(subject.qualifyingOnly),
+                passingStatus: firstValue(subject.passingStatus, getPassingStatus(subject), null)
+            };
+        });
     }
 
-    function drawSubjectScorecardRow(ctx, subject, x, y) {
-        const failed = String(subject.passingStatus || "").toLowerCase() === "fail";
-        fillRoundRect(ctx, x, y, 984, 66, 8, failed ? "#fff1f2" : "#f8fafc");
-        drawFittedText(ctx, subject.name, x + 24, y + 30, 310, 23, 17, 900, failed ? "#b91c1c" : "#0f172a");
-
-        if (subject.qualifyingOnly) {
-            fillRoundRect(ctx, x + 24, y + 38, 128, 22, 7, failed ? "#fee2e2" : "#e0f2fe");
-            drawFittedText(ctx, "Qualifying only", x + 36, y + 54, 104, 13, 11, 900, failed ? "#b91c1c" : "#0369a1");
-        }
-
-        drawFittedText(ctx, `Score ${subject.score}`, x + 390, y + 40, 190, 23, 16, 900, failed ? "#dc2626" : "#0b5ed7");
-        drawFittedText(ctx, `Accuracy ${subject.accuracy}`, x + 640, y + 40, 210, 23, 16, 900, failed ? "#b91c1c" : "#0f766e");
-        if (subject.passingStatus) {
-            drawStatusBadge(ctx, subject.passingStatus, x + 892, y + 18);
-        }
-    }
-
-    function drawQualificationWarning(ctx, model, x, y) {
-        fillRoundRect(ctx, x, y, 984, 122, 16, "#fff1f2");
-        ctx.strokeStyle = "#fecaca";
-        ctx.lineWidth = 2;
-        strokeRoundRect(ctx, x, y, 984, 122, 16);
-        drawText(ctx, model.qualificationStatus, x + 24, y + 34, 19, 900, "#b91c1c");
-        drawFittedText(ctx, model.failedTitle || model.qualificationMessage, x + 24, y + 72, 900, 29, 19, 900, "#991b1b");
-        if (model.failedDetail) {
-            drawFittedText(ctx, model.failedDetail, x + 24, y + 102, 900, 19, 14, 800, "#b91c1c");
-        }
-    }
-
-    function drawStatusBadge(ctx, status, x, y) {
-        const failed = String(status || "").toLowerCase() === "fail";
-        const label = failed ? "Fail" : String(status || "Pass");
-        fillRoundRect(ctx, x, y, 96, 30, 8, failed ? "#fee2e2" : "#dcfce7");
-        drawFittedText(ctx, label, x + 18, y + 21, 60, 17, 13, 900, failed ? "#b91c1c" : "#166534");
-    }
-
-    async function drawScorecardLogo(ctx, x, y, size) {
-        const image = await loadScorecardLogo();
-        fillRoundRect(ctx, x, y, size, size, 14, "#ffffff");
+    function drawScorecardLogo(ctx, image, x, y, size) {
+        fillRoundRect(ctx, x, y, size, size, Math.round(size * 0.22), "#ffffff");
         if (!image) {
-            drawText(ctx, "GJU", x + 8, y + 36, 18, 900, "#0b5ed7");
+            drawText(ctx, "GJU", x + size / 2, y + size * 0.62, size * 0.3, 800, SCORECARD_COLORS.blue, "center");
             return;
         }
-        drawImageContain(ctx, image, x + 6, y + 6, size - 12, size - 12);
+        const inset = Math.round(size * 0.09);
+        drawImageContain(ctx, image, x + inset, y + inset, size - inset * 2, size - inset * 2);
     }
 
     function loadScorecardLogo() {
@@ -890,63 +1232,87 @@
         ctx.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight);
     }
 
-    function drawMetricPill(ctx, x, y, label, value) {
-        fillRoundRect(ctx, x, y, 276, 92, 16, "#eff6ff");
-        drawText(ctx, label, x + 24, y + 34, 20, 900, "#5b6575");
-        drawText(ctx, value, x + 24, y + 70, 30, 900, "#0f172a");
+    function drawSectionHeading(ctx, text, x, baseline) {
+        fillRoundRect(ctx, x, baseline - 21, 6, 26, 3, SCORECARD_COLORS.blue);
+        drawLabel(ctx, text, x + 20, baseline, 19, 800, SCORECARD_COLORS.ink);
     }
 
-    function drawMetricCard(ctx, x, y, label, value) {
-        fillRoundRect(ctx, x, y, 276, 146, 18, "#f8fafc");
-        ctx.strokeStyle = "#dbe3ee";
-        ctx.lineWidth = 2;
-        strokeRoundRect(ctx, x, y, 276, 146, 18);
-        drawText(ctx, label, x + 24, y + 46, 22, 900, "#5b6575");
-        drawFittedText(ctx, value, x + 24, y + 112, 228, 48, 28, 900, "#0b5ed7");
+    function fontString(size, weight) {
+        return `${weight || 700} ${size}px ${SCORECARD_FONT}`;
     }
 
-    function drawText(ctx, text, x, y, size, weight, color) {
+    function drawText(ctx, text, x, y, size, weight, color, align) {
         ctx.fillStyle = color;
-        ctx.font = `${weight || 800} ${size}px Arial, sans-serif`;
+        ctx.font = fontString(size, weight);
+        ctx.textAlign = align || "left";
         ctx.textBaseline = "alphabetic";
-        ctx.fillText(String(text || ""), x, y);
+        ctx.fillText(String(text === undefined || text === null ? "" : text), x, y);
+        ctx.textAlign = "left";
+    }
+
+    function drawLabel(ctx, text, x, y, size, weight, color, align) {
+        ctx.save();
+        if ("letterSpacing" in ctx) ctx.letterSpacing = "1.6px";
+        drawText(ctx, String(text).toUpperCase(), x, y, size, weight, color, align);
+        ctx.restore();
+    }
+
+    function measureText(ctx, text, size, weight) {
+        ctx.font = fontString(size, weight);
+        return ctx.measureText(String(text === undefined || text === null ? "" : text)).width;
+    }
+
+    function measureLabel(ctx, text, size, weight) {
+        ctx.save();
+        if ("letterSpacing" in ctx) ctx.letterSpacing = "1.6px";
+        const width = measureText(ctx, String(text).toUpperCase(), size, weight);
+        ctx.restore();
+        return width;
     }
 
     function drawFittedText(ctx, text, x, y, maxWidth, maxSize, minSize, weight, color) {
-        const value = String(text || "");
+        const value = String(text === undefined || text === null ? "" : text);
         let size = maxSize;
-        ctx.fillStyle = color;
-        ctx.textBaseline = "alphabetic";
-        while (size > minSize) {
-            ctx.font = `${weight || 800} ${size}px Arial, sans-serif`;
-            if (ctx.measureText(value).width <= maxWidth) break;
-            size -= 2;
-        }
-        ctx.font = `${weight || 800} ${size}px Arial, sans-serif`;
-        if (ctx.measureText(value).width <= maxWidth) {
-            ctx.fillText(value, x, y);
-            return;
-        }
-        drawWrappedText(ctx, value, x, y - size, maxWidth, minSize, 1.12, weight, color);
+        while (size > minSize && measureText(ctx, value, size, weight) > maxWidth) size -= 1;
+        const shown = measureText(ctx, value, size, weight) > maxWidth ? ellipsize(ctx, value, maxWidth, size, weight) : value;
+        drawText(ctx, shown, x, y, size, weight, color);
+        return size;
     }
 
-    function drawWrappedText(ctx, text, x, y, maxWidth, size, lineHeight, weight, color) {
-        ctx.fillStyle = color;
-        ctx.font = `${weight || 800} ${size}px Arial, sans-serif`;
-        const words = String(text || "").split(/\s+/);
+    function ellipsize(ctx, text, maxWidth, size, weight) {
+        let value = String(text);
+        if (measureText(ctx, value, size, weight) <= maxWidth) return value;
+        while (value.length > 1 && measureText(ctx, `${value}\u2026`, size, weight) > maxWidth) value = value.slice(0, -1);
+        return `${value.replace(/[\s\u2026]+$/, "")}\u2026`;
+    }
+
+    function wrapLines(ctx, text, maxWidth, size, weight) {
+        const words = String(text || "").trim().split(/\s+/).filter(Boolean);
+        const lines = [];
         let line = "";
-        let currentY = y;
+        const pushLong = (word) => {
+            let chunk = "";
+            Array.from(word).forEach((char) => {
+                if (measureText(ctx, chunk + char, size, weight) > maxWidth && chunk) {
+                    lines.push(chunk);
+                    chunk = char;
+                } else {
+                    chunk += char;
+                }
+            });
+            return chunk;
+        };
         words.forEach((word) => {
-            const nextLine = line ? `${line} ${word}` : word;
-            if (ctx.measureText(nextLine).width > maxWidth && line) {
-                ctx.fillText(line, x, currentY);
-                line = word;
-                currentY += size * lineHeight;
+            const next = line ? `${line} ${word}` : word;
+            if (measureText(ctx, next, size, weight) <= maxWidth) {
+                line = next;
                 return;
             }
-            line = nextLine;
+            if (line) lines.push(line);
+            line = measureText(ctx, word, size, weight) > maxWidth ? pushLong(word) : word;
         });
-        if (line) ctx.fillText(line, x, currentY);
+        if (line) lines.push(line);
+        return lines.length ? lines : [""];
     }
 
     function fillRoundRect(ctx, x, y, width, height, radius, color) {
@@ -968,6 +1334,18 @@
         ctx.arcTo(x + width, y + height, x, y + height, r);
         ctx.arcTo(x, y + height, x, y, r);
         ctx.arcTo(x, y, x + width, y, r);
+        ctx.closePath();
+    }
+
+    function topRoundedRectPath(ctx, x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height);
+        ctx.beginPath();
+        ctx.moveTo(x, y + height);
+        ctx.lineTo(x, y + r);
+        ctx.arcTo(x, y, x + r, y, r);
+        ctx.lineTo(x + width - r, y);
+        ctx.arcTo(x + width, y, x + width, y + r, r);
+        ctx.lineTo(x + width, y + height);
         ctx.closePath();
     }
 
