@@ -73,7 +73,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-11-03",
         "examEndDate": "2026-11-05",
         "releaseDate": "2026-10-31",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33244/102956/cOPXnjiLXCY5nEw5Vt/login.html",
         "detailPage": "../jobs/railway-rrb-alp-2026.html",
