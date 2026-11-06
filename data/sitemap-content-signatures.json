@@ -10,12 +10,12 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "e8cbfd08ad5562c50c21579ab303133e4dc60efc4e28c647d903bcc9f03e7d06",
-      "lastmod": "2026-11-05"
+      "signature": "76896a648f90bcb214a30394f555fd0226ff51aae409365eebe59dcc944bdfcd",
+      "lastmod": "2026-11-06"
     },
     "HTML/answer-key.html": {
-      "signature": "8c2e4e433c08b28f8761c8e420c6af5ed2290b57c2a2cc36a3b3a87c44b13ac5",
-      "lastmod": "2026-11-04"
+      "signature": "e1400bdacd4c07b2df0c2b3ef992a0c4d4a307a414202acbc93ab4b13b891f38",
+      "lastmod": "2026-11-06"
     },
     "HTML/banking-quizzes.html": {
       "signature": "aa63672d2c2ea791bd778ef8bbb0e752a4c9582121ab794c285c7b99146dada9",
@@ -62,8 +62,8 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "f17bb410384eba17ff5c9f478e9b680ffe2aebeba2b61222c539196652a80b82",
-      "lastmod": "2026-11-05"
+      "signature": "cb1484bd11daad6b6b73b5d7343dac108edcd2bb1e41aa4f112f293747099152",
+      "lastmod": "2026-11-06"
     },
     "HTML/live-test-info.html": {
       "signature": "1586a3f526a7b3bdb011fe30173ba0d82c8c02c2abcbc0370b70bcb20c7a539b",
@@ -130,8 +130,8 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "47d07e6c46e460e63f9c4c8313c8fe6cf4796ce5c14bae875a83f974cd87c143",
-      "lastmod": "2026-11-05"
+      "signature": "5c2a781e1f31fb851a5a9c74146a70ec8f9a7156ae164ed318b8fb736c451c72",
+      "lastmod": "2026-11-06"
     },
     "HTML/rrb-quizzes.html": {
       "signature": "80539be166ac988564e9c6402052019e889672bb89affd72a9466ebbebc9aca3",
@@ -517,6 +517,10 @@
       "signature": "aeb5155f01919c3bf23725a434a3401d35378a6b23f56e901c99544c242fbed2",
       "lastmod": "2026-10-27"
     },
+    "jobs/bihar-bpsc-pcs-pre.html": {
+      "signature": "358db944186c7d422396b71cf77948ef1d9d953cf3e2840506936433a6cc1cf5",
+      "lastmod": "2026-11-06"
+    },
     "jobs/bihar-stet-2026.html": {
       "signature": "3eaee3f684027e8d0de118bf0835a63b752254b3aead3045100bc1c4fa5f69ab",
       "lastmod": "2026-10-16"
@@ -608,6 +612,10 @@
     "jobs/cmd-green-marshal-2026.html": {
       "signature": "8e749ac1e4ce651fc4c1ce5045d2657ef65a66a720068e299020caaf9686f807",
       "lastmod": "2026-10-16"
+    },
+    "jobs/coast-guard-navik-yantrik-2026.html": {
+      "signature": "6faaa4d395498c59ed1ab1dab2af936ca789d7660070fe9aa5eead8d4347b154",
+      "lastmod": "2026-11-06"
     },
     "jobs/concor-mt-assistant-officer-2026.html": {
       "signature": "b7cddd9f605fd8f6f1fada5626c46700569e3c2ba86d1952b8b2a0232437ae50",
@@ -966,8 +974,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/railway-rrb-ntpc-graduate-level-06-2026.html": {
-      "signature": "1055e7e407e9d79ec766e240d8d57aad13b4c47beb5ea601d70769802ad62e5a",
-      "lastmod": "2026-10-16"
+      "signature": "f0ed423704fe9c37c9df9f729e9519efd17ab438797bcff1eab2b8c671c29df7",
+      "lastmod": "2026-11-06"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
       "signature": "0b59a56d6595f845acddc63422b195ec4d9457af20e324d33f2d4193e00ca997",
@@ -984,6 +992,10 @@
     "jobs/rajasthan-ldc-online-form.html": {
       "signature": "4246da13ca44c6c2b052b567a85bf155af32434386919bc1e8677140d121f495",
       "lastmod": "2026-10-16"
+    },
+    "jobs/rajasthan-set-2026.html": {
+      "signature": "573a17f59a41cb69831569859d6bd74d37961a64c127d93e0b00c8543be1d0f6",
+      "lastmod": "2026-11-06"
     },
     "jobs/rbi-assistant-2026.html": {
       "signature": "8d458f1f1493d011d7582583a7156bd3282ffeab7aabf0d6f98cabf6103e541d",
