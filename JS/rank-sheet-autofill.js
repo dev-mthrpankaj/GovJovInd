@@ -31,7 +31,7 @@
         const fallbackTitle = document.querySelector(".manual-fallback strong");
         if (fallbackTitle) fallbackTitle.textContent = "Two ways to enter your marks";
         const fallbackNote = document.querySelector(".manual-fallback span");
-        if (fallbackNote) fallbackNote.textContent = "Paste your response sheet link and tap Fill, or enter attempted, right and wrong answers yourself. Manual entry always works, even after the response sheet link expires.";
+        if (fallbackNote) fallbackNote.textContent = "Use \"Quick fill\" at the top of this form, or enter attempted, right and wrong answers yourself. Manual entry always works, even after the answer key or response sheet link expires.";
 
         const wrap = document.createElement("section");
         wrap.className = "form-section-card online-only response-sheet-autofill";
@@ -39,21 +39,34 @@
         wrap.style.padding = "16px";
         wrap.style.marginBottom = "16px";
         wrap.innerHTML = `
+            <style>
+                .response-sheet-autofill .rs-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0; }
+                .rank-predictor-page .response-sheet-autofill .btn { width: auto; min-height: 44px; padding: 10px 18px; font-size: 15px; text-decoration: none; cursor: pointer; }
+                .response-sheet-autofill .rs-option { margin-top: 16px; font-weight: 800; display: block; }
+                .response-sheet-autofill ol { margin: 8px 0 0 20px; padding: 0; line-height: 1.7; }
+                .response-sheet-autofill .rs-note { display: block; margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: #eef5ff; color: #0b3d91; font-weight: 700; font-size: 0.9em; }
+                @media (max-width: 767px) { .rank-predictor-page .response-sheet-autofill .btn { width: 100%; } }
+            </style>
             <strong style="display:block;font-size:1.05em">Quick fill from your response sheet</strong>
             <span class="field-helper" style="display:block;margin:4px 0 10px">Fills your name, roll number, exam date, shift and right / wrong answers. Check the numbers before submitting. You can still enter everything by hand.</span>
             <details class="sheet-bookmarklet" open>
                 <summary><strong>Option 1: one click (laptop, recommended)</strong></summary>
-                <ol style="margin:8px 0 0 18px;padding:0">
-                    <li>Drag this button to your bookmarks bar (only once): <a id="sheetBookmarklet" class="btn btn-outline" href="#" draggable="true" style="display:inline-block;padding:4px 10px">Read response sheet</a></li>
+                <ol>
+                    <li>Drag this button to your bookmarks bar (only once):
+                        <div class="rs-actions"><a id="sheetBookmarklet" class="btn btn-primary" href="#" draggable="true">Read sheet</a></div>
+                    </li>
                     <li>Open your response sheet (SSC, RRB or any TCS iON exam) in the browser as usual.</li>
-                    <li>Click the <strong>Read response sheet</strong> bookmark. This page opens and everything is filled in automatically.</li>
+                    <li>Click that bookmark. This page opens and everything is filled in automatically.</li>
                 </ol>
-                <button class="btn btn-outline" id="copySheetBookmarklet" type="button" style="margin-top:8px">Copy code (phone or no bookmarks bar)</button>
-                <span class="field-helper">On a phone: open your response sheet, type <strong>javascript:</strong> in the address bar, paste the copied code after it and press Go.</span>
+                <span class="rs-option">On a phone</span>
+                <div class="rs-actions"><button class="btn btn-outline" id="copySheetBookmarklet" type="button">Copy code</button></div>
+                <span class="field-helper">Open your response sheet, type <strong>javascript:</strong> in the address bar, paste the copied code after it and press Go.</span>
+                <span class="rs-note">To track your rank without login, use the dashboard.</span>
             </details>
-            <div class="sheet-link-slot" style="margin-top:12px"><strong>Option 2: paste the link</strong></div>
-            <button class="btn btn-outline" id="fillFromSheetBtn" type="button" style="margin-top:8px">Fill from response sheet</button>
-            <label class="rp-field" for="responseSheetFiles" style="margin-top:12px"><strong>Option 3: upload saved pages</strong>
+            <span class="rs-option">Option 2: paste the link</span>
+            <div class="sheet-link-slot"></div>
+            <div class="rs-actions"><button class="btn btn-outline" id="fillFromSheetBtn" type="button">Fill from response sheet</button></div>
+            <label class="rp-field" for="responseSheetFiles" style="margin-top:16px"><strong>Option 3: upload saved pages</strong>
                 <input id="responseSheetFiles" type="file" accept=".html,.htm,.txt,text/html,text/plain" multiple>
                 <span class="field-helper">Open each PART (A, B, C, D) of the response sheet, save it (Ctrl+S) and select all saved files here.</span>
             </label>
@@ -106,7 +119,13 @@
 
     function bindSheetBookmarklet() {
         const link = getById("sheetBookmarklet");
-        const refresh = () => { if (link) link.setAttribute("href", "javascript:" + sheetBookmarkletCode()); };
+        const refresh = () => {
+            if (!link) return;
+            const examName = String(getSelectedExam()?.examName || "").trim();
+            link.textContent = examName ? `Read sheet: ${examName}` : "Read response sheet";
+            link.setAttribute("title", link.textContent);
+            link.setAttribute("href", "javascript:" + sheetBookmarkletCode());
+        };
         if (link) {
             ["pointerenter", "pointerdown", "dragstart", "focus", "touchstart"].forEach((name) => link.addEventListener(name, refresh, { passive: true }));
             link.addEventListener("click", (event) => {
@@ -300,7 +319,21 @@
             if (field && value && !String(field.value || "").trim()) setSheetInputValue(field, value);
         });
         if (candidate.shiftGuessed && candidate.shift) notes.push("Shift was guessed from the exam time, please check it.");
+        if (candidate.subject && exam.examName && !sheetMatchesExam(candidate.subject, exam.examName)) {
+            notes.push(`This sheet is for "${candidate.subject}", but this page is for ${exam.examName}. Please make sure you are on the right exam page.`);
+        }
         return { filled, notes };
+    }
+
+    // True when the exam named on the sheet ("Combined Graduate Level Examination, 2026") plausibly is the page's exam ("SSC CGL 2026").
+    function sheetMatchesExam(sheetExam, pageExam) {
+        const page = String(pageExam).toUpperCase().replace(/[^A-Z0-9]+/g, "");
+        const stop = new Set(["EXAMINATION", "EXAM", "TEST", "OF", "AND", "THE", "FOR", "IN", "SSC", "RRB"]);
+        const words = String(sheetExam).toUpperCase().replace(/[^A-Z0-9 ]+/g, " ").split(/\s+/).filter((w) => w && !/^\d+$/.test(w) && !stop.has(w));
+        if (words.length < 2) return true;
+        const acronym = words.map((w) => w[0]).join("");
+        if (page.includes(acronym)) return true;
+        return words.some((w) => w.length >= 4 && page.includes(w));
     }
 
     function sheetDateToIso(text) {
