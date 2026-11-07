@@ -99,47 +99,76 @@
         const basisText = top.basis === "normalized" ? "normalised marks" : "raw marks";
         setText("topPerformersSub", `Ranked on ${basisText} of ${formatCount(top.total)} candidates who submitted so far. Names are partly hidden for privacy.`);
 
+        const you = top.you || null;
+        const youOutside = Boolean(you && you.inTop === false && Number(you.rank) > 0);
+        const topper = Number(list[0].marks) || 0;
+        const cutoff = Number(list[list.length - 1].marks) || 0;
+        let youChip = "";
+        if (you && Number(you.rank) > 0) {
+            if (youOutside) {
+                const gap = Math.max(0, cutoff - (Number(you.marks) || 0));
+                youChip = `<div class="lb-chip is-you"><span>You are #${escapeHtml(you.rank)}</span><strong>${gap.toFixed(2)}</strong><small>marks behind top 10</small></div>`;
+            } else {
+                youChip = `<div class="lb-chip is-you"><span>You are in the top 10</span><strong>#${escapeHtml(you.rank)}</strong><small>${formatMarks(you.marks)} marks</small></div>`;
+            }
+        }
+        const summary = getById("lbSummary");
+        if (summary) {
+            summary.innerHTML =
+                `<div class="lb-chip"><span>Topper</span><strong>${formatMarks(topper)}</strong><small>highest marks</small></div>` +
+                `<div class="lb-chip"><span>Top 10 cut-off</span><strong>${formatMarks(cutoff)}</strong><small>marks of last rank</small></div>` +
+                youChip;
+        }
+
         const podiumItems = list.filter((item) => Number(item.rank) <= 3).slice(0, 3);
         const podium = getById("topPodium");
         if (podium) {
             const order = [podiumItems[1], podiumItems[0], podiumItems[2]].filter(Boolean);
             podium.hidden = !podiumItems.length;
-            podium.innerHTML = order.map((item) => (
-                `<div class="podium-step is-rank-${Math.min(Number(item.rank), 3)}${item.isYou ? " is-you" : ""}">` +
-                    `<span class="podium-medal" aria-hidden="true"><i class="fas fa-${Number(item.rank) === 1 ? "crown" : "medal"}"></i></span>` +
-                    `<span class="podium-rank">#${escapeHtml(item.rank)}</span>` +
-                    `<strong class="podium-name">${escapeHtml(item.displayName)}${item.isYou ? ' <em>You</em>' : ""}</strong>` +
+            podium.innerHTML = order.map((item) => {
+                const tier = Math.min(Number(item.rank), 3);
+                return `<div class="podium-step is-rank-${tier}${item.isYou ? " is-you" : ""}">` +
+                    `<span class="podium-avatar">${escapeHtml(getInitial(item.displayName))}<b class="podium-crown" aria-hidden="true"><i class="fas fa-${tier === 1 ? "crown" : "medal"}"></i></b></span>` +
+                    `<strong class="podium-name">${escapeHtml(item.displayName)}</strong>` +
+                    (item.isYou ? '<em class="you-tag">You</em>' : "") +
                     `<span class="podium-marks">${formatMarks(item.marks)}</span>` +
-                `</div>`
-            )).join("");
+                    `<span class="podium-base"><b>${escapeHtml(item.rank)}</b></span>` +
+                `</div>`;
+            }).join("");
         }
 
         const rowsHtml = list.filter((item) => !podiumItems.includes(item));
         const listNode = getById("topLeaderList");
         if (listNode) {
             listNode.hidden = !rowsHtml.length;
-            listNode.innerHTML = rowsHtml.map((item) => buildLeaderRow(item, best)).join("");
+            listNode.innerHTML = rowsHtml.map((item) => buildLeaderRow(item, best, topper)).join("");
         }
 
-        const you = top.you;
         const youGap = getById("leaderYouGap");
         const youList = getById("leaderYouList");
-        const showYou = Boolean(you && you.inTop === false && Number(you.rank) > 0);
-        if (youGap) youGap.hidden = !showYou;
+        if (youGap) youGap.hidden = !youOutside;
         if (youList) {
-            youList.hidden = !showYou;
-            youList.innerHTML = showYou ? buildLeaderRow(you, best) : "";
+            youList.hidden = !youOutside;
+            youList.innerHTML = youOutside ? buildLeaderRow(you, best, topper) : "";
         }
     }
 
-    function buildLeaderRow(item, best) {
+    function getInitial(name) {
+        const text = String(name || "").trim();
+        return text ? text.charAt(0).toUpperCase() : "?";
+    }
+
+    function buildLeaderRow(item, best, topper) {
         const marks = Number(item.marks) || 0;
         const width = Math.max(4, Math.min(100, (marks / best) * 100));
+        const behind = topper - marks;
+        const behindText = Number(item.rank) > 1 && behind > 0.004 ? `${behind.toFixed(2)} below topper` : "";
         return `<li class="leader-row${item.isYou ? " is-you" : ""}">` +
             `<span class="leader-rank">${escapeHtml(item.rank)}</span>` +
             `<div class="leader-main">` +
-                `<strong class="leader-name">${escapeHtml(item.displayName)}${item.isYou ? ' <em>You</em>' : ""}</strong>` +
+                `<div class="leader-top"><strong class="leader-name">${escapeHtml(item.displayName)}</strong>${item.isYou ? '<em class="you-tag">You</em>' : ""}</div>` +
                 `<span class="leader-bar" aria-hidden="true"><i style="width:${width.toFixed(1)}%"></i></span>` +
+                (behindText ? `<small class="leader-behind">${behindText}</small>` : "") +
             `</div>` +
             `<span class="leader-marks">${formatMarks(item.marks)}</span>` +
         `</li>`;
@@ -148,12 +177,13 @@
     function renderSessionInsights(insights) {
         const panel = getById("sessionInsightsPanel");
         if (!panel) return;
-        const sessions = insights && Array.isArray(insights.sessions) ? insights.sessions : [];
+        const sessions = insights && Array.isArray(insights.sessions) ? insights.sessions.slice() : [];
         if (sessions.length < 2) {
             panel.hidden = true;
             return;
         }
         panel.hidden = false;
+        sessions.sort((a, b) => (Number(a.difficultyRank) || 0) - (Number(b.difficultyRank) || 0));
 
         const note = getById("sessionNormNote");
         if (note) {
@@ -161,38 +191,160 @@
             note.textContent = insights.normalizationApplied ? "" : "Normalisation is not applied yet (it needs enough submissions in two or more shifts), so Gain / Loss is not shown.";
         }
 
-        const highestAvg = Math.max(...sessions.map((item) => Number(item.average) || 0), 0.01);
-        const difficultyText = { hardest: "Hardest", moderate: "Moderate", easiest: "Easiest" };
-        getById("sessionList").innerHTML = sessions.map((item) => {
-            const average = Number(item.average) || 0;
-            const width = Math.max(4, Math.min(100, (average / highestAvg) * 100));
-            const dateText = item.date ? escapeHtml(item.date) : "Date not given";
-            const gain = item.gain === null || item.gain === undefined ? null : Number(item.gain);
-            let gainHtml = '<span class="gain-chip is-na">Not normalised</span>';
-            if (gain !== null && Number.isFinite(gain)) {
-                const tone = gain > 0.004 ? "is-gain" : (gain < -0.004 ? "is-loss" : "is-flat");
-                const sign = gain > 0.004 ? "+" : "";
-                const icon = gain > 0.004 ? "fa-arrow-trend-up" : (gain < -0.004 ? "fa-arrow-trend-down" : "fa-minus");
-                gainHtml = `<span class="gain-chip ${tone}"><i class="fas ${icon}" aria-hidden="true"></i> ${sign}${gain.toFixed(2)}</span>`;
+        const total = sessions.length;
+        const averages = sessions.map((item) => Number(item.average) || 0);
+        const minAvg = Math.min(...averages);
+        const maxAvg = Math.max(...averages);
+        const scaleMax = getSessionScaleMax(sessions);
+        const yoursIndex = sessions.findIndex((item) => item.isYours);
+        const sessionName = (item) => `${item.date || "Date not given"} \u00b7 Shift ${item.shift}`;
+
+        // Summary tiles: your shift, hardest, easiest.
+        const tile = (cls, label, item, extra) => (
+            `<div class="shift-tile ${cls}"><span>${label}</span><strong>${formatMarks(item.average)}</strong><small>${escapeHtml(sessionName(item))}</small>${extra || ""}</div>`
+        );
+        const tiles = [];
+        if (yoursIndex >= 0) tiles.push(tile("is-yours", "Your shift", sessions[yoursIndex], `<em>#${yoursIndex + 1} hardest of ${total}</em>`));
+        tiles.push(tile("is-hardest", "Hardest shift", sessions[0]));
+        tiles.push(tile("is-easiest", "Easiest shift", sessions[total - 1]));
+        getById("shiftSummary").innerHTML = tiles.join("");
+
+        const verdict = getById("shiftVerdict");
+        if (verdict) {
+            if (yoursIndex >= 0) {
+                const position = total > 1 ? yoursIndex / (total - 1) : 0.5;
+                const tone = position <= 0.33 ? "Tougher than most" : (position >= 0.67 ? "Easier than most" : "Mid-level difficulty");
+                verdict.innerHTML = `Your shift is <strong>#${yoursIndex + 1} hardest</strong> out of <strong>${total}</strong> shifts <span>(${tone})</span>.`;
+                verdict.hidden = false;
+            } else {
+                verdict.hidden = true;
             }
-            return `<article class="session-card is-${escapeHtml(item.difficulty)}${item.isYours ? " is-yours" : ""}">` +
-                `<header class="session-head">` +
-                    `<span class="session-order">${escapeHtml(item.difficultyRank)}</span>` +
-                    `<div class="session-title"><strong>${dateText}</strong><span>Shift ${escapeHtml(item.shift)} &middot; ${formatCount(item.candidates)} candidates</span></div>` +
-                    `<div class="session-tags">` +
-                        (item.isYours ? '<span class="session-tag is-yours">Your shift</span>' : "") +
-                        `<span class="session-tag is-${escapeHtml(item.difficulty)}">${difficultyText[item.difficulty] || "Moderate"}</span>` +
-                    `</div>` +
-                `</header>` +
-                `<div class="session-avg"><span>Average marks</span><strong>${formatMarks(average)}</strong></div>` +
-                `<span class="session-bar" aria-hidden="true"><i style="width:${width.toFixed(1)}%"></i></span>` +
-                `<dl class="session-stats">` +
-                    `<div><dt>Highest</dt><dd>${formatMarks(item.highest)}</dd></div>` +
-                    `<div><dt>Lowest</dt><dd>${formatMarks(item.lowest)}</dd></div>` +
-                    `<div><dt>Normalisation Gain / Loss</dt><dd>${gainHtml}</dd></div>` +
-                `</dl>` +
-            `</article>`;
+        }
+
+        renderShiftChart(sessions, { minAvg, maxAvg, sessionName });
+
+        // Cards: first few always visible, the rest behind "View all".
+        const VISIBLE = 5;
+        const difficultyText = { hardest: "Hardest", moderate: "Moderate", easiest: "Easiest" };
+        getById("sessionList").innerHTML = sessions.map((item, index) => {
+            const extra = index >= VISIBLE && !item.isYours;
+            return buildSessionCard(item, scaleMax, difficultyText, extra);
         }).join("");
+
+        const toggle = getById("sessionToggle");
+        const hiddenCount = sessions.filter((item, index) => index >= VISIBLE && !item.isYours).length;
+        if (toggle) {
+            toggle.hidden = hiddenCount === 0;
+            toggle.dataset.open = "false";
+            toggle.textContent = `View all ${total} shifts`;
+            toggle.onclick = () => {
+                const open = toggle.dataset.open !== "true";
+                toggle.dataset.open = open ? "true" : "false";
+                getById("sessionList").classList.toggle("is-expanded", open);
+                toggle.textContent = open ? "Show fewer shifts" : `View all ${total} shifts`;
+            };
+        }
+    }
+
+    function getSessionScaleMax(sessions) {
+        for (const item of sessions) {
+            if (Array.isArray(item.subjects) && item.subjects.length) {
+                const sum = item.subjects.reduce((acc, subject) => acc + (Number(subject.maxMarks) || 0), 0);
+                if (sum > 0) return sum;
+            }
+        }
+        const highest = Math.max(...sessions.map((item) => Number(item.highest) || 0), 0);
+        return highest > 0 ? highest : 100;
+    }
+
+    function renderShiftChart(sessions, ctx) {
+        const wrap = getById("shiftChartWrap");
+        const chart = getById("shiftChart");
+        const readout = getById("shiftReadout");
+        if (!wrap || !chart) return;
+        wrap.hidden = false;
+        const range = ctx.maxAvg - ctx.minAvg;
+        const last = sessions.length - 1;
+        chart.innerHTML = sessions.map((item, index) => {
+            const avg = Number(item.average) || 0;
+            const height = range > 0 ? 16 + 84 * ((avg - ctx.minAvg) / range) : 60;
+            const kind = item.isYours ? "is-yours" : (index === 0 ? "is-hardest" : (index === last ? "is-easiest" : ""));
+            const label = `${ctx.sessionName(item)}, average ${formatMarks(avg)}`;
+            return `<button type="button" class="shift-bar ${kind}" data-index="${index}" style="height:${height.toFixed(1)}%" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"></button>`;
+        }).join("");
+
+        const show = (index) => {
+            const item = sessions[index];
+            if (!item) return;
+            chart.querySelectorAll(".shift-bar").forEach((bar) => bar.classList.toggle("is-selected", Number(bar.dataset.index) === index));
+            if (readout) {
+                readout.innerHTML = `<strong>${escapeHtml(ctx.sessionName(item))}</strong> &middot; Avg ${formatMarks(item.average)} &middot; High ${formatMarks(item.highest)} &middot; Low ${formatMarks(item.lowest)} &middot; ${formatCount(item.candidates)} candidate${Number(item.candidates) === 1 ? "" : "s"}`;
+            }
+        };
+        chart.onclick = (event) => {
+            const bar = event.target.closest(".shift-bar");
+            if (bar) show(Number(bar.dataset.index));
+        };
+        const yoursIndex = sessions.findIndex((item) => item.isYours);
+        show(yoursIndex >= 0 ? yoursIndex : 0);
+    }
+
+    function buildSessionCard(item, scaleMax, difficultyText, extra) {
+        const average = Number(item.average) || 0;
+        const highest = Number(item.highest) || 0;
+        const lowest = Number(item.lowest) || 0;
+        const pct = (value) => Math.max(0, Math.min(100, (value / scaleMax) * 100));
+        const ringPct = pct(average);
+        const lowPct = pct(lowest);
+        const highPct = pct(highest);
+        const spreadWidth = Math.max(2, highPct - lowPct);
+        const dateText = item.date ? escapeHtml(item.date) : "Date not given";
+        const gain = item.gain === null || item.gain === undefined ? null : Number(item.gain);
+        let gainHtml = '<span class="gain-chip is-na">Not normalised</span>';
+        if (gain !== null && Number.isFinite(gain)) {
+            const tone = gain > 0.004 ? "is-gain" : (gain < -0.004 ? "is-loss" : "is-flat");
+            const sign = gain > 0.004 ? "+" : "";
+            const icon = gain > 0.004 ? "fa-arrow-trend-up" : (gain < -0.004 ? "fa-arrow-trend-down" : "fa-minus");
+            gainHtml = `<span class="gain-chip ${tone}"><i class="fas ${icon}" aria-hidden="true"></i> ${sign}${gain.toFixed(2)}</span>`;
+        }
+        const candidates = Number(item.candidates) || 0;
+        return `<div class="session-card is-${escapeHtml(item.difficulty)}${item.isYours ? " is-yours" : ""}${extra ? " is-extra" : ""}">` +
+            `<div class="session-head">` +
+                `<span class="session-order">${escapeHtml(item.difficultyRank)}</span>` +
+                `<div class="session-title"><strong>${dateText}</strong><span>Shift ${escapeHtml(item.shift)} &middot; ${formatCount(candidates)} candidate${candidates === 1 ? "" : "s"}</span></div>` +
+                `<div class="session-tags">` +
+                    (item.isYours ? '<span class="session-tag is-yours">Your shift</span>' : "") +
+                    `<span class="session-tag is-${escapeHtml(item.difficulty)}">${difficultyText[item.difficulty] || "Moderate"}</span>` +
+                `</div>` +
+            `</div>` +
+            `<div class="session-body">` +
+                `<div class="score-ring" style="--p:${ringPct.toFixed(1)}" role="img" aria-label="Average ${formatMarks(average)} out of ${formatMarks(scaleMax)}"><div><strong>${formatMarks(average)}</strong><small>average</small></div></div>` +
+                `<div class="session-metrics">` +
+                    `<div class="spread">` +
+                        `<div class="spread-track" aria-hidden="true"><i class="spread-range" style="left:${lowPct.toFixed(1)}%;width:${spreadWidth.toFixed(1)}%"></i><b class="spread-dot" style="left:${ringPct.toFixed(1)}%"></b></div>` +
+                        `<div class="spread-labels"><span>Lowest <strong>${formatMarks(lowest)}</strong></span><span>Highest <strong>${formatMarks(highest)}</strong></span></div>` +
+                    `</div>` +
+                    `<div class="session-gain"><span>Normalisation Gain / Loss</span>${gainHtml}</div>` +
+                `</div>` +
+            `</div>` +
+            buildSessionSubjects(item.subjects) +
+        `</div>`;
+    }
+
+    function buildSessionSubjects(subjects) {
+        if (!Array.isArray(subjects) || !subjects.length) return "";
+        const chips = subjects.map((subject) => {
+            const average = Number(subject.average);
+            const max = Number(subject.maxMarks);
+            const pct = Number.isFinite(average) && max > 0 ? Math.max(0, Math.min(100, (average / max) * 100)) : 0;
+            const maxText = max > 0 ? `<small>/ ${formatMarks(max)}</small>` : "";
+            return `<li class="session-subject">` +
+                `<span class="session-subject-name">${escapeHtml(subject.name)}</span>` +
+                `<strong>${formatMarks(average)} ${maxText}</strong>` +
+                `<span class="session-subject-bar" aria-hidden="true"><i style="width:${pct.toFixed(1)}%"></i></span>` +
+            `</li>`;
+        }).join("");
+        return `<div class="session-subjects"><h3>Subject-wise average in this shift</h3><ul>${chips}</ul></div>`;
     }
 
     function renderQualificationPanel(data) {
