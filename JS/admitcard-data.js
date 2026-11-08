@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0217-20261108104430-7fd88158",
+        "title": "UPESSC UP Assistant Professor Admit Card 2026 for 1936 Post",
+        "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
+        "department": "UPESSC",
+        "category": "Education",
+        "year": "2026",
+        "examDate": "2026-11-19",
+        "examEndDate": "2026-11-20",
+        "releaseDate": "2026-11-07",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://apply.upessc.org/login",
+        "detailPage": "../jobs/upessc-up-assistant-professor-2026.html",
+        "updatedAt": "2026-11-08",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0215-20261106230548-9ce8484a",
         "title": "Coast Guard Navik Yantrik Exam City / Admit Card 2026 for 190 Post",
         "organization": "Join Indian Coast Guard",
