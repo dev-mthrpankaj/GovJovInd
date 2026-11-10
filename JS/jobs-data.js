@@ -806,7 +806,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "65",
         "startDate": "2026-10-20",
         "lastDate": "2026-11-10",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://www.sci.gov.in/recruitments/",
         "officialNotification": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/uploads/2026/10/2026101325.pdf",
