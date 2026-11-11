@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0201-20261111204350-7c930a5e",
+        "title": "United India UIIC AO Administrative Officers Result 2026 for 225 Post",
+        "organization": "United India Insurance Company (UIIC)",
+        "department": "UIIC",
+        "category": "Public Sector",
+        "year": "2026",
+        "resultDate": "2026-11-10",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://doc.sarkariresults.org.in/UIIC_AO_Result_11112026.pdf",
+        "detailPage": "../jobs/uiic-ao-sep-2026.html",
+        "updatedAt": "2026-11-11",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0199-20261106222042-d71bec96",
         "title": "Rajasthan State Eligibility Test SET Result 2026",
         "organization": "University of Kota Rajasthan (UOK)",
