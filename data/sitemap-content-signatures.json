@@ -10,7 +10,7 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "17519f2ccd53c936cb20e0d86ab1ece609e9c0d1c61952a1f29b9a87b367a05f",
+      "signature": "e1bfc06ada02e8b6e2b7e227c07da8f2d99e5e1850f8ffe51518748070234b16",
       "lastmod": "2026-11-12"
     },
     "HTML/answer-key.html": {
@@ -62,7 +62,7 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "a35ca8d5a2113b4af36e6d4aa2e34e94956045b4583ad25189b2258e51710691",
+      "signature": "5358d12ca17115edf88df69abeb2b9e072e49951b17c6e4b8a35251e57df8345",
       "lastmod": "2026-11-12"
     },
     "HTML/live-test-info.html": {
@@ -130,8 +130,8 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "c1e77215ee825518425b52cf741e18a46ba92209a38f078080833ab779bfeb3c",
-      "lastmod": "2026-11-11"
+      "signature": "96700763db94395378eb1000d994d87cff238d6a5fd564607292fb0ff6278b22",
+      "lastmod": "2026-11-12"
     },
     "HTML/rrb-quizzes.html": {
       "signature": "80539be166ac988564e9c6402052019e889672bb89affd72a9466ebbebc9aca3",
@@ -466,7 +466,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/afcat-01-2027.html": {
-      "signature": "dfafe62fda147253d8cafd13819e8c1a2971f7c20d9a259d307f79d22feff194",
+      "signature": "29bf61b0383abfae0cdfe09510c143c1354590724ac2330049d769a8f7643ba7",
       "lastmod": "2026-11-12"
     },
     "jobs/afcat-02-2026.html": {
@@ -526,7 +526,7 @@
       "lastmod": "2026-11-06"
     },
     "jobs/bihar-slet-2026.html": {
-      "signature": "0717aabe22f3bb0229e40c9b7698b3d0a5d08044f09b3a45cb9f3ac4ed9d70ad",
+      "signature": "d9e96ddd1d727b7bca8b34da30ecc1ddcabaa3b1033bdbb8d7067c39991c4015",
       "lastmod": "2026-11-12"
     },
     "jobs/bihar-stet-2026.html": {
@@ -706,7 +706,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/dsssb-junior-engineer-mts-2026.html": {
-      "signature": "e9fe828263e117f2b0f74847f425eb1e9027ef53b10678d9798281d8738d50de",
+      "signature": "d427ca7dc981ba381822d91dc1bd26954273b55e4708c20161e5b4f1d3c0fecd",
       "lastmod": "2026-11-12"
     },
     "jobs/dsssb-result.html": {
@@ -722,7 +722,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/hcl-apprentice-2026.html": {
-      "signature": "5259552a1ae01cc079374033cf086a789dddb34687ec1cc24a36e0bd5849cc19",
+      "signature": "fc2fc45e8ce96996281e7982eec03b37fa3e8c9999c6cc517b236176afff5677",
       "lastmod": "2026-11-12"
     },
     "jobs/hp-high-court-various-post-2026.html": {
@@ -958,7 +958,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/nta-csir-ugc-net-december-2026.html": {
-      "signature": "cdc3a7a645f91c8df79e3e75311af81d3e6c6453aab8133831cd2bb257b71c41",
+      "signature": "2c2fb43064075ea1f36ca74ba7098ed4d89a603dd3585632879bfd76cedd4f68",
       "lastmod": "2026-11-12"
     },
     "jobs/nta-csir-ugc-net-june-2026.html": {
@@ -1078,8 +1078,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/rrb-group-d-2026.html": {
-      "signature": "7a4bc67b9923dd64c2d9feffa4f28b774c0163c8deca97406b75683b12cc4237",
-      "lastmod": "2026-10-16"
+      "signature": "6e5ceb1b6dfe2521f403c447ceee36f16c608f20f437fdda429a4f14209f88d5",
+      "lastmod": "2026-11-12"
     },
     "jobs/rrb-je-junior-engineer-2025.html": {
       "signature": "26d5f2b3a82440f0faedb2faa869ef6f58c16cf8e17105961281290a1caeb942",
@@ -1110,7 +1110,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/rrc-nr-apprentice-2026.html": {
-      "signature": "d24ff78a1efe62b84fc7c65067281b0f25425818fb73541a8feae671118b9d1c",
+      "signature": "eb8bb86723626a42fcc56a7f8b4435c7e697b8dfcfb40c2cecc84568109bf6eb",
       "lastmod": "2026-11-12"
     },
     "jobs/rssb-computer-instructor-2026.html": {
@@ -1214,7 +1214,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/ssc-gd-constable-2026.html": {
-      "signature": "28283223bb0fc2ff4c7e852a69aeff901d85b80b3acaf14dcb86bbff3742b715",
+      "signature": "ecb8d67f5bcaa6e0e7f47098bcfd5b5331e158e2c6e77933f36e890c2f3202be",
       "lastmod": "2026-11-12"
     },
     "jobs/ssc-je-junior-engineer-2026.html": {
@@ -1370,7 +1370,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/uppsc-various-post-2026.html": {
-      "signature": "47500639ee49cc7c0c2dc97d480315eb75a6741f1b947e30b916c22b33edc970",
+      "signature": "8b5b5e4ac83a015a3a6661338cd10256b14004053cb20bfddd20285e9f94f8a7",
       "lastmod": "2026-11-12"
     },
     "jobs/upsc-capf-cpf-assistant-commandant-2026.html": {
@@ -1434,7 +1434,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-havaldar-instructor-2026.html": {
-      "signature": "88fce0581e14a68e5549b92a634a77b0e2afada28e9d64a3eb2efa9a51278b1f",
+      "signature": "9b248d90eb182aad7f3cec695647cd7b48654a41f4389937c8f17692a0f3b5f5",
       "lastmod": "2026-11-12"
     },
     "jobs/upsssc-junior-assistant-2024.html": {
@@ -1482,7 +1482,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-platoon-commander-block-organizer-2026.html": {
-      "signature": "6b24c4719d413018aee52c729ed7930a581f684b17961dc6f5679a69685af181",
+      "signature": "40e5fba5bb45053c980737956ceafcd4ac775a89648a4446386d78b5bc5a012d",
       "lastmod": "2026-11-12"
     },
     "jobs/upsssc-senior-instructor-cadre-2026.html": {
