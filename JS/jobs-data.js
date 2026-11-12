@@ -974,7 +974,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "90",
         "startDate": "2026-10-14",
         "lastDate": "2026-11-12",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://joinindianarmy.nic.in/Authentication.aspx",
         "officialNotification": "https://doc.sarkariresults.org.in/SarkariResult.Com_Army_NOTIFICATION_OF_TES-57.pdf",
