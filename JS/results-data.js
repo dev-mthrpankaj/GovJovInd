@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0202-20261112212048-f7faded6",
+        "title": "RRB Railway Group D Result 2026 | Score Card for 22195",
+        "organization": "Railway Recruitment Board",
+        "department": "RRB",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-11-12",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101714/login.html",
+        "detailPage": "../jobs/rrb-group-d-2026.html",
+        "updatedAt": "2026-11-12",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0201-20261111204350-7c930a5e",
         "title": "United India UIIC AO Administrative Officers Result 2026 for 225 Post",
         "organization": "United India Insurance Company (UIIC)",

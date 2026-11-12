@@ -554,28 +554,6 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "answerkey-sheet-0061-20260907211007-a5ef3c70",
-        "title": "RRB Railway Group D Answer Key 2026 for 22195",
-        "organization": "Railway Recruitment Board Recruitment",
-        "department": "RRB",
-        "category": "Central Government",
-        "year": "2026",
-        "examDate": "2026-08-03",
-        "examEndDate": "2026-08-25",
-        "releaseDate": "2026-09-07",
-        "objectionLastDate": "2026-09-16",
-        "status": "objection-closed",
-        "tags": [],
-        "downloadLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101714/login.html",
-        "objectionLink": "https://rrb.digialm.com/EForms/configuredHtml/33128/101714/login.html",
-        "detailPage": "../jobs/rrb-group-d-2026.html",
-        "updatedAt": "2026-09-07",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "answerkey-sheet-0060-20260902223108-76a1e79b",
         "title": "HTET OMR Sheet 2026 | Teacher Eligibility Test",
         "organization": "Haryana Teacher Eligibility",
