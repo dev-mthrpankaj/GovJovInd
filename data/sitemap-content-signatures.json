@@ -14,8 +14,8 @@
       "lastmod": "2026-11-12"
     },
     "HTML/answer-key.html": {
-      "signature": "046f9c4e4085af41fd5de0d03cbb7c66b2dacdae43f8da7eddf3affa611eba43",
-      "lastmod": "2026-11-11"
+      "signature": "1eaa2eb7981ae826bd76c79a421182e3de88fb31c9573604564a52332a5a301e",
+      "lastmod": "2026-11-12"
     },
     "HTML/banking-quizzes.html": {
       "signature": "aa63672d2c2ea791bd778ef8bbb0e752a4c9582121ab794c285c7b99146dada9",
@@ -62,7 +62,7 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "5358d12ca17115edf88df69abeb2b9e072e49951b17c6e4b8a35251e57df8345",
+      "signature": "dcd84bc7a9f2246c9a95b968b84e989e8a9cb5931995f6241f7d841a56f7bd99",
       "lastmod": "2026-11-12"
     },
     "HTML/live-test-info.html": {
@@ -130,7 +130,7 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "96700763db94395378eb1000d994d87cff238d6a5fd564607292fb0ff6278b22",
+      "signature": "3558476d025c75627be95de455c5acc46972c7dee37cf00b174cd0cd43a2f2ac",
       "lastmod": "2026-11-12"
     },
     "HTML/rrb-quizzes.html": {
@@ -489,6 +489,14 @@
       "signature": "0e4dc622884f87258bc8ae490bd1933d57f6cccfd3cd5586b792d34922a7ca12",
       "lastmod": "2026-10-20"
     },
+    "jobs/allahabad-high-court-private-secretary-2026.html": {
+      "signature": "e91e0e9bda43ff4a59fd9c04898d01a454c54e11c534ea4c8013e45fb556c61d",
+      "lastmod": "2026-11-13"
+    },
+    "jobs/asrb-icar-technical-assistant-2026.html": {
+      "signature": "c41e89a7eea6b5b948b9f822d55978e360666ca544ed341c4af79760ec3b8f77",
+      "lastmod": "2026-11-13"
+    },
     "jobs/assam-rifle-rally-2026.html": {
       "signature": "4e48fa095737c6760cd0dcbee89cdc61496a8cc4ce05a18d157af50e8044865f",
       "lastmod": "2026-10-16"
@@ -576,6 +584,10 @@
     "jobs/bsf-hc-ro-rm-august25.html": {
       "signature": "fc2efc05ee5abbda55c83b4b710fc2f721ed78926b95b1267067a5166c4077f6",
       "lastmod": "2026-11-04"
+    },
+    "jobs/bsf-si-sub-inspector-ldce-2026.html": {
+      "signature": "b3066e7833717996fc9bc6e869a9d559f3166d68cb57284e28105cb4360041e1",
+      "lastmod": "2026-11-13"
     },
     "jobs/bssc-stenographer-432-post.html": {
       "signature": "fd8ec239752b3625637bf75a7da32b69680145af94275f968d589ecb3d813967",
@@ -825,6 +837,10 @@
       "signature": "6d1d265b395ac3daee3f5f462fff52e2ad581692b6e94f2322ce6865e2a3814e",
       "lastmod": "2026-10-25"
     },
+    "jobs/jkssb-junior-engineer-2026.html": {
+      "signature": "9a78197b7912dfe9dc0a913040a0d2d0c3a4cb28322e5100f5b2bb1c3b35b063",
+      "lastmod": "2026-11-13"
+    },
     "jobs/jmi-teaching-recruitment-2026.html": {
       "signature": "1382f89e52de0aa02a48807fd2ee9fea80f66aabea27f9fc710da3c1ae34d6d6",
       "lastmod": "2026-10-16"
@@ -1006,8 +1022,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/railway-rrb-alp-2026.html": {
-      "signature": "d01f8423ac7a898ea5a8da7fb97fa5a740cfee9349d478631829731fef8eea60",
-      "lastmod": "2026-11-11"
+      "signature": "49469798723c4edf62ed478b3854d660496513b6c71e19b96e4d1088cd58849a",
+      "lastmod": "2026-11-13"
     },
     "jobs/railway-rrb-isolated-categories-cen08-2025.html": {
       "signature": "2f87fc7f0250ec9874142f3879ae6714b3bd0e8beffdebcc2d8ee1bdb63029d3",
@@ -1078,7 +1094,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/rrb-group-d-2026.html": {
-      "signature": "6e5ceb1b6dfe2521f403c447ceee36f16c608f20f437fdda429a4f14209f88d5",
+      "signature": "f972b88ee094d6e6c32ec58d36835edb6d1b646118b11933b366abcc0c05988a",
       "lastmod": "2026-11-12"
     },
     "jobs/rrb-je-junior-engineer-2025.html": {
@@ -1094,8 +1110,8 @@
       "lastmod": "2026-10-20"
     },
     "jobs/rrb-railway-paramedical-2026.html": {
-      "signature": "413996900dd1bb305e00cc97089affb55da57848e772d827140ee73313b4ad12",
-      "lastmod": "2026-10-16"
+      "signature": "106d55744ff264360c4b23c9aad071d641c4ffc0c270d65b8a23abb1445b4d96",
+      "lastmod": "2026-11-13"
     },
     "jobs/rrb-railway-section-controller-2026.html": {
       "signature": "f4a1bea4879f32cc5116df0545f8cd26cb0b2373a769ef2b68ab6e98d35458ac",
@@ -1258,8 +1274,8 @@
       "lastmod": "2026-11-11"
     },
     "jobs/ukpsc-upper-pcs-2026.html": {
-      "signature": "151062aaad00067fbc1f95b495166c67bb1c662cadc1e5556742655b2a884ba6",
-      "lastmod": "2026-10-16"
+      "signature": "75d6180564a7be7c7c28fe723753fa7aeacdec8cb0641b5d2672b6a2ec1263b5",
+      "lastmod": "2026-11-13"
     },
     "jobs/uksssc-aao-2026.html": {
       "signature": "9037969ef54e2518e4956230c05e5f0293c899ae82fca6534d4572b8a4de0c1b",
@@ -1386,8 +1402,8 @@
       "lastmod": "2026-10-27"
     },
     "jobs/upsc-civil-services-ias-ifs-2026.html": {
-      "signature": "966f15c4e22583124cf35cb1b5a61d401f753208d341f0d422d855c587cb49c3",
-      "lastmod": "2026-11-06"
+      "signature": "293cd415e35c2090edd5150ed1967b951974f77526a9831f3c75eb59a4cb01a3",
+      "lastmod": "2026-11-13"
     },
     "jobs/upsc-cms-admit-card.html": {
       "signature": "dc0d2fc5faaff7ad6cc2959e675c316e945f0f845259e3f33e8434b85c352bd4",
@@ -1457,6 +1473,10 @@
       "signature": "e51d5d2e6ee355dcd972ea1a2db8f064a6fa6c9af7e37be96ea6732716a370d4",
       "lastmod": "2026-10-16"
     },
+    "jobs/upsssc-lower-pcs-2026.html": {
+      "signature": "655d9bc168ab5cdee3cfaa2019d39409e2567690e928d20f8f3ef35c790850cf",
+      "lastmod": "2026-11-13"
+    },
     "jobs/upsssc-lower-pcs-inter-2026.html": {
       "signature": "add1c9e139612647df1b0d56de1caf368c854a5f13c678f9d55492465bae6f1d",
       "lastmod": "2026-10-16"
@@ -1494,8 +1514,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/utet-2026.html": {
-      "signature": "01db21ad2ddf1bef1734fdbd09bbd8d42a38f93b101fbb6893b539539c862d6c",
-      "lastmod": "2026-10-16"
+      "signature": "25be3f528031dcc2bab6ea8992bdfc58735431f2f7dbc8576a4498d6af900a32",
+      "lastmod": "2026-11-13"
     },
     "jobs/wcl-mining-sirdar-assistant-foreman-2026.html": {
       "signature": "692ee239ed89a3e9a490038ebd6acbd641986cb432f366e0d94fb1b239787b8a",
