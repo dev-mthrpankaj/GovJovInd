@@ -58,7 +58,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "",
         "releaseDate": "2026-11-10",
         "objectionLastDate": "2026-11-13",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://subsiprt2026.cbtexam.in/Home/ListofExam.aspx",
         "objectionLink": "https://subsiprt2026.cbtexam.in/Home/ListofExam.aspx",
