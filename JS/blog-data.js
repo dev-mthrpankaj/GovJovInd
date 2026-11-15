@@ -17,7 +17,7 @@
     title: "UP Police Constable Previous Year Question Papers PDF: Year-wise Download",
     category: "UP Police",
     date: "2026-11-15",
-    image: "../Assets/Home%20Page/up-police-constable-previous-year-question-papers-cover.webp",
+    image: "../Assets/Home%20Page/up-police-previous-year-question-papers-cover.webp",
     url: "student-hub/up-police-constable-previous-year-question-papers.html",
     excerpt: "UP Police Constable previous year question papers PDF, year-wise with answer keys. Practise real UPPRPB Constable papers and learn the exam pattern cycle by cycle."
 },
@@ -27,7 +27,7 @@
     title: "UP Police SI Previous Year Question Papers PDF: Year-wise Download",
     category: "UP Police",
     date: "2026-11-15",
-    image: "../Assets/Home%20Page/up-police-si-previous-year-question-papers-cover.webp",
+    image: "../Assets/Home%20Page/up-police-previous-year-question-papers-cover.webp",
     url: "student-hub/up-police-si-previous-year-question-papers.html",
     excerpt: "UP Police SI (Sub Inspector) previous year question papers PDF, year-wise with answer keys. Practise real UPPRPB SI papers and understand the SI exam pattern and stages."
 },
@@ -37,7 +37,7 @@
     title: "UP Police ASI Previous Year Question Papers PDF: Year-wise Download",
     category: "UP Police",
     date: "2026-11-15",
-    image: "../Assets/Home%20Page/up-police-asi-previous-year-question-papers-cover.webp",
+    image: "../Assets/Home%20Page/up-police-previous-year-question-papers-cover.webp",
     url: "student-hub/up-police-asi-previous-year-question-papers.html",
     excerpt: "UP Police ASI (Clerk and Accounts), SI Confidential and Computer Operator previous year question papers PDF. Year-wise download with answer keys and exam details."
 },
@@ -47,7 +47,7 @@
     title: "UP Police Home Guard Previous Year Question Papers PDF: Year-wise Download",
     category: "UP Police",
     date: "2026-11-15",
-    image: "../Assets/Home%20Page/up-police-home-guard-previous-year-question-papers-cover.webp",
+    image: "../Assets/Home%20Page/up-police-previous-year-question-papers-cover.webp",
     url: "student-hub/up-police-home-guard-previous-year-question-papers.html",
     excerpt: "UP Police Home Guard previous year question papers PDF with answer keys. Practise real UPPRPB Home Guard papers and learn the pattern, selection stages and how to use PYQs."
 },
