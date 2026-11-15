@@ -4,6 +4,26 @@
 
 window.GovJobUpdatesAdmitCards = [
     {
+        "id": "admit-sheet-0234-20261115180936-66b9840b",
+        "title": "MPESB MP Police ASI Subedar Admit Card 2026 for 655 Post",
+        "organization": "Madhya Pradesh Employees Selection Board",
+        "department": "MPESB",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-11-03",
+        "examEndDate": "2026-11-30",
+        "releaseDate": "2026-11-15",
+        "status": "available",
+        "tags": [],
+        "downloadLink": "https://esb.mp.gov.in/tacs/tac_2026/SUBEDAR_STENO_ASI_TAC26/default_tac.htm",
+        "detailPage": "../jobs/mpesb-mp-police-asi-subedar-2026.html",
+        "updatedAt": "2026-11-15",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "admit-sheet-0233-20261114182351-fbdeaf4d",
         "title": "Coast Guard Navik Yantrik Admit Card 2026",
         "organization": "Join Indian Coast Guard",
