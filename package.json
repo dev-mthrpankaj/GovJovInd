@@ -13,6 +13,7 @@
     "generate:rank-pages:local": "node scripts/generate-rank-predictor-pages.js --local",
     "hydrate:listings": "node scripts/hydrate-listing-pages.js --write",
     "hydrate:job-fallbacks": "node scripts/hydrate-job-static-fallbacks.js --write",
+    "generate:up-police-pyq": "node scripts/generate-up-police-pyq.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "generate:search-index": "node scripts/generate-search-index.js",
     "submit:indexnow": "node scripts/indexnow-submit.js"

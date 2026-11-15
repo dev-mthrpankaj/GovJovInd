@@ -1,0 +1,323 @@
+{
+  "settings": {
+    "baseUrl": "https://govjobupdates.com",
+    "folder": "HTML/student-hub",
+    "hubFile": "up-police-previous-year-question-papers.html",
+    "pdfBase": "https://files.govjobupdates.com/PYQPs/uppolice/",
+    "image": "Assets/Home%20Page/up-police-previous-year-question-papers-cover.webp",
+    "published": "2026-11-15",
+    "collectionStartYear": 2018,
+    "noindexUntilPapers": true,
+    "officialSite": "uppbpb.gov.in",
+    "officialSiteUrl": "https://uppbpb.gov.in"
+  },
+  "exams": [
+    {
+      "slug": "constable",
+      "file": "up-police-constable-previous-year-question-papers.html",
+      "short": "UP Police Constable",
+      "name": "UP Police Constable (Civil Police, PAC, Jail Warder & more)",
+      "tableLabel": "UP Police Constable",
+      "keywords": [
+        "UP Police Constable Previous Year Question Paper",
+        "UP Police Constable Question Paper PDF",
+        "UP Police Constable PYQ",
+        "UPP Constable Previous Year Paper",
+        "UP Police Constable Old Paper PDF",
+        "UP Police Constable Paper with Answer Key",
+        "यूपी पुलिस कांस्टेबल पिछले वर्ष के प्रश्न पत्र"
+      ],
+      "metaDescription": "UP Police Constable previous year question papers PDF, year-wise with answer keys. Practise real UPPRPB Constable papers and learn the exam pattern cycle by cycle.",
+      "dek": "UP Police Constable is the biggest recruitment run by the Uttar Pradesh Police Recruitment and Promotion Board (UPPRPB), and lakhs of candidates sit for it each cycle. This page collects UP Police Constable previous year question papers year by year, explains how the paper has been set, and shows how to turn each paper into marks.",
+      "about": [
+        "UP Police Constable recruitment is conducted by UPPRPB. A single recruitment can cover several constable cadres, for example Civil Police, PAC, Special Security Force, Female Battalion, Mounted Police (Horseman) and Jail Warder. Each notification lists the exact cadres and vacancies.",
+        "The latest recruitment tracked on GovJobUpdates is the 32,679-post UP Police Constable 2025-26 drive, which needs Class 12 (Intermediate). Its computer-based test was held on 8 to 10 June 2026 and the final result was declared on 14 October 2026."
+      ],
+      "stages": [
+        "Written examination (objective, MCQ)",
+        "Document verification and Physical Standard Test (PST)",
+        "Physical Efficiency Test (PET)",
+        "Final merit list and medical examination"
+      ],
+      "patterns": [
+        {
+          "cycle": "UP Police Constable 2023 recruitment (exam of February 2024, held again in August 2024)",
+          "rows": [
+            [
+              "Questions",
+              "150 objective questions"
+            ],
+            [
+              "Marks",
+              "2 marks per question, 300 in total"
+            ],
+            [
+              "Duration",
+              "120 minutes (2 hours)"
+            ],
+            [
+              "Sections",
+              "General Knowledge (38), General Hindi (37), Numerical and Mental Ability (38), Mental Aptitude, Intelligence and Reasoning (37)"
+            ]
+          ],
+          "note": "The first exam, held on 17 and 18 February 2024, was cancelled after paper-leak reports and the exam was conducted again later in 2024."
+        },
+        {
+          "cycle": "UP Police Constable 2025-26 recruitment (32,679 posts)",
+          "rows": [
+            [
+              "Computer-based test",
+              "8 to 10 June 2026"
+            ],
+            [
+              "PET / PST",
+              "1 to 8 October 2026"
+            ],
+            [
+              "Final result",
+              "14 October 2026"
+            ],
+            [
+              "Qualification",
+              "10+2 (Intermediate)"
+            ]
+          ],
+          "note": "For the question count, marking scheme and negative marking of this cycle, always refer to the official notification and the paper itself."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Where can I download UP Police Constable previous year question papers?",
+          "a": "Use the download table at the top of this page. Papers are listed year-wise and shift-wise, and the table grows every time a new clean copy is added. The page URL stays the same, so you can bookmark it."
+        },
+        {
+          "q": "How many questions come in the UP Police Constable written exam?",
+          "a": "It depends on the recruitment cycle. The 2023 recruitment exam had 150 questions of 2 marks each (300 marks) in 120 minutes. Always check the pattern given in the notification of the cycle you are preparing for."
+        },
+        {
+          "q": "Is there negative marking in the UP Police Constable exam?",
+          "a": "The marking scheme has not been the same in every cycle, so there is no single answer for all years. Check the notification of the cycle you are applying for, and calculate your score on old papers the way that cycle marks."
+        },
+        {
+          "q": "Does the Constable recruitment include Jail Warder?",
+          "a": "Yes, a Constable recruitment can include several cadres. The 2025-26 drive tracked on GovJobUpdates lists Jail Warder (male and female) along with other constable cadres."
+        }
+      ]
+    },
+    {
+      "slug": "si",
+      "file": "up-police-si-previous-year-question-papers.html",
+      "short": "UP Police SI",
+      "name": "UP Police Sub Inspector (SI)",
+      "tableLabel": "UP Police SI",
+      "keywords": [
+        "UP Police SI Previous Year Question Paper",
+        "UP SI Previous Year Paper PDF",
+        "UP Police Sub Inspector Question Paper PDF",
+        "UP SI Old Paper",
+        "UPPRPB SI PYQ",
+        "UP SI Paper with Answer Key",
+        "यूपी पुलिस एसआई पिछले वर्ष के प्रश्न पत्र"
+      ],
+      "metaDescription": "UP Police SI (Sub Inspector) previous year question papers PDF, year-wise with answer keys. Practise real UPPRPB SI papers and understand the SI exam pattern and stages.",
+      "dek": "The Sub Inspector exam is the most competitive officer-level recruitment run by UPPRPB. Old SI papers show you how Hindi, law and general knowledge, numerical ability and reasoning are actually tested. This page lists UP Police SI previous year question papers year by year and explains how to use them.",
+      "about": [
+        "UP Police SI recruitment is conducted by the Uttar Pradesh Police Recruitment and Promotion Board (UPPRPB). A single SI notification may cover more than one cadre, so always read the post list in the notification of the cycle you are applying for.",
+        "SI recruitment is held far less often than Constable recruitment, which makes every old SI paper valuable. A graduate degree has been the basic qualification in past cycles, and age limits and physical standards are given in each notification."
+      ],
+      "stages": [
+        "Written examination (objective, MCQ)",
+        "Document verification and Physical Standard Test (PST)",
+        "Physical Efficiency Test (PET)",
+        "Final merit list and medical examination"
+      ],
+      "patterns": [
+        {
+          "cycle": "UP Police SI 2021 recruitment (9,534 vacancies)",
+          "rows": [
+            [
+              "Questions",
+              "160 objective questions, all compulsory"
+            ],
+            [
+              "Marks",
+              "2.5 marks per question, 400 in total"
+            ],
+            [
+              "Duration",
+              "2 hours"
+            ],
+            [
+              "Sections",
+              "General Hindi (40), Basic Law, General Knowledge and Constitution (40), Numerical and Mental Ability (40), Mental Aptitude, IQ and Reasoning (40)"
+            ],
+            [
+              "Negative marking",
+              "None reported for this cycle"
+            ]
+          ],
+          "note": "This is the pattern reported for the 2021 cycle. Newer SI notifications can change it, so confirm the pattern in the latest notification."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Where can I download UP Police SI previous year question papers?",
+          "a": "Use the download table at the top of this page. Papers are listed year-wise and the table is updated whenever a new clean copy is added."
+        },
+        {
+          "q": "What is the UP Police SI exam pattern?",
+          "a": "In the 2021 cycle the written exam had 160 questions of 2.5 marks each (400 marks) in 2 hours, split into four sections of 40 questions. Newer cycles may differ, so check the latest notification."
+        },
+        {
+          "q": "What are the selection stages for UP Police SI?",
+          "a": "The written exam is followed by document verification and the Physical Standard Test, then the Physical Efficiency Test, and finally the merit list and medical examination."
+        },
+        {
+          "q": "How many SI papers should I solve?",
+          "a": "Because SI exams are held less often, there are fewer papers than for Constable. Solve each available paper once as a full timed test, then re-attempt after revising your weak sections."
+        }
+      ]
+    },
+    {
+      "slug": "asi",
+      "file": "up-police-asi-previous-year-question-papers.html",
+      "short": "UP Police ASI",
+      "name": "UP Police ASI, SI (Confidential) & Computer Operator",
+      "tableLabel": "UP Police ASI",
+      "keywords": [
+        "UP Police ASI Previous Year Question Paper",
+        "UP Police ASI Clerk Previous Year Paper",
+        "UP Police ASI Accounts Question Paper PDF",
+        "UP Police ASI PYQ",
+        "UP Police Computer Operator Previous Year Paper",
+        "UPPRPB ASI Old Paper",
+        "यूपी पुलिस एएसआई पिछले वर्ष के प्रश्न पत्र"
+      ],
+      "metaDescription": "UP Police ASI (Clerk and Accounts), SI Confidential and Computer Operator previous year question papers PDF. Year-wise download with answer keys and exam details.",
+      "dek": "UPPRPB recruits Assistant Sub Inspectors for ministerial work (ASI Clerk and ASI Accounts) together with SI (Confidential) and Computer Operator Grade A. This page collects UP Police ASI previous year question papers year by year and explains how these exams differ from SI and Constable.",
+      "about": [
+        "ASI (Clerk) and ASI (Accounts) are ministerial posts in the Uttar Pradesh Police. They are recruited by UPPRPB, usually together with SI (Confidential) and Computer Operator Grade A, so one notification can lead to several exams.",
+        "The written exam for these posts has been held offline on an OMR sheet. Depending on the post, a typing or computer-based skill stage can follow the written test, so read the stage list in the notification of the cycle you are applying for."
+      ],
+      "stages": [
+        "Written examination (objective, OMR based)",
+        "Post-specific skill stage such as a typing or computer test, where the notification requires it",
+        "Document verification",
+        "Final merit list"
+      ],
+      "patterns": [
+        {
+          "cycle": "UPPRPB written exam for Computer Operator Grade A, SI (Confidential), ASI (Clerk) and ASI (Accounts)",
+          "rows": [
+            [
+              "Mode",
+              "Offline, pen and paper, OMR sheet"
+            ],
+            [
+              "SI (Confidential), ASI (Clerk), ASI (Accounts)",
+              "Exam duration of 2.5 hours (10:00 am to 12:30 pm)"
+            ],
+            [
+              "Computer Operator Grade A",
+              "Exam duration of 2 hours (10:00 am to 12:00 pm)"
+            ]
+          ],
+          "note": "Question count, marks and negative marking differ by post and by cycle. Use the notification and the paper itself for these."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Where can I download UP Police ASI previous year question papers?",
+          "a": "Use the download table at the top of this page. Papers are listed year-wise and the table is updated whenever a new clean copy is added."
+        },
+        {
+          "q": "Which posts does the ASI exam cover?",
+          "a": "A single UPPRPB recruitment can cover ASI (Clerk), ASI (Accounts), SI (Confidential) and Computer Operator Grade A. The exact post list is given in each notification."
+        },
+        {
+          "q": "Is there a typing test for UP Police ASI Clerk?",
+          "a": "A skill stage such as a typing or computer test can follow the written exam, depending on the post and the notification. Check the stage list of the cycle you are applying for."
+        },
+        {
+          "q": "Is the ASI exam the same as the SI exam?",
+          "a": "No. ASI Clerk and ASI Accounts are ministerial posts with their own written exam, while Sub Inspector is a separate officer-level recruitment with its own pattern."
+        }
+      ]
+    },
+    {
+      "slug": "home-guard",
+      "file": "up-police-home-guard-previous-year-question-papers.html",
+      "short": "UP Police Home Guard",
+      "name": "UP Police Home Guard",
+      "tableLabel": "UP Police Home Guard",
+      "keywords": [
+        "UP Home Guard Previous Year Question Paper",
+        "UP Police Home Guard Question Paper PDF",
+        "UP Home Guard Old Paper PDF",
+        "UP Home Guard PYQ",
+        "UP Home Guard Paper with Answer Key",
+        "UP Home Guard Exam Paper 2026",
+        "यूपी होमगार्ड पिछले वर्ष के प्रश्न पत्र"
+      ],
+      "metaDescription": "UP Police Home Guard previous year question papers PDF with answer keys. Practise real UPPRPB Home Guard papers and learn the pattern, selection stages and how to use PYQs.",
+      "dek": "UP Home Guard is one of the largest 10th-pass recruitments in Uttar Pradesh. This page collects UP Police Home Guard previous year question papers and explains the exam pattern, so you can practise on real papers instead of guessing what will be asked.",
+      "about": [
+        "UP Police Home Guard recruitment is conducted by UPPRPB. The latest drive tracked on GovJobUpdates is Home Guard 2025, which advertised 41,424 posts for Class 10 pass candidates.",
+        "The written exam of this drive was held from 25 to 27 April 2026. The physical efficiency test was held on 15 September 2026, the final result was declared on 3 October 2026 and the score card was released on 24 October 2026."
+      ],
+      "stages": [
+        "Written examination (objective, offline)",
+        "Merit list preparation",
+        "Physical Efficiency Test (PET) and Physical Standard Test (PST)",
+        "Document verification and medical examination"
+      ],
+      "patterns": [
+        {
+          "cycle": "UP Police Home Guard 2025 recruitment (41,424 posts)",
+          "rows": [
+            [
+              "Mode",
+              "Offline, pen and paper"
+            ],
+            [
+              "Questions",
+              "100 questions, all from General Knowledge"
+            ],
+            [
+              "Marks",
+              "100 marks, 1 mark per question"
+            ],
+            [
+              "Duration",
+              "120 minutes (2 hours)"
+            ],
+            [
+              "Qualifying marks",
+              "25 per cent"
+            ]
+          ],
+          "note": "A negative marking rule was not mentioned in the sources we checked. Confirm it in the official notification and by reading the paper's instructions."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Where can I download UP Home Guard previous year question papers?",
+          "a": "Use the download table at the top of this page. Papers are listed year-wise and the table is updated whenever a new clean copy is added."
+        },
+        {
+          "q": "What is the UP Home Guard exam pattern?",
+          "a": "The 2025 recruitment written exam had 100 General Knowledge questions for 100 marks in 120 minutes, with 25 per cent qualifying marks."
+        },
+        {
+          "q": "What is the qualification for UP Home Guard?",
+          "a": "The 2025 recruitment asked for Class 10 (High School) or equivalent from a recognised board. Age limits and other conditions are in the notification."
+        },
+        {
+          "q": "Is selection based only on the written exam marks?",
+          "a": "No. After the written exam and merit list, candidates go through the physical efficiency and standard tests, document verification and medical examination."
+        }
+      ]
+    }
+  ],
+  "papers": []
+}
