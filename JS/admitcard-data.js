@@ -273,7 +273,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-11-15",
         "examEndDate": "",
         "releaseDate": "2026-11-10",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://recruitment.rajasthan.gov.in/knowlocationservlet",
         "detailPage": "../jobs/rpsc-protection-officer-2025.html",
