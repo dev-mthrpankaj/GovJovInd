@@ -4,6 +4,30 @@
 
 window.GovJobUpdatesJobs = [
     {
+        "id": "job-sheet-0324-20261116201306-e0c79f6e",
+        "title": "Exim Bank Management Trainee, Manager Online Form 2026 for 120 Post",
+        "organization": "India Exim  Bank",
+        "department": "IEB",
+        "category": "Banking",
+        "year": "2026",
+        "qualification": "Bachelor Degree with Minimum 60% Marks. Master Degree in Related Subject (If Required Post Wise)",
+        "totalPosts": "120",
+        "startDate": "2026-11-27",
+        "lastDate": "2026-12-11",
+        "status": "upcoming",
+        "tags": [],
+        "applyLink": "https://www.eximbankindia.in/careers",
+        "officialNotification": "https://www.eximbankindia.in/sites/default/files/2026-11/MT%20%20M%20Recruitment%20Advertisement%2012-11-2026%201.pdf",
+        "detailPage": "../jobs/exim-bank-mt-manager-2026.html",
+        "updatedAt": "2026-11-16",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "needsReview": "no",
+        "qualificationSource": "qualification",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "job-sheet-0321-20261113191132-ff962f67",
         "title": "JKSSB JE Junior Engineer Online Form 2026 for 127 Post",
         "organization": "The Jammu & Kashmir Services Selection Board (JKSSB)",
