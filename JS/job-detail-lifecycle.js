@@ -486,6 +486,20 @@
   window.addEventListener('resize', syncStickyNavigation, {passive:true});
   setInterval(updateStageCountdown, 60000);
 
+  // "Download Jobs Banner" button in Share This Job (see JS/job-banner.js)
+  (() => {
+    if (document.querySelector('script[data-job-banner]')) return;
+    const current = document.currentScript;
+    const src = current && current.src
+      ? current.src.replace(/[^/]+$/, 'job-banner.js')
+      : '../JS/job-banner.js';
+    const el = document.createElement('script');
+    el.src = src.replace(/[?&]v=[^&]*/gi, '').replace(/\?$/, '') + '?v=20261116-banner';
+    el.defer = true;
+    el.dataset.jobBanner = '1';
+    document.body.appendChild(el);
+  })();
+
   // Adcash Display / Autotag — /jobs/ only (see JS/adcash-jobs.js)
   (() => {
     if (!/\/jobs\//i.test(String(window.location.pathname || '').replace(/\\/g, '/'))) return;
