@@ -62,7 +62,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "1393",
         "startDate": "2026-11-18",
         "lastDate": "2026-12-17",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://asrb.gov.in/",
         "officialNotification": "https://doc.sarkariresults.org.in/ASRB_Technical_Assistant_2026.pdf",
