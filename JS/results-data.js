@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0205-20261118082916-e0ee3f90",
+        "title": "SSC CHSL 2025 Marks 2026",
+        "organization": "Staff Selection Commission SSC",
+        "department": "SSC",
+        "category": "Central Government",
+        "year": "2026",
+        "resultDate": "2026-11-17",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ssc.gov.in/",
+        "detailPage": "../jobs/ssc-chsl-june-2025.html",
+        "updatedAt": "2026-11-18",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0204-20261116184439-aba1fc24",
         "title": "UP Police Constable Score Card 2026",
         "organization": "Uttar Pradesh Police Recruitment and Promotion Board (UPPRPB)",
@@ -382,26 +400,6 @@ window.GovJobUpdatesResults = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "result-sheet-0011",
-        "title": "BSF Constable Tradesman Result 2026 for 3588 Post",
-        "organization": "Border Security force",
-        "department": "BSF",
-        "category": "Result",
-        "year": "2026",
-        "resultDate": "2026-06-09",
-        "status": "released",
-        "tags": [
-            "BSF"
-        ],
-        "resultLink": "https://www.sarkariresult.com/wp-content/uploads/2026/06/SarkariResult.Com_BSF_Constable_Tradesman_Result.pdf",
-        "detailPage": "../jobs/bsf-constable-tradesman-july-2025.html",
-        "updatedAt": "2026-10-15",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "result-sheet-0181-20261015182016-5c5dab29",
         "title": "SSB HC (Ministerial) Result 2026",
         "organization": "Sashastra Seema Bal (SSB)",
@@ -504,24 +502,6 @@ window.GovJobUpdatesResults = [
         "resultLink": "https://rrb.digialm.com//EForms/configuredHtml/33128/101492/login.html",
         "detailPage": "../jobs/railway-rrb-isolated-categories-cen08-2025.html",
         "updatedAt": "2026-10-08",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
-        "id": "result-sheet-0170-20261007201330-88f746d2",
-        "title": "SSC CHSL 2025 Final Result 2026",
-        "organization": "Staff Selection Commission (SSC)",
-        "department": "SSC",
-        "category": "Central Government",
-        "year": "2026",
-        "resultDate": "2026-10-07",
-        "status": "released",
-        "tags": [],
-        "resultLink": "https://ssc.gov.in/api/attachment/uploads/masterData/Results/List_07102026.pdf",
-        "detailPage": "../jobs/ssc-chsl-june-2025.html",
-        "updatedAt": "2026-10-07",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "detailPageSource": "sheet",
