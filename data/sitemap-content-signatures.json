@@ -10,7 +10,7 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "6b6773cc1a69338b09b9440ee453c92ba03ca5838903760315775314fbfa5545",
+      "signature": "98574dbfafffcb839f59af73468c9760ed74e736695f84ea2b8bc015d5115570",
       "lastmod": "2026-11-18"
     },
     "HTML/answer-key.html": {
@@ -62,7 +62,7 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "bad1ebf68997005278b795b28118d1da5d3a73c4c9ed825d1f655568a5dfeab5",
+      "signature": "7610368a3ab7b5ad8909e2c2a1f6404d67a56af0415996a3c79865e9ba0d2596",
       "lastmod": "2026-11-18"
     },
     "HTML/live-test-info.html": {
@@ -130,7 +130,7 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "b310eb5e1d2ac2890865368368ab23d1918d1be191e45c8a731c4d189c1b08ad",
+      "signature": "cf944f7123b3a259c868b38b41a4e33488d9fd00b31968ac0e9b7826822ac4f8",
       "lastmod": "2026-11-18"
     },
     "HTML/rrb-quizzes.html": {
@@ -482,8 +482,8 @@
       "lastmod": "2026-11-03"
     },
     "jobs/aibe-xxii-2026.html": {
-      "signature": "39168f0795f15be41b76363be8503ae5928c30dc7f014704707db0faa1e524cd",
-      "lastmod": "2026-10-20"
+      "signature": "c4fc0f2b97016183eb77992a0ed6cf81b6eff10b8868b23b7d4259e24ce1da39",
+      "lastmod": "2026-11-18"
     },
     "jobs/aiims-norcet-11th-2026.html": {
       "signature": "fee0b22a4ce53d62e07569dd8598a1d6153b419110f26f94a14a33e711e9f5c3",
@@ -582,7 +582,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/bsf-constable-tradesman-july-2025.html": {
-      "signature": "4904bd2e624178946d887f71d338738f103771856abc2c95de5c4015c094b66c",
+      "signature": "7a8945c40f36f5e90aef47e6406bfe534da775b497c2a0c4b8a2b289b6cb677f",
       "lastmod": "2026-11-18"
     },
     "jobs/bsf-hc-ro-rm-august25.html": {
@@ -642,11 +642,11 @@
       "lastmod": "2026-10-16"
     },
     "jobs/cisf-constable-fire-admit-card.html": {
-      "signature": "211173cf15e2138d164932b6556816ea05fe2129e6b15e78bca679d98d4bd885",
+      "signature": "692b2f70732e338dbf9027acc30119433c64a863a3b1c7675d5b341e91e4fb11",
       "lastmod": "2026-11-18"
     },
     "jobs/cisf-constable-tradesman.html": {
-      "signature": "62d5964056d454db94fef9acecbb2f89cefdc5d65d10a2945a86dc395848d421",
+      "signature": "376ff344cfbd821a73aa7e74d9a97123e1fb38a37c080a1afc55cb8b4a2cf48c",
       "lastmod": "2026-11-18"
     },
     "jobs/cmd-green-marshal-2026.html": {
@@ -870,7 +870,7 @@
       "lastmod": "2026-10-23"
     },
     "jobs/manit-bhopal-non-teaching-2026.html": {
-      "signature": "18b02d9f01fcba27b9e5b22816e50f4269d7b3c502324188b3c24f2d34996780",
+      "signature": "f2e05fde5460e9ae7f1551f2c6fc6140aac2c2884375b6343d5f0e8a54db3890",
       "lastmod": "2026-11-18"
     },
     "jobs/mecl-non-executive-2026.html": {
@@ -982,11 +982,11 @@
       "lastmod": "2026-10-23"
     },
     "jobs/nlc-executive-2026.html": {
-      "signature": "a29f619ba9a8bffd01979d8523fc0b0911897d20a5f866b7b61da58088061e00",
+      "signature": "aed87f11aff00e4a945e19fac27b9a9cd89864b51f69832e16ba3de2e2ff262b",
       "lastmod": "2026-11-18"
     },
     "jobs/nlc-graduate-executive-2026.html": {
-      "signature": "b9f6c5798a2d864e172f7781cfd8891c8699938448e556a01bcc258ccd3b0431",
+      "signature": "7305a4a0d596ce173962ff63623e49935127fcdfe3416e46d346d7e9bbd323d3",
       "lastmod": "2026-11-18"
     },
     "jobs/north-western-railway-rrc-nwr-apprentices.html": {
@@ -1014,7 +1014,7 @@
       "lastmod": "2026-10-25"
     },
     "jobs/nta-rimcee-2027.html": {
-      "signature": "16ab907b74cfc5be786814a9784f9eb5391413fe7f8d77b63455732fb1a756cc",
+      "signature": "6ef14e688c5e8efe645186f324e8d507bd6a2f53c2ebe17458453939e7b8f10e",
       "lastmod": "2026-11-18"
     },
     "jobs/nta-ugc-net-jrf-december-2026.html": {
@@ -1070,8 +1070,8 @@
       "lastmod": "2026-11-06"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
-      "signature": "0b59a56d6595f845acddc63422b195ec4d9457af20e324d33f2d4193e00ca997",
-      "lastmod": "2026-11-01"
+      "signature": "b4e84fd385f429afa645471edd8078dc994137bd4fc370df6adbef028f67d75d",
+      "lastmod": "2026-11-18"
     },
     "jobs/railway-rrb-ntpc-under-graduate-2026.html": {
       "signature": "f07c3c5ad9b8387bd8b2eae24c48db8e30f823f4b92c1642edca8dbff827b67c",
@@ -1142,8 +1142,8 @@
       "lastmod": "2026-10-20"
     },
     "jobs/rrb-railway-paramedical-2026.html": {
-      "signature": "f0950c9bc143ae26757ae777289ae964a5ad28384976b34ec6c759c1828fee00",
-      "lastmod": "2026-11-13"
+      "signature": "91b14ba0234448f3fde3dbaa69f5316d793a68f9c9fc1057a2652cb94aa013bd",
+      "lastmod": "2026-11-18"
     },
     "jobs/rrb-railway-section-controller-2026.html": {
       "signature": "f4a1bea4879f32cc5116df0545f8cd26cb0b2373a769ef2b68ab6e98d35458ac",
@@ -1186,8 +1186,8 @@
       "lastmod": "2026-10-19"
     },
     "jobs/sbi-junior-associates-clerk-jca-2026.html": {
-      "signature": "8dec73556091423abe77e34a0326470dac5c857b0ecdc6af4905887e1f6d0c78",
-      "lastmod": "2026-10-16"
+      "signature": "d51916c23806ffd5d3bb0801dd5825845c8ed64eca5fd80abae66622445af1cb",
+      "lastmod": "2026-11-18"
     },
     "jobs/sbi-po-2026.html": {
       "signature": "fe723f3fbfb86096d10661d5d96edb4172e0bf770af5c4ba8adf2add78c948d8",
@@ -1230,7 +1230,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/ssc-chsl-june-2025.html": {
-      "signature": "cf3d1cdcb48546aab21461815460f74e38884a6bf24b79e460c41b5ef9a31ad9",
+      "signature": "1ef5ff0ad24c6ff508b082edf2cb018c5122b24ab0e20f7bdce622f44364b71a",
       "lastmod": "2026-11-18"
     },
     "jobs/ssc-combined-hindi-translator.html": {
@@ -1238,8 +1238,8 @@
       "lastmod": "2026-11-06"
     },
     "jobs/ssc-cpo-si-2025.html": {
-      "signature": "2778d9399c3384b6b3b52bb16adab7085010ddb6ec77627038cd08421d89a9d4",
-      "lastmod": "2026-10-31"
+      "signature": "1b990b9371726620ce8dcb6ca93032e0b873463fc8d49c83be0cd7e1d5703dc0",
+      "lastmod": "2026-11-18"
     },
     "jobs/ssc-cpo-si-2026.html": {
       "signature": "f34ee4ad2b33079061ec8a80d61d5b07d800a46a443b262ba230586d584d072e",
@@ -1314,7 +1314,7 @@
       "lastmod": "2026-10-16"
     },
     "jobs/uksssc-constable-2026.html": {
-      "signature": "01f3536d9d53bde8fb3a6ff9c08a2fc2c7ef1f86e7f12b8e09bbf82d0f14d29f",
+      "signature": "1b8a168f0aef41ebedd8c50e6048643a50911759e295e5b35f927318ef31cc7e",
       "lastmod": "2026-11-18"
     },
     "jobs/uksssc-group-c-various-post-2026.html": {
@@ -1398,8 +1398,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/uppsc-assistant-teacher-july-2025.html": {
-      "signature": "db93b51b56d1ba42888f43d31b67ff59b49479966ae5427e3110ad740e12fc12",
-      "lastmod": "2026-10-28"
+      "signature": "55b55195de1ed3dda0db5fac6509f6eb17628d480e71a101f128fbb05df211b0",
+      "lastmod": "2026-11-18"
     },
     "jobs/uppsc-assistant-town-planner-nov-2025.html": {
       "signature": "f9975d400b41b22c8e527a2c5df05d865dcbdad89d5a3aa34a221d6a6537ab57",
@@ -1438,7 +1438,7 @@
       "lastmod": "2026-10-27"
     },
     "jobs/upsc-civil-services-ias-ifs-2026.html": {
-      "signature": "ac35933cd3753b3d6443299987427f98a6c17f1726c4fb5e0aff051ea875b9bc",
+      "signature": "976e43736bf1f336dd1b7dad89345ca2d421aedf8c6854f50df6f0f7958ef70f",
       "lastmod": "2026-11-18"
     },
     "jobs/upsc-cms-admit-card.html": {
@@ -1486,8 +1486,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-havaldar-instructor-2026.html": {
-      "signature": "9b248d90eb182aad7f3cec695647cd7b48654a41f4389937c8f17692a0f3b5f5",
-      "lastmod": "2026-11-12"
+      "signature": "0f2bea3c34b700b8f0f3b3a427ba3905fff47b4622d2c61a879c8e5a521fdd2f",
+      "lastmod": "2026-11-18"
     },
     "jobs/upsssc-junior-assistant-2024.html": {
       "signature": "ba0049528b7addb2a4ada5a67a30da18b276562c3972c83a29c26a892394983e",
@@ -1538,8 +1538,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-platoon-commander-block-organizer-2026.html": {
-      "signature": "40e5fba5bb45053c980737956ceafcd4ac775a89648a4446386d78b5bc5a012d",
-      "lastmod": "2026-11-12"
+      "signature": "8ad99eea144652d15a4ba5e33bfae80ea3e03e0340806c57346753b82e8d02b4",
+      "lastmod": "2026-11-18"
     },
     "jobs/upsssc-senior-instructor-cadre-2026.html": {
       "signature": "38e4adb91e1b23692b08f38a69333f1e50679d11fa8d85629812d38cb86ba047",
