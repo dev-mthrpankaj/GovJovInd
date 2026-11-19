@@ -10,12 +10,12 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "98574dbfafffcb839f59af73468c9760ed74e736695f84ea2b8bc015d5115570",
-      "lastmod": "2026-11-18"
+      "signature": "bec5343baf44229798f73fd2c264262582ba3c25a4e4dff37391a9c1fe6b7272",
+      "lastmod": "2026-11-19"
     },
     "HTML/answer-key.html": {
-      "signature": "4585d6afa71a61802a89d4227f36466869fdd002b6c76cc65ab54ec5d578774b",
-      "lastmod": "2026-11-18"
+      "signature": "3da896a6171c7deb5c2bc3ab2dbdcbb4b758dcd147580fadece1b97d39d16dee",
+      "lastmod": "2026-11-19"
     },
     "HTML/banking-quizzes.html": {
       "signature": "aa63672d2c2ea791bd778ef8bbb0e752a4c9582121ab794c285c7b99146dada9",
@@ -62,8 +62,8 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "7610368a3ab7b5ad8909e2c2a1f6404d67a56af0415996a3c79865e9ba0d2596",
-      "lastmod": "2026-11-18"
+      "signature": "3e182f7db9c5bd090fea07f92ec7abf92ecb4b175333c41b824d0c750b25bd07",
+      "lastmod": "2026-11-19"
     },
     "HTML/live-test-info.html": {
       "signature": "1586a3f526a7b3bdb011fe30173ba0d82c8c02c2abcbc0370b70bcb20c7a539b",
@@ -498,12 +498,16 @@
       "lastmod": "2026-11-13"
     },
     "jobs/asrb-icar-technical-assistant-2026.html": {
-      "signature": "430e24eda05f2cb9b32061c2df437e7d1b2cb36654937ebe3cd797ade3597fa7",
-      "lastmod": "2026-11-13"
+      "signature": "a451b272ca2fa95d05d7ef1ca13e7ded6fe83a24d4fe4278f69d2989467fa224",
+      "lastmod": "2026-11-19"
     },
     "jobs/assam-rifle-rally-2026.html": {
       "signature": "4e48fa095737c6760cd0dcbee89cdc61496a8cc4ce05a18d157af50e8044865f",
       "lastmod": "2026-10-16"
+    },
+    "jobs/aud-delhi-non-teaching-2026.html": {
+      "signature": "dae5cc86135c780ccd6f921c71a5ad41632c4e5f3bbee412ff794b6362f00f19",
+      "lastmod": "2026-11-19"
     },
     "jobs/bank-of-india-so-2026.html": {
       "signature": "516f0092cf4a0b4e5e9474a5956bf140e2daf0982c47d5692b88f76e35532cb1",
@@ -524,6 +528,10 @@
     "jobs/bhel-artisan-2026.html": {
       "signature": "e76875555b88f104085d35289f533f3e0ef10a544ae744fc0f76f8bf14cf5d85",
       "lastmod": "2026-11-01"
+    },
+    "jobs/bhu-non-teaching-2026.html": {
+      "signature": "5249ae75e6c9df5d3f0867f7cebe522def4d43a4885886ba501a69524bc0386a",
+      "lastmod": "2026-11-19"
     },
     "jobs/bhu-non-teaching-post-nov26.html": {
       "signature": "f7294ee242babb3fffb4fc0ee37080585716bfeceed915fd73dcae3d454a575b",
@@ -1038,8 +1046,8 @@
       "lastmod": "2026-11-05"
     },
     "jobs/pgcil-engineer-trainee-2026.html": {
-      "signature": "fc9426df4222e54a5171ff9e05cfa356741764a2d0405f39864ee347140ae595",
-      "lastmod": "2026-11-04"
+      "signature": "19bd565996c48e090762aa48671f524a92f646d05b8c5ca5c96394b9a663dc2b",
+      "lastmod": "2026-11-19"
     },
     "jobs/pgimer-group-c-various-post-2026.html": {
       "signature": "c3bc95261ef2e2c783c7d40500150528dc737b1774fd29e546fba46504ca3f6d",
@@ -1168,6 +1176,10 @@
     "jobs/rssb-forester-2026-for-259-post.html": {
       "signature": "025c1cac8cdd847012ebdf3e5b96240194f9d75dbbcd7ab19e2736cfeafb9554",
       "lastmod": "2026-10-16"
+    },
+    "jobs/rssb-junior-engineer-2026.html": {
+      "signature": "a3c7ec1d5e1f7b83333b3e517047f7531ebae13d2cf4e1a1353ecb10043ad594",
+      "lastmod": "2026-11-19"
     },
     "jobs/rssb-women-supervisor-2026.html": {
       "signature": "f882937f64f8d253fad9f7395be29547b858e748360f4d6c9ae6e902230901d3",
@@ -1344,6 +1356,10 @@
     "jobs/up-scholarship-2026.html": {
       "signature": "029f09b76d4b4922e9ba63fd745bb93ae411147d77d2520b90137a5851f823c5",
       "lastmod": "2026-10-16"
+    },
+    "jobs/up-tet-feb-2027.html": {
+      "signature": "c150f87c750e941adaf3f14021638aadb85c22ef732f498af701e96b7a80dbaf",
+      "lastmod": "2026-11-19"
     },
     "jobs/up-tgt-2022.html": {
       "signature": "cf41e80f79ef73f030ad95d037efdba6db8a922dbf2d91c094350c228f6780b2",
