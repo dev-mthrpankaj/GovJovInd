@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0207-20261119213619-3b9cd00a",
+        "title": "BPSC Prosecution Officer Result 2026 for 300 Post",
+        "organization": "Bihar Public Service Commission",
+        "department": "BPSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-11-19",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://bpsc.bihar.gov.in/",
+        "detailPage": "../jobs/bpsc-prosecution-officer-2026.html",
+        "updatedAt": "2026-11-19",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0205-20261118082916-e0ee3f90",
         "title": "SSC CHSL 2025 Marks 2026",
         "organization": "Staff Selection Commission SSC",
