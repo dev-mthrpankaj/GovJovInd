@@ -313,7 +313,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-11-17",
         "examEndDate": "2026-11-18",
         "releaseDate": "2026-11-14",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://cgept.parikshasaarthi.in/candidate/login",
         "detailPage": "../jobs/coast-guard-navik-yantrik-2026.html",

@@ -14,7 +14,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-11-05",
         "releaseDate": "2026-11-12",
         "objectionLastDate": "2026-11-18",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=102956&orgId=33244",
         "objectionLink": "https://digialm.com/EForms/loginAction.do?subAction=ViewLoginPage&formId=102956&orgId=33244",
