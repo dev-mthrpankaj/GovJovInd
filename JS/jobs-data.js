@@ -158,7 +158,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "145",
         "startDate": "2026-11-20",
         "lastDate": "2026-12-19",
-        "status": "upcoming",
+        "status": "active",
         "tags": [],
         "applyLink": "https://web.nlcindia.in/rec102026/index.php",
         "officialNotification": "https://www.nlcindia.in/nlcilapi/cmp/static/downloadfile/97260",
