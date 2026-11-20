@@ -10,12 +10,12 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "bec5343baf44229798f73fd2c264262582ba3c25a4e4dff37391a9c1fe6b7272",
-      "lastmod": "2026-11-19"
+      "signature": "47f0391a22b6596d3a8f781ed82602d4d40eaa98fd1f77d22833f8e22f9ef530",
+      "lastmod": "2026-11-20"
     },
     "HTML/answer-key.html": {
-      "signature": "3da896a6171c7deb5c2bc3ab2dbdcbb4b758dcd147580fadece1b97d39d16dee",
-      "lastmod": "2026-11-19"
+      "signature": "f89834ab43863668a43b0586fda568a104bfc472469eb8d56d4fe475177ff9c3",
+      "lastmod": "2026-11-20"
     },
     "HTML/banking-quizzes.html": {
       "signature": "aa63672d2c2ea791bd778ef8bbb0e752a4c9582121ab794c285c7b99146dada9",
@@ -62,8 +62,8 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "9042bc742c9e685bf45079aeeaaa07aa4332c5b67323774befa5630f2b0680e3",
-      "lastmod": "2026-11-19"
+      "signature": "a54b067f88a2a7d36ad47432c64c226cac7660a11b7af6de9601531650cacd90",
+      "lastmod": "2026-11-20"
     },
     "HTML/live-test-info.html": {
       "signature": "65daa310fd454e08aa55686cb4442a63fd605a57eb3e4acdd5ad108edb039bd7",
@@ -130,8 +130,8 @@
       "lastmod": "2026-10-31"
     },
     "HTML/results.html": {
-      "signature": "cf944f7123b3a259c868b38b41a4e33488d9fd00b31968ac0e9b7826822ac4f8",
-      "lastmod": "2026-11-18"
+      "signature": "b55bab354a529138acce1090761b64ed4fe99f7430ba28af40325d79cbf35cee",
+      "lastmod": "2026-11-20"
     },
     "HTML/rrb-quizzes.html": {
       "signature": "80539be166ac988564e9c6402052019e889672bb89affd72a9466ebbebc9aca3",
@@ -510,8 +510,8 @@
       "lastmod": "2026-11-19"
     },
     "jobs/bank-of-india-so-2026.html": {
-      "signature": "516f0092cf4a0b4e5e9474a5956bf140e2daf0982c47d5692b88f76e35532cb1",
-      "lastmod": "2026-10-16"
+      "signature": "d4d1848d0789d5ff386ccfba37596ea326dfeb0983c001b9ba078ee1e316d1c0",
+      "lastmod": "2026-11-19"
     },
     "jobs/bbmb-hindi-translator-2026.html": {
       "signature": "3744ed7dd6451b44d5396533233ca71e46fb5d91c29fb46a433f8306c448a4ab",
@@ -582,8 +582,8 @@
       "lastmod": "2026-10-27"
     },
     "jobs/bpsc-prosecution-officer-2026.html": {
-      "signature": "ccb046fd4f1934bdfc249da78b4dda97be1dbdb9151e077b234e69494442197c",
-      "lastmod": "2026-10-16"
+      "signature": "90fdeb9c71d388a440e66e164963c8ac7e3273f39740a0ee4beaea8f48f4e926",
+      "lastmod": "2026-11-19"
     },
     "jobs/bpssc-police-company-commander-2026.html": {
       "signature": "a16e39254e6167b80cf12b4f3134e80ac7ba3fc0051acb5bcf85e341fd84d96c",
@@ -1026,12 +1026,16 @@
       "lastmod": "2026-11-18"
     },
     "jobs/nta-ugc-net-jrf-december-2026.html": {
-      "signature": "0e5fb0ed39da6e18f46645c6b74d6a33b0e72462ceb590086617fc502d0055a5",
-      "lastmod": "2026-11-01"
+      "signature": "8ca88ea6ec1a9e5d4aa8bcd2e6dd20d2fb3060f6b1d9a616c6d5d0ef35537aab",
+      "lastmod": "2026-11-19"
     },
     "jobs/ntpc-act-2026.html": {
       "signature": "a97efa48b4b7482085a26070e209818667b838554cdd7aafd9c3051b3d872922",
       "lastmod": "2026-10-16"
+    },
+    "jobs/ntpc-ngel-engineer-executive-2026.html": {
+      "signature": "66133bd9ad7c57fb6a83df072ee8bc3bc1582e4d2c6ff138c24e4858dc08335c",
+      "lastmod": "2026-11-19"
     },
     "jobs/ongc-engineer-graduate-trainee.html": {
       "signature": "8fc8f1b3f93fb6d4bcc868a2deb9ec4f1e7998de0f7e33d35791a9a9863c0730",
@@ -1278,8 +1282,8 @@
       "lastmod": "2026-11-12"
     },
     "jobs/ssc-je-junior-engineer-2026.html": {
-      "signature": "7ac2d2d669055b539f5c4a057db9cbb03190af612cf489523eee7d186708efdd",
-      "lastmod": "2026-10-31"
+      "signature": "bd79e35707866c8c407d386908e221ee27d397a6bd50781a9b5023d1edc9485f",
+      "lastmod": "2026-11-19"
     },
     "jobs/ssc-mts-havaldar-2025.html": {
       "signature": "3d7bfa2e4568cb4cf0b294142b54f12e7debf2c992eb2c47e3d85056ea72e137",
@@ -1476,6 +1480,10 @@
     "jobs/upsssc-assistant-boring-technician-2026.html": {
       "signature": "93d061ef6526b9c5858d5d401b9ecde972914ff10ac2e62fbe82baa7d0cf5400",
       "lastmod": "2026-10-16"
+    },
+    "jobs/upsssc-cane-supervisor-2026.html": {
+      "signature": "8564ca0d600be535ef5d923126d45e394cdd0de8f0f56d9872cf986fe95dd299",
+      "lastmod": "2026-11-19"
     },
     "jobs/upsssc-cartographer-advt-no-11-exam-2023.html": {
       "signature": "383e68359b265b6a79fbb532d850a39deebade83be778b435e19637bcfab1611",
