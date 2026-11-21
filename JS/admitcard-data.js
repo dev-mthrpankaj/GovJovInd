@@ -753,7 +753,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-11-21",
         "examEndDate": "",
         "releaseDate": "2026-10-30",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://www.concorindia.co.in/recruitment-notice?lang=hi",
         "detailPage": "../jobs/concor-mt-assistant-officer-2026.html",

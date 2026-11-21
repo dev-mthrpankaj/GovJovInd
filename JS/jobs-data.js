@@ -210,14 +210,14 @@ window.GovJobUpdatesJobs = [
         "tags": [],
         "applyLink": "https://nspclregistration.ibtexamination.com/App02NSpcL2026/index.php",
         "officialNotification": "https://www.nspcl.co.in/storage/app/public/uploads/careers/NSPCL_website003.pdf",
-        "detailPage": "../HTML/latest-jobs.html",
+        "detailPage": "../jobs/nspcl-field-engineer-2026.html",
         "updatedAt": "2026-11-21",
         "telegramStatus": "ready",
         "telegramReady": "yes",
         "needsReview": "no",
         "qualificationSource": "qualification",
-        "detailPageSource": "fallback",
-        "detailPageNeedsReview": "yes"
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
     },
     {
         "id": "job-sheet-0329-20261119091235-80ec377e",
