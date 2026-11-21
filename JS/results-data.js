@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0208-20261121174056-06afa0ba",
+        "title": "UPESSC Principal Result 2026 for 111 Post",
+        "organization": "Uttar Pradesh  Education Service Selection Commission",
+        "department": "UPESSC",
+        "category": "Education",
+        "year": "2026",
+        "resultDate": "2026-11-20",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upessc.up.gov.in/Notice/1847-3021-473e-f4b1-4a3e.pdf",
+        "detailPage": "../jobs/upessc-principal-2026.html",
+        "updatedAt": "2026-11-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0209-20261121175747-62129040",
+        "title": "IBPS PO Probationary Officer XVI Mains Result 2026",
+        "organization": "Institute of  Banking Personal Selection",
+        "department": "IBPS",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-11-20",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ibpsreg.ibps.in/crppoxvijun26/fresta_nov26/login.php?appid=faa539a0e8fbd226743a6f2df8768c59",
+        "detailPage": "../jobs/ibps-po-2026.html",
+        "updatedAt": "2026-11-21",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0207-20261119213619-3b9cd00a",
         "title": "BPSC Prosecution Officer Result 2026 for 300 Post",
         "organization": "Bihar Public Service Commission",
