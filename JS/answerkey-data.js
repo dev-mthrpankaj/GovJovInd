@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0093-20261123152120-274f3134",
+        "title": "UPESSC UP Assistant Professor Answer Key 2026 for 1936 Post",
+        "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
+        "department": "UPESSC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-11-19",
+        "examEndDate": "2026-11-20",
+        "releaseDate": "2026-11-22",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://www.upessc.net/ap042026qc/Login.aspx",
+        "objectionLink": "",
+        "detailPage": "../jobs/upessc-up-assistant-professor-2026.html",
+        "updatedAt": "2026-11-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0092-20261119213346-db03fe53",
         "title": "SSC JE Junior Engineer Answer Key 2026 for 1748 Post",
         "organization": "Staff Selection Commission",
