@@ -1133,7 +1133,7 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "job-sheet-0292-20261023214534-4a9c06d0",
-        "title": "UPESSC UP Principal Online Form 2026 for 1475 Post",
+        "title": "UPESSC UP Principal Correction Form 2026 for 1475 Post",
         "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
         "department": "UPESSC",
         "category": "State Government",
@@ -1181,7 +1181,7 @@ window.GovJobUpdatesJobs = [
     },
     {
         "id": "job-sheet-0294-20261023220327-a7b4e5a4",
-        "title": "UPESSC UP Head Master Online Form 2026 for 1172 Post",
+        "title": "UPESSC UP Head Master Correction Form 2026 for 1172 Post",
         "organization": "Uttar Pradesh Education Service Selection Commission (UPESSC)",
         "department": "UPESSC",
         "category": "State Government",
@@ -1189,8 +1189,8 @@ window.GovJobUpdatesJobs = [
         "qualification": "Post Graduation with 50% Marks B.Ed. / BPEd from a recognized university. At least 4 years of teaching experience as a Lecturer or Assistant Teacher in higher classes (Class 9 to 12) of an institution recognized by the Central/State Government or at least 4 years of working experience as Principal of a Junior High School, which must be issued/certified by a competent authority.",
         "totalPosts": "1172",
         "startDate": "2026-10-23",
-        "lastDate": "2026-11-22",
-        "status": "closed",
+        "lastDate": "2026-11-26",
+        "status": "active",
         "tags": [],
         "applyLink": "https://apply.upessc.org/",
         "officialNotification": "https://doc.sarkariresults.org.in/UPESSC_Head_Master_Notification_2026.pdf",

@@ -26,6 +26,28 @@ window.GovJobUpdatesAnswerKeys = [
         "detailPageNeedsReview": "no"
     },
     {
+        "id": "answerkey-sheet-0094-20261123163308-3275820c",
+        "title": "Allahabad High Court Private Secretary Answer Key 2026",
+        "organization": "Allahabad High Court",
+        "department": "AHC",
+        "category": "Judiciary",
+        "year": "2026",
+        "examDate": "2026-11-17",
+        "examEndDate": "",
+        "releaseDate": "2026-11-20",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/970/103300/0y8mziEd1Eo3Ftg5pK/login.html",
+        "objectionLink": "",
+        "detailPage": "../jobs/allahabad-high-court-private-secretary-2026.html",
+        "updatedAt": "2026-11-23",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0092-20261119213346-db03fe53",
         "title": "SSC JE Junior Engineer Answer Key 2026 for 1748 Post",
         "organization": "Staff Selection Commission",

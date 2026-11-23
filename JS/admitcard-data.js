@@ -584,26 +584,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0231-20261113185534-8c5abc6c",
-        "title": "Allahabad High Court Private Secretary Admit Card 2026",
-        "organization": "Allahabad High Court",
-        "department": "AHC",
-        "category": "Judiciary",
-        "year": "2026",
-        "examDate": "2026-11-17",
-        "examEndDate": "",
-        "releaseDate": "2026-11-13",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://cdn.digialm.com/EForms/configuredHtml/970/103300/0y8mziEd1Eo3Ftg5pK/login.html",
-        "detailPage": "../jobs/allahabad-high-court-private-secretary-2026.html",
-        "updatedAt": "2026-11-13",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0227-20261112172726-4f2bf996",
         "title": "SSC GD Constable PET PST Admit Card 2026 for 25487 Post",
         "organization": "Staff Selection Commission",
