@@ -10,12 +10,12 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "eaa6c1c481adb9fefea4821305c36b3ff33be9756fa056a780fa82366a8aa7a1",
-      "lastmod": "2026-11-23"
+      "signature": "a806df09c546c1844de0ef422b239bd0117eeef61f095b081bfc3adc7074c56b",
+      "lastmod": "2026-11-24"
     },
     "HTML/answer-key.html": {
-      "signature": "3330a1e052767cb9b978d7d0e799fd94a704ce7d4ab34aaf56b22298b513b53a",
-      "lastmod": "2026-11-23"
+      "signature": "2b07261b4d612b544c58c7309ac32b270fa4d7a4d6946290efd4b43419990330",
+      "lastmod": "2026-11-24"
     },
     "HTML/banking-quizzes.html": {
       "signature": "aa63672d2c2ea791bd778ef8bbb0e752a4c9582121ab794c285c7b99146dada9",
@@ -62,8 +62,8 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "57e373f00419cd03e264627b1c5e2b2ec030cf43443f66f233ec5e8d4db5cdbc",
-      "lastmod": "2026-11-23"
+      "signature": "c6883e8ca5199c6b51b0e77ae75f080e3646f0ab10b81c131e52fef663016fe2",
+      "lastmod": "2026-11-24"
     },
     "HTML/live-test-info.html": {
       "signature": "65daa310fd454e08aa55686cb4442a63fd605a57eb3e4acdd5ad108edb039bd7",
@@ -494,7 +494,7 @@
       "lastmod": "2026-10-20"
     },
     "jobs/allahabad-high-court-private-secretary-2026.html": {
-      "signature": "5441a7b8cc512b4b52f7a79d7c8e9916f7321d73ce4f7fc1bb7c717c53d3f89f",
+      "signature": "fcb7a8430270651f5b28aa5f9d6b6defd00026f594956565b91f89991e1406d7",
       "lastmod": "2026-11-23"
     },
     "jobs/asrb-icar-technical-assistant-2026.html": {
@@ -734,8 +734,8 @@
       "lastmod": "2026-10-23"
     },
     "jobs/dhc-personal-assistant-2026.html": {
-      "signature": "79b38804acb9992e672fb90e8b0952a536fddcab64d694723462a30d20de8047",
-      "lastmod": "2026-11-06"
+      "signature": "8466af457b180ef8d99f1124978502b69057cc2c8c44dbc3fa10ffb818661d48",
+      "lastmod": "2026-11-24"
     },
     "jobs/district-court-rewari-stenographer-2026.html": {
       "signature": "1f6e4c7fc9c3a62c789c3824adb2b51f8d7a1c85c8927a6b87b82e33136f712f",
@@ -744,6 +744,10 @@
     "jobs/drrmlims-various-post-2026.html": {
       "signature": "f1198e0fa0d797599084abcfc065956b5afa37148115516cfc81cbc83b4f5218",
       "lastmod": "2026-10-24"
+    },
+    "jobs/dsssb-admit-card.html": {
+      "signature": "a4294451228888440e218b031faac0c12bd98503e2e31b66f841679fa9ad2ae7",
+      "lastmod": "2026-11-24"
     },
     "jobs/dsssb-answer-key.html": {
       "signature": "96e5c5afb541ed2bf8421992f6e0988418056a9d0fad1f79d4676b6bc69dee06",
@@ -768,6 +772,10 @@
     "jobs/exim-bank-mt-manager-2026.html": {
       "signature": "ff302221cc20ab9786c317e931434f057615d6f302efc9e9b5968e2520ad1472",
       "lastmod": "2026-11-16"
+    },
+    "jobs/gims-staff-nurse-2026.html": {
+      "signature": "1c2fd2addcc417bcae97a7503b2fe9889c526007c3747018dab6abc9f12c5340",
+      "lastmod": "2026-11-24"
     },
     "jobs/gsrtc-helper-2026.html": {
       "signature": "934a32d775b49f44cd679ad2027f10fa1d8311099e7ed275597e8eae726c40fa",
@@ -930,8 +938,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/mpesb-constable-2026.html": {
-      "signature": "370f7b6943fce2b3f2432e026eebdeba17468aee34b134f3324372ebcb4cbc2b",
-      "lastmod": "2026-11-23"
+      "signature": "5ee6ec0a8a4fc7a4bcfd582f2c17c268744d46dcdb1487dd31ffd78a6639f294",
+      "lastmod": "2026-11-24"
     },
     "jobs/mpesb-group-2-sub-group-4-2026.html": {
       "signature": "d2b3664fd830c489e27df8d2388d45d276f60a1c773722e2a28dd5118762ed5c",
@@ -1014,8 +1022,8 @@
       "lastmod": "2026-11-11"
     },
     "jobs/nicl-assistant-2026.html": {
-      "signature": "d8d3454680b64ffdae82c5ab5fb2c5714aaa0c1e0bb118ba66037ecad2fd2387",
-      "lastmod": "2026-10-23"
+      "signature": "89b992c6f2348a07d605bfcdaa054e7c735384c8041ca70277cced32355db141",
+      "lastmod": "2026-11-24"
     },
     "jobs/nlc-executive-2026.html": {
       "signature": "aed87f11aff00e4a945e19fac27b9a9cd89864b51f69832e16ba3de2e2ff262b",
@@ -1058,8 +1066,8 @@
       "lastmod": "2026-11-18"
     },
     "jobs/nta-ugc-net-jrf-december-2026.html": {
-      "signature": "8ca88ea6ec1a9e5d4aa8bcd2e6dd20d2fb3060f6b1d9a616c6d5d0ef35537aab",
-      "lastmod": "2026-11-19"
+      "signature": "bc72326d3d173b7bf8cc290ac5755b5fd5a39b21c475608266a252d357fe29fa",
+      "lastmod": "2026-11-24"
     },
     "jobs/ntpc-act-2026.html": {
       "signature": "a97efa48b4b7482085a26070e209818667b838554cdd7aafd9c3051b3d872922",
@@ -1114,8 +1122,8 @@
       "lastmod": "2026-11-06"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
-      "signature": "b4e84fd385f429afa645471edd8078dc994137bd4fc370df6adbef028f67d75d",
-      "lastmod": "2026-11-18"
+      "signature": "40cbefb7678c3666aa4d57a5e8989ea5cd52368fbfdeb85a21e0383de1d33ab5",
+      "lastmod": "2026-11-24"
     },
     "jobs/railway-rrb-ntpc-under-graduate-2026.html": {
       "signature": "f07c3c5ad9b8387bd8b2eae24c48db8e30f823f4b92c1642edca8dbff827b67c",
@@ -1128,6 +1136,10 @@
     "jobs/rajasthan-ldc-online-form.html": {
       "signature": "4246da13ca44c6c2b052b567a85bf155af32434386919bc1e8677140d121f495",
       "lastmod": "2026-10-16"
+    },
+    "jobs/rajasthan-rpsc-ras-2026.html": {
+      "signature": "3bcee4c850471632eea42b5e14d1223fce7377996538e81e2ef433bb0ba00469",
+      "lastmod": "2026-11-24"
     },
     "jobs/rajasthan-set-2026.html": {
       "signature": "573a17f59a41cb69831569859d6bd74d37961a64c127d93e0b00c8543be1d0f6",
@@ -1286,8 +1298,8 @@
       "lastmod": "2026-11-04"
     },
     "jobs/ssc-chsl-2026.html": {
-      "signature": "ea5faf030055e4f2d490e8dacffd12be2af5777ac5bffd5c33cf3d15b7ffffc9",
-      "lastmod": "2026-10-16"
+      "signature": "ebcd4b1d3879dbacae70de8ef26e113fa72e9d1cebf3d7b1a30c57efaab19b81",
+      "lastmod": "2026-11-24"
     },
     "jobs/ssc-chsl-june-2025.html": {
       "signature": "1ef5ff0ad24c6ff508b082edf2cb018c5122b24ab0e20f7bdce622f44364b71a",
@@ -1434,7 +1446,7 @@
       "lastmod": "2026-11-23"
     },
     "jobs/upessc-up-head-master-2026.html": {
-      "signature": "c5b9628bedd0d86e7a76d6bdd6ccf12667e545c6a1cd2ea407c01ce6a9e9fd38",
+      "signature": "8f150e7641f4aa44e57b9792ab660479b736bfe88a2f87a9ad3a1a4addaf6f75",
       "lastmod": "2026-11-23"
     },
     "jobs/upessc-up-pgt-teacher-2026.html": {
@@ -1442,11 +1454,11 @@
       "lastmod": "2026-10-19"
     },
     "jobs/upessc-up-primary-teacher-2026.html": {
-      "signature": "f0c4b272658245e66fcae54ee80a36066890cc8370f04abd3bba0c9a164b6a32",
-      "lastmod": "2026-11-09"
+      "signature": "49b2778aa0e39a02b2e0e72bfeff2c026a4bc785b03c36d83a58c4b5240b78c5",
+      "lastmod": "2026-11-24"
     },
     "jobs/upessc-up-principal-2026.html": {
-      "signature": "a41bd0f5aa1623bf7d4815baf56494e7888f7743a64f99de3551b7252d91e2bb",
+      "signature": "159a83c1256cfbe0d78393c52f5a729aa828dab46defccd0f01a0b680fd47ece",
       "lastmod": "2026-11-23"
     },
     "jobs/upessc-up-special-tet-2026.html": {
@@ -1546,8 +1558,8 @@
       "lastmod": "2026-11-23"
     },
     "jobs/upsssc-excise-constable-2026.html": {
-      "signature": "ccb7b162a8f34aa67dfd0952d57bdbddae5d81b2f2e607ea674868201f1f20c5",
-      "lastmod": "2026-10-16"
+      "signature": "68f4db0b50c3a681f52ea5c2638a073217c77bc5d99e6bd70912c5fae1177902",
+      "lastmod": "2026-11-24"
     },
     "jobs/upsssc-forensic-science-laboratory-2026.html": {
       "signature": "a413ce79f8c449876ac1c1d5992fa9cb3dfdf64df30e8f4990de057afdcd8322",
@@ -1558,8 +1570,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-havaldar-instructor-2026.html": {
-      "signature": "0f2bea3c34b700b8f0f3b3a427ba3905fff47b4622d2c61a879c8e5a521fdd2f",
-      "lastmod": "2026-11-18"
+      "signature": "e525f617a830df309cec00d17b46bf2d260648c69d63855fdf24d85b770837cc",
+      "lastmod": "2026-11-24"
     },
     "jobs/upsssc-junior-assistant-2024.html": {
       "signature": "ba0049528b7addb2a4ada5a67a30da18b276562c3972c83a29c26a892394983e",
@@ -1614,8 +1626,8 @@
       "lastmod": "2026-10-16"
     },
     "jobs/upsssc-platoon-commander-block-organizer-2026.html": {
-      "signature": "8ad99eea144652d15a4ba5e33bfae80ea3e03e0340806c57346753b82e8d02b4",
-      "lastmod": "2026-11-18"
+      "signature": "6a61b440cbe6500f78d0575acbae4ede34690006de7c07f8bf3d6d640e8e6b65",
+      "lastmod": "2026-11-24"
     },
     "jobs/upsssc-senior-instructor-cadre-2026.html": {
       "signature": "38e4adb91e1b23692b08f38a69333f1e50679d11fa8d85629812d38cb86ba047",
