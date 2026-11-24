@@ -4,6 +4,42 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0213-20261124181836-adf635c0",
+        "title": "National Insurance NICL Assistant Score Card 2026 for 500 Post",
+        "organization": "National  Insurance NICL",
+        "department": "NICL",
+        "category": "Public sector",
+        "year": "2026",
+        "resultDate": "2026-11-23",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://ibpsreg.ibps.in/nicljul26/scddb_nov26/login.php?appid=89dab2b8f5b52942ff792b773cb40eaf",
+        "detailPage": "../jobs/nicl-assistant-2026.html",
+        "updatedAt": "2026-11-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
+        "id": "result-sheet-0214-20261124182048-4d50c0ee",
+        "title": "UPSSSC Excise Constable Mains Result 2026",
+        "organization": "Uttar Pradesh Subordinate Service Selection Commission (UPSSSC)",
+        "department": "UPSSSC",
+        "category": "State Government",
+        "year": "2026",
+        "resultDate": "2026-11-23",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://upsssc.gov.in/Online_App/Results.aspx?ID=175&Result_Type=M&Exam_Code=5&Advt_Code=572&Dept_Code=603&Post_Code=1&OnlyIntview=No",
+        "detailPage": "../jobs/upsssc-excise-constable-2026.html",
+        "updatedAt": "2026-11-24",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0210-20261123133724-148c5e4c",
         "title": "UPSSSC Veterinary Pharmacist Eligibility Result 2026 for 1308 Post",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission",
