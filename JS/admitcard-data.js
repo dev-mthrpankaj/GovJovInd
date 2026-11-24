@@ -613,7 +613,7 @@ window.GovJobUpdatesAdmitCards = [
         "examDate": "2026-11-23",
         "examEndDate": "",
         "releaseDate": "2026-11-12",
-        "status": "available",
+        "status": "exam-over",
         "tags": [],
         "downloadLink": "https://sletregistration.cbrt.co.in/login",
         "detailPage": "../jobs/bihar-slet-2026.html",
