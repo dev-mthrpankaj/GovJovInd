@@ -102,7 +102,7 @@ window.GovJobUpdatesAnswerKeys = [
         "examEndDate": "2026-11-06",
         "releaseDate": "2026-11-19",
         "objectionLastDate": "2026-11-24",
-        "status": "available",
+        "status": "objection-closed",
         "tags": [],
         "downloadLink": "https://ssc.gov.in/login",
         "objectionLink": "",
