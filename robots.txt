@@ -22,11 +22,8 @@ Disallow: /.edge-
 Disallow: /.sixth/
 Disallow: /.cache/
 
-# Old WordPress URLs from the previous owner (these pages no longer exist)
-Disallow: /feed/
-Disallow: /*/feed/
-Disallow: /job/
-Disallow: /gov/
+# Old WordPress URLs from the previous owner (/feed/, /job/, /gov/) are NOT disallowed on purpose:
+# Cloudflare answers them with 410 Gone and Google must be able to crawl them to see it.
 
 Allow: /
 
