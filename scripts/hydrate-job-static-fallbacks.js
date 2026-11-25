@@ -608,7 +608,155 @@ function readJobData(html, file) {
   }
 }
 
-function hydratePage(original, job) {
+
+/* ------------------------------------------------------------------ *
+ * Static related-recruitment links (internal linking)
+ *
+ * Builds a deterministic list of related /jobs/ pages for every page so
+ * the links exist in the raw HTML (not only after JavaScript runs).
+ * - Similarity uses only static data (organization, tags, title, jobType),
+ *   never "today", so nightly runs do not churn the files.
+ * - A second pass gives under-linked pages a few extra inlinks, so no
+ *   recruitment page stays an orphan.
+ * ------------------------------------------------------------------ */
+const RELATED_TOP = 6;          // best topical matches per page
+const RELATED_BOOST_MAX = 2;    // extra slots used to rescue under-linked pages
+const RELATED_MIN_INLINKS = 3;  // every page should get at least this many
+
+const STOP_WORDS = new Set([
+  'recruitment', 'recruitments', 'online', 'form', 'forms', 'apply', 'post', 'posts', 'vacancy', 'vacancies',
+  'notification', 'notice', 'government', 'govt', 'jobs', 'job', 'india', 'indian', 'exam', 'examination',
+  'result', 'results', 'admit', 'card', 'answer', 'key', 'syllabus', 'date', 'dates', 'latest', 'new', 'for',
+  'and', 'the', 'of', 'in', 'to', 'a', 'an', 'out', 'released', 'official', 'check', 'direct', 'link', 'grade',
+  'various', 'staff', 'officer', 'officers', 'assistant', 'junior', 'senior', 'sarkari', 'naukri', 'department',
+  'limited', 'ltd', 'board', 'commission', 'service', 'services', 'public', 'state', 'central', 'group'
+]);
+
+function relatedTokens(job) {
+  const raw = [job.organization, job.shortTitle, job.title, ...(Array.isArray(job.tags) ? job.tags : [])]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+  const tokens = new Set();
+  for (const word of raw.split(/[^a-z0-9]+/)) {
+    if (word.length < 3 || /^\d+$/.test(word) || STOP_WORDS.has(word)) continue;
+    tokens.add(word);
+  }
+  return tokens;
+}
+
+function buildRelatedIndex(fileList) {
+  const items = [];
+  for (const file of fileList) {
+    const html = fs.readFileSync(path.join(jobsDir, file), 'utf8');
+    let job = null;
+    try { job = readJobData(html, file); } catch (e) { job = null; }
+    if (!job) continue;
+    const robots = (html.match(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']*)["']/i) || [])[1] || '';
+    if (/noindex/i.test(robots)) continue;               // never link to noindex pages
+    items.push({
+      file,
+      job,
+      tokens: relatedTokens(job),
+      time: Date.parse(job.updated || '') || 0
+    });
+  }
+
+  // IDF so rare tokens (an organisation name) outweigh common ones ("bank").
+  const df = new Map();
+  for (const item of items) for (const t of item.tokens) df.set(t, (df.get(t) || 0) + 1);
+  const idf = (t) => Math.log((items.length + 1) / ((df.get(t) || 0) + 1)) + 0.1;
+
+  const sim = (a, b) => {
+    let score = 0;
+    for (const t of a.tokens) if (b.tokens.has(t)) score += idf(t);
+    if (a.job.jobType && a.job.jobType === b.job.jobType) score += 0.15;
+    return score;
+  };
+
+  const byFile = new Map(items.map((i) => [i.file, i]));
+  const ranked = new Map();   // file -> sorted candidate list
+  for (const a of items) {
+    const list = items
+      .filter((b) => b.file !== a.file)
+      .map((b) => ({ b, score: sim(a, b) }))
+      .sort((x, y) => y.score - x.score || y.b.time - x.b.time || x.b.file.localeCompare(y.b.file));
+    ranked.set(a.file, list);
+  }
+
+  const chosen = new Map(items.map((i) => [i.file, []]));
+  const inlinks = new Map(items.map((i) => [i.file, 0]));
+  for (const a of items) {
+    for (const { b } of ranked.get(a.file).slice(0, RELATED_TOP)) {
+      chosen.get(a.file).push(b.file);
+      inlinks.set(b.file, inlinks.get(b.file) + 1);
+    }
+  }
+
+  // Rescue pass: give under-linked pages extra inlinks from their most similar neighbours.
+  const boostUsed = new Map(items.map((i) => [i.file, 0]));
+  const needy = items
+    .filter((i) => inlinks.get(i.file) < RELATED_MIN_INLINKS)
+    .sort((x, y) => inlinks.get(x.file) - inlinks.get(y.file) || x.file.localeCompare(y.file));
+  for (const target of needy) {
+    const candidates = ranked.get(target.file); // symmetric similarity: neighbours of target
+    for (const { b: source } of candidates) {
+      if (inlinks.get(target.file) >= RELATED_MIN_INLINKS) break;
+      if (boostUsed.get(source.file) >= RELATED_BOOST_MAX) continue;
+      if (chosen.get(source.file).includes(target.file)) continue;
+      chosen.get(source.file).push(target.file);
+      boostUsed.set(source.file, boostUsed.get(source.file) + 1);
+      inlinks.set(target.file, inlinks.get(target.file) + 1);
+    }
+  }
+
+  return { chosen, byFile, inlinks };
+}
+
+function buildRelatedHtml(file, related) {
+  const picks = related.chosen.get(file);
+  if (!picks || !picks.length) return '';
+  const links = picks.map((f) => {
+    const item = related.byFile.get(f);
+    const j = item.job;
+    const label = esc(j.shortTitle || j.title);
+    const stage = resolveCurrentStage(j);
+    const statusText = (stage && stage.status) || j.status || '';
+    const status = esc(statusText);
+    const updated = j.updated ? `${statusText ? ' • ' : ''}Updated ${esc(fmtDate(j.updated))}` : '';
+    return `<a class="related-open-job-link" href="./${encodeURI(f)}">` +
+      `<span class="related-open-job-name">${label}</span>` +
+      `<span class="related-open-job-meta">${status}${updated}</span></a>`;
+  });
+  return `<div class="related-open-jobs-list">${links.join('')}</div>`;
+}
+
+function setRelatedJobs(html, relatedHtml) {
+  if (!relatedHtml) return html;
+  const START = '<!--related-static:start-->';
+  const END = '<!--related-static:end-->';
+  const block = `${START}${relatedHtml}${END}`;
+
+  if (html.includes(START) && html.includes(END)) {
+    const from = html.indexOf(START);
+    const to = html.indexOf(END) + END.length;
+    html = html.slice(0, from) + block + html.slice(to);
+  } else {
+    // First run: fill the (empty) JS mount.
+    const mountRx = /(<div\s+class="related-open-jobs-mount"[^>]*>)([\s\S]*?)(<\/div>\s*<\/section>)/;
+    if (!mountRx.test(html)) return html;
+    html = html.replace(mountRx, (m, open, inner, close) => `${open}${block}${close}`);
+  }
+
+  // Tell the JS widget that static links already exist, and fix the heading.
+  html = html.replace(/(<div\s+class="related-open-jobs-mount")(?![^>]*data-static-related)/,
+    '$1 data-static-related="true"');
+  html = html.replace(/<p>More active openings<\/p>(\s*<h2>Related Jobs<\/h2>)/,
+    '<p>Explore more recruitments</p>$1');
+  return html;
+}
+
+function hydratePage(original, job, relatedHtml) {
   const currentStage = resolveCurrentStage(job);
   let html = original;
 
@@ -700,6 +848,8 @@ function hydratePage(original, job) {
   html = setScriptJson(html, 'breadcrumbSchema', schemas.breadcrumb);
   html = setScriptJson(html, 'faqSchema', schemas.faq);
 
+  html = setRelatedJobs(html, relatedHtml);
+
   return html;
 }
 
@@ -709,6 +859,7 @@ if (!fs.existsSync(jobsDir)) {
 }
 
 const files = fs.readdirSync(jobsDir).filter((f) => f.endsWith('.html')).sort();
+const relatedIndex = buildRelatedIndex(files);
 
 let changed = 0;
 let skipped = 0;
@@ -725,7 +876,7 @@ for (const file of files) {
       continue;
     }
 
-    const html = hydratePage(original, job);
+    const html = hydratePage(original, job, buildRelatedHtml(file, relatedIndex));
 
     if (html === original) {
       skipped += 1;

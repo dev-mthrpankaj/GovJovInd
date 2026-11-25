@@ -145,6 +145,8 @@
 
   function renderMount(mount) {
     if (!mount || mount.dataset.relatedOpenJobsRendered === "true") return;
+    // Static related links are already in the HTML (written by the hydrate script); keep them.
+    if (mount.dataset.staticRelated === "true" || mount.querySelector(".related-open-job-link")) return;
     const selected = selectJobs(mount);
     if (!selected.length) return;
     mount.dataset.relatedOpenJobsRendered = "true";
