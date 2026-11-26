@@ -4,6 +4,24 @@
 
 window.GovJobUpdatesResults = [
     {
+        "id": "result-sheet-0216-20261126121900-8d27030e",
+        "title": "SBI Junior Associates Clerk Backlog Mains Result 2026 for 1538 Post",
+        "organization": "State  Bank of India",
+        "department": "SBI",
+        "category": "Banking",
+        "year": "2026",
+        "resultDate": "2026-11-25",
+        "status": "released",
+        "tags": [],
+        "resultLink": "https://sbi.bank.in/webfiles/uploads/files_2627/11/Junior_Associates-SPLDRIVE-2025-26-RESULT-15_FORMAT.pdf",
+        "detailPage": "../jobs/sbi-junior-associates-clerk-2026.html",
+        "updatedAt": "2026-11-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "result-sheet-0215-20261125174414-71f8b8fc",
         "title": "Rajasthan State Eligibility Test SET Score Card 2026",
         "organization": "University of Kota Rajasthan (UOK)",

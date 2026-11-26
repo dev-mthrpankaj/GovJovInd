@@ -4,6 +4,28 @@
 
 window.GovJobUpdatesAnswerKeys = [
     {
+        "id": "answerkey-sheet-0097-20261126185950-6f3a69b1",
+        "title": "MP High Court Assistant Grade III Answer Key 2026 for 1174 Post",
+        "organization": "High  Court of Madhya Pradesh (MPHC)",
+        "department": "MPHC",
+        "category": "State Government",
+        "year": "2026",
+        "examDate": "2026-11-23",
+        "examEndDate": "2026-11-25",
+        "releaseDate": "2026-11-26",
+        "objectionLastDate": "",
+        "status": "objection-closed",
+        "tags": [],
+        "downloadLink": "https://portal.mphc.gov.in/PDF/web_pdf/RE/Notification%20alongwith%20Proposed%20Model%20Answer%20AG-III%20-2026.pdf",
+        "objectionLink": "",
+        "detailPage": "../jobs/mp-high-court-assistant-grade-iii-2026.html",
+        "updatedAt": "2026-11-26",
+        "telegramStatus": "ready",
+        "telegramReady": "yes",
+        "detailPageSource": "sheet",
+        "detailPageNeedsReview": "no"
+    },
+    {
         "id": "answerkey-sheet-0095-20261124204259-4a0efdd5",
         "title": "UPSSSC Havaldar Instructor Answer Key 2026 for 209 Post",
         "organization": "Uttar Pradesh Subordinate Service Selection Commission (UPSSSC)",
