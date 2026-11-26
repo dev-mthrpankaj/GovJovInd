@@ -10,8 +10,8 @@
       "lastmod": "2026-08-12"
     },
     "HTML/admitcard.html": {
-      "signature": "9f27c8ced2d97acfb5c3982f9dae9c598936a876d85809ca7c502c7d5c57ebbd",
-      "lastmod": "2026-11-25"
+      "signature": "8c97f306d2d108377ca410ba10aed778ba821a2c9613f3236271d21626ac6ac3",
+      "lastmod": "2026-11-26"
     },
     "HTML/answer-key.html": {
       "signature": "32db6feafe798a435b918472aff97cc80e33295a2456cf89b27514d77df48923",
@@ -62,8 +62,8 @@
       "lastmod": "2026-09-18"
     },
     "HTML/latest-jobs.html": {
-      "signature": "9227f41515bb57cecec5f6121c7db4cedb4a15e016ad84b151828ce79d9cd407",
-      "lastmod": "2026-11-25"
+      "signature": "00a6780d92e6f11ed02d5371593154ac54c5d21651048f64ba16325f8d525e14",
+      "lastmod": "2026-11-26"
     },
     "HTML/live-test-info.html": {
       "signature": "65daa310fd454e08aa55686cb4442a63fd605a57eb3e4acdd5ad108edb039bd7",
@@ -478,7 +478,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/afms-medical-officer-2026.html": {
-      "signature": "f1600530a8163dc55a2d8c8b947168e2d8aa5789db0cd8ae93a0e60c6caed86d",
+      "signature": "c6b77d2636f3625b24f4112128859924c67c3217c4019b4d0ece2e7c8d25c926",
       "lastmod": "2026-11-25"
     },
     "jobs/aibe-xxii-2026.html": {
@@ -542,7 +542,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/bihar-bpsc-pcs-pre.html": {
-      "signature": "3b1fc351539e494f9c2c6636c02107e458317982a37338dc8ae0ffd0671187df",
+      "signature": "022f98c3ad10fb9a68e1a742201b468c92ffdd208a297e325d3a03d63ed1c582",
       "lastmod": "2026-11-25"
     },
     "jobs/bihar-slet-2026.html": {
@@ -570,7 +570,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/bpsc-72nd-2026.html": {
-      "signature": "9b47b2b90e3dda44e8b2796725ec4b84779aa8f06c885ddbb44a5dbcc57090a2",
+      "signature": "f8dc70c9ad68676d631aa0efe6aa887a143298699a67a3f4a5ed3b3fea22146e",
       "lastmod": "2026-11-25"
     },
     "jobs/bpsc-aes-2025.html": {
@@ -602,7 +602,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/bsf-si-sub-inspector-ldce-2026.html": {
-      "signature": "1dfc32755c4990c1d2afe659fd11f85ff5865868260307b2f51c29f918c9d823",
+      "signature": "e25d41bff7c76b69351025265bb78192b7dfcece6eb88d9499bfe1acde97d079",
       "lastmod": "2026-11-25"
     },
     "jobs/bssc-stenographer-432-post.html": {
@@ -658,7 +658,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/cisf-constable-tradesman.html": {
-      "signature": "268c0b0523588108b29882ddfc81c15a6ffff33e653f37de019d708ba518aec1",
+      "signature": "a0b647217061bc8890f8c200a5b20bc9be9de2138e5ec2526ad62490c7923e63",
       "lastmod": "2026-11-25"
     },
     "jobs/clat-2026.html": {
@@ -694,7 +694,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/csc-aadhar-supervisor-operator-2026.html": {
-      "signature": "8ab50b55f192f632a5d5595fb3374e047ea748ae5b505e7d6c0bfa74a8caea39",
+      "signature": "fb16bda6d2b4a98ca9bd96f1be64bcd05eb74461771884ddd7ba8de11aa567ee",
       "lastmod": "2026-11-25"
     },
     "jobs/csir-ngri-technician-sep26.html": {
@@ -842,11 +842,11 @@
       "lastmod": "2026-11-25"
     },
     "jobs/indian-army-tes-57-2026.html": {
-      "signature": "b6a79bd7f1fa99bbc915f06944cf0b80a6e032a75fc2566a89716a78b05b85c0",
+      "signature": "dff2c8f9b2ba2e5fab0e3f9996ce235a061137736d378c94736a305d3e46ec99",
       "lastmod": "2026-11-25"
     },
     "jobs/indian-army-tgc-145-2026.html": {
-      "signature": "0705814ee58c7d17bdd8af354bcc095f562c6f834c598e50c844ff869430b6b6",
+      "signature": "0eae29b8fc4d3f95ff3ca1b6475d52468b42c371bda0c68ae6339ba9bd9b5052",
       "lastmod": "2026-11-25"
     },
     "jobs/indian-bank-apprentice-2026.html": {
@@ -854,7 +854,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/indian-navy-ssr-mr-inet-2026.html": {
-      "signature": "86b7ca020b7a78c7997e2586f751e7efac4dc2e64b445fcafd62894aa4dc39a0",
+      "signature": "95ac598dbdfdec08b3107a260d1309bab1d5c5eb42421c3b3c4933f71479e2b4",
       "lastmod": "2026-11-25"
     },
     "jobs/iob-apprentice-2026.html": {
@@ -1098,7 +1098,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/pgcil-engineer-trainee-2026.html": {
-      "signature": "7a5125ee0e7736fde16f2ec4996d8207734402c908d1870c4c17b4e33b165640",
+      "signature": "db75a5adb030fcba3820b3979167a7d3928e123211dc2bc2e66bd5d831e5bfb9",
       "lastmod": "2026-11-25"
     },
     "jobs/pgimer-group-c-various-post-2026.html": {
@@ -1126,8 +1126,8 @@
       "lastmod": "2026-11-25"
     },
     "jobs/railway-rrb-ntpc-graduate-level-06-2026.html": {
-      "signature": "39d750ef193072d868ae7cf23b1a98399fd68843a7c0281e6ae816220146bc9d",
-      "lastmod": "2026-11-25"
+      "signature": "c04e54237b72f763d32d09014351fd06cbfd65186737f44ebf439c85091c0abf",
+      "lastmod": "2026-11-26"
     },
     "jobs/railway-rrb-ntpc-inter-level-cen-07-2025.html": {
       "signature": "3a2c8c227aef1190bea4b9c19586e81e08d3697491a3c4184909bb969cd5ac97",
@@ -1142,7 +1142,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/rajasthan-ldc-online-form.html": {
-      "signature": "531462f68aea37a04f2c1460313a0cddbbaf50c50ad2402d96529160e7f4cce7",
+      "signature": "40ce0a709eae61609f6538ab41a3f0f7a3d9993f760aaa354bcb2c2af30b97fb",
       "lastmod": "2026-11-25"
     },
     "jobs/rajasthan-rpsc-ras-2026.html": {
@@ -1250,8 +1250,8 @@
       "lastmod": "2026-11-25"
     },
     "jobs/sbi-junior-associates-clerk-2026.html": {
-      "signature": "98579f4723c996e4d43a6e5842c35a3a5295f94830b277dbd1c6eb9b873ebeab",
-      "lastmod": "2026-11-25"
+      "signature": "492f0abff14de5867725c4212d8d27fc4d6c253fd0b8a9e94aaa1c3609dc7b0e",
+      "lastmod": "2026-11-26"
     },
     "jobs/sbi-junior-associates-clerk-jca-2026.html": {
       "signature": "62b0d96ed3c78d7b53899456a4b0998f7a1afd438a800e987ea912a0578f80e0",
@@ -1302,7 +1302,7 @@
       "lastmod": "2026-11-25"
     },
     "jobs/ssc-cgl-2026.html": {
-      "signature": "c390e287dba89884ef8705243eb56c50fd7fd4d6f053fbee9e17827b4839b8cb",
+      "signature": "9c5b970676df949904ed45dcd78904e839213eba55f4321b8d389cba1a5170a5",
       "lastmod": "2026-11-25"
     },
     "jobs/ssc-chsl-2026.html": {
@@ -1350,11 +1350,11 @@
       "lastmod": "2026-11-25"
     },
     "jobs/ssc-mts-havaldar-2025.html": {
-      "signature": "5601bc60b7971a05ec3939c7fc357436abd09bca7beaca46ef6fb62fe3232d7f",
+      "signature": "340bdd3cd91a2f4ba0e3c46034731fd5a15d8a001061642387ee9e12791fe6a7",
       "lastmod": "2026-11-25"
     },
     "jobs/ssc-selection-post-2026.html": {
-      "signature": "45d0e2889e9eaa9af189d0b96eb8f3f979eebcb071134d3ef7b50f542f08d4ee",
+      "signature": "69b3063a5055093850bba868502ae9b995187e09219baffc18b8574d7f8f183f",
       "lastmod": "2026-11-25"
     },
     "jobs/ssc-stenographer-2026.html": {
@@ -1514,43 +1514,43 @@
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-capf-cpf-assistant-commandant-2026.html": {
-      "signature": "e916f9dc0b59cb3f8acaee5bd4befdbfb56ecd7ed93a4f3b97661f4bfa863b8f",
+      "signature": "ffdca36e72dc6d84ac3738b72abe472edf8dd330418a04c4033c14fbe999afc8",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-cds-2027.html": {
-      "signature": "7e6d9351051f17bd4f0dcb1a08a4ea0764f58f5717cc949235e2850047ec62c3",
+      "signature": "91b8e574c7ae9f0eac25a191f2789ba228c62091a86c01193f12b5f5dc7c48a8",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-cds-ii-2026.html": {
-      "signature": "dbb3718641b45936bb653aacdbd2f968e2dcdce61520f110bc25907355a2b20c",
+      "signature": "8b3debb71de4e24f4f75c48f2c4d4da4195ac1f31116a60dcf1dca348cc89550",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-cgse-2027.html": {
-      "signature": "91da77df16c94cbe4937f74c8f1add026ad8a2a8e22deaef2ac3d306a4bbed1e",
+      "signature": "baadea8cd50c1fff9a2ad8a0fd23b07b995819bfd0710dbb1acace0c812ff18b",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-civil-services-ias-ifs-2026.html": {
-      "signature": "94a3837a955d0db02a26a34c34f63dd09d5d9433730bf762fe76c0731370dc0d",
+      "signature": "66f232eaf0f396bf280e6791f44179d3b53d1fc9f5a7927741edcd1301124342",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-cms-admit-card.html": {
-      "signature": "617bfed99e92dd80ecb38b1b1102c819a984aaaab0d45c7310f7574e8adabedc",
+      "signature": "09397ff40f03fe9b44a50eb9b9783b95b4c1bd0975a4d6c7d2233610c2f2a264",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-epfo-apfc-2026.html": {
-      "signature": "6234ac6fdaf33e0ba07d209ee254414058f1e701ed98b075073707ceefe50f6d",
+      "signature": "362534c0f21c6cc3f118018184bf0b87fe905f653aae34a0ce8f8ec80bcbdfc2",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-nda-2027.html": {
-      "signature": "3ad823795a887dcd895c35503978f9d9d2c39e532432ad58256e1d2f8ceebb7e",
+      "signature": "09674e3a9457db0f7987886319af18f6685aafb8b97f4a84d6dc35b7cfd7ce2b",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-nda-ii-2026.html": {
-      "signature": "0b44f34710577b92e66edb3e36db39dada8e148889fba9d7804c6b6ac75ae738",
+      "signature": "a02f52699c827d58984b91cec4da1ff35ad5a29248e41077bfc02d67e6834c85",
       "lastmod": "2026-11-25"
     },
     "jobs/upsc-various-post-2026.html": {
-      "signature": "03d572605c466e675a5839763f756f5c4276943009867c23e9dfed4950bee6ec",
+      "signature": "a0edef0e1b863f2681983e07f14e97a4656568590d8d9b736a9c1b38933f77b5",
       "lastmod": "2026-11-25"
     },
     "jobs/upsssc-assistant-boring-technician-2026.html": {
@@ -1610,11 +1610,11 @@
       "lastmod": "2026-11-25"
     },
     "jobs/upsssc-livestock-extension-2026.html": {
-      "signature": "1c6050c181487e07cba23938485c2bea212d8b3f0980c095c3cca8bd99fb6901",
+      "signature": "73553e766b40bf93b381c9d7ed0ac0fc1c7dc2e075f75b04070f02988203fd57",
       "lastmod": "2026-11-25"
     },
     "jobs/upsssc-lower-pcs-2026.html": {
-      "signature": "7c877c37682dd3201215411b5ed41fa084733075a6cffa10172962083c2afb1e",
+      "signature": "bdfa5978394ac0d2d2aeb314987e8ce2ebc6c67289655eff189ba87307c0acbc",
       "lastmod": "2026-11-25"
     },
     "jobs/upsssc-lower-pcs-inter-2026.html": {
