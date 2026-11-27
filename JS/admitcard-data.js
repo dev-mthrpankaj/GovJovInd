@@ -864,26 +864,6 @@ window.GovJobUpdatesAdmitCards = [
         "detailPageNeedsReview": "no"
     },
     {
-        "id": "admit-sheet-0210-20261031180742-618c86c8",
-        "title": "CONCOR MT Assistant Officer Exam Date 2026",
-        "organization": "Container Corporation of India Limited (CONCOR)",
-        "department": "CONCOR",
-        "category": "Public Sector",
-        "year": "2026",
-        "examDate": "2026-11-21",
-        "examEndDate": "",
-        "releaseDate": "2026-10-30",
-        "status": "exam-over",
-        "tags": [],
-        "downloadLink": "https://www.concorindia.co.in/recruitment-notice?lang=hi",
-        "detailPage": "../jobs/concor-mt-assistant-officer-2026.html",
-        "updatedAt": "2026-10-31",
-        "telegramStatus": "ready",
-        "telegramReady": "yes",
-        "detailPageSource": "sheet",
-        "detailPageNeedsReview": "no"
-    },
-    {
         "id": "admit-sheet-0209-20261027141831-e51c0723",
         "title": "UPSC CGSE Geo Scientist Exam Date 2027 – OUT",
         "organization": "Union Public Service Commission",
