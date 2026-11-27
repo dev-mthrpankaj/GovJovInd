@@ -1917,3 +1917,94 @@
     margin: 20px auto;
   }
 }
+
+
+/* ===== Student Hub static links (written by scripts/hydrate-student-hub.js) ===== */
+/* The hub <main> orders its sections with `order`; keep the article index as the last block. */
+.student-hub-page .student-hub-index {
+  order: 9;
+}
+
+.student-hub-index-grid {
+  column-count: 1;
+  column-gap: 2rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 760px) {
+  .student-hub-index-grid { column-count: 2; }
+}
+
+@media (min-width: 1100px) {
+  .student-hub-index-grid { column-count: 3; }
+}
+
+.student-hub-index-group {
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+}
+
+.student-hub-index-group h3 {
+  margin: 0 0 .5rem;
+  font-size: 1rem;
+  color: var(--secondary, #0f172a);
+}
+
+.student-hub-index-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .35rem;
+}
+
+.student-hub-index-group a {
+  color: var(--primary, #2563eb);
+  font-size: .92rem;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.student-hub-index-group a:hover,
+.student-hub-index-group a:focus-visible {
+  text-decoration: underline;
+}
+
+.article-resource-links {
+  margin: 0 0 clamp(1.2rem, 3vw, 2rem);
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-sm, 10px);
+  background: var(--surface, #fff);
+}
+
+.article-resource-links h2 {
+  margin: 0 0 .6rem;
+  color: var(--secondary, #0f172a);
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+}
+
+.article-resource-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .4rem;
+}
+
+.article-resource-links a {
+  color: var(--primary, #2563eb);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.article-resource-links a:hover,
+.article-resource-links a:focus-visible {
+  text-decoration: underline;
+}
+
+.article-resource-links span {
+  margin-left: .4rem;
+  color: #475569;
+  font-size: .78rem;
+}

@@ -1,0 +1,72 @@
+name: Hydrate Student Hub Links
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'JS/blog-data.js'
+      - 'HTML/student-hub/**/*.html'
+      - 'scripts/hydrate-student-hub.js'
+  # Nightly safety run (02:15 IST, after the job hydrate): picks up newly published job pages
+  # for the "Related recruitment pages" lists and re-hydrates anything an earlier run missed.
+  schedule:
+    - cron: '45 20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hydrate-student-hub-main
+  cancel-in-progress: false
+
+jobs:
+  hydrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # The output is fully derived from JS/blog-data.js, the job pages and the rank-predictor
+      # pages, so on a push race we never merge: start again from the newest main, re-run, push.
+      # Only HTML/student-hub.html and HTML/student-hub/ are ever touched.
+      - name: Hydrate Student Hub links and push (retry on race)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            npm run hydrate:student-hub
+
+            git add HTML/student-hub.html HTML/student-hub
+            if git diff --cached --quiet; then
+              echo "Student Hub links are already current."
+              exit 0
+            fi
+
+            git commit -m "Hydrate Student Hub static links"
+
+            if git push origin HEAD:main; then
+              echo "Pushed on attempt ${attempt}."
+              exit 0
+            fi
+
+            echo "Push rejected (main moved). Retrying from latest main (attempt ${attempt}/5)..."
+            sleep $((attempt * 5))
+          done
+
+          echo "Could not push after 5 attempts."
+          exit 1

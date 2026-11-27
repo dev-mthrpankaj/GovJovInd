@@ -186,7 +186,10 @@
   /* ---------- Related articles (reads window.GOVJOB_BLOGS) ---------- */
   const relatedGrid = document.getElementById("articleRelatedGrid");
   const relatedSection = document.getElementById("articleRelated");
-  if (relatedGrid && relatedSection && article && Array.isArray(window.GOVJOB_BLOGS)) {
+  if (relatedGrid && relatedSection && relatedGrid.dataset.static === "true" && relatedGrid.querySelector(".article-related-card")) {
+    // Static related articles were written into the HTML by scripts/hydrate-student-hub.js: keep them.
+    relatedSection.hidden = false;
+  } else if (relatedGrid && relatedSection && article && Array.isArray(window.GOVJOB_BLOGS)) {
     const currentId = article.dataset.blogId;
     const currentCategory = article.dataset.blogCategory;
     const relatedMode = article.dataset.relatedMode;
