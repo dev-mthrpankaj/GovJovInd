@@ -998,7 +998,7 @@ window.GovJobUpdatesJobs = [
         "totalPosts": "380",
         "startDate": "2026-11-06",
         "lastDate": "2026-11-27",
-        "status": "active",
+        "status": "closed",
         "tags": [],
         "applyLink": "https://upsssc.gov.in/AllNotifications.aspx",
         "officialNotification": "https://doc.sarkariresults.org.in/UPSSSC_JE_Electrical_Notification_Oct26.pdf",
